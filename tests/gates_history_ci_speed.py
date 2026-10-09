@@ -142,12 +142,14 @@ def test_python_env_cache_is_keyed_and_safe():
     steps = a["runs"]["steps"]
     rest = next(s for s in steps if s.get("id") == "restore")
     key = rest["with"]["key"]
-    check("控えの鍵に requirements.txt の中身・Python の版・OS の版・週が入る",
-          all(x in key for x in ("hashFiles('requirements.txt')", "steps.py.outputs.python-version",
+    check("控えの鍵に requirements の中身・Python の版・OS の版・週が入る",
+          all(x in key for x in ("steps.key.outputs.reqs", "steps.py.outputs.python-version",
                                   "steps.key.outputs.os", "steps.key.outputs.week")), True)
     keyrun = next(s for s in steps if s.get("id") == "key")["run"]
     check("週は ISO 週（毎週作り直す）・OS はランナーの版", ("date -u +%G-W%V" in keyrun, "ImageOS" in keyrun and "ImageVersion" in keyrun),
           (True, True))
+    check("requirements のファイルの名前と中身から指紋を作る", 'echo "== $f"; cat "$f"' in keyrun and "sha256sum" in keyrun, True)
+    check("既定は requirements.txt", a["inputs"]["requirements"]["default"], "requirements.txt")
     save = [s for s in steps if str(s.get("uses", "")).startswith("actions/cache/save")]
     check("控えるのは入れられた回だけ・同じ鍵で控える",
           (len(save), "steps.build.outputs.ok == 'yes'" in str(save[0].get("if")), save[0]["with"]["key"] == key),
@@ -155,7 +157,10 @@ def test_python_env_cache_is_keyed_and_safe():
     check("控えの保存に失敗しても止めない", save[0].get("continue-on-error"), True)
     check("venv を PATH の先頭に置く（python・pip の呼び方を変えない）", "$HOME/.venv-ci/bin" in steps[-1]["run"], True)
     users = {"deploy.yml": ("deploy", "python -m pip install --quiet -r requirements.txt || true"),
-             "pipeline-multi.yml": ("write", "pip install -q -r requirements.txt yt-dlp")}
+             "pipeline-multi.yml": ("write", "pip install -q -r requirements.txt yt-dlp"),
+             "daily-video.yml": ("video", "pip install --quiet -r requirements-video.txt")}
+    vid = next(s for s in _y("daily-video.yml")["jobs"]["video"]["steps"] if s.get("uses") == "./.github/actions/py-env")
+    check("動画は動画だけが使う依存も控えに入れる", vid["with"]["requirements"], "requirements.txt requirements-video.txt")
     for wf, (jn, line) in users.items():
         job = _y(wf)["jobs"][jn]
         uses = [s.get("uses") for s in job["steps"]]

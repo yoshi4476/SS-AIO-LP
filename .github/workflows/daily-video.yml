@@ -59,9 +59,11 @@ jobs:
       - uses: ./.github/actions/private-data
         with:
           token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
-      - uses: actions/setup-python@v5
+      # Python と依存（requirements.txt と動画だけが使う requirements-video.txt）を週ごとの控えから戻す。
+      # 戻せた回は下の pip install が確かめるだけになる（準備は6日7回で中央値約65秒・遅い日は6分だった）
+      - uses: ./.github/actions/py-env
         with:
-          python-version: "3.12"
+          requirements: requirements.txt requirements-video.txt
       # 読みの聞き直しに使う音声認識のモデル（約1.5GB）を毎回落とさない
       - uses: actions/cache@v4
         with:

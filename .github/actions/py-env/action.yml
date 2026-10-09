@@ -1,8 +1,8 @@
 name: Python と依存の控え
 description: >-
-  setup-python のあと、requirements.txt の依存を入れた venv を CI のキャッシュから戻す。戻せた回は pip install が
+  setup-python のあと、requirements の依存を入れた venv を CI のキャッシュから戻す。戻せた回は pip install が
   「入っている」を確かめるだけになる（2026-10-03〜09: 配信147回・記事の枠39回で毎回約15秒かけて入れ直していた）。
-  控えは requirements.txt の中身・Python の版・ランナーの OS の版・週（ISO 週）で切る。どれかが変われば作り直すので、
+  控えは requirements の中身・Python の版・ランナーの OS の版・週（ISO 週）で切る。どれかが変われば作り直すので、
   依存の版は長くても1週間で新しくなる。控えが無い回はここで入れて控え、入れられなければ控えない
   （呼び出し側の pip install が今までどおり入れ直し、失敗の扱いも呼び出し側のまま）。
   戻した後は venv の python・pip が PATH の先頭に来る（python・python3・pip の呼び方は変えなくてよい）。
@@ -11,6 +11,9 @@ inputs:
   python-version:
     description: Python の版
     default: "3.12"
+  requirements:
+    description: 控えに入れる requirements のファイル（空白区切り。中身の指紋が控えの鍵に入る）
+    default: requirements.txt
 
 outputs:
   hit:
@@ -27,15 +30,22 @@ runs:
 
     - id: key
       shell: bash
+      env:
+        REQS: ${{ inputs.requirements }}
       run: |
         echo "os=${ImageOS:-unknown}-${ImageVersion%%.*}" >> "$GITHUB_OUTPUT"
         echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+        # ファイルの名前と中身の指紋（どちらかが変われば別の控え）
+        h=$(for f in $REQS; do echo "== $f"; cat "$f"; done | sha256sum | cut -c1-40)
+        echo "reqs=$h" >> "$GITHUB_OUTPUT"
+        args=""; for f in $REQS; do args="$args -r $f"; done
+        echo "args=$args" >> "$GITHUB_OUTPUT"
 
     - id: restore
       uses: actions/cache/restore@v4
       with:
         path: ~/.venv-ci
-        key: py-env-v1-${{ steps.key.outputs.os }}-py${{ steps.py.outputs.python-version }}-${{ hashFiles('requirements.txt') }}-${{ steps.key.outputs.week }}
+        key: py-env-v1-${{ steps.key.outputs.os }}-py${{ steps.py.outputs.python-version }}-${{ steps.key.outputs.reqs }}-${{ steps.key.outputs.week }}
 
     - id: build
       if: steps.restore.outputs.cache-hit != 'true'
@@ -43,7 +53,7 @@ runs:
       run: |
         rm -rf ~/.venv-ci
         python -m venv ~/.venv-ci
-        if ~/.venv-ci/bin/python -m pip install --quiet -r requirements.txt; then
+        if ~/.venv-ci/bin/python -m pip install --quiet ${{ steps.key.outputs.args }}; then
           echo "ok=yes" >> "$GITHUB_OUTPUT"
         else
           echo "::warning::依存を控えに入れられませんでした（この回は控えずに進みます）"
@@ -54,7 +64,7 @@ runs:
       continue-on-error: true
       with:
         path: ~/.venv-ci
-        key: py-env-v1-${{ steps.key.outputs.os }}-py${{ steps.py.outputs.python-version }}-${{ hashFiles('requirements.txt') }}-${{ steps.key.outputs.week }}
+        key: py-env-v1-${{ steps.key.outputs.os }}-py${{ steps.py.outputs.python-version }}-${{ steps.key.outputs.reqs }}-${{ steps.key.outputs.week }}
 
     - shell: bash
       run: |
