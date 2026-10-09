@@ -206,7 +206,7 @@
     "external-md": {
      "status": "ok",
      "evidence": "scripts/publish.py:852",
-     "note": "前後を空行で挟んだ1行の HTML の塊として Markdown の表の直後に置く。先方の変換が生の HTML を通すことが前提（CONFLUX の marked は通す。2026-10-08 に先方の写しで build-journal と next build を通して確かめた）",
+     "note": "前後を空行で挟んだ1行の HTML の塊として Markdown の表の直後に置く。先方の変換が生の HTML を通すことが前提（お客様の社 の marked は通す。2026-10-08 に先方の写しで build-journal と next build を通して確かめた）",
      "anchor": "body = table_charts.add_to_markdown(body, cfg)"
     },
     "external-html": {
@@ -2401,7 +2401,7 @@
      "evidence": "scripts/publish.py:902",
      "anchor": "fm = noindex.md_front(fm)",
      "note": "まとめのページ・sitemap・llms.txt からは管制塔が外す。本文のリンクは配信のときに外す",
-     "need": "head の robots は先方の雛形がフロントマターの robots・noindex を読んで出すこと（CONFLUX の build-journal.mjs は読まない。配信のときに要対応で知らせる）"
+     "need": "head の robots は先方の雛形がフロントマターの robots・noindex を読んで出すこと（お客様の社 の build-journal.mjs は読まない。配信のときに要対応で知らせる）"
     },
     "external-html": {
      "status": "ok",
