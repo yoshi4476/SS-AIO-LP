@@ -211,6 +211,7 @@ SLUG_THUMB = {  # 手動で固定したい記事だけここに書く (それ以
 DEFAULT_PHOTO = "documents"  # キーワードに当たらなかった場合
 
 # ---- 記事メタ収集 ----
+SITE_SUFFIX = re.compile(r"\s*[|｜]\s*セブンセンシズ株式会社\s*$")   # 雛形が題の末尾に付ける社名（45字を超える題では付かない）
 arts = []
 for d in sorted((ROOT / "blog").iterdir()):
     f = d / "index.html"
@@ -220,7 +221,10 @@ for d in sorted((ROOT / "blog").iterdir()):
     # 検索から外した記事（noindex）はページを残すが、一覧・制度別・業種別・sitemap・llms.txt には出さない
     if NI.page_hidden(c) or NI.is_hidden(d.name):
         continue
-    title = re.search(r"<title>(.*?)[||]", c)
+    # 題は <title> 全体から末尾の社名だけを外して読む。以前は最初の区切り（|・｜）までを題としていたため、
+    # 題の中に「｜」がある記事は一覧の題が途中で切れ、社名を外した題（45字を超える記事・2026-10-09）は
+    # 読めずに一覧・sitemap から12本が落ちかけた
+    title = re.search(r"<title>(.*?)</title>", c, re.S)
     desc = re.search(r'name="description" content="(.*?)"', c)
     date = re.search(r'"datePublished":\s*"(\d{4}-\d{2}-\d{2})"', c)
     # sitemap の lastmod は更新日。公開日のままだと、書き直した記事の再クロールが促されない
@@ -230,7 +234,7 @@ for d in sorted((ROOT / "blog").iterdir()):
         print(f"WARN meta不足: {d.name}")
         continue
     heads = re.findall(r"<h2[^>]*>(.*?)</h2>", c, re.S)
-    arts.append({"slug": d.name, "title": title.group(1).strip(), "desc": desc.group(1)[:80],
+    arts.append({"slug": d.name, "title": SITE_SUFFIX.sub("", title.group(1).strip()), "desc": desc.group(1)[:80],
                  "date": date.group(1), "mod": max(date.group(1), mod.group(1) if mod else ""),
                  "cat": cat.group(1).strip(),
                  "heads": [re.sub(r"<[^>]+>", "", h) for h in heads]})

@@ -25,3 +25,19 @@ def test_title_drops_site_name_only_when_too_long():
           "<title>{{TITLE}}</title>")
     src = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
     check("配信の雛形への差し込みが fit_title_tag を通る", "out = fit_title_tag(tpl, meta[\"title\"], vals)" in src, True)
+
+
+def test_subsidy_index_reads_titles_without_site_name():
+    """補助金の一覧・sitemap を作る pages.py は、題を「最初の区切り（|・｜）まで」で読んでいた。
+    社名を外した題は読めずに12本が一覧・sitemap から落ちかけ（2026-10-09 の描き直しで発見・push 前に止めた）、
+    題の中に「｜」がある記事は一覧の題が途中で切れていた"""
+    import re
+    src = (ROOT / "scripts" / "subsidy" / "pages.py").read_text(encoding="utf-8")
+    check("題は <title> 全体から読む（最初の区切りまでで切らない）",
+          ('re.search(r"<title>(.*?)</title>", c, re.S)' in src, 'r"<title>(.*?)[||]"' in src), (True, False))
+    m = re.search(r'SITE_SUFFIX = re\.compile\(r"(.+?)"\)', src)
+    suf = re.compile(m.group(1)) if m else None
+    check("末尾の社名だけを外す（題の中の｜は残す）",
+          [suf.sub("", t) if suf else None for t in ("飲食店のAI導入補助金｜申請の進め方|セブンセンシズ株式会社",
+                                                     "飲食店のAI導入補助金｜申請の進め方")],
+          ["飲食店のAI導入補助金｜申請の進め方", "飲食店のAI導入補助金｜申請の進め方"])
