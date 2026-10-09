@@ -209,11 +209,11 @@ def test_jobs_with_client_data_mask_logs():
     import ci_mask as M
     corpus = ("aio対策の始め方\n補助金の申請", "事務局へ提出する書類と要件定義の進め方", "aio対策の始め方\n補助金の申請")
     pub = {"conflux", "conflux-partners.jp", "conflux partners の記事"}
-    got = {w: M.usable(w, corpus, pub) for w in ("RAG 導入の費用", "ab", "export", "AIO 対策", "事務局",
+    got = {w: M.usable(w, corpus, pub) for w in ("門の検査 架空の語の費用", "ab", "export", "AIO 対策", "事務局",
                                                  "conflux-partners.jp", "https://conflux-partners.jp/package",
                                                  "顧問プラン（月額 99万円・年間契約）", "2026-10")}
     check("伏せる語の選び方: 守秘の語は伏せ、短い語・英数の短い語・自社の記事名の語・一般語・公開済みの名前は伏せない",
-          got, {"RAG 導入の費用": True, "ab": False, "export": False, "AIO 対策": False, "事務局": False,
+          got, {"門の検査 架空の語の費用": True, "ab": False, "export": False, "AIO 対策": False, "事務局": False,
                 "conflux-partners.jp": False, "https://conflux-partners.jp/package": False,
                 "顧問プラン（月額 99万円・年間契約）": True, "2026-10": False})
     with _env(GITHUB_ACTIONS="", SS_PRIVATE_DIR=str(ROOT / "no-such-private")), contextlib.redirect_stdout(io.StringIO()) as o:
@@ -329,9 +329,12 @@ def test_client_work_stops_without_private_data():
     wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
     check("記事の枠は材料が読めない社を書かずに知らせる（skip と blocked・運用通知は送る）",
           ("--check-site" in wf, 'echo "blocked=yes"' in wf, "steps.site.outputs.blocked == 'yes'" in wf), (True, True, True))
-    check("記事の枠はお客様の社の案内・語をログに出さない",
-          ('python scripts/site_brief.py "${{ steps.site.outputs.id }}" | tee' in wf,
-           "steps.site.outputs.quiet" in wf), (False, True))
+    quiet_brief = ('if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then\n'
+                   '            python scripts/site_brief.py "${{ steps.site.outputs.id }}" > automation/logs/brief.txt')
+    check("記事の枠はお客様の社の案内をファイルにだけ書く（tee でログに出すのは自社の社だけ）",
+          (quiet_brief in wf, wf.count('python scripts/site_brief.py "${{ steps.site.outputs.id }}" | tee')), (True, 1))
+    check("記事の枠はお客様の社の語（横断の検査・食い合いの判定・一次情報）をログに出さない",
+          wf.count('steps.site.outputs.quiet }}" = "yes"') >= 5, True)
     prompt = (ROOT / "automation" / "multi_site_prompt.txt").read_text(encoding="utf-8")
     check("執筆の指示: 材料が読めないと出たら書かずに終える", "記事を書かずにそこで終える" in prompt, True)
 

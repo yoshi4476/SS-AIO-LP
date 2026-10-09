@@ -682,12 +682,18 @@ def test_hist_no_retired_scoring_claims():
     print("\n■ 履歴A-50: 旧採点（6観点120点満点）と llms.txt の加点を外に出さない")
     check("検出器: 提案書の「6観点120点満点」を拾う", bool(STALE_RX.search("さらに6観点120点満点の採点で")), True)
     check("検出器: いまの採点（3観点・100点）は拾わない", bool(STALE_RX.search("3観点を各100点で採点")), False)
+    # 提案資料の生成（sales_deck）と提案書は非公開のリポジトリの sales/ にある（2026-10-10 守秘義務）。あれば見る
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import private_store
+    sales = private_store.sales_path("")
     pub = [p for p in html_files(SITE)] + [SITE / "llms.txt"] + list((ROOT / "functions").rglob("*.js")) \
-        + [ROOT / "scripts" / n for n in ("proposal_make.py", "monthly_report.py", "group_report.py", "sales_deck.py")]
-    bad = sorted(p.relative_to(ROOT).as_posix() for p in pub if p.is_file() and STALE_RX.search(read(p)))
+        + [ROOT / "scripts" / n for n in ("proposal_make.py", "monthly_report.py", "group_report.py")] \
+        + [sales / "sales_deck.py"]
+    bad = sorted(p.name if sales in p.parents else p.relative_to(ROOT).as_posix()
+                 for p in pub if p.is_file() and STALE_RX.search(read(p)))
     check("site/・診断API・提案書とレポートの生成元に旧採点の表記が無い", bad, [])
     warn("営業資料・顧客向け文書に残る旧採点の表記（文面の判断が要るため人が直す）",
-         [p.relative_to(ROOT).as_posix() for p in list((ROOT / "docs" / "sales").glob("*.html")) + [ROOT / "docs" / "client-readme.md"]
+         [p.name for p in list(sales.glob("*.html")) + [ROOT / "docs" / "client-readme.md"]
           if p.is_file() and STALE_RX.search(read(p))])
     js = read(ROOT / "functions" / "api" / "audit.js")
     items = re.findall(r'name:\s*"([^"]+)",\s*pts:\s*(\d+)', js)
