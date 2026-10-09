@@ -55,6 +55,8 @@ faq:
 
 社内でよく使う4つの呼び方は、指す範囲と使われる場面で見分けられます。
 
+関連する内容として[経理事務と経理補助の違い](/blog/keiri-jimu-hojo-chigai/)も公開しています。
+
 <figure><img src="/images/corporate-backoffice-chigai/yobikata.png" alt="4つの呼び方が指す範囲: コーポレートは経営企画・法務まで含む本社機能、バックオフィスは経理・総務などの事務処理、管理部門は両方の総称、間接部門は売上を直接作らない部門全体" loading="lazy"><figcaption>4つの呼び方が指す範囲</figcaption></figure>
 
 | 呼び方 | 主に指す範囲 | よく使う場面 |
