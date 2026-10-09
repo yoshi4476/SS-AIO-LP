@@ -142,22 +142,71 @@ def _sitemap(domain):
     return {urlparse(u).path.rstrip("/") + "/": u for u in urls}
 
 
-def coverage(cfg, paths):
-    """URL検査で索引の状態を見る（英語の状態名で判定する。日本語は表記が変わりうる）"""
+# URL検査の結果の控え（同じ週次の中で2回検査しないため）。週次は findings（表示）と pace --write（保存）で
+# 2回 measure を呼び、3サイト120本・1本約6秒の検査を2回繰り返していた（2026-10-05: 774秒＋約750秒）。
+# 控えは一時フォルダに置く（お客様の URL を含むので public のリポジトリに置かない）。失敗した検査は控えない
+INSPECT_CACHE = "pace_inspect_cache.json"
+INSPECT_TTL = 6 * 3600
+# 同時に投げる本数。URL検査の上限は1プロパティ毎分600回・1日2,000回で、6本同時でも毎分60回ほど
+INSPECT_WORKERS = 6
+
+
+def _inspect_cache_path():
+    import tempfile
+    return Path(tempfile.gettempdir()) / INSPECT_CACHE
+
+
+def _inspect_cache():
+    try:
+        return json.loads(_inspect_cache_path().read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def coverage(cfg, paths, now=None):
+    """URL検査で索引の状態を見る（英語の状態名で判定する。日本語は表記が変わりうる）。
+    同じ URL を6時間以内に検査し直さない（控え）。検査は INSPECT_WORKERS 本ずつ同時に投げ、結果は paths の順で返す"""
+    import threading
+    import time
+    from concurrent.futures import ThreadPoolExecutor
     import index_status as IX
-    sc = IX.client()
+    sc = IX.client()       # 鍵が無い・読めないときは今までどおりここで止まる（呼び出し側が「測れません」にする）
     site_url = f"https://{cfg['domain']}/"
     sm = _sitemap(cfg["domain"])
+    urls = {p: sm.get(p) or f"https://{cfg['domain']}{p}" for p in paths[:INSPECT_MAX]}
+    now = time.time() if now is None else now
+    cache = _inspect_cache()
     out = {}
-    for p in paths[:INSPECT_MAX]:
-        url = sm.get(p) or f"https://{cfg['domain']}{p}"
+    for p, url in urls.items():
+        hit = cache.get(url)
+        if isinstance(hit, list) and len(hit) == 2 and now - float(hit[0]) < INSPECT_TTL:
+            out[p] = hit[1]
+    todo = [p for p in urls if p not in out]
+    local = threading.local()
+
+    def one(p):
+        # 検査の窓口はスレッドごとに作る（httplib2 は同時に使えない）
+        c = getattr(local, "sc", None)
+        if c is None:
+            c = local.sc = IX.client()
         try:
-            r = sc.urlInspection().index().inspect(
-                body={"inspectionUrl": url, "siteUrl": site_url, "languageCode": "en-US"}).execute()
-            out[p] = r.get("inspectionResult", {}).get("indexStatusResult", {}).get("coverageState", "")
+            r = c.urlInspection().index().inspect(
+                body={"inspectionUrl": urls[p], "siteUrl": site_url, "languageCode": "en-US"}).execute()
+            return p, r.get("inspectionResult", {}).get("indexStatusResult", {}).get("coverageState", "")
         except Exception as e:
-            out[p] = f"ERROR {str(e)[:40]}"
-    return out
+            return p, f"ERROR {str(e)[:40]}"
+
+    if todo:
+        with ThreadPoolExecutor(max_workers=min(INSPECT_WORKERS, len(todo))) as ex:
+            for p, v in ex.map(one, todo):
+                out[p] = v
+                if not v.startswith("ERROR"):
+                    cache[urls[p]] = [now, v]
+        try:
+            _inspect_cache_path().write_text(json.dumps(cache, ensure_ascii=False), encoding="utf-8")
+        except OSError:
+            pass
+    return {p: out[p] for p in urls}
 
 
 def spread(items, k):

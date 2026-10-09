@@ -226,6 +226,11 @@ CHECKS = [
      re.compile(r"^要対応:")),
 ]
 
+# 最初に同時に始めておく検査。遅く（2026-10-05 の週次で pace 774秒・サイト監査 187秒・量産の指紋 43秒・
+# KW重複 38秒）、どれも読むだけでファイルを書かない（ほかの検査の読む控えを書き換えない）ものに限る。
+# 書く検査（控え・台帳を更新するもの）をここに足すと、同時に動く検査と書き合う
+PARALLEL = {"pace.py", "seo_audit.py --live --all --external", "scaled_guard.py", "hub_client.py overlaps"}
+
 # 「問題あり」を表す印。検査ごとに語尾が違うため、値の側で見る
 BAD = re.compile(r"(?:[A-Z_]+_OK=no|LIVE_CHECK=ng|KW_GATE=block|RAKKO_MONTH=over)")
 GOOD = re.compile(r"(?:[A-Z_]+_OK=yes|LIVE_CHECK=ok|KW_GATE=ok|RAKKO_MONTH=ok)")
@@ -434,6 +439,11 @@ def main():
     a = ap.parse_args()
 
     rows, lines = [], []
+    # 遅い検査（PARALLEL）は最初に同時に始めておき、順番が来たら結果を受け取る。表示・判定の順は今までと同じ
+    from concurrent.futures import ThreadPoolExecutor
+    early = [s for _, s, _ in CHECKS if s in PARALLEL and (ROOT / "scripts" / s.split()[0]).exists()]
+    pool = ThreadPoolExecutor(max_workers=max(1, len(early)))
+    started = {s: pool.submit(run, s) for s in early}
     for label, script, pat in CHECKS:
         # 引数つき（"measure.py --log" など）も扱えるようにする。
         # 実在の判定はファイル名だけで行う
@@ -442,11 +452,12 @@ def main():
             rows.append((label, "動かせず", ["%s がありません" % fname]))
             continue
         print("\n===== %s（%s） =====" % (label, script), flush=True)
-        text, rc = run(script)
+        text, rc = started.pop(script).result() if script in started else run(script)
         if not a.quiet:
             print(text.rstrip())
         state = judge(text, rc)
         rows.append((label, state, details(text, pat) if state == "要対応" else []))
+    pool.shutdown(wait=True)
 
     print("\n" + "=" * 60)
     print("■ 週次で見つかったもの\n")
