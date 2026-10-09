@@ -226,6 +226,18 @@ def run(slug):
     juyou = body_nc.count("重要です")
     add("「重要です」3回以下", juyou <= 3, f"{juyou}回")
 
+    # お客様の「使ってはいけない表現」（ヒアリングシート → sites/<id>.json の rules.ng_words）。
+    # 配信の門（publish.py）だけで止めていたため、採点も承認も通った記事が配信で静かに止まり、
+    # 未配信のまま残った（2026-10-09 CONFLUX「必ず」）。書く段で見つけて直させる
+    try:
+        sid = sites_mod.find_category_owner(str(meta.get("category") or ""))
+        ng = ((sites_mod.load_all().get(sid) or {}).get("rules") or {}).get("ng_words") or []
+    except SystemExit:
+        ng = []
+    hay = f"{meta.get('title', '')}{meta.get('description', '')}{body}"
+    hit = [w for w in ng if w and w in hay]
+    add("お客様の使えない表現（rules.ng_words）が無い", not hit, "、".join(hit) or "なし")
+
     return checks
 
 

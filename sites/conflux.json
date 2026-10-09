@@ -209,7 +209,8 @@
   "report_issuer": "client",
   "rules": {
     "monthly_cap": 30,
-    "review_before_publish": true,
+    "review_before_publish": false,
+    "_review_note": "2026-10-09 運用者の決定「もう承認を聞かないで」: 公開前の確認（監修の記録）を待たずに公開する。禁止語（ng_words）・お客様に出せない表現（operator_leaks）・品質の門は publish.py がこれまでどおり止める",
     "ng_words": [
       "必ず",
       "確実に",

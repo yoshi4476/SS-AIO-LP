@@ -270,6 +270,15 @@ def main():
                     capture_output=True, text=True, encoding="utf-8", errors="replace")
                 mark = "○" if r.returncode == 0 else "×"
                 print(f"     [{i}] {mark} {s}", flush=True)
+                if r.returncode:
+                    # 止めた理由を出す。× だけでは、配信の門（禁止語など）で止まったまま誰も気づかない
+                    # （2026-10-09 CONFLUX の記事が「必ず」で止まり、承認の後も未配信だった）
+                    out = [ln.strip() for ln in ((r.stdout or "") + "\n" + (r.stderr or "")).splitlines() if ln.strip()]
+                    why = next((ln for ln in reversed(out) if re.search(r"BLOCKED|HELD|Error|エラー|失敗", ln)),
+                               out[-1] if out else "理由が出力されていません")
+                    print(f"         理由: {why[:200]}", flush=True)
+                    if "BLOCKED" in why:
+                        print(f"要対応: {c.get('name', site)} の {s} は配信の門で止まっています（{why[:120]}）")
 
     print(f"\nPUBLISH_GAP={total_gap}")
     if total_gap and not a.publish:
