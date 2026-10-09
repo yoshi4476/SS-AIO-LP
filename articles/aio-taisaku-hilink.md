@@ -49,6 +49,8 @@ faq:
 
 **AIO対策での被リンクは、検索順位を上げて引用候補に入る経路で効き、本数そのものは決め手になりません。**
 
+近い論点を[外壁塗装のAI検索集客](/aio/gaiheki-tosou-ai-kensaku-shukyaku/)で扱っています。
+
 あわせて[工務店のAI検索集客](/aio/koumuten-ai-kensaku-shukyaku/)もご覧ください。
 
 <div class="definition-box"><span class="term">被リンクとは</span>、他のサイトから自社サイトへ張られたリンクのことです。<span class="term">AIO対策とは</span>、GoogleのAI OverviewやChatGPTの回答で、自社の情報が根拠として引用されるようにする取り組みです。</div>

@@ -168,6 +168,8 @@ AIの回答から直接サイトへ来る施主は、まだ多くありません
 
 **多い失敗は、AIでの見え方を一度も確かめずに設定作業だけ進めることと、社名で検索された後の受け皿を用意していないことです。**
 
+社名で調べられた後の受け皿は、訪問業者と疑われやすい業種の例として[外壁塗装のAI検索集客](/aio/gaiheki-tosou-ai-kensaku-shukyaku/)でも整理しています。
+
 ### 失敗1: llms.txtや構造化データの設定だけで終える
 
 起きること: 設定を済ませても、AIの回答に社名が出ないままになります。原因は、設定が引用の決め手ではない点にあります。<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">GoogleのAI最適化ガイド</a>は、llms.txtを使わないと明記しています。避けるには、設定より先に性能値・施工事例・保証の事実を本文に書きます。
