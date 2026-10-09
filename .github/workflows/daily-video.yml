@@ -141,3 +141,10 @@ jobs:
           done
           [ "$pushed" = 1 ] || { echo "::error::動画の台帳を push できませんでした"; exit 1; }
           gh workflow run deploy.yml --ref "${GITHUB_REF_NAME}" || echo "::warning::デプロイを起動できませんでした（次の push で反映されます）"
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+

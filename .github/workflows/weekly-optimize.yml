@@ -208,6 +208,13 @@ jobs:
   # 未登録ページの検査（URL検査API・15分）。ここでは通知しない（--dry）。
   # 通知は optimize の最後に、この結果を使って行う（--from-cache）。先に通知すると Indexing API の
   # 1日200件をこの再通知が使い、その日に直した記事の通知（notify_indexing）が落ちる
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+
   index-inspect:
     needs: guard
     if: needs.guard.outputs.go == 'true'
@@ -278,6 +285,13 @@ jobs:
 
   # 読むだけの検査（結果はログ・注釈・管制塔のエラーログに出るだけで、ファイルを書かない）。
   # どれも live の GSC/GA4/本番サイトか、原稿を読むだけなので、記事の直しを待つ理由が無い
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+
   reports:
     needs: guard
     if: needs.guard.outputs.go == 'true'
@@ -439,6 +453,13 @@ jobs:
       - name: 鍵の後始末
         if: always()
         run: rm -f indexing-service-account.json
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+
 
   optimize:
     needs: guard
@@ -1284,3 +1305,10 @@ jobs:
       - name: 鍵の後始末
         if: always()
         run: rm -f indexing-service-account.json gbp-client.json gbp-token-*.json youtube-client.json youtube-token.json
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+

@@ -83,3 +83,10 @@ jobs:
           git push
           # GITHUB_TOKEN の push では deploy.yml が動かないので、公開を明示的に起動する
           GH_TOKEN="${{ github.token }}" gh workflow run deploy.yml --ref "${GITHUB_REF_NAME}" || echo "::warning::公開を起動できませんでした"
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+

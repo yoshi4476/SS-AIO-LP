@@ -199,9 +199,12 @@ jobs:
             i=$(( slot % N ))
             echo "枠$slot ÷ サイト数$N → $i 番目（${SITES[$i]}）"
             s="${SITES[$i]}"
+            # お客様の社は公開の id（sites/<公開の id>.json）で並ぶ。本数・上限は社の id で数える（非公開の置き場の設定）。
+            # ジョブの間で渡すのは公開の id だけ（社の id は CI のログで伏せる語なので、ジョブの出力に入れると落とされる）
+            real=$(python3 scripts/private_store.py --resolve "$s" 2>/dev/null || echo "$s")
             # 月の上限（60本）に達したサイトは書かない。publish_flow の上限は書き終えた後に効くため、
             # 書き手が別の道で公開すると抜ける（2026-09 は3サイトとも超えた）
-            if python scripts/daily_audit.py --cap-reached "$s" >/dev/null 2>&1; then
+            if python scripts/daily_audit.py --cap-reached "$real" >/dev/null 2>&1; then
               echo "skip=yes" >> "$GITHUB_OUTPUT"
               echo "$s は今月の上限に達しています。新しい記事は書きません"
               exit 0
@@ -212,7 +215,7 @@ jobs:
             # 設定で浮いた枠は、spare_slot=rewrite_main の社だけ主力の記事の書き直しに回す（2026-10-09 運用者の決定）。
             # 兆候・手動の対策で止めた枠と、上の月の上限で止めた枠は書き直さない（pace.slot が決める）
             rank=$(( slot / N ))
-            out=$(python scripts/pace.py --slot "$s" "$rank" 2>/dev/null) || true
+            out=$(python scripts/pace.py --slot "$real" "$rank" 2>/dev/null) || true
             mode=$(echo "$out" | sed -n 's/^SLOT=//p')
             why=$(echo "$out" | sed -n 's/^SLOT_WHY=//p')
             if [ -z "$mode" ]; then
@@ -230,12 +233,21 @@ jobs:
             fi
           fi
           # 自前でビルドするサイトかどうか。デプロイと配信の分岐に使う
+          # 手で動かした回に社の id を入れられても、ジョブの間は公開の id で渡す
+          s=$(python3 scripts/private_store.py --public-id "$s" 2>/dev/null || echo "$s")
           own=$(python -c "import json;print(json.load(open('sites/$s.json',encoding='utf-8')).get('type')=='self-static')")
           first="${SITES[0]}"
           echo "id=$s" >> "$GITHUB_OUTPUT"
           echo "own=$own" >> "$GITHUB_OUTPUT"
           echo "first=$first" >> "$GITHUB_OUTPUT"
           echo "対象サイト: $s（自前ビルド: $own / 全$N サイト）"
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+
 
   write:
     needs: select
@@ -272,8 +284,13 @@ jobs:
             echo "要対応: ${{ needs.select.outputs.id }} の記事を書きませんでした。非公開のデータ（yoshi4476/ss-aio-private）が読めません。Secret PRIVATE_DATA_TOKEN（無ければ SITE_PUSH_TOKEN）にこのリポジトリの Contents の読み書きを足してください" >> automation/logs/findings.txt
             echo "::error::${{ needs.select.outputs.id }} の記事を書きません。非公開のデータが読めません（鍵の権限を確認）"
           fi
+          # select からは公開の id で届く。工程には社の id を渡す（非公開の置き場の設定。CI のログでは伏せる語）。
+          # コミットの文・知らせる文には公開の id を使う（公開側の履歴に社名を残さない。2026-10-10）
+          pub="${{ needs.select.outputs.id }}"
+          real=$(python3 scripts/private_store.py --resolve "$pub" 2>/dev/null || echo "$pub")
           {
-            echo "id=${{ needs.select.outputs.id }}"
+            echo "id=$real"
+            echo "pub=$pub"
             echo "own=${{ needs.select.outputs.own }}"
             echo "first=${{ needs.select.outputs.first }}"
             # rewrite: 運用者の設定（daily_articles）で浮いた枠。新しい記事は書かず、主力の記事を1本書き直す
@@ -416,8 +433,8 @@ jobs:
           rm -f indexing-service-account.json
           echo "$out"
           r=$(echo "$out" | sed -n 's/^SPARE_SLOT=//p')
-          echo "::notice::浮いた枠（${{ steps.site.outputs.id }}）: ${r:-結果の印がありません（上のログを確認）}"
-          echo "浮いた枠（${{ steps.site.outputs.id }}）: ${r:-結果の印がありません}" >> "$GITHUB_STEP_SUMMARY"
+          echo "::notice::浮いた枠（${{ steps.site.outputs.pub }}）: ${r:-結果の印がありません（上のログを確認）}"
+          echo "浮いた枠（${{ steps.site.outputs.pub }}）: ${r:-結果の印がありません}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: 執筆ブリーフの表示（KW残数と担当領域をログに残す）
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
@@ -604,7 +621,12 @@ jobs:
         run: |
           for f in $(git ls-files --others --exclude-standard articles/*.md); do
             slug=$(basename "$f" .md)
-            python scripts/link_boost.py "${{ steps.site.outputs.id }}" --rescue --write --only="$slug" 2>&1 | tail -4 || true
+            # お客様の社の回は記事の slug・題が並ぶのでログに出さない（件数は週次の集計で見る）
+            if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
+              python scripts/link_boost.py "${{ steps.site.outputs.id }}" --rescue --write --only="$slug" > /dev/null 2>&1 || true
+            else
+              python scripts/link_boost.py "${{ steps.site.outputs.id }}" --rescue --write --only="$slug" 2>&1 | tail -4 || true
+            fi
           done
 
       # 多言語を指示した社だけ、書いた記事の要約をその場で訳す（週次を待たずに公開と同時に多言語化）。
@@ -640,7 +662,13 @@ jobs:
           # 記録の無い記事は公開されない（HELD）。放置すると書いた記事が溜まるだけになるため、毎回知らせる
           mkdir -p automation/logs
           # 公開前の確認を「要」にしたお客様の記事は、社ごとに原稿のURL・題・待っている日数と承認の手順を載せる
-          python scripts/editorial_review.py --notify --site "${{ steps.site.outputs.id }}" | tee /tmp/review.txt || true
+          # お客様の社の回は、原稿の題・URL をログに出さず通知（メール）にだけ載せる
+          if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
+            python scripts/editorial_review.py --notify --site "${{ steps.site.outputs.id }}" > /tmp/review.txt || true
+            echo "監修待ちの知らせ: $(grep -c . /tmp/review.txt || true) 行（お客様の社の回はログに出しません）"
+          else
+            python scripts/editorial_review.py --notify --site "${{ steps.site.outputs.id }}" | tee /tmp/review.txt || true
+          fi
           cat /tmp/review.txt >> automation/logs/findings.txt || true
 
       - name: 自リポジトリの記事をコミット
@@ -653,9 +681,9 @@ jobs:
             echo "変更なし — コミットをスキップ"
           else
             if [ "${{ steps.site.outputs.mode }}" = "rewrite" ]; then
-              git commit -m "spare-slot(${{ steps.site.outputs.id }}): 浮いた枠で主力の記事を書き直し $(date '+%Y-%m-%d %H:%M JST')"
+              git commit -m "spare-slot(${{ steps.site.outputs.pub }}): 浮いた枠で主力の記事を書き直し $(date '+%Y-%m-%d %H:%M JST')"
             else
-              git commit -m "publish(${{ steps.site.outputs.id }}): $(date '+%Y-%m-%d %H:%M JST')"
+              git commit -m "publish(${{ steps.site.outputs.pub }}): $(date '+%Y-%m-%d %H:%M JST')"
             fi
             pushed=0
             for i in 1 2 3; do
@@ -694,7 +722,7 @@ jobs:
           grep '^要対応' /tmp/publish_changed.txt >> automation/logs/findings.txt || true
           git add -A
           git diff --cached --quiet || {
-            git commit -q -m "spare-slot(${{ steps.site.outputs.id }}): 配信の記録 $(date '+%Y-%m-%d %H:%M JST')"
+            git commit -q -m "spare-slot(${{ steps.site.outputs.pub }}): 配信の記録 $(date '+%Y-%m-%d %H:%M JST')"
             pushed=0
             for i in 1 2 3; do
               if git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q; then pushed=1; break; fi
@@ -754,7 +782,8 @@ jobs:
           # 待つのは最長4.5分まで（以前は最長18分。1回の実行の半分がこの待ちだった）。
           # 見えなければ「確認中」で残し、翌日の publish_gap と日次の deploy_check が判定する
           out=$(python scripts/verify_publish.py --site "${{ steps.site.outputs.id }}" --since "$RUN_START" --build-timeout 180 --live-timeout 90) || true
-          echo "$out"
+          # お客様の社の回は記事の URL（slug）をログに出さない。判定の印だけ
+          if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then echo "$out" | grep -E '^VERIFY_' || true; else echo "$out"; fi
           # **「見えない」と「公開されていない」は違う。**
           # 配信が10分で終わらない日があり、それを「要対応」で出すと狼少年になる。
           # 公開されたかどうかは、翌日の publish_gap（手元と本番の一覧を突き合わせる）
@@ -825,7 +854,7 @@ jobs:
         continue-on-error: true      # 検知が目的。反映待ちで run を落とさない
         run: |
           out=$(python scripts/live_check.py --site "${{ steps.site.outputs.id }}") || true
-          echo "$out"
+          if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then echo "$out" | grep -E '^LIVE_CHECK=' || true; else echo "$out"; fi
           if echo "$out" | grep -q "LIVE_CHECK=ng"; then
             echo "::warning::公開ページに問題が見つかりました。ログを確認してください"
             mkdir -p automation/logs
@@ -855,12 +884,14 @@ jobs:
           fi
           # ここで配信できた記事は、公開の後の手順（台帳・SNS・既存記事からのリンク）を通っていない
           # ことがある（承認の回に配信できず翌日に回った記事など）。finish は台帳が公開済みなら何もしない
-          echo "$out" | grep -oE '\] ○ [a-z0-9-]+$' | awk '{print $3}' | while read -r slug; do
-            site=$(python -c "import sys; sys.path.insert(0,'scripts'); import sites, publish; m=publish.read_meta(__import__('pathlib').Path('articles')/(sys.argv[1]+'.md')); print(sites.find_category_owner((m or {}).get('category','')) or '')" "$slug")
-            [ -n "$site" ] || continue
+          # 配信できた記事は publish_gap が automation/logs/published_now.txt（社 slug）に書く。ログの「○ slug」の行は
+          # 拾わない（お客様の社の記事の slug はログに出さない。2026-10-10）
+          touch automation/logs/published_now.txt
+          while read -r site slug; do
+            [ -n "$slug" ] || continue
             python scripts/publish_flow.py --finish "$site" "$slug" "--since=$since" < /dev/null \
-              || echo "::warning::$slug の公開の後の手順に失敗"
-          done
+              || echo "::warning::$(python3 scripts/private_store.py --shown "$slug") の公開の後の手順に失敗"
+          done < automation/logs/published_now.txt
           # finish が既存記事に足したリンクを残す。コミット工程はこの前に終わっているため、
           # ここで入れないとランナーと一緒に消え、翌日の publish_gap が元の版で配信し直す
           for p in articles data/published.json data/body_hash.json; do if [ -e "$p" ]; then git add "$p"; fi; done
@@ -901,3 +932,10 @@ jobs:
           $found
           $(git log -1 --pretty=%s)
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+

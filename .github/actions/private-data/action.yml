@@ -1,16 +1,23 @@
-name: 非公開のデータ（お客様の情報・料金・レポート）
+name: 非公開のデータ（お客様の情報・記事・料金・レポート）
 description: >-
-  非公開のリポジトリ yoshi4476/ss-aio-private を管制塔の直下 private/ に取得し、お客様の守秘の語を ::add-mask:: で伏せる。
+  fetch（既定）: 非公開のリポジトリ yoshi4476/ss-aio-private を管制塔の直下 private/ に取得し、お客様の社の記事・画像・
+  動画の台本を作業場所へ重ねて置き（公開側の git からは外す）、commit の見張り（.git/hooks/pre-commit）を入れ、
+  お客様の守秘の語（社名・ドメイン・記事の題と slug・材料）を ::add-mask:: で伏せる。
+  save: この回に書いた・直したお客様の社のファイルを非公開のリポジトリへ戻して push する（ジョブの最後に always で）。
   管制塔は GitHub Actions を無料で使うため public で、CI のログも誰でも読める（90日残る）。お客様のデータを扱うジョブは
-  checkout の直後にこれを通す（門 gates_history_h76）。composite action は secrets を読めないので、鍵は呼ぶ側が
-  token に渡す（secrets.PRIVATE_DATA_TOKEN、無ければ secrets.SITE_PUSH_TOKEN）。取れなければ、お客様の社の工程は
-  scripts/private_store.py の require で止まって知らせ、自社3サイトはこれまでどおり動く。
+  checkout の直後に fetch、最後に save を通す（門 gates_history_h76・h77）。composite action は secrets を読めないので、
+  鍵は呼ぶ側が token に渡す（secrets.PRIVATE_DATA_TOKEN、無ければ secrets.SITE_PUSH_TOKEN）。取れなければ、お客様の社の
+  工程は scripts/private_store.py の require で止まって知らせ、自社3サイトはこれまでどおり動く。
 
 inputs:
   token:
     description: 非公開のリポジトリを読み書きできる鍵（fine-grained なら yoshi4476/ss-aio-private の Contents を Read and write）
     required: false
     default: ""
+  mode:
+    description: fetch（取得して伏せる）か save（この回の分を残す）
+    required: false
+    default: fetch
 
 outputs:
   ok:
@@ -22,11 +29,18 @@ runs:
   steps:
     # 取得する。鍵の base64 は private_store が ::add-mask:: で伏せてから使う（鍵そのものは GitHub が伏せる）
     - id: fetch
+      if: inputs.mode == 'fetch'
       shell: bash
       env:
         PRIVATE_DATA_TOKEN: ${{ inputs.token }}
       run: python3 scripts/private_store.py --fetch
 
     # お客様の守秘の語を伏せる。これより後の工程のログ・注釈では *** になる（成果物には効かないので、成果物に入れない）
-    - shell: bash
+    - if: inputs.mode == 'fetch'
+      shell: bash
       run: python3 scripts/ci_mask.py
+
+    - if: inputs.mode == 'save'
+      shell: bash
+      run: |
+        python3 scripts/private_store.py --push "CI: ${{ github.workflow }} / ${{ github.job }}（run ${{ github.run_id }}）" || true

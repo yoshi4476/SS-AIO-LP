@@ -440,6 +440,13 @@ jobs:
   # （古い中身で新しい公開を上書きする）。記事・週次・月次・ニュースレターは再実行すると二重に書く・送るので入れない。
   # 集中モード（Focus Mode）は再実行の回（run_attempt 2以上）で書き直しを飛ばすので、二重には直さない
   # 日次KPI（Daily KPI）は送った日を記録してから残すので、再実行しても同じ日を二重に送らない
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+
   rerun:
     if: >-
       github.event_name == 'workflow_run' &&

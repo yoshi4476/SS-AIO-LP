@@ -136,6 +136,13 @@ jobs:
   # 切った社だけ、その日に積み足す。月の途中でもよい。1社1か月1回（組んだ月は data/kw_plan_runs.json に社と年月だけ）。
   # 流れは kw_plan.py の冒頭（実証済みの語→シート→主力×業種→無料のサジェスト→検索数→見出し・共起語→実際の質問→予備）。
   # ラッコの上限（1サイト月150・全体600・1回150・目的ごとの枠）は rakko.allow が見る。KPI の集計とは別のジョブ（落ちても集計は止めない）
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+
   kw-stock:
     needs: sched
     if: ${{ !cancelled() && needs.sched.outputs.go != 'no' }}
@@ -262,3 +269,10 @@ jobs:
       - name: 鍵の後始末
         if: always()
         run: rm -f indexing-service-account.json
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+

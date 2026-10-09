@@ -130,3 +130,10 @@ jobs:
           if [ "${left}" = "0" ]; then
             gh workflow disable research-refill.yml --repo "$GITHUB_REPOSITORY" && echo "全業種そろったので、毎日の聞き足しを止めました（次は3か月ごとの調査のあと）"
           fi
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+

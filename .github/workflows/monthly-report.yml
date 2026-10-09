@@ -394,3 +394,10 @@ jobs:
           if [ -f automation/logs/findings.txt ]; then found=$(cat automation/logs/findings.txt); fi
           python scripts/notify_slack.py --routine "$icon 月次レポート: ${{ job.status }}（info.ai@7senses.co.jp へ送付）
           $found" || true
+
+      # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
+      # 公開側に commit が無い回も残す。門 gates_history_h77）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+
