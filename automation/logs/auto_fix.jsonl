@@ -1837,3 +1837,6 @@
 {"at": "2026-10-09 04:22", "by": "link_boost", "slug": "nail-salon-hojokin-hikaku", "kind": "link_band", "ok": true, "note": "kensetsugyou-denshishinsei-system から内部リンクを1本"}
 {"at": "2026-10-09 04:22", "by": "link_boost", "slug": "it-hojokin-osusume", "kind": "link_inline", "ok": true, "note": "monozukuri-hojokin-unsougyou の本文の「交付決定前の発注は対象外」を文中リンクに", "src": "monozukuri-hojokin-unsougyou", "anchor": "交付決定前の発注は対象外"}
 {"when": "2026-10-09T04:22:09.715949", "by": "auto_review", "slug": "(24記事)", "what": "言い回し6件を振り直し・19件を削除"}
+{"at": "2026-10-09 09:22", "by": "link_boost", "slug": "shoene-hojokin-chusho-kigyo", "kind": "link_rescue", "ok": true, "note": "ai-hojokin-gbizid-shutoku から内部リンクを1本"}
+{"at": "2026-10-09 09:22", "by": "link_boost", "slug": "shoene-hojokin-chusho-kigyo", "kind": "link_rescue", "ok": true, "note": "it-hojokin-clinic から内部リンクを1本"}
+{"at": "2026-10-09 09:22", "by": "link_boost", "slug": "shoene-hojokin-chusho-kigyo", "kind": "link_rescue", "ok": true, "note": "chusho-shoryokuka-toshi-hojokin から内部リンクを1本"}
