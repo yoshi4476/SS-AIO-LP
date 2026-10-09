@@ -18,6 +18,7 @@
 未設定ならローカルのクローンに書き込むだけで止まる（--push は失敗する）。
 """
 import argparse
+import html as html_mod
 import json
 import os
 import re
@@ -1285,6 +1286,22 @@ def _i18n_pages(cfg, meta, dest: Path):
     return {"hreflang": "\n".join(tags), "langs": list(have)}
 
 
+TITLE_MAX = 45   # 題（<title>）の字数の上限（URL診断・機械ゲートと同じ線）
+
+
+def fit_title_tag(tpl, title, vals):
+    """雛形の <title>{{TITLE}}＋サイト名</title> が45字を超えるときは、サイト名を外して本題だけにする。
+    補助金の雛形は末尾に「|セブンセンシズ株式会社」（12字）を付け、15本が45字を超えて URL診断で減点されていた
+    （2026-10-09）。本題（狙う語が前にある）は削らない。サイト名だけを外す"""
+    m = re.search(r"<title>\{\{TITLE\}\}([^<]*)</title>", tpl)
+    if not m or not m.group(1).strip():
+        return tpl
+    suffix = re.sub(r"\{\{([A-Z_]+)\}\}", lambda x: str(vals.get(x.group(1), "")), m.group(1))
+    if len(html_mod.unescape(f"{title}{suffix}")) <= TITLE_MAX:
+        return tpl
+    return tpl[:m.start()] + "<title>{{TITLE}}</title>" + tpl[m.end():]
+
+
 def write_external_html(cfg, dest: Path, meta, body, src: Path):
     """別リポジトリの静的サイト用: 相手のテンプレートに流し込んでHTMLを生成する。
 
@@ -1387,7 +1404,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     }
     # 表の数字の横棒グラフ（表の直後・1記事2つまで）。読了時間・扱う実体は上で表だけの本文から数えてある
     vals["BODY"] = table_charts.add_to_html(vals["BODY"], cfg)
-    out = tpl
+    out = fit_title_tag(tpl, meta["title"], vals)
     for k, v in vals.items():
         out = out.replace("{{" + k + "}}", v)
     left = re.findall(r"\{\{([A-Z_]+)\}\}", out)
