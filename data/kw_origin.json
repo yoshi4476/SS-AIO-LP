@@ -1,4 +1,174 @@
 {
+ "corporate": {
+  "アーバン記帳代行": {
+   "kw": "アーバン 記帳代行",
+   "month": "2026-10",
+   "priority": "B",
+   "proven": false,
+   "src": "rakko"
+  },
+  "エフアンドエム記帳代行評判": {
+   "kw": "エフアンドエム 記帳代行 評判",
+   "month": "2026-10",
+   "priority": "A",
+   "proven": false,
+   "src": "rakko"
+  },
+  "クラウドワークス記帳代行": {
+   "kw": "クラウドワークス 記帳代行",
+   "month": "2026-10",
+   "priority": "C",
+   "proven": false,
+   "src": "rakko"
+  },
+  "バックオフィス問題解決マニュアル": {
+   "kw": "バック オフィス 問題 解決 マニュアル",
+   "month": "2026-10",
+   "priority": "C",
+   "proven": false,
+   "src": "gsc"
+  },
+  "バックオフィス外注": {
+   "kw": "バックオフィス 外注",
+   "month": "2026-10",
+   "priority": "B",
+   "proven": false,
+   "src": "suggest"
+  },
+  "不動産記帳代行": {
+   "kw": "不動産 記帳代行",
+   "month": "2026-10",
+   "priority": "B",
+   "proven": false,
+   "src": "seed"
+  },
+  "人件費請求書": {
+   "kw": "人件費 請求書",
+   "month": "2026-10",
+   "priority": "C",
+   "proven": false,
+   "src": "gsc"
+  },
+  "介護記帳代行": {
+   "kw": "介護 記帳代行",
+   "month": "2026-10",
+   "priority": "C",
+   "proven": false,
+   "src": "seed"
+  },
+  "会計事務所経理どっち": {
+   "kw": "会計事務所 経理 どっち",
+   "month": "2026-10",
+   "priority": "A",
+   "proven": false,
+   "src": "gsc"
+  },
+  "外注費請求書テンプレート無料": {
+   "kw": "外注費 請求書 テンプレート 無料",
+   "month": "2026-10",
+   "priority": "C",
+   "proven": false,
+   "src": "suggest"
+  },
+  "建設業外注費仕訳": {
+   "kw": "建設業 外注費 仕訳",
+   "month": "2026-10",
+   "priority": "A",
+   "proven": false,
+   "src": "suggest"
+  },
+  "月次決算作り方": {
+   "kw": "月次決算作り方",
+   "month": "2026-10",
+   "priority": "C",
+   "proven": false,
+   "src": "rakko"
+  },
+  "税理士記帳代行丸投げ": {
+   "kw": "税理士 記帳代行 丸投げ",
+   "month": "2026-10",
+   "priority": "A",
+   "proven": false,
+   "src": "rakko"
+  },
+  "経理の夏谷さんはガマンできない": {
+   "kw": "経理の夏谷さんはガマンできない",
+   "month": "2026-10",
+   "priority": "B",
+   "proven": false,
+   "src": "rakko"
+  },
+  "経費精算書書き方": {
+   "kw": "経費精算書 書き方",
+   "month": "2026-10",
+   "priority": "A",
+   "proven": false,
+   "src": "rakko"
+  },
+  "経費精算領収書紛失": {
+   "kw": "経費精算 領収書 紛失",
+   "month": "2026-10",
+   "priority": "C",
+   "proven": false,
+   "src": "rakko"
+  },
+  "美容室記帳代行": {
+   "kw": "美容室 記帳代行",
+   "month": "2026-10",
+   "priority": "B",
+   "proven": false,
+   "src": "seed"
+  },
+  "行政書士記帳代行相場": {
+   "kw": "行政書士 記帳代行 相場",
+   "month": "2026-10",
+   "priority": "A",
+   "proven": false,
+   "src": "suggest"
+  },
+  "記帳代行ココナラ": {
+   "kw": "記帳代行 ココナラ",
+   "month": "2026-10",
+   "priority": "B",
+   "proven": false,
+   "src": "rakko"
+  },
+  "記帳代行料金表税理士": {
+   "kw": "記帳代行料金表 税理士",
+   "month": "2026-10",
+   "priority": "A",
+   "proven": false,
+   "src": "rakko"
+  },
+  "記帳代行札幌": {
+   "kw": "記帳代行 札幌",
+   "month": "2026-10",
+   "priority": "B",
+   "proven": false,
+   "src": "rakko"
+  },
+  "記帳代行沖縄": {
+   "kw": "記帳代行 沖縄",
+   "month": "2026-10",
+   "priority": "A",
+   "proven": false,
+   "src": "rakko"
+  },
+  "記帳代行税理士以外": {
+   "kw": "記帳代行 税理士以外",
+   "month": "2026-10",
+   "priority": "C",
+   "proven": false,
+   "src": "rakko"
+  },
+  "飲食店記帳代行": {
+   "kw": "飲食店 記帳代行",
+   "month": "2026-10",
+   "priority": "B",
+   "proven": false,
+   "src": "seed"
+  }
+ },
  "subsidy": {
   "ai導入補助金福岡": {
    "kw": "ai導入 補助金 福岡",
