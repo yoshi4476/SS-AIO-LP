@@ -415,6 +415,9 @@ jobs:
         if: steps.site.outputs.mode == 'rewrite' && steps.guard.outputs.ok == 'yes'
         timeout-minutes: 45
         env:
+          # 候補が尽きた日の無料の調べ（cooccur）は、上位・AIの出典を Gemini 検索で集める。鍵が無いと出典が0件になり、
+          # 候補が黙って0本になっていた（2026-10-10 の補助金の浮いた枠が何もせずに終わった）
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           HUB_URL: ${{ secrets.HUB_URL }}

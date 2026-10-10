@@ -673,36 +673,36 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:839",
+     "evidence": ".github/workflows/pipeline-multi.yml:842",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "external-md": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:839",
+     "evidence": ".github/workflows/pipeline-multi.yml:842",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "external-html": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:839",
+     "evidence": ".github/workflows/pipeline-multi.yml:842",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:839",
+     "evidence": ".github/workflows/pipeline-multi.yml:842",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:839",
+     "evidence": ".github/workflows/pipeline-multi.yml:842",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "ftp": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:839",
+     "evidence": ".github/workflows/pipeline-multi.yml:842",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
@@ -775,7 +775,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:836",
+     "evidence": ".github/workflows/pipeline-multi.yml:839",
      "anchor": "python scripts/bing_webmaster.py --site \"$id\" || true"
     },
     "external-md": {

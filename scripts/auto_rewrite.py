@@ -484,6 +484,10 @@ def free_spare_items(sites, skip=()):
             except Exception as e:
                 print(f"  （{slug}: 無料の調べに失敗 {type(e).__name__}）")
                 continue
+            if not (rec or {}).get("sources"):
+                # 出典が0件だと足す語も0個になり、候補が黙って尽きる。鍵（GEMINI_API_KEY）か月の予算の切れを疑う
+                print(f"  （{slug}: 上位・AIの出典を1件も集められませんでした。Gemini の鍵と月の予算を確かめてください）")
+                continue
             # 主力の記事に、ほかの制度の名前（持続化補助金・キャリアアップ助成金など）を節として足させない。
             # 主力の割合を上げるための書き直しで、周辺の制度を広げてしまう（2026-10-09 の本物の調べで混ざった）
             rule = _MAIN.get(sid) or KP.main_rule(sid)[0]

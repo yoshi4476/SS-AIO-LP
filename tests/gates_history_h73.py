@@ -36,7 +36,9 @@ def test_spare_slot_falls_back_to_free_research():
 
     def cover(sid, slug, kw, body):
         asked.append(slug)
-        return {"missing": ["申請の流れ", "小規模事業者持続化補助金", "対象経費"] if slug == "main-a" else []}
+        # 出典が0件の答えは候補にしない（gates_history_h80_spare）。ここは出典が集まった日の形にする
+        return {"sources": ["https://example.jp/a/"],
+                "missing": ["申請の流れ", "小規模事業者持続化補助金", "対象経費"] if slug == "main-a" else []}
 
     with mock.patch.object(KP, "site_articles", return_value=arts), \
             mock.patch.object(AR, "page_positions", return_value=pos), \
