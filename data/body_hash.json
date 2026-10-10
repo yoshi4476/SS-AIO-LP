@@ -16,7 +16,7 @@
 "modified": "2026-08-31"
 },
 "aio-checker": {
-"hash": "efb7faa5d803874c999b2172c2b2cebc",
+"hash": "3e6ba9de882dcbf612b036de32a2506d",
 "modified": "2026-09-23"
 },
 "aio-dairiten-erabikata": {
@@ -32,11 +32,15 @@
 "modified": "2026-09-15"
 },
 "aio-ijou-kenchi-alert-settei": {
-"hash": "f790eeb32b1f71bc0d2da9fb0ffa252e",
+"hash": "0d099a8014e99b51edc84b791ead96f9",
+"modified": "2026-10-10"
+},
+"aio-junni-hendou-riyuu": {
+"hash": "95f857e03054b75ccd5f9544309d1733",
 "modified": "2026-10-10"
 },
 "aio-log-bunseki-tool-hikaku": {
-"hash": "8ff4908bdc42668bd76d71978ee7ad71",
+"hash": "3c6181e085216cb867ba1605a88d5c96",
 "modified": "2026-10-05"
 },
 "aio-seo-audit": {
@@ -208,7 +212,7 @@
 "modified": "2026-08-31"
 },
 "clinic-hp-ryokin-nosekata": {
-"hash": "546a9a5047062d6498d59e66e8e10923",
+"hash": "a49be3fd4848643a55309ea1ca106bd0",
 "modified": "2026-10-07"
 },
 "clinic-instagram-yarikata": {
@@ -360,7 +364,7 @@
 "modified": "2026-08-08"
 },
 "koumuten-ai-kensaku-shukyaku": {
-"hash": "7ba62162ea5f8ef85c361efd7dfe6105",
+"hash": "f95de3d2271511efc81c347d79186105",
 "modified": "2026-10-09"
 },
 "koumuten-chumon-jutaku-aio": {

@@ -143,6 +143,8 @@ GA4は、ページの中のJavaScriptが動いた訪問だけを数えます。�
 
 **ログ分析の失敗は、GA4で代用する・UAを信じる・Googleの扱いを誤るの3つにほぼ集約されます。**
 
+クローラーが届いているのに順位や引用が動くときは、[AIOの順位が変動する理由と原因の分析手順](/aio/aio-junni-hendou-riyuu/)で切り分けてください。
+
 ![ログ分析のNGとOK](/images/aio-log-bunseki-tool-hikaku/ng-ok.png)
 
 ### 失敗1: GA4だけで「AIが来ていない」と判断する

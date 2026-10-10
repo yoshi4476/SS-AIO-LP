@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIOの順位が変動する理由は？原因を切り分ける5つの分析手順</title>
+<meta name="description" content="AIOの順位が変動する主な理由は、AIが回答のたびに出典を選び直すことと、通常の検索順位そのものが動くことの2つです。変動の原因を4種類に分け、Search Consoleで原因を切り分ける5つの分析手順と、手を打つべき変動・待つべき変動の見分け方を解説します。">
+<link rel="canonical" href="https://ai.7senses.co.jp/aio/aio-junni-hendou-riyuu/">
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="AIOの順位が変動する理由は？原因を切り分ける5つの分析手順">
+<meta property="og:description" content="AIOの順位が変動する主な理由は、AIが回答のたびに出典を選び直すことと、通常の検索順位そのものが動くことの2つです。変動の原因を4種類に分け、Search Consoleで原因を切り分ける5つの分析手順と、手を打つべき変動・待つべき変動の見分け方を解説します。">
+<meta property="og:url" content="https://ai.7senses.co.jp/aio/aio-junni-hendou-riyuu/">
+<meta property="og:image" content="https://ai.7senses.co.jp/images/shelf/aisearch-3.jpg">
+<meta property="og:site_name" content="AI集客ラボ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=9bff4c45">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js?v=8333a559"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "headline": "AIOの順位が変動する理由は？原因を切り分ける5つの分析手順",
+   "description": "AIOの順位が変動する主な理由は、AIが回答のたびに出典を選び直すことと、通常の検索順位そのものが動くことの2つです。変動の原因を4種類に分け、Search Consoleで原因を切り分ける5つの分析手順と、手を打つべき変動・待つべき変動の見分け方を解説します。",
+   "mainEntityOfPage": "https://ai.7senses.co.jp/aio/aio-junni-hendou-riyuu/",
+   "image": "https://ai.7senses.co.jp/images/shelf/aisearch-3.jpg",
+   "datePublished": "2026-10-10",
+   "dateModified": "2026-10-10",
+   "author": {
+    "@type": "Person",
+    "name": "原口 優",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "jobTitle": "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年",
+    "sameAs": [
+     "https://www.linkedin.com/in/yu-haraguchi",
+     "https://note.com/yu_haraguchi",
+     "https://corp.7senses.co.jp/",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
+    ],
+    "worksFor": {
+     "@type": "Organization",
+     "name": "セブンセンシズ株式会社",
+     "alternateName": "SEVEN SENSES Inc.",
+     "url": "https://ai.7senses.co.jp",
+     "telephone": "06-4305-7547",
+     "identifier": {
+      "@type": "PropertyValue",
+      "name": "法人番号",
+      "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+      "value": "3120001227825"
+     },
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "postalCode": "537-0003",
+      "addressRegion": "大阪府",
+      "addressLocality": "大阪市東成区",
+      "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+     },
+     "sameAs": [
+      "https://x.com/sevensensece",
+      "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+      "https://alarmbox.jp/companyinfo/entities/3120001227825",
+      "https://corp.7senses.co.jp/",
+      "https://lp.7senses.co.jp/",
+      "https://www.7senses.co.jp/",
+      "https://www.google.com/maps?cid=815053100031552916",
+      "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw"
+     ],
+     "location": {
+      "@type": "Place",
+      "geo": {
+       "@type": "GeoCoordinates",
+       "latitude": 34.6791137,
+       "longitude": 135.555196
+      },
+      "hasMap": "https://www.google.com/maps?cid=815053100031552916"
+     },
+     "knowsAbout": [
+      "MEO（マップ検索最適化）",
+      "AIO（AI検索最適化）",
+      "LLMO（大規模言語モデル最適化）",
+      "SEO",
+      "Googleビジネスプロフィール運用",
+      "店舗集客",
+      "AI導入支援",
+      "IT導入補助金",
+      "ものづくり補助金",
+      "小規模事業者持続化補助金",
+      "経理BPO"
+     ]
+    }
+   },
+   "editor": {
+    "@type": "Person",
+    "name": "原口 優",
+    "jobTitle": "代表取締役",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "sameAs": [
+     "https://www.linkedin.com/in/yu-haraguchi",
+     "https://note.com/yu_haraguchi",
+     "https://corp.7senses.co.jp/",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
+    ]
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "セブンセンシズ株式会社",
+    "alternateName": "SEVEN SENSES Inc.",
+    "url": "https://ai.7senses.co.jp",
+    "telephone": "06-4305-7547",
+    "identifier": {
+     "@type": "PropertyValue",
+     "name": "法人番号",
+     "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+     "value": "3120001227825"
+    },
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "JP",
+     "postalCode": "537-0003",
+     "addressRegion": "大阪府",
+     "addressLocality": "大阪市東成区",
+     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+    },
+    "sameAs": [
+     "https://x.com/sevensensece",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+     "https://alarmbox.jp/companyinfo/entities/3120001227825",
+     "https://corp.7senses.co.jp/",
+     "https://lp.7senses.co.jp/",
+     "https://www.7senses.co.jp/",
+     "https://www.google.com/maps?cid=815053100031552916",
+     "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw"
+    ],
+    "location": {
+     "@type": "Place",
+     "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 34.6791137,
+      "longitude": 135.555196
+     },
+     "hasMap": "https://www.google.com/maps?cid=815053100031552916"
+    },
+    "knowsAbout": [
+     "MEO（マップ検索最適化）",
+     "AIO（AI検索最適化）",
+     "LLMO（大規模言語モデル最適化）",
+     "SEO",
+     "Googleビジネスプロフィール運用",
+     "店舗集客",
+     "AI導入支援",
+     "IT導入補助金",
+     "ものづくり補助金",
+     "小規模事業者持続化補助金",
+     "経理BPO"
+    ]
+   },
+   "inLanguage": "ja",
+   "mentions": [
+    {
+     "@type": "Thing",
+     "name": "Google AI Overview",
+     "sameAs": "https://support.google.com/websearch/answer/14901683"
+    },
+    {
+     "@type": "Thing",
+     "name": "検索エンジン最適化（SEO）",
+     "sameAs": "https://ja.wikipedia.org/wiki/%E6%A4%9C%E7%B4%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E6%9C%80%E9%81%A9%E5%8C%96"
+    }
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ホーム",
+     "item": "https://ai.7senses.co.jp/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "AIO・LLMO運用",
+     "item": "https://ai.7senses.co.jp/aio/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "AIOの順位が変動する理由は？原因を切り分ける5つの分析手順",
+     "item": "https://ai.7senses.co.jp/aio/aio-junni-hendou-riyuu/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "AIOの引用元はどのくらいの頻度で入れ替わりますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "AIは回答のたびに出典を選び直すため、日単位で入れ替わります。判断は4週間以上の幅で行ってください。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "順位変動の分析は自社でどこまでできますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Search Consoleの期間比較とURL検査、自社ページ同士の食い合いの確認までは自社で進められます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "分析を外部に頼むと何をしてもらえますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "原因の切り分け、直す順番の決定、記事の書き直し、直した後の効果の確認までをまとめて任せられます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "直してからどのくらいで変化が見えますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "当社のAIO運用10件では、6件が1か月以内、10件すべてが3か月以内に主要クエリの平均順位が上がりました。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "分析を待ったほうがよいのはどんな場合ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "公開から1か月未満の記事や、表示が月に数十回しかない語は数字が揺れやすいため、待ってください。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "検索順位は同じなのに引用だけ消えるのはなぜですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "AI Overviewは関連する検索を複数行って回答と出典を組み直すため、順位と引用は別々に動きます。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="/industry/">業種から探す</a>
+      <a href="/lab/">実装ラボ</a>
+      <a href="/lp/#service" data-cta="nav_service">サービス・料金</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/tools/" class="nav-tool" data-cta="nav_tools">無料ツール</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li><a href="/aio/">AIO・LLMO運用</a></li>
+    <li aria-current="page">AIOの順位が変動する理由は？原因を切り分け</li>
+  </ol>
+</nav>
+
+<main class="article cat-aio">
+  <header class="article-header">
+    <span class="cat-badge">AIO・LLMO運用</span>
+    <h1>AIOの順位が変動する理由は？原因を切り分ける5つの分析手順</h1>
+    <div class="article-meta">
+      <span>公開: <time datetime="2026-10-10">2026年10月10日</time></span>
+      <span>更新: <time datetime="2026-10-10">2026年10月10日</time></span>
+      <span>執筆: 原口 優</span>
+      <span class="share-row">
+        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=AIO%E3%81%AE%E9%A0%86%E4%BD%8D%E3%81%8C%E5%A4%89%E5%8B%95%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1%E3%81%AF%EF%BC%9F%E5%8E%9F%E5%9B%A0%E3%82%92%E5%88%87%E3%82%8A%E5%88%86%E3%81%91%E3%82%8B5%E3%81%A4%E3%81%AE%E5%88%86%E6%9E%90%E6%89%8B%E9%A0%86&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Faio-junni-hendou-riyuu%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
+        <a class="share-btn share-hatena" href="https://b.hatena.ne.jp/entry/https://ai.7senses.co.jp/aio/aio-junni-hendou-riyuu/" target="_blank" rel="noopener" aria-label="はてなブックマークに追加">B! はてブ</a>
+        <button type="button" class="share-btn copy-url" data-url="https://ai.7senses.co.jp/aio/aio-junni-hendou-riyuu/" aria-label="この記事のURLをコピー">🔗 URLコピー</button>
+        <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
+      </span>
+    </div>
+    <figure class="article-eyecatch"><img src="/images/shelf/aisearch-3.webp" alt="AIOの順位が変動する理由は？原因を切り分ける5つの分析手順" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
+  </header>
+
+  <div class="article-layout">
+    <aside class="article-side">
+      <div class="side-sticky">
+        <nav class="toc" aria-label="目次"><details><summary class="toc-title">目次<span class="toc-n">10項目</span></summary><ol><li><a href="#aio">AIOの順位が変動する理由とは</a></li><li><a href="#4">変動の原因は4つの種類に分かれる</a></li><li><a href="#_1">引用元が日ごとに入れ替わる仕組み</a></li><li><a href="#5">原因を切り分ける5つの分析手順</a></li><li><a href="#_2">順位の下落はクリックをどれだけ減らすか</a></li><li><a href="#_3">手を打つべき変動と待つべき変動の見分け方</a></li><li><a href="#_4">順位変動の分析でよくある失敗</a></li><li><a href="#_5">分析を自社で進めるか任せるかの判断</a></li><li><a href="#_6">よくある質問</a></li><li><a href="#aio_1">まとめ: AIOの順位変動は「揺れ」と「下落」を分けてから分析する</a></li></ol></details></nav><script>if(matchMedia("(min-width: 1100px)").matches)document.currentScript.previousElementSibling.querySelector("details").open=true</script>
+        <div class="side-cta">
+          <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
+          <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
+          <div class="s">監修: セブンセンシズ株式会社</div>
+        </div>
+        <a class="side-banner" href="https://lp.7senses.co.jp/" target="_blank" rel="noopener" data-cta="article_side_hojokin">
+          <span class="sb-kicker">当社の申請サポート</span>
+          <span class="sb-title">AI導入補助金で<br>最大350万円</span>
+          <span class="sb-sub">補助金申請から導入・集客まで一気通貫 →</span>
+        </a>
+      </div>
+    </aside>
+    <div class="article-body">
+      <p><strong>AIOの順位が変動する主な理由は、AIが回答のたびに出典を選び直すことと、通常の検索順位そのものが動くことの2つです。</strong>前者は毎日起きる揺れで、後者はページの状態や検索の仕組みの変化で起きます。分析の要点は、どちらの変動かを先に分けることです。本記事では、原因を4種類に整理し、Search Consoleで切り分ける5つの手順を紹介します。</p>
+<div class="target-reader">この記事は、AI OverviewやSEOの順位が上下して、直すべきか待つべきか判断に迷っている中小企業の経営者・Web担当者向けです。</div>
+
+<p class="freshness">※ 2026年10月時点の情報です。Googleの公式ドキュメントは2026年10月10日に確認しました。</p>
+
+<div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>AIOの順位と引用が動く4種類の原因</li><li>検索順位が同じでも引用だけが入れ替わる仕組み</li><li>Search Consoleで原因を切り分ける5つの分析手順</li><li>手を打つべき変動と、待つべき変動の見分け方</li></ul></div>
+
+<h2 id="aio">AIOの順位が変動する理由とは</h2>
+<p><strong>AIOの順位の変動とは、AI Overviewでの引用の有無と、通常の検索順位の2つが別々に上下することです。</strong></p>
+<aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="url_check"><p class="it-head">御社のサイト、ChatGPTやGoogleのAIに読まれていますか？</p><p class="it-sub">URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）</p><form class="it-form" action="/tools/url-check/" method="get"><input type="hidden" name="src" value="article_inline"><input type="hidden" name="from" value="/aio/aio-junni-hendou-riyuu/"><input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_inline_url_check">確かめる</button></form></aside>
+<div class="definition-box"><span class="term">AIOの順位</span>とは、GoogleのAI Overview・AIモードの回答に自社ページが出典として載るかどうかと、その土台になる通常の検索順位をまとめた呼び方です。AIOそのものの意味は<a href="/aio/aio-towa/">AIOとは何かを整理した記事</a>にまとめています。</div>
+
+<p>2つは連動しますが、同じ動きはしません。Googleの公式ドキュメント「<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">AI features and your website</a>」は、AIモードとAI Overviewは異なるモデルと手法を使う場合があると説明しています。そのため、<em>表示される回答とリンクの組み合わせは変わる</em>と明記されています。</p>
+<p>つまり、引用が1日で消えても、それだけで異常とは言えません。一方で、通常の検索順位が数週間かけて下がっているなら、ページか検索の側に原因があります。<strong>まず「毎日の揺れ」か「続いている下落」かを分けることが、分析の出発点です。</strong></p>
+<p>当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています（自社サイトの実装・2026年8月時点）。日次で見ていると、引用元の顔ぶれが数日で入れ替わる様子が分かります。</p>
+<h2 id="4">変動の原因は4つの種類に分かれる</h2>
+<p><strong>順位と引用が動く原因は、検索の側・AIの回答の作り方・自社と競合のページ・測り方の4種類に分かれます。</strong></p>
+<figure><img src="/images/aio-junni-hendou-riyuu/gennin-tree.png" alt="AIOの順位が動く原因の4つの種類" width="1200" height="700" loading="lazy"><figcaption>AIOの順位が動く原因の4つの種類（当メディア作成）</figcaption></figure>
+
+<p>Googleの「<a href="https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops" target="_blank" rel="noopener">検索トラフィック減少のデバッグ</a>」は、減少の主な原因を6つ挙げています。アルゴリズム更新・技術的な問題・セキュリティの問題・スパムの問題・季節性と関心の変化・サイトの移転です。ここにAI特有の要因と測り方の誤りを足すと、次の4種類に整理できます。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">原因の種類</th>
+<th style="text-align: left;">具体例</th>
+<th style="text-align: left;">自社で直せるか</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">検索の側</td>
+<td style="text-align: left;">アルゴリズム更新、季節による需要の増減</td>
+<td style="text-align: left;">直せない（内容の見直しで備える）</td>
+</tr>
+<tr>
+<td style="text-align: left;">AIの回答の作り方</td>
+<td style="text-align: left;">回答ごとの出典の選び直し、AIモードとの違い</td>
+<td style="text-align: left;">直せない（待って傾向を見る）</td>
+</tr>
+<tr>
+<td style="text-align: left;">自社と競合のページ</td>
+<td style="text-align: left;">404・noindex、自社ページ同士の食い合い、競合の更新</td>
+<td style="text-align: left;">直せる</td>
+</tr>
+<tr>
+<td style="text-align: left;">測り方</td>
+<td style="text-align: left;">期間のずれ、集計の単位の誤り、指名検索の混入</td>
+<td style="text-align: left;">直せる（見方を正す）</td>
+</tr>
+</tbody>
+</table></div>
+<p>表のうち、自社で直せるのは下の2行です。上の2行は、待つか、内容の独自性を高めて備えるしかありません。<strong>直せない原因に手を打つと、効かない書き直しで記事を壊すことになります。</strong></p>
+<p>私たちがご相談を受ける場面でも、季節で落ちた語を「対策が効かなくなった」と受け止めている例をよく見かけます。まず表のどの行に当たるかを決めてから、次の手順に進んでください。</p>
+<aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_mid_ai_check">AI診断（地域と業種を選ぶだけ・無料）</a></p></aside>
+<h2 id="_1">引用元が日ごとに入れ替わる仕組み</h2>
+<p><strong>AI Overviewは検索のたびに関連する検索を複数行い、回答と出典を組み直すため、引用元は日ごとに入れ替わります。</strong></p>
+<p>Googleは同じドキュメントで、この仕組みを<em>query fan-out</em>と呼んでいます。1つの質問に対して、関連するサブトピックやデータ源へ複数の検索を出し、その結果から回答を組み立てる手法です。どのサブトピックの検索が選ばれるかで、出典になるページも変わります。</p>
+<p><a href="https://arxiv.org/abs/2605.14021" target="_blank" rel="noopener">2026年の学術調査（arXiv 2605.14021）</a>は、55,393件の検索を対象にしています。AI Overviewに引用されたドメインの約30%は、同時に表示された1ページ目の検索結果に出ていませんでした。引用は、通常の検索順位とは別の選び方で決まる部分があるということです。</p>
+<p>同じ調査では、AI Overviewの表示率は全体で13.7%、質問形の検索では64.7%でした。質問形の語ほどAIの回答が出やすく、引用の入れ替わりも起きやすい語だと考えてください。</p>
+<p>ただし、出典に選ばれる最低条件は変わりません。Googleは、補足リンクとして表示されるには、ページがインデックスに登録され、スニペット付きで検索に表示できる状態であることが必要だとしています。<strong>引用が消えたうえに検索順位まで落ちているなら、揺れではなくページ側の問題を疑ってください。</strong></p>
+<h2 id="5">原因を切り分ける5つの分析手順</h2>
+<p><strong>原因の切り分けは、期間をそろえる・語とページに分ける・検索に出られるか・食い合い・上位との比較の順に進めます。</strong></p>
+<figure><img src="/images/aio-junni-hendou-riyuu/bunseki-flow.png" alt="原因を切り分ける5つの分析手順" width="1200" height="700" loading="lazy"><figcaption>原因を切り分ける5つの分析手順（当メディア作成）</figcaption></figure>
+
+<p>順番には理由があります。安く確かめられ、見落とすと損が大きいものから並べました。上から順に確かめ、原因が見つかった段で止めてください。</p>
+<h3 id="1">1. 期間をそろえて比べる</h3>
+<p>Search Consoleの検索パフォーマンスで、日付の「比較」を開きます。Googleの手順どおり、直近3か月と前の期間、または前年の同じ期間を比べます。期間を「過去16か月間」にすると、毎年同じ時期に落ちる季節の動きかどうかが分かります。</p>
+<p>AI Overview・AIモードでの表示は、Search Consoleでは検索タイプ「ウェブ」の中に含めて集計されます。AIの分だけを切り出して見ることはできない点に注意してください。</p>
+<h3 id="2">2. 語とページに分ける</h3>
+<p>比較を開いたまま、クエリ・ページ・国・デバイスのタブを順に見ます。落ちたのが一部の語だけか、サイト全体かで、原因はまったく変わります。</p>
+<p>サイト全体で同じ時期に落ちているなら、アルゴリズム更新か技術的な問題です。一部の語やページだけなら、そのページ固有の原因を探します。</p>
+<h3 id="3">3. 検索に出られる状態か確かめる</h3>
+<p>落ちたページをブラウザで開き、正常に表示されるかを見ます。次にSearch ConsoleのURL検査で、インデックスに登録されているかを確かめます。404・noindex・robots.txtのブロックがあれば、ほかの分析より先に直してください。</p>
+<h3 id="4_1">4. 自社ページ同士の食い合いを確かめる</h3>
+<p>落ちた語で検索結果を見て、自社の別ページが出ていないかを確かめます。2つのページが同じ語で交互に出ていると、どちらも上がりません。食い合いなら、勝たせるページを1つ決め、もう一方からリンクを集めます。</p>
+<h3 id="5_1">5. 上位と引用元を開いて比べる</h3>
+<p>最後に、その語の上位ページとAI Overviewの引用元を開きます。見るのは、質問への答えが冒頭にあるか、更新日が新しいか、自社に無い一次情報があるかの3点です。競合が新しい答えを出していれば、書き直しで差を埋められます。</p>
+<h2 id="_2">順位の下落はクリックをどれだけ減らすか</h2>
+<p><strong>同じ1ページ目でも、1〜3位から4〜10位へ落ちると、当社の実測ではクリック率が約6分の1になります。</strong></p>
+<figure><img src="/images/aio-junni-hendou-riyuu/ctr-bars.png" alt="検索順位ごとの実測クリック率" width="1200" height="700" loading="lazy"><figcaption>検索順位ごとの実測クリック率（当メディア作成）</figcaption></figure>
+
+<p>当社3サイトの実測（2026年6月23日〜9月20日・表示7,015回）では、順位の帯ごとのクリック率は次のとおりでした。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">順位の帯</th>
+<th style="text-align: left;">クリック率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1〜3位</td>
+<td style="text-align: left;">6.28%</td>
+</tr>
+<tr>
+<td style="text-align: left;">4〜10位</td>
+<td style="text-align: left;">1.02%</td>
+</tr>
+<tr>
+<td style="text-align: left;">11〜20位</td>
+<td style="text-align: left;">0.09%</td>
+</tr>
+<tr>
+<td style="text-align: left;">21〜30位</td>
+<td style="text-align: left;">0.16%</td>
+</tr>
+</tbody>
+</table></div><figure class="table-chart" style="margin:1.5em 0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 124" width="100%" role="img" aria-label="上の表の横棒グラフ（4項目）。『クリック率』は1〜3位が最も大きく6.28%、11〜20位が最も小さく0.09%。" letter-spacing="0" word-spacing="0" font-weight="400" font-style="normal" style="display:block;width:100%;max-width:460px;height:auto;margin:0 auto"><title>上の表の『クリック率』をグラフにしたもの</title><line x1="144.04" y1="4" x2="144.04" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="209.36" y1="4" x2="209.36" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="274.68" y1="4" x2="274.68" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="340" y1="4" x2="340" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="78.72" y1="4" x2="78.72" y2="120" stroke="currentColor" stroke-opacity="0.4" stroke-width="1"/><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="22.32">1〜3位</tspan></text><path class="tc-bar tc-s1" d="M78.72,9.5H336A4,4 0 0 1 340,13.5V20.5A4,4 0 0 1 336,24.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="346" y="22.04" font-size="14" font-weight="700" fill="currentColor">6.28%</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="52.32">4〜10位</tspan></text><path class="tc-bar tc-s1" d="M78.72,39.5H117.16A4,4 0 0 1 121.16,43.5V50.5A4,4 0 0 1 117.16,54.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="127.16" y="52.04" font-size="14" font-weight="700" fill="currentColor">1.02%</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="82.32">11〜20位</tspan></text><path class="tc-bar tc-s1" d="M78.72,69.5H78.72A3.74,3.74 0 0 1 82.46,73.24V80.76A3.74,3.74 0 0 1 78.72,84.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="88.46" y="82.04" font-size="14" font-weight="700" fill="currentColor">0.09%</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="112.32">21〜30位</tspan></text><path class="tc-bar tc-s1" d="M78.72,99.5H81.38A4,4 0 0 1 85.38,103.5V110.5A4,4 0 0 1 81.38,114.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="91.38" y="112.04" font-size="14" font-weight="700" fill="currentColor">0.16%</text></g></svg><figcaption style="margin-top:.5em;font-size:.85em;line-height:1.6;text-align:center">上の表の『クリック率』をグラフにしたもの</figcaption></figure>
+<p>クリック率は、Search Consoleのクエリ×ページ単位で、帯ごとに表示回数とクリック数を合計して出しました。表示30回未満の帯は除いています。<strong>3位以内から外れる変動は、数字の上では小さくても、流入には大きく響きます。</strong></p>
+<p>ただし、順位だけでクリックは決まりません。当サイトの実測（Search Console・直近28日・2026年10月時点）では、同じ4〜10位でも「aio対策 やってはいけない」はクリック率4.8%でした。一方、「口コミ 返信 例文 医療」は0.0%です。</p>
+<p>「aio 診断」は平均5.5位に表示されながら、54回の表示でクリックが0でした。検索結果やAIの回答の時点で用が済む語では、順位が上がってもクリックは増えません。<strong>変動を分析するときは、順位の数字と一緒に、その語が開かれる語かどうかも見てください。</strong></p>
+<h2 id="_3">手を打つべき変動と待つべき変動の見分け方</h2>
+<p><strong>ページの消失・食い合い・3か月続く下落なら手を打ち、1〜2週間の揺れや季節の落ち込みなら待ちます。</strong></p>
+<p>判断の分かれ目を、状況ごとにまとめました。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">状況</th>
+<th style="text-align: left;">判断</th>
+<th style="text-align: left;">次にやること</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">引用が数日消えたが、検索順位は変わらない</td>
+<td style="text-align: left;">待つ</td>
+<td style="text-align: left;">4週間後に同じ語で確かめる</td>
+</tr>
+<tr>
+<td style="text-align: left;">1〜2週間下がり、翌週に戻った</td>
+<td style="text-align: left;">待つ</td>
+<td style="text-align: left;">記録だけ残す</td>
+</tr>
+<tr>
+<td style="text-align: left;">前年も同じ時期に下がっている</td>
+<td style="text-align: left;">待つ</td>
+<td style="text-align: left;">需要が戻る時期に向けて内容を更新する</td>
+</tr>
+<tr>
+<td style="text-align: left;">ページが404・noindex・未登録になっている</td>
+<td style="text-align: left;">すぐ直す</td>
+<td style="text-align: left;">配信とURL検査を確かめる</td>
+</tr>
+<tr>
+<td style="text-align: left;">同じ語で自社の2ページが交互に出る</td>
+<td style="text-align: left;">直す</td>
+<td style="text-align: left;">勝たせるページへ統合・内部リンクを集める</td>
+</tr>
+<tr>
+<td style="text-align: left;">3か月比べて下がり続け、競合が新しい答えを出している</td>
+<td style="text-align: left;">直す</td>
+<td style="text-align: left;">冒頭の答えと一次情報を書き直す</td>
+</tr>
+<tr>
+<td style="text-align: left;">サイト全体が更新の時期に合わせて下がった</td>
+<td style="text-align: left;">見直す</td>
+<td style="text-align: left;">個別の小手先ではなく、内容の独自性を見直す</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>公開から1か月未満の記事なら、まだ判断しないでください。</strong>当社3サイトの372本の集計（2026年6月23日〜9月20日）では、公開0〜13日の記事で検索結果に出たのは58.9%でした。28〜41日では96.2%です。公開直後の上下は、評価が固まる前の揺れと考えるのが自然です。</p>
+<p>表示が月に数十回しかない語も、数回の差で順位が大きく動きます。当サイトの実測では、直近28日で813個の検索語からのべ3,827回表示され、クリックは10回でした（2026年10月時点）。1語あたりの表示は平均5回に届きません。<strong>表示の少ない語の上下は、1語ずつではなくページ単位でまとめて判断します。</strong></p>
+<div class="cta-box"><p>自社の変動が「待つ」か「直す」か判断がつかない場合は、検索とAI検索の両面から現状を無料で分析します。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
+<h2 id="_4">順位変動の分析でよくある失敗</h2>
+<p><strong>よくある失敗は、短い期間で判断する、集計の単位を取り違える、指名検索を混ぜる、の3つです。</strong></p>
+<div class="caution-box"><span class="box-title">注意: 1日の変動で記事を書き直さない</span><br>引用は回答ごとに組み直されます。1日の結果だけで書き直すと、<strong>効いていた部分まで消してしまう</strong>おそれがあります。</div>
+
+<h3 id="1-1">失敗1: 1日の変動を見て記事を書き直す</h3>
+<p>起きたこと: 朝の確認で引用が消えていたため、その日のうちに冒頭を書き換えた。数日後には元の記事でも引用が戻っていた。</p>
+<p>原因: AI Overviewの引用元は、query fan-outで回答ごとに選び直されます。1日の結果は、たまたまその回の組み合わせだった可能性が高いのです。</p>
+<p>避け方: 判断は4週間以上の幅で行います。書き直した日付と内容を記録し、前後4週間を同じ条件で比べてください。</p>
+<h3 id="2_1">失敗2: クエリ単位の合計でページの数字を出す</h3>
+<p>起きたこと: クエリのタブで表示回数を足し上げ、ページの表示が半分に落ちたと判断した。ページのタブで見ると、ほとんど変わっていなかった。</p>
+<p>原因: Search Consoleのクエリ単位の表には、プライバシー保護のため一部の検索語が出ません。足し上げると、実際より少なく出ます。</p>
+<p>避け方: ページの増減はページのタブで見ます。末尾のスラッシュだけが違うURLが別行に分かれていないかも確かめてください。</p>
+<h3 id="3_1">失敗3: 指名検索の増減を対策の成果と混ぜる</h3>
+<p>起きたこと: 社名での検索が広告の影響で増え、それを記事の順位改善の成果として報告した。</p>
+<p>原因: 社名やサービス名の検索は、記事の出来とは関係なく増減します。混ぜると、対策が効いたのか分からなくなります。</p>
+<p>避け方: 社名・サービス名を含む語を除いた数字と、含めた数字を分けて記録します。</p>
+<p>AIの回答に自社サイトが載る準備ができているかは、<a href="/tools/aio-check/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録は不要で、その場で点数が出ます。</p>
+<h2 id="_5">分析を自社で進めるか任せるかの判断</h2>
+<p><strong>Search Consoleの比較とURL検査を毎週見られるなら自社で進め、原因の切り分けや書き直しまで手が回らないなら任せます。</strong></p>
+<p>手順1〜4は、Search Consoleの基本操作だけで進められます。手順5の上位ページとの比較と書き直しは、記事1本ごとに時間がかかる作業です。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">社内の状況</th>
+<th style="text-align: left;">向いている進め方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">週1回、30分ほどSearch Consoleを見る担当がいる</td>
+<td style="text-align: left;">自社で手順1〜4を回し、書き直しだけ相談する</td>
+</tr>
+<tr>
+<td style="text-align: left;">記事が50本を超え、どの変動から見るか決められない</td>
+<td style="text-align: left;">原因の切り分けと優先順位づけを任せる</td>
+</tr>
+<tr>
+<td style="text-align: left;">公開から1か月未満の記事しかない</td>
+<td style="text-align: left;">待つ。まず記事数と表示を積み上げる</td>
+</tr>
+</tbody>
+</table></div>
+<p>当社がAIO運用を2026年5月に開始した10件では、6件が1か月以内、8件が2か月以内、10件が3か月以内に、主要クエリの平均順位が開始時より上がりました（2026年5月〜8月の集計。わずかな上昇も含みます）。<strong>原因を切り分けてから直すと、変化は数か月の単位で見えてきます。</strong></p>
+<p>数字の見方そのものは、<a href="/aio/aio-taisaku-keisoku-houhou/">AIO対策の計測方法と5つの指標</a>で整理しています。急な落ち込みに早く気づく設定は、<a href="/aio/aio-ijou-kenchi-alert-settei/">AIOの異常検知アラートの設定方法</a>を参考にしてください。</p>
+<div class="cta-box"><p>順位と引用の変動の原因を切り分け、直す順番まで無料でお伝えします。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
+<h2 id="_6">よくある質問</h2>
+<details><summary>AIOの引用元はどのくらいの頻度で入れ替わりますか？</summary><p class="faq-a">AIは回答のたびに出典を選び直すため、日単位で入れ替わります。判断は4週間以上の幅で行ってください。</p></details>
+
+<details><summary>順位変動の分析は自社でどこまでできますか？</summary><p class="faq-a">Search Consoleの期間比較とURL検査、自社ページ同士の食い合いの確認までは自社で進められます。</p></details>
+
+<details><summary>分析を外部に頼むと何をしてもらえますか？</summary><p class="faq-a">原因の切り分け、直す順番の決定、記事の書き直し、直した後の効果の確認までをまとめて任せられます。</p></details>
+
+<details><summary>直してからどのくらいで変化が見えますか？</summary><p class="faq-a">当社のAIO運用10件では、6件が1か月以内、10件すべてが3か月以内に主要クエリの平均順位が上がりました。</p></details>
+
+<details><summary>分析を待ったほうがよいのはどんな場合ですか？</summary><p class="faq-a">公開から1か月未満の記事や、表示が月に数十回しかない語は数字が揺れやすいため、待ってください。</p></details>
+
+<details><summary>検索順位は同じなのに引用だけ消えるのはなぜですか？</summary><p class="faq-a">AI Overviewは関連する検索を複数行って回答と出典を組み直すため、順位と引用は別々に動きます。</p></details>
+
+<h2 id="aio_1">まとめ: AIOの順位変動は「揺れ」と「下落」を分けてから分析する</h2>
+<p>AIOの順位が変動する理由は、AIによる出典の選び直しと、通常の検索順位の変化の2つです。<strong>引用の揺れは待ち、検索順位の下落は5つの手順で原因を切り分けてから直します。</strong></p>
+<p>今日できる一歩は、Search Consoleで「過去16か月間」を開き、気になる語の下落が毎年同じ時期に起きていないかを見ることです。季節の動きでなければ、URL検査で落ちたページの登録状況を確かめてください。</p>
+<p>引用されるための土台づくりは<a href="/aio/aio-taisaku-ai-inyou-sareru/">AIO対策でAIに引用されるための実践ポイント</a>で、そもそも表示されない場合は<a href="/aio/aio-taisaku-hyouji-sarenai/">AIO対策なのに表示されない原因</a>で解説しています。</p>
+<p>当社が2026年5月から9月までに契約したAIO運用15件では、3か月以内の解約は0件でした。変動の原因が分からないときは、<a href="/lp/">AI検索対策の無料相談</a>で現状分析から一緒に整理できます。</p>
+
+
+      <aside class="scan-box scan-bottom" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_bottom"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_bottom_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_bottom_ai_check">AI診断（地域と業種を選ぶだけ・無料）</a></p></aside>
+
+      <section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
+    <li class="cat-aio"><a href="/aio/ai-kensaku-taiou-settei/"><span class="thumb"><img src="/images/shelf/aisearch-1.webp" alt="AI検索対応とは？公開前に済ませる7つの設定項目のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-16">2026.09.16</time><h3>AI検索対応とは？公開前に済ませる7つの設定項目<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-checker/"><span class="thumb"><img src="/images/shelf/aisearch-3.webp" alt="AIOチェッカーとは？表示と引用を見分ける使い方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-23">2026.09.23</time><h3>AIOチェッカーとは？表示と引用を見分ける使い方<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-dairiten-erabikata/"><span class="thumb"><img src="/images/shelf/outsource-3.webp" alt="AIO代理店の選び方｜再委託で失敗しない5つのポイントのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-10-04">2026.10.04</time><h3>AIO代理店の選び方｜再委託で失敗しない5つのポイント<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul></section>
+
+      <nav class="prev-next" aria-label="前後の記事"><a class="pn" href="/aio/aio-ijou-kenchi-alert-settei/"><span>← 前の記事</span><strong>AIOの異常検知アラート設定｜引用と流入の急減を3つの道具で知る</strong></a><a class="pn pn-next" href="/aio/gemini-inyou-noru-houhou/"><span>次の記事 →</span><strong>AIOでGeminiの引用に載る方法は？18語の実測と5つの手順</strong></a></nav>
+
+      <section class="cta">
+        <p class="cta-copy">ChatGPTやAI Overviewが御社を出典に選んでいるか、一緒に確かめませんか？</p>
+        <a class="btn btn-primary" href="/lp/" data-cta="article_bottom_lp">SEO・AIO・LLMO集客支援の詳細を見る <span class="arw">→</span></a>
+        <p class="cta-sub">無料相談・資料ダウンロードはリンク先から</p>
+      </section>
+
+      <aside class="author-box">
+        <div class="avatar" style="background:#0b2447;padding:23px;"><img src="/images/company/star-white.png" alt="Seven Senses" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div>
+          <div class="name">原口 優</div>
+          <div class="role">セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年｜監修（集客・Web施策）: <a href="/author/haraguchi/">代表取締役 原口 優</a></div>
+          
+          <p>通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。</p>
+          <p class="how-made">制作の流れ: 一次情報と出典を集め、AIツールで下書き → 機械検査18項目と3観点の採点（90点以上のみ公開）→ 監修者が事実と表現を確認。<a href="/editorial-policy/">編集・訂正ポリシー</a></p>
+        </div>
+      </aside>
+
+      <aside class="newsletter-box">
+        <div class="nl-text">
+          <strong>週1本のメールで、AI集客の最新実務を。</strong>
+          <span>新着記事とAI検索の動きを毎週まとめてお届けします（無料・いつでも解除できます）。</span>
+        </div>
+        <form class="nl-form" action="/api/subscribe" method="post">
+          <input type="hidden" name="form_type" value="ニュースレター購読">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="email" name="email" required placeholder="メールアドレス" aria-label="メールアドレス" autocomplete="email">
+          <button type="submit" class="btn btn-primary" data-cta="article_newsletter">購読する</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">セブンセンシズ株式会社</a><br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>TEL 06-4305-7547（9:00〜20:00 / 土日祝休）</p>
+      <ul class="social-links" aria-label="外部プロフィール"><li><a href="https://x.com/sevensensece" target="_blank" rel="noopener me" aria-label="X（セブンセンシズ株式会社）" data-net="x"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li><li><a href="https://www.linkedin.com/in/yu-haraguchi" target="_blank" rel="noopener me" aria-label="LinkedIn（原口 優）" data-net="linkedin"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a></li><li><a href="https://note.com/yu_haraguchi" target="_blank" rel="noopener me" aria-label="note（原口 優）" data-net="note"><span>note</span></a></li></ul>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
+      <a href="/industry/">業種から探す</a>
+      <a href="/research/">業種別のAI調査</a>
+      <a href="/download/">無料資料ダウンロード</a>
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/compare/">比較表から探す</a>
+      <a href="/tools/">無料ツール一覧</a>
+      <a href="/tools/url-check/">URL診断（サイトの14項目を採点）</a>
+      <a href="/tools/ai-check/">AI診断（AIにどう紹介されているか）</a>
+      <a href="/tools/aio-check/">AI検索の対応度チェック（30秒）</a>
+      <a href="/tools/kuchikomi-henshin/">口コミ返信文の作成ツール</a>
+      <a href="/tools/meo-check/">マップ集客の整備度チェック（30秒）</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/author/haraguchi/">監修者プロフィール</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/faq/">ご契約前のよくある質問</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+    <div class="footer-credit"><p><a href="https://conflux-partners.jp/works/7senses-aio" target="_blank" rel="noopener">AIO 対策・サイト制作：YW（CONFLUX PARTNERS）</a></p></div>
+  </div>
+</footer>
+
+<!-- スマホで記事を半分ほど読んだら出る「30秒診断」（site.js が出し入れする） -->
+<div class="scan-sticky" hidden><a class="btn btn-primary" href="/tools/ai-check/" data-cta="article_sticky_ai_check" data-ab="sticky_ai" data-ab-b="ChatGPTやGeminiに御社が出るか見る（無料）">AIに御社が出るか無料で確かめる <span class="arw">→</span></a></div>
+</body>
+</html>

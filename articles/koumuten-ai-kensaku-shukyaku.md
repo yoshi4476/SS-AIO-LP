@@ -194,6 +194,8 @@ AIの回答から直接サイトへ来る施主は、まだ多くありません
 
 **AI経由の成果は、GA4のAI参照元、Search Consoleの社名での検索回数、予約フォームの「何で知ったか」の3つを、3か月単位で合わせて見ます。**
 
+あわせて[AIOの順位が変動する理由は？](/aio/aio-junni-hendou-riyuu/)もご覧ください。
+
 1つ目はGA4の参照元です。chatgpt.com・perplexity.ai・gemini.google.com・copilot.microsoft.com・claude.ai からの流入を、AI経由として分けて数えます。
 
 当社の計測では、ChatGPTからの流入が参照元「openai」と記録される場合もありました。参照元の一覧に入れておかないと、数え漏れます。
