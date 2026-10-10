@@ -361,6 +361,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_mid_ai_check">AI診断（地域と業種を選ぶだけ・無料）</a></p></aside>
 <h2 id="aio2ai">自社サイトでのAIO導入事例②：AIクローラー許可の設計と記録</h2>
 <p><strong>AIクローラー許可は、Googlebotを含む主要20種を1つずつ個別に確認し、許可状況を記録しました。</strong></p>
+<p>許可した後も、設定の変更でクローラーが弾かれていないかは、<a href="/aio/aio-ijou-kenchi-alert-settei/">AIOの異常検知とアラートの設定</a>の手順で毎日見張れます。</p>
 <p>「AI系のクローラーはまとめて許可しておけばよい」という判断は、実は危険です。</p>
 <p>GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extendedは、それぞれ用途が異なります。Google-ExtendedはGemini学習用の制御であり、AI Overview表示の可否とは別物です。robots.txtの各行は、クローラーごとにコメント付きで管理しています。</p>
 <div class="caution-box"><span class="box-title">注意: Googlebotを止めない</span><br>AI系クローラーをまとめてブロックする設定は、結果的にGooglebot自体を止める事故につながります。<strong>Googlebotだけは絶対にブロックしない</strong>という前提を、他のどの判断より優先してください。</div>

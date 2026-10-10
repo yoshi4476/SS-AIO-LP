@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIOの異常検知アラート設定｜引用と流入の急減を3つの道具で知る</title>
+<meta name="description" content="AIOの異常検知アラートは、GA4のカスタムインサイト・Search Consoleの週次比較・クローラーの到達確認の3つを組み合わせて設定します。急減に気づける仕組みの作り方と、小さなサイトで誤報を出さないしきい値の決め方を、当社の運用から解説します。">
+<link rel="canonical" href="https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/">
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="AIOの異常検知アラート設定｜引用と流入の急減を3つの道具で知る">
+<meta property="og:description" content="AIOの異常検知アラートは、GA4のカスタムインサイト・Search Consoleの週次比較・クローラーの到達確認の3つを組み合わせて設定します。急減に気づける仕組みの作り方と、小さなサイトで誤報を出さないしきい値の決め方を、当社の運用から解説します。">
+<meta property="og:url" content="https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/">
+<meta property="og:image" content="https://ai.7senses.co.jp/images/shelf/aisearch-1.jpg">
+<meta property="og:site_name" content="AI集客ラボ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=9bff4c45">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js?v=2509d56e"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "headline": "AIOの異常検知アラート設定｜引用と流入の急減を3つの道具で知る",
+   "description": "AIOの異常検知アラートは、GA4のカスタムインサイト・Search Consoleの週次比較・クローラーの到達確認の3つを組み合わせて設定します。急減に気づける仕組みの作り方と、小さなサイトで誤報を出さないしきい値の決め方を、当社の運用から解説します。",
+   "mainEntityOfPage": "https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/",
+   "image": "https://ai.7senses.co.jp/images/shelf/aisearch-1.jpg",
+   "datePublished": "2026-10-10",
+   "dateModified": "2026-10-10",
+   "author": {
+    "@type": "Person",
+    "name": "原口 優",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "jobTitle": "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年",
+    "sameAs": [
+     "https://www.linkedin.com/in/yu-haraguchi",
+     "https://note.com/yu_haraguchi",
+     "https://corp.7senses.co.jp/",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
+    ],
+    "worksFor": {
+     "@type": "Organization",
+     "name": "セブンセンシズ株式会社",
+     "alternateName": "SEVEN SENSES Inc.",
+     "url": "https://ai.7senses.co.jp",
+     "telephone": "06-4305-7547",
+     "identifier": {
+      "@type": "PropertyValue",
+      "name": "法人番号",
+      "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+      "value": "3120001227825"
+     },
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "postalCode": "537-0003",
+      "addressRegion": "大阪府",
+      "addressLocality": "大阪市東成区",
+      "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+     },
+     "sameAs": [
+      "https://x.com/sevensensece",
+      "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+      "https://alarmbox.jp/companyinfo/entities/3120001227825",
+      "https://corp.7senses.co.jp/",
+      "https://lp.7senses.co.jp/",
+      "https://www.7senses.co.jp/",
+      "https://www.google.com/maps?cid=815053100031552916",
+      "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw"
+     ],
+     "location": {
+      "@type": "Place",
+      "geo": {
+       "@type": "GeoCoordinates",
+       "latitude": 34.6791137,
+       "longitude": 135.555196
+      },
+      "hasMap": "https://www.google.com/maps?cid=815053100031552916"
+     },
+     "knowsAbout": [
+      "MEO（マップ検索最適化）",
+      "AIO（AI検索最適化）",
+      "LLMO（大規模言語モデル最適化）",
+      "SEO",
+      "Googleビジネスプロフィール運用",
+      "店舗集客",
+      "AI導入支援",
+      "IT導入補助金",
+      "ものづくり補助金",
+      "小規模事業者持続化補助金",
+      "経理BPO"
+     ]
+    }
+   },
+   "editor": {
+    "@type": "Person",
+    "name": "原口 優",
+    "jobTitle": "代表取締役",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "sameAs": [
+     "https://www.linkedin.com/in/yu-haraguchi",
+     "https://note.com/yu_haraguchi",
+     "https://corp.7senses.co.jp/",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
+    ]
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "セブンセンシズ株式会社",
+    "alternateName": "SEVEN SENSES Inc.",
+    "url": "https://ai.7senses.co.jp",
+    "telephone": "06-4305-7547",
+    "identifier": {
+     "@type": "PropertyValue",
+     "name": "法人番号",
+     "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+     "value": "3120001227825"
+    },
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "JP",
+     "postalCode": "537-0003",
+     "addressRegion": "大阪府",
+     "addressLocality": "大阪市東成区",
+     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+    },
+    "sameAs": [
+     "https://x.com/sevensensece",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+     "https://alarmbox.jp/companyinfo/entities/3120001227825",
+     "https://corp.7senses.co.jp/",
+     "https://lp.7senses.co.jp/",
+     "https://www.7senses.co.jp/",
+     "https://www.google.com/maps?cid=815053100031552916",
+     "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw"
+    ],
+    "location": {
+     "@type": "Place",
+     "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 34.6791137,
+      "longitude": 135.555196
+     },
+     "hasMap": "https://www.google.com/maps?cid=815053100031552916"
+    },
+    "knowsAbout": [
+     "MEO（マップ検索最適化）",
+     "AIO（AI検索最適化）",
+     "LLMO（大規模言語モデル最適化）",
+     "SEO",
+     "Googleビジネスプロフィール運用",
+     "店舗集客",
+     "AI導入支援",
+     "IT導入補助金",
+     "ものづくり補助金",
+     "小規模事業者持続化補助金",
+     "経理BPO"
+    ]
+   },
+   "inLanguage": "ja",
+   "mentions": [
+    {
+     "@type": "Thing",
+     "name": "Google AI Overview",
+     "sameAs": "https://support.google.com/websearch/answer/14901683"
+    },
+    {
+     "@type": "Thing",
+     "name": "ChatGPT",
+     "sameAs": "https://ja.wikipedia.org/wiki/ChatGPT"
+    },
+    {
+     "@type": "Thing",
+     "name": "Perplexity",
+     "sameAs": "https://www.perplexity.ai/"
+    },
+    {
+     "@type": "Thing",
+     "name": "Gemini",
+     "sameAs": "https://gemini.google.com/"
+    }
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ホーム",
+     "item": "https://ai.7senses.co.jp/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "AIO・LLMO運用",
+     "item": "https://ai.7senses.co.jp/aio/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "AIOの異常検知アラート設定｜引用と流入の急減を3つの道具で知る",
+     "item": "https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "AIOの異常検知は自社でどこまで設定できますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "GA4のカスタムインサイトとSearch Consoleの週次比較は、管理画面の操作だけで社内で設定できます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "運用代行に頼むと何をしてもらえますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "3種類の見張りの設定に加え、通知が来たときの原因の切り分けと記事やサイト設定の直しまで行います。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "アラートを設定してから役に立つまでどのくらいかかりますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "設定した翌日から動きます。ただし誤報の少ないしきい値に落ち着くまで、1〜2か月の調整を見てください。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "アラートの設定が向かないのはどんな場合ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "月の表示が数百回に満たないサイトです。割合の変化が偶然でも大きく動くので、月1回の確認で足ります。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Search Consoleから表示の急落をメールで知らせてもらえますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "表示が何割落ちたら知らせる設定はありません。届くのはインデックス登録の問題など検出された問題の通知です。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GA4にAI経由の訪問が出ないときは異常ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "異常とは限りません。アプリ経由の訪問は参照元が渡らず、直接の訪問として数えられることがあります。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="/industry/">業種から探す</a>
+      <a href="/lab/">実装ラボ</a>
+      <a href="/lp/#service" data-cta="nav_service">サービス・料金</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/tools/" class="nav-tool" data-cta="nav_tools">無料ツール</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li><a href="/aio/">AIO・LLMO運用</a></li>
+    <li aria-current="page">AIOの異常検知アラート設定｜引用と流入の急</li>
+  </ol>
+</nav>
+
+<main class="article cat-aio">
+  <header class="article-header">
+    <span class="cat-badge">AIO・LLMO運用</span>
+    <h1>AIOの異常検知アラート設定｜引用と流入の急減を3つの道具で知る</h1>
+    <div class="article-meta">
+      <span>公開: <time datetime="2026-10-10">2026年10月10日</time></span>
+      <span>更新: <time datetime="2026-10-10">2026年10月10日</time></span>
+      <span>執筆: 原口 優</span>
+      <span class="share-row">
+        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=AIO%E3%81%AE%E7%95%B0%E5%B8%B8%E6%A4%9C%E7%9F%A5%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%E8%A8%AD%E5%AE%9A%EF%BD%9C%E5%BC%95%E7%94%A8%E3%81%A8%E6%B5%81%E5%85%A5%E3%81%AE%E6%80%A5%E6%B8%9B%E3%82%923%E3%81%A4%E3%81%AE%E9%81%93%E5%85%B7%E3%81%A7%E7%9F%A5%E3%82%8B&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Faio-ijou-kenchi-alert-settei%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
+        <a class="share-btn share-hatena" href="https://b.hatena.ne.jp/entry/https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/" target="_blank" rel="noopener" aria-label="はてなブックマークに追加">B! はてブ</a>
+        <button type="button" class="share-btn copy-url" data-url="https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/" aria-label="この記事のURLをコピー">🔗 URLコピー</button>
+        <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
+      </span>
+    </div>
+    <figure class="article-eyecatch"><img src="/images/shelf/aisearch-1.webp" alt="AIOの異常検知アラート設定｜引用と流入の急減を3つの道具で知る" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
+  </header>
+
+  <div class="article-layout">
+    <aside class="article-side">
+      <div class="side-sticky">
+        <nav class="toc" aria-label="目次"><details><summary class="toc-title">目次<span class="toc-n">9項目</span></summary><ol><li><a href="#aio3">AIOの異常検知とは？見張るのは「届く・出る・来る」の3段</a></li><li><a href="#_1">どの異常から先に知らせるべきか</a></li><li><a href="#ga4ai">GA4のカスタムインサイトでAI流入の急減を知らせる手順</a></li><li><a href="#search-console">Search Consoleには急落の通知が無い：週次で比べて気づく方法</a></li><li><a href="#ai_1">AIクローラーの遮断とページの消失を見張る設定</a></li><li><a href="#_4">アラート運用でよくある失敗と避け方</a></li><li><a href="#_5">通知が来たら何をするか：原因の切り分け</a></li><li><a href="#_6">よくある質問</a></li><li><a href="#_7">まとめ: 異常検知は「届く・出る・来る」を別の道具で見張る</a></li></ol></details></nav><script>if(matchMedia("(min-width: 1100px)").matches)document.currentScript.previousElementSibling.querySelector("details").open=true</script>
+        <div class="side-cta">
+          <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
+          <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
+          <div class="s">監修: セブンセンシズ株式会社</div>
+        </div>
+        <a class="side-banner" href="https://lp.7senses.co.jp/" target="_blank" rel="noopener" data-cta="article_side_hojokin">
+          <span class="sb-kicker">当社の申請サポート</span>
+          <span class="sb-title">AI導入補助金で<br>最大350万円</span>
+          <span class="sb-sub">補助金申請から導入・集客まで一気通貫 →</span>
+        </a>
+      </div>
+    </aside>
+    <div class="article-body">
+      <p><strong>AIOの異常検知アラートは、GA4のカスタムインサイト・Search Consoleの週次比較・クローラーの到達確認の3つを組み合わせて設定します。</strong>1つの道具で全部は見張れません。AIに読まれなくなった・検索に出なくなった・AI経由の人が来なくなった、の3つは記録される場所が違うからです。当社は自社サイトをAIO対策の実験場にし、主要AIクローラー20種の許可と引用状況を日次で計測しています。その運用で実際に使っている設定と、誤報を出さない決め方をまとめました。</p>
+<div class="target-reader">この記事は、AI検索からの表示や問い合わせが急に減ったときに、すぐ気づける仕組みを作りたい中小企業の経営者・Web担当者向けです。</div>
+
+<p class="freshness">※ 2026年10月時点の情報です。GA4とSearch Consoleの機能は、Googleのヘルプで確認した時点のものです。</p>
+
+<div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>AIOで見張る異常の3つの種類と、それぞれの記録場所</li><li>GA4のカスタムインサイトでAI流入の急減を知らせる手順</li><li>通知機能が無いSearch Consoleで急落に気づく方法</li><li>誤報で通知が読まれなくなる失敗と、その避け方</li></ul></div>
+
+<h2 id="aio3">AIOの異常検知とは？見張るのは「届く・出る・来る」の3段</h2>
+<p><strong>AIOの異常検知は、AIに読まれる・検索に出る・人が来るの3段のどこで落ちたかを、自動で知らせる仕組みです。</strong></p>
+<aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="url_check"><p class="it-head">御社のサイト、ChatGPTやGoogleのAIに読まれていますか？</p><p class="it-sub">URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）</p><form class="it-form" action="/tools/url-check/" method="get"><input type="hidden" name="src" value="article_inline"><input type="hidden" name="from" value="/aio/aio-ijou-kenchi-alert-settei/"><input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_inline_url_check">確かめる</button></form></aside>
+<div class="definition-box"><span class="term">AIOの異常検知アラートとは</span>、AI検索からの表示や訪問、AIクローラーの到達が普段より大きく減ったときに、担当者へメールなどで自動的に知らせる設定のことです。</div>
+
+<p>AIOという言葉そのものの意味は<a href="/aio/aio-towa/">AIOとは何かを解説した記事</a>にまとめ、ここでは見張り方に絞ります。</p>
+<p><img alt="AIOで見張る異常の3つの種類" src="/images/aio-ijou-kenchi-alert-settei/shurui.png" /></p>
+<p>AI検索の異常は、3つの種類に分かれます。1つ目はクローラーの遮断やページの404で「届かない」状態です。2つ目は検索の表示が急に落ちて「出ない」状態です。3つ目はAI経由の訪問が減って「来ない」状態です。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">異常の種類</th>
+<th style="text-align: left;">記録される場所</th>
+<th style="text-align: left;">知らせる道具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">届かない（遮断・404・noindex）</td>
+<td style="text-align: left;">サーバーやCDNのログ、ページの応答</td>
+<td style="text-align: left;">到達確認の定期チェック</td>
+</tr>
+<tr>
+<td style="text-align: left;">出ない（表示の急落）</td>
+<td style="text-align: left;">Search Console</td>
+<td style="text-align: left;">週次の比較（通知機能は無い）</td>
+</tr>
+<tr>
+<td style="text-align: left;">来ない（AI経由の訪問の減少）</td>
+<td style="text-align: left;">GA4</td>
+<td style="text-align: left;">カスタムインサイトのメール</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>3段のうち、上の段が止まると下の段も止まります。</strong>そのため、通知が来たら「届く」から順に疑うのが早道です。</p>
+<h2 id="_1">どの異常から先に知らせるべきか</h2>
+<p><strong>最初に設定すべきは「届かない」の見張りで、1ページが消えるだけで、そのページの表示がまるごと失われます。</strong></p>
+<p>当社の運用では、落ちる原因を次の順で潰しています。ページが検索結果から消えた（404・noindex・配信漏れ）、自社ページ同士の食い合い、鮮度切れ、の順です。上ほど一度に失う量が大きく、直すのも早い原因です。</p>
+<p>順位の小さなずれも、見張る価値があります。当社が自社3サイトの表示7,015回（2026年6月23日〜9月20日、Search Consoleの実測）を集計したところ、<strong>1〜3位のクリック率は6.28%、4〜10位は1.02%</strong>でした。3位から5位へ落ちるだけで、クリックは大きく減る計算です。</p>
+<p>一方で、新しい記事は通知の対象から外してください。同じ期間に自社3サイトの記事372本を集計すると、公開から0〜13日の記事のうち検索結果に1回でも出たのは58.9%でした。28〜41日では96.2%です。<strong>公開4週間未満の記事が「出ない」のは、異常ではありません。</strong></p>
+<aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_mid_ai_check">AI診断（地域と業種を選ぶだけ・無料）</a></p></aside>
+<h2 id="ga4ai">GA4のカスタムインサイトでAI流入の急減を知らせる手順</h2>
+<p><strong>GA4では、カスタムインサイトに指標としきい値を登録すると、条件を満たした時点でメールが届きます。</strong></p>
+<p><img alt="GA4でAI流入の急減を知らせる手順" src="/images/aio-ijou-kenchi-alert-settei/ga4-tejun.png" /></p>
+<p><a href="https://support.google.com/analytics/answer/9443595?hl=ja" target="_blank" rel="noopener">Googleアナリティクスのヘルプ</a>に沿った手順は、次の4つです。</p>
+<ol>
+<li>インサイトのカードで「すべての統計情報を表示」を押し、「作成」を選びます</li>
+<li>「ゼロから作成」の「新規作成」を選びます</li>
+<li>評価の頻度・セグメント・指標・条件・値を決めます</li>
+<li>インサイトの名前と、通知を受け取る人のメールアドレスを入れて作成します</li>
+</ol>
+<p>評価の頻度は、時間単位・日単位・週単位・月単位から選べます。時間単位はウェブのデータでだけ使えます。作成できるのは<strong>1プロパティにつき最大50個</strong>で、作るには編集者か管理者の権限が要ります。</p>
+<h3 id="_2">条件は「異常値があります」か「何%減ったら」か</h3>
+<p>条件には2つの選び方があります。「異常値があります」を選ぶと、GA4が普段の動きから外れた変化を自動で判定します。値の入力は要りません。</p>
+<p>もう1つは、割合でしきい値を決める方法です。ヘルプの例は「30日間のアクティブユーザーが20%低下」です。<strong>月の訪問が多いサイトは自動判定、少ないサイトは割合と週単位</strong>の組み合わせが誤報を減らします。</p>
+<h3 id="ai">AI経由の訪問に絞るときの注意</h3>
+<p>セグメントは既定で「すべてのユーザー」です。「変更」から別のディメンションと値を選べます。AIの参照元（chatgpt.com・perplexity.ai・gemini.google.com など）で絞れる場合は、絞ったインサイトを1つ作ります。</p>
+<p>ただし、ChatGPTなどのアプリから来た訪問は、参照元が渡らず直接の訪問に入ることがあります。<span class="txt-red">AI経由の数字だけで「AIから来なくなった」と断定しないでください。</span></p>
+<h2 id="search-console">Search Consoleには急落の通知が無い：週次で比べて気づく方法</h2>
+<p><strong>Search Consoleには、表示が何割落ちたら知らせる設定が無いため、28日間を前の28日間と比べる仕組みを自分で作ります。</strong></p>
+<p>Search Consoleが送るメールは、インデックス登録の問題などGoogleが検出した問題の通知です。表示やクリックのしきい値は設定できません。生成AIパフォーマンスのレポートも、2026年9月時点で当社が確かめた範囲では、APIから取り出せませんでした。</p>
+<p>そこで当社は、週に1回、直近28日間と前の28日間の表示・クリックをサイトごとに並べています。<strong>表示が2割以上落ちたら、原因を調べる目安</strong>にしています。</p>
+<p>比べ方には3つの注意があります。</p>
+<ul>
+<li><strong>数日前までの数字を使う</strong>: 直近の数日は値が確定していません。当社は3日前までの数字で比べています</li>
+<li><strong>検索語ごとの合計を使わない</strong>: 検索語の単位で足すと、ページ単位の合計より少なく出ます。全体の推移はページ単位か合計で見ます</li>
+<li><strong>URLの重複をまとめる</strong>: 末尾のスラッシュの有無で同じページが2行に分かれ、片方だけ「急落」に見えることがあります</li>
+</ul>
+<h3 id="_3">小さなサイトは割合ではなく実数で見る</h3>
+<p>当サイトの直近28日の実測では、813個の検索語からのべ3,827回表示され、クリックは10回でした（Search Console、2026年10月時点）。<strong>クリックが10回のサイトで「クリック20%減」は、たった2回の差です。</strong></p>
+<p>この規模なら、クリックの割合でアラートを出すと毎週のように誤報が出ます。判断は次の分岐で決めてください。</p>
+<ul>
+<li><strong>月の表示が数千回以上なら</strong>、表示の28日比較で2割減を目安に調べます</li>
+<li><strong>月の表示が数百回なら</strong>、割合ではなく「表示が0になったページ」の数を見ます</li>
+<li><strong>月の表示が100回に満たないなら</strong>、アラートは作らず、月1回の目視で足ります</li>
+</ul>
+<div class="cta-box"><p>どの数字をどのしきい値で見張るか、サイトの規模に合わせて一緒に決めませんか。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談はこちら</a></div>
+
+<h2 id="ai_1">AIクローラーの遮断とページの消失を見張る設定</h2>
+<p><strong>「届かない」の見張りは、主要ページの応答コードとrobots.txtの中身を毎日確かめる定期チェックで作ります。</strong></p>
+<p>確かめる項目は4つです。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">確かめる項目</th>
+<th style="text-align: left;">異常の印</th>
+<th style="text-align: left;">よくある原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">主要ページの応答</td>
+<td style="text-align: left;">200以外（404・500など）</td>
+<td style="text-align: left;">URLの変更、配信の漏れ</td>
+</tr>
+<tr>
+<td style="text-align: left;">ページのmetaタグ</td>
+<td style="text-align: left;">noindexが付いている</td>
+<td style="text-align: left;">テンプレートの変更</td>
+</tr>
+<tr>
+<td style="text-align: left;">robots.txt</td>
+<td style="text-align: left;">AIクローラーやGooglebotが拒否されている</td>
+<td style="text-align: left;">プラグインやCDNの設定変更</td>
+</tr>
+<tr>
+<td style="text-align: left;">CDN・サーバーのログ</td>
+<td style="text-align: left;">AIクローラーへの403・429が増えた</td>
+<td style="text-align: left;">WAFやボット対策の自動判定</td>
+</tr>
+</tbody>
+</table></div>
+<p>当社は、robots.txtで許可していても配信側の設定で止まることがあると考え、到達の確認を毎日回しています。<strong>robots.txtに許可と書いてあることは、届いていることの証明になりません。</strong></p>
+<p>Googleについては、<em>Googlebotが200で読めているか</em>だけを見れば足ります。<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google検索セントラルの説明</a>のとおり、AI Overviewにも通常の検索と同じ技術要件が当てはまるためです。Googlebotを止めると、通常の検索とAI Overviewの両方から消えます。</p>
+<p>ログの読み方は<a href="/aio/aio-log-bunseki-tool-hikaku/">AIOのログ分析ツール4種の比較</a>で詳しく扱っています。</p>
+<h2 id="_4">アラート運用でよくある失敗と避け方</h2>
+<p><strong>アラートの失敗は、通知が多すぎて読まれなくなる型と、「0件」を「異常なし」と読む型の2つに分かれます。</strong></p>
+<p><img alt="アラート運用のNGとOK" src="/images/aio-ijou-kenchi-alert-settei/ng-ok.png" /></p>
+<h3 id="1">失敗1: うまくいった報告まで毎回送る</h3>
+<p>起きたことは、当社の週次の通知です。以前は「週次最適化: success」とリンクだけの通知が毎週届き、見つけた問題は実行ログの奥に埋もれていました。原因は、成功の報告と異常の知らせを同じ経路で送っていたことです。</p>
+<p>避け方は、<strong>異常があった回だけ送る</strong>ことです。当社は、うまくいった報告は送らない形に改めました。</p>
+<h3 id="2">失敗2: 同じ警告を毎週並べる</h3>
+<p>起きたことは、毎週同じ「要対応」が並び、本当に新しい異常が埋もれる状態です。原因は、直しようのない事実や人が動かせない項目まで、毎回警告として出していたことにあります。</p>
+<p>避け方は、<strong>新しく出たもの・悪化したもの・期限のあるものだけを要対応にする</strong>ことです。前の週と同じ内容は、下の「情報」の欄にまとめます。</p>
+<h3 id="3-0">失敗3: 「0件」を異常なしと読む</h3>
+<p>起きたことは、検出の仕組みが動いていないのに「異常0件」と表示されるケースです。原因は、見つからなかったことと、検査が動かなかったことを区別していないことにあります。</p>
+<p>避け方は、<strong>見つかるはずの例で検出器を一度試す</strong>ことです。わざとnoindexを付けたテスト用ページを置き、通知が来るかを確かめてください。</p>
+<p>関連して、施策の側で避けたい行動は<a href="/aio/aio-taisaku-yattewaikenai/">AIO対策でやってはいけない5つのNG行動</a>にまとめています。</p>
+<p>AI検索への対応で抜けている箇所は、<a href="/tools/aio-check/">AI検索の対応度チェック（無料・30秒）</a>で見られます。登録は要らず、結果はその場で出ます。</p>
+<h2 id="_5">通知が来たら何をするか：原因の切り分け</h2>
+<p><strong>通知が来たら、届く・出る・来るの順に上から確かめ、どの段で落ちたかを絞り込みます。</strong></p>
+<p>まず落ちたページが200で開くか、次にSearch ConsoleのURL検査で登録があるかを見ます。最後に、同じ語で自社の別ページが順位を持っていないかを確かめます。404やnoindexなら最優先で直し、食い合いなら勝たせる側へ内部リンクを集めます。</p>
+<p>順位が同じで訪問だけ減ったときは、すぐに記事を直さず2〜4週間様子を見てください。原因の全体像は<a href="/aio/aio-taisaku-hyouji-sarenai/">AIO対策なのに表示されない8つの原因</a>、指標の決め直しは<a href="/aio/aio-taisaku-keisoku-houhou/">AIO対策の計測方法と5つの指標</a>で整理しています。</p>
+<p>今日できる一歩は、GA4でカスタムインサイトを1つ作ることです。「セッション」を指標に、週単位・前の週から2割減を条件にして、自分のメールアドレスを入れてください。</p>
+<div class="cta-box"><p>アラートの設定から、通知が来たときの原因調べと直しまで、まとめてご相談ください。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談はこちら</a></div>
+
+<h2 id="_6">よくある質問</h2>
+<details><summary>AIOの異常検知は自社でどこまで設定できますか？</summary><p class="faq-a">GA4のカスタムインサイトとSearch Consoleの週次比較は、管理画面の操作だけで社内で設定できます。</p></details>
+
+<details><summary>運用代行に頼むと何をしてもらえますか？</summary><p class="faq-a">3種類の見張りの設定に加え、通知が来たときの原因の切り分けと記事やサイト設定の直しまで行います。</p></details>
+
+<details><summary>アラートを設定してから役に立つまでどのくらいかかりますか？</summary><p class="faq-a">設定した翌日から動きます。ただし誤報の少ないしきい値に落ち着くまで、1〜2か月の調整を見てください。</p></details>
+
+<details><summary>アラートの設定が向かないのはどんな場合ですか？</summary><p class="faq-a">月の表示が数百回に満たないサイトです。割合の変化が偶然でも大きく動くので、月1回の確認で足ります。</p></details>
+
+<details><summary>Search Consoleから表示の急落をメールで知らせてもらえますか？</summary><p class="faq-a">表示が何割落ちたら知らせる設定はありません。届くのはインデックス登録の問題など検出された問題の通知です。</p></details>
+
+<details><summary>GA4にAI経由の訪問が出ないときは異常ですか？</summary><p class="faq-a">異常とは限りません。アプリ経由の訪問は参照元が渡らず、直接の訪問として数えられることがあります。</p></details>
+
+<h2 id="_7">まとめ: 異常検知は「届く・出る・来る」を別の道具で見張る</h2>
+<p><strong>AIOの異常検知アラートは、3段の異常をそれぞれの記録場所で見張り、異常の回だけ知らせる形で設定します。</strong></p>
+<p>届かない異常は到達確認の定期チェック、出ない異常はSearch Consoleの28日比較、来ない異常はGA4のカスタムインサイトで見張ります。小さなサイトは割合ではなく実数で判断し、公開4週間未満の記事は対象から外します。</p>
+<p>通知は少ないほど読まれます。<em>新しい異常と悪化だけを知らせる</em>決まりを先に作ってから、しきい値を足していってください。</p>
+
+
+      <aside class="scan-box scan-bottom" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_bottom"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_bottom_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_bottom_ai_check">AI診断（地域と業種を選ぶだけ・無料）</a></p></aside>
+
+      <section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
+    <li class="cat-aio"><a href="/aio/ai-kensaku-taiou-settei/"><span class="thumb"><img src="/images/shelf/aisearch-1.webp" alt="AI検索対応とは？公開前に済ませる7つの設定項目のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-16">2026.09.16</time><h3>AI検索対応とは？公開前に済ませる7つの設定項目<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-checker/"><span class="thumb"><img src="/images/shelf/aisearch-3.webp" alt="AIOチェッカーとは？表示と引用を見分ける使い方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-23">2026.09.23</time><h3>AIOチェッカーとは？表示と引用を見分ける使い方<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-dairiten-erabikata/"><span class="thumb"><img src="/images/shelf/outsource-3.webp" alt="AIO代理店の選び方｜再委託で失敗しない5つのポイントのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-10-04">2026.10.04</time><h3>AIO代理店の選び方｜再委託で失敗しない5つのポイント<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul></section>
+
+      <nav class="prev-next" aria-label="前後の記事"><a class="pn" href="/aio/koumuten-ai-kensaku-shukyaku/"><span>← 前の記事</span><strong>工務店のAI検索集客｜来場予約までの導線を4ステップで確かめる</strong></a><a class="pn pn-next" href="/aio/gemini-inyou-noru-houhou/"><span>次の記事 →</span><strong>AIOでGeminiの引用に載る方法は？18語の実測と5つの手順</strong></a></nav>
+
+      <section class="cta">
+        <p class="cta-copy">ChatGPTやAI Overviewが御社を出典に選んでいるか、一緒に確かめませんか？</p>
+        <a class="btn btn-primary" href="/lp/" data-cta="article_bottom_lp">SEO・AIO・LLMO集客支援の詳細を見る <span class="arw">→</span></a>
+        <p class="cta-sub">無料相談・資料ダウンロードはリンク先から</p>
+      </section>
+
+      <aside class="author-box">
+        <div class="avatar" style="background:#0b2447;padding:23px;"><img src="/images/company/star-white.png" alt="Seven Senses" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div>
+          <div class="name">原口 優</div>
+          <div class="role">セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年｜監修（集客・Web施策）: <a href="/author/haraguchi/">代表取締役 原口 優</a></div>
+          
+          <p>通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。</p>
+          <p class="how-made">制作の流れ: 一次情報と出典を集め、AIツールで下書き → 機械検査18項目と3観点の採点（90点以上のみ公開）→ 監修者が事実と表現を確認。<a href="/editorial-policy/">編集・訂正ポリシー</a></p>
+        </div>
+      </aside>
+
+      <aside class="newsletter-box">
+        <div class="nl-text">
+          <strong>週1本のメールで、AI集客の最新実務を。</strong>
+          <span>新着記事とAI検索の動きを毎週まとめてお届けします（無料・いつでも解除できます）。</span>
+        </div>
+        <form class="nl-form" action="/api/subscribe" method="post">
+          <input type="hidden" name="form_type" value="ニュースレター購読">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="email" name="email" required placeholder="メールアドレス" aria-label="メールアドレス" autocomplete="email">
+          <button type="submit" class="btn btn-primary" data-cta="article_newsletter">購読する</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">セブンセンシズ株式会社</a><br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>TEL 06-4305-7547（9:00〜20:00 / 土日祝休）</p>
+      <ul class="social-links" aria-label="外部プロフィール"><li><a href="https://x.com/sevensensece" target="_blank" rel="noopener me" aria-label="X（セブンセンシズ株式会社）" data-net="x"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li><li><a href="https://www.linkedin.com/in/yu-haraguchi" target="_blank" rel="noopener me" aria-label="LinkedIn（原口 優）" data-net="linkedin"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a></li><li><a href="https://note.com/yu_haraguchi" target="_blank" rel="noopener me" aria-label="note（原口 優）" data-net="note"><span>note</span></a></li></ul>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
+      <a href="/industry/">業種から探す</a>
+      <a href="/research/">業種別のAI調査</a>
+      <a href="/download/">無料資料ダウンロード</a>
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/compare/">比較表から探す</a>
+      <a href="/tools/">無料ツール一覧</a>
+      <a href="/tools/url-check/">URL診断（サイトの14項目を採点）</a>
+      <a href="/tools/ai-check/">AI診断（AIにどう紹介されているか）</a>
+      <a href="/tools/aio-check/">AI検索の対応度チェック（30秒）</a>
+      <a href="/tools/kuchikomi-henshin/">口コミ返信文の作成ツール</a>
+      <a href="/tools/meo-check/">マップ集客の整備度チェック（30秒）</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/author/haraguchi/">監修者プロフィール</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/faq/">ご契約前のよくある質問</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+    <div class="footer-credit"><p><a href="https://conflux-partners.jp/works/7senses-aio" target="_blank" rel="noopener">AIO 対策・サイト制作：YW（CONFLUX PARTNERS）</a></p></div>
+  </div>
+</footer>
+
+<!-- スマホで記事を半分ほど読んだら出る「30秒診断」（site.js が出し入れする） -->
+<div class="scan-sticky" hidden><a class="btn btn-primary" href="/tools/ai-check/" data-cta="article_sticky_ai_check" data-ab="sticky_ai" data-ab-b="ChatGPTやGeminiに御社が出るか見る（無料）">AIに御社が出るか無料で確かめる <span class="arw">→</span></a></div>
+</body>
+</html>

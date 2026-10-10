@@ -16,7 +16,7 @@
 "modified": "2026-08-31"
 },
 "aio-checker": {
-"hash": "3cb7cf04c4c5098cd66ac4abbc547e11",
+"hash": "efb7faa5d803874c999b2172c2b2cebc",
 "modified": "2026-09-23"
 },
 "aio-dairiten-erabikata": {
@@ -24,15 +24,19 @@
 "modified": "2026-10-04"
 },
 "aio-donyu-jirei": {
-"hash": "0f9b0e1ce73d2fd9084e094f0d739b8a",
+"hash": "eae0e6295a493b23fd5a4a5079d6bb0f",
 "modified": "2026-10-07"
 },
 "aio-erabareru-kiji-kakikata": {
 "hash": "86fc18aacb7d569a5a22835a2c0750be",
 "modified": "2026-09-15"
 },
+"aio-ijou-kenchi-alert-settei": {
+"hash": "f790eeb32b1f71bc0d2da9fb0ffa252e",
+"modified": "2026-10-10"
+},
 "aio-log-bunseki-tool-hikaku": {
-"hash": "3bf37931ccb447a86eda31b6b531529e",
+"hash": "8ff4908bdc42668bd76d71978ee7ad71",
 "modified": "2026-10-05"
 },
 "aio-seo-audit": {
@@ -88,7 +92,7 @@
 "modified": "2026-09-23"
 },
 "aio-taisaku-hilink": {
-"hash": "21fe86a9d6b49a8db5a1ad524fca50be",
+"hash": "0204f560e9571c3c6f9a4885621ce5c0",
 "modified": "2026-10-08"
 },
 "aio-taisaku-hyouji-sarenai": {
@@ -356,7 +360,7 @@
 "modified": "2026-08-08"
 },
 "koumuten-ai-kensaku-shukyaku": {
-"hash": "5f8b10c678ce2c1d470f66055c79370e",
+"hash": "7ba62162ea5f8ef85c361efd7dfe6105",
 "modified": "2026-10-09"
 },
 "koumuten-chumon-jutaku-aio": {

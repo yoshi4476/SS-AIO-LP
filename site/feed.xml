@@ -7,6 +7,13 @@
   <updated>2026-10-10T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
+    <title>AIOの異常検知アラート設定｜引用と流入の急減を3つの道具で知る</title>
+    <link href="https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/</id>
+    <updated>2026-10-10T00:00:00+09:00</updated>
+    <summary>AIOの異常検知アラートは、GA4のカスタムインサイト・Search Consoleの週次比較・クローラーの到達確認の3つを組み合わせて設定します。急減に気づける仕組みの作り方と、小さなサイトで誤報を出さないしきい値の決め方を、当社の運用から解説します。</summary>
+  </entry>
+  <entry>
     <title>AIOでGeminiの引用に載る方法は？18語の実測と5つの手順</title>
     <link href="https://ai.7senses.co.jp/aio/gemini-inyou-noru-houhou/"/>
     <id>https://ai.7senses.co.jp/aio/gemini-inyou-noru-houhou/</id>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/shika-aio-taisaku-hiyou/</id>
     <updated>2026-10-03T00:00:00+09:00</updated>
     <summary>歯科医院のAIO対策費用は月額で、外部委託の部分支援なら数十万円〜、運用まで一括なら数十万〜数百万円が目安です（2026年10月時点の当社の見立て）。費用の内訳、医療広告ガイドラインの影響、内製の人件費、外部に任せて成果を出す条件まで解説します。</summary>
-  </entry>
-  <entry>
-    <title>AIO対策の無料ツール6選｜計測・診断と安い有料ツールの選び方</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/</id>
-    <updated>2026-09-28T00:00:00+09:00</updated>
-    <summary>AIO対策の無料ツールは、Search Console・GA4・リッチリザルトテストなど6つで足ります。AI引用状況と構造化データを無料で診断する手順と、足りなくなったときの安い有料ツールの価格帯まで解説します。</summary>
   </entry>
 </feed>

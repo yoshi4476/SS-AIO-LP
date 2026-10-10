@@ -73,6 +73,8 @@ faq:
 
 **AIクローラー許可は、Googlebotを含む主要20種を1つずつ個別に確認し、許可状況を記録しました。**
 
+許可した後も、設定の変更でクローラーが弾かれていないかは、[AIOの異常検知とアラートの設定](/aio/aio-ijou-kenchi-alert-settei/)の手順で毎日見張れます。
+
 「AI系のクローラーはまとめて許可しておけばよい」という判断は、実は危険です。
 
 GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extendedは、それぞれ用途が異なります。Google-ExtendedはGemini学習用の制御であり、AI Overview表示の可否とは別物です。robots.txtの各行は、クローラーごとにコメント付きで管理しています。

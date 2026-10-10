@@ -148,6 +148,8 @@ AI検索への対応で抜けている箇所は、[AI検索の対応度チェッ
 
 **AIO対策は、クロール・独自の内容・検索順位を先に固め、言及と被リンクを最後に積むのが効率のよい順番です。**
 
+関連する内容として[AIOの異常検知アラート設定](/aio/aio-ijou-kenchi-alert-settei/)も公開しています。
+
 <figure><img src="/images/aio-taisaku-hilink/junban.png" alt="クロールから被リンクまでAIO対策で打つ5つの順番"></figure>
 
 土台から順に見ていきます。
