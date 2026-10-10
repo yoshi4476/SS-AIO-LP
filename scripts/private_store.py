@@ -305,8 +305,10 @@ def push(message, tries=3):
     overlay_out(unstage=False)         # 作業場所で書いた・直したお客様の社の記事・画像・台本も残す
     _git("add", "-A")
     if _git("diff", "--cached", "--quiet").returncode == 0:
-        # 書くものが無い回も、書けるかだけは確かめる。書けないまま原稿を書いた回は、その原稿がランナーと一緒に消える
-        r = _git("push", "--dry-run", "-q", "origin", "HEAD")
+        # 書くものが無い回も、書けるかだけは確かめる。書けないまま原稿を書いた回は、その原稿がランナーと一緒に消える。
+        # 下見は存在しない枝を作る形にする。main へ下見すると、手元が古いだけ（同時に動いた別の工程が先に送った）で
+        # 「先に進んだ変更がある」と断られ、書けないと誤って知らせていた（2026-10-10）。枝は下見なので作られない
+        r = _git("push", "--dry-run", "-q", "origin", "HEAD:refs/heads/write-check")
         if r.returncode:
             return _push_failed((r.stderr or r.stdout).strip()[-200:])
         print("PRIVATE_PUSH=nochange", flush=True)

@@ -445,12 +445,27 @@ def test_private_push_fails_loudly_when_it_cannot_write():
                 mock.patch.object(PS, "overlay_out", return_value=[]), \
                 mock.patch("builtins.print", side_effect=lambda *a, **k: out.append(" ".join(map(str, a)))):
             ok1 = PS.push("t")
+            # 同時に動いた別の工程が先に送り、手元が1つ古い（書く権限はある）。これを「書けない」と誤って知らせていた
+            other = Path(d) / "other"
+            g("clone", "-q", str(bare), str(other))
+            for k, v in (("user.name", "t"), ("user.email", "t@example.com")):
+                g("config", k, v, cwd=other)
+            (other / "c.txt").write_text("3", encoding="utf-8")
+            g("add", "-A", cwd=other)
+            g("commit", "-q", "-m", "other", cwd=other)
+            g("push", "-q", "origin", "HEAD", cwd=other)
+            g("fetch", "-q", cwd=work)
+            n_before = len(out)
+            ok_behind = PS.push("t")
+            behind_out = out[n_before:]
             g("remote", "set-url", "origin", str(Path(d) / "nowhere.git"), cwd=work)
             ok2 = PS.push("t")
             (work / "b.txt").write_text("2", encoding="utf-8")
             with mock.patch.object(PS.time, "sleep"):
                 ok3 = PS.push("t", tries=1)
     check("書けて変更が無い回は nochange", (ok1, any(o.startswith("PRIVATE_PUSH=nochange") for o in out[:1])), (True, True))
+    check("手元が古いだけ（書く権限はある）なら failed にしない",
+          (ok_behind, any(o.startswith("PRIVATE_PUSH=nochange") for o in behind_out)), (True, True))
     check("変更が無くても、書けない回は failed（push の下見で確かめる）", ok2, False)
     check("変更があって書けない回も failed", ok3, False)
     check("書けない回は実行の画面に赤い注釈を出す", sum(o.startswith("::error title=非公開のリポジトリへ書けません") for o in out), 2)
