@@ -500,5 +500,38 @@
       "title": "物件を増やせばAIに選ばれる？",
       "youtube": "MObZZZpOqmA"
     }
+  },
+  "koumuten-ai-kensaku-shukyaku": {
+    "site": "ai-lab",
+    "date": "2026-10-10",
+    "sec": 283,
+    "mp4": "automation/video/koumuten-ai-kensaku-shukyaku.mp4",
+    "nums": [
+      "3",
+      "4"
+    ],
+    "format": "duo",
+    "long": {
+      "date": "2026-10-10",
+      "keyword": "工務店 AI検索 集客",
+      "queries": [
+        "工務店 ai検索 集客",
+        "ai検索 集客",
+        "工務店 集客",
+        "工務店 ai検索"
+      ],
+      "decision": "make",
+      "term": "工務店 集客",
+      "title": "工務店 集客は何から始める？｜来場予約までの導線を4ステップで確かめる",
+      "reason": "YouTube のサジェストに「工務店 集客」が出ます"
+    },
+    "youtube": "5RlCzd8cSwQ",
+    "short": {
+      "date": "2026-10-10",
+      "sec": 43,
+      "title": "工務店のAI検索、予約までどう運ぶ？",
+      "desc": "lead-long",
+      "youtube": "6Q9DPOt-BVw"
+    }
   }
 }
