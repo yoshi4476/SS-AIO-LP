@@ -52,6 +52,10 @@ function isSales_(text) {
 // 別事業のサイト・お客様のサイトの名前とドメインはここに書かない（公開リポジトリ）。サイト一覧の登録から引く
 const LEAD_SALES = '営業';
 const LEAD_TEST = 'テスト';
+// 問い合わせの「対応状況」の選択肢（台帳のプルダウン・lead_status）。未対応の行だけが自動の後追いの対象。
+// 既存客・契約中・成約にした人は配信除外へ写る（syncClientExcludes_）
+const LEAD_NO_ACTION = '対応不要';
+const LEAD_STATUSES = ['未対応', '対応中', '商談中', '成約', '失注', '対応済み', '対応不要', '既存客', '契約中'];
 const OWN_MAIL_DOMAINS = ['7senses.co.jp'];
 // 運用者の個人のアドレス（カンマ区切り）。公開リポジトリに書かない: Script Properties の OWNER_EMAILS か、
 // gas_deploy.py が .env の HUB_OWNER_EMAILS で埋める
@@ -208,6 +212,8 @@ function leadSetKind_(saved, temp, note) {
   const RANK = { HOT: 3, WARM: 2, COOL: 1 };
   const before = String(sh.getRange(r, 13).getValue() || '');
   if (saved.merged ? (RANK[temp] || 0) > (RANK[before] || 0) : before !== temp) sh.getRange(r, 13).setValue(temp);
+  // テストは対応の要らない行。未対応の一覧に残さない（売り込みは誤判定のおそれがあるので、未対応のまま運用者が決める）
+  if (temp === LEAD_TEST && !saved.merged) sh.getRange(r, 14).setValue(LEAD_NO_ACTION);
   const cur = String(sh.getRange(r, 10).getValue() || '');
   sh.getRange(r, 10).setValue(cells_([(cur ? cur + '\n' : '') + note])[0]);
 }
@@ -889,6 +895,58 @@ function leadReply_(site, type, d) {
 const FOLLOW_COL = 15;
 const FOLLOW_AFTER_DAYS = { HOT: 1, WARM: 3 };
 
+/**
+ * 受信の日以降に、このアカウント（info.ai の別名を含む）からこの人へ送ったメールがあるか。
+ * 返信したのに対応状況を「未対応」のまま置くと、自動の後追いが重なって届く（2026-10-10 運用者「今対応している場合は
+ * どのように管理すればいいのか」）。メールを読めないときは見つからなかった扱いにし、今までどおり対応状況で決める
+ */
+function repliedSince_(email, at) {
+  try {
+    const day = Utilities.formatDate(at && typeof at.getTime === 'function' ? at : new Date(at), 'Asia/Tokyo', 'yyyy/MM/dd');
+    return GmailApp.search('in:sent to:' + email + ' after:' + day, 0, 1).length > 0;
+  } catch (e) {
+    console.error('返信済みかを確かめられません: ' + e);
+    return false;
+  }
+}
+
+/**
+ * 問い合わせの対応状況をまとめて変える（合言葉つきの action でだけ呼ばれる）。行番号と受信日の両方が合う行だけ。
+ * 名前・本文・温度は変えない。選べるのは LEAD_STATUSES のどれか
+ */
+function leadStatus_(b) {
+  const sh = sheet_('問い合わせ');
+  const last = sh.getLastRow();
+  const out = { ok: true, changed: [], skipped: [] };
+  (b.items || []).forEach(function (it) {
+    const row = Number(it.row);
+    const st = String(it.status || '');
+    if (!(row >= 2 && row <= last) || LEAD_STATUSES.indexOf(st) < 0) {
+      out.skipped.push({ row: it.row, why: '行番号か対応状況が違う' });
+      return;
+    }
+    const v = sh.getRange(row, 1, 1, 14).getValues()[0];
+    if (leadDay_(v[0]) !== String(it.day || '')) {
+      out.skipped.push({ row: row, why: '受信日が合わない（' + leadDay_(v[0]) + '）' });
+      return;
+    }
+    sh.getRange(row, 14).setValue(st);
+    out.changed.push({ row: row, status: st });
+  });
+  return out;
+}
+
+/** 問い合わせの「対応状況」の列をプルダウンにする（手で書いた別の値も残す） */
+function leadStatusMenu_() {
+  const sh = sheet_('問い合わせ');
+  sh.getRange(2, 14, Math.max(sh.getMaxRows() - 1, 1), 1).setDataValidation(SpreadsheetApp.newDataValidation()
+    .requireValueInList(LEAD_STATUSES, true).setAllowInvalid(true).build());
+  sh.getRange(1, 14).setNote('返信したら「対応中」、商談に進んだら「商談中」、結果が出たら「成約」「失注」に変えてください。\n'
+    + '「未対応」の行だけに自動の後追いメールが届きます（AI集客ラボの問い合わせ・診断のみ）。返信済みの人には自動で「対応中」になり、送りません。\n'
+    + '「成約」「契約中」「既存客」にした人は、配信除外に自動で追加されます。テストは自動で「対応不要」になります。');
+  return '問い合わせの対応状況をプルダウンにしました';
+}
+
 function followUp() {
   const sh = sheet_('問い合わせ');
   const last = sh.getLastRow();
@@ -918,6 +976,11 @@ function followUp() {
     if (status !== '未対応' || !isEmail_(email)) continue;
     if (temp === '営業') continue;                 // 営業メールの送り主にフォローを送らない
     if (excluded_(ex, email, r[9])) continue;
+    // 担当が返信済みなのに「未対応」のまま置かれた行。後追いが重なって届かないよう「対応中」にして送らない
+    if (repliedSince_(email, at)) {
+      sh.getRange(i + 2, 14).setValue('対応中');
+      continue;
+    }
     // AI紹介チェックと資料ダウンロードは相談ではない。「お問い合わせ…行き違い」の文面は送らず、
     // 道具ごとの後追い（数日後に1通だけ）に回す
     const kind = toolKind_(r);

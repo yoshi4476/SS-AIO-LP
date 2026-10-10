@@ -265,6 +265,8 @@ function doPost(e) {
       // 相談・売り込み・テストの見分け（contact.hub.gs）。既にある行の温度を運用者の判断で「営業」「テスト」にする・
       // GA4 から推定した流入経路を入れる・受付と同じ見分けにかけた結果を見る（書かない）・疎通確認の「不明」を直す
       case 'lead_mark':     return json_(leadMark_(body));
+      // 問い合わせの対応状況をまとめて変える（行番号と受信日が合う行だけ。運用者の判断で付ける）
+      case 'lead_status':   return json_(leadStatus_(body));
       case 'lead_route_fix': return json_(leadRouteFix_(body));
       case 'lead_classify': return json_(leadClassify_(body));
       case 'probe_tidy':    return json_(probeTidy_());
@@ -933,6 +935,12 @@ function admin_(task) {
     case 'clean_kpi': return { ok: true, result: cleanKpi_() };
     case 'tidy_exclude': return { ok: true, result: tidyExclude_() };
     case 'review_trigger': return { ok: true, result: installReviewReplyTrigger() };
+    // 自動の後追い（followUp）を毎日 09:00 に動かす。2026-10-10 運用者が有効にすることを承認（それまで一度も入っていなかった）
+    case 'followup_trigger':
+      installFollowUpTrigger();
+      return { ok: true, result: 'followUp のトリガー ' + ScriptApp.getProjectTriggers().filter(function (t) {
+        return t.getHandlerFunction() === 'followUp'; }).length + '本' };
+    case 'lead_status_menu': return { ok: true, result: leadStatusMenu_() };
     default:
       return { ok: false, error: '不明なtask: ' + task
                + '（format / triggers / kpi / dashboard / setup）' };
