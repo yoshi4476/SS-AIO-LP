@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-09",
+  "date": "2026-10-10",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
@@ -101,11 +101,11 @@
         {
           "kw": "aio診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
-          "pos": 8.6,
-          "imp": 40,
+          "pos": 8.1,
+          "imp": 38,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 3.5,
           "ratio": 0.0
         },
         {
@@ -382,7 +382,7 @@
       "judged": 3,
       "suspect_taken": 3,
       "healthy": 0,
-      "too_thin": 41,
+      "too_thin": 38,
       "items": [
         {
           "kw": "セブンセンシズ株式会社",
