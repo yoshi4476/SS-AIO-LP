@@ -260,6 +260,8 @@ function doPost(e) {
       // 取りこぼした問い合わせを台帳へ戻す（lead_reconcile で見つけ、送信履歴から復元した分）。
       // メールは送らない。フォームの経路（form_）を通すと、今になって自動返信が相手に届く
       case 'restore_lead': return json_(restoreLead_(body));
+      // サイト名が「（不明）」の行にサイト名を入れる（lead_reconcile.py --fix。GA4 の送信と日付が1対1で合うときだけ）
+      case 'lead_fix_site': return json_(leadFixSite_(body));
       // AI紹介チェックの回数（メールごと3回・月の全体の上限）と記録。functions/api/ai-check.js が合言葉つきで呼ぶ
       case 'ai_check_quota': return json_(aiCheckQuota_(body));
       case 'gemini_usage':   return json_(geminiUsage_());

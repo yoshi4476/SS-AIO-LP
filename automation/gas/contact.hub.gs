@@ -1026,6 +1026,30 @@ function stepText_(band, k, v) {
 }
 
 /**
+ * サイト名が「（不明）」の問い合わせの行にサイト名を入れる（lead_reconcile.py --fix。合言葉つきの action でだけ呼ばれる）。
+ * 入れるのは、その日の（不明）の行がちょうど1行で、渡した id が「サイト一覧」にあるときだけ。名前の入った行は変えない。
+ * 補助金のサービスのページのフォームがサイトIDを送っていなかった時期の行が、サイト別の件数から漏れていた（2026-10-10）
+ */
+function leadFixSite_(b) {
+  const day = String(b.day || '');
+  const m = siteMap_()[b.site];
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || !m) return { ok: false, error: 'day（yyyy-MM-dd）と、サイト一覧にある site が必要です' };
+  const sh = sheet_('問い合わせ');
+  const last = sh.getLastRow();
+  if (last < 2) return { ok: false, error: '台帳に行がありません' };
+  const hit = [];
+  sh.getRange(2, 1, last - 1, 2).getValues().forEach(function (r, i) {
+    const t = r[0] && typeof r[0].getTime === 'function' ? Utilities.formatDate(r[0], 'Asia/Tokyo', 'yyyy-MM-dd')
+      : String(r[0]).slice(0, 10).replace(/\//g, '-');
+    const s = String(r[1] || '').trim();
+    if (t === day && (s === '' || s === '（不明）')) hit.push(i + 2);
+  });
+  if (hit.length !== 1) return { ok: false, error: 'その日のサイト名の無い行が1行ではありません', rows: hit.length };
+  sh.getRange(hit[0], 2).setValue(m.label);
+  return { ok: true, fixed: 1, label: m.label };
+}
+
+/**
  * 取りこぼした問い合わせを台帳へ戻す（合言葉つきの action でだけ呼ばれる）。
  * 列は leadSave_ と同じ。メール・自動返信・フォローは一切しない（相手に今さら届かないように）。
  * 同じメール・同じ受信日の行が既にあれば書かない（2回流しても重複しない）。

@@ -26,6 +26,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 EVENTS = ("lead_capture", "generate_lead")
+# 2026-09-25 の直し（e2003eabd）より前の診断・サイト診断は、結果を出した時点でも lead_capture を出していた（連絡先は
+# 受け取っていない。完了の記録 diagnosis_complete / site_audit_complete と1対1で出る）。その日・そのページの完了の数だけ
+# lead_capture から引き、残り（結果の送付を頼んだ＝連絡先を送った分）だけを数える。引かないと、8月の診断の完了4件を
+# 「台帳に行が無い送信」と取りこぼし扱いにしていた（2026-10-10 判明）
+COMPLETES = ("diagnosis_complete", "site_audit_complete")
+COMPLETE_FIXED = "20260925"
 ACK_FILE = ROOT / "data" / "lead_reconcile_ack.json"
 try:
     import json as _json
@@ -45,7 +51,7 @@ def ga4_by_day(prop, start, end):
         dimensions=[Dimension(name="date"), Dimension(name="eventName"), Dimension(name="pagePath")],
         metrics=[Metric(name="eventCount")],
         dimension_filter=FilterExpression(filter=Filter(field_name="eventName",
-                                                        in_list_filter=Filter.InListFilter(values=list(EVENTS)))),
+                                                        in_list_filter=Filter.InListFilter(values=list(EVENTS + COMPLETES)))),
         limit=5000))
     rows = [(r.dimension_values[0].value, r.dimension_values[1].value,
              r.dimension_values[2].value, int(r.metric_values[0].value)) for r in rep.rows]
@@ -75,9 +81,17 @@ def is_lead(ev, path=None):
 def count_rows(rows):
     """(date, eventName, pagePath, count) から日ごとの件数。
     コーポレートは同じ送信で generate_lead と lead_capture が両方出るので、足さずに多い方を取る"""
+    done = collections.Counter((d, path) for d, ev, path, n in rows for _ in range(n)
+                               if ev in COMPLETES and d < COMPLETE_FIXED)
     per = collections.defaultdict(lambda: collections.Counter())
     for d, ev, path, n in rows:
-        if is_lead(ev, path):
+        if not is_lead(ev, path):
+            continue
+        if ev == "lead_capture" and done[(d, path)]:
+            k = min(n, done[(d, path)])
+            done[(d, path)] -= k
+            n -= k
+        if n > 0:
             per[f"{d[:4]}-{d[4:6]}-{d[6:]}"][ev] += n
     return {d: max(v.values()) for d, v in per.items() if v}
 
@@ -95,6 +109,16 @@ def selftest():
           ("20261005", "lead_capture", "/contact", 1)], {"2026-10-05": 1}),
         ([("20260909", "generate_lead", "/contact", 1)], {"2026-09-09": 1}),
         ([("20260918", "lead_capture", "/diagnosis/meo/", 1)], {"2026-09-18": 1}),           # 診断結果の送付依頼
+        # 9/25 より前の診断の完了（結果を見ただけ・連絡先なし）。AI集客ラボの 8/21 /diagnosis/aio/ と 8/4 /site-audit/ の実例
+        ([("20260821", "diagnosis_complete", "/diagnosis/aio/", 1), ("20260821", "lead_capture", "/diagnosis/aio/", 1),
+          ("20260821", "lead_diagnosis", "/diagnosis/aio/", 1)], {}),
+        ([("20260804", "site_audit_complete", "/site-audit/", 1), ("20260804", "lead_capture", "/site-audit/", 1)], {}),
+        # 完了より lead_capture が多い日は、その差が結果の送付の依頼（連絡先を送った分）
+        ([("20260901", "diagnosis_complete", "/diagnosis/meo/", 1), ("20260901", "lead_capture", "/diagnosis/meo/", 2)],
+         {"2026-09-01": 1}),
+        # 9/25 の直し以降は、完了では lead_capture を出さない。同じ日に完了と送付があれば送付の1件
+        ([("20261001", "diagnosis_complete", "/tools/diagnosis/aio/", 1),
+          ("20261001", "lead_capture", "/tools/diagnosis/aio/", 1)], {"2026-10-01": 1}),
     ]
     bad = [(rows, want, count_rows(rows)) for rows, want in cases if count_rows(rows) != want]
     for rows, want, got in bad:
@@ -133,6 +157,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--days", type=int, default=28)
     ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--fix", action="store_true",
+                    help="サイト名が（不明）の行に、その日 GA4 で送信があった1社の名前を入れる（1対1で合う日だけ）")
     a = ap.parse_args()
     if a.selftest:
         return selftest()
@@ -146,6 +172,7 @@ def main():
         return 1
     print(f"■ フォーム送信（GA4）と問い合わせ台帳（{start}〜{end}）\n")
     bad, unread = [], []
+    fixable = collections.defaultdict(list)       # 日 → その日に台帳に行が無く、（不明）の行がある社
     for sid, cfg in S.load_all().items():
         prop = cfg.get("ga4_property_id")
         # 問い合わせを管制塔へ送らず自前の台帳だけに入れる社（lead_hub: false）は突き合わせない
@@ -166,6 +193,7 @@ def main():
             where = f"（送信したページ: {src}）" if src else ""
             unknown = led.get("?", {}).get(d, 0)
             if unknown:
+                fixable[d].append((sid, cfg.get("name", sid), len(bad)))
                 # 行はあるがサイト名が「（不明）」の日。補助金のサービスページのフォームはサイトIDを送っておらず、
                 # 10/1 の問い合わせがこの形で残っていた（2026-10-07）。「メールにだけ届いた」と言うと探す先を誤る
                 bad.append(f"要対応: {cfg.get('name', sid)} — {d} に GA4 では送信{ga[d]}件。この社の行は無く、"
@@ -175,7 +203,25 @@ def main():
                 bad.append(f"要対応: {cfg.get('name', sid)} — {d} に GA4 では送信{ga[d]}件あるのに台帳に行がありません"
                            + where + "（メールにだけ届いた可能性。info.ai の受信箱を確認し、台帳に書き足す）")
             print("  " + bad[-1])
-    if led.get("?"):
+    if a.fix:
+        # 根拠が1対1のときだけ直す: その日の（不明）の行がちょうど1行で、行の無い送信がある社もちょうど1社
+        import hub_client as HC
+        fixed = set()
+        for d, who in sorted(fixable.items()):
+            if len(who) != 1 or led.get("?", {}).get(d, 0) != 1:
+                print(f"  {d}: 直さない（（不明）の行 {led.get('?', {}).get(d, 0)}行・候補 {len(who)}社。1対1ではない）")
+                continue
+            sid, name, idx = who[0]
+            try:
+                r = HC._post({"action": "lead_fix_site", "day": d, "site": sid}) or {}
+            except Exception as e:                    # 管制塔につながらない回は直さずに知らせるだけ（照合は止めない）
+                r = {"error": f"管制塔につながりません（{type(e).__name__}）"}
+            print(f"  {d}: サイト名を「{name}」に直しました" if r.get("ok") else f"  {d}: 直せませんでした（{r.get('error', '')}）")
+            if r.get("ok"):
+                fixed.add(idx)
+                led["?"][d] -= 1
+        bad = [b for i, b in enumerate(bad) if i not in fixed]
+    if led.get("?") and sum(led["?"].values()):
         print(f"  サイト名を判定できない行 {sum(led['?'].values())}件")
     if unread and not bad:
         # 読めなかったサイトを「食い違いなし」に数えない（GA4 が落ちた日も LEADS_OK=yes と出ていた）
