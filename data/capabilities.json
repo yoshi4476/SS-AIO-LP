@@ -2291,37 +2291,37 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "automation/gas/contact.hub.gs:469",
+     "evidence": "automation/gas/contact.hub.gs:595",
      "note": "フォームを管制塔が直接受ける",
      "anchor": "function followUp() {"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:488",
+     "evidence": "automation/gas/contact.hub.gs:614",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:488",
+     "evidence": "automation/gas/contact.hub.gs:614",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:488",
+     "evidence": "automation/gas/contact.hub.gs:614",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:488",
+     "evidence": "automation/gas/contact.hub.gs:614",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:488",
+     "evidence": "automation/gas/contact.hub.gs:614",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },

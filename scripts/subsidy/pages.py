@@ -13,6 +13,7 @@ import desc_fill as DF  # noqa: E402
 import footer_credit  # noqa: E402
 import social_footer as SF  # noqa: E402
 import noindex as NI  # noqa: E402
+import turnstile_block as TB  # noqa: E402  ロボットよけ（管制塔へ直接送るフォーム）
 
 # 補助金サイトの作業コピー。管制塔の publish.py が SUBSIDY_ROOT で渡す
 # （2026-10-03 まで補助金サイト側の tools/ で CI が動かしていた。管制塔に一本化）
@@ -195,7 +196,7 @@ def sync_chrome(root):
         if SKIP_DIRS & set(p.relative_to(root).parts):
             continue
         t = p.read_bytes().decode("utf-8", "surrogateescape")
-        u = chrome(t, root)
+        u = TB.apply(chrome(t, root))
         if u != t:
             p.write_bytes(u.encode("utf-8", "surrogateescape"))
             n += 1

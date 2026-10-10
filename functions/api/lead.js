@@ -10,8 +10,19 @@
  *
  * B) Resend（フォールバック）
  *   RESEND_API_KEY / LEAD_TO_EMAIL / LEAD_FROM_EMAIL
+ *
+ * ロボットよけ（Turnstile）は functions/_turnstile.js。答えを確かめ、結果を管制塔への転送に添える（台帳には残さない）。
  */
-export async function onRequestPost({ request, env }) {
+import { ENFORCE, FIELD, REFUSAL, verify, refuse, log } from "../_turnstile.js";
+
+// ページの部品（site.js）が読むサイトキーと、断るかどうか（公開してよい値だけ返す）
+export async function onRequestGet({ env }) {
+  return Response.json({ turnstile: env.TURNSTILE_SECRET && env.TURNSTILE_SITEKEY ? env.TURNSTILE_SITEKEY : "", enforce: ENFORCE },
+    { headers: { "Cache-Control": "public, max-age=300" } });
+}
+
+export async function onRequestPost(context) {
+  const { request, env } = context;
   const data = {};
   let fd;
   try {
@@ -19,8 +30,9 @@ export async function onRequestPost({ request, env }) {
   } catch (_) {
     return new Response("フォーム形式で送信してください。", { status: 400 });
   }
-  // 直し方の一覧は長いので、そこだけ上限を広げる
-  for (const [k, v] of fd) data[k] = String(v).slice(0, k === "audit_fixes" ? 6000 : 2000);
+  // 直し方の一覧は長いので、そこだけ上限を広げる。ロボットよけの答え（最長2048字）は切らずに別に持ち、台帳へは送らない
+  for (const [k, v] of fd) if (k !== FIELD) data[k] = String(v).slice(0, k === "audit_fixes" ? 6000 : 2000);
+  const token = String(fd.get(FIELD) || "");
 
   // ハニーポット（botはこの不可視フィールドを埋める）
   if (data._gotcha) return Response.redirect(new URL("/thanks/", request.url), 303);
@@ -30,6 +42,13 @@ export async function onRequestPost({ request, env }) {
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
     return new Response("メールアドレスの形式が正しくありません。", { status: 400 });
+  }
+
+  const ts = await verify(env, token, request.headers.get("CF-Connecting-IP") || "");
+  if (refuse("lead", ts, data.email)) {
+    const done = log(env, "ai-lab", String(data.form_type || "").slice(0, 40), ts, data.email, true);
+    if (context.waitUntil) context.waitUntil(done);
+    return new Response(REFUSAL, { status: 403, headers: { "Content-Type": "text/plain; charset=utf-8" } });
   }
 
   const hasGas = Boolean(env.GAS_WEBHOOK_URL);
@@ -67,7 +86,8 @@ export async function onRequestPost({ request, env }) {
       const gas = await fetch(env.GAS_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secret: env.GAS_SHARED_SECRET || "", site: "ai-lab", data: hub, referer }),
+        // turnstile は管制塔の「ロボットよけ」タブにだけ残る（台帳の行には入らない）
+        body: JSON.stringify({ secret: env.GAS_SHARED_SECRET || "", site: "ai-lab", data: hub, referer, turnstile: ts }),
       });
       // GASは失敗時も200で {ok:false} を返すため、本文まで確認する
       const out = await gas.json().catch(() => ({}));

@@ -763,3 +763,112 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
   });
   if (ok) box.value = v;
 })();
+
+/* ロボットよけ（Cloudflare Turnstile）。問い合わせ・資料・診断結果の受け取り・購読のフォームに付ける。
+ * 部品は約590KBあるので、ページを開いた時点では読まず、フォームに触れた時点で読む（表示速度の方針・ai-check.js と同じ）。
+ * 見た目は interaction-only。ふつうは何も出さず、Cloudflare が人の操作を求めたときだけ確認の欄を出す。
+ * 送る直前に答えがまだ無ければ最大6秒待ち、無くても送る（断るかは受付 functions/_turnstile.js が決める。
+ * 部品を読めない人の問い合わせを、ページの側で止めない）。2026-10-10 運用者の承認 */
+(function () {
+  var SEL = 'form[action="/api/lead"], form[action="/api/subscribe"], form.lc-form, .lx-gate form';
+  var WAIT = 6000, HIDE = "position:absolute;width:0;height:0;overflow:hidden";
+  var cfg = {}, ready = null;
+  function pick(el) {
+    var f = el && el.closest ? el.closest("form") : null;
+    return f && f.matches && f.matches(SEL) ? f : null;
+  }
+  function kind(f) { return f.getAttribute("action") === "/api/subscribe" ? "subscribe" : "lead"; }
+  function token(f) {
+    var i = f.querySelector('input[name="cf-turnstile-response"]');
+    return i ? i.value : "";
+  }
+  function load() {
+    if (ready) return ready;
+    ready = fetch("/api/lead").then(function (r) { return r.json(); }).then(function (c) {
+      cfg = c || {};
+      if (!cfg.turnstile) return null;
+      if (window.turnstile) return window.turnstile;
+      return new Promise(function (done) {
+        window.ssTurnstileReady = function () { done(window.turnstile || null); };
+        var s = document.createElement("script");
+        s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=ssTurnstileReady";
+        s.async = true;
+        s.onerror = function () { done(null); };
+        document.head.appendChild(s);
+      });
+    }).catch(function () { return null; });
+    return ready;
+  }
+  function mount(f) {
+    if (f.getAttribute("data-ts")) return;
+    f.setAttribute("data-ts", "wait");
+    load().then(function (ts) {
+      if (!ts || !document.documentElement.contains(f)) { f.setAttribute("data-ts", "off"); return; }
+      var box = document.createElement("div");
+      box.className = "ts-box";
+      box.style.cssText = HIDE;
+      var btn = f.querySelector('button[type="submit"]');
+      var flex = getComputedStyle(f).display === "flex";
+      if (btn && btn.parentNode === f && !flex) f.insertBefore(box, btn); else f.appendChild(box);
+      f.setAttribute("data-ts", "run");
+      try {
+        f._ts = ts.render(box, {
+          sitekey: cfg.turnstile, appearance: "interaction-only", language: "ja", action: kind(f),
+          callback: function () { f.setAttribute("data-ts", "ok"); },
+          "expired-callback": function () { f.setAttribute("data-ts", "run"); },
+          "error-callback": function () { f.setAttribute("data-ts", "err"); },
+          // 人の操作を求められたときだけ、確認の欄を見える場所に出す（横並びのフォームでは次の行へ）
+          "before-interactive-callback": function () {
+            f.setAttribute("data-ts", "ask");
+            box.style.cssText = "grid-column:1/-1;flex:1 0 100%;margin:.4rem 0";
+            if (flex) f.style.flexWrap = "wrap";
+          }
+        });
+      } catch (e) { f.setAttribute("data-ts", "off"); }
+    });
+  }
+  // 答えは1回きり。送った後は、次の送信（画面内で送るフォームのやり直し）のために作り直す
+  function renew(f) {
+    setTimeout(function () {
+      try {
+        if (f._ts != null && window.turnstile) { window.turnstile.reset(f._ts); f.setAttribute("data-ts", "run"); }
+      } catch (e) {}
+    }, 0);
+  }
+  function touch(e) { var f = pick(e.target); if (f) mount(f); }
+  document.addEventListener("focusin", touch, true);
+  document.addEventListener("pointerdown", touch, true);
+  document.addEventListener("submit", function (e) {
+    var f = pick(e.target);
+    if (!f) return;
+    if (f._tsGo) { f._tsGo = false; renew(f); return; }
+    if (f.noValidate && !f.checkValidity()) return;   // 未入力の案内はフォームの側がすぐ出す
+    mount(f);
+    var st = f.getAttribute("data-ts");
+    if (token(f) || (st !== "wait" && st !== "run" && st !== "ask")) { renew(f); return; }
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var btn = f.querySelector('button[type="submit"]'), t0 = Date.now();
+    if (btn) btn.disabled = true;
+    var iv = setInterval(function () {
+      var s = f.getAttribute("data-ts");
+      if (!token(f) && (s === "wait" || s === "run" || s === "ask") && Date.now() - t0 < WAIT) return;
+      clearInterval(iv);
+      if (btn) btn.disabled = false;
+      if (!token(f) && s === "ask" && cfg.enforce && cfg.enforce[kind(f)]) {
+        var m = f.querySelector(".ts-msg");
+        if (!m) { m = document.createElement("p"); m.className = "ts-msg"; m.setAttribute("role", "alert"); f.appendChild(m); }
+        m.textContent = "確認の欄にチェックを入れてから、もう一度送信してください。うまくいかない場合は 06-4305-7547 までお電話ください。";
+        return;
+      }
+      f._tsGo = true;
+      if (f.requestSubmit) f.requestSubmit();
+      else if (f.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }))) f.submit();
+    }, 150);
+  }, true);
+  // 戻る・進む（bfcache）で表示し直したら、使い終わった答えを作り直す
+  addEventListener("pageshow", function (e) {
+    if (!e.persisted) return;
+    document.querySelectorAll("form[data-ts]").forEach(function (f) { if (f._ts != null) renew(f); });
+  });
+})();

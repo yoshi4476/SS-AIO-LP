@@ -7,8 +7,14 @@
  *   RESEND_AUDIENCE_ID  … Resend Audiences で作成した購読者リストのID
  *   LEAD_TO_EMAIL       … 購読通知の宛先（任意。設定時のみ通知メールも送る）
  *   LEAD_FROM_EMAIL     … 送信元（ドメイン認証済みアドレス）
+ *
+ * ロボットよけ（Turnstile）は functions/_turnstile.js。架空・他人のアドレスを大量に登録されると、
+ * 配信のたびに戻ってくるメールが増え、送信元の評価が落ちる。結果は管制塔の「ロボットよけ」タブに残る。
  */
-export async function onRequestPost({ request, env }) {
+import { FIELD, REFUSAL, verify, refuse, log } from "../_turnstile.js";
+
+export async function onRequestPost(context) {
+  const { request, env } = context;
   // フォーム以外の本文で例外になると Cloudflare の生の500が返る（2026-09-02 に lead.js で起きたのと同じ穴）
   let fd;
   try {
@@ -23,6 +29,11 @@ export async function onRequestPost({ request, env }) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return new Response("メールアドレスの形式が正しくありません。", { status: 400 });
   }
+  const ts = await verify(env, fd.get(FIELD), request.headers.get("CF-Connecting-IP") || "");
+  const refused = refuse("subscribe", ts, email);
+  const done = log(env, "ai-lab", "newsletter", ts, email, refused);
+  if (context.waitUntil) context.waitUntil(done);
+  if (refused) return new Response(REFUSAL, { status: 403, headers: { "Content-Type": "text/plain; charset=utf-8" } });
   if (!env.RESEND_API_KEY || !env.RESEND_AUDIENCE_ID) {
     return new Response("購読設定が未完了です。恐れ入りますがお問い合わせフォームからご連絡ください。", { status: 500 });
   }

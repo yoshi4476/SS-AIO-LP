@@ -79,8 +79,9 @@ def test_hub_keyword_reads_need_the_secret_and_form_cells_are_text():
                "'=IMPORTDATA(\"https://x/?\"&A2)" in row], [True, True, True, True])
 
     src = (GAS / "contact.hub.gs").read_text(encoding="utf-8")
-    check("フォームから来る行（問い合わせ・疎通確認・配信停止・再送信の追記）は全部消毒してから置く",
-          (src.count("appendRow(cells_(["), "setValue(cells_([" in src), (3, True))
+    # ロボットよけの記録（2026-10-10・gates_history_h79）で4つ目が増えた
+    check("フォームから来る行（問い合わせ・疎通確認・配信停止・ロボットよけの記録・再送信の追記）は全部消毒してから置く",
+          (src.count("appendRow(cells_(["), "setValue(cells_([" in src), (4, True))
     form = src.split("function form_(")[1].split("\nfunction ")[0]
     check("フォームの返事に温度と台帳の行番号を返さない", ("temperature:" in form, "row: row" in form), (False, False))
 

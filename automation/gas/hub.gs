@@ -268,6 +268,9 @@ function doPost(e) {
       case 'rakko_usage':    return json_(rakkoUsage_(body));
       case 'rakko_log':      return json_(rakkoLog_(body));
       case 'ai_check_stats': return json_(aiCheckStats_(body));
+      // ロボットよけ（Turnstile）の記録と集計（contact.hub.gs）。AI集客ラボの受付が合言葉つきで送る・断る前に読む
+      case 'bot_log':        return json_(botLogAction_(body));
+      case 'bot_status':     return json_(botStatus_(body));
       case 'probe_status':   return json_(probeStatus_());
       case 'ai_check_log':   return json_(aiCheckLog_(body));
       case 'ai_recheck_list': return json_(aiRecheckList_());

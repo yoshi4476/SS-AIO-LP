@@ -40,6 +40,126 @@ function isSales_(text) {
   return SALES_PATTERNS.some(function (re) { return re.test(s); });
 }
 
+// ── ロボットよけ（Cloudflare Turnstile）────────────────────────
+// 合言葉の無い送信（補助金・コーポレートのページから直接届くもの）は、ページの部品が出した答え（cf-turnstile-response）を
+// Cloudflare に確かめる。機械で大量に送られると台帳が埋まるうえ、送り主への自動返信で他人のアドレスへ当社のメールを
+// 出させられ、MailApp の1日の上限を食い切ると本物の問い合わせの通知・自動返信まで止まる（2026-10-10 運用者の承認）。
+// 合言葉つき（AI集客ラボの /api/lead・/api/subscribe）はサーバー側で確かめ済みなので、届いた結果を記録するだけ。
+// false の間は記録するだけで断らない。3サイトとも本物のブラウザで ok が記録されたのを確かめ、合言葉なしでサーバーから
+// 記録だけを送ってくる別事業のサイト（silent つき）に合言葉が届くようにしてから true にする（そのままだとその記録が落ちる）
+const TURNSTILE_ENFORCE = false;
+// gas_deploy.py が .env の TURNSTILE_SECRET で埋める。Script Properties に同じ名前があればそちらを使う
+const TURNSTILE_KEY_FILL = 'TURNSTILE_SECRET_XXXXXXXX';
+const BOT_REFUSAL = 'ロボットでないことの確認ができませんでした。ページを読み込み直してもう一度お送りいただくか、'
+  + '06-4305-7547 までお電話ください。';
+// 断った送信を表に残すのは1時間に60件まで。大量に送られたときに、記録の表まで埋めさせない
+const BOT_LOG_REFUSED_PER_HOUR = 60;
+
+function turnstileSecret_() {
+  const p = PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET');
+  if (p) return p;
+  return TURNSTILE_KEY_FILL.indexOf('XXXXXXXX') < 0 ? TURNSTILE_KEY_FILL : '';
+}
+
+/** 答えを Cloudflare に確かめる。result は ok / none（答えが無い）/ invalid / error（確かめられない）/ unset（鍵が無い） */
+function turnstileVerify_(token) {
+  const secret = turnstileSecret_();
+  if (!secret) return { result: 'unset' };
+  const t = String(token || '').trim();
+  if (!t) return { result: 'none' };
+  // 形の明らかに違う答えは問い合わせずに不正とする（外への問い合わせの1日の上限を食わせない）
+  if (t.length > 2048 || !/^[\x21-\x7e]+$/.test(t)) return { result: 'invalid', codes: 'format' };
+  try {
+    const r = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',
+      { method: 'post', payload: { secret: secret, response: t }, muteHttpExceptions: true });
+    if (r.getResponseCode() >= 500) return { result: 'error', codes: 'http' + r.getResponseCode() };
+    const j = JSON.parse(r.getContentText() || '{}');
+    return { result: j.success ? 'ok' : 'invalid', host: String(j.hostname || ''),
+             codes: (j['error-codes'] || []).join(',') };
+  } catch (err) {
+    return { result: 'error', codes: String(err).slice(0, 80) };
+  }
+}
+
+/**
+ * 1件の送信を確かめて記録し、断るかを返す。答えの欄は台帳に残さないよう d から消す。
+ * 確かめられない（error）・鍵が無い（unset）ときは断らない（Cloudflare の不調で本物の問い合わせを落とさない）。
+ * 疎通確認（@pipeline-check.invalid）は断らない（答えがあれば確かめて記録はする）
+ */
+function botCheck_(body, d, site, type, probe) {
+  const token = d['cf-turnstile-response'] || body['cf-turnstile-response'] || '';
+  delete d['cf-turnstile-response'];
+  delete body['cf-turnstile-response'];
+  const trusted = !!SHARED_SECRET && body.secret === SHARED_SECRET;
+  let v;
+  if (trusted) {
+    const s = body.turnstile || {};
+    if (!s.result) return { refuse: false };     // 確かめない送り元（転送・AI紹介チェックの記録）は記録もしない
+    v = { result: clean_(s.result), host: s.host, codes: s.codes };
+  } else {
+    v = turnstileVerify_(token);
+    if (v.result === 'unset') return { refuse: false };
+  }
+  const refuse = TURNSTILE_ENFORCE && !trusted && !probe && (v.result === 'none' || v.result === 'invalid');
+  botLog_(site, trusted ? 'サーバーで確認' : 'ページから直接', type, v, probe, refuse);
+  return { refuse: refuse, result: v.result };
+}
+
+function botSheet_() {
+  const ss = book_();
+  let sh = ss.getSheetByName('ロボットよけ');
+  if (!sh) {
+    sh = ss.insertSheet('ロボットよけ');
+    sh.appendRow(['日時', 'サイト', '経路', '種別', '結果', 'ドメイン', '理由', '疎通確認', '処置']);
+  }
+  return sh;
+}
+
+/** 記録は失敗しても問い合わせを止めない（記録より受付が先） */
+function botLog_(site, route, type, v, probe, refused) {
+  try {
+    if (refused) {
+      const c = CacheService.getScriptCache();
+      const k = 'bot_refused_' + Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyyMMddHH');
+      const n = Number(c.get(k) || 0) + 1;
+      c.put(k, String(n), 3700);
+      if (n > BOT_LOG_REFUSED_PER_HOUR) return;
+    }
+    botSheet_().appendRow(cells_([new Date(), clean_(site), route, clean_(type), clean_(v.result), clean_(v.host),
+                                  clean_(v.codes), probe ? '疎通確認' : '', refused ? '断った' : '受付']));
+  } catch (err) {
+    console.error('ロボットよけの記録に失敗: ' + err);
+  }
+}
+
+/** AI集客ラボの受付（lead.js が断った送信・subscribe.js）から合言葉つきで届く記録 */
+function botLogAction_(b) {
+  const s = b.turnstile || {};
+  if (!s.result) return { ok: false, error: 'turnstile.result が必要です' };
+  botLog_(siteLabel_(b.site) || '（不明）', 'サーバーで確認', b.type || '', s, b.probe === true, b.refused === true);
+  return { ok: true };
+}
+
+/** 直近の記録の集計（断るかを決める前に読む）。個人の情報は記録していない */
+function botStatus_(b) {
+  const days = Math.min(Number(b.days) || 7, 90);
+  const since = new Date(Date.now() - days * 864e5);
+  const sh = botSheet_();
+  const counts = {};
+  const recent = [];
+  if (sh.getLastRow() > 1) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 9).getValues().forEach(function (r) {
+      const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
+      if (!(at >= since)) return;
+      const k = [r[1], r[2], r[4], r[7] ? '疎通確認' : '', r[8]].join('｜');
+      counts[k] = (counts[k] || 0) + 1;
+      recent.push([at.toISOString()].concat(r.slice(1).map(String)));
+    });
+  }
+  return { ok: true, days: days, enforce: TURNSTILE_ENFORCE, secret: !!turnstileSecret_(), counts: counts,
+           recent: recent.slice(-20) };
+}
+
 /**
  * フォーム受付の入口。hub.gs の doPost から、action が無いときに呼ばれる。
  * @param {Object} body  { site, type, name, email, ... } もしくは { data: {...} }
@@ -78,12 +198,18 @@ function form_(body) {
     return { ok: false, error: 'お名前をご入力ください。' };
   }
 
+  // ロボットよけ（Turnstile）。記録だけの間（TURNSTILE_ENFORCE=false）は断らない。疎通確認は断らない
+  const probe = /@pipeline-check\.invalid$/i.test(email);
+  const bot = botCheck_(body, d, site, type, probe);
+
   // 週次の疎通確認（lead_probe.py）。本物と同じ経路を通ったことだけを記録し、台帳にも通知にも出さない。
   // 2026-09-18 に診断の送信2件が台帳にもメールにも残らず失われ、気づくまで10日かかった
-  if (/@pipeline-check\.invalid$/i.test(email)) {
+  if (probe) {
     probeSheet_().appendRow(cells_([new Date(), site, type, String(body.referer || d.referer || '').slice(0, 200)]));
     return { ok: true, probe: true };
   }
+  // 台帳・通知・自動返信・配信停止のどれにも入る前に断る（配信停止も、他人のアドレスへ確認メールを出させられる）
+  if (bot.refuse) return { ok: false, error: BOT_REFUSAL };
 
   // 配信停止（補助金サイトの /unsubscribe/）は問い合わせではない。台帳・担当への通知・自動返信・後追いに入れず、
   // 配信除外に残して本人へ停止の確認だけを返す。以前は問い合わせの1行として台帳に入り、担当へ通知され、
@@ -231,7 +357,7 @@ function leadDetailBase_(type, d) {
             a.grade ? '判定 ' + a.grade : '', n ? '未対応 ' + n + '項目' : ''].filter(String).join(' / ');
   }
   const known = ['type', 'site', 'name', 'company', 'email', 'tel', 'phone',
-                 'message', 'body', 'referer', 'website', 'ts', 'formKey', 'ref',
+                 'message', 'body', 'referer', 'website', 'ts', 'formKey', 'ref', 'cf-turnstile-response', 'turnstile',
                  'audit_url', 'audit_score', 'audit_grade', 'audit_fixes'];
   return Object.keys(d)
     .filter(function (k) { return known.indexOf(k) < 0 && k.charAt(0) !== '_'; })
