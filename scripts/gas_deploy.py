@@ -101,7 +101,9 @@ def fill(src_text, e):
             # 無ければ空で埋まり、Script Properties に入れるまで自動回答は止まったまま
             .replace("'GEMINI_KEY_XXXXXXXX'", f"'{e.get('GEMINI_API_KEY', '')}'")
             # ロボットよけ（contact.hub.gs の turnstileVerify_）。無ければ空で埋まり、確かめも記録もしない（断らない）
-            .replace("'TURNSTILE_SECRET_XXXXXXXX'", f"'{e.get('TURNSTILE_SECRET', '')}'"))
+            .replace("'TURNSTILE_SECRET_XXXXXXXX'", f"'{e.get('TURNSTILE_SECRET', '')}'")
+            # 別事業のサイトのフォーム専用の合言葉（contact.hub.gs の formTrusted_）。無ければ空で埋まり、誰も信用しない
+            .replace("'FORM_SECRET_XXXXXXXX'", f"'{e.get('HUB_FORM_SECRET', '')}'"))
 
 
 # 既存の doPost に転送の呼び出しを1行足す。ここだけは新規ファイルの追加では済まない。
@@ -177,6 +179,8 @@ def push(site, e, tok, deploy=True):
             return False
         if "'TURNSTILE_SECRET_XXXXXXXX'" in src and not e.get("TURNSTILE_SECRET"):
             print(f"  {cfg['name']}: .env に TURNSTILE_SECRET が無いため、ロボットよけの確かめは止まったまま配ります（{local}）")
+        if "'FORM_SECRET_XXXXXXXX'" in src and not e.get("HUB_FORM_SECRET"):
+            print(f"  {cfg['name']}: .env に HUB_FORM_SECRET が無いため、別事業のサイトのフォームは「ページから直接」と同じ扱いで配ります（{local}）")
 
     # いまプロジェクトに入っているファイルを取得し、対象ファイルだけ差し替える。
     # 全置換にすると既存の doPost ごと消えるため、必ずマージする。

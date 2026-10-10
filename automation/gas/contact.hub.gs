@@ -50,6 +50,14 @@ function isSales_(text) {
 const TURNSTILE_ENFORCE = false;
 // gas_deploy.py が .env の TURNSTILE_SECRET で埋める。Script Properties に同じ名前があればそちらを使う
 const TURNSTILE_KEY_FILL = 'TURNSTILE_SECRET_XXXXXXXX';
+// サーバー側でロボットよけを確かめてから記録だけを送ってくる別事業のサイトのための、フォーム専用の合言葉。
+// 本体の合言葉（SHARED_SECRET）と違って管理の操作は開けず、フォームの送信を「サーバーで確認済み」と扱うことにだけ使う
+// （2026-10-10 運用者の承認）。gas_deploy.py が .env の HUB_FORM_SECRET で埋める。短い・空のままなら誰も信用しない
+const FORM_SECRET = 'FORM_SECRET_XXXXXXXX';
+
+function formTrusted_(body) {
+  return FORM_SECRET.length >= 24 && FORM_SECRET.indexOf('XXXXXXXX') < 0 && body.form_secret === FORM_SECRET;
+}
 const BOT_REFUSAL = 'ロボットでないことの確認ができませんでした。ページを読み込み直してもう一度お送りいただくか、'
   + '06-4305-7547 までお電話ください。';
 // 断った送信を表に残すのは1時間に60件まで。大量に送られたときに、記録の表まで埋めさせない
@@ -90,7 +98,10 @@ function botCheck_(body, d, site, type, probe) {
   const token = d['cf-turnstile-response'] || body['cf-turnstile-response'] || '';
   delete d['cf-turnstile-response'];
   delete body['cf-turnstile-response'];
-  const trusted = !!SHARED_SECRET && body.secret === SHARED_SECRET;
+  const trusted = (!!SHARED_SECRET && body.secret === SHARED_SECRET) || formTrusted_(body);
+  // フォーム専用の合言葉は、台帳の「その他項目」や通知に残さない（d と body が同じものの送り元がある）
+  delete d.form_secret;
+  delete body.form_secret;
   let v;
   if (trusted) {
     const s = body.turnstile || {};
@@ -357,7 +368,7 @@ function leadDetailBase_(type, d) {
             a.grade ? '判定 ' + a.grade : '', n ? '未対応 ' + n + '項目' : ''].filter(String).join(' / ');
   }
   const known = ['type', 'site', 'name', 'company', 'email', 'tel', 'phone',
-                 'message', 'body', 'referer', 'website', 'ts', 'formKey', 'ref', 'cf-turnstile-response', 'turnstile',
+                 'message', 'body', 'referer', 'website', 'ts', 'formKey', 'ref', 'cf-turnstile-response', 'turnstile', 'form_secret',
                  'audit_url', 'audit_score', 'audit_grade', 'audit_fixes'];
   return Object.keys(d)
     .filter(function (k) { return known.indexOf(k) < 0 && k.charAt(0) !== '_'; })

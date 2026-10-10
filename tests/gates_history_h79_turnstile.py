@@ -51,6 +51,7 @@ vm.createContext(ctx);
 for (const f of files) vm.runInContext(fs.readFileSync(f, 'utf8'), ctx, { filename: f });
 ctx.siteLabel_ = (s) => s || '';
 const secret = vm.runInContext('SHARED_SECRET', ctx);
+const FORM = vm.runInContext('FORM_SECRET', ctx);
 function run(body) {
   sheets = { '問い合わせ': sheet([['日時']]), 'エラーログ': sheet([]) };
   fetches = []; mails = 0;
@@ -76,12 +77,22 @@ const res = {
   unsub: run(base({ type: 'unsubscribe', email: 'e@example.co.jp' })),
   status: (() => { run(base({})); return ctx.doPost({ postData: { contents: JSON.stringify({ action: 'bot_status', secret }) } }); })(),
   statusNoSecret: ctx.doPost({ postData: { contents: JSON.stringify({ action: 'bot_status' }) } }),
+  formOk: run({ form_secret: FORM, site: 'client-x', type: 'contact', silent: true, name: '山田', email: 'f@example.co.jp',
+    message: 'x', turnstile: { result: 'ok', host: 'client.example.jp' } }),
+  formWrong: run({ form_secret: 'wrong-secret', site: 'client-x', type: 'contact', silent: true, name: '山田',
+    email: 'g@example.co.jp', message: 'x' }),
+  formEmpty: run({ form_secret: '', site: 'client-x', type: 'contact', silent: true, name: '山田', email: 'h@example.co.jp',
+    message: 'x' }),
+  formAction: ctx.doPost({ postData: { contents: JSON.stringify({ action: 'bot_status', form_secret: FORM }) } }),
 };
 console.log(JSON.stringify(res));
 """
 
 
-def _gas(mode, filled=True):
+FORM_FOR_TEST = "form-secret-for-test-0123456789abcdef"
+
+
+def _gas(mode, filled=True, form=True):
     """管制塔の受付を Node の上で動かす。filled=True は gas_deploy.fill で鍵を埋めた形（配る形と同じ）"""
     import gas_deploy as GD
     node = shutil.which("node")
@@ -92,7 +103,8 @@ def _gas(mode, filled=True):
         for name in ("hub.gs", "contact.hub.gs"):
             src = (GAS / name).read_text(encoding="utf-8")
             if filled:
-                src = GD.fill(src, {"TURNSTILE_SECRET": "sekret-for-test", "HUB_SECRET": "hub-secret-for-test"})
+                src = GD.fill(src, {"TURNSTILE_SECRET": "sekret-for-test", "HUB_SECRET": "hub-secret-for-test",
+                                    **({"HUB_FORM_SECRET": FORM_FOR_TEST} if form else {})})
             if mode == "enforce":
                 src = src.replace("const TURNSTILE_ENFORCE = false;", "const TURNSTILE_ENFORCE = true;")
             p = Path(d) / name.replace(".gs", ".js")
@@ -514,3 +526,29 @@ def test_h79_subsidy_and_corporate_pages_send_the_answer():
     finally:
         browser.close()
         pw.stop()
+
+
+def test_h79_form_secret_is_trusted_but_opens_nothing_else():
+    """2026-10-10 運用者「持たせて良い 鍵入れて」。別事業のサイトはサーバーでロボットよけを確かめてから、管制塔へ記録だけを
+    合言葉なしで送っていた。強制に切り替えるとその記録が落ちるので、フォーム専用の合言葉（HUB_FORM_SECRET）を持たせる。
+    本体の合言葉と違い、管理の操作は開けない"""
+    print("\n■ ロボットよけ（管制塔）: 別事業のサイトのフォーム専用の合言葉は、フォームの信用にだけ効く")
+    rec = _gas("record")
+    if rec is None:
+        print("  WARN  node が無いため管制塔の受付の動きは確かめられません")
+        return
+    bot = lambda r: [r["bot"][0][2], r["bot"][0][4], r["bot"][0][5]] if r["bot"] else []
+    check("合言葉が合えば Cloudflare に問い合わせず「サーバーで確認」と記録する",
+          (rec["formOk"]["r"], rec["formOk"]["fetches"], bot(rec["formOk"]), rec["formOk"]["leads"]),
+          ({"ok": True}, 0, ["サーバーで確認", "ok", "client.example.jp"], 1))
+    check("合言葉は台帳に残らない", FORM_FOR_TEST in rec["formOk"]["leadText"], False)
+    check("違う合言葉・空の合言葉は「ページから直接」と同じ扱い（Cloudflare に確かめる）",
+          (bot(rec["formWrong"])[:2], bot(rec["formEmpty"])[:2]), (["ページから直接", "none"], ["ページから直接", "none"]))
+    check("フォーム専用の合言葉では管理の操作を開けない", rec["formAction"].get("error"), "unauthorized")
+    enf = _gas("enforce")
+    check("強制: 合言葉つきは受け付け、違う合言葉は断る",
+          (enf["formOk"]["r"], enf["formOk"]["leads"], enf["formWrong"]["r"].get("ok"), enf["formWrong"]["leads"]),
+          ({"ok": True}, 1, False, 0))
+    no_form = _gas("enforce", form=False)
+    check("強制: 合言葉を入れ忘れて配った（空で埋まった）ときに、空の合言葉で通り抜けられない",
+          (no_form["formEmpty"]["r"].get("ok"), no_form["formEmpty"]["leads"]), (False, 0))
