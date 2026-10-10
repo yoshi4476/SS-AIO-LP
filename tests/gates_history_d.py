@@ -537,7 +537,8 @@ def _array_len(s, i):
 def append_mismatch(text, tabs):
     """appendRow の要素数とタブの見出しの列数の食い違い"""
     out = []
-    for m in re.finditer(r"([\w$]+(?:\('([^']+)'\))?)\.appendRow\(\s*\[", text):
+    # フォームから来る行は数式の注入よけ（cells_）で包んで書く（2026-10-10・gates_history_h78_security）
+    for m in re.finditer(r"([\w$]+(?:\('([^']+)'\))?)\.appendRow\(\s*(?:cells_\(\s*)?\[", text):
         tab = m.group(2)
         if not tab:
             # 変数は同じ関数の中で sheet_('タブ') を代入したものだけ見る（別の関数の sh と取り違えない）

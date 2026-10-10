@@ -81,7 +81,7 @@ function form_(body) {
   // 週次の疎通確認（lead_probe.py）。本物と同じ経路を通ったことだけを記録し、台帳にも通知にも出さない。
   // 2026-09-18 に診断の送信2件が台帳にもメールにも残らず失われ、気づくまで10日かかった
   if (/@pipeline-check\.invalid$/i.test(email)) {
-    probeSheet_().appendRow([new Date(), site, type, String(body.referer || d.referer || '').slice(0, 200)]);
+    probeSheet_().appendRow(cells_([new Date(), site, type, String(body.referer || d.referer || '').slice(0, 200)]));
     return { ok: true, probe: true };
   }
 
@@ -94,7 +94,7 @@ function form_(body) {
   // 「弊社サービス」「業務提携」は本物の相談にも入りうるので、通知まで止めると問い合わせを見落とす（最後は人が判断する）
   const sales = type === 'contact' && isSales_(body_(d.message));
   const temp = sales ? '営業' : leadTemp_(type, d.message, d, body.referer || d.referer || '');
-  const row = leadSave_(site, type, temp, d, body.referer || d.referer || '');
+  leadSave_(site, type, temp, d, body.referer || d.referer || '');
   const silent = body.silent === true || body.silent === 'true';
   // 記録は済んでいる。メールで失敗しても、送信者にはエラーを返さない。
   // ここで例外を投げると、問い合わせが届いていないと誤解される。
@@ -121,7 +121,8 @@ function form_(body) {
       sheet_('エラーログ').appendRow([new Date(), site, 'メール送信', warn.join(' / '), '', '未対応']);
     } catch (e2) {}
   }
-  return { ok: true, temperature: temp, row: row };
+  // 温度（社内の見立て）と台帳の行番号（＝問い合わせの総数）は送信者に返さない。誰でも送れるフォームの返事のため
+  return { ok: true };
 }
 
 /**
@@ -133,8 +134,8 @@ function form_(body) {
 function unsubscribe_(email, site) {
   const addr = String(email || '').trim().toLowerCase();
   if (excludeSet_().emails[addr]) return { ok: true, already: true };
-  excludeSheet_().appendRow([addr, '', '配信停止', '配信停止のフォーム（' + site + '）',
-    Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd'), '配信停止フォーム']);
+  excludeSheet_().appendRow(cells_([addr, '', '配信停止', '配信停止のフォーム（' + site + '）',
+    Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd'), '配信停止フォーム']));
   // 停止の記録は済んでいる。確認メールで失敗しても、送信者にはエラーを返さない（停止できていないと誤解される）
   try {
     MailApp.sendEmail({ to: addr, subject: '配信停止のお手続きが完了しました（セブンセンシズ株式会社）',
@@ -187,19 +188,20 @@ function leadSave_(site, type, temp, d, referer) {
       // 診断を出した人が後から相談してきたときに、温度が下がらないようにする
       if ((RANK[temp] || 0) > (RANK[before] || 0)) sh.getRange(r, 13).setValue(temp);
       const cur = String(sh.getRange(r, 10).getValue() || '');
-      sh.getRange(r, 10).setValue(
+      // 読み戻した値は先頭の ' が外れているので、書き戻す前にもう一度消毒する
+      sh.getRange(r, 10).setValue(cells_([
         (cur ? cur + '\n' : '') + Utilities.formatDate(now, 'Asia/Tokyo', 'MM/dd HH:mm')
-        + ' 再送信(' + (LEAD_TYPE_LABELS[type] || type) + ') ' + leadDetail_(type, d));
+        + ' 再送信(' + (LEAD_TYPE_LABELS[type] || type) + ') ' + leadDetail_(type, d)])[0]);
       return r;
     }
   }
 
-  sh.appendRow([
+  sh.appendRow(cells_([
     now, site, LEAD_TYPE_LABELS[type] || type, clean_(d.company), clean_(d.name), '',
     email, clean_(d.tel || d.phone), body_(d.message || d.body),
     // AI集客ラボは referer を body の外側に載せて送る。d.referer だけ見ると空欄になる
     leadDetail_(type, d), '', clean_(referer || d.referer), temp, '未対応',
-  ]);
+  ]));
   return sh.getLastRow();
 }
 
@@ -254,6 +256,15 @@ function body_(s) {
     .replace(/\u0000/g, '')       // 制御文字だけ落とす
     .slice(0, 5000)
     .trim();
+}
+
+/**
+ * フォームから来た値をシートの1行に置くときの消毒。「=」「+」「-」「@」で始まる文字はシートが数式として読む。
+ * 誰でも送れるフォームから =IMPORTDATA("…"&A2) のような式を入れられると、台帳を開いた時に他の問い合わせの
+ * 中身を外へ送らせることができる（数式の注入）。先頭に ' を付けると文字として置かれ、' は値に残らない
+ */
+function cells_(row) {
+  return row.map(function (v) { return typeof v === 'string' && /^[=+\-@\t\r]/.test(v) ? "'" + v : v; });
 }
 
 /** 社内向けの通知。温度を件名に出して、見た瞬間に優先度が分かるようにする */

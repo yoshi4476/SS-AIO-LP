@@ -117,7 +117,8 @@ def _get(params):
     d = _direct(params.get("action", ""), params)
     if d is not None:
         return d
-    url = HUB_URL + ("&" if "?" in HUB_URL else "?") + urllib.parse.urlencode(params)
+    # 狙う語の台帳を読む操作は合言葉が要る（hub.gs の KW_READS。フォームの送り先としてページに載る URL のため）
+    url = HUB_URL + ("&" if "?" in HUB_URL else "?") + urllib.parse.urlencode({**params, "secret": HUB_SECRET})
     req = urllib.request.Request(url, headers=UA)
     with _open(req) as r:
         return json.load(r)

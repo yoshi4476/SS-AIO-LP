@@ -188,8 +188,15 @@ function sheet_(name) {
 // ============================================================
 // Web API（記事工場とフォームからの入口）
 // ============================================================
+// 狙う語の台帳を読む操作。この URL は各サイトのフォームの送り先としてページに載っているため、合言葉なしだと
+// 全社（お客様の分も）の狙う語・状態・URL が誰でも読めた（2026-10-10 に 1,611 件が読めることを確かめた）
+const KW_READS = { next_kw: true, all_kw: true, kw_status: true, kw_overlaps: true };
+
 function doGet(e) {
   const p = (e && e.parameter) || {};
+  if (KW_READS[p.action] && (!SHARED_SECRET || p.secret !== SHARED_SECRET)) {
+    return json_({ ok: false, error: 'unauthorized' });
+  }
   try {
     switch (p.action) {
       case 'next_kw':  return json_(nextKw_(p.site));
