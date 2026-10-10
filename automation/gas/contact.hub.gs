@@ -1418,7 +1418,11 @@ function probeTidy_() {
   const rg = sh.getRange(2, 4, sh.getLastRow() - 1, 1);
   const v = rg.getValues();
   let n = 0;
-  v.forEach(function (r) { if (String(r[0]).trim() === '不明') { r[0] = '未記録（自動の疎通確認は参照元を送らない）'; n++; } });
+  v.forEach(function (r) {
+    const s = String(r[0]).trim();
+    if (s === '不明') { r[0] = '未記録（自動の疎通確認は参照元を送らない）'; n++; }
+    else if (s.indexOf('｜送信: 不明') >= 0) { r[0] = s.replace('｜送信: 不明', ''); n++; }   // 受付の直しより前の「不明」
+  });
   if (n) rg.setValues(v);
   return { ok: true, fixed: n };
 }
