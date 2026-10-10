@@ -779,6 +779,13 @@ jobs:
             echo "::warning::本番が手元より古い状態です。次のデプロイまで反映されません"
             echo "要対応: 本番が手元より古い（次のデプロイまで反映されません）" >> automation/logs/findings.txt
           fi
+          # 浮いた枠で書き直す記事が無かった回（原稿が1本も変わっていない）は、配信先へ何も送っていないので
+          # 届いたかを確かめる記事が無い。確かめに行くと来ないビルドを最長3分待っていた（2026-10-10 補助金の枠 6）
+          if [ "${{ steps.site.outputs.mode }}" = "rewrite" ] && { [ -z "$BASE_SHA" ] || git diff --quiet "$BASE_SHA" HEAD -- articles; }; then
+            echo "この回は原稿を変えていない（書き直す記事が無かった）ため、配信先の公開の確認を省きます"
+            echo "VERIFY_OK=skip"
+            exit 0
+          fi
           # 待つのは最長4.5分まで（以前は最長18分。1回の実行の半分がこの待ちだった）。
           # 見えなければ「確認中」で残し、翌日の publish_gap と日次の deploy_check が判定する
           out=$(python scripts/verify_publish.py --site "${{ steps.site.outputs.id }}" --since "$RUN_START" --build-timeout 180 --live-timeout 90) || true

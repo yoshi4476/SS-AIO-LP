@@ -272,6 +272,20 @@ def test_brief_and_cross_check_run_together_but_log_in_order():
           < names.index("一次情報の収集（YouTube文字起こし）"), True)
 
 
+def test_verify_is_skipped_only_when_nothing_was_published():
+    print("\n■ 本番に届いたかの確認: 浮いた枠で原稿を1本も変えなかった回だけ、配信先の公開の確認を省く")
+    # 2026-10-10 補助金の浮いた枠（書き直す記事なし）で、来ないビルドを180秒待っていた
+    write = _y("pipeline-multi.yml")["jobs"]["write"]
+    v = _step(write, "本番に届いたかの確認")["run"]
+    i_dep, i_skip, i_ver = v.find("deploy_check.py"), v.find('echo "VERIFY_OK=skip"'), v.find("verify_publish.py")
+    check("自前のサイトの照合（deploy_check）は省かない", 0 <= i_dep < i_skip < i_ver, True)
+    check("省くのは浮いた枠で、原稿（articles）が書き直しの前から変わっていないときだけ",
+          '[ "${{ steps.site.outputs.mode }}" = "rewrite" ] && { [ -z "$BASE_SHA" ] || git diff --quiet "$BASE_SHA" HEAD -- articles; }' in v,
+          True)
+    rw = _step(write, "浮いた枠：主力の記事を1本書き直す")["run"]
+    check("書き直しの前の位置を BASE_SHA に残している", 'echo "BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"' in rw, True)
+
+
 def test_selfheal_starts_runners_only_when_needed():
     print("\n■ 自動修復: 成功した回のあとは runner を立てない（失敗の見張りは残す）")
     y = _y("selfheal.yml")
