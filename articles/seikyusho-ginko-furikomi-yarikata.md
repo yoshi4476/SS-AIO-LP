@@ -93,6 +93,8 @@ faq:
 
 振込手数料は、特約がなければ支払う側（債務者）が負担するのが法律上の原則です。
 
+近い論点を[経理部と経理課の違いは階層](/blog/keiri-bu-keiri-ka-chigai/)で扱っています。
+
 <div class="definition-box"><span class="term">振込手数料の負担ルールとは</span>、民法485条が定める「弁済の費用は債務者の負担とする」という原則にもとづくものです。==特約がない限り、支払う側（債務者）が振込手数料を負担するのが法的な原則です。==</div>
 
 <a href="https://laws.e-gov.go.jp/law/129AC0000000089" target="_blank" rel="noopener">民法485条</a>は、弁済の費用について別段の意思表示がないときはその費用を債務者の負担とすると定めています。マネーフォワード クラウド請求書が公開する<a href="https://biz.moneyforward.com/invoice/basic/50004/" target="_blank" rel="noopener">振込手数料の解説</a>でも、<strong>この規定にもとづき、請求書を受け取って支払う側が手数料を負担するのが原則とされています。</strong>
