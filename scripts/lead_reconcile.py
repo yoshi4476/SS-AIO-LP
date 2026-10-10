@@ -128,6 +128,32 @@ def selftest():
 
 
 def ledger_by_site(start):
+    """日ごと・サイトごとの台帳の行数（照合用。売り込み・テストの行も数える。GA4 の送信にはそれらも入るため）"""
+    out = collections.defaultdict(collections.Counter)
+    for x in ledger_rows(start):
+        out[x["sid"]][x["day"]] += 1
+    return out
+
+
+# ── 問い合わせの件数（台帳で数える）──────────────────────────────────
+# 問い合わせの件数は、管制塔の台帳の行のうち温度の列が「営業」（売り込み）・「テスト」（社内の試し送信）でない行で数える。
+# 以前は GA4 の送信イベントや台帳の行数をそのまま数え、売り込みもテストも入っていた（2026-10-10 運用者の指示）。
+# 見分けは受付（contact.hub.gs の leadKind_）が行い、温度の列に入れる。GA4 の送信は取りこぼしの照合（main）にだけ使う
+EXCLUDED = {"営業": "sales", "テスト": "test"}
+_LEDGER = {}
+
+
+def _day(v):
+    try:
+        return date(1899, 12, 30) + timedelta(days=float(v))
+    except (TypeError, ValueError):
+        try:
+            return date.fromisoformat(str(v)[:10].replace("/", "-"))
+        except ValueError:
+            return None
+
+
+def _site_resolver():
     import hub_sheets as H
     import re
     # 台帳の表示名は「コーポレート (corp.7senses.co.jp)」のように、サイト一覧の名前と一致しない
@@ -135,22 +161,186 @@ def ledger_by_site(start):
     by_dom, by_name = {}, {}
     for r in H.rows("サイト一覧", 3):
         if len(r) >= 3:
-            by_dom[r[2].strip()] = r[0]
-            by_name[r[1].strip()] = r[0]
+            by_dom[str(r[2]).strip()] = r[0]
+            by_name[str(r[1]).strip()] = r[0]
 
     def sid_of(label):
         m = re.search(r"\(([^)]+)\)", label or "")
         return by_dom.get(m.group(1).strip()) if m else by_name.get((label or "").strip())
-    base = date(1899, 12, 30)
+    return sid_of
+
+
+def ledger_rows(start=None, end=None):
+    """台帳の行（日・サイトID・種別・温度・流入経路）。名前・メール・本文は持たない。1回の実行で1回だけ読む"""
+    if "rows" not in _LEDGER:
+        import hub_sheets as H
+        sid_of = _site_resolver()
+        rows = []
+        for r in H.rows("問い合わせ", 14):
+            d = _day(r[0])
+            if d:
+                rows.append({"day": d.isoformat(), "sid": sid_of(str(r[1])) or "?", "type": str(r[2]).strip(),
+                             "temp": str(r[12]).strip(), "route": str(r[11]).strip()})
+        _LEDGER["rows"] = rows
+    s = start.isoformat() if start else ""
+    e = end.isoformat() if end else "9999"
+    return [x for x in _LEDGER["rows"] if s <= x["day"] <= e]
+
+
+def browser_probes(start):
+    """本物のブラウザから送った疎通確認（疎通確認のタブ）の、日ごと・サイトごとの数。
+    ブラウザからの疎通確認は GA4 の送信イベントも出すが台帳には入らない。照合で GA4 の数から引かないと、
+    「台帳に行が無い」と誤って要対応にする。スクリプトの疎通確認（lead_probe.py）は GA4 を出さないので引かない。
+    見分け: 送信元がページの URL（2026-10-10 の流入の欄より前）か、流入の欄つき（「流入: 未記録」でない）"""
+    import hub_sheets as H
+    sid_of = _site_resolver()
     out = collections.defaultdict(collections.Counter)
-    for r in H.rows("問い合わせ", 2):
-        try:
-            d = base + timedelta(days=float(r[0]))
-        except (ValueError, IndexError):
-            continue
-        if d >= start:
-            out[sid_of(r[1] if len(r) > 1 else "") or "?"][d.isoformat()] += 1
+    for r in H.rows("疎通確認", 4):
+        d = _day(r[0])
+        src = str(r[3]).strip()
+        # 手元の確かめ（127.0.0.1・localhost のページ）は本番の GA4 に入ったか分からないので引かない（引きすぎると本物を隠す）
+        local = "://127.0.0.1" in src or "://localhost" in src
+        if d and d >= start and not local and (src.startswith(("http://", "https://"))
+                                               or (src.startswith("流入: ") and not src.startswith("流入: 未記録"))):
+            out[sid_of(str(r[1])) or "?"][d.isoformat()] += 1
     return out
+
+
+def ledger_counts(rows, sid=None, start=None, end=None):
+    """相談（売り込み・テスト以外）・売り込み・テストの件数と、相談の種別ごとの内訳"""
+    s = start.isoformat() if start else ""
+    e = end.isoformat() if end else "9999"
+    c = {"consult": 0, "sales": 0, "test": 0, "by_type": collections.Counter()}
+    for x in rows:
+        if (sid and x["sid"] != sid) or not (s <= x["day"] <= e):
+            continue
+        k = EXCLUDED.get(x["temp"])
+        if k:
+            c[k] += 1
+        else:
+            c["consult"] += 1
+            c["by_type"][x["type"] or "（種別なし）"] += 1
+    return c
+
+
+def consult_text(c):
+    """レポート・検査に出す1行。「相談 N件（ほかに売り込み x件・テスト y件を除いた）」"""
+    return f"相談 {c['consult']}件（ほかに売り込み {c['sales']}件・テスト {c['test']}件を除いた）"
+
+
+def leads(sid, start, end, prop=None, ga4_n=None):
+    """その社のその期間の問い合わせの件数（**レポートに出す数はこれだけ**）。
+    台帳に行のある社は台帳の相談の数。台帳に1行も無い社（問い合わせを管制塔へ送らない社）と、その社の最初の行より前の期間は、
+    GA4 の送信（ga4_n があればそれ、無ければ prop から lead_capture / generate_lead を数える）で数え、
+    相談か見分けていないことを source='ga4' で返す。返す: {"n", "source": "ledger"|"ga4"|None, "counts"（台帳のときだけ）, "text"}"""
+    try:
+        rows = ledger_rows()
+    except Exception:
+        rows = None
+    mine = [x for x in rows or [] if x["sid"] == sid]
+    if mine and start.isoformat() >= min(x["day"] for x in mine)[:7] + "-01":
+        c = ledger_counts(mine, start=start, end=end)
+        return {"n": c["consult"], "source": "ledger", "counts": c, "text": consult_text(c)}
+    n = ga4_n
+    if n is None and prop:
+        try:
+            n = sum(ga4_by_day(str(prop), start, end).values())
+        except Exception:
+            n = None
+    if n is None:
+        return {"n": None, "source": None, "counts": None, "text": "台帳にも GA4 にも問い合わせの記録がありません"}
+    why = ("台帳を読めなかった" if rows is None else
+           "台帳に記録が始まる前の期間の" if mine else "この社の問い合わせは台帳に入っていない")
+    return {"n": n, "source": "ga4", "counts": None,
+            "text": f"送信 {n}件（GA4 の送信イベント。{why}ため、売り込み・テストを見分けていません）"}
+
+
+def month_fields(sid, start, end, ga4_n):
+    """月次の集計（monthly_report・group_report）の1か月に入れる問い合わせの欄。cv は台帳の相談の数
+    （台帳に無い社・期間は GA4 の送信 ga4_n）。cv_ga4 は照合のために残す GA4 の送信の数"""
+    r = leads(sid, start, end, ga4_n=ga4_n)
+    out = {"cv": r["n"] if r["n"] is not None else ga4_n, "cv_source": r["source"] or "ga4", "cv_text": r["text"],
+           "cv_ga4": ga4_n}
+    if r["counts"]:
+        c = r["counts"]
+        out["cv_counts"] = {"consult": c["consult"], "sales": c["sales"], "test": c["test"], "by_type": dict(c["by_type"])}
+    return out
+
+
+# ── 流入経路の名前（受付の contact.hub.gs の leadSource_ と同じ分類）─────────────
+# AI は daily_kpi.AI_DOMAINS を正とする（受付側は同じ中身を写して持つ。門 gates_history_h82_leads が一致を確かめる）
+REF_LABELS = [
+    ("mail.google.com", "Gmail（メール）"), ("outlook.live.com", "Outlook（メール）"), ("outlook.office.com", "Outlook（メール）"),
+    ("mail.yahoo.co.jp", "Yahoo!メール"), ("googleadservices.com", "Google広告"), ("doubleclick.net", "Google広告"),
+    ("google.", "Google検索"), ("bing.com", "Bing検索"), ("search.yahoo.co.jp", "Yahoo!検索"), ("yahoo.co.jp", "Yahoo! JAPAN"),
+    ("duckduckgo.com", "DuckDuckGo"),
+    ("ecosia.org", "Ecosia"), ("naver.com", "NAVER"), ("baidu.com", "Baidu"), ("yandex.", "Yandex"),
+    ("facebook.com", "Facebook"), ("fb.com", "Facebook"), ("instagram.com", "Instagram"), ("t.co", "X"), ("x.com", "X"),
+    ("twitter.com", "X"), ("linkedin.com", "LinkedIn"), ("lnkd.in", "LinkedIn"), ("youtube.com", "YouTube"), ("youtu.be", "YouTube"),
+    ("threads.net", "Threads"), ("threads.com", "Threads"), ("note.com", "note"), ("tiktok.com", "TikTok"), ("line.me", "LINE"),
+]
+DIRECT = "直接（ブックマーク・URLの入力・アプリなど）"
+
+
+def _host_is(host, d):
+    if "/" in d:
+        return False
+    if d.endswith("."):
+        return host.startswith(d) or ("." + d) in host
+    return host == d or host.endswith("." + d)
+
+
+def _ref_name(h):
+    import daily_kpi as DK
+    if not h:
+        return ""
+    for k, doms in DK.AI_DOMAINS.items():
+        if any((d in h) if "." not in d else _host_is(h, d) for d in doms):
+            return DK.AI_LABELS.get(k, k)
+    return next((label for d, label in REF_LABELS if _host_is(h, d)), "")
+
+
+def source_label(ref, utm="", ad="", own_host="", sites=None):
+    """参照元のドメイン（と utm「source|medium|campaign」・広告のクリック）から流入の名前。sites は {ドメイン: 名前}"""
+    host = str(ref or "").strip().lower().removeprefix("www.")
+    u = str(utm or "").split("|")
+    src, med = u[0].strip().lower(), (u[1].strip().lower() if len(u) > 1 else "")
+    if src:
+        tag = "（utm: " + " / ".join(x.strip() for x in u if x.strip()) + "）"
+        paid = med in ("cpc", "ppc", "paid", "paidsearch", "display", "cpm")
+        mail = med in ("email", "e-mail", "newsletter") or "newsletter" in src or "mail" in src
+        return (_ref_name(src) or ("メール" if mail else src)) + ("（広告）" if paid else "") + tag
+    if ad:
+        return "Google広告"
+    if not host:
+        return DIRECT
+    own = str(own_host or "").lower().removeprefix("www.")
+    if own and host == own:
+        return "未記録（記録を始める前の来訪）"
+    name = _ref_name(host)
+    if name:
+        return name
+    for dom, nm in (sites or {}).items():
+        if host == str(dom).lower().removeprefix("www."):
+            return f"自社サイト（{nm}）"
+    return f"他サイト（{host}）"
+
+
+def ga4_source_label(source, medium):
+    """GA4 のセッションの参照元・メディア（sessionSource / sessionMedium）から、受付と同じ流入の名前（推定に使う）"""
+    s, m = str(source or "").strip().lower(), str(medium or "").strip().lower()
+    if s in ("(direct)", "") and m in ("(none)", "(not set)", ""):
+        return DIRECT
+    ai = _ref_name(s) if "." in s or s == "openai" else ""
+    if ai and ai not in dict(REF_LABELS).values():
+        return ai
+    engines = {"google": "Google検索", "bing": "Bing検索", "yahoo": "Yahoo!検索", "duckduckgo": "DuckDuckGo",
+               "ecosia.org": "Ecosia", "naver": "NAVER", "baidu": "Baidu", "yandex": "Yandex"}
+    if m == "organic":
+        return engines.get(s) or ai or f"{s}（自然検索）"
+    if m in ("cpc", "ppc", "paid"):
+        return (engines.get(s, s).replace("検索", "")) + "（広告）"
+    return ai or (f"他サイト（{s}）" if "." in s else s)
 
 
 def main():
@@ -171,6 +361,13 @@ def main():
         print(f"台帳を読めません（{str(e)[:80]}）")
         return 1
     print(f"■ フォーム送信（GA4）と問い合わせ台帳（{start}〜{end}）\n")
+    # ブラウザからの疎通確認は GA4 の送信を出すが台帳に入らない。照合の前に GA4 の数から引く（台帳を読めた回だけ）
+    probes = {}
+    if "rows" in _LEDGER:
+        try:
+            probes = browser_probes(start)
+        except Exception as e:
+            print(f"  疎通確認のタブを読めず、ブラウザからの疎通確認を引いていません（{str(e)[:60]}）")
     bad, unread = [], []
     fixable = collections.defaultdict(list)       # 日 → その日に台帳に行が無く、（不明）の行がある社
     for sid, cfg in S.load_all().items():
@@ -184,10 +381,19 @@ def main():
             print(f"  {sid}: GA4 を読めません（{str(e)[:60]}）")
             unread.append(sid)
             continue
+        pr = probes.get(sid, {})
+        for d, n in pr.items():
+            if d in ga:
+                ga[d] = max(0, ga[d] - n)
+        if pr:
+            print(f"  （{cfg.get('name', sid)}: ブラウザからの疎通確認 {sum(pr.values())}件を GA4 の送信から引きました）")
         # 調べて記録が見つからなかった日（ACK）は毎週くり返し知らせない
         ack = set(ACKED.get(sid, {}))
         miss = [d for d, n in sorted(ga.items()) if n > 0 and led[sid].get(d, 0) == 0 and d not in ack]
-        print(f"  {cfg.get('name', sid)}: GA4 の送信 {sum(ga.values())}件（{len(ga)}日） / 台帳 {sum(led[sid].values())}行")
+        # 照合は台帳の全行と比べる（GA4 の送信には売り込み・テストも入る）。件数として出すのは相談だけ
+        print(f"  {cfg.get('name', sid)}: GA4 の送信 {sum(ga.values())}件（{len(ga)}日） / 台帳 {sum(led[sid].values())}行"
+              + (f"（{consult_text(ledger_counts(ledger_rows(start), sid=sid))}）"
+                 if led[sid] and "rows" in _LEDGER else ""))
         for d in miss:
             src = pages_on(getattr(ga4_by_day, "rows", []), d)
             where = f"（送信したページ: {src}）" if src else ""

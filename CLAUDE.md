@@ -22,7 +22,7 @@
 **前提を口に出して確かめる**。数字が1つ崩れたら、そこから導いた結論をすべて取り下げる。
 
 特に間違えやすい所: GSC の **query次元**の合計（少なく出る）／**末尾スラッシュ**違いの重複／**指名検索**とボットの混入／
-`form_submit` と **lead_capture** の二重計上（問い合わせは `lead_reconcile.is_lead` だけで数える）。
+`form_submit` と **lead_capture** の二重計上（GA4 の送信は `lead_reconcile.is_lead` で照合にだけ使う）／**問い合わせの件数は台帳の相談**（`lead_reconcile.leads`。温度が「営業」「テスト」の行＝売り込み・社内の試し送信は除き、除いた数を添える）。
 
 **手順・落とし穴の全表・過去の誤報の実例は `/fact-checker` スキル**（`.claude/skills/fact-checker/`）。
 数字・件数・制度名を報告や記事に出す作業では、頼まれていなくても呼ぶ。道具: `python scripts/data_sanity.py`。

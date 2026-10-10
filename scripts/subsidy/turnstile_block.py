@@ -9,6 +9,7 @@
   1. 共通の部品 <script id="ss-turnstile-js">（何度当てても同じ。中身を直したらここを直せば全ページが揃う）
   2. 送り口 fetch(GAS_ENDPOINT, …) を ssTs.send(GAS_ENDPOINT, payload) に替える（部品が無ければ従来どおり送る）
 
+送り口は、共通の枠（subsidy/pages.py の CHROME_JS）が覚えた最初の流入元と入口（window.ssFirst）も添える（2026-10-10）。
 部品は約590KBあるので、フォームに触れた時点で読む（開いた時点では読まない。表示速度の方針）。見た目は interaction-only。
 送る直前に答えが無ければ最大6秒待ち、無くても送る（部品が読めない人の問い合わせを、ページの側で止めない）。
 
@@ -83,7 +84,8 @@ function renew(st){try{if(st&&st.id!=null&&window.turnstile){window.turnstile.re
 return {send:function(url,payload){
  var st=last&&last._ts;
  return token().catch(function(){return "";}).then(function(t){
-  var b=t?Object.assign({"cf-turnstile-response":t},payload):payload;
+  var f={};try{f=window.ssFirst?ssFirst():{};}catch(e){f={};}
+  var b=Object.assign({},f,t?{"cf-turnstile-response":t}:{},payload);
   var p=fetch(url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(b)});
   p.then(function(){renew(st);},function(){renew(st);});
   return p;

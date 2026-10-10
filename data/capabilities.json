@@ -2146,43 +2146,43 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2032",
+     "evidence": "scripts/monthly_report.py:2056",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2032",
+     "evidence": "scripts/monthly_report.py:2056",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2032",
+     "evidence": "scripts/monthly_report.py:2056",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2032",
+     "evidence": "scripts/monthly_report.py:2056",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2032",
+     "evidence": "scripts/monthly_report.py:2056",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2032",
+     "evidence": "scripts/monthly_report.py:2056",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2032",
+     "evidence": "scripts/monthly_report.py:2056",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     }
@@ -2291,37 +2291,37 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "automation/gas/contact.hub.gs:606",
+     "evidence": "automation/gas/contact.hub.gs:892",
      "note": "フォームを管制塔が直接受ける",
      "anchor": "function followUp() {"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:625",
+     "evidence": "automation/gas/contact.hub.gs:911",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:625",
+     "evidence": "automation/gas/contact.hub.gs:911",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:625",
+     "evidence": "automation/gas/contact.hub.gs:911",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:625",
+     "evidence": "automation/gas/contact.hub.gs:911",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:625",
+     "evidence": "automation/gas/contact.hub.gs:911",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },

@@ -119,6 +119,14 @@ def check(month, through=None):
         print(f"     └ {k}: {v}")
     print(f"   内訳の合計: {s_parts}")
     print(f"   form_submit（フォーム送信のみ）: {ev.get('form_submit', 0)}")
+    # レポートに出す問い合わせの数は台帳の相談（売り込み・社内の試し送信を除く）。GA4 の送信はここでの照合にだけ使う
+    try:
+        import lead_reconcile as LR
+        from datetime import date as _d
+        _lead = LR.leads(M.SITE_ID, _d.fromisoformat(start), _d.fromisoformat(end), ga4_n=umb)
+        print(f"   レポートの問い合わせ（{'台帳' if _lead['source'] == 'ledger' else 'GA4'}）: {_lead['text']}")
+    except Exception as e:
+        note.append(f"台帳の問い合わせを数えられませんでした（{str(e)[:60]}）")
 
     if umb != s_parts:
         bad.append(f"リードの傘（{umb}）と内訳の合計（{s_parts}）が一致しません。"

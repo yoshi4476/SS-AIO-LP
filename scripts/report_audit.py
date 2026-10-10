@@ -49,7 +49,11 @@ def audit(pdf, month, through=None):
     # GA4未設定の社は None。そのまま API に渡すと落ち、GSC の検算まで捨てて毎回照合NGになる
     pid = M.ga4_property()
     ev = RV._ga_events(pid, start, end) if pid else {}
-    真["リード"] = ev.get("lead_capture", 0)
+    # レポートの CV と同じ数え方（lead_reconcile.leads）: 台帳の相談の数。台帳に無い社・期間は GA4 の送信
+    import lead_reconcile as LR
+    from datetime import date as _d
+    _lead = LR.leads(M.SITE_ID, _d.fromisoformat(start), _d.fromisoformat(end), ga4_n=ev.get("lead_capture", 0))
+    真["リード"] = _lead["n"] if _lead["n"] is not None else ev.get("lead_capture", 0)
     rows = RV._gsc(site, start, end, ["query"], 5000).get("rows", [])
     真["検索語数"] = len(rows)
 
@@ -139,6 +143,11 @@ def audit_group(pdf, month, through=None):
             parts = sum(ev.get(k, 0) for k in RV.LEAD_PARTS)
             if parts != lead:
                 per.append((cfg["id"], f"リードの傘{lead}と内訳{parts}が不一致"))
+            # レポートの CV と同じ数え方（台帳の相談の数。台帳に無い社・期間は GA4 の送信）
+            import lead_reconcile as LR
+            from datetime import date as _d
+            _lead = LR.leads(cfg["id"], _d.fromisoformat(start), _d.fromisoformat(end), ga4_n=lead)
+            lead = _lead["n"] if _lead["n"] is not None else lead
         tot["表示回数"] += imp
         tot["クリック"] += clk
         tot["リード"] += lead

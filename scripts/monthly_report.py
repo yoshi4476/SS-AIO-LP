@@ -298,7 +298,7 @@ PLAIN = {
     "検索クリック": "検索から来た回数",
     "平均CTR": "出たうち押された割合",
     "平均掲載順位": "検索での平均の順位",
-    "CV（相談+資料DL）": "問い合わせ・資料請求の件数",
+    "CV（相談+資料DL）": "問い合わせ・資料請求の件数。売り込み・社内の試し送信は除く",
     "AI経由参照": "ChatGPTなどから来た回数",
     "当月公開記事": "今月出した記事",
     "公開記事ストック": "今までに出した記事の合計",
@@ -625,6 +625,11 @@ def fetch_real():
                          "AIO診断": evs.get("lead_diagnosis", 0),
                          "サイト監査": evs.get("lead_site_audit", 0)},
             "form_submit": evs.get("form_submit", 0)})
+        # 問い合わせの件数は台帳の相談の数（売り込み・テストを除く）。GA4 の送信は照合にだけ使う（cv_ga4 に残す）。
+        # 台帳に無い社・台帳の始まる前の月は GA4 の送信のまま（cv_source='ga4'。2026-10-10 運用者の指示）
+        import lead_reconcile as _LR
+        data["months"][-1].update(_LR.month_fields(SITE_ID, date(y, mo, 1), date.fromisoformat(end),
+                                                   evs.get("lead_capture", 0)))
 
     # AI参照元セッション
     # 参照元ドメインでしか見分けられないため、主要なAIサービスを網羅する。
@@ -890,6 +895,10 @@ def fetch_real():
         data["behavior"] = behavior_counts(by_day, ids, leads)
         doubled = any(k.startswith("cta_") and not k.startswith("cta_click") for d in by_day.values() for k in d)
         data["behavior"]["notes"] = behavior_notes(SITE_ID, cur_m, cur_end, data["behavior"], doubled)
+        # 送信完了は GA4 の送信イベント（売り込み・社内の試し送信も入る）。問い合わせとして数えるのは台帳の相談
+        if (data["months"] or [{}])[-1].get("cv_source") == "ledger":
+            data["behavior"]["notes"].append("送信完了は GA4 の送信イベントで、売り込みと社内の試し送信も入ります。"
+                                             f"問い合わせとして数えるのは台帳の{data['months'][-1]['cv_text']}です。")
     except Exception:
         data["behavior"] = {}
 
@@ -1754,6 +1763,21 @@ def cv_breakdown(d):
     if not ms:
         return ""
     cur = ms[-1]
+    if cur.get("cv_source") == "ledger" and cur.get("cv_counts"):
+        # 台帳で数えた月は、相談の種別の内訳と、除いた売り込み・テストの数を出す（lead_reconcile.ledger_counts）
+        c = cur["cv_counts"]
+        rows = "".join(f'<tr><td>{k}</td><td class="num">{v}</td></tr>' for k, v in sorted(c["by_type"].items()))
+        ga = cur.get("cv_ga4")
+        return (f'<h3>問い合わせの内訳（{html.escape(cur.get("cv_text", ""))}）</h3>'
+                f'<table><thead><tr><th>種別</th><th>件数</th></tr></thead><tbody>{rows}'
+                f'<tr><td><b>相談の合計</b></td><td class="num"><b>{c["consult"]}</b></td></tr>'
+                f'<tr><td>除いた売り込み</td><td class="num">{c["sales"]}</td></tr>'
+                f'<tr><td>除いたテスト（社内の試し送信）</td><td class="num">{c["test"]}</td></tr>'
+                f'</tbody></table>'
+                '<p class="note">問い合わせは管制塔の台帳で数えています。届いた本文の文脈から、売り込みと社内の試し送信を'
+                '見分けて除いています（同じ方の24時間以内の再送信は1件）。'
+                + (f'GA4 の送信イベント（{ga}件）は、台帳への取りこぼしの照合にだけ使います。' if ga is not None else '')
+                + '</p>')
     parts = cur.get("cv_parts") or {}
     if not parts:
         return ""

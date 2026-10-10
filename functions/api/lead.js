@@ -57,7 +57,8 @@ export async function onRequestPost(context) {
     return new Response("送信設定が未完了です。恐れ入りますが 06-4305-7547 までお電話ください。", { status: 500 });
   }
 
-  const referer = request.headers.get("referer") || "不明";
+  // 参照元が無い送信（ブラウザが送らない設定・自動の疎通確認）は空で送る。「不明」と入れると台帳にそのまま残った（2026-10-10）
+  const referer = request.headers.get("referer") || "";
   const ft = String(data.form_type || "");
   // 資料ダウンロードの後は、資料の案内と次の一歩のページへ。
   // 以前は「2営業日以内に担当者よりご連絡」と出ていた（資料はメールで届くのに）（2026-10-08）
@@ -117,7 +118,7 @@ export async function onRequestPost(context) {
       to: [env.LEAD_TO_EMAIL],
       reply_to: data.email,
       subject: `【AI集客ラボ】${label}: ${subj(data.company)} ${subj(data.name)}様`,
-      text: `AI集客ラボのフォームから${label}が届きました。\n\n${lines}\n\n---\n送信元ページ: ${referer}`,
+      text: `AI集客ラボのフォームから${label}が届きました。\n\n${lines}\n\n---\n送信元ページ: ${referer || "（ブラウザが送らなかった）"}`,
     }),
   });
 

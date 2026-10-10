@@ -103,7 +103,10 @@ def fill(src_text, e):
             # ロボットよけ（contact.hub.gs の turnstileVerify_）。無ければ空で埋まり、確かめも記録もしない（断らない）
             .replace("'TURNSTILE_SECRET_XXXXXXXX'", f"'{e.get('TURNSTILE_SECRET', '')}'")
             # 別事業のサイトのフォーム専用の合言葉（contact.hub.gs の formTrusted_）。無ければ空で埋まり、誰も信用しない
-            .replace("'FORM_SECRET_XXXXXXXX'", f"'{e.get('HUB_FORM_SECRET', '')}'"))
+            .replace("'FORM_SECRET_XXXXXXXX'", f"'{e.get('HUB_FORM_SECRET', '')}'")
+            # 運用者の個人のアドレス（contact.hub.gs の leadTestRule_。カンマ区切り）。公開リポジトリに書かないため .env から埋める。
+            # 無ければ空で埋まり、自社のドメインのアドレスだけをテストと見分ける（Script Properties の OWNER_EMAILS でも足せる）
+            .replace("'OWNER_EMAILS_XXXXXXXX'", f"'{e.get('HUB_OWNER_EMAILS', '')}'"))
 
 
 # 既存の doPost に転送の呼び出しを1行足す。ここだけは新規ファイルの追加では済まない。
@@ -179,6 +182,9 @@ def push(site, e, tok, deploy=True):
             return False
         if "'TURNSTILE_SECRET_XXXXXXXX'" in src and not e.get("TURNSTILE_SECRET"):
             print(f"  {cfg['name']}: .env に TURNSTILE_SECRET が無いため、ロボットよけの確かめは止まったまま配ります（{local}）")
+        if "'OWNER_EMAILS_XXXXXXXX'" in src and not e.get("HUB_OWNER_EMAILS"):
+            print(f"  {cfg['name']}: .env に HUB_OWNER_EMAILS が無いため、運用者の個人のアドレスからの試し送信は"
+                  f"文脈（Gemini）でだけテストと見分けます（{local}）")
         if "'FORM_SECRET_XXXXXXXX'" in src and not e.get("HUB_FORM_SECRET"):
             print(f"  {cfg['name']}: .env に HUB_FORM_SECRET が無いため、別事業のサイトのフォームは「ページから直接」と同じ扱いで配ります（{local}）")
 

@@ -58,6 +58,9 @@ export async function onRequestPost({ request, env }) {
   if (v("_gotcha")) return Response.json({ ok: false, error: "送信できませんでした。" }, { status: 400 });
   const ind = v("industry", 20), area = v("area", 40), company = v("company", 80), site = v("site", 300);
   const name = v("name", 60), email = v("email", 200), pages = v("pages", 400);
+  // 最初に来たときの流入元と最初に見たページ（site.js の ssFirst が足す）。台帳の送信元ページの列に入る
+  const first = {};
+  for (const k of ["first_ref", "first_utm", "first_ad", "first_land", "first_at", "send_page"]) if (k in d) first[k] = v(k, 200);
   const word = WORDS[ind] || v("word", 20);
   if (!word || !area || !company || !name || !email) {
     return Response.json({ ok: false, error: "未入力の項目があります。" }, { status: 400 });
@@ -118,7 +121,7 @@ export async function onRequestPost({ request, env }) {
       : "AIへの問い合わせに失敗しました。時間をおいてもう一度お試しください。";
     results = null;
     // 受け付けた連絡先は残し、結果は人が送る
-    await record(env, request, { ind, area, company, site, name, email, word, pages, summary: "チェック未実行（" + e.message + "）" });
+    await record(env, request, { ind, area, company, site, name, email, word, pages, first, summary: "チェック未実行（" + e.message + "）" });
     return Response.json({ ok: false, error: msg }, { status: 503 });
   }
   const cited = results.filter((r) => r.cited).length, mentioned = results.filter((r) => r.mentioned).length;
@@ -128,7 +131,7 @@ export async function onRequestPost({ request, env }) {
   const top = Object.keys(freq).sort((a, b) => freq[b] - freq[a]).slice(0, 3);
   const summary = `AI紹介チェック: ${area} ${word}｜出典に御社サイト ${cited}/3問・回答に社名 ${mentioned}/3問`
     + (top.length ? `\n主な出典: ${top.join("、")}` : "");
-  await record(env, request, { ind, area, company, site, name, email, word, pages, summary });
+  await record(env, request, { ind, area, company, site, name, email, word, pages, first, summary });
   // 翌月の測り直しは、本人が印をつけたときだけ（同意のない配信はしない）
   const searches = results.reduce((n, r) => n + (r.searches || 1), 0);
   await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned, site, ip, searches,
@@ -156,13 +159,13 @@ async function hub(env, body) {
 
 async function record(env, request, x) {
   if (!env.GAS_WEBHOOK_URL) return;
-  const data = { name: x.name, company: x.company, email: x.email, form_type: "AI紹介チェック（診断）", pages: x.pages || "",
+  const data = { name: x.name, company: x.company, email: x.email, form_type: "AI紹介チェック（診断）", pages: x.pages || "", ...(x.first || {}),
     message: `${x.summary}\n業種: ${x.word}／地域: ${x.area}／サイト: ${x.site || "未入力"}` };
   try {
     await fetch(env.GAS_WEBHOOK_URL, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ secret: env.GAS_SHARED_SECRET || "", site: "ai-lab",
-        data: { ...data, site: "ai-lab", type: "diagnosis" }, referer: request.headers.get("referer") || "不明" }),
+        data: { ...data, site: "ai-lab", type: "diagnosis" }, referer: request.headers.get("referer") || "" }),
     });
   } catch (_) { /* 台帳に書けなくても結果は返す */ }
 }

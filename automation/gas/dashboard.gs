@@ -47,8 +47,14 @@ function refreshDashboard() {
     ? Math.round(scores.reduce(function (a, b) { return a + b; }, 0) / scores.length * 10) / 10 : 0;
 
   const inqSh = ss.getSheetByName('問い合わせ');
-  const inq = inqSh && inqSh.getLastRow() > 1
+  const allInq = inqSh && inqSh.getLastRow() > 1
     ? inqSh.getRange(2, 1, inqSh.getLastRow() - 1, 14).getValues() : [];
+  // 問い合わせの件数は相談だけ。温度が「営業」（売り込み）・「テスト」（社内の試し送信）の行は数えず、除いた数を別に出す
+  // （scripts/lead_reconcile.py の ledger_counts と同じ数え方。2026-10-10 運用者の指示）
+  const kindOf = function (r) { return String(r[12]).trim(); };
+  const inq = allInq.filter(function (r) { return kindOf(r) !== '営業' && kindOf(r) !== 'テスト'; });
+  const salesN = allInq.filter(function (r) { return kindOf(r) === '営業'; }).length;
+  const testN = allInq.filter(function (r) { return kindOf(r) === 'テスト'; }).length;
   const hot = inq.filter(function (r) { return String(r[12]).trim() === 'HOT'; }).length;
   const open = inq.filter(function (r) { return String(r[13]).trim() === '未対応'; }).length;
 
@@ -57,20 +63,25 @@ function refreshDashboard() {
   const errRows = (errSh && errSh.getLastRow() > 1) ? errSh.getRange(2, 6, errSh.getLastRow() - 1, 1).getValues() : [];
   const errN = errRows.filter(function (r) { return String(r[0]).trim() === '未対応'; }).length;
 
-  // どのページが問い合わせを生んだか。送信元ページ（12列目）を数え、
-  // 記事作成ログのURL（8列目）と突き合わせて題名を添える
+  // どのページが問い合わせを生んだか。送信元ページ（12列目）の「入口: …」（最初に見たページ）を数え、
+  // 記事作成ログのURL（8列目）と突き合わせて題名を添える。流入経路の形になる前の行（URL だけ）はそのURLで数える
   const byPage = {};
+  const bySrc = {};
   inq.forEach(function (r) {
-    const src = String(r[11] || '').trim().replace(/[?#].*$/, '');
-    if (!src) return;
-    byPage[src] = (byPage[src] || 0) + 1;
+    const cell = String(r[11] || '').trim();
+    const land = (cell.match(/入口: ([^｜]+)/) || [])[1];
+    const src = (land || (/^https?:\/\//.test(cell) ? cell : '')).trim().replace(/[?#].*$/, '').replace(/^https?:\/\/[^/]+/, '');
+    if (src) byPage[src] = (byPage[src] || 0) + 1;
+    const from = (cell.match(/流入: ([^｜（]+)/) || [])[1];
+    if (from && from.trim() !== '未記録') bySrc[from.trim()] = (bySrc[from.trim()] || 0) + 1;
   });
   const titleOf = {};
   logs.forEach(function (r) {
-    const u = String(r[7] || '').trim().replace(/[?#].*$/, '');
+    const u = String(r[7] || '').trim().replace(/[?#].*$/, '').replace(/^https?:\/\/[^/]+/, '');
     if (u) titleOf[u] = String(r[2] || '');
   });
   const topPages = Object.keys(byPage).sort(function (a, b) { return byPage[b] - byPage[a]; }).slice(0, 3);
+  const topSrc = Object.keys(bySrc).sort(function (a, b) { return bySrc[b] - bySrc[a]; }).slice(0, 3);
 
   const rows = [
     ['公開記事数（累計）', logs.length],
@@ -86,10 +97,15 @@ function refreshDashboard() {
     ['問い合わせ（累計）', inq.length],
     ['　うちHOT', hot],
     ['　未対応', open],
+    ['　除いた売り込み', salesN],
+    ['　除いたテスト', testN],
     ['エラーログ（未対応）', errN],
     ...topPages.map(function (u, i) {
-      const t = titleOf[u] || titleOf[u.replace(/\/$/, '')] || u.replace(/^https?:\/\/[^/]+/, '');
+      const t = titleOf[u] || titleOf[u.replace(/\/$/, '')] || u;
       return ['　問い合わせを生んだページ ' + (i + 1) + '位', byPage[u] + '件 ｜ ' + t.slice(0, 40)];
+    }),
+    ...topSrc.map(function (s, i) {
+      return ['　問い合わせの流入元 ' + (i + 1) + '位', bySrc[s] + '件 ｜ ' + s.slice(0, 40)];
     }),
   ];
 

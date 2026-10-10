@@ -145,6 +145,11 @@ def fetch_site(cfg, labels):
                                  "AIO診断": evs.get("lead_diagnosis", 0),
                                  "サイト監査": evs.get("lead_site_audit", 0)},
                     "form_submit": evs.get("form_submit", 0)})
+                # 問い合わせの件数は台帳の相談の数（売り込み・テストを除く）。GA4 の送信は照合用に cv_ga4 に残す
+                # （台帳に無い社・台帳の始まる前の月は GA4 のまま。monthly_report と同じ lead_reconcile.month_fields）
+                import lead_reconcile as LR
+                out["months"][i].update(LR.month_fields(cfg["id"], date.fromisoformat(f"{m}-01"),
+                                                        date.fromisoformat(month_end(m)), evs.get("lead_capture", 0)))
             cur = labels[-1]
             rep = c.run_report(RunReportRequest(
                 property=p, date_ranges=[DateRange(start_date=f"{cur}-01", end_date=month_end(cur))],
@@ -482,7 +487,11 @@ def analyze(sites, labels, arts, pipeline):
                           "サイトごとに需要の山が異なります。合計値だけでなくサイト別の推移も併せてご覧ください。"),
     ]
 
-    return {"cur": cur, "prev": prev, "mom": mom, "ai": ai, "ctr": ctr, "cvr": cvr, "pos": pos,
+    # CV は台帳の相談の数（売り込み・社内の試し送信を除く。lead_reconcile.month_fields）。除いた数も添える
+    cc = [s["months"][-1].get("cv_counts") for s in sites if s["months"][-1].get("cv_source") == "ledger"]
+    cv_note = (f"CV は管制塔の台帳の相談の数です（ほかに売り込み {sum(c['sales'] for c in cc if c)}件・"
+               f"テスト {sum(c['test'] for c in cc if c)}件を除いた）。" if cc else "")
+    return {"cur": cur, "prev": prev, "mom": mom, "ai": ai, "ctr": ctr, "cvr": cvr, "pos": pos, "cv_note": cv_note,
             "ai_ratio": ai_ratio, "ad_value": ad_value, "assess": assess, "contrib": contrib,
             "plan": plan, "targets": targets, "headline": headline, "risks": risks,
             "fix_plan": fix_plan, "inbound": inbound, "inbound_dist": inbound_dist}
@@ -769,6 +778,7 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 {tile("CV", f'{cur["cv"]}件', f'前月比 {mom("cv")}')}
 {tile("AI経由参照", str(a["ai"]), "3サイト合計")}
 </div>
+{f'<p class="note">{a["cv_note"]}</p>' if a.get("cv_note") else ""}
 <div class="callout"><b>3サイト体制の狙い:</b> 集客手法はAI集客ラボ、資金調達は補助金サイト、
 店舗経営の実務はコーポレートサイトと役割を分けています。同じ会社のサイトどうしで検索評価を
 奪い合わないよう、キーワードは1つの台帳で一元管理し、記事作成のたびに重複を機械検査しています。</div>

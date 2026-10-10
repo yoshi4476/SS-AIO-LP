@@ -716,6 +716,43 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
   }, true);
 })();
 
+/* 最初に来たときの流入元と、最初に見たページ（4サイト共通の形。管制塔の台帳の「送信元ページ」に
+ * 「流入: Google検索｜入口: /記事/｜送信: /contact/」と入る。流入元の名前は管制塔の contact.hub.gs が決める）
+ * 初めて開いたページの参照元のドメイン・utm・広告のクリックの有無を180日覚え、問い合わせ・資料請求・診断の送信に
+ * first_ref / first_utm / first_ad / first_land / first_at / send_page として足す。送るのはドメインとページの場所だけ。
+ * 覚えられない（プライベートブラウズ・保存の拒否）ときは、このページを開いた時点の値を送る。どちらでも送信は止めない */
+(function () {
+  var KEY = "ss_first", DAYS = 180, cur = null;
+  try { cur = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { cur = null; }
+  if (!cur || !(Date.now() - cur.t < DAYS * 864e5)) {
+    var q = new URLSearchParams(location.search), ref = "";
+    try { ref = document.referrer ? new URL(document.referrer).hostname : ""; } catch (e) { ref = ""; }
+    var utm = ["utm_source", "utm_medium", "utm_campaign"].map(function (k) { return (q.get(k) || "").slice(0, 60); });
+    cur = { r: ref, u: utm.join("") ? utm.join("|") : "", a: q.get("gclid") ? "gclid" : "",
+            l: location.pathname.slice(0, 150), t: Date.now() };
+    try { localStorage.setItem(KEY, JSON.stringify(cur)); } catch (e) {}
+  }
+  window.ssFirst = function () {
+    var d = new Date(cur.t), p = function (n) { return ("0" + n).slice(-2); };
+    return { first_ref: cur.r || "", first_utm: cur.u || "", first_ad: cur.a || "", first_land: cur.l || "",
+             first_at: d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()),
+             send_page: location.pathname.slice(0, 150) };
+  };
+  document.addEventListener("submit", function (e) {
+    var f = e.target;
+    if (!f || !f.querySelector || f.querySelector('input[name="first_land"]')) return;
+    var act = f.getAttribute("action") || "";
+    if (act.indexOf("/api/lead") < 0 && !f.hasAttribute("data-pages") && !f.classList.contains("lc-form")
+        && !(f.closest && f.closest(".lx-gate"))) return;
+    var v = window.ssFirst();
+    Object.keys(v).forEach(function (k) {
+      var i = document.createElement("input");
+      i.type = "hidden"; i.name = k; i.value = v[k];
+      f.appendChild(i);
+    });
+  }, true);
+})();
+
 /* スマホの固定ボタン（記事の .scan-sticky・LP の .sticky-cta）
  * 1画面半ほど読み進めたら出し、フォーム・診断欄・フッターが見えている間と、入力している間は引っ込める
  * （同じ誘いを二重に見せない）。LP の帯は最初の画面から出てヒーローの「30秒で診断する」に重なり、

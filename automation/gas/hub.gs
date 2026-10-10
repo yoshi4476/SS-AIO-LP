@@ -262,6 +262,12 @@ function doPost(e) {
       case 'restore_lead': return json_(restoreLead_(body));
       // サイト名が「（不明）」の行にサイト名を入れる（lead_reconcile.py --fix。GA4 の送信と日付が1対1で合うときだけ）
       case 'lead_fix_site': return json_(leadFixSite_(body));
+      // 相談・売り込み・テストの見分け（contact.hub.gs）。既にある行の温度を運用者の判断で「営業」「テスト」にする・
+      // GA4 から推定した流入経路を入れる・受付と同じ見分けにかけた結果を見る（書かない）・疎通確認の「不明」を直す
+      case 'lead_mark':     return json_(leadMark_(body));
+      case 'lead_route_fix': return json_(leadRouteFix_(body));
+      case 'lead_classify': return json_(leadClassify_(body));
+      case 'probe_tidy':    return json_(probeTidy_());
       // AI紹介チェックの回数（メールごと3回・月の全体の上限）と記録。functions/api/ai-check.js が合言葉つきで呼ぶ
       case 'ai_check_quota': return json_(aiCheckQuota_(body));
       case 'gemini_usage':   return json_(geminiUsage_());

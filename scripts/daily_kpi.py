@@ -204,6 +204,20 @@ def collect(ga_day):
             else:
                 print(f"  {sid}: GSC取得スキップ（{e}）")
         row.update(aio_estimate(sid))
+        # CV は台帳の相談の数（売り込み・社内の試し送信を除く）。GA4 の lead_capture は照合用に cv_ga4 に残す。
+        # 台帳に無い社・台帳の始まる前の日は GA4 のまま（lead_reconcile.leads。2026-10-10 運用者の指示）
+        try:
+            import lead_reconcile as LR
+            day = date.fromisoformat(ga_day)
+            lead = LR.leads(sid, day, day, ga4_n=row.get("cv"))
+            row["cv_ga4"] = row.get("cv")
+            if lead["n"] is not None:
+                row["cv"] = lead["n"]
+            if lead["source"] == "ledger":
+                c = lead["counts"]
+                row["note"] = row["note"] + f"／CVは台帳の相談（売り込み{c['sales']}・テスト{c['test']}を除く）"
+        except Exception as e:
+            print(f"  {sid}: 台帳の問い合わせを数えられず、CV は GA4 の送信のまま（{str(e)[:60]}）")
         rows.append(row)
         if sites_mod.is_client(sid):     # お客様の社の数字は CI のログに出さない（日次の記録とメールには入る）
             print(f"{ga_day} {sid:10s} 取得しました")

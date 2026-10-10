@@ -231,7 +231,12 @@ def check_leads(sid, cfg, prop, days, ledger, out):
     for d in lead_mismatch(gad, led, L.ACKED.get(sid, {})):
         out.append(("注意", f"{d} の問い合わせは台帳に{led[d]}行あるのに、GA4 に送信の記録がありません"
                             "（送信の計測が飛んでいないか。手で足した行なら問題なし）"))
-    return sum(gad.values()), sum(led.values())
+    # 問い合わせとして数えるのは台帳の相談だけ（売り込み・社内の試し送信を除く）。GA4 と比べるのは台帳の全行
+    try:
+        txt = L.consult_text(L.ledger_counts(L.ledger_rows(start), sid=sid))
+    except Exception:
+        txt = ""
+    return sum(gad.values()), sum(led.values()), txt
 
 
 def check_brand_share(cfg, days, out):
@@ -303,7 +308,8 @@ def main():
                    else "GSCは取得できず確かめられません")
             print(f"     セッション{tot}（うち国不明{bad}）/ 自然検索{org} / {gsc}")
             print(f"     AI流入: GA4のAI Assistant {ga_ai} / 自前の分類 {ours}"
-                  + (f" ／ 問い合わせ: GA4 {leads[0]}件・台帳 {leads[1]}行" if leads else ""))
+                  + (f" ／ 問い合わせ: GA4 {leads[0]}件・台帳 {leads[1]}行" + (f"（{leads[2]}）" if leads[2] else "")
+                     if leads else ""))
             if clicks is None or bc is None:
                 # 確かめられなかった（計測の不一致を含む）ものを「崩れなし」と出さない
                 out.append(("注意", "GSCのクリック合計を確かめられず、GA4との照合と指名検索の割合を見ていません"))

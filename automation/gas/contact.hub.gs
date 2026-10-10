@@ -33,11 +33,269 @@ const SALES_PATTERNS = [
   /突然のご連絡(大変)?失礼(いた)?します/, /ご案内でご連絡/, /登壇/, /掲載のご案内/, /広告枠/,
   /リード単価/, /提携のご提案/, /弊社サービス/, /営業代行/, /業務提携/, /SEO対策のご提案/,
   /御社のサイトを拝見/,
+  // 2026-10-10 に台帳で取りこぼしていた売り込みの定型文（GPU機器の協業・アフィリエイト広告・アポ獲得代行）
+  /協業の機会/, /(ご提案|ご案内)(いた)?しております/, /アフィリエイト広告/, /完全成果報酬/,
 ];
 
 function isSales_(text) {
   const s = String(text || '');
   return SALES_PATTERNS.some(function (re) { return re.test(s); });
+}
+
+// ── 問い合わせの見分け（相談・売り込み・テスト）────────────────────
+// 温度の列（13列目）に HOT/WARM/COOL のほか「営業」（売り込み）と「テスト」（社内の試し送信）を入れる。
+// 問い合わせの件数は「営業」「テスト」以外の行で数える（scripts/lead_reconcile.py の ledger_counts）。
+// 見分けは3段: 1) 当社のドメイン・送信先のサイトと同じドメイン・運用者のアドレスはテスト（機械で決まる。Gemini を呼ばない）
+// 2) 本文の文脈を Gemini に1回だけ読ませる 3) Gemini が使えないとき（鍵が無い・月の上限・失敗）は正規表現（isSales_）。
+// **相談を売り込み・テストと誤って落とすのが一番まずい**ので、判定に関係なく担当への通知は必ず送り、件名に印を付けるだけにする
+// （送り主への自動返信だけは、従来どおり売り込みには出さない）。2026-10-10 運用者の指示
+// 別事業のサイト・お客様のサイトの名前とドメインはここに書かない（公開リポジトリ）。サイト一覧の登録から引く
+const LEAD_SALES = '営業';
+const LEAD_TEST = 'テスト';
+const OWN_MAIL_DOMAINS = ['7senses.co.jp'];
+// 運用者の個人のアドレス（カンマ区切り）。公開リポジトリに書かない: Script Properties の OWNER_EMAILS か、
+// gas_deploy.py が .env の HUB_OWNER_EMAILS で埋める
+const OWNER_EMAILS_FILL = 'OWNER_EMAILS_XXXXXXXX';
+// Gemini で見分ける回数の月の上限（1件に1回）。超えたら正規表現だけで見分ける
+const LEAD_AI_MONTH = 300;
+const LEAD_KINDS = { '相談': true, '売り込み': true, 'テスト': true };
+
+function ownerEmails_() {
+  const p = String(PropertiesService.getScriptProperties().getProperty('OWNER_EMAILS') || '');
+  const f = OWNER_EMAILS_FILL.indexOf('XXXXXXXX') < 0 ? OWNER_EMAILS_FILL : '';
+  return (p + ',' + f).split(/[,\s]+/).map(function (a) { return a.trim().toLowerCase(); }).filter(isEmail_);
+}
+
+/** 片方がもう片方と同じか、そのサブドメイン（ai.7senses.co.jp と 7senses.co.jp） */
+function sameDomain_(a, b) {
+  a = normHost_(a);
+  b = normHost_(b);
+  return !!a && !!b && (a === b || a.slice(-b.length - 1) === '.' + b || b.slice(-a.length - 1) === '.' + a);
+}
+
+/** 送信先のサイトのドメイン。site はサイトID か、台帳のサイト欄の表示名「名前 (ドメイン)」 */
+function siteDomainOf_(site) {
+  let m = null;
+  try { m = siteMap_()[site]; } catch (e) { m = null; }     // サイト一覧を読めなくても受付は止めない
+  if (m && m.domain) return normHost_(m.domain);
+  return normHost_((String(site || '').match(/\(([^)\s]+)\)\s*$/) || [])[1] || '');
+}
+
+/**
+ * 機械で決まるテスト。当たれば理由、当たらなければ ''。
+ * 当社のドメイン・送信先のサイトと同じドメイン（そのサイトの運営者の試し送信）・運用者のアドレス。
+ * フリーメールのドメインはサイトと同じでもテストにしない
+ */
+function leadTestRule_(email, site) {
+  const e = String(email || '').trim().toLowerCase();
+  const dom = e.split('@')[1] || '';
+  if (OWN_MAIL_DOMAINS.some(function (d) { return dom === d || dom.slice(-d.length - 1) === '.' + d; })) {
+    return '自社のドメインのアドレス';
+  }
+  const sd = siteDomainOf_(site);
+  if (dom && sd && !FREE_MAIL.test(dom) && sameDomain_(dom, sd)) return '送信先のサイトと同じドメインのアドレス';
+  return ownerEmails_().indexOf(e) >= 0 ? '運用者のアドレス' : '';
+}
+
+/** 今月の Gemini の残りがあれば1回分を数えて true（1件に1回。数えてから呼ぶので、失敗しても回数は戻さない） */
+function leadAiBudget_() {
+  if (!geminiKey_()) return false;
+  const props = PropertiesService.getScriptProperties();
+  if (String(props.getProperty('GEMINI_OFF') || '') === '1') return false;
+  const k = 'lead_ai_' + Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM');
+  const n = Number(props.getProperty(k) || 0);
+  if (n >= LEAD_AI_MONTH) return false;
+  props.setProperty(k, String(n + 1));
+  return true;
+}
+
+/** Gemini に渡す文。メールはドメインだけ、電話は有無だけを渡す（見分けに要らない個人の情報は出さない） */
+function leadKindPrompt_(site, type, d) {
+  const email = String(d.email || '');
+  const extra = leadDetailBase_(type, d).replace(/^紹介元 \S+( \/ )?/, '').slice(0, 300);
+  return [
+    'セブンセンシズ株式会社（大阪）と、同じ運用者の別事業のWebサイトのフォームに届いた送信を、次の3つのどれかに分けてください。'
+      + '下の「サイト」が、送信を受けたサイト（運営者の名前とドメイン）です。',
+    '当社と別事業のサービス: AI検索対策（AIO・LLMO）・SEO・Web集客の支援、'
+      + '補助金（AI導入補助金など）の申請の相談・助言、AI導入・システム開発・SaaS開発、DXの相談、経理BPO・記帳代行。',
+    '',
+    '# 分け方',
+    '- 相談: 当社のサービスを受けたい・検討している・見積や説明がほしい、または診断・資料を求めた見込み客。'
+      + '送り主が自社の事業や商品を紹介していても、当社に頼みたいこと（集客・SEO・補助金・開発・経理など）が書かれていれば相談です。',
+    '- 売り込み: 送り主が当社に、商品・機器・サービス・広告枠・アフィリエイト・イベントの登壇・アポイント獲得代行・'
+      + '業務提携や協業・人材などを売り込む／提案する連絡で、当社に頼みたいことが書かれていないもの。',
+    '- テスト: 社内の試し送信。会社名が当社（セブンセンシズ株式会社）か「サイト」の運営者と同じ、'
+      + '診断した対象のサイトが当社のもの（7senses.co.jp）か「サイト」と同じドメイン、'
+      + '名前や本文が意味をなさない（数字や記号だけ・「テスト」「test」だけ）のどれかに当たるもの。',
+    '- 迷ったら「相談」にしてください。相談を売り込みやテストと誤ると、本物のお客様を見落とします。',
+    '',
+    '# 送信',
+    'サイト: ' + site,
+    '種類: ' + (LEAD_TYPE_LABELS[type] || type),
+    '会社名: ' + clean_(d.company),
+    'お名前: ' + clean_(d.name),
+    'メールのドメイン: ' + (email.split('@')[1] || ''),
+    '電話番号: ' + (clean_(d.tel || d.phone) ? 'あり' : 'なし'),
+    extra ? 'フォームの項目: ' + extra : '',
+    '本文:',
+    body_(d.message || d.body).slice(0, 1500),
+    '',
+    '# 答え方',
+    'JSON だけを返してください: {"kind": "相談" か "売り込み" か "テスト", "reason": "そう分けた理由を40字以内で"}',
+  ].filter(function (x) { return x !== ''; }).join('\n');
+}
+
+/** 理由の文は台帳の詳細欄に入る。後追い・自動回答が読む印（AI紹介チェック・再送信・総合 N/100・対象 URL）と取り違えない形にする */
+function leadReason_(s) {
+  return clean_(s).replace(/AI紹介チェック|再送信|checklist|総合|対象\s*https?:\S*|https?:\/\/\S+|\d+\s*\/\s*100/g, '')
+    .replace(/\s+/g, ' ').trim().slice(0, 60);
+}
+
+/** Gemini で文脈から見分ける。使えない・答えが読めないときは null（呼び出し側が正規表現に落とす） */
+function leadAiKind_(site, type, d) {
+  if (!leadAiBudget_()) return null;
+  try {
+    const model = PropertiesService.getScriptProperties().getProperty('GEMINI_MODEL') || REVIEW_MODEL;
+    const r = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', {
+      method: 'post', contentType: 'application/json', muteHttpExceptions: true, headers: { 'x-goog-api-key': geminiKey_() },
+      payload: JSON.stringify({ contents: [{ parts: [{ text: leadKindPrompt_(site, type, d) }] }],
+                                generationConfig: { temperature: 0, responseMimeType: 'application/json' } }),
+    });
+    if (r.getResponseCode() !== 200) return null;
+    const parts = ((((JSON.parse(r.getContentText()).candidates || [])[0] || {}).content || {}).parts) || [];
+    const text = parts.filter(function (p) { return !p.thought; }).map(function (p) { return p.text || ''; }).join('');
+    const j = JSON.parse((text.match(/\{[\s\S]*\}/) || ['{}'])[0]);
+    if (!LEAD_KINDS[j.kind]) return null;
+    return { kind: j.kind, reason: leadReason_(j.reason), by: 'Gemini' };
+  } catch (err) {
+    console.error('問い合わせの見分け（Gemini）に失敗。正規表現で見分けます: ' + err);
+    return null;
+  }
+}
+
+/**
+ * 1件の送信を「相談・売り込み・テスト」に分ける。{ kind, reason, by }
+ * テストの決まり → Gemini（文脈）→ 正規表現の順。Gemini が「相談」と読めば、正規表現の売り込みの印より優先する
+ */
+function leadKind_(site, type, d, email) {
+  const rule = leadTestRule_(email, site);
+  if (rule) return { kind: 'テスト', reason: rule, by: '決まり' };
+  const ai = leadAiKind_(site, type, d);
+  if (ai) return ai;
+  if (type === 'contact' && isSales_(body_(d.message))) return { kind: '売り込み', reason: '営業の定型文に当たる', by: '正規表現' };
+  return { kind: '相談', reason: '', by: '正規表現' };
+}
+
+/** 見分けの結果から温度の列の値。相談はこれまでどおりの温度（HOT/WARM/COOL） */
+function leadTempOf_(k, type, d, referer) {
+  if (k.kind === '売り込み') return LEAD_SALES;
+  if (k.kind === 'テスト') return LEAD_TEST;
+  return leadTemp_(type, d.message, d, referer);
+}
+
+function leadKindNote_(k) {
+  return '判定: ' + k.kind + (k.reason ? '（' + k.reason + '）' : '') + '／' + k.by;
+}
+
+/**
+ * 見分けた結果を台帳の行に書く（温度の列と、詳細の列の末尾の理由）。
+ * 新しい行はそのまま入れる。24時間以内の再送信でまとめた行は、温度を上げるときだけ変える（前の送信が相談なら、
+ * 後の送信の見分けで売り込み・テストに下げない）
+ */
+function leadSetKind_(saved, temp, note) {
+  const sh = sheet_('問い合わせ');
+  const r = saved.row;
+  const RANK = { HOT: 3, WARM: 2, COOL: 1 };
+  const before = String(sh.getRange(r, 13).getValue() || '');
+  if (saved.merged ? (RANK[temp] || 0) > (RANK[before] || 0) : before !== temp) sh.getRange(r, 13).setValue(temp);
+  const cur = String(sh.getRange(r, 10).getValue() || '');
+  sh.getRange(r, 10).setValue(cells_([(cur ? cur + '\n' : '') + note])[0]);
+}
+
+// ── 流入経路（台帳の「送信元ページ」の列）──────────────────────────
+// 各サイトのフォームが、最初に来たときの参照元のドメイン（first_ref）・utm（first_utm「source|medium|campaign」）・
+// 広告のクリック（first_ad）・最初に見たページ（first_land）・その日（first_at）と、送信したページ（send_page）を送る。
+// ここで「流入: Google検索｜入口: /記事/｜送信: /contact/」の1つの文字列にして12列目へ入れる（列は増やさない）。
+// AI の参照元の分類は scripts/daily_kpi.py の AI_DOMAINS・AI_LABELS と同じ中身（門 gates_history_h82_leads が一致を確かめる）
+const LEAD_AI_DOMAINS = {"chatgpt": ["chatgpt.com", "chat.openai.com", "openai"], "perplexity": ["perplexity.ai"], "gemini": ["gemini.google.com", "bard.google.com"], "copilot": ["copilot.microsoft.com", "bing.com/chat", "edgeservices.bing.com"], "claude": ["claude.ai", "anthropic.com"], "grok": ["grok.com", "x.ai", "grok.x.com"], "その他AI": ["you.com", "poe.com", "felo.ai", "genspark.ai", "chat-assistant.persol-group.co.jp", "chat.mistral.ai", "phind.com", "kagi.com", "duckduckgo.com/aichat", "meta.ai", "iask.ai", "andisearch.com", "deepseek.com", "chat.qwen.ai", "notebooklm.google", "aistudio.google.com", "search.brave.com/summarizer"]};
+const LEAD_AI_LABELS = {"chatgpt": "ChatGPT", "perplexity": "Perplexity", "gemini": "Gemini", "copilot": "Copilot", "claude": "Claude", "grok": "Grok", "その他AI": "その他AI"};
+// AI 以外の参照元（上から順に当てる）。scripts/lead_reconcile.py の REF_LABELS と同じ（門が一致を確かめる）
+const LEAD_REF_LABELS = [
+  ['mail.google.com', 'Gmail（メール）'], ['outlook.live.com', 'Outlook（メール）'], ['outlook.office.com', 'Outlook（メール）'],
+  ['mail.yahoo.co.jp', 'Yahoo!メール'], ['googleadservices.com', 'Google広告'], ['doubleclick.net', 'Google広告'],
+  ['google.', 'Google検索'], ['bing.com', 'Bing検索'], ['search.yahoo.co.jp', 'Yahoo!検索'], ['yahoo.co.jp', 'Yahoo! JAPAN'],
+  ['duckduckgo.com', 'DuckDuckGo'],
+  ['ecosia.org', 'Ecosia'], ['naver.com', 'NAVER'], ['baidu.com', 'Baidu'], ['yandex.', 'Yandex'],
+  ['facebook.com', 'Facebook'], ['fb.com', 'Facebook'], ['instagram.com', 'Instagram'], ['t.co', 'X'], ['x.com', 'X'],
+  ['twitter.com', 'X'], ['linkedin.com', 'LinkedIn'], ['lnkd.in', 'LinkedIn'], ['youtube.com', 'YouTube'], ['youtu.be', 'YouTube'],
+  ['threads.net', 'Threads'], ['threads.com', 'Threads'], ['note.com', 'note'], ['tiktok.com', 'TikTok'], ['line.me', 'LINE'],
+];
+
+function hostIs_(host, d) {
+  if (d.indexOf('/') >= 0) return false;          // 場所つき（bing.com/chat）は参照元のドメインだけでは見分けられない
+  if (d.slice(-1) === '.') return host.indexOf(d) === 0 || host.indexOf('.' + d) >= 0;     // google. → google.co.jp・www.google.com
+  return host === d || host.slice(-d.length - 1) === '.' + d;
+}
+
+/** 参照元のドメイン・utm から流入の名前。自社の別サイトは「自社サイト（名前）」、送ったサイトそのものは未記録 */
+function leadSource_(ref, utm, ad, ownHost) {
+  const host = String(ref || '').trim().toLowerCase().replace(/^www\./, '');
+  const u = String(utm || '').split('|');
+  const src = String(u[0] || '').trim().toLowerCase();
+  const med = String(u[1] || '').trim().toLowerCase();
+  const name = function (h) {
+    if (!h) return '';
+    for (const k in LEAD_AI_DOMAINS) {
+      if (LEAD_AI_DOMAINS[k].some(function (d) { return d.indexOf('.') < 0 ? h.indexOf(d) >= 0 : hostIs_(h, d); })) {
+        return LEAD_AI_LABELS[k] || k;
+      }
+    }
+    for (let i = 0; i < LEAD_REF_LABELS.length; i++) if (hostIs_(h, LEAD_REF_LABELS[i][0])) return LEAD_REF_LABELS[i][1];
+    return '';
+  };
+  if (src) {
+    const tag = '（utm: ' + u.map(function (x) { return String(x || '').trim(); }).filter(String).join(' / ') + '）';
+    const paid = /^(cpc|ppc|paid|paidsearch|display|cpm)$/.test(med);
+    const mail = /^(e-?mail|newsletter)$/.test(med) || /newsletter|mail/.test(src);
+    return (name(src) || (mail ? 'メール' : src)) + (paid ? '（広告）' : '') + tag;
+  }
+  if (ad) return 'Google広告';
+  if (!host) return '直接（ブックマーク・URLの入力・アプリなど）';
+  const own = String(ownHost || '').toLowerCase().replace(/^www\./, '');
+  if (own && (host === own)) return '未記録（記録を始める前の来訪）';
+  const ai = name(host);
+  if (ai) return ai;
+  let m = {};
+  try { m = siteMap_(); } catch (e) { m = {}; }               // サイト一覧を読めなくても受付は止めない
+  for (const id in m) {
+    const dom = String(m[id].domain || '').toLowerCase().replace(/^www\./, '');
+    if (dom && host === dom) return '自社サイト（' + m[id].name + '）';
+  }
+  return '他サイト（' + host + '）';
+}
+
+function pathOf_(u) {
+  const s = String(u || '').trim();
+  if (!s) return '';
+  const m = s.match(/^https?:\/\/[^\/?#]+([^?#]*)/i);
+  return (m ? (m[1] || '/') : s.replace(/[?#].*$/, '')).slice(0, 120);
+}
+
+function hostOf_(u) {
+  const m = String(u || '').match(/^https?:\/\/([^\/?#:]+)/i);
+  return m ? m[1].toLowerCase() : '';
+}
+
+/** 12列目の文字列。「流入: …｜入口: …｜送信: …」。フォームが流入元を送ってこない（古いページ・転送）ときは「流入: 未記録」 */
+function leadRoute_(d, referer) {
+  const sent = pathOf_(d.send_page) || pathOf_(referer);
+  const has = d.first_ref !== undefined || d.first_utm !== undefined || d.first_land !== undefined;
+  const at = String(d.first_at || '').match(/^\d{4}-(\d{2})-(\d{2})$/);
+  const src = has ? leadSource_(d.first_ref, d.first_utm, d.first_ad, hostOf_(referer)) : '未記録';
+  const parts = ['流入: ' + src + (at ? '（初回 ' + at[1] + '/' + at[2] + '）' : '')];
+  if (pathOf_(d.first_land)) parts.push('入口: ' + pathOf_(d.first_land));
+  if (sent) parts.push('送信: ' + sent);
+  return parts.join('｜');
 }
 
 // ── ロボットよけ（Cloudflare Turnstile）────────────────────────
@@ -215,8 +473,9 @@ function form_(body) {
 
   // 週次の疎通確認（lead_probe.py）。本物と同じ経路を通ったことだけを記録し、台帳にも通知にも出さない。
   // 2026-09-18 に診断の送信2件が台帳にもメールにも残らず失われ、気づくまで10日かかった
+  // 送信元の列は本物の台帳と同じ「流入: …｜入口: …｜送信: …」の形（各サイトのフォームが流入の欄を送っているかも確かめられる）
   if (probe) {
-    probeSheet_().appendRow(cells_([new Date(), site, type, String(body.referer || d.referer || '').slice(0, 200)]));
+    probeSheet_().appendRow(cells_([new Date(), site, type, leadRoute_(d, String(body.referer || d.referer || '')).slice(0, 200)]));
     return { ok: true, probe: true };
   }
   // 台帳・通知・自動返信・配信停止のどれにも入る前に断る（配信停止も、他人のアドレスへ確認メールを出させられる）
@@ -227,18 +486,32 @@ function form_(body) {
   // 本人には問い合わせ用の自動返信（3営業日以内にご連絡します・動画の案内）が届いていた（2026-10-08）
   if (type === 'unsubscribe') return unsubscribe_(email, site);
 
-  // 営業メールらしい送信は、送り主への自動返信だけを止める。担当への通知は「営業の可能性」の印を付けて出す。
-  // 「弊社サービス」「業務提携」は本物の相談にも入りうるので、通知まで止めると問い合わせを見落とす（最後は人が判断する）
-  const sales = type === 'contact' && isSales_(body_(d.message));
-  const temp = sales ? '営業' : leadTemp_(type, d.message, d, body.referer || d.referer || '');
-  leadSave_(site, type, temp, d, body.referer || d.referer || '');
+  // 相談・売り込み・テストの見分け。先に台帳へ書いてから Gemini に読ませる（Gemini が遅い・落ちても記録は残る）。
+  // 書く時点の温度は機械で決まる分（テストの決まり・営業の定型文）だけで決め、見分けた後に直す。
+  // 売り込みは送り主への自動返信だけを止める。担当への通知は判定に関係なく、件名に印を付けて必ず出す
+  // （「弊社サービス」「業務提携」は本物の相談にも入りうる。最後は人が判断する）
+  const referer = String(body.referer || d.referer || '');
+  const testRule = leadTestRule_(email, site);
+  const pre = testRule ? LEAD_TEST
+    : (type === 'contact' && isSales_(body_(d.message)) ? LEAD_SALES : leadTemp_(type, d.message, d, referer));
+  const saved = leadSave_(site, type, pre, d, leadRoute_(d, referer));
+  let kind = { kind: pre === LEAD_TEST ? 'テスト' : (pre === LEAD_SALES ? '売り込み' : '相談'), reason: testRule, by: '決まり' };
+  let temp = pre;
+  try {
+    kind = leadKind_(site, type, d, email);
+    temp = leadTempOf_(kind, type, d, referer);
+    leadSetKind_(saved, temp, leadKindNote_(kind));
+  } catch (err) {
+    console.error('問い合わせの見分けに失敗（記録は済んでいます）: ' + err);
+  }
+  const sales = temp === LEAD_SALES;
   const silent = body.silent === true || body.silent === 'true';
   // 記録は済んでいる。メールで失敗しても、送信者にはエラーを返さない。
   // ここで例外を投げると、問い合わせが届いていないと誤解される。
   const warn = [];
   if (!silent) {
     try {
-      leadNotify_(site, type, temp, d, body.referer || d.referer || '');
+      leadNotify_(site, type, temp, d, referer, kind, leadRoute_(d, referer));
     } catch (err) {
       warn.push('通知メール: ' + err);
     }
@@ -304,8 +577,9 @@ function leadTemp_(type, message, d, referer) {
   return ['COOL', 'WARM', 'HOT'][Math.min(level, 2)];
 }
 
-/** 「問い合わせ」タブへ記録する。24時間以内の同一メールは既存行にまとめる */
-function leadSave_(site, type, temp, d, referer) {
+/** 「問い合わせ」タブへ記録する。24時間以内の同一メールは既存行にまとめる。{ row, merged } を返す。
+ * route は12列目（送信元ページ）に入れる流入経路の文字列（leadRoute_） */
+function leadSave_(site, type, temp, d, route) {
   const sh = sheet_('問い合わせ');
   const email = clean_(d.email);
   const now = new Date();
@@ -329,17 +603,17 @@ function leadSave_(site, type, temp, d, referer) {
       sh.getRange(r, 10).setValue(cells_([
         (cur ? cur + '\n' : '') + Utilities.formatDate(now, 'Asia/Tokyo', 'MM/dd HH:mm')
         + ' 再送信(' + (LEAD_TYPE_LABELS[type] || type) + ') ' + leadDetail_(type, d)])[0]);
-      return r;
+      return { row: r, merged: true };
     }
   }
 
   sh.appendRow(cells_([
     now, site, LEAD_TYPE_LABELS[type] || type, clean_(d.company), clean_(d.name), '',
     email, clean_(d.tel || d.phone), body_(d.message || d.body),
-    // AI集客ラボは referer を body の外側に載せて送る。d.referer だけ見ると空欄になる
-    leadDetail_(type, d), '', clean_(referer || d.referer), temp, '未対応',
+    // 流入経路は80字で切る clean_ を通さない（入口・送信のページまで入れると80字を超える）
+    leadDetail_(type, d), '', String(route || '').replace(/[\r\n]+/g, ' ').slice(0, 200), temp, '未対応',
   ]));
-  return sh.getLastRow();
+  return { row: sh.getLastRow(), merged: false };
 }
 
 /** 診断・監査の結果を1つの文字列にまとめる（列を増やさず後から読める形にする） */
@@ -369,7 +643,9 @@ function leadDetailBase_(type, d) {
   }
   const known = ['type', 'site', 'name', 'company', 'email', 'tel', 'phone',
                  'message', 'body', 'referer', 'website', 'ts', 'formKey', 'ref', 'cf-turnstile-response', 'turnstile', 'form_secret',
-                 'audit_url', 'audit_score', 'audit_grade', 'audit_fixes'];
+                 'audit_url', 'audit_score', 'audit_grade', 'audit_fixes',
+                 // 流入経路の欄は12列目にまとめて入れる（leadRoute_）。silent は別事業のサイトが送る通知止めの印
+                 'first_ref', 'first_utm', 'first_ad', 'first_land', 'first_at', 'send_page', 'silent'];
   return Object.keys(d)
     .filter(function (k) { return known.indexOf(k) < 0 && k.charAt(0) !== '_'; })
     .map(function (k) { return k + ': ' + JSON.stringify(d[k]); }).join(' / ');
@@ -405,12 +681,22 @@ function cells_(row) {
 }
 
 /** 社内向けの通知。温度を件名に出して、見た瞬間に優先度が分かるようにする */
-function leadNotify_(site, type, temp, d, referer) {
-  const tag = { HOT: '🔥【HOT】', WARM: '🌤【WARM】', COOL: '❄️【COOL】', '営業': '📮【営業の可能性・要確認】' }[temp] || '';
+function leadNotify_(site, type, temp, d, referer, kind, route) {
+  // 売り込み・テストも必ず届ける（見分けを誤っても、担当が件名と判定の理由を見て拾える）
+  const tag = { HOT: '🔥【HOT】', WARM: '🌤【WARM】', COOL: '❄️【COOL】', '営業': '📮【売り込みの可能性】',
+                'テスト': '🧪【テスト】' }[temp] || '';
   const label = LEAD_TYPE_LABELS[type] || type;
-  const lines = ['サイト: ' + site, '種別: ' + label, '温度: ' + temp, '',
-                 '会社・店舗: ' + clean_(d.company), 'お名前: ' + clean_(d.name),
-                 'メール: ' + clean_(d.email), '電話: ' + clean_(d.tel || d.phone), ''];
+  const lines = ['サイト: ' + site, '種別: ' + label, '温度: ' + temp];
+  if (kind) {
+    lines.push(leadKindNote_(kind));
+    if (kind.kind !== '相談') {
+      lines.push('※ 相談でしたら、台帳の温度の列を HOT・WARM・COOL のどれかに直してください（問い合わせの件数に入ります）'
+        + (temp === LEAD_SALES ? '。送り主への自動返信は送っていません' : ''));
+    }
+  }
+  lines.push('');
+  lines.push('会社・店舗: ' + clean_(d.company), 'お名前: ' + clean_(d.name),
+             'メール: ' + clean_(d.email), '電話: ' + clean_(d.tel || d.phone), '');
   if (body_(d.message)) lines.push('ご相談内容:', body_(d.message), '');
   const detail = leadDetail_(type, d);
   if (detail) lines.push('詳細: ' + detail, '');
@@ -422,7 +708,7 @@ function leadNotify_(site, type, temp, d, referer) {
       lines.unshift('※ 配信除外に登録があります（既存のお客様か、配信停止の手続き済みの方。自動のご案内メールは送りません）', '');
     }
   } catch (e) {}
-  lines.push('送信元: ' + (referer || '不明'),
+  lines.push('流入経路: ' + (route || leadRoute_(d, referer)),
              '台帳: ' + book_().getUrl());
 
   const opts = {
@@ -1047,6 +1333,118 @@ function leadFixSite_(b) {
   if (hit.length !== 1) return { ok: false, error: 'その日のサイト名の無い行が1行ではありません', rows: hit.length };
   sh.getRange(hit[0], 2).setValue(m.label);
   return { ok: true, fixed: 1, label: m.label };
+}
+
+/** 台帳の行の受信日（yyyy-MM-dd・日本時間） */
+function leadDay_(v) {
+  return v && typeof v.getTime === 'function' ? Utilities.formatDate(v, 'Asia/Tokyo', 'yyyy-MM-dd')
+    : String(v || '').slice(0, 10).replace(/\//g, '-');
+}
+
+/**
+ * 既にある行の温度を「営業」「テスト」にする（運用者の判断。合言葉つきの action でだけ呼ばれる）。
+ * items: [{ row, day: 'yyyy-MM-dd', kind: '営業' | 'テスト', note }]。行番号と受信日の両方が合う行だけ直す
+ * （並べ替えで行がずれていたら直さない）。名前・本文は変えない。詳細の列の末尾に判断の印を足す。dry なら書かずに照合だけ
+ */
+function leadMark_(b) {
+  const sh = sheet_('問い合わせ');
+  const last = sh.getLastRow();
+  const out = { ok: true, marked: [], skipped: [] };
+  (b.items || []).forEach(function (it) {
+    const row = Number(it.row);
+    const kind = String(it.kind || '');
+    if (!(row >= 2 && row <= last) || (kind !== LEAD_SALES && kind !== LEAD_TEST)) {
+      out.skipped.push({ row: it.row, why: '行番号か kind（営業・テスト）が違う' });
+      return;
+    }
+    const v = sh.getRange(row, 1, 1, 14).getValues()[0];
+    if (leadDay_(v[0]) !== String(it.day || '')) {
+      out.skipped.push({ row: row, why: '受信日が合わない（' + leadDay_(v[0]) + '）' });
+      return;
+    }
+    if (String(v[12] || '') === kind) {
+      out.skipped.push({ row: row, why: '既に' + kind });
+      return;
+    }
+    if (!b.dry) {
+      sh.getRange(row, 13).setValue(kind);
+      const note = '判定: ' + (kind === LEAD_SALES ? '売り込み' : 'テスト') + '（' + leadReason_(it.note || '運用者の判断')
+        + ' ' + Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + '）';
+      sh.getRange(row, 10).setValue(cells_([(String(v[9] || '') ? String(v[9]) + '\n' : '') + note])[0]);
+    }
+    out.marked.push({ row: row, from: String(v[12] || ''), to: kind });
+  });
+  out.dry = !!b.dry;
+  return out;
+}
+
+/**
+ * 既にある行の送信元ページの列に流入経路を入れる（GA4 から推定した分。合言葉つきの action でだけ呼ばれる）。
+ * items: [{ row, day, route }]。入れるのは列が空・URL だけ（流入経路の形になる前の行）・前の推定のときだけ。
+ * route は「推定」で始める（受付で受け取った流入経路と見分けられるように）
+ */
+function leadRouteFix_(b) {
+  const sh = sheet_('問い合わせ');
+  const last = sh.getLastRow();
+  const out = { ok: true, fixed: [], skipped: [] };
+  (b.items || []).forEach(function (it) {
+    const row = Number(it.row);
+    const route = String(it.route || '').replace(/[\r\n]+/g, ' ').slice(0, 200);
+    if (!(row >= 2 && row <= last) || route.indexOf('推定') !== 0) {
+      out.skipped.push({ row: it.row, why: '行番号か route（「推定」で始める）が違う' });
+      return;
+    }
+    const v = sh.getRange(row, 1, 1, 12).getValues()[0];
+    const cur = String(v[11] || '').trim();
+    if (leadDay_(v[0]) !== String(it.day || '')) {
+      out.skipped.push({ row: row, why: '受信日が合わない' });
+      return;
+    }
+    if (cur && !/^https?:\/\/\S+$/.test(cur) && cur.indexOf('推定') !== 0) {
+      out.skipped.push({ row: row, why: '受付で受け取った流入経路がある' });
+      return;
+    }
+    if (!b.dry) sh.getRange(row, 12).setValue(cells_([route])[0]);
+    out.fixed.push({ row: row });
+  });
+  out.dry = !!b.dry;
+  return out;
+}
+
+/** 疎通確認の送信元に残った「不明」（AI集客ラボの受付が参照元の無い送信に入れていた）を空けて、何が入っていたかを書く */
+function probeTidy_() {
+  const sh = probeSheet_();
+  if (sh.getLastRow() < 2) return { ok: true, fixed: 0 };
+  const rg = sh.getRange(2, 4, sh.getLastRow() - 1, 1);
+  const v = rg.getValues();
+  let n = 0;
+  v.forEach(function (r) { if (String(r[0]).trim() === '不明') { r[0] = '未記録（自動の疎通確認は参照元を送らない）'; n++; } });
+  if (n) rg.setValues(v);
+  return { ok: true, fixed: n };
+}
+
+/**
+ * 既にある行を、受付と同じ見分け（leadKind_）にかけた結果を返す。台帳には書かない（見分けの確かめ用。合言葉つき）。
+ * rows: [行番号…]。1行につき Gemini を1回呼ぶ（月の上限に数える）。返すのは行番号・判定・理由だけ（個人の情報は返さない）
+ */
+function leadClassify_(b) {
+  const sh = sheet_('問い合わせ');
+  const last = sh.getLastRow();
+  const keyOf = {};
+  Object.keys(LEAD_TYPE_LABELS).forEach(function (k) { keyOf[LEAD_TYPE_LABELS[k]] = k; });
+  const out = [];
+  (b.rows || []).slice(0, 40).forEach(function (n) {
+    const row = Number(n);
+    if (!(row >= 2 && row <= last)) return;
+    const v = sh.getRange(row, 1, 1, 14).getValues()[0];
+    const type = keyOf[String(v[2])] || 'contact';
+    // 詳細の列に前の判定（「判定: …」）があれば外して渡す（前の答えに引きずられないように）
+    const extra = String(v[9] || '').split('\n').filter(function (x) { return x.indexOf('判定: ') !== 0; }).join(' / ');
+    const d = { company: v[3], name: v[4], email: v[6], tel: v[7], message: v[8], note: extra.slice(0, 300) };
+    const k = leadKind_(String(v[1] || ''), type, d, String(v[6] || ''));
+    out.push({ row: row, kind: k.kind, reason: k.reason, by: k.by });
+  });
+  return { ok: true, items: out };
 }
 
 /**

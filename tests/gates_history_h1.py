@@ -34,12 +34,16 @@ def test_sales_inquiries_are_kept_but_silent():
     i_notify = form.find("leadNotify_(")
     check("form_: 疎通確認の後・記録の前に営業を判定する", 0 <= i_probe < i_sales < i_save, True)
     check("form_: 通知より前に営業を判定する", 0 <= i_sales < i_notify, True)
-    check("form_: 営業なら温度を「営業」にする", "sales ? '営業'" in form, True)
+    # 2026-10-10 から、温度は「相談・売り込み・テスト」の見分け（leadKind_）で決める。正規表現の営業は Gemini が使えないときの代わり
+    # （見分けの動きは gates_history_h82_leads が受付を動かして確かめる）
+    check("form_: 営業なら温度を「営業」にする",
+          ("isSales_(body_(d.message)) ? LEAD_SALES" in form, "const LEAD_SALES = '営業';" in src,
+           "if (k.kind === '売り込み') return LEAD_SALES;" in src), (True, True, True))
     # 通知まで止めると、「弊社サービス」「業務提携」を含む本物の相談を見落とす。通知は印つきで出し、自動返信だけ止める
     check("form_: 営業らしい送信も担当には通知し、自動返信だけ止める",
           (bool(re.search(r"const silent = sales \|\|", form)), "if (!sales)" in form and "leadReply_" in form.split("if (!sales)", 1)[1][:200]),
           (False, True))
-    check("通知: 営業らしい送信に「要確認」の印を付ける", "営業の可能性・要確認" in src, True)
+    check("通知: 営業らしい送信に「売り込みの可能性」の印を付ける（2026-10-10 運用者の指示の表記）", "【売り込みの可能性】" in src, True)
     follow = src.split("function followUp() {", 1)[1].split("\nfunction ", 1)[0]
     check("followUp: 営業の行に送らない", "temp === '営業'" in follow, True)
     tool = src.split("function toolFollow_(", 1)[1].split("\nfunction ", 1)[0]
