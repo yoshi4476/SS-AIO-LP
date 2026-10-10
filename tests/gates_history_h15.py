@@ -127,8 +127,13 @@ def test_existing_videos_are_not_rewritten():
     import article_videos as AV
     import youtube_upload as YT
     led = _ledger()
-    check("今ある動画の台帳に新しい印（desc=lead-long）は無い",
-          [k for k, v in led.items() if (v.get("short") or {}).get("desc")], [])
+    # 印は毎日の記事動画で増えていく（2026-10-10 に1本目）。この門が見るのは「印の無い上げ済みの動画は書き換えない」
+    # なので、台帳の印は lead-long だけであることを確かめたうえで、印を外した形（直しを入れる前の台帳）で確かめる
+    check("台帳の印は desc=lead-long だけ（ほかの印で説明欄を書き換えない）",
+          sorted({(v.get("short") or {}).get("desc") for v in led.values()} - {None} - {YT.LEAD_LONG}), [])
+    for v in led.values():
+        if (v.get("short") or {}).get("desc"):
+            v["short"] = {k: x for k, x in v["short"].items() if k != "desc"}
     # 「いま YouTube にある説明欄」= 今回の直しを入れる前と同じ組み立て（lead_long なし）
     current = {}
     for slug, v in led.items():

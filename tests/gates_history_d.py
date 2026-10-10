@@ -195,7 +195,8 @@ SECRET_NAME = re.compile(r"KEY|TOKEN|SECRET|PASSWORD|PASSWD|WEBHOOK|PRIVATE|CRED
 SECRET_FILE = re.compile(r"(^|/)(\.env(?!\.example$)[^/]*|[^/]*service-account[^/]*\.json|[^/]*-token(-[^/]*)?\.json"
                          r"|(gbp|youtube)-client\.json|secrets\.local\.txt|\.clasprc\.json|credentials\.json)$")
 # 公開が前提の値（IndexNow の鍵はサイト直下にファイルとして置く決まり）
-PUBLIC_KEYS = {"INDEXNOW_KEY"}
+# 公開する決まりの鍵（IndexNow はサイト直下に置く。Turnstile のサイトキーは部品を出す全ページに載る）
+PUBLIC_KEYS = {"INDEXNOW_KEY", "TURNSTILE_SITEKEY"}
 GENERIC_LOCAL = {"info", "contact", "support", "hello", "mail", "office", "sales", "inquiry", "otoiawase",
                  "toiawase", "admin", "webmaster", "noreply", "no-reply", "pr", "press", "recruit", "saiyo", "info.ai"}
 GS_SECRET = re.compile(r"^\s*(?:const|let|var)\s+(\w*(?:SECRET|TOKEN|PASSWORD|API_KEY|APIKEY)\w*)\s*=\s*(['\"])(.*?)\2", re.M)
@@ -203,7 +204,8 @@ EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+")
 
 
 def _placeholder(v):
-    return not v or re.fullmatch(r"X+|x+|YOUR_.*|<.*>|\*+|change-?me", v, re.I) is not None
+    # 「名前_XXXXXXXX」は配るときに gas_deploy.fill が埋める見本（例 FORM_SECRET_XXXXXXXX）
+    return not v or re.fullmatch(r"X+|x+|[A-Z_]*_X{8,}|YOUR_.*|<.*>|\*+|change-?me", v, re.I) is not None
 
 
 def env_secret_values(text):
@@ -258,6 +260,9 @@ def test_hist_no_secrets_in_tracked_files():
     check("検出器: 鍵の無い文は拾わない", secret_hits({"y.md": "OPENAI_API_KEY を .env に書く"}, vals), [])
     check("検出器: .gs の合言葉に本番値", gs_secret_offenders("const SHARED_SECRET = 'a8f3kq0z9wq';"), ["SHARED_SECRET"])
     check("検出器: .gs の合言葉がプレースホルダなら通す", gs_secret_offenders("const SHARED_SECRET = 'XXXXXXXXXXXXXXXX';"), [])
+    check("検出器: 「名前_XXXXXXXX」の見本は通し、埋めた本番値は拾う",
+          (gs_secret_offenders("const FORM_SECRET = 'FORM_SECRET_XXXXXXXX';"),
+           gs_secret_offenders("const FORM_SECRET = 'q7Zk2_9fPw0LmN4vR8tYc1dE6hJ3sA5u';")), ([], ["FORM_SECRET"]))
     check("検出器: 担当者の個人メール", personal_emails('{"contact": "taro@client.co.jp"}'), ["taro@client.co.jp"])
     check("検出器: 代表アドレスは通す", personal_emails('{"contact": "info@client.co.jp"}'), [])
     check("検出器: .env の控えを秘密のファイルと見なす", bool(SECRET_FILE.search(".env.backup-20260821")), True)
