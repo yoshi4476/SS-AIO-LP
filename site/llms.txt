@@ -14,7 +14,7 @@
 - [クリニック・医療機関の集客](https://ai.7senses.co.jp/industry/clinic/): 患者はいま、検索とAI検索で受診先や症状を調べています。（19本）
 - [不動産の集客](https://ai.7senses.co.jp/industry/fudosan/): 不動産は物件ポータルが検索の上位を占め、自社サイトが同じ土俵で戦っても届きません。（13本）
 - [工務店・注文住宅の集客](https://ai.7senses.co.jp/industry/koumuten/): 注文住宅は検討期間が長く、その間に何度も検索されます。（11本）
-- [リフォーム・外壁塗装の集客](https://ai.7senses.co.jp/industry/reform/): リフォーム・外壁塗装は、一括見積もりサイトに顧客を取られやすい領域です。（7本）
+- [リフォーム・外壁塗装の集客](https://ai.7senses.co.jp/industry/reform/): リフォーム・外壁塗装は、一括見積もりサイトに顧客を取られやすい領域です。（8本）
 - [士業（税理士・社労士ほか）の集客](https://ai.7senses.co.jp/industry/shigyou/): 士業は、相談される前に比較されます。（7本）
 - [BtoB・法人向けサービスの集客](https://ai.7senses.co.jp/industry/btob/): BtoBは検討期間が長く、担当者・決裁者・現場と読む人が変わります。（6本）
 
@@ -176,4 +176,5 @@
 - [AIOでGeminiの引用に載る方法は？18語の実測と5つの手順](https://ai.7senses.co.jp/aio/gemini-inyou-noru-houhou/): Geminiの引用に載るには、Google検索の索引に入り、質問1つに1ページで答えることが土台です。当サイトがGeminiに18語を聞いた実測では、出典に入った3語はどれも、聞かれた語1つに絞ったページが選ばれました。Google-Extendedの確認から計測まで5つの手順で解説します。
 - [AIOの異常検知アラート設定｜引用と流入の急減を3つの道具で知る](https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/): AIOの異常検知アラートは、GA4のカスタムインサイト・Search Consoleの週次比較・クローラーの到達確認の3つを組み合わせて設定します。急減に気づける仕組みの作り方と、小さなサイトで誤報を出さないしきい値の決め方を、当社の運用から解説します。
 - [AIOの順位が変動する理由は？原因を切り分ける5つの分析手順](https://ai.7senses.co.jp/aio/aio-junni-hendou-riyuu/): AIOの順位が変動する主な理由は、AIが回答のたびに出典を選び直すことと、通常の検索順位そのものが動くことの2つです。変動の原因を4種類に分け、Search Consoleで原因を切り分ける5つの分析手順と、手を打つべき変動・待つべき変動の見分け方を解説します。
+- [リフォーム会社のAIO対策｜工事別ページで依頼先に選ばれる5つの準備](https://ai.7senses.co.jp/aio/reform-kaisha-aio-taisaku/): リフォーム会社のAIO対策は、水回り・内装・増改築など工事の種類ごとに、価格の決まり方・施工事例の条件・許可と保険を書き分けることから始まります。AIが依頼先を比べる材料と5つの準備、順位による優先順位の分け方、成果の測り方を解説します。
 
