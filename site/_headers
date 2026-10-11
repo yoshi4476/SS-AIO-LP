@@ -1,8 +1,13 @@
+# CSP は読み込み先（script・img・style・connect・frame・default）を縛らない。計測タグ・ロボットよけ（Turnstile）・
+# YouTube の埋め込み・JSON-LD を、新しく足したときに黙って止めないため。枠への埋め込み・<base>・<object>・
+# フォームの送り先（全ページで同じドメインの /lp/・/api/*・/tools/ だけ）だけを閉じる。門 gates_history_h89_headers
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests
 
 /css/*
   Cache-Control: public, max-age=604800

@@ -1052,11 +1052,16 @@ def youtube_blocked(dest: Path):
         f = dest / rel
         if not f.is_file():
             continue
-        m = re.search(r"Content-Security-Policy:\s*(.+)", f.read_text(encoding="utf-8", errors="ignore"))
+        m = re.search(r"^[ \t]*Content-Security-Policy:[ \t]*(.+)$", f.read_text(encoding="utf-8", errors="ignore"),
+                      re.I | re.M)
         if not m:
             continue
-        pol = {p.strip().split(" ", 1)[0]: p.strip() for p in m.group(1).split(";") if p.strip()}
-        rule = pol.get("frame-src") or pol.get("child-src") or pol.get("default-src") or ""
+        pol = {p.strip().split(" ", 1)[0].lower(): p.strip() for p in m.group(1).split(";") if p.strip()}
+        rule = pol.get("frame-src") or pol.get("child-src") or pol.get("default-src")
+        # 枠の読み込み先を縛る項目が無い CSP（埋め込まれ方・フォームの送り先だけを閉じる守りの形）は YouTube も通す。
+        # 以前は空を「許さない」と読み、補助金に守りの CSP を足すと記事の動画が外れるところだった（2026-10-11）
+        if not rule:
+            return False
         return "youtube-nocookie.com" not in rule and "*" not in rule.split()
     return False
 
