@@ -106,6 +106,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TURNSTILE_SITEKEY: ${{ secrets.TURNSTILE_SITEKEY }}
           TURNSTILE_SECRET: ${{ secrets.TURNSTILE_SECRET }}
+          # AI紹介チェックを使ってよい別事業のサイト（{"<Origin>": "<台帳のサイトID>"}）。お客様のドメインを公開側に書かないため Secrets に置く
+          AI_CHECK_PARTNERS: ${{ secrets.AI_CHECK_PARTNERS }}
         run: |
           # 公開前の門: sitemapの404/noindex・git の衝突マーカーがあれば公開しない（seo_audit --gate）
           python3 scripts/seo_audit.py --gate || { echo "::error::サイト監査の門で止めました（上の ::error:: を直す）"; exit 1; }
@@ -127,7 +129,7 @@ jobs:
           npx --yes wrangler@4.121.0 pages project create ss-aio-lp --production-branch=master 2>/dev/null || echo "プロジェクトは作成済み"
           # AI紹介チェック（functions/api/ai-check.js）が使う鍵。Gemini の検索つき回答は有料（無料枠では使えない）なので、
           # 回数の上限（月の検索5,000回・同じ回線1日2回）と、ロボットよけ（Turnstile）の鍵を一緒に入れる
-          for k in GEMINI_API_KEY TURNSTILE_SITEKEY TURNSTILE_SECRET; do
+          for k in GEMINI_API_KEY TURNSTILE_SITEKEY TURNSTILE_SECRET AI_CHECK_PARTNERS; do
             val="${!k}"
             [ -z "$val" ] && continue
             printf '%s' "$val" | npx --yes wrangler@4.121.0 pages secret put "$k" --project-name=ss-aio-lp > /dev/null 2>&1 \

@@ -51,9 +51,55 @@ async function ask(env, q) {
   return { text, hosts, searches };
 }
 
-export async function onRequestPost({ request, env }) {
+// 運用者が許可した別事業のサイトのページから、利用者のブラウザが直接呼ぶ（2026-10-11 運用者の承認）。
+// 許すサイトは Cloudflare の環境変数 AI_CHECK_PARTNERS（{"<Origin>": "<台帳のサイトID>"}。公開のリポジトリに
+// お客様の名前・ドメインを書かないため。deploy.yml が GitHub Secrets から入れる）。部品は同じ Turnstile（許可ドメインに
+// そのサイトを足す）で、ロボットよけの答えと回数の上限（利用者の回線とメール）はこれまでと同じに効かせる。
+// CORS は * にせず、その Origin だけを返す。ほかの Origin・Origin なしはこれまでどおり
+function partnerOf(request, env) {
+  const origin = request.headers.get("Origin") || "";
+  if (!origin) return null;
+  let map = {};
+  try { map = JSON.parse(env.AI_CHECK_PARTNERS || "{}") || {}; } catch (_) { map = {}; }
+  const site = Object.prototype.hasOwnProperty.call(map, origin) ? map[origin] : "";
+  return typeof site === "string" && /^[a-z0-9-]{1,40}$/.test(site) ? { origin, site } : null;
+}
+
+function withCors(res, origin) {
+  const h = new Headers(res.headers);
+  h.set("Access-Control-Allow-Origin", origin);
+  h.append("Vary", "Origin");
+  return new Response(res.body, { status: res.status, headers: h });
+}
+
+export async function onRequestPost(context) {
+  const partner = partnerOf(context.request, context.env || {});
+  const res = await check(context, partner);
+  return partner ? withCors(res, partner.origin) : res;
+}
+
+// ブラウザが別のドメインへ JSON を送る前の問い合わせ。許可したサイトにだけ答え、ほかは次の処理へ渡す（これまでどおり）
+export async function onRequestOptions(context) {
+  const partner = partnerOf(context.request, context.env || {});
+  if (!partner) return context.next();
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": partner.origin,
+      "Access-Control-Allow-Methods": "POST",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Max-Age": "86400",
+      Vary: "Origin",
+    },
+  });
+}
+
+async function check({ request, env }, partner) {
   let d;
   try { d = await request.json(); } catch (_) { return Response.json({ ok: false, error: "送信の形式が正しくありません。" }, { status: 400 }); }
+  // 別事業のサイトからの申し込みは、記録をそのサイトの名義（silent）にし、当社名義のメール（結果の送付・自動返信・後追い・
+  // 測り直し）を出さない。測り直し・改善の案内の申し込みも受けない（どちらも当社名義のメールになるため）
+  if (partner) { delete d.recheck; delete d.optin; }
   const v = (k, n = 200) => String(d[k] || "").trim().slice(0, n);
   if (v("_gotcha")) return Response.json({ ok: false, error: "送信できませんでした。" }, { status: 400 });
   const ind = v("industry", 20), area = v("area", 40), company = v("company", 80), site = v("site", 300);
@@ -121,7 +167,7 @@ export async function onRequestPost({ request, env }) {
       : "AIへの問い合わせに失敗しました。時間をおいてもう一度お試しください。";
     results = null;
     // 受け付けた連絡先は残し、結果は人が送る
-    await record(env, request, { ind, area, company, site, name, email, word, pages, first, summary: "チェック未実行（" + e.message + "）" });
+    await record(env, request, { ind, area, company, site, name, email, word, pages, first, partner, summary: "チェック未実行（" + e.message + "）" });
     return Response.json({ ok: false, error: msg }, { status: 503 });
   }
   const cited = results.filter((r) => r.cited).length, mentioned = results.filter((r) => r.mentioned).length;
@@ -131,7 +177,7 @@ export async function onRequestPost({ request, env }) {
   const top = Object.keys(freq).sort((a, b) => freq[b] - freq[a]).slice(0, 3);
   const summary = `AI紹介チェック: ${area} ${word}｜出典に御社サイト ${cited}/3問・回答に社名 ${mentioned}/3問`
     + (top.length ? `\n主な出典: ${top.join("、")}` : "");
-  await record(env, request, { ind, area, company, site, name, email, word, pages, first, summary });
+  await record(env, request, { ind, area, company, site, name, email, word, pages, first, partner, summary });
   // 翌月の測り直しは、本人が印をつけたときだけ（同意のない配信はしない）
   const searches = results.reduce((n, r) => n + (r.searches || 1), 0);
   await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned, site, ip, searches,
@@ -161,11 +207,13 @@ async function record(env, request, x) {
   if (!env.GAS_WEBHOOK_URL) return;
   const data = { name: x.name, company: x.company, email: x.email, form_type: "AI紹介チェック（診断）", pages: x.pages || "", ...(x.first || {}),
     message: `${x.summary}\n業種: ${x.word}／地域: ${x.area}／サイト: ${x.site || "未入力"}` };
+  // 別事業のサイトからの申し込みはそのサイトの名義で記録し、silent で管制塔の通知・自動返信を止める（後追いは AI集客ラボの行だけ）
+  const label = x.partner ? x.partner.site : "ai-lab";
   try {
     await fetch(env.GAS_WEBHOOK_URL, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ secret: env.GAS_SHARED_SECRET || "", site: "ai-lab",
-        data: { ...data, site: "ai-lab", type: "diagnosis" }, referer: request.headers.get("referer") || "" }),
+      body: JSON.stringify({ secret: env.GAS_SHARED_SECRET || "", site: label, ...(x.partner ? { silent: true } : {}),
+        data: { ...data, site: label, type: "diagnosis" }, referer: request.headers.get("referer") || "" }),
     });
   } catch (_) { /* 台帳に書けなくても結果は返す */ }
 }

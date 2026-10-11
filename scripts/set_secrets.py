@@ -54,6 +54,9 @@ TO_GITHUB = {
     "FTP_CREDENTIALS_JSON", "WP_CREDENTIALS_JSON",
     # AI診断のロボットよけ（Cloudflare Turnstile）。deploy.yml が Cloudflare Pages に入れる
     "TURNSTILE_SITEKEY", "TURNSTILE_SECRET",
+    # AI紹介チェックを使ってよい別事業のサイト（{"<Origin>": "<台帳のサイトID>"}）。deploy.yml が Cloudflare Pages に入れる。
+    # 鍵ではないが、お客様のドメインを公開側に書かないため Secrets に置く（2026-10-11）
+    "AI_CHECK_PARTNERS",
     # 非公開のデータ（yoshi4476/ss-aio-private）を CI で読み書きする鍵。無ければ SITE_PUSH_TOKEN で読む
     # （.github/actions/private-data。2026-10-10 守秘義務）
     "PRIVATE_DATA_TOKEN",
