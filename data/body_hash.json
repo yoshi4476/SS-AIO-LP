@@ -20,7 +20,7 @@
 "modified": "2026-09-23"
 },
 "aio-dairiten-erabikata": {
-"hash": "ce2b622d93c5ff8dc558fbbd49b5dec1",
+"hash": "b994d9f98be738c193ebcde5d63665a0",
 "modified": "2026-10-04"
 },
 "aio-donyu-jirei": {
@@ -84,8 +84,12 @@
 "modified": "2026-08-12"
 },
 "aio-taisaku-ctr": {
-"hash": "09b586d7831a929ef177a704e06ce927",
+"hash": "a5da4dbe6dfb54b841d30925ef79a29b",
 "modified": "2026-10-11"
+},
+"aio-taisaku-dairiten": {
+"hash": "572b0605f27865db59bf1d8478d62e2d",
+"modified": "2026-10-12"
 },
 "aio-taisaku-donyu-hoho": {
 "hash": "7c9a9e2376223c4a6511b942fece10b2",
