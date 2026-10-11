@@ -239,6 +239,8 @@ function doPost(e) {
       // ゲートの不具合で実行が途中で落ちると、KWだけが執筆中で取り残される
       case 'unclaim_kw':  return json_(unclaimKw_(body.site, body.keywords));
       case 'publish_log': return json_(publishLog_(body));
+      // 公開済みなのに執筆中のまま止まった語を「公開済み」にする（記事作成ログには足さない。kw_published_sync.py）
+      case 'kw_published': return json_(kwPublished_(body));
       case 'add_kw':      return json_(addKw_(body.site, body.keywords || [], body.ctx));
       case 'error_log':   return json_(errorLog_(body));
       case 'kpi_log':     return json_(kpiLog_(body));
@@ -616,27 +618,47 @@ function publishLog_(b) {
     new Date(), siteLabel_(b.site), b.title || '', b.keyword || '', b.category || '',
     b.score || '', b.chars || '', b.url || '', b.note || '',
   ]);
-  if (b.keyword) {
-    const sh = sheet_('KW台帳');
-    const rows = kwRows_();
-    // 完全一致だと表記ゆれ（「aio 診断」と「aio診断」）で公開済みにならず、未着手のまま
-    // 残って同じ語がまた書かれる。claim_kw と同じく正規化して照合する
-    // 完全一致の行を優先し、無ければ生きている（対象外・取り下げでない）行に当てる
-    const want = normKw_(b.keyword);
-    let hit = -1;
-    for (let i = 0; i < rows.length; i++) {
-      if (String(rows[i][0]) !== b.site || normKw_(rows[i][1]) !== want) continue;
-      if (String(rows[i][1]) === b.keyword) { hit = i; break; }
-      const st = String(rows[i][2]).trim();
-      if (hit < 0 && st !== '対象外' && st !== '取り下げ') hit = i;
-    }
-    if (hit >= 0) {
-      sh.getRange(hit + 2, 3).setValue('公開済み');
-      sh.getRange(hit + 2, 9).setValue(new Date());
-      sh.getRange(hit + 2, 10).setValue(b.url || '');
-    }
-  }
+  if (b.keyword) markKwPublished_(b.site, b.keyword, b.url);
   return { ok: true };
+}
+
+/**
+ * KW台帳の語を「公開済み」にする（公開の記録・kw_published から）。どの行に当てたか（2始まりの行番号・無ければ 0）を返す。
+ * 完全一致だと表記ゆれ（「aio 診断」と「aio診断」）で公開済みにならず、未着手のまま
+ * 残って同じ語がまた書かれる。claim_kw と同じく正規化して照合する
+ * 完全一致の行を優先し、無ければ生きている（対象外・取り下げでない）行に当てる
+ */
+function markKwPublished_(site, keyword, url) {
+  const sh = sheet_('KW台帳');
+  const rows = kwRows_();
+  const want = normKw_(keyword);
+  let hit = -1;
+  for (let i = 0; i < rows.length; i++) {
+    if (String(rows[i][0]) !== site || normKw_(rows[i][1]) !== want) continue;
+    if (String(rows[i][1]) === keyword) { hit = i; break; }
+    const st = String(rows[i][2]).trim();
+    if (hit < 0 && st !== '対象外' && st !== '取り下げ') hit = i;
+  }
+  if (hit < 0) return 0;
+  sh.getRange(hit + 2, 3).setValue('公開済み');
+  sh.getRange(hit + 2, 9).setValue(new Date());
+  sh.getRange(hit + 2, 10).setValue(url || '');
+  return hit + 2;
+}
+
+/**
+ * 公開済みなのに「執筆中」のまま止まった語を直す（kw_published_sync.py。合言葉つきの action でだけ呼ばれる）。
+ * 記事作成ログには足さない（公開の記録を2回数えない）。執筆中の行だけに当てる
+ */
+function kwPublished_(b) {
+  const rows = kwRows_();
+  const want = normKw_(b.keyword);
+  const busy = rows.some(function (r) {
+    return String(r[0]) === b.site && normKw_(r[1]) === want && String(r[2]).trim() === '執筆中';
+  });
+  if (!busy) return { ok: false, error: '執筆中の行がありません' };
+  const row = markKwPublished_(b.site, b.keyword, b.url);
+  return row ? { ok: true, row: row } : { ok: false, error: '台帳に当てる行がありません' };
 }
 
 /** 救済のTODOを同期する。今回のTODOに無い「未対応」の同じ工程の行は「解消」にする */
