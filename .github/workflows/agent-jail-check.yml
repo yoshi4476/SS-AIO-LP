@@ -99,6 +99,79 @@ jobs:
         if: always()
         with: {mode: save}
 
+  # 範囲ごとに AI を回す手順（scripts/agent_passes.sh。救済・週次・自動修復の書き直しで使う）を、本物のランナーで
+  # 範囲（自社・お客様の社ごと）ごとに1回ずつ回し、範囲の中でほかの社の原稿が見えず、通行証で管制塔に入れ、
+  # 終わったら全部が元に戻るかを確かめる（2026-10-12。記事は書かない。AI は各範囲で1ターンだけ答える）
+  passes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/private-data
+        with:
+          token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+
+      - uses: ./.github/actions/py-env
+
+      - name: 依存インストール
+        run: |
+          pip install -q -r requirements.txt
+          npm install -g @anthropic-ai/claude-code > /tmp/npm.log 2>&1 || { cat /tmp/npm.log; exit 1; }
+
+      - name: AIの作業場から鍵を外す（範囲の一覧と範囲ごとの通行証）
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          HUB_AGENT_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+        run: |
+          find articles site/images data/duo_scripts -type f | sort | xargs sha1sum > /tmp/before.txt
+          python scripts/agent_guard.py --lock
+          python scripts/private_store.py --scopes > "$RUNNER_TEMP/agent_scopes"
+          echo "範囲の数: $(wc -l < "$RUNNER_TEMP/agent_scopes")"
+          mkdir -p "$RUNNER_TEMP/hub_tokens"
+          for sc in $(cat "$RUNNER_TEMP/agent_scopes"); do
+            python scripts/hub_token.py --scope "$sc" --out "$RUNNER_TEMP/hub_tokens/$sc" || true
+          done
+
+      - name: 範囲ごとに AI を回す
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+        run: |
+          python scripts/agent_guard.py --verify || exit 1
+          cat > /tmp/passes_prompt.txt <<'EOF'
+          これは範囲の点検です。次の2つだけを行い、各行に『番号: 結果』を書いてください。ファイルは変えないこと。
+          1) Glob で articles/*.md の数を数える
+          2) Bash で python scripts/kw_status.py を実行し、出力の最後の1行を書く
+          EOF
+          bash scripts/agent_passes.sh /tmp/passes_prompt.txt 6 2>&1 | tee /tmp/passes.log | grep -E "^SCOPE=|^AGENT_|^[0-9]: " || true
+
+      - name: AIが触ってはいけない場所を戻す
+        if: always()
+        run: python scripts/agent_guard.py --protect
+
+      - name: AIの作業場へ鍵を戻す
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python scripts/private_store.py --scope all || true
+          python scripts/agent_guard.py --unlock
+          find articles site/images data/duo_scripts -type f | sort | xargs sha1sum > /tmp/after.txt
+          if cmp -s /tmp/before.txt /tmp/after.txt; then echo "PASSES_RESTORED=yes"; else
+            echo "::error::範囲ごとの回の後に、原稿・画像・台本が元に戻っていません"; diff /tmp/before.txt /tmp/after.txt | wc -l; exit 1; fi
+          n=$(grep -c '^SCOPE=narrowed' /tmp/passes.log || true)
+          [ "$n" = "$(wc -l < "$RUNNER_TEMP/agent_scopes")" ] && echo "PASSES_SCOPES=ok（$n 回）" \
+            || { echo "::error::範囲ごとに絞れていません（$n 回）"; exit 1; }
+
+      # 非公開のデータを取ったジョブは最後に必ず残す（書くものは無く、書けるかの下見だけになる）
+      - uses: ./.github/actions/private-data
+        if: always()
+        with: {mode: save}
+
   # 不具合を直す AI を動かすコンテナ（selfheal の repair と同じ作り）が、ランナーのプロセス・docker・ファイル・鍵に
   # 届かず、claude は動き、終われば中の処理が残らないかを確かめる（2026-10-11 の点検。記事も修復も書かない）
   repair-container:
