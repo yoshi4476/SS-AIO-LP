@@ -44,7 +44,7 @@ TEXT_EXT = {".py", ".md", ".json", ".jsonl", ".yml", ".yaml", ".txt", ".html", "
 URL = re.compile(r"https?://([^/\s\"'<>)]+)[^\s\"'<>)]*")
 # 名前を出してよいか・slug を数えるかで、ログの出し方を替えた道具（お客様の記事の slug を CI のログに出さない）
 QUIET_TOOLS = ("build.py", "publish_gap.py", "fix_block_breaks.py", "split_paragraphs.py", "split_sentences.py",
-               "anchor_audit.py", "shorten_anchors.py", "cta_fill.py")
+               "anchor_audit.py", "shorten_anchors.py", "cta_fill.py", "article_videos.py")
 
 
 def _tracked():
@@ -361,6 +361,12 @@ def test_ci_logs_count_client_articles_instead_of_naming_them():
           ("published_now.txt" in src, "PS.shown(s)" in src), (True, True))
     wf = {p.name: p.read_text(encoding="utf-8") for p in (ROOT / ".github" / "workflows").glob("*.yml")}
     pm, ar = wf["pipeline-multi.yml"], wf["approve-review.yml"]
+    # 2026-10-11: 動画の工程が別事業の記事の slug をログに出していた（10/07 の1回）。成果物は誰でも落とせる
+    av = (ROOT / "scripts" / "article_videos.py").read_text(encoding="utf-8")
+    check("動画の工程: 記事の名前は _shown を通し、TikTok 用の成果物は自社の記事の分（tiktok/）だけ",
+          # 素の slug[:40] が残ってよいのは自社（ai-lab）の調査ページの動画の1行だけ
+          (len(re.findall(r"slug'?\]?\[:40\]", av)), "if not _client(slug) and out.is_file():" in av,
+           "path: automation/video/tiktok/*.short.mp4" in wf["daily-video.yml"]), (1, True, True))
     check("ログの「○ slug」を拾う処理が残っていない", [n for n, t in wf.items() if "] ○ " in t], [])
     check("警告に slug をそのまま出さない（--shown を通す）",
           [n for n, t in wf.items() if re.search(r"::warning::\$slug\b", t)], [])

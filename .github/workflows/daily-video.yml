@@ -115,12 +115,13 @@ jobs:
             | tee /tmp/video.log | grep --line-buffered '^VIDEO_TIME' || true
           tail -10 /tmp/video.log
           rm -f youtube-client.json youtube-token.json youtube-token-*.json
-      # TikTok は審査前だと自動投稿が非公開になるため、縦型の mp4 を成果物に残して手で上げる（30日保存）
+      # TikTok は審査前だと自動投稿が非公開になるため、縦型の mp4 を成果物に残して手で上げる（30日保存）。
+      # public のリポジトリの成果物は誰でも落とせるので、自社の記事の分だけ（article_videos が tiktok/ に写す）
       - name: 縦型ショートを成果物に残す（TikTok 用）
         uses: actions/upload-artifact@v4
         with:
           name: shorts-${{ github.run_id }}
-          path: automation/video/*.short.mp4
+          path: automation/video/tiktok/*.short.mp4
           if-no-files-found: ignore
           retention-days: 30
       - name: 記事に埋めてコミット

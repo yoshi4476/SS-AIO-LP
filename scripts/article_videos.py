@@ -27,6 +27,7 @@
 import argparse
 import json
 import re
+import shutil
 import sys
 import time
 from datetime import date, timedelta
@@ -36,6 +37,17 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 LEDGER = ROOT / "data" / "videos.json"
 FINDINGS = ROOT / "automation" / "logs" / "findings.txt"
+
+
+def _client(slug):
+    import private_store as PS
+    return PS.client_slug(slug)
+
+
+def _shown(slug):
+    """CI のログは public。お客様の社の記事は slug・題・動画のIDを出さない（private_store.shown と同じ）"""
+    import private_store as PS
+    return PS.shown(slug)[:40]
 
 
 def load():
@@ -196,9 +208,9 @@ def hide_out_of_scope(ledger, redo, set_privacy):
                 if vid:
                     set_privacy(vid, "unlisted")
             rec["hidden"] = {"date": date.today().isoformat(), "why": "数字が変わった・動画を作る範囲の外"}
-            print(f"   限定公開に下げました（範囲外・数字が変わった）: {slug[:40]}")
+            print(f"   限定公開に下げました（範囲外・数字が変わった）: {_shown(slug)}")
         except Exception as e:
-            print(f"   × 限定公開に下げられませんでした {slug[:40]}: {str(e)[:80]}")
+            print(f"   × 限定公開に下げられませんでした {_shown(slug)}: {str(e)[:80]}")
     return keep
 
 
@@ -292,7 +304,7 @@ def shorts(ledger, limit, token, public):
             with VM.timed("short.script"):
                 sc = DS.load_script(slug) or DS.write_script(slug)
             if not sc:
-                print(f"   × short {slug[:40]}: 台本が検査に通りませんでした")
+                print(f"   × short {_shown(slug)}: 台本が検査に通りませんでした")
                 continue
             out = VM.OUT / f"{slug}.short.mp4"
             # 置き場は通常の動画を作ったときにだけできていた。通常の動画が0本の回（YouTube で検索されていない記事
@@ -310,11 +322,16 @@ def shorts(ledger, limit, token, public):
                     rec["youtube"] = YT.upload(out, slug, public=public, quiet=True, short_title=sc.get("title", ""),
                                                lead_long=lead)
             ledger[slug]["short"] = rec
+            if not _client(slug) and out.is_file():
+                tk = VM.OUT / "tiktok"
+                tk.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(out, tk / out.name)
             made += 1
-            print(f"   ○ short {slug[:40]:<40} {sec:.0f}秒" + (f" → youtube.com/shorts/{rec['youtube']}" if token else ""))
+            print(f"   ○ short {_shown(slug):<40} {sec:.0f}秒"
+                  + (f" → youtube.com/shorts/{rec['youtube']}" if token and not _client(slug) else ""))
         except Exception as e:
             SHORT_FAILS.append(slug)
-            print(f"   × short {slug[:40]}: {str(e)[:300]}")
+            print(f"   × short {_shown(slug)}: {str(e)[:300]}")
             if "uploadLimitExceeded" in str(e):
                 # 1日のアップロード上限（API は手動より厳しい。2026-10-03 は約10本で当たった）。
                 # 続けても作っては失敗するだけなので、この回はやめる。翌日の回で続きから上がる
@@ -370,10 +387,14 @@ def main():
     print(f"■ 記事動画: 今回 {len(rows)}本（作り直し {len(redo)}本待ち・直近{a.days}日の未作成） / "
           f"YouTubeの鍵 {'あり' if token else '無し'}")
     for r in rows:
+        if _client(r["slug"]):
+            print(f"   [{r['site']:<9}] {'作り直し' if r.get('redo') else r['date']} （お客様の記事）")
+            continue
         print(f"   [{r['site']:<9}] {'作り直し' if r.get('redo') else r['date']} {r['title'][:44]}"
               + (f"\n               → 動画の題: {r['yt']['title']}" if r.get("yt") else ""))
     for r, j in skipped:
-        print(f"   [{r['site']:<9}] 通常の動画なし（ショートだけ） {r['slug'][:40]}: {j['reason']}")
+        print(f"   [{r['site']:<9}] 通常の動画なし（ショートだけ） {_shown(r['slug'])}"
+              + ("" if _client(r["slug"]) else f": {j['reason']}"))
     if not a.write:
         print(f"YT_TOKEN={'yes' if token else 'missing'}")
         return 0
@@ -421,10 +442,11 @@ def main():
                 rec["site"] = old.get("site", rec["site"])
             ledger[r["slug"]] = rec
             made += 1
-            print(f"   ○ {r['slug'][:40]:<40} {sec:.0f}秒 {fmt}" + (f" → youtu.be/{rec['youtube']}" if token else ""))
+            print(f"   ○ {_shown(r['slug']):<40} {sec:.0f}秒 {fmt}"
+                  + (f" → youtu.be/{rec['youtube']}" if token and not _client(r["slug"]) else ""))
         except Exception as e:
             ok = False
-            print(f"   × {r['slug'][:40]:<40} {str(e)[:80]}")
+            print(f"   × {_shown(r['slug']):<40} {str(e)[:80]}")
             if "uploadLimitExceeded" in str(e):
                 print("   要対応: YouTube の1日のアップロード上限に達しました。翌日の回で続きを上げます")
                 a.shorts = 0   # 同じ回のショートも上がらない
