@@ -135,6 +135,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-log-bunseki-tool-hikaku/steps.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-log-bunseki-tool-hikaku/ng-ok.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/aio-mojisuu/</loc><lastmod>2026-10-11</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-mojisuu/nagasa-kimekata.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-mojisuu/mizumashi.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-mojisuu/minaoshi.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/aio/aio-seo-audit/</loc><lastmod>2026-09-15</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-seo-audit/items.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-seo-audit/steps.png</image:loc></image:image>
