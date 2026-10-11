@@ -327,7 +327,8 @@ def order_problems(y, consumers):
         present = False
         for n, r in runs:
             for line in r.splitlines():
-                if re.search(r">\s*" + re.escape(KEY_FILE), line):
+                # agent_guard --lock は鍵ファイルの場所に読むだけの許可証を置く（AI の手順の道具はそれを読む）
+                if re.search(r">\s*" + re.escape(KEY_FILE), line) or "agent_guard.py --lock" in line:
                     present = True
                 elif re.search(r"\brm\b[^\n]*" + re.escape(KEY_FILE), line):
                     present = False

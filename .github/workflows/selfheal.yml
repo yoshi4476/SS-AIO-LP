@@ -13,7 +13,7 @@ on:
     workflows: ["Multi-Site Article Pipeline", "Article Pipeline (Rescue)", "Weekly Optimize",
                 "Monthly Consulting Report", "Weekly Newsletter Digest", "Deploy to Cloudflare Pages",
                 "記事動画（毎日1本）", "業種調査", "業種調査の聞き足し", "Research Refresh", "Photo Shelf", "監修の記録", "Focus Mode",
-                "Daily KPI"]
+                "Daily KPI", "AIの作業場の確かめ"]
     types: [completed]
   schedule:
     - cron: "0 15 * * *"   # JST 00:00 — 1日の最後に検査だけはかける（取りこぼしの見張りの最後の砦も兼ねる）
@@ -506,7 +506,7 @@ jobs:
     if: >-
       github.event_name == 'workflow_run' &&
       github.event.workflow_run.conclusion == 'failure' &&
-      contains(fromJSON('["記事動画（毎日1本）", "業種調査", "業種調査の聞き足し", "Research Refresh", "Photo Shelf", "監修の記録", "Deploy to Cloudflare Pages", "Focus Mode", "Daily KPI"]'), github.event.workflow_run.name)
+      contains(fromJSON('["記事動画（毎日1本）", "業種調査", "業種調査の聞き足し", "Research Refresh", "Photo Shelf", "監修の記録", "Deploy to Cloudflare Pages", "Focus Mode", "Daily KPI", "AIの作業場の確かめ"]'), github.event.workflow_run.name)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
