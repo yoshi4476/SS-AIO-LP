@@ -32,14 +32,22 @@ def term_id(term):
     return hashlib.md5(term.encode("utf-8")).hexdigest()[:10]
 
 
+def _explains(keyword, term):
+    """その用語を説明する記事（狙う語が「<用語>とは」）か。括弧の中の正式名は外して比べる"""
+    short = re.sub(r"（[^）]*）|\([^)]*\)", "", term).strip().lower().replace(" ", "")
+    return bool(short) and keyword.lower().replace(" ", "").replace("　", "") == short + "とは"
+
+
 def collect(site_id, only=None):
-    """公開記事の定義ブロックを集める。同じ用語は新しい記事のものを採る。
+    """公開記事の定義ブロックを集める。同じ用語は、その用語を説明する記事（狙う語が「<用語>とは」）のものを採り、
+    無ければ新しい記事のものを採る。新しい記事を優先するだけだと、AIO のような中心の用語の定義が記事の増えるたびに
+    入れ替わり、トップの図の説明と食い違った（2026-10-11 に「aio 文字数」の記事の定義が「AIOとは」の記事の定義を上書きした）。
 
     only: 実際に公開する記事の slug の集合（build.py が渡す）。score だけで絞ると、
     観点の足切りや監修待ちで止めた記事まで出典になり、用語集から404へリンクする
     """
     import sites as S
-    out, pubs = {}, []
+    out, pubs, owner = {}, [], {}
     for p in sorted((ROOT / "articles").glob("*.md")):   # 名前順（ランナーごとにファイルの並びが違い、同じ日付の並びが毎回変わった）
         if only is not None and p.stem not in only:
             continue
@@ -67,8 +75,11 @@ def collect(site_id, only=None):
                 continue
             rec = {"term": term, "id": term_id(term), "definition": definition[:300],
                    "slug": p.stem, "category": g("category"), "title": g("title"), "date": g("date")}
-            if term not in out or out[term]["date"] < rec["date"]:
+            own = _explains(g("keyword"), term)
+            cur = out.get(term)
+            if cur is None or (own and not owner.get(term)) or (own == owner.get(term, False) and cur["date"] < rec["date"]):
                 out[term] = rec
+                owner[term] = own
     for rec in out.values():
         t = target_of(rec, pubs)
         rec.update({"target": t["slug"], "target_title": t["title"], "target_category": t["category"]})
