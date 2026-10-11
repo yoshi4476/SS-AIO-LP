@@ -176,17 +176,15 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <form novalidate data-pages>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
       <div class="row">
-        <label>業種
-          <select name="industry" required>
-            <option value="dental">歯科医院</option><option value="clinic">クリニック</option>
-            <option value="fudosan">不動産会社</option><option value="koumuten">工務店</option><option value="reform">リフォーム会社</option>
-            <option value="zeirishi">税理士事務所</option><option value="sharoushi">社労士事務所</option><option value="gyousei">行政書士事務所</option>
-            <option value="shihou">司法書士事務所</option><option value="bengoshi">法律事務所</option><option value="other">その他（下に業種名を入力）</option>
-          </select>
+        <label>業種 <small>（候補から選ぶか、そのまま入力。どの業種でも使えます）</small>
+          <input name="word" required maxlength="20" list="ac-industries" placeholder="例：美容室、動物病院、居酒屋" autocomplete="off">
+          <datalist id="ac-industries">
+            <option value="歯科医院"><option value="クリニック"><option value="不動産会社"><option value="工務店"><option value="リフォーム会社">
+            <option value="税理士事務所"><option value="社労士事務所"><option value="行政書士事務所"><option value="司法書士事務所"><option value="法律事務所">
+          </datalist>
         </label>
         <label>地域 <small>（例：大阪市北区、梅田、横浜市）</small><input name="area" required placeholder="大阪市北区"></label>
       </div>
-      <label>その他の業種名 <small>（業種で「その他」を選んだ場合）</small><input name="word" placeholder="例：動物病院"></label>
       <div class="row">
         <label>会社名・医院名<input name="company" required autocomplete="organization" placeholder="〇〇歯科医院"></label>
         <label>公式サイトのURL <small>（任意）</small><input name="site" type="url" inputmode="url" placeholder="https://example.co.jp"></label>

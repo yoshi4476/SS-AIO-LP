@@ -10,9 +10,12 @@
   function ev(n, p) { try { if (window.gtag) window.gtag("event", n, p || {}); } catch (e) {} }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   var LPNAME = { medical: "クリニック・歯科医院", fudosan: "不動産会社", koumuten: "工務店・リフォーム会社", shigyou: "士業事務所" };
-  // 業種 → 業種別チェックリスト（/download/?ind=）
+  // 業種別の案内がある業種のキー → 業種別チェックリスト（/download/?ind=）。キーは受付が業種名から決めて返す（d.ind）
   var CHECKLIST = { dental: "dental", clinic: "clinic", fudosan: "fudosan", koumuten: "koumuten", reform: "koumuten",
     zeirishi: "shigyou", sharoushi: "shigyou", gyousei: "shigyou", shihou: "shigyou", bengoshi: "shigyou" };
+  // 調査ページなどの ?ind=<キー> で来たときに入れておく業種名
+  var LABEL = { dental: "歯科医院", clinic: "クリニック", fudosan: "不動産会社", koumuten: "工務店", reform: "リフォーム会社",
+    zeirishi: "税理士事務所", sharoushi: "社労士事務所", gyousei: "行政書士事務所", shihou: "司法書士事務所", bengoshi: "法律事務所" };
   // 結果画面の次の一歩を押したか（段階ごとの数を週次で出すため。F5）
   out.addEventListener("click", function (e) {
     var a = e.target.closest ? e.target.closest("a[data-next]") : null;
@@ -22,17 +25,34 @@
   // ロボットよけ（Cloudflare Turnstile）。サイトキーが設定されているときだけ、送信ボタンの上に出す
   // 部品は約590KBあり、開いた時点で読むとスマホでページの表示が最大6秒かかった（2026-10-04 の計測）。
   // 入力欄に触れたときに初めて読む（診断する人だけが読み込む）
-  // 調査ページなどから ?ind=<業種> で来たら、その業種を選んだ状態で開く
+  // 調査ページなどから ?ind=<業種> で来たら、その業種を入れた状態で開く
   try {
     var pre = new URLSearchParams(location.search).get("ind");
-    var sel = form.querySelector('select[name="industry"]');
-    if (pre && sel && sel.querySelector('option[value="' + pre.replace(/[^a-z]/g, "") + '"]')) sel.value = pre;
+    var wordBox = form.querySelector('input[name="word"]');
+    if (pre && wordBox && LABEL[pre] && !wordBox.value) wordBox.value = LABEL[pre];
   } catch (x) {}
+  // 業種の候補（全業種。受付の functions/_industries.js が返す）。分野名を添えて入力欄の候補に入れる
+  function fillIndustries(groups) {
+    var list = document.getElementById("ac-industries");
+    if (!list || !groups || !groups.length) return;
+    var frag = document.createDocumentFragment();
+    groups.forEach(function (g) {
+      (g[1] || []).forEach(function (w) {
+        var o = document.createElement("option");
+        o.value = w;
+        o.label = g[0];
+        frag.appendChild(o);
+      });
+    });
+    list.innerHTML = "";
+    list.appendChild(frag);
+  }
   var tsLoaded = false;
   function loadTurnstile() {
     if (tsLoaded) return;
     tsLoaded = true;
     fetch("/api/ai-check").then(function (r) { return r.json(); }).then(function (c) {
+      if (c) fillIndustries(c.industries);
       if (!c || !c.turnstile) return;
       var box = document.createElement("div");
       box.className = "cf-turnstile";
@@ -55,7 +75,7 @@
     new FormData(form).forEach(function (v, k) { data[k] = v; });
     btn.disabled = true;
     out.innerHTML = '<p class="ac-wait" role="status">AIに3つの質問を聞いています（15〜30秒ほどかかります）…</p>';
-    ev("ai_check_start", { industry: data.industry });
+    ev("ai_check_start", { industry: data.word || "" });
     fetch("/api/ai-check", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
       .then(function (r) { return r.json(); })
       .then(function (d) {
@@ -71,7 +91,7 @@
           return;
         }
         if (window.trackLead) window.trackLead("lead_capture", { lead_route: "ai_check", form_type: "AI紹介チェック" });
-        ev("ai_check_done", { industry: data.industry, cited: d.cited, mentioned: d.mentioned });
+        ev("ai_check_done", { industry: d.ind || "other", cited: d.cited, mentioned: d.mentioned });
         var head = d.cited || d.mentioned
           ? "3問中" + d.cited + "問で、AIの答えの出典に御社のサイトが入っていました。"
           : "3問とも、AIの答えに御社のサイトも社名も出てきませんでした。";
@@ -91,7 +111,7 @@
         var lp = d.lp ? '<a class="btn btn-ghost" href="/lp/' + d.lp + '/" data-cta="ai_check_lp_' + d.lp + '">' + esc(LPNAME[d.lp] || "") + "のSEO・AI検索対策を見る</a>" : "";
         // 結果に合わせて次の一歩を変える（0問: 直す順番 / 1〜2問: 残りを取る相談 / 3問: 競合との比較）。
         // 同じボタンを全員に出していたが、出典に入っていない人と全部入っている人では、次にやることが違う
-        var ck = CHECKLIST[data.industry] || "";
+        var ck = CHECKLIST[d.ind] || "";
         var step, nextHtml;
         if (!d.cited) {
           step = "fix_order";

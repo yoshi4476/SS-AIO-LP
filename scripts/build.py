@@ -743,7 +743,7 @@ def _alt_entry(meta, where):
         return ('<p class="sb-alt">Googleマップの整備度を測るなら '
                 f'<a href="/tools/meo-check/" data-cta="article_{where}_meo_quiz">マップ集客の整備度チェック（8問・30秒）</a></p>')
     return ('<p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら '
-            f'<a href="/tools/ai-check/" data-cta="article_{where}_ai_check">AI診断（地域と業種を選ぶだけ・無料）</a></p>')
+            f'<a href="/tools/ai-check/" data-cta="article_{where}_ai_check">AI診断（地域と業種を入れるだけ・無料）</a></p>')
 
 
 def diag_banner_html(meta):

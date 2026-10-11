@@ -12,10 +12,8 @@
  * 必要な環境変数: GEMINI_API_KEY（必須）、GEMINI_MODEL（任意）、GAS_WEBHOOK_URL / GAS_SHARED_SECRET（台帳・必須）、
  *   TURNSTILE_SITEKEY / TURNSTILE_SECRET（ロボットよけ。両方そろうと有効）
  */
-const WORDS = {
-  dental: "歯医者", clinic: "クリニック", fudosan: "不動産会社", koumuten: "工務店", reform: "リフォーム会社",
-  zeirishi: "税理士", sharoushi: "社労士", gyousei: "行政書士", shihou: "司法書士", bengoshi: "弁護士",
-};
+// 業種の候補・案内のキーへの対応づけ・自由入力の確かめは functions/_industries.js の1か所（画面の候補もそこから返す）
+import { GROUPS, keyOf, searchWord, cleanWord } from "../_industries.js";
 const LP = { dental: "medical", clinic: "medical", fudosan: "fudosan", koumuten: "koumuten", reform: "koumuten",
   zeirishi: "shigyou", sharoushi: "shigyou", gyousei: "shigyou", shihou: "shigyou", bengoshi: "shigyou" };
 // 予約・比較・紹介のサイト（調査 industry_ai_sources.py で多かったもの）
@@ -107,7 +105,13 @@ async function check({ request, env }, partner) {
   // 最初に来たときの流入元と最初に見たページ（site.js の ssFirst が足す）。台帳の送信元ページの列に入る
   const first = {};
   for (const k of ["first_ref", "first_utm", "first_ad", "first_land", "first_at", "send_page"]) if (k in d) first[k] = v(k, 200);
-  const word = WORDS[ind] || v("word", 20);
+  // 業種は入力欄の言葉（word）。候補に無い業種もそのまま使う。古い画面の業種のキー（industry）も受ける
+  const typed = v("word", 20);
+  if (typed && !cleanWord(typed)) {
+    return Response.json({ ok: false, error: "業種は20文字以内の言葉で入れてください（記号やURLは使えません）。" }, { status: 400 });
+  }
+  const word = typed ? searchWord(typed) : (keyOf(ind) ? searchWord(ind) : "");
+  const key = keyOf(typed) || keyOf(ind);
   if (!word || !area || !company || !name || !email) {
     return Response.json({ ok: false, error: "未入力の項目があります。" }, { status: 400 });
   }
@@ -167,7 +171,7 @@ async function check({ request, env }, partner) {
       : "AIへの問い合わせに失敗しました。時間をおいてもう一度お試しください。";
     results = null;
     // 受け付けた連絡先は残し、結果は人が送る
-    await record(env, request, { ind, area, company, site, name, email, word, pages, first, partner, summary: "チェック未実行（" + e.message + "）" });
+    await record(env, request, { ind: key || "other", area, company, site, name, email, word, pages, first, partner, summary: "チェック未実行（" + e.message + "）" });
     return Response.json({ ok: false, error: msg }, { status: 503 });
   }
   const cited = results.filter((r) => r.cited).length, mentioned = results.filter((r) => r.mentioned).length;
@@ -177,19 +181,23 @@ async function check({ request, env }, partner) {
   const top = Object.keys(freq).sort((a, b) => freq[b] - freq[a]).slice(0, 3);
   const summary = `AI紹介チェック: ${area} ${word}｜出典に御社サイト ${cited}/3問・回答に社名 ${mentioned}/3問`
     + (top.length ? `\n主な出典: ${top.join("、")}` : "");
-  await record(env, request, { ind, area, company, site, name, email, word, pages, first, partner, summary });
+  await record(env, request, { ind: key || "other", area, company, site, name, email, word, pages, first, partner, summary });
   // 翌月の測り直しは、本人が印をつけたときだけ（同意のない配信はしない）
   const searches = results.reduce((n, r) => n + (r.searches || 1), 0);
   await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned, site, ip, searches,
     recheck: v("recheck", 2) === "1", optin: v("optin", 2) === "1" });
   results.forEach((r) => { delete r.searches; });
   const used = quota.used + 1;
-  return Response.json({ ok: true, results, cited, mentioned, lp: LP[ind] || "", used, perEmail: 3 });
+  return Response.json({ ok: true, results, cited, mentioned, lp: LP[key] || "", ind: key, used, perEmail: 3 });
 }
 
-// ページがロボットよけを出すかどうか（公開してよいサイトキーだけ返す）
-export async function onRequestGet({ env }) {
-  return Response.json({ turnstile: env.TURNSTILE_SECRET && env.TURNSTILE_SITEKEY ? env.TURNSTILE_SITEKEY : "" });
+// ページがロボットよけを出すかどうか（公開してよいサイトキーだけ返す）と、業種の入力欄の候補。
+// 許可した別事業のサイトの画面も同じ候補を読む（候補を2か所に書かない）
+export async function onRequestGet({ request, env }) {
+  const res = Response.json({ turnstile: env.TURNSTILE_SECRET && env.TURNSTILE_SITEKEY ? env.TURNSTILE_SITEKEY : "",
+                              industries: GROUPS });
+  const partner = partnerOf(request, env || {});
+  return partner ? withCors(res, partner.origin) : res;
 }
 
 async function hub(env, body) {

@@ -101,9 +101,13 @@ def run_harness(path=FN):
     with tempfile.TemporaryDirectory() as d:
         h = Path(d) / "harness.mjs"
         h.write_text(HARNESS, encoding="utf-8")
-        # 関数のファイルは ESM として読む（package.json の type に頼らないよう .mjs に写す）
-        f = Path(d) / "ai-check.mjs"
+        # 関数のファイルは ESM として読む（package.json の type に頼らないよう .mjs に写す）。
+        # 業種の一覧（../_industries.js）を読むので、functions/ と同じ並び（api/ の1つ上）に置く
+        (Path(d) / "api").mkdir()
+        f = Path(d) / "api" / "ai-check.mjs"
         f.write_text(Path(path).read_text(encoding="utf-8"), encoding="utf-8")
+        ind = Path(path).parent.parent / "_industries.js"
+        shutil.copy(ind if ind.is_file() else ROOT / "functions" / "_industries.js", Path(d) / "_industries.js")
         r = subprocess.run([node, str(h), str(f), PARTNER], capture_output=True, text=True, encoding="utf-8", timeout=60)
     if r.returncode != 0:
         raise AssertionError("検査が動かない: " + r.stderr.strip()[-300:])
@@ -178,7 +182,10 @@ def test_h84_detector_catches_wildcard_cors():
         print("  SKIP  写しを作れない・node が無い")
         return
     with tempfile.TemporaryDirectory() as d:
-        p = Path(d) / "ai-check.js"
+        # 受付は業種の一覧（functions/_industries.js）を ../ から読むので、同じ並びで写す
+        (Path(d) / "api").mkdir()
+        shutil.copy(ROOT / "functions" / "_industries.js", Path(d) / "_industries.js")
+        p = Path(d) / "api" / "ai-check.js"
         p.write_text(bad, encoding="utf-8")
         o = run_harness(p)
     check("検出器: 何でも許す CORS（*）の写しを拾う", (o["evilOk"]["acao"], o["labOk"]["acao"]), ("*", "*"))
