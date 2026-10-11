@@ -577,8 +577,17 @@ jobs:
           before=$(ls articles/*.md 2>/dev/null | wc -l)
           for try in 1 2 3; do
             # 使える道具は許可の一覧（automation/agent_settings_article.json）だけ。外へ送るコマンド・コードの書き換えは拒否される
-            claude -p "$(cat automation/multi_site_prompt.txt)" \
-              $MODEL_ARG --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 160 || true
+            # お客様の社の回は AI の出力をログに出さない（書き終えたまとめに新しい記事の題・URL が入り、その回で書いた記事は
+            # 伏せる語の一覧に無いので伏せられない。2026-10-11 の回で出た）。出力はランナーの一時置き場にだけ残す
+            if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
+              claude -p "$(cat automation/multi_site_prompt.txt)" \
+                $MODEL_ARG --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 160 \
+                > "$RUNNER_TEMP/claude_out_$try.txt" 2>&1 || true
+              echo "AI の出力 $(wc -l < "$RUNNER_TEMP/claude_out_$try.txt") 行（お客様の社の回のため、ログには出しません）"
+            else
+              claude -p "$(cat automation/multi_site_prompt.txt)" \
+                $MODEL_ARG --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 160 || true
+            fi
             after=$(ls articles/*.md 2>/dev/null | wc -l)
             if [ "$after" -gt "$before" ]; then
               echo "記事が増えました（$before → $after）。$try 回目で完了"
@@ -611,6 +620,8 @@ jobs:
           # 絞った範囲を全部へ戻してから鍵を戻す（この後の配信・検査・保存は全社の分を見る）
           python scripts/private_store.py --scope all || true
           python scripts/agent_guard.py --unlock
+          # この回で書いた記事の題・slug も伏せる語に足す（回の始めの一覧には無い。以後の工程のログで伏せる）
+          python scripts/ci_mask.py || true
 
       # 配信・管制塔への記録・SNS は、鍵を持つ機械の手順で行う（AI は publish_flow --check で門を通すところまで）
       - name: 書いた記事を配信する（鍵を持つ機械の手順）

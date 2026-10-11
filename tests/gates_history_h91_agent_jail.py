@@ -401,7 +401,7 @@ def test_agent_sees_only_its_scope():
            < loop.index('agent_guard.py --protect --site "$sc" --pass'),
            'hub_tokens/$sc' in loop and "export HUB_AGENT_TOKEN" in loop,
            all(x in loop for x in ("--permission-mode dontAsk", '--allowedTools "Glob,Grep"', "--settings automation/agent_settings_article.json")),
-           ap.rstrip().endswith("python scripts/private_store.py --scope all")),
+           "python scripts/private_store.py --scope all" in ap[ap.index("done"):]),
           (True, True, True, True))
     art = json.loads((ROOT / "automation" / "agent_settings_article.json").read_text(encoding="utf-8"))["permissions"]["deny"]
     check("AI は作業場所の外によけた物（ランナーの一時置き場）と非公開の置き場の git の中身を読めない",

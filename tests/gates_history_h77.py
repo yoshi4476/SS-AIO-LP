@@ -464,3 +464,22 @@ def test_private_push_fails_loudly_when_it_cannot_write():
     act = (ROOT / ".github" / "actions" / "private-data" / "action.yml").read_text(encoding="utf-8")
     check("save の工程は、書けない回だけ失敗にする（private/ が無い回は止めない）",
           ("grep -q '^PRIVATE_PUSH=failed'" in act, "then exit 1" in act), (True, True))
+
+
+def test_new_client_articles_do_not_reach_ci_logs():
+    print("\n■ 守秘義務: その回で書いたお客様の記事（伏せる語の一覧に無い題・slug）を CI のログに出さない")
+    # 2026-10-11 の記事の枠で、AI の書き終えたまとめ（題・URL）と「既に公開済み」の1行に、その回で書いたお客様の記事が出た
+    pm = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    ai = pm[pm.index("- name: 記事生成（Phase 1〜7）"):pm.index("- name: AIの変更のうち触ってはいけない場所を戻す")]
+    quiet = ai[ai.index('if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then'):ai.index("else")]
+    check("記事の枠: お客様の社の回は AI の出力をログに出さず、ランナーの一時置き場に残す",
+          ("claude -p" in quiet and '> "$RUNNER_TEMP/claude_out_' in quiet), True)
+    ap = (ROOT / "scripts" / "agent_passes.sh").read_text(encoding="utf-8")
+    check("範囲ごとの回: お客様の範囲の回は AI の出力をログに出さない",
+          ('[ "$sc" = "own" ] || out="$RUNNER_TEMP/claude_out_pass.txt"' in ap and '> "$out" 2>&1' in ap), True)
+    unl = pm[pm.index("- name: AIの作業場に鍵を戻す"):pm.index("- name: 書いた記事を配信する（鍵を持つ機械の手順）")]
+    check("AI の後に、その回で書いた記事の題・slug も伏せる語に足す（記事の枠・範囲ごとの回）",
+          ("python scripts/ci_mask.py" in unl, "python scripts/ci_mask.py" in ap[ap.index("done"):]), (True, True))
+    pf = (ROOT / "scripts" / "publish_flow.py").read_text(encoding="utf-8")
+    raw = [ln.strip()[:60] for ln in pf.splitlines() if ("print(" in ln or "SystemExit(" in ln) and "{slug}" in ln]
+    check("公開の手順（publish_flow）は記事の名前を伏せて出す（{slug} をそのまま出さない）", raw, [])

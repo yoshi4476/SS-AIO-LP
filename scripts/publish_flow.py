@@ -57,21 +57,30 @@ def finish_approved(site_id, slug, push, since=None):
     cfg = sites_mod.load(site_id)
     meta, body = load_article(slug)
     if not editorial_review.reviewed(slug):
-        raise SystemExit(f"{slug} は監修の記録が無いため、公開後の手順を行いません")
+        raise SystemExit(f"{_shown(slug)} は監修の記録が無いため、公開後の手順を行いません")
     if not publish.gate_ok(meta):
-        raise SystemExit(f"{slug} は公開の基準（score・観点の足切り）を通っていません")
+        raise SystemExit(f"{_shown(slug)} は公開の基準（score・観点の足切り）を通っていません")
     # main と同じく、build が出力しなかった記事を『公開済み』にしない（2026-09-25）
     if cfg["type"] == "self-static" and not (ROOT / "site" / meta["category"] / slug / "index.html").is_file():
-        raise SystemExit(f"{slug} は build が出力していません（公開済みにしません）")
+        raise SystemExit(f"{_shown(slug)} は build が出力していません（公開済みにしません）")
     url = sites_mod.article_url(cfg, meta)
     # 二重に記録しない。記録は行を足すだけなので、2回呼ぶと公開本数を二重に数える。
     # 台帳を読めなかったのを「未記録」と読むと二重に足すため strict で読む（読めなければ止まる）
     if any(r.get("site") == site_id and str(r.get("url") or "").rstrip("/") == url.rstrip("/")
            and str(r.get("status") or "").strip() == "公開済み"
            for r in (hub_client.all_kw(strict=True) if hub_client.enabled() else [])):
-        print(f"{slug} は管制塔で既に公開済みです（何もしません）")
+        print(f"{_shown(slug)} は管制塔で既に公開済みです（何もしません）")
         return
     finish(site_id, slug, cfg, meta, body, push, since)
+
+
+def _shown(slug):
+    """CI のログに出す記事の名前。お客様の社の記事は slug を出さない（その回で書いた記事は伏せる語の一覧に無い。2026-10-12）"""
+    try:
+        import private_store as PS
+        return PS.shown(slug)
+    except Exception:
+        return "（記事）"
 
 
 def main():
@@ -199,10 +208,10 @@ def main():
 
     def exit_held():
         if check:
-            print(f"PUBLISH_CHECK=held（{slug}: 門は通り、監修の記録だけがありません。書き直さないこと）")
+            print(f"PUBLISH_CHECK=held（{_shown(slug)}: 門は通り、監修の記録だけがありません。書き直さないこと）")
             raise SystemExit(0)
         # 監修待ちは品質の不合格ではない。失敗で返すと救済の工程が書き直しに回すため、0で抜ける
-        print(f"HELD(監修待ち): {slug} は監修の記録が無いため公開していません"
+        print(f"HELD(監修待ち): {_shown(slug)} は監修の記録が無いため公開していません"
               f"（確認したら GitHub の Actions →「監修の記録」に {slug} を入れて実行）")
         # 台帳では未着手のまま残るため、次の枠が同じ語を選んで既存原稿と食い合って止まる。
         # 公開までは「執筆中」にしておく（公開の後の手順で「公開済み」になる）
@@ -233,10 +242,10 @@ def main():
         if not (ROOT / "site" / cat / slug / "index.html").is_file():
             if held(out):
                 exit_held()
-            raise SystemExit(f"BLOCKED(公開不可): build.py が {slug} を止めました。"
+            raise SystemExit(f"BLOCKED(公開不可): build.py が {_shown(slug)} を止めました。"
                              "上の BLOCKED の理由を直してから再実行すること")
         if check:
-            print(f"PUBLISH_CHECK=ok（{slug}: 門を通りました。配信・管制塔への記録は機械の手順が行います）")
+            print(f"PUBLISH_CHECK=ok（{_shown(slug)}: 門を通りました。配信・管制塔への記録は機械の手順が行います）")
             return
         # IndexNow / Indexing API の通知は、デプロイの後にワークフローが送る
         # （ここで送ると、まだ配信されていないURLを知らせて404を踏ませる）
@@ -252,7 +261,7 @@ def main():
                 exit_held()
             raise SystemExit(f"失敗: {' '.join(str(a) for a in args)}")
         if check:
-            print(f"PUBLISH_CHECK=ok（{slug}: 門を通りました。配信・管制塔への記録は機械の手順が行います）")
+            print(f"PUBLISH_CHECK=ok（{_shown(slug)}: 門を通りました。配信・管制塔への記録は機械の手順が行います）")
             return
 
     finish(site_id, slug, cfg, meta, body, push)

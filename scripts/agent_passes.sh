@@ -31,10 +31,16 @@ for sc in $scopes; do
     note="この回の対象は、作業場所にあるお客様の社だけです。自社の社の TODO・記事はこの回では扱いません（別の回で行います）。"
   fi
   # 使える道具は許可の一覧（automation/agent_settings_article.json）だけ。Linux では Glob・Grep を名指ししないと探せない
+  # お客様の範囲の回は AI の出力をログに出さない（その回で書いた記事の題・URL は伏せる語の一覧に無い。2026-10-12）
+  out="/dev/stdout"
+  [ "$sc" = "own" ] || out="$RUNNER_TEMP/claude_out_pass.txt"
   claude -p "$(cat "$prompt_file")
 
 【この回の範囲】${note}" --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json \
-    --max-turns "$turns" "$@" || echo "::warning::AI の回が失敗しました（次の範囲へ続けます）"
+    --max-turns "$turns" "$@" > "$out" 2>&1 || echo "::warning::AI の回が失敗しました（次の範囲へ続けます）"
+  [ "$sc" = "own" ] || echo "AI の出力 $(wc -l < "$out") 行（お客様の範囲のため、ログには出しません）"
   python scripts/agent_guard.py --protect --site "$sc" --pass
 done
 python scripts/private_store.py --scope all
+# この回で書いた記事の題・slug も伏せる語に足す（以後の工程のログで伏せる）
+python scripts/ci_mask.py || true
