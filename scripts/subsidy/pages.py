@@ -417,7 +417,7 @@ SIDEBAR = '''<aside class="side">
 
 FOOTER = '''<footer>
   <nav><a href="/">AI導入補助金LP</a><a href="/service/hojokin/">補助金サポート</a><a href="/service/aio/">AIOコンサル</a><a href="/service/meo/">MEOコンサル</a><a href="/service/dev/">システム開発</a><a href="/#diagnosis">無料診断</a><a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a><a href="/privacy/">プライバシーポリシー</a></nav>
-  <p>© 2026 SEVEN SENSES INC. セブンセンシズ株式会社|大阪市東成区神路1-7-4</p>
+  <p>© 2026 SEVEN SENSES Inc. セブンセンシズ株式会社|大阪市東成区神路1-7-4</p>
   ''' + footer_credit.CREDIT + '''
   ''' + SF.BLOCK + '''
 </footer>'''

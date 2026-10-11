@@ -30,7 +30,7 @@ def _page(title, date, head="", body=""):
             '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">\n'
             f'<script type="application/ld+json">{{"datePublished": "{date}", "dateModified": "{date}"}}</script>\n{head}</head>\n<body>\n'
             f'{OLD_HEAD}\n<main><span class="cat">補助金</span><h1>{title}</h1>{body}</main>\n'
-            '<footer>\n  <nav><a href="/">トップ</a></nav>\n  <p>© 2026 SEVEN SENSES INC.</p>\n'
+            '<footer>\n  <nav><a href="/">トップ</a></nav>\n  <p>© 2026 SEVEN SENSES Inc.</p>\n'
             '      <ul class="social-links" aria-label="外部プロフィール"></ul>\n</footer>\n</body>\n</html>\n')
 
 

@@ -1459,7 +1459,7 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 <header class="site-header">
   <div class="inner">
     <a class="brand" href="/">
-      <img class="brand-logo" src="/images/company/logo.png" alt="Seven Senses" width="371" height="147">
+      <img class="brand-logo" src="/images/company/logo.png" alt="SEVEN SENSES" width="371" height="147">
       <span class="mark">{site}<span class="by">by セブンセンシズ株式会社</span></span>
     </a>
     <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
@@ -1506,7 +1506,7 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
 <footer class="site-footer">
   <div class="inner">
     <div>
-      <img class="footer-logo" src="/images/company/logo-white.png" alt="Seven Senses セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="SEVEN SENSES セブンセンシズ株式会社" width="371" height="147" loading="lazy">
       <div class="brand-f">{site}</div>
       <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
       <p class="addr">運営: セブンセンシズ株式会社<br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>TEL 06-4305-7547（9:00〜20:00 / 土日祝休）</p>
@@ -1515,7 +1515,7 @@ window.addEventListener('load',function(){{setTimeout(function(){{var s=document
     <nav aria-label="フッターナビゲーション">
 {footer_nav}
     </nav>
-    <div class="copyright">© 2026 Seven Senses Inc. All rights reserved.</div>
+    <div class="copyright">© 2026 SEVEN SENSES Inc. All rights reserved.</div>
     {footer_credit}
   </div>
 </footer>

@@ -460,7 +460,8 @@ def test_hist_brand_detectors():
     canon_text = "。".join(BS.CANON) + "。株式会社ではなくセブンセンシズ株式会社です。"
     check("brand_spelling: 正規表記だけの文に「ゆれ」を見つけない", BS.scan(canon_text), {})
     check("brand_spelling: 正規表記は直しで変わらない", BS.fix(canon_text), canon_text)
-    for bad in ("セブン・センシズ", "セブンセンシズ（株）", "ＡＩ集客ラボ", "AI 集客ラボ"):
+    for bad in ("セブン・センシズ", "セブンセンシズ（株）", "ＡＩ集客ラボ", "AI 集客ラボ",
+                "SEVEN SENSES INC.", "Seven Senses Inc.", "Seven Senses Co., Ltd."):
         check(f"brand_spelling: ゆれ「{bad}」を見つける", bool(BS.scan(f"本文{bad}です")), True)
         fixed = BS.fix(f"本文{bad}です")
         check(f"brand_spelling: 「{bad}」の直しは2回当てても同じ", BS.fix(fixed), fixed)

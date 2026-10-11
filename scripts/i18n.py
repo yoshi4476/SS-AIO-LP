@@ -8,7 +8,7 @@ AIが切り出す単位（題名・冒頭の断言・各H2の1文結論・FAQ）
 
 守ること:
   - 数字は1つも変えない（訳の前後で数字の集合が同じでなければ捨てる）
-  - URL・社名は訳さない（社名は「Seven Senses Inc.」の表記だけ許す）
+  - URL・社名は訳さない（社名は「SEVEN SENSES Inc.」の表記だけ許す）
   - 訳は1記事1回。日本語の要約が変わったときだけ訳し直す（data/i18n/<lang>/<slug>.json に元のハッシュを持つ）
 
   python scripts/i18n.py                        # 訳す候補（表示の多い順）
@@ -168,7 +168,7 @@ PROMPT = """Translate the following Japanese article summary into {lang_name}. O
 Rules:
 - Keep every number exactly as in the source (same digits, same order of magnitude). Do not add or drop numbers.
 - Always write numbers as Arabic numerals (write "6 examples", never "six examples"; write "2 principles", never "two principles").
-- Do not add URLs, links, or facts that are not in the source. Do not translate product names; render the company as "Seven Senses Inc." (セブンセンシズ株式会社).
+- Do not add URLs, links, or facts that are not in the source. Do not translate product names; render the company as "SEVEN SENSES Inc." (セブンセンシズ株式会社).
 - Natural, concise, professional tone for business owners. Keep each section answer self-contained (it may be quoted alone by an AI search engine).
 - The article is Japanese-market specific: keep Japanese program names in Japanese with a short gloss in parentheses the first time (e.g., "AI導入補助金 (AI Adoption Subsidy)").
 Source JSON:
@@ -355,7 +355,7 @@ def _credit(ja_url):
             if c.get("author") and c.get("publisher"):
                 return c["author"], c["publisher"]
     return ({"@type": "Person", "name": "Yu Haraguchi", "url": "https://ai.7senses.co.jp/author/haraguchi/"},
-            {"@type": "Organization", "name": "Seven Senses Inc."})
+            {"@type": "Organization", "name": "SEVEN SENSES Inc."})
 
 
 def page_html(d, ja_url, lang):

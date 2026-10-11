@@ -95,7 +95,7 @@ def fix_style(text, site, nl="\n"):
 # 置く場所。AI集客ラボは住所の段落の直後、補助金はページによってフッターが2種類ある
 AI_ANCHOR = r'<p class="addr">.*?</p>'
 SUB_ANCHORS = (r'<p>セブンセンシズ株式会社<br>.*?</p>',
-               r'<p>© \d{4} SEVEN SENSES INC\..*?</p>')
+               r'<p>© \d{4} SEVEN SENSES (?:Inc|INC)\..*?</p>')  # 2026-10-11 に Inc. へ（配信済みの INC. も拾う）
 
 
 def _walk(base):

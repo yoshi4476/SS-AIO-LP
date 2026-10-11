@@ -26,6 +26,10 @@ CANON = {
     "セブンセンシズ": [r"セブン・センシズ", r"セブン\s+センシズ", r"ｾﾌﾞﾝｾﾝｼｽﾞ"],
     "AI集客ラボ": [r"AI\s+集客ラボ", r"ＡＩ集客ラボ", r"AI集客\s*Lab\b", r"AI集客らぼ"],
     "AI導入補助金サポート": [r"AI導入補助金\s+サポート", r"ＡＩ導入補助金サポート"],
+    # 英語の社名はコーポレートの本番（会社概要・プレスキットの商号・構造化データ・著作権表示）と同じ。
+    # 大文字と小文字を区別して数えるので、正規表記「SEVEN SENSES Inc.」には一致しない（2026-10-11 運用者の決定）
+    "SEVEN SENSES Inc.": [r"SEVEN SENSES INC\.", r"Seven Senses,?\s*Inc\.", r"SevenSenses,?\s*Inc\.",
+                          r"(?:SEVEN SENSES|Seven Senses|SevenSenses)\s+Co\.,?\s*Ltd\.?"],
 }
 SKIP = re.compile(r"https?://\S+|[\w.+-]+@[\w-]+\.[\w.]+|`[^`]*`|<code>.*?</code>", re.S)
 
