@@ -1194,6 +1194,8 @@ jobs:
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
           SCHED_GH_TOKEN: ${{ github.token }}   # 定時の起動役（Cloudflare Worker）の起動の記録を読む（sched_guard --watch だけが使う）
+          # CI のログを取って守秘の語を数える（log_leak_check だけが使う。actions: read はワークフロー全体で付けてある）
+          LOG_LEAK_GH_TOKEN: ${{ github.token }}
         run: |
           python scripts/findings.py || true
           # 公開した後の結果（題の型のCTR・別工程の採点・本数の効き・戻された直し）から学び、

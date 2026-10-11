@@ -96,6 +96,10 @@ CHECKS = [
     ("過去の誤りの再発（動画の説明欄・取り下げた旧URL）", "history_checks_b.py", re.compile(r"^要対応:|^\s+×")),
     ("過去の誤りの再発（レポートの数字・公開本数の照合）", "history_checks_c.py", re.compile(r"^要対応:|^\s+×")),
     ("過去の誤りの再発（鍵の配布・外部APIの生死・配信先の依存）", "history_checks_d.py", re.compile(r"^要対応:|^\s+×")),
+    # 門はコードを読むだけで、実際のログは見ない。2026-10-09〜10 の16回にお客様の記事の名前・題・ドメインが出ていた。
+    # 8日の回は1,410（中身の無い skipped を除いて728。2026-10-03〜10-11 の実測）なので、既定の上限400では足りない
+    ("CI のログに出たお客様の守秘の語（public のログ）", "log_leak_check.py --max-runs 1500",
+     re.compile(r"^要対応:|^\s{2}- ")),
     ("YouTube の公開動画（重複・字幕なし・台帳漏れ）", "youtube_upload.py --audit", re.compile(r"^\s{2}(自前の字幕|台帳に無い|同じ題)")),
     ("AIO基盤（robots・llms.txt・構造化データ）", "aio_check.py",
      re.compile(r"未記載:|不足:|取得できません|記事が載っていません")),
@@ -233,7 +237,8 @@ CHECKS = [
 # 最初に同時に始めておく検査。遅く（2026-10-05 の週次で pace 774秒・サイト監査 187秒・量産の指紋 43秒・
 # KW重複 38秒）、どれも読むだけでファイルを書かない（ほかの検査の読む控えを書き換えない）ものに限る。
 # 書く検査（控え・台帳を更新するもの）をここに足すと、同時に動く検査と書き合う
-PARALLEL = {"pace.py", "seo_audit.py --live --all --external", "scaled_guard.py", "hub_client.py overlaps"}
+PARALLEL = {"pace.py", "seo_audit.py --live --all --external", "scaled_guard.py", "hub_client.py overlaps",
+            "log_leak_check.py --max-runs 1500"}
 
 # 「問題あり」を表す印。検査ごとに語尾が違うため、値の側で見る
 BAD = re.compile(r"(?:[A-Z_]+_OK=no|LIVE_CHECK=ng|KW_GATE=block|RAKKO_MONTH=over)")
@@ -263,6 +268,7 @@ DEADLINE = {
     "YouTube の許可の上限（未確認アプリは累計100）": "期限あり: 上限に達すると新しい社のチャンネルをつなげない",
     "生成AIの表示回数（手動の取り込み）": "期限あり: 取り込みを忘れた月は数字が永久に空く（APIが無く、人がCSVを落とすしかない）",
     "定時の起動役（Cloudflare Worker）の起動と鍵の期限": "期限あり: 止まっている間、記事・救済・動画・週次が3〜8時間遅れて動く",
+    "CI のログに出たお客様の守秘の語（public のログ）": "期限あり: ログは保存の14日の間、誰でも読める（守秘義務）",
 }
 # 前の工程が足した行のうち、この回の仕事が失われたもの。続いていても要対応のまま
 LOST = re.compile(r"作れませんでした|push|配信に落ち|反映されていません|届いていません")

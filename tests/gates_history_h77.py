@@ -138,30 +138,10 @@ def test_load_all_reads_the_company_from_the_private_store():
 # ── 2. 公開側で追跡しているファイルに、お客様の社の名前・ドメイン・記事の題と slug が出ない ─────────
 
 def _client_words():
-    """{社の id: (名前・ドメインの語, 記事の題・slug の語, ドメイン)}。非公開のデータがある回だけ"""
-    import sites as S
-    import private_store as PS
+    """{社の id: (名前・ドメインの語, 記事の題・slug の語, ドメイン)}。非公開のデータがある回だけ。
+    CI のログの見張り（log_leak_check）と同じ語で照らす"""
     import ci_mask as M
-    out = {}
-    slugs = PS.client_slugs()
-    for sid, cfg in S.load_all().items():
-        if not S.is_client(sid):
-            continue
-        comp = PS.read_json(sid, "company.json", {}) or {}
-        mine = sorted(s for s, o in slugs.items() if o == sid)
-        art = set(mine)
-        for s in mine:
-            for d in (ROOT / "articles", PS.base() / "articles"):
-                p = d / f"{s}.md"
-                if p.is_file():
-                    m = re.search(r"^title:\s*[\"']?(.+?)[\"']?\s*$", p.read_text(encoding="utf-8-sig")[:3000], re.M)
-                    if m:
-                        art.add(m.group(1))
-                    break
-        idw = set(M.identity_words(sid, cfg, comp)) - {cfg.get("public_id")}
-        names = {w for w in idw if w not in art and w.lower() not in {a.lower() for a in art}}
-        out[sid] = (sorted(names), sorted(art), str(cfg.get("domain") or "").lower().replace("www.", ""))
-    return out
+    return M.identity_terms()
 
 
 def _strip_foreign_urls(text, keep):

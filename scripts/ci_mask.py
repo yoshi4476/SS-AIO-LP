@@ -160,10 +160,20 @@ def site_words(sid, corpus=None):
     return out
 
 
+def article_title(slug):
+    """お客様の社の記事の題（公開側の作業場所か非公開の置き場の原稿から）。無ければ空"""
+    import private_store as PS
+    for d in (ROOT / "articles", PS.base() / "articles"):
+        p = d / f"{slug}.md"
+        if p.is_file():
+            m = re.search(r"^title:\s*[\"']?(.+?)[\"']?\s*$", p.read_text(encoding="utf-8-sig")[:3000], re.M)
+            return m.group(1) if m else ""
+    return ""
+
+
 def identity_words(sid, cfg, comp):
     """社が特定できる語: 社の id（公開の id と違うとき）・社名・サイト名・ドメイン・配信先のリポジトリと、記事の題・slug"""
     import private_store as PS
-    import re
     pid = cfg.get("public_id") or ""
     raw = [sid if sid != pid else "", cfg.get("name"), comp.get("name"), comp.get("name_en"), cfg.get("domain"),
            cfg.get("repo"), str(cfg.get("repo") or "").split("/")[-1]]
@@ -173,20 +183,33 @@ def identity_words(sid, cfg, comp):
     for slug, owner in PS.client_slugs().items():
         if owner != sid:
             continue
-        raw.append(slug)
-        for d in (ROOT / "articles", PS.base() / "articles"):
-            p = d / f"{slug}.md"
-            if p.is_file():
-                m = re.search(r"^title:\s*[\"']?(.+?)[\"']?\s*$", p.read_text(encoding="utf-8-sig")[:3000], re.M)
-                if m:
-                    raw.append(m.group(1))
-                break
+        raw += [slug, article_title(slug)]
     out = []
     for w in raw:
         w = str(w or "").strip()
         for v in (w, w.upper(), w.capitalize()) if w.isascii() else (w,):
             if len(v) >= 4 and v not in out:
                 out.append(v)
+    return out
+
+
+def identity_terms():
+    """{社の id: (名前・ドメインの語, 記事の題・slug の語, ドメイン)}。非公開のデータがある回だけ（無ければ空）。
+    公開側の追跡ファイルの門（gates_history_h77）と CI のログの見張り（log_leak_check）が同じ語で照らす"""
+    import private_store as PS
+    import sites as S
+    out = {}
+    slugs = PS.client_slugs()
+    for sid, cfg in S.load_all().items():
+        if not S.is_client(sid):
+            continue
+        comp = PS.read_json(sid, "company.json", {}) or {}
+        mine = sorted(s for s, o in slugs.items() if o == sid)
+        art = set(mine) | {t for t in map(article_title, mine) if t}
+        low = {a.lower() for a in art}
+        idw = set(identity_words(sid, cfg, comp)) - {cfg.get("public_id")}
+        names = {w for w in idw if w.lower() not in low}
+        out[sid] = (sorted(names), sorted(art), str(cfg.get("domain") or "").lower().replace("www.", ""))
     return out
 
 
