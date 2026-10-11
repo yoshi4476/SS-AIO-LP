@@ -893,8 +893,8 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     # 週次の道具が後から張り直しても、公開するページには出さない（配信の publish.py も同じ関数を通す）
     body = noindex.unlink(body)[0]
 
-    # 変換ルールは md2html に集約（publish.py と共通化し、サイト間で装飾がずれないようにする）
-    content, toc_tokens = md2html.convert(body)
+    # 変換ルールは md2html に集約（publish.py と共通化し、サイト間で装飾がずれないようにする）。地図・動画の記号は site/_headers の CSP が許せば iframe
+    content, toc_tokens = md2html.convert(body, embeds=SITE)
 
     # 連鎖隔離の防止: 未公開（BLOCKED）記事への内部リンクはテキスト化して404を出さない。
     # 元のMarkdownは変更しないため、リンク先が公開されれば次回ビルドで自動的にリンクへ戻る。

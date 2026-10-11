@@ -693,7 +693,7 @@ def from_article(slug):
         lead = ""
         for ln in rest.split("\n"):
             ln = ln.strip()
-            if not ln or ln.startswith(("<", "|", "#", "!", "[")):
+            if not ln or ln.startswith(("<", "|", "#", "!", "[", "@[")):         # @[ は地図・動画の記号の行
                 continue
             # 箇条書きの印は「- 」「* 」のように空白が続く。空白で判定しないと、
             # **太字** で始まる1文結論を箇条書きと誤判定して飛ばしてしまう。

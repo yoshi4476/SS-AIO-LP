@@ -8,6 +8,8 @@ import re
 
 import markdown
 
+import embeds as _embeds
+
 
 def close_open_divs(body: str) -> str:
     """閉じ忘れた <div> を、その段落の終わりで閉じる。
@@ -51,9 +53,12 @@ def raw_markdown_left(html: str):
     return [name for pat, name in _RAW_MARKDOWN if pat.search(html)]
 
 
-def convert(body: str, toc_depth: str = "2-2"):
-    """本文Markdownを (HTML, TOCトークン) に変換する"""
-    body = close_open_divs(body)
+def convert(body: str, toc_depth: str = "2-2", embeds="frame", report=None):
+    """本文Markdownを (HTML, TOCトークン) に変換する。
+
+    地図・動画の記号（@[地図](住所)・@[動画](id) の1行）は、変換の後で決まった形の埋め込みにする（scripts/embeds.py）。
+    embeds はその出し方（"frame"・配信先の作業コピーの Path・"link"・"wp"・None）。report は embeds.fill へ渡す"""
+    body, items, token = _embeds.mark(close_open_divs(body))
     md = markdown.Markdown(extensions=["tables", "extra", "toc", "sane_lists"],
                            extension_configs={"toc": {"toc_depth": toc_depth}})
     html = md.convert(body)
@@ -62,7 +67,12 @@ def convert(body: str, toc_depth: str = "2-2"):
         "</table>", "</table></div>")
     # 装飾記法: ==テキスト== → <mark>（黄マーカー）
     html = re.sub(r"==([^=<>\n]+?)==", r"<mark>\1</mark>", html)
-    return html, getattr(md, "toc_tokens", [])
+    return _embeds.fill(html, items, token, embeds, report), getattr(md, "toc_tokens", [])
+
+
+def markdown_links(body: str) -> str:
+    """先方が Markdown を変換する形式（external-md）へ渡す原稿: 地図・動画の記号の行を普通のリンクの行にする"""
+    return _embeds.markdown_links(body)
 
 
 def plain_text(html: str) -> str:

@@ -1042,7 +1042,7 @@ IndexNow は**鍵ファイルが各ドメインの直下で配信されている
 | **取りこぼし** | 原稿にある表・リスト・見出し・画像・リンクが、出力に同じ数だけ出ている | `render_check.structure_gap()`（build.py が自動で呼ぶ） |
 | **サイト監査（Ahrefs 相当）** | 記事以外も含む全ページで: sitemap の404/noindex/転送・題と説明の欠け長さ重複・OGP・H1・alt・構造化データ・http混在・孤立・重い画像。致命的と警告はゼロ | `scripts/seo_audit.py`（build.py が WARN、ゲート `test_site_audit_has_no_critical_or_warning` が止める。週次は3サイトの本番を外部リンク切れ・別ドメインへの転送まで巡回） |
 | **衝突マーカー** | 原稿に `<<<<<<<` / `=======` / `>>>>>>>` が無い（`=======` の直前の行が H1 として公開される） | ゲートと publish.py が止める（2026-09-29 に17本が公開されていた） |
-| **入れてはいけない HTML・外への転送** | 本文・題・説明・FAQ に ld+json 以外の script・on 属性・iframe・外部への form・javascript: が無い。`site/_redirects` の転送先は内部のパスと自社のドメインだけ（AI は外の文章を読むので、仕込まれた指示で入れられうる） | `scripts/html_safety.py`（build.py・publish.py の全形式と --check・seo_audit --gate・score_check。2026-10-11） |
+| **入れてはいけない HTML・外への転送** | 本文・題・説明・FAQ に ld+json 以外の script・on 属性・iframe・外部への form・javascript: が無い。`site/_redirects` の転送先は内部のパスと自社のドメインだけ（AI は外の文章を読むので、仕込まれた指示で入れられうる）。地図・動画は原稿の1行の記号 `@[地図](住所)`・`@[動画](11文字の id)`（各3つまで）から機械が決まった形で作り（HTML の形式は iframe・WordPress と先方変換の Markdown はリンク）、記号から作った iframe だけを通す | `scripts/html_safety.py`（build.py・publish.py の全形式と --check・seo_audit --gate・score_check。2026-10-11）・`scripts/embeds.py`（2026-10-12） |
 
 **症状の一覧では足りない理由**: 上の描画検査は「こちらが知っている壊れ方」しか見つけられない。実際、4種類の崩れが長期間だれにも気づかれずに公開されていた。そこで**中身を見ず、原稿と出力で塊の数だけを突き合わせる**検査を足した。知らない壊れ方でも、変換に失敗すれば数は合わなくなる。
 

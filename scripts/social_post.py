@@ -71,7 +71,7 @@ def article(slug):
         rest = body[pos:heads[i + 1][1]] if i + 1 < len(heads) else body[pos:pos + 700]
         for ln in rest.split("\n"):
             ln = ln.strip()
-            if not ln or ln.startswith(("<", "|", "#", "!", "[")) or re.match(r"^[-*+]\s|^\d+\.\s", ln):
+            if not ln or ln.startswith(("<", "|", "#", "!", "[", "@[")) or re.match(r"^[-*+]\s|^\d+\.\s", ln):
                 continue
             s = _plain(ln)
             if re.match(r"^(関連|あわせて|近い論点|前提となる|つまずき|費用の目安|選ぶときの)", s):

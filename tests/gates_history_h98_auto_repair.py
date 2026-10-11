@@ -52,6 +52,8 @@ def test_patch_policy_lets_ordinary_fixes_through():
         "多すぎる": "".join(_patch(f"scripts/m{i}.py", ["x = 1"]) for i in range(20)),
         "直した中身が無い": _patch("site/index.html", ["<p>"]),
         "検査そのもの": _patch("scripts/patch_policy.py", ["MAX_FILES = 999"]),
+        # 記事に入れてよい埋め込みの形を決める所（2026-10-12）。変えると、通してよい iframe の形が人の確認なしに変わる
+        "埋め込みの仕組み": _patch("scripts/embeds.py", ["x = 1"]) + _patch("scripts/md2html.py", ["y = 2"]),
     }
     got = {k: PP.judge(v)[0] for k, v in bad.items()}
     check("危ない書き方・守る場所・依存・門を弱める・見えない変更・多すぎる・中身が無い・検査そのものは取り込まない",

@@ -396,8 +396,8 @@ def template_intro(html, tpl, cfg, meta):
 
 
 def write_nextjs_json(cfg, dest: Path, meta, body):
-    """Next.jsサイト用: 本文HTML込みのJSONを書き出す"""
-    html, _ = md2html.convert(body)
+    """Next.jsサイト用: 本文HTML込みのJSONを書き出す（地図・動画の記号は配信先の CSP が許す行き先だけ iframe）"""
+    html, _ = md2html.convert(body, embeds=dest)
     html = apply_html_parts(html, cfg)
     faq = md2html.extract_faq(body)
     # 変換されずに残ったMarkdownの検査は main() に移した。
@@ -824,7 +824,7 @@ def journal_prepare(cfg, meta, body, vb=""):
     """方言の社の原稿（画像の場所を直し、表のグラフを足した後）を先方の形へ直す。(フロントマター, 本文, HTML, 止める理由)。
     配信（write_external_md）と --check（pre_problems）が同じ手順を通る（別々に書くと --check だけ通って配信で止まる）"""
     journal = md_dialect(cfg)
-    body = _md_insert_entries((vb + "\n" + body.lstrip("\n")) if vb else body, cfg)
+    body = _md_insert_entries(md2html.markdown_links((vb + "\n" + body.lstrip("\n")) if vb else body), cfg)
     html = md2html.convert(body)[0]
     fm, body = journal_md(cfg, meta, body, journal)
     return fm, body, html, journal_problems(fm, body, journal)
@@ -849,7 +849,7 @@ def write_external_md(cfg, dest: Path, meta, body, src: Path):
     images_dir = cfg.get("images_dir") or "images"
     prefix = image_prefix({**cfg, "images_dir": images_dir})
     journal = md_dialect(cfg)
-    fm = dict(meta)
+    fm, body = dict(meta), md2html.markdown_links(body)  # 地図・動画の記号は普通のリンクに（先方の変換が iframe を通すか分からない）
     src_path, dst_path = f"/images/{slug}/", f"{prefix}/{slug}/"
     if src_path != dst_path:
         body = body.replace(src_path, dst_path)
@@ -1353,7 +1353,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
         raise SystemExit(f"テンプレートが見つかりません: {cfg['template']}（{cfg['repo']}）")
     tpl = tpl_path.read_text(encoding="utf-8")
 
-    html, _ = md2html.convert(body)
+    html, _ = md2html.convert(body, embeds=dest)
     html = apply_html_parts(html, cfg)
     # FAQはテンプレート側が専用セクションを持つので、本文からは先に取り除く
     # （目次を作る前に消さないと、存在しない見出しへのリンクが目次に残る）
@@ -2129,7 +2129,7 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     """
     import md2html
     import wp_bridge
-    html, _ = md2html.convert(body)
+    html, _ = md2html.convert(body, embeds="wp")
     # 公開URLの一覧（パーマリンク）。本文の内部リンクを実際のURLへ直すのと、構造化データの URL に使う
     rows = wp_bridge.url_rows(cfg, fallback=False)
     html = wp_bridge.rewrite_links(html, rows)

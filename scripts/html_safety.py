@@ -7,6 +7,8 @@ site/_redirects で相談先を外の場所へ転送したりできる。Markdow
 題・説明・FAQ も雛形へそのまま入るので、どれも読者の画面で動く。
 build.py（公開できなくなる側）・publish.py（全方式）・score_check（書く段）・seo_audit（転送）が同じ関数を呼ぶ。
 方式ごとに書くと、1つの方式だけを見る検査になる（publish.py の script の検査は先方の変換の社だけだった）
+地図・動画は原稿の記号（@[地図](住所)・@[動画](id)）から機械が決まった形で作る（embeds.py）。検査はそれを置いた後の HTML を
+見て、記号から作った iframe と1文字も違わず、記号の数までのものだけを通す
 
   python scripts/html_safety.py      # 原稿（articles/*.md）と site/_redirects を数える（HTML_SAFETY_OK=yes|no）
 """
@@ -14,8 +16,11 @@ import html as H
 import json
 import re
 import sys
+from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
+
+import embeds
 
 ROOT = Path(__file__).resolve().parent.parent
 OWN_SUFFIX = "7senses.co.jp"
@@ -23,13 +28,16 @@ OWN_SUFFIX = "7senses.co.jp"
 KINDS = {
     "script": "スクリプト（ld+json 以外の script）",
     "on": "on で始まる属性（onerror・onclick など）",
-    "frame": "埋め込み（iframe・object・embed）",
+    "frame": "埋め込み（iframe・object・embed。地図・動画は HTML を書かず @[地図](住所)・@[動画](id) の1行で書く）",
     "base": "base（ページのリンクの行き先をまとめて変える）",
     "form": "外部へ送る form",
     "url": "javascript: などの URL",
     "refresh": "meta の http-equiv（自動の転送など）",
+    "embed": "地図・動画の記号の書き違い（@[地図](住所)・@[動画](11文字の id) を行頭から1行で・各3つまで・住所は80字までの文字と数字と - ・ など）",
 }
 _FRAMES = {"iframe", "frame", "frameset", "object", "embed", "applet", "portal"}
+# ページのスクリプトが押されたときに iframe へ変える属性（site.js の地図の .map-facade）。AI が書くと任意の行き先を埋め込める
+_FRAME_ATTRS = {"data-map-src"}
 _BAD_SCHEMES = {"javascript", "vbscript", "livescript"}
 _NAV = {"href", "xlink:href", "action", "formaction"}
 # HTMLParser とブラウザで読み方が分かれる形（noscript の中の属性値・--!> で閉じる注釈など）のための、字面での二重の確かめ。
@@ -37,6 +45,7 @@ _NAV = {"href", "xlink:href", "action", "formaction"}
 _RX = (
     ("script", re.compile(r"<\s*script\b(?![^>]*application/ld\+json)", re.I)),
     ("frame", re.compile(r"<\s*(?:iframe|frame|frameset|object|embed|applet|portal)\b", re.I)),
+    ("frame", re.compile(r"\bdata-map-src\b", re.I)),
     ("base", re.compile(r"<\s*base\b", re.I)),
     ("refresh", re.compile(r"<\s*meta\b[^>]*http-equiv", re.I)),
 )
@@ -47,7 +56,7 @@ _ON_TEXT = re.compile(r"(?:^|[\s\"'/;])on[a-z]+\s*=", re.I)
 # ブラウザは URL の途中のタブ・改行を消して読むので、語の文字の間の空白・制御文字も許す
 _SEP = r"[\x00-\x20]*"
 _PRE = re.compile("|".join([r"<\s*/?\s*(?:script|iframe|frame|object|embed|applet|portal|base|meta|form)",
-                            r"on[a-z]+\s*=", "formaction", "&#", r"&[a-z][a-z0-9]*;"]
+                            r"on[a-z]+\s*=", "formaction", "&#", r"&[a-z][a-z0-9]*;", "data-map-src"]
                            + [_SEP.join(map(re.escape, w)) for w in ("javascript", "vbscript", "livescript", "data:")]),
                   re.I)
 # Markdown のリンク・画像・参照の行き先（[文字](行き先)・[id]: 行き先）
@@ -136,6 +145,8 @@ class _Scan(HTMLParser):
             k = k.lower()
             if k.startswith("on") and v is not None:
                 self.hits.append(("on", raw))
+            if k in _FRAME_ATTRS:
+                self.hits.append(("frame", raw))
             if k == "formaction" and not form_ok(v, self.extra):
                 self.hits.append(("form", raw))
             sch = _scheme(v)
@@ -143,14 +154,27 @@ class _Scan(HTMLParser):
                 self.hits.append(("url", raw))
 
 
-def find(html, extra=()):
-    """HTML（の断片）にある入れてはいけないもの [(種類, 例)]。extra は自社に加えて送ってよいドメイン（その社のドメイン）"""
+def find(html, extra=(), allow=()):
+    """HTML（の断片）にある入れてはいけないもの [(種類, 例)]。extra は自社に加えて送ってよいドメイン（その社のドメイン）。
+    allow は記号から作った埋め込みの iframe の開始タグ（embeds.fill の report の frames）。同じ字面のものを、その数まで通す"""
     if not html:
         return []
     s = _Scan(extra)
     s.feed(html)
     s.close()
-    hits = s.hits + [(k, m.group(0)) for k, rx in _RX for m in rx.finditer(html)]
+    left = Counter(allow)
+
+    def ours(tag):
+        if left[tag] > 0:
+            left[tag] -= 1
+            return True
+        return False
+    hits = [(k, ex) for k, ex in s.hits if not (k == "frame" and ours(ex))]
+    left = Counter(allow)
+    for k, rx in _RX:
+        for m in rx.finditer(html):
+            if not (k == "frame" and any(html.startswith(t, m.start()) and ours(t) for t in list(left))):
+                hits.append((k, m.group(0)))
     hits += [("on", m.group(0)) for m in _RX_ON.finditer(_QUOTED.sub('""', html))]
     return _uniq(hits)
 
@@ -187,9 +211,13 @@ def article_problems(meta, body, extra=(), raw=False):
     raw=True は原稿の Markdown のまま先方が変換する社（external-md）。先方の変換（marked など）は
     「<div> の直後のコードの囲み」を HTML のまま通すが当社の変換は文字にするので、原稿の字面も見る"""
     hits = []
-    if _PRE.search(body or ""):
+    if _PRE.search(body or "") or embeds.present(body):
         import md2html
-        hits += find(md2html.convert(body)[0], extra) + md_links(body)
+        # 地図・動画の記号を埋め込みにした後の、実際に出す形を見る（印を消した形を見ると、HTML の中に置いた記号の
+        # 埋め込みが周りの読まれ方を変えても気づけない）。通す iframe は記号から作ったものだけ
+        rep = {}
+        hits += find(md2html.convert(body, report=rep)[0], extra, rep["frames"]) + md_links(body)
+        hits += embeds.problems(body, rep["lost"])
         if raw:
             hits += find(body, extra)
     for v in meta_fields(meta or {}):

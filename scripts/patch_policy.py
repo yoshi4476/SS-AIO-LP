@@ -21,7 +21,7 @@ MAX_ADDED = 400
 FORBID = [r"^\.github/", r"^\.claude/", r"^\.env", r"^automation/agent_settings_", r"^automation/ai_container\.Dockerfile$",
           r"^automation/gas/", r"^automation/wordpress/", r"^functions/", r"^templates/", r"^private/",
           r"^requirements[^/]*\.txt$", r"^package(-lock)?\.json$",
-          r"^scripts/(agent_guard|gcreds|private_store|client_private|ci_mask|log_leak_check|html_safety|patch_policy|"
+          r"^scripts/(agent_guard|gcreds|private_store|client_private|ci_mask|log_leak_check|html_safety|patch_policy|embeds|md2html|"
           r"notify_slack|set_secrets|gas_deploy)\.py$",
           r"^tests/gates_history_h91_agent_jail\.py$", r"(^|/)(sitecustomize|usercustomize|conftest|setup)\.py$",
           r"\.pth$"]
