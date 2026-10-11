@@ -7,7 +7,8 @@
 分からなかった。疎通確認のタブには、AI集客ラボの受付が参照元の無い送信に入れた「不明」が17件残っていた。
 
 ここで確かめること:
-  1. 受付（contact.hub.gs）の見分け: テストの決まり → Gemini（文脈）→ 正規表現。Gemini が使えなくても記録・通知は落ちない。
+  1. 受付（contact.hub.gs）の見分け: テストの決まり → 正規表現。AI（Gemini）は使わない（2026-10-11 運用者「メールまわりで
+     AI を使っているのは2か所いらない」。10-10 に足した Gemini の見分けを外した）。
      判定に関係なく担当への通知は必ず出す（件名に印を付けるだけ）。売り込みにだけ自動返信を出さない
   2. 判別の例（悪い例と良い例）: 売り込みの定型文は拾い、自社の事業を紹介してから相談する本物の相談は拾わない
   3. 件数の数え方: 台帳の温度が「営業」「テスト」でない行だけを数える（lead_reconcile.ledger_counts / leads）
@@ -65,7 +66,7 @@ CONSULT_EXAMPLES = [
 
 
 def test_lead_kind_rules_and_examples():
-    print("\n■ 問い合わせの見分け: 判別の例（悪い例と良い例）と、Gemini に渡す決まり")
+    print("\n■ 問い合わせの見分け: 判別の例（悪い例と良い例）と、AI を使わないこと")
     r = _run({"calls": [["isSales_", t] for t in SALES_EXAMPLES + CONSULT_EXAMPLES]
               + [["leadTestRule_", "taro@7senses.co.jp", "ai-lab"], ["leadTestRule_", "a@mail.partner.example.jp", "partner"],
                  ["leadTestRule_", "a@partner.example.jp", "別事業 (partner.example.jp)"],
@@ -90,13 +91,14 @@ def test_lead_kind_rules_and_examples():
     import gas_deploy as G
     check("配る時に運用者のアドレスの欄を .env の値で埋める",
           "'a@example.com'" in G.fill("const OWNER_EMAILS_FILL = 'OWNER_EMAILS_XXXXXXXX';", {"HUB_OWNER_EMAILS": "a@example.com"}), True)
-    p = _run({"calls": [["leadKindPrompt_", "AI集客ラボ (ai.7senses.co.jp)", "contact",
-                         {"company": "例", "name": "山田", "email": "yamada@example.co.jp", "tel": "06-0000-0000",
-                          "message": "相談です"}]]})["calls"][0]
-    check("Gemini に渡す決まり: 3つの分け方・迷ったら相談・JSON で答える",
-          all(w in p for w in ("相談:", "売り込み:", "テスト:", "迷ったら「相談」", '"kind"')), True)
-    check("Gemini にはメールのドメインと電話の有無だけを渡す（アドレス・番号そのものは渡さない）",
-          ("yamada@" in p, "06-0000-0000" in p, "example.co.jp" in p), (False, False, True))
+    lk = re.search(r"^function leadKind_\(.*?^}", CONTACT, re.S | re.M)
+    check("見分け（leadKind_）は決まりと正規表現だけで、外へ送らない",
+          bool(lk) and not re.search(r"gemini|UrlFetchApp", lk.group(0), re.I), True)
+    check("受付で Gemini を呼ぶのは「見てほしい」の自動回答の1か所だけ（geminiText_ を呼ぶのは reviewOne_ だけ）",
+          (CONTACT.count("generativelanguage.googleapis.com"), len(re.findall(r"geminiText_\(", CONTACT))), (1, 2))
+    check("配る時に Gemini の鍵を埋めない（自動回答は鍵が無く止まったまま）",
+          G.fill("const GEMINI_KEY_FILL = 'GEMINI_KEY_XXXXXXXX';", {"GEMINI_API_KEY": "k", "GEMINI_API_KEY_PAID": "k"}),
+          "const GEMINI_KEY_FILL = 'GEMINI_KEY_XXXXXXXX';")
 
 
 def test_lead_intake_never_drops_and_marks():
@@ -107,43 +109,34 @@ def test_lead_intake_never_drops_and_marks():
         dict(base, site="corporate", type="contact", name="山田", company="例", email="a@example.co.jp", message=SALES_EXAMPLES[4]),
         dict(base, site="corporate", type="contact", name="佐藤", company="例", email="b@example.co.jp", message=CONSULT_EXAMPLES[0]),
         dict(base, site="ai-lab", type="contact", name="原", company="例", email="t@7senses.co.jp", message="試し"),
-        # Gemini が 500 → 正規表現。売り込みの定型文なら営業、そうでなければ相談
-        dict(base, site="ai-lab", type="contact", name="鈴木", company="例", email="c@example.com",
-             message="壊れる " + SALES_EXAMPLES[0]),
-        dict(base, site="ai-lab", type="contact", name="田中", company="例", email="d@example.com", message="壊れる 見積もりをお願いします"),
-        # Gemini が例外・読めない答え → 正規表現。記録と通知は落ちない
-        dict(base, site="subsidy", type="contact", name="高橋", company="例", email="e@example.com", message="投げる 補助金の相談です"),
-        dict(base, site="subsidy", type="contact", name="伊藤", company="例", email="f@example.com", message="読めない 補助金の相談です"),
-        # 正規表現は売り込みと読むが、文脈では相談（Gemini を優先する）
-        dict(base, site="corporate", type="contact", name="渡辺", company="例", email="g@example.com",
-             message="突然のご連絡失礼いたします。御社の経理代行をお願いしたく、見積もりをください。"),
+        dict(base, site="ai-lab", type="contact", name="鈴木", company="例", email="c@example.com", message=SALES_EXAMPLES[0]),
+        dict(base, site="ai-lab", type="contact", name="田中", company="例", email="d@example.com", message="見積もりをお願いします"),
+        dict(base, site="subsidy", type="contact", name="高橋", company="例", email="e@example.com", message="補助金の相談です"),
+        dict(base, site="subsidy", type="contact", name="伊藤", company="例", email="f@example.com", message=CONSULT_EXAMPLES[1]),
         # 別事業のサイト（通知を各サイトが自分で出す silent）。記録と見分けはする
-        dict(base, site="partner", type="contact", name="1", company="", email="h@example.com", message="0", silent=True),
+        dict(base, site="partner", type="contact", name="原田", company="", email="h@example.com", message="相談です", silent=True),
         # 疎通確認は台帳・通知に出さず、疎通確認のタブに流入経路の形で残す
         dict(base, site="ai-lab", type="contact", name="疎通確認", email="probe-1@pipeline-check.invalid", message="x"),
     ]
-    r = _run({"props": {"GEMINI_API_KEY_PAID": "k"}, "posts": posts,
-              "gemini": {"業務用の計算機器": {"kind": "売り込み", "reason": "機器の協業の提案"},
-                         "壊れる": "fail", "投げる": "throw", "読めない": "garbage",
-                         "経理代行をお願いしたく": {"kind": "相談", "reason": "経理代行の見積もり依頼"},
-                         "お名前: あり（数字や記号だけ）": {"kind": "テスト", "reason": "名前が数字だけ"}}})
+    # 鍵が入っていても、受付は Gemini を呼ばない
+    r = _run({"props": {"GEMINI_API_KEY": "k"}, "posts": posts})
     if r is None:
         print("  WARN  node が無いため受付の動きは確かめられません")
         return
-    check("どの送信も受付は ok を返す（Gemini が落ちても送り主にエラーを出さない）",
+    check("どの送信も受付は ok を返す",
           [x.get("ok") for x in r["results"]], [True] * len(posts))
     rows = r["rows"]
     check("疎通確認を除く全件が台帳に残る（見分けの前に書く）", len(rows), len(posts) - 1)
     check("台帳の行は14列のまま（列を増やさない）", sorted({len(x) for x in rows}), [14])
     temps = [x[12] for x in rows]
-    check("温度の列: 売り込み→営業・相談→HOT/WARM/COOL・自社ドメイン→テスト・Gemini が使えなければ正規表現",
+    check("温度の列: 売り込み→営業・相談→HOT/WARM/COOL・自社ドメイン→テスト",
           [t if t in ("営業", "テスト") else "相談" for t in temps],
-          ["営業", "相談", "テスト", "営業", "相談", "相談", "相談", "相談", "テスト"])
+          ["営業", "相談", "テスト", "営業", "相談", "相談", "相談", "相談"])
     check("詳細の列の末尾に判定と理由（誰が判定したか）を添える",
           [x[9].split("\n")[-1].split("／")[-1] for x in rows],
-          ["Gemini", "Gemini", "決まり", "正規表現", "正規表現", "正規表現", "正規表現", "Gemini", "Gemini"])
-    check("自社のドメインのアドレスは Gemini を呼ばない（呼んだのは自社ドメイン以外の8件）",
-          sum("generativelanguage" in u for u in r["fetches"]), 8)
+          ["正規表現", "正規表現", "決まり", "正規表現", "正規表現", "正規表現", "正規表現", "正規表現"])
+    check("鍵があっても Gemini を呼ばない（お客様の問い合わせを外の AI に送らない）",
+          sum("generativelanguage" in u for u in r["fetches"]), 0)
     staff = [m for m in r["mails"] if m["to"] == "info.ai@7senses.co.jp"]
     check("担当への通知は判定に関係なく必ず出す（silent の別事業のサイト・疎通確認だけ出さない）", len(staff), len(posts) - 2)
     check("件名に【売り込みの可能性】【テスト】の印を付ける",
@@ -151,19 +144,10 @@ def test_lead_intake_never_drops_and_marks():
     replies = [m["to"] for m in r["mails"] if m["to"] != "info.ai@7senses.co.jp"]
     check("送り主への自動返信は売り込みにだけ出さない（テスト・相談には出す）",
           (any(t in replies for t in ("a@example.co.jp", "c@example.com")), "t@7senses.co.jp" in replies,
-           all(t in replies for t in ("b@example.co.jp", "d@example.com", "e@example.com", "g@example.com"))), (False, True, True))
+           all(t in replies for t in ("b@example.co.jp", "d@example.com", "e@example.com", "f@example.com"))), (False, True, True))
     check("送信元ページの列は「流入: …｜入口: …｜送信: …」", rows[0][11], "流入: Google検索（初回 10/03）｜入口: /blog/x/｜送信: /contact")
     check("疎通確認は台帳に入れず、疎通確認のタブの送信元に流入経路の形で残す（「不明」と書かない）",
           (len(r["probe"]), r["probe"][0][2] if r["probe"] else ""), (1, "流入: Google検索（初回 10/03）｜入口: /blog/x/｜送信: /contact"))
-    check("Gemini の回数は1件につき1回で、月の上限の数に足す", r["props"].get("lead_ai_" + date.today().strftime("%Y-%m")), "8")
-
-    over = _run({"props": {"GEMINI_API_KEY_PAID": "k", "lead_ai_" + date.today().strftime("%Y-%m"): "300"},
-                 "posts": [dict(base, site="ai-lab", type="contact", name="x", email="z@example.com", message=SALES_EXAMPLES[1])]})
-    check("月の上限に達したら Gemini を呼ばず正規表現で見分ける",
-          (len(over["fetches"]), over["rows"][0][12], over["rows"][0][9].split("／")[-1]), (0, "営業", "正規表現"))
-    nokey = _run({"posts": [dict(base, site="ai-lab", type="contact", name="x", email="z@example.com", message=CONSULT_EXAMPLES[1])]})
-    check("鍵が無ければ Gemini を呼ばず、相談は相談のまま記録・通知する",
-          (len(nokey["fetches"]), nokey["rows"][0][12] not in ("営業", "テスト"), len(nokey["mails"]) >= 1), (0, True, True))
 
 
 def test_lead_existing_rows_mark_and_route():

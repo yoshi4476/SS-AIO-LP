@@ -82,11 +82,7 @@ def test_review_reply_offer_and_auto_answer():
           "gemini-3.6-flash" in (ROOT / "scripts" / "ai_cite_check.py").read_text(encoding="utf-8")
           and "const REVIEW_MODEL = 'gemini-3.6-flash';" in src and "getProperty('GEMINI_MODEL')" in src, True)
     import gas_deploy as G
-    # 受け口の Gemini はお客様の情報を送るので、有料の契約の鍵だけを埋める（2026-10-11。無料の契約は送った内容が
-    # サービスの改善に使われうる。gates_history_h88_lead_privacy）
-    check("gas_deploy が .env の GEMINI_API_KEY_PAID（有料の契約の鍵）だけを埋める（無料の GEMINI_API_KEY は埋めない・無ければ空）",
-          (G.fill("'GEMINI_KEY_XXXXXXXX'", {"GEMINI_API_KEY_PAID": "k"}), G.fill("'GEMINI_KEY_XXXXXXXX'", {"GEMINI_API_KEY": "free"})),
-          ("'k'", "''"))
-    check("受け口は Script Properties の GEMINI_API_KEY（無料の鍵）を読まない",
-          ("getProperty('GEMINI_API_KEY_PAID')" in src, "getProperty('GEMINI_API_KEY')" in src), (True, False))
+    # メールまわりで AI を使わない（2026-10-11 運用者）。配る時に鍵を埋めないので、自動回答は止まったまま
+    check("gas_deploy は Gemini の鍵を埋めない",
+          G.fill("'GEMINI_KEY_XXXXXXXX'", {"GEMINI_API_KEY": "k", "GEMINI_API_KEY_PAID": "k"}), "'GEMINI_KEY_XXXXXXXX'")
     check("鍵の実値をリポジトリに書かない", "const GEMINI_KEY_FILL = 'GEMINI_KEY_XXXXXXXX';" in src, True)

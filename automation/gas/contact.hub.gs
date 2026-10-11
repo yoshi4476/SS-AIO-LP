@@ -45,8 +45,8 @@ function isSales_(text) {
 // ── 問い合わせの見分け（相談・売り込み・テスト）────────────────────
 // 温度の列（13列目）に HOT/WARM/COOL のほか「営業」（売り込み）と「テスト」（社内の試し送信）を入れる。
 // 問い合わせの件数は「営業」「テスト」以外の行で数える（scripts/lead_reconcile.py の ledger_counts）。
-// 見分けは3段: 1) 当社のドメイン・送信先のサイトと同じドメイン・運用者のアドレスはテスト（機械で決まる。Gemini を呼ばない）
-// 2) 本文の文脈を Gemini に1回だけ読ませる 3) Gemini が使えないとき（鍵が無い・月の上限・失敗）は正規表現（isSales_）。
+// 見分けは2段: 1) 当社のドメイン・送信先のサイトと同じドメイン・運用者のアドレスはテスト 2) 売り込みの定型文（isSales_）は売り込み。
+// AI（Gemini）は使わない。お客様の情報を外の AI に送らないため（2026-10-11 運用者「メールまわりで AI を使っているのは2か所いらない」）。
 // **相談を売り込み・テストと誤って落とすのが一番まずい**ので、判定に関係なく担当への通知は必ず送り、件名に印を付けるだけにする
 // （送り主への自動返信だけは、従来どおり売り込みには出さない）。2026-10-10 運用者の指示
 // 別事業のサイト・お客様のサイトの名前とドメインはここに書かない（公開リポジトリ）。サイト一覧の登録から引く
@@ -60,9 +60,6 @@ const OWN_MAIL_DOMAINS = ['7senses.co.jp'];
 // 運用者の個人のアドレス（カンマ区切り）。公開リポジトリに書かない: Script Properties の OWNER_EMAILS か、
 // gas_deploy.py が .env の HUB_OWNER_EMAILS で埋める
 const OWNER_EMAILS_FILL = 'OWNER_EMAILS_XXXXXXXX';
-// Gemini で見分ける回数の月の上限（1件に1回）。超えたら正規表現だけで見分ける
-const LEAD_AI_MONTH = 300;
-const LEAD_KINDS = { '相談': true, '売り込み': true, 'テスト': true };
 
 function ownerEmails_() {
   const p = String(PropertiesService.getScriptProperties().getProperty('OWNER_EMAILS') || '');
@@ -101,110 +98,19 @@ function leadTestRule_(email, site) {
   return ownerEmails_().indexOf(e) >= 0 ? '運用者のアドレス' : '';
 }
 
-/** 今月の Gemini の残りがあれば1回分を数えて true（1件に1回。数えてから呼ぶので、失敗しても回数は戻さない） */
-function leadAiBudget_() {
-  if (!geminiKey_()) return false;
-  const props = PropertiesService.getScriptProperties();
-  if (String(props.getProperty('GEMINI_OFF') || '') === '1') return false;
-  const k = 'lead_ai_' + Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM');
-  const n = Number(props.getProperty(k) || 0);
-  if (n >= LEAD_AI_MONTH) return false;
-  props.setProperty(k, String(n + 1));
-  return true;
-}
-
-/** Gemini に渡す文。メールはドメインだけ、電話は有無だけを渡す（見分けに要らない個人の情報は出さない） */
-/**
- * 問い合わせの見分け（Gemini）に送る中身は、見分けに要るものだけにする（2026-10-11 運用者「メールお客さんのものは大丈夫か」）。
- * お名前は形（あり・なし・数字や記号だけ・「テスト」など）だけを渡し、本文の中のメールアドレスと電話番号は伏せる
- */
-function leadNameShape_(name) {
-  const n = clean_(name).trim();
-  if (!n) return 'なし';
-  if (/^(テスト|てすと|test|疎通確認)/i.test(n)) return 'あり（「テスト」などの試しの言葉）';
-  if (!/[^\d\s\-_.!?#@*]/.test(n)) return 'あり（数字や記号だけ）';
-  return 'あり（伏せています）';
-}
-
-function leadMaskContacts_(s) {
-  return String(s || '')
-    .replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, '［メールアドレス］')
-    .replace(/(?:\+81[\s-]?|0)\d{1,4}[\s-]?\d{1,4}[\s-]?\d{3,4}/g, '［電話番号］');
-}
-
-function leadKindPrompt_(site, type, d) {
-  const email = String(d.email || '');
-  const extra = leadDetailBase_(type, d).replace(/^紹介元 \S+( \/ )?/, '').slice(0, 300);
-  return [
-    'セブンセンシズ株式会社（大阪）と、同じ運用者の別事業のWebサイトのフォームに届いた送信を、次の3つのどれかに分けてください。'
-      + '下の「サイト」が、送信を受けたサイト（運営者の名前とドメイン）です。',
-    '当社と別事業のサービス: AI検索対策（AIO・LLMO）・SEO・Web集客の支援、'
-      + '補助金（AI導入補助金など）の申請の相談・助言、AI導入・システム開発・SaaS開発、DXの相談、経理BPO・記帳代行。',
-    '',
-    '# 分け方',
-    '- 相談: 当社のサービスを受けたい・検討している・見積や説明がほしい、または診断・資料を求めた見込み客。'
-      + '送り主が自社の事業や商品を紹介していても、当社に頼みたいこと（集客・SEO・補助金・開発・経理など）が書かれていれば相談です。',
-    '- 売り込み: 送り主が当社に、商品・機器・サービス・広告枠・アフィリエイト・イベントの登壇・アポイント獲得代行・'
-      + '業務提携や協業・人材などを売り込む／提案する連絡で、当社に頼みたいことが書かれていないもの。',
-    '- テスト: 社内の試し送信。会社名が当社（セブンセンシズ株式会社）か「サイト」の運営者と同じ、'
-      + '診断した対象のサイトが当社のもの（7senses.co.jp）か「サイト」と同じドメイン、'
-      + '名前や本文が意味をなさない（数字や記号だけ・「テスト」「test」だけ）のどれかに当たるもの。',
-    '- 迷ったら「相談」にしてください。相談を売り込みやテストと誤ると、本物のお客様を見落とします。',
-    '',
-    '# 送信',
-    'サイト: ' + site,
-    '種類: ' + (LEAD_TYPE_LABELS[type] || type),
-    '会社名: ' + clean_(d.company),
-    // お名前そのものは送らない（見分けに要らない個人の情報）。試し送信かどうかの手がかりになる形だけを渡す
-    'お名前: ' + leadNameShape_(d.name),
-    'メールのドメイン: ' + (email.split('@')[1] || ''),
-    '電話番号: ' + (clean_(d.tel || d.phone) ? 'あり' : 'なし'),
-    extra ? 'フォームの項目: ' + extra : '',
-    '本文:',
-    leadMaskContacts_(body_(d.message || d.body)).slice(0, 1500),
-    '',
-    '# 答え方',
-    'JSON だけを返してください: {"kind": "相談" か "売り込み" か "テスト", "reason": "そう分けた理由を40字以内で"}',
-  ].filter(function (x) { return x !== ''; }).join('\n');
-}
-
 /** 理由の文は台帳の詳細欄に入る。後追い・自動回答が読む印（AI紹介チェック・再送信・総合 N/100・対象 URL）と取り違えない形にする */
 function leadReason_(s) {
   return clean_(s).replace(/AI紹介チェック|再送信|checklist|総合|対象\s*https?:\S*|https?:\/\/\S+|\d+\s*\/\s*100/g, '')
     .replace(/\s+/g, ' ').trim().slice(0, 60);
 }
 
-/** Gemini で文脈から見分ける。使えない・答えが読めないときは null（呼び出し側が正規表現に落とす） */
-function leadAiKind_(site, type, d) {
-  if (!leadAiBudget_()) return null;
-  try {
-    const model = PropertiesService.getScriptProperties().getProperty('GEMINI_MODEL') || REVIEW_MODEL;
-    const r = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', {
-      method: 'post', contentType: 'application/json', muteHttpExceptions: true, headers: { 'x-goog-api-key': geminiKey_() },
-      payload: JSON.stringify({ contents: [{ parts: [{ text: leadKindPrompt_(site, type, d) }] }],
-                                generationConfig: { temperature: 0, responseMimeType: 'application/json' } }),
-    });
-    if (r.getResponseCode() !== 200) return null;
-    const parts = ((((JSON.parse(r.getContentText()).candidates || [])[0] || {}).content || {}).parts) || [];
-    const text = parts.filter(function (p) { return !p.thought; }).map(function (p) { return p.text || ''; }).join('');
-    const j = JSON.parse((text.match(/\{[\s\S]*\}/) || ['{}'])[0]);
-    if (!LEAD_KINDS[j.kind]) return null;
-    return { kind: j.kind, reason: leadReason_(j.reason), by: 'Gemini' };
-  } catch (err) {
-    console.error('問い合わせの見分け（Gemini）に失敗。正規表現で見分けます: ' + err);
-    return null;
-  }
-}
-
 /**
  * 1件の送信を「相談・売り込み・テスト」に分ける。{ kind, reason, by }
- * テストの決まり → Gemini（文脈）→ 正規表現の順。Gemini が「相談」と読めば、正規表現の売り込みの印より優先する
+ * テストの決まり → 売り込みの定型文（正規表現）の順。どちらにも当たらなければ相談（AI は使わない）
  */
 function leadKind_(site, type, d, email) {
   const rule = leadTestRule_(email, site);
   if (rule) return { kind: 'テスト', reason: rule, by: '決まり' };
-  const ai = leadAiKind_(site, type, d);
-  if (ai) return ai;
   if (type === 'contact' && isSales_(body_(d.message))) return { kind: '売り込み', reason: '営業の定型文に当たる', by: '正規表現' };
   return { kind: '相談', reason: '', by: '正規表現' };
 }
@@ -511,8 +417,7 @@ function form_(body) {
   // 本人には問い合わせ用の自動返信（3営業日以内にご連絡します・動画の案内）が届いていた（2026-10-08）
   if (type === 'unsubscribe') return unsubscribe_(email, site);
 
-  // 相談・売り込み・テストの見分け。先に台帳へ書いてから Gemini に読ませる（Gemini が遅い・落ちても記録は残る）。
-  // 書く時点の温度は機械で決まる分（テストの決まり・営業の定型文）だけで決め、見分けた後に直す。
+  // 相談・売り込み・テストの見分け（決まりと正規表現だけ。AI は使わない）。先に台帳へ書いてから見分けた結果を温度の列に入れる。
   // 売り込みは送り主への自動返信だけを止める。担当への通知は判定に関係なく、件名に印を付けて必ず出す
   // （「弊社サービス」「業務提携」は本物の相談にも入りうる。最後は人が判断する）
   const referer = String(body.referer || d.referer || '');
@@ -1511,7 +1416,7 @@ function probeTidy_() {
 
 /**
  * 既にある行を、受付と同じ見分け（leadKind_）にかけた結果を返す。台帳には書かない（見分けの確かめ用。合言葉つき）。
- * rows: [行番号…]。1行につき Gemini を1回呼ぶ（月の上限に数える）。返すのは行番号・判定・理由だけ（個人の情報は返さない）
+ * rows: [行番号…]。返すのは行番号・判定・理由だけ（個人の情報は返さない）
  */
 function leadClassify_(b) {
   const sh = sheet_('問い合わせ');
@@ -1907,7 +1812,7 @@ const REVIEW_NG = ['円', '万円', '保証', '必ず', '確実', '担当の'];
 const REVIEW_LEN = { min: 350, max: 800 };
 const REVIEW_FORM_URL = 'https://ai.7senses.co.jp/lp/#form';
 const REVIEW_FORM_TEXT = '詳しくお聞きになりたい場合は、お問い合わせフォームからご連絡ください。\n  ' + REVIEW_FORM_URL;
-// gas_deploy.py が .env の GEMINI_API_KEY で埋める。Script Properties に同じ名前があればそちらを使う
+// gas_deploy.py は埋めない（メールまわりで AI を使わない。2026-10-11 運用者）。空のあいだ自動回答は止まったまま
 const GEMINI_KEY_FILL = 'GEMINI_KEY_XXXXXXXX';
 const REVIEW_MODEL = 'gemini-3.6-flash';        // scripts/ai_cite_check.py の既定と同じ。GEMINI_MODEL で上書き
 
@@ -1915,13 +1820,8 @@ function reviewInbox_() {
   return PropertiesService.getScriptProperties().getProperty('REVIEW_INBOX') || NOTIFY_TO;
 }
 
-/**
- * 受け口の Gemini は、お客様の情報（問い合わせの本文・「見てほしい」の返信）を送るので、有料の契約の鍵だけを使う。
- * 無料の契約は、送った内容を Google がサービスの改善に使える（2026-10-11 運用者: 今の鍵は無料、セブンセンシズのサイトの方は有料）。
- * 鍵が無いあいだ、問い合わせの見分けは正規表現に落ち、「見てほしい」への自動回答は止まる。無料の鍵（GEMINI_API_KEY）には戻さない
- */
 function geminiKey_() {
-  const p = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY_PAID');
+  const p = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
   if (p) return p;
   return GEMINI_KEY_FILL && GEMINI_KEY_FILL.indexOf('XXXXXXXX') < 0 ? GEMINI_KEY_FILL : '';
 }
@@ -2138,7 +2038,7 @@ function reviewOne_(thread, ask, me, log) {
 }
 
 function reviewReply() {
-  if (!geminiKey_()) { console.error('有料の契約の Gemini の鍵（GEMINI_API_KEY_PAID）が未設定のため、自動回答を止めています'); return; }
+  if (!geminiKey_()) { console.error('GEMINI_API_KEY が未設定のため、自動回答を止めています'); return; }
   const lock = LockService.getScriptLock();
   if (!lock.tryLock(5000)) return;            // 前の回がまだ動いていれば重ねない（二重に返さない）
   try {
@@ -2188,7 +2088,7 @@ function installReviewReplyTrigger() {
       + '（届かない場合は ' + inbox + ' からこのアカウントへ転送するか、Script Properties の REVIEW_INBOX に'
       + 'このアカウントで受けられるアドレスを入れてください）');
   }
-  if (!geminiKey_()) notes.push('有料の契約の Gemini の鍵（GEMINI_API_KEY_PAID）が未設定です（.env に入れて配るまで自動回答は動きません）');
+  if (!geminiKey_()) notes.push('GEMINI_API_KEY が未設定です（Script Properties に入れるまで自動回答は動きません）');
   const has = ScriptApp.getProjectTriggers().some(function (t) { return t.getHandlerFunction() === 'reviewReply'; });
   if (has) {
     notes.push('reviewReply のトリガーは既にあります');

@@ -97,11 +97,8 @@ def fill(src_text, e):
             .replace("https://script.google.com/macros/s/XXXXXXXXXXXXXXXX/exec",
                      e.get("HUB_URL", ""))
             .replace("'XXXXXXXXXXXXXXXX'", f"'{e.get('HUB_SECRET', '')}'")
-            # 「見てほしい」への自動回答（contact.hub.gs の reviewReply）が使う。
-            # 無ければ空で埋まり、Script Properties に入れるまで自動回答は止まったまま
-            # 受け口の Gemini はお客様の情報を送るので、有料の契約の鍵（GEMINI_API_KEY_PAID）だけを埋める。無料の契約の鍵
-            # （GEMINI_API_KEY）は送った内容がサービスの改善に使われうるので埋めない（2026-10-11 運用者の確認）
-            .replace("'GEMINI_KEY_XXXXXXXX'", f"'{e.get('GEMINI_API_KEY_PAID', '')}'")
+            # Gemini の鍵（contact.hub.gs の GEMINI_KEY_FILL）は埋めない。メールまわりで AI を使わないため
+            # （2026-10-11 運用者）。埋まらなければ「見てほしい」への自動回答（reviewReply）は止まったまま
             # ロボットよけ（contact.hub.gs の turnstileVerify_）。無ければ空で埋まり、確かめも記録もしない（断らない）
             .replace("'TURNSTILE_SECRET_XXXXXXXX'", f"'{e.get('TURNSTILE_SECRET', '')}'")
             # 別事業のサイトのフォーム専用の合言葉（contact.hub.gs の formTrusted_）。無ければ空で埋まり、誰も信用しない
