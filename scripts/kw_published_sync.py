@@ -45,6 +45,41 @@ def stuck(rows, arts_by_site, norm):
     return out
 
 
+RELEASE_DAYS = 14
+
+
+def stale_claims(rows, arts_by_site, norm, today, days=RELEASE_DAYS):
+    """執筆中にしてから days 日たっても、その社に原稿（点数を問わず）が1本も無い語 → [(社, 語)]。
+    書けなかった語は本来その回で未着手に戻すが、戻し損ねると誰も書かないまま在庫に残る
+    （2026-10-11 に、8月末〜9月に着手した8件が原稿なしで執筆中のままだった）"""
+    import datetime as dt
+    out = []
+    for r in rows:
+        if str(r.get("status", "")).strip() != "執筆中":
+            continue
+        try:
+            started = dt.date.fromisoformat(str(r.get("started", "")).replace("/", "-")[:10])
+        except ValueError:
+            continue                            # 着手日が無い・読めない行は戻さない（いつからか分からない）
+        if (today - started).days < days:
+            continue
+        sid, kw = r.get("site", ""), r.get("keyword", "")
+        if any(norm(k) == norm(kw) for k in (arts_by_site.get(sid) or {}).values()):
+            continue
+        out.append((sid, kw))
+    return out
+
+
+def ledger_rows():
+    """KW台帳を着手日つきで読む（サービスアカウント・読むだけ）"""
+    import hub_client as HC
+    import hub_sheets as HS
+    sid = HC._clean(HC.ENV.get("HUB_SHEET_ID", ""))
+    v = HS._svc().values().get(spreadsheetId=sid, range="'KW台帳'!A:H").execute().get("values", [])
+    return [{"site": r[0], "keyword": r[1], "status": r[2], "started": r[7] if len(r) > 7 else ""}
+            for r in v[1:] if len(r) > 2]
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
@@ -91,6 +126,31 @@ def main(argv=None):
             failed.append(name)
             print(f"  要対応: {name} を公開済みに直せませんでした（{r.get('error', '')}）")
     print(f"  直した {fixed}件 / 公開前で執筆中のまま {left}件 / 直せなかった {len(failed)}件")
+
+    # 執筆中のまま原稿の無い語を未着手に戻す（unclaim_kw。公開済みの行には触らない）
+    import datetime as dt
+    try:
+        led = ledger_rows()
+    except Exception as e:
+        led = None
+        print(f"■ 原稿の無い執筆中の語: 台帳を着手日つきで読めないため見送りました（{type(e).__name__}）")
+    if led is not None:
+        old = stale_claims(led, arts, HS.norm_kw, dt.date.today())
+        print(f"■ {RELEASE_DAYS}日以上たっても原稿の無い執筆中の語: {len(old)}件")
+        for sid, kw in old:
+            name = "（お客様の語）" if cfgs.get(sid, {}).get("client") else f"{sid}: {kw}"
+            if not a.write:
+                print(f"  未着手に戻せる: {name}")
+                continue
+            try:
+                r = HC._post({"action": "unclaim_kw", "site": sid, "keywords": [kw]}) or {}
+            except Exception as e:
+                r = {"error": f"管制塔につながりません（{type(e).__name__}）"}
+            if r.get("ok") and r.get("unclaimed"):
+                print(f"  未着手に戻しました: {name}")
+            else:
+                failed.append(name)
+                print(f"  要対応: {name} を未着手に戻せませんでした（{r.get('error', '当たる行なし')}）")
     print(f"KW_SYNC_OK={'no' if failed else 'yes'}")
     return 0
 

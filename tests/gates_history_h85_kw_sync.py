@@ -86,12 +86,21 @@ def test_stuck_keywords_are_marked_published_without_double_logging():
                                                                          "cl": {"d": "語d"}}[sid]), \
             mock.patch("publish.read_meta", side_effect=lambda p: metas[p.stem]), \
             mock.patch.object(K, "live", side_effect=lambda u: "/c/" not in u), \
+            mock.patch.object(K, "ledger_rows", return_value=[]), \
             contextlib.redirect_stdout(out):
         K.main(["--write"])
     text = out.getvalue()
     check("90点以上で本番で開けるものだけ直す（90点未満・本番に無いものは執筆中のまま）", sorted(posted), ["語a", "語d"])
     check("お客様の社の語はログに出さない", ("語d" in text, "（お客様の記事）" in text), (False, True))
 
+    import datetime as dt
+    led = [{"site": "ai-lab", "keyword": "古い語", "status": "執筆中", "started": "2026/09/05"},
+           {"site": "ai-lab", "keyword": "新しい語", "status": "執筆中", "started": "2026/10/05"},
+           {"site": "ai-lab", "keyword": "原稿のある語", "status": "執筆中", "started": "2026/09/05"},
+           {"site": "ai-lab", "keyword": "日の無い語", "status": "執筆中", "started": ""},
+           {"site": "ai-lab", "keyword": "公開した語", "status": "公開済み", "started": "2026/08/01"}]
+    check("14日以上たって原稿（点数を問わず）の無い執筆中の語だけを未着手に戻す（着手日の無い行は戻さない）",
+          K.stale_claims(led, {"ai-lab": {"x": "原稿のある語"}}, HS.norm_kw, dt.date(2026, 10, 11)), [("ai-lab", "古い語")])
     check("週次の検査が --write で呼ぶ", '"kw_published_sync.py --write"' in (ROOT / "scripts" / "findings.py").read_text(encoding="utf-8"),
           True)
     node = shutil.which("node")
