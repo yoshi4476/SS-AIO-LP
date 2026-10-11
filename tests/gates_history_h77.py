@@ -431,7 +431,9 @@ def test_private_push_fails_loudly_when_it_cannot_write():
         g("commit", "-q", "-m", "init", cwd=work)
         g("push", "-q", "origin", "HEAD", cwd=work)
         out = []
+        # 鍵は渡さない（CI では配信の鍵があり、伏せの行 ::add-mask:: が先に出て「最初の出力」の見方が外れていた。2026-10-11）
         with mock.patch.dict(os.environ, {"SS_PRIVATE_DIR": str(work), "GITHUB_ACTIONS": "true"}), \
+                mock.patch.object(PS, "_token", return_value=""), \
                 mock.patch.object(PS, "overlay_out", return_value=[]), \
                 mock.patch("builtins.print", side_effect=lambda *a, **k: out.append(" ".join(map(str, a)))):
             ok1 = PS.push("t")
