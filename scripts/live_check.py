@@ -98,7 +98,12 @@ def post_actions(html):
     return sorted(acts)
 
 
-def check_page(url, html, status, final):
+def _norm(u):
+    return u.split("#")[0].split("?")[0].rstrip("/")
+
+
+def check_page(url, html, status, final, indexed=None):
+    """indexed: そのサイトの sitemap の URL（末尾の / を外した集合）。None なら全ページで noindex を問題にする"""
     out = []
     if status != 200:
         return [f"HTTP {status}"]
@@ -116,10 +121,13 @@ def check_page(url, html, status, final):
 
     out += tag_balance(html)[:3]
 
-    # 誤ってnoindexになっていないか
+    # 誤ってnoindexになっていないか。問題にするのはトップと、sitemap に載せた（検索に出したい）ページだけ。
+    # sitemap から外して noindex にしたページは意図した外し（例: 別事業のサイトで、AI集客ラボと同じ診断を
+    # 検索で食わないよう外したページ。2026-10-11 に「要対応」と誤って知らせていた）
     rob = re.search(r'<meta[^>]+name="robots"[^>]+content="([^"]*)"', html, re.I)
-    if rob and "noindex" in rob.group(1).lower():
-        out.append("noindex が付いている")
+    top = re.sub(r"^https?://[^/]+", "", _norm(url)) == ""
+    if rob and "noindex" in rob.group(1).lower() and (indexed is None or top or _norm(url) in indexed):
+        out.append("noindex が付いている" + ("（sitemap に載せている）" if indexed is not None and not top else ""))
 
     # 構造化データが壊れていないか
     for j in re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S):
@@ -186,6 +194,9 @@ def main():
         if a.site and sid != a.site:
             continue
         urls = targets(sid, a.all)
+        st_sm, body_sm, _ = fetch("https://" + cfg["domain"] + "/sitemap.xml")
+        # sitemap が取れないときは従来どおり全ページで noindex を問題にする（見逃すより知らせる）
+        indexed = {_norm(u) for u in re.findall(r"<loc>([^<]+)</loc>", body_sm)} if st_sm == 200 else None
         print(f"■ {cfg['name']}（{len(urls)}ページ）", flush=True)
         checked = 0
         for u in urls:
@@ -195,7 +206,7 @@ def main():
             if st == 404:
                 continue
             checked += 1
-            probs = check_page(u, html, st, final)
+            probs = check_page(u, html, st, final, indexed)
             for p in probs:
                 print(f"   NG {u.replace('https://' + cfg['domain'], '') or '/'}: {p}", flush=True)
             ng += len(probs)

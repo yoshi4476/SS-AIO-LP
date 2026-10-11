@@ -3547,6 +3547,15 @@ def test_detectors_do_not_misread_neighbors():
     page = ('<form class="lx-form" action="/lp/" method="get"><input name="url"></form>'
             '<form class="form-panel" action="/api/lead" method="post"></form>')
     check("本番巡回: 診断欄（GETで /lp/ へ移るだけ）に POST を送らない", LC_.post_actions(page), ["/api/lead"])
+    # 2026-10-11: 別事業のサイトで、AI集客ラボと同じ診断を検索で食わないよう sitemap から外して noindex にした
+    # ページを「要対応」と知らせていた。問題にするのはトップと sitemap に載せたページだけ（取れなければ全ページ）
+    ni = '<meta name="robots" content="noindex, follow">'
+    sm = {"https://x.example/tools/aio-check", "https://x.example"}
+    check("本番巡回: noindex は sitemap に載せたページ・トップ・sitemap が取れない回だけ問題にする",
+          [bool(LC_.check_page(u, ni, 200, u, idx)) for u, idx in (
+              ("https://x.example/tools/aio-check/", sm), ("https://x.example/tools/meo-check/", sm),
+              ("https://x.example/", set()), ("https://x.example/a/", None))],
+          [True, False, True, True])
 
 
 def test_report_actions_close_the_loop():
