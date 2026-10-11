@@ -1915,8 +1915,13 @@ function reviewInbox_() {
   return PropertiesService.getScriptProperties().getProperty('REVIEW_INBOX') || NOTIFY_TO;
 }
 
+/**
+ * 受け口の Gemini は、お客様の情報（問い合わせの本文・「見てほしい」の返信）を送るので、有料の契約の鍵だけを使う。
+ * 無料の契約は、送った内容を Google がサービスの改善に使える（2026-10-11 運用者: 今の鍵は無料、セブンセンシズのサイトの方は有料）。
+ * 鍵が無いあいだ、問い合わせの見分けは正規表現に落ち、「見てほしい」への自動回答は止まる。無料の鍵（GEMINI_API_KEY）には戻さない
+ */
 function geminiKey_() {
-  const p = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
+  const p = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY_PAID');
   if (p) return p;
   return GEMINI_KEY_FILL && GEMINI_KEY_FILL.indexOf('XXXXXXXX') < 0 ? GEMINI_KEY_FILL : '';
 }
@@ -2133,7 +2138,7 @@ function reviewOne_(thread, ask, me, log) {
 }
 
 function reviewReply() {
-  if (!geminiKey_()) { console.error('GEMINI_API_KEY が未設定のため、自動回答を止めています'); return; }
+  if (!geminiKey_()) { console.error('有料の契約の Gemini の鍵（GEMINI_API_KEY_PAID）が未設定のため、自動回答を止めています'); return; }
   const lock = LockService.getScriptLock();
   if (!lock.tryLock(5000)) return;            // 前の回がまだ動いていれば重ねない（二重に返さない）
   try {
@@ -2183,7 +2188,7 @@ function installReviewReplyTrigger() {
       + '（届かない場合は ' + inbox + ' からこのアカウントへ転送するか、Script Properties の REVIEW_INBOX に'
       + 'このアカウントで受けられるアドレスを入れてください）');
   }
-  if (!geminiKey_()) notes.push('GEMINI_API_KEY が未設定です（Script Properties に入れるまで自動回答は動きません）');
+  if (!geminiKey_()) notes.push('有料の契約の Gemini の鍵（GEMINI_API_KEY_PAID）が未設定です（.env に入れて配るまで自動回答は動きません）');
   const has = ScriptApp.getProjectTriggers().some(function (t) { return t.getHandlerFunction() === 'reviewReply'; });
   if (has) {
     notes.push('reviewReply のトリガーは既にあります');

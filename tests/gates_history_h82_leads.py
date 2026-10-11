@@ -122,7 +122,7 @@ def test_lead_intake_never_drops_and_marks():
         # 疎通確認は台帳・通知に出さず、疎通確認のタブに流入経路の形で残す
         dict(base, site="ai-lab", type="contact", name="疎通確認", email="probe-1@pipeline-check.invalid", message="x"),
     ]
-    r = _run({"props": {"GEMINI_API_KEY": "k"}, "posts": posts,
+    r = _run({"props": {"GEMINI_API_KEY_PAID": "k"}, "posts": posts,
               "gemini": {"業務用の計算機器": {"kind": "売り込み", "reason": "機器の協業の提案"},
                          "壊れる": "fail", "投げる": "throw", "読めない": "garbage",
                          "経理代行をお願いしたく": {"kind": "相談", "reason": "経理代行の見積もり依頼"},
@@ -157,7 +157,7 @@ def test_lead_intake_never_drops_and_marks():
           (len(r["probe"]), r["probe"][0][2] if r["probe"] else ""), (1, "流入: Google検索（初回 10/03）｜入口: /blog/x/｜送信: /contact"))
     check("Gemini の回数は1件につき1回で、月の上限の数に足す", r["props"].get("lead_ai_" + date.today().strftime("%Y-%m")), "8")
 
-    over = _run({"props": {"GEMINI_API_KEY": "k", "lead_ai_" + date.today().strftime("%Y-%m"): "300"},
+    over = _run({"props": {"GEMINI_API_KEY_PAID": "k", "lead_ai_" + date.today().strftime("%Y-%m"): "300"},
                  "posts": [dict(base, site="ai-lab", type="contact", name="x", email="z@example.com", message=SALES_EXAMPLES[1])]})
     check("月の上限に達したら Gemini を呼ばず正規表現で見分ける",
           (len(over["fetches"]), over["rows"][0][12], over["rows"][0][9].split("／")[-1]), (0, "営業", "正規表現"))
