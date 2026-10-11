@@ -148,6 +148,8 @@ faq:
 
 **記帳代行は、資料を数える・対面かを決める・見積もる・試しに任せる、の4段階で始めます。**最初の月に資料の渡し方を合わせることが、その後の早さを決めます。
 
+関連する内容については、[税理士に記帳代行を丸投げすると月次が遅れる？](/blog/zeirishi-kichodaiko-marunage)にまとめています。
+
 <figure><img src="/images/kichodaiko-osaka/nagare.png" alt="記帳代行を始めるまでの流れ"></figure>
 
 流れは4つの段階です。

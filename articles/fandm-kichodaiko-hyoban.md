@@ -51,6 +51,8 @@ faq:
 
 **カルクは、書類を封筒で送ると記帳と確定申告を任せられる、エフアンドエムの個人向け会計サービスです。**公式ページ（<a href="https://www.fmltd.co.jp/services/seiho.html" target="_blank" rel="noopener">エフアンドエム「個人向け会計サービス カルク」</a>）では「封筒に書類を入れるだけのカンタン会計サービス」と紹介されています。
 
+あわせて[税理士に記帳代行を丸投げすると月次が遅れる？](/blog/zeirishi-kichodaiko-marunage/)もご覧ください。
+
 関連する内容として[記帳代行料金表は税理士事務所でどう読む？](/blog/kichodaiko-ryokinhyo-zeirishi/)も公開しています。
 
 <div class="definition-box"><span class="term">カルク（CalQ）とは</span>、株式会社エフアンドエムが提供する個人向けの会計サービスです。領収書・レシート・売上の書類を封筒で送ると、記帳から確定申告までを任せられます。</div>
