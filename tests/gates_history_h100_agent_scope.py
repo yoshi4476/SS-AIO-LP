@@ -170,3 +170,34 @@ def test_overlay_out_deletes_only_what_this_workspace_placed():
             check("この作業場所で置いて消した記事は置き場からも消し、ほかの作業場所が一覧に足した記事は消さない",
                   ((priv / "articles" / "zz-a.md").exists(), (priv / "articles" / "zz-c.md").exists(),
                    (priv / "articles" / "zz-b.md").exists()), (False, True, True))
+
+
+def test_scopes_without_work_are_skipped():
+    print("\n■ 範囲ごとの回: その範囲の今日の仕事が0件なら AI を起こさない（救済は監査の TODO、週次は記事の本数で数える）")
+    import sites as S
+    import agent_work as W
+    clients = [c for c in S.load_all() if S.is_client(c)]
+    owner = {"zz-own-slug": "corporate"}
+    if clients:
+        owner["zz-client-slug"] = clients[0]
+    text = "\n".join(["===== 結果 =====", "AUDIT_OK=no", "TODO: ai-lab の記事を本日あと 1 本作成して公開する",
+                      "TODO: zz-own-slug を品質基準まで直して score を更新し、再ビルドする",
+                      "TODO: 配信用のトークンの期限が近い", "", "--- 以下は今日やらないこと（週次で扱う / 知らせるだけ） ---",
+                      "NOTE: zz-client-slug は週次で扱う"])
+    check("自社の回は、自社の社・自社の記事・社に触れない TODO を数える", W.rescue_count("own", text, owner), 3)
+    if clients:
+        pub = S.public_id(clients[0])
+        check("お客様の回は、その社の TODO が無ければ0件（今日やらないこと・自社の TODO は数えない）",
+              W.rescue_count(pub, text, owner), 0)
+        text2 = text.replace("TODO: 配信用", "TODO: zz-client-slug を品質基準まで直す\nTODO: 配信用")
+        check("お客様の回は、その社の記事の TODO を数え、自社の回はそれを数えない",
+              (W.rescue_count(pub, text2, owner), W.rescue_count("own", text2, owner)), (1, 3))
+        check("週次はその範囲の記事の本数で数える", (W.weekly_count("own", owner), W.weekly_count(pub, owner)), (1, 1))
+    ap = (ROOT / "scripts" / "agent_passes.sh").read_text(encoding="utf-8")
+    loop = ap[ap.index("for sc in"):]
+    pl = (ROOT / ".github" / "workflows" / "pipeline.yml").read_text(encoding="utf-8")
+    wk = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("範囲ごとの回は、仕事が0件なら AI の前に飛ばし、数えられなければ飛ばさない。救済は監査の出力を残し、救済・週次が数え方を渡す",
+          (loop.index("agent_work.py") < loop.index("claude -p"), '[ "$w" = "0" ]' in ap,
+           'audit_out.txt' in pl and "AGENT_WORK_KIND=rescue bash scripts/agent_passes.sh" in pl,
+           "AGENT_WORK_KIND=weekly bash scripts/agent_passes.sh" in wk), (True, True, True, True))

@@ -6,6 +6,7 @@
 # 鍵を持たない AI の手順から呼ぶ。範囲の一覧と通行証は、鍵のある「鍵を外す」手順が $RUNNER_TEMP に置く。
 #
 #   bash scripts/agent_passes.sh <指示書> <最大のターン数> [claude に渡す追加の引数…]
+#   AGENT_WORK_KIND=rescue|weekly を付けると、その範囲の今日の仕事が0件の回は AI を起こさない（scripts/agent_work.py）
 set -u
 prompt_file="$1"
 turns="$2"
@@ -13,6 +14,14 @@ shift 2
 scopes=$(cat "$RUNNER_TEMP/agent_scopes" 2>/dev/null || echo own)
 for sc in $scopes; do
   python scripts/private_store.py --scope "$sc"
+  # 仕事が0件の範囲は AI を起こさない（2026-10-12 運用者「仕事が無い社は飛ばす」）。数えられなければ飛ばさない
+  if [ -n "${AGENT_WORK_KIND:-}" ]; then
+    w=$(python scripts/agent_work.py --kind "$AGENT_WORK_KIND" --scope "$sc" | sed -n 's/^AGENT_WORK=//p')
+    if [ "$w" = "0" ]; then
+      echo "AGENT_PASS=skip（この範囲は今日の仕事が0件のため、AI を起こしません）"
+      continue
+    fi
+  fi
   python scripts/agent_guard.py --checkpoint
   HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/$sc" 2>/dev/null || true)"
   export HUB_AGENT_TOKEN

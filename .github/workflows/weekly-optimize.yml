@@ -864,7 +864,7 @@ jobs:
         run: |
           python scripts/agent_guard.py --verify || exit 1
           # 利用枠切れ・最大ターン到達で落ちても、後ろの実測・コミット・配信は続ける
-          bash scripts/agent_passes.sh automation/weekly_optimize_prompt.txt 120 \
+          AGENT_WORK_KIND=weekly bash scripts/agent_passes.sh automation/weekly_optimize_prompt.txt 120 \
             || echo "::warning::週次の claude 工程が失敗（後続は続行）"
 
       - name: 週次のAIが触ってはいけない場所を戻す

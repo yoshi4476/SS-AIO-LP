@@ -141,6 +141,8 @@ jobs:
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
           out=$(python scripts/daily_audit.py --fix-kw); echo "$out"
+          # 範囲ごとに AI を回すとき、仕事が0件の範囲を飛ばす材料（scripts/agent_work.py が読む）
+          printf '%s\n' "$out" > "$RUNNER_TEMP/audit_out.txt"
           rm -f indexing-service-account.json
           if echo "$out" | grep -q "AUDIT_OK=yes"; then
             echo "救済不要（3サイトとも当日ノルマ達成・BLOCKEDなし・領域違反なし）"
@@ -215,7 +217,7 @@ jobs:
         run: |
           [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
           python scripts/agent_guard.py --verify || exit 1
-          bash scripts/agent_passes.sh automation/retry_prompt.txt 300 \
+          AGENT_WORK_KIND=rescue bash scripts/agent_passes.sh automation/retry_prompt.txt 300 \
             || echo "::warning::救済の claude 工程が失敗（書けた分の配信とコミットは続けます）"
 
       # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
