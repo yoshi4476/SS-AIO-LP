@@ -36,7 +36,7 @@ jobs:
           python scripts/agent_guard.py --lock
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
-              nohup python scripts/agent_guard.py --refresh > /dev/null 2>&1 &
+              nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
           fi
 
       - name: AIに許すことと止めることを試す
@@ -60,7 +60,7 @@ jobs:
           6) Bash で env
           EOF
           claude -p "$(cat /tmp/jail_prompt.txt)" \
-            --permission-mode dontAsk --settings automation/agent_settings_article.json --max-turns 20 || true
+            --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 20 || true
           if cmp -s scripts/kw_intent.py /tmp/kw_intent.before; then
             echo "JAIL_EDIT=blocked（AI はコードを書き換えられなかった）"
           else
@@ -91,3 +91,50 @@ jobs:
       - uses: ./.github/actions/private-data
         if: always()
         with: {mode: save}
+
+  # 不具合を直す AI を動かすコンテナ（selfheal の repair と同じ作り）が、ランナーのプロセス・docker・ファイル・鍵に
+  # 届かず、claude は動き、終われば中の処理が残らないかを確かめる（2026-10-11 の点検。記事も修復も書かない）
+  repair-container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: コンテナを作る（自動修復と同じ作り）
+        run: |
+          mkdir -p /tmp/img && cp requirements.txt /tmp/img/ && cp automation/ai_container.Dockerfile /tmp/img/Dockerfile
+          docker build -q -t selfheal-ai /tmp/img
+          rm -rf /tmp/ws && cp -a . /tmp/ws
+
+      - name: コンテナの中から届かないものと動くものを試す
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges --pids-limit 1024 \
+            -e CLAUDE_CODE_OAUTH_TOKEN -e HOME=/tmp/home -v /tmp/ws:/ws -w /ws selfheal-ai bash -c '
+              mkdir -p "$HOME"
+              echo "CT_PROCS=$(ls -d /proc/[0-9]* | wc -l)"
+              [ -e /var/run/docker.sock ] && echo "CT_DOCKER=reachable" || echo "CT_DOCKER=none"
+              command -v sudo > /dev/null && echo "CT_SUDO=present" || echo "CT_SUDO=none"
+              [ -e /home/runner ] && echo "CT_RUNNER_HOME=visible" || echo "CT_RUNNER_HOME=none"
+              echo "CT_ENV=$(env | cut -d= -f1 | grep -E "TOKEN|SECRET|KEY" | grep -vE "^(CLAUDE_CODE_OAUTH_TOKEN|GPG_KEY)$" | tr "\n" " ")"
+              python -c "import sys; print(\"CT_PYTHON=\" + sys.version.split()[0])"
+              claude --version | sed "s/^/CT_CLAUDE=/"
+              echo "# 点検" > /ws/ai-container-check.txt
+              timeout 300 claude -p "「点検」とだけ答えてください" --permission-mode dontAsk --allowedTools "Glob,Grep" \
+                --settings automation/agent_settings_maint.json --max-turns 2 | head -3 | sed "s/^/CT_ANSWER=/"
+              sleep 600 &' | tee /tmp/ct.log || true
+          grep -q "CT_DOCKER=none" /tmp/ct.log && grep -q "CT_SUDO=none" /tmp/ct.log && grep -q "CT_RUNNER_HOME=none" /tmp/ct.log \
+            && grep -q "^CT_ENV= *$" /tmp/ct.log && grep -q "^CT_ANSWER=" /tmp/ct.log \
+            || { echo "::error::コンテナの隔離か claude の起動が想定と違います（上の CT_ の行）"; exit 1; }
+          # コンテナの中で裏に残した処理（sleep）が、終わった後のランナーに残っていない
+          if pgrep -f "sleep 600" > /dev/null; then echo "::error::コンテナの処理がランナーに残っています"; exit 1; fi
+          echo "CT_LEFTOVER=none"
+          # 写しの中身だけをランナーへ戻すと、差分として見える（ランナー側の .git は使わせない）
+          rsync -a --delete --exclude .git --exclude selfheal-out /tmp/ws/ ./
+          git status --porcelain | grep -q "ai-container-check.txt" && echo "CT_DIFF=ok" \
+            || { echo "::error::写しの変更が差分に出ません"; exit 1; }

@@ -29,15 +29,24 @@ AGENT_ENV_OK = {"SITE_ID", "CLAUDE_CODE_OAUTH_TOKEN", "ANTHROPIC_API_KEY", "HUB_
 
 
 def _agent_steps():
-    """[(ワークフロー, ジョブ, 手順の番号, 手順)] — claude -p を動かす手順"""
+    """[(ワークフロー, ジョブ, 手順の番号, 手順, 手順の一覧, その手順で効く env)] — claude -p を動かす手順。
+    env はワークフロー・ジョブ・手順の順に重ねたもの（ジョブ全体の env は、手順で上書きしない限り AI の手順に流れ込む。
+    2026-10-11 の点検: 週次の AI にジョブの env の全権の合言葉が入っていた）"""
     out = []
     for p in sorted(WF.glob("*.yml")):
         d = yaml.safe_load(p.read_text(encoding="utf-8"))
         for jn, job in (d.get("jobs") or {}).items():
             for i, st in enumerate(job.get("steps") or []):
                 if re.search(r"\bclaude\s+-p\b", str(st.get("run", ""))):
-                    out.append((p.name, jn, i, st, job["steps"]))
+                    env = {**(d.get("env") or {}), **(job.get("env") or {}), **(st.get("env") or {})}
+                    out.append((p.name, jn, i, st, job["steps"], env, job, d))
     return out
+
+
+def _in_container(run):
+    """AI をコンテナの中だけで動かす手順か（自動修復。ランナーのプロセス・docker・ファイルに届かない）"""
+    return bool(re.search(r"docker run\b[^\n]*--cap-drop ALL[^\n]*--security-opt no-new-privileges", run)) \
+        and not re.search(r"(-v|--volume|--mount)[ =]\S*docker\.sock", run)
 
 
 def test_workflows_run_the_agent_without_keys():
@@ -47,19 +56,26 @@ def test_workflows_run_the_agent_without_keys():
           [n for n, t in raw.items() if "--dangerously-skip-permissions" in t], [])
     steps = _agent_steps()
     check("AI を動かす手順が見つかる（記事・救済・自動修復・週次）", len(steps) >= 7, True)
-    bad_flags, bad_env, bad_hub, bad_verify, bad_order = [], [], [], [], []
-    for name, jn, i, st, all_steps in steps:
+    import agent_guard as AG
+    bad_flags, bad_env, bad_hub, bad_verify, bad_order, bad_box = [], [], [], [], [], []
+    for name, jn, i, st, all_steps, env, job, wf in steps:
         run = str(st.get("run", ""))
         cmd = re.sub(r"\\\n\s*", " ", run)
         for m in re.finditer(r"claude\s+-p\b[^\n]*", cmd):
             if "--permission-mode dontAsk" not in m.group(0) or "--settings automation/agent_settings_" not in m.group(0):
                 bad_flags.append(f"{name}:{st.get('name')}")
-        env = st.get("env") or {}
-        extra = sorted(set(env) - AGENT_ENV_OK)
+        extra = sorted(k for k in env if k not in AGENT_ENV_OK and (k in AG.KNOWN_SECRETS or "secrets." in str(env[k])))
         if extra:
             bad_env.append(f"{name}:{st.get('name')} {extra}")
         if "HUB_SECRET" in env and "HUB_AGENT_SECRET" not in str(env["HUB_SECRET"]):
             bad_hub.append(f"{name}:{st.get('name')}")
+        if _in_container(cmd):
+            # コンテナで動かすジョブは、claude の鍵のほかに鍵を1つも参照せず、書き込みの権限を持たない
+            # （同じジョブの鍵はランナーのメモリにあり、コンテナの外の手順はその権限で動く）
+            refs = sorted(set(re.findall(r"secrets\.([A-Z0-9_]+)", json.dumps(job, ensure_ascii=False))) - {"CLAUDE_CODE_OAUTH_TOKEN"})
+            if refs or (job.get("permissions") or {}).get("contents") != "read" or (wf.get("permissions") or {}).get("contents") == "write" and not job.get("permissions"):
+                bad_box.append(f"{name}:{jn} {refs}")
+            continue
         if "agent_guard.py --verify || exit 1" not in run or run.index("agent_guard.py --verify") > run.index("claude -p"):
             bad_verify.append(f"{name}:{st.get('name')}")
         before = " ".join(str(s.get("run", "")) for s in all_steps[:i])
@@ -70,10 +86,36 @@ def test_workflows_run_the_agent_without_keys():
                 or "always()" not in str(prot[0].get("if", "")) or "always()" not in str(unl[0].get("if", ""))):
             bad_order.append(f"{name}:{st.get('name')}")
     check("AI は dontAsk と許可の一覧（--settings）で動かす", bad_flags, [])
+    # Linux（CI）では Glob・Grep が既定の道具から外れ、--allowedTools で名指ししないと探せない（許可の一覧では戻らない）
+    no_search = [f"{n}:{st.get('name')}" for n, j, i, st, *_ in steps
+                 for m in re.finditer(r"claude\s+-p\b[^\n]*", re.sub(r"\\\n\s*", " ", str(st.get("run", ""))))
+                 if '--allowedTools "Glob,Grep"' not in m.group(0)]
+    check("AI に探す道具（Glob・Grep）を名指しで渡す", no_search, [])
     check("AI の手順の環境変数は claude の鍵・台帳の合言葉・サイトだけ（配信・Google・SNS の鍵を渡さない）", bad_env, [])
     check("AI の手順の合言葉は台帳の操作だけ通る HUB_AGENT_SECRET", bad_hub, [])
     check("AI を動かす前に、鍵が外れているかを確かめて外れていなければ止める", bad_verify, [])
     check("AI の前に鍵を外し、後で（失敗しても）触ってはいけない場所を戻して鍵を戻す", bad_order, [])
+    check("コンテナで AI を動かすジョブは、claude の鍵のほかに鍵を参照せず、書き込みの権限を持たない", bad_box, [])
+    boxed = sorted({f"{n}:{j}" for n, j, i, st, *_ in steps if _in_container(re.sub(r"\\\n\s*", " ", str(st.get("run", ""))))})
+    check("コードを直す AI（自動修復）はコンテナの中だけで動かす（点検のワークフローも同じ作り）",
+          boxed, ["agent-jail-check.yml:repair-container", "selfheal.yml:repair"])
+    maint = [f"{n}:{j}" for n, j, i, st, *_ in steps if "agent_settings_maint.json" in str(st.get("run", ""))]
+    check("コードを直せる許可の一覧（maint）を使うのはコンテナの手順だけ", sorted(set(maint)) == boxed, True)
+    sh = yaml.safe_load((WF / "selfheal.yml").read_text(encoding="utf-8"))["jobs"]
+    rb = "\n".join(str(s.get("run", "")) for s in sh["repair-branch"]["steps"])
+    check("修復の案は本体へ入れず枝に置き、案のコードを動かさない（通知は master に戻ってから）・守る場所に触れた案は置かない",
+          ('git push -q origin "$b"' in rb, "git push origin master" not in rb and "git push -q\n" not in rb,
+           rb.rindex("git switch -q -") < rb.index("python scripts/notify_slack.py"),
+           all(x in rb for x in (r"\.github/", "automation/agent_settings_", r"scripts/agent_guard\.py"))),
+          (True, True, True, True))
+    check("修復のジョブは鍵の無い作業場（非公開のデータを取らない・資格を git に残さない）",
+          ([s for s in sh["repair"]["steps"] if "private-data" in str(s.get("uses", ""))],
+           next(s for s in sh["repair"]["steps"] if "checkout" in str(s.get("uses", ""))).get("with", {}).get("persist-credentials")),
+          ([], False))
+    pl = (WF / "pipeline.yml").read_text(encoding="utf-8")
+    raw_claude = [ln for ln in re.sub(r"\\\n\s*", " ", pl).splitlines() if re.search(r"\bclaude\s+-p\b", ln)]
+    check("救済の AI が落ちても、書けた分の配信とコミットを飛ばさない（claude の失敗で手順を落とさない）",
+          [ln.strip()[:60] for ln in raw_claude if "||" not in ln], [])
     pub = [n for n, t in raw.items() if "agent_guard.py --publish" in t]
     check("AI が書いた記事の配信は、鍵を持つ機械の手順が行う（記事・救済・自動修復）",
           sorted(pub), ["pipeline-multi.yml", "pipeline.yml", "selfheal.yml"])
@@ -86,7 +128,7 @@ def test_agent_settings_allow_only_what_the_job_needs():
     allow, deny = art["allow"], art["deny"]
     check("記事の AI: 書けるのは記事・作業メモ・転送の表だけ",
           sorted(a for a in allow if a.startswith("Edit(")),
-          ["Edit(articles/**)", "Edit(automation/logs/**)", "Edit(site/_redirects)"])
+          ["Edit(articles/**)", "Edit(automation/logs/*.md)", "Edit(site/_redirects)"])
     broad = [a for a in allow if re.fullmatch(r"Bash\((python3?|bash|sh|node)( \*|:\*)?\)", a)
              or re.fullmatch(r"Bash\(python3? scripts/\*\)", a) or a in ("Bash", "WebFetch", "Edit", "Write")]
     check("記事の AI: python・シェルを丸ごと許さない（scripts は1本ずつ名指し）", broad, [])
@@ -179,8 +221,10 @@ def test_the_rest_of_the_chain_has_no_keys_for_the_agent():
     check("許可証で読めるのは検索の実績とアクセス解析だけ（台帳 Sheets は入れない）",
           sorted(s.rsplit("/", 1)[-1] for s in A.TOKEN_SCOPES), ["analytics.readonly", "webmasters.readonly"])
     hub = (ROOT / "automation" / "gas" / "hub.gs").read_text(encoding="utf-8")
-    m = re.search(r"const AGENT_ACTIONS = \{(.*?)\};", hub, re.S)
-    acts = set(re.findall(r"(\w+): true", m.group(1))) if m else set()
+    acts = set()
+    for name in ("KW_READS", "AGENT_POSTS"):
+        m = re.search(r"const " + name + r" = \{(.*?)\};", hub, re.S)
+        acts |= set(re.findall(r"(\w+): true", m.group(1))) if m else set()
     check("AI 用の合言葉で通るのは台帳とエラーの記録だけ（問い合わせ・管理・お客様のメール・公開の記録は通らない）",
           (bool(acts), sorted(a for a in acts if re.search(r"lead|admin|recheck|newsletter|restore|publish|probe|bot", a))),
           (True, []))
@@ -207,3 +251,105 @@ def test_the_rest_of_the_chain_has_no_keys_for_the_agent():
                           "ai_cite_check.py") if "child_env()" not in (ROOT / "scripts" / f).read_text(encoding="utf-8")]
     check("道具の中から AI を呼ぶ口（auto_rewrite.sh と直接呼ぶ5か所）は鍵の名前の変数を外す",
           ("agent_guard.child_env()" in ar, direct), (True, []))
+
+
+def test_agent_guard_keeps_to_the_site_and_refuses_the_full_secret():
+    print("\n■ agent_guard: 全権の合言葉なら AI を止める・別の社の記事は戻して配らない・日本語名も戻す")
+    import importlib
+    import threading
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+    import agent_guard
+    A = importlib.reload(agent_guard)
+
+    class Hub(BaseHTTPRequestHandler):
+        def do_POST(self):
+            body = json.loads(self.rfile.read(int(self.headers.get("Content-Length") or 0)) or b"{}")
+            ok = body.get("action") == "probe_status" and body.get("secret") == "FULL"
+            out = json.dumps({"ok": ok} if ok else {"ok": False, "error": "unauthorized"}).encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(out)
+
+        def log_message(self, *a):
+            pass
+
+    srv = HTTPServer(("127.0.0.1", 0), Hub)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    url = f"http://127.0.0.1:{srv.server_port}/"
+    try:
+        check("管制塔に聞いて、全権の合言葉なら True・AI 用なら False・届かなければ None（AI は止めない）",
+              (A.hub_full({"HUB_URL": url, "HUB_SECRET": "FULL"}), A.hub_full({"HUB_URL": url, "HUB_SECRET": "AGENT"}),
+               A.hub_full({"HUB_URL": "http://127.0.0.1:9/", "HUB_SECRET": "FULL"})), (True, False, None))
+    finally:
+        srv.shutdown()
+    tmp = Path(tempfile.mkdtemp(prefix="gate_guard2_"))
+    root, rt = tmp / "w", tmp / "rt"
+    for d in (root / "articles", root / "scripts", rt):
+        d.mkdir(parents=True, exist_ok=True)
+    keep = {k: os.environ.get(k) for k in ("AGENT_GUARD_HOME", "RUNNER_TEMP")}
+    os.environ.update({"AGENT_GUARD_HOME": str(tmp / "home"), "RUNNER_TEMP": str(rt)})
+    try:
+        def g(*a):
+            return subprocess.run(["git", *a], cwd=root, capture_output=True, text=True, encoding="utf-8")
+        g("init", "-q")
+        g("config", "user.email", "t@example.com")
+        g("config", "user.name", "t")
+        art = lambda cat, body: f"---\ntitle: t\ncategory: {cat}\n---\n{body}\n"
+        (root / "articles" / "mine.md").write_text(art("aio", "a"), encoding="utf-8")
+        (root / "articles" / "theirs.md").write_text(art("keiri-bpo", "b"), encoding="utf-8")
+        g("add", "-A")
+        g("commit", "-qm", "init")
+        A.lock(root, mint=False)
+        (root / "articles" / "mine.md").write_text(art("aio", "a2"), encoding="utf-8")
+        (root / "articles" / "theirs.md").write_text(art("keiri-bpo", "書き換え"), encoding="utf-8")
+        (root / "articles" / "theirs-new.md").write_text(art("keiri-bpo", "新しい"), encoding="utf-8")
+        (root / "scripts" / "新しい.py").write_text("x\n", encoding="utf-8")
+        A.protect(root, site="ai-lab")
+        check("その回の社の記事は残し、別の社の記事の書き換え・新しい記事は戻す。日本語名のコードも戻す",
+              ((root / "articles" / "mine.md").read_text(encoding="utf-8").strip().endswith("a2"),
+               (root / "articles" / "theirs.md").read_text(encoding="utf-8").strip().endswith("b"),
+               (root / "articles" / "theirs-new.md").exists(), (root / "scripts" / "新しい.py").exists()),
+              (True, True, False, False))
+        (root / "articles" / "theirs-new.md").write_text(art("keiri-bpo", "新しい"), encoding="utf-8")
+        res = A.publish(root, only="ai-lab")
+        fd = (root / "automation" / "logs" / "findings.txt").read_text(encoding="utf-8") if (root / "automation" / "logs" / "findings.txt").exists() else ""
+        check("配るのはその回の社の記事だけ。別の社の記事は配らずに要対応として通知の本文に載せる",
+              (res["other"], res["published"], fd.startswith("要対応:")), (1, 0, True))
+    finally:
+        for k, v in keep.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+    ag = (ROOT / "scripts" / "agent_guard.py").read_text(encoding="utf-8")
+    check("--verify は全権の合言葉を見つけたら AI を止める・許可証の作り直しの終わりを待ってから鍵を戻す",
+          ("full = hub_full()" in ag, "_pid_path().write_text" in ag and "_alive(pid)" in ag), (True, True))
+    refresh = [ln for f in WF.glob("*.yml") for ln in f.read_text(encoding="utf-8").splitlines() if "agent_guard.py --refresh" in ln]
+    check("許可証の作り直しの記録は $RUNNER_TEMP に残す（捨てない）", [ln.strip()[:40] for ln in refresh if "/dev/null" in ln], [])
+    pm = (WF / "pipeline-multi.yml").read_text(encoding="utf-8")
+    check("記事の枠は、その回の社に限って戻し・配る（公開の id で渡す）",
+          ('--protect --site "${{ steps.site.outputs.pub }}"' in pm, '--publish --site "${{ steps.site.outputs.pub }}"' in pm),
+          (True, True))
+
+
+def test_tools_calling_claude_deny_key_files():
+    print("\n■ 道具の中から呼ぶ AI: 許可の設定を渡さない呼び出しにも、鍵のファイルを読ませない拒否を付ける")
+    import importlib
+    from unittest import mock
+    import auto_rewrite as AR
+    AR = importlib.reload(AR)
+    seen = []
+    with mock.patch.object(AR.subprocess, "run", side_effect=lambda args, **kw: seen.append(list(args)) or
+                           subprocess.CompletedProcess(args, 0, "", "")):
+        AR.sh([AR.claude_bin(), "-p", "--max-turns", "1"], stdin_text="x")
+        AR.sh([AR.claude_bin(), "-p", "--settings", AR.PERM], stdin_text="x")
+        AR.sh(["git", "status"])
+    deny = json.loads(seen[0][seen[0].index("--settings") + 1])["permissions"]["deny"] if "--settings" in seen[0] else []
+    check("設定の無い呼び出しに拒否を付け、設定のある呼び出しは二重にしない・claude 以外には付けない",
+          (all(d in deny for d in ("Read(//proc/**)", "Read(**/.git/config)", "Read(indexing-service-account.json)",
+                                    "Read(private/**)")), seen[1].count("--settings"), "--settings" in seen[2]),
+          (True, 1, False))
+    import site_renovate as SR
+    check("サイト改修の AI も鍵のファイルを読めない", all(d in json.loads(SR.perm_settings())["permissions"]["deny"]
+                                                for d in AR.READ_DENY), True)

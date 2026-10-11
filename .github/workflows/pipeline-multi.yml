@@ -532,7 +532,7 @@ jobs:
           python scripts/agent_guard.py --lock
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
-              nohup python scripts/agent_guard.py --refresh > /dev/null 2>&1 &
+              nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
           fi
 
       - name: 記事生成（Phase 1〜7）
@@ -568,7 +568,7 @@ jobs:
           for try in 1 2 3; do
             # 使える道具は許可の一覧（automation/agent_settings_article.json）だけ。外へ送るコマンド・コードの書き換えは拒否される
             claude -p "$(cat automation/multi_site_prompt.txt)" \
-              $MODEL_ARG --permission-mode dontAsk --settings automation/agent_settings_article.json --max-turns 160 || true
+              $MODEL_ARG --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 160 || true
             after=$(ls articles/*.md 2>/dev/null | wc -l)
             if [ "$after" -gt "$before" ]; then
               echo "記事が増えました（$before → $after）。$try 回目で完了"
@@ -587,7 +587,8 @@ jobs:
       # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
       - name: AIの変更のうち触ってはいけない場所を戻す
         if: always() && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
-        run: python scripts/agent_guard.py --protect
+        # この回の社でない記事の変更も戻す（AI は全社の原稿を Edit できる。社は公開の id で渡す）
+        run: python scripts/agent_guard.py --protect --site "${{ steps.site.outputs.pub }}"
 
       - name: AIの作業場に鍵を戻す
         if: always() && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
@@ -625,8 +626,9 @@ jobs:
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
-          # お客様の社の記事は slug・題をログに出さない（agent_guard が「（お客様の記事）」で出す）
-          python scripts/agent_guard.py --publish || true
+          # お客様の社の記事は slug・題をログに出さない（agent_guard が「（お客様の記事）」で出す）。
+          # 配るのはこの回の社の記事だけ（カテゴリの取り違え・別の社の原稿の書き換えを別の社へ出さない）
+          python scripts/agent_guard.py --publish --site "${{ steps.site.outputs.pub }}" || true
           rm -f indexing-service-account.json
 
       # 書き手が執筆前ゲートと違うKWを選ぶことがある。

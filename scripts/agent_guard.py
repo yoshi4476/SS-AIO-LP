@@ -7,9 +7,10 @@ AI の手順には AI 用の鍵（claude の鍵と、台帳の操作だけ通る
 
   python scripts/agent_guard.py --lock      # AI の前（鍵のある手順）: 鍵のファイルと git の資格を外し、Google は読むだけの許可証に置き換える
   python scripts/agent_guard.py --verify    # AI の手順の先頭（鍵の無い手順）: 外れていなければ AI を動かさない（終了コード1）
-  python scripts/agent_guard.py --protect   # AI の後: AI が触ってはいけない場所（コード・ワークフロー・門・指示）の変更を戻す
+  python scripts/agent_guard.py --protect [--site <社>]   # AI の後: AI が触ってはいけない場所（コード・ワークフロー・門・指示、
+                                            #   --site があればその回の社でない記事）の変更を戻す
   python scripts/agent_guard.py --unlock    # AI の後（鍵のある手順）: 鍵のファイルと git の資格を戻す
-  python scripts/agent_guard.py --publish   # AI の後（鍵のある手順）: AI が書いた新しい記事を配信する
+  python scripts/agent_guard.py --publish [--site <社>]   # AI の後（鍵のある手順）: AI が書いた新しい記事を配信する（--site の社だけ）
 
 --lock / --unlock / --protect / --publish は CI（GITHUB_ACTIONS=true）でだけ動く（手元の鍵と .env を消さないため）。
 記録（$RUNNER_TEMP/agent_guard.json）には鍵の値を書かない。
@@ -78,6 +79,10 @@ def _ci():
 
 def _state_path():
     return Path(os.environ.get("RUNNER_TEMP") or "/tmp") / "agent_guard.json"
+
+
+def _pid_path():
+    return _state_path().with_suffix(".pid")
 
 
 def _load_state():
@@ -180,7 +185,9 @@ def _mint_token(info):
 
 
 def _write_token(path, tok):
-    tmp = path.with_suffix(".tmp")
+    # 一時ファイルは作業場所に置かない（.gitignore に無い名前が commit に入りうる）。同じファイルシステムの記録の場所へ
+    tmp = _state_path().with_suffix(".token.tmp")
+    tmp.parent.mkdir(parents=True, exist_ok=True)
     tmp.write_text(json.dumps(tok), encoding="utf-8")
     os.chmod(tmp, 0o600)
     os.replace(tmp, path)
@@ -194,16 +201,29 @@ def refresher(root=None, every=2400, life=8 * 3600):
     root = Path(root or ROOT)
     info = json.loads(sys.stdin.read().lstrip("﻿"))
     stop = _state_path().with_suffix(".stop")
+    # --unlock はこの印のプロセスが終わるのを待ってから鍵を戻す（作り直しの書き込みと入れ違わないように）
+    _pid_path().write_text(str(os.getpid()), encoding="utf-8")
     start = time.time()
-    while time.time() - start < life and not stop.exists():
-        for _ in range(every // 10):
-            time.sleep(10)
-            if stop.exists():
-                return
-        try:
-            _write_token(root / SA, _mint_token(info))
-        except Exception:
-            pass
+    try:
+        print(f"許可証の作り直しを始めました（{every // 60}分ごと）", flush=True)
+        while time.time() - start < life and not stop.exists():
+            for _ in range(every // 10):
+                time.sleep(10)
+                if stop.exists():
+                    return
+            try:
+                tok = _mint_token(info)
+                # 作り直している間に --unlock が鍵を戻していたら上書きしない（戻した鍵が許可証に化けると、
+                # 後の工程が台帳・通知の範囲を失う）
+                if stop.exists() or _sa_is_key(root):
+                    return
+                _write_token(root / SA, tok)
+                print("許可証を作り直しました", flush=True)
+            except Exception as e:
+                # 理由の種類だけ残す（鍵の中身は出さない）。記録は $RUNNER_TEMP に残り、公開のログには出ない
+                print(f"許可証を作り直せませんでした（{type(e).__name__}）", flush=True)
+    finally:
+        _pid_path().unlink(missing_ok=True)
 
 
 def lock(root=None, mint=True):
@@ -213,11 +233,16 @@ def lock(root=None, mint=True):
     # Google の鍵 → 読むだけの許可証（鍵の元: 作業場所のファイルか、この手順の環境変数）
     sa_path = root / SA
     info = None
-    if _sa_is_key(root):
-        info = json.loads(sa_path.read_text(encoding="utf-8-sig"))
-        st["sa"] = "file"
-    elif os.environ.get("GCP_SERVICE_ACCOUNT_JSON"):
-        info = json.loads(os.environ["GCP_SERVICE_ACCOUNT_JSON"].lstrip("﻿"))
+    try:
+        if _sa_is_key(root):
+            info = json.loads(sa_path.read_text(encoding="utf-8-sig"))
+            st["sa"] = "file"
+        elif os.environ.get("GCP_SERVICE_ACCOUNT_JSON"):
+            info = json.loads(os.environ["GCP_SERVICE_ACCOUNT_JSON"].lstrip("﻿"))
+    except ValueError:
+        # 鍵の形が壊れていても記事の回は止めない（許可証は作れないので、AI の手順では検索の実績を読まない）
+        print("  Google の鍵の形が読めません（許可証を作りません）", flush=True)
+        info = None
     if info and mint:
         try:
             tok = _mint_token(info)
@@ -277,11 +302,34 @@ def suspects(env=None):
                   if v and SECRETISH.search(k) and k not in AGENT_ENV_OK and k not in KNOWN_SECRETS)
 
 
+def hub_full(env=None):
+    """AI の手順の HUB_SECRET が管制塔の全権の合言葉か（AI 用の合言葉では通らない読み出しが通るか）。
+    ジョブ全体の env に全権の合言葉があると、手順で上書きし忘れた AI の手順に流れ込む（2026-10-11 の点検で週次がそうだった）。
+    True / False / None（管制塔に届かない）"""
+    env = os.environ if env is None else env
+    url, sec = env.get("HUB_URL", ""), env.get("HUB_SECRET", "")
+    if not url or not sec:
+        return False
+    import urllib.request
+    try:
+        req = urllib.request.Request(url, data=json.dumps({"action": "probe_status", "secret": sec}).encode("utf-8"),
+                                     method="POST", headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=20) as r:
+            return bool(json.loads(r.read().decode("utf-8", "replace") or "{}").get("ok"))
+    except Exception:
+        return None
+
+
 def verify(root=None):
     sus = suspects()
     if sus:
         print("  鍵らしい名前の環境変数（AI は止めません。鍵なら AI の手順から外してください）: " + " / ".join(sus), flush=True)
     bad = problems(root)
+    full = hub_full()
+    if full:
+        bad.append("環境変数 HUB_SECRET（管制塔の全権の合言葉。AI の手順では HUB_AGENT_SECRET を渡す）")
+    elif full is None:
+        print("  管制塔に届かず、HUB_SECRET が AI 用の合言葉かを確かめられませんでした（AI は止めません）", flush=True)
     if bad:
         print("AGENT_JAIL=ng（AI の手順に鍵が残っています。AI を動かしません）: " + " / ".join(bad), flush=True)
         if os.environ.get("GITHUB_ACTIONS"):
@@ -309,6 +357,25 @@ def unlock(root=None):
     st = _load_state()
     stop = _state_path().with_suffix(".stop")
     stop.write_text("stop", encoding="utf-8")      # 許可証の作り直しを止める
+    # 作り直しのプロセスが終わるのを待ってから鍵を戻す（作り直しの途中の書き込みに、戻した鍵を上書きさせない）。
+    # 30秒で終わらなければ止める
+    import signal
+    import time
+    pid = 0
+    try:
+        pid = int(_pid_path().read_text(encoding="utf-8").strip() or 0)
+    except (OSError, ValueError):
+        pass
+    for _ in range(60):
+        if not pid or not _alive(pid):
+            break
+        time.sleep(0.5)
+    else:
+        try:
+            os.kill(pid, signal.SIGTERM)
+            time.sleep(1)
+        except OSError:
+            pass
     miss = []
     sa_path = root / SA
     if os.environ.get("GCP_SERVICE_ACCOUNT_JSON") and st.get("sa") == "file":
@@ -328,9 +395,10 @@ def unlock(root=None):
             miss.append(p.name)
             continue
         if f["env"] in ("YOUTUBE_TOKENS_JSON", "GBP_TOKENS_JSON"):
-            m = re.match(r"(.*-)(.+)\.json$", p.name)
+            # 社の id にハイフンがあっても切り違えない（youtube-token-ai-lab.json の社は ai-lab）
+            prefix = "youtube-token-" if f["env"] == "YOUTUBE_TOKENS_JSON" else "gbp-token-"
             try:
-                p.write_text(json.dumps(json.loads(val)[m.group(2)]), encoding="utf-8")
+                p.write_text(json.dumps(json.loads(val)[p.name[len(prefix):-len(".json")]]), encoding="utf-8")
             except Exception:
                 miss.append(p.name)
                 continue
@@ -349,7 +417,11 @@ def unlock(root=None):
         if not tok:
             miss.append(f"git の資格（{os.path.relpath(r['repo'], root)}: {r['name']}）")
             continue
-        _git(r["repo"], "remote", "set-url", r["name"], r["url"].replace("https://", f"https://x-access-token:{tok}@", 1))
+        if r["url"].startswith("https://github.com/"):
+            # 資格は URL に埋めず、その作業場所の設定の見出しで渡す（publish.py と同じ。URL は git の出力に出やすい）
+            _git(r["repo"], "config", "--local", "http.https://github.com/.extraheader", _header(tok))
+        else:
+            _git(r["repo"], "remote", "set-url", r["name"], r["url"].replace("https://", f"https://x-access-token:{tok}@", 1))
     print("AGENT_UNLOCK=" + ("ok" if not miss else "partial（戻せなかったもの: " + " / ".join(miss) + "）"), flush=True)
     return not miss
 
@@ -365,15 +437,37 @@ def _match(rel, pats):
     return False
 
 
-def protect(root=None, scope="article"):
-    """AI が触ってはいけない場所の変更を戻す。戻した場所（パス）を返す"""
+def _status(root):
+    """[(状態, パス)]。日本語名のパスを8進の引用の形にせず、そのまま受け取る（-z。引用されると戻す処理が空振りした）"""
+    out = []
+    parts = _git(root, "-c", "core.quotePath=false", "status", "--porcelain", "-z", "-uall").stdout.split("\0")
+    i = 0
+    while i < len(parts):
+        ent = parts[i]
+        i += 1
+        if len(ent) < 4:
+            continue
+        code, rel = ent[:2], ent[3:]
+        if code[0] in "RC":
+            i += 1      # 名前の変更は、次の欄が元の名前（戻すのは新しい名前の側。元の名前は消えた扱いで下の削除が拾う）
+        out.append((code, rel))
+    return out
+
+
+def _alive(pid):
+    try:
+        os.kill(pid, 0)
+        return True
+    except OSError:
+        return False
+
+
+def protect(root=None, scope="article", site=None):
+    """AI が触ってはいけない場所の変更を戻す。site があれば、その回の社でない記事の変更も戻す。戻した場所（パス）を返す"""
     root = Path(root or ROOT)
     pats = PROTECTED if scope == "article" else PROTECTED_JAIL
     back = []
-    for ln in _git(root, "status", "--porcelain", "-uall").stdout.splitlines():
-        code, rel = ln[:2], ln[3:].strip().strip('"')
-        if " -> " in rel:
-            rel = rel.split(" -> ", 1)[1]
+    for code, rel in _status(root):
         if not _match(rel, pats):
             continue
         if code == "??":
@@ -381,6 +475,13 @@ def protect(root=None, scope="article"):
         else:
             _git(root, "checkout", "HEAD", "--", rel)
         back.append(rel)
+    if site and scope == "article":
+        back += _protect_other_sites(root, site)
+    left = [rel for code, rel in _status(root) if _match(rel, pats)]
+    if left:
+        print(f"AGENT_PROTECT=ng（戻せなかった場所 {len(left)}件）: " + " / ".join(left[:10]), flush=True)
+        if os.environ.get("GITHUB_ACTIONS"):
+            print(f"::error::AI が触ってはいけない場所の変更を戻せませんでした（{len(left)}件）", flush=True)
     if back:
         print(f"AGENT_PROTECT=restored（AI が触ってはいけない場所 {len(back)}件を元に戻しました）: " + " / ".join(back[:10]),
               flush=True)
@@ -388,6 +489,31 @@ def protect(root=None, scope="article"):
             print(f"::warning::AI が触ってはいけない場所を変えていたため、元に戻しました（{len(back)}件）", flush=True)
     else:
         print("AGENT_PROTECT=ok", flush=True)
+    return back
+
+
+def _protect_other_sites(root, site):
+    """その回の社でない記事の変更を戻す（AI は全社の原稿を Edit できるため。公開側で追跡していない原稿は
+    非公開の置き場の写しへ戻す）。新しく作った別の社の記事は消す"""
+    import shutil
+    new, changed = changes(root)
+    back = []
+    for slug in new + changed:
+        owner = _site_of(slug, root)
+        if owner == site or owner is None:
+            continue
+        p = root / "articles" / f"{slug}.md"
+        rel = f"articles/{slug}.md"
+        orig = root / "private" / "articles" / f"{slug}.md"
+        if slug in new:
+            p.unlink(missing_ok=True)
+        elif _git(root, "ls-files", "--error-unmatch", rel).returncode == 0:
+            _git(root, "checkout", "HEAD", "--", rel)
+        elif orig.is_file():
+            shutil.copyfile(orig, p)
+        else:
+            continue
+        back.append("（別の社の記事）")
     return back
 
 
@@ -409,21 +535,28 @@ def _site_of(slug, root=None):
     return S.find_category_owner(m.group(1).strip()) if m else None
 
 
-def publish(root=None):
-    """AI が書いた新しい記事を publish_flow で配信し、中身の変わった別リポジトリの社の記事を配り直す"""
+def publish(root=None, only=None):
+    """AI が書いた新しい記事を publish_flow で配信し、中身の変わった別リポジトリの社の記事を配り直す。
+    only（その回の社）があれば、その社の記事だけを配る（AI は全社の原稿を Edit できる。カテゴリの取り違えで別の社へ出さない）"""
     root = Path(root or ROOT)
     sys.path.insert(0, str(root / "scripts"))
     import private_store as PS
     import sites as S
     new, changed = changes(root)
-    res = {"published": 0, "held": 0, "failed": 0}
+    res = {"published": 0, "held": 0, "failed": 0, "other": 0}
     py = sys.executable
+    hide_all = bool(only) and S.is_client(only)
     for slug in new:
         site = _site_of(slug, root)
-        name = PS.shown(slug)
+        # 社の決まらない記事・お客様の回の記事は名前を出さない（カテゴリで判定できないとお客様の記事と分からない）
+        name = "（お客様の記事）" if hide_all or not site or S.is_client(site) else PS.shown(slug)
         if not site:
             print(f"   × {name}: カテゴリから配信先のサイトが決まりません", flush=True)
             res["failed"] += 1
+            continue
+        if only and site != only:
+            print(f"   × {name}: この回の社の記事ではないため配信しません", flush=True)
+            res["other"] += 1
             continue
         r = subprocess.run([py, "scripts/publish_flow.py", site, slug], cwd=root, capture_output=True, text=True,
                            encoding="utf-8", errors="replace")
@@ -440,14 +573,29 @@ def publish(root=None):
             print(f"   × {name}: 公開できませんでした（終了コード {r.returncode}）", flush=True)
         if not quiet:
             print("\n".join("     " + x for x in out.strip().splitlines()[-12:]), flush=True)
-    ext = sorted({s for s in (_site_of(x, root) for x in changed) if s and S.load(s).get("type") != "self-static"})
+    ext = sorted({s for s in (_site_of(x, root) for x in changed)
+                  if s and (not only or s == only) and S.load(s).get("type") != "self-static"})
     for site in ext:
         r = subprocess.run([py, "scripts/publish_changed.py", "--site", site, "--push"], cwd=root, capture_output=True,
                            text=True, encoding="utf-8", errors="replace")
         print(f"   配り直し（{S.public_id(site) if hasattr(S, 'public_id') else site}）: 終了コード {r.returncode}", flush=True)
-    print(f"AGENT_PUBLISH={'ng' if res['failed'] else 'ok'}（新しい記事 {len(new)}本: 公開 {res['published']}・"
-          f"監修待ち {res['held']}・失敗 {res['failed']} / 中身の変わった記事 {len(changed)}本・配り直し {len(ext)}サイト）",
-          flush=True)
+    bad = res["failed"] + res["other"]
+    print(f"AGENT_PUBLISH={'ng' if bad else 'ok'}（新しい記事 {len(new)}本: 公開 {res['published']}・"
+          f"監修待ち {res['held']}・失敗 {res['failed']}・別の社 {res['other']} / 中身の変わった記事 {len(changed)}本・"
+          f"配り直し {len(ext)}サイト）", flush=True)
+    if bad:
+        # AI はもういないので、止まった記事は人が見る。通知の本文（findings.txt）に要対応として載せる
+        who = S.public_id(only) if only and hasattr(S, "public_id") else "AI の回"
+        line = (f"要対応: {who} で AI が書いた記事のうち {bad}本を配信できませんでした"
+                f"（失敗 {res['failed']}・別の社 {res['other']}。実行ログの「書いた記事を配信する」を確認）")
+        print(line, flush=True)
+        try:
+            log = root / "automation" / "logs" / "findings.txt"
+            log.parent.mkdir(parents=True, exist_ok=True)
+            with log.open("a", encoding="utf-8") as f:
+                f.write(line + "\n")
+        except OSError:
+            pass
     return res
 
 
@@ -457,7 +605,13 @@ def main():
     for f in ("lock", "verify", "unlock", "protect", "publish", "refresh"):
         g.add_argument(f"--{f}", action="store_true")
     ap.add_argument("--scope", default="article", choices=["article", "jail"])
+    ap.add_argument("--site", default="", help="その回の社（公開の id でも社の id でもよい）")
     a = ap.parse_args()
+    site = ""
+    if a.site:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import sites as S
+        site = S.resolve(a.site) if hasattr(S, "resolve") else a.site
     if a.verify:
         return 0 if verify() else 1
     if a.refresh:
@@ -471,9 +625,9 @@ def main():
     elif a.unlock:
         unlock()
     elif a.protect:
-        protect(scope=a.scope)
+        protect(scope=a.scope, site=site or None)
     elif a.publish:
-        publish()
+        publish(only=site or None)
     return 0
 
 

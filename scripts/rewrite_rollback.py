@@ -175,13 +175,32 @@ def later_rewrites(slug, d):
     return out
 
 
+SLUG = re.compile(r"[a-z0-9][a-z0-9-]*")
+
+
+def before_file(d):
+    """直す前の原稿。置き場（data/rewrite_before/）の中のファイルだけを返し、外を指していれば None。
+    台帳（auto_fix.jsonl）は公開側で追跡していて書き換えられうる。before_path が .. や絶対パスで鍵のファイルや
+    コードを指していると、その中身を記事へ書き写して公開してしまう"""
+    rel = str(d.get("before_path") or "")
+    base = (ROOT / "data" / "rewrite_before").resolve()
+    bad = (not rel or ".." in re.split(r"[\\/]", rel) or Path(rel).is_absolute()
+           or rel.startswith(("/", "\\")) or re.match(r"^[A-Za-z]:", rel))
+    src = None if bad else (ROOT / rel).resolve()
+    if src is None or base not in src.parents:
+        who = d.get("slug") if SLUG.fullmatch(str(d.get("slug") or "")) else "?"
+        print(f"要対応: {who} の台帳の直す前の原稿が data/rewrite_before/ の外を指しているため、読みません")
+        return None
+    return src if src.is_file() else None
+
+
 def restore_early(slug, d):
     """直した後だれも触っていなければ原稿ごと、内部リンクの追加などだけなら early の部分だけを戻す。
     別の書き直しが入っていたら戻さない（その直しまで消してしまう）"""
     import hashlib
     p = ROOT / "articles" / f"{slug}.md"
-    src = ROOT / d["before_path"]
-    if not p.is_file() or not src.is_file():
+    src = before_file(d)
+    if not p.is_file() or src is None:
         return False
     raw = p.read_bytes()
     if hashlib.sha1(raw).hexdigest() == d.get("after_sha"):
@@ -204,8 +223,8 @@ def restore_file(slug, d):
     """直す前の原稿へ戻す。直した後にだれかが触っていたら戻さない（その直しまで消してしまう）"""
     import hashlib
     p = ROOT / "articles" / f"{slug}.md"
-    src = ROOT / d["before_path"]
-    if not p.is_file() or not src.is_file():
+    src = before_file(d)
+    if not p.is_file() or src is None:
         return False
     if hashlib.sha1(p.read_bytes()).hexdigest() != d.get("after_sha"):
         print(f"要対応: {slug} は直した後に別の変更が入ったため、自動では戻しません（{d['before_path']} と見比べてください）")
@@ -215,6 +234,10 @@ def restore_file(slug, d):
 
 
 def restore(slug, d):
+    # slug も台帳から来る。articles/ の外へ書かない
+    if not SLUG.fullmatch(str(slug or "")):
+        print("要対応: 台帳の slug が記事の名前の形ではないため、戻しません")
+        return False
     if d.get("kind") == "early":
         return restore_early(slug, d)
     if d.get("kind") != "title" and d.get("before_path"):

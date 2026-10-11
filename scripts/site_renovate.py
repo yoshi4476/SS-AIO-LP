@@ -207,10 +207,13 @@ TYPE_NOTE = {
 
 
 def perm_settings():
-    # 書けるのは作業フォルダ（cwd）の中だけ。Bash・外部通信は渡さない。.git と写真は読み書きさせない
+    # 書けるのは作業フォルダ（cwd）の中だけ。Bash・外部通信は渡さない。.git と写真は読み書きさせない。
+    # Read は作業フォルダの外も許すので、管制塔の鍵のファイル・非公開の置き場は auto_rewrite と同じ拒否で塞ぐ
+    import auto_rewrite as AR
     return json.dumps({"permissions": {
         "allow": ["Read", "Glob", "Grep", "Edit(./**)", "Write(./**)"],
-        "deny": ["Read(./.git/**)", "Edit(./.git/**)", "Write(./.git/**)", "Edit(./_preview/**)", "Write(./_preview/**)"],
+        "deny": ["Read(./.git/**)", "Edit(./.git/**)", "Write(./.git/**)", "Edit(./_preview/**)", "Write(./_preview/**)"]
+        + AR.READ_DENY,
         "defaultMode": "acceptEdits",
     }}, ensure_ascii=False)
 

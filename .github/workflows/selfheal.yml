@@ -88,6 +88,8 @@ jobs:
          github.event.workflow_run.name != 'Deploy to Cloudflare Pages')))
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    outputs:
+      broken: ${{ steps.diag.outputs.broken }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -242,83 +244,18 @@ jobs:
             echo "検査はすべて通っています。修復は不要です"
           fi
 
-      # 修復の AI もログ（外の文章を含みうる）を読むので、作業場から鍵を外してから動かす（2026-10-11）
-      - name: 修復の前にAIの作業場から鍵を外す
-        if: steps.diag.outputs.broken == '1'
-        run: python scripts/agent_guard.py --lock
+      # 不具合を直す AI は、このジョブでは動かさない（下の repair・repair-branch。2026-10-11 の点検）。
+      # このジョブは鍵を持つため、AI の書いたコード（python で何でも動かせる）が裏に残って鍵を戻した後に読む・
+      # sudo でジョブのメモリから全部の鍵を読む・鍵を戻した後の検証で動く・本体へ push されて以後の全工程が鍵つきで動かす、の道があった
 
-      - name: 不具合の自動修復
-        if: steps.diag.outputs.broken == '1'
-        env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          HUB_URL: ${{ secrets.HUB_URL }}
-          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）
-          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
-        run: |
-          python scripts/agent_guard.py --verify || exit 1
-          # コードは直せるが、外へ送るコマンドと鍵の外し方そのもの（agent_guard・許可の一覧）には触れない
-          claude -p "$(cat automation/selfheal_prompt.txt)" \
-            --permission-mode dontAsk --settings automation/agent_settings_maint.json --max-turns 120 || true
-
-      - name: 修復のAIが触ってはいけない場所を戻す
-        if: always() && steps.diag.outputs.broken == '1'
-        run: python scripts/agent_guard.py --protect --scope jail
-
-      - name: 修復の後にAIの作業場へ鍵を戻す
-        if: always() && steps.diag.outputs.broken == '1'
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
-          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
-        run: python scripts/agent_guard.py --unlock
-
-      # 直したつもりで壊していないかを、人の目の代わりに機械で見る。
-      # 通らなければ変更を捨てる。壊れたまま配信するより安全。
-      - name: 直った状態の検証
-        if: steps.diag.outputs.broken == '1'
-        id: verify
-        run: |
-          ok=1
-          # 記事のページは Git に置かない（公開の前に作る）。検査は作った後に走らせる
-          python scripts/build.py    || ok=0
-          python tests/test_gates.py || ok=0
-          echo "ok=$ok" >> "$GITHUB_OUTPUT"
-          if [ "$ok" = "0" ]; then
-            echo "::error::修復後も検査が通りません。変更を捨てます"
-            git checkout -- . || true
-          fi
-
-      - name: 直った分だけコミット
-        if: steps.diag.outputs.broken == '1' && steps.verify.outputs.ok == '1'
-        run: |
-          # ワークフローの変更は CI の鍵（GITHUB_TOKEN）では push できず、修復の全体が拒否されて捨てられた
-          # （2026-10-05・50ファイル）。ワークフローの分だけ外して残りを反映し、変更案は成果物と要対応で知らせる
-          if [ -n "$(git status --porcelain -- .github/workflows)" ]; then
-            git diff -- .github/workflows > /tmp/workflow-change.patch || true
-            git checkout -- .github/workflows 2>/dev/null || true
-            git clean -fdq -- .github/workflows || true
-            echo "::warning::自動修復がワークフローの変更を提案しました（CI の鍵では反映できないため外しました。成果物 workflow-change を確認）"
-            mkdir -p automation/logs
-            echo "要対応: 自動修復がワークフローの変更を提案しました（反映は手で。run の成果物 workflow-change）" >> automation/logs/findings.txt
-          fi
-          git add -A
-          if git diff --cached --quiet; then
-            echo "変更なし"
-          else
-            git commit -m "selfheal: パイプラインを止めていた不具合を自動修復 $(date '+%Y-%m-%d %H:%M')"
-            git pull --rebase origin "${GITHUB_REF_NAME}" || true
-            git push
-          fi
-
-      # 記事が落ちた日は、修復のあとで書き直す。1日分を失わない。
-      # コードが壊れていない回（claude の一時失敗・取り消し）がいちばん多い落ち方なので、
-      # 「壊れていない」か「直せた」のどちらかなら動かす。verify は壊れていた回にしか走らない
+      # 記事が落ちた日は、書き直す。1日分を失わない。
+      # コードが壊れていない回（claude の一時失敗・取り消し）がいちばん多い落ち方なので、壊れていない回だけ動かす
+      # （壊れていた回は修復の案を人が取り込んでから。次の記事の枠・救済が書く）
       - name: 書き直しの前にAIの作業場から鍵を外す
         id: rewrite
         if: >-
           github.event_name == 'workflow_run' &&
-          (steps.diag.outputs.broken == '0' || steps.verify.outputs.ok == '1')
+          steps.diag.outputs.broken == '0'
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -326,7 +263,7 @@ jobs:
           python scripts/agent_guard.py --lock
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
-              nohup python scripts/agent_guard.py --refresh > /dev/null 2>&1 &
+              nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
           fi
 
       - name: 修復後に記事を書き直す（AI）
@@ -339,7 +276,7 @@ jobs:
         run: |
           python scripts/agent_guard.py --verify || exit 1
           claude -p "$(cat automation/retry_prompt.txt)" \
-            --permission-mode dontAsk --settings automation/agent_settings_article.json --max-turns 160 || true
+            --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 160 || true
 
       - name: 書き直しのAIが触ってはいけない場所を戻す
         if: always() && steps.rewrite.outputs.go == 'yes'
@@ -394,7 +331,7 @@ jobs:
         if: >-
           github.event_name == 'workflow_run' &&
           github.event.workflow_run.name == 'Monthly Consulting Report' &&
-          (steps.diag.outputs.broken == '0' || steps.verify.outputs.ok == '1')
+          steps.diag.outputs.broken == '0'
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
           GA4_ID: ${{ secrets.GA4_PROPERTY_ID }}
@@ -475,10 +412,12 @@ jobs:
           elif [ "${{ steps.diag.outputs.broken }}" = "0" ]; then
             msg="✅ 自動修復: 異常なし"
             routine="--routine"
-          elif [ "${{ steps.verify.outputs.ok }}" = "1" ]; then
-            msg="🔧 自動修復: 不具合を直しました（内容は実行ログ）"
+          elif [ "${{ steps.diag.outputs.broken }}" = "1" ]; then
+            # 不具合のある回は、修復の案を作る工程（repair-branch）が結果をまとめて知らせる（二重に送らない）
+            echo "不具合あり。知らせは修復の案の工程が送ります"
+            exit 0
           else
-            msg="🚨 自動修復: 直せませんでした。手当てが必要です"
+            msg="🚨 自動修復: いま壊れているものの確認が最後まで動きませんでした。手当てが必要です"
           fi
           # ワークフローの変更案は CI では反映できない。黙らずに知らせる
           if [ -s /tmp/workflow-change.patch ]; then
@@ -501,6 +440,154 @@ jobs:
       - uses: ./.github/actions/private-data
         if: always()
         with: {mode: save}
+
+  # 不具合を直す AI は、鍵を1つも持たない別のランナーの、さらにコンテナの中だけで動かす（2026-10-11 の点検）。
+  # 同じジョブで鍵と並べると、AI の書いたコード（python で何でも動かせる）が裏に残って鍵を戻した後に読む・sudo で
+  # ジョブのメモリから鍵を読む・鍵を戻した後の検証で動く、の道があった。別のランナーでも、ランナーの上で動かすと
+  # 後の手順（キャッシュの保存など）の権限を横取りできるので、AI と検証はコンテナ（ランナーのプロセス・ファイル・
+  # docker に届かない）で動かし、ランナーへは作業場の写し（データ）だけを戻す。渡す鍵は claude の利用の鍵だけで、
+  # 非公開のデータも取らない。直した内容は本体（master）へ入れず、差分をキャッシュで次のジョブへ渡す
+  repair:
+    needs: heal
+    if: needs.heal.outputs.broken == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    permissions:
+      contents: read
+    outputs:
+      ok: ${{ steps.verify.outputs.ok }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: AI の作業場（コンテナ）を作る
+        run: |
+          mkdir -p /tmp/img && cp requirements.txt /tmp/img/ && cp automation/ai_container.Dockerfile /tmp/img/Dockerfile
+          docker build -q -t selfheal-ai /tmp/img
+          # 作業場の写し。.git も写す（AI が履歴を読む）が、ランナー側の .git には届かない
+          rm -rf /tmp/ws && cp -a . /tmp/ws
+
+      - name: 不具合の自動修復（鍵の無いコンテナ）
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          # 権限を全部外し、昇格もさせない。ランナーの /proc・docker・ファイルには届かない。終われば中の処理はすべて消える
+          docker run --rm --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges --pids-limit 1024 \
+            -e CLAUDE_CODE_OAUTH_TOKEN -e HOME=/tmp/home -v /tmp/ws:/ws -w /ws selfheal-ai bash -c '
+              mkdir -p "$HOME" && git config --global --add safe.directory /ws
+              python scripts/build.py > /tmp/prebuild.log 2>&1 || true
+              # コードは直せるが、外へ送るコマンドと鍵の外し方そのもの（agent_guard・許可の一覧）には触れない
+              claude -p "$(cat automation/selfheal_prompt.txt)" \
+                --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_maint.json --max-turns 120 || true' || true
+
+      - name: 直った状態の検証と差分
+        id: verify
+        if: always()
+        run: |
+          # 検証は AI が書き換えたコードを動かすので、これもコンテナの中（鍵は渡さない。結果は参考）
+          docker run --rm --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges --pids-limit 1024 \
+            -e HOME=/tmp/home -v /tmp/ws:/ws -w /ws selfheal-ai bash -c '
+              ok=1; python scripts/build.py || ok=0; python tests/test_gates.py || ok=0
+              echo "SELFHEAL_VERIFY=$ok"' | tee /tmp/verify.log || true
+          ok=$(grep -o 'SELFHEAL_VERIFY=[01]' /tmp/verify.log | tail -1 | cut -d= -f2)
+          echo "ok=${ok:-0}" >> "$GITHUB_OUTPUT"
+          # 写しの中身（データ）だけをランナーの作業場へ戻して差分を取る。ランナー側の .git（設定・hooks）は使わせない
+          rsync -a --delete --exclude .git --exclude selfheal-out /tmp/ws/ ./
+          rm -rf selfheal-out && mkdir -p selfheal-out
+          # ワークフローの変更は CI の鍵（GITHUB_TOKEN）では push できない。案は成果物で残す
+          if [ -n "$(git status --porcelain -- .github/workflows)" ]; then
+            git diff -- .github/workflows > selfheal-out/workflow-change.patch || true
+            git checkout -- .github/workflows 2>/dev/null || true
+            git clean -fdq -- .github/workflows || true
+          fi
+          git add -A -- . ':!selfheal-out'
+          git diff --cached --binary > selfheal-out/selfheal.patch || true
+          echo "差分: $(git diff --cached --name-only | wc -l) ファイル（検証 ok=${ok:-0}）"
+
+      - name: 修復の差分を次のジョブへ渡す
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: selfheal-out
+          key: selfheal-patch-${{ github.run_id }}
+
+      - name: ワークフローの変更案を残す（修復）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workflow-change-repair
+          path: selfheal-out/workflow-change.patch
+          if-no-files-found: ignore
+          retention-days: 14
+
+  # 修復の案を、本体とは別の枝（selfheal/fix-<run>）に置いて知らせる。人が確かめてから master へ取り込む。
+  # ここでは案のコードを1行も動かさない（通知は案を当てる前の master の notify_slack.py で送る）。
+  # 鍵の外し方・許可の一覧・ワークフローに触れた案は置かない
+  repair-branch:
+    needs: [heal, repair]
+    if: always() && needs.heal.outputs.broken == '1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: selfheal-out
+          key: selfheal-patch-${{ github.run_id }}
+
+      - name: 修復の案を枝に置いて知らせる
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: |
+          git config user.name "AIO Pipeline Bot"
+          git config user.email "noreply@7senses.co.jp"
+          repo="https://github.com/${{ github.repository }}"
+          b="selfheal/fix-${{ github.run_id }}"
+          p=selfheal-out/selfheal.patch
+          checked="$([ "${{ needs.repair.outputs.ok }}" = "1" ] && echo 通った || echo 通らない)"
+          if [ ! -s "$p" ]; then
+            msg="🚨 自動修復: 不具合がありますが、修復の案を作れませんでした。手当てが必要です"
+          else
+            git switch -q -c "$b"
+            if ! git apply --index "$p"; then
+              git reset -q --hard; git switch -q -
+              msg="🚨 自動修復: 修復の案を当てられませんでした（差分の形が壊れています）。手当てが必要です"
+            else
+              bad=$(git diff --cached --name-only --no-renames | grep -E '^(\.github/|\.claude/|automation/agent_settings_|automation/ai_container\.Dockerfile|scripts/agent_guard\.py|scripts/gcreds\.py|tests/gates_history_h91_agent_jail\.py|\.env)' || true)
+              if [ -n "$bad" ]; then
+                git reset -q --hard; git switch -q -
+                msg="🚨 自動修復: 修復の案が触ってはいけない場所（鍵の外し方・許可の一覧・ワークフロー）に触れていたため置いていません。手当てが必要です"
+              else
+                n=$(git diff --cached --name-only | wc -l)
+                git commit -q -m "selfheal: 修復の案（鍵の無い作業場で AI が作成。人が確かめてから master へ取り込む）"
+                if git push -q origin "$b"; then
+                  msg="🔧 自動修復: 修復の案を枝に置きました（${n}ファイル・鍵の無い作業場での検証: ${checked}）。差分を確かめてから master へ取り込んでください
+          $repo/compare/master...$b"
+                else
+                  msg="🚨 自動修復: 修復の案を枝へ push できませんでした。手当てが必要です"
+                fi
+                git switch -q -
+              fi
+            fi
+          fi
+          if [ -s selfheal-out/workflow-change.patch ]; then
+            msg="$msg
+          ⚠️ ワークフローの変更案があります（CI の鍵では反映できないため外しました。成果物 workflow-change-repair を確認して手で反映）"
+          fi
+          # ここは master のコードのまま（案は上で枝に置いて戻した）
+          python scripts/notify_slack.py "$msg
+          $repo/actions/runs/${{ github.run_id }}" || true
 
   rerun:
     if: >-

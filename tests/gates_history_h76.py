@@ -189,6 +189,11 @@ def test_jobs_with_client_data_mask_logs():
                         arts.append(f"{name}/{job}: {path}")
             if co is None or not scripts or scripts <= TIMING:
                 continue
+            # 鍵を1つも持たないジョブ（自動修復の AI を動かす作業場。claude の利用の鍵だけ）は非公開のデータを取れず、
+            # お客様の語がログに出る元が無い。わざと取らせていない（2026-10-11 の点検）
+            if set(re.findall(r"secrets\.([A-Z0-9_]+)", json.dumps(j, ensure_ascii=False))) <= {"CLAUDE_CODE_OAUTH_TOKEN"} \
+                    and (j.get("permissions") or {}).get("contents") == "read":
+                continue
             pd = next((i for i, s in enumerate(steps) if s.get("uses") == "./.github/actions/private-data"), None)
             if pd is None:
                 missing.append(f"{name}/{job}")

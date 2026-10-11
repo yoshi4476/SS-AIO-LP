@@ -843,17 +843,20 @@ jobs:
           python scripts/agent_guard.py --lock
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
-              nohup python scripts/agent_guard.py --refresh > /dev/null 2>&1 &
+              nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
           fi
 
       - name: 週次最適化の実行
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # ジョブ全体の env にある全権の合言葉を、AI の手順では AI 用の合言葉で上書きする（狙う語の台帳とエラーの記録だけが通る）。
+          # 上書きしないとジョブの env の値が流れ込む（2026-10-11 の点検。--verify も管制塔に聞いて止める）
+          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
         run: |
           python scripts/agent_guard.py --verify || exit 1
           # 利用枠切れ・最大ターン到達で落ちても、後ろの実測・コミット・配信は続ける
           claude -p "$(cat automation/weekly_optimize_prompt.txt)" \
-            --permission-mode dontAsk --settings automation/agent_settings_article.json --max-turns 120 \
+            --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 120 \
             || echo "::warning::週次の claude 工程が失敗（後続は続行）"
 
       - name: 週次のAIが触ってはいけない場所を戻す
@@ -1221,6 +1224,9 @@ jobs:
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
           SCHED_GH_TOKEN: ${{ github.token }}   # 定時の起動役（Cloudflare Worker）の起動の記録を読む（sched_guard --watch だけが使う）
+          # ロボットよけを「断る」へ切り替えた週に、AI集客ラボの受付をその場で配信し直す（下の TURNSTILE_SWITCHED）
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # CI のログを取って守秘の語を数える（log_leak_check だけが使う。actions: read はワークフロー全体で付けてある）
           LOG_LEAK_GH_TOKEN: ${{ github.token }}
         run: |
@@ -1235,11 +1241,36 @@ jobs:
           # findings_seen は前の週に出たもの（来週の要対応と情報の振り分けが読む）。pull は未コミットの変更があっても通す
           # functions/_turnstile_enforce.js は、ロボットよけを「断る」へ切り替えた週に書き換わる（AI集客ラボの受付へ配信される）
           for p in data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json data/bing_stats data/findings_seen.json functions/_turnstile_enforce.js; do if [ -e "$p" ]; then git add "$p"; fi; done
+          sw=0
+          git diff --cached --name-only | grep -qx functions/_turnstile_enforce.js && sw=1
+          attention() {
+            # 要対応は情報の欄より上に置く（通知は情報の欄より上だけを見る）
+            { echo "要対応: $1"; cat automation/logs/findings.txt 2>/dev/null; } > automation/logs/findings.new
+            mv automation/logs/findings.new automation/logs/findings.txt
+          }
           git diff --cached --quiet || {
             git commit -q -m "weekly: 記事本数の判定と結果からの学び $(date '+%Y-%m-%d')"
             git pull --rebase --autostash -q origin "${GITHUB_REF_NAME}" || true
-            git push -q || true
+            if ! git push -q; then
+              echo "::warning::週次の記録を正本へ push できませんでした"
+              if [ "$sw" = 1 ]; then attention "ロボットよけの切り替え（functions/_turnstile_enforce.js）を正本へ push できませんでした。管制塔だけが断っています"; fi
+            fi
           }
+          # 切り替えた週は、AI集客ラボの受付へその場で配信する。この push は GITHUB_TOKEN なので配信のワークフロー（deploy.yml）が
+          # 起動せず、次に別の工程が配信するまで受付だけが「断らない」ままだった（2026-10-11 の点検）
+          if [ "$sw" = 1 ]; then
+            ok=0
+            if python3 scripts/seo_audit.py --gate >/dev/null 2>&1; then
+              for i in 1 2 3; do
+                npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && { ok=1; break; }
+                sleep 40
+              done
+            fi
+            if [ "$ok" = 1 ]; then echo "TURNSTILE_SWITCHED=deployed"; else
+              echo "TURNSTILE_SWITCHED=deploy-failed"
+              attention "ロボットよけの切り替えを AI集客ラボの受付へ配信できませんでした（deploy.yml を手で動かしてください。それまで管制塔だけが断っています）"
+            fi
+          fi
 
       # 検査（findings）の後に作る。要対応の一覧を「次にやること」に載せるため。
       # 前はここより前にあり、検査結果が出る前にレポートが確定していた

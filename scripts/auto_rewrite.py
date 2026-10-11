@@ -55,11 +55,15 @@ def sh(args, timeout=1800, stdin_text=None, cwd=None):
     claude.CMD（バッチ）に解決されるため、最初の改行で切れる。実測で、
     引数で渡した複数行は1行目しか届かず、書き換えが24本続けて空振りした。
     """
-    # claude を呼ぶときは鍵の名前の環境変数を外す（呼ばれた AI は手順の鍵を受け継ぐ。agent_guard.child_env）
+    # claude を呼ぶときは鍵の名前の環境変数を外す（呼ばれた AI は手順の鍵を受け継ぐ。agent_guard.child_env）。
+    # 許可の設定を渡さない呼び出し（訳・動画の台本・採点など）にも、鍵のファイルを読ませない拒否を付ける。
+    # 作業の場所（既定は ROOT）の中の Read は許可なしで通るので、Google の鍵・git の資格・非公開の置き場が読めた
     env = None
     if Path(str(args[0])).name.lower().startswith("claude"):
         import agent_guard
         env = agent_guard.child_env()
+        if "--settings" not in args:
+            args = [*args, "--settings", json.dumps({"permissions": {"deny": READ_DENY}}, ensure_ascii=False)]
     return subprocess.run(args, cwd=cwd or ROOT, capture_output=True, text=True,
                           encoding="utf-8", errors="ignore", timeout=timeout,
                           input=stdin_text, env=env)
@@ -851,11 +855,33 @@ WHAT = {
 }
 
 
+def _abs_rule(path):
+    """許可の // 形（ファイルシステムの根から）。Windows は C:/x を /c/x にそろえて照合される"""
+    p = Path(path).as_posix()
+    if re.match(r"^[A-Za-z]:/", p):
+        p = "/" + p[0].lower() + p[2:]
+    return "/" + p
+
+
+# Read は全部許しているので、外の文章（競合の見出し・検索語）に仕込まれた指示に従うと鍵のファイルや
+# 親の python の環境変数（/proc/<親>/environ。管制塔の合言葉・AI の鍵）まで読めた。浮いた枠は鍵を外さずに
+# この道具を動かすので、ここの deny だけが守りになる。行は agent_settings_maint.json の Read の拒否とそろえる。
+# 接頭辞なしは作業の場所からの相対で、draft_all は一時フォルダで動かすため、// の絶対の形でも同じものを拒む
+READ_DENY = [
+    "Read(.env)", "Read(**/.env)", "Read(**/.env.*)", "Read(//proc/**)",
+    "Read(~/.codex/**)", "Read(~/.config/**)", "Read(~/.ssh/**)", "Read(~/.git-credentials)",
+    "Read(**/.git/config)", "Read(indexing-service-account.json)",
+    "Read(**/*token*.json)", "Read(**/*credentials*.json)", "Read(private/**)",
+    "Read(//**/.env)", "Read(//**/.env.*)", "Read(//**/.git/config)", "Read(//**/indexing-service-account.json)",
+    "Read(//**/*token*.json)", "Read(//**/*credentials*.json)", f"Read({_abs_rule(ROOT)}/private/**)",
+]
+
 PERM = json.dumps({"permissions": {
     # articles/ の書き換えだけを許す。Bash も外部通信も渡さないので、
     # この工程にできるのは原稿1本の書き換えだけ。
     # 全権限を飛ばす指定は使わない（ゲートが綴りの有無で見張っている）
     "allow": ["Read", "Edit(articles/**)"],
+    "deny": READ_DENY,
     "defaultMode": "acceptEdits",
 }}, ensure_ascii=False)
 
