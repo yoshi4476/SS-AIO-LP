@@ -93,8 +93,9 @@ function kwRows_() {
   return BOOK['KW台帳'].slice(1).map(function (r) { var o = r.slice(); while (o.length < 11) o.push(''); return o; });
 }
 """ % (json.dumps(_ledger(), ensure_ascii=False), tabs)
+    # cells_: 台帳に外の文字を置く前の消毒（2026-10-11 から addKw_・noteOverlap_ が通す）
     body = "".join(fn(n) for n in ("normKw_", "kwGroup_", "sameGroup_", "kwTime_", "noteOverlap_", "kwOverlaps_",
-                                   "kwConflict_", "addKw_", "claimKw_"))
+                                   "kwConflict_", "addKw_", "claimKw_", "cells_"))
     run = """
 var STEPS = %s, RES = [];
 STEPS.forEach(function (s) {

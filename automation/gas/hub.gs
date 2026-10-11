@@ -178,6 +178,16 @@ function setup() {
   book_().toast('11タブの準備が完了しました', '管制塔セットアップ', 5);
 }
 
+/**
+ * フォームから来た値をシートの1行に置くときの消毒。「=」「+」「-」「@」で始まる文字はシートが数式として読む。
+ * 誰でも送れるフォームから =IMPORTDATA("…"&A2) のような式を入れられると、台帳を開いた時に他の問い合わせの
+ * 中身を外へ送らせることができる（数式の注入）。先頭に ' を付けると文字として置かれ、' は値に残らない
+ * hub.gs に置く（台帳・エラーの記録など hub.gs だけの書き込みも同じ消毒を通す。contact.hub.gs からも使う）
+ */
+function cells_(row) {
+  return row.map(function (v) { return typeof v === 'string' && /^[=+\-@\t\r]/.test(v) ? "'" + v : v; });
+}
+
 function sheet_(name) {
   const ss = book_();
   let sh = ss.getSheetByName(name);
@@ -194,15 +204,19 @@ const KW_READS = { next_kw: true, all_kw: true, kw_status: true, kw_overlaps: tr
 // 記事を書く AI の手順に渡す合言葉（gas_deploy が .env の HUB_AGENT_SECRET で埋める）。AI は外の文章を読むので、
 // 仕込まれた指示に従っても問い合わせ・管理・お客様のメールに触れないよう、狙う語の台帳とエラーの記録だけを通す（2026-10-11）
 const AGENT_SECRET = 'AGENT_SECRET_XXXXXXXX';
-const AGENT_ACTIONS = { next_kw: true, all_kw: true, kw_status: true, kw_overlaps: true, claim_kw: true, kw_conflict: true,
-                        add_kw: true, retire_kw: true, unclaim_kw: true, error_log: true };
-function agentOk_(secret, action) {
-  return !!secret && AGENT_SECRET.indexOf('XXXXXXXX') < 0 && secret === AGENT_SECRET && !!AGENT_ACTIONS[action];
+// 読む操作は GET（KW_READS）、書く操作は POST（AGENT_POSTS）でだけ通す。POST に読む操作の名前を付けると、
+// 受付に該当の操作が無いためフォーム（問い合わせの台帳・自動返信）へ落ちていた。toString などの元の名前も通さない
+const AGENT_POSTS = { claim_kw: true, kw_conflict: true, add_kw: true, retire_kw: true, unclaim_kw: true, error_log: true };
+function agentOk_(secret, action, reads) {
+  const allow = reads ? KW_READS : AGENT_POSTS;
+  return typeof secret === 'string' && typeof action === 'string' && AGENT_SECRET.indexOf('XXXXXXXX') < 0
+    && secret === AGENT_SECRET && Object.prototype.hasOwnProperty.call(allow, action);
 }
 
 function doGet(e) {
   const p = (e && e.parameter) || {};
-  if (KW_READS[p.action] && (!SHARED_SECRET || p.secret !== SHARED_SECRET) && !agentOk_(p.secret, p.action)) {
+  if (Object.prototype.hasOwnProperty.call(KW_READS, String(p.action || '')) && (!SHARED_SECRET || p.secret !== SHARED_SECRET)
+      && !agentOk_(p.secret, p.action, true)) {
     return json_({ ok: false, error: 'unauthorized' });
   }
   try {
@@ -234,7 +248,7 @@ function doPost(e) {
   // 転送（forwardToHub_）は合言葉を付けてくるので、あれば照合する。
   const hasAction = !!body.action;
   if (SHARED_SECRET && (hasAction || body.secret) && body.secret !== SHARED_SECRET
-      && !(hasAction && agentOk_(body.secret, body.action))) {
+      && !(hasAction && agentOk_(body.secret, body.action, false))) {
     return json_({ ok: false, error: 'unauthorized' });
   }
   try {
@@ -301,9 +315,14 @@ function doPost(e) {
       case 'ai_recheck_done': return json_(aiRecheckDone_(body));
       // ニュースレターを送る前に、購読者のうち配信除外に当たる人を聞く（newsletter_exclude.py。合言葉つき）
       case 'newsletter_excluded': return json_(newsletterExcluded_(body));
+      // 別事業のサイトの GAS（forward-to-hub.gs）が合言葉つきで転送してくる問い合わせ
+      case 'contact':     return json_(form_(body));
       // 各サイトのフォームは action を持たない。種別ごとに必要項目が違うため、
       // 判定と記録は contact.hub.gs の form_() にまとめている。
-      default:            return json_(form_(body));
+      // 操作名があるのに該当が無いものはフォームとして受けない（名前を誤った呼び出しが、問い合わせの台帳と自動返信に入っていた）
+      default:
+        if (hasAction) return json_({ ok: false, error: 'unknown action' });
+        return json_(form_(body));
     }
   } catch (err) {
     return json_({ ok: false, error: String(err) });
@@ -403,8 +422,8 @@ function noteOverlap_(keyword, first, second, ctx) {
     }
   }
   const reg = (ctx && ctx.regions) || {};
-  sh.appendRow([new Date(), keyword, first, reg[first] || '', second, reg[second] || '', '未確認',
-                '社Aが先に登録。片方を外すときは retire_kw で外す側の語を対象外にする']);
+  sh.appendRow(cells_([new Date(), String(keyword), first, String(reg[first] || ''), second, String(reg[second] || ''), '未確認',
+                '社Aが先に登録。片方を外すときは retire_kw で外す側の語を対象外にする']));
   return true;
 }
 
@@ -508,12 +527,12 @@ function retireKw_(site, keywords, reason, force) {
     if (String(rows[i][2]).trim() === '公開済み') {
       if (!force) continue;
       sh.getRange(i + 2, 3).setValue('取り下げ');
-      sh.getRange(i + 2, 11).setValue(reason || 'サイトから取り下げ');
+      sh.getRange(i + 2, 11).setValue(cells_([String(reason || 'サイトから取り下げ')])[0]);
       n++;
       continue;
     }
     sh.getRange(i + 2, 3).setValue('対象外');
-    sh.getRange(i + 2, 11).setValue(reason || '担当領域が異なるため取り下げ');
+    sh.getRange(i + 2, 11).setValue(cells_([String(reason || '担当領域が異なるため取り下げ')])[0]);
     n++;
   }
   return { ok: true, retired: n };
@@ -611,8 +630,8 @@ function addKw_(site, keywords, ctx) {
     if (exist[n]) { skipped.push({ keyword: kw.keyword, dup: exist[n] }); return; }
     // 同じ組の他サイトが持つ語は入れない。グループ内で同じ語を奪い合うことになる
     if (other[n]) { crossed.push({ keyword: kw.keyword, site: other[n] }); return; }
-    sh.appendRow([site, kw.keyword, '未着手', kw.priority || 'B', kw.category || '',
-                  kw.aim || '', new Date(), '', '', '', kw.note || '']);
+    sh.appendRow(cells_([site, String(kw.keyword), '未着手', String(kw.priority || 'B'), String(kw.category || ''),
+                  String(kw.aim || ''), new Date(), '', '', '', String(kw.note || '')]));
     exist[n] = kw.keyword;
     added++;
     // 組の違う社（別の会社）が持つ語は入れたうえで、運用者に知らせる
@@ -626,10 +645,10 @@ function addKw_(site, keywords, ctx) {
 
 /** 公開完了の記録（KW台帳と記事作成ログの両方を更新） */
 function publishLog_(b) {
-  sheet_('記事作成ログ').appendRow([
-    new Date(), siteLabel_(b.site), b.title || '', b.keyword || '', b.category || '',
-    b.score || '', b.chars || '', b.url || '', b.note || '',
-  ]);
+  sheet_('記事作成ログ').appendRow(cells_([
+    new Date(), siteLabel_(b.site), String(b.title || ''), String(b.keyword || ''), String(b.category || ''),
+    b.score || '', b.chars || '', String(b.url || ''), String(b.note || ''),
+  ]));
   if (b.keyword) markKwPublished_(b.site, b.keyword, b.url);
   return { ok: true };
 }
@@ -740,10 +759,10 @@ function errorLog_(b) {
       }
     }
   }
-  sh.appendRow([
-    new Date(), siteLabel_(b.site) || '', b.phase || '', b.message || '',
-    b.fix || '', b.status || '未対応',
-  ]);
+  sh.appendRow(cells_([
+    new Date(), siteLabel_(b.site) || '', String(b.phase || ''), String(b.message || ''),
+    String(b.fix || ''), String(b.status || '未対応'),
+  ]));
   return { ok: true };
 }
 

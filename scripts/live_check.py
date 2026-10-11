@@ -102,6 +102,23 @@ def _norm(u):
     return u.split("#")[0].split("?")[0].rstrip("/")
 
 
+def sitemap_urls(status, body):
+    """sitemap の URL の集合（末尾の / を外す）。索引の形（sitemapindex）は1段だけたどる。
+    取れない・urlset でない・中身が0件のときは None（全ページで noindex を問題にする。見逃すより知らせる）"""
+    if status != 200 or not body:
+        return None
+    if "<sitemapindex" in body:
+        out = set()
+        for sub in re.findall(r"<loc>([^<]+)</loc>", body)[:20]:
+            st, b, _ = fetch(sub.strip())
+            if st == 200 and "<urlset" in b:
+                out |= {_norm(u) for u in re.findall(r"<loc>([^<]+)</loc>", b)}
+        return out or None
+    if "<urlset" not in body:
+        return None
+    return {_norm(u) for u in re.findall(r"<loc>([^<]+)</loc>", body)} or None
+
+
 def check_page(url, html, status, final, indexed=None):
     """indexed: そのサイトの sitemap の URL（末尾の / を外した集合）。None なら全ページで noindex を問題にする"""
     out = []
@@ -196,7 +213,7 @@ def main():
         urls = targets(sid, a.all)
         st_sm, body_sm, _ = fetch("https://" + cfg["domain"] + "/sitemap.xml")
         # sitemap が取れないときは従来どおり全ページで noindex を問題にする（見逃すより知らせる）
-        indexed = {_norm(u) for u in re.findall(r"<loc>([^<]+)</loc>", body_sm)} if st_sm == 200 else None
+        indexed = sitemap_urls(st_sm, body_sm)
         print(f"■ {cfg['name']}（{len(urls)}ページ）", flush=True)
         checked = 0
         for u in urls:

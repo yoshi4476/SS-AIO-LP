@@ -72,15 +72,21 @@ def rows(tab, cols):
     return [r + [""] * (cols - len(r)) for r in v]
 
 
+def _cell(v):
+    """「=」「+」「-」「@」で始まる文字は表が数式として読む（GAS の cells_ と同じ消毒）。先頭の ' は値に残らない。
+    日付の文字列を日付として入れるため USER_ENTERED のままにし、数式になりうる文字だけを文字として置く"""
+    return "'" + v if isinstance(v, str) and v[:1] in ("=", "+", "-", "@", "\t", "\r") else v
+
+
 def _set(tab, row, col, value):
     _svc().values().update(spreadsheetId=sheet_id(), range=f"'{tab}'!{chr(64 + col)}{row}",
-                           valueInputOption="USER_ENTERED", body={"values": [[value]]}).execute()
+                           valueInputOption="USER_ENTERED", body={"values": [[_cell(value)]]}).execute()
 
 
 def _append(tab, values):
     global WROTE
     _svc().values().append(spreadsheetId=sheet_id(), range=f"'{tab}'!A1", valueInputOption="USER_ENTERED",
-                           insertDataOption="INSERT_ROWS", body={"values": [values]}).execute()
+                           insertDataOption="INSERT_ROWS", body={"values": [[_cell(v) for v in values]]}).execute()
     WROTE = True
 
 

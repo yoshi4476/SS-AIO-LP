@@ -40,8 +40,21 @@ FINDINGS = ROOT / "automation" / "logs" / "findings.txt"
 
 
 def _client(slug):
-    import private_store as PS
-    return PS.client_slug(slug)
+    """お客様の社の記事か。判定できないときはお客様の記事とみなす（伏せる側・写さない側に倒す）"""
+    try:
+        import private_store as PS
+        return PS.client_slug(slug)
+    except Exception:
+        return True
+
+
+def _site_shown(site):
+    """CI のログに出す社の名前。お客様の社は公開の id（社の内部の id は伏せる語）"""
+    try:
+        import sites as S
+        return S.public_id(site) if S.is_client(site) else site
+    except Exception:
+        return "（社）"
 
 
 def _shown(slug):
@@ -317,21 +330,27 @@ def shorts(ledger, limit, token, public):
             lead = bool(ledger[slug].get("youtube"))
             if lead:
                 rec["desc"] = YT.LEAD_LONG
+            # TikTok 用の成果物（自社の記事だけ）。投稿の前に写す（投稿が上限などで失敗しても成果物には残す）。
+            # 写しの失敗で動画の工程を失敗にしない
+            if not _client(slug) and out.is_file():
+                try:
+                    tk = VM.OUT / "tiktok"
+                    tk.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(out, tk / out.name)
+                except OSError as e:
+                    print(f"   ※ TikTok 用の写しを残せませんでした（{type(e).__name__}）")
             if token:
                 with VM.timed("short.upload"):
                     rec["youtube"] = YT.upload(out, slug, public=public, quiet=True, short_title=sc.get("title", ""),
                                                lead_long=lead)
             ledger[slug]["short"] = rec
-            if not _client(slug) and out.is_file():
-                tk = VM.OUT / "tiktok"
-                tk.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(out, tk / out.name)
             made += 1
             print(f"   ○ short {_shown(slug):<40} {sec:.0f}秒"
                   + (f" → youtube.com/shorts/{rec['youtube']}" if token and not _client(slug) else ""))
         except Exception as e:
             SHORT_FAILS.append(slug)
-            print(f"   × short {_shown(slug)}: {str(e)[:300]}")
+            # お客様の記事は例外の文を出さない（ffmpeg の出力先のパスなどに slug が入る）
+            print(f"   × short {_shown(slug)}: {'（お客様の記事のため理由は伏せます）' if _client(slug) else str(e)[:300]}")
             if "uploadLimitExceeded" in str(e):
                 # 1日のアップロード上限（API は手動より厳しい。2026-10-03 は約10本で当たった）。
                 # 続けても作っては失敗するだけなので、この回はやめる。翌日の回で続きから上がる
@@ -388,12 +407,12 @@ def main():
           f"YouTubeの鍵 {'あり' if token else '無し'}")
     for r in rows:
         if _client(r["slug"]):
-            print(f"   [{r['site']:<9}] {'作り直し' if r.get('redo') else r['date']} （お客様の記事）")
+            print(f"   [{_site_shown(r['site']):<9}] {'作り直し' if r.get('redo') else r['date']} （お客様の記事）")
             continue
         print(f"   [{r['site']:<9}] {'作り直し' if r.get('redo') else r['date']} {r['title'][:44]}"
               + (f"\n               → 動画の題: {r['yt']['title']}" if r.get("yt") else ""))
     for r, j in skipped:
-        print(f"   [{r['site']:<9}] 通常の動画なし（ショートだけ） {_shown(r['slug'])}"
+        print(f"   [{_site_shown(r['site']):<9}] 通常の動画なし（ショートだけ） {_shown(r['slug'])}"
               + ("" if _client(r["slug"]) else f": {j['reason']}"))
     if not a.write:
         print(f"YT_TOKEN={'yes' if token else 'missing'}")

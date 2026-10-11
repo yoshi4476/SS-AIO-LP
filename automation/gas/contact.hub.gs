@@ -253,6 +253,8 @@ const PII_DAYS = { lead: 365 * 3, noise: 365, check_mail: 365, check_ip: 90, rev
 const PII_ERASED = '（保存期間を過ぎたため個人の情報を消しました ';
 
 function piiOld_(v, days, now) {
+  // 数値（行番号や件数が日付の列に入った行）は日付と見なさない。new Date(数値) は1970年になり、全部を古いと判定して消していた
+  if (typeof v === 'number' || (typeof v === 'string' && /^\s*\d+(\.\d+)?\s*$/.test(v))) return false;
   const at = v && typeof v.getTime === 'function' ? v : new Date(v);
   return !isNaN(at.getTime()) && now - at.getTime() > days * 864e5;
 }
@@ -302,12 +304,31 @@ function piiRetention_(b) {
   return out;
 }
 
-/** 止める・戻す（合言葉つきの action。AI 用の合言葉では通らない） */
+/**
+ * 止める・戻す（合言葉つきの action。AI 用の合言葉では通らない）。
+ * 手で止めた（manual）印は、週次の自動の判断が「断る」へ戻すのを止める。断られた本物の相談は台帳に残らないため、
+ * 印が無いと翌週の判断が同じ材料で再び切り替えていた（2026-10-11 の点検）。resume で印を外し、その時刻より後の記録で判断し直す
+ */
 function botEnforce_(b) {
   const props = PropertiesService.getScriptProperties();
-  if (b.on === true) props.setProperty('TURNSTILE_ENFORCE', '1');
-  else if (b.on === false) props.deleteProperty('TURNSTILE_ENFORCE');
-  return { ok: true, enforce: turnstileEnforce_() };
+  if (b.resume === true) {
+    props.deleteProperty('TURNSTILE_MANUAL_OFF');
+    props.setProperty('TURNSTILE_RESUMED_AT', new Date().toISOString());
+  }
+  if (b.on === true) {
+    if (props.getProperty('TURNSTILE_MANUAL_OFF')) return Object.assign({ ok: false, error: 'manual_off' }, botEnforceState_());
+    props.setProperty('TURNSTILE_ENFORCE', '1');
+  } else if (b.on === false) {
+    props.deleteProperty('TURNSTILE_ENFORCE');
+    if (b.manual === true) props.setProperty('TURNSTILE_MANUAL_OFF', new Date().toISOString());
+  }
+  return Object.assign({ ok: true }, botEnforceState_());
+}
+
+function botEnforceState_() {
+  const props = PropertiesService.getScriptProperties();
+  return { enforce: turnstileEnforce_(), manual_off: props.getProperty('TURNSTILE_MANUAL_OFF') || '',
+           resumed_at: props.getProperty('TURNSTILE_RESUMED_AT') || '' };
 }
 // gas_deploy.py が .env の TURNSTILE_SECRET で埋める。Script Properties に同じ名前があればそちらを使う
 const TURNSTILE_KEY_FILL = 'TURNSTILE_SECRET_XXXXXXXX';
@@ -429,8 +450,8 @@ function botStatus_(b) {
     });
   }
   // all: 切り替えの判断（bot_enforce.py）が全部の行を時刻で台帳と突き合わせる。行に個人の情報は無い
-  return { ok: true, days: days, enforce: turnstileEnforce_(), secret: !!turnstileSecret_(), counts: counts,
-           recent: b.all ? recent : recent.slice(-20) };
+  return Object.assign({ ok: true, days: days, secret: !!turnstileSecret_(), counts: counts,
+           recent: b.all ? recent : recent.slice(-20) }, botEnforceState_());
 }
 
 /**
@@ -644,7 +665,8 @@ function leadDetailBase_(type, d) {
     return ['対象 ' + (a.url || ''), '総合 ' + (a.total || '') + '/100',
             a.grade ? '判定 ' + a.grade : '', n ? '未対応 ' + n + '項目' : ''].filter(String).join(' / ');
   }
-  const known = ['type', 'site', 'name', 'company', 'email', 'tel', 'phone',
+  // secret・action・data は転送や直接の送信に付く運びの項目（合言葉を台帳の詳細欄へ書き写さない）
+  const known = ['type', 'site', 'name', 'company', 'email', 'tel', 'phone', 'secret', 'action', 'data',
                  'message', 'body', 'referer', 'website', 'ts', 'formKey', 'ref', 'cf-turnstile-response', 'turnstile', 'form_secret',
                  'audit_url', 'audit_score', 'audit_grade', 'audit_fixes',
                  // 流入経路の欄は12列目にまとめて入れる（leadRoute_）。silent は別事業のサイトが送る通知止めの印
@@ -672,15 +694,6 @@ function body_(s) {
     .replace(/\u0000/g, '')       // 制御文字だけ落とす
     .slice(0, 5000)
     .trim();
-}
-
-/**
- * フォームから来た値をシートの1行に置くときの消毒。「=」「+」「-」「@」で始まる文字はシートが数式として読む。
- * 誰でも送れるフォームから =IMPORTDATA("…"&A2) のような式を入れられると、台帳を開いた時に他の問い合わせの
- * 中身を外へ送らせることができる（数式の注入）。先頭に ' を付けると文字として置かれ、' は値に残らない
- */
-function cells_(row) {
-  return row.map(function (v) { return typeof v === 'string' && /^[=+\-@\t\r]/.test(v) ? "'" + v : v; });
 }
 
 /** 社内向けの通知。温度を件名に出して、見た瞬間に優先度が分かるようにする */
@@ -1028,6 +1041,10 @@ const CHECKLIST_LABEL = { dental: '歯科医院版', clinic: 'クリニック版
                           koumuten: '工務店・リフォーム会社版', shigyou: '士業事務所版' };
 const AI_CHECK_WORD_KEY = { '歯医者': 'dental', 'クリニック': 'clinic', '不動産会社': 'fudosan', '工務店': 'koumuten',
   'リフォーム会社': 'koumuten', '税理士': 'shigyou', '社労士': 'shigyou', '行政書士': 'shigyou', '司法書士': 'shigyou', '弁護士': 'shigyou' };
+// 受付（functions/_industries.js）が決めた業種のキー → 案内の版。業種は自由入力なので、言い方（「矯正歯科」など）では引けない。
+// 14列目が空の行（2026-10-11 より前）は、これまでどおり言い方で引く
+const AI_CHECK_IND_KEY = { dental: 'dental', clinic: 'clinic', fudosan: 'fudosan', koumuten: 'koumuten', reform: 'koumuten',
+  zeirishi: 'shigyou', sharoushi: 'shigyou', gyousei: 'shigyou', shihou: 'shigyou', bengoshi: 'shigyou' };
 
 function toolKind_(r) {
   if (/AI紹介チェック/.test(String(r[9] || '') + String(r[8] || ''))) return 'aicheck';
@@ -1052,12 +1069,13 @@ function toolFollowCtx_(vals) {
   });
   const sh = book_().getSheetByName('AI紹介チェック');
   if (sh && sh.getLastRow() > 1) {
-    sh.getRange(2, 1, sh.getLastRow() - 1, 13).getValues().forEach(function (r) {
+    sh.getRange(2, 1, sh.getLastRow() - 1, 14).getValues().forEach(function (r) {
       const email = String(r[1] || '').trim().toLowerCase();
       if (!email) return;
-      const a = ctx.ai[email] || { cited: 0, word: '', optin: null };
+      const a = ctx.ai[email] || { cited: 0, word: '', ind: '', optin: null };
       a.cited = Math.max(a.cited, Number(r[5]) || 0);
       a.word = String(r[3] || '') || a.word;
+      a.ind = String(r[13] || '') || a.ind;
       // 13列目が空の行は、同意の欄を足す前の申し込み（従来どおり0問の人だけに送る）
       if (String(r[12] || '')) a.optin = a.optin === true || String(r[12]) === '希望';
       ctx.ai[email] = a;
@@ -1117,7 +1135,9 @@ function aiCheckPartialText_(who, a) {
 }
 
 function aiCheckFollowText_(who, r, a) {
-  const key = AI_CHECK_WORD_KEY[a.word] || '';
+  const has = Object.prototype.hasOwnProperty;
+  const key = (has.call(AI_CHECK_IND_KEY, a.ind || '') ? AI_CHECK_IND_KEY[a.ind] : '')
+    || (has.call(AI_CHECK_WORD_KEY, a.word || '') ? AI_CHECK_WORD_KEY[a.word] : '');
   // サイトのURLを入れずに調べた人は、出典に入ったかを判定できていない
   const noSite = /サイト: 未入力/.test(String(r[8] || ''));
   return { subject: 'AIの答えの出典に入るための3つの手順', body: [who, '',
@@ -1592,6 +1612,10 @@ function aiCheckSheet_() {
   if (String(sh.getRange(1, 13).getValue() || '') === '') {
     sh.getRange(1, 13).setValue('改善のご案内');
   }
+  // 業種のキー（受付が決めたもの。3日後のご案内の版を選ぶ。2026-10-11 追加）
+  if (String(sh.getRange(1, 14).getValue() || '') === '') {
+    sh.getRange(1, 14).setValue('業種のキー');
+  }
   return sh;
 }
 
@@ -1818,10 +1842,12 @@ function aiCheckQuota_(body) {
 }
 
 function aiCheckLog_(body) {
-  aiCheckSheet_().appendRow([new Date(), clean_(body.email).toLowerCase(), clean_(body.company).slice(0, 80),
+  // 会社名・地域・サイトは誰でも入れられるので、数式として読まれないようにする（cells_）
+  aiCheckSheet_().appendRow(cells_([new Date(), clean_(body.email).toLowerCase(), clean_(body.company).slice(0, 80),
     clean_(body.word).slice(0, 20), clean_(body.area).slice(0, 40), Number(body.cited) || 0, Number(body.mentioned) || 0,
     String(body.site || '').replace(/[\r\n\s]+/g, '').slice(0, 200), body.recheck ? '希望' : '', '',
-    clean_(body.ip).slice(0, 64), Number(body.searches) || 0, body.optin ? '希望' : 'なし']);
+    clean_(body.ip).slice(0, 64), Number(body.searches) || 0, body.optin ? '希望' : 'なし',
+    String(body.ind || '').replace(/[^a-z_]/g, '').slice(0, 20)]));
   return { ok: true };
 }
 
@@ -1894,7 +1920,8 @@ function reviewInbox_() {
 }
 
 function geminiKey_() {
-  const p = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
+  // お客様の返信の中身を送るので、有料の契約の鍵だけを読む（無料の契約は送った内容を Google が改善に使える。cbf4af981 の決まり）
+  const p = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY_PAID');
   if (p) return p;
   return GEMINI_KEY_FILL && GEMINI_KEY_FILL.indexOf('XXXXXXXX') < 0 ? GEMINI_KEY_FILL : '';
 }
@@ -2111,6 +2138,8 @@ function reviewOne_(thread, ask, me, log) {
 }
 
 function reviewReply() {
+  // メールの返信に AI を使わない（2026-10-11 運用者の決定）。鍵が残っていても、REVIEW_REPLY_AI を on にしない限り動かさない
+  if (PropertiesService.getScriptProperties().getProperty('REVIEW_REPLY_AI') !== 'on') return;
   if (!geminiKey_()) { console.error('GEMINI_API_KEY が未設定のため、自動回答を止めています'); return; }
   const lock = LockService.getScriptLock();
   if (!lock.tryLock(5000)) return;            // 前の回がまだ動いていれば重ねない（二重に返さない）
@@ -2161,7 +2190,10 @@ function installReviewReplyTrigger() {
       + '（届かない場合は ' + inbox + ' からこのアカウントへ転送するか、Script Properties の REVIEW_INBOX に'
       + 'このアカウントで受けられるアドレスを入れてください）');
   }
-  if (!geminiKey_()) notes.push('GEMINI_API_KEY が未設定です（Script Properties に入れるまで自動回答は動きません）');
+  if (PropertiesService.getScriptProperties().getProperty('REVIEW_REPLY_AI') !== 'on') {
+    notes.push('メールの返信に AI を使わない決まりのため、REVIEW_REPLY_AI を on にするまで自動回答は動きません');
+  }
+  if (!geminiKey_()) notes.push('有料の契約の Gemini の鍵（GEMINI_API_KEY_PAID）が未設定です（Script Properties に入れるまで自動回答は動きません）');
   const has = ScriptApp.getProjectTriggers().some(function (t) { return t.getHandlerFunction() === 'reviewReply'; });
   if (has) {
     notes.push('reviewReply のトリガーは既にあります');

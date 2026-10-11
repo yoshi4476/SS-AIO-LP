@@ -15,6 +15,8 @@ const tabs = {
   // 筋書きの行の受信日時は ISO の文字列で渡し、ここで日時にする（台帳は日時で持つ）
   '問い合わせ': [HEAD.slice()].concat((plan.rows || []).map((r) => [new Date(r[0])].concat(r.slice(1)))),
 };
+// 筋書きの tabs: ほかの表を最初から置く（{ 表の名前: [[見出し…], [行…]…] }）。show: 返す表の名前
+for (const [n, rs] of Object.entries(plan.tabs || {})) tabs[n] = rs.map((r) => r.slice());
 const sheet = (name) => {
   if (!tabs[name]) tabs[name] = [];
   const t = tabs[name];
@@ -75,4 +77,5 @@ const results = (plan.posts || []).map((b) => {
 });
 const calls = (plan.calls || []).map((c) => { try { return ctx[c[0]].apply(null, c.slice(1)); } catch (e) { return { thrown: String(e) }; } });
 console.log(JSON.stringify({ results, calls, rows: tabs['問い合わせ'].slice(1).map((r) => r.map((v) => (v && v.toISOString ? v.toISOString() : v))),
-                             probe: (tabs['疎通確認'] || []).slice(1).map((r) => r.slice(1)), mails, fetches, props }));
+                             probe: (tabs['疎通確認'] || []).slice(1).map((r) => r.slice(1)), mails, fetches, props,
+                             shown: Object.fromEntries((plan.show || []).map((n) => [n, (tabs[n] || []).map((r) => r.map((v) => (v && v.toISOString ? v.toISOString() : v)))])) }));

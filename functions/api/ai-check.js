@@ -106,7 +106,8 @@ async function check({ request, env }, partner) {
   const first = {};
   for (const k of ["first_ref", "first_utm", "first_ad", "first_land", "first_at", "send_page"]) if (k in d) first[k] = v(k, 200);
   // 業種は入力欄の言葉（word）。候補に無い業種もそのまま使う。古い画面の業種のキー（industry）も受ける
-  const typed = v("word", 20);
+  // 長さは cleanWord が確かめる（ここで20字に切ると、長い入力が途中で切れたまま AI と台帳に入る）
+  const typed = String(d.word || "").trim().slice(0, 60);
   if (typed && !cleanWord(typed)) {
     return Response.json({ ok: false, error: "業種は20文字以内の言葉で入れてください（記号やURLは使えません）。" }, { status: 400 });
   }
@@ -184,7 +185,8 @@ async function check({ request, env }, partner) {
   await record(env, request, { ind: key || "other", area, company, site, name, email, word, pages, first, partner, summary });
   // 翌月の測り直しは、本人が印をつけたときだけ（同意のない配信はしない）
   const searches = results.reduce((n, r) => n + (r.searches || 1), 0);
-  await hub(env, { action: "ai_check_log", email, company, word, area, cited, mentioned, site, ip, searches,
+  // 業種のキー（ind）も残す。3日後の後追いのメールが、業種別の案内を業種名ではなくキーで選ぶため
+  await hub(env, { action: "ai_check_log", email, company, word, ind: key, area, cited, mentioned, site, ip, searches,
     recheck: v("recheck", 2) === "1", optin: v("optin", 2) === "1" });
   results.forEach((r) => { delete r.searches; });
   const used = quota.used + 1;

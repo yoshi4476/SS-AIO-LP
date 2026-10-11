@@ -29,9 +29,10 @@
   try {
     var pre = new URLSearchParams(location.search).get("ind");
     var wordBox = form.querySelector('input[name="word"]');
-    if (pre && wordBox && LABEL[pre] && !wordBox.value) wordBox.value = LABEL[pre];
+    if (pre && wordBox && Object.prototype.hasOwnProperty.call(LABEL, pre) && !wordBox.value) wordBox.value = LABEL[pre];
   } catch (x) {}
-  // 業種の候補（全業種。受付の functions/_industries.js が返す）。分野名を添えて入力欄の候補に入れる
+  // 業種の候補（全業種。受付の functions/_industries.js が返す）。分野名は付けない
+  // （Firefox は label があると label だけを出して label で絞り込むため、業種名で探せなくなる）
   function fillIndustries(groups) {
     var list = document.getElementById("ac-industries");
     if (!list || !groups || !groups.length) return;
@@ -40,7 +41,6 @@
       (g[1] || []).forEach(function (w) {
         var o = document.createElement("option");
         o.value = w;
-        o.label = g[0];
         frag.appendChild(o);
       });
     });
@@ -52,7 +52,8 @@
     if (tsLoaded) return;
     tsLoaded = true;
     fetch("/api/ai-check").then(function (r) { return r.json(); }).then(function (c) {
-      if (c) fillIndustries(c.industries);
+      // 候補の形が崩れていても、ロボットよけの部品は必ず置く（置けないと送信がすべて断られる）
+      try { if (c) fillIndustries(c.industries); } catch (x) {}
       if (!c || !c.turnstile) return;
       var box = document.createElement("div");
       box.className = "cf-turnstile";
@@ -75,7 +76,8 @@
     new FormData(form).forEach(function (v, k) { data[k] = v; });
     btn.disabled = true;
     out.innerHTML = '<p class="ac-wait" role="status">AIに3つの質問を聞いています（15〜30秒ほどかかります）…</p>';
-    ev("ai_check_start", { industry: data.word || "" });
+    // 業種は自由入力なので送らない（人名などが計測に入らないように）。業種のキーは完了のときに受付が決めたものを送る
+    ev("ai_check_start", {});
     fetch("/api/ai-check", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
       .then(function (r) { return r.json(); })
       .then(function (d) {

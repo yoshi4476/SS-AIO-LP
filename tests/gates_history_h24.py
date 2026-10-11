@@ -86,3 +86,11 @@ def test_review_reply_offer_and_auto_answer():
     check("gas_deploy は Gemini の鍵を埋めない",
           G.fill("'GEMINI_KEY_XXXXXXXX'", {"GEMINI_API_KEY": "k", "GEMINI_API_KEY_PAID": "k"}), "'GEMINI_KEY_XXXXXXXX'")
     check("鍵の実値をリポジトリに書かない", "const GEMINI_KEY_FILL = 'GEMINI_KEY_XXXXXXXX';" in src, True)
+    # 受け口はお客様の返信を送るので、無料の契約の鍵（GEMINI_API_KEY）を読まない。残っていても使われないように
+    check("受け口は有料の契約の鍵だけを読む（無料の GEMINI_API_KEY は読まない）",
+          ("getProperty('GEMINI_API_KEY_PAID')" in src, "getProperty('GEMINI_API_KEY')" in src), (True, False))
+    rr = src[src.index("function reviewReply()"):]
+    rr = rr[:rr.index("\n}\n")]
+    check("自動回答は REVIEW_REPLY_AI が on のときだけ動く（鍵より先に見る）",
+          "getProperty('REVIEW_REPLY_AI') !== 'on') return;" in rr
+          and rr.index("REVIEW_REPLY_AI") < rr.index("geminiKey_()"), True)

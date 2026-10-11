@@ -1,5 +1,5 @@
 /**
- * AI紹介チェック（/api/ai-check）の業種。入力欄の候補（GET /api/ai-check が返す。AI集客ラボと CONFLUX の画面が読む）と、
+ * AI紹介チェック（/api/ai-check）の業種。入力欄の候補（GET /api/ai-check が返す。AI集客ラボと、許可した別事業のサイトの画面が読む）と、
  * 業種名から業種別の案内（チェックリスト・業種別のページ）への対応づけと、自由入力の確かめを1か所に置く。
  * 候補に無い業種もそのまま入力できる（2026-10-11 運用者「業種が少なすぎる あらゆる業種できるようにして」。それまでは10業種＋その他）。
  * ファイル名の先頭の _ は、ここが受付の URL にならないことを示す。
@@ -62,15 +62,25 @@ const KEY_OF = {
   shihou: ["司法書士", "司法書士事務所"],
   bengoshi: ["弁護士", "法律事務所", "弁護士事務所"],
 };
-const LOOKUP = {};
+// 元の名前（toString・constructor など）を業種と取り違えないよう、空の入れ物で引く
+const LOOKUP = Object.create(null);
 for (const [k, words] of Object.entries(KEY_OF)) for (const w of words) LOOKUP[w] = k;
+// これまでの選択肢の表示名と、AI に聞く言い方そのもの。これまでどおり WORDS の言い方で聞く（税理士事務所 → 税理士）
+const AS_BEFORE = Object.create(null);
+for (const [k, label] of Object.entries({ dental: "歯科医院", clinic: "クリニック", fudosan: "不動産会社", koumuten: "工務店",
+  reform: "リフォーム会社", zeirishi: "税理士事務所", sharoushi: "社労士事務所", gyousei: "行政書士事務所",
+  shihou: "司法書士事務所", bengoshi: "法律事務所" })) AS_BEFORE[label] = k;
+for (const [k, w] of Object.entries(WORDS)) AS_BEFORE[w] = k;
+AS_BEFORE["歯科"] = "dental";
 
 /** 自由入力の業種名を整える。AI への質問と台帳に入るので、言葉だけを通す（URL・記号・命令文を入れさせない）。
  *  通らなければ "" を返す */
 export function cleanWord(s) {
-  const t = String(s || "").normalize("NFKC").replace(/\s+/g, " ").trim();
+  // 括弧・／・読点・波線は区切りとして空白にする（「歯科（矯正）」「税理士/会計士」「美容室、理容室」を断らない）
+  const t = String(s || "").normalize("NFKC").replace(/[()（）［］\[\]【】「」『』/／\\、,，。〜~]+/g, " ")
+    .replace(/\s+/g, " ").trim();
   if (!t || t.length > 20) return "";
-  if (!/^[\p{L}\p{N} ー・&]+$/u.test(t)) return "";
+  if (!/^[\p{L}\p{N} ー・&-]+$/u.test(t)) return "";
   if (/^[\p{N} ]+$/u.test(t) || /https?|www/i.test(t)) return "";
   return t;
 }
@@ -83,8 +93,7 @@ export function keyOf(s) {
 
 /** AI に聞くときの業種の言い方。案内のある業種は検索で多い言い方（歯科医院 → 歯医者）、ほかは入力のまま */
 export function searchWord(s) {
-  const k = keyOf(s);
+  if (Object.prototype.hasOwnProperty.call(WORDS, s)) return WORDS[s];
   const w = cleanWord(s);
-  if (k && (!w || Object.prototype.hasOwnProperty.call(WORDS, s) || ["歯科医院", "歯科"].includes(w))) return WORDS[k];
-  return w;
+  return AS_BEFORE[w] ? WORDS[AS_BEFORE[w]] : w;
 }
