@@ -533,5 +533,29 @@
       "desc": "lead-long",
       "youtube": "6Q9DPOt-BVw"
     }
+  },
+  "reform-kaisha-aio-taisaku": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-11",
+      "keyword": "リフォーム会社 AIO対策",
+      "queries": [
+        "リフォーム会社 aio対策"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "リフォーム会社 選び方",
+        "リフォーム業者の選び方",
+        "リフォーム会社の選び方",
+        "リフォーム会社"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-10-11",
+      "sec": 51,
+      "title": "リフォームのAIO対策、何から始める？",
+      "youtube": "7hsLfCfGzk4"
+    }
   }
 }
