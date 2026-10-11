@@ -167,7 +167,7 @@ def _read_once(items):
               "迷ったら cond ではなく、答えの最初の結論の文で決める。各答えから、その判断の根拠になる一文をそのまま抜き出す。\n"
               "出力は JSON のオブジェクト1つだけ: {\"<番号>\": {\"label\": \"yes|cond|no|none\", \"quote\": \"<そのままの一文>\"}}\n\n" + body)
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
-        r = subprocess.run([AR.claude_bin(), "-p", "--model", "claude-sonnet-5-5"], input=prompt, cwd=tmp,
+        r = subprocess.run([AR.claude_bin(), "-p", "--model", "claude-sonnet-5-5"], input=prompt, cwd=tmp, env=__import__("agent_guard").child_env(),
                            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=900)
     m = re.search(r"\{.*\}", r.stdout or "", re.S)
     try:

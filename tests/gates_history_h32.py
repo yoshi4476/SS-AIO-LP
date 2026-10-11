@@ -128,7 +128,8 @@ def test_client_articles_are_notified_right_after_publish():
     check("記事の枠: 要対応は通知の本文へ足す", "findings.txt" in run and "^要対応" in run, True)
     check("Bing の送信記録の復元・保存も全社の枠で動く",
           [("own == 'True'" in str(s.get("if"))) for s in steps if "Bing への送信記録" in s.get("name", "")], [False, False])
-    gen = next(s for s in steps if s.get("name", "").startswith("記事生成"))
+    # 配信は AI の後の機械の手順（agent_guard --publish → publish_flow）。AI の手順には鍵を渡さない（2026-10-11）
+    gen = next(s for s in steps if "agent_guard.py --publish" in str(s.get("run", "")))
     check("記事の配信（publish.py）に Bing の鍵を渡す（確認ファイルを配信と一緒に置くため）",
           "BING_WEBMASTER_API_KEY" in (gen.get("env") or {}), True)
 

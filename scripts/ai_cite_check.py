@@ -312,7 +312,7 @@ def ask_claude_cli(q):
         r = subprocess.run([exe, "-p", "--allowedTools", "WebSearch",
                             "--model", _env("CLAUDE_CITE_MODEL") or "claude-sonnet-5-5"],
                            input=prompt, cwd=tmp, capture_output=True, text=True, encoding="utf-8",
-                           errors="replace", timeout=300)
+                           errors="replace", timeout=300, env=__import__("agent_guard").child_env())
     if r.returncode != 0:
         raise RuntimeError(f"claude -p が失敗しました: {(r.stderr or r.stdout)[:120]}")
     TEXT[("ask_claude_cli", q)] = r.stdout or ""

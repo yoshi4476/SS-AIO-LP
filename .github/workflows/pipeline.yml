@@ -121,46 +121,114 @@ jobs:
       - name: KWキュー残数の確認
         run: python scripts/kw_status.py
 
-      - name: 記事パイプライン実行（Phase 1〜7）
-        if: steps.mode.outputs.mode == 'main'
-        env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: |
-          claude -p "$(cat automation/pipeline_prompt.txt)" \
-            --dangerously-skip-permissions --max-turns 160
-
-      - name: 公開失敗の即時リトライ（最大2回）
-        if: steps.mode.outputs.mode == 'main'
-        env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          for i in 1 2; do
-            out=$(python scripts/build.py); echo "$out"
-            echo "$out" | grep -q "BLOCKED" || break
-            echo "::warning::BLOCKED記事あり — リトライ $i/2"
-            claude -p "$(cat automation/retry_prompt.txt)" \
-              --dangerously-skip-permissions --max-turns 160
-          done
-
       # 予定は 21:30 だが GitHub の定時は遅れ、14回とも日付が変わってから始まり（翌1:36〜5:36）「期待は0本」としていた。
       # その日の最初の枠より前に始まった回は前日を数える。claude と再監査も同じ日を数える（途中で日付が変わっても動かさない）
       - name: 救済で数える日を決める
         if: steps.mode.outputs.mode == 'rescue'
         run: echo "AUDIT_DAY=$(python scripts/daily_audit.py --rescue-day)" | tee -a "$GITHUB_ENV"
 
-      # 3サイト分の当日ノルマ（各2本）・品質・担当領域・KW供給を機械監査し、
-      # 不足があればその日のうちに書き直し・追加公開まで行う
-      - name: 同日救済（3サイトの監査 → 不足分の作成・修正）
+      # 3サイト分の当日ノルマ（各2本）・品質・担当領域・KW供給を機械監査する。鍵を使う監査は AI の前に済ませ、
+      # 不足があるときだけ AI に書き足させる（AI の作業場には鍵を置かない。2026-10-11）
+      - name: 救済の監査（3サイトの本数・品質・領域・KW供給）
+        id: audit
         if: steps.mode.outputs.mode == 'rescue'
+        env:
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
+          out=$(python scripts/daily_audit.py --fix-kw); echo "$out"
+          rm -f indexing-service-account.json
+          if echo "$out" | grep -q "AUDIT_OK=yes"; then
+            echo "救済不要（3サイトとも当日ノルマ達成・BLOCKEDなし・領域違反なし）"
+            echo "need=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "need=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      # 記事を書く AI の作業場から鍵を外す（2026-10-11 運用者の指示）。AI は外の文章（YouTube の字幕・検索上位の見出し）を
+      # 読むので、そこに仕込まれた指示に従っても鍵を持ち出せないようにする。Google は読むだけ・1時間で切れる許可証にし、
+      # 鍵を環境変数に持たない別のプロセスが40分ごとに作り直す（救済の AI は1時間を超えることがある）
+      - name: AIの作業場から鍵を外す
+        if: steps.mode.outputs.mode == 'main' || steps.audit.outputs.need == 'yes'
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python scripts/agent_guard.py --lock
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
+              nohup python scripts/agent_guard.py --refresh > /dev/null 2>&1 &
+          fi
+
+      - name: 記事パイプライン実行（Phase 1〜7）
+        if: steps.mode.outputs.mode == 'main'
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）
+          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+        run: |
+          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
+          python scripts/agent_guard.py --verify || exit 1
+          claude -p "$(cat automation/pipeline_prompt.txt)" \
+            --permission-mode dontAsk --settings automation/agent_settings_article.json --max-turns 160
+
+      - name: 公開失敗の即時リトライ（最大2回）
+        if: steps.mode.outputs.mode == 'main'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）
+          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+        run: |
+          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
+          python scripts/agent_guard.py --verify || exit 1
+          for i in 1 2; do
+            out=$(python scripts/build.py); echo "$out"
+            echo "$out" | grep -q "BLOCKED" || break
+            echo "::warning::BLOCKED記事あり — リトライ $i/2"
+            claude -p "$(cat automation/retry_prompt.txt)" \
+              --permission-mode dontAsk --settings automation/agent_settings_article.json --max-turns 160
+          done
+
+      # 不足があれば、その日のうちに書き直し・追加公開まで行う（配信は AI の後の機械の手順）
+      - name: 同日救済（3サイトの監査 → 不足分の作成・修正）
+        if: steps.mode.outputs.mode == 'rescue' && steps.audit.outputs.need == 'yes'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）
+          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+        run: |
+          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
+          python scripts/agent_guard.py --verify || exit 1
+          claude -p "$(cat automation/retry_prompt.txt)" \
+            --permission-mode dontAsk --settings automation/agent_settings_article.json --max-turns 300
+
+      # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
+      - name: AIの変更のうち触ってはいけない場所を戻す
+        if: always() && (steps.mode.outputs.mode == 'main' || steps.audit.outputs.need == 'yes')
+        run: python scripts/agent_guard.py --protect
+
+      - name: AIの作業場に鍵を戻す
+        if: always() && (steps.mode.outputs.mode == 'main' || steps.audit.outputs.need == 'yes')
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: python scripts/agent_guard.py --unlock
+
+      # 配信・管制塔への記録は、鍵を持つ機械の手順で行う（AI は publish_flow --check で門を通すところまで）
+      - name: 書いた記事を配信する（鍵を持つ機械の手順）
+        if: steps.mode.outputs.mode == 'main' || steps.audit.outputs.need == 'yes'
+        env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
@@ -171,14 +239,7 @@ jobs:
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
-          out=$(python scripts/daily_audit.py --fix-kw); echo "$out"
-          if echo "$out" | grep -q "AUDIT_OK=yes"; then
-            echo "救済不要（3サイトとも当日ノルマ達成・BLOCKEDなし・領域違反なし）"
-            rm -f indexing-service-account.json
-            exit 0
-          fi
-          claude -p "$(cat automation/retry_prompt.txt)" \
-            --dangerously-skip-permissions --max-turns 300
+          python scripts/agent_guard.py --publish || true
           rm -f indexing-service-account.json
 
       - name: 救済後の再監査（残った問題をログとエラーログに残す）

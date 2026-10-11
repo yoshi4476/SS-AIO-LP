@@ -288,7 +288,37 @@ def check(days=8, max_runs=400, repo=REPO, now=None, budget=BUDGET, ident=None, 
     return _end("yes", 0)
 
 
+def check_tracked():
+    """公開側で追跡しているファイルに、お客様の守秘の語が出ていないか（2026-10-11: CI が書いた学びの台帳に
+    お客様の記事の slug が入り、公開リポジトリに残っていた。門は毎回の記事では回らないので週次でも見る）。
+    照らし方は門（gates_history_h77.find_identity）と同じ（表示の場所の社名・他社の URL の中の同じ綴りは数えない）。
+    TRACKED_LEAK_OK=yes/no/unknown。語そのものは出さない"""
+    sys.path.insert(0, str(ROOT / "tests"))
+    try:
+        import gates_history_h77 as G
+        words = G._client_words()
+    except Exception as e:
+        print(f"TRACKED_LEAK_OK=unknown（守秘の語を集められません: {type(e).__name__}）")
+        return 1
+    if not words:
+        print("TRACKED_LEAK_OK=unknown（非公開のデータが無く、照らす語がありません）")
+        return 0
+    _own, doms = G._own()
+    files = G._tracked()
+    hits = sorted(set(G.find_identity(files, words, doms)))
+    terms = [w.lower() for n, a, d in words.values() for w in list(n) + list(a) + [d] if w and len(w) >= 4]
+    for f, kind in hits:
+        shown = "（お客様の語を含むファイル名）" if any(t in f.lower() for t in terms) else f
+        print(f"  {shown}: {kind}")
+    print(f"TRACKED_LEAK_OK={'no' if hits else 'yes'}（公開側の追跡ファイル {len(files)}件を照らしました）")
+    if hits:
+        print(f"要対応: 公開リポジトリのファイルにお客様の守秘の語が出ています（{len(hits)}件）。語を伏せるか、非公開の置き場へ移してください")
+    return 0
+
+
 def main(argv=None):
+    if argv is None and "--tracked" in sys.argv[1:]:
+        return check_tracked()
     ap = argparse.ArgumentParser(description="CI のログにお客様の守秘の語が出ていないか数える（語は出さない）")
     ap.add_argument("--days", type=int, default=8, help="さかのぼる日数（2026-10-11 より前の回は数えない）")
     ap.add_argument("--max-runs", type=int, default=400, help="調べる回の上限（新しい順）")

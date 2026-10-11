@@ -242,18 +242,36 @@ jobs:
             echo "検査はすべて通っています。修復は不要です"
           fi
 
+      # 修復の AI もログ（外の文章を含みうる）を読むので、作業場から鍵を外してから動かす（2026-10-11）
+      - name: 修復の前にAIの作業場から鍵を外す
+        if: steps.diag.outputs.broken == '1'
+        run: python scripts/agent_guard.py --lock
+
       - name: 不具合の自動修復
         if: steps.diag.outputs.broken == '1'
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
-          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
-          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
           HUB_URL: ${{ secrets.HUB_URL }}
-          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）
+          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
         run: |
+          python scripts/agent_guard.py --verify || exit 1
+          # コードは直せるが、外へ送るコマンドと鍵の外し方そのもの（agent_guard・許可の一覧）には触れない
           claude -p "$(cat automation/selfheal_prompt.txt)" \
-            --dangerously-skip-permissions --max-turns 120 || true
+            --permission-mode dontAsk --settings automation/agent_settings_maint.json --max-turns 120 || true
+
+      - name: 修復のAIが触ってはいけない場所を戻す
+        if: always() && steps.diag.outputs.broken == '1'
+        run: python scripts/agent_guard.py --protect --scope jail
+
+      - name: 修復の後にAIの作業場へ鍵を戻す
+        if: always() && steps.diag.outputs.broken == '1'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: python scripts/agent_guard.py --unlock
 
       # 直したつもりで壊していないかを、人の目の代わりに機械で見る。
       # 通らなければ変更を捨てる。壊れたまま配信するより安全。
@@ -296,12 +314,49 @@ jobs:
       # 記事が落ちた日は、修復のあとで書き直す。1日分を失わない。
       # コードが壊れていない回（claude の一時失敗・取り消し）がいちばん多い落ち方なので、
       # 「壊れていない」か「直せた」のどちらかなら動かす。verify は壊れていた回にしか走らない
-      - name: 修復後に記事を書き直す
+      - name: 書き直しの前にAIの作業場から鍵を外す
+        id: rewrite
         if: >-
           github.event_name == 'workflow_run' &&
           (steps.diag.outputs.broken == '0' || steps.verify.outputs.ok == '1')
         env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          echo "go=yes" >> "$GITHUB_OUTPUT"
+          python scripts/agent_guard.py --lock
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
+              nohup python scripts/agent_guard.py --refresh > /dev/null 2>&1 &
+          fi
+
+      - name: 修復後に記事を書き直す（AI）
+        if: steps.rewrite.outputs.go == 'yes'
+        env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）
+          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+        run: |
+          python scripts/agent_guard.py --verify || exit 1
+          claude -p "$(cat automation/retry_prompt.txt)" \
+            --permission-mode dontAsk --settings automation/agent_settings_article.json --max-turns 160 || true
+
+      - name: 書き直しのAIが触ってはいけない場所を戻す
+        if: always() && steps.rewrite.outputs.go == 'yes'
+        run: python scripts/agent_guard.py --protect
+
+      - name: 書き直しの後にAIの作業場へ鍵を戻す
+        if: always() && steps.rewrite.outputs.go == 'yes'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: python scripts/agent_guard.py --unlock
+
+      - name: 修復後に記事を書き直す（配信とコミット）
+        if: steps.rewrite.outputs.go == 'yes'
+        env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
@@ -312,8 +367,8 @@ jobs:
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
-          claude -p "$(cat automation/retry_prompt.txt)" \
-            --dangerously-skip-permissions --max-turns 160 || true
+          # 配信・管制塔への記録は鍵を持つこの手順で行う（AI は publish_flow --check まで）
+          python scripts/agent_guard.py --publish || true
           rm -f indexing-service-account.json
           python scripts/build.py || true
           # ワークフローの変更は CI の鍵（GITHUB_TOKEN）では push できず、修復の全体が拒否されて捨てられた
@@ -402,7 +457,7 @@ jobs:
           name: workflow-change
           path: /tmp/workflow-change.patch
           if-no-files-found: ignore
-          retention-days: 30
+          retention-days: 14
 
       - name: 結果の通知
         if: always()

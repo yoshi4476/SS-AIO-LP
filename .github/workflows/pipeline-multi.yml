@@ -521,6 +521,20 @@ jobs:
             python scripts/research_next.py "${{ steps.site.outputs.id }}" || true
           fi
 
+      # 記事を書く AI の作業場から鍵を外す（2026-10-11 運用者の指示）。AI は外の文章（YouTube の字幕・検索上位の見出し）を
+      # 読むので、そこに仕込まれた指示に従っても鍵を持ち出せないようにする。Google は読むだけ・1時間で切れる許可証にし、
+      # 鍵を環境変数に持たない別のプロセスが40分ごとに作り直す（AI が1時間を超えても検索の実績を読める）
+      - name: AIの作業場から鍵を外す
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python scripts/agent_guard.py --lock
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
+              nohup python scripts/agent_guard.py --refresh > /dev/null 2>&1 &
+          fi
+
       - name: 記事生成（Phase 1〜7）
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
@@ -529,6 +543,65 @@ jobs:
           # 社数が増えてサブスクの枠に当たったら、API の従量課金に切り替える（鍵を登録するだけ。
           # 記事1本 ¥50〜150 の目安。未登録なら空で、claude はサブスクの鍵を使う）
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）。
+          # 配信・SNS・検索エンジンへの通知の鍵は渡さない（この後の機械の手順が使う）
+          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+        run: |
+          # 未登録の鍵は空文字で渡る。空のまま置くと claude が API の鍵として扱って落ちるので外す
+          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
+          # 鍵が外れていなければ AI を動かさない（外し損ねたまま外の文章を読ませない）
+          python scripts/agent_guard.py --verify || exit 1
+          # 1回で書けなくても、その日の記事は落とさない。書けたかどうかを
+          # 記事ファイルの数で判定し、増えるまで繰り返す。回数を切るのは、
+          # 壊れたまま無限に回して実行時間を食い潰さないため。
+          # 記事はいちばん強いモデルで書く。ただし版が古いと 400 で落ちるため、
+          # 版を見て切り替える（実測: 2.1.218 は claude-opus-5-5 を
+          # 「version 2.1.280 or newer is required」で拒否した）
+          V=$(claude --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+          MODEL_ARG="--model claude-opus-5"
+          if [ "$(printf '%s\n2.1.280\n' "$V" | sort -V | head -1)" = "2.1.280" ]; then
+            MODEL_ARG="--model claude-opus-5-5"
+          fi
+          echo "記事生成のモデル: $MODEL_ARG（claude $V）"
+          before=$(ls articles/*.md 2>/dev/null | wc -l)
+          for try in 1 2 3; do
+            # 使える道具は許可の一覧（automation/agent_settings_article.json）だけ。外へ送るコマンド・コードの書き換えは拒否される
+            claude -p "$(cat automation/multi_site_prompt.txt)" \
+              $MODEL_ARG --permission-mode dontAsk --settings automation/agent_settings_article.json --max-turns 160 || true
+            after=$(ls articles/*.md 2>/dev/null | wc -l)
+            if [ "$after" -gt "$before" ]; then
+              echo "記事が増えました（$before → $after）。$try 回目で完了"
+              break
+            fi
+            echo "::warning::記事が増えていません。書き直します（$try/3）"
+            # 書き直しの回は台帳が変わっている（1回目が語を「執筆中」にした等）。先に作ったブリーフは使わせない
+            rm -f automation/logs/brief.txt
+            if [ "$try" = "3" ]; then
+              echo "::error::3回試しても記事が増えませんでした"
+              python scripts/hub_client.py error_log write \
+                "${{ steps.site.outputs.id }}: 3回試しても記事を書けませんでした" || true
+            fi
+          done
+
+      # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
+      - name: AIの変更のうち触ってはいけない場所を戻す
+        if: always() && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        run: python scripts/agent_guard.py --protect
+
+      - name: AIの作業場に鍵を戻す
+        if: always() && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: python scripts/agent_guard.py --unlock
+
+      # 配信・管制塔への記録・SNS は、鍵を持つ機械の手順で行う（AI は publish_flow --check で門を通すところまで）
+      - name: 書いた記事を配信する（鍵を持つ機械の手順）
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
@@ -549,41 +622,11 @@ jobs:
           # 社ごとのアカウント（social_connect.py が登録。クライアントの記事はその社にだけ投稿する）
           SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}
         run: |
-          # 未登録の鍵は空文字で渡る。空のまま置くと claude が API の鍵として扱って落ちるので外す
-          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
-          # 1回で書けなくても、その日の記事は落とさない。書けたかどうかを
-          # 記事ファイルの数で判定し、増えるまで繰り返す。回数を切るのは、
-          # 壊れたまま無限に回して実行時間を食い潰さないため。
-          # 記事はいちばん強いモデルで書く。ただし版が古いと 400 で落ちるため、
-          # 版を見て切り替える（実測: 2.1.218 は claude-opus-5-5 を
-          # 「version 2.1.280 or newer is required」で拒否した）
-          V=$(claude --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
-          MODEL_ARG="--model claude-opus-5"
-          if [ "$(printf '%s\n2.1.280\n' "$V" | sort -V | head -1)" = "2.1.280" ]; then
-            MODEL_ARG="--model claude-opus-5-5"
-          fi
-          echo "記事生成のモデル: $MODEL_ARG（claude $V）"
-          before=$(ls articles/*.md 2>/dev/null | wc -l)
-          for try in 1 2 3; do
-            claude -p "$(cat automation/multi_site_prompt.txt)" \
-              $MODEL_ARG --dangerously-skip-permissions --max-turns 160 || true
-            after=$(ls articles/*.md 2>/dev/null | wc -l)
-            if [ "$after" -gt "$before" ]; then
-              echo "記事が増えました（$before → $after）。$try 回目で完了"
-              break
-            fi
-            echo "::warning::記事が増えていません。書き直します（$try/3）"
-            # 書き直しの回は台帳が変わっている（1回目が語を「執筆中」にした等）。先に作ったブリーフは使わせない
-            rm -f automation/logs/brief.txt
-            if [ "$try" = "3" ]; then
-              echo "::error::3回試しても記事が増えませんでした"
-              python scripts/hub_client.py error_log write \
-                "${{ steps.site.outputs.id }}: 3回試しても記事を書けませんでした" || true
-            fi
-          done
+          # お客様の社の記事は slug・題をログに出さない（agent_guard が「（お客様の記事）」で出す）
+          python scripts/agent_guard.py --publish || true
           rm -f indexing-service-account.json
 
       # 書き手が執筆前ゲートと違うKWを選ぶことがある。

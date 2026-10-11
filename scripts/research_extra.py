@@ -101,7 +101,7 @@ def draft():
         fb = ""
         for _ in range(3):
             with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
-                r = subprocess.run([AR.claude_bin(), "-p", "--model", "claude-sonnet-5-5"], input=prompt + fb, cwd=tmp,
+                r = subprocess.run([AR.claude_bin(), "-p", "--model", "claude-sonnet-5-5"], input=prompt + fb, cwd=tmp, env=__import__("agent_guard").child_env(),
                                    capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=600)
             m = re.search(r"\{.*\}", r.stdout or "", re.S)
             try:

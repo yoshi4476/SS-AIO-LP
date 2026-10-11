@@ -97,6 +97,8 @@ def fill(src_text, e):
             .replace("https://script.google.com/macros/s/XXXXXXXXXXXXXXXX/exec",
                      e.get("HUB_URL", ""))
             .replace("'XXXXXXXXXXXXXXXX'", f"'{e.get('HUB_SECRET', '')}'")
+            # 記事を書く AI の手順に渡す合言葉（hub.gs の AGENT_SECRET）。無ければ空で埋まり、AI 用の合言葉は誰も通らない
+            .replace("'AGENT_SECRET_XXXXXXXX'", f"'{e.get('HUB_AGENT_SECRET', '')}'")
             # Gemini の鍵（contact.hub.gs の GEMINI_KEY_FILL）は埋めない。メールまわりで AI を使わないため
             # （2026-10-11 運用者）。埋まらなければ「見てほしい」への自動回答（reviewReply）は止まったまま
             # ロボットよけ（contact.hub.gs の turnstileVerify_）。無ければ空で埋まり、確かめも記録もしない（断らない）

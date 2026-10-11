@@ -302,6 +302,10 @@ def push(message, tries=3):
     if not (base() / ".git").is_dir():
         print("PRIVATE_PUSH=none（private/ がありません）", flush=True)
         return False
+    # AI の手順の前に git の資格を外す（agent_guard --lock）。鍵を受け取っていれば、書く直前に設定し直す
+    tok = _token()
+    if tok:
+        _git("config", "--local", "http.https://github.com/.extraheader", _header(tok))
     overlay_out(unstage=False)         # 作業場所で書いた・直したお客様の社の記事・画像・台本も残す
     _git("add", "-A")
     if _git("diff", "--cached", "--quiet").returncode == 0:

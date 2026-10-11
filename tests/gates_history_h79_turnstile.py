@@ -175,12 +175,10 @@ def _fn(enforce):
     with tempfile.TemporaryDirectory() as d:
         dst = Path(d) / "functions"
         shutil.copytree(FN, dst)
-        t = dst / "_turnstile.js"
-        src = t.read_text(encoding="utf-8")
-        if enforce:
-            src = src.replace("export const ENFORCE = { lead: false, subscribe: false };",
-                              "export const ENFORCE = { lead: true, subscribe: true };")
-        t.write_text(src, encoding="utf-8")
+        # 断るかは判断のファイル（turnstile_status.py --decide --apply が書く）。作り物ではそこを書き換えて試す
+        t = dst / "_turnstile_enforce.js"
+        flag = "true" if enforce else "false"
+        t.write_text(f"export const DECIDED = {{ lead: {flag}, subscribe: {flag} }};\n", encoding="utf-8")
         h = Path(d) / "h.mjs"
         h.write_text(FN_HARNESS, encoding="utf-8")
         r = subprocess.run([node, str(h), dst.as_posix()], capture_output=True, text=True, encoding="utf-8",
@@ -242,8 +240,11 @@ def test_h79_hub_records_then_refuses_only_when_told():
 def test_h79_ai_lab_functions_verify_and_forward_the_result():
     print("\n■ ロボットよけ（AI集客ラボの受付）: 確かめて結果を管制塔へ添える／強制は定数1つ")
     t = (FN / "_turnstile.js").read_text(encoding="utf-8")
-    check("AI集客ラボの受付は記録だけの段階（ENFORCE がどちらも false）",
-          "export const ENFORCE = { lead: false, subscribe: false };" in t, True)
+    dec = (FN / "_turnstile_enforce.js").read_text(encoding="utf-8")
+    # 2026-10-11 から、断るかは週次が記録で決めて判断のファイルに書く（本物の相談が通ったと確かめてから true）
+    check("AI集客ラボの受付の断る判定は、判断のファイル（turnstile_status.py が書く）から読む",
+          ('import { DECIDED } from "./_turnstile_enforce.js";' in t and "export const ENFORCE = DECIDED;" in t,
+           "export const DECIDED = { lead: " in dec), (True, True))
     rec = _fn(False)
     if rec is None:
         print("  WARN  node が無いため受付の動きは確かめられません")

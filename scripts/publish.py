@@ -2265,6 +2265,9 @@ def main():
     ap.add_argument("--site", required=True)
     ap.add_argument("--slug", required=True)
     ap.add_argument("--push", action="store_true", help="対象リポジトリへcommit+pushする")
+    # 配信の手前の門だけを通す（鍵を使わない）。記事を書く AI は鍵を持たないので、これで直してから終える
+    # （配信は AI の後に鍵を持つ機械の手順が行う。agent_guard.py --publish）
+    ap.add_argument("--check", action="store_true", help="配信せず、配信の前の門だけを確かめる")
     args = ap.parse_args()
 
     cfg = sites_mod.load(args.site)
@@ -2295,6 +2298,9 @@ def main():
     import scaled_guard
     bad = scaled_guard.check(args.slug)
     dest = None
+    if bad and args.check and cfg["type"] != "self-static":
+        # 配信先にあるかは鍵が無いと見られない。新しい記事として扱う（配信済みの直しは機械の配信で通る）
+        raise SystemExit("BLOCKED(公開不可): " + " / ".join(bad))
     if bad:
         delivered, dest = _delivered(cfg, meta)
         if not delivered:
@@ -2341,6 +2347,9 @@ def main():
 
     if cfg["type"] == "self-static":
         print(f"{cfg['id']} は本リポジトリのサイトです。scripts/build.py で公開してください。")
+        return
+    if args.check:
+        print(f"PUBLISH_CHECK=ok（{args.slug}: 配信の前の門を通りました。配信は機械の手順が行います）")
         return
 
     # その社に無い場所へのリンク（AI集客ラボの /lp/ など）は配信しない。Git の社は作業コピーを取った後に見る

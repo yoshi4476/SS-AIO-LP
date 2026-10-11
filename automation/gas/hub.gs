@@ -191,10 +191,18 @@ function sheet_(name) {
 // 狙う語の台帳を読む操作。この URL は各サイトのフォームの送り先としてページに載っているため、合言葉なしだと
 // 全社（お客様の分も）の狙う語・状態・URL が誰でも読めた（2026-10-10 に 1,611 件が読めることを確かめた）
 const KW_READS = { next_kw: true, all_kw: true, kw_status: true, kw_overlaps: true };
+// 記事を書く AI の手順に渡す合言葉（gas_deploy が .env の HUB_AGENT_SECRET で埋める）。AI は外の文章を読むので、
+// 仕込まれた指示に従っても問い合わせ・管理・お客様のメールに触れないよう、狙う語の台帳とエラーの記録だけを通す（2026-10-11）
+const AGENT_SECRET = 'AGENT_SECRET_XXXXXXXX';
+const AGENT_ACTIONS = { next_kw: true, all_kw: true, kw_status: true, kw_overlaps: true, claim_kw: true, kw_conflict: true,
+                        add_kw: true, retire_kw: true, unclaim_kw: true, error_log: true };
+function agentOk_(secret, action) {
+  return !!secret && AGENT_SECRET.indexOf('XXXXXXXX') < 0 && secret === AGENT_SECRET && !!AGENT_ACTIONS[action];
+}
 
 function doGet(e) {
   const p = (e && e.parameter) || {};
-  if (KW_READS[p.action] && (!SHARED_SECRET || p.secret !== SHARED_SECRET)) {
+  if (KW_READS[p.action] && (!SHARED_SECRET || p.secret !== SHARED_SECRET) && !agentOk_(p.secret, p.action)) {
     return json_({ ok: false, error: 'unauthorized' });
   }
   try {
@@ -225,7 +233,8 @@ function doPost(e) {
   // フォームは action を持たないので、その場合だけ合言葉を求めない。
   // 転送（forwardToHub_）は合言葉を付けてくるので、あれば照合する。
   const hasAction = !!body.action;
-  if (SHARED_SECRET && (hasAction || body.secret) && body.secret !== SHARED_SECRET) {
+  if (SHARED_SECRET && (hasAction || body.secret) && body.secret !== SHARED_SECRET
+      && !(hasAction && agentOk_(body.secret, body.action))) {
     return json_({ ok: false, error: 'unauthorized' });
   }
   try {
@@ -282,6 +291,9 @@ function doPost(e) {
       case 'ai_check_stats': return json_(aiCheckStats_(body));
       // ロボットよけ（Turnstile）の記録と集計（contact.hub.gs）。AI集客ラボの受付が合言葉つきで送る・断る前に読む
       case 'bot_log':        return json_(botLogAction_(body));
+      case 'bot_enforce':    return json_(botEnforce_(body));
+      // 個人情報の保存期間を過ぎた行の個人の情報を消す（週次の pii_retention.py。件数だけ返す）
+      case 'pii_retention':  return json_(piiRetention_(body));
       case 'bot_status':     return json_(botStatus_(body));
       case 'probe_status':   return json_(probeStatus_());
       case 'ai_check_log':   return json_(aiCheckLog_(body));

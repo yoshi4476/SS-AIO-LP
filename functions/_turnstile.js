@@ -11,8 +11,10 @@
  */
 
 // 断るかどうか。false の間は確かめて記録するだけで、断らない。
-// 本物のブラウザで ok が記録されたのを確かめてから true にする（記録は python scripts/turnstile_status.py で読む）
-export const ENFORCE = { lead: false, subscribe: false };
+// 本物の相談がすべてロボットよけを通ったことを記録で確かめてから、週次の turnstile_status.py --decide --apply が
+// _turnstile_enforce.js を true にする（管制塔の側も同時に切り替わる。2026-10-11）
+import { DECIDED } from "./_turnstile_enforce.js";
+export const ENFORCE = DECIDED;
 
 export const REFUSAL = "ロボットでないことの確認ができませんでした。ページを読み込み直してもう一度お送りいただくか、"
   + "06-4305-7547 までお電話ください。";

@@ -121,8 +121,13 @@ def test_weekly_findings_runs_the_log_leak_check():
     print("\n■ 守秘義務: 週次の findings が見張りを回し、出たら要対応。そのジョブは actions: read と鍵を持つ")
     import findings as F
     import yaml
-    item = [c for c in F.CHECKS if c[1].split()[0] == "log_leak_check.py"]
+    # ログの見張りは1つ（公開側のファイルの照らし --tracked は別の検査。2026-10-11）
+    item = [c for c in F.CHECKS if c[1].split()[0] == "log_leak_check.py" and "--tracked" not in c[1]]
     check("findings の検査に入っている", len(item), 1)
+    tracked = [c for c in F.CHECKS if c[1] == "log_leak_check.py --tracked"]
+    check("公開側のファイルの照らしも週次に入り、出たら要対応", (len(tracked), bool(tracked) and
+          bool(F.details("要対応: 公開リポジトリの…\n  data/x.jsonl: 記事の題・slug\nTRACKED_LEAK_OK=no", tracked[0][2]))),
+          (1, True))
     label, script, pat = item[0]
     check("出たら要対応・動かなければ動かせず（期限ありで毎週要対応のまま）",
           (F.judge("LOG_LEAK_OK=no", 0), F.judge("LOG_LEAK_OK=unknown", 1), F.judge("LOG_LEAK_OK=yes", 0),

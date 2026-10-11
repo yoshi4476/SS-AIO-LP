@@ -237,6 +237,78 @@ function leadRoute_(d, referer) {
 // false の間は記録するだけで断らない。3サイトとも本物のブラウザで ok が記録されたのを確かめ、合言葉なしでサーバーから
 // 記録だけを送ってくる別事業のサイト（silent つき）に合言葉が届くようにしてから true にする（そのままだとその記録が落ちる）
 const TURNSTILE_ENFORCE = false;
+// 止めるかは、実際の記録を見て週次の bot_enforce.py が決める（本物の相談が断られていないことを確かめてから。
+// 2026-10-11 運用者「自動ですべて」）。Script Properties の TURNSTILE_ENFORCE='1' で止める。上の決まりは手で止めるとき用
+function turnstileEnforce_() {
+  return TURNSTILE_ENFORCE || PropertiesService.getScriptProperties().getProperty('TURNSTILE_ENFORCE') === '1';
+}
+
+/**
+ * 個人情報の保存期間（2026-10-11 運用者「顧客情報が漏れないように」「自動ですべて」）。持っていなければ漏れない。
+ * 期限を過ぎた行は、お名前・メール・電話・本文などの個人の情報だけを消し、日付・サイト・種別・会社名・温度・対応状況は残す
+ * （件数の集計と効果の測定はこれまでどおり）。既存客・契約中・成約の行は取引が続くので消さない。週次の pii_retention.py が呼ぶ
+ */
+const PII_KEEP_STATUS = { '成約': true, '契約中': true, '既存客': true };
+const PII_DAYS = { lead: 365 * 3, noise: 365, check_mail: 365, check_ip: 90, review: 365 };
+const PII_ERASED = '（保存期間を過ぎたため個人の情報を消しました ';
+
+function piiOld_(v, days, now) {
+  const at = v && typeof v.getTime === 'function' ? v : new Date(v);
+  return !isNaN(at.getTime()) && now - at.getTime() > days * 864e5;
+}
+
+function piiRetention_(b) {
+  const now = Date.now();
+  const dry = b && b.dry === true;
+  const stamp = PII_ERASED + Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd') + '）';
+  const out = { ok: true, dry: dry, lead: 0, noise: 0, check_mail: 0, check_ip: 0, review: 0 };
+  // 問い合わせ: E お名前・F ご担当者様・G メール・H 電話・I ご相談内容・J 診断・詳細
+  const sh = sheet_('問い合わせ');
+  if (sh.getLastRow() > 1) {
+    const rows = sh.getRange(2, 1, sh.getLastRow() - 1, 14).getValues();
+    rows.forEach(function (r, i) {
+      if (String(r[8] || '').indexOf(PII_ERASED) === 0 || PII_KEEP_STATUS[String(r[13] || '').trim()]) return;
+      const noise = r[12] === LEAD_SALES || r[12] === LEAD_TEST || String(r[13] || '').trim() === '対応不要';
+      if (!piiOld_(r[0], noise ? PII_DAYS.noise : PII_DAYS.lead, now)) return;
+      out[noise ? 'noise' : 'lead']++;
+      if (!dry) sh.getRange(i + 2, 5, 1, 6).setValues([['', '', '', '', stamp, '']]);
+    });
+  }
+  // AI紹介チェック: B メール（1年）・K IPアドレス（90日。1日の回数の上限にしか使わない）
+  const ck = book_().getSheetByName('AI紹介チェック');
+  if (ck && ck.getLastRow() > 1) {
+    const rows = ck.getRange(2, 1, ck.getLastRow() - 1, 11).getValues();
+    rows.forEach(function (r, i) {
+      if (r[1] && piiOld_(r[0], PII_DAYS.check_mail, now)) {
+        out.check_mail++;
+        if (!dry) ck.getRange(i + 2, 2).setValue('');
+      }
+      if (r[10] && piiOld_(r[0], PII_DAYS.check_ip, now)) {
+        out.check_ip++;
+        if (!dry) ck.getRange(i + 2, 11).setValue('');
+      }
+    });
+  }
+  // 自動回答: B メール（1年）
+  const rv = book_().getSheetByName('自動回答');
+  if (rv && rv.getLastRow() > 1) {
+    rv.getRange(2, 1, rv.getLastRow() - 1, 2).getValues().forEach(function (r, i) {
+      if (r[1] && piiOld_(r[0], PII_DAYS.review, now)) {
+        out.review++;
+        if (!dry) rv.getRange(i + 2, 2).setValue('');
+      }
+    });
+  }
+  return out;
+}
+
+/** 止める・戻す（合言葉つきの action。AI 用の合言葉では通らない） */
+function botEnforce_(b) {
+  const props = PropertiesService.getScriptProperties();
+  if (b.on === true) props.setProperty('TURNSTILE_ENFORCE', '1');
+  else if (b.on === false) props.deleteProperty('TURNSTILE_ENFORCE');
+  return { ok: true, enforce: turnstileEnforce_() };
+}
 // gas_deploy.py が .env の TURNSTILE_SECRET で埋める。Script Properties に同じ名前があればそちらを使う
 const TURNSTILE_KEY_FILL = 'TURNSTILE_SECRET_XXXXXXXX';
 // サーバー側でロボットよけを確かめてから記録だけを送ってくる別事業のサイトのための、フォーム専用の合言葉。
@@ -300,7 +372,7 @@ function botCheck_(body, d, site, type, probe) {
     v = turnstileVerify_(token);
     if (v.result === 'unset') return { refuse: false };
   }
-  const refuse = TURNSTILE_ENFORCE && !trusted && !probe && (v.result === 'none' || v.result === 'invalid');
+  const refuse = turnstileEnforce_() && !trusted && !probe && (v.result === 'none' || v.result === 'invalid');
   botLog_(site, trusted ? 'サーバーで確認' : 'ページから直接', type, v, probe, refuse);
   return { refuse: refuse, result: v.result };
 }
@@ -356,8 +428,9 @@ function botStatus_(b) {
       recent.push([at.toISOString()].concat(r.slice(1).map(String)));
     });
   }
-  return { ok: true, days: days, enforce: TURNSTILE_ENFORCE, secret: !!turnstileSecret_(), counts: counts,
-           recent: recent.slice(-20) };
+  // all: 切り替えの判断（bot_enforce.py）が全部の行を時刻で台帳と突き合わせる。行に個人の情報は無い
+  return { ok: true, days: days, enforce: turnstileEnforce_(), secret: !!turnstileSecret_(), counts: counts,
+           recent: b.all ? recent : recent.slice(-20) };
 }
 
 /**

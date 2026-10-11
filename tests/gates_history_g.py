@@ -44,14 +44,17 @@ def test_file_delivery_types_are_wired():
     left = set(re.findall(r"\{\{([A-Z_]+)\}\}", tpl)) - vals - {"SITE_NAME", "ORIGIN", "PREFIX"}
     check("汎用の雛形に埋まらない差し込みが無い", sorted(left), [])
 
-    # 配信する工程（SITE_PUSH_TOKEN を渡す工程）には、FTP・WordPress の接続情報も渡す
+    # 配信する工程（SITE_PUSH_TOKEN を渡す工程）には、FTP・WordPress の接続情報も渡す。
+    # AI の作業場へ git の資格を戻すだけの工程（agent_guard --unlock）は配信しないので数えない（2026-10-11）
+    import yaml
     for wf in (ROOT / ".github" / "workflows").glob("*.yml"):
-        s = wf.read_text(encoding="utf-8")
-        n = s.count("SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}")
+        d = yaml.safe_load(wf.read_text(encoding="utf-8"))
+        st = [s for j in (d.get("jobs") or {}).values() for s in (j.get("steps") or [])
+              if "SITE_PUSH_TOKEN" in (s.get("env") or {}) and "agent_guard.py --unlock" not in str(s.get("run", ""))]
         check(f"{wf.name}: 配信の工程に FTP の接続情報を渡している",
-              s.count("FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}") >= n, True)
+              [s.get("name") for s in st if "FTP_CREDENTIALS_JSON" not in (s.get("env") or {})], [])
         check(f"{wf.name}: 配信の工程に WordPress の接続情報を渡している",
-              s.count("WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}") >= n, True)
+              [s.get("name") for s in st if "WP_CREDENTIALS_JSON" not in (s.get("env") or {})], [])
 
     gi = (ROOT / ".gitignore").read_text(encoding="utf-8")
     check("FTP の接続情報と ZIP 納品物はコミットしない", "ftp-credentials.json" in gi and "deliveries/" in gi, True)

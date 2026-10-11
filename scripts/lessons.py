@@ -64,9 +64,18 @@ def _scrub(row):
     """全社に効く学びは public に残し、お客様の名前・ドメイン・記事の名前は伏せる"""
     import client_private as CP
     r = dict(row)
+    # 記事の slug・題も伏せる（名前・ドメインだけだと、お客様の記事の slug が詳細に残って public に出た。2026-10-11）
+    try:
+        import ci_mask
+        arts = sorted({w for _n, a, _d in ci_mask.identity_terms().values() for w in a if len(w) >= 4},
+                      key=len, reverse=True)
+    except Exception:
+        arts = []
     for k in ("rule", "detail"):
         if r.get(k):
             r[k] = CP.redact(r[k])
+            for w in arts:
+                r[k] = r[k].replace(w, "お客様の記事")
     if r.get("source") and CP.is_private(CP.owner_of_slug(str(r["source"]))):
         r["source"] = "お客様の記事"
     return r

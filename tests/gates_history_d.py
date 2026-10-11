@@ -298,8 +298,12 @@ KEY_FILE = "indexing-service-account.json"
 WRITE_STEP = re.compile(r"python3? scripts/(\w+)\.py[^\n|;&]*?(--write|--finish|--fix\b|--apply)")
 
 
+# 鍵を外す・戻す道具（agent_guard）は鍵ファイルの名前と鍵の名前を「外すための一覧」として持つ。使う側ではない
+KEY_HANDLERS = {"agent_guard"}
+
+
 def key_consumers():
-    return {p.stem for p, t in scripts() if KEY_FILE in t}
+    return {p.stem for p, t in scripts() if KEY_FILE in t} - KEY_HANDLERS
 
 
 def order_problems(y, consumers):
@@ -642,7 +646,8 @@ def test_hist_ci_gets_the_keys_scripts_read():
         wf_secrets |= set(re.findall(r"secrets\.([A-Z0-9_]+)", t))
     wf_secrets.discard("GITHUB_TOKEN")
     universe = wf_secrets | distributed()
-    reads = {p.stem: {a or b for a, b in ENV_READ.findall(t)} & universe for p, t in scripts()}
+    reads = {p.stem: {a or b for a, b in ENV_READ.findall(t)} & universe for p, t in scripts()
+             if p.stem not in KEY_HANDLERS}
     bad = yaml.safe_load("jobs: {m: {steps: [{name: 引用, env: {GEMINI_API_KEY: x}, run: python scripts/ai_cite_check.py}]}}")
     good = yaml.safe_load("jobs: {m: {steps: [{name: 引用, env: {GEMINI_API_KEY: x, OPENAI_API_KEY: x}, run: python scripts/ai_cite_check.py}]}}")
     fake = {"ai_cite_check": {"GEMINI_API_KEY", "OPENAI_API_KEY"}}

@@ -28,7 +28,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2342",
+     "evidence": "scripts/publish.py:2348",
      "note": "build.py が site/ に書き、デプロイで公開",
      "anchor": "if cfg[\"type\"] == \"self-static\":",
      "anchor_prev": [
@@ -93,17 +93,17 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2287",
+     "evidence": "scripts/publish.py:2290",
      "anchor": "if not gate_ok(meta):"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2287",
+     "evidence": "scripts/publish.py:2290",
      "anchor": "if not gate_ok(meta):"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2287",
+     "evidence": "scripts/publish.py:2290",
      "anchor": "if not gate_ok(meta):"
     },
     "wordpress": {
@@ -114,12 +114,12 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2287",
+     "evidence": "scripts/publish.py:2290",
      "anchor": "if not gate_ok(meta):"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2287",
+     "evidence": "scripts/publish.py:2290",
      "note": "基準に届かない記事は ZIP を作らない",
      "anchor": "if not gate_ok(meta):"
     }
@@ -673,36 +673,36 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:842",
+     "evidence": ".github/workflows/pipeline-multi.yml:885",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "external-md": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:842",
+     "evidence": ".github/workflows/pipeline-multi.yml:885",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "external-html": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:842",
+     "evidence": ".github/workflows/pipeline-multi.yml:885",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:842",
+     "evidence": ".github/workflows/pipeline-multi.yml:885",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:842",
+     "evidence": ".github/workflows/pipeline-multi.yml:885",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "ftp": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:842",
+     "evidence": ".github/workflows/pipeline-multi.yml:885",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
@@ -775,7 +775,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:839",
+     "evidence": ".github/workflows/pipeline-multi.yml:882",
      "anchor": "python scripts/bing_webmaster.py --site \"$id\" || true"
     },
     "external-md": {
@@ -1211,7 +1211,7 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2362",
+     "evidence": "scripts/publish.py:2371",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})",
      "note": "aggregate_pages.collect が業種ハブ（/industry/・/industry/<業種>/・その faq/）を build.py と同じ関数で組む（5本未満の業種・1業種で記事の8割以上を占める社は作らない。お客様の社で運用会社の名前が出るページは捨てる）。external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す"
     },
@@ -1265,7 +1265,7 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2362",
+     "evidence": "scripts/publish.py:2371",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})",
      "note": "aggregate_pages.collect が用語集（/glossary/。記事の定義ブロックを1ページに）を build.py と同じ関数で組む（10語未満なら作らない。お客様の社で運用会社の名前が出るページは捨てる）。external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す"
     },
@@ -1316,13 +1316,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2362",
+     "evidence": "scripts/publish.py:2371",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2362",
+     "evidence": "scripts/publish.py:2371",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1367,13 +1367,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2362",
+     "evidence": "scripts/publish.py:2371",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2362",
+     "evidence": "scripts/publish.py:2371",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1418,13 +1418,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2362",
+     "evidence": "scripts/publish.py:2371",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2362",
+     "evidence": "scripts/publish.py:2371",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1470,13 +1470,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2362",
+     "evidence": "scripts/publish.py:2371",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す。検索データ（season.py が data/season/<id>.json に山の月だけ残す）が12か月分そろうまでは作らない（判定前）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2362",
+     "evidence": "scripts/publish.py:2371",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -2003,37 +2003,37 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2338",
+     "evidence": "scripts/publish.py:2344",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2338",
+     "evidence": "scripts/publish.py:2344",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2338",
+     "evidence": "scripts/publish.py:2344",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2338",
+     "evidence": "scripts/publish.py:2344",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2338",
+     "evidence": "scripts/publish.py:2344",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2338",
+     "evidence": "scripts/publish.py:2344",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     }
@@ -2050,7 +2050,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/live_check.py:155",
+     "evidence": "scripts/live_check.py:163",
      "anchor": "def targets(site_id, all_urls):"
     },
     "external-md": {
@@ -2291,37 +2291,37 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "automation/gas/contact.hub.gs:874",
+     "evidence": "automation/gas/contact.hub.gs:947",
      "note": "フォームを管制塔が直接受ける",
      "anchor": "function followUp() {"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:893",
+     "evidence": "automation/gas/contact.hub.gs:966",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:893",
+     "evidence": "automation/gas/contact.hub.gs:966",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:893",
+     "evidence": "automation/gas/contact.hub.gs:966",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:893",
+     "evidence": "automation/gas/contact.hub.gs:966",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:893",
+     "evidence": "automation/gas/contact.hub.gs:966",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },

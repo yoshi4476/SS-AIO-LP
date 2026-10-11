@@ -834,13 +834,40 @@ jobs:
       - uses: ./.github/actions/client-private
         with: {mode: restore, family: ai-kw, kinds: ai_kw}
 
+      # 週次の AI も記事と検索の実績を読むので、作業場から鍵を外してから動かす（2026-10-11）。
+      # Google は読むだけ・1時間で切れる許可証にし、鍵を環境変数に持たない別のプロセスが40分ごとに作り直す
+      - name: 週次のAIの作業場から鍵を外す
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python scripts/agent_guard.py --lock
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
+              nohup python scripts/agent_guard.py --refresh > /dev/null 2>&1 &
+          fi
+
       - name: 週次最適化の実行
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
+          python scripts/agent_guard.py --verify || exit 1
           # 利用枠切れ・最大ターン到達で落ちても、後ろの実測・コミット・配信は続ける
           claude -p "$(cat automation/weekly_optimize_prompt.txt)" \
-            --dangerously-skip-permissions --max-turns 120 || echo "::warning::週次の claude 工程が失敗（後続は続行）"
+            --permission-mode dontAsk --settings automation/agent_settings_article.json --max-turns 120 \
+            || echo "::warning::週次の claude 工程が失敗（後続は続行）"
+
+      - name: 週次のAIが触ってはいけない場所を戻す
+        if: always()
+        run: python scripts/agent_guard.py --protect
+
+      - name: 週次のAIの作業場へ鍵を戻す
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: python scripts/agent_guard.py --unlock
 
       # 速度・インデックス・表記ゆれ・AI引用の週次実測。見つけたものは要対応として通知に載る。
       # Actions の残枠が 75% を超えていたら、後段の重い工程（動画・書き換え）の本数を半分にする
@@ -1206,7 +1233,8 @@ jobs:
           # content_yield の判定（統合を増やすサイト）と学びの台帳を残す。日次の執筆がこれを読む
           # Bing の検索の成績は自社3サイトの分だけ（お客様の分は .gitignore で外れる）
           # findings_seen は前の週に出たもの（来週の要対応と情報の振り分けが読む）。pull は未コミットの変更があっても通す
-          for p in data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json data/bing_stats data/findings_seen.json; do if [ -e "$p" ]; then git add "$p"; fi; done
+          # functions/_turnstile_enforce.js は、ロボットよけを「断る」へ切り替えた週に書き換わる（AI集客ラボの受付へ配信される）
+          for p in data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json data/bing_stats data/findings_seen.json functions/_turnstile_enforce.js; do if [ -e "$p" ]; then git add "$p"; fi; done
           git diff --cached --quiet || {
             git commit -q -m "weekly: 記事本数の判定と結果からの学び $(date '+%Y-%m-%d')"
             git pull --rebase --autostash -q origin "${GITHUB_REF_NAME}" || true

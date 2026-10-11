@@ -82,10 +82,14 @@ def main():
             raise SystemExit("使い方: python scripts/publish_flow.py --finish <site_id> <slug>"
                              " [--no-push] [--since=<ISO8601>]")
         return finish_approved(a[0], a[1], "--no-push" not in sys.argv, since)
-    if len(sys.argv) < 3:
-        raise SystemExit("使い方: python scripts/publish_flow.py <site_id> <slug> [--no-push]")
-    site_id, slug = sys.argv[1], sys.argv[2]
-    push = "--no-push" not in sys.argv
+    # --check: 配信の前の門だけを通す（鍵を使わない）。記事を書く AI は鍵を持たないので、これが通るまで直して終える。
+    # 配信・管制塔への記録・SNS は AI の後に鍵を持つ機械の手順が行う（agent_guard.py --publish。2026-10-11）
+    check = "--check" in sys.argv
+    a = [x for x in sys.argv[1:] if not x.startswith("--")]
+    if len(a) < 2:
+        raise SystemExit("使い方: python scripts/publish_flow.py <site_id> <slug> [--no-push] [--check]")
+    site_id, slug = a[0], a[1]
+    push = "--no-push" not in sys.argv and not check
     cfg = sites_mod.load(site_id)
 
     src = ROOT / "articles" / f"{slug}.md"
@@ -194,6 +198,9 @@ def main():
                 and re.search(r"^HELD\(監修待ち\): " + re.escape(slug) + r"\s", out, re.M))
 
     def exit_held():
+        if check:
+            print(f"PUBLISH_CHECK=held（{slug}: 門は通り、監修の記録だけがありません。書き直さないこと）")
+            raise SystemExit(0)
         # 監修待ちは品質の不合格ではない。失敗で返すと救済の工程が書き直しに回すため、0で抜ける
         print(f"HELD(監修待ち): {slug} は監修の記録が無いため公開していません"
               f"（確認したら GitHub の Actions →「監修の記録」に {slug} を入れて実行）")
@@ -228,17 +235,25 @@ def main():
                 exit_held()
             raise SystemExit(f"BLOCKED(公開不可): build.py が {slug} を止めました。"
                              "上の BLOCKED の理由を直してから再実行すること")
+        if check:
+            print(f"PUBLISH_CHECK=ok（{slug}: 門を通りました。配信・管制塔への記録は機械の手順が行います）")
+            return
         # IndexNow / Indexing API の通知は、デプロイの後にワークフローが送る
         # （ここで送ると、まだ配信されていないURLを知らせて404を踏ませる）
     else:
         args = [PY, "scripts/publish.py", "--site", site_id, "--slug", slug]
-        if push:
+        if check:
+            args.append("--check")
+        elif push:
             args.append("--push")
         code, out = run_out(args)
         if code != 0:
             if held(out):
                 exit_held()
             raise SystemExit(f"失敗: {' '.join(str(a) for a in args)}")
+        if check:
+            print(f"PUBLISH_CHECK=ok（{slug}: 門を通りました。配信・管制塔への記録は機械の手順が行います）")
+            return
 
     finish(site_id, slug, cfg, meta, body, push)
 

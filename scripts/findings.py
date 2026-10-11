@@ -100,6 +100,9 @@ CHECKS = [
     # 8日の回は1,410（中身の無い skipped を除いて728。2026-10-03〜10-11 の実測）なので、既定の上限400では足りない
     ("CI のログに出たお客様の守秘の語（public のログ）", "log_leak_check.py --max-runs 1500",
      re.compile(r"^要対応:|^\s{2}- ")),
+    # 公開側で追跡しているファイルも同じ語で照らす（2026-10-11: CI が書いた学びの台帳にお客様の記事の slug が入っていた。
+    # 門と同じ照らし方 gates_history_h77.find_identity。読むだけ）
+    ("公開リポジトリのファイルに出たお客様の守秘の語", "log_leak_check.py --tracked", re.compile(r"^要対応:|^\s{2}\S")),
     ("YouTube の公開動画（重複・字幕なし・台帳漏れ）", "youtube_upload.py --audit", re.compile(r"^\s{2}(自前の字幕|台帳に無い|同じ題)")),
     ("AIO基盤（robots・llms.txt・構造化データ）", "aio_check.py",
      re.compile(r"未記載:|不足:|取得できません|記事が載っていません")),
@@ -143,6 +146,11 @@ CHECKS = [
     # 公開済みなのに KW台帳で「執筆中」のまま止まった語を直す（2026-10-11 に8件。在庫と進み具合の表示がずれる）
     ("執筆中のまま止まった語（公開済みの記事あり）", "kw_published_sync.py --write",
      re.compile(r"^\s*要対応:")),
+    # ロボットよけを「断る」へ切り替えてよいかを、本物の相談と記録の突き合わせで決めて当てる（2026-10-11 運用者「自動ですべて」）
+    ("ロボットよけの切り替え（本物の相談が通っているか）", "turnstile_status.py --decide --apply",
+     re.compile(r"^\s*要対応:")),
+    # 個人情報の保存期間を過ぎた行から個人の情報だけを消す（持っていなければ漏れない。2026-10-11）
+    ("個人情報の保存期間", "pii_retention.py --apply", re.compile(r"PII_RETENTION_OK=unknown")),
     ("問い合わせの取りこぼし（GA4と台帳）", "lead_reconcile.py --fix",
      re.compile(r"^\s*要対応:")),
     # WordPress の社のプラグインは自分で新しい版に置き換わる。書き換えを許さないサーバーでは古いまま残るので知らせる
@@ -238,7 +246,7 @@ CHECKS = [
 # KW重複 38秒）、どれも読むだけでファイルを書かない（ほかの検査の読む控えを書き換えない）ものに限る。
 # 書く検査（控え・台帳を更新するもの）をここに足すと、同時に動く検査と書き合う
 PARALLEL = {"pace.py", "seo_audit.py --live --all --external", "scaled_guard.py", "hub_client.py overlaps",
-            "log_leak_check.py --max-runs 1500"}
+            "log_leak_check.py --max-runs 1500", "log_leak_check.py --tracked"}
 
 # 「問題あり」を表す印。検査ごとに語尾が違うため、値の側で見る
 BAD = re.compile(r"(?:[A-Z_]+_OK=no|LIVE_CHECK=ng|KW_GATE=block|RAKKO_MONTH=over)")

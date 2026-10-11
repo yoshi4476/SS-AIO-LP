@@ -55,9 +55,14 @@ def sh(args, timeout=1800, stdin_text=None, cwd=None):
     claude.CMD（バッチ）に解決されるため、最初の改行で切れる。実測で、
     引数で渡した複数行は1行目しか届かず、書き換えが24本続けて空振りした。
     """
+    # claude を呼ぶときは鍵の名前の環境変数を外す（呼ばれた AI は手順の鍵を受け継ぐ。agent_guard.child_env）
+    env = None
+    if Path(str(args[0])).name.lower().startswith("claude"):
+        import agent_guard
+        env = agent_guard.child_env()
     return subprocess.run(args, cwd=cwd or ROOT, capture_output=True, text=True,
                           encoding="utf-8", errors="ignore", timeout=timeout,
-                          input=stdin_text)
+                          input=stdin_text, env=env)
 
 
 def aio_items():
