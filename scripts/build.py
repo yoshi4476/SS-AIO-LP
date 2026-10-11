@@ -2605,15 +2605,12 @@ def main():
             print(f"   {s}: " + " / ".join(v))
 
     # 本番の転送（site/_redirects）の行き先は、サイトの中（/ で始まる）か自社のドメインだけ。外の指示に従った AI が
-    # 相談先などを外へ転送できたため、外れたらビルドを失敗で終える（デプロイの seo_audit --gate も同じ判定で止める）
+    # 相談先などを外へ転送できたため、外れた行はここで外して知らせる（デプロイの seo_audit --gate も同じ判定で止める）。
+    # ビルドを失敗で終えると、その行を人が消すまで全部の記事の枠・救済が止まった（2026-10-12 の点検）
     import html_safety
-    rd = SITE / "_redirects"
-    bad_rd = html_safety.redirect_problems(rd.read_text(encoding="utf-8")) if rd.is_file() else []
-    for n, src, dst in bad_rd:
-        print(f"BLOCKED(公開不可): site/_redirects {n}行目 {src} → {dst[:80]}"
-              "（転送先は / で始まるサイトの中の場所か、自社のドメインだけ）")
-    if bad_rd:
-        sys.exit(1)
+    for n, src, dst in html_safety.drop_bad_redirects(SITE / "_redirects"):
+        print(f"要対応: site/_redirects {n}行目 {src} → {dst[:80]} を外しました"
+              "（転送先は / で始まるサイトの中の場所か、自社のドメインだけ。誰が書いたかを確かめてください）")
 
 
 if __name__ == "__main__":

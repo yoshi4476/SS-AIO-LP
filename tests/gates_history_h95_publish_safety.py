@@ -129,10 +129,28 @@ def test_redirects_must_stay_inside_own_sites():
     check("seo_audit: 外への転送は「致命的」（サイトの中だけなら出ない）",
           (rows_ok, [(r[0], r[2]) for r in rows]), ([], [("致命的", "/lp/")]))
     check("seo_audit --gate は公開しない（終了コード2・SEO_GATE=ng）", (code, "SEO_GATE=ng" in out.getvalue()), (2, True))
+    # build.py は同じ判定で外への転送の行を外し、ビルドは続ける（失敗で終えると、その行を人が消すまで全部の枠・救済が
+    # 止まった。2026-10-12 の点検）。外したことは週次の findings が要対応で知らせる
+    from datetime import date
+    with tempfile.TemporaryDirectory() as td:
+        rdf, log = Path(td) / "_redirects", Path(td) / "dropped.jsonl"
+        rdf.write_text("/a/ /b/ 301\n/lp/ https://evil.example/ 302\n/c/ /d/ 301\n", encoding="utf-8")
+        got = [n for n, _s, _d in HS.drop_bad_redirects(rdf, log=log, today=date(2026, 10, 12))]
+        check("build.py の外し方: 外への転送の行だけを外し、残りの転送は残す・台帳には件数だけ（転送先を書かない）",
+              (got, rdf.read_text(encoding="utf-8"), log.read_text(encoding="utf-8").strip()),
+              ([2], "/a/ /b/ 301\n/c/ /d/ 301\n", '{"at": "2026-10-12", "n": 1}'))
+        check("外した行は7日のあいだ要対応で知らせる（8日目からは出さない）",
+              (HS.dropped(today=date(2026, 10, 19), log=log), HS.dropped(today=date(2026, 10, 20), log=log)),
+              ([("2026-10-12", 1)], []))
     src = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
-    tail = src[src.rindex("html_safety.redirect_problems"):]
-    check("build.py も同じ判定で、外への転送があればビルドを失敗で終える",
-          ("BLOCKED(公開不可): site/_redirects" in tail, "sys.exit(1)" in tail[:600]), (True, True))
+    fd = (ROOT / "scripts" / "findings.py").read_text(encoding="utf-8")
+    check("build.py が外し方を呼び、findings が --dropped を見る",
+          ("html_safety.drop_bad_redirects(SITE / \"_redirects\")" in src, "html_safety.py --dropped" in fd), (True, True))
+    check("alt・title の「JavaScript:」は止めず、行き先の属性（href・SVG の values）の javascript: は止める",
+          (HS.find('<abbr title="JavaScript: 入門">JS</abbr><img src="/a.png" alt="javascript: の例">'),
+           bool(HS.find('<a href="javascript:alert(1)">x</a>')),
+           bool(HS.find('<svg><animate attributeName="href" values="javascript:alert(1)"/></svg>'))),
+          ([], True, True))
 
 
 def test_build_and_score_check_stop_dangerous_articles():

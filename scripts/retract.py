@@ -22,14 +22,14 @@ RETRACT = ROOT / "data" / "retractions.jsonl"
 
 
 def load():
-    if not RETRACT.is_file():
-        return []
-    return [json.loads(l) for l in RETRACT.read_text(encoding="utf-8").splitlines() if l.strip()]
+    # お客様の社の行は非公開の置き場に分けて書く（client_private.SPLIT_JSONL）。読むときに合わせる
+    import client_private as CP
+    return [json.loads(l) for l in CP.read_lines(RETRACT)]
 
 
 def save(rows):
-    RETRACT.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows),
-                       encoding="utf-8", newline="\n")
+    import client_private as CP
+    CP.save_jsonl(RETRACT, rows, owner=lambda r: r.get("site"))
 
 
 def redirects_file(cfg, dest: Path):
@@ -111,8 +111,6 @@ def main():
     ap.add_argument("--site", default="")
     ap.add_argument("--push", action="store_true", help="配信先を直して push する")
     a = ap.parse_args()
-    import publish
-    import sites as S
     rows = load()
     todo = [r for r in rows if not r.get("done_at") and (not a.site or r["site"] == a.site)]
     print(f"■ 配信先から外す記事: {len(todo)}件")
@@ -121,66 +119,97 @@ def main():
     by_site = {}
     for r in todo:
         by_site.setdefault(r["site"], []).append(r)
-    for sid, items in by_site.items():
-        cfg = S.load(sid)
-        if cfg.get("type") in (None, "self-static"):
+    # 1社の失敗（鍵が無い・相手が落ちている）で、ほかの社の分と済んだ印を失わない。済んだ印は最後に必ず書く
+    try:
+        for sid, items in by_site.items():
+            try:
+                _site(sid, items, a.push)
+            except (SystemExit, Exception) as e:
+                print(f"  [{_label(sid)}] 取り下げを続けられませんでした（次回また試します）: {type(e).__name__}")
+    finally:
+        save(rows)
+    return 0
+
+
+def _label(sid):
+    """CI のログに出す社の名前。お客様の社は公開の id（社の id・ドメインは伏せる語。2.1 節）"""
+    import sites as S
+    try:
+        return S.public_id(sid) if S.is_client(sid) else sid
+    except Exception:
+        return "（社）"
+
+
+def _say(sid, r, text, detail=""):
+    """1件の結果をログに出す。お客様の社は slug・URL を出さない（その回に取り下げた記事は伏せる語に無いことがある）"""
+    import sites as S
+    if S.is_client(sid):
+        print(f"  [{_label(sid)}] （お客様の記事）: {text}")
+    else:
+        print(f"  [{sid}] {r['slug']}: {text}{detail}")
+
+
+def _site(sid, items, do_push):
+    import publish
+    import sites as S
+    cfg = S.load(sid)
+    if cfg.get("type") in (None, "self-static"):
+        for r in items:
+            r["done_at"] = date.today().isoformat(); r["note"] = "自サイト（build.py が処理）"
+        return
+    if not do_push:
+        for r in items:
+            _say(sid, r, f"{r.get('reason', '')}", f"（{r['from']} → {r['to']}）")
+        return
+    # Git を使わない配信先（FTP・ZIP）は相手のサーバーを直接直す
+    import deliver_files
+    if cfg.get("type") in deliver_files.TYPES:
+        if deliver_files.retract(cfg, items, True):
             for r in items:
-                r["done_at"] = date.today().isoformat(); r["note"] = "自サイト（build.py が処理）"
-            continue
-        if not a.push:
-            for r in items:
-                print(f"  [{sid}] {r['from']} → {r['to']}（{r.get('reason', '')}）")
-            continue
-        # Git を使わない配信先（FTP・ZIP）は相手のサーバーを直接直す
-        import deliver_files
-        if cfg.get("type") in deliver_files.TYPES:
-            if deliver_files.retract(cfg, items, True):
-                for r in items:
-                    r["done_at"] = date.today().isoformat()
-                print(f"  [{sid}] 取り下げ完了（{cfg['type']}）")
-            continue
-        # WordPress: 先方の mu-plugin の転送表に301を足してから、記事を下書きに戻す（公開から外す）。
-        # 転送元・転送先は台帳の組み立てたURLではなく、WordPress の実際のパーマリンクを使う
-        if cfg.get("type") == "wordpress":
-            import wp_bridge
-            for r in items:
+                r["done_at"] = date.today().isoformat()
+            print(f"  [{_label(sid)}] 取り下げ完了（{cfg['type']}・{len(items)}本）")
+        return
+    # WordPress: 先方の mu-plugin の転送表に301を足してから、記事を下書きに戻す（公開から外す）。
+    # 転送元・転送先は台帳の組み立てたURLではなく、WordPress の実際のパーマリンクを使う。
+    # 1件の失敗（接続・権限）で残りの件と済んだ印を失わないよう、1件ずつ受け止める
+    if cfg.get("type") == "wordpress":
+        import wp_bridge
+        for r in items:
+            try:
                 found = publish._wp_call(cfg, f"posts?slug={r['slug']}&status=publish&_fields=id,link")
                 found = found if isinstance(found, list) else []
                 src = found[0].get("link") if found else r["from"]
                 survivor = r.get("survivor") or r["to"].rstrip("/").rsplit("/", 1)[-1]
                 dst = wp_bridge.post_link(cfg, survivor) or r["to"]
-                try:
-                    n, rej = wp_bridge.add_redirects(cfg, [(src, dst)])
-                except SystemExit as e:
-                    print(f"  [{sid}] {r['slug']}: 転送を足せません（橋渡しが無い・古い）。次回また試します: {str(e)[:80]}")
-                    continue
+                n, rej = wp_bridge.add_redirects(cfg, [(src, dst)])
                 if not n:
-                    print(f"  [{sid}] {r['slug']}: 転送を受け付けませんでした（{rej}）。次回また試します")
+                    _say(sid, r, "転送を受け付けませんでした。次回また試します", f"（{rej}）")
                     continue
                 for p in found:
                     publish._wp_call(cfg, f"posts/{p['id']}", {"status": "draft"})
-                r["done_at"] = date.today().isoformat()
-                r["note"] = f"下書きに戻し、{src} → {dst} を301で送る"
-                print(f"  [{sid}] {r['slug']}: 下書きに戻し、301 {src} → {dst}")
-            # llms.txt から外した記事を消す（静的サイトで llms.txt の行を消すのと同じ）
-            if any(r.get("done_at") for r in items):
-                try:
-                    wp_bridge.push_settings(cfg)
-                except SystemExit:
-                    pass
-            continue
-        dest = publish.ensure_clone(cfg, publish._push_token())
+            except (SystemExit, Exception) as e:
+                _say(sid, r, f"転送を足せません（橋渡しが無い・古い・接続できない）。次回また試します: {type(e).__name__}")
+                continue
+            r["done_at"] = date.today().isoformat()
+            r["note"] = f"下書きに戻し、{src} → {dst} を301で送る"
+            _say(sid, r, "下書きに戻し、301で送りました", f"（{src} → {dst}）")
+        # llms.txt から外した記事を消す（静的サイトで llms.txt の行を消すのと同じ）
+        if any(r.get("done_at") for r in items):
+            try:
+                wp_bridge.push_settings(cfg)
+            except (SystemExit, Exception):
+                pass
+        return
+    dest = publish.ensure_clone(cfg, publish._push_token())
+    for r in items:
+        touched = apply(r, cfg, dest)
+        _say(sid, r, f"{len(touched)}か所を直しました", f"（{r['from']} → {r['to']}: {', '.join(touched) or '変更なし'}）")
+    if push(cfg, dest, f"統合した記事を外して301で送る（{len(items)}本）"):
         for r in items:
-            touched = apply(r, cfg, dest)
-            print(f"  [{sid}] {r['from']} → {r['to']}: {', '.join(touched) or '変更なし'}")
-        if push(cfg, dest, f"統合した記事を外して301で送る（{len(items)}本）"):
-            for r in items:
-                r["done_at"] = date.today().isoformat()
-            print(f"  [{sid}] push完了")
-        else:
-            print(f"  [{sid}] pushできませんでした（次回また試します）")
-    save(rows)
-    return 0
+            r["done_at"] = date.today().isoformat()
+        print(f"  [{_label(sid)}] push完了")
+    else:
+        print(f"  [{_label(sid)}] pushできませんでした（次回また試します）")
 
 
 if __name__ == "__main__":

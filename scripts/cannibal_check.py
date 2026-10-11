@@ -11,6 +11,7 @@
 形態素解析ライブラリなしで日本語の意図重複を判定するため、文字2-gramのDice係数を使う。
 KW選定時の重複回避（kw_status.py）からも本モジュールの関数を利用する。
 """
+import json
 import re
 import sys
 from pathlib import Path
@@ -165,6 +166,47 @@ def topic_overlap(plan_terms, arts):
     return sorted(out, key=lambda x: -x[0])
 
 
+def _site_name(site):
+    """ログに出す社の名前。お客様の社は公開の id（社の id は伏せる語）"""
+    import sites as S
+    try:
+        return S.public_id(S.resolve(site)) if S.is_client(site) else site
+    except Exception:
+        return "（社）"
+
+
+def _open(site):
+    """この出力に、その社の語・題・URL を出してよいか。お客様の社は、その社の回（--site <id>）だけ出す。
+    ほかの社の回・週次の出力は CI のログ（public）とほかの社の AI に渡るので、語の代わりに印を出す（2.1 節）"""
+    import sites as S
+    try:
+        if not site or not S.is_client(site):
+            return True
+        me = sys.argv[sys.argv.index("--site") + 1] if "--site" in sys.argv[:-1] else ""
+        return bool(me) and S.resolve(me) == S.resolve(site)
+    except Exception:
+        return False
+
+
+def _t(site, text, kind="語"):
+    return text if _open(site) else f"（お客様の{kind}）"
+
+
+_SLUG_SITE = None
+
+
+def _art_site(slug):
+    """お客様の記事ならその社の id（自社の記事は空）"""
+    global _SLUG_SITE
+    if _SLUG_SITE is None:
+        try:
+            import private_store as PS
+            _SLUG_SITE = PS.client_slugs()
+        except Exception:
+            _SLUG_SITE = {}
+    return _SLUG_SITE.get(slug, "")
+
+
 def find_pairs(arts):
     pairs = []
     for i in range(len(arts)):
@@ -249,10 +291,11 @@ def cross_site_check():
     if same:
         print("SAME_SITE_DUP=yes")
         for h in same[:10]:
-            print(f"\n  [{h['score']}] {h['kw']['site']} 内で重複のおそれ")
-            print(f"    これから書くKW: {h['kw']['keyword']}")
-            print(f"    既に公開済み  : {h['art']['keyword']}")
-            print(f"                    {h['art'].get('url', '')}")
+            st = h['kw']['site']
+            print(f"\n  [{h['score']}] {_site_name(st)} 内で重複のおそれ")
+            print(f"    これから書くKW: {_t(st, h['kw']['keyword'])}")
+            print(f"    既に公開済み  : {_t(st, h['art']['keyword'], '記事')}")
+            print(f"                    {_t(st, h['art'].get('url', ''), 'URL')}")
             print("    → 対処: このKWを台帳で「対象外」にするか、切り口を変えて別の検索意図を狙う")
     else:
         print("SAME_SITE_DUP=no")
@@ -264,15 +307,15 @@ def cross_site_check():
     print("CROSS_CANNIBAL=yes")
     for h in hits[:15]:
         a, b = h["a"], h["b"]
-        print(f"\n[{h['score']}] {a['site']} ×  {b['site']}")
-        print(f"  A: {a['keyword']}（{a.get('status', '-')}）")
-        print(f"  B: {b['keyword']}（{b.get('status', '-')}）")
+        print(f"\n[{h['score']}] {_site_name(a['site'])} ×  {_site_name(b['site'])}")
+        print(f"  A: {_t(a['site'], a['keyword'])}（{a.get('status', '-')}）")
+        print(f"  B: {_t(b['site'], b['keyword'])}（{b.get('status', '-')}）")
         # 公開済み側を残し、未着手側を取り下げるのが原則（既に評価を得ている方を守る）
         done = a if a.get("status") == "公開済み" else (b if b.get("status") == "公開済み" else None)
         if done:
             other = b if done is a else a
-            print(f"  → 推奨: {other['site']} の「{other['keyword']}」を取り下げるか、"
-                  f"読者と切り口を変える（{done['site']} が先に公開済み）")
+            print(f"  → 推奨: {_site_name(other['site'])} の「{_t(other['site'], other['keyword'])}」を取り下げるか、"
+                  f"読者と切り口を変える（{_site_name(done['site'])} が先に公開済み）")
         else:
             print("  → 推奨: どちらのサイトで扱うかを sites/*.json の担当領域に沿って決め、"
                   "片方を台帳から削除する")
@@ -346,9 +389,9 @@ def territory_check():
         return []
     print("TERRITORY_OK=no")
     for b in bad:
-        print(f"  [{b['site']}] {b['keyword']}（{b['status']}）"
-              f" ← 「{b['term']}」は {b['owner']} の担当領域")
-    print(f"\n→ 対処: 上記KWを {b['site']} の台帳から取り下げるか、担当サイトへ移す。"
+        print(f"  [{_site_name(b['site'])}] {_t(b['site'], b['keyword'])}（{b['status']}）"
+              f" ← 「{_t(b['owner'], b['term'])}」は {_site_name(b['owner'])} の担当領域")
+    print(f"\n→ 対処: 上記KWを {_site_name(b['site'])} の台帳から取り下げるか、担当サイトへ移す。"
           "\n  そのまま書くと同じ会社のサイトどうしで検索評価を奪い合う。")
     return bad
 
@@ -497,14 +540,25 @@ def external_dup_check():
         print(f"EXTERNAL_DUP_CHECK=skip （外部サイトの記事一覧を取得できません: {e}）")
         return []
 
+    # 配信先の一覧には、この管制塔が書いて配った記事も入る（sitemap を全部拾うため）。それを「元からある記事」と
+    # 取り違えると、自社の記事どうしを両向きに取り下げて301の輪になる（2026-10-12 の点検）。自社で書いた記事
+    # （作業場所・統合済み・取り下げ済み）は相手の側から外す。自社の記事どうしの重なりは auto_merge が扱う
+    ours = {p.stem for p in (ROOT / "articles").glob("*.md")} | {p.stem for p in (ROOT / "articles" / "_merged").glob("*.md")}
+    try:
+        import client_private as CP
+        ours |= {json.loads(x).get("slug", "") for x in CP.read_lines(ROOT / "data" / "retractions.jsonl")}
+    except Exception:
+        pass
     hits = []
+    seen = set()
     for a in load_articles():
         site = cat2site.get(a["cat"])
         if not site or site not in ext:
             continue
         for e in ext[site]:
-            if e["slug"] == a["slug"]:
+            if e["slug"] == a["slug"] or e["slug"] in ours or (e["slug"], a["slug"]) in seen:
                 continue
+            seen.add((a["slug"], e["slug"]))
             s = dice(a["title"], e["title"])
             if s >= WARN:
                 hits.append({"score": round(s, 2), "site": site, "mine": a, "theirs": e})
@@ -525,6 +579,11 @@ def external_dup_check():
     for h in hits:
         mark = {"conflict": "×", "clear": "―", "unknown": "?"}.get(h.get("verdict"), "?")
         print()
+        # お客様の社は、先方の既存記事の題・URL・検索語を CI のログに出さない（伏せる語の一覧に無い。2.1 節）
+        if not _open(h["site"]):
+            print(f"  {mark} [{h['score']}] {_site_name(h['site'])} の既存記事とタイトルが似ています"
+                  f"（お客様の記事のため題・URL は出しません）")
+            continue
         print(f"  {mark} [{h['score']}] {h['site']} の既存記事とタイトルが似ています")
         print(f"    自作: {h['mine']['title']}（{h['mine']['slug']}）")
         print(f"    既存: {h['theirs']['title']}")
@@ -570,9 +629,9 @@ def written_territory_check():
         return []
     print("WRITTEN_TERRITORY_OK=no")
     for slug, site, invader, scores in bad:
-        print(f"\n  {slug}: {site} に置かれているが、主題は {invader} の領域")
-        print(f"    領域スコア {scores}")
-        print(f"    → 対処: 記事を取り下げるか、{invader} へ配信し直して旧URLを301で転送する")
+        print(f"\n  {_t(site, slug, '記事')}: {_site_name(site)} に置かれているが、主題は {_site_name(invader)} の領域")
+        print(f"    領域スコア { {_site_name(k): v for k, v in scores.items()} }")
+        print(f"    → 対処: 記事を取り下げるか、{_site_name(invader)} へ配信し直して旧URLを301で転送する")
     return bad
 
 
@@ -679,8 +738,9 @@ def glossary_report(gl, failed=False):
     print(f"GLOSSARY_OVERLAP: 同じ検索語で用語集が記事より上に出ている {len(gl)}語")
     for h in gl[:20]:
         g, a = h["glossary"], h["article"]
-        print(f"  要対応: [{h['site']}] 「{h['kw']}」で用語集 {g[1]:.1f}位（{g[0].split('//')[-1]}・表示{g[2]}）が"
-              f"記事 {a[0]} {a[1]:.1f}位（表示{a[2]}）より上")
+        print(f"  要対応: [{_site_name(h['site'])}] 「{_t(h['site'], h['kw'])}」で用語集 {g[1]:.1f}位"
+              f"（{_t(h['site'], g[0].split('//')[-1], 'URL')}・表示{g[2]}）が"
+              f"記事 {_t(h['site'], a[0], 'URL')} {a[1]:.1f}位（表示{a[2]}）より上")
     if len(gl) > 20:
         print(f"  ほか{len(gl) - 20}語")
     if gl:
@@ -701,10 +761,10 @@ def serp_overlap_check(days=28):
     print("SERP_OVERLAP_FOUND=yes")
     for h in hits[:20]:
         w = h["win"]
-        print(f"  [{h['site']}] 「{h['kw']}」表示{h['imp']}")
-        print(f"      勝たせる  {w[1]:5.1f}位 {w[0]}")
+        print(f"  [{_site_name(h['site'])}] 「{_t(h['site'], h['kw'])}」表示{h['imp']}")
+        print(f"      勝たせる  {w[1]:5.1f}位 {_t(h['site'], w[0], 'URL')}")
         for d in h["drag"]:
-            print(f"      下げる    {d[1]:5.1f}位 {d[0]}（表示{d[2]}）")
+            print(f"      下げる    {d[1]:5.1f}位 {_t(h['site'], d[0], 'URL')}（表示{d[2]}）")
     if len(hits) > 20:
         print(f"  ほか{len(hits) - 20}語")
     print()
@@ -742,9 +802,10 @@ def main():
     for p in pairs:
         action = "統合候補（auto_merge が GSC 実績で判断し301つきで統合する。手で原稿を削除しない）" if p["score"] >= STRONG \
             else "差別化（H1・メタ・冒頭結論の切り口を分ける／片方を対象読者で限定する）"
-        print(f"\n[{p['score']}] {p['a']['slug']}  ×  {p['b']['slug']}")
-        print(f"  A: {p['a']['title']}")
-        print(f"  B: {p['b']['title']}")
+        sa, sb = _art_site(p['a']['slug']), _art_site(p['b']['slug'])
+        print(f"\n[{p['score']}] {_t(sa, p['a']['slug'], '記事')}  ×  {_t(sb, p['b']['slug'], '記事')}")
+        print(f"  A: {_t(sa, p['a']['title'], '記事')}")
+        print(f"  B: {_t(sb, p['b']['title'], '記事')}")
         print(f"  タイトル類似 {p['title_sim']} / H2構成の重なり {p['h2_overlap']}")
         print(f"  → 推奨対処: {action}")
     sys.exit(0)

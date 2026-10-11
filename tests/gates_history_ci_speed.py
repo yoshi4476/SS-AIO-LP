@@ -258,13 +258,13 @@ def test_brief_and_cross_check_run_together_but_log_in_order():
     brief = _step(write, "執筆ブリーフの表示")["run"]
     cross = _step(write, "全サイト横断のカニバリ・領域チェック")["run"]
     check("横断の検査をブリーフより先に裏で始める",
-          0 <= brief.find("cannibal_check.py --cross > /tmp/cannibal.txt") < brief.find("site_brief.py"), True)
+          0 <= brief.find('cannibal_check.py --cross --site "${{ steps.site.outputs.id }}" > /tmp/cannibal.txt') < brief.find("site_brief.py"), True)
     check("裏の検査は工程の出力をつかまない（工程の終わりを待たせない）", "< /dev/null > /dev/null 2>&1 &" in brief, True)
     check("ブリーフは brief.txt を作り直す（tee）", "| tee automation/logs/brief.txt" in brief, True)
     check("横断の結果は見出しの後に書き足す",
           0 <= cross.find('echo "■ python scripts/cannibal_check.py --cross の結果"') < cross.find("tee -a automation/logs/brief.txt"), True)
     check("終わるまで待つ（印のファイル）", "/tmp/cannibal.rc" in cross, True)
-    check("始まっていなければその場で動かす（取りこぼさない）", "python scripts/cannibal_check.py --cross 2>&1 | tee -a" in cross, True)
+    check("始まっていなければその場で動かす（取りこぼさない）", 'python scripts/cannibal_check.py --cross --site "${{ steps.site.outputs.id }}" 2>&1 | tee -a' in cross, True)
     check("同じ条件で動く（片方だけ動くことが無い）", _step(write, "執筆ブリーフの表示")["if"], _step(write, "全サイト横断のカニバリ・領域チェック")["if"])
     names = [s.get("name", "") for s in write["steps"]]
     check("食い合いゲートは横断の検査の後（台帳を書き換えうるので並べない）",

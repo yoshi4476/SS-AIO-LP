@@ -90,7 +90,9 @@ def key(at, slot, slot_mode):
     if at is None:
         return None
     if slot_mode:
-        return ("slot", int(slot), jst_day(at)) if str(slot or "").isdigit() else None
+        # 枠の番号 0 を空にしない（str(0 or "") は "" になり、枠0の予備の定時が鍵を作れず、起動役が受け持った後に
+        # もう一度書いていた。2026-10-08〜11 の AI集客ラボは毎日3本）
+        return ("slot", int(slot), jst_day(at)) if slot is not None and str(slot).isdigit() else None
     return ("at", at.strftime("%Y-%m-%dT%H:%M"))
 
 

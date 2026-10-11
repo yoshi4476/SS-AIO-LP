@@ -24,7 +24,7 @@ def _patch(path, added, removed=(), new=False, gone=False):
     if gone:
         head += "deleted file mode 100644\n"
     body = "".join(f"-{x}\n" for x in removed) + "".join(f"+{x}\n" for x in added)
-    return head + f"--- a/{path}\n+++ b/{path}\n@@ -1 +1 @@\n" + body
+    return head + f"--- a/{path}\n+++ b/{path}\n@@ -1,{len(removed)} +1,{len(added)} @@\n" + body
 
 
 def test_patch_policy_lets_ordinary_fixes_through():
@@ -33,8 +33,15 @@ def test_patch_policy_lets_ordinary_fixes_through():
     ok = [_patch("scripts/kw_plan.py", ["    if not rows:", "        return []"], ["    rows = rows or []"]),
           _patch("tests/test_gates.py", ["    check(\"空の台帳でも落ちない\", f([]), [])"]),
           _patch("data/lessons.jsonl", ["{\"rule\": \"x\"}"]),
-          _patch("site/sitemap.xml", ["<url/>"]) + _patch("scripts/kw_gate.py", ["    n = len(xs)"])]
-    check("ふつうの直し（コード・門を足す・データ・生成物つき）は取り込む", [PP.judge(p)[0] for p in ok], [True] * 4)
+          _patch("site/sitemap.xml", ["<url/>"]) + _patch("scripts/kw_gate.py", ["    n = len(xs)"]),
+          # ふつうの直しに出る書き方（2026-10-12 の点検で、これらまで枝に回り自動で直らなかった）
+          _patch("scripts/kw_plan.py", ["RX = re.compile(r'^x')", "    max_tokens = 400", "    v = getattr(args, \"site\", \"\")",
+                                        "    tmp.unlink(missing_ok=True)", "ROOT = Path(__file__).resolve().parent",
+                                        "    s = s.replace(\"\\u3000\", \" \")", "if __name__ == \"__main__\":"])]
+    check("ふつうの直し（コード・門を足す・データ・生成物つき・よく使う書き方）は取り込む",
+          [PP.judge(p)[0] for p in ok], [True] * len(ok))
+    hunk = lambda path, lines: (f"diff --git a/{path} b/{path}\n--- a/{path}\n+++ b/{path}\n"
+                                f"@@ -1,0 +1,{len(lines)} @@\n" + "".join(f"+{x}\n" for x in lines))
     bad = {
         "外への通信": _patch("scripts/kw_plan.py", ["import urllib.request"]),
         "コマンド": _patch("scripts/kw_plan.py", ["    subprocess.run(['curl', u])"]),
@@ -54,6 +61,20 @@ def test_patch_policy_lets_ordinary_fixes_through():
         "検査そのもの": _patch("scripts/patch_policy.py", ["MAX_FILES = 999"]),
         # 記事に入れてよい埋め込みの形を決める所（2026-10-12）。変えると、通してよい iframe の形が人の確認なしに変わる
         "埋め込みの仕組み": _patch("scripts/embeds.py", ["x = 1"]) + _patch("scripts/md2html.py", ["y = 2"]),
+        # 2026-10-12 の点検: 判定を素通りして git apply だけが当てる形
+        "見出しの無い2つ目のファイル": hunk("scripts/kw_plan.py", ["x = 1"])
+            + "--- a/.github/workflows/x.yml\n+++ b/.github/workflows/x.yml\n@@ -1 +1 @@\n-on: push\n+on: workflow_dispatch\n",
+        "見出しの前の差分": "--- a/.github/workflows/x.yml\n+++ b/.github/workflows/x.yml\n@@ -1 +1 @@\n-a\n+b\n"
+            + hunk("scripts/kw_plan.py", ["x = 1"]),
+        "引用符つきの名前": "diff --git \"a/scripts/k w.py\" \"b/scripts/k w.py\"\n@@ -1 +1 @@\n-a\n+b\n",
+        "名前の変更": "diff --git a/scripts/a.py b/scripts/b.py\nsimilarity index 90%\nrename from scripts/a.py\nrename to scripts/b.py\n",
+        "見出しと名前が違う": "diff --git a/scripts/a.py b/scripts/a.py\n--- a/scripts/a.py\n+++ b/sites/x.json\n@@ -1 +1 @@\n-a\n+b\n",
+        "指示書・設定": _patch("CLAUDE.md", ["- 新しい決まり"]) + _patch("sites/corporate.json", ["{}"])
+            + _patch("automation/retry_prompt.txt", ["x"]),
+        "データの名前で外へ": _patch("data/../sites/x.json", ["{}"]),
+        "; の後ろの import": _patch("scripts/kw_plan.py", ["x = 1; import webbrowser"]),
+        "ワークフローを書き出す": _patch("scripts/kw_plan.py", ["    Path('.github/workflows/x.yml').write_text(y)"]),
+        "隠した文字": _patch("scripts/kw_plan.py", ["    m = '\\x6f\\x73\\x2e\\x73'"]),
     }
     got = {k: PP.judge(v)[0] for k, v in bad.items()}
     check("危ない書き方・守る場所・依存・門を弱める・見えない変更・多すぎる・中身が無い・検査そのものは取り込まない",

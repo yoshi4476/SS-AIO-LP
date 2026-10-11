@@ -211,6 +211,13 @@ def test_guard_runs_each_schedule_once():
     check("cron が1つのワークフローは、run-name を足す前の予備の回も予定の時刻が分かる", kd(kold, [kold, kw], cron="13 1 * * *"), False)
     manual = w(403, "Daily KPI", "2026-10-08T03:00:00Z")
     check("手で起動した回は何にも止められない", kd(manual, [manual, kw, kb]), True)
+    # 枠0（cron の並びの先頭）。番号 0 を空として扱い鍵が作れず、予備の定時が起動役の後にもう一度書いていた
+    # （2026-10-08〜11 の AI集客ラボは毎日3本。run 38016288229・38103036368）
+    c0 = pm[0]
+    w0 = w(500, f"記事の枠 0 2026-10-11T08:07+09:00", "2026-10-10T23:10:05Z")
+    b0 = w(501, f"記事の枠（予備の定時） {c0}", "2026-10-11T01:47:00Z", ev="schedule")
+    check("枠0: 予備の定時の回は、同じ日を起動役が先に受け持っていれば何もしない（番号 0 でも鍵を作る）",
+          (G.run_key(b0, pm, True), dec(b0, [b0, w0], cron=c0)), (("slot", 0, "2026-10-11"), False))
     check("鍵の読み方: Worker の回の run-name", G.run_key(worker, pm, True), ("slot", 12, "2026-10-08"))
     check("鍵の読み方: 予備の定時の回（作られた時刻からさかのぼる）", G.run_key(backup, pm, True), ("slot", 12, "2026-10-08"))
 

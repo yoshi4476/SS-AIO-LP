@@ -455,7 +455,7 @@ jobs:
           # 応答待ちが長い（2026-10-03〜09 の39回でブリーフ平均35秒・横断平均39秒を順に待っていた）ので同時に始め、
           # 結果は次の工程で今までと同じ順に brief.txt へ書き足す
           rm -f /tmp/cannibal.txt /tmp/cannibal.rc
-          ( python scripts/cannibal_check.py --cross > /tmp/cannibal.txt 2>&1; echo $? > /tmp/cannibal.rc ) < /dev/null > /dev/null 2>&1 &
+          ( python scripts/cannibal_check.py --cross --site "${{ steps.site.outputs.id }}" > /tmp/cannibal.txt 2>&1; echo $? > /tmp/cannibal.rc ) < /dev/null > /dev/null 2>&1 &
           if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
             python scripts/site_brief.py "${{ steps.site.outputs.id }}" > automation/logs/brief.txt
             echo "お客様の社の執筆の案内はログに出しません（$(wc -l < automation/logs/brief.txt) 行。claude は automation/logs/brief.txt を読みます）"
@@ -479,10 +479,10 @@ jobs:
           elif [ -f /tmp/cannibal.rc ]; then
             tee -a automation/logs/brief.txt < /tmp/cannibal.txt || true
           elif [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
-            python scripts/cannibal_check.py --cross >> automation/logs/brief.txt 2>&1 || true
+            python scripts/cannibal_check.py --cross --site "${{ steps.site.outputs.id }}" >> automation/logs/brief.txt 2>&1 || true
             echo "（お客様の社の回は結果をログに出しません。brief.txt にあります）"
           else
-            python scripts/cannibal_check.py --cross 2>&1 | tee -a automation/logs/brief.txt || true
+            python scripts/cannibal_check.py --cross --site "${{ steps.site.outputs.id }}" 2>&1 | tee -a automation/logs/brief.txt || true
           fi
 
       # 手順書に「必ず実行すること」と書いても、それは関門ではない。

@@ -281,8 +281,11 @@ jobs:
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
           HUB_AGENT_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+          FAILED_STARTED: ${{ github.event.workflow_run.run_started_at || github.event.inputs.failed_started }}
         run: |
           echo "go=yes" >> "$GITHUB_OUTPUT"
+          # 書き直しは、落ちた回が数える日の不足を埋める（修復が日付をまたいでも、今日ではなくその日。監査と配信が読む）
+          echo "AUDIT_DAY=$(python scripts/daily_audit.py --rescue-day "$FAILED_STARTED")" | tee -a "$GITHUB_ENV"
           python scripts/agent_guard.py --lock
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
@@ -330,6 +333,10 @@ jobs:
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
@@ -351,8 +358,18 @@ jobs:
           git add -A
           git diff --cached --quiet || {
             git commit -m "selfheal: 落ちた回の記事を書き直し $(date '+%Y-%m-%d')"
-            git pull --rebase origin "${GITHUB_REF_NAME}" || true
-            git push
+            # 同じ時刻に他の工程も push する。1回の衝突で書き直した記事を失わない（3回試し、だめなら知らせる）
+            pushed=0
+            for i in 1 2 3; do
+              if git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q; then pushed=1; break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep 20
+            done
+            if [ "$pushed" != "1" ]; then
+              python scripts/notify_slack.py "🚨 自動修復: 書き直した記事を本体へ push できませんでした（3回）。配信は済んでいる場合があります。実行ログを見てください
+          ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
+              exit 1
+            fi
           }
 
       # 月次レポートが落ちた回は、直したあとで発行し直す。翌月まで届かないのを防ぐ。
@@ -615,6 +632,24 @@ jobs:
           else
             bad=$(git -C /tmp/apply diff --cached --name-only --no-renames | grep -E '^(\.github/|\.claude/|automation/agent_settings_|automation/ai_container\.Dockerfile|scripts/agent_guard\.py|scripts/gcreds\.py|tests/gates_history_h91_agent_jail\.py|\.env)' || true)
             n=$(git -C /tmp/apply diff --cached --name-only | wc -l)
+            if [ "$mode" = "auto" ] && [ -z "$bad" ] && [ "$n" != "0" ]; then
+              # 判定は、git が実際に当てた形でもう一度行う（案の字面と git の読み方がずれる形を、判定を素通りさせない）
+              git -C /tmp/apply diff --cached --no-renames --binary > /tmp/applied.patch
+              pol2=$(python scripts/patch_policy.py /tmp/applied.patch 2>&1 || true)
+              if ! echo "$pol2" | grep -q '^PATCH_POLICY=auto'; then
+                mode=branch
+                pol="$pol2"
+              fi
+              # 直近24時間に自動で取り込んだ修復があれば、続けては入れない（直したつもりの修復が別の所を壊す連鎖を止める）
+              since=$(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%SZ)
+              recent=$(gh api "repos/${{ github.repository }}/commits?sha=master&since=$since&per_page=100" \
+                         --jq '.[].commit.message' 2>/dev/null | grep -c '^selfheal: 不具合を自動修復' || true)
+              if [ "${recent:-0}" != "0" ]; then
+                mode=branch
+                pol="PATCH_POLICY=review
+            直近24時間に自動で取り込んだ修復があるため（続けては自動で入れない）"
+              fi
+            fi
             if [ -n "$bad" ]; then
               msg="🚨 自動修復: 修復の案が触ってはいけない場所（鍵の外し方・許可の一覧・ワークフロー）に触れていたため取り込みません。手当てが必要です"
             elif [ "$n" = "0" ] && [ "${{ needs.repair.outputs.ok }}" = "1" ]; then

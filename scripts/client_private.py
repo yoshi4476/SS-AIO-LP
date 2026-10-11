@@ -66,7 +66,7 @@ def is_private(sid):
 # 監修の記録で、社名・記事の slug が入る（公開側に置かない。2026-10-10 運用者の指示）。キャッシュは7日で消えるので、
 # 消えると困る記録はこちら
 REPO_BACKED = ("data/editorial_reviews.jsonl", "data/videos.json", "data/youtube_connected.json",
-               "data/bing_backfill.json", "data/pace_manual.json")
+               "data/bing_backfill.json", "data/pace_manual.json", "data/retractions.jsonl")
 
 
 def private_path(sid, rel):
@@ -287,7 +287,9 @@ def save_backfill(b, pub=None):
 # ── 1行ずつ積む記録（介入の台帳・学び・統合の記録） ─────────────────────
 # 介入の台帳の備考には直した記事の順位・表示が、学びの詳細と統合の記録には検索語・表示の数が入る。
 # お客様の記事・社の行は置き場へ書き、読むときに合わせる（2026-10-08 の点検で、どれも public に載りうる形だった）
-SPLIT_JSONL = ("automation/logs/auto_fix.jsonl", "data/lessons.jsonl", "data/merges.jsonl", "data/editorial_reviews.jsonl")
+# 取り下げの記録（retractions.jsonl）には配信先の URL と slug が入るので、お客様の社の分は置き場へ（2026-10-12 の点検）
+SPLIT_JSONL = ("automation/logs/auto_fix.jsonl", "data/lessons.jsonl", "data/merges.jsonl", "data/editorial_reviews.jsonl",
+               "data/retractions.jsonl")
 
 
 def _split_rel(p):

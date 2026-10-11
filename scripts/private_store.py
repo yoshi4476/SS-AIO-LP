@@ -460,9 +460,12 @@ def client_files():
     return sorted(set(out))
 
 
-def overlay_in():
+def overlay_in(mark=True):
     """非公開の置き場のお客様の社のファイルを、公開側の作業場所へ重ねて置き、公開側の git から外す。
-    手元に同じファイルがあれば手元を残す（書きかけを上書きしない）。置いた数を返す"""
+    手元に同じファイルがあれば手元を残す（書きかけを上書きしない）。置いた数を返す。
+    mark は「この回の始まり」（.git/ss_base）を今の HEAD に置くか。取得の後だけ置く。範囲を戻すたび（widen）に
+    置き直すと、それまでの工程（link_boost・auto_rewrite など）がお客様の記事に入れた直しが client_changes から消え、
+    最後の配り直しに入らなかった（2026-10-12 の点検）"""
     import shutil
     b = base()
     if not b.is_dir():
@@ -480,7 +483,7 @@ def overlay_in():
                 rels.append(rel)
     _write_exclude(rels + [r for r in _exclude_entries() if (ROOT / r).exists()])
     _write_record(rels)
-    if (b / ".git").is_dir():
+    if mark and (b / ".git").is_dir():
         sha = _git("rev-parse", "HEAD").stdout.strip()
         if sha:
             (b / ".git" / "ss_base").write_text(sha, encoding="utf-8")
@@ -653,7 +656,7 @@ def widen():
             print(f"要対応: 範囲を絞っている間に、外した社の場所へ書かれたファイルが {len(stray)}件ありました"
                   "（上書きせずに作業場所の外へよけました）", flush=True)
         _git("sparse-checkout", "disable")
-        overlay_in()
+        overlay_in(mark=False)
     back, kept = 0, 0
     hid = _scope_hidden()
     for rel in state.get("hidden") or []:

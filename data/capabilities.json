@@ -486,7 +486,7 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/retract.py:153",
+     "evidence": "scripts/retract.py:184",
      "note": "先方の mu-plugin の転送表へ実際のパーマリンク同士の301を足してから下書きに戻す（mu-plugin の template_redirect が送る）",
      "anchor": "n, rej = wp_bridge.add_redirects(cfg, [(src, dst)])"
     },

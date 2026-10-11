@@ -32,13 +32,38 @@ def fetch(url, timeout=25):
         return r.read().decode("utf-8", "ignore")
 
 
+def _label(sid):
+    """CI のログに出す社の名前。お客様の社は公開の id（社の id・ドメインは伏せる語）"""
+    return sites_mod.public_id(sid) if sites_mod.is_client(sid) else sid
+
+
+def _client_file(sid):
+    """お客様の社の一覧の置き場（非公開・CI のキャッシュ）。先方のドメイン・記事の題を public の一覧に書かない"""
+    import client_private as CP
+    return CP.private_path(sid, "data/external_articles.json")
+
+
+def _with_clients(d):
+    """public の一覧に、お客様の社の一覧（置き場にあるもの）を重ねる"""
+    out = {"fetched": d.get("fetched"), "sites": dict(d.get("sites", {}))}
+    for sid in sites_mod.load_all():
+        if not sites_mod.is_client(sid):
+            continue
+        p = _client_file(sid)
+        try:
+            out["sites"].update(json.loads(p.read_text(encoding="utf-8")).get("sites", {}))
+        except (OSError, ValueError):
+            continue
+    return out
+
+
 def site_articles(cfg):
     """sitemapから記事URLを拾い、各ページのH1をタイトルとして取る"""
     prefix = cfg.get("url_prefix") or ""
     try:
         sm = fetch(f"https://{cfg['domain']}/sitemap.xml")
     except Exception as e:
-        print(f"  {cfg['id']}: sitemap取得に失敗（{type(e).__name__}）")
+        print(f"  {_label(cfg.get('id', ''))}: sitemap取得に失敗（{type(e).__name__}）")
         return []
     urls = [u for u in re.findall(r"<loc>(.*?)</loc>", sm)
             if prefix and f"{prefix}/" in u and not u.rstrip("/").endswith(prefix)]
@@ -61,7 +86,7 @@ def load(refresh=False):
         d = json.loads(CACHE.read_text(encoding="utf-8"))
         fetched = date.fromisoformat(d.get("fetched", "1970-01-01"))
         if date.today() - fetched <= timedelta(days=MAX_AGE_DAYS):
-            return d
+            return _with_clients(d)
     return build()
 
 
@@ -70,14 +95,22 @@ def build():
     for sid, cfg in sites_mod.load_all().items():
         if cfg["type"] == "self-static":
             continue  # 自リポジトリの記事は articles/ で把握済み
-        print(f"  {sid}（{cfg['domain']}）を取得中…")
+        client = sites_mod.is_client(sid)
+        print(f"  {_label(sid)}" + ("" if client else f"（{cfg['domain']}）") + " を取得中…")
         arts = site_articles(cfg)
-        data["sites"][sid] = arts
         print(f"    {len(arts)}本")
+        if client:
+            # お客様の社のドメイン・記事の題は public の一覧（data/external_articles.json）に書かず、置き場へ（守秘。2026-10-12）
+            p = _client_file(sid)
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(json.dumps({"fetched": data["fetched"], "sites": {sid: arts}}, ensure_ascii=False, indent=2) + "\n",
+                         encoding="utf-8", newline="\n")
+            continue
+        data["sites"][sid] = arts
     CACHE.parent.mkdir(parents=True, exist_ok=True)
     CACHE.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n",
                      encoding="utf-8", newline="\n")
-    return data
+    return _with_clients(data)
 
 
 def all_titles():

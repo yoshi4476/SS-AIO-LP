@@ -103,6 +103,8 @@ CHECKS = [
     # 公開側で追跡しているファイルも同じ語で照らす（2026-10-11: CI が書いた学びの台帳にお客様の記事の slug が入っていた。
     # 門と同じ照らし方 gates_history_h77.find_identity。読むだけ）
     ("公開リポジトリのファイルに出たお客様の守秘の語", "log_leak_check.py --tracked", re.compile(r"^要対応:|^\s{2}\S")),
+    # build.py は自社の外への転送の行を外してビルドを続ける（止めると全部の枠が止まる）。外したことはここで知らせる
+    ("自社の外への転送（build.py が外した行）", "html_safety.py --dropped", re.compile(r"^要対応:")),
     ("YouTube の公開動画（重複・字幕なし・台帳漏れ）", "youtube_upload.py --audit", re.compile(r"^\s{2}(自前の字幕|台帳に無い|同じ題)")),
     ("AIO基盤（robots・llms.txt・構造化データ）", "aio_check.py",
      re.compile(r"未記載:|不足:|取得できません|記事が載っていません")),

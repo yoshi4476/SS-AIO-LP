@@ -40,6 +40,8 @@ _FRAMES = {"iframe", "frame", "frameset", "object", "embed", "applet", "portal"}
 _FRAME_ATTRS = {"data-map-src"}
 _BAD_SCHEMES = {"javascript", "vbscript", "livescript"}
 _NAV = {"href", "xlink:href", "action", "formaction"}
+_TEXT_ATTRS = {"alt", "title", "aria-label", "aria-description", "aria-roledescription", "placeholder", "class", "id",
+               "lang", "dir", "datetime", "width", "height"}
 # HTMLParser とブラウザで読み方が分かれる形（noscript の中の属性値・--!> で閉じる注釈など）のための、字面での二重の確かめ。
 # on 属性は、< を含まない引用符の中（URL の /online= など）を外してから見る
 _RX = (
@@ -149,7 +151,9 @@ class _Scan(HTMLParser):
                 self.hits.append(("frame", raw))
             if k == "formaction" and not form_ok(v, self.extra):
                 self.hits.append(("form", raw))
-            sch = _scheme(v)
+            # alt・title などの文字だけの属性は、ブラウザが行き先として読まない（「JavaScript: 入門」の title で
+            # 記事を止めていた。2026-10-12 の点検）。それ以外の属性（href・src・SVG の values など）は全部見る
+            sch = "" if k in _TEXT_ATTRS else _scheme(v)
             if sch in _BAD_SCHEMES or (sch == "data" and k in _NAV):
                 self.hits.append(("url", raw))
 
@@ -247,7 +251,47 @@ def redirect_problems(text, extra=()):
     return out
 
 
+DROP_LOG = ROOT / "data" / "redirects_dropped.jsonl"
+
+
+def drop_bad_redirects(rd, log=None, today=None):
+    """site/_redirects から自社の外への転送の行を外し、外した [(行番号, 元, 先)] を返す（build.py が呼ぶ）。
+    外したことは週次の findings が「要対応」で知らせる（--dropped）。台帳に転送先は書かない（お客様のドメインがありうる）"""
+    from datetime import date
+    text = rd.read_text(encoding="utf-8") if rd.is_file() else ""
+    bad = redirect_problems(text)
+    if bad:
+        drop = {n for n, _, _ in bad}
+        rd.write_text("".join(x + "\n" for i, x in enumerate(text.splitlines(), 1) if i not in drop),
+                      encoding="utf-8", newline="\n")
+        with (log or DROP_LOG).open("a", encoding="utf-8", newline="\n") as f:
+            f.write(json.dumps({"at": (today or date.today()).isoformat(), "n": len(drop)}) + "\n")
+    return bad
+
+
+def dropped(days=7, today=None, log=None):
+    """build.py が直近 days 日に site/_redirects から外した行の数 [(日付, 行数)]"""
+    from datetime import date, timedelta
+    today = today or date.today()
+    out = []
+    p = log or DROP_LOG
+    for line in (p.read_text(encoding="utf-8").splitlines() if p.is_file() else []):
+        try:
+            r = json.loads(line)
+            if date.fromisoformat(r["at"]) >= today - timedelta(days=days):
+                out.append((r["at"], int(r["n"])))
+        except (ValueError, KeyError, TypeError):
+            continue
+    return out
+
+
 def main():
+    if sys.argv[1:] == ["--dropped"]:
+        rows = dropped()
+        for at, n in rows:
+            print(f"要対応: {at} に site/_redirects から自社の外への転送を {n} 行外しました（誰が書いたかを実行ログで確かめてください）")
+        print(f"REDIRECT_DROP_OK={'no' if rows else 'yes'}")
+        return 0
     sys.path.insert(0, str(ROOT / "scripts"))
     import private_store
     bad = 0

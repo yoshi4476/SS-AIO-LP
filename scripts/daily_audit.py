@@ -779,8 +779,15 @@ def main():
         print(f"CAP_LEFT={left}")
         return 0 if left <= 0 else 1
     # 同日救済のワークフローが最初に1回だけ呼び、AUDIT_DAY に入れる（途中で日付が変わっても数える日を変えない）
-    if sys.argv[1:] == ["--rescue-day"]:
-        print(rescue_day())
+    # 2つ目（任意）は落ちた回が始まった時刻（ISO 8601）。自動修復の書き直しが、修復の時刻ではなく落ちた回の日を数える
+    if sys.argv[1:2] == ["--rescue-day"] and len(sys.argv) <= 3:
+        at = None
+        try:
+            t = datetime.fromisoformat((sys.argv[2] if len(sys.argv) == 3 else "").strip().replace("Z", "+00:00"))
+            at = t.astimezone(JST) if t.tzinfo else None
+        except ValueError:
+            pass
+        print(rescue_day(at))
         return 0
     # 記事の枠が予定されていた日（日次の枠のワークフローが AUDIT_DAY に入れる）。3つ目は起動役が渡す予定の時刻
     if len(sys.argv) in (3, 4) and sys.argv[1] == "--slot-day":
