@@ -45,6 +45,8 @@ faq:
 
 **大阪で記帳代行を頼める先は、税理士事務所・記帳代行会社・経理BPOの3タイプで、任せられる範囲が違います。**名前が似ていても、決算まで頼めるか、請求書まで頼めるかが分かれます。
 
+税理士以外に行政書士へ記帳を頼む道もあり、報酬の分布は[行政書士の記帳代行の相場は？](/blog/gyoseishoshi-kichodaiko-souba)で整理しています。
+
 <div class="definition-box"><span class="term">記帳代行とは</span>、領収書や通帳の明細をもとに仕訳を入力し、帳簿と試算表を作る作業を外部に任せることです。==申告書の作成は含みません。==</div>
 
 <figure><img src="/images/kichodaiko-osaka/iraisaki.png" alt="大阪で記帳代行を頼む依頼先3タイプの比較"></figure>

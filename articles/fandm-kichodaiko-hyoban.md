@@ -132,6 +132,8 @@ faq:
 
 **カルクは記帳と申告に絞ったサービスで、請求・支払い・月次決算まで任せる経理BPOとは範囲が違います。**同じ「経理を外に出す」でも、どこまで手放せるかで選ぶ相手が変わります。
 
+あわせて[行政書士の記帳代行の相場は？](/blog/gyoseishoshi-kichodaiko-souba/)もご覧ください。
+
 <figure><img src="/images/fandm-kichodaiko-hyoban/irai-hikaku.png" alt="カルク・税理士・経理BPOで任せられる業務を比べた表の図"></figure>
 
 | 業務 | カルク | 税理士事務所 | 経理BPO |
