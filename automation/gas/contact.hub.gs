@@ -114,6 +114,24 @@ function leadAiBudget_() {
 }
 
 /** Gemini に渡す文。メールはドメインだけ、電話は有無だけを渡す（見分けに要らない個人の情報は出さない） */
+/**
+ * 問い合わせの見分け（Gemini）に送る中身は、見分けに要るものだけにする（2026-10-11 運用者「メールお客さんのものは大丈夫か」）。
+ * お名前は形（あり・なし・数字や記号だけ・「テスト」など）だけを渡し、本文の中のメールアドレスと電話番号は伏せる
+ */
+function leadNameShape_(name) {
+  const n = clean_(name).trim();
+  if (!n) return 'なし';
+  if (/^(テスト|てすと|test|疎通確認)/i.test(n)) return 'あり（「テスト」などの試しの言葉）';
+  if (!/[^\d\s\-_.!?#@*]/.test(n)) return 'あり（数字や記号だけ）';
+  return 'あり（伏せています）';
+}
+
+function leadMaskContacts_(s) {
+  return String(s || '')
+    .replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, '［メールアドレス］')
+    .replace(/(?:\+81[\s-]?|0)\d{1,4}[\s-]?\d{1,4}[\s-]?\d{3,4}/g, '［電話番号］');
+}
+
 function leadKindPrompt_(site, type, d) {
   const email = String(d.email || '');
   const extra = leadDetailBase_(type, d).replace(/^紹介元 \S+( \/ )?/, '').slice(0, 300);
@@ -137,12 +155,13 @@ function leadKindPrompt_(site, type, d) {
     'サイト: ' + site,
     '種類: ' + (LEAD_TYPE_LABELS[type] || type),
     '会社名: ' + clean_(d.company),
-    'お名前: ' + clean_(d.name),
+    // お名前そのものは送らない（見分けに要らない個人の情報）。試し送信かどうかの手がかりになる形だけを渡す
+    'お名前: ' + leadNameShape_(d.name),
     'メールのドメイン: ' + (email.split('@')[1] || ''),
     '電話番号: ' + (clean_(d.tel || d.phone) ? 'あり' : 'なし'),
     extra ? 'フォームの項目: ' + extra : '',
     '本文:',
-    body_(d.message || d.body).slice(0, 1500),
+    leadMaskContacts_(body_(d.message || d.body)).slice(0, 1500),
     '',
     '# 答え方',
     'JSON だけを返してください: {"kind": "相談" か "売り込み" か "テスト", "reason": "そう分けた理由を40字以内で"}',

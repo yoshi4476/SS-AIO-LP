@@ -126,7 +126,7 @@ def test_lead_intake_never_drops_and_marks():
               "gemini": {"業務用の計算機器": {"kind": "売り込み", "reason": "機器の協業の提案"},
                          "壊れる": "fail", "投げる": "throw", "読めない": "garbage",
                          "経理代行をお願いしたく": {"kind": "相談", "reason": "経理代行の見積もり依頼"},
-                         "名前: 1": {"kind": "テスト", "reason": "名前が数字だけ"}}})
+                         "お名前: あり（数字や記号だけ）": {"kind": "テスト", "reason": "名前が数字だけ"}}})
     if r is None:
         print("  WARN  node が無いため受付の動きは確かめられません")
         return
