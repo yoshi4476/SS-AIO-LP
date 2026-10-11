@@ -43,6 +43,23 @@ HUB_URL = _clean(ENV.get("HUB_URL", ""))
 HUB_SECRET = _clean(ENV.get("HUB_SECRET", ""))
 
 
+def _secret():
+    """送る合言葉。全権の合言葉（HUB_SECRET）があればそれ、無ければ記事を書く AI の通行証（環境変数 HUB_AGENT_TOKEN。
+    hub_token.py が作る。その回の社だけに効く）。呼ぶたびに読む（通行証は手順の途中で渡されるため）"""
+    return HUB_SECRET or _clean(os.environ.get("HUB_AGENT_TOKEN", ""))
+
+
+def _token_site():
+    """通行証の回の社（社を名指さない記録の送り先）。SITE_ID が書ける社ならそれ、無ければ書ける社の先頭。
+    管制塔は通行証で書ける社の無い記録を通さないため、社を名指さないエラーの記録が黙って消えていた"""
+    if HUB_SECRET:
+        return ""
+    f = _secret().split("~")
+    w = f[1].split(",") if len(f) == 5 and f[1] else []
+    sid = _clean(os.environ.get("SITE_ID", ""))
+    return sid if sid in w else (w[0] if w else "")
+
+
 def enabled():
     return bool(HUB_URL)
 
@@ -118,7 +135,7 @@ def _get(params):
     if d is not None:
         return d
     # 狙う語の台帳を読む操作は合言葉が要る（hub.gs の KW_READS。フォームの送り先としてページに載る URL のため）
-    url = HUB_URL + ("&" if "?" in HUB_URL else "?") + urllib.parse.urlencode({**params, "secret": HUB_SECRET})
+    url = HUB_URL + ("&" if "?" in HUB_URL else "?") + urllib.parse.urlencode({**params, "secret": _secret()})
     req = urllib.request.Request(url, headers=UA)
     with _open(req) as r:
         return json.load(r)
@@ -129,7 +146,7 @@ def _post(body):
     if d is not None:
         return d
     body = dict(body)
-    body["secret"] = HUB_SECRET
+    body["secret"] = _secret()
     req = urllib.request.Request(
         HUB_URL, data=json.dumps(body).encode("utf-8"), method="POST",
         headers={**UA, "Content-Type": "application/json"})
@@ -433,7 +450,7 @@ def error_log(site, phase, message, fix="", status="未対応"):
     if not enabled():
         return None
     try:
-        return _post({"action": "error_log", "site": site, "phase": phase,
+        return _post({"action": "error_log", "site": site or _token_site(), "phase": phase,
                       "message": message, "fix": fix, "status": status})
     except Exception:
         return None

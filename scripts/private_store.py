@@ -490,6 +490,166 @@ def overlay_out(unstage=True):
     return files
 
 
+def _scope_dir():
+    import tempfile
+    return Path(os.environ.get("RUNNER_TEMP") or tempfile.gettempdir())
+
+
+def _scope_state():
+    return _scope_dir() / "private_scope.json"
+
+
+def _scope_hidden():
+    # 作業場所の外（AI の許可の一覧で読ませない場所。CI では $RUNNER_TEMP）
+    return _scope_dir() / "private_scope_hidden"
+
+
+def scope(target):
+    """AI が動く間だけ、作業場所に置くお客様の社を target（公開の id・社の id・own）に絞る。all で戻す。
+
+    記事を書く AI は作業場所のファイルを読めるので、全社の原稿・材料・順位を置いたままだと、A社の回の AI が
+    B社のまだ公開していない原稿や狙う語を読めた（2026-10-11 運用者「ほかの社の原稿も見られないように」）。
+    非公開の置き場は git なので、書きかけを手元で commit してから sparse-checkout で外す（外した分は commit に
+    残るので、戻し損ねても消えない。save の push も外した分を消さない）。CI のキャッシュで持ち越した派生データ
+    （順位・語・上位の見出し）は、作業場所の外へよけて all で戻す。範囲を絞るのは CI だけ（手元の写しは触らない）
+    """
+    if target in ("all", ""):
+        return widen()
+    if not (os.environ.get("GITHUB_ACTIONS") == "true" or os.environ.get("PRIVATE_SCOPE_FORCE") == "1"):
+        print("SCOPE=skip（CI の外では範囲を絞りません。試すときは PRIVATE_SCOPE_FORCE=1）", flush=True)
+        return True
+    if _scope_state().is_file():
+        widen()
+    import shutil
+    S = _sites()
+    keep = set()
+    if target != "own":
+        sid = S.resolve(target)
+        if S.is_client(sid):
+            g = S.group_key(sid)
+            keep = {c for c in S.load_all() if S.is_client(c) and S.group_key(c) == g} | {sid}
+    others = sorted(c for c in S.load_all() if S.is_client(c) and c not in keep)
+    by_slug = client_slugs()
+    b = base()
+    git_ok = (b / ".git").is_dir()
+    moved_files = 0
+    if git_ok:
+        # 1. 書きかけを非公開の置き場へ写し、手元で commit する（push は最後の save）。絞っても消えないように
+        overlay_out(unstage=False)
+        _git("add", "-A")
+        if _git("diff", "--cached", "--quiet").returncode:
+            _git("-c", "user.name=AIO Pipeline Bot", "-c", "user.email=noreply@7senses.co.jp",
+                 "commit", "-q", "-m", "CI: 範囲を絞る前の控え")
+        # 2. 公開側の作業場所から、ほかの社の記事・画像・台本を外す（置き場と同じ中身のものだけ）
+        drop = []
+        for slug, sid in by_slug.items():
+            if sid not in others:
+                continue
+            for rel in [f"articles/{slug}.md"] + [t.format(slug) for t in SLUG_PATHS]:
+                q = ROOT / rel
+                files = [q] if q.is_file() else ([x for x in q.rglob("*") if x.is_file()] if q.is_dir() else [])
+                for f in files:
+                    r = f.relative_to(ROOT).as_posix()
+                    src = b / r
+                    if src.is_file() and src.read_bytes() == f.read_bytes():
+                        f.unlink()
+                        drop.append(r)
+                        moved_files += 1
+                if q.is_dir() and not any(q.rglob("*")):
+                    shutil.rmtree(q, ignore_errors=True)
+        # 外したファイルは commit の見張りの一覧からも外す（残すと、戻す前に保存したとき「消えた」と読まれうる）
+        _write_exclude([r for r in _exclude_entries() if r not in set(drop)])
+        # 3. 非公開の置き場を絞る。当社の料金・営業の台本・レポートと、お客様の門も AI の間は置かない
+        pats = ["/*", "!/sales/", "!/reports/", "!/tests/", "!/security/"]
+        pats += [f"!/clients/{c}/" for c in others]
+        for slug, sid in by_slug.items():
+            if sid in others:
+                pats += [f"!/articles/{slug}.md"] + [f"!/{t.format(slug)}" + ("/" if not t.endswith(".json") else "")
+                                                     for t in SLUG_PATHS]
+        r = subprocess.run(["git", "-C", str(b), "sparse-checkout", "set", "--no-cone", "--stdin"],
+                           input="\n".join(pats) + "\n", capture_output=True, text=True, encoding="utf-8")
+        if r.returncode:
+            print(f"SCOPE=failed（非公開の置き場を絞れませんでした: {(r.stderr or '').strip()[-120:]}）", flush=True)
+            widen()
+            return False
+        # 外したファイルの一覧を控える（戻すとき、外した場所へ書かれたものを見つけるため。git は作業場所に現れた
+        # ファイルの「外した」印を自分で消すので、戻す時点の印では見つけられない）
+        skipped = [ln[2:] for ln in _git("ls-files", "-t").stdout.splitlines() if ln.startswith("S ")]
+    else:
+        skipped = []
+    # 4. キャッシュで持ち越した派生データ（data/clients/<社>/ と社ごとの記録）を作業場所の外へよける
+    import client_private as CP
+    hidden = []
+    hid = _scope_hidden()
+    for c in others:
+        rels = [f"data/clients/{c}"] + [p.format(c) for ps in CP.PER_SITE.values() for p in ps]
+        for rel in rels:
+            q = ROOT / rel
+            if q.exists():
+                dst = hid / rel
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                if dst.exists():
+                    shutil.rmtree(dst) if dst.is_dir() else dst.unlink()
+                shutil.move(str(q), str(dst))
+                hidden.append(rel)
+    _scope_state().write_text(json.dumps({"target": target, "others": len(others), "hidden": hidden, "skipped": skipped},
+                                         ensure_ascii=False), encoding="utf-8")
+    print(f"SCOPE=narrowed（外した社 {len(others)}・記事などのファイル {moved_files}・派生データ {len(hidden)}）", flush=True)
+    return True
+
+
+def widen():
+    """scope で絞った範囲を戻す（非公開の置き場を全部に戻して重ね直し、よけた派生データを戻す）"""
+    import shutil
+    st = _scope_state()
+    if not st.is_file():
+        print("SCOPE=all", flush=True)
+        return True
+    try:
+        state = json.loads(st.read_text(encoding="utf-8"))
+    except ValueError:
+        state = {}
+    b = base()
+    if (b / ".git").is_dir():
+        # 絞っている間に、外した場所へ書かれたファイルがあれば、戻す前に作業場所の外へよける（戻すと commit 済みの
+        # その社の中身を上書きし、次の保存でその社の分を書き換えてしまう）
+        stray = [r for r in state.get("skipped") or [] if (b / r).is_file()]
+        for r in stray:
+            dst = _scope_dir() / "private_scope_stray" / r
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(b / r), str(dst))
+        if stray:
+            print(f"要対応: 範囲を絞っている間に、外した社の場所へ書かれたファイルが {len(stray)}件ありました"
+                  "（上書きせずに作業場所の外へよけました）", flush=True)
+        _git("sparse-checkout", "disable")
+        overlay_in()
+    back, kept = 0, 0
+    hid = _scope_hidden()
+    for rel in state.get("hidden") or []:
+        src, dst = hid / rel, ROOT / rel
+        if not src.exists():
+            continue
+        if not dst.exists():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(src), str(dst))
+        elif src.is_dir():
+            # 絞っている間に同じ場所へ書かれたものは残し、無いものだけ戻す
+            for f in src.rglob("*"):
+                t = dst / f.relative_to(src)
+                if f.is_file() and not t.exists():
+                    t.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.move(str(f), str(t))
+            kept += 1
+        else:
+            kept += 1
+        back += 1
+    shutil.rmtree(hid, ignore_errors=True)
+    st.unlink()
+    print(f"SCOPE=all（戻した派生データ {back}" + (f"・同じ場所に新しいものがあり残したもの {kept}" if kept else "") + "）",
+          flush=True)
+    return True
+
+
 def install_hook():
     """公開側の .git/hooks/pre-commit に、お客様の社のファイルを commit に入れない見張りを置く"""
     p = _git_path("hooks/pre-commit")
@@ -617,9 +777,19 @@ def main(argv=None):
     a = list(sys.argv[1:] if argv is None else argv)
     if "--fetch" in a:
         return 0 if fetch() else 0       # 取れなくても止めない（お客様の工程が require で止まる）
+    if "--scopes" in a:               # 範囲ごとに AI を回す回の範囲の一覧（own と、お客様の社の公開の id。1行に1つ）
+        S = _sites()
+        for x in ["own"] + sorted(S.public_id(c) for c in S.load_all() if S.is_client(c)):
+            print(x)
+        return 0
+    if "--scope" in a:                # AI の間だけお客様の社を絞る（all で戻す）。止まらない（印で知らせる）
+        i = a.index("--scope")
+        scope(a[i + 1] if i + 1 < len(a) else "all")
+        return 0
     if "--push" in a:
         i = a.index("--push")
         msg = a[i + 1] if i + 1 < len(a) else "管制塔から更新"
+        widen()                       # 絞ったまま保存しない（外した社の分を見張りの一覧から落とさない）
         return 0 if push(msg) else 1
     if "--pre-commit" in a:
         return pre_commit()

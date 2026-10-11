@@ -156,12 +156,21 @@ jobs:
         if: steps.mode.outputs.mode == 'main' || steps.audit.outputs.need == 'yes'
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          # 管制塔の通行証を作る鍵（AI の手順には渡さない。通行証はその範囲の社だけに効く）
+          HUB_AGENT_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
         run: |
           python scripts/agent_guard.py --lock
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
               nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
           fi
+          # 範囲（自社の社・お客様の社ごと）の一覧と、範囲ごとの管制塔の通行証。AI は scripts/agent_passes.sh で範囲ごとに動く
+          # （A社の回の AI がB社の原稿・材料・狙う語を読めないように。2026-10-11）
+          python scripts/private_store.py --scopes > "$RUNNER_TEMP/agent_scopes"
+          mkdir -p "$RUNNER_TEMP/hub_tokens"
+          for sc in $(cat "$RUNNER_TEMP/agent_scopes"); do
+            python scripts/hub_token.py --scope "$sc" --out "$RUNNER_TEMP/hub_tokens/$sc" || true
+          done
 
       - name: 記事パイプライン実行（Phase 1〜7）
         if: steps.mode.outputs.mode == 'main'
@@ -169,14 +178,12 @@ jobs:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           HUB_URL: ${{ secrets.HUB_URL }}
-          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）
-          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+          # 管制塔へは範囲ごとの通行証で入る（scripts/agent_passes.sh が範囲ごとに渡す）
         run: |
           [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
           python scripts/agent_guard.py --verify || exit 1
           # 利用枠切れ・最大ターンで落ちても、書けた分の配信とコミットは続ける（落とすと後の手順が飛び、書いた記事が届かない）
-          claude -p "$(cat automation/pipeline_prompt.txt)" \
-            --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 160 \
+          bash scripts/agent_passes.sh automation/pipeline_prompt.txt 160 \
             || echo "::warning::記事の claude 工程が失敗（書けた分の配信とコミットは続けます）"
 
       - name: 公開失敗の即時リトライ（最大2回）
@@ -185,8 +192,7 @@ jobs:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           HUB_URL: ${{ secrets.HUB_URL }}
-          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）
-          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+          # 管制塔へは範囲ごとの通行証で入る（scripts/agent_passes.sh が範囲ごとに渡す）
         run: |
           [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
           python scripts/agent_guard.py --verify || exit 1
@@ -194,8 +200,7 @@ jobs:
             out=$(python scripts/build.py); echo "$out"
             echo "$out" | grep -q "BLOCKED" || break
             echo "::warning::BLOCKED記事あり — リトライ $i/2"
-            claude -p "$(cat automation/retry_prompt.txt)" \
-              --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 160 \
+            bash scripts/agent_passes.sh automation/retry_prompt.txt 160 \
               || echo "::warning::リトライの claude 工程が失敗（続けます）"
           done
 
@@ -206,13 +211,11 @@ jobs:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           HUB_URL: ${{ secrets.HUB_URL }}
-          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）
-          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+          # 管制塔へは範囲ごとの通行証で入る（scripts/agent_passes.sh が範囲ごとに渡す）
         run: |
           [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
           python scripts/agent_guard.py --verify || exit 1
-          claude -p "$(cat automation/retry_prompt.txt)" \
-            --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 300 \
+          bash scripts/agent_passes.sh automation/retry_prompt.txt 300 \
             || echo "::warning::救済の claude 工程が失敗（書けた分の配信とコミットは続けます）"
 
       # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
@@ -227,7 +230,9 @@ jobs:
           PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
-        run: python scripts/agent_guard.py --unlock
+        run: |
+          python scripts/private_store.py --scope all || true
+          python scripts/agent_guard.py --unlock
 
       # 配信・管制塔への記録は、鍵を持つ機械の手順で行う（AI は publish_flow --check で門を通すところまで）
       - name: 書いた記事を配信する（鍵を持つ機械の手順）

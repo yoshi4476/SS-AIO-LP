@@ -51,6 +51,12 @@ def _article_prompts():
         t = re.sub(r"\\\n\s*", " ", p.read_text(encoding="utf-8"))
         for m in re.finditer(r'claude\s+-p\s+"\$\(cat (automation/[\w.]+_prompt\.txt)\)"[^\n]*agent_settings_article\.json', t):
             out.add(m.group(1))
+        # 範囲ごとに回す手順（scripts/agent_passes.sh）は、記事の許可の一覧で指示書を動かす（2026-10-11）
+        for m in re.finditer(r"bash scripts/agent_passes\.sh (automation/[\w.]+_prompt\.txt)", t):
+            out.add(m.group(1))
+    ap = (ROOT / "scripts" / "agent_passes.sh").read_text(encoding="utf-8")
+    if "agent_settings_article.json" not in ap:
+        out = {x for x in out if x == "automation/multi_site_prompt.txt"}
     return sorted(out)
 
 

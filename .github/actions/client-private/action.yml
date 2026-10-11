@@ -50,6 +50,8 @@ runs:
       id: pack
       shell: bash
       run: |
+        # AI の間だけ外へよけたほかの社の分を先に戻す（よけたまま残すと、次に読む工程でその社の分が消えて見える）
+        python3 scripts/private_store.py --scope all || true
         python3 scripts/client_private.py --pack ${{ inputs.kinds != '' && format('--kinds {0}', inputs.kinds) || '' }} || true
         n=$(python3 scripts/client_private.py --stash 2>/dev/null | sed -n 's/^CLIENT_PRIVATE_STASHED=//p')
         echo "このジョブで書いた・変えたお客様のファイル: ${n:-数えられません}"

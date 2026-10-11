@@ -1,0 +1,126 @@
+# -*- coding: utf-8 -*-
+"""2026-10-11 運用者「ほかの社の原稿も見られないように」「一番いい方法で」。
+
+記事を書く AI が動く間だけ、作業場所に置くお客様の社をその回の範囲に絞り（private_store --scope）、終わったら戻す。
+非公開の置き場は git なので、書きかけを手元で commit してから sparse-checkout で外す。戻し損ねても消えないこと、
+戻した後は元と1バイトも違わないこと、絞っている間に外した場所へ書かれても commit 済みの中身を上書きしないこと、
+範囲ごとの回（agent_guard --checkpoint / --protect --pass）が範囲の外の書き換えだけを戻すことを、
+一時の作業場所（git worktree）と非公開の置き場の写しで確かめる（本物の作業場所・置き場には触れない）。
+"""
+import json
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+from test_gates import check, ROOT
+
+CHILD = r'''
+import hashlib, json, os, subprocess, sys
+from pathlib import Path
+W = Path.cwd()
+os.environ["PRIVATE_SCOPE_FORCE"] = "1"
+sys.path.insert(0, str(W / "scripts"))
+import private_store as PS
+import sites as S
+import agent_guard as A
+A.ROOT = W
+out = {}
+g = lambda *a: subprocess.run(["git", "-C", str(W / "private"), *a], capture_output=True, text=True, encoding="utf-8")
+clients = [c for c in S.load_all() if S.is_client(c)]
+out["clients"] = len(clients)
+for c in clients:
+    d = W / "data" / "clients" / c / "private"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "x.json").write_text("{}", encoding="utf-8")
+
+
+def snap():
+    r = {}
+    for base in (W / "articles", W / "site" / "images", W / "data" / "clients", W / "private"):
+        for p in base.rglob("*"):
+            if p.is_file() and ".git" not in p.parts:
+                r[p.relative_to(W).as_posix()] = hashlib.sha1(p.read_bytes()).hexdigest()
+    return r
+
+
+before = snap()
+by = PS.client_slugs()
+PS.scope("own")
+out["own_visible"] = sum((W / "articles" / f"{s}.md").exists() for s in by) + \
+    sum((W / "data" / "clients" / c).exists() for c in clients) + sum((W / "private" / "clients" / c).exists() for c in clients)
+out["own_sales"] = (W / "private" / "sales").exists()
+# 戻し損ねたまま保存の前半が走っても、置き場から消えない
+PS.overlay_out(unstage=False)
+g("add", "-A")
+out["staged_deletes"] = sum(l.startswith("D") for l in g("diff", "--cached", "--name-status").stdout.splitlines())
+g("reset", "-q")
+# 絞っている間に、外した場所へ書かれた（commit 済みの中身を上書きしない）
+tracked = [l for l in g("ls-files").stdout.splitlines() if l.startswith("clients/") and l.endswith(".json")]
+if tracked:
+    t = W / "private" / tracked[0]
+    orig = g("show", f"HEAD:{tracked[0]}").stdout
+    t.parent.mkdir(parents=True, exist_ok=True)
+    t.write_text("{\"x\": 1}", encoding="utf-8")
+PS.widen()
+after = snap()
+out["diff_after_widen"] = len(set(before) ^ set(after)) + sum(before[k] != after[k] for k in before if k in after)
+out["private_status"] = len(g("status", "--porcelain").stdout.splitlines())
+# 範囲ごとの回: client の範囲で、範囲の外（自社）の書き換え・新しい記事は戻り、範囲の中は残る
+if clients:
+    own = next((p for p in sorted((W / "articles").glob("*.md")) if A._site_of(p.stem, W) in S.own_ids()), None)
+    cl = next((p for p in sorted((W / "articles").glob("*.md")) if A._site_of(p.stem, W) == clients[0]), None)
+    if own and cl:
+        ob, cb = own.read_bytes(), cl.read_bytes()
+        A.checkpoint(W)
+        own.write_bytes(ob + b"\n# off\n")
+        cl.write_bytes(cb + b"\n# in\n")
+        (W / "articles" / "zz-new-off.md").write_text(own.read_text(encoding="utf-8"), encoding="utf-8")
+        A._protect_other_sites(W, S.public_id(clients[0]), by_pass=True)
+        out["pass"] = [own.read_bytes() == ob, cl.read_bytes() != cb, not (W / "articles" / "zz-new-off.md").exists()]
+        cl.write_bytes(cb)
+print("RESULT=" + json.dumps(out))
+'''
+
+
+def test_scope_narrows_and_widens_without_loss():
+    print("\n■ AI の範囲: 絞る・戻すで中身が変わらず、戻し損ねても消えず、外した場所への書き込みで上書きしない")
+    priv = ROOT / "private"
+    if not (priv / ".git").is_dir():
+        print("  WARN  非公開の置き場（private/）が無いため確かめられません")
+        return
+    tmp = Path(tempfile.mkdtemp(prefix="gate_scope_"))
+    wt = tmp / "w"
+    g = lambda *a, cwd=ROOT: subprocess.run(["git", *a], cwd=cwd, capture_output=True, text=True, encoding="utf-8")
+    try:
+        if g("worktree", "add", "-q", "--detach", str(wt), "HEAD").returncode:
+            print("  WARN  一時の作業場所を作れませんでした")
+            return
+        # 手元で直している途中の道具も試す（HEAD の写しに上書き）
+        for f in ("private_store.py", "agent_guard.py", "client_private.py", "sites.py"):
+            shutil.copyfile(ROOT / "scripts" / f, wt / "scripts" / f)
+        g("clone", "-q", str(priv), str(wt / "private"))
+        for k, v in (("user.name", "t"), ("user.email", "t@example.com")):
+            g("-C", str(wt / "private"), "config", k, v)
+        env = {**__import__("os").environ, "RUNNER_TEMP": str(tmp / "rt"), "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"}
+        (tmp / "rt").mkdir()
+        subprocess.run([sys.executable, "scripts/private_store.py", "--overlay"], cwd=wt, env=env, capture_output=True)
+        (tmp / "child.py").write_text(CHILD, encoding="utf-8")
+        r = subprocess.run([sys.executable, str(tmp / "child.py")], cwd=wt, env=env, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", timeout=600)
+        line = next((ln for ln in r.stdout.splitlines() if ln.startswith("RESULT=")), "")
+        if not line:
+            check("範囲の試しが最後まで動く", (r.stderr or r.stdout)[-300:], "")
+            return
+        o = json.loads(line[len("RESULT="):])
+        check("自社だけの範囲: お客様の社の原稿・派生データ・置き場の社が1つも見えず、営業の資料も置かない",
+              (o["own_visible"], o["own_sales"]), (0, False))
+        check("戻し損ねたまま保存の前半が走っても、置き場の削除は0件", o["staged_deletes"], 0)
+        check("戻した後は元と1バイトも違わず、外した場所への書き込みで commit 済みの中身を上書きしない",
+              (o["diff_after_widen"], o["private_status"]), (0, 0))
+        if "pass" in o:
+            check("範囲ごとの回: 範囲の外の書き換えは戻り、範囲の中は残り、範囲の外の新しい記事は消える", o["pass"], [True, True, True])
+    finally:
+        g("worktree", "remove", "--force", str(wt))
+        shutil.rmtree(tmp, ignore_errors=True)

@@ -344,7 +344,10 @@
    "Edit(automation/gas/**)",
    "Edit(CLAUDE.md)",
    "Edit(.env)",
-   "Edit(**/.git/**)"
+   "Edit(**/.git/**)",
+   "Read(private/.git/**)",
+   "Read(//**/private/.git/**)",
+   "Read(//**/_temp/**)"
   ]
  }
 }

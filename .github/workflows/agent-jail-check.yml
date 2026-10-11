@@ -32,19 +32,25 @@ jobs:
       - name: AIの作業場から鍵を外す
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          # 管制塔の通行証を作る鍵（AI の手順には渡さない。通行証はその範囲の社だけに効く）
+          HUB_AGENT_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
         run: |
           python scripts/agent_guard.py --lock
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
               nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
           fi
+          python scripts/private_store.py --scope own
+          mkdir -p "$RUNNER_TEMP/hub_tokens"
+          python scripts/hub_token.py --scope own --out "$RUNNER_TEMP/hub_tokens/own" || true
 
       - name: AIに許すことと止めることを試す
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           HUB_URL: ${{ secrets.HUB_URL }}
-          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
         run: |
+          HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/own" 2>/dev/null || true)"
+          export HUB_AGENT_TOKEN
           python scripts/agent_guard.py --verify || exit 1
           cp scripts/kw_intent.py /tmp/kw_intent.before
           # 自社のサイトの1つ（お客様の社には触れない）
@@ -81,6 +87,7 @@ jobs:
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
+          python scripts/private_store.py --scope all || true
           python scripts/agent_guard.py --unlock
           # 戻した資格で、管制塔のリポジトリと非公開の置き場に届くか（書き込みの下見は存在しない枝宛て）
           git ls-remote -q origin HEAD > /dev/null && echo "JAIL_GIT=ok" || { echo "::error::git の資格が戻っていません"; exit 1; }

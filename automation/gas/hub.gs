@@ -201,23 +201,137 @@ function sheet_(name) {
 // 狙う語の台帳を読む操作。この URL は各サイトのフォームの送り先としてページに載っているため、合言葉なしだと
 // 全社（お客様の分も）の狙う語・状態・URL が誰でも読めた（2026-10-10 に 1,611 件が読めることを確かめた）
 const KW_READS = { next_kw: true, all_kw: true, kw_status: true, kw_overlaps: true };
-// 記事を書く AI の手順に渡す合言葉（gas_deploy が .env の HUB_AGENT_SECRET で埋める）。AI は外の文章を読むので、
-// 仕込まれた指示に従っても問い合わせ・管理・お客様のメールに触れないよう、狙う語の台帳とエラーの記録だけを通す（2026-10-11）
+// 記事を書く AI に渡す通行証（scripts/hub_token.py が作る）の署名の鍵（gas_deploy が .env の HUB_AGENT_SECRET で埋める）。
+// AI は外の文章を読むので、仕込まれた指示に従っても問い合わせ・管理・お客様のメールに触れないよう、狙う語の台帳とエラーの
+// 記録だけを通す（2026-10-11）。鍵そのものは通さない: 全社（お客様の社を含む）の台帳に効き、語の一覧も読めたため、
+// その回の社だけに効き数時間で切れる通行証にした（2026-10-12。お客様どうしの守秘）
 const AGENT_SECRET = 'AGENT_SECRET_XXXXXXXX';
 // 読む操作は GET（KW_READS）、書く操作は POST（AGENT_POSTS）でだけ通す。POST に読む操作の名前を付けると、
 // 受付に該当の操作が無いためフォーム（問い合わせの台帳・自動返信）へ落ちていた。toString などの元の名前も通さない
 const AGENT_POSTS = { claim_kw: true, kw_conflict: true, add_kw: true, retire_kw: true, unclaim_kw: true, error_log: true };
+// 鍵が空・短いまま配られると誰でも署名を作れる（scripts/hub_token.py の KEY_MIN と同じ値）
+const AGENT_KEY_MIN = 16;
+// 区切りの ~ と , を社の id に入れさせない（hub_token.py の SITE と同じ）
+const AGENT_SITE = /^[A-Za-z0-9_-]{1,64}$/;
+// 1つの通行証で1日にできる量。外の指示に従って台帳を埋め尽くす・取り下げ尽くすのを止める
+const AGENT_DAY_LIMITS = { add: 60, retire: 30, claim: 30 };
+
+/** 通行証を照合して { w: 書ける社, r: 読める社（書ける社を含む）, sig } を返す。通らなければ null（hub_token.verify と同じ照合） */
+function agentPass_(token, now) {
+  if (typeof token !== 'string' || token.length > 4000 || AGENT_SECRET.indexOf('XXXXXXXX') >= 0
+      || AGENT_SECRET.length < AGENT_KEY_MIN) return null;
+  const f = token.split('~');
+  if (f.length !== 5 || f[0] !== 'v1' || !/^[0-9]{1,12}$/.test(f[3]) || !/^[0-9a-f]{64}$/.test(f[4])) return null;
+  if (Number(f[3]) * 1000 <= (now || Date.now())) return null;
+  const w = f[1] ? f[1].split(',') : [], r = f[2] ? f[2].split(',') : [];
+  if (w.concat(r).some(function (s) { return !AGENT_SITE.test(s); })) return null;
+  const want = Utilities.computeHmacSha256Signature(f.slice(0, 4).join('~'), AGENT_SECRET, Utilities.Charset.UTF_8)
+    .map(function (b) { return ('0' + (b & 0xff).toString(16)).slice(-2); }).join('');
+  let diff = want.length ^ f[4].length;
+  for (let i = 0; i < want.length; i++) diff |= want.charCodeAt(i) ^ f[4].charCodeAt(i);
+  return diff ? null : { w: w, r: r.concat(w), sig: f[4] };
+}
+
+/** 通行証で通す操作か。通れば agentPass_ の結果、通らなければ null */
 function agentOk_(secret, action, reads) {
   const allow = reads ? KW_READS : AGENT_POSTS;
-  return typeof secret === 'string' && typeof action === 'string' && AGENT_SECRET.indexOf('XXXXXXXX') < 0
-    && secret === AGENT_SECRET && Object.prototype.hasOwnProperty.call(allow, action);
+  if (typeof action !== 'string' || !Object.prototype.hasOwnProperty.call(allow, action)) return null;
+  return agentPass_(secret);
+}
+
+function agentCan_(list, site) {
+  return typeof site === 'string' && site !== '' && list.indexOf(site) >= 0;
+}
+
+/** 応答の一覧から、読めない社の行を外す（食い合いの確かめ・重複の知らせ・全社の一覧に別の社の語と URL が載るため） */
+function agentScrub_(pass, out) {
+  if (!out || typeof out !== 'object') return out;
+  const res = {};
+  Object.keys(out).forEach(function (k) {
+    res[k] = Array.isArray(out[k]) ? out[k].filter(function (x) {
+      return !(x && typeof x === 'object' && Object.prototype.hasOwnProperty.call(x, 'site')) || agentCan_(pass.r, String(x.site));
+    }) : out[k];
+  });
+  return res;
+}
+
+/**
+ * 通行証の回の組。読めない社は組に入れない（その社だけの組＝止めずに記録だけ）。AI が送る組をそのまま使うと、
+ * 全社を1つの組にして「別の社が持つ語なら止まる」を手がかりに、別の社の語を1文字ずつ当てられる
+ */
+function agentCtx_(pass, ctx) {
+  const given = (ctx && ctx.groups) || {};
+  const groups = {};
+  pass.r.forEach(function (s) {
+    groups[s] = Object.prototype.hasOwnProperty.call(given, s) ? String(given[s]) : '';
+  });
+  return { groups: groups, regions: (ctx && ctx.regions) || {} };
+}
+
+/** 1つの通行証の1日の量を数える。CacheService は最長6時間で消えるが、使うたびに置き直すので使っている間は続く */
+function agentQuota_(pass, kind, n) {
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(10000)) return false;
+  try {
+    const c = CacheService.getScriptCache();
+    const k = 'agent_' + kind + '_' + Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyyMMdd') + '_' + pass.sig.slice(0, 40);
+    const used = Number(c.get(k) || 0);
+    if (used + n > AGENT_DAY_LIMITS[kind]) return false;
+    c.put(k, String(used + n), 21600);
+    return true;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/** 通行証の読む操作。社を名指すものは読める社だけ（空の社＝全社は通さない）、一覧は読める社の行だけ */
+function agentRead_(pass, p) {
+  switch (p.action) {
+    case 'next_kw':
+    case 'kw_status':
+      if (!agentCan_(pass.r, p.site)) return { ok: false, error: 'forbidden' };
+      return agentScrub_(pass, p.action === 'next_kw' ? nextKw_(p.site) : kwStatus_(p.site));
+    case 'all_kw':
+      return agentScrub_(pass, { ok: true, keywords: allKw_() });
+    case 'kw_overlaps':
+      return { ok: true, rows: kwOverlaps_().rows.filter(function (r) {
+        return agentCan_(pass.r, String(r.site_a)) && agentCan_(pass.r, String(r.site_b));
+      }) };
+  }
+  return { ok: false, error: 'unauthorized' };
+}
+
+/** 通行証の書く操作。社は書ける社だけ・公開済みの取り下げ（force）は効かせない・1日の量に上限 */
+function agentWrite_(pass, b) {
+  if (!agentCan_(pass.w, b.site)) return { ok: false, error: 'forbidden' };
+  const a = b.action;
+  const many = Array.isArray(b.keywords) ? b.keywords.length : 1;
+  const use = a === 'add_kw' ? ['add', many] : a === 'retire_kw' ? ['retire', many]
+    : a === 'claim_kw' ? ['claim', 1] : a === 'unclaim_kw' ? ['claim', many] : null;
+  if (use && !agentQuota_(pass, use[0], use[1])) return { ok: false, error: 'limit' };
+  let out;
+  switch (a) {
+    case 'claim_kw':    out = claimKw_(b.site, b.keyword, agentCtx_(pass, b.ctx)); break;
+    case 'kw_conflict': out = kwConflict_(b.site, b.keyword, null, null, agentCtx_(pass, b.ctx)); break;
+    case 'retire_kw':   out = retireKw_(b.site, b.keywords, b.reason, false); break;
+    case 'unclaim_kw':  out = unclaimKw_(b.site, b.keywords); break;
+    case 'add_kw':      out = addKw_(b.site, b.keywords || [], agentCtx_(pass, b.ctx)); break;
+    case 'error_log':   out = errorLog_(b); break;
+    default:            return { ok: false, error: 'unauthorized' };
+  }
+  return agentScrub_(pass, out);
 }
 
 function doGet(e) {
   const p = (e && e.parameter) || {};
-  if (Object.prototype.hasOwnProperty.call(KW_READS, String(p.action || '')) && (!SHARED_SECRET || p.secret !== SHARED_SECRET)
-      && !agentOk_(p.secret, p.action, true)) {
-    return json_({ ok: false, error: 'unauthorized' });
+  if (Object.prototype.hasOwnProperty.call(KW_READS, String(p.action || '')) && (!SHARED_SECRET || p.secret !== SHARED_SECRET)) {
+    const pass = agentOk_(p.secret, p.action, true);
+    if (!pass) return json_({ ok: false, error: 'unauthorized' });
+    try {
+      return json_(agentRead_(pass, p));
+    } catch (err) {
+      return json_({ ok: false, error: String(err) });
+    }
   }
   try {
     switch (p.action) {
@@ -247,9 +361,14 @@ function doPost(e) {
   // フォームは action を持たないので、その場合だけ合言葉を求めない。
   // 転送（forwardToHub_）は合言葉を付けてくるので、あれば照合する。
   const hasAction = !!body.action;
-  if (SHARED_SECRET && (hasAction || body.secret) && body.secret !== SHARED_SECRET
-      && !(hasAction && agentOk_(body.secret, body.action, false))) {
-    return json_({ ok: false, error: 'unauthorized' });
+  if (SHARED_SECRET && (hasAction || body.secret) && body.secret !== SHARED_SECRET) {
+    const pass = hasAction ? agentOk_(body.secret, body.action, false) : null;
+    if (!pass) return json_({ ok: false, error: 'unauthorized' });
+    try {
+      return json_(agentWrite_(pass, body));
+    } catch (err) {
+      return json_({ ok: false, error: String(err) });
+    }
   }
   try {
     switch (body.action) {

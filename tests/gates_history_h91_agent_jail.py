@@ -37,7 +37,8 @@ def _agent_steps():
         d = yaml.safe_load(p.read_text(encoding="utf-8"))
         for jn, job in (d.get("jobs") or {}).items():
             for i, st in enumerate(job.get("steps") or []):
-                if re.search(r"\bclaude\s+-p\b", str(st.get("run", ""))):
+                # 範囲ごとに AI を回す手順（scripts/agent_passes.sh）も AI の手順として見る
+                if re.search(r"\bclaude\s+-p\b|bash scripts/agent_passes\.sh", str(st.get("run", ""))):
                     env = {**(d.get("env") or {}), **(job.get("env") or {}), **(st.get("env") or {})}
                     out.append((p.name, jn, i, st, job["steps"], env, job, d))
     return out
@@ -67,7 +68,8 @@ def test_workflows_run_the_agent_without_keys():
         extra = sorted(k for k in env if k not in AGENT_ENV_OK and (k in AG.KNOWN_SECRETS or "secrets." in str(env[k])))
         if extra:
             bad_env.append(f"{name}:{st.get('name')} {extra}")
-        if "HUB_SECRET" in env and "HUB_AGENT_SECRET" not in str(env["HUB_SECRET"]):
+        # 管制塔へは範囲ごとの通行証（HUB_AGENT_TOKEN）で入る。合言葉そのもの（全権・AI 用とも）は AI の手順に置かない
+        if str(env.get("HUB_SECRET", "")).strip() or "HUB_AGENT_SECRET" in env:
             bad_hub.append(f"{name}:{st.get('name')}")
         if _in_container(cmd):
             # コンテナで動かすジョブは、claude の鍵のほかに鍵を1つも参照せず、書き込みの権限を持たない
@@ -76,7 +78,8 @@ def test_workflows_run_the_agent_without_keys():
             if refs or (job.get("permissions") or {}).get("contents") != "read" or (wf.get("permissions") or {}).get("contents") == "write" and not job.get("permissions"):
                 bad_box.append(f"{name}:{jn} {refs}")
             continue
-        if "agent_guard.py --verify || exit 1" not in run or run.index("agent_guard.py --verify") > run.index("claude -p"):
+        first = run.index("claude -p") if "claude -p" in run else run.index("bash scripts/agent_passes.sh")
+        if "agent_guard.py --verify || exit 1" not in run or run.index("agent_guard.py --verify") > first:
             bad_verify.append(f"{name}:{st.get('name')}")
         before = " ".join(str(s.get("run", "")) for s in all_steps[:i])
         after = all_steps[i + 1:]
@@ -92,7 +95,7 @@ def test_workflows_run_the_agent_without_keys():
                  if '--allowedTools "Glob,Grep"' not in m.group(0)]
     check("AI に探す道具（Glob・Grep）を名指しで渡す", no_search, [])
     check("AI の手順の環境変数は claude の鍵・台帳の合言葉・サイトだけ（配信・Google・SNS の鍵を渡さない）", bad_env, [])
-    check("AI の手順の合言葉は台帳の操作だけ通る HUB_AGENT_SECRET", bad_hub, [])
+    check("AI の手順には合言葉そのもの（全権・AI 用）を置かない（管制塔へは範囲ごとの通行証で入る）", bad_hub, [])
     check("AI を動かす前に、鍵が外れているかを確かめて外れていなければ止める", bad_verify, [])
     check("AI の前に鍵を外し、後で（失敗しても）触ってはいけない場所を戻して鍵を戻す", bad_order, [])
     check("コンテナで AI を動かすジョブは、claude の鍵のほかに鍵を参照せず、書き込みの権限を持たない", bad_box, [])
@@ -241,12 +244,14 @@ def test_the_rest_of_the_chain_has_no_keys_for_the_agent():
     for name in ("KW_READS", "AGENT_POSTS"):
         m = re.search(r"const " + name + r" = \{(.*?)\};", hub, re.S)
         acts |= set(re.findall(r"(\w+): true", m.group(1))) if m else set()
-    check("AI 用の合言葉で通るのは台帳とエラーの記録だけ（問い合わせ・管理・お客様のメール・公開の記録は通らない）",
+    check("AI の通行証で通るのは台帳とエラーの記録だけ（問い合わせ・管理・お客様のメール・公開の記録は通らない）",
           (bool(acts), sorted(a for a in acts if re.search(r"lead|admin|recheck|newsletter|restore|publish|probe|bot", a))),
           (True, []))
-    check("管制塔は AI 用の合言葉を GET と POST の両方で照合する", hub.count("agentOk_(") >= 3, True)
+    # 2026-10-12: 合言葉そのものは全社の台帳に効いたため通さず、その回の社だけに効く通行証（hub_token.py）を署名で照合する（門 h99）
+    check("管制塔は AI の通行証を GET と POST の両方で署名で照合し、合言葉そのものは通さない",
+          (hub.count("agentOk_(") >= 3, "computeHmacSha256Signature" in hub, "secret === AGENT_SECRET" in hub), (True, True, False))
     import gas_deploy as G
-    check("配る時に AI 用の合言葉を .env の HUB_AGENT_SECRET で埋める",
+    check("配る時に通行証の署名の鍵を .env の HUB_AGENT_SECRET で埋める",
           G.fill("const AGENT_SECRET = 'AGENT_SECRET_XXXXXXXX';", {"HUB_AGENT_SECRET": "k"}), "const AGENT_SECRET = 'k';")
     pf = (ROOT / "scripts" / "publish_flow.py").read_text(encoding="utf-8")
     pb = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
@@ -369,3 +374,40 @@ def test_tools_calling_claude_deny_key_files():
     import site_renovate as SR
     check("サイト改修の AI も鍵のファイルを読めない", all(d in json.loads(SR.perm_settings())["permissions"]["deny"]
                                                 for d in AR.READ_DENY), True)
+
+
+def test_agent_sees_only_its_scope():
+    print("\n■ AI の範囲: その回の社の分だけを作業場所に置き、範囲ごとに AI を回し、終わったら全部へ戻す")
+    pm = (WF / "pipeline-multi.yml").read_text(encoding="utf-8")
+    lock = pm[pm.index("- name: AIの作業場から鍵を外す"):pm.index("- name: 記事生成（Phase 1〜7）")]
+    unl = pm[pm.index("- name: AIの作業場に鍵を戻す"):pm.index("- name: 書いた記事を配信する（鍵を持つ機械の手順）")]
+    check("記事の枠: 鍵を外した後にその回の社の分へ絞って通行証を作り、鍵を戻す前に全部へ戻す",
+          (lock.index("agent_guard.py --lock") < lock.index('private_store.py --scope "${{ steps.site.outputs.pub }}"'),
+           'hub_token.py --scope "${{ steps.site.outputs.pub }}"' in lock and "HUB_AGENT_SECRET:" in lock,
+           unl.index("private_store.py --scope all") < unl.index("agent_guard.py --unlock")),
+          (True, True, True))
+    multi = {}
+    for f in ("pipeline.yml", "weekly-optimize.yml", "selfheal.yml"):
+        t = (WF / f).read_text(encoding="utf-8")
+        multi[f] = ("private_store.py --scopes" in t, "hub_token.py --scope \"$sc\"" in t,
+                    "bash scripts/agent_passes.sh" in t,
+                    t.count("private_store.py --scope all || true") >= 1)
+    check("救済・週次・自動修復の書き直し: 範囲の一覧と範囲ごとの通行証を作り、AI は範囲ごとに回し、鍵を戻す前に全部へ戻す",
+          {k: all(v) for k, v in multi.items()}, {k: True for k in multi})
+    ap = (ROOT / "scripts" / "agent_passes.sh").read_text(encoding="utf-8")
+    loop = ap[ap.index("for sc in"):ap.index("done")]
+    check("範囲ごとの回: 絞る→控え→その範囲の通行証→AI（許可の一覧・探す道具）→範囲の外を戻す、最後に全部へ戻す",
+          (loop.index('private_store.py --scope "$sc"') < loop.index("agent_guard.py --checkpoint") < loop.index("claude -p")
+           < loop.index('agent_guard.py --protect --site "$sc" --pass'),
+           'hub_tokens/$sc' in loop and "export HUB_AGENT_TOKEN" in loop,
+           all(x in loop for x in ("--permission-mode dontAsk", '--allowedTools "Glob,Grep"', "--settings automation/agent_settings_article.json")),
+           ap.rstrip().endswith("python scripts/private_store.py --scope all")),
+          (True, True, True, True))
+    art = json.loads((ROOT / "automation" / "agent_settings_article.json").read_text(encoding="utf-8"))["permissions"]["deny"]
+    check("AI は作業場所の外によけた物（ランナーの一時置き場）と非公開の置き場の git の中身を読めない",
+          [d for d in ("Read(//**/_temp/**)", "Read(private/.git/**)") if d not in art], [])
+    act = (ROOT / ".github" / "actions" / "client-private" / "action.yml").read_text(encoding="utf-8")
+    ps = (ROOT / "scripts" / "private_store.py").read_text(encoding="utf-8")
+    check("保存の前には必ず全部へ戻す（キャッシュの保存・非公開の置き場への push）",
+          (act.index("private_store.py --scope all") < act.index("client_private.py --pack"),
+           "widen()                       # 絞ったまま保存しない" in ps), (True, True))

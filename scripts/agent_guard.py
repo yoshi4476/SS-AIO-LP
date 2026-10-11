@@ -462,7 +462,7 @@ def _alive(pid):
         return False
 
 
-def protect(root=None, scope="article", site=None):
+def protect(root=None, scope="article", site=None, by_pass=False):
     """AI が触ってはいけない場所の変更を戻す。site があれば、その回の社でない記事の変更も戻す。戻した場所（パス）を返す"""
     root = Path(root or ROOT)
     pats = PROTECTED if scope == "article" else PROTECTED_JAIL
@@ -476,7 +476,7 @@ def protect(root=None, scope="article", site=None):
             _git(root, "checkout", "HEAD", "--", rel)
         back.append(rel)
     if site and scope == "article":
-        back += _protect_other_sites(root, site)
+        back += _protect_other_sites(root, site, by_pass=by_pass)
     left = [rel for code, rel in _status(root) if _match(rel, pats)]
     if left:
         print(f"AGENT_PROTECT=ng（戻せなかった場所 {len(left)}件）: " + " / ".join(left[:10]), flush=True)
@@ -492,28 +492,66 @@ def protect(root=None, scope="article", site=None):
     return back
 
 
-def _protect_other_sites(root, site):
-    """その回の社でない記事の変更を戻す（AI は全社の原稿を Edit できるため。公開側で追跡していない原稿は
-    非公開の置き場の写しへ戻す）。新しく作った別の社の記事は消す"""
+def _scope_sites(site, root=None):
+    """範囲（own＝自社の社・社の id か公開の id＝その社と同じ組のお客様の社）に入る社の id の集合"""
+    sys.path.insert(0, str(Path(root or ROOT) / "scripts"))
+    import sites as S
+    if site == "own":
+        return set(S.own_ids())
+    sid = S.resolve(site)
+    if not S.is_client(sid):
+        return {sid}
+    g = S.group_key(sid)
+    return {c for c in S.load_all() if S.is_client(c) and S.group_key(c) == g} | {sid}
+
+
+def _pass_dir():
+    return _state_path().with_suffix(".pass")
+
+
+def checkpoint(root=None):
+    """範囲ごとの AI の回の前の原稿の控え（その回が範囲の外を触った分を、前の回の直しを残したまま戻すため）"""
     import shutil
-    new, changed = changes(root)
+    root = Path(root or ROOT)
+    d = _pass_dir()
+    shutil.rmtree(d, ignore_errors=True)
+    shutil.copytree(root / "articles", d, ignore=shutil.ignore_patterns("_merged"))
+    print(f"AGENT_CHECKPOINT=ok（原稿 {len(list(d.glob('*.md')))}本を控え）", flush=True)
+
+
+def _protect_other_sites(root, site, by_pass=False):
+    """その回の範囲の社でない記事の変更を戻す（AI は作業場所の全部の原稿を Edit できるため）。新しく作った範囲の外の
+    記事は消す。by_pass なら直前の checkpoint の控えへ戻す（範囲ごとに回す救済・週次。前の回の直しは残す）。
+    そうでなければ lock の控えと比べ、公開側で追跡している原稿は HEAD、追跡していない原稿は非公開の置き場の写しへ戻す"""
+    import shutil
+    allowed = _scope_sites(site, root)
+    if by_pass:
+        d = _pass_dir()
+        before = {p.stem: hashlib.sha1(p.read_bytes()).hexdigest() for p in d.glob("*.md")} if d.is_dir() else {}
+        now = _articles(root)
+        new = sorted(s for s in now if s not in before)
+        changed = sorted(s for s in now if s in before and now[s] != before[s])
+    else:
+        new, changed = changes(root)
     back = []
     for slug in new + changed:
         owner = _site_of(slug, root)
-        if owner == site or owner is None:
+        if owner in allowed or owner is None:
             continue
         p = root / "articles" / f"{slug}.md"
         rel = f"articles/{slug}.md"
         orig = root / "private" / "articles" / f"{slug}.md"
         if slug in new:
             p.unlink(missing_ok=True)
+        elif by_pass:
+            shutil.copyfile(_pass_dir() / f"{slug}.md", p)
         elif _git(root, "ls-files", "--error-unmatch", rel).returncode == 0:
             _git(root, "checkout", "HEAD", "--", rel)
         elif orig.is_file():
             shutil.copyfile(orig, p)
         else:
             continue
-        back.append("（別の社の記事）")
+        back.append("（範囲の外の記事）")
     return back
 
 
@@ -602,10 +640,12 @@ def publish(root=None, only=None):
 def main():
     ap = argparse.ArgumentParser()
     g = ap.add_mutually_exclusive_group(required=True)
-    for f in ("lock", "verify", "unlock", "protect", "publish", "refresh"):
+    for f in ("lock", "verify", "unlock", "protect", "publish", "refresh", "checkpoint"):
         g.add_argument(f"--{f}", action="store_true")
     ap.add_argument("--scope", default="article", choices=["article", "jail"])
-    ap.add_argument("--site", default="", help="その回の社（公開の id でも社の id でもよい）")
+    ap.add_argument("--site", default="", help="その回の社（公開の id でも社の id でもよい。own は自社の社）")
+    ap.add_argument("--pass", dest="by_pass", action="store_true",
+                    help="--protect で、lock ではなく直前の --checkpoint の控えと比べる（範囲ごとに回す AI の回）")
     a = ap.parse_args()
     site = ""
     if a.site:
@@ -624,8 +664,10 @@ def main():
         lock()
     elif a.unlock:
         unlock()
+    elif a.checkpoint:
+        checkpoint()
     elif a.protect:
-        protect(scope=a.scope, site=site or None)
+        protect(scope=a.scope, site=site or None, by_pass=a.by_pass)
     elif a.publish:
         publish(only=site or None)
     return 0

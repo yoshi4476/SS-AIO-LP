@@ -1,7 +1,8 @@
 // 管制塔の受付（hub.gs + contact.hub.gs）を、Apps Script の代わりの作り物の上で動かす（門 gates_history_h82_leads が使う）。
 // node gas_leads_harness.js <hub.gs> <contact.hub.gs> < 筋書き（JSON）
-// 筋書き: { gemini: { "<本文に含まれる語>": {kind, reason} | "fail" }, props: {...}, posts: [<doPost の本文>…], calls: [[関数名, 引数…]…] }
-// 返す: { results, rows（問い合わせタブ）, probe, mails, fetches, calls }
+// 筋書き: { gemini: { "<本文に含まれる語>": {kind, reason} | "fail" }, props: {...}, posts: [<doPost の本文>…], calls: [[関数名, 引数…]…],
+//          gets: [<doGet のパラメータ>…], cache: true（CacheService に覚えさせる） }
+// 返す: { results, rows（問い合わせタブ）, probe, mails, fetches, calls, gets }
 const vm = require('vm'), fs = require('fs');
 const plan = JSON.parse(fs.readFileSync(0, 'utf8'));
 const HEAD = ['受信日時', 'サイト', '種別', '会社名', 'お名前', 'ご担当者様', 'メールアドレス', '電話番号', 'ご相談内容',
@@ -36,6 +37,8 @@ const book = { getSheetByName: (n) => (tabs[n] ? sheet(n) : null), insertSheet: 
                getUrl: () => 'https://docs.google.com/spreadsheets/d/x' };
 const props = Object.assign({}, plan.props || {});
 const mails = [], fetches = [];
+// 筋書きの cache: true で覚える入れ物にする（通行証の1日の量を数える門 h99 が使う）。既定は何も覚えない（これまでどおり）
+const cache = {};
 const ctx = {
   console: { log() {}, error() {} },
   ContentService: { createTextOutput: (o) => ({ setMimeType: () => JSON.parse(o) }), MimeType: { JSON: 'json' } },
@@ -43,12 +46,17 @@ const ctx = {
   PropertiesService: { getScriptProperties: () => ({ getProperty: (k) => (k in props ? props[k] : null),
                                                      setProperty: (k, v) => { props[k] = String(v); },
                                                      deleteProperty: (k) => { delete props[k]; } }) },
-  CacheService: { getScriptCache: () => ({ get: () => null, put: () => {} }) },
+  CacheService: { getScriptCache: () => (plan.cache ? { get: (k) => (k in cache ? cache[k] : null), put: (k, v) => { cache[k] = String(v); } }
+                                                    : { get: () => null, put: () => {} }) },
   Utilities: { formatDate: (d, tz, f) => {
     const j = new Date(d.getTime() + 9 * 3600e3), p = (n) => String(n).padStart(2, '0');
     const Y = j.getUTCFullYear(), M = p(j.getUTCMonth() + 1), D = p(j.getUTCDate()), h = p(j.getUTCHours()), m = p(j.getUTCMinutes());
     return f.replace('yyyy', Y).replace('MM', M).replace('dd', D).replace('HH', h).replace('mm', m);
-  } },
+  },
+  // Apps Script と同じく、符号つきのバイト（-128〜127）の配列で返す
+  computeHmacSha256Signature: (v, k) => Array.from(require('crypto').createHmac('sha256', Buffer.from(String(k), 'utf8'))
+    .update(Buffer.from(String(v), 'utf8')).digest()).map((b) => (b > 127 ? b - 256 : b)),
+  Charset: { UTF_8: 'UTF-8' } },
   MailApp: { sendEmail: (o) => mails.push({ to: o.to, subject: o.subject, body: o.body }) },
   UrlFetchApp: { fetch: (url, opt) => {
     fetches.push(url);
@@ -76,6 +84,12 @@ const results = (plan.posts || []).map((b) => {
   try { return ctx.doPost({ postData: { contents: JSON.stringify(body) } }); } catch (e) { return { thrown: String(e) }; }
 });
 const calls = (plan.calls || []).map((c) => { try { return ctx[c[0]].apply(null, c.slice(1)); } catch (e) { return { thrown: String(e) }; } });
-console.log(JSON.stringify({ results, calls, rows: tabs['問い合わせ'].slice(1).map((r) => r.map((v) => (v && v.toISOString ? v.toISOString() : v))),
+// 筋書きの gets: doGet のパラメータの並び（posts の後に動かす）。secret が '$SECRET' なら本来の合言葉にする
+const gets = (plan.gets || []).map((p) => {
+  const q = Object.assign({}, p);
+  if (q.secret === '$SECRET') q.secret = secret;
+  try { return ctx.doGet({ parameter: q }); } catch (e) { return { thrown: String(e) }; }
+});
+console.log(JSON.stringify({ results, calls, gets, rows: tabs['問い合わせ'].slice(1).map((r) => r.map((v) => (v && v.toISOString ? v.toISOString() : v))),
                              probe: (tabs['疎通確認'] || []).slice(1).map((r) => r.slice(1)), mails, fetches, props,
                              shown: Object.fromEntries((plan.show || []).map((n) => [n, (tabs[n] || []).map((r) => r.map((v) => (v && v.toISOString ? v.toISOString() : v)))])) }));

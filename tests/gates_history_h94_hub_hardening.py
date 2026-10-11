@@ -11,15 +11,23 @@
 import json
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 from pathlib import Path
 
 from test_gates import check, ROOT
 
+sys.path.insert(0, str(ROOT / "scripts"))
 GAS = ROOT / "automation" / "gas"
 HARNESS = ROOT / "tests" / "gas_leads_harness.js"
 AGENT = "agent-test-secret-0123456789abcd"
+
+
+def _token():
+    """AI に渡す通行証（2026-10-12 から合言葉そのものは通らない。門 h99）"""
+    import hub_token
+    return hub_token.mint(["ai-lab"], ["ai-lab"], secret=AGENT)
 
 
 def _run(plan):
@@ -38,16 +46,17 @@ def _run(plan):
 
 
 def test_hub_rejects_names_it_does_not_know():
-    print("\n■ 管制塔の受付: AI 用の合言葉は決めた操作だけ・知らない操作名はフォームにしない・外の文字を数式にしない")
+    print("\n■ 管制塔の受付: AI の通行証は決めた操作だけ・知らない操作名はフォームにしない・外の文字を数式にしない")
     err_head = [["日時", "サイト", "工程", "エラー内容", "対応", "状態"]]
     form = {"type": "contact", "name": "山田", "email": "a@example.com", "message": "相談です", "company": "例"}
+    tok = _token()
     out = _run({"tabs": {"エラーログ": err_head}, "show": ["エラーログ"], "posts": [
-        {"action": "next_kw", "secret": AGENT},                      # 読む操作の名前を POST で
-        {"action": "toString", "secret": AGENT},                     # 元の名前
-        {"action": ["add_kw"], "secret": AGENT},                     # 配列の名前
-        {"action": "lead_status", "secret": AGENT},                  # AI に許していない操作
+        {"action": "next_kw", "secret": tok},                        # 読む操作の名前を POST で
+        {"action": "toString", "secret": tok},                       # 元の名前
+        {"action": ["add_kw"], "secret": tok},                       # 配列の名前
+        {"action": "lead_status", "secret": tok},                    # AI に許していない操作
         {"action": "nope", "secret": "$SECRET"},                     # 本来の合言葉でも知らない名前
-        {"action": "error_log", "secret": AGENT, "site": "ai-lab", "phase": "p", "message": '=IMPORTDATA("https://x.example/")'},
+        {"action": "error_log", "secret": tok, "site": "ai-lab", "phase": "p", "message": '=IMPORTDATA("https://x.example/")'},
         {"action": "contact", "secret": "$SECRET", "site": "partner", "silent": True, "data": dict(form)},
         dict(form, site="ai-lab", email="b@example.com"),            # 合言葉の無いフォーム（これまでどおり受ける）
     ]})
@@ -55,7 +64,7 @@ def test_hub_rejects_names_it_does_not_know():
         print("  WARN  node が無いため受付の動きは確かめられません")
         return
     res = out["results"]
-    check("AI 用の合言葉: 読む操作の POST・元の名前・配列・許していない操作は通らない",
+    check("AI の通行証: 読む操作の POST・元の名前・配列・許していない操作は通らない",
           [r.get("error") for r in res[:4]], ["unauthorized"] * 4)
     check("本来の合言葉でも、知らない操作名はフォームとして受けない", res[4], {"ok": False, "error": "unknown action"})
     check("問い合わせの台帳に入ったのは、転送（contact）と合言葉の無いフォームの2件だけ",
@@ -63,16 +72,17 @@ def test_hub_rejects_names_it_does_not_know():
     check("転送の行の詳細欄に合言葉・操作名を書き写さない",
           any("secret" in str(c) or "action" in str(c) for x in out["rows"] for c in x), False)
     errs = out["shown"]["エラーログ"][1:]
-    check("AI 用の合言葉の error_log は、= で始まる文字を数式でなく文字として置く",
+    check("AI の通行証の error_log は、= で始まる文字を数式でなく文字として置く",
           (res[5].get("ok"), [x[3] for x in errs]), (True, ["'=IMPORTDATA(\"https://x.example/\")"]))
 
 
 def test_hub_agent_names_and_retention_and_industry():
     print("\n■ 管制塔の受付: 操作名の照合・保存期間の日付・手で止めた印・AI紹介チェックの業種のキー")
     now = int(time.time() * 1000)
-    calls = [["agentOk_", AGENT, "next_kw", True], ["agentOk_", AGENT, "next_kw", False],
-             ["agentOk_", AGENT, "add_kw", False], ["agentOk_", AGENT, "add_kw", True],
-             ["agentOk_", AGENT, "constructor", False], ["agentOk_", AGENT, "hasOwnProperty", True],
+    tok = _token()
+    calls = [["agentOk_", tok, "next_kw", True], ["agentOk_", tok, "next_kw", False],
+             ["agentOk_", tok, "add_kw", False], ["agentOk_", tok, "add_kw", True],
+             ["agentOk_", tok, "constructor", False], ["agentOk_", tok, "hasOwnProperty", True],
              ["piiOld_", 45000, 1, now], ["piiOld_", "45000", 1, now], ["piiOld_", "2020-01-01T00:00:00Z", 1, now],
              ["botEnforce_", {"on": True}], ["botEnforce_", {"on": False, "manual": True}], ["botEnforce_", {"on": True}],
              ["botEnforce_", {"resume": True}], ["botEnforce_", {"on": True}],
@@ -81,14 +91,15 @@ def test_hub_agent_names_and_retention_and_industry():
              ["aiCheckFollowText_", "様", ["", "", "", "", "", "", "", "", "サイト: https://x.example/"],
               {"word": "矯正歯科", "ind": "dental"}],
              ["aiCheckFollowText_", "様", ["", "", "", "", "", "", "", "", "サイト: https://x.example/"],
-              {"word": "toString", "ind": "constructor"}]]
+              {"word": "toString", "ind": "constructor"}],
+             ["agentOk_", AGENT, "next_kw", True]]
     out = _run({"calls": calls, "show": ["AI紹介チェック"]})
     if out is None:
         print("  WARN  node が無いため受付の動きは確かめられません")
         return
     c = out["calls"]
-    check("AI 用の合言葉は、読む操作を GET・書く操作を POST でだけ通し、元の名前は通さない",
-          c[:6], [True, False, True, False, False, False])
+    check("AI の通行証は、読む操作を GET・書く操作を POST でだけ通し、元の名前は通さない。合言葉そのものは通さない",
+          [bool(x) for x in c[:6] + c[17:18]], [True, False, True, False, False, False, False])
     check("保存期間: 数値の日付は消さない側に倒し、文字の日付は期限で判定する", c[6:9], [False, False, True])
     check("手で止めた印がある間は「断る」へ戻さず、resume で外してから戻せる",
           [(x.get("ok"), x.get("enforce"), bool(x.get("manual_off"))) for x in c[9:14]],

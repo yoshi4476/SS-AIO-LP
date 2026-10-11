@@ -431,8 +431,11 @@ jobs:
           fi
           # 配信の基点。書き直した記事だけを後の工程で配信先へ届ける
           echo "BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          # 道具の中から呼ぶ AI も、その社の分だけを置いて動かす（ほかのお客様の原稿・順位を読ませない）
+          python scripts/private_store.py --scope "${{ steps.site.outputs.pub }}"
           out=$(python scripts/auto_rewrite.py --write --kind spare --main-only --sites "${{ steps.site.outputs.id }}" \
             --limit 1 --skip-recent 28 --tag spare-slot 2>&1) || true
+          python scripts/private_store.py --scope all
           rm -f indexing-service-account.json
           echo "$out"
           r=$(echo "$out" | sed -n 's/^SPARE_SLOT=//p')
@@ -528,12 +531,18 @@ jobs:
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          # 管制塔の通行証を作る鍵（AI の手順には渡さない。通行証はその範囲の社だけに効く）
+          HUB_AGENT_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
         run: |
           python scripts/agent_guard.py --lock
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
               nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
           fi
+          # その回の社の分だけを作業場所に残す（ほかのお客様の原稿・材料・順位・狙う語は AI の間は置かない。2026-10-11）
+          python scripts/private_store.py --scope "${{ steps.site.outputs.pub }}"
+          mkdir -p "$RUNNER_TEMP/hub_tokens"
+          python scripts/hub_token.py --scope "${{ steps.site.outputs.pub }}" --out "$RUNNER_TEMP/hub_tokens/${{ steps.site.outputs.pub }}" || true
 
       - name: 記事生成（Phase 1〜7）
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
@@ -544,10 +553,11 @@ jobs:
           # 記事1本 ¥50〜150 の目安。未登録なら空で、claude はサブスクの鍵を使う）
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           HUB_URL: ${{ secrets.HUB_URL }}
-          # AI 用の合言葉。狙う語の台帳とエラーの記録だけが通る（問い合わせ・管理には使えない）。
+          # 管制塔へは、その回の社だけに効く通行証で入る（鍵を外す手順が作る。狙う語の台帳とエラーの記録だけが通る）。
           # 配信・SNS・検索エンジンへの通知の鍵は渡さない（この後の機械の手順が使う）
-          HUB_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
         run: |
+          HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/${{ steps.site.outputs.pub }}" 2>/dev/null || true)"
+          export HUB_AGENT_TOKEN
           # 未登録の鍵は空文字で渡る。空のまま置くと claude が API の鍵として扱って落ちるので外す
           [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
           # 鍵が外れていなければ AI を動かさない（外し損ねたまま外の文章を読ませない）
@@ -597,7 +607,10 @@ jobs:
           PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
-        run: python scripts/agent_guard.py --unlock
+        run: |
+          # 絞った範囲を全部へ戻してから鍵を戻す（この後の配信・検査・保存は全社の分を見る）
+          python scripts/private_store.py --scope all || true
+          python scripts/agent_guard.py --unlock
 
       # 配信・管制塔への記録・SNS は、鍵を持つ機械の手順で行う（AI は publish_flow --check で門を通すところまで）
       - name: 書いた記事を配信する（鍵を持つ機械の手順）
