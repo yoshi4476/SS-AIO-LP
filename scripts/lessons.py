@@ -22,7 +22,8 @@
 
 台帳: data/lessons.jsonl（1行1件）。サイトを指定しない学びは全サイト（クライアント含む）に効く。
 お客様の社の学び（sites にお客様の社）は data/clients/<id>/private/data/lessons.jsonl に置き（public に
-置かない。CI はキャッシュで持ち越す）、全社の学びに入ったお客様の名前・ドメインは伏せる（client_private）。
+置かない。CI はキャッシュで持ち越す）、全社の学びに入ったお客様の名前・ドメイン・記事の題と slug は伏せる
+（門 h77・log_leak_check と同じ照らし方）。伏せる語が取れない回は、新しい行・書き換えた行を公開の台帳へ書かない。
 """
 import argparse
 import json
@@ -60,30 +61,127 @@ def _owner(row):
     return next((s for s in row.get("sites") or [] if CP.is_private(s)), None)
 
 
-def _scrub(row):
-    """全社に効く学びは public に残し、お客様の名前・ドメイン・記事の名前は伏せる"""
-    import client_private as CP
-    r = dict(row)
-    # 記事の slug・題も伏せる（名前・ドメインだけだと、お客様の記事の slug が詳細に残って public に出た。2026-10-11）
+ART, SITE = "お客様の記事", "お客様のサイト"
+TEXT = ("rule", "detail", "source", "gate")
+SAFE = ("hits", "status")   # 書き換わってもお客様の語が入らない項目
+PUBLIC = SRC                # 公開側で追跡している台帳（門が差し替える一時の台帳は公開されない）
+HELD = []                   # この実行で保存しなかった行（同じ実行の中で同じ学びを二重に積まない）
+
+
+def _unresolved():
+    """sites/ にお客様の印があるのに、非公開のデータから設定が読めない社の数（読めない社の語は伏せられない）"""
+    import sites as S
+    stubs = set()
+    for p in S.SITES_DIR.glob("*.json"):
+        try:
+            if json.loads(p.read_text(encoding="utf-8-sig")).get("client"):
+                stubs.add(p.stem)
+        except (OSError, ValueError):
+            pass
+    return len(stubs - {c.get("public_id") or sid for sid, c in S.load_all().items()})
+
+
+def _terms():
+    """お客様の伏せる語の (正規表現, {語の小文字: 置き換え})。お客様の社が無ければ (None, {})。
+    語が取れない（非公開のデータが無い・読めない社がある・例外）ときは None。
+
+    照らし方は門と同じで、大文字小文字を問わない。記事の題・slug は CI のログの見張りと同じ部品
+    （log_leak_check.word_rx: 英数の語は前後の境目を見る）で、門 h77 の照らしより広い（日本語に続く slug も伏せる）。
+    名前・ドメインは門 h77 と同じく部分一致（門が部分一致で数えるので、境目を見ると門に引っかかる）。
+    2026-10-11: 大文字小文字を区別する単純な置き換えで、大文字の slug が伏せ漏れになっていた"""
     try:
         import ci_mask
-        arts = sorted({w for _n, a, _d in ci_mask.identity_terms().values() for w in a if len(w) >= 4},
-                      key=len, reverse=True)
+        import log_leak_check as LL
+        ident = ci_mask.identity_terms()
+        if _unresolved():
+            return None
     except Exception:
-        arts = []
-    for k in ("rule", "detail"):
-        if r.get(k):
-            r[k] = CP.redact(r[k])
-            for w in arts:
-                r[k] = r[k].replace(w, "お客様の記事")
-    if r.get("source") and CP.is_private(CP.owner_of_slug(str(r["source"]))):
-        r["source"] = "お客様の記事"
+        return None
+    repl = {}
+    for names, arts, dom in ident.values():
+        for words, to, rx in ((arts, ART, LL.word_rx), (list(names) + [dom], SITE, re.escape)):
+            for w in words:
+                w = str(w or "").strip()
+                if len(w) >= LL.MIN_LEN:
+                    repl.setdefault(w.lower(), (to, rx(w)))
+    if not repl:
+        return None, {}
+    # 長い語を先に（題の中の社名・URL の中のドメインを、長い方の1か所として伏せる）
+    rx = re.compile("|".join(f for _w, (_t, f) in sorted(repl.items(), key=lambda kv: -len(kv[0]))), re.I)
+    return rx, {w: t for w, (t, _f) in repl.items()}
+
+
+def _client_article(src):
+    import client_private as CP
+    import private_store as PS
+    return PS.client_slug(src) or CP.is_private(CP.owner_of_slug(src))
+
+
+def _scrub(row, terms):
+    """全社に効く学びは public に残し、お客様の名前・ドメイン・記事の題と slug は伏せる"""
+    import client_private as CP
+    r = dict(row)
+    rx, repl = terms or (None, {})
+    for k in TEXT:
+        if isinstance(r.get(k), str) and r[k]:
+            v = rx.sub(lambda m: repl.get(m.group(0).lower(), ART), r[k]) if rx else r[k]
+            r[k] = CP.redact(v)
+    if row.get("source") and _client_article(str(row["source"])):
+        r["source"] = ART
     return r
 
 
+def _body(r):
+    return json.dumps({k: v for k, v in r.items() if k not in SAFE}, ensure_ascii=False, sort_keys=True)
+
+
+def _hold(rows):
+    """伏せる語が取れない回に、公開の台帳へ書いてよい行だけを残す。(残す行, 保存しなかった件数)
+
+    公開の台帳にある文のままの行は書く（新しく出るものが無い）。新しい行と文を書き換えた行は、お客様の語を含みうるので
+    書かない（書き換えた行は公開の台帳の文のまま残す）。お客様の記事が source の行も書かない"""
+    disk = []
+    for line in (SRC.read_text(encoding="utf-8").splitlines() if SRC.is_file() else []):
+        try:
+            disk.append(json.loads(line))
+        except ValueError:
+            pass
+    bodies = {_body(x) for x in disk}
+    by_id = {}
+    for x in disk:
+        by_id.setdefault(x.get("id"), x)
+    out, held = [], 0
+    for r in rows:
+        if _owner(r):                                   # お客様の社の行は置き場へ（公開の台帳には書かない）
+            out.append(r)
+            continue
+        if r.get("source") and _client_article(str(r["source"])):
+            held += 1
+            HELD.append(r)
+            continue
+        if _body(r) in bodies:
+            out.append(r)
+            continue
+        held += 1
+        if r.get("id") in by_id:
+            out.append(dict(by_id[r["id"]], **{k: r[k] for k in SAFE if k in r}))
+        else:
+            HELD.append(r)
+    return out, held
+
+
 def save(rows):
+    """台帳を書き直す。返り値は保存しなかった行の数（伏せる語が取れない回だけ。件数を出す）"""
     import client_private as CP
-    CP.save_jsonl(SRC, rows, _owner, scrub=_scrub)
+    terms = _terms()
+    held = 0
+    if terms is None and SRC.resolve() == PUBLIC.resolve():
+        rows, held = _hold(rows)
+        if held:
+            print(f"学びの台帳: お客様の伏せる語を取れないため、{held}件を保存しませんでした"
+                  "（非公開のデータが読めない回。新しい行・書き換えた行は書かず、読める回に積み直す）", file=sys.stderr)
+    CP.save_jsonl(SRC, rows, _owner, scrub=lambda r: _scrub(r, terms))
+    return held
 
 
 def _id(rows):
@@ -95,7 +193,7 @@ def add(kind, phase, rule, detail="", sites=None, gate="", source="", rows=None)
     """学びを1件積む。rule は「次からこうする」を1文で"""
     rows = load() if rows is None else rows
     rule = rule.strip()
-    for r in rows:                      # 同じ内容を二重に積まない
+    for r in rows + HELD:               # 同じ内容を二重に積まない（保存しなかった行も、同じ実行の中では数える）
         if r.get("rule", "").strip() == rule and r.get("status") != "retired":
             return r, False
     rec = {"id": _id(rows), "at": date.today().isoformat(), "kind": kind, "phase": phase,
@@ -271,6 +369,10 @@ def main():
             raise SystemExit("--rule（次からこうする）が要ります")
         rec, made = add(a.kind, a.phase, a.rule, a.detail,
                         [s for s in a.sites.split(",") if s], a.gate, a.source)
+        if any(r is rec for r in HELD):
+            # 文はお客様の語を含みうるので出さない（このログも public）
+            print(f'保存しませんでした: {rec["id"]} [{rec["phase"]}]（お客様の伏せる語を取れない回）')
+            return 0
         print(("追加: " if made else "既にあります: ") + f'{rec["id"]} [{rec["phase"]}] {rec["rule"][:60]}')
         if made and _owner(rec) and not os.environ.get("GITHUB_ACTIONS"):
             # 置き場は CI のキャッシュでしか CI に渡らない。手元で積んだお客様の学びは CI の記事に効かない

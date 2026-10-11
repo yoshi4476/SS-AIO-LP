@@ -820,6 +820,16 @@ def journal_problems(fm, body, dialect):
     return out
 
 
+def journal_prepare(cfg, meta, body, vb=""):
+    """方言の社の原稿（画像の場所を直し、表のグラフを足した後）を先方の形へ直す。(フロントマター, 本文, HTML, 止める理由)。
+    配信（write_external_md）と --check（pre_problems）が同じ手順を通る（別々に書くと --check だけ通って配信で止まる）"""
+    journal = md_dialect(cfg)
+    body = _md_insert_entries((vb + "\n" + body.lstrip("\n")) if vb else body, cfg)
+    html = md2html.convert(body)[0]
+    fm, body = journal_md(cfg, meta, body, journal)
+    return fm, body, html, journal_problems(fm, body, journal)
+
+
 def write_external_md(cfg, dest: Path, meta, body, src: Path):
     """別リポジトリの静的サイト用: Markdown を置き、記事1本分の届け物を揃える。
 
@@ -851,10 +861,7 @@ def write_external_md(cfg, dest: Path, meta, body, src: Path):
     # そのまま通す。消毒しない。中の * や = は文字参照にしてあるので、journal_md の読み替えにも拾われない）
     body = table_charts.add_to_markdown(body, cfg)
     if journal:
-        body = _md_insert_entries((vb + "\n" + body.lstrip("\n")) if vb else body, cfg)
-        html = md2html.convert(body)[0]
-        fm, body = journal_md(cfg, meta, body, journal)
-        bad = journal_problems(fm, body, journal)
+        fm, body, html, bad = journal_prepare(cfg, meta, body, vb)
         if bad:
             raise SystemExit(f"BLOCKED(公開不可): {slug} は {cfg.get('name', cfg['id'])} の先方の変換で組み立てが止まるか、"
                              "崩れる形です: " + " / ".join(bad))
@@ -1164,6 +1171,35 @@ def stop_foreign_links(cfg, meta, body, dest=None):
     if bad:
         raise SystemExit(f"BLOCKED(公開不可): {meta['slug']} に {cfg.get('name', cfg['id'])} に無い場所へのリンクがあります: "
                          f"{' / '.join(bad)}（相談先は sites/{cfg['id']}.json の cta.url: {(cfg.get('cta') or {}).get('url', '—')}）")
+
+
+def work_copy(cfg):
+    """手元にある配信先の作業コピー（取り直さない）。無ければ None（--check は鍵を持たないので取れない）"""
+    w = WORK / cfg["id"]
+    try:
+        return w if (w / ".git").is_dir() else None
+    except OSError:
+        return None
+
+
+def pre_problems(cfg, meta, body):
+    """配信先の作業コピーが無くても分かる、配信の途中で止まる理由。--check でも配信でも書き出しの前に見る。
+    書き出しの中だけで見ていたため、--check は通って AI のいない配信で止まり、直されないまま残った"""
+    out = []
+    if cfg["type"] == "external-html" or cfg["type"] in deliver_files.TYPES:
+        # 雛形の差し込みの印が原稿にあると、書き出しで「テンプレートの未置換タグ」になって止まる
+        text = "\n".join([str(meta.get("title") or ""), str(meta.get("description") or ""),
+                          json.dumps(meta.get("faq") or [], ensure_ascii=False, default=str), body])
+        tags = sorted(set(re.findall(r"\{\{[A-Z_]+\}\}", text)))
+        if tags:
+            out.append(f"雛形の差し込みの印 {' '.join(tags)} が原稿にあります（書き出しで未置換タグになって止まる）")
+    if cfg["type"] == "external-md" and md_dialect(cfg):
+        # 先方の変換が組み立てを止める形（本文の script・** の残り・先方に無い部品など）。動画の塊は機械が足すので入れずに見る
+        prefix = image_prefix({**cfg, "images_dir": cfg.get("images_dir") or "images"})
+        b = body.replace(f"/images/{meta['slug']}/", f"{prefix}/{meta['slug']}/")
+        bad = journal_prepare(cfg, meta, table_charts.add_to_markdown(b, cfg))[3]
+        out += [f"先方の変換で組み立てが止まるか崩れる形: {' / '.join(bad)}"] if bad else []
+    return out
 
 
 def check_contract(cfg, dest: Path, meta):
@@ -2307,10 +2343,15 @@ def main():
             raise SystemExit("BLOCKED(公開不可): " + " / ".join(bad))
     # 配信先のテンプレートは監修者を固定で表示する。記録の無い記事を出すと表示が実態と食い違う
     import editorial_review
+    # --check は監修待ちを最後に返す。HELD は「他の門を全部通って、監修の記録だけが無い」の印で、AI は書き直さない。
+    # 先に返すと後ろの門で止まる記事まで HELD になり、監修の後の AI のいない配信で止まる
+    hold = []
     if not editorial_review.reviewed(args.slug):
-        raise SystemExit(f"HELD(監修待ち): {args.slug} は監修の記録がありません"
-                         f"（確認したら GitHub の Actions →「監修の記録」に {args.slug} を入れて実行。"
-                         "配信と台帳への記録まで行います）")
+        hold.append(f"HELD(監修待ち): {args.slug} は監修の記録がありません"
+                    f"（確認したら GitHub の Actions →「監修の記録」に {args.slug} を入れて実行。"
+                    "配信と台帳への記録まで行います）")
+        if not args.check:
+            raise SystemExit(hold[0])
     if meta["category"] not in cfg.get("categories", {}):
         raise SystemExit(f"カテゴリ '{meta['category']}' は {cfg['id']} に定義されていません"
                          f"（候補: {', '.join(cfg.get('categories', {}))}）")
@@ -2335,8 +2376,10 @@ def main():
                              + " / ".join(dict.fromkeys(leak)))
         # 公開前の確認を「要」にした社（医療など）は、確認の記録が付くまで配信しない
         if (cfg.get("rules") or {}).get("review_before_publish") and args.slug not in editorial_review.load():
-            raise SystemExit(f"HELD(監修待ち): {args.slug} は {cfg['name']} の公開前の確認がまだです"
-                             f"（確認が済んだら python scripts/editorial_review.py --approve {args.slug}）")
+            hold.append(f"HELD(監修待ち): {args.slug} は {cfg['name']} の公開前の確認がまだです"
+                        f"（確認が済んだら python scripts/editorial_review.py --approve {args.slug}）")
+            if not args.check:
+                raise SystemExit(hold[-1])
 
     # 描画の崩れは、ここで一度だけ見る。各writerの中に書くと、配信方式が
     # 増えたときに必ず漏れる（実際 external-html と wordpress には検査が無く、
@@ -2345,16 +2388,39 @@ def main():
         print(f"  [警告] {meta['slug']}: {name}"
               + (f" 「{sample}」" if sample else "") + f" → {fix}")
 
+    # 入れてはいけない HTML（ld+json 以外の script・on 属性・iframe・外部への form・javascript: の URL・自動の転送）も
+    # 全方式がここを通る。外の文章（字幕・上位の見出し）の指示に従った AI が入れると、どの配信先でも読者の画面で動く。
+    # 原稿の Markdown のまま先方が変換する社（external-md）は、先方の変換が HTML のまま通す形も原稿の字面で見る
+    import html_safety
+    import private_store
+    danger = html_safety.article_problems(meta, body, [cfg.get("domain")], raw=cfg["type"] == "external-md")
+    if danger:
+        raise SystemExit(f"BLOCKED(公開不可): {private_store.shown(args.slug)} の本文・題・説明・FAQ に入れてはいけない HTML が"
+                         f"あります: {html_safety.describe(danger, sample=not sites_mod.is_client(cfg['id']))}。"
+                         "外の文章の指示に従っていないか確かめ、その部分を消してください"
+                         "（記事の動画は data/videos.json から機械が埋め込みます）")
+
     if cfg["type"] == "self-static":
+        if hold:
+            raise SystemExit(hold[0])
         print(f"{cfg['id']} は本リポジトリのサイトです。scripts/build.py で公開してください。")
         return
+
+    # 配信先の作業コピーが無くても分かる門は、--check でも配信でも書き出しの前に通す（--check の後ろに置くと、
+    # --check では通って AI のいない配信で止まり、直されない）。その社に無い場所へのリンク（AI集客ラボの /lp/ など）は、
+    # 作業コピーの無い方式（WordPress・FTP・ZIP）はここで見る。Git の社は配信では作業コピーを取った後に見て、
+    # --check では手元の作業コピー（無ければ AI集客ラボにしか無い入口）で先に見る
+    files_type = cfg["type"] == "wordpress" or cfg["type"] in deliver_files.TYPES
+    if files_type or args.check:
+        stop_foreign_links(cfg, meta, body, None if files_type else work_copy(cfg))
+    pre = pre_problems(cfg, meta, body)
+    if pre:
+        raise SystemExit(f"BLOCKED(公開不可): {private_store.shown(args.slug)}: " + " / ".join(pre))
     if args.check:
+        if hold:
+            raise SystemExit(hold[0])
         print(f"PUBLISH_CHECK=ok（{args.slug}: 配信の前の門を通りました。配信は機械の手順が行います）")
         return
-
-    # その社に無い場所へのリンク（AI集客ラボの /lp/ など）は配信しない。Git の社は作業コピーを取った後に見る
-    if cfg["type"] == "wordpress" or cfg["type"] in deliver_files.TYPES:
-        stop_foreign_links(cfg, meta, body)
 
     if cfg["type"] == "wordpress":
         ok = write_wordpress(cfg, meta, body, src, push=args.push)

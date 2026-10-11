@@ -11,7 +11,8 @@
     python scripts/seo_audit.py --live --site corporate --limit 200
 
 重さ（Ahrefs の区分に合わせる）:
-  致命的 … sitemap に載っているのに開けない・noindex・正規URLが別を指す（検索から外れる）
+  致命的 … sitemap に載っているのに開けない・noindex・正規URLが別を指す（検索から外れる）・
+           _redirects の転送先が自社の外（相談先などを外へ送れる）
   警告   … 題・説明の欠け／長さ／重複、OGPの欠け、H1の数、alt の無い画像、転送先へのリンク
   お知らせ … 被リンクが1本以下（手元のみ。本番は全ページを読まないので数えない）
 
@@ -186,12 +187,19 @@ def local():
     sitemap = {urlparse(u).path.rstrip("/") + "/" for u in re.findall(r"<loc>(.*?)</loc>", sm)}
     red = set()
     rf = SITE / "_redirects"
+    outside = []
     if rf.is_file():
-        for line in rf.read_text(encoding="utf-8").splitlines():
+        text = rf.read_text(encoding="utf-8")
+        for line in text.splitlines():
             if line.strip() and not line.startswith("#"):
                 src = line.split()[0]
                 red.add(src if src.endswith("/") else src + "/")
-    rows = check(pages, sitemap, red, inbound)
+        # 転送元だけを見ていたため、相談先などを外のサイトへ送る行を書かれても止まらなかった（外の文章の指示に従った AI が
+        # site/_redirects を直せる）。行き先はサイトの中（/ で始まる）か自社のドメインだけ。外れたら --gate で公開しない
+        import html_safety
+        outside = [("致命的", "転送先が自社の外（_redirects）", s, f"{n}行目 → {d[:80]}")
+                   for n, s, d in html_safety.redirect_problems(text)]
+    rows = check(pages, sitemap, red, inbound) + outside
     # 重い画像（Ahrefs の「画像のファイルサイズが大きい」）。表示速度とLCPを落とす
     # ページが実際に表示している画像だけを見る（置いてあるだけの控えは読み込まれない）
     for src in sorted({s for f in pages.values() for s in f.get("imgs", ())}):

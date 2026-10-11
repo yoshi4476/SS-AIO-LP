@@ -231,12 +231,20 @@ def run(slug):
     # 未配信のまま残った（2026-10-09 お客様の社「必ず」）。書く段で見つけて直させる
     try:
         sid = sites_mod.find_category_owner(str(meta.get("category") or ""))
-        ng = ((sites_mod.load_all().get(sid) or {}).get("rules") or {}).get("ng_words") or []
+        site_cfg = sites_mod.load_all().get(sid) or {}
+        ng = (site_cfg.get("rules") or {}).get("ng_words") or []
     except SystemExit:
-        ng = []
+        site_cfg, ng = {}, []
     hay = f"{meta.get('title', '')}{meta.get('description', '')}{body}"
     hit = [w for w in ng if w and w in hay]
     add("お客様の使えない表現（rules.ng_words）が無い", not hit, "、".join(hit) or "なし")
+
+    # 入れてはいけない HTML（ld+json 以外の script・on 属性・iframe・外部への form・javascript: の URL・自動の転送）。
+    # 外の文章（字幕・上位の見出し）の指示に従った AI が入れうる。build.py・publish.py と同じ判定（html_safety）を書く段で当てる
+    import html_safety
+    danger = html_safety.article_problems(meta, body, [site_cfg.get("domain")], raw=site_cfg.get("type") == "external-md")
+    add("入れてはいけない HTML が無い（script・on 属性・iframe・外部への form・javascript:）", not danger,
+        html_safety.describe(danger, sample=not site_cfg.get("client")) if danger else "なし")
 
     return checks
 

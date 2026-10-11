@@ -56,6 +56,12 @@ DOMAIN, OTHER = "domain", "name・title・slug"
 EDGE = "A-Za-z0-9_-"
 
 
+def word_rx(w):
+    """1語を探す正規表現の部品（re.I で使う）。英数の語は前後が英数・-・_ でないときだけ当てる。
+    学びの台帳の伏せ（lessons._terms）も同じ部品で照らす（照らし方を二重に書かない）"""
+    return rf"(?<![{EDGE}]){re.escape(w)}(?![{EDGE}])" if w.isascii() else re.escape(w)
+
+
 def patterns(ident):
     """{社の id: (探す正規表現, {語の小文字: 種類})}。ident は ci_mask.identity_terms() の形"""
     out = {}
@@ -69,8 +75,7 @@ def patterns(ident):
         if not kinds:
             continue
         # 長い語を先に試す（URL とその中のドメインを1か所として数える）
-        alts = [rf"(?<![{EDGE}]){re.escape(w)}(?![{EDGE}])" if w.isascii() else re.escape(w)
-                for w in sorted(kinds, key=len, reverse=True)]
+        alts = [word_rx(w) for w in sorted(kinds, key=len, reverse=True)]
         out[sid] = (re.compile("|".join(alts), re.I), kinds)
     return out
 

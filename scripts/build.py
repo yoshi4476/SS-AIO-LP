@@ -2330,7 +2330,7 @@ def main():
             continue
         # 1記事の不正フロントマターで全ビルドを止めない（不正記事はBLOCKED扱いで続行）
         try:
-            meta = parse_article(p)[0]
+            meta, _body = parse_article(p)
         except Exception as e:
             blocked.append(f"{p.stem}: フロントマター不正（{e}）")
             unparsable.add(p.stem)
@@ -2359,6 +2359,15 @@ def main():
         _legal = legal_claims.find(p.read_text(encoding="utf-8"))
         if _legal:
             blocked.append(f"{meta['slug']}: 表示の決まりに当たる文（{_legal[0][0]}: {_legal[0][1][:40]}）")
+            blocked_metas.append(meta)
+            continue
+        # 入れてはいけない HTML（ld+json 以外の script・on 属性・iframe・外部への form・javascript: の URL・自動の転送）。
+        # 変換も雛形も生の HTML をそのまま通すので、外の文章の指示に従った AI が入れると読者の画面で動く。
+        # 書き直しで入れられることもあるので公開済みの記事も止める（publish.py・score_check と同じ html_safety）
+        import html_safety
+        _danger = html_safety.article_problems(meta, _body)
+        if _danger:
+            blocked.append(f"{meta['slug']}: 入れてはいけない HTML（{html_safety.describe(_danger)}）")
             blocked_metas.append(meta)
             continue
         if not title_has_keyword(str(meta.get("title") or ""),
@@ -2594,6 +2603,17 @@ def main():
               "（取り下げず、直す対象として扱います）")
         for s, v in list(still.items())[:6]:
             print(f"   {s}: " + " / ".join(v))
+
+    # 本番の転送（site/_redirects）の行き先は、サイトの中（/ で始まる）か自社のドメインだけ。外の指示に従った AI が
+    # 相談先などを外へ転送できたため、外れたらビルドを失敗で終える（デプロイの seo_audit --gate も同じ判定で止める）
+    import html_safety
+    rd = SITE / "_redirects"
+    bad_rd = html_safety.redirect_problems(rd.read_text(encoding="utf-8")) if rd.is_file() else []
+    for n, src, dst in bad_rd:
+        print(f"BLOCKED(公開不可): site/_redirects {n}行目 {src} → {dst[:80]}"
+              "（転送先は / で始まるサイトの中の場所か、自社のドメインだけ）")
+    if bad_rd:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

@@ -157,7 +157,11 @@ def find_identity(files, words, own_domains, read=None):
     pats = {}
     for sid, (names, arts, dom) in words.items():
         n_rx = [re.compile(re.escape(w), re.I) for w in names if len(w) >= 4]
-        a_rx = [re.compile(r"(?<![\w-])" + re.escape(w) + r"(?![\w-])", re.I) for w in arts if len(w) >= 4]
+        # 境目は英数・-・_ だけで見る（\w は日本語も含むので、日本語のすぐ後ろの slug を見逃していた。
+        # CI のログの見張り・学びの台帳の伏せと同じ部品）
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import log_leak_check as LL
+        a_rx = [re.compile(LL.word_rx(w), re.I) for w in arts if len(w) >= 4]
         pats[sid] = (n_rx, a_rx, own_domains | {dom})
     for f in files:
         if Path(f).suffix.lower() not in TEXT_EXT or f.startswith("private/"):
@@ -185,10 +189,10 @@ def test_client_identity_is_not_in_public_tracked_files():
     texts = {"a.py": "# 架空商事 の設定", "b.json": '{"u": "https://zz-shoji.example/blog/zz-secret-slug"}',
              "c.json": '{"u": "https://other.example/media/zz-secret-slug/"}', "d.md": "zz-secret-slugs と別の語",
              "site/x.html": "<a href='https://zz-shoji.example/'>架空商事</a>", "site/y.html": "架空の記事の題です",
-             "e.txt": "zz-secret-slug を書き直した"}
+             "e.txt": "zz-secret-slug を書き直した", "f.md": "記事zz-secret-slugを直した", "g.md": "ZZ-SECRET-SLUG"}
     got = find_identity(list(texts), words, doms, read=texts.get)
-    check("検出器: 名前・ドメイン・slug・題を拾い、他社の URL の中の同じ綴りと表示の場所の名前は拾わない",
-          sorted({f for f, _ in got}), ["a.py", "b.json", "e.txt", "site/y.html"])
+    check("検出器: 名前・ドメイン・slug・題を拾い（日本語のすぐ後ろ・大文字も）、他社の URL の中の同じ綴りと表示の場所の名前は拾わない",
+          sorted({f for f, _ in got}), ["a.py", "b.json", "e.txt", "f.md", "g.md", "site/y.html"])
     # 非公開のデータが無くても確かめられること: 追跡している原稿は自社のカテゴリだけ
     cats = {c for s in own for c in (S.load(s).get("categories") or {})}
     stray = []
