@@ -1,6 +1,6 @@
 {
 "ai-jidai-seo-taisaku": {
-"hash": "558b485b7e15f2430d5f24c096901d59",
+"hash": "0550379d664294902f19e8084db230d1",
 "modified": "2026-08-31"
 },
 "ai-kantan-shukyaku": {
@@ -36,7 +36,7 @@
 "modified": "2026-10-10"
 },
 "aio-junni-hendou-riyuu": {
-"hash": "95f857e03054b75ccd5f9544309d1733",
+"hash": "9ebc3205984aef14923df75f5efbafd2",
 "modified": "2026-10-10"
 },
 "aio-log-bunseki-tool-hikaku": {
@@ -82,6 +82,10 @@
 "aio-taisaku-chuiten": {
 "hash": "f7a0d9e51a0bbd21f51e9e4e629a475c",
 "modified": "2026-08-12"
+},
+"aio-taisaku-ctr": {
+"hash": "09b586d7831a929ef177a704e06ce927",
+"modified": "2026-10-11"
 },
 "aio-taisaku-donyu-hoho": {
 "hash": "7c9a9e2376223c4a6511b942fece10b2",
@@ -132,7 +136,7 @@
 "modified": "2026-10-03"
 },
 "aio-taisaku-yattewaikenai": {
-"hash": "51cf75209d0eb6dc8944fac6f0869630",
+"hash": "5810ef04fa0af299cc7fcb263d764116",
 "modified": "2026-09-02"
 },
 "aio-to-seo-no-chigai": {

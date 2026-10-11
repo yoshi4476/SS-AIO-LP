@@ -126,6 +126,8 @@ AI Overview・AIモードでの表示は、Search Consoleでは検索タイプ�
 
 **同じ1ページ目でも、1〜3位から4〜10位へ落ちると、当社の実測ではクリック率が約6分の1になります。**
 
+関連する内容として[AIO対策でCTRは上がる？](/aio/aio-taisaku-ctr/)も公開しています。
+
 <figure><img src="/images/aio-junni-hendou-riyuu/ctr-bars.png" alt="検索順位ごとの実測クリック率" width="1200" height="700" loading="lazy"><figcaption>検索順位ごとの実測クリック率（当メディア作成）</figcaption></figure>
 
 当社3サイトの実測（2026年6月23日〜9月20日・表示7,015回）では、順位の帯ごとのクリック率は次のとおりでした。

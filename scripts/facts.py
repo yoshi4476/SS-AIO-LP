@@ -47,7 +47,8 @@ def own_data_facts(site_id):
     if clicks >= 10:
         out.append({
             "id": "own-gsc",
-            "claim": f"当サイトの実測では、直近28日で{len(rows)}個の検索語から"
+            # rows は検索語×ページの行。同じ語が複数ページに出ると行が増えるので、語の数は kw の種類で数える
+            "claim": f"当サイトの実測では、直近28日で{len({r['kw'] for r in rows})}個の検索語から"
                      f"のべ{total:,}回表示され、{clicks}回のクリックがありました",
             "source": "自社サイトのSearch Console実測",
             "as_of": date.today().strftime("%Y-%m"), "verifiable": True,

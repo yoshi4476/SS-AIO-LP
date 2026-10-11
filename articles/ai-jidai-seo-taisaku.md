@@ -30,6 +30,8 @@ faq:
 
 AI時代のSEO対策とは、検索順位とAI引用の両方をゴールに置いた検索最適化です。
 
+AI検索でクリック率がどう変わるかは、[AIO対策とCTRの関係](/aio/aio-taisaku-ctr/)で実測をもとに整理しています。
+
 前提となる考え方は[AIO SEO監査とは？](/aio/aio-seo-audit/)でも扱っています。
 
 前提となる考え方は[AIO SEO対策とは？](/aio/aio-seo-taisaku/)でも扱っています。

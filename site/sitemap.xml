@@ -180,6 +180,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-taisaku-chuiten/ngok.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-taisaku-chuiten/check.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/aio-taisaku-ctr/</loc><lastmod>2026-10-11</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-taisaku-ctr/juni-ctr.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-taisaku-ctr/kiriwake.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-taisaku-ctr/go-no-mokuhyou.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/</loc><lastmod>2026-08-25</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-taisaku-donyu-hoho/prereq.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-taisaku-donyu-hoho/steps-zenhan.png</image:loc></image:image>
