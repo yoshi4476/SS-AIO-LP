@@ -22,6 +22,28 @@ on:
     - cron: "53 6 1,15 * *"  # JST 1日・15日 15:53 — 月次レポート（9:00）から7時間
     - cron: "23 20 * * 1,4"  # JST 火・金 05:23 — 集中モード（04:13）から1時間（記事の枠 08:07 までに終わる時間）
   workflow_dispatch:
+    # 修復の案を自動で取り込んだ後に、repair-branch が落ちた回の書き直しを頼むときの受け口（手で動かすときは空のまま）
+    inputs:
+      rewrite:
+        description: "yes なら、落ちた回の記事を書き直す（月次レポートなら発行し直す）"
+        required: false
+        default: ""
+      failed:
+        description: "落ちたワークフローの名前"
+        required: false
+        default: ""
+      failed_run:
+        description: "落ちた run の id"
+        required: false
+        default: ""
+      failed_started:
+        description: "落ちた run の開始時刻"
+        required: false
+        default: ""
+      attempt:
+        description: "修復の回数（2 以上は自動で取り込まない）"
+        required: false
+        default: "1"
 
 permissions:
   contents: write
@@ -254,7 +276,7 @@ jobs:
       - name: 書き直しの前にAIの作業場から鍵を外す
         id: rewrite
         if: >-
-          github.event_name == 'workflow_run' &&
+          (github.event_name == 'workflow_run' || github.event.inputs.rewrite == 'yes') &&
           steps.diag.outputs.broken == '0'
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
@@ -329,8 +351,8 @@ jobs:
       # 照合（report_audit）が通らなければ送らないのは通常発行と同じ
       - name: 落ちたのが月次レポートなら発行し直す
         if: >-
-          github.event_name == 'workflow_run' &&
-          github.event.workflow_run.name == 'Monthly Consulting Report' &&
+          (github.event.workflow_run.name == 'Monthly Consulting Report' ||
+           (github.event.inputs.rewrite == 'yes' && github.event.inputs.failed == 'Monthly Consulting Report')) &&
           steps.diag.outputs.broken == '0'
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
@@ -340,8 +362,8 @@ jobs:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
-          RUN_STARTED: ${{ github.event.workflow_run.run_started_at }}
-          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_STARTED: ${{ github.event.workflow_run.run_started_at || github.event.inputs.failed_started }}
+          RUN_ID: ${{ github.event.workflow_run.id || github.event.inputs.failed_run }}
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -z "$GCP_SERVICE_ACCOUNT_JSON" ] || [ -z "$GA4_ID" ]; then echo "実データ未設定のため発行しない"; exit 0; fi
@@ -407,7 +429,9 @@ jobs:
           # 異常が無かった回は黙る。直した回は「何が起きたか」を知らせる。
           # ただし元の実行が落ちた・取り消された回は、コードが無事でも黙らない（書き直し・再発行をした）
           routine=""
-          if [ "${{ github.event_name }}" = "workflow_run" ] && [ "${{ steps.diag.outputs.broken }}" = "0" ]; then
+          if [ "${{ github.event.inputs.rewrite }}" = "yes" ] && [ "${{ steps.diag.outputs.broken }}" = "0" ]; then
+            msg="🔧 自動修復: 取り込んだ直しの後に、落ちた回（${{ github.event.inputs.failed }}）の書き直し／再発行を実行しました（結果は実行ログ）"
+          elif [ "${{ github.event_name }}" = "workflow_run" ] && [ "${{ steps.diag.outputs.broken }}" = "0" ]; then
             msg="🔧 自動修復: ${{ github.event.workflow_run.name }} が ${{ github.event.workflow_run.conclusion }} で終わりました。コードに異常は無いため、書き直し／再発行を実行しました（結果は実行ログ）"
           elif [ "${{ steps.diag.outputs.broken }}" = "0" ]; then
             msg="✅ 自動修復: 異常なし"
@@ -521,9 +545,10 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
-  # 修復の案を、本体とは別の枝（selfheal/fix-<run>）に置いて知らせる。人が確かめてから master へ取り込む。
-  # ここでは案のコードを1行も動かさない（通知は案を当てる前の master の notify_slack.py で送る）。
-  # 鍵の外し方・許可の一覧・ワークフローに触れた案は置かない
+  # 修復の案を取り込む（2026-10-11 運用者「自動的に直して」）。鍵の無い作業場での検証が通り、機械の検査（patch_policy:
+  # 外へ送る・コマンド・環境変数・書き方を隠す書き方、守る場所、門を弱める変更、量）にも通った案は、人を待たずに本体へ入れ、
+  # 落ちた回の記事の書き直し（または月次レポートの発行し直し）を自動修復の手動起動でそのまま動かす。通らない案と2回目の修復は
+  # 枝（selfheal/fix-<run>）に置いて知らせる。案は別の作業場所（worktree）で当て、ここ（master のまま）では案のコードを動かさない
   repair-branch:
     needs: [heal, repair]
     if: always() && needs.heal.outputs.broken == '1'
@@ -531,6 +556,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: write
+      actions: write     # 取り込んだ後の書き直しを自動修復の手動起動で動かす
     steps:
       - uses: actions/checkout@v4
 
@@ -543,41 +569,93 @@ jobs:
           path: selfheal-out
           key: selfheal-patch-${{ github.run_id }}
 
-      - name: 修復の案を枝に置いて知らせる
+      - name: 修復の案を取り込む（検査に通らなければ枝に置く）
         env:
+          GH_TOKEN: ${{ github.token }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+          FAILED: ${{ github.event.workflow_run.name || github.event.inputs.failed }}
+          FAILED_RUN: ${{ github.event.workflow_run.id || github.event.inputs.failed_run }}
+          FAILED_STARTED: ${{ github.event.workflow_run.run_started_at || github.event.inputs.failed_started }}
+          ATTEMPT: ${{ github.event.inputs.attempt || '1' }}
         run: |
-          git config user.name "AIO Pipeline Bot"
-          git config user.email "noreply@7senses.co.jp"
+          git config --global user.name "AIO Pipeline Bot"
+          git config --global user.email "noreply@7senses.co.jp"
           repo="https://github.com/${{ github.repository }}"
           b="selfheal/fix-${{ github.run_id }}"
-          p=selfheal-out/selfheal.patch
+          p="$PWD/selfheal-out/selfheal.patch"
           checked="$([ "${{ needs.repair.outputs.ok }}" = "1" ] && echo 通った || echo 通らない)"
+          mode=branch
+          pol=""
+          if [ -s "$p" ]; then
+            # 判定は master のままのコードで行う（案のコードは動かさない）
+            pol=$(python scripts/patch_policy.py "$p" 2>&1 || true)
+            echo "$pol"
+            if [ "${{ needs.repair.outputs.ok }}" = "1" ] && [ "$ATTEMPT" = "1" ] && echo "$pol" | grep -q '^PATCH_POLICY=auto'; then
+              mode=auto
+            fi
+          fi
+          # 案は別の作業場所で当てる（site/ はビルドが作り直すので入れない）
+          git worktree add -q /tmp/apply HEAD
+          msg=""
           if [ ! -s "$p" ]; then
             msg="🚨 自動修復: 不具合がありますが、修復の案を作れませんでした。手当てが必要です"
+          elif ! git -C /tmp/apply apply --index --exclude='site/*' "$p"; then
+            msg="🚨 自動修復: 修復の案を当てられませんでした（差分の形が壊れています）。手当てが必要です"
           else
-            git switch -q -c "$b"
-            if ! git apply --index "$p"; then
-              git reset -q --hard; git switch -q -
-              msg="🚨 自動修復: 修復の案を当てられませんでした（差分の形が壊れています）。手当てが必要です"
+            bad=$(git -C /tmp/apply diff --cached --name-only --no-renames | grep -E '^(\.github/|\.claude/|automation/agent_settings_|automation/ai_container\.Dockerfile|scripts/agent_guard\.py|scripts/gcreds\.py|tests/gates_history_h91_agent_jail\.py|\.env)' || true)
+            n=$(git -C /tmp/apply diff --cached --name-only | wc -l)
+            if [ -n "$bad" ]; then
+              msg="🚨 自動修復: 修復の案が触ってはいけない場所（鍵の外し方・許可の一覧・ワークフロー）に触れていたため取り込みません。手当てが必要です"
+            elif [ "$n" = "0" ]; then
+              msg="🚨 自動修復: 修復の案に直した中身がありません（生成物だけ）。手当てが必要です"
             else
-              bad=$(git diff --cached --name-only --no-renames | grep -E '^(\.github/|\.claude/|automation/agent_settings_|automation/ai_container\.Dockerfile|scripts/agent_guard\.py|scripts/gcreds\.py|tests/gates_history_h91_agent_jail\.py|\.env)' || true)
-              if [ -n "$bad" ]; then
-                git reset -q --hard; git switch -q -
-                msg="🚨 自動修復: 修復の案が触ってはいけない場所（鍵の外し方・許可の一覧・ワークフロー）に触れていたため置いていません。手当てが必要です"
-              else
-                n=$(git diff --cached --name-only | wc -l)
-                git commit -q -m "selfheal: 修復の案（鍵の無い作業場で AI が作成。人が確かめてから master へ取り込む）"
-                if git push -q origin "$b"; then
-                  msg="🔧 自動修復: 修復の案を枝に置きました（${n}ファイル・鍵の無い作業場での検証: ${checked}）。差分を確かめてから master へ取り込んでください
-          $repo/compare/master...$b"
+              if [ "$mode" = "auto" ]; then
+                git -C /tmp/apply commit -q -m "selfheal: 不具合を自動修復（鍵の無い作業場で AI が作成・検証と機械の検査に通った案）"
+                pushed=0
+                for i in 1 2 3; do
+                  if git -C /tmp/apply pull -q --rebase origin master && git -C /tmp/apply push -q origin HEAD:master; then pushed=1; break; fi
+                  sleep 10
+                done
+                if [ "$pushed" = "1" ]; then
+                  msg="🔧 自動修復: 不具合を直して本体へ取り込みました（${n}ファイル・鍵の無い作業場での検証: ${checked}・機械の検査: 通過）
+          $repo/commit/$(git -C /tmp/apply rev-parse HEAD)"
+                  # 落ちた回の記事を書き直す（月次レポートなら発行し直す）。2回目の修復は自動で取り込まない（attempt=2）
+                  if [ -n "$FAILED" ]; then
+                    if gh workflow run selfheal.yml --ref master -f rewrite=yes -f failed="$FAILED" -f failed_run="$FAILED_RUN" \
+                         -f failed_started="$FAILED_STARTED" -f attempt=2; then
+                      msg="$msg
+          落ちた回（$FAILED）の書き直しを始めました"
+                    else
+                      msg="$msg
+          ⚠️ 落ちた回の書き直しを始められませんでした（次の記事の枠・救済が書きます）"
+                    fi
+                  fi
+                else
+                  git -C /tmp/apply rebase --abort 2>/dev/null || true
+                  mode=branch
+                  note="本体への取り込みが競合で3回失敗したため、枝に置きます。"
+                fi
+              fi
+              if [ "$mode" = "branch" ]; then
+                if [ "$ATTEMPT" != "1" ]; then
+                  reason="  直した後も同じ不具合が残ったため（2回目の修復は自動で取り込まない）"
+                elif [ "${{ needs.repair.outputs.ok }}" != "1" ]; then
+                  reason="  鍵の無い作業場での検証が通っていないため"
+                else
+                  reason=$(echo "$pol" | grep '^  ' | head -5)
+                fi
+                git -C /tmp/apply switch -q -c "$b"
+                git -C /tmp/apply commit -q -m "selfheal: 修復の案（取り込みを見送った。人が確かめてから master へ）" || true
+                if git -C /tmp/apply push -q origin "$b"; then
+                  msg="🔧 自動修復: 修復の案を枝に置きました（${n}ファイル）。${note:-}取り込みを見送った理由:
+          ${reason:-  （理由を取れませんでした）}
+          差分を確かめてから master へ取り込んでください: $repo/compare/master...$b"
                 else
                   msg="🚨 自動修復: 修復の案を枝へ push できませんでした。手当てが必要です"
                 fi
-                git switch -q -
               fi
             fi
           fi
@@ -585,7 +663,7 @@ jobs:
             msg="$msg
           ⚠️ ワークフローの変更案があります（CI の鍵では反映できないため外しました。成果物 workflow-change-repair を確認して手で反映）"
           fi
-          # ここは master のコードのまま（案は上で枝に置いて戻した）
+          # ここは master のコードのまま（案は /tmp/apply で当てた）
           python scripts/notify_slack.py "$msg
           $repo/actions/runs/${{ github.run_id }}" || true
 

@@ -103,11 +103,27 @@ def test_workflows_run_the_agent_without_keys():
     check("コードを直せる許可の一覧（maint）を使うのはコンテナの手順だけ", sorted(set(maint)) == boxed, True)
     sh = yaml.safe_load((WF / "selfheal.yml").read_text(encoding="utf-8"))["jobs"]
     rb = "\n".join(str(s.get("run", "")) for s in sh["repair-branch"]["steps"])
-    check("修復の案は本体へ入れず枝に置き、案のコードを動かさない（通知は master に戻ってから）・守る場所に触れた案は置かない",
-          ('git push -q origin "$b"' in rb, "git push origin master" not in rb and "git push -q\n" not in rb,
-           rb.rindex("git switch -q -") < rb.index("python scripts/notify_slack.py"),
-           all(x in rb for x in (r"\.github/", "automation/agent_settings_", r"scripts/agent_guard\.py"))),
-          (True, True, True, True))
+    # 2026-10-11 運用者「自動的に直して」: 検証と機械の検査（patch_policy）に通った1回目の案だけ本体へ取り込む。
+    # 案は別の作業場所（/tmp/apply）で当て、python は master のままの作業場所でだけ動かす（案のコードを動かさない）
+    pyl = [ln.strip() for ln in rb.splitlines() if re.search(r"\bpython3?\b", ln)]
+    check("修復の案の取り込み: 判定は当てる前に master のコードで・本体へは検査と検証に通った1回目だけ・案は別の作業場所で当てる",
+          (rb.index("python scripts/patch_policy.py") < rb.index("git -C /tmp/apply apply"),
+           all(x in rb for x in ("^PATCH_POLICY=auto", 'needs.repair.outputs.ok }}" = "1"', '"$ATTEMPT" = "1"')),
+           "push -q origin HEAD:master" in rb and rb.count("HEAD:master") == 1,
+           [ln for ln in pyl if "/tmp/apply" in ln], 'git -C /tmp/apply push -q origin "$b"' in rb),
+          (True, True, True, [], True))
+    check("守る場所に触れた案は取り込まない・枝にも置かない",
+          all(x in rb for x in (r"\.github/", "automation/agent_settings_", r"scripts/agent_guard\.py")), True)
+    import patch_policy as PP
+    bad = "diff --git a/scripts/x.py b/scripts/x.py\n--- a/scripts/x.py\n+++ b/scripts/x.py\n@@ -1 +1,2 @@\n x\n+import urllib.request\n"
+    good = "diff --git a/scripts/x.py b/scripts/x.py\n--- a/scripts/x.py\n+++ b/scripts/x.py\n@@ -1 +1,2 @@\n x\n+y = x.strip()\n"
+    check("検査: 外へ送る書き方は取り込まず、ふつうの直しは取り込む", (PP.judge(bad)[0], PP.judge(good)[0]), (False, True))
+    heal = sh["heal"]["steps"]
+    rw = next(s for s in heal if s.get("id") == "rewrite")
+    check("取り込んだ後の書き直しは、自動修復の手動起動（rewrite=yes・attempt=2）で動く",
+          ("github.event.inputs.rewrite == 'yes'" in str(rw.get("if")), "-f attempt=2" in rb,
+           (sh["repair-branch"].get("permissions") or {}).get("actions")),
+          (True, True, "write"))
     check("修復のジョブは鍵の無い作業場（非公開のデータを取らない・資格を git に残さない）",
           ([s for s in sh["repair"]["steps"] if "private-data" in str(s.get("uses", ""))],
            next(s for s in sh["repair"]["steps"] if "checkout" in str(s.get("uses", ""))).get("with", {}).get("persist-credentials")),

@@ -244,6 +244,10 @@ jobs:
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
           python scripts/agent_guard.py --publish || true
+          # 配信先に元からある記事と重複した公開済みの記事は、実績（同じ検索語に両方が出ている）で決めて機械が取り下げ、
+          # 既存の記事へ301で送る（AI には公開済みの記事を消させない。2026-10-11 運用者「自動的に直して」）
+          python scripts/dup_retract.py --write || true
+          python scripts/retract.py --pending --push || true
           rm -f indexing-service-account.json
 
       - name: 救済後の再監査（残った問題をログとエラーログに残す）

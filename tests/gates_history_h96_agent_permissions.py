@@ -154,8 +154,9 @@ def test_prompts_point_to_grep_glob_and_discard_draft():
     check("指示書・スキルが rm で記事を消すよう案内していない",
           sorted(f for f, t in texts.items() if re.search(r"\brm\s+(-\w+\s+)*articles/|articles/<slug>\.md を削除", t)), [])
     rp = texts["automation/retry_prompt.txt"]
-    check("救済の指示書: 重複の取り下げは discard_draft で消し、断られたら残りの手順を行わず要対応",
-          ("`python scripts/discard_draft.py <slug>`" in rp, "DISCARD_OK=no" in rp, "要対応: <slug> の取り下げ" in rp),
+    # 公開済みの記事は機械（dup_retract）が実績で決めて取り下げる（2026-10-11 運用者「自動的に直して」）。AI は要対応にしない
+    check("救済の指示書: 重複の取り下げは discard_draft で消し、断られたら残りの手順を行わず機械に任せる",
+          ("`python scripts/discard_draft.py <slug>`" in rp, "DISCARD_OK=no" in rp, "機械の手順（dup_retract）" in rp),
           (True, True, True))
 
 

@@ -34,7 +34,8 @@ from test_gates import check, ROOT
 
 sys.path.insert(0, str(ROOT / "scripts"))
 
-TIMING = {"sched_guard.py", "schedule_guard.py", "focus_report.py", "ci_rerun.py", "notify_slack.py"}
+# patch_policy.py は自動修復の差分だけを読む（お客様のデータを読まない。2026-10-11）
+TIMING = {"sched_guard.py", "schedule_guard.py", "focus_report.py", "ci_rerun.py", "notify_slack.py", "patch_policy.py"}
 CLIENT_FILES = re.compile(r"^data/clients/[^/]+/(company|brief|facts|site_private|private)\.json$")
 # 当社の料金の書き方（月額◯万円・初期費用◯万円・◯万円／月・"◯万〜◯万円"）。検索数（660万/月）や記事の例文
 # （初期費用は平均755万円）は拾わない
