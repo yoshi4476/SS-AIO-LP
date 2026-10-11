@@ -369,6 +369,29 @@ def _git_path(rel):
     return p if p.is_absolute() else ROOT / p
 
 
+def _record_path():
+    """この作業場所で重ねて置いたファイルの記録（作業場所ごと。git の作業場所どうしで共有する info/exclude とは別に持つ）"""
+    r = _public_git("rev-parse", "--git-dir")
+    if r.returncode or not r.stdout.strip():
+        return None
+    d = Path(r.stdout.strip())
+    return (d if d.is_absolute() else ROOT / d) / "private_overlay.json"
+
+
+def _record():
+    p = _record_path()
+    try:
+        return set(json.loads(p.read_text(encoding="utf-8"))) if p and p.is_file() else set()
+    except ValueError:
+        return set()
+
+
+def _write_record(rels):
+    p = _record_path()
+    if p:
+        p.write_text(json.dumps(sorted(set(rels)), ensure_ascii=False), encoding="utf-8")
+
+
 def _exclude_entries():
     p = _git_path("info/exclude")
     t = p.read_text(encoding="utf-8", errors="ignore") if p and p.is_file() else ""
@@ -456,6 +479,7 @@ def overlay_in():
                     shutil.copy2(p, dst)
                 rels.append(rel)
     _write_exclude(rels + [r for r in _exclude_entries() if (ROOT / r).exists()])
+    _write_record(rels)
     if (b / ".git").is_dir():
         sha = _git("rev-parse", "HEAD").stdout.strip()
         if sha:
@@ -477,9 +501,15 @@ def overlay_out(unstage=True):
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
     prev = _exclude_entries()
+    # 消すのは「この作業場所で重ねて置いた」のに作業場所から消えたものだけ。見張りの一覧（info/exclude）は git の
+    # 作業場所どうしで共有されるので、別の作業場所が置いた分まで「消えた」と読み、置き場から消していた（2026-10-12、
+    # 試しの作業場所で重ね置きした後の commit で、お客様の記事2本・画像・台本を消した。置き場の履歴から戻した）
+    mine = _record()
     for rel in prev:
-        if not (ROOT / rel).exists() and (b / rel).is_file() and rel.split("/")[0] in ("articles", "site", "data"):
+        if rel in mine and not (ROOT / rel).exists() and (b / rel).is_file() \
+                and rel.split("/")[0] in ("articles", "site", "data"):
             (b / rel).unlink()
+    _write_record([r for r in mine if (ROOT / r).exists()] + files)
     _write_exclude(sorted(set(files) | {r for r in prev if (ROOT / r).exists()}))
     if unstage and files:
         for i in range(0, len(files), 200):
@@ -559,6 +589,7 @@ def scope(target):
                     shutil.rmtree(q, ignore_errors=True)
         # 外したファイルは commit の見張りの一覧からも外す（残すと、戻す前に保存したとき「消えた」と読まれうる）
         _write_exclude([r for r in _exclude_entries() if r not in set(drop)])
+        _write_record([r for r in _record() if r not in set(drop)])
         # 3. 非公開の置き場を絞る。当社の料金・営業の台本・レポートと、お客様の門も AI の間は置かない
         pats = ["/*", "!/sales/", "!/reports/", "!/tests/", "!/security/"]
         pats += [f"!/clients/{c}/" for c in others]

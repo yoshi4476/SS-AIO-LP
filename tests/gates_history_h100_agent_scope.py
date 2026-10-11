@@ -5,7 +5,8 @@
 非公開の置き場は git なので、書きかけを手元で commit してから sparse-checkout で外す。戻し損ねても消えないこと、
 戻した後は元と1バイトも違わないこと、絞っている間に外した場所へ書かれても commit 済みの中身を上書きしないこと、
 範囲ごとの回（agent_guard --checkpoint / --protect --pass）が範囲の外の書き換えだけを戻すことを、
-一時の作業場所（git worktree）と非公開の置き場の写しで確かめる（本物の作業場所・置き場には触れない）。
+一時の写し（git clone。worktree は見張りの一覧 info/exclude を本物と共有するので使わない）と非公開の置き場の写しで確かめる
+（本物の作業場所・置き場には触れない）。
 """
 import json
 import shutil
@@ -94,8 +95,10 @@ def test_scope_narrows_and_widens_without_loss():
     wt = tmp / "w"
     g = lambda *a, cwd=ROOT: subprocess.run(["git", *a], cwd=cwd, capture_output=True, text=True, encoding="utf-8")
     try:
-        if g("worktree", "add", "-q", "--detach", str(wt), "HEAD").returncode:
-            print("  WARN  一時の作業場所を作れませんでした")
+        # worktree は info/exclude を本物の作業場所と共有し、重ね置きの一覧を書き換える（2026-10-12 にそれで置き場の
+        # 記事を消した）。別の .git を持つ写しで試す
+        if g("clone", "-q", "--no-hardlinks", "--depth", "1", f"file://{ROOT.as_posix()}", str(wt)).returncode:
+            print("  WARN  一時の写しを作れませんでした")
             return
         # 手元で直している途中の道具も試す（HEAD の写しに上書き）
         for f in ("private_store.py", "agent_guard.py", "client_private.py", "sites.py"):
@@ -122,5 +125,48 @@ def test_scope_narrows_and_widens_without_loss():
         if "pass" in o:
             check("範囲ごとの回: 範囲の外の書き換えは戻り、範囲の中は残り、範囲の外の新しい記事は消える", o["pass"], [True, True, True])
     finally:
-        g("worktree", "remove", "--force", str(wt))
         shutil.rmtree(tmp, ignore_errors=True)
+
+
+def test_overlay_out_deletes_only_what_this_workspace_placed():
+    print("\n■ 重ね置きの見張り: この作業場所で置いて消したものだけ置き場からも消す（ほかの作業場所が一覧に足した分は消さない）")
+    import os
+    from unittest import mock
+    import private_store as PS
+    import sites as S
+    with tempfile.TemporaryDirectory() as td:
+        t = Path(td)
+        pub, priv = t / "pub", t / "priv"
+        g = lambda cwd, *a: subprocess.run(["git", *a], cwd=cwd, capture_output=True, text=True, encoding="utf-8")
+        for d in (pub, priv):
+            d.mkdir()
+            g(d, "init", "-q")
+            g(d, "config", "user.email", "gate@example.invalid")
+            g(d, "config", "user.name", "gate")
+        (pub / "sites").mkdir()
+        (pub / "articles").mkdir()
+        (pub / "sites" / "own-x.json").write_text(json.dumps({"id": "own-x", "domain": "own.example",
+                                                              "categories": {"ox": "O"}}), encoding="utf-8")
+        g(pub, "add", "-A")
+        g(pub, "commit", "-q", "-m", "init")
+        with mock.patch.dict(os.environ, {"SS_PRIVATE_DIR": str(priv)}), \
+                mock.patch.object(S, "SITES_DIR", pub / "sites"), mock.patch.object(S, "ROOT", pub), \
+                mock.patch.object(PS, "ROOT", pub), mock.patch.object(PS, "_CLIENT_SLUGS", None):
+            PS.write_site({"id": "c0a1b2c3d", "public_id": "c0a1b2c3d", "name": "架空の社", "domain": "zz.example",
+                           "type": "external-md", "categories": {"zz-blog": "Z"}}, pub / "sites")
+            for slug in ("zz-a", "zz-b"):
+                (priv / "articles").mkdir(exist_ok=True)
+                (priv / "articles" / f"{slug}.md").write_text(f"---\ntitle: {slug}\ncategory: zz-blog\n---\n本文\n",
+                                                             encoding="utf-8")
+            g(priv, "add", "-A")
+            g(priv, "commit", "-q", "-m", "init")
+            PS.overlay_in()
+            # 別の作業場所が置いた分（この作業場所には無い）が、共有の見張りの一覧に足された
+            (priv / "articles" / "zz-c.md").write_text("---\ntitle: c\ncategory: zz-blog\n---\n本文\n", encoding="utf-8")
+            PS._write_exclude(PS._exclude_entries() + ["articles/zz-c.md"])
+            # この作業場所では zz-a を消した（取り下げ・統合など）
+            (pub / "articles" / "zz-a.md").unlink()
+            PS.overlay_out(unstage=False)
+            check("この作業場所で置いて消した記事は置き場からも消し、ほかの作業場所が一覧に足した記事は消さない",
+                  ((priv / "articles" / "zz-a.md").exists(), (priv / "articles" / "zz-c.md").exists(),
+                   (priv / "articles" / "zz-b.md").exists()), (False, True, True))
