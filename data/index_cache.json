@@ -14,6 +14,11 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/": {
+"at": 1791768474.5321004,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://ai.7senses.co.jp/ai-marketing/biyoushitsu-shukyaku-houhou/": {
 "at": 1791176035.4924185,
 "state": "送信して登録されました",
@@ -254,6 +259,116 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://ai.7senses.co.jp/aio/ai-kensaku-taiou-settei/": {
+"at": 1791768474.4189506,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-checker/": {
+"at": 1791768479.6004095,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-dairiten-erabikata/": {
+"at": 1791768479.8000333,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-donyu-jirei/": {
+"at": 1791768480.0144968,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-erabareru-kiji-kakikata/": {
+"at": 1791768480.598297,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/": {
+"at": 1791768480.7288542,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-junni-hendou-riyuu/": {
+"at": 1791768485.8222058,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/": {
+"at": 1791768486.1427414,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-mojisuu/": {
+"at": 1791768486.3625758,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-seo-audit/": {
+"at": 1791768486.8464339,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-seo-meo-chigai/": {
+"at": 1791768487.027845,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-seo-taisaku/": {
+"at": 1791768492.0344198,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-service-hikaku/": {
+"at": 1791768492.367567,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-shindan-yarikata/": {
+"at": 1791768492.5971105,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-shukyaku/": {
+"at": 1791768493.30126,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-taisaku-ai-inyou-sareru/": {
+"at": 1791768493.3636487,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-taisaku-ai-kensaku/": {
+"at": 1791768498.3816094,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-taisaku-chuiten/": {
+"at": 1791768498.7335017,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-taisaku-ctr/": {
+"at": 1791768498.9216902,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-taisaku-dairiten/": {
+"at": 1791768500.0168273,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
+},
+"https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/": {
+"at": 1791768500.0168345,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-taisaku-faq/": {
+"at": 1791768504.7524922,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://ai.7senses.co.jp/aio/aio-taisaku-guide/": {
 "at": 1791176016.137105,
 "state": "送信して登録されました",
@@ -261,6 +376,11 @@
 },
 "https://ai.7senses.co.jp/aio/aio-taisaku-gutairei/": {
 "at": 1791176016.1841483,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/aio-taisaku-hilink/": {
+"at": 1791768505.192317,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -334,8 +454,23 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://ai.7senses.co.jp/aio/clinic-hp-ryokin-nosekata/": {
+"at": 1791768505.1923246,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/clinic-shoujou-page-tsukurikata/": {
+"at": 1791768505.89797,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://ai.7senses.co.jp/aio/fudousan-ai-kensaku-taisaku/": {
 "at": 1791176068.1761107,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/fudousan-aio-taisaku-yarikata/": {
+"at": 1791768506.250317,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -344,8 +479,23 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://ai.7senses.co.jp/aio/gaiheki-tosou-ai-kensaku-shukyaku/": {
+"at": 1791768511.142605,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://ai.7senses.co.jp/aio/gaiheki-tosou-aio-taisaku/": {
 "at": 1791176082.5434124,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/gemini-inyou-noru-houhou/": {
+"at": 1791768511.3331287,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/koumuten-ai-kensaku-shukyaku/": {
+"at": 1791768511.5612617,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -384,6 +534,16 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://ai.7senses.co.jp/aio/reform-kaisha-aio-taisaku/": {
+"at": 1791768512.178343,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/reform-shukyaku-daikou/": {
+"at": 1791768512.520243,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://ai.7senses.co.jp/aio/saas-hikaku-kiji-taisaku/": {
 "at": 1791176126.176033,
 "state": "送信して登録されました",
@@ -414,10 +574,20 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://ai.7senses.co.jp/aio/shika-hp-chiryou-setsumei-kakikata/": {
+"at": 1791768517.4636052,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://ai.7senses.co.jp/aio/shika-hp-ryokinhyou-kakikata/": {
-"at": 1791176151.0675664,
-"state": "URL が Google に認識されていません",
-"verdict": "NEUTRAL"
+"at": 1791768517.5790472,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/aio/shika-shoujou-page-tsukurikata/": {
+"at": 1791768517.899393,
+"state": "送信して登録されました",
+"verdict": "PASS"
 },
 "https://ai.7senses.co.jp/aio/zeirishi-houjin-aio/": {
 "at": 1790583345.316555,
@@ -431,6 +601,31 @@
 },
 "https://ai.7senses.co.jp/blog/": {
 "at": 1790583435.453065,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/compare/": {
+"at": 1791768460.913255,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/compare/ai-marketing/": {
+"at": 1791768461.073641,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/compare/aio/": {
+"at": 1791768461.0736501,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/compare/meo/": {
+"at": 1791768461.906761,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/compare/seo/": {
+"at": 1791768461.906768,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -466,6 +661,11 @@
 },
 "https://ai.7senses.co.jp/editorial-policy/": {
 "at": 1790583480.6856825,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/faq/": {
+"at": 1791768398.1561658,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -924,6 +1124,11 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://ai.7senses.co.jp/industry/reform/faq/": {
+"at": 1791768404.4915974,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://ai.7senses.co.jp/industry/seikotsuin/": {
 "at": 1790583551.4321518,
 "state": "送信して登録されました",
@@ -961,6 +1166,26 @@
 },
 "https://ai.7senses.co.jp/lp/": {
 "at": 1790583429.1983826,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/lp/fudosan/": {
+"at": 1791768454.8545952,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/lp/koumuten/": {
+"at": 1791768454.8546033,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/lp/medical/": {
+"at": 1791768455.4332035,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/lp/shigyou/": {
+"at": 1791768455.4544835,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -1069,8 +1294,193 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://ai.7senses.co.jp/research/": {
+"at": 1791768404.491572,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/ai-answers/": {
+"at": 1791768410.6891706,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/biyou-ai-sources/": {
+"at": 1791768410.68918,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/clinic-ai-sources/": {
+"at": 1791768410.6891832,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/clinic-ai-sources/questions/": {
+"at": 1791768410.767314,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/dental-ai-sources/": {
+"at": 1791768410.9050364,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/dental-ai-sources/questions/": {
+"at": 1791768417.0644116,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/ec-ai-sources/": {
+"at": 1791768417.0644193,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://ai.7senses.co.jp/research/esthe-ai-sources/": {
+"at": 1791768417.0644274,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/fitness-ai-sources/": {
+"at": 1791768417.064432,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/fudosan-ai-sources/": {
+"at": 1791768417.130426,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/fudosan-ai-sources/questions/": {
+"at": 1791768423.0335815,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/fuyouhin-ai-sources/": {
+"at": 1791768423.3383102,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/gaiheki-ai-sources/": {
+"at": 1791768423.338317,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/hoken-ai-sources/": {
+"at": 1791768423.4638124,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://ai.7senses.co.jp/research/hotel-ai-sources/": {
+"at": 1791768423.5155737,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/inshoku-ai-sources/": {
+"at": 1791768429.218528,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/jidousha-ai-sources/": {
+"at": 1791768429.5311162,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/juku-ai-sources/": {
+"at": 1791768429.727329,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/kaigo-ai-sources/": {
+"at": 1791768429.8418832,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/kaji-ai-sources/": {
+"at": 1791768429.841891,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/kensetsu-ai-sources/": {
+"at": 1791768435.6164165,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/koumuten-ai-sources/": {
+"at": 1791768435.8591683,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/koumuten-ai-sources/questions/": {
+"at": 1791768435.8993511,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/ranking/": {
+"at": 1791768436.2137747,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/saas-ai-sources/": {
+"at": 1791768441.9377546,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/seikotsuin-ai-sources/": {
+"at": 1791768442.0920846,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/seizou-ai-sources/": {
+"at": 1791768442.2268887,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/shashin-ai-sources/": {
+"at": 1791768442.4777503,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/shigyou-ai-sources/": {
+"at": 1791768442.6501968,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/shigyou-ai-sources/questions/": {
+"at": 1791768448.1485972,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/sougi-ai-sources/": {
+"at": 1791768448.5007958,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/unso-ai-sources/": {
+"at": 1791768448.5008044,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/vet-ai-sources/": {
+"at": 1791768448.9340565,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/wedding-ai-sources/": {
+"at": 1791768449.042591,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/research/yakkyoku-ai-sources/": {
+"at": 1791768454.5494413,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://ai.7senses.co.jp/seo/": {
 "at": 1790583391.7386615,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/seo/ai-jidai-seo-taisaku/": {
+"at": 1791768473.6640246,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -1199,6 +1609,66 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://ai.7senses.co.jp/tools/": {
+"at": 1791768398.1561563,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/tools/ai-check/": {
+"at": 1791768398.1561754,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/tools/aio-check/": {
+"at": 1791768398.1561797,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/tools/kuchikomi-henshin/": {
+"at": 1791768404.4777186,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/tools/meo-check/": {
+"at": 1791768404.477727,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/tools/url-check/": {
+"at": 1791768398.1561713,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/topics/": {
+"at": 1791768467.1344516,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/topics/107cc2af/": {
+"at": 1791768467.3011787,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/topics/40d4ace7/": {
+"at": 1791768467.301186,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
+},
+"https://ai.7senses.co.jp/topics/5cb002c4/": {
+"at": 1791768468.2120044,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/topics/a494ab79/": {
+"at": 1791768473.4269004,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://ai.7senses.co.jp/topics/da9a2779/": {
+"at": 1791768473.4274788,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp": {
 "at": 1791176176.3539011,
 "state": "送信して登録されました",
@@ -1244,14 +1714,29 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/corporate-backoffice-chigai": {
+"at": 1791768603.6941504,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/denshichoboho-chusho-kigyo-taio": {
 "at": 1791176309.2474203,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/eigyo-keiri-chigai": {
+"at": 1791768597.5877197,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/excel-keiri-koritsuka": {
-"at": 1791176251.688737,
-"state": "検出 - インデックス未登録",
+"at": 1791768629.0460596,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/fandm-kichodaiko-hyoban": {
+"at": 1791768597.2603545,
+"state": "URL が Google に認識されていません",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/freee-keihi-seisan-yarikata": {
@@ -1280,7 +1765,7 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/getsuji-kessan-bpo-keiyakumae": {
-"at": 1791176213.6839337,
+"at": 1791768610.2548218,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1289,8 +1774,28 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/getsuji-kessan-houkokusho-kakikata": {
+"at": 1791768597.8438587,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/getsuji-kessan-nyumon": {
-"at": 1791176252.2176564,
+"at": 1791768629.5122972,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/getsuji-kessan-soukika-houhou": {
+"at": 1791768648.4272025,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/getsuji-nenji-kessan-chigai": {
+"at": 1791768603.9228501,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/getsuji-shihanki-kessan-chigai": {
+"at": 1791768604.3954978,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1300,7 +1805,7 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/inshokuten-keiri-yarikata": {
-"at": 1791176245.5597932,
+"at": 1791768623.1132925,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1340,7 +1845,7 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/keihi-seisan-bpo": {
-"at": 1791176271.2736456,
+"at": 1791768641.6355023,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1355,7 +1860,7 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/keihi-seisan-system-erabikata": {
-"at": 1791176258.5914578,
+"at": 1791768635.589284,
 "state": "クロール済み - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1383,6 +1888,16 @@
 "at": 1790271057.46914,
 "state": "送信して登録されました",
 "verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-bpo-toha": {
+"at": 1791768648.1632414,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-bu-keiri-ka-chigai": {
+"at": 1791768591.3729851,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/keiri-daiko-erabikata": {
 "at": 1791176321.8594782,
@@ -1419,13 +1934,18 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/keiri-gaichuu-handan-kijun": {
+"at": 1791768642.0090983,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/keiri-gaichuu-hikitsugi": {
 "at": 1791176314.690676,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/keiri-gaichuu-hiyou-souba": {
-"at": 1791176258.2929122,
+"at": 1791768635.267143,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1435,8 +1955,8 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/keiri-gaichuu-kojin": {
-"at": 1791176257.991836,
-"state": "検出 - インデックス未登録",
+"at": 1791768630.5113995,
+"state": "URL が Google に認識されていません",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-minaoshi": {
@@ -1450,13 +1970,13 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/keiri-gyomu-flowchart-kakikata": {
-"at": 1791176252.3441339,
+"at": 1791768629.5123093,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/keiri-gyomu-itaku": {
-"at": 1791176208.1883469,
-"state": "検出 - インデックス未登録",
+"at": 1791768609.9825473,
+"state": "URL が Google に認識されていません",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/keiri-gyomu-jidoka-jirei": {
@@ -1499,6 +2019,11 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/keiri-jimu-hojo-chigai": {
+"at": 1791768597.5414538,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/keiri-kaikeishi-chigai": {
 "at": 1791176207.6719558,
 "state": "送信して登録されました",
@@ -1525,12 +2050,12 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/keiri-kyujin-gaichuu": {
-"at": 1791176239.1400483,
+"at": 1791768622.4914527,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/keiri-macro-jidoka": {
-"at": 1791176245.9967723,
+"at": 1791768623.9512527,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1555,17 +2080,22 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/keiri-outsourcing-donyu-jirei": {
-"at": 1791176309.8681715,
+"at": 1791768641.8159673,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-outsourcing-hiyou-souba": {
+"at": 1791768648.1540203,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/keiri-shigoto-koritsuka": {
+"at": 1791768629.3710065,
 "state": "URL が Google に認識されていません",
 "verdict": "NEUTRAL"
 },
-"https://corp.7senses.co.jp/blog/keiri-shigoto-koritsuka": {
-"at": 1791176252.136872,
-"state": "検出 - インデックス未登録",
-"verdict": "NEUTRAL"
-},
 "https://corp.7senses.co.jp/blog/keiri-shiwake-jidoka-genkai": {
-"at": 1791176245.6890476,
+"at": 1791768623.1308107,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1594,6 +2124,11 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/keiri-zokujinka-kaisho": {
+"at": 1791768643.2988284,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/kicho-jidoka-app": {
 "at": 1791176220.7074509,
 "state": "送信して登録されました",
@@ -1604,8 +2139,13 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/kichodaiko-hiyou-souba": {
+"at": 1791768642.0090919,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/kichodaiko-houjin-hiyou-souba": {
-"at": 1791176226.6912003,
+"at": 1791768616.7761977,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1619,10 +2159,25 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/kichodaiko-okinawa": {
+"at": 1791768591.0100026,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/kichodaiko-osaka": {
+"at": 1791768597.6650062,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/kichodaiko-outsourcing": {
 "at": 1790584189.8062396,
 "state": "送信して登録されました",
 "verdict": "PASS"
+},
+"https://corp.7senses.co.jp/blog/kichodaiko-ryokinhyo-zeirishi": {
+"at": 1791768591.1224751,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/kichodaiko-toha": {
 "at": 1790271093.0183191,
@@ -1640,12 +2195,12 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/kojin-jigyonushi-choubo-tsukekata": {
-"at": 1791176258.6541877,
+"at": 1791768635.7946396,
 "state": "クロール済み - インデックス未登録",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/kojin-keiei-keiri-yarikata": {
-"at": 1791176239.8105521,
+"at": 1791768622.7533364,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1659,14 +2214,19 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/middle-office-backoffice-chigai": {
+"at": 1791768603.9228594,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/nencho-koritsuka-houhou": {
 "at": 1791176302.0148644,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/notion-kicho-jidoka": {
-"at": 1791176232.929904,
-"state": "検出 - インデックス未登録",
+"at": 1791768616.776209,
+"state": "URL が Google に認識されていません",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/rakurakuseisan-keihi-seisan-yarikata": {
@@ -1675,7 +2235,7 @@
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/seikyusho-check-koritsuka": {
-"at": 1791176226.5420382,
+"at": 1791768616.444072,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
@@ -1695,18 +2255,18 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/seikyusho-ginko-furikomi-yarikata": {
-"at": 1791176214.1003377,
+"at": 1791768610.7801251,
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/seikyusho-hakko-tesuryo-souba": {
-"at": 1791176233.3561785,
-"state": "検出 - インデックス未登録",
+"at": 1791768617.3615196,
+"state": "URL が Google に認識されていません",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/seikyusho-hakko-yarikata": {
-"at": 1791176265.029414,
-"state": "URL が Google に認識されていません",
+"at": 1791768636.9032319,
+"state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/seikyusho-jidoka-ai": {
@@ -1725,8 +2285,8 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/seikyusho-mitsuori-yarikata": {
-"at": 1791176214.0650065,
-"state": "URL が Google に認識されていません",
+"at": 1791768610.2548292,
+"state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/blog/seikyusho-shiharai-yarikata": {
@@ -1759,6 +2319,11 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/blog/shiwake-jidoka-houhou": {
+"at": 1791768654.5373225,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/shiwake-miss-fusegu-houhou": {
 "at": 1791176302.5876162,
 "state": "送信して登録されました",
@@ -1774,10 +2339,20 @@
 "state": "検出 - インデックス未登録",
 "verdict": "NEUTRAL"
 },
+"https://corp.7senses.co.jp/blog/sweeep-seikyusho": {
+"at": 1791768603.8554463,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/blog/tekikaku-seikyusho-youken": {
-"at": 1791176213.6839232,
-"state": "検出 - インデックス未登録",
+"at": 1791768610.012249,
+"state": "URL が Google に認識されていません",
 "verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/tenpo-jimu-sagyou-ai-koritsuka": {
+"at": 1791768649.7587473,
+"state": "送信して登録されました",
+"verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/theme": {
 "at": 1791176194.865014,
@@ -1840,14 +2415,59 @@
 "verdict": "PASS"
 },
 "https://corp.7senses.co.jp/blog/zeirishi-houshu-kichodaiko-souba": {
-"at": 1791176220.5055592,
+"at": 1791768616.444062,
 "state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/blog/zeirishi-kichodaiko-marunage": {
+"at": 1791768591.0100112,
+"state": "URL が Google に認識されていません",
 "verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/company": {
 "at": 1791176188.6357572,
 "state": "送信して登録されました",
 "verdict": "PASS"
+},
+"https://corp.7senses.co.jp/compare": {
+"at": 1791768656.1151023,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/compare/backoffice": {
+"at": 1791768654.5373363,
+"state": "検出 - インデックス未登録",
+"verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/compare/keiri-bpo": {
+"at": 1791768654.5815997,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/compare/keiri-jitsumu": {
+"at": 1791768654.7824888,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/contact": {
+"at": 1791768679.4601066,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/glossary": {
+"at": 1791768663.7785945,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/industry": {
+"at": 1791768663.7786198,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/industry/shigyou/faq": {
+"at": 1791768663.7786143,
+"state": "URL が Google に認識されていません",
+"verdict": "NEUTRAL"
 },
 "https://corp.7senses.co.jp/news": {
 "at": 1791176188.9544063,
@@ -1864,10 +2484,20 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/news/rakushift-ai-development": {
+"at": 1791768584.7495518,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://corp.7senses.co.jp/news/scholarship-support": {
-"at": 1791176189.0392606,
+"at": 1791768584.7495587,
 "state": "重複しています。Google により、ユーザーがマークしたページとは異なるページが正規ページとして選択されました",
 "verdict": "NEUTRAL"
+},
+"https://corp.7senses.co.jp/press/kit": {
+"at": 1791768584.7206442,
+"state": "送信して登録されました",
+"verdict": "PASS"
 },
 "https://corp.7senses.co.jp/rakushift": {
 "at": 1791176182.7447848,
@@ -1919,6 +2549,61 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://corp.7senses.co.jp/tools/keiri-check": {
+"at": 1791768584.7495763,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/topics": {
+"at": 1791768676.5515952,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/topics/14c1c15e": {
+"at": 1791768667.0048146,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/topics/577dea2f": {
+"at": 1791768673.287776,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/topics/75feedc8": {
+"at": 1791768673.175436,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/topics/8771f0ae": {
+"at": 1791768670.1511946,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/topics/973fa6d0": {
+"at": 1791768663.7786248,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/topics/9f798325": {
+"at": 1791768673.5810468,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/topics/bpo": {
+"at": 1791768667.4120424,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/topics/e00ab192": {
+"at": 1791768667.130943,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://corp.7senses.co.jp/topics/ff108de1": {
+"at": 1791768675.1260874,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/": {
 "at": 1791176352.7013214,
 "state": "送信して登録されました",
@@ -1934,8 +2619,23 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/ai-donyu-hiyou-soba/": {
+"at": 1791768736.5767908,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-ai-katsuyo-jirei/": {
+"at": 1791768730.4641187,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/ai-hojokin-chakkin-itsu/": {
 "at": 1791176404.5340707,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-chatbot-donyu/": {
+"at": 1791768730.3844874,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -1944,23 +2644,83 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/ai-hojokin-clinic-katsuyou/": {
+"at": 1791768727.1808217,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/ai-hojokin-fusaitaku-riyu/": {
 "at": 1791176430.6792629,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/ai-hojokin-futaitaku-riyu/": {
+"at": 1791768739.8994746,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/ai-hojokin-gbizid-shutoku/": {
-"at": 1791176446.048279,
+"at": 1791768701.896618,
 "state": "見つかりませんでした（404）",
 "verdict": "NEUTRAL"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-guide-2026/": {
+"at": 1791768743.0777507,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-ikura-moraeru/": {
+"at": 1791768723.9172657,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-jissekihoukoku-kakikata/": {
+"at": 1791768730.5226126,
+"state": "送信して登録されました",
+"verdict": "PASS"
 },
 "https://lp.7senses.co.jp/blog/ai-hojokin-kaikeisoft-taisho/": {
 "at": 1791176391.5002282,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/ai-hojokin-kensetsugyou-katsuyou/": {
+"at": 1791768730.2084775,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-miradigi-keieicheck/": {
+"at": 1791768736.6120386,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/": {
+"at": 1791768736.6908073,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-security-action-2star/": {
+"at": 1791768742.840356,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/ai-hojokin-security-action-hoshi2/": {
 "at": 1791176446.0482838,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-shippai-yokuaru/": {
+"at": 1791768739.8532262,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-shinsei-yarikata/": {
+"at": 1791768724.311523,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/ai-hojokin-taisho-tool/": {
+"at": 1791768724.3115296,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -1981,6 +2741,11 @@
 },
 "https://lp.7senses.co.jp/blog/chusho-kigyo-joseikin/": {
 "at": 1791176410.6816103,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/chusho-kigyocho-hojokin/": {
+"at": 1791768692.6749914,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2009,8 +2774,18 @@
 "state": "URL が Google に認識されていません",
 "verdict": "NEUTRAL"
 },
+"https://lp.7senses.co.jp/blog/gaikokujin-koyou-joseikin-kojinjigyonushi/": {
+"at": 1791768686.468662,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/gakushujuku-ai-hojokin-shinsei-susumekata/": {
 "at": 1791176384.8597236,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/gbizid-shutoku/": {
+"at": 1791768746.245161,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2050,12 +2825,22 @@
 "verdict": "PASS"
 },
 "https://lp.7senses.co.jp/blog/it-donyu-shienjigyosha-erabikata/": {
-"at": 1791176365.9207234,
-"state": "検出 - インデックス未登録",
-"verdict": "NEUTRAL"
+"at": 1791768699.010867,
+"state": "送信して登録されました",
+"verdict": "PASS"
 },
 "https://lp.7senses.co.jp/blog/it-hojokin-2026-kojinjigyonushi/": {
 "at": 1791176378.699819,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-biyoushitsu/": {
+"at": 1791768717.939993,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-chusho-teigi/": {
+"at": 1791768723.956379,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2064,8 +2849,23 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/": {
+"at": 1791768748.9116726,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-denkaru-kyoyu-clinic/": {
+"at": 1791768692.7854714,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/it-hojokin-gakushujuku/": {
 "at": 1791176453.380963,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-inshokuten/": {
+"at": 1791768711.5568843,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2074,8 +2874,23 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/it-hojokin-joken/": {
+"at": 1791768692.7854786,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/it-hojokin-kensetsugyou-jirei/": {
 "at": 1791176378.436622,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/": {
+"at": 1791768714.5490196,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-pc/": {
+"at": 1791768717.7224963,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2094,6 +2909,21 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/it-hojokin-saitakuritsu/": {
+"at": 1791768746.0859873,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-schedule/": {
+"at": 1791768752.4159603,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-seizougyou/": {
+"at": 1791768711.5568895,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/it-hojokin-shika-iin/": {
 "at": 1791176424.3987918,
 "state": "送信して登録されました",
@@ -2101,6 +2931,21 @@
 },
 "https://lp.7senses.co.jp/blog/it-hojokin-shukuhakugyou/": {
 "at": 1791176462.3199987,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-taisho-tool/": {
+"at": 1791768749.5190153,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-unsougyou/": {
+"at": 1791768717.9399996,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/it-hojokin-vendor/": {
+"at": 1791768749.1712625,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2134,6 +2979,11 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-itsumade/": {
+"at": 1791768705.2069998,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-kakuteishinkoku/": {
 "at": 1791176483.9130323,
 "state": "送信して登録されました",
@@ -2144,8 +2994,18 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/jigyou-shoukei-hojokin-kojinjigyonushi/": {
+"at": 1791768689.5124948,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/jizokuka-hojokin-biyoushitsu-kakikata/": {
 "at": 1791176472.6415908,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/jizokuka-hojokin-chusho-kigyo-taisho/": {
+"at": 1791768705.3044708,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2219,10 +3079,20 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/kojin-jigyonushi-ai-hojokin/": {
+"at": 1791768717.9409554,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/kojin-jigyonushi-kuruma-kounyu-hojokin/": {
+"at": 1791768689.5125234,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/kojinjigyonushi-joseikin-shinsei-jouken/": {
-"at": 1791176365.9207141,
-"state": "検出 - インデックス未登録",
-"verdict": "NEUTRAL"
+"at": 1791768698.9694765,
+"state": "送信して登録されました",
+"verdict": "PASS"
 },
 "https://lp.7senses.co.jp/blog/kojinjigyonushi-kaigyoutodoke-denshishinsei/": {
 "at": 1791176446.0482597,
@@ -2254,6 +3124,11 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/monozukuri-hojokin-chusho-teigi/": {
+"at": 1791768708.2211907,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/monozukuri-hojokin-clinic/": {
 "at": 1791176466.1586256,
 "state": "送信して登録されました",
@@ -2279,6 +3154,16 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/monozukuri-hojokin-kojinjigyonushi-1nin/": {
+"at": 1791768705.442135,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/monozukuri-hojokin-kyuyo-shikyu-sogaku/": {
+"at": 1791768705.3044658,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nail-salon/": {
 "at": 1791176449.8653612,
 "state": "送信して登録されました",
@@ -2291,6 +3176,11 @@
 },
 "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/": {
 "at": 1791176459.7721217,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/monozukuri-hojokin-seizougyou/": {
+"at": 1791768711.5530632,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2321,6 +3211,11 @@
 },
 "https://lp.7senses.co.jp/blog/nail-salon-hojokin-tejun/": {
 "at": 1791176417.9069376,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/nail-salon-kaigyou-joseikin/": {
+"at": 1791768692.6749845,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2359,6 +3254,11 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/seicho-kasokuka-hojokin-schedule/": {
+"at": 1791768720.849149,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/shakaihoken-denshishinsei-gimuka-chusho/": {
 "at": 1791176446.0482922,
 "state": "送信して登録されました",
@@ -2369,6 +3269,11 @@
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
+"https://lp.7senses.co.jp/blog/shika-iin-joseikin-taisho/": {
+"at": 1791768698.969484,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
 "https://lp.7senses.co.jp/blog/shukuhakugyou-ai-hojokin-hojogaku-meyasu/": {
 "at": 1791176384.8597317,
 "state": "送信して登録されました",
@@ -2376,6 +3281,11 @@
 },
 "https://lp.7senses.co.jp/blog/shukuhakugyou-hojokin-erabikata/": {
 "at": 1791176407.7191365,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/blog/smart-nougyou-hojokin/": {
+"at": 1791768695.710251,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2396,6 +3306,21 @@
 },
 "https://lp.7senses.co.jp/blog/vendor-touroku-toha/": {
 "at": 1791176424.0796285,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/compare/hojokin/": {
+"at": 1791768755.7678273,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/glossary/": {
+"at": 1791768767.8343472,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/industry/": {
+"at": 1791768755.1082647,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
@@ -2465,9 +3390,9 @@
 "verdict": "PASS"
 },
 "https://lp.7senses.co.jp/research/ai-hojokin/": {
-"at": 1791176346.367187,
-"state": "検出 - インデックス未登録",
-"verdict": "NEUTRAL"
+"at": 1791768755.3711565,
+"state": "送信して登録されました",
+"verdict": "PASS"
 },
 "https://lp.7senses.co.jp/seido/": {
 "at": 1791176346.367193,
@@ -2511,6 +3436,36 @@
 },
 "https://lp.7senses.co.jp/service/meo/": {
 "at": 1791176359.6385877,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/topics/": {
+"at": 1791768765.0258398,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/topics/1b7e7599/": {
+"at": 1791768764.8678887,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/topics/5903bdb5/": {
+"at": 1791768762.023691,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/topics/b29d00b8/": {
+"at": 1791768758.6415007,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/topics/bbcbe660/": {
+"at": 1791768761.491199,
+"state": "送信して登録されました",
+"verdict": "PASS"
+},
+"https://lp.7senses.co.jp/topics/f8d4ea56/": {
+"at": 1791768761.5244212,
 "state": "送信して登録されました",
 "verdict": "PASS"
 },
