@@ -1241,8 +1241,19 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # CI のログを取って守秘の語を数える（log_leak_check だけが使う。actions: read はワークフロー全体で付けてある）
           LOG_LEAK_GH_TOKEN: ${{ github.token }}
+          # 鍵の配布の確認（history_checks_d）は Secrets の一覧を読む。GITHUB_TOKEN では読めず毎週「動かせず」だった（2026-10-12）。
+          # この検査だけが HISTD_GH_TOKEN の名前で読む（ほかの工程には渡らない名前）
+          HISTD_GH_TOKEN: ${{ secrets.GH_SECRET_TOKEN }}
+          # YouTube の公開動画と台帳の照合（youtube_upload --audit）。鍵は daily-video だけに置いていたため週次で「動かせず」だった。
+          # この手順の中だけで書き、findings の直後に消す
+          YOUTUBE_TOKEN_JSON: ${{ secrets.YOUTUBE_TOKEN_JSON }}
         run: |
+          if [ -n "$YOUTUBE_TOKEN_JSON" ]; then
+            printf '%s' "$YOUTUBE_TOKEN_JSON" > youtube-token.json
+            chmod 600 youtube-token.json
+          fi
           python scripts/findings.py || true
+          rm -f youtube-token.json
           # 公開した後の結果（題の型のCTR・別工程の採点・本数の効き・戻された直し）から学び、
           # 書く工程が読む台帳へ書き戻す。学びごとに1行で、毎週最新の数字に書き換え、根拠が消えたら退役
           python scripts/learn.py --write 2>&1 | tail -8 || true
