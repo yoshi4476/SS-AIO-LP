@@ -44,6 +44,8 @@ faq:
 
 仕訳入力と試算表の作成までなら、資格なしの会社に頼んでも法律上の問題はありません。
 
+関連する内容として[現金払いは否認の落とし穴？](/blog/gaichuuhi-seikyuusho-nashi/)も公開しています。
+
 <figure><img src="/images/kichodaiko-shikaku-nashi/wakekata.png" alt="記帳まわりの業務の分け方: 資格なしで頼める仕訳入力と試算表、税理士だけの申告書と税務相談、社労士の手続き" loading="lazy"><figcaption>記帳まわりの業務の分け方</figcaption></figure>
 
 <div class="definition-box"><span class="term">記帳代行とは</span>、領収書や通帳をもとに会計ソフトへ仕訳を入力し、帳簿と試算表を作る業務です。==税理士の独占業務には入りません。==</div>
@@ -75,6 +77,8 @@ faq:
 ## 記帳代行と税理士の受け渡しはどう組む？
 
 毎月は記帳代行が試算表まで作り、年1回の決算と申告を税理士が受け取る形が基本です。
+
+あわせて[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)もご覧ください。
 
 <figure><img src="/images/kichodaiko-shikaku-nashi/nagare.png" alt="記帳代行と税理士の受け渡し: 毎月証憑を渡す、記帳代行が入力、迷う仕訳を税理士へ、年1回税理士が申告" loading="lazy"><figcaption>記帳代行と税理士の受け渡し</figcaption></figure>
 
@@ -108,6 +112,8 @@ faq:
 ## 資格なしの記帳代行が向く会社・向かない会社
 
 すでに税理士がいるなら資格なしの記帳代行が向き、税理士がいないなら申告まで受けられる先を選びます。
+
+関連する内容として[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)も公開しています。
 
 | 会社の状況 | 向く頼み先 | 理由 |
 |:--|:--|:--|

@@ -82,7 +82,7 @@ ChatGPTやPerplexityまで含めた対策は、[LLMO対策でChatGPTに引用さ
 
 <figure><img src="/images/gemini-inyou-noru-houhou/shibori.png" alt="Geminiに18語を聞いた結果" width="1200" height="700" loading="lazy"><figcaption>Geminiに18語を聞いた結果（当メディア作成）</figcaption></figure>
 
-当社は2026年10月1日〜5日に、Google検索の根拠付けを有効にしたGemini（API経由）へ18語を聞きました。語は「aio やり方」「aio対策 失敗」など、AI検索とSEO対策に関するものです。Geminiアプリの画面そのものではない点にご注意ください。
+当社は2026年10月1日〜5日に、Google検索の根拠付けを有効にしたGemini（API経由）へ18語を聞きました。語は「[aio やり方](/aio/aio-yarikata/)」「aio対策 失敗」など、AI検索とSEO対策に関するものです。Geminiアプリの画面そのものではない点にご注意ください。
 
 結果は次のとおりです。出典が付いた15語では、重複を除いて数えると**1回答あたりの出典URLが4〜19件、中央値は10件**でした。残る3語は出典が付かず、うち1つは「aio 対策 費用」でした。
 

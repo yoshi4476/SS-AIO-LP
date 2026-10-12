@@ -1997,3 +1997,21 @@
 {"at": "2026-10-12 19:35", "by": "link_boost", "slug": "kichodaiko-shikaku-nashi", "kind": "link_rescue", "ok": true, "note": "kichodaiko-okinawa から内部リンクを1本"}
 {"at": "2026-10-12 19:35", "by": "link_boost", "slug": "kichodaiko-shikaku-nashi", "kind": "link_rescue", "ok": true, "note": "keiri-daiko-erabikata から内部リンクを1本"}
 {"at": "2026-10-12 19:35", "by": "link_boost", "slug": "kichodaiko-shikaku-nashi", "kind": "link_rescue", "ok": true, "note": "kichodaiko-hiyou-souba から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "auto_rewrite", "slug": "kojin-jigyonushi-kuruma-kounyu-hojokin", "kind": "title", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-13 04:18", "by": "auto_rewrite", "slug": "aio-taisaku-souba", "kind": "title", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-13 04:18", "by": "auto_rewrite", "slug": "unsougyou-jissekihoukokusho", "kind": "title", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-13 04:18", "by": "auto_rewrite", "slug": "seikotsuin-shukyaku-seminar", "kind": "title", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-13 04:18", "by": "auto_rewrite", "slug": "koumuten-hp-shukyaku", "kind": "title", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "aio-yarikata", "kind": "link_inline", "ok": true, "note": "gemini-inyou-noru-houhou の本文の「aio やり方」を文中リンクに", "src": "gemini-inyou-noru-houhou", "anchor": "aio やり方"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "seikyusho-kakikata-kojin", "kind": "link_rescue", "ok": true, "note": "kichodaiko-shikaku-nashi から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "backoffice-bpo-toha", "kind": "link_rescue", "ok": true, "note": "kichodaiko-shikaku-nashi から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "gaichuuhi-seikyuusho-nashi", "kind": "link_decay", "ok": true, "note": "kichodaiko-shikaku-nashi から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "unsougyou-jissekihoukokusho", "kind": "link_rescue", "ok": true, "note": "jizokuka-hojokin-kojinjigyonushi-saitakuritsu から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "unsougyou-jissekihoukokusho", "kind": "link_rescue", "ok": true, "note": "monozukuri-hojokin-2025-kojinjigyonushi から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "it-hojokin-kojinjigyonushi-pc", "kind": "link_decay", "ok": true, "note": "kojinjigyonushi-joseikin-shinsei-jouken から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "it-hojokin-kojinjigyonushi-pc", "kind": "link_decay", "ok": true, "note": "it-hojokin-2026-kojinjigyonushi から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "it-hojokin-kojinjigyonushi-pc", "kind": "link_decay", "ok": true, "note": "jigyou-saikouchiku-kojinjigyonushi-itsumade から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "it-hojokin-kojinjigyonushi-kaikeisoft", "kind": "link_decay", "ok": true, "note": "kojin-jigyonushi-ai-hojokin から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "it-hojokin-kojinjigyonushi-kaikeisoft", "kind": "link_decay", "ok": true, "note": "hojokin-denshishinsei-gimuka-itsukara から内部リンクを1本"}
+{"at": "2026-10-13 04:18", "by": "link_boost", "slug": "it-hojokin-kojinjigyonushi-kaikeisoft", "kind": "link_decay", "ok": true, "note": "inshokuten-ai-hojokin-teishutsu-shorui から内部リンクを1本"}
+{"when": "2026-10-13T04:19:01.653243", "by": "auto_review", "slug": "(5記事)", "what": "言い回し0件を振り直し・4件を削除"}
