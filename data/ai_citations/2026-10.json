@@ -1,12 +1,12 @@
 {
-  "date": "2026-10-11",
+  "date": "2026-10-12",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 22,
       "suspect_taken": 15,
       "healthy": 7,
-      "too_thin": 224,
+      "too_thin": 230,
       "items": [
         {
           "kw": "aio seo",
@@ -21,8 +21,8 @@
         {
           "kw": "aio やり方",
           "url": "https://ai.7senses.co.jp/aio/aio-yarikata/",
-          "pos": 7.6,
-          "imp": 32,
+          "pos": 7.7,
+          "imp": 33,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -31,8 +31,8 @@
         {
           "kw": "aio 効果測定 レポート 雛形",
           "url": "https://ai.7senses.co.jp/aio/aio-koka-sokutei-report-hinagata/",
-          "pos": 4.3,
-          "imp": 10,
+          "pos": 4.1,
+          "imp": 11,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -61,18 +61,18 @@
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
-          "pos": 8.8,
-          "imp": 12,
+          "pos": 8.3,
+          "imp": 14,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 3.5,
           "ratio": 0.0
         },
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
           "pos": 4.8,
-          "imp": 72,
+          "imp": 71,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -102,7 +102,7 @@
           "kw": "llmo 代理店 募集",
           "url": "https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/",
           "pos": 4.9,
-          "imp": 18,
+          "imp": 19,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -131,8 +131,8 @@
         {
           "kw": "工務店 meo 上がらない",
           "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
-          "pos": 3.6,
-          "imp": 14,
+          "pos": 3.8,
+          "imp": 15,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -141,8 +141,8 @@
         {
           "kw": "歯科医院 閉院費用",
           "url": "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/",
-          "pos": 6.3,
-          "imp": 11,
+          "pos": 6.4,
+          "imp": 10,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -161,40 +161,30 @@
       ]
     },
     "corporate": {
-      "judged": 28,
-      "suspect_taken": 24,
-      "healthy": 4,
-      "too_thin": 155,
+      "judged": 30,
+      "suspect_taken": 25,
+      "healthy": 5,
+      "too_thin": 168,
       "items": [
         {
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/company",
           "pos": 1,
-          "imp": 22,
+          "imp": 24,
           "clicks": 2,
-          "ctr": 9.09,
+          "ctr": 8.33,
           "expected_ctr": 28.0,
-          "ratio": 0.32
+          "ratio": 0.3
         },
         {
           "kw": "ゆうちょ 記帳",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 8.9,
-          "imp": 109,
+          "pos": 9.0,
+          "imp": 127,
           "clicks": 1,
-          "ctr": 0.92,
+          "ctr": 0.79,
           "expected_ctr": 3.0,
-          "ratio": 0.31
-        },
-        {
-          "kw": "送金 振込 違い ゆうちょ",
-          "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 6.5,
-          "imp": 91,
-          "clicks": 1,
-          "ctr": 1.1,
-          "expected_ctr": 5.0,
-          "ratio": 0.22
+          "ratio": 0.26
         },
         {
           "kw": "3点照合",
@@ -209,8 +199,18 @@
         {
           "kw": "ゆうちょ 振込 送金 違い",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 7,
-          "imp": 40,
+          "pos": 6.8,
+          "imp": 43,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 4.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "ゆうちょ 振込と送金の違い",
+          "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
+          "pos": 7.2,
+          "imp": 10,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -220,7 +220,7 @@
           "kw": "ゆうちょ 記帳 やり方",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
           "pos": 6.7,
-          "imp": 54,
+          "imp": 57,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -240,7 +240,7 @@
           "kw": "ゆうちょ記帳",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
           "pos": 9.1,
-          "imp": 13,
+          "imp": 17,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -249,8 +249,8 @@
         {
           "kw": "ゆうちょ銀行 振込 送金 違い",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 8,
-          "imp": 14,
+          "pos": 7.5,
+          "imp": 15,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -270,7 +270,7 @@
           "kw": "ゆうちょ銀行 記帳 やり方",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
           "pos": 6.4,
-          "imp": 22,
+          "imp": 24,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -279,8 +279,8 @@
         {
           "kw": "ゆうちょ銀行 送金 振込 違い",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 6.7,
-          "imp": 12,
+          "pos": 6.6,
+          "imp": 14,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -289,8 +289,8 @@
         {
           "kw": "ゆうちょ銀行 送金と振込の違い",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 6.7,
-          "imp": 12,
+          "pos": 6.8,
+          "imp": 15,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -300,10 +300,20 @@
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
           "pos": 6.7,
-          "imp": 260,
+          "imp": 292,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "セブンセンシズ株式会社",
+          "url": "https://corp.7senses.co.jp/services",
+          "pos": 1,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 28.0,
           "ratio": 0.0
         },
         {
@@ -350,20 +360,10 @@
           "kw": "記帳 やり方 ゆうちょ",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
           "pos": 5.6,
-          "imp": 13,
+          "imp": 14,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
-          "ratio": 0.0
-        },
-        {
-          "kw": "請求書 源泉徴収",
-          "url": "https://corp.7senses.co.jp/blog/seikyusho-kakikata-kojin",
-          "pos": 9,
-          "imp": 13,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 3.0,
           "ratio": 0.0
         }
       ]
@@ -372,7 +372,7 @@
       "judged": 3,
       "suspect_taken": 1,
       "healthy": 2,
-      "too_thin": 46,
+      "too_thin": 45,
       "items": [
         {
           "kw": "it導入補助金 個人事業主",
