@@ -156,7 +156,7 @@
     "tool": "hojokin_quiz",
     "head": "御社が補助金を使えそうか、8つの質問に答えて確かめる（無料）",
     "label": "質問に答える",
-    "url": "https://lp.7senses.co.jp/?diag=hojokin#diagnosis",
+    "url": "https://lp.7senses.co.jp/#diagnosis",
     "note": "結果はその場で表示されます。表示の前に、お名前とメールアドレスの入力が要ります",
     "_why": "記事の最初の章に置く入口（publish.insert_inline_entry）。トップの補助金適性診断（8問）は結果の前にお名前とメールを求めるため「登録不要」とは書かない。どの補助金が使えるかではなく、補助金の活用の適性を判定する診断なので「使えそうな補助金を」とも書かない（2026-10-05）"
   },

@@ -94,7 +94,8 @@ def test_subsidy_entry_tells_the_truth():
     print("\n■ 補助金サイト: 既存の診断（トップの8問）への入口")
     cfg = json.loads((ROOT / "sites" / "subsidy.json").read_text(encoding="utf-8"))
     ent = cfg["cta_inline"]
-    check("送り先はトップの補助金適性診断", ent["url"], "https://lp.7senses.co.jp/?diag=hojokin#diagnosis")
+    check("送り先はトップの補助金適性診断（最初から選ばれているタブ。クエリを付けると Search Console の「代替ページ」になる。2026-10-12）",
+          ent["url"], "https://lp.7senses.co.jp/#diagnosis")
     words = ent["head"] + ent.get("note", "") + ent.get("label", "")
     check("結果の前にお名前とメールが要るので「登録不要」と書かない", "登録不要" in words, False)
     check("料金・採択・結果の約束を書かない", re.search(r"円|採択率|必ず|すぐ|確実|保証", words), None)
