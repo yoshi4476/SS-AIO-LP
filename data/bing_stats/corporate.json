@@ -1,7 +1,86 @@
 {
-"daily": {},
-"weeks": {},
-"updated": "2026-10-07",
+"daily": {
+"2026-10-07": {
+"imp": 362,
+"clicks": 11
+},
+"2026-10-08": {
+"imp": 314,
+"clicks": 5
+},
+"2026-10-09": {
+"imp": 107,
+"clicks": 1
+}
+},
+"weeks": {
+"2026-10-09": {
+"queries": [
+{
+"key": "bpoとは",
+"imp": 169,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "経理業務　フローチャート　システム入力記号",
+"imp": 2,
+"clicks": 2,
+"pos": 3
+},
+{
+"key": "セブンセンシズ株式会社",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "経理作業リスト　マニュアル　テンプレート",
+"imp": 2,
+"clicks": 1,
+"pos": 48
+},
+{
+"key": "国税庁 適格請求書 要件",
+"imp": 1,
+"clicks": 1,
+"pos": 9
+},
+{
+"key": "外注費　請求書なし",
+"imp": 1,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "決算 アウトソーシング 費用",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "freee 経費精算　勘定科目　啓蒙本",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "freee 経費精算　啓蒙本",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "インボイス6要件",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+}
+],
+"pages": []
+}
+},
+"updated": "2026-10-12",
 "site": "corporate",
 "domain": "corp.7senses.co.jp"
 }

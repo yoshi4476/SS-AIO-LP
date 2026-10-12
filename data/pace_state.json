@@ -2,16 +2,16 @@
  "ai-lab": {
   "quota": 2,
   "signals": [],
-  "date": "2026-10-05",
+  "date": "2026-10-12",
   "how": "URL検査",
-  "new": 74,
+  "new": 72,
   "judged": 40,
   "not_indexed_rate": 0.0,
   "duplicates": 0,
   "pairs": 0,
   "imp": [
-   3092,
-   4115
+   3132,
+   5724
   ],
   "states": {
    "Submitted and indexed": 40
@@ -20,28 +20,28 @@
  "corporate": {
   "quota": 2,
   "signals": [],
-  "date": "2026-10-05",
+  "date": "2026-10-12",
   "how": "URL検査",
-  "new": 80,
+  "new": 81,
   "judged": 40,
-  "not_indexed_rate": 0.35,
+  "not_indexed_rate": 0.2,
   "duplicates": 0,
   "pairs": 0,
   "imp": [
-   1165,
-   3425
+   1275,
+   5899
   ],
   "states": {
-   "Submitted and indexed": 25,
-   "Discovered - currently not indexed": 10,
-   "Crawled - currently not indexed": 4,
-   "URL is unknown to Google": 1
+   "Submitted and indexed": 24,
+   "URL is unknown to Google": 8,
+   "Discovered - currently not indexed": 7,
+   "Crawled - currently not indexed": 1
   }
  },
  "subsidy": {
   "quota": 2,
   "signals": [],
-  "date": "2026-10-05",
+  "date": "2026-10-12",
   "how": "URL検査",
   "new": 74,
   "judged": 40,
@@ -49,12 +49,11 @@
   "duplicates": 0,
   "pairs": 0,
   "imp": [
-   2118,
-   2725
+   2637,
+   2705
   ],
   "states": {
-   "Submitted and indexed": 39,
-   "Not found (404)": 1
+   "Submitted and indexed": 40
   }
  }
 }

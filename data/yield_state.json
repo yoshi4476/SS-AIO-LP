@@ -1,19 +1,21 @@
 {
  "ai-lab": {
   "flagged": false,
-  "date": "2026-10-05",
+  "date": "2026-10-12",
   "reasons": [],
   "cohort": "unknown"
  },
  "corporate": {
-  "flagged": false,
-  "date": "2026-10-05",
-  "reasons": [],
+  "flagged": true,
+  "date": "2026-10-12",
+  "reasons": [
+   "セブンセンシズ コーポレートサイト — 公開30日以上の86本のうち35本（41%）が28日間表示ゼロ。統合・書き直しを優先（週次の統合を4組に増やします）"
+  ],
   "cohort": "unknown"
  },
  "subsidy": {
   "flagged": false,
-  "date": "2026-10-05",
+  "date": "2026-10-12",
   "reasons": [],
   "cohort": "unknown"
  }

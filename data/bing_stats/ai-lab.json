@@ -271,6 +271,26 @@
 "2026-10-04": {
 "imp": 16,
 "clicks": 1
+},
+"2026-10-05": {
+"imp": 12,
+"clicks": 2
+},
+"2026-10-06": {
+"imp": 13,
+"clicks": 3
+},
+"2026-10-07": {
+"imp": 15,
+"clicks": 1
+},
+"2026-10-08": {
+"imp": 6,
+"clicks": 1
+},
+"2026-10-09": {
+"imp": 3,
+"clicks": 0
 }
 },
 "weeks": {
@@ -1653,9 +1673,164 @@
 "pos": 1
 }
 ]
+},
+"2026-10-09": {
+"queries": [
+{
+"key": "ai集客ラボ",
+"imp": 3,
+"clicks": 2,
+"pos": 2
+},
+{
+"key": "aio点数",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "歯科医院廃業のために機材撤去廃棄する費用は？",
+"imp": 2,
+"clicks": 1,
+"pos": 10
+},
+{
+"key": "meo 攻略",
+"imp": 2,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "工務店　sns　キャプション",
+"imp": 2,
+"clicks": 0,
+"pos": 84
+},
+{
+"key": "見学　どうやったら集客できるか",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "集客 g-aio",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "aioコンサルティング 流れ",
+"imp": 1,
+"clicks": 2,
+"pos": 2
+},
+{
+"key": "ai に　選ばれる方法",
+"imp": 1,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "aio対策 h1 h2",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "aio診断ツールとは",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "ai　記事　文章スタイル例",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "meo アルゴリズム攻略",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "meo設定",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "aio seo 両立しない",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "aioコンサルティングの流れを全公開",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "chatgpt 集客 おすすめ",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "it　aio コンサルティング",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "it業界　aio コンサルティング",
+"imp": 1,
+"clicks": 0,
+"pos": 22
+},
+{
+"key": "ob客とは",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "seo監査 とは　輸出",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "建築事例についての説明とは",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "歯科医院　閉院　費用",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "集患 meo対策",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "𝘉𝘵𝗈𝖡の𝖫𝘓𝘔𝖮対策",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+}
+],
+"pages": []
 }
 },
-"updated": "2026-10-07",
+"updated": "2026-10-12",
 "site": "ai-lab",
 "domain": "ai.7senses.co.jp"
 }
