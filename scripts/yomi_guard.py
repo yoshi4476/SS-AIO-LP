@@ -91,6 +91,26 @@ def _norm(k):
     return k.replace("ー", "")
 
 
+# 声は正しいのに、解析器（unidic-lite）が読み違える語。**比べるときだけ、台本と聞き取りの両方に通す**（声には渡さない）。
+# 辞書（yomi_dict）は台本の側にしか効かないので、ここに入れる語を辞書へ足すと、聞き取りが漢字で書かれた回に逆にずれる。
+# 2026-10-12 の週次で「直せなかった読み」51件のうち、次の語は声が正しく、台本の側の読みが誤っていた
+SAME_BOTH = [
+    (r"(?<=[0-9０-９])位", "い"),          # 数字をかなにした後の「位」を「くらい」と読む（10位・9.2位・3位）
+    (r"一歩", "いっぽ"),                   # 「一」「歩」に分けて「いちほ」と読む
+    (r"お得", "おとく"),                   # 読点の前で「おえ」と読む
+    (r"何(?=[がをも])", "なに"),           # 「何が」「何を」を「なんが」と読む
+    (r"(?<![一-龥々])科(?![一-龥々])", "か"),  # 単独の「科の線引き」を「とが」と読む
+    (r"[＋+]", "プラス"),                 # 台本の側では記号が消え、声は「プラス」と読む
+]
+
+
+def _latin_read_as():
+    """READ_AS のうち、英字の名前をカタカナにするもの。聞き取りが英字で書いても、カタカナで書いても同じになる。
+    （日本語の読み替え「人→ひと」などは聞き取りの側に通さない。下の spoken_form の注意を参照）"""
+    import video_make as V
+    return [(p, r) for p, r in V.READ_AS if re.search(r"[A-Za-z]", p) and re.fullmatch(r"[ァ-ヺー\s]+", r)]
+
+
 def spoken_form(s, heard=False):
     """比べる前にそろえる。台本は実際に読ませた文（読み替え後）にする。
     聞き取った文には英字・数字・記号をそろえるだけで、台本側の読み替えは通さない。
@@ -101,8 +121,14 @@ def spoken_form(s, heard=False):
     if heard:
         s = s.replace("〇〇", "まるまる").replace("○○", "まるまる").replace("%", "パーセント").replace("％", "パーセント")
         s = V.COUNTER_RE.sub(V._counter, s.replace(",", ""))   # 「3つ」「10件」は助数詞の読みに
+        # 1万以上は台本と同じく「万」を入れる（入れないと数字ごと消え、「55,393件」が丸ごとずれに見えた）
+        s = re.sub(r"(?<![0-9.])\d{5,}(?![0-9.])", V._man, s)
+        for pat, rep in _latin_read_as():
+            s = re.sub(pat, rep, s)
     else:
         s = V.read_text(apply_dict(s))
+    for pat, rep in SAME_BOTH:
+        s = re.sub(pat, rep, s)
     # 英字は1文字ずつカタカナの読みに（「UA」と「ユーエー」、「GPT」と「ジーピーティー」を同じにする）
     s = re.sub(r"[A-Za-z]", lambda m: LETTER.get(m.group(0).upper(), ""), s)
     s = re.sub(r"\d+", lambda m: V.kana_num(int(m.group(0))) if int(m.group(0)) < 10000 else m.group(0), s)
@@ -251,9 +277,13 @@ def guard(text, path, synth, heard=None):
     # 人が辞書で直せるのは漢字の読み。英字・かなだけのずれは聞き取りの揺れなので残さない
     bad = [x for x in bad if re.search(r"[一-龥々]", x[0])]
     if bad:
+        row = {"date": datetime.date.today().isoformat(), "text": text, "diff": bad}
+        # かなで読ませて作り直しても一致しなかった語。かなの読みは誤りようがないので、残るずれは聞き取りの誤り
+        tried = [x[0] for x in bad if any(w in x[0] for w in learned)]
+        if tried:
+            row["kana_tried"] = tried
         with open(ISSUES, "a", encoding="utf-8") as f:
-            f.write(json.dumps({"date": datetime.date.today().isoformat(), "text": text,
-                                "diff": bad}, ensure_ascii=False) + "\n")
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
     return bad
 
 
@@ -265,10 +295,23 @@ def report(days=14):
     since = (datetime.date.today() - datetime.timedelta(days=days)).isoformat()
     rows = [json.loads(l) for l in ISSUES.read_text(encoding="utf-8").splitlines() if l.strip()]
     rows = [r for r in rows if r.get("date", "") >= since]
+    # 比べ方を直して、記録の聞き取りでずれが消えた行（直した人が resolved に理由を書く。行は消さない）
+    rows = [r for r in rows if not r.get("resolved")]
+    # 同じ動画を作り直した回は同じ行が二度残る（2026-10-03 は11行が重複し、51件と数えていた）
+    seen, uniq = set(), []
+    for r in rows:
+        k = (r.get("text"), json.dumps(r.get("diff"), ensure_ascii=False))
+        if k not in seen:
+            seen.add(k)
+            uniq.append(r)
+    heard_only = [r for r in uniq if r.get("kana_tried") and {d[0] for d in r["diff"]} <= set(r["kana_tried"])]
+    rows = [r for r in uniq if r not in heard_only]
+    if heard_only:
+        print(f"情報: かなで読ませても聞き取りが一致しなかった語 {len(heard_only)}件（音声認識の誤り。辞書では直りません）")
     if not rows:
         print("YOMI_OK=yes")
         return 0
-    print(f"要対応: 読み上げで直せなかった読み {len(rows)}件（直近{days}日）。"
+    print(f"要対応: 読み上げで直せなかった読み {len(rows)}件（直近{days}日。同じ行の重複を除く）。"
           "data/yomi_dict.json に正しい読みを足すと、次から直ります")
     for r in rows[:10]:
         for w, a, b in r["diff"][:2]:
@@ -282,7 +325,15 @@ def selftest():
     ok = True
     for text, heard in (("最近お客さんに、AIで調べてきましたと言われます。", "最近お客さんにAIで調べてきましたと言われます"),
                         ("この3つを、3か月単位で見ます。", "この3つを3ヶ月単位で見ます"),
-                        ("工務店の性能値です。", "公務店の性能値です")):
+                        ("工務店の性能値です。", "公務店の性能値です"),
+                        # 2026-10-12: 声は正しいのに台本の側の読みが誤っていた語（SAME_BOTH）。聞き取りが仮名でも漢字でも一致する
+                        ("Search Consoleで、10位以内を1本選びます。", "サーチコンソールでじゅういいないをいっぽんえらびます"),
+                        ("Search Consoleで、10位以内を1本選びます。", "Search Consoleで10位以内を1本選びます"),
+                        ("今日できる一歩です。", "きょうできるいっぽです"),
+                        ("今日できる一歩です。", "今日できる一歩です"),
+                        ("事例の下には何を置くの？", "じれいのしたにはなにをおくの"),
+                        ("番号は「年月＋連番」にします。", "ばんごうはねんげつプラスれんばんにします"),
+                        ("検索のうち55,393件でした。", "検索のうち55,393件でした")):
         d = diff(text, heard)
         if d:
             print(f"  NG 見かけの差を拾いました: {text} → {d}")

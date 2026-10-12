@@ -264,7 +264,10 @@ def sitemap_locs(ctx, wp=False):
 # ---------- 社ごとの材料 ----------
 
 def articles(cfg, ctx):
-    """公開の基準を満たすその社の記事 [{slug, url, date, faq, title}]（新しい順）。WordPress は橋渡しのパーマリンク"""
+    """公開の基準を満たすその社の記事 [{slug, url, date, faq, title}]（新しい順）。WordPress は橋渡しのパーマリンク。
+    検索から外した記事（noindex）は数えない。sitemap・llms.txt から外すのが決まり（scripts/noindex.py）なので、
+    数えると「本番で開けるのに sitemap に無い」と誤って知らせる（2026-10-12 の週次: 3サイトで9本）"""
+    import noindex
     import sites as S
     import wp_bridge
     rows = []
@@ -278,6 +281,8 @@ def articles(cfg, ctx):
         wp_urls = {r.get("slug"): r.get("url") for r in (data.get("urls") or []) if isinstance(r, dict) and r.get("type") == "post"}
     for meta, body, _p in wp_bridge._site_articles(cfg):
         slug = meta.get("slug") or Path(_p).stem
+        if noindex.on(meta):
+            continue
         m = dict(meta, slug=slug)
         if cfg.get("type") == "wordpress":
             url = wp_urls.get(slug)

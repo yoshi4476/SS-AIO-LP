@@ -7,6 +7,8 @@
 
 PageSpeed Insights API（鍵なしで使える。1日の上限は低いので、1サイト2URL・週1回）。
 フィールドデータ（実利用者・28日）があればそれを、無ければラボ値を使う。
+ラボ値は1回ごとに大きく揺れるので、基準を割った回だけ同じURLを測り直し（合わせて3回まで・60秒あけて）、
+中央値で判定する（lab_verdict / settled / remeasure）。基準内の1回目と実利用者の値は測り直さない。
 
   python scripts/cwv_check.py            # 3サイト × トップ＋記事1本（PageSpeed）と、実利用者の値（CrUX）
   python scripts/cwv_check.py --site ai-lab --url https://ai.7senses.co.jp/lp/
@@ -22,6 +24,7 @@ API が使えなかった（鍵の制限・未有効化）ときは CRUX_OK=unkn
 """
 import argparse
 import json
+import statistics
 import sys
 import time
 import urllib.error
@@ -35,6 +38,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 LOG = ROOT / "data" / "cwv.jsonl"
 API = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
 LIMITS = {"LCP": 2500, "INP": 200, "CLS": 0.1}
+UA = {"User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0; +https://ai.7senses.co.jp/)"}
+# ラボ値（Lighthouse の見積もり）は1回ごとに大きく揺れる。2026-10-12 の ai-lab のトップは、同じ日に
+# LCP 4.7秒・1.7秒・1.7秒。計測タグ（169KB）が最初の描画より先に読まれた回だけ、その分が見積もりに入る。
+# 基準を割った回だけ測り直し、3回の中央値で判定する（実利用者の値 field は28日の集計なので1回）
+LAB_RUNS = 3
+PSI_GAP = 60          # 同じURLを続けて頼むと PageSpeed は直前の結果を返す（18秒後は同じ fetchTime、50秒後は新しい結果）
 
 
 def _key(names=("PAGESPEED_API_KEY", "YOUTUBE_API_KEY")):
@@ -119,15 +128,19 @@ def measure(url, strategy="mobile"):
         out["INP"] = (audits.get("interaction-to-next-paint") or {}).get("numericValue")  # ラボでは出ないことが多い
     out["score"] = round(((d.get("lighthouseResult") or {}).get("categories") or {})
                          .get("performance", {}).get("score", 0) * 100)
+    out["_fetched"] = (d.get("lighthouseResult") or {}).get("fetchTime") or ""   # 記録には残さない（_ で始まる）
     return out
 
 
 def sample_urls(cfg):
-    """トップと、sitemap の先頭の記事1本"""
+    """トップと、sitemap の末尾の記事1本"""
     import re
     urls = [f"https://{cfg['domain']}/"]
     try:
-        with urllib.request.urlopen(f"https://{cfg['domain']}/sitemap.xml", timeout=30) as r:
+        # Python の既定の名乗り（Python-urllib）は Cloudflare が 403 で断り、記事が1本も測られていなかった
+        # （2026-10-12 まで data/cwv.jsonl はトップだけ）
+        req = urllib.request.Request(f"https://{cfg['domain']}/sitemap.xml", headers=UA)
+        with urllib.request.urlopen(req, timeout=30) as r:
             locs = re.findall(r"<loc>(.*?)</loc>", r.read().decode("utf-8"))
         pre = (cfg.get("url_prefix") or "").strip("/")
         art = [u for u in locs if u.count("/") >= 4 and (not pre or f"/{pre}/" in u)]
@@ -136,6 +149,64 @@ def sample_urls(cfg):
     except Exception:
         pass
     return urls
+
+
+def over_limits(m):
+    """1回の計測で基準を割った指標"""
+    return [k for k, lim in LIMITS.items() if m.get(k) is not None and m[k] > lim]
+
+
+def lab_verdict(runs):
+    """同じURLを測った回（1〜LAB_RUNS 回）の中央値で判定する。戻り値: (基準を割った指標, 指標ごとの中央値)"""
+    med = {}
+    for k in LIMITS:
+        vals = [r[k] for r in runs if r.get(k) is not None]
+        if vals:
+            med[k] = statistics.median(vals)
+    return [k for k, lim in LIMITS.items() if k in med and med[k] > lim], med
+
+
+def settled(runs):
+    """もう測り直さなくてよいか。実利用者の値（field）・1回目が基準内なら1回で決める。
+    1回目が基準を割ったラボ値は、どの指標も過半（3回中2回）が同じ側にそろうまで測る"""
+    if not runs or runs[0].get("source") != "lab" or len(runs) >= LAB_RUNS:
+        return True
+    if len(runs) == 1 and not over_limits(runs[0]):
+        return True
+    need = LAB_RUNS // 2 + 1
+    for k, lim in LIMITS.items():
+        vals = [r[k] for r in runs if r.get(k) is not None]
+        n_over = sum(v > lim for v in vals)
+        if vals and n_over < need and len(vals) - n_over < need:
+            return False
+    return True
+
+
+def remeasure(pages, measure_fn=None, clock=None, sleep=None, on_run=None):
+    """基準を割ったラボ値のページだけ、決まるまで測り直す。pages は {"url", "runs", "at"} の list（その場で足す）。
+    同じURLは PSI_GAP 秒あけ、PageSpeed の控え（同じ fetchTime）が返ったら数えない。on_run(page, m) は数えた回ごと"""
+    measure_fn, clock, sleep = measure_fn or measure, clock or time.monotonic, sleep or time.sleep
+    for _ in range(LAB_RUNS - 1):
+        for p in pages:
+            if settled(p["runs"]):
+                continue
+            wait = PSI_GAP - (clock() - p["at"])
+            if wait > 0:
+                sleep(wait)
+            try:
+                m = measure_fn(p["url"])
+            except Exception as e:
+                p.setdefault("errors", []).append(str(e)[:200])
+                continue
+            finally:
+                p["at"] = clock()
+            if m.get("_fetched") and m["_fetched"] in {r.get("_fetched") for r in p["runs"]}:
+                p["cached"] = p.get("cached", 0) + 1
+                continue
+            p["runs"].append(m)
+            if on_run:
+                on_run(p, m)
+    return pages
 
 
 # ---- 実利用者の値（Chrome UX Report API） ----
@@ -301,16 +372,29 @@ def crux_site(sid, cfg, key):
             row["judge"][m] = mark
             if mark in ("bad", "worse"):
                 what = "基準を割っています" if mark == "bad" else "悪化が続いています"
-                where = f"{sid} {'サイト全体' if kind == 'origin' else ident} {form}"
+                # お客様の社は公開の id で出し、ページの URL は出さない（知らせる文は CI のログにも出る）
+                import sites as S
+                client = S.is_client(sid)
+                page = "サイト全体" if kind == "origin" else ("（お客様のページ）" if client else ident)
+                where = f"{S.public_id(sid) if client else sid} {page} {form}"
                 flags.append(f"要対応: 実利用者の表示速度が{what}（CrUX・75パーセンタイル）: {where} … {txt}")
         rows.append(row)
     return {"site": sid, "origin": origin, "limits": LIMITS, "targets": rows}, flags
 
 
+def crux_path(sid):
+    """CrUX のスナップショットの置き場。お客様の社は非公開の置き場（CI のキャッシュ）。public に URL を書かない"""
+    import client_private as CP
+    import sites as S
+    if not S.is_client(sid):
+        return CRUX_DIR / f"{sid}.json"
+    return CP.site_file(sid, f"data/cwv_crux/{sid}.json")
+
+
 def save_crux(sid, rec, today=None):
     """スナップショットで上書きし、origin の今の値だけ log に積む（履歴は API が25週を返すので持たない）"""
-    CRUX_DIR.mkdir(parents=True, exist_ok=True)
-    p = CRUX_DIR / f"{sid}.json"
+    p = crux_path(sid)
+    p.parent.mkdir(parents=True, exist_ok=True)
     old = {}
     if p.is_file():
         try:
@@ -342,6 +426,21 @@ def save_crux(sid, rec, today=None):
     return p
 
 
+def crux_fix(err):
+    """CrUX API が使えない理由から、人がする1つの作業を書く（週次の要対応に載る。CRUX_OK=unknown の印だけでは
+    理由が届かず、2026-10-12 の通知は「測れませんでした」だけだった）。データ不足（404）はここに来ない"""
+    if "SERVICE_DISABLED" in err:
+        what = ("鍵のプロジェクトで Chrome UX Report API が有効になっていません（SERVICE_DISABLED）。"
+                "Google Cloud の「APIとサービス」でその鍵のプロジェクトの Chrome UX Report API を有効にするか、"
+                "有効なプロジェクトで作った鍵を Secret CRUX_API_KEY に登録してください")
+    elif "API_KEY_SERVICE_BLOCKED" in err:
+        what = ("鍵の「APIの制限」で Chrome UX Report API が許可されていません（API_KEY_SERVICE_BLOCKED）。"
+                "鍵の制限に Chrome UX Report API を足すか、別の鍵を Secret CRUX_API_KEY に登録してください")
+    else:
+        what = f"鍵か API の設定を確かめてください（{err[:60]}）"
+    return f"実利用者の表示速度（CrUX）を測れません: {what}"
+
+
 def run_crux(site=""):
     """CrUX の検査。戻り値は終了コード（API が使えなかったときだけ1）"""
     import sites as S
@@ -358,8 +457,7 @@ def run_crux(site=""):
             rec, fl = crux_site(sid, cfg, key)
         except CruxUnavailable as e:
             print(f"   CrUX API が使えません: {e}")
-            print("   鍵の「APIの制限」に Chrome UX Report API が入っているか、鍵のプロジェクトで "
-                  "Chrome UX Report API が有効かを確かめてください（別の鍵なら CRUX_API_KEY に入れる）")
+            print(f"要対応: {crux_fix(str(e))}")
             print("CRUX_OK=unknown")
             return 1
         save_crux(sid, rec)
@@ -369,12 +467,16 @@ def run_crux(site=""):
             n_nodata += t["status"] == "nodata"
             n_err += t["status"] == "error"
             label = "サイト全体" if t["kind"] == "origin" else t["id"][:60]
+            # お客様の社は公開の id で出し、ページの URL は出さない（CI のログは public）
+            name = S.public_id(sid) if S.is_client(sid) else sid
+            if S.is_client(sid) and t["kind"] != "origin":
+                label = "（お客様のページ）"
             if t["status"] == "ok":
                 c = t["current"]
-                print(f"   [{sid:<9}] {t['form']:<7} {label:<60} LCP {_fmt('LCP', c.get('LCP'))} "
+                print(f"   [{name:<9}] {t['form']:<7} {label:<60} LCP {_fmt('LCP', c.get('LCP'))} "
                       f"INP {_fmt('INP', c.get('INP'))} CLS {_fmt('CLS', c.get('CLS'))}")
             else:
-                print(f"   [{sid:<9}] {t['form']:<7} {label:<60} "
+                print(f"   [{name:<9}] {t['form']:<7} {label:<60} "
                       + ("データ無し（アクセスが少ない。遅いという意味ではない）" if t["status"] == "nodata"
                          else f"取れませんでした {t.get('error', '')}"))
     print(f"CrUX: データあり {n_ok}件・データ無し {n_nodata}件・取得失敗 {n_err}件")
@@ -395,7 +497,7 @@ def run_crux(site=""):
 def crux_html(sid):
     """月次レポートの「実際の利用者の表示速度」の中身。記録が無ければ ""（節を出さない）"""
     import html as H
-    p = CRUX_DIR / f"{sid}.json"
+    p = crux_path(sid)
     if not p.is_file():
         return ""
     try:
@@ -443,28 +545,53 @@ def main():
     a = ap.parse_args()
     if a.crux:
         return run_crux(a.site)
-    bad, rows = [], []
+    bad, rows, pages = [], [], []
+
+    def record(p, m):
+        rows.append({"date": date.today().isoformat(), "site": p["sid"],
+                     **{k: v for k, v in m.items() if not k.startswith("_")}})
+        over = over_limits(m)
+        again = f"（{len(p['runs'])}回目）" if len(p["runs"]) > 1 else ""
+        print(f"   {'×' if over else '○'} [{p['name']:<9}] {p['shown'][:52]:<52} 総合{m['score']:>3} "
+              f"LCP {m.get('LCP') and round(m['LCP'])}ms INP {m.get('INP') and round(m['INP'])}ms "
+              f"CLS {m.get('CLS') and round(m['CLS'], 3)}（{m['source']}）{again}")
+
     for sid, cfg in S.load_all().items():
         if a.site and sid != a.site:
             continue
+        # お客様の社は公開の id で出し、URL は出さない（CI のログは public）
+        client = S.is_client(sid)
         for url in ([a.url] if a.url else sample_urls(cfg)):
+            name, shown_url = (S.public_id(sid), "（お客様のページ）") if client else (sid, url)
             try:
                 m = measure(url)
             except Exception as e:
-                print(f"   {sid}: 計測できません {url[:50]} ({str(e)[:300]})")
+                print(f"   {name}: 計測できません {shown_url[:50]} ({str(e)[:300]})")
                 continue
-            rows.append({"date": date.today().isoformat(), "site": sid, **m})
-            over = [k for k, lim in LIMITS.items() if m.get(k) is not None and m[k] > lim]
-            print(f"   {'×' if over else '○'} [{sid:<9}] {url[:52]:<52} 総合{m['score']:>3} "
-                  f"LCP {m.get('LCP') and round(m['LCP'])}ms INP {m.get('INP') and round(m['INP'])}ms "
-                  f"CLS {m.get('CLS') and round(m['CLS'], 3)}（{m['source']}）")
-            if over:
-                bad.append(f"{sid} {url} … " + "・".join(over))
+            p = {"sid": sid, "url": url, "name": name, "shown": shown_url, "runs": [m], "at": time.monotonic()}
+            pages.append(p)
+            record(p, m)
             time.sleep(2)
+    remeasure(pages, on_run=record)
+    for p in pages:
+        over, med = lab_verdict(p["runs"])
+        n = len(p["runs"])
+        if n > 1:
+            vals = "・".join(f"{r['LCP'] / 1000:.1f}" for r in p["runs"] if r.get("LCP") is not None)
+            print(f"     → [{p['name']}] {n}回の中央値で判定: LCP {_fmt('LCP', med.get('LCP'))}（{vals}秒）"
+                  f"{'・基準を割っています' if over else '・基準内'}")
+        if p.get("cached"):
+            print(f"     → [{p['name']}] 測り直しに直前の控えが返った回は数えませんでした（{p['cached']}回）")
+        if over:
+            how = (f"（{n}回の中央値: " if n > 1 else "（実利用者の28日の値: "
+                   if p["runs"][0].get("source") == "field" else "（1回だけの値・測り直せず: ")
+            bad.append(f"{p['name']} {p['shown']} … " + "・".join(over) + how
+                       + "・".join(f"{k} {_fmt(k, med[k])}" for k in over) + "）")
+    # お客様の社の行は非公開の置き場へ（public の data/cwv.jsonl にドメインの URL を書かない。2026-10-12）
+    import client_private as CP
     LOG.parent.mkdir(exist_ok=True)
-    with LOG.open("a", encoding="utf-8") as f:
-        for r in rows:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    for r in rows:
+        CP.append_jsonl(LOG, r, sid=r["site"])
     for b in bad:
         print(f"要対応: 表示速度が基準を割っています: {b}")
     if not rows:

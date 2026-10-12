@@ -282,11 +282,37 @@ def stuck_floor():
     return {}
 
 
+_ARTICLE_TOPS = None
+
+
+def uncounted_article(line):
+    """リンク段落の送り先が、記事の形のパス（/<カテゴリ>/<slug>/・/blog/<slug>/）で、原稿が articles/ に無いか。
+    配信先にだけある記事・統合や取り下げで消えた記事（本番は301）。ここで被リンクを数えておらず、リンクを足す道具
+    （link_boost・link_new）も足しに来ないので、外しても「足しては消す」は起きない。数えていない先を被リンク0本と
+    みなして毎回残していたため、上限+1本が直らなかった（2026-10-12 の週次）。
+    業種ハブ・用語集など記事でないページ（/industry/<業種>/ など）は入口なので、これまでどおり守る"""
+    global _ARTICLE_TOPS
+    m = re.search(r"\]\((/[a-z0-9/-]+/)\)", line or "")
+    if not m:
+        return False
+    if _ARTICLE_TOPS is None:
+        import sites as S
+        tops = {"blog"}
+        for c in S.load_all().values():
+            tops |= set(c.get("categories") or {})
+            tops.add(str(c.get("url_prefix") or "").strip("/"))
+        _ARTICLE_TOPS = tops - {""}
+    parts = m.group(1).strip("/").split("/")
+    return (len(parts) == 2 and parts[0] in _ARTICLE_TOPS
+            and not (ROOT / "articles" / f"{parts[1]}.md").is_file())
+
+
 def fix(path, item, write, inb=None, floor=3, floors=None):
     """言い回しを振り直し、なお多すぎる分は後ろから外す
 
     外すのは、送り先の被リンクが下限を割らないものだけ。割るものまで外すと、
     次の自動修正が同じ記事へまた足しに来て、足しては消すの繰り返しになる。
+    原稿の無い記事への送り先（uncounted_article）は下限で守らない。
     """
     head, body, paras = scan(path)
     edits = rewrite(path.stem, paras, head)
@@ -306,12 +332,12 @@ def fix(path, item, write, inb=None, floor=3, floors=None):
             budget -= cost
             m = re.search(r"\]\([^)\s]*?/([a-z0-9-]+)/?[)#]", x["line"])
             tgt = m.group(1) if m else None
-            # 送り先が痩せるなら残す。言い回しだけ振り直す
+            # 送り先が痩せるなら残す。言い回しだけ振り直す（原稿の無い記事への送り先は数えていないので守らない）
             need = (floors or {}).get(tgt, floor)
-            if inb is not None and tgt and inb.get(tgt, 0) - 1 < need:
+            if inb is not None and tgt and not uncounted_article(x["line"]) and inb.get(tgt, 0) - 1 < need:
                 continue
             if tgt and inb is not None:
-                inb[tgt] -= 1
+                inb[tgt] = inb.get(tgt, 0) - 1
             drop.append(x)
     dropped = {(d["start"], d["end"]) for d in drop}
     edits = [e for e in edits if (e[0], e[1]) not in dropped]

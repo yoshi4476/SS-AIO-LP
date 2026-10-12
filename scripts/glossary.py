@@ -80,9 +80,13 @@ def collect(site_id, only=None):
             if cur is None or (own and not owner.get(term)) or (own == owner.get(term, False) and cur["date"] < rec["date"]):
                 out[term] = rec
                 owner[term] = own
+    kw_of = {a["slug"]: a["keyword"] for a in pubs}
     for rec in out.values():
         t = target_of(rec, pubs)
-        rec.update({"target": t["slug"], "target_title": t["title"], "target_category": t["category"]})
+        # same_topic: 「詳しくは」の行き先の記事の狙う語が「用語＋骨組みの語」だけ（旧URLを301で送ってよい）か。
+        # 語順だけ違う語（「不動産のLLMO」と「LLMO 不動産」）は target_of が拾わず出典に落ちるので、出典の語でも見る
+        rec.update({"target": t["slug"], "target_title": t["title"], "target_category": t["category"],
+                    "same_topic": same_topic(rec["term"], kw_of.get(t["slug"], ""))})
     return sorted(out.values(), key=lambda r: r["term"])
 
 
@@ -107,6 +111,34 @@ def target_of(rec, pubs):
                                                (best["slug"] != rec["slug"] and len(k) < len(_nz(best["keyword"])))))):
             best, rank = a, r
     return best or rec
+
+
+# 記事の狙う語のうち、主題を狭めない語（どの記事にも付く骨組み）。cannibal_check._FRAME と同じ考え
+# 「費用・相場・事例」は読者の目的を変えるので入れない（「AIO対策」の旧URLを相場の記事へ送らない）
+FRAME = {"とは", "方法", "やり方", "選び方", "比較", "対策", "ツール", "書き方", "作り方", "増やす", "増やし方", "仕組み",
+         "理由", "分析", "変動", "ポイント", "改善", "手順", "違い", "注意点", "おすすめ",
+         "始め方", "進め方", "流れ", "効果", "メリット", "デメリット", "確認", "基準", "目安", "見直し", "載る方法"}
+
+
+def same_topic(term, keyword):
+    """記事の狙う語が、用語そのものか「用語＋骨組みの語」だけか。
+    「SEO」と「aio seo meo」、「MEO対策」と「飲食店 meo対策」のように、記事のほうが業種や別の手法で主題を狭めて
+    いれば False（一般の語の旧URLを業種の記事へ301で送ると、主題の違うページへの転送になる）"""
+    names = {_nz(term), _nz(re.sub(r"[（(].*?[）)]", "", term))} - {""}
+    toks = [_nz(x) for x in re.split(r"[\s　]+", str(keyword))]
+    if not names or not any(toks):
+        return False
+    for t in filter(None, toks):
+        if t in FRAME or any(t in n for n in names):
+            continue
+        rest = [t.replace(n, "") for n in names if n in t]
+        if rest and min(rest, key=len) in FRAME | {""}:
+            continue
+        # 「計測方法」のように、用語の一部＋骨組みの語でできた語
+        if any(t.endswith(f) and t[:-len(f)] and any(t[:-len(f)] in n for n in names) for f in FRAME):
+            continue
+        return False
+    return True
 
 
 def target_url(rec, article_url):
@@ -212,8 +244,21 @@ def index_html(terms, base="/glossary/", site_url="", rel_all=None):
 
 
 def redirects(terms, base="/glossary/"):
-    """旧URL（1語1ページ）から、まとめたページの該当箇所への転送"""
-    return [f"{base}{r['id']}/  {base}#{r['id']}  301" for r in terms]
+    """旧URL（1語1ページ）から、その語を狙う記事（「詳しくは」の行き先）への転送。
+
+    2026-10-03 に1ページへまとめ、旧URLはまとめたページの該当箇所（#id）へ送ったが、Google は旧URLを使い続け、
+    まとめた後の7日（10-03〜10-09）で旧URLの表示847回・クリック1、まとめた1ページは表示2回だった。
+    旧URLが記事より上に出る語が14語あった（cannibal_check --glossary）。141本の旧URLを1ページへ送ると、
+    その評価がまとめたページに集まり、同じ語で記事と食い合う。語ごとに狙う記事へ送り、記事を勝たせる（8.1 の統合と同じ考え）。
+
+    狙う記事が無い語（「AI Overview」の定義が歯科の記事にある、など）と、記事のほうが主題を狭めている語（same_topic）は、
+    記事へ送ると主題の違うページへの転送になるので、これまでどおりまとめたページの該当箇所へ送る"""
+    out = []
+    for r in terms:
+        src = "/%s/%s/" % (r["category"], r["slug"])
+        to = target_url(r, src) if r.get("same_topic") else f"{base}#{r['id']}"
+        out.append(f"{base}{r['id']}/  {to}  301")
+    return out
 
 
 def link_terms(content, terms_by_term, base="/glossary/", self_slug=""):

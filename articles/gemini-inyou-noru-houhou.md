@@ -13,7 +13,7 @@ diagrams:
   - name: chigai
     type: matrix
     title: AI OverviewとGeminiアプリの違い
-    items: ["観点|AI Overview|Geminiアプリ", "出る場所|検索結果の上部|Geminiの画面", "根拠の取り方|検索の索引|必要なときに検索", "Google-Extended|影響しない|拒否で使われない", "計測|Search Console|GA4と実際の質問"]
+    items: ["観点|AI Overview|Geminiアプリ", "出る場所|検索結果の上部|Geminiの画面", "根拠の取り方|検索の索引|必要なときに検索", "Google-Extendedの拒否|影響しない|根拠付けに使われない", "計測|Search Console|GA4と実際の質問"]
   - name: shibori
     type: funnel
     title: Geminiに18語を聞いた結果

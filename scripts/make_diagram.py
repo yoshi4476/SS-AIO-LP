@@ -355,7 +355,9 @@ def wrap(d, text, f, max_width):
     toks = _tokens(text)
     lines = _greedy(d, toks, f, max_width)
     if len(lines) > 1:
-        lo, hi, best = max_width * 0.5, max_width, lines
+        # 詰める幅は、1行に入る英数字の語より狭くしない（狭くすると語の途中で割る）
+        longest = max((d.textlength(w, font=f) for w in _WORD.findall(text)), default=0)
+        lo, hi, best = max(max_width * 0.5, min(longest, max_width)), max_width, lines
         for _ in range(7):
             mid = (lo + hi) / 2
             trial = _greedy(d, toks, f, mid)
@@ -367,30 +369,44 @@ def wrap(d, text, f, max_width):
     return lines
 
 
+def splits_word(d, text, f, width):
+    """1行に入りきらない英数字の語があるか（あれば wrap が語の途中で割る）。
+    大きい文字のまま「Google-Exten／ded」と割れていた（2026-10-12 の手順の図。行数の上限には収まるので検査を通っていた）"""
+    return any(d.textlength(w, font=f) > width for w in _WORD.findall(str(text)))
+
+
 def fit_block(d, text, width, max_lines, base, minimum, weight="bold"):
     """text を width に max_lines 行以内で収める (行, 文字, 収まったか)。
-    まず1行のまま base の85%まで縮め、入らなければ折り返して base から縮める"""
+    まず1行のまま base の85%まで縮め、入らなければ折り返して base から縮める。
+    英数字の語を割らずに収まる大きさを先に探し、どの大きさでも割れるときだけ割る"""
     text = str(text).strip()
     for size in range(base, max(minimum, int(base * 0.85)) - 1, -1):
         f = font(size, weight)
         if d.textlength(text, font=f) <= width:
             return [text], f, True
-    for size in range(base, minimum - 1, -1):
-        f = font(size, weight)
-        lines = wrap(d, text, f, width)
-        if len(lines) <= max_lines:
-            return lines, f, True
+    for whole in (True, False):
+        for size in range(base, minimum - 1, -1):
+            f = font(size, weight)
+            if whole and splits_word(d, text, f, width):
+                continue
+            lines = wrap(d, text, f, width)
+            if len(lines) <= max_lines:
+                return lines, f, True
     f = font(minimum, weight)
     return wrap(d, text, f, width), f, False
 
 
 def fit_multi(d, segs, width, max_lines, base, minimum, weight="regular"):
-    """複数の段（「|」で分けた補足）を同じ大きさの文字で、合わせて max_lines 行以内に収める"""
-    for size in range(base, minimum - 1, -1):
-        f = font(size, weight)
-        lines = [ln for s in segs for ln in wrap(d, s, f, width)]
-        if len(lines) <= max_lines:
-            return lines, f, True
+    """複数の段（「|」で分けた補足）を同じ大きさの文字で、合わせて max_lines 行以内に収める。
+    fit_block と同じく、英数字の語を割らない大きさを先に探す"""
+    for whole in (True, False):
+        for size in range(base, minimum - 1, -1):
+            f = font(size, weight)
+            if whole and any(splits_word(d, s, f, width) for s in segs):
+                continue
+            lines = [ln for s in segs for ln in wrap(d, s, f, width)]
+            if len(lines) <= max_lines:
+                return lines, f, True
     f = font(minimum, weight)
     return [ln for s in segs for ln in wrap(d, s, f, width)], f, False
 

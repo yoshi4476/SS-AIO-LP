@@ -45,6 +45,15 @@ def _env(key):
     return ai_cite_check._env(key)
 
 
+def _gh_env(*names):
+    """gh に渡す環境。この検査だけが使う名前の鍵があれば GH_TOKEN にする（無ければ gh の手元の認証のまま）。
+    週次の findings の工程は GH_TOKEN を持たない（2026-10-12 も「動かせず」）。工程全体に GH_TOKEN を渡すと
+    ほかの検査の gh まで鍵が変わるので、sched_guard（SCHED_GH_TOKEN）と同じく専用の名前で受け取る"""
+    import os
+    tok = next((os.environ[n] for n in names if os.environ.get(n)), "")
+    return dict(os.environ, GH_TOKEN=tok) if tok else None
+
+
 def workflow_secrets():
     out = set()
     for p in sorted((ROOT / ".github" / "workflows").glob("*.yml")):
@@ -57,8 +66,9 @@ def check_secrets(found):
         print("  GitHub Secrets: gh が無いため確かめられません")
         GH_SKIPPED.append("鍵の登録: gh が無い")
         return
+    # Secrets の一覧は GITHUB_TOKEN では読めない。週次は Secrets を書ける鍵（GH_SECRET_TOKEN）を HISTD_GH_TOKEN で渡す
     r = subprocess.run(["gh", "secret", "list", "--json", "name"], cwd=ROOT, capture_output=True,
-                       text=True, encoding="utf-8", errors="replace", timeout=60)
+                       text=True, encoding="utf-8", errors="replace", timeout=60, env=_gh_env("HISTD_GH_TOKEN"))
     if r.returncode != 0:
         print(f"  GitHub Secrets: 一覧を取れません（{(r.stderr or '').strip()[:80]}）")
         GH_SKIPPED.append(f"鍵の登録: {(r.stderr or '').strip()[:60]}")
@@ -193,13 +203,20 @@ def check_delivery_fonts(found):
         GH_SKIPPED.append("配信先のフォント: gh が無い")
         return
     tried, failed = 0, []
+    # 配信先のリポジトリを読める鍵を順に試す（週次は配信の鍵 SITE_PUSH_TOKEN が工程にある）。
+    # GITHUB_TOKEN は自分のリポジトリしか読めない。どれも無ければ gh の手元の認証（None）
+    envs = [e for e in (_gh_env(n) for n in ("HISTD_REPO_TOKEN", "SITE_PUSH_TOKEN", "HISTD_GH_TOKEN")) if e] or [None]
     for sid, cfg in S.load_all().items():
         repo = cfg.get("repo") or ""
         if cfg.get("type") == "self-static" or "/" not in repo:
             continue
         tried += 1
-        r = subprocess.run(["gh", "api", "-X", "GET", "search/code", "-f", f'q="next/font/google" repo:{repo}'],
-                           capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
+        # コード検索は時々一時的に失敗する（2026-10-12 手元で3件中1〜2件。直後にやり直すと通った）ので、1回ずつやり直す
+        for env in envs * 2:
+            r = subprocess.run(["gh", "api", "-X", "GET", "search/code", "-f", f'q="next/font/google" repo:{repo}'],
+                               capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60, env=env)
+            if r.returncode == 0:
+                break
         if r.returncode != 0:
             print(f"  配信先のフォント: {repo} を検索できません（{(r.stderr or '').strip()[:60]}）")
             failed.append((r.stderr or "").strip()[:60])
@@ -210,7 +227,7 @@ def check_delivery_fonts(found):
             if not re.search(r"\.(t|j)sx?$|\.mjs$", path):
                 continue
             c = subprocess.run(["gh", "api", f"repos/{repo}/contents/{path}", "-H", "Accept: application/vnd.github.raw"],
-                               capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
+                               capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60, env=env)
             if c.returncode == 0 and FONT_IMPORT.search(c.stdout or ""):
                 hits.append(path)
         print(f"  配信先のフォント: {repo} " + ("import なし" if not hits else f"import {len(hits)}件"))
@@ -233,7 +250,7 @@ def main():
     for f in found:
         print(f)
     # 動けなかった GitHub API の検査は *_OK=unknown で出す。findings は「動かせず」として知らせる（CLAUDE.md 8.7）。
-    # CI で動かすには、鍵の一覧を読めるトークンを GH_TOKEN に渡す（GITHUB_TOKEN では Secrets の一覧を読めない）
+    # CI で動かすには、鍵の一覧を読めるトークンを HISTD_GH_TOKEN に渡す（GITHUB_TOKEN では Secrets の一覧を読めない）
     if GH_SKIPPED:
         print("HISTD_GH_OK=unknown（" + " / ".join(GH_SKIPPED)[:160] + "）")
     print(f"HISTD_OK={'no' if found else 'yes'}")

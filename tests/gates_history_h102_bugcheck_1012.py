@@ -465,3 +465,51 @@ def test_undelivered_warning_only_for_real_gaps():
     check("警告は未配信か失敗があるときだけ（内容が古い分は件数をログに残すだけ）",
           (len(warn), 'if [ "${miss:-0}" -gt 0 ] || [ "${fail:-0}" -gt 0 ]; then' in step,
            "警告にしません" in step), (1, True, True))
+
+
+def test_speed_records_of_clients_stay_private():
+    print("\n■ 表示速度の記録: お客様の社の行・CrUX は非公開の置き場へ（2026-10-12 の週次が public に1行 push した）")
+    import client_private as CP
+    import cwv_check as CW
+    import sites as S
+    check("cwv.jsonl は分け書きの記録で、お客様の行は非公開のリポジトリに残す",
+          ("data/cwv.jsonl" in CP.SPLIT_JSONL, "data/cwv.jsonl" in CP.REPO_BACKED), (True, True))
+    with tempfile.TemporaryDirectory() as d, contextlib.ExitStack() as st:
+        d = Path(d)
+        for p in _fake_sites():
+            st.enter_context(p)
+        st.enter_context(mock.patch.object(CP, "is_private", lambda sid: sid == CL))
+        st.enter_context(mock.patch.object(CP, "private_path", lambda sid, rel: d / "priv" / sid / rel))
+        st.enter_context(mock.patch.object(CP, "site_file", lambda sid, rel: d / "priv" / sid / rel))
+        st.enter_context(mock.patch.object(CW, "CRUX_DIR", d / "crux"))
+        st.enter_context(mock.patch.object(CP, "_split_rel", lambda p: "data/cwv.jsonl"))
+        log = d / "cwv.jsonl"
+        CP.append_jsonl(log, {"site": CL, "url": "https://zz.example/"}, sid=CL)
+        CP.append_jsonl(log, {"site": "ai-lab", "url": "https://ai.example/"}, sid="ai-lab")
+        pub = log.read_text(encoding="utf-8")
+        priv = (d / "priv" / CL / "data/cwv.jsonl").read_text(encoding="utf-8")
+        crux = (CW.crux_path(CL), CW.crux_path("ai-lab"))
+    check("お客様の行は置き場へ・自社の行は public へ・CrUX の置き場も同じ",
+          ("zz.example" in pub, "ai.example" in pub, "zz.example" in priv, "priv" in str(crux[0]), "priv" in str(crux[1])),
+          (False, True, True, True, False))
+    src = (ROOT / "scripts" / "cwv_check.py").read_text(encoding="utf-8")
+    check("cwv_check は行を client_private で書き、ログ・知らせる文にお客様の URL を出さない",
+          ("CP.append_jsonl(LOG, r, sid=r[\"site\"])" in src, 'with LOG.open("a"' not in src,
+           src.count("（お客様のページ）") >= 3), (True, True, True))
+    rows = [json.loads(x) for x in (ROOT / "data" / "cwv.jsonl").read_text(encoding="utf-8").splitlines() if x.strip()]
+    check("いまの public の data/cwv.jsonl にお客様の社の行が無い", [r.get("date") for r in rows if S.is_client(r.get("site", ""))], [])
+
+
+def test_priority_boost_never_links_to_noindexed_articles():
+    print("\n■ 主力の語の底上げ（priority_boost）: 検索から外した記事へリンクを送らない・送り元にもしない")
+    import priority_boost as PB
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        (d / "articles").mkdir()
+        (d / "articles" / "zz-live.md").write_text("---\ntitle: t\ncategory: hojokin\n---\n本文\n", encoding="utf-8")
+        (d / "articles" / "zz-hidden.md").write_text(
+            "---\ntitle: t\ncategory: hojokin\nnoindex: true\nnoindex_reason: 試験\n---\n本文\n", encoding="utf-8")
+        with mock.patch.object(PB, "ROOT", d):
+            got = sorted(PB.load_articles())
+    check("検索から外した記事は送り先にも送り元にも入らない（2026-10-12 の週次が12本の原稿からリンクを足した）",
+          got, ["zz-live"])

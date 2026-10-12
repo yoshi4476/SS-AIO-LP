@@ -62,8 +62,18 @@ SCORES design=<0-20> seo=<0-20> editorial=<0-20> expert=<0-20> persona=<0-20> ai
 """
 
 
-def published(limit=0, seed=0):
-    """公開HTMLがある記事。slug -> (html_path, 自己申告の点数)"""
+def rewritten_since_audit(d, tries=None):
+    """採点の後に一次性の書き直し（auto_rewrite の quality）を当てた記事。次の採点で先に採点し直す。
+    採点し直さないと、直して上がったかが分からず、retire_stale --quality も「採点待ち」のまま動かない"""
+    if tries is None:
+        import retire_stale as RS
+        tries = RS.quality_tries()
+    return sorted(s for s, ds in tries.items()
+                  if ds and s in d and str((d.get(s) or {}).get("at", "")) < max(ds))
+
+
+def published(limit=0, seed=0, first=()):
+    """公開HTMLがある記事。slug -> (html_path, 自己申告の点数)。first の記事を先に取る"""
     out = {}
     for p in sorted((ROOT / "articles").glob("*.md")):
         if p.name.startswith("_"):
@@ -80,6 +90,8 @@ def published(limit=0, seed=0):
     if limit:
         keys = sorted(out)
         random.Random(seed).shuffle(keys)
+        head = [k for k in first if k in out]
+        keys = head + [k for k in keys if k not in head]
         out = {k: out[k] for k in keys[:limit]}
     return out
 
@@ -183,7 +195,12 @@ def main():
         return 1
 
     d = load()
-    targets = published(a.limit, a.seed)
+    try:
+        first = rewritten_since_audit(d)
+    except Exception as e:
+        print(f"  （書き直した記事を先に採点する一覧を作れません: {str(e)[:50]}）")
+        first = []
+    targets = published(a.limit, a.seed, first)
     print(f"■ {len(targets)}本を採点し直します（公開HTMLを読む・書き換えはできません）\n")
     for i, (slug, (html, self_score)) in enumerate(targets.items(), 1):
         res, err = audit_one(slug, html)

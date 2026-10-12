@@ -69,6 +69,15 @@ def video_urls():
     return out
 
 
+def missing_from_sitemap(slug, url, sm):
+    """説明欄の記事URLが sitemap に無いか。検索から外した記事（noindex）は sitemap から外す決まりなので数えない
+    （2026-10-12: noindex にした記事の動画を「sitemap に無い」と誤って知らせた。ページは200のまま）"""
+    import noindex
+    if sm is None or noindex.is_hidden(slug):
+        return False
+    return url not in sm and url.rstrip("/") not in sm
+
+
 def main():
     bad, reached = [], 0
     print("■ 動画の説明欄の記事URL")
@@ -88,7 +97,7 @@ def main():
             print(f"  ?  {slug}: 届かない {url}")
         elif st != 200:
             bad.append(f"{slug}: {url} が {st}")
-        if sm is not None and url not in sm and url.rstrip("/") not in sm:
+        if missing_from_sitemap(slug, url, sm):
             bad.append(f"{slug}: {url} が {dom} の sitemap.xml に無い")
     print("■ 取り下げ済みの旧URL")
     import sites as S

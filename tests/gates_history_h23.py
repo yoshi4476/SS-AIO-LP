@@ -214,5 +214,18 @@ def test_glossary_sends_readers_to_the_article_that_targets_the_term():
     slugs = {p.stem for p in (ROOT / "articles").glob("*.md")}
     check("実データ: 詳しくはの行き先は公開記事（存在する原稿）", [t["term"] for t in terms if t["target"] not in slugs], [])
     ids = {i for i, _ in secs}
-    check("旧URL /glossary/<id>/ の転送先（#id）が用語集の節にある",
-          [ln for ln in GL.redirects(terms) if ln.split()[1].split("#")[1] not in ids], [])
+    # 2026-10-12: 旧URLは、狙う記事が同じ主題（same_topic）ならその記事へ、それ以外はまとめたページの該当箇所へ送る
+    by_id = {t["id"]: t for t in terms}
+    wrong = []
+    for ln in GL.redirects(terms):
+        old, to = ln.split()[:2]
+        t = by_id.get(old.strip("/").split("/")[-1])
+        if t is None:
+            wrong.append(ln)
+        elif "#" in to:
+            if t["same_topic"] or to.split("#")[1] not in ids:
+                wrong.append(ln)
+        elif not t["same_topic"] or to != GL.target_url(t, "/%s/%s/" % (t["category"], t["slug"])) \
+                or to.strip("/").split("/")[-1] not in slugs:
+            wrong.append(ln)
+    check("旧URL /glossary/<id>/ の転送先は、同じ主題の狙う記事（公開記事）か、用語集の節（#id）", wrong, [])

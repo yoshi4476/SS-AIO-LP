@@ -101,7 +101,8 @@
    "hugo": "記事のレイアウトの head に {{ with .Params.robots }}<meta name=\"robots\" content=\"{{ . }}\">{{ end }} を足す",
    "jekyll": "記事のレイアウトの head に {% if page.robots %}<meta name=\"robots\" content=\"{{ page.robots }}\">{% endif %} を足す",
    "astro": "記事のレイアウトの head に、フロントマターの robots を <meta name=\"robots\"> として出す",
-   "eleventy": "記事のレイアウトの head に {% if robots %}<meta name=\"robots\" content=\"{{ robots }}\">{% endif %} を足す"
+   "eleventy": "記事のレイアウトの head に {% if robots %}<meta name=\"robots\" content=\"{{ robots }}\">{% endif %} を足す",
+   "next": "記事ページの metadata（generateMetadata が返す robots）を {{ index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 }} にする（検索から外す記事は index: false のまま）"
   },
   "nextjs-json": "app/layout.tsx の metadata.robots に maxSnippet: -1・maxImagePreview: 'large'・maxVideoPreview: -1 を足す",
   "wordpress": "テーマの header.php で wp_head() を呼ぶ（SEO プラグインが noindex を出していないかも確かめる）"
@@ -112,7 +113,8 @@
    "_": "先方のビルドが sitemap.xml を作るなら止め、配信先に置いた sitemap.xml（画像の行つき）をそのまま出す",
    "hugo": "Hugo の [sitemap] を止め（disableKinds に \"sitemap\"）、static/sitemap.xml（配ったもの）をそのまま出す",
    "jekyll": "jekyll-sitemap を外し、配った sitemap.xml をそのまま出す",
-   "astro": "@astrojs/sitemap を外すか、配った public/sitemap.xml を優先する"
+   "astro": "@astrojs/sitemap を外すか、配った public/sitemap.xml を優先する",
+   "next": "app/sitemap.ts で記事ごとに images（アイキャッチか OG 画像の絶対URL）を返す（MetadataRoute.Sitemap の images）"
   },
   "nextjs-json": "app/sitemap.ts で記事ごとに images（アイキャッチの絶対URL）を返す（templates/corporate_sitemap.ts の形）",
   "wordpress": "画像のサイトマップを出す SEO プラグイン（Yoast・Rank Math 等）を有効にするか、橋渡しの最新版に置き直す"
@@ -215,6 +217,7 @@
  "video_missing": {
   "_": "記事を配り直す（python scripts/publish_rerender.py --site {site} --push。CSP が止めていた頃に配った記事は動画を持たない）。配り直しても出なければ、先方の記事ページが本文の <iframe> を消していないか確かめる",
   "nextjs-json": "記事を配り直す（python scripts/publish_rerender.py --site {site} --push。CSP が止めていた頃に配った JSON には video が無い）。配り直しても出なければ、先方の記事ページで JSON の video（または本文の <iframe>）を描く",
+  "external-md": "記事を配り直す（python scripts/publish.py --site {site} --slug <slug> --push。動画を上げる前に配った記事は動画を持たない。publish_rerender は external-md を扱わない）。配り直しても出なければ、先方の Markdown の変換・記事ページが本文の <iframe> を消していないか確かめる",
   "wordpress": "記事を配り直す（python scripts/publish.py --site {site} --slug <slug>）。出なければ、本文の <iframe> を落とすプラグイン・設定を外す"
  },
  "merge_301": {

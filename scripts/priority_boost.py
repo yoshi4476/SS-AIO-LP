@@ -76,8 +76,12 @@ def near_page1(days=28):
 
 
 def load_articles():
-    return {p.stem: p.read_text(encoding="utf-8", errors="replace")
-            for p in (ROOT / "articles").glob("*.md")}
+    # 検索から外した記事（noindex）は送り先にも送り元にもしない。検索の実績（GSC）にはまだ順位が残るので、
+    # 送り先に選んで12本の原稿からリンクを足していた（2026-10-12 の週次）
+    import noindex
+    texts = {p.stem: p.read_text(encoding="utf-8", errors="replace")
+             for p in (ROOT / "articles").glob("*.md")}
+    return {k: t for k, t in texts.items() if not noindex.hidden_text(t)}
 
 
 def inbound(slug, texts):

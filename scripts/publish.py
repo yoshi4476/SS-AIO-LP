@@ -1633,7 +1633,9 @@ def _update_external_index(dest: Path, cfg, meta, page=None):
         if pat.search(t):
             new = pat.sub(lambda _m: line, t, count=1)
         else:
-            new = t.rstrip("\n") + f"\n{line}\n"
+            # 末尾が「まとめのページ」の区画なら、その前に入れる（後ろに足すと区画の書き直しで消える）
+            import aggregate_pages as AP
+            new = AP.add_article_lines(t, [line])
         if new != t:
             lt.write_text(new, encoding="utf-8", newline="\n")
             touched.append(lt)

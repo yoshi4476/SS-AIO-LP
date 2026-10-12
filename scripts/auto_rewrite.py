@@ -123,6 +123,52 @@ def audit_items():
     return sorted(out, key=lambda x: x["why"])
 
 
+QUALITY_PER_RUN = 1     # 週次で、採点を理由に直す本数（順位とクリックで測れる直しの時間を食わない）
+
+
+def quality_items(audits=None, tries=None, facts_of=None):
+    """別工程の採点で一次性が80点を割った記事のうち、直せば一次性が上がりうるものを quality で直す（2026-10-12）。
+
+    2026-10-04 に採点だけを理由にした書き直しを週次から外した理由は「登録済みの一次情報が無いと、書き直しても
+    一次性が上がらない（補助金の旧記事12本）」だった。そこで次の記事だけにする:
+      - その社の登録済みの一次情報のうち、まだ本文に無いものがある（足せる材料がある。数字は登録済みのものだけ）
+      - 書き直しが retire_stale.MIN_TRIES 回未満（届かなければ retire_stale --quality が統合に回す）
+      - 前の書き直しの後に採点し直されている（採点待ちの記事を二度直さない。score_audit が先に採点し直す）
+    指示には採点者の指摘（score_audit の reason）をそのまま渡す。一次性の低い順"""
+    import rubric as R
+    import retire_stale as RS
+    if audits is None:
+        try:
+            audits = json.loads((ROOT / "data" / "score_audit.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return []
+    tries = RS.quality_tries() if tries is None else tries
+    if facts_of is None:
+        import facts as F
+        facts_of = lambda sid: F.load_for(sid)[1]
+    out = []
+    for slug, r in audits.items():
+        a = r.get("audit") or {}
+        o = (a.get("axes") or {}).get("originality")
+        if o is None or o >= R.PASS_EACH or a.get("version") != R.VERSION:
+            continue
+        p = ROOT / "articles" / f"{slug}.md"
+        if not p.is_file():
+            continue
+        done = sorted(tries.get(slug) or [])
+        if len(done) >= RS.MIN_TRIES or (done and str(r.get("at", "")) < done[-1]):
+            continue
+        sid = site_of(slug)
+        body = p.read_text(encoding="utf-8-sig")
+        unused = [f for f in facts_of(sid) or [] if f.get("claim") and f["claim"][:18] not in body]
+        if not unused:
+            continue
+        weak = re.sub(r"\n*SCORES[^\n]*\s*$", "", str(a.get("reason") or a.get("why") or "")).strip()
+        out.append({"kind": "quality", "slug": slug, "site": sid, "orig": o,
+                    "why": f"別工程の採点で一次性{o}点（80点未満）・合計{a.get('total')}点\n{weak}"})
+    return sorted(out, key=lambda x: x["orig"])
+
+
 def targets():
     """直すべき記事を、効く順に受け取る。
 
@@ -143,10 +189,18 @@ def targets():
         print(f"  （rank_rescue から取れません: {str(e)[:50]}）")
     seen0 = {x["slug"] for x in head}
     head = head + [x for x in aio_items() if x["slug"] not in seen0]
-    # 採点（一次性）だけを理由にした書き直しは週次の対象にしない（audit_items は残すが、ここでは使わない）。
+    # 採点（一次性）だけを理由にした書き直しは、週 QUALITY_PER_RUN 本だけにする（audit_items は使わない）。
     # 自社データでは点数と順位が揃わず（91〜93点が96点以上より上。公開日数を揃えても同じ・2026-10-04）、
     # 一次性は登録済みのデータが無いと書き直しても上がらなかった（補助金の旧記事12本で確認）。
-    # 書き直しの時間は、順位とクリックで効いたかを測れる記事に使う。公開の条件（90点・各80点）は変えない
+    # そのため、足せる登録済みの一次情報がある記事だけを quality_items が選ぶ（2026-10-12）。
+    # 2本目に置くのは、本数の上限・時間の予算で後ろが切られても週1本は必ず当てるため
+    try:
+        seen1 = {x["slug"] for x in head}
+        q = [x for x in quality_items() if x["slug"] not in seen1][:QUALITY_PER_RUN]
+        head = head[:1] + q + head[1:]
+    except Exception as e:
+        print(f"  （採点の低い記事を選べません: {str(e)[:50]}）")
+    # 書き直しの時間の大半は、順位とクリックで効いたかを測れる記事に使う。公開の条件（90点・各80点）は変えない
     try:
         import rank_up
         items = rank_up.human_items()

@@ -405,6 +405,29 @@ def _public_file(dest: Path, name):
     return None
 
 
+_LLMS_HEAD_RX = re.compile(r"(?m)^" + re.escape(LLMS_HEAD) + r"[ \t]*$")
+_LLMS_URL = re.compile(r"^- \[.*?\]\((?:https?://[^/)\s]+)?(/[^)\s]*)\)")
+
+
+def is_page_line(line):
+    """llms.txt の行が、まとめのページ（URL の最初の階層が compare・topics・industry・en など）の行か"""
+    m = _LLMS_URL.match(line or "")
+    return bool(m) and m.group(1).strip("/").split("/", 1)[0] in TOPS + HUBS + LANGS
+
+
+def add_article_lines(text, lines):
+    """llms.txt に記事の行を足す。末尾が「まとめのページ」の区画なら、区画の前に入れる。
+    区画の後ろに足すと、続く「- 」行として区画に飲み込まれ、update_indexes が区画を書き直すときに消える
+    （2026-10-07〜12 にコーポレートの新しい記事12本が llms.txt から消えていた）"""
+    lines = [ln for ln in lines if ln]
+    if not lines:
+        return text
+    m = _LLMS_HEAD_RX.search(text or "")
+    if not m:
+        return (text or "").rstrip("\n") + "\n" + "\n".join(lines) + "\n"
+    return text[:m.start()].rstrip("\n") + "\n" + "\n".join(lines) + "\n\n" + text[m.start():]
+
+
 def update_indexes(dest: Path, cfg, pages, gone=()):
     """配信先の sitemap.xml と llms.txt に、まとめのページを載せる（消したページは外す）。書き換えたファイルを返す"""
     touched = []
@@ -428,7 +451,12 @@ def update_indexes(dest: Path, cfg, pages, gone=()):
         t = lt.read_text(encoding="utf-8")
         block = (LLMS_HEAD + "\n" + "".join(f"- [{p['title']}]({p['url']}): {p['description']}\n" for p in pages)) if pages else ""
         if LLMS_HEAD in t:
-            new = re.sub(re.escape(LLMS_HEAD) + r"\n(?:- [^\n]*\n?)*", lambda m: block, t, count=1)
+            m = re.search(re.escape(LLMS_HEAD) + r"\n(?:- [^\n]*\n?)*", t)
+            new = t
+            if m:
+                # 区画に紛れた記事の行（区画の後ろに足された行）は消さずに区画の前へ戻す
+                stray = [ln for ln in m.group(0).split("\n")[1:] if ln.startswith("- ") and not is_page_line(ln)]
+                new = add_article_lines(t[:m.start()] + block + t[m.end():], stray)
         else:
             new = t.rstrip("\n") + ("\n\n" + block if block else "\n")
         if new != t:
