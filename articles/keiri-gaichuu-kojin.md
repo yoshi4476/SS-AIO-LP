@@ -49,6 +49,8 @@ faq:
 
 経理を個人に外注するとは、経理業務の一部を法人ではなくフリーランス個人へ直接委託することです。
 
+費用の目安は、[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)で解説しています。
+
 あわせて[経理の外注はどこまで丸投げできる？](/blog/keiri-marunage-dekiru-hani/)もご覧ください。
 
 近い論点を[外注費の請求書の書き方](/blog/gaichuuhi-seikyuusho-kakikata/)で扱っています。
@@ -66,8 +68,6 @@ faq:
 ## 個人に外注する3つのメリット
 
 個人に外注する主なメリットは、費用を抑えやすいこと、業務範囲を柔軟に絞れること、意思疎通が早いことの3つです。
-
-近い論点を[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)で扱っています。
 
 <figure><img src="/images/keiri-gaichuu-kojin/merit.png" alt="経理を個人に外注する3つのメリット: 会社より低コストで依頼できることが多い、記帳のみなど業務範囲を柔軟に絞れる、担当者と直接やり取りでき意思疎通が早い" loading="lazy"><figcaption>経理を個人に外注する3つのメリット</figcaption></figure>
 

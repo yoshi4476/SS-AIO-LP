@@ -51,6 +51,10 @@ faq:
 
 **AIOで書く記事の文字数に決まった基準は無く、Googleは優先する文字数は存在しないと明言しています。**
 
+関連する内容として[歯科医院の症状ページの作り方](/aio/shika-shoujou-page-tsukurikata/)も公開しています。
+
+あわせて[クリニックの症状ページの作り方](/aio/clinic-shoujou-page-tsukurikata/)もご覧ください。
+
 <div class="definition-box"><span class="term">AIO（AI Overview Optimization）とは</span>、GoogleのAI OverviewやChatGPTなどが回答を作るときに、自社サイトの情報が根拠として使われるよう整える取り組みです。</div>
 
 Googleの「有用で信頼性の高い、ユーザー第一のコンテンツの作成」には、避けるべき作り方の1つとして次の問いが載っています。Googleが優先する文字数があると聞いて、特定の文字数に合わせて書いていないか、という問いです。
@@ -85,6 +89,8 @@ Googleのガイドが効くと書いているのは、一次体験にもとづ�
 ## 記事の長さは検索意図で決める
 
 **記事の長さは、狙う語が1つの疑問か、比較か、網羅かという検索意図で決めます。**
+
+あわせて[AIOのログ分析ツールはどれ？4種の比較と選び方](/aio/aio-log-bunseki-tool-hikaku/)もご覧ください。
 
 <figure><img src="/images/aio-mojisuu/nagasa-kimekata.png" alt="検索意図ごとの記事の長さの目安を3段階で比べた表"></figure>
 

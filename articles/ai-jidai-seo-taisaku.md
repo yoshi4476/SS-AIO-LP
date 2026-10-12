@@ -39,8 +39,6 @@ AI検索でクリック率がどう変わるかは、[AIO対策とCTRの関係](
 実際の進め方は[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)でも扱っています。
 
 
-前提となる考え方は[飲食店のMEO対策とは？](/meo/inshokuten-meo-taisaku/)で整理しています。
-
 <div class="definition-box"><span class="term">SEO（Search Engine Optimization）とは</span>、検索エンジンの検索結果で自社ページが上位に表示されるよう最適化することです。AI時代には、この上位表示が「AIの回答に引用されるための前提条件」という新しい役割も持ちます。</div>
 
 「SEOはオワコン」という言説を耳にしますが、実務の感覚は逆です。Google AI OverviewもChatGPTの検索機能も、回答を作るときに検索上位のページを参照します。つまり検索圏外のサイトは、人間からもAIからも見つからない状態になります。

@@ -50,6 +50,10 @@ AI検索で不動産会社が選ばれる条件の全体像は、[不動産のAI
 
 不動産会社のAIO対策は、AIが会社を選ぶときに読む答えのページを、自社サイトに用意する作業です。
 
+対象になる範囲は[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)で整理しています。
+
+関連する内容として[歯科医院ホームページで治療説明はどう書く？](/aio/shika-hp-chiryou-setsumei-kakikata/)も公開しています。
+
 <div class="definition-box"><span class="term">不動産会社のAIO対策とは</span>、GoogleのAI Overviewや生成AIが「◯◯市で売却に強い不動産会社は」などの質問に答えるとき、自社の情報が答えの根拠として使われるよう、自社サイトを整える取り組みです。</div>
 
 AI向けの特別な書き方はありません。Googleは<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">AI最適化ガイド</a>で、AI検索に効くのは独自の視点・一般論に留まらない内容・クロールできることだと示しています。用語の仕組みは[AIOとは？AI Overviewの仕組み](/aio/aio-towa/)にまとめました。
@@ -179,8 +183,6 @@ AIは文の言い切りを好んで切り出します。根拠の無い言い切
 原因: 比べる基準が無いまま手を入れています。
 
 避け方: **手順1の記録を、作業の前に必ず残してください。**
-
-AIO対策全般の落とし穴は、[AIO対策の注意点7つ](/aio/aio-taisaku-chuiten/)で整理しています。
 
 ## 毎月の計測は何を見る？
 

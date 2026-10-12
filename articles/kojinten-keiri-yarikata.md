@@ -167,7 +167,7 @@ faq:
 
 あわせて[現金払いは否認の落とし穴？](/blog/gaichuuhi-seikyuusho-nashi/)もご覧ください。
 
-関連する内容として[請求書をエクセルで自動化する3つの手段](/blog/seikyusho-excel-jidoka/)も公開しています。
+近い論点を[請求書をエクセルで自動化する3つの手段](/blog/seikyusho-excel-jidoka/)で扱っています。
 
 控除額の条件は明確です。国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2072.htm" target="_blank" rel="noopener">No.2072 青色申告特別控除</a>によると、複式簿記で記帳し、貸借対照表と損益計算書を添付して期限内に申告すると55万円控除が受けられます。さらにe-Taxで申告するか優良な電子帳簿保存を行うと、65万円控除になります。
 

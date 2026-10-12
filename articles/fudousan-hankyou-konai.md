@@ -61,13 +61,13 @@ faq:
 
 反響が減っている会社には、ポータル任せ・強み不明・対応の遅さなど共通する5つの共通点があります。
 
+関連する内容として[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)も公開しています。
+
+あわせて[工務店のホームページ集客とは？反響を増やす必須6要素](/ai-marketing/koumuten-hp-shukyaku/)もご覧ください。
+
 ポータルに頼らず自社サイトで反響を取りたい場合は、[不動産のSEO対策で反響を増やす5つの施策](/seo/fudousan-seo-taisaku/)から着手してください。
 
-前提となる考え方については、[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)にまとめています。
-
 業種を問わない基本手順は[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)でも扱っています。ただし不動産業には、物件情報自体は登録対象外という他業種にはない制約が加わります。
-
-AI検索での見え方は[不動産のAI検索対策](/aio/fudousan-ai-kensaku-taisaku/)でも扱っています。
 
 <figure><img src="/images/fudousan-hankyou-konai/signs.png" alt="反響が減る不動産会社の5つの共通点: ポータル任せ、強みが不明、反響対応が遅い、更新が止まった、表記がバラバラ" loading="lazy"><figcaption>反響が減る不動産会社の5つの共通点</figcaption></figure>
 

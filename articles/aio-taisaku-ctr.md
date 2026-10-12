@@ -62,6 +62,8 @@ AIO対策とは、GoogleのAI OverviewやChatGPTの回答に、自社のペー�
 
 **外部の調査では、AI Overviewが出る検索でクリックは約半分に減り、1位のクリック率も約3分の1下がっています。**
 
+近い論点を[不動産会社のAIO対策のやり方は？](/aio/fudousan-aio-taisaku-yarikata/)で扱っています。
+
 米国のPew Research Centerは、900人の成人の2025年3月の閲覧記録を調べました。AI要約が出た検索で通常のリンクが押されたのは訪問の**8%**でした。AI要約が出ない検索では15%です（<a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/" target="_blank" rel="noopener">Pew Research Center</a>）。
 
 同じ調査で、AI要約の中のリンクが押されたのは訪問の1%にとどまりました。*引用されること*と*クリックされること*は、ほぼ別物と考えてください。
@@ -129,7 +131,7 @@ Search Consoleの検索パフォーマンスで、語ごとの平均掲載順位
 
 近い論点を[AIO対策を代理店に任せる前に](/aio/aio-taisaku-dairiten/)で扱っています。
 
-近い論点を[AIO対策でやってはいけない5つのNG行動](/aio/aio-taisaku-yattewaikenai/)で扱っています。
+あわせて[AIO対策でやってはいけない5つのNG行動](/aio/aio-taisaku-yattewaikenai/)もご覧ください。
 
 ### 1. 題に「AIの回答に無いもの」を入れる
 

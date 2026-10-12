@@ -72,8 +72,6 @@ AI Overviewは、Google検索の結果の上部にAIが作る要約です。要�
 
 **AIOはGoogleのAI回答、LLMOはChatGPTなど他のAI、SEOは通常の検索順位が対象です。**
 
-近い論点を[歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ](/seo/shika-seo-taisaku/)で扱っています。
-
 3つは対立しません。AI OverviewはGoogleの通常の検索評価を土台にしているため、SEOで評価されたページが引用の候補になります。
 
 | 施策 | 対象 | 成果の見え方 |

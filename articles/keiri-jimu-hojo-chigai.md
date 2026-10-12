@@ -46,6 +46,8 @@ faq:
 
 **経理事務は数字を判断して締める仕事で、経理補助は決まった手順で数字を入れる仕事です。**作業の一部は重なりますが、責任の範囲が違います。
 
+あわせて[経理と財務の違い｜兼任の社長が資金繰りで詰まる3つの落とし穴](/blog/keiri-zaimu-chigai/)もご覧ください。
+
 <div class="definition-box"><span class="term">経理事務とは</span>、会計ソフトを使い、取引の入出金・社内の資金管理・給料の支払などを記帳し、月次や決算の数字にまとめる仕事です。<span class="term">経理補助とは</span>、経理事務の担当者の指示を受け、入力・書類の整理・ファイリングなど手順の決まった作業を受け持つ役割です。</div>
 
 厚生労働省の職業情報提供サイト<a href="https://shigoto.mhlw.go.jp/User/Occupation/Detail/430" target="_blank" rel="noopener">job tag「経理事務」</a>は、仕事を「経理・会計管理のソフトウェア、システム等を使い、社外との取引に伴う入出金、社内の資金管理、給料の支払等を行う」と説明しています。
@@ -176,7 +178,5 @@ job tag の同じページでは、経理事務の就業者数は全国で1,523,
 <span class="big">経理事務は判断して締める仕事、経理補助は手順どおりに入れる仕事です。</span>経理補助は、判断役がいて初めて力を出せます。
 
 今日できる一歩は、先月の月次決算で「残高の照合を誰がしたか」を書き出すことです。**名前が書けなければ、足りないのは経理補助ではなく判断役です。**
-
-判断役を社内で用意できないときは、締めの手前までを外に出す方法があります。経理の人手不足への打ち手は、[経理の人手不足対策8つ](/blog/keiri-hitode-busoku-taisaku/)でもまとめています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>

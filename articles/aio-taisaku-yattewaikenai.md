@@ -147,10 +147,6 @@ AI Overviewが出る語でクリック率がどこまで下がるか、どの語
 
 **NG行動をやめたら、順位確認・クローラー確認・FAQ整合・自社ファクト追加・CV導線点検の順に立て直します。**
 
-関連する内容として[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)も公開しています。
-
-あわせて[AIO導入のメリット5つと費用相場](/aio/aio-taisaku-donyu-hoho/)もご覧ください。
-
 まず今日、狙うキーワードの検索順位とrobots.txtの許可状況を確認してください。ここまでは数十分で終わります。次に、公開済み記事のFAQ本文とSchemaが一致しているかを確認し、ずれている箇所だけ直します。
 
 <figure><img src="/images/aio-taisaku-yattewaikenai/junban.png" alt="NG行動をやめて立て直す4ステップ: 今日はrobots.txtと検索順位を確認、1週目はFAQ本文とSchemaの一致を確認、2週目は量産記事に自社事例を追加、月1回はCV導線とAI参照セッションを計測" width="1200" height="675" loading="lazy"><figcaption>NG行動をやめて立て直す4ステップ（当メディア作成）</figcaption></figure>

@@ -81,9 +81,9 @@ faq:
 
 不動産SEO会社を選ぶ基準は、業界知識・YMYL理解・AIO対応・レポートの透明性・契約の柔軟性・データの引き渡しの6点に整理できます。
 
-関連する内容として[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)も公開しています。
+関連する内容として[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)も公開しています。
 
-あわせて[相場記事の作り方｜不動産・住宅会社が信頼される6つの要素](/ai-marketing/souba-kiji-tsukurikata/)もご覧ください。
+関連する内容として[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)も公開しています。
 
 <figure><img src="/images/fudousan-seo-kaisha-erabikata/kijun.png" alt="不動産SEO会社を選ぶ6つの基準: 不動産業界の実務知識があるか、YMYL・ローカルSEOへの理解があるか、AIO・LLMO対応の実績があるか、レポートに透明性があるか、契約期間に柔軟性があるか、解約時にデータを引き渡すか" loading="lazy"><figcaption>不動産SEO会社を選ぶ6つの基準</figcaption></figure>
 

@@ -87,7 +87,7 @@ diagrams:
 
 優先順位は、即効性のMEO→情報検索層を拾うSEO→比較検討層に届くAIOの順が基本です。この順序には理由があります。
 
-あわせて[AIO・SEO・MEOの違いと使い分け](/aio/aio-seo-meo-chigai/)もご覧ください。
+近い論点を[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)で扱っています。
 
 ### ステップ1: MEO｜今すぐ受診先を探す患者に効く
 

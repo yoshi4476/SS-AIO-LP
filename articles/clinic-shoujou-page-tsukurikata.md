@@ -132,6 +132,10 @@ faq:
 
 **医科の症状ページの失敗は、何でも診ると書く・疾患ページと同じ文を載せる・監修者と更新日が無い、の3つです。**
 
+近い論点を[歯科医院ホームページで治療説明はどう書く？](/aio/shika-hp-chiryou-setsumei-kakikata/)で扱っています。
+
+あわせて[クリニックのホームページの料金の載せ方は？](/aio/clinic-hp-ryokin-nosekata/)もご覧ください。
+
 関連する内容として[歯科医院SEOとは？ポータルサイトに勝つ症状KW対策5つ](/seo/shika-seo-taisaku/)も公開しています。
 
 <figure><img src="/images/clinic-shoujou-page-tsukurikata/ng-ok.png" alt="クリニックの症状ページのNGとOKの比較" loading="lazy"><figcaption>症状ページのNGとOK</figcaption></figure>

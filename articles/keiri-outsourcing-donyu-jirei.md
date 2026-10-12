@@ -47,13 +47,13 @@ faq:
 
 経理アウトソーシングの導入事例は、委託する業務範囲の広さによって3つのパターンに分かれます。
 
+関連する内容として[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)も公開しています。
+
 あわせて[経理代行の失敗5パターン](/blog/keiri-daiko-shippai/)もご覧ください。
 
 あわせて[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)もご覧ください。
 
 関連する内容として[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)も公開しています。
-
-選ぶときの基準については、[記帳代行のアウトソーシング活用](/blog/kichodaiko-outsourcing/)にまとめています。
 
 <div class="definition-box"><span class="term">経理アウトソーシングとは</span>、記帳や請求書発行などの定型業務から月次決算まで、経理業務の一部または全部を外部の専門会社に委託することです。==委託範囲は会社によって大きく異なり、範囲の決め方が導入後の満足度を左右します。==</div>
 

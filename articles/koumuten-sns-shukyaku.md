@@ -49,6 +49,8 @@ faq:
 
 工務店のSNS集客とは、施工事例や現場の様子を複数のSNS媒体で発信し、認知から問い合わせへの導線を作る取り組みです。
 
+前提となる考え方を先に押さえるなら、[工務店のホームページ集客とは？反響を増やす必須6要素](/ai-marketing/koumuten-hp-shukyaku/)が参考になります。
+
 あわせて[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)もご覧ください。
 
 前提となる考え方は[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)で整理しています。
@@ -124,8 +126,6 @@ LINE公式アカウントは、資料請求や見学会予約をした見込み�
 ## SNS集客が伸びない工務店に共通する失敗パターン
 
 SNS集客が伸びない工務店には、媒体選びより前に共通するNGパターンがあります。
-
-関連する内容として[リフォーム会社のインスタグラム運用](/ai-marketing/reform-instagram-shukyaku/)も公開しています。
 
 <figure><img src="/images/koumuten-sns-shukyaku/ngok.png" alt="NG例: 全媒体に同時展開する、個人アカウントで運用する、更新が数ヶ月止まる。OK例: 1〜2媒体に絞って継続する、ビジネスアカウントで運用する、週1回でも更新を続ける" loading="lazy"><figcaption>SNS集客が伸びる工務店・伸びない工務店</figcaption></figure>
 

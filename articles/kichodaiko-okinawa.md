@@ -43,6 +43,10 @@ faq:
 
 **沖縄で記帳を頼める先は、税理士事務所・記帳代行会社・経理BPOの3つで、任せられる範囲が違います。**決算まで1か所なら税理士事務所、帳簿だけなら記帳代行会社、請求や支払いまで手放すなら経理BPOです。
 
+あわせて[エフアンドエムの記帳代行の評判は？](/blog/fandm-kichodaiko-hyoban/)もご覧ください。
+
+関連する内容として[記帳代行を大阪で頼むなら](/blog/kichodaiko-osaka/)も公開しています。
+
 <div class="definition-box"><span class="term">記帳代行とは</span>、領収書や通帳の明細から仕訳を入力し、帳簿と試算表を作る作業を外部に任せることです。==申告書の作成は含みません。==</div>
 
 <figure><img src="/images/kichodaiko-okinawa/bunrui.png" alt="沖縄で記帳を頼める先を3つに分けた図"></figure>

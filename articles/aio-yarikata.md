@@ -51,6 +51,8 @@ faq:
 
 **AIOのやり方とは、クローラーの受け入れ・文章の構造・計測の3つを同時に整える作業のことです。**どれか1つが欠けても、AI検索に引用される確率は上がりません。
 
+近い論点を[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)で扱っています。
+
 | ステップ | やること | 最初の確認点 |
 |:--|:--|:--|
 | 1 | クローラーを許可し構造化データを整える | robots.txtでAIクローラーが許可されているか |
@@ -61,9 +63,7 @@ faq:
 
 近い論点を[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)で扱っています。
 
-近い論点を[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)で扱っています。
-
-あわせて[AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](/aio/aio-towa/)もご覧ください。
+関連する内容として[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)も公開しています。
 
 <div class="definition-box"><span class="term">AIOのやり方とは</span>、AI検索(AI Overview・ChatGPT等)が本文をそのまま抜き出して回答に使える状態を、技術設定と文章の両面からつくる一連の作業のことです。</div>
 

@@ -81,9 +81,9 @@ diagrams:
 
 優先順位は、**即効性のMEO→情報検索層を拾うSEO→比較検討層に届くAIOの順**が基本です。この順序には理由があります。
 
-選ぶときの基準は[AIO・SEO・MEOの違いと使い分け](/aio/aio-seo-meo-chigai/)でも扱っています。
+関連する内容として[大阪でMEOとAIOを両方任せられる会社の選び方](/aio/osaka-meo-aio-kaisha/)も公開しています。
 
-関連する内容として[病院・クリニックの口コミ返信](/meo/byoin-kuchikomi-henshin-reibun/)も公開しています。
+選ぶときの基準は[AIO・SEO・MEOの違いと使い分け](/aio/aio-seo-meo-chigai/)でも扱っています。
 
 ### ステップ1: MEO｜今すぐ店を探す客に効く
 

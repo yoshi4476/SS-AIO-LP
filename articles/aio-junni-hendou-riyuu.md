@@ -63,6 +63,8 @@ faq:
 
 **順位と引用が動く原因は、検索の側・AIの回答の作り方・自社と競合のページ・測り方の4種類に分かれます。**
 
+近い論点を[クリニックの症状ページの作り方](/aio/clinic-shoujou-page-tsukurikata/)で扱っています。
+
 <figure><img src="/images/aio-junni-hendou-riyuu/gennin-tree.png" alt="AIOの順位が動く原因の4つの種類" width="1200" height="700" loading="lazy"><figcaption>AIOの順位が動く原因の4つの種類（当メディア作成）</figcaption></figure>
 
 Googleの「<a href="https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops" target="_blank" rel="noopener">検索トラフィック減少のデバッグ</a>」は、減少の主な原因を6つ挙げています。アルゴリズム更新・技術的な問題・セキュリティの問題・スパムの問題・季節性と関心の変化・サイトの移転です。ここにAI特有の要因と測り方の誤りを足すと、次の4種類に整理できます。
@@ -93,6 +95,8 @@ Googleは同じドキュメントで、この仕組みを*query fan-out*と呼�
 ## 原因を切り分ける5つの分析手順
 
 **原因の切り分けは、期間をそろえる・語とページに分ける・検索に出られるか・食い合い・上位との比較の順に進めます。**
+
+あわせて[AIOのログ分析ツールはどれ？4種の比較と選び方](/aio/aio-log-bunseki-tool-hikaku/)もご覧ください。
 
 <figure><img src="/images/aio-junni-hendou-riyuu/bunseki-flow.png" alt="原因を切り分ける5つの分析手順" width="1200" height="700" loading="lazy"><figcaption>原因を切り分ける5つの分析手順（当メディア作成）</figcaption></figure>
 
@@ -125,6 +129,8 @@ AI Overview・AIモードでの表示は、Search Consoleでは検索タイプ�
 ## 順位の下落はクリックをどれだけ減らすか
 
 **同じ1ページ目でも、1〜3位から4〜10位へ落ちると、当社の実測ではクリック率が約6分の1になります。**
+
+関連する内容として[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)も公開しています。
 
 関連する内容として[AIO対策でCTRは上がる？](/aio/aio-taisaku-ctr/)も公開しています。
 
@@ -196,7 +202,6 @@ AI Overview・AIモードでの表示は、Search Consoleでは検索タイプ�
 原因: 社名やサービス名の検索は、記事の出来とは関係なく増減します。混ぜると、対策が効いたのか分からなくなります。
 
 避け方: 社名・サービス名を含む語を除いた数字と、含めた数字を分けて記録します。
-
 
 AIの回答に自社サイトが載る準備ができているかは、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で確かめられます。登録は不要で、その場で点数が出ます。
 

@@ -45,6 +45,8 @@ diagrams:
 
 **3つの違いは、狙う検索結果の場所と、評価される情報の種類の組み合わせにあります。**表で並べると、混同していた部分が見えてきます。
 
+あわせて[大阪でMEOとAIOを両方任せられる会社の選び方](/aio/osaka-meo-aio-kaisha/)もご覧ください。
+
 実測の参考として、2023年5月から2026年9月までにSEO運用を74件、2026年5月からAIO運用を15件ご契約いただいています（出典: 自社の契約実績）。
 
 選ぶときの基準は、[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)で解説しています。
@@ -67,10 +69,6 @@ diagrams:
 ## AIOを一言でいうと
 
 **AIOとは、AIが生成する回答文の中で、自社の情報が引用元として使われるようにする対策です。**新しいマークアップを追加する対策ではありません。
-
-Googleの検索画面ではなくGeminiの回答に載るための確認点は、[Geminiの引用に載る方法](/aio/gemini-inyou-noru-houhou/)で整理しています。
-
-前提となる考え方は[AIOチェッカーとは？表示と引用を見分ける使い方](/aio/aio-checker/)でも扱っています。
 
 <div class="definition-box"><span class="term">AIOとは</span>、AIの生成する回答の中に、自社サイトの情報が引用・参照されるよう、記事構造と一次情報を整える対策です。<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google Search Central</a>は、AI OverviewとAIモードへの表示に追加要件はなく、既存の検索SEOの評価がそのまま使われると明記しています。</div>
 
