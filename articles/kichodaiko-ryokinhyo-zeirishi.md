@@ -49,6 +49,8 @@ faq:
 
 **税理士の報酬は、各事務所が自分で決めているため、料金表の作りも事務所ごとに違います。**かつては税理士会の会則に報酬の規定がありました。
 
+あわせて[記帳代行を沖縄で頼むなら？](/blog/kichodaiko-okinawa/)もご覧ください。
+
 <a href="https://www.kinzei.or.jp/sites/default/files/document/data13-4.pdf" target="_blank" rel="noopener">近畿税理士会のサイトで公開されている報酬に関する資料</a>によると、<strong>2001年の税理士法改正で税理士会の報酬規定は廃止</strong>されました。2002年4月以降は、税理士が自らの責任で報酬額を決める方式です。
 
 <div class="definition-box"><span class="term">記帳代行料金表とは</span>、税理士事務所などが記帳を引き受けるときの料金を、仕訳の件数や作業の範囲ごとに並べた表です。==表に無い作業は、別の料金になると考えて読みます。==</div>
