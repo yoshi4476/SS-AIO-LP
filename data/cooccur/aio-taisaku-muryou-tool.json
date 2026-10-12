@@ -12,15 +12,15 @@
   "手動チェックテンプレート",
   "aisearchmap",
   "bringritera",
-  "スマホロック画面広告",
-  "seomonitor",
   "ディープクロール解析",
-  "visibility",
-  "writesonic",
+  "スマホロック画面広告",
   "業種別ランクイン事例",
-  "ライタープロフィール",
+  "writesonic",
+  "visibility",
   "similarweb",
-  "rankscale"
+  "seomonitor",
+  "計測チェックツール",
+  "レコメンドサービス"
  ],
- "covered": 0.3
+ "covered": 0.31
 }

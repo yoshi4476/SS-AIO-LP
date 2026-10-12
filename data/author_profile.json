@@ -1,5 +1,5 @@
 {
- "date": "2026-10-05",
+ "date": "2026-10-12",
  "same_as": [
   "https://www.linkedin.com/in/yu-haraguchi",
   "https://note.com/yu_haraguchi",
@@ -34,7 +34,7 @@
   },
   {
    "kind": "動画",
-   "title": "請求書テンプレ無料の選び方｜入手先4種と使う前の確認6点",
+   "title": "請求書テンプレ無料で起きやすい失敗｜登録番号なしの旧版と確認6点",
    "url": "https://www.youtube.com/watch?v=oV87orjtRXY",
    "date": "2026-10-03"
   },
@@ -43,6 +43,30 @@
    "title": "農業の初期費用は平均755万円｜費目別に使える補助金4つ",
    "url": "https://www.youtube.com/watch?v=XR42uoRLpOs",
    "date": "2026-10-03"
+  },
+  {
+   "kind": "動画",
+   "title": "research-biyou",
+   "url": "https://www.youtube.com/watch?v=dYnX1eXwC8w",
+   "date": "2026-10-05"
+  },
+  {
+   "kind": "動画",
+   "title": "計理と経理は何が違う？保険の計理人・旧計理士と取り違えない3つの場面",
+   "url": "https://www.youtube.com/watch?v=-fUhQeHt8ss",
+   "date": "2026-10-06"
+  },
+  {
+   "kind": "動画",
+   "title": "工務店のAI検索集客｜来場予約までの導線を4ステップで確かめる",
+   "url": "https://www.youtube.com/watch?v=5RlCzd8cSwQ",
+   "date": "2026-10-10"
+  },
+  {
+   "kind": "動画",
+   "title": "research-clinic",
+   "url": "https://www.youtube.com/watch?v=nQbOv2DGj4U",
+   "date": "2026-10-12"
   }
  ],
  "credentials": [],
@@ -165,9 +189,9 @@
   }
  ],
  "counts": {
-  "articles": 392,
-  "datasets": 11,
-  "videos": 6,
+  "articles": 441,
+  "datasets": 12,
+  "videos": 10,
   "research": 29
  }
 }

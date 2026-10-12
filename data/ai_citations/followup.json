@@ -430,10 +430,429 @@
     }
    },
    "cited": true
+  },
+  "ai-hojokin-gbizid-shutoku": {
+   "checked": "2026-10-12",
+   "site": "subsidy",
+   "kw": "AI導入補助金 GビズID 取得方法",
+   "published": "2026-09-02",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "digital.go.jp",
+      "gbiz-id.go.jp",
+      "seisansei.smrj.go.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "d-spport.jp",
+      "gbiz-id.go.jp",
+      "hojyokin-portal.jp",
+      "it-shien.smrj.go.jp",
+      "itosmec.com",
+      "jbm.co.jp",
+      "kakehashi-gyo.com",
+      "note.com"
+     ]
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "chusho.meti.go.jp",
+      "digital.go.jp",
+      "generativeai.tokyo",
+      "hojyokin-portal.jp",
+      "jicoo.com",
+      "jiji.com",
+      "note.com",
+      "pr.gbiz-id.go.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "atsoho.com",
+      "office-tree.jp",
+      "romsearch.officestation.jp",
+      "roumu.com",
+      "shigyo.co.jp",
+      "suzukaze.net"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "ai-hojokin-security-action-hoshi2": {
+   "checked": "2026-10-12",
+   "site": "subsidy",
+   "kw": "AI導入補助金 セキュリティアクション 二つ星",
+   "published": "2026-09-02",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "bts.jtbbwt.com",
+      "canon.jp",
+      "chusho-dx.bcnretail.com",
+      "ipa.go.jp",
+      "it-shien.smrj.go.jp",
+      "itw-okinawa.co.jp",
+      "ntt.com",
+      "soichiro.co.jp"
+     ]
+    },
+    "Perplexity": {
+     "cited": true,
+     "ours": [
+      "https://lp.7senses.co.jp/blog/ai-hojokin-security-action-hoshi2/"
+     ],
+     "sources": [
+      "broadleaf.co.jp",
+      "business.ntt-west.co.jp",
+      "c-compe.com",
+      "dos-osaka.co.jp",
+      "ipa.go.jp",
+      "lp.7senses.co.jp",
+      "nippon-smes-project.com",
+      "office-tree.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "canon.jp",
+      "eliiypower.co.jp",
+      "ipa.go.jp",
+      "j-net21.smrj.go.jp",
+      "meidensha.co.jp",
+      "office-tree.jp",
+      "onamae.com",
+      "pref.wakayama.lg.jp"
+     ]
+    }
+   },
+   "cited": true
+  },
+  "aio-taisaku-ai-inyou-sareru": {
+   "checked": "2026-10-12",
+   "site": "ai-lab",
+   "kw": "AIO対策 AIに引用される",
+   "published": "2026-09-02",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "cited": true,
+     "ours": [
+      "https://ai.7senses.co.jp/aio/aio-taisaku-ai-inyou-sareru/"
+     ],
+     "sources": [
+      "ai-search.techsuite.co.jp",
+      "ai.7senses.co.jp",
+      "allweb-consulting.co.jp",
+      "biz.moneyforward.com",
+      "nexer.co.jp",
+      "note.com",
+      "protea-inc.co.jp",
+      "uravation.com"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "ai.giftx.co.jp",
+      "aspicjapan.org",
+      "biz.moneyforward.com",
+      "dmp.intimatemerger.com",
+      "issoh.co.jp",
+      "itmedia.co.jp",
+      "jinrai.co.jp",
+      "koukoku.jp"
+     ]
+    }
+   },
+   "cited": true
+  },
+  "aio-taisaku-keisoku-houhou": {
+   "checked": "2026-10-12",
+   "site": "ai-lab",
+   "kw": "aio対策 計測方法",
+   "published": "2026-09-02",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "aio-check.ai",
+      "bring-flower.com",
+      "digital-marketing.jp",
+      "exidea.co.jp",
+      "jinrai.co.jp",
+      "lifestyle.assist-all.co.jp",
+      "note.com",
+      "one-produce.co.jp"
+     ]
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "0120.co.jp",
+      "ai-search.techsuite.co.jp",
+      "apex-japan-aio.co.jp",
+      "bitstrong.com",
+      "kurofune-ai.co.jp",
+      "lnx.co.jp",
+      "note.com"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "0120.co.jp",
+      "koukoku.jp",
+      "lifestyle.assist-all.co.jp",
+      "media.souzoh-official.com",
+      "shopowner-support.net",
+      "stellagent.ai",
+      "uravation.com"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "aio-taisaku-yattewaikenai": {
+   "checked": "2026-10-12",
+   "site": "ai-lab",
+   "kw": "AIO対策 やってはいけない",
+   "published": "2026-09-02",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": true,
+     "ours": [
+      "https://ai.7senses.co.jp/aio/aio-taisaku-yattewaikenai/",
+      "https://ai.7senses.co.jp/glossary/#3ad01200c2"
+     ],
+     "sources": [
+      "ai.7senses.co.jp",
+      "giginc.co.jp",
+      "mediareach.co.jp",
+      "note.com",
+      "oro.com",
+      "revimy.jp",
+      "sungrove.co.jp",
+      "uravation.com"
+     ]
+    },
+    "Perplexity": {
+     "cited": true,
+     "ours": [
+      "https://ai.7senses.co.jp/aio/aio-taisaku-chuiten/"
+     ],
+     "sources": [
+      "ai.7senses.co.jp",
+      "cascaded.ai",
+      "jinrai.co.jp",
+      "lo-ads.com",
+      "mesut.co.jp",
+      "nexer.co.jp",
+      "stellagent.ai",
+      "sungrove.co.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "shopowner-support.net",
+      "stellagent.ai",
+      "stock-sun.com",
+      "sungrove.co.jp"
+     ]
+    }
+   },
+   "cited": true
+  },
+  "jieigyou-keiri-yarikata": {
+   "checked": "2026-10-12",
+   "site": "corporate",
+   "kw": "自営業 経理 やり方",
+   "published": "2026-09-02",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "airregi.jp",
+      "cnbc.com",
+      "fujiko-san.com",
+      "iwahashi-ms.com",
+      "l-c-style.co.jp",
+      "m-tax.jp",
+      "sorimachi.co.jp",
+      "squareup.com"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "all-senmonka.jp",
+      "biz.moneyforward.com",
+      "freee.co.jp",
+      "sogyotecho.jp",
+      "yayoi-kk.co.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "kaigo-denshishinsei-todokede": {
+   "checked": "2026-10-12",
+   "site": "subsidy",
+   "kw": "介護事業所 電子申請・届出システム",
+   "published": "2026-09-02",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "engaru.jp",
+      "kaigokensaku.mhlw.go.jp",
+      "kaigokensaku.net",
+      "mhlw.go.jp",
+      "town.kaita.lg.jp",
+      "vertexaisearch.cloud.google.com",
+      "youtube.com"
+     ]
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "city.asaka.lg.jp",
+      "city.katsuragi.nara.jp",
+      "city.matsue.lg.jp",
+      "city.minamiawaji.hyogo.jp",
+      "city.shinjuku.lg.jp",
+      "demo.kaigokensaku.mhlw.go.jp",
+      "mhlw.go.jp",
+      "pref.nagano.lg.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "city.ichinomiya.aichi.jp",
+      "city.kimitsu.lg.jp",
+      "city.morioka.iwate.jp",
+      "city.nishio.aichi.jp",
+      "pref.hiroshima.lg.jp",
+      "pref.ishikawa.lg.jp",
+      "pref.kumamoto.jp",
+      "www-source.city.hitachi.lg.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "keihi-seisan-system-erabikata": {
+   "checked": "2026-10-12",
+   "site": "corporate",
+   "kw": "経費精算システム",
+   "published": "2026-09-02",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "aspicjapan.org",
+      "itreview.jp",
+      "keihi.com",
+      "my-best.com",
+      "saas.imitsu.jp",
+      "tis.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "it-trend.jp",
+      "kigyolog.com",
+      "news.mynavi.jp",
+      "romsearch.officestation.jp",
+      "saas.imitsu.jp",
+      "sogyotecho.jp",
+      "tv-tokyo.co.jp"
+     ]
+    }
+   },
+   "cited": false
   }
  },
  "last_run": {
-  "date": "2026-10-05",
+  "date": "2026-10-12",
   "state": "ok",
   "checked": 8,
   "failed": 0,
