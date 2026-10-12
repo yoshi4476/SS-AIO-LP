@@ -127,7 +127,19 @@ def gsc(site_url, day):
         ["https://www.googleapis.com/auth/webmasters.readonly"]))
     res = svc.searchanalytics().query(siteUrl=site_url,
                                       body={"startDate": day, "endDate": day}).execute()
-    r = (res.get("rows") or [{}])[0]
+    rows = res.get("rows") or []
+    if not rows:
+        # 確定の数字がまだ無い日（Search Console の遅れ）。速報（dataState=all）で同じ日と後の日を見て、同じ日が
+        # あればそれを使い、後の日だけに数字があれば本当に0、どちらも無ければ「未取得」として表示・クリックを送らない
+        # （2026-10-10・11 は空の応答を0として全サイト表示0で送り、管制塔に0の日が残った）
+        res = svc.searchanalytics().query(siteUrl=site_url, body={
+            "startDate": day, "endDate": date.today().isoformat(), "dimensions": ["date"], "dataState": "all"}).execute()
+        by = {x["keys"][0]: x for x in res.get("rows") or [] if x.get("keys")}
+        if day in by:
+            rows = [by[day]]
+        elif not any(k > day for k in by):
+            return {"gsc_missing": True}
+    r = rows[0] if rows else {}
     return {"impressions": int(r.get("impressions", 0)), "clicks": int(r.get("clicks", 0)),
             "ctr": round(r.get("ctr", 0) * 100, 2), "position": round(r.get("position", 0), 1)}
 
@@ -195,7 +207,10 @@ def collect(ga_day):
         except Exception as e:
             print(f"  {sid}: GA4取得スキップ（{e}）")
         try:
-            row.update(gsc(f"https://{cfg['domain']}/", sc_day))
+            got = gsc(f"https://{cfg['domain']}/", sc_day)
+            if got.pop("gsc_missing", False):
+                row["note"] = row["note"] + "／GSCの数字がまだ出ていません（未取得。0ではありません）"
+            row.update(got)
         except Exception as e:
             # 403の正体は「権限が制限付き」。長い例外をそのまま出すと原因が埋もれる
             if "403" in str(e) or "sufficient permission" in str(e):
@@ -221,6 +236,10 @@ def collect(ga_day):
         rows.append(row)
         if sites_mod.is_client(sid):     # お客様の社の数字は CI のログに出さない（日次の記録とメールには入る）
             print(f"{ga_day} {sid:10s} 取得しました")
+            continue
+        if "impressions" not in row:
+            print(f"{ga_day} {sid:10s} セッション{row.get('sessions', 0):5d}  表示・クリック: 未取得（Search Console の遅れ）"
+                  f"  AI参照{row.get('ai', 0):3d}")
             continue
         print(f"{ga_day} {sid:10s} セッション{row.get('sessions', 0):5d}  表示{row.get('impressions', 0):6d}  "
               f"クリック{row.get('clicks', 0):4d}  AI参照{row.get('ai', 0):3d}")

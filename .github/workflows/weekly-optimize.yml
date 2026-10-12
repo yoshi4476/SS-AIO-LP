@@ -635,6 +635,8 @@ jobs:
         run: python scripts/tool_links.py --write || true
 
       - name: 管制塔スプレッドシートを整える（文字切れの防止）
+        env:
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
         run: python scripts/sheet_format.py || true
 
       - name: 実測データの公開ページを更新

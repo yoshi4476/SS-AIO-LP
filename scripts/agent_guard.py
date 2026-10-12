@@ -505,6 +505,9 @@ def _scope_sites(site, root=None):
     return {c for c in S.load_all() if S.is_client(c) and S.group_key(c) == g} | {sid}
 
 
+CHECKPOINT_DONE = ".complete"
+
+
 def _pass_dir():
     return _state_path().with_suffix(".pass")
 
@@ -516,6 +519,8 @@ def checkpoint(root=None):
     d = _pass_dir()
     shutil.rmtree(d, ignore_errors=True)
     shutil.copytree(root / "articles", d, ignore=shutil.ignore_patterns("_merged"))
+    # 控えを最後まで作れた印。印の無い控え（途中で落ちた）で戻すと、控えに無い原稿を「新しい記事」として消す
+    (d / CHECKPOINT_DONE).write_text("ok", encoding="utf-8")
     print(f"AGENT_CHECKPOINT=ok（原稿 {len(list(d.glob('*.md')))}本を控え）", flush=True)
 
 
@@ -527,23 +532,52 @@ def _protect_other_sites(root, site, by_pass=False):
     allowed = _scope_sites(site, root)
     if by_pass:
         d = _pass_dir()
-        before = {p.stem: hashlib.sha1(p.read_bytes()).hexdigest() for p in d.glob("*.md")} if d.is_dir() else {}
+        # 控えを最後まで作れなかった回は何もしない（控えに無い原稿を全部「新しい記事」として消し、その後の保存が
+        # 非公開の置き場からも消していた。2026-10-12 の点検）
+        if not (d / CHECKPOINT_DONE).is_file():
+            print("AGENT_PROTECT=skip（範囲ごとの控えがありません。範囲の外の記事は戻せません）", flush=True)
+            if os.environ.get("GITHUB_ACTIONS"):
+                print("::error::範囲ごとの控えが無いため、範囲の外の記事を戻せませんでした", flush=True)
+            return []
+        before = {p.stem: hashlib.sha1(p.read_bytes()).hexdigest() for p in d.glob("*.md")}
         now = _articles(root)
         new = sorted(s for s in now if s not in before)
         changed = sorted(s for s in now if s in before and now[s] != before[s])
     else:
+        if "articles" not in _load_state():
+            print("AGENT_PROTECT=skip（鍵を外した回の控えがありません。範囲の外の記事は戻しません）", flush=True)
+            return []
         new, changed = changes(root)
-    back = []
+    back, aside = [], 0
     for slug in new + changed:
         owner = _site_of(slug, root)
-        if owner in allowed or owner is None:
-            continue
         p = root / "articles" / f"{slug}.md"
         rel = f"articles/{slug}.md"
         orig = root / "private" / "articles" / f"{slug}.md"
         if slug in new:
+            # 公開側か非公開の置き場で追跡している原稿は、この回に作った記事ではない（控えから漏れただけ）。消さない
+            if _known_article(root, rel):
+                continue
+            if owner in allowed:
+                continue
+            if owner is None:
+                # 社の決まらない新しい記事（範囲の外に隠れたお客様のカテゴリ・書き違い）は消さずに作業場所の外へよける。
+                # 残すと範囲を戻した後にその社の記事として保存・配信される
+                dst = _state_path().parent / "agent_unowned" / f"{slug}.md"
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(p), str(dst))
+                aside += 1
+                continue
             p.unlink(missing_ok=True)
-        elif by_pass:
+            back.append("（範囲の外の記事）")
+            continue
+        # 書き換えた記事は、今の社か前の社のどちらかが範囲の外なら戻す（カテゴリを範囲の社へ書き換えて持ち出させない）
+        prev = _owner_of_text(_before_text(root, slug, rel, by_pass), root)
+        if owner in allowed and (prev in allowed or prev is None):
+            continue
+        if owner is None and prev is None:
+            continue
+        if by_pass:
             shutil.copyfile(_pass_dir() / f"{slug}.md", p)
         elif _git(root, "ls-files", "--error-unmatch", rel).returncode == 0:
             _git(root, "checkout", "HEAD", "--", rel)
@@ -552,12 +586,51 @@ def _protect_other_sites(root, site, by_pass=False):
         else:
             continue
         back.append("（範囲の外の記事）")
+    if aside:
+        print(f"要対応: 社の決まらない新しい記事 {aside}本を作業場所の外へよけました（カテゴリを確かめてください）", flush=True)
+        if os.environ.get("GITHUB_ACTIONS"):
+            print(f"::warning::社の決まらない新しい記事 {aside}本を作業場所の外へよけました", flush=True)
     return back
 
 
+def _known_article(root, rel):
+    """公開側の git か非公開の置き場の git（範囲を絞って作業場所に無くても HEAD）で追跡している原稿か"""
+    if _git(root, "ls-files", "--error-unmatch", rel).returncode == 0:
+        return True
+    priv = Path(root) / "private"
+    if (priv / rel).is_file():
+        return True
+    return bool((priv / ".git").exists() and _git(priv, "cat-file", "-e", f"HEAD:{rel}").returncode == 0)
+
+
+def _before_text(root, slug, rel, by_pass):
+    """書き換える前の原稿（範囲ごとの控え・公開側の HEAD・非公開の置き場の写しか HEAD）。無ければ空"""
+    if by_pass:
+        q = _pass_dir() / f"{slug}.md"
+        return q.read_text(encoding="utf-8-sig", errors="replace") if q.is_file() else ""
+    r = _git(root, "show", f"HEAD:{rel}")
+    if r.returncode == 0:
+        return r.stdout
+    priv = Path(root) / "private"
+    if (priv / rel).is_file():
+        return (priv / rel).read_text(encoding="utf-8-sig", errors="replace")
+    r = _git(priv, "show", f"HEAD:{rel}") if (priv / ".git").exists() else None
+    return r.stdout if r is not None and r.returncode == 0 else ""
+
+
+def _owner_of_text(text, root=None):
+    sys.path.insert(0, str(Path(root or ROOT) / "scripts"))
+    import sites as S
+    m = re.search(r"^category:\s*[\"']?([^\"'\n]+)", (text or "")[:4000], re.M)
+    return S.find_category_owner(m.group(1).strip()) if m else None
+
+
 def changes(root=None):
-    """(新しい記事, 中身が変わった記事) — lock の控えと今の articles/ を比べる"""
+    """(新しい記事, 中身が変わった記事) — lock の控えと今の articles/ を比べる。控えが無ければ（鍵を外す手順が
+    動かなかった回）どちらも空（全部の原稿を新しい記事とみなして消す・配ることをしない）"""
     st = _load_state()
+    if "articles" not in st:
+        return [], []
     before = st.get("articles") or {}
     now = _articles(root)
     new = sorted(s for s in now if s not in before)

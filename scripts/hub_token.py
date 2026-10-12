@@ -105,7 +105,8 @@ def scope_sites(scope):
     client = S.is_client(sid)
 
     def grp(s):
-        return str((all_.get(s) or {}).get("group") or S.group_key(s))
+        # 範囲（private_store.scope・agent_guard._scope_sites・agent_work）と同じ組の決め方にそろえる（設定の group は見ない）
+        return S.group_key(s)
     # お客様の組に自社の社を入れない（設定の group を誤って書いても、自社の台帳に書ける通行証にしない）
     w = [s for s in all_ if S.is_client(s) == client and grp(s) == grp(sid)]
     return w, w + [s for s in own if s not in w]

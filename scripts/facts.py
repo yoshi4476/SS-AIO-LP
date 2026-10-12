@@ -17,6 +17,9 @@ SRC = ROOT / "data" / "first_party_facts.json"
 RANKS = ROOT / "data" / "ranks"
 # これ未満の表示回数は、増減が偶然と区別できない。記事に数字として書かない
 MIN_IMP = 20
+# 割合（クリック率）を書いてよい母数。小さい母数の割合は1回のクリックで大きく動く
+CTR_MIN_IMP = 200
+CTR_MIN_CLICKS = 5
 
 
 def _is_client(site_id):
@@ -118,9 +121,10 @@ def own_query_facts(site_id, kw="", days=40):
                      f"{r['imp']}回表示されました。1ページ目に届くまでは"
                      f"クリックがほとんど発生しません")
         else:
+            # 割合は母数が足りるときだけ（表示21回・クリック1回から「4.8%」と書いていた。2026-10-12 の点検）
+            rate = f"（クリック率{r['ctr']:.1f}%）" if r["imp"] >= CTR_MIN_IMP and r["clicks"] >= CTR_MIN_CLICKS else ""
             claim = (f"当サイトの実測では、「{r['kw']}」は平均{r['pos']:.1f}位で"
-                     f"{r['imp']}回表示され、{r['clicks']}回クリックされました"
-                     f"（クリック率{r['ctr']:.1f}%）")
+                     f"{r['imp']}回表示され、{r['clicks']}回クリックされました{rate}")
         out.append({
             "id": "own-query", "claim": claim,
             "source": "自社サイトのSearch Console実測（直近28日）",
@@ -129,7 +133,8 @@ def own_query_facts(site_id, kw="", days=40):
 
     # 同じ順位帯でクリック率が分かれた例。順位ではなく語の性質で決まることを、
     # 自社の数字で示せる。外部の一般論ではなく実測なので、引用の対象になりやすい
-    band = [r for r in rows if 3.5 < r["pos"] <= 10.5]
+    # 割合を比べるので、どちらも母数が足りる語だけ（少ない表示の語どうしの差から「語の性質で決まる」と結論しない）
+    band = [r for r in rows if 3.5 < r["pos"] <= 10.5 and r["imp"] >= CTR_MIN_IMP]
     if len(band) >= 4:
         band.sort(key=lambda r: -r["ctr"])
         hi, lo = band[0], band[-1]

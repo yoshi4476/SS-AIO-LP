@@ -61,6 +61,11 @@ def check_articles(day, bad):
         if len(done) < want:
             bad.append(f"要対応: {name} — {day} の記事が {len(done)}/{want} 本でした（実行は成功でも書かれていない。"
                        "pipeline-multi の「対象サイトの判定」のログで、どの理由で止まったかを確かめる）")
+        elif len(done) > want:
+            # 多すぎるのも知らせる（予備の定時が起動役の後にもう一度書いた・手で起動した回が重ねた。2026-10-08〜11 の
+            # AI集客ラボは毎日3本で、どの見張りも少ない方しか見ていなかった）
+            bad.append(f"要対応: {name} — {day} の記事が {len(done)}/{want} 本でした（1日の本数より多い。"
+                       "同じ枠を2回動かした回・手で起動した回が無いかを確かめる）")
         for a in done:
             if not D._is_published(a):              # 監修待ちはまだ公開されないので、開けなくて正常
                 continue

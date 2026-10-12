@@ -218,8 +218,8 @@ def test_cli_scope_and_output():
     pub = {"pub-zz": ZZ}
     with mock.patch.object(S, "load_all", lambda: cfg), mock.patch.object(S, "own_ids", lambda: list(OWN)), \
             mock.patch.object(S, "resolve", lambda s: pub.get(s, s)), \
-            mock.patch.object(S, "is_client", lambda s: bool(cfg.get(s, {}).get("client"))), \
-            mock.patch.object(S, "group_key", lambda s: s if cfg.get(s, {}).get("client") else "own"):
+            mock.patch.object(S, "is_client", lambda s: bool(cfg.get(s, {}).get("client"))):
+        # 組は sites.group_key（設定の group。'own' と書いても自社の組には入れない）。範囲・通行証・仕事の数え方が同じ組を見る
         got = [HT.scope_sites(s) for s in ("own", "pub-zz", YY, "client-xx", "nope")]
     check("自社の回は自社の社だけ、お客様の回は同じ組のお客様＋読むだけの自社、知らない社は作らない",
           got, [(OWN, OWN), ([ZZ, ZZ + "2"], [ZZ, ZZ + "2"] + OWN), ([YY], [YY] + OWN), (["client-xx"], ["client-xx"] + OWN), None])

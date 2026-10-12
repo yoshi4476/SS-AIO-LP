@@ -13,7 +13,11 @@ turns="$2"
 shift 2
 scopes=$(cat "$RUNNER_TEMP/agent_scopes" 2>/dev/null || echo own)
 for sc in $scopes; do
-  python scripts/private_store.py --scope "$sc"
+  # 絞れなかった範囲は AI を起こさない（ほかの社の原稿・材料が見えたままになる）
+  if ! python scripts/private_store.py --scope "$sc"; then
+    echo "::error::範囲を絞れませんでした（この範囲の AI は動かしません）"
+    continue
+  fi
   # 仕事が0件の範囲は AI を起こさない（2026-10-12 運用者「仕事が無い社は飛ばす」）。数えられなければ飛ばさない
   if [ -n "${AGENT_WORK_KIND:-}" ]; then
     w=$(python scripts/agent_work.py --kind "$AGENT_WORK_KIND" --scope "$sc" | sed -n 's/^AGENT_WORK=//p')
@@ -22,7 +26,11 @@ for sc in $scopes; do
       continue
     fi
   fi
-  python scripts/agent_guard.py --checkpoint
+  # 控えを作れなかった範囲は AI を起こさない（控えが欠けたまま戻すと、控えに無い原稿を消す）
+  if ! python scripts/agent_guard.py --checkpoint; then
+    echo "::error::範囲ごとの控えを作れませんでした（この範囲の AI は動かしません）"
+    continue
+  fi
   HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/$sc" 2>/dev/null || true)"
   export HUB_AGENT_TOKEN
   if [ "$sc" = "own" ]; then

@@ -528,6 +528,7 @@ jobs:
       # 読むので、そこに仕込まれた指示に従っても鍵を持ち出せないようにする。Google は読むだけ・1時間で切れる許可証にし、
       # 鍵を環境変数に持たない別のプロセスが40分ごとに作り直す（AI が1時間を超えても検索の実績を読める）
       - name: AIの作業場から鍵を外す
+        id: lock
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
@@ -605,12 +606,14 @@ jobs:
 
       # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
       - name: AIの変更のうち触ってはいけない場所を戻す
-        if: always() && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        # 鍵を外す手順が動かなかった回（前の手順の失敗・取り消し）は動かさない。控えが無いまま戻すと全部の原稿を
+        # 「この回の新しい記事」とみなして範囲の外を消し、その後の保存が非公開の置き場からも消していた（2026-10-12 の点検）
+        if: always() && steps.lock.outcome != 'skipped' && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         # この回の社でない記事の変更も戻す（AI は全社の原稿を Edit できる。社は公開の id で渡す）
         run: python scripts/agent_guard.py --protect --site "${{ steps.site.outputs.pub }}"
 
       - name: AIの作業場に鍵を戻す
-        if: always() && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        if: always() && steps.lock.outcome != 'skipped' && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}

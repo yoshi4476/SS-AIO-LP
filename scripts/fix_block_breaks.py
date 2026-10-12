@@ -139,7 +139,8 @@ def run(write):
         nb, d = split_glued_paragraphs(nb)
         nb, b = rejoin_marks(nb)
         nb, c = strong_in_html(nb)
-        if not (a or b or c or d):
+        # 分けてから戻しただけ（中身が同じ）の記事は数えない（毎回「8本を直しました」と出て実態と違った。2026-10-12 の点検）
+        if not (a or b or c or d) or nb == body:
             continue
         # 地の文が1字でも変わったら触らない。空行の増減と結合しかしていないはず
         if plain(body) != plain(nb):

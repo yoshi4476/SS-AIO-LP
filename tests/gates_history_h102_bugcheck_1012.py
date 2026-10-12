@@ -189,3 +189,203 @@ def test_selfheal_rejudges_applied_diff_and_limits_auto_fixes():
     check("落ちた回の時刻: 最初の枠より前（0:28）は前日・後（10:10）はその日",
           (DA.rescue_day(datetime.fromisoformat("2026-10-12T00:28:00+09:00")),
            DA.rescue_day(datetime.fromisoformat("2026-10-11T10:10:00+09:00"))), ("2026-10-11", "2026-10-11"))
+
+
+# ── 2つ目のまとまり（範囲の絞り込み・AI の読み取り・本数の見張り・KPI の未取得） ─────────────
+
+def _art(cat, body="本文"):
+    return f"---\ntitle: t\ncategory: {cat}\nkeyword: k\n---\n{body}\n"
+
+
+def test_protect_never_deletes_without_a_checkpoint_and_catches_category_swaps():
+    print("\n■ 範囲の外を戻す: 控えの無い回は何もしない・追跡している原稿は消さない・カテゴリの付け替えも戻す")
+    import subprocess
+    import agent_guard as G
+    import sites as S
+    owners = {"keiri-bpo": "corporate", "zzcat": CL}
+    with tempfile.TemporaryDirectory() as d, contextlib.ExitStack() as st:
+        d = Path(d)
+        root, tmp = d / "w", d / "tmp"
+        (root / "articles").mkdir(parents=True)
+        tmp.mkdir()
+        g = lambda *a: subprocess.run(["git", "-C", str(root), *a], capture_output=True)
+        g("init", "-q")
+        a = root / "articles"
+        (a / "zz-tracked.md").write_text(_art("zzcat"), encoding="utf-8")
+        g("add", "-A")
+        g("-c", "user.email=t@example.com", "-c", "user.name=t", "commit", "-qm", "init")
+        (a / "zz-own.md").write_text(_art("keiri-bpo"), encoding="utf-8")
+        (a / "zz-client.md").write_text(_art("zzcat"), encoding="utf-8")
+        st.enter_context(mock.patch.object(G, "_state_path", lambda: tmp / "agent_guard.json"))
+        st.enter_context(mock.patch.object(G, "_scope_sites", lambda site, root=None: {"corporate"}))
+        st.enter_context(mock.patch.object(S, "find_category_owner", lambda c: owners.get(c)))
+        out = st.enter_context(contextlib.redirect_stdout(io.StringIO()))
+        # 1) 控えが無い（鍵を外す手順も範囲ごとの控えも動かなかった）回は、何も消さない
+        nolock = G._protect_other_sites(root, "corporate"), G._protect_other_sites(root, "corporate", by_pass=True)
+        files0 = sorted(p.name for p in a.glob("*.md"))
+        # 2) 控えを作ってから AI が動いた形
+        (a / "zz-tracked.md").unlink()           # 範囲を絞って作業場所から外れた、追跡している原稿（控えに無い）
+        G.checkpoint(root)
+        (a / "zz-tracked.md").write_text(_art("zzcat"), encoding="utf-8")
+        (a / "zz-own.md").write_text(_art("zzcat", "持ち出し"), encoding="utf-8")       # 自社の記事をお客様のカテゴリへ
+        (a / "zz-client.md").write_text(_art("keiri-bpo", "付け替え"), encoding="utf-8")  # お客様の記事を自社のカテゴリへ
+        (a / "zz-new-own.md").write_text(_art("keiri-bpo"), encoding="utf-8")
+        (a / "zz-new-client.md").write_text(_art("zzcat"), encoding="utf-8")
+        (a / "zz-new-unknown.md").write_text(_art("nope"), encoding="utf-8")
+        G._protect_other_sites(root, "corporate", by_pass=True)
+        left = sorted(p.name for p in a.glob("*.md"))
+        own_back = (a / "zz-own.md").read_text(encoding="utf-8")
+        client_back = (a / "zz-client.md").read_text(encoding="utf-8")
+        aside = (tmp / "agent_unowned" / "zz-new-unknown.md").is_file()
+    check("控えの無い回は何もしない（全部を新しい記事とみなして消さない）",
+          (nolock, files0), (([], []), ["zz-client.md", "zz-own.md", "zz-tracked.md"]))
+    check("追跡している原稿は消さない・範囲の外の新しい記事は消す・社の決まらない新しい記事はよける・範囲の新しい記事は残す",
+          (left, aside), (["zz-client.md", "zz-new-own.md", "zz-own.md", "zz-tracked.md"], True))
+    check("カテゴリを付け替えた記事は、今の社か前の社が範囲の外なら控えへ戻す",
+          ("category: keiri-bpo" in own_back and "持ち出し" not in own_back,
+           "category: zzcat" in client_back and "付け替え" not in client_back), (True, True))
+    check("知らせる: 控えが無い・社の決まらない記事をよけた", ("AGENT_PROTECT=skip" in out.getvalue(),
+          "要対応: 社の決まらない新しい記事 1本" in out.getvalue()), (True, True))
+    wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    prot = wf[wf.index("- name: AIの変更のうち触ってはいけない場所を戻す"):wf.index("- name: AIの作業場に鍵を戻す")]
+    unl = wf[wf.index("- name: AIの作業場に鍵を戻す"):]
+    unl = unl[:unl.index("- name:", 10)]
+    check("記事の枠: 鍵を外す手順（id: lock）が動かなかった回は、戻す・鍵を戻す手順も動かさない",
+          ("id: lock" in wf, "steps.lock.outcome != 'skipped'" in prot, "steps.lock.outcome != 'skipped'" in unl),
+          (True, True, True))
+    ap = (ROOT / "scripts" / "agent_passes.sh").read_text(encoding="utf-8")
+    check("範囲ごとの回: 絞れない・控えを作れない範囲は AI を起こさない",
+          ('if ! python scripts/private_store.py --scope "$sc"; then' in ap,
+           "if ! python scripts/agent_guard.py --checkpoint; then" in ap), (True, True))
+
+
+def test_scope_fails_closed_and_keeps_its_record_per_workspace():
+    print("\n■ 絞り込み: 落ちたら全部へ戻して非0・記録は作業場所ごと・新しく入る他社カテゴリの記事は commit を止める")
+    import private_store as PS
+    calls = []
+    with tempfile.TemporaryDirectory() as d, contextlib.ExitStack() as st:
+        st.enter_context(mock.patch.dict("os.environ", {"RUNNER_TEMP": d, "PRIVATE_SCOPE_FORCE": "1"}))
+        st.enter_context(mock.patch.object(PS, "_narrow", mock.Mock(side_effect=RuntimeError("試験"))))
+        st.enter_context(mock.patch.object(PS, "widen", lambda: calls.append("widen") or True))
+        st.enter_context(contextlib.redirect_stdout(io.StringIO()))
+        ok = PS.scope("own")
+        rec = PS._scope_state().is_file()
+    check("途中で落ちたら False・記録を残して全部へ戻す（呼び出し側は AI を起こさない）", (ok, calls, rec), (False, ["widen"], True))
+    src = (ROOT / "scripts" / "private_store.py").read_text(encoding="utf-8")
+    check("--scope は絞れなければ終了コード1", 'return 0 if scope(a[i + 1] if i + 1 < len(a) else "all") else 1' in src, True)
+    a_ = PS._scope_state().name
+    with mock.patch.object(PS, "ROOT", Path(tempfile.gettempdir()) / "zz-other-workspace"):
+        b_ = PS._scope_state().name
+    check("絞りの記録は作業場所ごと（手元で一時の場所を共有しても、別の作業場所の記録で戻さない）",
+          (a_ != b_, a_.startswith("private_scope_") and b_.startswith("private_scope_")), (True, True))
+    check("絞るときは無視されたファイル（__pycache__）も消し、記事は category で外す（_merged・_conflicted も）",
+          ('b.rglob("__pycache__")' in src, 'for q in sorted((ROOT / "articles").rglob("*.md"))' in src,
+           '"core.quotePath=false", "ls-files", "-t"' in src), (True, True, True))
+    import sites as S
+    own_cat = next(c for s, cfg in S.load_all().items() if not S.is_client(s) for c in (cfg.get("categories") or {}))
+    with tempfile.TemporaryDirectory() as d, contextlib.ExitStack() as st:
+        d = Path(d)
+        (d / "articles").mkdir()
+        (d / "articles" / "zz-x.md").write_text(_art("zzcat"), encoding="utf-8")
+        (d / "articles" / "zz-own.md").write_text(_art(own_cat), encoding="utf-8")
+        st.enter_context(mock.patch.object(PS, "ROOT", d))
+        st.enter_context(mock.patch.object(PS, "_public_git", lambda *a: mock.Mock(
+            stdout="articles/zz-x.md\narticles/zz-own.md\nscripts/x.py\n", returncode=0)))
+        bad = PS.foreign_new_articles()
+    check("commit の見張り: 公開側に新しく入る記事のうち自社のカテゴリでないものを止める", bad, ["articles/zz-x.md"])
+    pc = src[src.index("def pre_commit("):]
+    pc = pc[:pc.index("\ndef ", 5)]
+    check("見張りはお客様の記事を外した後に見る（非公開の置き場が無い回も見る）",
+          (pc.index("overlay_out(unstage=True)") < pc.index("bad = foreign_new_articles()"),
+           "return 0\n" not in pc[:pc.index("bad = foreign_new_articles()")]), (True, True))
+
+
+def test_ai_cannot_read_private_git_or_gate_caches():
+    print("\n■ 記事を書く AI: 非公開の置き場の git・読むだけの Bash・お客様の門を読ませない")
+    s = json.loads((ROOT / "automation" / "agent_settings_article.json").read_text(encoding="utf-8"))
+    deny = s["permissions"]["deny"]
+    need = ["Bash(git *)", "Bash(git)", "Bash(cat *)", "Bash(ls *)", "Bash(ls)", "Bash(head *)", "Bash(find *)",
+            "Bash(grep *)", "Read(private/tests/**)", "Read(//**/private/tests/**)"]
+    check("拒む一覧に git・cat・ls・head・find・grep と private/tests がある", [x for x in need if x not in deny], [])
+    allow = s["permissions"]["allow"]
+    check("許す一覧の Bash は決まった scripts の python だけ（拒む一覧と重ならない）",
+          [x for x in allow if x.startswith("Bash(") and not x.startswith(("Bash(python scripts/", "Bash(python3 scripts/"))], [])
+    jc = (ROOT / ".github" / "workflows" / "agent-jail-check.yml").read_text(encoding="utf-8")
+    check("点検のワークフローが git・cat・通行証の読み取りを試し、動いたら失敗にする",
+          ("7) Bash で git -C private rev-parse --short HEAD" in jc, "10) Bash で cat $RUNNER_TEMP/hub_tokens/own" in jc,
+           "AI が止めるべき操作を実行できました" in jc), (True, True, True))
+
+
+def test_watchers_flag_too_many_articles_and_missing_search_numbers():
+    print("\n■ 見張り: 1日の本数より多い日も知らせる・Search Console の数字がまだ無い日を0で送らない")
+    import outcome_watch as OW
+    import daily_audit as D
+    import sites as S
+    from datetime import date
+    arts = [{"slug": f"zz-{i}", "date": "2026-10-11", "category": "aio"} for i in range(3)]
+    bad = []
+    with contextlib.ExitStack() as st:
+        st.enter_context(mock.patch.object(D, "articles_by_site", lambda: {"ai-lab": arts}))
+        st.enter_context(mock.patch.object(S, "load_all", lambda: {"ai-lab": {"name": "試験", "domain": "zz.example"}}))
+        st.enter_context(mock.patch.object(D, "_is_published", lambda a, need_review=True: True))
+        st.enter_context(mock.patch.object(OW, "expected_articles", lambda sid, arts, day: 2))
+        st.enter_context(mock.patch.object(S, "article_url", lambda cfg, a: "https://zz.example/x/"))
+        st.enter_context(mock.patch("urllib.request.urlopen", lambda *a, **k: mock.Mock(status=200)))
+        st.enter_context(contextlib.redirect_stdout(io.StringIO()))
+        OW.check_articles(date(2026, 10, 11), bad)
+    check("記事が1日の本数より多い日は要対応（3/2本）", sum(1 for b in bad if "3/2 本" in b and "1日の本数より多い" in b), 1)
+    import daily_kpi as DK
+
+    class _Q:
+        def __init__(self, plan):
+            self.plan = plan
+
+        def searchanalytics(self):
+            return self
+
+        def query(self, siteUrl, body):
+            return mock.Mock(execute=lambda: self.plan("dimensions" in body))
+
+    def run(plan):
+        with mock.patch.object(DK, "creds", lambda s: None), \
+                mock.patch("googleapiclient.discovery.build", lambda *a, **k: _Q(plan)):
+            return DK.gsc("https://zz.example/", "2026-10-08")
+    full = {"rows": [{"impressions": 330, "clicks": 4, "ctr": 0.012, "position": 9.1}]}
+    got = (run(lambda dated: full)["impressions"],
+           run(lambda dated: {"rows": [{"keys": ["2026-10-09"], "impressions": 5}]} if dated else {})["impressions"],
+           run(lambda dated: {"rows": []} if dated else {}))
+    check("確定の数字があれば使う・後の日だけ数字があれば本当に0・どちらも無ければ未取得（0を送らない）",
+          got, (330, 0, {"gsc_missing": True}))
+    hub = (ROOT / "automation" / "gas" / "hub.gs").read_text(encoding="utf-8")
+    check("管制塔は送られなかった表示・クリックを空欄で書く（0にしない）・食い合いの応答はいつも overlaps を返す",
+          ("sc(r.impressions), sc(r.clicks)" in hub, "return { ok: true, overlaps: other.map(" in hub), (True, True))
+
+
+def test_small_fixes_from_ci_records():
+    print("\n■ 実行記録の点検: アンカーの詰め戻し・AI Overview と AIO・他社の評判の語・小さい母数の割合・CI の .env")
+    import anchor_audit as AA
+    import shorten_anchors as SA
+    t = "現金払いは否認の落とし穴？外注費の請求書なしで経費にする証憑3つ【2026年】"
+    got = AA.natural_anchor("外注費 請求書なし", t)
+    check("アンカーは shorten_anchors の上限まで（付けた直後に詰め戻されない）",
+          (got is None or (len(got) <= SA.MAX and SA.shorten(got) == got)), True)
+    from cannibal_check import norm_kw
+    check("「AI Overview」と「AIO」は同じ語として扱う（管制塔も同じ置き換え）",
+          (norm_kw("ai overview seo 対策") == norm_kw("aio seo 対策"), norm_kw("AIOverviews 表示") == norm_kw("aio 表示"),
+           r"ai\s*overviews?(?![a-z])|ai\s*オーバービュー/gi" in (ROOT / "automation" / "gas" / "hub.gs").read_text(encoding="utf-8")),
+          (True, True, True))
+    import kw_fit
+    check("他社の名前の評判の語は担当の外", kw_fit.judge("エフアンドエム 記帳代行 評判", "corporate")[0], 2)
+    import facts
+    check("割合（クリック率）は母数が足りるときだけ", (facts.CTR_MIN_IMP, facts.CTR_MIN_CLICKS), (200, 5))
+    import sheet_format as SF
+    with mock.patch.dict("os.environ", {"SPREADSHEET_ID": "zz-sheet", "HUB_SHEET_ID": ""}), \
+            mock.patch.object(SF, "ROOT", Path(tempfile.gettempdir()) / "zz-none"):
+        check("管制塔の表の id は環境変数を先に見る（CI に .env は無い）", SF._sheet_id(), "zz-sheet")
+    import auto_rewrite as AR
+    rcs = iter([2, 0])
+    with mock.patch.object(AR, "meta", lambda slug: ("t", "語", "")), mock.patch.object(AR, "site_of", lambda s: "subsidy"), \
+            mock.patch.object(AR, "sh", lambda *a, **k: mock.Mock(returncode=next(rcs))), \
+            contextlib.redirect_stdout(io.StringIO()):
+        picked = AR.spare_guarded([{"slug": "zz-a", "kind": "stuck"}, {"slug": "zz-b", "kind": "stuck"}], 1)
+    check("浮いた枠: 書き直す前から食い合う候補は外して次を取る", [x["slug"] for x in picked], ["zz-b"])

@@ -95,8 +95,12 @@ def natural_anchor(kw, title):
     足りない語を前に添える。それでも作れない場合は None を返して見送る。
     """
     ts = tokens(kw)
-    for cand in (re.split(r"[｜|]", title)[0].strip(), title.strip()):
-        if cand and all(t in norm(cand) for t in ts) and len(cand) <= 34:
+    # 長さの上限は shorten_anchors と同じ（ここが34字まで付け、直後に shorten_anchors が26字へ詰め戻し、同じ8本を
+    # 毎回書き換えて、狙う語の入ったアンカーが1本も増えなかった。2026-10-12 の点検）。詰めた形も候補にする
+    import shorten_anchors as SA
+    head = re.split(r"[｜|]", title)[0].strip()
+    for cand in (head, title.strip(), SA.shorten(title)):
+        if cand and all(t in norm(cand) for t in ts) and len(cand) <= SA.MAX:
             return cand
     # タイトルで作れない場合は自動生成しない。狙う語を機械的につなぐと
     # 「よくあるのAI導入補助金の申請に失敗する〜」のような壊れた日本語になる。

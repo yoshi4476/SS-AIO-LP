@@ -60,6 +60,9 @@ def norm_kw(s):
     落とす記号が1つでも違うと、GAS なら弾く重複（「〜とは？」と「〜とは」）を直接接続では通してしまう"""
     s = str(s or "")
     s = "".join(chr(ord(c) - 0xFEE0) if "Ａ" <= c <= "Ｚ" or "ａ" <= c <= "ｚ" or "０" <= c <= "９" else c for c in s)
+    # 「AI Overview」と「AIO」は同じ検索（GAS の normKw_ と同じ置き換え。空白を消す前）。JS の \s と同じ空白の集合で見る
+    s = re.sub(r"ai[\t\n\x0b\x0c\r \xa0  -     　﻿]*"
+               r"(?:overviews?(?![a-zA-Z])|オーバービュー)", "aio", s, flags=re.I)
     # 空白は JS の \s と同じ集合を明示する。Python の \s は \x1c-\x1f・\x85 を含み BOM を含まないため、
     # 同じ語が GAS と直接接続とで別の語になっていた
     return re.sub(r"[\t\n\x0b\x0c\r \xa0  -     　﻿"
@@ -220,7 +223,8 @@ def claim_kw(site, keyword, ctx=None):
                 note_overlap(keyword, site, str(x[0]), ctx)
         _set("KW台帳", i + 2, 3, "執筆中")
         _set("KW台帳", i + 2, 8, _now())
-        return {"ok": True, "overlaps": [rec(x) for x in other]} if other else {"ok": True}
+        # 読めない社が同じ語を持つかが応答の形で分からないよう、overlaps はいつも返す（GAS と同じ）
+        return {"ok": True, "overlaps": [rec(x) for x in other]}
     return {"ok": False, "error": f"KWが見つかりません: {keyword}"}
 
 

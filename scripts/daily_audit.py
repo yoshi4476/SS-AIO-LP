@@ -291,7 +291,8 @@ def check_volume(todo):
         # 2本のままだと救済が「不足」とみなし、落とした分を書き足してしまう
         want = min(left, daily_quota(sid))
         due = want if past else min(want, _due_now(sid))      # いまの時刻で在るべき本数
-        mark = "OK " if n >= due else "不足"
+        # 多すぎる日も印で分かるようにする（書き足しはしない。知らせるのは outcome_watch）
+        mark = "超過" if n > want else ("OK " if n >= due else "不足")
         yet = "" if due >= want else f"（この時刻での期待は{due}本）"
         print(f"  {mark} {sid:10s} {'前日' if past else '本日'} {n}/{want}本  今月 {month}/{site_cap(sid)}本"
               f"  （累計 {len(arts)}本）{yet}")

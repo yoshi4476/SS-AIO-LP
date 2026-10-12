@@ -68,6 +68,10 @@ def norm_kw(s):
     """
     import unicodedata
     t = unicodedata.normalize("NFKC", str(s))
+    # 「AI Overview」と「AIO」は同じ検索（2026-10-10 の書き手が「ai overview seo 対策」を既存の「aio seo 対策」と
+    # 同じ語として自分で退けた。門が見分けていなかった）。管制塔の normKw_ と同じ置き換え
+    # 空白を消す前に置き換える（消した後だと「aioverviewseo」の s を複数形として食べた）
+    t = re.sub(r"ai\s*overviews?(?![a-z])|ai\s*オーバービュー", "aio", t.lower())
     return _NOISE.sub("", t).lower()
 
 

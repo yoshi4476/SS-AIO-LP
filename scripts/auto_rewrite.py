@@ -874,6 +874,8 @@ READ_DENY = [
     "Read(**/*token*.json)", "Read(**/*credentials*.json)", "Read(private/**)",
     "Read(//**/.env)", "Read(//**/.env.*)", "Read(//**/.git/config)", "Read(//**/indexing-service-account.json)",
     "Read(//**/*token*.json)", "Read(//**/*credentials*.json)", f"Read({_abs_rule(ROOT)}/private/**)",
+    # ランナーの一時置き場（範囲を絞った回は、ほかの社の派生データ・管制塔の通行証をここによけている）
+    "Read(//**/_temp/**)",
 ]
 
 PERM = json.dumps({"permissions": {
@@ -1049,6 +1051,28 @@ def snapshot():
 def changed_since(snap):
     now = snapshot()
     return sorted(n for n in set(snap) | set(now) if snap.get(n) != now.get(n))
+
+
+def spare_guarded(items, limit, tries=6):
+    """浮いた枠の候補のうち、書き直す前から食い合う（kw_guard 終了コード2）ものを外す。同じ語を狙う公開済みの組の
+    片方が選ばれ、書き直しても検算で必ず戻されて、枠が2日続けて空いた（2026-10-11 の補助金。2026-10-12 の点検）。
+    食い合う組は統合（auto_merge）の受け持ち。見るのは先頭から tries 本まで（1本ごとに検索の実績を読むため）"""
+    out = []
+    for x in items[:tries]:
+        try:
+            _title, kw, _t = meta(x["slug"])
+        except OSError:
+            kw = ""
+        if kw:
+            r = sh([sys.executable, "scripts/kw_guard.py", kw, "--site", site_of(x["slug"]),
+                    "--exclude-slug", x["slug"]], timeout=600)
+            if r.returncode == 2:
+                print(f"  見送り [{x['kind']}] {x['slug'][:34]}: 書き直す前から既存記事と食い合います（統合の候補）")
+                continue
+        out.append(x)
+        if len(out) >= limit:
+            break
+    return out
 
 
 def guard_message(rc):
@@ -1701,6 +1725,11 @@ def main():
               "（通らなければ元に戻します）")
         return 0
 
+    if a.kind == "spare":
+        items = spare_guarded(items, a.limit)
+        if not items:
+            print("SPARE_SLOT=none（候補はどれも書き直す前から既存記事と食い合います。統合の候補として週次に任せます）")
+            return 0
     ok = ng = 0
     rewrote = []
     started = time.time()

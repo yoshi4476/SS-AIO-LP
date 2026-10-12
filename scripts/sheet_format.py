@@ -37,7 +37,13 @@ def _px(s):
 
 
 def _sheet_id():
-    env = (ROOT / ".env").read_text(encoding="utf-8", errors="replace")
+    # CI には .env が無い（週次の手順は毎週ここで落ち、|| true で見えていなかった。2026-10-12 の点検）。環境変数を先に見る
+    import os
+    for k in ("HUB_SHEET_ID", "SPREADSHEET_ID"):
+        if os.environ.get(k, "").strip():
+            return os.environ[k].strip()
+    p = ROOT / ".env"
+    env = p.read_text(encoding="utf-8", errors="replace") if p.is_file() else ""
     for k in ("HUB_SHEET_ID", "SPREADSHEET_ID"):
         m = re.search(r"^%s\s*=\s*(.+)$" % k, env, re.M)
         if m and m.group(1).strip().strip('"').strip("'"):

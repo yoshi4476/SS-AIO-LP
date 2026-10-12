@@ -46,7 +46,7 @@ RIVALS = ("freee", "フリー会計", "マネーフォワード", "money forward
           "楽楽明細", "奉行", "pca", "jdl", "tkc", "ドットコム", "misoca", "board", "invoice", "バクラク",
           "concur", "コンカー", "sweeep", "tokium", "sansan", "bill one", "kintone", "salesforce", "hubspot",
           "canva", "chatgpt plus", "kinmaq", "キンマク", "レジーナ", "湘南美容", "levo", "かんたん集客",
-          "web集客ラボ", "gmo")
+          "web集客ラボ", "gmo", "エフアンドエム")
 # 集客の媒体（ポータル）。AI集客ラボは「ポータル依存から抜ける」を書くので、入口では止めない（計画では外す）
 PORTALS = ("ホットペッパー", "エキテン", "ぐるなび", "食べログ", "リクルート", "indeed", "タウンページ", "ミツモア",
            "くらしのマーケット")

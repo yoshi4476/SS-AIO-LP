@@ -528,13 +528,20 @@ def _scope_dir():
     return Path(os.environ.get("RUNNER_TEMP") or tempfile.gettempdir())
 
 
+def _ws():
+    """作業場所の印。手元では一時の場所（%TEMP%）を作業場所どうしで共有するので、記録を作業場所ごとに分ける
+    （別の作業場所で絞ったままの記録で、本体の置き場の99件を「迷子」としてよけ、push が削除を送りえた。2026-10-12）"""
+    import hashlib
+    return hashlib.sha1(str(ROOT.resolve()).encode("utf-8")).hexdigest()[:10]
+
+
 def _scope_state():
-    return _scope_dir() / "private_scope.json"
+    return _scope_dir() / f"private_scope_{_ws()}.json"
 
 
 def _scope_hidden():
     # 作業場所の外（AI の許可の一覧で読ませない場所。CI では $RUNNER_TEMP）
-    return _scope_dir() / "private_scope_hidden"
+    return _scope_dir() / f"private_scope_hidden_{_ws()}"
 
 
 def scope(target):
@@ -561,59 +568,88 @@ def scope(target):
         if S.is_client(sid):
             g = S.group_key(sid)
             keep = {c for c in S.load_all() if S.is_client(c) and S.group_key(c) == g} | {sid}
-    others = sorted(c for c in S.load_all() if S.is_client(c) and c not in keep)
+    others = sorted((set(c for c in S.load_all() if S.is_client(c)) | set(known_clients())) - keep)
     by_slug = client_slugs()
     b = base()
     git_ok = (b / ".git").is_dir()
+    state = {"target": target, "others": len(others), "hidden": [], "skipped": []}
+    try:
+        n = _narrow(b, git_ok, others, by_slug, state)
+    except Exception as e:
+        # 途中で落ちたら全部へ戻す（外した記事を戻し、置き場の sparse を外す）。呼び出し側は AI を起こさない
+        _scope_state().write_text(json.dumps(state, ensure_ascii=False), encoding="utf-8")
+        print(f"SCOPE=failed（範囲を絞れませんでした: {type(e).__name__}: {str(e)[:120]}。全部へ戻します）", flush=True)
+        widen()
+        return False
+    print(f"SCOPE=narrowed（外した社 {len(others)}・記事などのファイル {n}・派生データ {len(state['hidden'])}）", flush=True)
+    return True
+
+
+def _narrow(b, git_ok, others, by_slug, state):
+    """scope の本体。外した記事などのファイルの数を返す。途中で落ちたときに戻せるよう、記録を先に書いて足していく"""
+    import shutil
     moved_files = 0
+    cats = client_categories()
     if git_ok:
         # 1. 書きかけを非公開の置き場へ写し、手元で commit する（push は最後の save）。絞っても消えないように
         overlay_out(unstage=False)
         _git("add", "-A")
         if _git("diff", "--cached", "--quiet").returncode:
-            _git("-c", "user.name=AIO Pipeline Bot", "-c", "user.email=noreply@7senses.co.jp",
-                 "commit", "-q", "-m", "CI: 範囲を絞る前の控え")
-        # 2. 公開側の作業場所から、ほかの社の記事・画像・台本を外す（置き場と同じ中身のものだけ）
+            r = _git("-c", "user.name=AIO Pipeline Bot", "-c", "user.email=noreply@7senses.co.jp",
+                     "commit", "-q", "-m", "CI: 範囲を絞る前の控え")
+            if r.returncode:
+                raise RuntimeError("控えを commit できません")
+        # 途中で落ちたときに widen で戻せるよう、外す前に記録を置く
+        _scope_state().write_text(json.dumps(state, ensure_ascii=False), encoding="utf-8")
+        # 2. 公開側の作業場所から、ほかの社の記事・画像・台本を外す（置き場と同じ中身のものだけ）。記事は category で
+        #    見分ける（slug から articles/<slug>.md を組むと、_merged・_conflicted の下のお客様の原稿が残った）
         drop = []
+
+        def _drop(f):
+            r = f.relative_to(ROOT).as_posix()
+            src = b / r
+            if src.is_file() and src.read_bytes() == f.read_bytes():
+                f.unlink()
+                drop.append(r)
+
+        for q in sorted((ROOT / "articles").rglob("*.md")):
+            if cats.get(_category(q)) in others:
+                _drop(q)
         for slug, sid in by_slug.items():
             if sid not in others:
                 continue
-            for rel in [f"articles/{slug}.md"] + [t.format(slug) for t in SLUG_PATHS]:
-                q = ROOT / rel
-                files = [q] if q.is_file() else ([x for x in q.rglob("*") if x.is_file()] if q.is_dir() else [])
-                for f in files:
-                    r = f.relative_to(ROOT).as_posix()
-                    src = b / r
-                    if src.is_file() and src.read_bytes() == f.read_bytes():
-                        f.unlink()
-                        drop.append(r)
-                        moved_files += 1
+            for t in SLUG_PATHS:
+                q = ROOT / t.format(slug)
+                for f in ([q] if q.is_file() else ([x for x in q.rglob("*") if x.is_file()] if q.is_dir() else [])):
+                    _drop(f)
                 if q.is_dir() and not any(q.rglob("*")):
                     shutil.rmtree(q, ignore_errors=True)
+        moved_files = len(drop)
         # 外したファイルは commit の見張りの一覧からも外す（残すと、戻す前に保存したとき「消えた」と読まれうる）
         _write_exclude([r for r in _exclude_entries() if r not in set(drop)])
         _write_record([r for r in _record() if r not in set(drop)])
         # 3. 非公開の置き場を絞る。当社の料金・営業の台本・レポートと、お客様の門も AI の間は置かない
         pats = ["/*", "!/sales/", "!/reports/", "!/tests/", "!/security/"]
         pats += [f"!/clients/{c}/" for c in others]
+        pats += [f"!/{q.relative_to(b).as_posix()}" for q in sorted((b / "articles").rglob("*.md"))
+                 if cats.get(_category(q)) in others]
         for slug, sid in by_slug.items():
             if sid in others:
-                pats += [f"!/articles/{slug}.md"] + [f"!/{t.format(slug)}" + ("/" if not t.endswith(".json") else "")
-                                                     for t in SLUG_PATHS]
+                pats += [f"!/{t.format(slug)}" + ("/" if not t.endswith(".json") else "") for t in SLUG_PATHS]
         r = subprocess.run(["git", "-C", str(b), "sparse-checkout", "set", "--no-cone", "--stdin"],
                            input="\n".join(pats) + "\n", capture_output=True, text=True, encoding="utf-8")
         if r.returncode:
-            print(f"SCOPE=failed（非公開の置き場を絞れませんでした: {(r.stderr or '').strip()[-120:]}）", flush=True)
-            widen()
-            return False
+            raise RuntimeError(f"非公開の置き場を絞れません: {(r.stderr or '').strip()[-120:]}")
+        # 無視されたファイル（門の __pycache__ に社の内部名と中身が残る）は sparse-checkout では消えない
+        for d in list(b.rglob("__pycache__")):
+            shutil.rmtree(d, ignore_errors=True)
         # 外したファイルの一覧を控える（戻すとき、外した場所へ書かれたものを見つけるため。git は作業場所に現れた
-        # ファイルの「外した」印を自分で消すので、戻す時点の印では見つけられない）
-        skipped = [ln[2:] for ln in _git("ls-files", "-t").stdout.splitlines() if ln.startswith("S ")]
-    else:
-        skipped = []
+        # ファイルの「外した」印を自分で消すので、戻す時点の印では見つけられない）。日本語の名前を引用の形にしない
+        state["skipped"] = [ln[2:] for ln in _git("-c", "core.quotePath=false", "ls-files", "-t").stdout.splitlines()
+                            if ln.startswith("S ")]
     # 4. キャッシュで持ち越した派生データ（data/clients/<社>/ と社ごとの記録）を作業場所の外へよける
     import client_private as CP
-    hidden = []
+    hidden = state["hidden"]
     hid = _scope_hidden()
     for c in others:
         rels = [f"data/clients/{c}"] + [p.format(c) for ps in CP.PER_SITE.values() for p in ps]
@@ -626,10 +662,8 @@ def scope(target):
                     shutil.rmtree(dst) if dst.is_dir() else dst.unlink()
                 shutil.move(str(q), str(dst))
                 hidden.append(rel)
-    _scope_state().write_text(json.dumps({"target": target, "others": len(others), "hidden": hidden, "skipped": skipped},
-                                         ensure_ascii=False), encoding="utf-8")
-    print(f"SCOPE=narrowed（外した社 {len(others)}・記事などのファイル {moved_files}・派生データ {len(hidden)}）", flush=True)
-    return True
+    _scope_state().write_text(json.dumps(state, ensure_ascii=False), encoding="utf-8")
+    return moved_files
 
 
 def widen():
@@ -649,7 +683,7 @@ def widen():
         # その社の中身を上書きし、次の保存でその社の分を書き換えてしまう）
         stray = [r for r in state.get("skipped") or [] if (b / r).is_file()]
         for r in stray:
-            dst = _scope_dir() / "private_scope_stray" / r
+            dst = _scope_dir() / f"private_scope_stray_{_ws()}" / r
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.move(str(b / r), str(dst))
         if stray:
@@ -703,17 +737,33 @@ def install_hook():
 
 def pre_commit():
     """公開側の commit の直前（hook）。お客様の社のファイルを非公開の置き場へ戻して commit から外し、残っていれば止める"""
-    if not (base() / ".git").is_dir():
-        return 0
-    files = overlay_out(unstage=True)
-    staged = set(_public_git("diff", "--cached", "--name-only").stdout.splitlines())
-    left = sorted(staged & set(files))
-    if left:
-        print(f"お客様の社のファイル {len(left)}件が公開側の commit に入ろうとしています。止めます", file=sys.stderr)
+    files = []
+    if (base() / ".git").is_dir():
+        files = overlay_out(unstage=True)
+        staged = set(_public_git("diff", "--cached", "--name-only").stdout.splitlines())
+        left = sorted(staged & set(files))
+        if left:
+            print(f"お客様の社のファイル {len(left)}件が公開側の commit に入ろうとしています。止めます", file=sys.stderr)
+            return 1
+    # お客様の社の記事を外した後に、まだ新しく入る記事のうち自社のカテゴリでないもの（カテゴリを書き違えたお客様の記事・
+    # 範囲を絞って社の決まらない記事）を止める。非公開の置き場が無い回も見る
+    bad = foreign_new_articles()
+    if bad:
+        print(f"自社のカテゴリでない新しい記事 {len(bad)}件が公開側の commit に入ろうとしています。止めます"
+              "（カテゴリを確かめてください。お客様の記事なら非公開の置き場へ）", file=sys.stderr)
         return 1
     if files:
         push("公開側の commit の前に、お客様の社の記事・画像・台本を残す")
     return 0
+
+
+def foreign_new_articles():
+    """公開側に新しく入る（staged の追加）articles/**/*.md のうち、自社のカテゴリでないもの"""
+    S = _sites()
+    own = {c for sid, cfg in S.load_all().items() if not S.is_client(sid) for c in (cfg.get("categories") or {})}
+    added = _public_git("-c", "core.quotePath=false", "diff", "--cached", "--name-only", "--diff-filter=A").stdout
+    return [x for x in added.splitlines()
+            if x.startswith("articles/") and x.endswith(".md") and (ROOT / x).is_file() and _category(ROOT / x) not in own]
 
 
 _CLIENT_SLUGS = None
@@ -818,8 +868,7 @@ def main(argv=None):
         return 0
     if "--scope" in a:                # AI の間だけお客様の社を絞る（all で戻す）。止まらない（印で知らせる）
         i = a.index("--scope")
-        scope(a[i + 1] if i + 1 < len(a) else "all")
-        return 0
+        return 0 if scope(a[i + 1] if i + 1 < len(a) else "all") else 1
     if "--push" in a:
         i = a.index("--push")
         msg = a[i + 1] if i + 1 < len(a) else "管制塔から更新"

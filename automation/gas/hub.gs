@@ -497,6 +497,8 @@ function normKw_(s) {
     .replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (c) {
       return String.fromCharCode(c.charCodeAt(0) - 0xFEE0);
     })
+    // 「AI Overview」と「AIO」は同じ検索（cannibal_check.norm_kw と同じ置き換え。空白を消す前に置き換える）
+    .replace(/ai\s*overviews?(?![a-z])|ai\s*オーバービュー/gi, 'aio')
     .replace(/[\s　・|｜:：\-—?？!！。、,.／\/（）()【】\[\]]/g, '')
     .toLowerCase();
 }
@@ -698,7 +700,8 @@ function claimKw_(site, keyword, ctx) {
     });
     sh.getRange(i + 2, 3).setValue('執筆中');
     sh.getRange(i + 2, 8).setValue(new Date());
-    return other.length ? { ok: true, overlaps: other.map(function (o) { return o.rec; }) } : { ok: true };
+    // 読めない社が同じ語を持つかが応答の形で分からないよう、overlaps はいつも返す（通行証の回は読めない社の行を外す）
+    return { ok: true, overlaps: other.map(function (o) { return o.rec; }) };
   }
   return { ok: false, error: 'KWが見つかりません: ' + keyword };
 }
@@ -900,8 +903,10 @@ function kpiLog_(b) {
   const total = { sessions: 0, pv: 0, cv: 0, impressions: 0, clicks: 0, ai: 0 };
 
   rows.forEach(function (r) {
+    // Search Console の数字がまだ出ていない日（daily_kpi が表示・クリックを送らない）は空欄。0 と書くと表示0の日として残る
+    const sc = function (v) { return (v === undefined || v === null) ? '' : (Number(v) || 0); };
     kpi.appendRow([r.date || '', siteLabel_(r.site), r.sessions || 0, r.pv || 0,
-                   r.impressions || 0, r.clicks || 0, Number(r.ctr) || 0, r.position || 0,
+                   sc(r.impressions), sc(r.clicks), sc(r.ctr), sc(r.position),
                    r.cv || 0, r.note || '']);
     const bd = r.breakdown || {};
     // AI Overview の表示回数はAPIで取れない。CTRの歪みからの推定（ai_citation_check）を

@@ -119,13 +119,19 @@ def group_of(site_id):
     """食い合いを見る相手。自社3サイトはドメインをまたいでも自社どうしで食い合うが、
     クライアントは別の会社。混ぜると、お客様の順位で自社の記事が止まり、その逆も起きる"""
     if is_client(site_id):
-        return [site_id]
+        g = group_key(site_id)
+        return [s for s in load_all() if is_client(s) and group_key(s) == g] or [site_id]
     return own_ids()
 
 
 def group_key(site_id):
-    """group_of の組の名前（管制塔へ渡す）。自社は 'own'、お客様はその社のID"""
-    return site_id if is_client(site_id) else "own"
+    """group_of の組の名前（管制塔へ渡す）。自社は 'own'、お客様はその社のID。同じ会社の複数のサイトは設定の group で
+    1つの組にする（範囲の絞り込み・管制塔の通行証・仕事の数え方が同じ組を見る。2026-10-12 にそろえた）。
+    group に 'own' と書いても自社の組には入れない（お客様の回に自社の台帳を書かせない）"""
+    if not is_client(site_id):
+        return "own"
+    g = str((load_all().get(site_id) or {}).get("group") or "").strip()
+    return g if g and g != "own" else site_id
 
 
 PREF = re.compile(r"(北海道|東京都|(?:京都|大阪)府|[^\s　都道府県0-9０-９]{2,3}県)")
