@@ -80,13 +80,24 @@ FEATURE_MIN = 3          # 3本未満の主題は特集にしない（topics.MIN
 FEATURE_MAX = 6
 
 
+def store_path(site_id):
+    """山の月の置き場。お客様の社は非公開の置き場（CI のキャッシュ）。ファイル名に社の id が入るので public に置かない
+    （2026-10-12 の週次が public に commit した）"""
+    import client_private as CP
+    import sites as S
+    if S.is_client(site_id):
+        return CP.site_file(site_id, f"data/season/{site_id}.json")
+    return STORE / f"{site_id}.json"
+
+
 def save_peaks(site_id, pk, span, words):
     """山の月だけを残す。表示回数は残さない（お客様の検索の数字を公開リポジトリに置かない）。
     その社の記事の狙う語・題に出てくる語だけに絞る（特集は記事を束ねるだけなので、ほかの語は要らない）"""
     import json
-    STORE.mkdir(parents=True, exist_ok=True)
     peaks_ = {t: m for t, (m, _, _) in sorted(pk.items()) if t in words}
-    (STORE / f"{site_id}.json").write_text(json.dumps(
+    out = store_path(site_id)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(
         {"made": date.today().isoformat(), "span": int(span), "peak_ratio": PEAK_RATIO, "peaks": peaks_},
         ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
 
@@ -94,7 +105,7 @@ def save_peaks(site_id, pk, span, words):
 def feature(site_id, metas, today=None):
     """今の時期の特集。[{term, month, members}]。12か月分の検索データがそろうまでは作らない（判定前）"""
     import json
-    p = STORE / f"{site_id}.json"
+    p = store_path(site_id)
     if not p.is_file():
         return []
     try:

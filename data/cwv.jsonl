@@ -10,6 +10,5 @@
 {"date": "2026-10-05", "site": "corporate", "url": "https://corp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 2326.031585542195, "CLS": 0, "INP": null, "score": 97}
 {"date": "2026-10-05", "site": "subsidy", "url": "https://lp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 982.5104083071686, "CLS": 0, "INP": null, "score": 100}
 {"date": "2026-10-12", "site": "ai-lab", "url": "https://ai.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 4732.947614396402, "CLS": 0, "INP": null, "score": 78}
-{"date": "2026-10-12", "site": "conflux", "url": "https://conflux-partners.jp/", "strategy": "mobile", "source": "lab", "LCP": 11706.26501219462, "CLS": 0, "INP": null, "score": 25}
 {"date": "2026-10-12", "site": "corporate", "url": "https://corp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 2718.029473524136, "CLS": 0.0014712988784744967, "INP": null, "score": 85}
 {"date": "2026-10-12", "site": "subsidy", "url": "https://lp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 1155.5141869148104, "CLS": 0, "INP": null, "score": 99}

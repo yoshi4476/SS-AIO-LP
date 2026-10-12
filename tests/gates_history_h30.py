@@ -85,7 +85,9 @@ def fixture(n_tables=3, n_articles=5, season=True, translate=True, credit=True):
             return None
         org = {"@type": "Organization", "name": "h30食堂", "url": "https://h30.example/"}
         return {"publisher": org, "author": dict(org), "reviewer": None, "byline": "", "supervisor": None}
-    olds = [(W, _with(W, ROOT=root)), (CP, _with(CP, ROOT=root)), (SN, _with(SN, STORE=root / "season")),
+    # お客様の社の季節の記録は非公開の置き場（season.store_path）。試験では一時の場所の season/ に置く
+    olds = [(W, _with(W, ROOT=root)), (CP, _with(CP, ROOT=root)),
+            (SN, _with(SN, STORE=root / "season", store_path=lambda sid: root / "season" / f"{sid}.json")),
             (I, _with(I, OUT=root / "i18n")), (AP, _with(AP, STATE=root / "state")),
             (S, _with(S, load_all=load_all, is_client=lambda sid: sid == SITE or real_client(sid))),
             (P, _with(P, client_credit=client_credit)),

@@ -513,3 +513,21 @@ def test_priority_boost_never_links_to_noindexed_articles():
             got = sorted(PB.load_articles())
     check("検索から外した記事は送り先にも送り元にも入らない（2026-10-12 の週次が12本の原稿からリンクを足した）",
           got, ["zz-live"])
+
+
+def test_season_peaks_of_clients_stay_private():
+    print("\n■ 季節の山の記録: お客様の社の分は非公開の置き場へ（ファイル名に社の id が入る。2026-10-12 の週次が commit した）")
+    import client_private as CP
+    import season as SE
+    with tempfile.TemporaryDirectory() as d, contextlib.ExitStack() as st:
+        d = Path(d)
+        for p in _fake_sites():
+            st.enter_context(p)
+        st.enter_context(mock.patch.object(CP, "site_file", lambda sid, rel: d / "priv" / sid / rel))
+        st.enter_context(mock.patch.object(SE, "STORE", d / "season"))
+        got = (SE.store_path(CL), SE.store_path("ai-lab"))
+    check("お客様の社は置き場・自社は data/season のまま", ("priv" in str(got[0]), got[1] == d / "season" / "ai-lab.json"),
+          (True, True))
+    src = (ROOT / "scripts" / "season.py").read_text(encoding="utf-8")
+    check("書く・読むの両方が store_path を通す", (src.count("store_path(site_id)") >= 2, 'STORE / f"{site_id}.json").write_text' not in src),
+          (True, True))
