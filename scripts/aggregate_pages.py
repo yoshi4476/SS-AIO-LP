@@ -70,6 +70,46 @@ def _page(kind, path, title, desc, html, lang="ja", members=(), **extra):
             "lang": lang, "members": list(members), **extra}
 
 
+TITLE_MIN_PAGE = 10    # 題（サイト名を足す前）。seo_audit は「題｜サイト名」で15字未満を短すぎるとする
+DESC_MIN, DESC_MAX = 100, 160
+
+
+def fit_meta(page, cfg, by_slug):
+    """まとめのページの題と説明文を、検索結果で読める長さにそろえる（題10字以上・説明文100〜160字）。
+    足すのはその社のカテゴリ名と、まとめている記事の題だけ（ページに無いことを書かない）。2026-10-12 の本番の巡回で、
+    「用語集」「比較表から探す」など題が短い・説明文が短いページが3サイトで40件近く出ていた"""
+    cats = [str(v) for v in (cfg.get("categories") or {}).values() if isinstance(v, str) and v]
+    main = str((cfg.get("categories") or {}).get(cfg.get("main_category") or "") or (cats[0] if cats else ""))
+    area = "・".join(cats[:2])
+    # 題は主力のカテゴリの名前だけを添える（長い題は検索結果で切れる）。すでに入っていれば足さない
+    if len(page["title"]) < TITLE_MIN_PAGE and main and main not in page["title"]:
+        page["title"] = f"{page['title']}（{main}）"
+    d = str(page.get("description") or "").strip()
+    if len(d) < DESC_MIN:
+        titles = [by_slug[s]["title"] for s in page.get("members") or [] if s in by_slug and by_slug[s].get("title")]
+        if not titles:
+            # 入口のページ（一覧の一覧）は記事を直接持たないので、その社の新しい記事の題で例を示す
+            titles = [m["title"] for m in sorted(by_slug.values(), key=lambda m: m.get("date", ""), reverse=True)
+                      if m.get("title")][:6]
+        if not d:
+            d = f"{page['title']}のページです。"
+        n = len([s for s in page.get("members") or [] if s in by_slug])
+        if n and f"{n}本" not in d:
+            d = d.rstrip("。") + f"。記事{n}本をまとめています。"
+        if titles:
+            d = d.rstrip("。") + "。掲載している記事の例: "
+            for t in titles:
+                if len(d) + len(t) + 1 > DESC_MAX - 1:
+                    break
+                d += t + "／"
+            d = d.rstrip("／") + "。"
+        if len(d) < DESC_MIN and area:
+            d += f"{area}について、記事をまとめて読めるようにしています。"
+        if len(d) < DESC_MIN:
+            d += "各記事へは、このページの一覧から移動できます。"
+    page["description"] = d[:DESC_MAX - 1] + "…" if len(d) > DESC_MAX else d
+
+
 def collect(cfg, live=None, url_of=None, kinds=KINDS, i18n_prefix=None, arts=None, today=None):
     """その社のまとめのページの一覧。live: 公開済みの記事の slug（None ならその社の公開基準を満たす全記事）。
     url_of(meta): 記事の公開URL（既定は sites.article_url。WordPress はパーマリンクを渡す）"""
@@ -236,6 +276,8 @@ def collect(cfg, live=None, url_of=None, kinds=KINDS, i18n_prefix=None, arts=Non
     kept = []
     client = S.is_client(cfg["id"])
     for p in out:
+        if p.get("lang", "ja") == "ja":
+            fit_meta(p, cfg, by_slug)
         p["html"] = drop_title_heading(_LINK.sub(fix, p["html"]), p["title"])
         p["url"] = page_url(cfg, p["path"])
         leak = S.operator_leaks(p["html"] + json.dumps(p["jsonld"], ensure_ascii=False), cfg) if client else []

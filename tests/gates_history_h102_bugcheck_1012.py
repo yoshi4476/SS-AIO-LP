@@ -531,3 +531,41 @@ def test_season_peaks_of_clients_stay_private():
     src = (ROOT / "scripts" / "season.py").read_text(encoding="utf-8")
     check("書く・読むの両方が store_path を通す", (src.count("store_path(site_id)") >= 2, 'STORE / f"{site_id}.json").write_text' not in src),
           (True, True))
+
+
+def test_live_audit_flags_internal_links_to_redirects():
+    print("\n■ 本番の巡回: 内部リンクの先が転送（統合・取り下げの 301）なら警告する（末尾のスラッシュの違いは数えない）")
+    import seo_audit as SA
+    page = ('<html><head><title>{t}</title></head><body><h1>{t}</h1>'
+            '<a href="/blog/zz-old/">古い</a><a href="/blog/zz-live">生きている</a><a href="/tools/zz-tool">道具</a></body></html>')
+    site = {
+        "https://zz.example/sitemap.xml": (200, "<loc>https://zz.example/blog/zz-a/</loc><loc>https://zz.example/blog/zz-live/</loc>",
+                                           "https://zz.example/sitemap.xml"),
+        "https://zz.example/blog/zz-a/": (200, page.format(t="試験の記事A"), "https://zz.example/blog/zz-a/"),
+        "https://zz.example/blog/zz-live/": (200, page.format(t="試験の記事B"), "https://zz.example/blog/zz-live/"),
+        "https://zz.example/blog/zz-old/": (200, page.format(t="転送先"), "https://zz.example/blog/zz-new/"),
+        "https://zz.example/tools/zz-tool/": (200, page.format(t="道具"), "https://zz.example/tools/zz-tool"),
+    }
+    with mock.patch.object(SA, "_get", lambda u, timeout=30: site.get(u, (404, "", u))):
+        rows, _pages = SA.live("zz.example", 50)
+    red = [(r[2], r[3]) for r in rows if r[1] == "転送されるURLへの内部リンク"]
+    check("統合済みの記事へのリンクは警告・末尾のスラッシュだけ違う道具のページは警告しない",
+          (len(red) > 0, all(d == "/blog/zz-old/" for _p, d in red)), (True, True))
+
+
+def test_aggregate_pages_have_readable_titles_and_descriptions():
+    print("\n■ まとめのページ: 題は主力のカテゴリ名で補い、説明文は記事の題で100〜160字にそろえる（ページに無いことは書かない）")
+    import aggregate_pages as AP
+    cfg = {"categories": {"zz-main": "試験の主力", "zz-sub": "試験の副"}, "main_category": "zz-main"}
+    by = {f"zz-{i}": {"title": f"試験の記事その{i}の題です", "date": f"2026-10-0{i}"} for i in range(1, 9)}
+    short = {"title": "用語集", "description": "用語をまとめました。", "members": ["zz-1", "zz-2", "zz-3"]}
+    index = {"title": "比較表から探す", "description": "", "members": []}
+    long_ = {"title": "試験の主力の比較表", "description": "あ" * 200, "members": []}
+    for p in (short, index, long_):
+        AP.fit_meta(p, cfg, by)
+    check("題: 短い題は主力のカテゴリ名を添え、すでに入っている題は変えない",
+          (short["title"], long_["title"]), ("用語集（試験の主力）", "試験の主力の比較表"))
+    check("説明文: 短いものは記事の題で補い、長すぎるものは切る（どれも100〜160字）",
+          [100 <= len(p["description"]) <= 160 for p in (short, index, long_)], [True, True, True])
+    check("足すのは実在する記事の題だけ", ("試験の記事その1の題です" in short["description"],
+                                       "試験の記事その8の題です" in index["description"]), (True, True))

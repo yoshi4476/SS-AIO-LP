@@ -295,7 +295,18 @@ def live(domain, limit, cfg=None):
             if s == 200 and urlparse(final).path.rstrip("/") == urlparse(u).path.rstrip("/"):
                 pages[p] = page_facts(body)
     sm_paths = {urlparse(u).path.rstrip("/") + "/" for u in urls}
-    rows = check(pages, sm_paths - {r[2] for r in moved}) + moved
+    # 内部リンクの先が転送（統合・取り下げの 301）になっているものを見つける。配信先のサイトは _redirects を手元に持たない
+    # ので、巡回で見つけたリンクの先を開いて確かめる（2026-10-12: 補助金の11ページが統合済みの記事へ張ったままで、
+    # Search Console の「ページにリダイレクトがあります」に出ていた）。末尾のスラッシュだけの違いは転送に数えない
+    known = set(pages) | sm_paths
+    cand = sorted({(l if l.endswith("/") else l + "/") for f in pages.values() for l in f["links"]} - known)
+    cand = [c for c in cand if not re.search(r"\.(png|jpe?g|webp|gif|svg|ico|css|js|pdf|xml|txt|json)/$", c, re.I)][:300]
+    redirects = set()
+    with cf.ThreadPoolExecutor(6) as ex:
+        for c, (s, _b, final) in zip(cand, ex.map(lambda c: _get(f"https://{domain}{c}"), cand)):
+            if s == 200 and urlparse(final).path.rstrip("/") != c.rstrip("/"):
+                redirects.add(c)
+    rows = check(pages, sm_paths - {r[2] for r in moved}, redirects=redirects) + moved
     return rows, pages
 
 

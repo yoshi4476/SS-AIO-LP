@@ -1949,25 +1949,25 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:324",
+     "evidence": "scripts/seo_audit.py:335",
      "note": "公開前の門",
      "anchor": "ap.add_argument(\"--gate\", action=\"store_true\","
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:353",
+     "evidence": "scripts/seo_audit.py:364",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:353",
+     "evidence": "scripts/seo_audit.py:364",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:353",
+     "evidence": "scripts/seo_audit.py:364",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
@@ -1979,13 +1979,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:353",
+     "evidence": "scripts/seo_audit.py:364",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:353",
+     "evidence": "scripts/seo_audit.py:364",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     }
