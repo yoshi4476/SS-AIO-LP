@@ -321,6 +321,12 @@
         "歯科医院 治療"
       ],
       "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-10-12",
+      "sec": 48,
+      "title": "歯がしみる、すぐ病院に行くべき?",
+      "youtube": "pQOtSKDDod8"
     }
   },
   "aio-log-bunseki-tool-hikaku": {
@@ -557,5 +563,15 @@
       "title": "リフォームのAIO対策、何から始める？",
       "youtube": "7hsLfCfGzk4"
     }
+  },
+  "research-clinic": {
+    "site": "ai-lab",
+    "kind": "research",
+    "date": "2026-10-12",
+    "sec": 224,
+    "mp4": "automation/video/research-clinic.mp4",
+    "format": "duo",
+    "url": "https://ai.7senses.co.jp/research/clinic-ai-sources/",
+    "youtube": "nQbOv2DGj4U"
   }
 }
