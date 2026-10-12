@@ -1,0 +1,21 @@
+{
+ "corporate": {
+  "at": "2026-10-12",
+  "fp": "52d32967eb5d",
+  "parts": {
+   "sites": "33f67374e267",
+   "templates/nextjs_aggregate_index.tsx": "73375c85a45b",
+   "templates/nextjs_aggregate_page.tsx": "95b21201bd8f",
+   "templates/nextjs_aggregate_slug.tsx": "d7501c381de0",
+   "templates/nextjs_alternates.ts": "f4c7fe26f560"
+  }
+ },
+ "subsidy": {
+  "at": "2026-10-12",
+  "fp": "40ab0b49aac5",
+  "parts": {
+   "dest/template": "42ff73367826",
+   "sites": "70648ca9921e"
+  }
+ }
+}
