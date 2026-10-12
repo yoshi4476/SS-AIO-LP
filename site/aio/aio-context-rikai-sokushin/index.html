@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIOでコンテキスト理解を促進するには？文脈が切れない5つの書き方</title>
+<meta name="description" content="AIOでコンテキスト理解を促進するとは、AIが記事の一部だけを使っても主語・条件・時点が落ちない文にすることです。Googleは公式にAI向けの特別な書き方は不要としています。文脈が切れる4つの原因と5つの書き方、自社で直すか任せるかの判断を解説します。">
+<link rel="canonical" href="https://ai.7senses.co.jp/aio/aio-context-rikai-sokushin/">
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="AIOでコンテキスト理解を促進するには？文脈が切れない5つの書き方">
+<meta property="og:description" content="AIOでコンテキスト理解を促進するとは、AIが記事の一部だけを使っても主語・条件・時点が落ちない文にすることです。Googleは公式にAI向けの特別な書き方は不要としています。文脈が切れる4つの原因と5つの書き方、自社で直すか任せるかの判断を解説します。">
+<meta property="og:url" content="https://ai.7senses.co.jp/aio/aio-context-rikai-sokushin/">
+<meta property="og:image" content="https://ai.7senses.co.jp/images/shelf/aisearch-2.jpg">
+<meta property="og:site_name" content="AI集客ラボ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=9bff4c45">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js?v=8333a559"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "headline": "AIOでコンテキスト理解を促進するには？文脈が切れない5つの書き方",
+   "description": "AIOでコンテキスト理解を促進するとは、AIが記事の一部だけを使っても主語・条件・時点が落ちない文にすることです。Googleは公式にAI向けの特別な書き方は不要としています。文脈が切れる4つの原因と5つの書き方、自社で直すか任せるかの判断を解説します。",
+   "mainEntityOfPage": "https://ai.7senses.co.jp/aio/aio-context-rikai-sokushin/",
+   "image": "https://ai.7senses.co.jp/images/shelf/aisearch-2.jpg",
+   "datePublished": "2026-10-12",
+   "dateModified": "2026-10-12",
+   "author": {
+    "@type": "Person",
+    "name": "原口 優",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "jobTitle": "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年",
+    "sameAs": [
+     "https://www.linkedin.com/in/yu-haraguchi",
+     "https://note.com/yu_haraguchi",
+     "https://corp.7senses.co.jp/",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
+    ],
+    "worksFor": {
+     "@type": "Organization",
+     "name": "セブンセンシズ株式会社",
+     "alternateName": "SEVEN SENSES Inc.",
+     "url": "https://ai.7senses.co.jp",
+     "telephone": "06-4305-7547",
+     "identifier": {
+      "@type": "PropertyValue",
+      "name": "法人番号",
+      "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+      "value": "3120001227825"
+     },
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "postalCode": "537-0003",
+      "addressRegion": "大阪府",
+      "addressLocality": "大阪市東成区",
+      "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+     },
+     "sameAs": [
+      "https://x.com/sevensensece",
+      "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+      "https://alarmbox.jp/companyinfo/entities/3120001227825",
+      "https://corp.7senses.co.jp/",
+      "https://lp.7senses.co.jp/",
+      "https://www.7senses.co.jp/",
+      "https://www.google.com/maps?cid=815053100031552916",
+      "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw"
+     ],
+     "location": {
+      "@type": "Place",
+      "geo": {
+       "@type": "GeoCoordinates",
+       "latitude": 34.6791137,
+       "longitude": 135.555196
+      },
+      "hasMap": "https://www.google.com/maps?cid=815053100031552916"
+     },
+     "knowsAbout": [
+      "MEO（マップ検索最適化）",
+      "AIO（AI検索最適化）",
+      "LLMO（大規模言語モデル最適化）",
+      "SEO",
+      "Googleビジネスプロフィール運用",
+      "店舗集客",
+      "AI導入支援",
+      "IT導入補助金",
+      "ものづくり補助金",
+      "小規模事業者持続化補助金",
+      "経理BPO"
+     ]
+    }
+   },
+   "editor": {
+    "@type": "Person",
+    "name": "原口 優",
+    "jobTitle": "代表取締役",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "sameAs": [
+     "https://www.linkedin.com/in/yu-haraguchi",
+     "https://note.com/yu_haraguchi",
+     "https://corp.7senses.co.jp/",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
+    ]
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "セブンセンシズ株式会社",
+    "alternateName": "SEVEN SENSES Inc.",
+    "url": "https://ai.7senses.co.jp",
+    "telephone": "06-4305-7547",
+    "identifier": {
+     "@type": "PropertyValue",
+     "name": "法人番号",
+     "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+     "value": "3120001227825"
+    },
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "JP",
+     "postalCode": "537-0003",
+     "addressRegion": "大阪府",
+     "addressLocality": "大阪市東成区",
+     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+    },
+    "sameAs": [
+     "https://x.com/sevensensece",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+     "https://alarmbox.jp/companyinfo/entities/3120001227825",
+     "https://corp.7senses.co.jp/",
+     "https://lp.7senses.co.jp/",
+     "https://www.7senses.co.jp/",
+     "https://www.google.com/maps?cid=815053100031552916",
+     "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw"
+    ],
+    "location": {
+     "@type": "Place",
+     "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 34.6791137,
+      "longitude": 135.555196
+     },
+     "hasMap": "https://www.google.com/maps?cid=815053100031552916"
+    },
+    "knowsAbout": [
+     "MEO（マップ検索最適化）",
+     "AIO（AI検索最適化）",
+     "LLMO（大規模言語モデル最適化）",
+     "SEO",
+     "Googleビジネスプロフィール運用",
+     "店舗集客",
+     "AI導入支援",
+     "IT導入補助金",
+     "ものづくり補助金",
+     "小規模事業者持続化補助金",
+     "経理BPO"
+    ]
+   },
+   "inLanguage": "ja",
+   "mentions": [
+    {
+     "@type": "Thing",
+     "name": "Google AI Overview",
+     "sameAs": "https://support.google.com/websearch/answer/14901683"
+    },
+    {
+     "@type": "Thing",
+     "name": "検索エンジン最適化（SEO）",
+     "sameAs": "https://ja.wikipedia.org/wiki/%E6%A4%9C%E7%B4%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E6%9C%80%E9%81%A9%E5%8C%96"
+    }
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ホーム",
+     "item": "https://ai.7senses.co.jp/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "AIO・LLMO運用",
+     "item": "https://ai.7senses.co.jp/aio/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "AIOでコンテキスト理解を促進するには？文脈が切れない5つの書き方",
+     "item": "https://ai.7senses.co.jp/aio/aio-context-rikai-sokushin/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "コンテキスト理解の促進は、自社の担当者だけでできますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "できます。指示語を名詞に戻し、対象・時点・社名を各段落に書く作業は、文章を直せる人なら進められます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "外部に頼むと、何をしてもらえますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "検索順位とAIの出典の実測から直す記事を選び、文の書き換えと内部リンクの整理、その後の計測まで任せられます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "書き方を直してから、どのくらいで変化が見えますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "当社のAIO運用では、2026年5月開始の10件のうち6件が1か月以内に主要クエリの平均順位が上がりました。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "AI向けに文章を細かく区切る必要はありますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ありません。Googleは公式に、AIのために内容を細かく刻む必要は無いと説明しています。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "llms.txtや構造化データを置けば文脈は伝わりますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Google検索では効きません。Googleはllms.txtを使わず、構造化データもAI検索に必須ではないとしています。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "この書き直しが向かないのはどんな場合ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "検索順位が30位より下の記事です。先に順位を上げる直しをしないと、AIの候補に入りにくいからです。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="SEVEN SENSES" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="/industry/">業種から探す</a>
+      <a href="/lab/">実装ラボ</a>
+      <a href="/lp/#service" data-cta="nav_service">サービス・料金</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/tools/" class="nav-tool" data-cta="nav_tools">無料ツール</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li><a href="/aio/">AIO・LLMO運用</a></li>
+    <li aria-current="page">AIOでコンテキスト理解を促進するには？文脈</li>
+  </ol>
+</nav>
+
+<main class="article cat-aio">
+  <header class="article-header">
+    <span class="cat-badge">AIO・LLMO運用</span>
+    <h1>AIOでコンテキスト理解を促進するには？文脈が切れない5つの書き方</h1>
+    <div class="article-meta">
+      <span>公開: <time datetime="2026-10-12">2026年10月12日</time></span>
+      <span>更新: <time datetime="2026-10-12">2026年10月12日</time></span>
+      <span>執筆: 原口 優</span>
+      <span class="share-row">
+        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=AIO%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E7%90%86%E8%A7%A3%E3%82%92%E4%BF%83%E9%80%B2%E3%81%99%E3%82%8B%E3%81%AB%E3%81%AF%EF%BC%9F%E6%96%87%E8%84%88%E3%81%8C%E5%88%87%E3%82%8C%E3%81%AA%E3%81%845%E3%81%A4%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Faio-context-rikai-sokushin%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
+        <a class="share-btn share-hatena" href="https://b.hatena.ne.jp/entry/https://ai.7senses.co.jp/aio/aio-context-rikai-sokushin/" target="_blank" rel="noopener" aria-label="はてなブックマークに追加">B! はてブ</a>
+        <button type="button" class="share-btn copy-url" data-url="https://ai.7senses.co.jp/aio/aio-context-rikai-sokushin/" aria-label="この記事のURLをコピー">🔗 URLコピー</button>
+        <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
+      </span>
+    </div>
+    <figure class="article-eyecatch"><img src="/images/shelf/aisearch-2.webp" alt="AIOでコンテキスト理解を促進するには？文脈が切れない5つの書き方" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
+  </header>
+
+  <div class="article-layout">
+    <aside class="article-side">
+      <div class="side-sticky">
+        <nav class="toc" aria-label="目次"><details><summary class="toc-title">目次<span class="toc-n">9項目</span></summary><ol><li><a href="#_1">コンテキスト理解の促進とは何をすることか</a></li><li><a href="#ai4">AIが文脈を取り違える4つの原因</a></li><li><a href="#5">文脈が切れない5つの書き方</a></li><li><a href="#_2">社名とサービスの結びつきを文脈として伝えるには</a></li><li><a href="#_3">内部リンクで記事同士の関係を伝えるには</a></li><li><a href="#2">失敗例: 自社記事で文脈が切れていた2つのケース</a></li><li><a href="#_4">自社で直すか、外に任せるかの判断</a></li><li><a href="#_5">よくある質問</a></li><li><a href="#1">まとめ: 文脈は「1つの文に前提を持たせる」ことで伝わる</a></li></ol></details></nav><script>if(matchMedia("(min-width: 1100px)").matches)document.currentScript.previousElementSibling.querySelector("details").open=true</script>
+        <div class="side-cta">
+          <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
+          <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
+          <div class="s">監修: セブンセンシズ株式会社</div>
+        </div>
+        <a class="side-banner" href="https://lp.7senses.co.jp/" target="_blank" rel="noopener" data-cta="article_side_hojokin">
+          <span class="sb-kicker">当社の申請サポート</span>
+          <span class="sb-title">AI導入補助金で<br>最大350万円</span>
+          <span class="sb-sub">補助金申請から導入・集客まで一気通貫 →</span>
+        </a>
+      </div>
+    </aside>
+    <div class="article-body">
+      <p><strong>AIOでコンテキスト理解を促進するとは、記事の一部だけが使われても、主語・条件・時点が落ちない文にすることです。</strong>AIの回答は数文にまとめられるため、前の段落を読まないと意味が通らない文は誤って伝わります。</p>
+<div class="target-reader">この記事は、自社の記事がAIの回答に使われない、または使われても内容がずれて伝わると感じている中小企業の経営者・Web担当者向けです。</div>
+
+<p class="freshness">※ 2026年10月時点の情報です。</p>
+
+<p>最初に、よくある誤解を1つ外します。Googleは2026年7月10日更新の公式ガイドで、<em>AI検索のための特別な書き方は不要</em>と明言しています。AIは同義語や大まかな意味も理解できる、とも書いています（出典: <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">Google 検索セントラル「生成AI機能向けの最適化ガイド」</a>）。</p>
+<p>ですから、ここで扱うのは「AIだけに効く技」ではありません。<strong>人が一部だけ読んでも誤解しない文</strong>です。AIOそのものの意味と仕組みは<a href="/aio/aio-towa/">AIOとは何かを解説した記事</a>で整理しています。</p>
+<h2 id="_1">コンテキスト理解の促進とは何をすることか</h2>
+<p><strong>コンテキスト理解の促進とは、どの段落を抜き出しても、誰が・何を・どの条件での話かが分かる状態にすることです。</strong></p>
+<aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="url_check"><p class="it-head">御社のサイト、ChatGPTやGoogleのAIに読まれていますか？</p><p class="it-sub">URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）</p><form class="it-form" action="/tools/url-check/" method="get"><input type="hidden" name="src" value="article_inline"><input type="hidden" name="from" value="/aio/aio-context-rikai-sokushin/"><input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_inline_url_check">確かめる</button></form></aside>
+<div class="definition-box"><span class="term">コンテキスト（文脈）</span>とは、ある文の意味を決める前提のことです。主語、対象の読者、時点、地域、比べている相手などが当たります。</div>
+
+<p>人は記事を上から読むので、前提を一度書けば覚えています。一方、AIの回答に使われるのは記事の一部です。前提が離れた段落にしか無いと、その文だけが前提抜きで使われます。</p>
+<p>ずれが起きる余地は小さくありません。2026年3〜4月に55,393件のクエリを調べた研究では、AI Overviewが引用した主張の11.0%に、引用元ページの裏付けがありませんでした（出典: <a href="https://arxiv.org/abs/2605.14021" target="_blank" rel="noopener">arXiv 2605.14021</a>）。</p>
+<h2 id="ai4">AIが文脈を取り違える4つの原因</h2>
+<p><strong>文脈が切れる原因は、指示語・条件の欠落・名前の揺れ・孤立したページの4つに分けられます。</strong></p>
+<figure><img src="/images/aio-context-rikai-sokushin/genin.png" loading="lazy" decoding="async" alt="文脈が切れる4つの原因を指示語・条件の欠落・名前の揺れ・孤立したページに分けた図"></figure>
+
+<p>1つ目は<strong>指示語</strong>です。「これ」「それ」「上記」は、前の文が無いと何を指すか分かりません。</p>
+<p>2つ目は<strong>条件の欠落</strong>です。対象の業種や時点を冒頭にだけ書くと、後ろの段落は条件抜きで読まれます。</p>
+<p>3つ目は<strong>名前の揺れ</strong>です。社名を「弊社」「当社」「略称」と書き分けると、サービスと会社の結びつきが伝わりにくくなります。</p>
+<p>4つ目は<strong>孤立したページ</strong>です。関係の深い記事どうしがつながっていないと、記事の位置づけが見えません。</p>
+<aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_mid_ai_check">AI診断（地域と業種を入れるだけ・無料）</a></p></aside>
+<h2 id="5">文脈が切れない5つの書き方</h2>
+<p><strong>文脈が切れない書き方は、指示語を名詞に戻すことと、条件・時点・名前を段落ごとに持たせることの5つです。</strong></p>
+<figure><img src="/images/aio-context-rikai-sokushin/kakikae.png" loading="lazy" decoding="async" alt="文脈が切れる文と伝わる文を左右に並べて比べた図"></figure>
+
+<p>次の5つを、上から順に当ててください。</p>
+<ol>
+<li><strong>指示語を名詞に戻す</strong>: 「これで」を「内部リンクの見直しで」と書き直します</li>
+<li><strong>主語を省かない</strong>: 段落の最初の文に、何の話かを入れます</li>
+<li><strong>条件を文の中に書く</strong>: 「クリニックの場合」「従業員10名以下なら」を結論と同じ文に置きます</li>
+<li><strong>時点を数字の隣に書く</strong>: 料金や件数には「2026年10月時点」を添えます</li>
+<li><strong>名前を1つに揃える</strong>: 社名とサービス名は、記事の中で同じ表記にします</li>
+</ol>
+<p>書き換えの前後を表にまとめます。表の文は、書き換え方を示すための例文です。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">書き換え前</th>
+<th style="text-align: left;">書き換え後</th>
+<th style="text-align: left;">補った文脈</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">これで順位が上がります</td>
+<td style="text-align: left;">内部リンクの見直しで順位が上がります</td>
+<td style="text-align: left;">何をしたか</td>
+</tr>
+<tr>
+<td style="text-align: left;">弊社では対応可能です</td>
+<td style="text-align: left;">AI集客ラボはAIO運用に対応します</td>
+<td style="text-align: left;">誰が</td>
+</tr>
+<tr>
+<td style="text-align: left;">比べると手間が少ないです</td>
+<td style="text-align: left;">社内で一から書く場合と比べると手間が少ないです</td>
+<td style="text-align: left;">何と比べたか</td>
+</tr>
+<tr>
+<td style="text-align: left;">最新の料金は下表のとおり</td>
+<td style="text-align: left;">2026年10月時点の料金は下表のとおり</td>
+<td style="text-align: left;">いつの話か</td>
+</tr>
+</tbody>
+</table></div>
+<p>文を短く切ること自体が目的ではありません。Googleは同じガイドで、AIのために内容を細かく刻む必要は無いとも書いています。<strong>1つの文に前提を持たせる</strong>ことが目的です。冒頭や見出し直下の書き方は<a href="/aio/aio-erabareru-kiji-kakikata/">AIに選ばれる記事の書き方</a>で詳しく扱っています。</p>
+<h2 id="_2">社名とサービスの結びつきを文脈として伝えるには</h2>
+<p><strong>社名とサービスの結びつきは、同じ表記を記事・運営者情報・外部の言及でそろえることで伝わります。</strong></p>
+<p>AIが「どの会社の話か」を取り違えると、内容が正しくても自社の名前は残りません。そこで、社名とサービス名を数字や実績と同じ文に書きます。</p>
+<p>たとえば当社は、自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装し、引用状況を日次で計測しています（2026年8月時点）。</p>
+<p>ただし、llms.txtはGoogle検索では使われません。構造化データもAI検索には必須ではないと、Googleは公式に説明しています。<strong>ファイルを置くだけで文脈が伝わるわけではありません。</strong>当社が実装しているのは、効き目を自社で測るためです。</p>
+<h2 id="_3">内部リンクで記事同士の関係を伝えるには</h2>
+<p><strong>内部リンクは本数を増やすより、リンクの前後の文で「なぜその記事へ進むのか」を書くほうが文脈を伝えます。</strong></p>
+<p>当社は2026年6月23日〜9月20日に、自社3サイトの記事196本を集計しました（出典: 検索順位ごとの内部リンク本数）。内部リンクを受けている本数の中央値は次のとおりです。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">順位帯</th>
+<th style="text-align: left;">受けている内部リンク（中央値）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1〜10位</td>
+<td style="text-align: left;">5.0本</td>
+</tr>
+<tr>
+<td style="text-align: left;">11〜20位</td>
+<td style="text-align: left;">6.0本</td>
+</tr>
+<tr>
+<td style="text-align: left;">21〜30位</td>
+<td style="text-align: left;">6本</td>
+</tr>
+<tr>
+<td style="text-align: left;">31位以下</td>
+<td style="text-align: left;">5本</td>
+</tr>
+</tbody>
+</table></div><figure class="table-chart" style="margin:1.5em 0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 124" width="100%" role="img" aria-label="上の表の横棒グラフ（4項目）。『受けている内部リンク（中央値）』は11〜20位が最も大きく6.0本、1〜10位が最も小さく5.0本。" letter-spacing="0" word-spacing="0" font-weight="400" font-style="normal" style="display:block;width:100%;max-width:460px;height:auto;margin:0 auto"><title>上の表の『受けている内部リンク（中央値）』をグラフにしたもの</title><line x1="146.04" y1="4" x2="146.04" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="213.36" y1="4" x2="213.36" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="280.69" y1="4" x2="280.69" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="348.01" y1="4" x2="348.01" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="78.72" y1="4" x2="78.72" y2="120" stroke="currentColor" stroke-opacity="0.4" stroke-width="1"/><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="22.32">1〜10位</tspan></text><path class="tc-bar tc-s1" d="M78.72,9.5H299.13A4,4 0 0 1 303.13,13.5V20.5A4,4 0 0 1 299.13,24.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="309.13" y="22.04" font-size="14" font-weight="700" fill="currentColor">5.0本</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="52.32">11〜20位</tspan></text><path class="tc-bar tc-s1" d="M78.72,39.5H344.01A4,4 0 0 1 348.01,43.5V50.5A4,4 0 0 1 344.01,54.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="354.01" y="52.04" font-size="14" font-weight="700" fill="currentColor">6.0本</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="82.32">21〜30位</tspan></text><path class="tc-bar tc-s1" d="M78.72,69.5H344.01A4,4 0 0 1 348.01,73.5V80.5A4,4 0 0 1 344.01,84.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="354.01" y="82.04" font-size="14" font-weight="700" fill="currentColor">6本</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="112.32">31位以下</tspan></text><path class="tc-bar tc-s1" d="M78.72,99.5H299.13A4,4 0 0 1 303.13,103.5V110.5A4,4 0 0 1 299.13,114.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="309.13" y="112.04" font-size="14" font-weight="700" fill="currentColor">5本</text></g></svg><figcaption style="margin-top:.5em;font-size:.85em;line-height:1.6;text-align:center">上の表の『受けている内部リンク（中央値）』をグラフにしたもの</figcaption></figure>
+<p>この集計では、本数で順位は分かれていません。<mark>増やすより、どの語でどの記事と結ぶかを選ぶ</mark>ほうが先です。引用されるページの条件は<a href="/aio/aio-taisaku-ai-inyou-sareru/">AIに引用されるための実践ポイント</a>にまとめています。</p>
+<h2 id="2">失敗例: 自社記事で文脈が切れていた2つのケース</h2>
+<p><strong>当社の記事でも、自動で足した定型文が文脈を持たず、記事の要点を押しのけていたことがあります。</strong></p>
+<p>1つ目は、内部リンクの案内文です。以前の点検で、サイト全体の内部リンク文970本のうち403本（41.5%）が「関連して、〜もあわせてご確認ください。」という同じ一文でした。</p>
+<ul>
+<li>起きたこと: どの記事でも同じ一文が並び、リンク先へ進む理由が書かれていませんでした</li>
+<li>原因: リンクを足す工程が、前後の段落の主題を見ずに定型文を使っていました</li>
+<li>避け方: 言い回しを8種の型に分け、1記事で同じ言い回しは2本までにしました</li>
+</ul>
+<p>2つ目は、記事の要点を機械で抜き出して多言語の要約ページを作る工程です。冒頭の要点を拾うはずが、「関連して…」という案内文を冒頭として拾っていました。</p>
+<ul>
+<li>起きたこと: 記事の主張ではなく、別記事への案内が要約の冒頭に入りました</li>
+<li>原因: 冒頭の断言のすぐ近くに、前提を持たない案内文が置かれていました</li>
+<li>避け方: 拾う範囲を最初の見出しまでに絞り、内部リンクの案内文を除くように直しました</li>
+</ul>
+<p><span class="txt-red">定型文を冒頭に並べるのはNGです。</span>人にもAIにも、記事の要点が伝わらなくなります。</p>
+<p>AIの回答に自社サイトが載る準備ができているかは、<a href="/tools/aio-check/">AI検索の対応度チェック（無料・30秒）</a>で見られます。登録は要らず、結果はその場で出ます。</p>
+<h2 id="_4">自社で直すか、外に任せるかの判断</h2>
+<p><strong>検索10位以内の記事が多いなら自社で文を直し、30位より下が多いなら先に順位を上げる直しから始めてください。</strong></p>
+<p>順位を先に見る理由は、表示の大半が上位に集まるからです。当社が2026年6月23日〜9月20日に自社3サイトで計測した表示7,015回では、順位帯ごとのクリック率は次のとおりでした（出典: 検索順位ごとの実測クリック率）。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">順位帯</th>
+<th style="text-align: left;">クリック率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1〜3位</td>
+<td style="text-align: left;">6.28%</td>
+</tr>
+<tr>
+<td style="text-align: left;">4〜10位</td>
+<td style="text-align: left;">1.02%</td>
+</tr>
+<tr>
+<td style="text-align: left;">11〜20位</td>
+<td style="text-align: left;">0.09%</td>
+</tr>
+<tr>
+<td style="text-align: left;">21〜30位</td>
+<td style="text-align: left;">0.16%</td>
+</tr>
+</tbody>
+</table></div><figure class="table-chart" style="margin:1.5em 0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 124" width="100%" role="img" aria-label="上の表の横棒グラフ（4項目）。『クリック率』は1〜3位が最も大きく6.28%、11〜20位が最も小さく0.09%。" letter-spacing="0" word-spacing="0" font-weight="400" font-style="normal" style="display:block;width:100%;max-width:460px;height:auto;margin:0 auto"><title>上の表の『クリック率』をグラフにしたもの</title><line x1="144.04" y1="4" x2="144.04" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="209.36" y1="4" x2="209.36" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="274.68" y1="4" x2="274.68" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="340" y1="4" x2="340" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="78.72" y1="4" x2="78.72" y2="120" stroke="currentColor" stroke-opacity="0.4" stroke-width="1"/><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="22.32">1〜3位</tspan></text><path class="tc-bar tc-s1" d="M78.72,9.5H336A4,4 0 0 1 340,13.5V20.5A4,4 0 0 1 336,24.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="346" y="22.04" font-size="14" font-weight="700" fill="currentColor">6.28%</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="52.32">4〜10位</tspan></text><path class="tc-bar tc-s1" d="M78.72,39.5H117.16A4,4 0 0 1 121.16,43.5V50.5A4,4 0 0 1 117.16,54.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="127.16" y="52.04" font-size="14" font-weight="700" fill="currentColor">1.02%</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="82.32">11〜20位</tspan></text><path class="tc-bar tc-s1" d="M78.72,69.5H78.72A3.74,3.74 0 0 1 82.46,73.24V80.76A3.74,3.74 0 0 1 78.72,84.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="88.46" y="82.04" font-size="14" font-weight="700" fill="currentColor">0.09%</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="112.32">21〜30位</tspan></text><path class="tc-bar tc-s1" d="M78.72,99.5H81.38A4,4 0 0 1 85.38,103.5V110.5A4,4 0 0 1 81.38,114.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="91.38" y="112.04" font-size="14" font-weight="700" fill="currentColor">0.16%</text></g></svg><figcaption style="margin-top:.5em;font-size:.85em;line-height:1.6;text-align:center">上の表の『クリック率』をグラフにしたもの</figcaption></figure>
+<p>判断の目安は次のとおりです。</p>
+<ul>
+<li><strong>10位以内の記事が多い</strong>: 社内で文の書き換えから始めます。下の手順で3週間ほどです</li>
+<li><strong>11〜30位が多い</strong>: 文の書き換えと内部リンクの整理を一緒に行います</li>
+<li><strong>30位より下が多い</strong>: 文の書き換えは後回しにし、狙う語と記事の主題のずれを先に直します</li>
+<li><strong>書く人が社内にいない</strong>: 実測から直す記事を選ぶ工程ごと、外に任せる選択肢があります</li>
+</ul>
+<figure><img src="/images/aio-context-rikai-sokushin/tejun.png" loading="lazy" decoding="async" alt="既存記事の文脈を直す手順を1日目から3週目までの4段階で示した図"></figure>
+
+<p>社内で進める場合は、Search Consoleで表示の多い上位10本を選びます。1週目に指示語と主語、2週目に条件と時点、3週目に社名の表記と内部リンクを直してください。</p>
+<div class="cta-box"><p>自社の記事のどこで文脈が切れているか、SEO・AIO・LLMOの現状分析を無料で行います。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
+<h2 id="_5">よくある質問</h2>
+<p>問い合わせの前に、経営者の方からよく聞かれる質問に答えます。</p>
+<div class="faq">
+<details><summary>コンテキスト理解の促進は、自社の担当者だけでできますか？</summary><p class="faq-a">できます。指示語を名詞に戻し、対象・時点・社名を各段落に書く作業は、文章を直せる人なら進められます。</p></details>
+<details><summary>外部に頼むと、何をしてもらえますか？</summary><p class="faq-a">検索順位とAIの出典の実測から直す記事を選び、文の書き換えと内部リンクの整理、その後の計測まで任せられます。</p></details>
+<details><summary>書き方を直してから、どのくらいで変化が見えますか？</summary><p class="faq-a">当社のAIO運用では、2026年5月開始の10件のうち6件が1か月以内に主要クエリの平均順位が上がりました。</p></details>
+<details><summary>AI向けに文章を細かく区切る必要はありますか？</summary><p class="faq-a">ありません。Googleは公式に、AIのために内容を細かく刻む必要は無いと説明しています。</p></details>
+<details><summary>llms.txtや構造化データを置けば文脈は伝わりますか？</summary><p class="faq-a">Google検索では効きません。Googleはllms.txtを使わず、構造化データもAI検索に必須ではないとしています。</p></details>
+<details><summary>この書き直しが向かないのはどんな場合ですか？</summary><p class="faq-a">検索順位が30位より下の記事です。先に順位を上げる直しをしないと、AIの候補に入りにくいからです。</p></details>
+</div>
+
+<h2 id="1">まとめ: 文脈は「1つの文に前提を持たせる」ことで伝わる</h2>
+<p><strong>AIOのコンテキスト理解を促進する近道は、AI専用の技ではなく、段落ごとに主語・条件・時点・名前を持たせることです。</strong></p>
+<p>今日できる一歩は、表示の多い記事を1本開き、「これ」「それ」「上記」を検索して名詞に戻すことです。直した箇所の数が、その記事の文脈の切れ目の数です。</p>
+<div class="cta-box"><p>どの記事から直せば効くか、検索データとAIの出典から無料で判断します。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
+
+      <aside class="scan-box scan-bottom" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_bottom"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_bottom_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_bottom_ai_check">AI診断（地域と業種を入れるだけ・無料）</a></p></aside>
+
+      <section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
+    <li class="cat-aio"><a href="/aio/ai-kensaku-taiou-settei/"><span class="thumb"><img src="/images/shelf/aisearch-1.webp" alt="AI検索対応とは？公開前に済ませる7つの設定項目のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-16">2026.09.16</time><h3>AI検索対応とは？公開前に済ませる7つの設定項目<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-checker/"><span class="thumb"><img src="/images/shelf/aisearch-3.webp" alt="AIOチェッカーとは？表示と引用を見分ける使い方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-23">2026.09.23</time><h3>AIOチェッカーとは？表示と引用を見分ける使い方<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-dairiten-erabikata/"><span class="thumb"><img src="/images/shelf/outsource-3.webp" alt="AIO代理店の選び方｜再委託で失敗しない5つのポイントのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-10-04">2026.10.04</time><h3>AIO代理店の選び方｜再委託で失敗しない5つのポイント<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul></section>
+
+      <nav class="prev-next" aria-label="前後の記事"><a class="pn" href="/aio/reform-kaisha-aio-taisaku/"><span>← 前の記事</span><strong>リフォーム会社のAIO対策｜工事別ページで依頼先に選ばれる5つの準備</strong></a><a class="pn pn-next" href="/aio/aio-taisaku-dairiten/"><span>次の記事 →</span><strong>AIO対策を代理店に任せる前に｜今の広告・制作会社へ聞く4つの質問</strong></a></nav>
+
+      <section class="cta">
+        <p class="cta-copy">ChatGPTやAI Overviewが御社を出典に選んでいるか、一緒に確かめませんか？</p>
+        <a class="btn btn-primary" href="/lp/" data-cta="article_bottom_lp">SEO・AIO・LLMO集客支援の詳細を見る <span class="arw">→</span></a>
+        <p class="cta-sub">無料相談・資料ダウンロードはリンク先から</p>
+      </section>
+
+      <aside class="author-box">
+        <div class="avatar" style="background:#0b2447;padding:23px;"><img src="/images/company/star-white.png" alt="SEVEN SENSES" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div>
+          <div class="name">原口 優</div>
+          <div class="role">セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年｜監修（集客・Web施策）: <a href="/author/haraguchi/">代表取締役 原口 優</a></div>
+          
+          <p>通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。</p>
+          <p class="how-made">制作の流れ: 一次情報と出典を集め、AIツールで下書き → 機械検査18項目と3観点の採点（90点以上のみ公開）→ 監修者が事実と表現を確認。<a href="/editorial-policy/">編集・訂正ポリシー</a></p>
+        </div>
+      </aside>
+
+      <aside class="newsletter-box">
+        <div class="nl-text">
+          <strong>週1本のメールで、AI集客の最新実務を。</strong>
+          <span>新着記事とAI検索の動きを毎週まとめてお届けします（無料・いつでも解除できます）。</span>
+        </div>
+        <form class="nl-form" action="/api/subscribe" method="post">
+          <input type="hidden" name="form_type" value="ニュースレター購読">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="email" name="email" required placeholder="メールアドレス" aria-label="メールアドレス" autocomplete="email">
+          <button type="submit" class="btn btn-primary" data-cta="article_newsletter">購読する</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="SEVEN SENSES セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">セブンセンシズ株式会社</a><br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>TEL 06-4305-7547（9:00〜20:00 / 土日祝休）</p>
+      <ul class="social-links" aria-label="外部プロフィール"><li><a href="https://x.com/sevensensece" target="_blank" rel="noopener me" aria-label="X（セブンセンシズ株式会社）" data-net="x"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li><li><a href="https://www.linkedin.com/in/yu-haraguchi" target="_blank" rel="noopener me" aria-label="LinkedIn（原口 優）" data-net="linkedin"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a></li><li><a href="https://note.com/yu_haraguchi" target="_blank" rel="noopener me" aria-label="note（原口 優）" data-net="note"><span>note</span></a></li></ul>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
+      <a href="/industry/">業種から探す</a>
+      <a href="/research/">業種別のAI調査</a>
+      <a href="/download/">無料資料ダウンロード</a>
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/compare/">比較表から探す</a>
+      <a href="/tools/">無料ツール一覧</a>
+      <a href="/tools/url-check/">URL診断（サイトの14項目を採点）</a>
+      <a href="/tools/ai-check/">AI診断（AIにどう紹介されているか）</a>
+      <a href="/tools/aio-check/">AI検索の対応度チェック（30秒）</a>
+      <a href="/tools/kuchikomi-henshin/">口コミ返信文の作成ツール</a>
+      <a href="/tools/meo-check/">マップ集客の整備度チェック（30秒）</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/author/haraguchi/">監修者プロフィール</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/faq/">ご契約前のよくある質問</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 SEVEN SENSES Inc. All rights reserved.</div>
+    <div class="footer-credit"><p><a href="https://conflux-partners.jp/works/7senses-aio" target="_blank" rel="noopener">AIO 対策・サイト制作：YW（CONFLUX PARTNERS）</a></p></div>
+  </div>
+</footer>
+
+<!-- スマホで記事を半分ほど読んだら出る「30秒診断」（site.js が出し入れする） -->
+<div class="scan-sticky" hidden><a class="btn btn-primary" href="/tools/ai-check/" data-cta="article_sticky_ai_check" data-ab="sticky_ai" data-ab-b="ChatGPTやGeminiに御社が出るか見る（無料）">AIに御社が出るか無料で確かめる <span class="arw">→</span></a></div>
+</body>
+</html>

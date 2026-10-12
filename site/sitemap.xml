@@ -108,6 +108,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-checker/ng-ok.png</image:loc></image:image>
     <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/4_wtV9p1d7Y/hqdefault.jpg</video:thumbnail_loc><video:title>AIOチェッカーとは？表示と引用を見分ける使い方</video:title><video:description>AIOチェッカーは、AI Overviewの表示と自社の引用を確かめる道具です。測るもの別の4種類、点数を信じすぎない理由、結果別に次にやることを自社の実測つきで解説します。確かめられるものは「表示」と「引用」の2つだけで、点数でサイトを採点する診断ツールとは役割が違います。</video:description><video:player_loc>https://www.youtube.com/embed/4_wtV9p1d7Y</video:player_loc><video:duration>285</video:duration><video:publication_date>2026-10-03T00:00:00+09:00</video:publication_date></video:video>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/aio-context-rikai-sokushin/</loc><lastmod>2026-10-12</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-context-rikai-sokushin/genin.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-context-rikai-sokushin/kakikae.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-context-rikai-sokushin/tejun.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/aio/aio-dairiten-erabikata/</loc><lastmod>2026-10-04</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-dairiten-erabikata/five-points.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-dairiten-erabikata/ng-ok.png</image:loc></image:image>
