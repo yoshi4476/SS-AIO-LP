@@ -37,6 +37,47 @@ def judge(kw, site, exclude_slug=""):
     return r.returncode, (r.stdout or "") + (r.stderr or "")
 
 
+def _canon(kw, same=()):
+    """同じ検索かを見る形。全角・記号をそろえ、年（2026 など）を落とし、言い換え（sites/<id>.json の kw_same。
+    補助金は「デジタル化・AI導入補助金」＝「AI導入補助金」＝旧称「IT導入補助金」）を1つにそろえた語の組"""
+    import unicodedata
+
+    def norm(x):
+        x = unicodedata.normalize("NFKC", str(x)).lower()
+        return re.sub(r"[・･|｜:：/／（）()【】\[\]「」、。,.!?！？]", " ", x)
+    t = re.sub(r"20\d\d\s*年?(度)?", " ", norm(kw))
+    for group in same:
+        names = sorted((norm(x).strip() for x in group if x), key=len, reverse=True)
+        if names:
+            pat = "|".join(r"\s*".join(map(re.escape, n.split())) for n in names)
+            t = re.sub(pat, " " + names[-1] + " ", t)
+    return frozenset(w for w in t.split() if w)
+
+
+def same_site_published(kw, site, arts=None):
+    """同じサイトの公開済みの記事（score 90 以上）のうち、狙う語が同じ検索のもの（slug の一覧）。
+    文字の似かたでは「条件」と「学習塾」のような別の記事まで同じに見えるので、語の組で比べる（2026-10-12 の点検:
+    執筆前の門が「デジタル化 ai導入補助金2026 個人事業主」を、公開済みの「it導入補助金 2026 個人事業主」があるのに選んだ）"""
+    import sites as S
+    from cannibal_check import load_articles
+    cfg = S.load_all().get(site) or {}
+    cats = set(cfg.get("categories") or {})
+    same = cfg.get("kw_same") or []
+    want = _canon(kw, same)
+    out = []
+    for a in (load_articles() if arts is None else arts):
+        if a.get("cat") not in cats or not a.get("kw"):
+            continue
+        p = ROOT / "articles" / f"{a['slug']}.md"
+        if arts is None:
+            m = re.search(r"^score:\s*(\d+)", p.read_text(encoding="utf-8-sig")[:3000], re.M) if p.is_file() else None
+            if not m or int(m.group(1)) < 90:
+                continue
+        if _canon(a["kw"], same) == want:
+            out.append(a["slug"])
+    return out
+
+
 def next_keyword(site):
     """次に書くKWを管制塔から取る。取れなければローカルの計画から"""
     try:
@@ -138,6 +179,10 @@ def main():
             # 鍵が切れた日に未着手の語を次々と捨てる。従来（1として扱っていた頃）どおり進める
             if level == 3:
                 print("   食い合いの検査が動きませんでした（鍵・通信を確認）。語だけの審査で進めます")
+            dup = same_site_published(kw, a.site) if (level < 2 or level == 3) else []
+            if dup:
+                print(f"   同じサイトの公開済みの記事が同じ検索を狙っています（{len(dup)}本）。新しく書かず、台帳から外します")
+                level = 2
             if level < 2 or level == 3:
                 print(f"\n次に書くKW: 「{kw}」")
                 print("KW_GATE=ok")
@@ -147,6 +192,7 @@ def main():
             import kw_fit
             fit, why = kw_fit.judge(kw, a.site)
             reason = (f"担当領域の外（kw_fit: {why}）" if fit >= 2
+                      else "同じサイトの公開済みの記事と同じ検索のため自動退避（kw_gate。既存の記事を書き足す）" if dup
                       else "既存ページと食い合うため自動退避（kw_gate）")
             try:
                 import hub_client

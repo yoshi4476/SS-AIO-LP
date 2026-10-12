@@ -12,6 +12,8 @@ prompt_file="$1"
 turns="$2"
 shift 2
 scopes=$(cat "$RUNNER_TEMP/agent_scopes" 2>/dev/null || echo own)
+# 範囲を絞る前に、全社の記事→社の対応を控える（絞った後はほかの社の原稿が見えず、仕事を数え違える）
+[ -n "${AGENT_WORK_KIND:-}" ] && python scripts/agent_work.py --snapshot
 for sc in $scopes; do
   # 絞れなかった範囲は AI を起こさない（ほかの社の原稿・材料が見えたままになる）
   if ! python scripts/private_store.py --scope "$sc"; then

@@ -447,7 +447,15 @@ jobs:
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
+          # 裏で始める横断の検査は、似た題の組が実際に同じ語で並んでいるかを Search Console で確かめる。鍵が無いと
+          # 全回で「GSCを引けませんでした」になっていた（2026-10-12 の点検）。鍵は次の工程の終わりに消す
+          # （残っても、鍵を外す手順が読むだけの許可証に置き換える）
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+            chmod 600 indexing-service-account.json
+          fi
           # 記事を書く claude が同じ出力を読む（同じものを2回作らない。1回約50秒）。
           # お客様の社の案内（記事の材料・狙う語・一次情報・売り物と料金）はログに出さない（CI のログは public）
           mkdir -p automation/logs
@@ -484,6 +492,7 @@ jobs:
           else
             python scripts/cannibal_check.py --cross --site "${{ steps.site.outputs.id }}" 2>&1 | tee -a automation/logs/brief.txt || true
           fi
+          rm -f indexing-service-account.json
 
       # 手順書に「必ず実行すること」と書いても、それは関門ではない。
       # 実行を忘れれば素通りする。実際、タイトル類似だけのゲートを通り抜けて
@@ -960,9 +969,15 @@ jobs:
           since=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           out=$(python scripts/publish_gap.py --publish) || true
           echo "$out"
+          # 警告は、本当に公開されていない記事か配り直しに失敗した記事があるときだけ。内容が古い記事の配り直し
+          # （公開の後に足したリンクが次の回で届く）は毎回の作業なので、件数をログに残すだけにする
           n=$(echo "$out" | grep -oE 'PUBLISH_GAP=[0-9]+' | cut -d= -f2)
-          if [ "${n:-0}" -gt 0 ]; then
-            echo "::warning::未配信が ${n} 本ありました。この実行で配信しています"
+          miss=$(echo "$out" | grep -oE 'PUBLISH_MISSING=[0-9]+' | cut -d= -f2)
+          fail=$(echo "$out" | grep -oE 'PUBLISH_FAILED=[0-9]+' | cut -d= -f2)
+          if [ "${miss:-0}" -gt 0 ] || [ "${fail:-0}" -gt 0 ]; then
+            echo "::warning::未配信が ${miss:-0} 本・配り直しの失敗が ${fail:-0} 本ありました（未配信はこの実行で配信しています）"
+          elif [ "${n:-0}" -gt 0 ]; then
+            echo "内容が古い記事 ${n} 本を配り直しました（公開の後に足したリンクなど。警告にしません）"
           fi
           # ここで配信できた記事は、公開の後の手順（台帳・SNS・既存記事からのリンク）を通っていない
           # ことがある（承認の回に配信できず翌日に回った記事など）。finish は台帳が公開済みなら何もしない

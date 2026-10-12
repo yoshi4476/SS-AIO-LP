@@ -223,6 +223,7 @@ def main():
     import editorial_review
     reviews = editorial_review.load()
     total_gap = 0
+    total_missing = total_failed = 0
     for site, slugs in sorted(mine.items()):
         c = conf[site]
         # ZIP 納品は先方が上げるまで公開されない。差を「未配信」と数えると毎日同じ ZIP を作り直す
@@ -279,6 +280,7 @@ def main():
                 why[s] = reason
         gap = missing + stale
         total_gap += len(gap)
+        total_missing += len(missing)
         print(f"■ {site}: 手元 {len(slugs)}本 / 公開 {len(slugs) - len(missing) - len(held)}本"
               f" / 未配信 {len(missing)}本 / 内容が古い {len(stale)}本"
               f" / 監修待ち {len(held)}本（未配信に数えない）")
@@ -294,6 +296,7 @@ def main():
                      "--site", site, "--slug", s, "--push"],
                     capture_output=True, text=True, encoding="utf-8", errors="replace")
                 mark = "○" if r.returncode == 0 else "×"
+                total_failed += r.returncode != 0
                 print(f"     [{i}] {mark} {PS.shown(s)}", flush=True)
                 if r.returncode == 0:
                     with done_file.open("a", encoding="utf-8") as fh:
@@ -311,6 +314,10 @@ def main():
                               f"{PS.shown(s)} は配信の門で止まっています（{(why.replace(s, PS.shown(s)) if quiet else why)[:120]}）")
 
     print(f"\nPUBLISH_GAP={total_gap}")
+    # 本当に公開されていない記事・配り直しに失敗した記事の数（ワークフローはこれで警告する）。内容が古い記事の配り直し
+    # （公開の後に足したリンクが次の回で届く）は毎回の作業なので、警告にしない（13回中11回出て雑音だった。2026-10-12）
+    print(f"PUBLISH_MISSING={total_missing}")
+    print(f"PUBLISH_FAILED={total_failed}")
     if total_gap and not a.publish:
         print("  --publish を付けると、足りない分を配信します")
     return 0

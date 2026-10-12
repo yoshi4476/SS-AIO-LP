@@ -389,3 +389,79 @@ def test_small_fixes_from_ci_records():
             contextlib.redirect_stdout(io.StringIO()):
         picked = AR.spare_guarded([{"slug": "zz-a", "kind": "stuck"}, {"slug": "zz-b", "kind": "stuck"}], 1)
     check("浮いた枠: 書き直す前から食い合う候補は外して次を取る", [x["slug"] for x in picked], ["zz-b"])
+
+
+# ── 3つ目のまとまり（2026-10-12 運用者「これら修正」: 残りの4件） ─────────────
+
+def test_own_pass_counts_work_with_the_map_taken_before_narrowing():
+    print("\n■ 範囲ごとの仕事の数え方: 絞る前の全社の対応表で数える（自社の回がお客様の TODO を数えない）")
+    import agent_work as AW
+    import sites as S
+    audit = ("===== 結果 =====\nTODO: zz-client-post を品質基準まで直して score を更新し、再ビルドする\n"
+             "TODO: corporate の記事を本日あと 1 本作成して公開する\n--- 以下は今日やらないこと\n")
+    with tempfile.TemporaryDirectory() as d, contextlib.ExitStack() as st:
+        st.enter_context(mock.patch.dict("os.environ", {"RUNNER_TEMP": d}))
+        for p in _fake_sites():
+            st.enter_context(p)
+        st.enter_context(mock.patch.object(S, "own_ids", lambda: ["ai-lab", "corporate", "subsidy"]))
+        st.enter_context(mock.patch.object(S, "load_all", lambda: {"ai-lab": {}, "corporate": {}, "subsidy": {}, CL: {}}))
+        # 絞る前（全社の原稿が見える）に控える
+        st.enter_context(mock.patch.object(AW, "_slug_owner", lambda: {"zz-client-post": CL, "zz-own": "corporate"}))
+        st.enter_context(contextlib.redirect_stdout(io.StringIO()))
+        AW.snapshot()
+        # 絞った後（お客様の原稿・設定が作業場所に無い）
+        st.enter_context(mock.patch.object(AW, "_slug_owner", lambda: {"zz-own": "corporate"}))
+        st.enter_context(mock.patch.object(S, "load_all", lambda: {"ai-lab": {}, "corporate": {}, "subsidy": {}}))
+        got = (AW.rescue_count("own", audit), AW.rescue_count(PUB, audit))
+    check("自社の回は自社の TODO だけ（1件）・お客様の回はその社の TODO だけ（1件）", got, (1, 1))
+    ap = (ROOT / "scripts" / "agent_passes.sh").read_text(encoding="utf-8")
+    check("範囲ごとの回は、絞る前に対応表を控える", ap.index("agent_work.py --snapshot") < ap.index("for sc in $scopes"), True)
+
+
+def test_kw_gate_skips_keywords_that_a_published_article_already_targets():
+    print("\n■ 執筆前の門: 同じサイトの公開済みの記事と同じ検索（言い換え・年の違いだけ）の語は書かない")
+    import kw_gate as KG
+    import sites as S
+    cfg = {"subsidy": {"categories": {"hojokin": {}}, "kw_same": [["デジタル化・AI導入補助金", "AI導入補助金", "IT導入補助金"]]}}
+    arts = [{"slug": "zz-it-kojin", "cat": "hojokin", "kw": "it導入補助金 2026 個人事業主"},
+            {"slug": "zz-it-joken", "cat": "hojokin", "kw": "it導入補助金 条件"},
+            {"slug": "zz-other", "cat": "keiri-bpo", "kw": "it導入補助金 学習塾"}]
+    with mock.patch.object(S, "load_all", lambda: cfg):
+        got = [KG.same_site_published(k, "subsidy", arts) for k in
+               ("デジタル化 ai導入補助金2026 個人事業主", "it導入補助金 学習塾", "it導入補助金 条件 2027", "AI導入補助金 飲食店")]
+    check("言い換え・年の違いだけの語は同じ検索・語の組が違えば別（文字の似かたで決めない）・別のサイトの記事は見ない",
+          got, [["zz-it-kojin"], [], ["zz-it-joken"], []])
+    src = (ROOT / "scripts" / "kw_gate.py").read_text(encoding="utf-8")
+    check("執筆前の門は、同じ検索の公開済みの記事があれば台帳から外して次の候補へ",
+          ("dup = same_site_published(kw, a.site)" in src, "同じサイトの公開済みの記事と同じ検索のため自動退避" in src), (True, True))
+    sub = json.loads((ROOT / "sites" / "subsidy.json").read_text(encoding="utf-8-sig"))
+    check("補助金の言い換え（旧称の IT導入補助金）は設定に書く", any("IT導入補助金" in g for g in sub.get("kw_same") or []), True)
+
+
+def test_brief_cross_check_can_read_search_console():
+    print("\n■ ブリーフの横断の検査: Search Console を読めるように鍵を置いてから始め、検査の後に消す")
+    import yaml
+    wf = yaml.safe_load((ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8"))
+    steps = wf["jobs"]["write"]["steps"]
+    brief = next(s for s in steps if str(s.get("name", "")).startswith("執筆ブリーフの表示"))
+    cross = next(s for s in steps if s.get("name") == "全サイト横断のカニバリ・領域チェック")
+    run = brief["run"]
+    check("ブリーフの手順に鍵があり、裏の検査を始める前に置く",
+          ("GCP_SERVICE_ACCOUNT_JSON" in (brief.get("env") or {}),
+           0 <= run.find("> indexing-service-account.json") < run.find("cannibal_check.py --cross")), (True, True))
+    check("横断の検査の手順の最後に鍵を消す", cross["run"].rstrip().endswith("rm -f indexing-service-account.json"), True)
+
+
+def test_undelivered_warning_only_for_real_gaps():
+    print("\n■ 未配信の警告: 本当に公開されていない記事と配り直しの失敗だけ（内容が古い記事の配り直しは警告にしない）")
+    src = (ROOT / "scripts" / "publish_gap.py").read_text(encoding="utf-8")
+    check("publish_gap は未配信と配り直しの失敗を分けて出す",
+          ('print(f"PUBLISH_MISSING={total_missing}")' in src, 'print(f"PUBLISH_FAILED={total_failed}")' in src,
+           "total_missing += len(missing)" in src), (True, True, True))
+    wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    step = wf[wf.index("- name: 未配信の記事がないかの確認"):]
+    step = step[:step.index("- name:", 10)]
+    warn = [ln for ln in step.splitlines() if "::warning::未配信" in ln]
+    check("警告は未配信か失敗があるときだけ（内容が古い分は件数をログに残すだけ）",
+          (len(warn), 'if [ "${miss:-0}" -gt 0 ] || [ "${fail:-0}" -gt 0 ]; then' in step,
+           "警告にしません" in step), (1, True, True))
