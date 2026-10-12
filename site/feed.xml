@@ -7,6 +7,13 @@
   <updated>2026-10-13T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
+    <title>AI Overviewで店舗集客はできる？出る検索と出ない検索の見分け方</title>
+    <link href="https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/"/>
+    <id>https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/</id>
+    <updated>2026-10-13T00:00:00+09:00</updated>
+    <summary>AI Overviewで店舗集客はできますが、効くのは来店前の質問形の検索です。「近くの店」を探す検索では効きにくい理由、AIが店の情報を拾う2つの入口、表示されてもクリックされない語の扱い方、自店でやるか任せるかの判断基準を自社の実測とあわせて解説します。</summary>
+  </entry>
+  <entry>
     <title>AIOでコンテキスト理解を促進するには？文脈が切れない5つの書き方</title>
     <link href="https://ai.7senses.co.jp/aio/aio-context-rikai-sokushin/"/>
     <id>https://ai.7senses.co.jp/aio/aio-context-rikai-sokushin/</id>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/shika-shoujou-page-tsukurikata/</id>
     <updated>2026-10-06T00:00:00+09:00</updated>
     <summary>歯科医院の症状ページは、患者が検索する言葉を題名にし、考えられる原因・見分け方・受診を急ぐサイン・自院での検査と治療・予約の順に1症状1ページで作ります。歯がしみるを例にした見出しの型、作る順番の決め方、起きやすい4つの失敗も整理します。</summary>
-  </entry>
-  <entry>
-    <title>AIOのログ分析ツールはどれ？4種の比較と選び方</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/</id>
-    <updated>2026-10-05T00:00:00+09:00</updated>
-    <summary>AIOのログ分析ツールは、CDNの管理画面・ログ専用ツール・生ログ集計・GA4の4種に分かれ、何を数えたいかで選びます。AIクローラーの訪問はGA4に出ないため、ログ側で403や429の有無まで確かめる手順と、条件別の選び方を解説します。</summary>
   </entry>
 </feed>

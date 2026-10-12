@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Overviewで店舗集客はできる？出る検索と出ない検索の見分け方</title>
+<meta name="description" content="AI Overviewで店舗集客はできますが、効くのは来店前の質問形の検索です。「近くの店」を探す検索では効きにくい理由、AIが店の情報を拾う2つの入口、表示されてもクリックされない語の扱い方、自店でやるか任せるかの判断基準を自社の実測とあわせて解説します。">
+<link rel="canonical" href="https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/">
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#071a38">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="AI Overviewで店舗集客はできる？出る検索と出ない検索の見分け方">
+<meta property="og:description" content="AI Overviewで店舗集客はできますが、効くのは来店前の質問形の検索です。「近くの店」を探す検索では効きにくい理由、AIが店の情報を拾う2つの入口、表示されてもクリックされない語の扱い方、自店でやるか任せるかの判断基準を自社の実測とあわせて解説します。">
+<meta property="og:url" content="https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/">
+<meta property="og:image" content="https://ai.7senses.co.jp/images/shelf/marketing-2.jpg">
+<meta property="og:site_name" content="AI集客ラボ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/images/icon-192.png">
+<link rel="apple-touch-icon" href="/images/icon-180.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="alternate" type="application/atom+xml" title="AI集客ラボ 新着記事" href="/feed.xml">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
+/* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
+window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
+<link rel="stylesheet" href="/css/style.css?v=9bff4c45">
+<script>document.documentElement.classList.add('js');</script>
+<script defer src="/js/site.js?v=8333a559"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BlogPosting",
+   "headline": "AI Overviewで店舗集客はできる？出る検索と出ない検索の見分け方",
+   "description": "AI Overviewで店舗集客はできますが、効くのは来店前の質問形の検索です。「近くの店」を探す検索では効きにくい理由、AIが店の情報を拾う2つの入口、表示されてもクリックされない語の扱い方、自店でやるか任せるかの判断基準を自社の実測とあわせて解説します。",
+   "mainEntityOfPage": "https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/",
+   "image": "https://ai.7senses.co.jp/images/shelf/marketing-2.jpg",
+   "datePublished": "2026-10-13",
+   "dateModified": "2026-10-13",
+   "author": {
+    "@type": "Person",
+    "name": "原口 優",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "jobTitle": "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年",
+    "sameAs": [
+     "https://www.linkedin.com/in/yu-haraguchi",
+     "https://note.com/yu_haraguchi",
+     "https://corp.7senses.co.jp/",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
+    ],
+    "worksFor": {
+     "@type": "Organization",
+     "name": "セブンセンシズ株式会社",
+     "alternateName": "SEVEN SENSES Inc.",
+     "url": "https://ai.7senses.co.jp",
+     "telephone": "06-4305-7547",
+     "identifier": {
+      "@type": "PropertyValue",
+      "name": "法人番号",
+      "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+      "value": "3120001227825"
+     },
+     "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "postalCode": "537-0003",
+      "addressRegion": "大阪府",
+      "addressLocality": "大阪市東成区",
+      "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+     },
+     "sameAs": [
+      "https://x.com/sevensensece",
+      "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+      "https://alarmbox.jp/companyinfo/entities/3120001227825",
+      "https://corp.7senses.co.jp/",
+      "https://lp.7senses.co.jp/",
+      "https://www.7senses.co.jp/",
+      "https://www.google.com/maps?cid=815053100031552916",
+      "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw"
+     ],
+     "location": {
+      "@type": "Place",
+      "geo": {
+       "@type": "GeoCoordinates",
+       "latitude": 34.6791137,
+       "longitude": 135.555196
+      },
+      "hasMap": "https://www.google.com/maps?cid=815053100031552916"
+     },
+     "knowsAbout": [
+      "MEO（マップ検索最適化）",
+      "AIO（AI検索最適化）",
+      "LLMO（大規模言語モデル最適化）",
+      "SEO",
+      "Googleビジネスプロフィール運用",
+      "店舗集客",
+      "AI導入支援",
+      "IT導入補助金",
+      "ものづくり補助金",
+      "小規模事業者持続化補助金",
+      "経理BPO"
+     ]
+    }
+   },
+   "editor": {
+    "@type": "Person",
+    "name": "原口 優",
+    "jobTitle": "代表取締役",
+    "url": "https://ai.7senses.co.jp/author/haraguchi/",
+    "sameAs": [
+     "https://www.linkedin.com/in/yu-haraguchi",
+     "https://note.com/yu_haraguchi",
+     "https://corp.7senses.co.jp/",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825"
+    ]
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "セブンセンシズ株式会社",
+    "alternateName": "SEVEN SENSES Inc.",
+    "url": "https://ai.7senses.co.jp",
+    "telephone": "06-4305-7547",
+    "identifier": {
+     "@type": "PropertyValue",
+     "name": "法人番号",
+     "propertyID": "https://www.houjin-bangou.nta.go.jp/",
+     "value": "3120001227825"
+    },
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "JP",
+     "postalCode": "537-0003",
+     "addressRegion": "大阪府",
+     "addressLocality": "大阪市東成区",
+     "streetAddress": "神路1丁目7-4 コンフォートビル901・902"
+    },
+    "sameAs": [
+     "https://x.com/sevensensece",
+     "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3120001227825",
+     "https://alarmbox.jp/companyinfo/entities/3120001227825",
+     "https://corp.7senses.co.jp/",
+     "https://lp.7senses.co.jp/",
+     "https://www.7senses.co.jp/",
+     "https://www.google.com/maps?cid=815053100031552916",
+     "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw"
+    ],
+    "location": {
+     "@type": "Place",
+     "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 34.6791137,
+      "longitude": 135.555196
+     },
+     "hasMap": "https://www.google.com/maps?cid=815053100031552916"
+    },
+    "knowsAbout": [
+     "MEO（マップ検索最適化）",
+     "AIO（AI検索最適化）",
+     "LLMO（大規模言語モデル最適化）",
+     "SEO",
+     "Googleビジネスプロフィール運用",
+     "店舗集客",
+     "AI導入支援",
+     "IT導入補助金",
+     "ものづくり補助金",
+     "小規模事業者持続化補助金",
+     "経理BPO"
+    ]
+   },
+   "inLanguage": "ja",
+   "about": [
+    {
+     "@type": "Thing",
+     "name": "Google AI Overview",
+     "sameAs": "https://support.google.com/websearch/answer/14901683"
+    }
+   ],
+   "mentions": [
+    {
+     "@type": "Thing",
+     "name": "Googleビジネスプロフィール",
+     "sameAs": "https://www.google.com/business/"
+    },
+    {
+     "@type": "Thing",
+     "name": "検索エンジン最適化（SEO）",
+     "sameAs": "https://ja.wikipedia.org/wiki/%E6%A4%9C%E7%B4%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E6%9C%80%E9%81%A9%E5%8C%96"
+    }
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ホーム",
+     "item": "https://ai.7senses.co.jp/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "AIO・LLMO運用",
+     "item": "https://ai.7senses.co.jp/aio/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "AI Overviewで店舗集客はできる？出る検索と出ない検索の見分け方",
+     "item": "https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "AI Overviewに店の名前を出してもらう申請はできますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "専用の申し込みはありません。Googleは公開されクロールできるページから回答の根拠を選びます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "店舗のサイトでどこまで自分で取り組めますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "料金の決まり方や予約の流れを書く作業は自店でできます。順位と表示の計測から先は手間がかかります。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "AI Overviewの対策を頼むと何をしてもらえますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "狙う質問の選定、店にしか無い情報の聞き取りと記事化、表示とクリックの毎月の計測と直しを任せられます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "どのくらいで変化が見えますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "当社のAIO運用を2026年5月に始めた10件では、6件が1か月以内に主要な語の平均順位が上がりました。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "AI Overviewでの店舗集客が向かないのはどんな店ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "来店前に調べられることが少ない業種や、近さと営業時間だけで店が選ばれる業種は効果が小さくなります。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "llms.txtを置けばAI Overviewに載りやすくなりますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "なりません。GoogleはAI向けの専用ファイルを検索で使わないと公式のガイドで明言しています。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/images/company/logo.png" alt="SEVEN SENSES" width="371" height="147">
+      <span class="mark">AI集客ラボ<span class="by">by セブンセンシズ株式会社</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
+      <a href="/aio/">AIO・LLMO</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/ai-marketing/">AI集客</a>
+      <a href="/industry/">業種から探す</a>
+      <a href="/lab/">実装ラボ</a>
+      <a href="/lp/#service" data-cta="nav_service">サービス・料金</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/tools/" class="nav-tool" data-cta="nav_tools">無料ツール</a>
+      <a href="/lp/" class="nav-cta" data-cta="nav_consult">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="/">ホーム</a></li>
+    <li><a href="/aio/">AIO・LLMO運用</a></li>
+    <li aria-current="page">AI Overviewで店舗集客はできる？出</li>
+  </ol>
+</nav>
+
+<main class="article cat-aio">
+  <header class="article-header">
+    <span class="cat-badge">AIO・LLMO運用</span>
+    <h1>AI Overviewで店舗集客はできる？出る検索と出ない検索の見分け方</h1>
+    <div class="article-meta">
+      <span>公開: <time datetime="2026-10-13">2026年10月13日</time></span>
+      <span>更新: <time datetime="2026-10-13">2026年10月13日</time></span>
+      <span>執筆: 原口 優</span>
+      <span class="share-row">
+        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=AI%20Overview%E3%81%A7%E5%BA%97%E8%88%97%E9%9B%86%E5%AE%A2%E3%81%AF%E3%81%A7%E3%81%8D%E3%82%8B%EF%BC%9F%E5%87%BA%E3%82%8B%E6%A4%9C%E7%B4%A2%E3%81%A8%E5%87%BA%E3%81%AA%E3%81%84%E6%A4%9C%E7%B4%A2%E3%81%AE%E8%A6%8B%E5%88%86%E3%81%91%E6%96%B9&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Fai-overview-tenpo-shukyaku%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
+        <a class="share-btn share-hatena" href="https://b.hatena.ne.jp/entry/https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/" target="_blank" rel="noopener" aria-label="はてなブックマークに追加">B! はてブ</a>
+        <button type="button" class="share-btn copy-url" data-url="https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/" aria-label="この記事のURLをコピー">🔗 URLコピー</button>
+        <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
+      </span>
+    </div>
+    <figure class="article-eyecatch"><img src="/images/shelf/marketing-2.webp" alt="AI Overviewで店舗集客はできる？出る検索と出ない検索の見分け方" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
+  </header>
+
+  <div class="article-layout">
+    <aside class="article-side">
+      <div class="side-sticky">
+        <nav class="toc" aria-label="目次"><details><summary class="toc-title">目次<span class="toc-n">9項目</span></summary><ol><li><a href="#ai-overview">AI Overviewで店舗集客はできるのか？</a></li><li><a href="#ai-overview_1">AI Overviewが出やすい店舗の検索・出にくい検索は？</a></li><li><a href="#ai-overview_2">AI Overviewは店の情報をどこから拾うのか？</a></li><li><a href="#_1">店のサイトに書くべき「その店にしか無い情報」は？</a></li><li><a href="#_3">表示されてもクリックされない語はどう扱うか？</a></li><li><a href="#ai-overview3">AI Overviewの店舗集客で失敗する3つのパターン</a></li><li><a href="#_4">自店で取り組むか、任せるかの判断基準</a></li><li><a href="#_5">よくある質問</a></li><li><a href="#ai-overview_3">まとめ: AI Overviewの店舗集客は来店前の疑問から始める</a></li></ol></details></nav><script>if(matchMedia("(min-width: 1100px)").matches)document.currentScript.previousElementSibling.querySelector("details").open=true</script>
+        <div class="side-cta">
+          <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
+          <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
+          <div class="s">監修: セブンセンシズ株式会社</div>
+        </div>
+        <a class="side-banner" href="https://lp.7senses.co.jp/" target="_blank" rel="noopener" data-cta="article_side_hojokin">
+          <span class="sb-kicker">当社の申請サポート</span>
+          <span class="sb-title">AI導入補助金で<br>最大350万円</span>
+          <span class="sb-sub">補助金申請から導入・集客まで一気通貫 →</span>
+        </a>
+      </div>
+    </aside>
+    <div class="article-body">
+      <p><strong>AI Overviewで店舗集客はできますが、効くのは「来店前に読者が抱く疑問」の検索です。</strong>「地名＋業種」で店を探す検索は、店の一覧や地図が答えになりやすい場面です。一方で「インプラント 費用 決まり方」のような質問形の検索では、AI Overviewが表示される割合が64.7%という研究があります。店のサイトがその疑問に、店にしか書けない中身で答えると、AIの回答に引用される余地が生まれます。</p>
+<div class="target-reader">この記事は、クリニック・歯科医院・整骨院・工務店・リフォーム会社・不動産会社など、来店や相談の前に調べられる業種の経営者向けです。AI Overviewが自店の集客に関係あるのかを判断したい方を想定しています。</div>
+
+<p class="freshness">※ 2026年10月時点の情報です。AI Overviewの表示の仕方は変わりやすいため、数字には時点を添えています。</p>
+
+<div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>AI Overviewが出やすい店舗の検索・出にくい検索</li><li>AIが店の情報を拾う2つの入口</li><li>店のサイトに書くべき、その店にしか無い情報</li><li>表示されてもクリックされない語の扱い方</li><li>自店で取り組むか任せるかの判断基準</li></ul></div>
+
+<h2 id="ai-overview">AI Overviewで店舗集客はできるのか？</h2>
+<p><strong>AI Overviewは店舗集客に使えますが、店を探す検索より、来店前の疑問の検索で効きます。</strong></p>
+<aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="url_check"><p class="it-head">御社のサイト、ChatGPTやGoogleのAIに読まれていますか？</p><p class="it-sub">URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）</p><form class="it-form" action="/tools/url-check/" method="get"><input type="hidden" name="src" value="article_inline"><input type="hidden" name="from" value="/aio/ai-overview-tenpo-shukyaku/"><input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_inline_url_check">確かめる</button></form></aside>
+<div class="definition-box"><span class="term">AI Overviewとは</span>、Google検索の結果の上部に、AIが複数のページをまとめた回答を表示する機能です。回答の横には、根拠として引用したページへのリンクが並びます。</div>
+
+<p>店舗の集客で考えると、AI Overviewは「店を選ぶ前の下調べ」の場面に現れます。患者や施主は、店名を決める前に費用や流れを調べるからです。その回答の根拠に自店のページが選ばれると、店名と一緒に読まれます。</p>
+<p>仕組みの全体像は<a href="/aio/aio-towa/">AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説</a>にまとめています。この記事では店舗の集客に絞って話を進めます。</p>
+<h2 id="ai-overview_1">AI Overviewが出やすい店舗の検索・出にくい検索は？</h2>
+<p><strong>店舗の検索は「店を探す」「来店前の疑問」「店名で調べる」の3種類に分かれ、AI Overviewが出やすいのは疑問の検索です。</strong></p>
+<figure><img src="/images/ai-overview-tenpo-shukyaku/kensaku-wakekata.png" loading="lazy" decoding="async" alt="店舗の検索を3種類に分け、AI Overviewの出やすさと先に打つ手を並べた表"></figure>
+
+<p>2026年3〜4月に55,393件の検索を調べた研究では、AI Overviewの表示率は全体で13.7%でした。質問形の検索に限ると64.7%に上がります（<a href="https://arxiv.org/abs/2605.14021" target="_blank" rel="noopener">arXiv 2605.14021</a>）。店の集客でも、質問の形をとる検索ほどAIの回答が出ると考えてください。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">検索の種類</th>
+<th style="text-align: left;">例</th>
+<th style="text-align: left;">AI Overview</th>
+<th style="text-align: left;">先に打つ手</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">店を探す</td>
+<td style="text-align: left;">「地名＋歯医者」</td>
+<td style="text-align: left;">出にくい</td>
+<td style="text-align: left;">地図の情報を整える</td>
+</tr>
+<tr>
+<td style="text-align: left;">来店前の疑問</td>
+<td style="text-align: left;">「リフォーム 費用 決まり方」</td>
+<td style="text-align: left;">出やすい</td>
+<td style="text-align: left;">店のサイトで答える</td>
+</tr>
+<tr>
+<td style="text-align: left;">店名で調べる</td>
+<td style="text-align: left;">「店名＋口コミ」</td>
+<td style="text-align: left;">店による</td>
+<td style="text-align: left;">公式の情報をそろえる</td>
+</tr>
+</tbody>
+</table></div>
+<p>上の表の「出にくい」「出やすい」は、研究の数字を店舗の検索に当てはめた目安です。自店の語で確かめるには、実際にその語でGoogle検索するのが一番確かです。</p>
+<p><mark>確かめた結果で、打つ手は分かれます。</mark></p>
+<ul>
+<li>自店の語の多くで地図の枠が先に出るなら、まず地図の情報（Googleビジネスプロフィール）を整える</li>
+<li>費用・期間・流れの検索でAIの回答が出るなら、店のサイトでその疑問に答えるページを作る</li>
+</ul>
+<p>地図とAI検索の役割分担は<a href="/aio/aio-seo-meo-chigai/">AIO・SEO・MEOの違いと使い分け</a>で整理しています。</p>
+<aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_mid_ai_check">AI診断（地域と業種を入れるだけ・無料）</a></p></aside>
+<h2 id="ai-overview_2">AI Overviewは店の情報をどこから拾うのか？</h2>
+<p><strong>AIが店の情報を拾う入口は、店のサイトとGoogleビジネスプロフィールの2つです。</strong></p>
+<p>Googleは<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">生成AI機能への最適化ガイド</a>（2026年7月更新）で、AIの回答に地域の店の情報が含まれうると書いています。あわせて、ビジネスプロフィールが店の見え方を助けるとも説明しています。</p>
+<p>同じガイドは、AI向けの特別な書き方や専用ファイルは要らないとも明言しています。<strong>llms.txtや構造化データは、AI Overviewに載るための条件ではありません。</strong>効くと書かれているのは、次の3つです。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Googleが挙げる条件</th>
+<th style="text-align: left;">店舗に置き換えると</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">実体験・専門家の視点</td>
+<td style="text-align: left;">院長や職人が現場で判断していること</td>
+</tr>
+<tr>
+<td style="text-align: left;">ほかに無い内容</td>
+<td style="text-align: left;">料金の決まり方や対応できない相談</td>
+</tr>
+<tr>
+<td style="text-align: left;">クロールできること</td>
+<td style="text-align: left;">サイトをAIや検索のロボットに開いておく</td>
+</tr>
+</tbody>
+</table></div>
+<p>当社はこのサイト自体をAIO対策の実験場にしています。主要なAIクローラー20種の許可を実装し、引用状況を日次で計測しています。運用して分かったのは、技術の設定より中身の差のほうが結果に響くことです。</p>
+<h2 id="_1">店のサイトに書くべき「その店にしか無い情報」は？</h2>
+<p><strong>引用の候補になるのは、料金の決まり方・流れ・断る基準のような、その店でしか書けない情報です。</strong></p>
+<figure><img src="/images/ai-overview-tenpo-shukyaku/kakunin.png" loading="lazy" decoding="async" alt="店のサイトに書く前に確かめる5項目のチェックリスト"></figure>
+
+<p>Googleのガイドは、既存の情報をまとめ直しただけのページを「ほかにも既にある情報の言い直し」としています。「歯科医院の選び方5つ」のような一般論は、どの店のサイトにも書けるので選ばれにくいのです。</p>
+<p>業種ごとに、店にしか書けない情報の例を挙げます。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">業種</th>
+<th style="text-align: left;">店にしか書けない情報の例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">歯科医院</td>
+<td style="text-align: left;">治療費が変わる条件、通院回数の決まり方</td>
+</tr>
+<tr>
+<td style="text-align: left;">整骨院</td>
+<td style="text-align: left;">保険が使えない症状と、その場合の案内</td>
+</tr>
+<tr>
+<td style="text-align: left;">工務店・リフォーム</td>
+<td style="text-align: left;">見積もりが上がる典型的な理由</td>
+</tr>
+<tr>
+<td style="text-align: left;">不動産会社</td>
+<td style="text-align: left;">内見から契約までにかかった日数の実例</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>断る基準</em>は、とくに引用に向きます。「この症状は当院では扱わず、専門の病院を案内します」という一文は、読者の疑問に正面から答えます。</p>
+<h3 id="_2">答える疑問はどこから見つけるか</h3>
+<p>書く疑問は、机の上で考えるより、すでにある記録から拾うほうが確かです。拾う先は次の3つです。</p>
+<ol>
+<li>受付や電話で、来店前によく聞かれる質問</li>
+<li>見積もりや初診のあとに、断られた理由として多いもの</li>
+<li>Search Consoleで、表示はあるのにクリックが少ない語</li>
+</ol>
+<p>3つ目は、サイトがすでに持っている語の一覧です。当サイトの場合、直近28日で642個の検索語からのべ4,326回表示され、クリックは15回でした（2026年10月時点）。表示されている語の多くは、まだ答えきれていない疑問の候補です。</p>
+<p>受付の質問から始めると、読者の言葉のまま見出しを作れます。「何回通えば終わりますか」と聞かれるなら、見出しもその形にしてください。答えには、その店が回数を決めるときの基準を書きます。</p>
+<p>一方で、数字を書くときは注意が要ります。<strong>「満足度◯%」のように母数と時期が無い数字は、根拠にされにくい書き方です。</strong>「◯年に施工した◯件のうち」のように、時点と件数を添えてください。</p>
+<h2 id="_3">表示されてもクリックされない語はどう扱うか？</h2>
+<p><strong>AI Overviewが出る語は、表示されても来店につながりにくいので、店名を覚えてもらう語として扱います。</strong></p>
+<p>当社の3サイトで2026年6月23日〜9月20日に計測した7,015回の表示を、順位ごとに集計しました。クリック率は1〜3位が6.28%、4〜10位が1.02%、11〜20位が0.09%、21〜30位が0.16%でした。</p>
+<figure><img src="/images/ai-overview-tenpo-shukyaku/ctr-juni.png" loading="lazy" decoding="async" alt="検索順位ごとの実測クリック率の棒グラフ。1〜3位が6.28%で最も高い"></figure>
+
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">順位</th>
+<th style="text-align: left;">実測クリック率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1〜3位</td>
+<td style="text-align: left;">6.28%</td>
+</tr>
+<tr>
+<td style="text-align: left;">4〜10位</td>
+<td style="text-align: left;">1.02%</td>
+</tr>
+<tr>
+<td style="text-align: left;">11〜20位</td>
+<td style="text-align: left;">0.09%</td>
+</tr>
+<tr>
+<td style="text-align: left;">21〜30位</td>
+<td style="text-align: left;">0.16%</td>
+</tr>
+</tbody>
+</table></div><figure class="table-chart" style="margin:1.5em 0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 124" width="100%" role="img" aria-label="上の表の横棒グラフ（4項目）。『実測クリック率』は1〜3位が最も大きく6.28%、11〜20位が最も小さく0.09%。" letter-spacing="0" word-spacing="0" font-weight="400" font-style="normal" style="display:block;width:100%;max-width:460px;height:auto;margin:0 auto"><title>上の表の『実測クリック率』をグラフにしたもの</title><line x1="144.04" y1="4" x2="144.04" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="209.36" y1="4" x2="209.36" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="274.68" y1="4" x2="274.68" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="340" y1="4" x2="340" y2="120" stroke="currentColor" stroke-opacity="0.12" stroke-width="1"/><line x1="78.72" y1="4" x2="78.72" y2="120" stroke="currentColor" stroke-opacity="0.4" stroke-width="1"/><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="22.32">1〜3位</tspan></text><path class="tc-bar tc-s1" d="M78.72,9.5H336A4,4 0 0 1 340,13.5V20.5A4,4 0 0 1 336,24.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="346" y="22.04" font-size="14" font-weight="700" fill="currentColor">6.28%</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="52.32">4〜10位</tspan></text><path class="tc-bar tc-s1" d="M78.72,39.5H117.16A4,4 0 0 1 121.16,43.5V50.5A4,4 0 0 1 117.16,54.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="127.16" y="52.04" font-size="14" font-weight="700" fill="currentColor">1.02%</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="82.32">11〜20位</tspan></text><path class="tc-bar tc-s1" d="M78.72,69.5H78.72A3.74,3.74 0 0 1 82.46,73.24V80.76A3.74,3.74 0 0 1 78.72,84.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="88.46" y="82.04" font-size="14" font-weight="700" fill="currentColor">0.09%</text></g><g class="tc-row"><text class="tc-lab" font-size="14" fill="currentColor" text-anchor="end"><tspan x="70.72" y="112.32">21〜30位</tspan></text><path class="tc-bar tc-s1" d="M78.72,99.5H81.38A4,4 0 0 1 85.38,103.5V110.5A4,4 0 0 1 81.38,114.5H78.72Z" fill="#2563EB"/><text class="tc-val tc-s1" x="91.38" y="112.04" font-size="14" font-weight="700" fill="currentColor">0.16%</text></g></svg><figcaption style="margin-top:.5em;font-size:.85em;line-height:1.6;text-align:center">上の表の『実測クリック率』をグラフにしたもの</figcaption></figure>
+<p>出典は当社の一次データ「検索順位ごとの実測クリック率」です。4位以下では、表示されてもクリックはほとんど起きていません。</p>
+<p>AIの回答で用が済む語では、さらに差が出ます。当サイトのAIOカテゴリの一覧ページは、「ai overview 計測」で平均10.4位に表示されました。直近28日（2026年10月時点）の55回の表示で、クリックは0回です。検索結果の時点で答えが済む語だと考えています。</p>
+<p>ここから言えるのは、AI Overviewの語は<strong>クリック数ではなく、店名が回答に出たか</strong>で評価すべきだということです。回答で店名を見た人は、後で店名を検索します。測り方は<a href="/aio/aio-taisaku-keisoku-houhou/">AIO対策の計測方法</a>で詳しく扱っています。</p>
+<div class="cta-box"><p>自店の語でAI Overviewが出るか、無料で一緒に確かめませんか。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
+<h2 id="ai-overview3">AI Overviewの店舗集客で失敗する3つのパターン</h2>
+<p><strong>失敗の多くは、狙う検索の種類を取り違えるか、一般論で書くかのどちらかから起きます。</strong></p>
+<p><b>失敗1: 地名＋業種の語だけを狙う</b></p>
+<p>起きること：記事を増やしても、地図の枠と大手の比較サイトに埋もれて順位が動きません。原因は、店を探す検索ではAIの回答より一覧が答えになりやすいことです。避け方は、地名の語は地図の情報で受け、サイトは来店前の疑問に回すことです。</p>
+<p><b>失敗2: 業種名を入れ替えた同じ型の記事を並べる</b></p>
+<p>起きること：どのページも引用されず、サイト全体の評価も伸びません。原因は、中身がほかの店と同じになることです。避け方は、1ページに1つ、その店の判断基準や実例を入れることです。</p>
+<p><b>失敗3: AIのクローラーをまとめて止めている</b></p>
+<p>起きること：中身を整えても、AIの回答に一度も出ません。原因は、サーバーやCDNの設定でロボットの巡回を拒否していることです。CDNによっては、AIクローラーを既定で止める設定になっているものもあります。避け方は、robots.txtとCDNの設定を一度確かめることです。</p>
+<div class="caution-box"><span class="box-title">注意: 表示回数だけで成果を判断しない</span><br>AI Overviewの表示回数が増えても、店名の検索や予約が増えていなければ、集客にはなっていません。<strong>表示と店名の検索と予約を、同じ月で並べて見てください。</strong></div>
+
+<p>引用されない原因の切り分けは<a href="/aio/aio-taisaku-hyouji-sarenai/">AIO対策で表示されないときの確認手順</a>にまとめています。</p>
+<p>AIの回答に自社サイトが載る準備ができているかは、<a href="/tools/aio-check/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録は不要で、その場で点数が出ます。</p>
+<h2 id="_4">自店で取り組むか、任せるかの判断基準</h2>
+<p><strong>月に数時間を書く作業に充てられるなら自店で、計測と直しまで回せないなら任せる、と分けて考えてください。</strong></p>
+<p>判断の分かれ目は、書く作業より、その後の計測と直しにあります。</p>
+<ul>
+<li>院長や職人が、料金の決まり方や断る基準を自分で書けるなら、まず自店で3ページ書く</li>
+<li>書く時間はあるが、順位と表示を毎月見る時間が無いなら、計測だけを任せる</li>
+<li>書く時間も計測の時間も無いなら、聞き取りから任せる</li>
+</ul>
+<p><strong>待ったほうがよい場合もあります。</strong>来店前に調べられることが少ない業種では、効果が小さくなります。近さと営業時間だけで店が選ばれる業種がその例です。その場合は、先に地図の情報を整えてください。</p>
+<p>当社のAIO運用を2026年5月に始めた10件では、6件が1か月以内に主要な語の平均順位が上がりました。2か月以内では8件、3か月以内では10件です（2026年5〜8月の集計。わずかな上昇も含みます）。出典は当社の一次データです。</p>
+<p>当社はMEO運用サービス「G-ran」で通算3,200店舗以上を運用してきました。地図とサイトの両方を見て、どちらを先に整えるかを一緒に決められます。業種ごとの進め方は<a href="/aio/clinic-ai-kensaku-taisaku/">クリニックのAI検索対策</a>や<a href="/aio/llmo-tenpo-shukyaku/">LLMO店舗集客とは？</a>も参考にしてください。</p>
+<div class="cta-box"><p>SEO・AIO・LLMOの現状分析を無料で行います。</p><a class="cta-button" data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう" href="/lp/">AI検索対策の無料相談</a></div>
+
+<h2 id="_5">よくある質問</h2>
+<div class="faq">
+<details><summary>AI Overviewに店の名前を出してもらう申請はできますか？</summary><p class="faq-a">専用の申し込みはありません。Googleは公開されクロールできるページから回答の根拠を選びます。</p></details>
+<details><summary>店舗のサイトでどこまで自分で取り組めますか？</summary><p class="faq-a">料金の決まり方や予約の流れを書く作業は自店でできます。順位と表示の計測から先は手間がかかります。</p></details>
+<details><summary>AI Overviewの対策を頼むと何をしてもらえますか？</summary><p class="faq-a">狙う質問の選定、店にしか無い情報の聞き取りと記事化、表示とクリックの毎月の計測と直しを任せられます。</p></details>
+<details><summary>どのくらいで変化が見えますか？</summary><p class="faq-a">当社のAIO運用を2026年5月に始めた10件では、6件が1か月以内に主要な語の平均順位が上がりました。</p></details>
+<details><summary>AI Overviewでの店舗集客が向かないのはどんな店ですか？</summary><p class="faq-a">来店前に調べられることが少ない業種や、近さと営業時間だけで店が選ばれる業種は効果が小さくなります。</p></details>
+<details><summary>llms.txtを置けばAI Overviewに載りやすくなりますか？</summary><p class="faq-a">なりません。GoogleはAI向けの専用ファイルを検索で使わないと公式のガイドで明言しています。</p></details>
+</div>
+
+<h2 id="ai-overview_3">まとめ: AI Overviewの店舗集客は来店前の疑問から始める</h2>
+<p>AI Overviewで店舗集客をするなら、店を探す検索ではなく、来店前の疑問の検索を狙います。答えるのは、料金の決まり方・流れ・断る基準のような、その店にしか書けない情報です。評価は、クリック数ではなく店名の検索と予約で見てください。</p>
+<p><strong>今日できる一歩は、自店の業種で「費用」「流れ」の語を3つ検索し、AIの回答が出るかを見ることです。</strong>出たら、その疑問に答えるページを1つ書きます。結果をどう読むか迷ったら、<a href="/lp/">無料の現状分析</a>で一緒に確かめます。</p>
+
+
+      <aside class="scan-box scan-bottom" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_bottom"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_bottom_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_bottom_ai_check">AI診断（地域と業種を入れるだけ・無料）</a></p></aside>
+
+      <section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
+    <li class="cat-aio"><a href="/aio/ai-kensaku-taiou-settei/"><span class="thumb"><img src="/images/shelf/aisearch-1.webp" alt="AI検索対応とは？公開前に済ませる7つの設定項目のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-16">2026.09.16</time><h3>AI検索対応とは？公開前に済ませる7つの設定項目<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-checker/"><span class="thumb"><img src="/images/shelf/aisearch-3.webp" alt="AIOチェッカーとは？表示と引用を見分ける使い方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-23">2026.09.23</time><h3>AIOチェッカーとは？表示と引用を見分ける使い方<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/aio-context-rikai-sokushin/"><span class="thumb"><img src="/images/shelf/aisearch-2.webp" alt="AIOでコンテキスト理解を促進するには？文脈が切れない5つの書き方のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-10-12">2026.10.12</time><h3>AIOでコンテキスト理解を促進するには？文脈が切れない5つの書き方<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul></section>
+
+      <nav class="prev-next" aria-label="前後の記事"><a class="pn" href="/aio/aio-taisaku-dairiten/"><span>← 前の記事</span><strong>AIO対策を代理店に任せる前に｜今の広告・制作会社へ聞く4つの質問</strong></a><span class="pn pn-empty" aria-hidden="true"></span></nav>
+
+      <section class="cta">
+        <p class="cta-copy">ChatGPTやAI Overviewが御社を出典に選んでいるか、一緒に確かめませんか？</p>
+        <a class="btn btn-primary" href="/lp/" data-cta="article_bottom_lp">SEO・AIO・LLMO集客支援の詳細を見る <span class="arw">→</span></a>
+        <p class="cta-sub">無料相談・資料ダウンロードはリンク先から</p>
+      </section>
+
+      <aside class="author-box">
+        <div class="avatar" style="background:#0b2447;padding:23px;"><img src="/images/company/star-white.png" alt="SEVEN SENSES" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div>
+          <div class="name">原口 優</div>
+          <div class="role">セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年｜監修（集客・Web施策）: <a href="/author/haraguchi/">代表取締役 原口 優</a></div>
+          
+          <p>通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。</p>
+          <p class="how-made">制作の流れ: 一次情報と出典を集め、AIツールで下書き → 機械検査18項目と3観点の採点（90点以上のみ公開）→ 監修者が事実と表現を確認。<a href="/editorial-policy/">編集・訂正ポリシー</a></p>
+        </div>
+      </aside>
+
+      <aside class="newsletter-box">
+        <div class="nl-text">
+          <strong>週1本のメールで、AI集客の最新実務を。</strong>
+          <span>新着記事とAI検索の動きを毎週まとめてお届けします（無料・いつでも解除できます）。</span>
+        </div>
+        <form class="nl-form" action="/api/subscribe" method="post">
+          <input type="hidden" name="form_type" value="ニュースレター購読">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="email" name="email" required placeholder="メールアドレス" aria-label="メールアドレス" autocomplete="email">
+          <button type="submit" class="btn btn-primary" data-cta="article_newsletter">購読する</button>
+        </form>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <img class="footer-logo" src="/images/company/logo-white.png" alt="SEVEN SENSES セブンセンシズ株式会社" width="371" height="147" loading="lazy">
+      <div class="brand-f">AI集客ラボ</div>
+      <p style="font-size:.8rem;color:rgba(255,255,255,.6);margin:.5em 0 0;">AIに選ばれる集客を、実務からつくる。</p>
+      <p class="addr">運営: <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">セブンセンシズ株式会社</a><br>〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902<br>TEL 06-4305-7547（9:00〜20:00 / 土日祝休）</p>
+      <ul class="social-links" aria-label="外部プロフィール"><li><a href="https://x.com/sevensensece" target="_blank" rel="noopener me" aria-label="X（セブンセンシズ株式会社）" data-net="x"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li><li><a href="https://www.linkedin.com/in/yu-haraguchi" target="_blank" rel="noopener me" aria-label="LinkedIn（原口 優）" data-net="linkedin"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a></li><li><a href="https://note.com/yu_haraguchi" target="_blank" rel="noopener me" aria-label="note（原口 優）" data-net="note"><span>note</span></a></li></ul>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <a href="/start/">はじめての方へ</a>
+      <a href="/industry/">業種から探す</a>
+      <a href="/research/">業種別のAI調査</a>
+      <a href="/download/">無料資料ダウンロード</a>
+      <a href="/blog/">記事一覧</a>
+      <a href="/glossary/">用語集</a>
+      <a href="/compare/">比較表から探す</a>
+      <a href="/tools/">無料ツール一覧</a>
+      <a href="/tools/url-check/">URL診断（サイトの14項目を採点）</a>
+      <a href="/tools/ai-check/">AI診断（AIにどう紹介されているか）</a>
+      <a href="/tools/aio-check/">AI検索の対応度チェック（30秒）</a>
+      <a href="/tools/kuchikomi-henshin/">口コミ返信文の作成ツール</a>
+      <a href="/tools/meo-check/">マップ集客の整備度チェック（30秒）</a>
+      <a href="/aio/">AIO・LLMO運用</a>
+      <a href="/seo/">SEO運用</a>
+      <a href="/meo/">MEO運用</a>
+      <a href="/ai-marketing/">AI集客・活用</a>
+      <a href="/about/">運営者情報</a>
+      <a href="/author/haraguchi/">監修者プロフィール</a>
+      <a href="https://lp.7senses.co.jp/" target="_blank" rel="noopener">AI導入補助金サポート</a>
+      <a href="https://corp.7senses.co.jp/" target="_blank" rel="noopener">コーポレートサイト</a>
+      <a href="/lp/">集客支援サービス</a>
+      <a href="/faq/">ご契約前のよくある質問</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/editorial-policy/">編集・訂正ポリシー</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/tokushoho/">特定商取引法に基づく表記</a>
+    </nav>
+    <div class="copyright">© 2026 SEVEN SENSES Inc. All rights reserved.</div>
+    <div class="footer-credit"><p><a href="https://conflux-partners.jp/works/7senses-aio" target="_blank" rel="noopener">AIO 対策・サイト制作：YW（CONFLUX PARTNERS）</a></p></div>
+  </div>
+</footer>
+
+<!-- スマホで記事を半分ほど読んだら出る「30秒診断」（site.js が出し入れする） -->
+<div class="scan-sticky" hidden><a class="btn btn-primary" href="/tools/ai-check/" data-cta="article_sticky_ai_check" data-ab="sticky_ai" data-ab-b="ChatGPTやGeminiに御社が出るか見る（無料）">AIに御社が出るか無料で確かめる <span class="arw">→</span></a></div>
+</body>
+</html>

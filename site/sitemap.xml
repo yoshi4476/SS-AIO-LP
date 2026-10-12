@@ -100,6 +100,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/ai-kensaku-taiou-settei/ngok.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/ai-kensaku-taiou-settei/junban.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/</loc><lastmod>2026-10-13</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/ai-overview-tenpo-shukyaku/kensaku-wakekata.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/ai-overview-tenpo-shukyaku/kakunin.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/ai-overview-tenpo-shukyaku/ctr-juni.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/</loc><lastmod>2026-08-31</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/ai-shukyaku-guide/steps.png</image:loc></image:image>
   </url>
