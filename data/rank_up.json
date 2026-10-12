@@ -322,11 +322,10 @@
   "by": "auto_rewrite"
  },
  "ai-hojokin-nozeishomeisho-dore": {
-  "at": "2026-09-20",
-  "pos": 5.1,
-  "imp": 54,
-  "band": "4〜10位",
-  "site": "subsidy"
+  "at": "2026-10-12",
+  "pos": 5.0,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  },
  "kensetsugyou-denshishinsei-etsuran": {
   "at": "2026-09-28",
