@@ -1994,3 +1994,6 @@
 {"at": "2026-10-12 11:10", "by": "fact_cite", "slug": "aio-taisaku-ctr", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
 {"at": "2026-10-12 11:10", "by": "fact_cite", "slug": "aio-taisaku-dairiten", "kind": "cite", "ok": true, "note": "実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の"}
 {"when": "2026-10-12T12:32:02.461569", "by": "auto_review", "slug": "(1記事)", "what": "言い回し0件を振り直し・1件を削除"}
+{"at": "2026-10-12 19:35", "by": "link_boost", "slug": "kichodaiko-shikaku-nashi", "kind": "link_rescue", "ok": true, "note": "kichodaiko-okinawa から内部リンクを1本"}
+{"at": "2026-10-12 19:35", "by": "link_boost", "slug": "kichodaiko-shikaku-nashi", "kind": "link_rescue", "ok": true, "note": "keiri-daiko-erabikata から内部リンクを1本"}
+{"at": "2026-10-12 19:35", "by": "link_boost", "slug": "kichodaiko-shikaku-nashi", "kind": "link_rescue", "ok": true, "note": "kichodaiko-hiyou-souba から内部リンクを1本"}
