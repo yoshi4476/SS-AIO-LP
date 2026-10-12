@@ -1,51 +1,11 @@
 {
-  "date": "2026-10-05",
-  "asked": 6,
+  "date": "2026-10-12",
+  "asked": 4,
   "items": [
     {
-      "kw": "ai導入 中小企業 費用",
-      "imp": 33,
-      "pos": 40,
-      "src": "gsc",
-      "written": true,
-      "ai": {
-        "answered": true,
-        "ours": false,
-        "sources": [
-          "ai-keiei.shift-ai.co.jp",
-          "corinaie.com",
-          "liftbaseinc.com",
-          "main.sr-konishi.jp",
-          "nuco.co.jp",
-          "otsuka-shokai.co.jp",
-          "ricoh.co.jp",
-          "syusodo.co.jp",
-          "vertexaisearch.cloud.google.com",
-          "vnext.co.jp"
-        ],
-        "engines": {
-          "Gemini": {
-            "answered": true,
-            "ours": false,
-            "sources": [
-              "ai-keiei.shift-ai.co.jp",
-              "corinaie.com",
-              "liftbaseinc.com",
-              "main.sr-konishi.jp",
-              "nuco.co.jp",
-              "otsuka-shokai.co.jp",
-              "ricoh.co.jp",
-              "syusodo.co.jp"
-            ]
-          }
-        }
-      },
-      "score": 9.5
-    },
-    {
       "kw": "it導入補助金 選び方",
-      "imp": 21,
-      "pos": 33.2,
+      "imp": 26,
+      "pos": 30.3,
       "src": "gsc",
       "written": false,
       "ai": {
@@ -80,12 +40,12 @@
           }
         }
       },
-      "score": 8.3
+      "score": 8.4
     },
     {
       "kw": "it導入支援事業者 選び方",
-      "imp": 5,
-      "pos": 18.4,
+      "imp": 7,
+      "pos": 17.9,
       "src": "gsc",
       "written": true,
       "ai": {
@@ -100,7 +60,7 @@
           }
         }
       },
-      "score": 6.8
+      "score": 6.9
     },
     {
       "kw": "デジタル化 ai導入補助金 選び方",
@@ -123,29 +83,9 @@
       "score": 6.0
     },
     {
-      "kw": "大阪 ローカルseo 飲食店 対策",
-      "imp": 49,
-      "pos": 63.1,
-      "src": "gsc",
-      "written": false,
-      "ai": {
-        "answered": false,
-        "ours": false,
-        "sources": [],
-        "engines": {
-          "Gemini": {
-            "answered": false,
-            "ours": false,
-            "sources": []
-          }
-        }
-      },
-      "score": 4.7
-    },
-    {
       "kw": "ベンダー登録とは",
-      "imp": 37,
-      "pos": 5.0,
+      "imp": 60,
+      "pos": 5,
       "src": "gsc",
       "written": true,
       "ai": {
@@ -160,7 +100,7 @@
           }
         }
       },
-      "score": 2.6
+      "score": 2.8
     }
   ]
 }
