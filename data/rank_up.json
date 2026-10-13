@@ -724,5 +724,11 @@
   "pos": 16.2,
   "site": "corporate",
   "by": "auto_rewrite"
+ },
+ "ai-hojokin-chakkin-itsu": {
+  "at": "2026-10-13",
+  "pos": 4.2,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  }
 }

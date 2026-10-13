@@ -9,17 +9,18 @@
   "https://it-shien.smrj.go.jp/applicant/flow/"
  ],
  "missing": [
-  "infomation",
   "地域経済牽引事業計画",
+  "infomation",
   "地域未来投資促進法",
+  "security",
+  "地域未来牽引企業",
   "健康経営優良法人",
   "運転経歴証明書又",
-  "prodougu",
-  "地域未来牽引企業",
   "事業場内最低賃金",
-  "security",
-  "点群処理ソフト",
-  "小規模事業者等"
+  "prodougu",
+  "inquiry",
+  "サービス事業者",
+  "次世代育成支援"
  ],
  "covered": 0.27
 }
