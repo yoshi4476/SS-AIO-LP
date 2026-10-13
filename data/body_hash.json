@@ -32,7 +32,7 @@
 "modified": "2026-10-04"
 },
 "aio-donyu-jirei": {
-"hash": "09808e25b6a809ae8545b7d2a1b728e8",
+"hash": "b1055f1906ef0b06821140050f023670",
 "modified": "2026-10-07"
 },
 "aio-erabareru-kiji-kakikata": {
@@ -52,8 +52,12 @@
 "modified": "2026-10-05"
 },
 "aio-mojisuu": {
-"hash": "a4c698985e835f66b0dde3ad61f1c0ff",
+"hash": "688aa6f506d77b2dc0243004fe161d97",
 "modified": "2026-10-11"
+},
+"aio-muryou-soudan": {
+"hash": "133b8176f8c0df965e69b8b11fd45e5a",
+"modified": "2026-10-13"
 },
 "aio-seo-audit": {
 "hash": "8efef4164982e929264eee03662046b8",

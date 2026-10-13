@@ -151,6 +151,10 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-mojisuu/mizumashi.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-mojisuu/minaoshi.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/aio-muryou-soudan/</loc><lastmod>2026-10-13</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-muryou-soudan/soudan-nagare.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-muryou-soudan/minuki.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/aio/aio-seo-audit/</loc><lastmod>2026-09-15</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-seo-audit/items.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-seo-audit/steps.png</image:loc></image:image>

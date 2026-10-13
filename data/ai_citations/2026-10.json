@@ -1,12 +1,12 @@
 {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 22,
-      "suspect_taken": 15,
+      "judged": 23,
+      "suspect_taken": 16,
       "healthy": 7,
-      "too_thin": 230,
+      "too_thin": 234,
       "items": [
         {
           "kw": "aio seo",
@@ -22,7 +22,7 @@
           "kw": "aio やり方",
           "url": "https://ai.7senses.co.jp/aio/aio-yarikata/",
           "pos": 7.7,
-          "imp": 33,
+          "imp": 34,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -61,8 +61,8 @@
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
-          "pos": 8.3,
-          "imp": 14,
+          "pos": 7.9,
+          "imp": 16,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -72,7 +72,7 @@
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
           "pos": 4.8,
-          "imp": 71,
+          "imp": 70,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -81,8 +81,8 @@
         {
           "kw": "aio対策 キーワード選定",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/",
-          "pos": 4.1,
-          "imp": 23,
+          "pos": 4.2,
+          "imp": 20,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -99,10 +99,20 @@
           "ratio": 0.0
         },
         {
+          "kw": "btob企業向けのaio対策に強い会社を教えてください。",
+          "url": "https://ai.7senses.co.jp/aio/btob-aio-taisaku-kaisha/",
+          "pos": 6.9,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 4.0,
+          "ratio": 0.0
+        },
+        {
           "kw": "llmo 代理店 募集",
           "url": "https://ai.7senses.co.jp/aio/llmo-dairiten-boshu/",
-          "pos": 4.9,
-          "imp": 19,
+          "pos": 5,
+          "imp": 20,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -131,8 +141,8 @@
         {
           "kw": "工務店 meo 上がらない",
           "url": "https://ai.7senses.co.jp/meo/koumuten-meo-taisaku/",
-          "pos": 3.8,
-          "imp": 15,
+          "pos": 3.9,
+          "imp": 16,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -161,10 +171,10 @@
       ]
     },
     "corporate": {
-      "judged": 30,
-      "suspect_taken": 25,
+      "judged": 31,
+      "suspect_taken": 26,
       "healthy": 5,
-      "too_thin": 168,
+      "too_thin": 180,
       "items": [
         {
           "kw": "セブンセンシズ株式会社",
@@ -180,11 +190,11 @@
           "kw": "ゆうちょ 記帳",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
           "pos": 9.0,
-          "imp": 127,
+          "imp": 149,
           "clicks": 1,
-          "ctr": 0.79,
+          "ctr": 0.67,
           "expected_ctr": 3.0,
-          "ratio": 0.26
+          "ratio": 0.22
         },
         {
           "kw": "3点照合",
@@ -220,7 +230,7 @@
           "kw": "ゆうちょ 記帳 やり方",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
           "pos": 6.7,
-          "imp": 57,
+          "imp": 61,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -229,8 +239,8 @@
         {
           "kw": "ゆうちょ 送金と振込の違い",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 5.1,
-          "imp": 14,
+          "pos": 4.6,
+          "imp": 16,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 7.0,
@@ -240,7 +250,7 @@
           "kw": "ゆうちょ記帳",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
           "pos": 9.1,
-          "imp": 17,
+          "imp": 22,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -249,11 +259,11 @@
         {
           "kw": "ゆうちょ銀行 振込 送金 違い",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 7.5,
-          "imp": 15,
+          "pos": 7.2,
+          "imp": 19,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.5,
+          "expected_ctr": 4.0,
           "ratio": 0.0
         },
         {
@@ -269,8 +279,8 @@
         {
           "kw": "ゆうちょ銀行 記帳 やり方",
           "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 6.4,
-          "imp": 24,
+          "pos": 6.5,
+          "imp": 25,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -299,8 +309,8 @@
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 6.7,
-          "imp": 292,
+          "pos": 6.6,
+          "imp": 317,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -320,7 +330,7 @@
           "kw": "バックオフィス 略",
           "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha",
           "pos": 4.2,
-          "imp": 12,
+          "imp": 13,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -357,10 +367,10 @@
           "ratio": 0.0
         },
         {
-          "kw": "記帳 やり方 ゆうちょ",
-          "url": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
-          "pos": 5.6,
-          "imp": 14,
+          "kw": "計理とは",
+          "url": "https://corp.7senses.co.jp/blog/keiri-kanji-chigai",
+          "pos": 6.5,
+          "imp": 13,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -369,10 +379,10 @@
       ]
     },
     "subsidy": {
-      "judged": 3,
-      "suspect_taken": 1,
+      "judged": 4,
+      "suspect_taken": 2,
       "healthy": 2,
-      "too_thin": 45,
+      "too_thin": 48,
       "items": [
         {
           "kw": "it導入補助金 個人事業主",
@@ -382,6 +392,16 @@
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 15.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "個人事業主 車購入補助金",
+          "url": "https://lp.7senses.co.jp/blog/kojin-jigyonushi-kuruma-kounyu-hojokin/",
+          "pos": 6.3,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 5.0,
           "ratio": 0.0
         }
       ]
