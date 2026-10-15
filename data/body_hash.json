@@ -236,7 +236,7 @@
 "modified": "2026-09-07"
 },
 "clinic-hp-hissu-koumoku": {
-"hash": "69d3a64ca5cdc99d111a181fe9a421b5",
+"hash": "9cfc98eff4efea077f85d9217822ee47",
 "modified": "2026-08-31"
 },
 "clinic-hp-ryokin-nosekata": {
@@ -400,12 +400,16 @@
 "modified": "2026-10-09"
 },
 "koumuten-chumon-jutaku-aio": {
-"hash": "f7fda1e50231d46723c4caafc05e6118",
+"hash": "17319593f1e4990a87ec003fef88ca08",
 "modified": "2026-09-25"
 },
 "koumuten-hp-shukyaku": {
 "hash": "11c0eb939a8a55a6acdb35870881a424",
 "modified": "2026-08-28"
+},
+"koumuten-hp-yokuaru-shitsumon": {
+"hash": "605a21a4fd1c6d1a3e327b3880a02abd",
+"modified": "2026-10-16"
 },
 "koumuten-instagram-shukyaku": {
 "hash": "aa2e28070607f99a246f34830741e377",

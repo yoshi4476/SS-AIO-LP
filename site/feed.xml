@@ -7,6 +7,13 @@
   <updated>2026-10-16T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
+    <title>工務店ホームページのよくある質問は何を載せる？施主が聞く5分野</title>
+    <link href="https://ai.7senses.co.jp/aio/koumuten-hp-yokuaru-shitsumon/"/>
+    <id>https://ai.7senses.co.jp/aio/koumuten-hp-yokuaru-shitsumon/</id>
+    <updated>2026-10-16T00:00:00+09:00</updated>
+    <summary>工務店ホームページのよくある質問は、施主が商談で実際に聞く費用・性能・土地とエリア・工期・保証の5分野から選びます。条件を先に置く答え方、載せてはいけない答え、置き場所の決め方、AI検索で使われたかの確かめ方を解説します。</summary>
+  </entry>
+  <entry>
     <title>AIOはいつから？日本は2024年8月・AIモードは2025年9月から</title>
     <link href="https://ai.7senses.co.jp/aio/aio-itsukara/"/>
     <id>https://ai.7senses.co.jp/aio/aio-itsukara/</id>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-donyu-jirei/</id>
     <updated>2026-10-07T00:00:00+09:00</updated>
     <summary>AIO導入事例は、当メディアが自社サイトで実践した構造化データ・llms.txt・クローラー許可・日次計測という4つの施策と、その効果です。業種による進め方の違いとよくある失敗例もあわせて解説します。</summary>
-  </entry>
-  <entry>
-    <title>クリニックのホームページの料金の載せ方は？診療の区分ごとの書き方</title>
-    <link href="https://ai.7senses.co.jp/aio/clinic-hp-ryokin-nosekata/"/>
-    <id>https://ai.7senses.co.jp/aio/clinic-hp-ryokin-nosekata/</id>
-    <updated>2026-10-07T00:00:00+09:00</updated>
-    <summary>クリニックのホームページの料金は、保険診療・自由診療・健康診断・予防接種の区分ごとに書ける範囲が違います。自由診療は全額自己負担の旨と窓口で払う総額の幅、期間、リスクを文字で示し、薬の販売名は書きません。区分別の書き方と失敗例を整理します。</summary>
   </entry>
 </feed>
