@@ -354,7 +354,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       </div>
     </aside>
     <div class="article-body">
-      <p><strong>AIOのやり方は、クローラーの受け入れ整備→本文の断言型書き換え→数値ファクトの追加→FAQの整備→公開後の計測という5ステップです。</strong>当社はMEO運用サービス「G-ran」で通算3,200店舗以上を運用し、自社サイトでは主要AIクローラー20種の許可と構造化データ・llms.txtを実装して引用状況を日次で計測しています。その実測から言えるのは、個別の技を1つ試すだけでは効果が出にくく、この順番を守って組み合わせる必要があるということです。</p>
+      <p>**AIOのやり方は、クローラーの受け入れ整備→本文の断言型書き換え→数値ファクトの追加→FAQの整備→公開後の計測という5ステップです。**当社はMEO運用サービス「G-ran」で通算3,200店舗以上を運用し、自社サイトでは主要AIクローラー20種の許可と構造化データ・llms.txtを実装して引用状況を日次で計測しています。その実測から言えるのは、個別の技を1つ試すだけでは効果が出にくく、この順番を守って組み合わせる必要があるということです。</p>
 <div class="target-reader">この記事は、自社サイトのAIO対策を自分の手で進めたい中小企業の経営者・マーケティング担当者向けです。</div>
 
 <p class="freshness">※ 2026年9月時点の情報です。</p>
@@ -362,7 +362,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>AIOのやり方の全体像と5つのステップ</li><li>クローラー設定・本文構造・数値ファクトの具体的な直し方</li><li>公開後にどこを計測して次に何を直すか</li><li>AIOのやり方でよくある失敗例と避け方</li></ul></div>
 
 <h2 id="aio">AIOのやり方とは？何から始めればいいか</h2>
-<p><strong>AIOのやり方とは、クローラーの受け入れ・文章の構造・計測の3つを同時に整える作業のことです。</strong>どれか1つが欠けても、AI検索に引用される確率は上がりません。</p>
+<p>**AIOのやり方とは、クローラーの受け入れ・文章の構造・計測の3つを同時に整える作業のことです。**どれか1つが欠けても、AI検索に引用される確率は上がりません。</p>
 <aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="url_check"><p class="it-head">御社のサイト、ChatGPTやGoogleのAIに読まれていますか？</p><p class="it-sub">URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）</p><form class="it-form" action="/tools/url-check/" method="get"><input type="hidden" name="src" value="article_inline"><input type="hidden" name="from" value="/aio/aio-yarikata/"><input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_inline_url_check">確かめる</button></form></aside>
 <p>近い論点を<a href="/aio/aio-donyu-jirei/">AIO導入事例｜自社サイトで実践した4施策と数値</a>で扱っています。</p>
 <div class="table-wrap"><table>
@@ -406,10 +406,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <div class="definition-box"><span class="term">AIOのやり方とは</span>、AI検索(AI Overview・ChatGPT等)が本文をそのまま抜き出して回答に使える状態を、技術設定と文章の両面からつくる一連の作業のことです。</div>
 
 <p>似た記事に<a href="/aio/aio-taisaku-donyu-hoho/">AIO対策の導入方法</a>がありますが、扱う範囲が異なります。導入方法は体制づくりを中心とした話で、本記事は記事1本ごとに手を動かす実務手順に絞っています。まず<a href="/aio/aio-shindan-yarikata/">AIO診断のやり方</a>で現状を採点してから、本記事の手順に進むと迷いません。</p>
-<p><strong>当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。</strong>本記事の手順は、その実装をそのまま言語化したものです。</p>
-<p><strong>この順番を逆にすると、遠回りになりがちです。</strong>技術設定を後回しにして文章だけを直しても、クローラーが記事を読めていなければ引用の土台自体ができていません。私たちも過去に、本文の書き換えを先行させて成果が出ず、あとから設定漏れに気づいた経験があります。</p>
+<p>**当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています。**本記事の手順は、その実装をそのまま言語化したものです。</p>
+<p>**この順番を逆にすると、遠回りになりがちです。**技術設定を後回しにして文章だけを直しても、クローラーが記事を読めていなければ引用の土台自体ができていません。私たちも過去に、本文の書き換えを先行させて成果が出ず、あとから設定漏れに気づいた経験があります。</p>
 <h2 id="aio5">AIOのやり方｜全体の流れは5ステップ</h2>
-<p><strong>AIOのやり方は、土台づくり→書き換え→数値追加→FAQ整備→計測という5ステップで進みます。</strong>どのステップも1回で終わらず、記事を追加するたびに繰り返します。</p>
+<p>**AIOのやり方は、土台づくり→書き換え→数値追加→FAQ整備→計測という5ステップで進みます。**どのステップも1回で終わらず、記事を追加するたびに繰り返します。</p>
 <figure><img src="/images/aio-yarikata/steps.png" alt="AIOのやり方5ステップ: クローラーを受け入れる設定にする、本文を断言型に書き直す、数値ファクトを出典付きで足す、FAQを5問以上整える、公開後にGSCとGA4で計測する" width="1200" height="400" loading="lazy"><figcaption>AIOのやり方5ステップ（当メディア作成）</figcaption></figure>
 
 <figure><img src="/images/aio-yarikata/checklist.png" alt="着手前に確認する3つの前提: 対象キーワードが検索10位以内にあるか、robots.txtでAIクローラーを許可しているか、FAQ・構造化データが未整備でないか" width="1200" height="500" loading="lazy"><figcaption>着手前に確認する3つの前提（当メディア作成）</figcaption></figure>
@@ -417,13 +417,13 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>着手前に、この3つの前提を先に確認してください。検索順位が圏外のまま本文だけを直しても、引用の土台が無いため効果が出にくいためです。前提が揃っていれば、次の章から順にステップ1〜5を進めます。</p>
 <aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">御社のサイトは、AIの回答に使われる状態ですか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_mid_ai_check">AI診断（地域と業種を入れるだけ・無料）</a></p></aside>
 <h2 id="1">ステップ1｜クローラーと構造化データの土台を作る</h2>
-<p><strong>最初のステップは、AIクローラーを許可し、構造化データを整える技術設定です。</strong>ここが欠けていると、文章をどれだけ直してもAIはページを読み込めません。</p>
+<p>**最初のステップは、AIクローラーを許可し、構造化データを整える技術設定です。**ここが欠けていると、文章をどれだけ直してもAIはページを読み込めません。</p>
 <p>robots.txtでGPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extended・Bingbotを許可します。Googlebot自体をブロックしないことも合わせて確認してください。</p>
 <p>実際、WAFやCDNの設定でGPTBotやPerplexityBotを意図せずブロックしているケースは珍しくありません。アクセスログで403や429が出ていないか、設定後に必ず確認してください。</p>
 <p>次に、記事ページにBlogPosting・FAQPage・BreadcrumbListのJSON-LDを設定します。<a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=ja" target="_blank" rel="noopener">Google公式の構造化データガイド</a>に沿って書けば、記述ミスを避けられます。</p>
 <p>設定後は<a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">リッチリザルトテスト</a>で構文エラーがないか確認します。エラーがあると、AIがページの意味を正しく読み取れないおそれがあります。llms.txtへの追記もこの段階で済ませ、AI向けのサイト案内を最新の状態に保ちます。</p>
 <h2 id="2">ステップ2｜本文を"抜き出される形"に書き直す</h2>
-<p><strong>続くステップは、本文をAIがそのまま引用できる形に書き直す作業です。</strong>技術設定を整えても、文章が前置きから始まっていては抜き出されません。</p>
+<p>**続くステップは、本文をAIがそのまま引用できる形に書き直す作業です。**技術設定を整えても、文章が前置きから始まっていては抜き出されません。</p>
 <p>冒頭200字は「◯◯は◯◯です」という断言型の直接回答で始めます。挨拶や一般論は不要です。各H2の直後には、40〜60字で単体でも意味が通る1文結論を置きます。この1文だけを切り出しても、読者が答えを理解できる形にすることが条件です。</p>
 <div class="table-wrap"><table>
 <thead>
@@ -459,29 +459,29 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>たとえば「AIOに取り組むと、AI検索での露出が増えることがあります」だと、断定を避けた表現になり抜き出されにくくなります。「AIOに取り組むと、AI検索での露出が増えます」のように、言い切る形に直してください。</p>
 <p>代名詞の多用も避けます。「これ」「それ」で受けると、その1文だけを切り出したときに主語が消えて意味が通らなくなるためです。定義ブロックも同じタイミングで整えます。「◯◯とは」で始まる1〜2文を、枠で囲んで視覚的に強調してください。</p>
 <h2 id="34faq">ステップ3〜4｜数値ファクトとFAQを増やす</h2>
-<p><strong>数値ファクトを3箇所以上、FAQを5問以上そろえるのがステップ3〜4です。</strong>AIは根拠のあいまいな一般論より、数値付きの断定文を優先して引用する傾向があります。</p>
-<p>数値は自社の実績・実測データから集めます。<strong>当サイトの実測では、直近28日で290個の検索語からのべ2,221回表示され、7回のクリックがありました(2026年9月時点・自社サイトのSearch Console実測)。</strong>このように出典と時点をセットで書くことで、後から検証できる形になります。</p>
+<p>**数値ファクトを3箇所以上、FAQを5問以上そろえるのがステップ3〜4です。**AIは根拠のあいまいな一般論より、数値付きの断定文を優先して引用する傾向があります。</p>
+<p>数値は自社の実績・実測データから集めます。**当サイトの実測では、直近28日で290個の検索語からのべ2,221回表示され、7回のクリックがありました(2026年9月時点・自社サイトのSearch Console実測)。**このように出典と時点をセットで書くことで、後から検証できる形になります。</p>
 <p>FAQは読者が実際に検索しそうな疑問を5問以上そろえ、回答は40〜60字を目安にします。本文のFAQセクションとJSON-LDのFAQPageは、一字一句を完全に一致させてください。不一致はスパムと判定されるリスクがあり、AIからの信頼を落とします。</p>
 <p>数値のストックが少ない場合は、自社の創業年や支援実績など、他社が書けない事実から探すと集めやすくなります。<strong>当社の場合は2020年3月創業、大阪市東成区を拠点に店舗集客とAI活用を支援してきた実績が、こうした数値ファクトの土台になっています。</strong></p>
 <h2 id="5">ステップ5｜公開後に計測して直す</h2>
-<p><strong>最後のステップは、公開して終わりにせず、計測して直すサイクルに乗せることです。</strong>AIOのやり方は一度の設定で完了せず、継続的な確認が前提になります。</p>
+<p>**最後のステップは、公開して終わりにせず、計測して直すサイクルに乗せることです。**AIOのやり方は一度の設定で完了せず、継続的な確認が前提になります。</p>
 <p><a href="https://support.google.com/webmasters/answer/16984139?hl=ja" target="_blank" rel="noopener">Google公式ヘルプ</a>によると、Search Consoleの生成AIパフォーマンスレポートで分かるのはインプレッション・ページ・国・デバイスです。クリック数やAI検索内の掲載順位は、2026年9月時点でまだ取得できません。</p>
 <p>この欠けを補うため、GA4のAI参照元セッション(chatgpt.com・perplexity.ai・gemini.google.com等)を毎月確認します。IndexNowやIndexing APIで即時にURLを通知しておくと、新しい記事や更新が反映されるまでの時間を縮められます。月1回のペースで、順位が10位以内なのに引用がない記事を洗い出し、鮮度更新や構造の直しに回してください。</p>
 <p>直す内容は記事によって異なりますが、鮮度表記の更新・数値ファクトの追加・FAQの見直しの3つから着手すると効果が出やすいというのが、私たちの運用で得た実感です。</p>
 <h2 id="aio_1">AIOのやり方でよくある失敗</h2>
-<p><strong>AIOのやり方でよくある失敗は、図解だけに重要情報を入れ、本文には書かないことです。</strong>AIは画像を引用できないため、図解の内容は必ず本文のテキストにも残す必要があります。一番多い原因は、技術設定か文章のどちらか一方だけの対応。</p>
+<p>**AIOのやり方でよくある失敗は、図解だけに重要情報を入れ、本文には書かないことです。**AIは画像を引用できないため、図解の内容は必ず本文のテキストにも残す必要があります。一番多い原因は、技術設定か文章のどちらか一方だけの対応。</p>
 <p>前提となる考え方は、<a href="/aio/aio-checker/">AIOチェッカーとは？表示と引用を見分ける使い方</a>で解説しています。</p>
 <figure><img src="/images/aio-yarikata/ng-ok.png" alt="AIOのやり方でよくある失敗と正しい進め方の比較" width="1200" height="500" loading="lazy"><figcaption>AIOのやり方のNG例とOK例（当メディア作成）</figcaption></figure>
 
 <div class="caution-box"><span class="box-title">注意: 一度整えて放置しない</span><br>クローラー許可の設定は、担当者交代やサイト移行のタイミングで意図せず外れることがあります。月1回の再確認を前提にしてください。</div>
 
 <p>失敗1つ目は、<strong>前置きから書き始めてしまうこと</strong>です。結論を後回しにすると、AIが要約する前に文章が切れてしまいます。失敗2つ目は、<strong>FAQを本文と構造化データで食い違わせること</strong>です。文言を後から一方だけ直し、もう一方が古いままというケースをよく見ます。</p>
-<p>失敗3つ目は、<strong>数値ファクトに出典と時点を書かないことです。</strong>根拠のない数値は、確認できないという理由で引用の対象から外れやすくなります。私たちも自社メディアの運用で、出典を明記した記事ほど計測データが安定して伸びることを確認しています。</p>
+<p>失敗3つ目は、**数値ファクトに出典と時点を書かないことです。**根拠のない数値は、確認できないという理由で引用の対象から外れやすくなります。私たちも自社メディアの運用で、出典を明記した記事ほど計測データが安定して伸びることを確認しています。</p>
 <p>具体例として、当社は主要AIクローラー20種の許可を実装して引用状況を日次で計測しています。ただし、この許可設定が外れたまま本文だけを直しても、計測上の変化は読み取れません。設定と本文の両方を確認する癖が必要です。</p>
 <p>失敗4つ目は、<strong>代名詞を多用して主語をあいまいにすることです。</strong>「これ」「それ」で文をつなぐと、見出し直下の1文だけを読んだときに何を指すか伝わらなくなります。</p>
 <p>AIの回答に自社サイトが載る準備ができているかは、<a href="/tools/aio-check/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録なしで、その場で点数が表示されます。</p>
 <h2 id="aio_2">AIOのやり方は自分でやるべきか、外部に任せるべきか</h2>
-<p><strong>基礎の技術設定と本文の書き換えは自分で対応でき、競合分析や継続計測は外部委託が向いています。</strong>どちらを選ぶかは、社内に割ける時間で判断してください。</p>
+<p>**基礎の技術設定と本文の書き換えは自分で対応でき、競合分析や継続計測は外部委託が向いています。**どちらを選ぶかは、社内に割ける時間で判断してください。</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>

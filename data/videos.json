@@ -582,5 +582,31 @@
     "format": "duo",
     "url": "https://ai.7senses.co.jp/research/clinic-ai-sources/",
     "youtube": "nQbOv2DGj4U"
+  },
+  "reform-shukyaku-daikou": {
+    "site": "ai-lab",
+    "date": "2026-10-15",
+    "sec": 114,
+    "mp4": "automation/video/reform-shukyaku-daikou.mp4",
+    "nums": [
+      "4",
+      "5"
+    ],
+    "format": "slides",
+    "long": {
+      "date": "2026-10-15",
+      "keyword": "リフォーム 集客 代行",
+      "queries": [
+        "リフォーム 集客 代行",
+        "集客 代行",
+        "リフォーム 代行",
+        "リフォーム 集客"
+      ],
+      "decision": "make",
+      "term": "リフォーム 集客",
+      "title": "リフォーム 集客は何から始める？｜AI検索まで見る依頼の線引き",
+      "reason": "YouTube のサジェストに「リフォーム 集客」が出ます"
+    },
+    "youtube": "5aez38k_BdM"
   }
 }
