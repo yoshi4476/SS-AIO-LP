@@ -60,6 +60,8 @@ faq:
 
 **店舗の検索は「店を探す」「来店前の疑問」「店名で調べる」の3種類に分かれ、AI Overviewが出やすいのは疑問の検索です。**
 
+近い論点を[病院・クリニックの口コミ返信](/meo/byoin-kuchikomi-henshin-reibun/)で扱っています。
+
 <figure><img src="/images/ai-overview-tenpo-shukyaku/kensaku-wakekata.png" alt="店舗の検索を3種類に分け、AI Overviewの出やすさと先に打つ手を並べた表"></figure>
 
 2026年3〜4月に55,393件の検索を調べた研究では、AI Overviewの表示率は全体で13.7%でした。質問形の検索に限ると64.7%に上がります（<a href="https://arxiv.org/abs/2605.14021" target="_blank" rel="noopener">arXiv 2605.14021</a>）。店の集客でも、質問の形をとる検索ほどAIの回答が出ると考えてください。

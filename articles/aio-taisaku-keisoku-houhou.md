@@ -87,8 +87,6 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 関連する内容として[AI Overviewで店舗集客はできる？](/aio/ai-overview-tenpo-shukyaku/)も公開しています。
 
-関連する内容として[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)も公開しています。
-
 同じ質問をAIに毎月聞き直して記録する手順は、不動産会社を例に[不動産会社のAIO対策のやり方](/aio/fudousan-aio-taisaku-yarikata/)でまとめました。
 
 被リンクの本数を指標に入れるべきかは、[AIO対策と被リンクの関係](/aio/aio-taisaku-hilink/)で解説しています。

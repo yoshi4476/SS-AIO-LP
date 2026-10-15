@@ -53,8 +53,6 @@ diagrams:
 
 あわせて[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)もご覧ください。
 
-関連する内容として[士業のSEO｜広告規制の中で専門性をどう発信するか](/seo/shigyou-seo-taisaku/)も公開しています。
-
 <figure><img src="/images/aio-seo-meo-chigai/sanshu.png" alt="AIO・SEO・MEOを一言でいうと示した図" loading="lazy"><figcaption>AIO・SEO・MEOを一言でいうと</figcaption></figure>
 
 | 項目 | AIO | SEO | MEO |
