@@ -137,6 +137,10 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-ijou-kenchi-alert-settei/ga4-tejun.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-ijou-kenchi-alert-settei/ng-ok.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/aio-itsukara/</loc><lastmod>2026-10-15</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-itsukara/nenpyou.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-itsukara/hajimekata.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/aio/aio-junni-hendou-riyuu/</loc><lastmod>2026-10-10</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-junni-hendou-riyuu/gennin-tree.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-junni-hendou-riyuu/bunseki-flow.png</image:loc></image:image>
@@ -356,6 +360,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kaigyou-yarikata/steps.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kaigyou-yarikata/dodai.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kaigyou-yarikata/shippai.png</image:loc></image:image>
+  </url>
+  <url><loc>https://ai.7senses.co.jp/ai-marketing/clinic-kanja-shukyaku/</loc><lastmod>2026-10-15</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kanja-shukyaku/iriguchi-hikaku.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kanja-shukyaku/kyaku-funnel.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kanja-shukyaku/kaizen-cycle.png</image:loc></image:image>
   </url>
   <url><loc>https://ai.7senses.co.jp/meo/clinic-meo-taisaku/</loc><lastmod>2026-08-31</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-meo-taisaku/steps.png</image:loc></image:image>
