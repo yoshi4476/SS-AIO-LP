@@ -564,7 +564,7 @@
 "modified": "2026-08-19"
 },
 "shigyou-seo-taisaku": {
-"hash": "18772aad8d75cd38c4f6525bc9b1c44a",
+"hash": "c9ef04039c4f3e5cc0a7944700928022",
 "modified": "2026-08-08"
 },
 "shika-ai-kensaku-denai-genin": {
@@ -640,7 +640,7 @@
 "modified": "2026-08-31"
 },
 "zeirishi-blog-shukyaku": {
-"hash": "2258ecd135bb781da6339c1af4bd8ea5",
+"hash": "bb7f25c9affe0a090eda62332e42983e",
 "modified": "2026-08-23"
 },
 "zeirishi-homepage-shukyaku": {
@@ -650,6 +650,10 @@
 "zeirishi-houjin-aio": {
 "hash": "0e8462d4bef7cfceb3967bbe7e2e924c",
 "modified": "2026-09-24"
+},
+"zeirishi-seo-keyword": {
+"hash": "ca1502884cce5edded9a233dabc1c695",
+"modified": "2026-10-17"
 },
 "zeirishi-shukyaku-channel": {
 "hash": "8854fa7678c3904bc9bbc63490d169d5",

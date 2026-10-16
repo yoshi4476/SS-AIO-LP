@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-10-16T00:00:00+09:00</updated>
+  <updated>2026-10-17T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>税理士のSEOキーワードはどう選ぶ？依頼につながる語の4分類</title>
+    <link href="https://ai.7senses.co.jp/seo/zeirishi-seo-keyword/"/>
+    <id>https://ai.7senses.co.jp/seo/zeirishi-seo-keyword/</id>
+    <updated>2026-10-17T00:00:00+09:00</updated>
+    <summary>税理士のSEOキーワードは、依頼先を探す語・条件で絞る語・状況の語・自分で調べる語の4つに分け、依頼に近い順に選びます。順位ごとのクリック率の実測と、事務所のタイプ別に最初の1語を決める手順、よくある失敗を解説します。</summary>
+  </entry>
   <entry>
     <title>工務店ホームページのよくある質問は何を載せる？施主が聞く5分野</title>
     <link href="https://ai.7senses.co.jp/aio/koumuten-hp-yokuaru-shitsumon/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/reform-shukyaku-daikou/</id>
     <updated>2026-10-08T00:00:00+09:00</updated>
     <summary>リフォームの集客代行は、広告・検索・ポータル・反響対応のどれを任せるかを先に決めてから選びます。施工事例と見積もりの項目は自社でそろえ、検索とAI検索の土台を任せるのが基本の順番です。向く会社・向かない会社の分かれ目と、依頼前に聞く5つの質問を解説します。</summary>
-  </entry>
-  <entry>
-    <title>AIO導入事例｜自社サイトで実践した4施策と数値</title>
-    <link href="https://ai.7senses.co.jp/aio/aio-donyu-jirei/"/>
-    <id>https://ai.7senses.co.jp/aio/aio-donyu-jirei/</id>
-    <updated>2026-10-07T00:00:00+09:00</updated>
-    <summary>AIO導入事例は、当メディアが自社サイトで実践した構造化データ・llms.txt・クローラー許可・日次計測という4つの施策と、その効果です。業種による進め方の違いとよくある失敗例もあわせて解説します。</summary>
   </entry>
 </feed>
