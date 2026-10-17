@@ -106,6 +106,10 @@ def published_html(slug):
     return bool(r.stdout.strip())
 
 
+# 1回の実行で新しく書く記事の上限（救済でも数本）。超えたら拾い方の誤りとみなす
+MAX_NEW = 6
+
+
 def written_keyword(site):
     """この実行で新しく書かれた記事の keyword を拾う。
 
@@ -125,8 +129,12 @@ def written_keyword(site):
                        capture_output=True, text=True, cwd=ROOT)
     files = [l[3:].strip() for l in r.stdout.splitlines()
              if l[:2].strip() in ("??", "A") and l.strip().endswith(".md")]
-    if not files:
-        # 直前のコミットで「追加」された記事だけ（変更や改名は見ない）
+    shallow = subprocess.run(["git", "rev-parse", "--is-shallow-repository"], capture_output=True,
+                             text=True, cwd=ROOT).stdout.strip() == "true"
+    if not files and not shallow:
+        # 直前のコミットで「追加」された記事だけ（変更や改名は見ない）。
+        # 浅い取得（CI の checkout は1コミット）では先頭のコミットに親が無く、全記事が「追加」に見える。
+        # 記事を書かなかった回にこれで全記事を新しい記事として審査し、公開中の280本を隔離した（2026-10-13）
         files = added(["git", "show", "--name-only", "--diff-filter=A",
                        "--pretty=", "HEAD"])
     head = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
@@ -223,6 +231,11 @@ def main():
         pairs = written_keyword(a.site)
         if not pairs:
             print("この実行で追加された記事はありません")
+            print("KW_GATE=skip")
+            return 0
+        # 1回の実行で書くのは数本。それより多ければ「新しい記事」の拾い方が壊れている。隔離せずに知らせる
+        if len(pairs) > MAX_NEW:
+            print(f"要対応: この実行の新しい記事が{len(pairs)}本と出ました（上限{MAX_NEW}本）。拾い方の誤りとみなし、隔離しません")
             print("KW_GATE=skip")
             return 0
         import kw_fit

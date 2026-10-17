@@ -133,3 +133,30 @@ def test_eyecatch_line_and_public_run_keys():
     keys = set(json.loads((ROOT / "data" / "kw_plan_runs.json").read_text(encoding="utf-8")))
     check("公開側の記録に社の id（公開の id と違うもの）が無い",
           sorted(k for k in keys if k in S.load_all() and S.public_id(k) != k), [])
+
+
+def test_after_gate_does_not_treat_shallow_checkout_as_new():
+    import kw_gate as KG
+    print("\n■ 食い合いの検査（--after）: 浅い取得で記事を書かなかった回に、全記事を新しい記事として隔離しない")
+    with tempfile.TemporaryDirectory() as d:
+        src, dst = Path(d) / "src", Path(d) / "dst"
+        (src / "articles").mkdir(parents=True)
+        g = lambda *a, cwd=src: subprocess.run(["git", *a], cwd=cwd, capture_output=True, text=True)
+        g("init", "-q")
+        for i in range(3):
+            (src / "articles" / f"a{i}.md").write_text(f"---\nkeyword: 語{i}\n---\n本文\n", encoding="utf-8")
+        g("add", "-A"); g("-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "1")
+        (src / "x.txt").write_text("x", encoding="utf-8")
+        g("add", "-A"); g("-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "2")
+        subprocess.run(["git", "clone", "-q", "--depth", "1", "--no-local", str(src), str(dst)], capture_output=True)
+        old = KG.ROOT
+        KG.ROOT = dst
+        try:
+            none = KG.written_keyword("ai-lab")
+            (dst / "articles" / "new1.md").write_text("---\nkeyword: 新しい語\n---\n本文\n", encoding="utf-8")
+            one = KG.written_keyword("ai-lab")
+        finally:
+            KG.ROOT = old
+    check("浅い取得・新しい記事なし → 0本（以前は全記事を拾った）", none, [])
+    check("浅い取得・新しい記事1本 → その1本だけ", [s for s, _ in one], ["new1"])
+    check("新しい記事が上限を超えたら隔離しない", 0 < KG.MAX_NEW <= 10, True)
