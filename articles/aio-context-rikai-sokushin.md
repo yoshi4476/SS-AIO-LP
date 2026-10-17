@@ -76,6 +76,8 @@ faq:
 
 **文脈が切れない書き方は、指示語を名詞に戻すことと、条件・時点・名前を段落ごとに持たせることの5つです。**
 
+あわせて[歯科医院の集客方法とは？新患を増やす5つの基本施策](/ai-marketing/shika-iin-shukyaku/)もご覧ください。
+
 <figure><img src="/images/aio-context-rikai-sokushin/kakikae.png" alt="文脈が切れる文と伝わる文を左右に並べて比べた図"></figure>
 
 次の5つを、上から順に当ててください。

@@ -1360,6 +1360,22 @@ def recently_touched(days, log=None, today=None):
     return out
 
 
+def pick_slugs(items, slugs, kind):
+    """運用者が選んだ記事だけにする。候補の一覧に無い記事は、材料の要らない種類（title・question・fresh）なら作る。
+    stuck・desc などは材料（上位の見出し・流入語）が要るので、候補に出ていなければ飛ばす"""
+    want = [s.strip() for s in slugs.split(",") if s.strip()]
+    have = {x["slug"]: x for x in items if x["slug"] in want}
+    out = []
+    for s in want:
+        if s in have:
+            out.append(have[s])
+        elif kind in ("title", "question", "fresh") and (ROOT / "articles" / f"{s}.md").is_file():
+            out.append({"kind": kind, "slug": s, "site": site_of(s), "why": "運用者が選んだ記事（GSC で見て直す）"})
+        else:
+            print(f"  {s}: 種類 {kind or '（指定なし）'} の材料が無いので飛ばします")
+    return out
+
+
 def build_prompt(item):
     """書き直しの指示と、増えてよい数字（allowed）。記事の今の状態には依存しない（並列で先に作れる）"""
     slug, kind = item["slug"], item["kind"]
@@ -1731,6 +1747,8 @@ def main():
     ap.add_argument("--tag", default="", help="台帳に残す印（集中モード・浮いた枠の直しを対照群と分けるため）")
     ap.add_argument("--sites", default="",
                     help="この社の記事だけを直す（空白かカンマ区切り。空=全社。集中モードが focus_report --sites を渡す）")
+    ap.add_argument("--slugs", default="",
+                    help="この記事だけを直す（カンマ区切り。運用者が選んだ記事に --kind の直しを当てる。候補に無ければ作る）")
     ap.add_argument("--main-only", action="store_true",
                     help="その社の主力の語（kw_plan.main_rule）の記事だけを直す（浮いた枠が使う）")
     a = ap.parse_args()
@@ -1762,6 +1780,8 @@ def main():
     else:
         items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
     items = only_sites(items, a.sites)
+    if a.slugs:
+        items = pick_slugs(items, a.slugs, a.kind)
     if a.main_only:
         items = only_main(items)
     # 検索から外した記事（noindex）は書き直さない（本数の枠と下書きの時間を使わせない）
