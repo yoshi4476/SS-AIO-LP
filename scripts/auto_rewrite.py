@@ -1678,10 +1678,15 @@ def selftest():
     for s in names[:20]:
         if not (ROOT / "articles" / f"{s}.md").is_file():
             continue
-        if not check(s, meta(s), warns(s), snap0):
+        why = check(s, meta(s), warns(s), snap0)
+        if not why:
             slug = s
             break
-        print(f"  --  {s}: 直す前から検算に落ちるため、診断には使いません")
+        # 落ちた理由を出す（CI で全件が落ちたとき、理由が無いと原因を追えなかった）
+        PS = __import__("private_store")
+        # 理由に別の記事の slug・題が入ることがある。お客様の記事の回は理由を伏せる
+        told = why[:80] if PS.shown(s) == s else "理由はお客様の記事のため伏せます"
+        print(f"  --  {PS.shown(s)}: 直す前から検算に落ちるため、診断には使いません（{told}）")
     if not slug:
         print("  NG  検算を試せる記事がありません（全件が手つかずで落ちます）")
         return 1
