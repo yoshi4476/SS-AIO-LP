@@ -866,7 +866,7 @@ jobs:
         run: |
           python scripts/agent_guard.py --verify || exit 1
           # 利用枠切れ・最大ターン到達で落ちても、後ろの実測・コミット・配信は続ける
-          AGENT_WORK_KIND=weekly bash scripts/agent_passes.sh automation/weekly_optimize_prompt.txt 120 \
+          AGENT_MEMORY=weekly AGENT_WORK_KIND=weekly bash scripts/agent_passes.sh automation/weekly_optimize_prompt.txt 120 \
             || echo "::warning::週次の claude 工程が失敗（後続は続行）"
 
       - name: 週次のAIが触ってはいけない場所を戻す
@@ -915,13 +915,17 @@ jobs:
           if [ -n "$GBP_TOKENS_JSON" ]; then
             python -c "import json,os;[open(f'gbp-token-{k}.json','w').write(json.dumps(v) if not isinstance(v,str) else v) for k,v in json.loads(os.environ['GBP_TOKENS_JSON']).items()]" || true
           fi
-          python scripts/cwv_check.py 2>&1 | tee -a /tmp/measure.txt | tail -8 || true
+          # 速度の実測（約3分・PageSpeed を待つだけ）は、AIへの質問（約4分）と同時に回す。書く先が重ならない
+          python scripts/cwv_check.py > /tmp/measure_cwv.txt 2>&1 &
+          CWV_PID=$!
           python scripts/brand_spelling.py --fix 2>&1 | tee -a /tmp/measure.txt | tail -4 || true
           # 未登録ページの検査は最後の「再通知」工程（reindex）が行う。ここで index_status を
           # 回すと同じURL検査を2回することになり、週次が上限に当たる原因になっていた
           python scripts/ai_cite_check.py --limit 5 2>&1 | tee -a /tmp/measure.txt | tail -4 || true
           # 公開28〜40日の新記事の狙う語を、同じAI・同じキャッシュで1回だけ確かめる（引用0は情報。全件失敗だけ要対応）
           python scripts/ai_followup.py --limit 8 2>&1 | tail -6 || true
+          wait "$CWV_PID" || true
+          tee -a /tmp/measure.txt < /tmp/measure_cwv.txt | tail -8 || true
           # 引用が取れた記事の型を、次の記事を書く指示へ渡す（引用実績が無ければ空のまま）
           python scripts/win_patterns.py 2>&1 | tail -4 || true
           # 著者の実在（sameAs・実績）を台帳から束ね、記事の Person と著者ページへ流す

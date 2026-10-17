@@ -584,6 +584,8 @@ jobs:
             MODEL_ARG="--model claude-opus-5-5"
           fi
           echo "記事生成のモデル: $MODEL_ARG（claude $V）"
+          # CLAUDE.md は毎手文脈に入るので、書く仕事に要る章だけに絞る（約7.8万字 → 約2.1万字）。後で戻す
+          python scripts/agent_memory.py --slim writer || true
           before=$(ls articles/*.md 2>/dev/null | wc -l)
           for try in 1 2 3; do
             # 使える道具は許可の一覧（automation/agent_settings_article.json）だけ。外へ送るコマンド・コードの書き換えは拒否される
@@ -612,6 +614,7 @@ jobs:
                 "${{ steps.site.outputs.id }}: 3回試しても記事を書けませんでした" || true
             fi
           done
+          python scripts/agent_memory.py --restore || true
 
       # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
       - name: AIの変更のうち触ってはいけない場所を戻す

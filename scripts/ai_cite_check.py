@@ -499,6 +499,7 @@ def main():
             print(f"   {sid}: 順位の記録が無く語を選べません（rank_track を先に）")
             continue
         items, cited = [], 0
+        quiet = S.is_client(sid)
         site_engines = engines_available(site=sid)      # お客様の社の答えは置き場へ
         for q in qs:
             row = {"kw": q, "engines": {}}
@@ -522,7 +523,7 @@ def main():
                 f"{n}:{_mark(r)}" for n, r in row["engines"].items()))
         measured["sites"][sid] = {"queries": len(qs), "cited": cited, "items": items}
         total_q += len(qs); total_cited += cited
-        print(f"   {cfg['name']}: 引用 {cited}/{len(qs)}語")
+        print(f"   {S.public_id(sid) if quiet else cfg['name']}: 引用 {cited}/{len(qs)}語")
     CP.save_citations(p.name, d)
     print(f"AI_CITED={total_cited}/{total_q}")
     print(f"記録: {p.relative_to(ROOT).as_posix()}")

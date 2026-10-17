@@ -77,6 +77,22 @@ def redraw_all(site=None):
     return 1 if bad else 0
 
 
+def ensure_eyecatch_line(p, slug):
+    """画像を作った記事のフロントマターに eyecatch: を足す。書く AI が書き忘れると一覧・配信先に画像が出なかった
+    （2026-10-17 のコーポレートの記事。画像はあるのに行が無かった）"""
+    import re
+    if not (ROOT / "site" / "images" / slug / "eyecatch.png").exists():
+        return False
+    text = p.read_text(encoding="utf-8")
+    m = re.match(r"(---\r?\n)(.*?)(\r?\n---)", text, re.S)
+    if not m or re.search(r"^eyecatch:", m.group(2), re.M):
+        return False
+    head = m.group(2) + f"\neyecatch: /images/{slug}/eyecatch.png"
+    p.write_text(text[:m.start(2)] + head + text[m.end(2):], encoding="utf-8", newline="")
+    print(f"  フロントマターに eyecatch: を足しました（{slug}）")
+    return True
+
+
 def main():
     args = sys.argv[1:]
     if args[:1] == ["--all"]:
@@ -92,6 +108,7 @@ def main():
 
     # 1) アイキャッチ（フロントマターのtitle/categoryから自動）
     subprocess.run([PY, str(ROOT / "scripts" / "make_eyecatch.py"), slug], check=True)
+    ensure_eyecatch_line(p, slug)
 
     # 2) 図解（diagrams: 宣言があれば）。同じプロセスで描く（1枚ごとにフォントを読み直さない）
     failed = draw_diagrams(slug, meta, body)

@@ -1,0 +1,135 @@
+# -*- coding: utf-8 -*-
+"""2026-10-17 の「自動運用のトークンを減らす・実行時間を縮める」の門。
+
+  1. claude は起動時に CLAUDE.md（約7.8万字）を文脈に入れ、1手ごとに読み直す。記事を書く AI は1本で100手を超えるのに、
+     導入・納品方式・週次の工程表など書く仕事に使わない章が毎手の大半を占めていた → CI の AI の間だけ要る章に絞る
+  2. 1手で答えるだけの呼び出し（台本・訳・返信案）も CLAUDE.md を丸ごと読んでいた → CLAUDE.md の無い場所で起こす
+  3. 週次の実測で ai_cite_check が未定義の変数で毎回落ちていた（引用の実測が記録されない）
+  4. 週次の実測で速度（約3分）とAIへの質問（約4分）を順に待っていた → 同時に回す
+"""
+import os
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+from test_gates import check, ROOT
+
+sys.path.insert(0, str(ROOT / "scripts"))
+
+
+def test_claude_md_is_slimmed_for_ci_agents_and_restored():
+    import agent_memory as M
+    print("\n■ CI の AI に読ませる CLAUDE.md は書く仕事に要る章だけ（戻すのは HEAD）")
+    full = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    w = M.slim(full, "writer")
+    heads = [ln for ln in w.splitlines() if ln.startswith("#")]
+    has = lambda pre: any(h.lstrip("# ").startswith(pre) for h in heads)
+    check("writer: 0章・Phase 2〜6・6章・付録が残る",
+          [has(p) for p in ("0.1", "0.3", "Phase 2", "Phase 3", "Phase 5", "Phase 6", "6.", "付録")], [True] * 8)
+    check("writer: 導入・納品・守秘の置き場・週次・Phase 7・在庫の作り方は載せない",
+          [has(p) for p in ("2.1", "3.0", "3.0.1", "8.", "Phase 7", "9.", "10.")] + ["在庫の作り方" in w], [False] * 8)
+    check("writer: 全文の35%未満", len(w) < len(full) * 0.35, True)
+    check("weekly: 8章（週次最適化）を足す", ("## 8." in M.slim(full, "weekly"), "## 8." in w), (True, False))
+    check("先頭に絞った印がある（二重に絞らない・戻す判定）", w.startswith(M.MARK), True)
+    fake = "# t\n## 0.1 a\nx\n## 3. b\n```\n## 0.9 コードの中\n```\n## 6. c\ny\n"
+    check("コードブロックの中の見出しでは分けない", "コードの中" in M.slim(fake, "writer"), False)
+
+    with tempfile.TemporaryDirectory() as d:
+        subprocess.run(["git", "init", "-q", d], check=True)
+        (Path(d) / "CLAUDE.md").write_text(full, encoding="utf-8")
+        subprocess.run(["git", "-C", d, "add", "CLAUDE.md"], check=True)
+        subprocess.run(["git", "-C", d, "-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "x"], check=True)
+        old = os.environ.get("GITHUB_ACTIONS")
+        os.environ["GITHUB_ACTIONS"] = "true"
+        try:
+            first = M.write_slim("writer", d)
+            again = M.write_slim("writer", d)
+            slimmed = (Path(d) / "CLAUDE.md").read_text(encoding="utf-8").startswith(M.MARK)
+            M.restore(d)
+        finally:
+            if old is None:
+                os.environ.pop("GITHUB_ACTIONS", None)
+            else:
+                os.environ["GITHUB_ACTIONS"] = old
+        back = (Path(d) / "CLAUDE.md").read_text(encoding="utf-8")
+    check("絞る → 二度目は触らない → 戻すと HEAD と同じ", (first, again, slimmed, back == full), (True, False, True, True))
+
+    import agent_guard as G
+    check("戻し損ねても protect が CLAUDE.md を HEAD へ戻す（守る場所に入っている）", "CLAUDE.md" in G.PROTECTED, True)
+    wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    i, j = wf.find("agent_memory.py --slim writer"), wf.find("agent_memory.py --restore")
+    k = wf.find('claude -p "$(cat automation/multi_site_prompt.txt)"')
+    check("記事の枠: 執筆の前に絞り、試し直しの輪の後で戻す", (0 < i < k < j), True)
+    sh = (ROOT / "scripts" / "agent_passes.sh").read_text(encoding="utf-8")
+    a, b, c = sh.find("agent_memory.py --slim"), sh.find("  claude -p \"$(cat"), sh.find("agent_memory.py --restore")
+    check("範囲ごとの AI の回: claude の前に絞り、後で戻す", 0 < a < b < c, True)
+    wk = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("週次の AI の回は 8章を載せる版", "AGENT_MEMORY=weekly AGENT_WORK_KIND=weekly bash scripts/agent_passes.sh automation/weekly_optimize_prompt.txt" in wk, True)
+
+
+def test_one_turn_calls_run_without_claude_md():
+    import auto_rewrite as AR
+    print("\n■ 1手で答えるだけの呼び出しは CLAUDE.md の無い場所で起こす。ファイルを読む呼び出しは ROOT のまま")
+    seen = []
+    real = subprocess.run
+
+    def fake(args, cwd=None, **kw):
+        seen.append(Path(cwd))
+        return subprocess.CompletedProcess(args, 0, "", "")
+    AR.subprocess.run = fake
+    try:
+        AR.sh(["claude", "-p", "--max-turns", "1"], stdin_text="x")
+        AR.sh(["claude", "-p", "--max-turns", "40", "--allowedTools", "Read,Edit"], stdin_text="x")
+        AR.sh(["claude", "-p", "--max-turns", "1"], stdin_text="x", cwd=ROOT / "scripts")
+    finally:
+        AR.subprocess.run = real
+    check("1手: ROOT の外・CLAUDE.md が無い", (seen[0] != ROOT, (seen[0] / "CLAUDE.md").exists()), (True, False))
+    check("40手（Read・Edit）: ROOT", seen[1], ROOT)
+    check("呼ぶ側が場所を決めていればそのまま", seen[2], ROOT / "scripts")
+
+
+def test_weekly_cite_check_runs_and_cwv_overlaps():
+    print("\n■ 週次の実測: ai_cite_check が落ちない・速度の実測はAIへの質問と同時に回す")
+    src = (ROOT / "scripts" / "ai_cite_check.py").read_text(encoding="utf-8")
+    check("quiet を社ごとに決めてから使う（未定義で毎週落ちていた）",
+          0 < src.find("quiet = S.is_client(sid)") < src.find("if quiet:"), True)
+    wk = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    bg, cite, wait = wk.find("cwv_check.py > /tmp/measure_cwv.txt 2>&1 &"), wk.find("ai_cite_check.py --limit 5"), wk.find('wait "$CWV_PID"')
+    check("速度の実測を裏で始め、AIへの質問の後で待って結果を集める", 0 < bg < cite < wait, True)
+    check("待った後に速度の結果を要対応の集計（/tmp/measure.txt）へ足す", "tee -a /tmp/measure.txt < /tmp/measure_cwv.txt" in wk, True)
+
+
+def test_eyecatch_line_and_public_run_keys():
+    import make_images as MI
+    import kw_plan as K
+    print("\n■ 画像を作った記事に eyecatch: を足す・在庫を組んだ月の記録は公開の id で書く")
+    slug = "zz-h107-eyecatch"
+    img = ROOT / "site" / "images" / slug
+    with tempfile.TemporaryDirectory() as d:
+        p = Path(d) / f"{slug}.md"
+        p.write_text("---\ntitle: t\ndiagrams:\n  - name: a\n    items: [\"x\"]\n---\n本文\n", encoding="utf-8")
+        img.mkdir(parents=True, exist_ok=True)
+        try:
+            none = MI.ensure_eyecatch_line(p, slug)
+            (img / "eyecatch.png").write_bytes(b"x")
+            added = MI.ensure_eyecatch_line(p, slug)
+            twice = MI.ensure_eyecatch_line(p, slug)
+            text = p.read_text(encoding="utf-8")
+        finally:
+            for f in img.glob("*"):
+                f.unlink()
+            img.rmdir()
+    import yaml
+    fm = yaml.safe_load(text.split("---")[1])
+    check("画像があれば1回だけ足す・本文は残る・YAML として読める",
+          (none, added, twice, fm.get("eyecatch"), text.rstrip().endswith("本文")),
+          (False, True, False, f"/images/{slug}/eyecatch.png", True))
+    import sites as S
+    cl = next((s for s in S.load_all() if S.is_client(s) and S.public_id(s) != s), None)
+    if cl:
+        check("お客様の社の記録の鍵は公開の id", K._run_key(cl), S.public_id(cl))
+    import json
+    keys = set(json.loads((ROOT / "data" / "kw_plan_runs.json").read_text(encoding="utf-8")))
+    check("公開側の記録に社の id（公開の id と違うもの）が無い",
+          sorted(k for k in keys if k in S.load_all() and S.public_id(k) != k), [])

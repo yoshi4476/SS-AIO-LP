@@ -6,6 +6,7 @@ keyword: 不動産 記帳代行
 category: keiri-bpo
 date: 2026-10-17
 modified: 2026-10-17
+eyecatch: /images/fudousan-kichodaiko/eyecatch.png
 depth: standard
 score: 90
 diagrams:

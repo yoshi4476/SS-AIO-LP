@@ -64,6 +64,17 @@ def sh(args, timeout=1800, stdin_text=None, cwd=None):
         env = agent_guard.child_env()
         if "--settings" not in args:
             args = [*args, "--settings", json.dumps({"permissions": {"deny": READ_DENY}}, ensure_ascii=False)]
+        # 1手で答えるだけの呼び出し（台本・訳・返信案）はファイルを読まないので、CLAUDE.md の無い場所で起こす。
+        # ファイルを読む呼び出しは、CI では CLAUDE.md を書く仕事に要る章だけに絞る（約7.8万字が毎手入っていた）
+        if cwd is None and "--max-turns" in args and args[args.index("--max-turns") + 1] == "1":
+            import tempfile
+            cwd = tempfile.mkdtemp(prefix="claude_bare_")
+        else:
+            import agent_memory
+            with agent_memory.slimmed("writer"):
+                return subprocess.run(args, cwd=cwd or ROOT, capture_output=True, text=True,
+                                      encoding="utf-8", errors="ignore", timeout=timeout,
+                                      input=stdin_text, env=env)
     return subprocess.run(args, cwd=cwd or ROOT, capture_output=True, text=True,
                           encoding="utf-8", errors="ignore", timeout=timeout,
                           input=stdin_text, env=env)

@@ -190,7 +190,7 @@ def test_crux_privacy_and_wiring():
     i = wf.index("python scripts/cwv_check.py")
     line = wf[i:wf.index("\n", i)]
     check("週次: 実測の工程が CrUX まで回り（--no-crux を付けない）、要対応を findings へ流す",
-          ("--no-crux" not in line, "/tmp/measure.txt" in line,
+          ("--no-crux" not in line, "/tmp/measure.txt" in line or "tee -a /tmp/measure.txt < /tmp/measure_cwv.txt" in wf[i:i + 4000],
            "grep '^要対応' /tmp/measure.txt >> automation/logs/findings.txt" in wf[i:i + 4000]), (True, True, True))
     check("週次: お客様の CrUX の記録をキャッシュに残す（自社3サイトはコミット）",
           "cwv-crux-" in wf and "!data/cwv_crux/ai-lab.json" in wf, True)

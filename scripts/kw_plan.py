@@ -66,7 +66,7 @@ REWRITE_BAND = (3.5, 20.5)
 REWRITE_MIN_IMP = 15
 QA_TOP = 20              # 実際の質問を取る語（上位から）
 SERP_COST = 6.0          # 見出し3＋共起語3（公式の資料 v1.21.0）
-RUNS = ROOT / "data" / "kw_plan_runs.json"     # 組んだ月（{社: "YYYY-MM"}。社のIDと年月だけなので公開してよい）
+RUNS = ROOT / "data" / "kw_plan_runs.json"     # 組んだ月（{公開の id: "YYYY-MM"}。お客様の社は公開の id で書く）
 ORIGIN = ROOT / "data" / "kw_origin.json"      # 積んだ語の出どころ（後で出どころ別の成果を比べる。お客様の分は置き場へ）
 SRC_ORDER = ("gsc", "sheet", "seed", "question", "suggest", "cache", "rakko")
 ENOUGH_DAYS = 30      # 未着手がこの日数分あるサイトは、--if-needed のとき組み直さない（2026-10-08 運用者「1か月分を切ったら」）
@@ -1007,10 +1007,17 @@ def remember_origin(site_id, picked):
                  dump=lambda o: json.dumps(o, ensure_ascii=False, indent=1, sort_keys=True) + "\n", pub=ORIGIN)
 
 
+def _run_key(site_id):
+    """公開側のファイルなので、お客様の社は公開の id で書く（社の id は社名から作られていて、公開側に出せない）"""
+    import sites as S
+    return S.public_id(site_id)
+
+
 def runs_done(site_id):
     """その社を最後に組んだ月（'YYYY-MM'）。無ければ空"""
     try:
-        return str((json.loads(RUNS.read_text(encoding="utf-8")) or {}).get(site_id) or "")
+        d = json.loads(RUNS.read_text(encoding="utf-8")) or {}
+        return str(d.get(_run_key(site_id)) or d.get(site_id) or "")
     except (OSError, ValueError, AttributeError):
         return ""
 
@@ -1020,7 +1027,8 @@ def mark_done(site_id, month):
         d = json.loads(RUNS.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         d = {}
-    d[site_id] = month
+    d.pop(site_id, None)
+    d[_run_key(site_id)] = month
     RUNS.parent.mkdir(parents=True, exist_ok=True)
     RUNS.write_text(json.dumps(d, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
 

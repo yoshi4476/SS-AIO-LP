@@ -44,10 +44,13 @@ for sc in $scopes; do
   # お客様の範囲の回は AI の出力をログに出さない（その回で書いた記事の題・URL は伏せる語の一覧に無い。2026-10-12）
   out="/dev/stdout"
   [ "$sc" = "own" ] || out="$RUNNER_TEMP/claude_out_pass.txt"
+  # CLAUDE.md は毎手文脈に入るので、この仕事に要る章だけに絞る（週次は AGENT_MEMORY=weekly で8章も載せる）
+  python scripts/agent_memory.py --slim "${AGENT_MEMORY:-writer}" || true
   claude -p "$(cat "$prompt_file")
 
 【この回の範囲】${note}" --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json \
     --max-turns "$turns" "$@" > "$out" 2>&1 || echo "::warning::AI の回が失敗しました（次の範囲へ続けます）"
+  python scripts/agent_memory.py --restore || true
   [ "$sc" = "own" ] || echo "AI の出力 $(wc -l < "$out") 行（お客様の範囲のため、ログには出しません）"
   python scripts/agent_guard.py --protect --site "$sc" --pass
 done
