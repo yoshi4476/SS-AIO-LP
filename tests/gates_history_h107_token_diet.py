@@ -170,3 +170,17 @@ def test_rewrite_guard_blocks_only_new_cannibalization():
           ('"--title", before[0]' in body, "r.returncode > r0" in body, "r.returncode == 3 or" in body), (True, True, True))
     check("--slugs: 選んだ記事だけにする（材料の要る種類は候補に無ければ飛ばす）",
           ("def pick_slugs" in src, 'kind in ("title", "question", "fresh")' in src), (True, True))
+
+
+def test_actions_are_pinned_to_commit():
+    import re
+    print("\n■ 公開リポジトリ: 外のアクションは版の記号ではなくコミットの番号で固定する（記号は付け替えられる）")
+    files = list((ROOT / ".github" / "workflows").glob("*.yml")) + list((ROOT / ".github" / "actions").glob("*/action.yml"))
+    loose = [f"{f.name}: {m.group(1)}" for f in files for m in
+             re.finditer(r"uses:\s*([\w-]+/[\w./-]+@(?![0-9a-f]{40}\b)[^\s#]+)", f.read_text(encoding="utf-8"))]
+    check("番号で固定していない外のアクション", loose, [])
+    check("固定したアクションには元の版を注記する（Dependabot が更新できる）",
+          all(re.search(r"@[0-9a-f]{40} # v\d", ln) for f in files for ln in f.read_text(encoding="utf-8").splitlines()
+              if re.search(r"uses:\s*[\w-]+/[\w./-]+@[0-9a-f]{40}", ln)), True)
+    dep = (ROOT / ".github" / "dependabot.yml").read_text(encoding="utf-8")
+    check("Dependabot がアクションの番号を更新する", "github-actions" in dep, True)

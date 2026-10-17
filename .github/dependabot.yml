@@ -1,0 +1,11 @@
+# アクションはコミットの番号で固定している（公開リポジトリで版の記号を付け替えられても変わらない）。
+# 番号の更新は Dependabot の変更提案で受ける（月1回・まとめて1件）
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]

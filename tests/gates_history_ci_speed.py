@@ -166,7 +166,7 @@ def test_python_env_cache_is_keyed_and_safe():
         uses = [s.get("uses") for s in job["steps"]]
         runs = "\n".join(str(s.get("run", "")) for s in job["steps"])
         check(f"{wf}: 控えを使い、呼び出し側の pip install はそのまま", ("./.github/actions/py-env" in uses, line in runs,
-                                                                   "actions/setup-python@v5" in uses), (True, True, False))
+                                                                   any(str(u or "").startswith("actions/setup-python@") for u in uses)), (True, True, False))
 
 
 def test_followup_asks_each_ai_at_once_in_order():
@@ -235,7 +235,7 @@ def test_select_skips_only_big_unused_dirs():
     co = sel["steps"][0]
     w = co.get("with") or {}
     pats = [l.strip() for l in str(w.get("sparse-checkout") or "").splitlines() if l.strip()]
-    check("最初の工程が checkout", co.get("uses"), "actions/checkout@v4")
+    check("最初の工程が checkout", str(co.get("uses")).split("@")[0], "actions/checkout")
     check("除外の書き方（全部を取ってから外す）", (w.get("sparse-checkout-cone-mode"), pats[:1]), (False, ["/*"]))
     check("外すのは画像・動画・資料・レポート・写真の原本だけ",
           sorted(pats[1:]), sorted(["!/site/images/", "!/site/videos/", "!/assets/", "!/reports/", "!/写真素材/"]))
@@ -248,8 +248,8 @@ def test_select_skips_only_big_unused_dirs():
           [d for d in ("site/images", "site/videos", "写真素材", "\"assets\"", "'reports'", "\"reports\"") if d in src], [])
     write = _y("pipeline-multi.yml")["jobs"]["write"]
     check("記事を書く job は全部を取る（画像の検査・配信に要る）",
-          (write["steps"][0].get("uses"), (write["steps"][0].get("with") or {}).get("sparse-checkout")),
-          ("actions/checkout@v4", None))
+          (str(write["steps"][0].get("uses")).split("@")[0], (write["steps"][0].get("with") or {}).get("sparse-checkout")),
+          ("actions/checkout", None))
 
 
 def test_brief_and_cross_check_run_together_but_log_in_order():

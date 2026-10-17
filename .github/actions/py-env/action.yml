@@ -24,7 +24,7 @@ runs:
   using: composite
   steps:
     - id: py
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
       with:
         python-version: ${{ inputs.python-version }}
 
@@ -42,7 +42,7 @@ runs:
         echo "args=$args" >> "$GITHUB_OUTPUT"
 
     - id: restore
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
       with:
         path: ~/.venv-ci
         key: py-env-v1-${{ steps.key.outputs.os }}-py${{ steps.py.outputs.python-version }}-${{ steps.key.outputs.reqs }}-${{ steps.key.outputs.week }}
@@ -60,7 +60,7 @@ runs:
         fi
 
     - if: steps.restore.outputs.cache-hit != 'true' && steps.build.outputs.ok == 'yes'
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
       continue-on-error: true
       with:
         path: ~/.venv-ci
