@@ -44,7 +44,7 @@ jobs:
     outputs:
       go: ${{ steps.g.outputs.go }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - id: g
         env:
           GH_TOKEN: ${{ github.token }}
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120  # 20社までのレポート・競合比較・改善の実行に余裕を持つ（在庫の組みは毎日の kw-stock へ移した）
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
@@ -95,7 +95,7 @@ jobs:
             echo "mid=false" >> "$GITHUB_OUTPUT"; echo "through=" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         if: steps.gate.outputs.ready == 'true'
         with:
           python-version: "3.12"
@@ -152,7 +152,7 @@ jobs:
       # 自社だけ: 自社3サイトと月の回数はコミット済みなので、キャッシュで上書きしない
       - name: 競合比較の控えを戻す
         if: steps.gate.outputs.ready == 'true'
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             data/compete/*
@@ -166,7 +166,7 @@ jobs:
       # Bing の検索の成績（週次の bing_webmaster.py --stats が積む）。お客様の分だけキャッシュから戻す（自社3サイトはコミット済み）
       - name: Bing の検索の成績（お客様の分）を戻す
         if: steps.gate.outputs.ready == 'true'
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             data/bing_stats/*
@@ -179,7 +179,7 @@ jobs:
       # 実利用者の表示速度（週次の cwv_check の CrUX）。お客様の分だけキャッシュから戻す
       - name: 実利用者の表示速度（お客様の分）を戻す
         if: steps.gate.outputs.ready == 'true'
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             data/cwv_crux/*
@@ -215,7 +215,7 @@ jobs:
       # 自社だけ: 自社3サイトの分はコミットするので、キャッシュに残すのはお客様の分だけ
       - name: 競合比較の控えを残す
         if: always() && steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             data/compete/*
