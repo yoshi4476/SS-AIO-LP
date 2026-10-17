@@ -2036,3 +2036,6 @@
 {"at": "2026-10-17 17:18", "by": "cta_fill", "slug": "keiri-jikyu-souba", "kind": "cta", "ok": true, "note": "CTAを2箇所目まで足した"}
 {"at": "2026-10-17 17:21", "by": "cta_fill", "slug": "keiri-jikyu-souba", "kind": "cta", "ok": true, "note": "CTAを2箇所目まで足した"}
 {"at": "2026-10-17 17:21", "by": "link_boost", "slug": "koumuten-aio-taisaku-taisei", "kind": "link_rescue", "ok": true, "note": "koumuten-hp-yokuaru-shitsumon から内部リンクを1本"}
+{"at": "2026-10-17 19:44", "by": "link_boost", "slug": "biyoushitsu-kichodaiko", "kind": "link_rescue", "ok": true, "note": "kichodaiko-shikaku-nashi から内部リンクを1本"}
+{"at": "2026-10-17 19:44", "by": "link_boost", "slug": "biyoushitsu-kichodaiko", "kind": "link_rescue", "ok": true, "note": "kichodaiko-sapporo から内部リンクを1本"}
+{"at": "2026-10-17 19:44", "by": "link_boost", "slug": "biyoushitsu-kichodaiko", "kind": "link_rescue", "ok": true, "note": "kicho-daiko-coconala から内部リンクを1本"}

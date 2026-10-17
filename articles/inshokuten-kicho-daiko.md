@@ -167,6 +167,8 @@ faq:
 
 人手が足りずに経理が回らない会社の考え方は、[管理部門の人手不足を解決する方法](/blog/kanribumon-hitodebusoku-kaiketsu/)でも扱っています。事務作業の効率化は[店舗の事務作業をAIで効率化する方法](/blog/tenpo-jimu-sagyou-ai-koritsuka/)が参考になります。
 
+業務委託のスタッフや店販の在庫を抱える業種の例は、[美容室の記帳代行で間違えやすい3つの取引](/blog/biyoushitsu-kichodaiko/)で扱っています。
+
 <div class="cta-box"><p>記帳から月次の数字づくりまで、外部委託の範囲を無料で相談できます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## 依頼先を選ぶ5つの確認点

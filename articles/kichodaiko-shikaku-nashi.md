@@ -44,6 +44,8 @@ faq:
 
 仕訳入力と試算表の作成までなら、資格なしの会社に頼んでも法律上の問題はありません。
 
+関連する内容として[美容室の記帳代行は何を任せる？](/blog/biyoushitsu-kichodaiko/)も公開しています。
+
 関連する内容として[現金払いは否認の落とし穴？](/blog/gaichuuhi-seikyuusho-nashi/)も公開しています。
 
 <figure><img src="/images/kichodaiko-shikaku-nashi/wakekata.png" alt="記帳まわりの業務の分け方: 資格なしで頼める仕訳入力と試算表、税理士だけの申告書と税務相談、社労士の手続き" loading="lazy"><figcaption>記帳まわりの業務の分け方</figcaption></figure>

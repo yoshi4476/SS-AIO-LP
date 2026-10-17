@@ -52,6 +52,8 @@ faq:
 
 **札幌で記帳を頼める先は、税理士事務所・記帳代行会社・オンラインの経理BPO・商工会議所の記帳指導の4つです。**
 
+関連する内容として[美容室の記帳代行は何を任せる？](/blog/biyoushitsu-kichodaiko/)も公開しています。
+
 <figure><img src="/images/kichodaiko-sapporo/tanomisaki.png" alt="札幌で選べる記帳の頼み先を、税理士事務所・記帳代行会社・オンラインの経理BPO・商工会議所の記帳指導の4つに分けた図"></figure>
 
 <div class="definition-box"><span class="term">記帳代行とは</span>、領収書や通帳の情報を会計ソフトに入力し、帳簿を作る作業を代わりに行うサービスです。申告書の作成とは別の業務です。</div>
