@@ -1637,8 +1637,12 @@ def selftest():
     slug = ""
     # git status と比べると、先に走った工程の未コミットの記事で全件が落ちる
     snap0 = snapshot()
-    for it in items[:8]:
-        s = it["slug"]
+    # 直す候補の先頭が全部落ちる週がある（2026-10-16: AI Overview と AIO を同じ語とみなした後、AIO の記事どうしの
+    # 食い合いが見えて8本とも落ち、浮いた枠の書き直しが止まった）。診断はどれか1本で検算が効くかを見れば足りるので、
+    # 候補が尽きたらほかの記事からも探す（時間をかけすぎないよう、合わせて20本まで）
+    names = [it["slug"] for it in items[:8]]
+    names += [p.stem for p in sorted((ROOT / "articles").glob("*.md")) if p.stem not in names]
+    for s in names[:20]:
         if not (ROOT / "articles" / f"{s}.md").is_file():
             continue
         if not check(s, meta(s), warns(s), snap0):
