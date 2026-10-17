@@ -1192,7 +1192,13 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
     r = sh([sys.executable, "scripts/kw_guard.py", kw, "--site",
             site_of(slug), "--title", title, "--exclude-slug", slug], timeout=600)
     if r.returncode:
-        return guard_message(r.returncode)
+        # 直す前の題でも同じ判定なら、食い合いは直しが作ったものではない（狙う語は変えていない）。
+        # 「aio」のような広い語で別の記事が順位を持つだけで、AIO の記事の題の直しが全部戻っていた（2026-10-17）
+        r0 = 0 if r.returncode == 3 else sh(
+            [sys.executable, "scripts/kw_guard.py", kw, "--site", site_of(slug), "--title", before[0],
+             "--exclude-slug", slug], timeout=600).returncode
+        if r.returncode == 3 or r.returncode > r0:
+            return guard_message(r.returncode)
 
     if terms:
         # 「足した」と言いながら見出しが変わっていないものを通さない。

@@ -160,3 +160,13 @@ def test_after_gate_does_not_treat_shallow_checkout_as_new():
     check("浅い取得・新しい記事なし → 0本（以前は全記事を拾った）", none, [])
     check("浅い取得・新しい記事1本 → その1本だけ", [s for s, _ in one], ["new1"])
     check("新しい記事が上限を超えたら隔離しない", 0 < KG.MAX_NEW <= 10, True)
+
+
+def test_rewrite_guard_blocks_only_new_cannibalization():
+    print("\n■ 書き直しの食い合いの検査: 直す前の題でも同じ判定なら止めない（悪化したときだけ止める）")
+    src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
+    body = src[src.index("def check(slug, before"):src.index("def mechanically_fixable")]
+    check("直す前の題（before[0]）でも検査し、悪化したときだけ戻す",
+          ('"--title", before[0]' in body, "r.returncode > r0" in body, "r.returncode == 3 or" in body), (True, True, True))
+    check("--slugs: 選んだ記事だけにする（材料の要る種類は候補に無ければ飛ばす）",
+          ("def pick_slugs" in src, 'kind in ("title", "question", "fresh")' in src), (True, True))
