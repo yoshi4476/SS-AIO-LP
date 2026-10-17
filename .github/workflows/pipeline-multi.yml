@@ -109,7 +109,7 @@ jobs:
       # 枠の判定は1日80回近く動き、書くのはそのうち1割。判定に要らない大きな置き場（画像・動画・資料・写真の原本。
       # 334MB のうち 287MB）は取らない。取得に平均12秒かかっていた（2026-10-03〜09 の305回）。
       # 外すのは下の5つだけで、判定が読む scripts/・sites/・data/・articles/・.github/ はそのまま取る
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
@@ -261,7 +261,7 @@ jobs:
       group: article-pipeline
       cancel-in-progress: false
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
@@ -897,7 +897,7 @@ jobs:
       # Bing への送信記録を前の回から戻す。戻さないと同じ日の2枠目が同じURLをもう一度送り、枠を食う
       - name: Bing への送信記録を戻す
         if: steps.site.outputs.skip != 'yes'
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/bing_submit.json
           key: bing-submit-${{ github.run_id }}
@@ -935,7 +935,7 @@ jobs:
 
       - name: Bing への送信記録を残す
         if: always() && steps.site.outputs.skip != 'yes' && hashFiles('data/bing_submit.json') != ''
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/bing_submit.json
           key: bing-submit-${{ github.run_id }}
