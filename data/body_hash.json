@@ -444,7 +444,7 @@
 "modified": "2026-08-31"
 },
 "llmo-dairiten-boshu": {
-"hash": "0b5c732c9fb2cbf7b6b288bedae51f25",
+"hash": "cb559ab19583cb57985a76848849dd61",
 "modified": "2026-10-07"
 },
 "llmo-shukyaku": {
@@ -452,7 +452,7 @@
 "modified": "2026-09-04"
 },
 "llmo-taisaku-hoho": {
-"hash": "1e75efa0fa06411cc0ab6187e44d2252",
+"hash": "aa0729095fa8b51e540a47cef9def2c3",
 "modified": "2026-08-31"
 },
 "llmo-tenpo-shukyaku": {
@@ -598,6 +598,10 @@
 "shika-kaigyou-hiyou": {
 "hash": "294914100c999ab6f12e4c399ccb6cab",
 "modified": "2026-09-09"
+},
+"shika-llmo-taisaku": {
+"hash": "7447fd126f6bb90575a1dc928e38db9c",
+"modified": "2026-10-18"
 },
 "shika-meo-taisaku": {
 "hash": "5f234e8cdc6f308cc90433ad3180db4c",

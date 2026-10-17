@@ -125,6 +125,8 @@ LLMO代理店になるには、提供元の募集に申し込み、審査を経�
 
 LLMO代理店の始め方は、情報収集・契約・実務準備という3ステップで進みます。
 
+実際の進め方を先に押さえるなら、[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)が参考になります。
+
 <figure><img src="/images/llmo-dairiten-boshu/steps3.png" alt="LLMO代理店を始める3ステップ: 情報収集で募集要項と提供範囲を確認する、契約で報酬体系とサポート内容を確定する、実務準備で自社の対応体制を整える" loading="lazy"><figcaption>LLMO代理店を始める3ステップ</figcaption></figure>
 
 ### ステップ1: 情報収集
