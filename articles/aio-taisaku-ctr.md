@@ -131,6 +131,8 @@ Search Consoleの検索パフォーマンスで、語ごとの平均掲載順位
 
 **クリックを取り戻すには、AIの回答に載らない情報を題・説明文・冒頭に置き、引用時の社名露出も狙います。**
 
+関連する内容として[工務店のAIO対策は自社で続けられる？](/aio/koumuten-aio-taisaku-taisei/)も公開しています。
+
 近い論点を[AIO対策を代理店に任せる前に](/aio/aio-taisaku-dairiten/)で扱っています。
 
 あわせて[AIO対策でやってはいけない5つのNG行動](/aio/aio-taisaku-yattewaikenai/)もご覧ください。

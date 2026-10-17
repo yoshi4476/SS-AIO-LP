@@ -85,6 +85,8 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 **見るべき指標は、表示回数・参照セッション・引用ページ数・11〜20位の本数・流入経路の5つです。**
 
+関連する内容については、[工務店のAIO対策は自社で続けられる？](/aio/koumuten-aio-taisaku-taisei/)にまとめています。
+
 関連する内容として[AI Overviewで店舗集客はできる？](/aio/ai-overview-tenpo-shukyaku/)も公開しています。
 
 同じ質問をAIに毎月聞き直して記録する手順は、不動産会社を例に[不動産会社のAIO対策のやり方](/aio/fudousan-aio-taisaku-yarikata/)でまとめました。
