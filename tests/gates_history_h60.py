@@ -259,9 +259,8 @@ def test_mid_cta_uses_the_site_colors():
     sub = P.mid_cta_block(S.load("subsidy"))
     lab = P.mid_cta_block(S.load("ai-lab"))
     check("補助金の中ほどの導線に AI集客ラボの青（#1b4fa0）を書かない", "#1b4fa0" in sub, False)
-    # 主ボタンの色は補助金サイトの DESIGN.md の藍（--ai）。2026-10-18 のデザインの作り直しで金から藍へ変えた
-    check("補助金の中ほどの導線は主ボタンと同じ藍（sites/subsidy.json の cta_colors）",
-          "#233f7c" in sub and "color:#fff" in sub, True)
+    check("補助金の中ほどの導線は主ボタンと同じ金（sites/subsidy.json の cta_colors）",
+          "#d9b36a" in sub and "#171104" in sub, True)
     check("色の設定の無い社は、これまでどおりの色", "#1b4fa0" in lab, True)
     cfg = {"id": "zz", "diagram_colors": {"accent": "#C2410C", "soft": "#F7E4D9", "line": "#D5D6D0", "muted": "#4B4F57"},
            "cta": {"label": "相談", "url": "https://zz.test/contact"}}

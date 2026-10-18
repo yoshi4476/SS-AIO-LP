@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """補助金サイト（lp.7senses.co.jp）の各ページに写真を置く。何度実行しても同じ結果になる。
 
-  - ページの題（会社案内・サービス・要項）: 題の右に写真を置く（スマホでは題の下）。見た目は補助金サイトの DESIGN.md
-  - トップ: 写真を置かない（顔は自己負担の計算。2026-10-18）
-  - サービスページの問い合わせ: 入力欄の左に写真
+  - 紺のヒーロー（会社案内・サービス・要項）: 右側に写真を薄く敷く（文字の側は紺のまま）
+  - トップのヒーロー: 試算カードの後ろに経営者の写真を敷く（左の文字の側は地の色に溶かす）
+  - 「対象になるか確認」・サービスページの問い合わせ: 中央に細い列だけが並び両脇が空くので、左に写真
   - 業種ページ・ブログ一覧・記事: 見出しの下に、その業種・記事の写真（記事は一覧のサムネイルと同じ1枚）
 
 写真は assets/img/（在庫）と images/shelf/（3サイト共通の写真の棚）から名前で引く。
@@ -17,27 +17,27 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 CSS = """<style id="ph-css">
-/* 写真の置き方（決まりは補助金サイトの DESIGN.md）。ページの題の右に写真を置く（文字に重ねない）。スマホでは題の下に短い帯で出す */
-.hero:has(>.hero-ph){position:relative;display:flex;flex-direction:column}
-.hero-ph{position:absolute;top:0;right:0;bottom:0;width:min(38vw,540px);z-index:0;pointer-events:none;background:var(--sheet,#f3f5f1)}
-.hero-ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-ph{position:absolute;inset:0;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 34%,rgba(0,0,0,.85) 72%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,transparent 34%,rgba(0,0,0,.85) 72%,#000 100%)}
+.hero-ph img{width:100%;height:100%;object-fit:cover;object-position:right center;opacity:.5}
 .hero>.wrap{position:relative;z-index:1}
-.hero:has(>.hero-ph)>.wrap{width:100%}
-@media(min-width:1024px){.hero:has(>.hero-ph)>.wrap>*{max-width:min(620px,52vw)}}
-@media(max-width:1023px){.hero-ph{position:static;order:2;width:auto;height:200px;margin-top:28px}.hero:has(>.hero-ph){padding-bottom:0}}
-.ph-side{margin:0;border-radius:var(--r-md,8px);overflow:hidden}
+.hero-ph-light{position:absolute;inset:0;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 38%,rgba(0,0,0,.9) 78%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,transparent 38%,rgba(0,0,0,.9) 78%,#000 100%)}
+.hero-ph-light img{width:100%;height:100%;object-fit:cover;object-position:80% 20%;opacity:.95}
+#hero>.wrap{position:relative;z-index:1}
+.ph-side{margin:0;border-radius:18px;overflow:hidden;box-shadow:0 18px 40px -22px rgba(19,36,69,.45)}
 .ph-side img{display:block;width:100%;height:auto;object-fit:cover;aspect-ratio:4/3}
 @media(min-width:900px){
  .ph-grid{display:grid !important;grid-template-columns:.9fr 1.1fr;column-gap:56px;align-items:start;text-align:left !important}
  .ph-grid>*{grid-column:2}
- .ph-grid>.ph-side{grid-column:1;grid-row:1/span 12;position:sticky;top:96px}
+ .ph-grid>.ph-side{grid-column:1;grid-row:1/span 12;position:sticky;top:110px}
  .ph-grid .fit-cta{justify-content:flex-start !important}
+ .ph-grid .kicker{justify-content:flex-start !important}
  .ph-grid .micro{text-align:left !important}
 }
 @media(max-width:899px){.ph-side{margin:0 0 22px}.ph-side img{aspect-ratio:16/9}}
-.ph-band{margin:24px 0;border-radius:var(--r-md,8px);overflow:hidden}
+@media(max-width:760px){.hero-ph img{opacity:.25}.hero-ph-light img{opacity:.2}}
+.ph-band{margin:18px 0 22px;border-radius:16px;overflow:hidden}
 .ph-band img{display:block;width:100%;height:auto;aspect-ratio:21/9;object-fit:cover}
-.ph-band figcaption{margin-top:6px;font-size:12px;color:var(--ink-3,#616a79)}
+.ph-band figcaption{font-size:11px;color:#8a8f99;margin-top:6px}
 @media(pointer:coarse){.crumb a,footer li>a,footer nav a{display:inline-block;padding:9px 0}}
 </style>"""
 
@@ -101,8 +101,14 @@ def decorate(repo: Path, rel: str, html: str) -> str:
     if rel in DARK:
         html = _insert_after(html, r'<div class="hero">', "hero",
                              f'<div class="hero-ph" aria-hidden="true">{img(DARK[rel], "このページの内容に関わる場面のイメージ", eager=True)}</div>')
-    # トップには写真を差し込まない（2026-10-18 のデザインの作り直し）。トップの顔は自己負担の計算（帳簿の形）で、
-    # 試算の後ろに敷いていた経営者の写真は文字と重なり、スマホで最初に読む大きな画像になっていた
+    if rel == "index.html":
+        html = _insert_after(html, r'<section class="hero" id="hero">', "hero",
+                             f'<div class="hero-ph-light" aria-hidden="true">{img("/assets/img/hero-owner.webp", "新しい管理システムを入れたタブレットを持つ経営者のイメージ", eager=True)}</div>')
+        # 「対象になるか確認」: 中央の細い列 → 左に写真
+        html = html.replace('<section id="fit" style="padding:64px 0 56px">\n  <div class="wrap rev" style="text-align:center">',
+                            '<section id="fit" style="padding:64px 0 56px">\n  <div class="wrap rev ph-grid" style="text-align:center">')
+        html = _insert_after(html, r'<div class="wrap rev ph-grid" style="text-align:center">', "fit",
+                             f'<figure class="ph-side">{img("/assets/img/step-check.webp", "チェックリストで対象かを確かめる経営者のイメージ")}</figure>')
     if rel.startswith("service/") and 'id="svcform"' in html:
         html = html.replace('<section id="svcform"><div class="wrap">', '<section id="svcform"><div class="wrap ph-grid">')
         html = _insert_after(html, r'<section id="svcform"><div class="wrap ph-grid">', "form",
