@@ -69,6 +69,35 @@ def live_slugs(domain):
     return None
 
 
+LEFTOVER = ("強調記号がそのまま出ている", "Markdownリンクが押せない形で出ている", "表の区切り記号が本文に出ている",
+            "見出し記号が本文に出ている", "タグが文字列として出ている")
+
+
+def delivered_leftovers(c, slugs, work=None):
+    """配信先の作業コピーにある記事の本文に、変換されないまま残った記法がある記事（nextjs-json）。
+    指紋は原稿から作るので、変換の道具を直しても配った記事は「古い」にならない。2026-10-18 にコーポレートの
+    147本で `**` が本番にそのまま出ていた（変換を直す前に配った分）。作業コピーが無ければ見ない"""
+    if c.get("type") != "nextjs-json" or not c.get("content_dir"):
+        return []
+    import render_check
+    if work is None:
+        import publish
+        work = publish.WORK / c["id"]
+    d = Path(work) / c["content_dir"]
+    if not d.is_dir():
+        return []
+    out = []
+    for s in slugs:
+        p = d / f"{s}.json"
+        try:
+            html = json.loads(p.read_text(encoding="utf-8")).get("html") or ""
+        except (OSError, ValueError):
+            continue
+        if any(name in LEFTOVER for name, _, _ in render_check.problems(html)):
+            out.append(s)
+    return out
+
+
 def live_manifest(domain):
     """公開サイトに置かれた、配信済み原稿の指紋一覧。
 
@@ -278,6 +307,9 @@ def main():
             if not ok:
                 stale.append(s)
                 why[s] = reason
+        for s in delivered_leftovers(c, [s for s, _, _, _ in slugs if s in live and s not in stale]):
+            stale.append(s)
+            why[s] = "変換漏れ"
         gap = missing + stale
         total_gap += len(gap)
         total_missing += len(missing)

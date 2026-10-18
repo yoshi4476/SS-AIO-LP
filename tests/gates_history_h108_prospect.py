@@ -90,3 +90,20 @@ def test_prospect_outreach_rules():
     js = (ROOT / "functions" / "api" / "audit.js").read_text(encoding="utf-8")
     check("営業のための診断（ref=prospect）は診断の記録・同業の平均に入れない",
           ('body.ref === "prospect"' in js, "!own && !prospect" in js), (True, True))
+
+
+def test_publish_gap_redelivers_unconverted_markdown():
+    import json
+    import tempfile
+    from pathlib import Path
+    import publish_gap as PG
+    print("\n■ 配信の照合: 配った記事に変換漏れ（** など）があれば「内容が古い」として配り直す")
+    with tempfile.TemporaryDirectory() as d:
+        c = {"type": "nextjs-json", "content_dir": "src/content/blog", "id": "client-zz"}
+        p = Path(d) / c["content_dir"]
+        p.mkdir(parents=True)
+        (p / "bad.json").write_text(json.dumps({"html": "<p>**強調のまま。**ただし</p>"}, ensure_ascii=False), encoding="utf-8")
+        (p / "good.json").write_text(json.dumps({"html": "<p><strong>強調。</strong>ただし</p>"}, ensure_ascii=False), encoding="utf-8")
+        got = PG.delivered_leftovers(c, ["bad", "good", "none"], work=d)
+        other = PG.delivered_leftovers({**c, "type": "external-html"}, ["bad"], work=d)
+    check("変換漏れの記事だけを拾う・作業コピーに無い記事と他の配信方式は見ない", (got, other), (["bad"], []))
