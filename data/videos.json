@@ -637,5 +637,47 @@
       "title": "工務店のよくある質問、何を載せる？",
       "youtube": "7pyg-i1PeDM"
     }
+  },
+  "koumuten-aio-taisaku-taisei": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-18",
+      "keyword": "工務店 AIO対策",
+      "queries": [
+        "工務店 aio対策"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "工務店の選び方",
+        "工務店 選び方",
+        "工務店 デメリット",
+        "工務店とは"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-10-18",
+      "sec": 49,
+      "title": "工務店のAI対策、社内と外注はどう分ける？",
+      "youtube": "LDzcM7555LM"
+    }
+  },
+  "shika-llmo-taisaku": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-18",
+      "keyword": "歯科 llmo",
+      "queries": [
+        "歯科 llmo"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "歯科医院",
+        "歯科 女医",
+        "歯科受付",
+        "歯科 英語"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
   }
 }
