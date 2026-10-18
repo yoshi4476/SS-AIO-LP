@@ -69,10 +69,10 @@ def worst_exit(order, views):
 
 
 def block(page_path):
-    # 見た目はサイトの CSS（.cta-mini・.btn-primary）に任せる。色を直書きすると、デザインを変えたときに残る
-    return ('<div class="cta-mini" data-exit-cta="1">'
-            '<p>ここまで読んで「自社の場合は？」と思った方へ</p>'
-            '<a class="btn btn-primary" href="/lp/#diagnosis" data-cta="exit_diagnosis">'
+    return ('<div class="cta-mini" data-exit-cta="1" style="text-align:center;margin:28px auto;max-width:720px">'
+            '<p style="margin:0 0 10px;font-weight:700">ここまで読んで「自社の場合は？」と思った方へ</p>'
+            '<a class="cta-button" href="/lp/#diagnosis" data-cta="exit_diagnosis" '
+            'style="display:inline-block;padding:12px 26px;border-radius:8px;background:#1b4fa0;color:#fff;text-decoration:none;font-weight:700">'
             '3分の無料診断で確かめる</a></div>\n')
 
 

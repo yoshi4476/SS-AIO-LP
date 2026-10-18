@@ -203,13 +203,13 @@ def _parts(d, more):
     links = "".join(f'<a href="{u}">{_e(t)}</a>' for u, t in more)
     src, alt = d["side"]
     return {
-        "steps": f'<div class="enrich-block"><h2>使い方は3ステップ</h2><ol class="enrich-steps">{steps}</ol></div>',
-        "learn": (f'<div class="enrich-block"><h2>結果でわかること</h2><div class="enrich-learn">'
+        "steps": f'<div class="enrich-block"><span class="en">How to use</span><h2>使い方は3ステップ</h2><ol class="enrich-steps">{steps}</ol></div>',
+        "learn": (f'<div class="enrich-block"><span class="en">Result</span><h2>結果でわかること</h2><div class="enrich-learn">'
                   f'<figure><img src="{src}" alt="{_e(alt)}のイメージ" width="1600" height="900" loading="lazy" decoding="async"></figure>'
                   f'<dl>{learn}</dl></div><p class="enrich-note">※ 写真はイメージです</p></div>'),
-        "who": f'<div class="enrich-block"><h2>こんな方に向いています</h2><ul class="enrich-who">{who}</ul></div>',
-        "faq": f'<div class="enrich-block enrich-faq"><h2>よくある質問</h2>{faq}</div>',
-        "more": (f'<div class="enrich-block"><h2>あわせて読む・使う</h2><div class="enrich-more">{links}</div></div>'
+        "who": f'<div class="enrich-block"><span class="en">For you</span><h2>こんな方に向いています</h2><ul class="enrich-who">{who}</ul></div>',
+        "faq": f'<div class="enrich-block enrich-faq"><span class="en">FAQ</span><h2>よくある質問</h2>{faq}</div>',
+        "more": (f'<div class="enrich-block"><span class="en">Next</span><h2>あわせて読む・使う</h2><div class="enrich-more">{links}</div></div>'
                  if links else ""),
     }
 
@@ -226,7 +226,7 @@ def _contact_side():
     """問い合わせの右の欄（相談の流れ・よくある質問）。フォームだけが中央にあり、パソコンで右半分が空いていた（2026-10-08）"""
     p = _parts(CONTACT, [])
     return ('<!-- contact-side --><aside class="contact-side" aria-label="ご相談の流れとよくある質問">'
-            + p["steps"].replace("<h2>使い方は3ステップ</h2>", "<h2>ご相談の流れ</h2>")
+            + p["steps"].replace("<h2>使い方は3ステップ</h2>", "<h2>ご相談の流れ</h2>").replace(">How to use<", ">Flow<")
             + p["faq"] + '</aside><!-- /contact-side -->')
 
 

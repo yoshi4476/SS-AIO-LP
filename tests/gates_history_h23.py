@@ -175,10 +175,7 @@ def test_top_hero_video_does_not_become_late_lcp():
         check(f"{f}: 計測タグの遅延読み込みはそのまま", "googletagmanager.com/gtag/js" in js, True)
     h = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
     pre = re.search(r'<link rel="preload" as="image" href="/images/home/mv\.webp"[^>]*>', h)
-    # 2026-10-18 のデザインの作り直しで、トップは背景に写真を敷かなくなった（先読みも無い）。敷くときは広い画面だけ
-    uses_bg = "--mv-photo" in h or "/images/home/mv." in h.replace(pre.group(0), "") if pre else "--mv-photo" in h
-    check("トップ: 背景写真の先読みは広い画面だけ（背景に敷かないなら先読みもしない）",
-          bool(pre and 'media="(min-width: 921px)"' in pre.group(0)) if (pre or uses_bg) else True, True)
+    check("トップ: 背景写真の先読みは広い画面だけ", bool(pre and 'media="(min-width: 921px)"' in pre.group(0)), True)
     mob = re.search(r"@media \(max-width:920px\)\{\.home \.lx-hero\{background:([^}]*)\}\}", h)
     check("トップ: 狭い画面の背景に大きな写真（--mv-photo）を敷かない", bool(mob) and "mv-photo" not in mob.group(1), True)
     still = re.search(r'<img[^>]*lx-hero-still[^>]*>', h)

@@ -810,12 +810,11 @@ def home_section(inds=None):
     G = group_stats(hls)
     n = len(hls)
     return ('<!-- research:home -->\n'
-            # トップの物語（問題→原因→やり方→根拠→料金と流れ→相談）の4番目。見た目は DESIGN.md の .story
-            '<section class="story is-wide rsh" data-area="業種別のAI調査" data-area-id="research">\n'
-            '  <div class="story-head">\n'
-            '    <p class="story-step"><b>4</b>根拠｜当社の調査</p>\n'
+            '<section class="section rsh" data-area="業種別のAI調査" data-area-id="research">\n'
+            '  <div class="section-head reveal">\n'
+            '    <span class="eyebrow">当社の調査</span>\n'
             '    <h2>AIは、何を出典にして答えているか</h2>\n'
-            '    <p>お客様がAIに聞きそうな質問を業種ごとにAIへ聞き、答えの出典になったサイトの種類を数えました。'
+            '    <p class="sub">お客様がAIに聞きそうな質問を業種ごとにAIへ聞き、答えの出典になったサイトの種類を数えました。'
             f'下の図は、{n}業種を{len(G)}つのまとまりに分けて見たものです。</p>\n'
             '  </div>\n'
             f'  <div class="rsh-wrap">{summary_html(hls, "h3")}\n'

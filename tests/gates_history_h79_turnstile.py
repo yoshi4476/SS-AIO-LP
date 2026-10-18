@@ -365,12 +365,6 @@ def _browser_case(page, path, mode, api="ok", enforce=False, form_sel="form.form
         except Exception:
             return default
     got["msg"] = look("(document.querySelector('.ts-msg') || {}).textContent || ''", "") if not got["posts"] else ""
-    if sub and got["posts"]:
-        # 作り直し（reset）は送信の応答を受けた後に非同期で走る。送信を見た直後に読むと、間に合わない回が出た（2026-10-19）
-        for _ in range(10):
-            if look("window.__tsReset || 0", 0):
-                break
-            page.wait_for_timeout(100)
     got["reset"] = look("window.__tsReset || 0", 0) if sub else 0
     return got
 

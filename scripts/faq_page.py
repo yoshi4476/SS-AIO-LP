@@ -82,7 +82,7 @@ def body():
     for i, (g, qs) in enumerate(FAQ, 1):
         items = "".join(f'<details class="faq-item"><summary>{E(q)}</summary><p>{a}</p></details>' for q, a in qs)
         secs.append(f'<section class="faq-sec" id="f{i}"><h2>{E(g)}</h2>{items}</section>')
-    return ('<section class="tools-head"><h1>ご契約前のよくある質問</h1>'
+    return ('<section class="tools-head"><span class="kicker">FAQ</span><h1>ご契約前のよくある質問</h1>'
             '<p class="lead">契約期間・解約・記事の品質・Googleの罰則など、ご契約の前によくいただく質問に答えます。'
             'ここに無いことは、<a href="/lp/#form" data-cta="faq_head_consult">無料相談</a>でお気軽にお尋ねください。</p>'
             f'<nav class="qa-toc faq-toc" aria-label="質問の種類">{toc}</nav></section>'

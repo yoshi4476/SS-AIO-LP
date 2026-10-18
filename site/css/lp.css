@@ -1,25 +1,29 @@
 /* ============================================================
-   LP（/lp/）だけの部品。色・書体・見出しはサイト共通（style.css）のまま（DESIGN.md）
+   LP（/lp/）だけの部品。色・書体・見出しはサイト共通（style.css）のまま（2026-10-08）
 
-   以前はここで「経営提案書」の見た目（紙白×金×墨・明朝の見出し）を重ね、全体のリンクを墨色にした指定
-   （body.lp-doc a）が紺の写真の上のリンクに勝って読めなくなっていた。ここには LP にしか無い部品だけを置く
+   以前はここで「経営提案書」の見た目（紙白×金×墨・明朝の見出し・第N章の札・生成りのフッター）を
+   style.css の上から重ねていた。1ページに紺の写真（ヒーロー）・金と墨の明朝体・青いボタンの3つの見た目が混ざり、
+   全体のリンクを墨色にした指定（body.lp-doc a）がヒーローの白いリンクに勝って、紺の写真の上の
+   「業種別のご案内」「よくある質問へ」が読めなくなっていた（1.6〜1.9:1）。ほかのページと同じ青×白にそろえる
    ============================================================ */
 
-/* ヒーロー（明るい紙の地）の上の文字リンクは墨色 */
-body.lp-doc .lx-hero a:not(.btn) { color: var(--ink); }
+/* ヒーロー（紺の写真）の上の文字リンクは白 */
+body.lp-doc .lx-hero a:not(.btn) { color: #fff; }
 
 /* 章の間の帯（どの章で読み止めても診断へ進める） */
 body.lp-doc .lead-band {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px;
-  max-width: var(--max-wide); margin: clamp(32px, 4vw, 48px) auto; padding: 22px clamp(18px, 2.5vw, 32px);
-  background: var(--sheet); border-left: 4px solid var(--pine);
-  border-radius: 0 var(--r-m) var(--r-m) 0; box-shadow: inset 0 0 0 1px var(--line);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem;
+  max-width: var(--max-wide); margin: 0 auto clamp(2rem, 4vw, 3rem); padding: 1.4rem clamp(1.2rem, 2.5vw, 2.2rem);
+  background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--blue);
+  border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow-sm);
 }
 body.lp-doc .lead-band .lb-text { flex: 1 1 32em; min-width: min(30em, 100%); }
-body.lp-doc .lead-band .lb-main { margin: 0; font-size: 1.04rem; font-weight: 700; line-height: 1.7; }
-body.lp-doc .lead-band .lb-sub { margin: .35em 0 0; font-size: .84rem; font-weight: 500; color: var(--ink-2); }
-body.lp-doc .lead-band .lb-sub a { color: var(--ink-2); }
+body.lp-doc .lead-band .lb-main { margin: 0; font-size: 1.02rem; font-weight: 700; line-height: 1.7; }
+body.lp-doc .lead-band .lb-sub { margin: .35em 0 0; font-size: .83rem; font-weight: 500; color: var(--muted); }
+body.lp-doc .lead-band .lb-sub a { color: var(--muted); }
 body.lp-doc .lead-band .btn { flex-shrink: 0; white-space: nowrap; }
 
-/* 申し込みフォームの横の「✓」 */
-body.lp-doc #form .trust-row span::before { color: var(--ok); }
+/* 申し込みフォームの横の「✓」。明るい面なので、暗い面用の白い丸では見えない */
+body.lp-doc #form .trust-row span::before { background: var(--sky); color: var(--blue); }
+/* 見出しを中央に置いた区画は、上の小見出しも中央に */
+body.lp-doc #form .section-head .eyebrow { margin-left: auto; margin-right: auto; }
