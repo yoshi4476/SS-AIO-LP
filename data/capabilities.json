@@ -2056,29 +2056,29 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:250",
+     "evidence": "scripts/publish_gap.py:279",
      "note": "配信した原稿の指紋（article-manifest.json）と本番を突き合わせ、足りなければ配信し直す",
      "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:250",
+     "evidence": "scripts/publish_gap.py:279",
      "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:250",
+     "evidence": "scripts/publish_gap.py:279",
      "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:88",
+     "evidence": "scripts/publish_gap.py:117",
      "note": "配信のたびに原稿の指紋を投稿メタ _ss_source_hash に残し、橋渡し 2.0.3 の /ss/v1/urls が返す。publish_gap が指紋で照合し、違えば配信し直す（指紋を返さない古い橋渡しはタイトルと本文で照合。橋渡しは署名つきの自己更新で上がる）",
      "anchor": "def live_manifest_wp(cfg, rows=None):"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish_gap.py:250",
+     "evidence": "scripts/publish_gap.py:279",
      "anchor": "man = live_manifest_wp(c) if c.get(\"type\") == \"wordpress\" else live_manifest(c[\"domain\"])"
     },
     "zip": {
