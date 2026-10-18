@@ -44,23 +44,27 @@
 "modified": "2026-10-10"
 },
 "aio-itsukara": {
-"hash": "140738faa052b80146a4ecfda1b556f1",
+"hash": "e3157178e5e7e5d5e93e3da435fbbf8b",
 "modified": "2026-10-15"
 },
 "aio-junni-hendou-riyuu": {
 "hash": "ecdaa791289567f2b73f1ef9325e6032",
 "modified": "2026-10-10"
 },
+"aio-kotoba": {
+"hash": "48bbc9483c6c47db2d11982b53ab1e46",
+"modified": "2026-10-18"
+},
 "aio-log-bunseki-tool-hikaku": {
 "hash": "8876b3e9372350915f77b8c390ec8c2f",
 "modified": "2026-10-05"
 },
 "aio-mojisuu": {
-"hash": "277cf26e1df4ae04918c52754f96ce3d",
+"hash": "2a56003053b927d810b309939cb76ed0",
 "modified": "2026-10-11"
 },
 "aio-muryou-soudan": {
-"hash": "c3488df8a6539075011bc3f8fd2b975a",
+"hash": "fb696895a437eba916a7a15e4986a030",
 "modified": "2026-10-13"
 },
 "aio-seo-audit": {
@@ -164,7 +168,7 @@
 "modified": "2026-09-14"
 },
 "aio-towa": {
-"hash": "baf6e78d4053a28f4eb0094631ea88ff",
+"hash": "503103be14f4332c93a1ced41d464199",
 "modified": "2026-09-24"
 },
 "aio-yarikata": {
@@ -400,7 +404,7 @@
 "modified": "2026-10-09"
 },
 "koumuten-aio-taisaku-taisei": {
-"hash": "96836bfd1453d4bfcafbb79fffc0deec",
+"hash": "e65be842e2e503570a5600ff0260b2f5",
 "modified": "2026-10-17"
 },
 "koumuten-chumon-jutaku-aio": {
