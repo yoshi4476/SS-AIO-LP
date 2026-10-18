@@ -122,7 +122,10 @@ def test_h51_article_answer_comes_before_the_side_column_on_phones():
 
 
 def test_h51_lp_is_blue_white_and_its_links_are_visible():
-    lp = _css("lp.css")
+    # LP だけの指定は 2026-10-19 にページへ埋め込んだ（読み込みを1回減らす。LCP の77%が CSS 待ちだった）
+    page = (ROOT / "site" / "lp" / "index.html").read_text(encoding="utf-8")
+    lp = " ".join(re.findall(r"<style>(.*?)</style>", page, re.S))
+    check("LP: 埋め込んだ指定がある・別ファイル lp.css を読まない", ("body.lp-doc" in lp, "/css/lp.css" in page), (True, False))
     check("LP: 墨・金・明朝の上書きが無い", [w for w in ("Shippori", "--gold", "#23201a", "#96751a", "counter(chapter")
                                            if w in lp], [])
     check("LP: 全体のリンクを墨色にする指定が無い（ヒーローの白いリンクに勝っていた）",

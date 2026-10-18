@@ -1514,8 +1514,8 @@ figure.layers { margin: clamp(2.2rem, 4vw, 3.2rem) 0 0; text-align: left; }
 /* 1 問題: 2つの割合を大きな数字と棒で比べる */
 .figure-pair { margin: 0; text-align: left; border-top: 2px solid var(--ink); }
 .figure-pair figcaption { margin: 0; padding: 14px 0 6px; font-size: .9rem; font-weight: 700; color: var(--ink); }
-.fp-row { display: grid; grid-template-columns: minmax(0, 9.5rem) minmax(0, 1fr); grid-template-areas: "n l" "n b"; column-gap: 24px; align-items: end; padding: 18px 0; border-bottom: 1px solid var(--line); }
-.fp-n { grid-area: n; margin: 0; font-family: var(--num); font-variant-numeric: tabular-nums; font-weight: 700; font-size: clamp(2.6rem, 5.6vw, 4.2rem); line-height: .95; letter-spacing: -.02em; color: var(--ink-2); }
+.fp-row { display: grid; grid-template-columns: max-content minmax(0, 1fr); grid-template-areas: "n l" "n b"; column-gap: 24px; align-items: end; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.fp-n { grid-area: n; margin: 0; font-family: var(--num); font-variant-numeric: tabular-nums; font-weight: 700; font-size: clamp(2.6rem, 5.6vw, 4.2rem); line-height: .95; letter-spacing: -.02em; color: var(--ink-2); white-space: nowrap; }
 .fp-n small { font-size: .42em; margin-left: .05em; letter-spacing: 0; }
 .fp-row.is-hl .fp-n { color: var(--pine); }
 .fp-l { grid-area: l; margin: 0 0 8px; font-weight: 700; font-size: .95rem; }
@@ -1523,7 +1523,7 @@ figure.layers { margin: clamp(2.2rem, 4vw, 3.2rem) 0 0; text-align: left; }
 .fp-bar i { display: block; height: 100%; background: var(--line-2); border-radius: 2px; }
 .fp-row.is-hl .fp-bar i { background: var(--pine); }
 .fp-src { margin: 12px 0 0; font-size: .8rem; color: var(--ink-2); line-height: 1.7; }
-@media (max-width: 560px) { .fp-row { grid-template-columns: minmax(0, 7rem) minmax(0, 1fr); column-gap: 16px; } }
+@media (max-width: 560px) { .fp-row { column-gap: 16px; } }
 
 /* 2 原因: 診断で測る14項目（検査票） */
 .sheet14 { background: var(--sheet); border-radius: 12px; padding: clamp(18px, 2.6vw, 28px); box-shadow: 0 0 0 1px var(--line), 0 0 0 7px var(--paper), 0 0 0 8px var(--line); margin: 8px; }
