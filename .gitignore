@@ -80,6 +80,8 @@ intake/下書き/
 data/reviews/
 # 言及の依頼の宛先・連絡先・下書き・送った記録（outreach.py）。公開リポジトリには置かない
 data/outreach/
+# 営業の下書きの見込み先・連絡先・検査結果・送った記録（prospect_outreach.py）。公開リポジトリには置かない
+data/prospects/
 
 # 社ごとのSNSの鍵（social_connect.py の控え。GitHub では SOCIAL_TOKENS_JSON）
 social-tokens.json

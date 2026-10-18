@@ -142,7 +142,9 @@ export async function onRequestPost({ request, env, waitUntil }) {
   // 応答は待たせない。記録に失敗しても診断の結果はそのまま返す
   // 自社のサイトと例示用のドメインは数えない（同業の平均がゆがむ）
   const own = /(^|\.)(7senses\.co\.jp|example\.(com|org|net|jp))$/i.test(new URL(page.finalUrl).hostname);
-  if (env && env.GAS_WEBHOOK_URL && waitUntil && !own) {
+  // 営業の下書き（scripts/prospect_outreach.py）が当社の側で測った分は、同業の平均にも診断の記録にも入れない
+  const prospect = body.ref === "prospect";
+  if (env && env.GAS_WEBHOOK_URL && waitUntil && !own && !prospect) {
     const INDUSTRIES = ["クリニック・歯科医院", "不動産", "工務店・リフォーム", "士業・コンサル", "BtoB・IT", "店舗・飲食・美容", "その他"];
     const industry = INDUSTRIES.includes(body.industry) ? body.industry : "";
     const ref = /^[A-Za-z0-9_-]{1,40}$/.test(String(body.ref || "")) ? body.ref : "";
