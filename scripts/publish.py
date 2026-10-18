@@ -370,7 +370,8 @@ def template_intro(html, tpl, cfg, meta):
     lead = ""
     m = re.search(r"<p>(.*?)</p>", intro, re.S)
     if m:
-        lead = _plain(m.group(1))
+        # 句読点の直後の ** は変換で閉じられず記号のまま残るため、結論の文字には出さない
+        lead = _plain(m.group(1)).replace("**", "")
         if "{{LEAD_DANGEN}}" in tpl:
             intro = intro[:m.start()] + intro[m.end():]
     target = ""
