@@ -22,7 +22,16 @@ MARK = "<!-- blog-cta:v1 -->"
 INDUSTRIES = ["動物病院", "歯科医院", "クリニック", "エステサロン", "美容室", "飲食店", "学習塾", "不動産会社",
               "自動車整備業", "建設業", "製造業", "小売業", "介護事業所", "運送業", "宿泊業", "士業", "個人事業主"]
 
+# 色・文字・ボタンの形はサイト共通の ss-common（scripts/subsidy/pages.py の CHROME_CSS）が持つ。ここは位置と出入りだけ。
+# 以前の金と橙のグラデーションの版（OLD_STYLE）が入っている記事は、apply が差し替える（2026-10-18 のデザインの作り直し）
 STYLE = """<style>
+.blog-sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));transform:translateY(110%);transition:transform .25s cubic-bezier(.23,1,.32,1)}
+.blog-sticky.on{transform:none}
+@media (min-width:761px){.blog-sticky{display:none}}
+@media (prefers-reduced-motion:reduce){.blog-sticky{transition:none}}
+</style>"""
+
+OLD_STYLE = """<style>
 .bcta-mid{background:linear-gradient(135deg,rgba(217,179,106,.16),rgba(217,179,106,.05));border:1px solid var(--line2,#e6d3a3);border-radius:14px;padding:22px 22px 20px;margin:36px 0;text-align:center}
 .bcta-mid .t{font-weight:800;font-size:17px;line-height:1.7;margin:0 0 6px}
 .bcta-mid .d{font-size:13px;color:var(--muted,#5b6472);margin:0 0 14px;line-height:1.8}
@@ -99,7 +108,7 @@ def add_table_css(html):
 
 
 def apply(html):
-    html = add_table_css(add_aicheck(html))
+    html = add_table_css(add_aicheck(html)).replace(OLD_STYLE, STYLE)
     if MARK in html:
         return html
     title = re.sub(r"<[^>]+>", "", (re.search(r"<h1[^>]*>(.*?)</h1>", html, re.S) or [None, ""])[1])

@@ -145,12 +145,12 @@
     "_why": "記事の中ほどは相談する段階にない。実測CTA押下率2.7%（AI集客ラボの診断前面は9.4%）。効果は月次の導線で検証する（2026-09-24）"
   },
   "cta_colors": {
-    "button": "linear-gradient(135deg,#e8c988,#d9b36a 55%,#c39a4e)",
-    "button_ink": "#171104",
-    "soft": "#fbf6ea",
-    "line": "#e6d3a3",
-    "muted": "#5b6472",
-    "_why": "記事の中ほどの導線（publish.mid_cta_block）の色。先方の雛形（blog/_template.html）の主ボタン（.cta-box a の金・文字 --gold-ink）・定義の箱の地・途中の案内（.bcta-mid）の枠・--muted と同じ値。直書きの AI集客ラボの青で、主ボタン（2026-10-08 に金へ統一）と揃っていなかった"
+    "button": "#233f7c",
+    "button_ink": "#fff",
+    "soft": "#f3f5f1",
+    "line": "#d5dad2",
+    "muted": "#616a79",
+    "_why": "記事の中ほどの導線（publish.mid_cta_block）の色。補助金サイトの DESIGN.md のトークン（主ボタンの藍 --ai・文字の白・章の帯 --sheet・罫線 --rule・注記 --ink-3）と同じ値。2026-10-18 のデザインの作り直しで金のグラデーションから藍へ。直書きの AI集客ラボの青だと主ボタンと揃わない（2026-10-08）"
   },
   "cta_inline": {
     "tool": "hojokin_quiz",

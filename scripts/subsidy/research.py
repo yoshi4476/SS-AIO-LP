@@ -261,56 +261,61 @@ def top_html(d):
         f'<span class="rs-t"><span style="width:{s[k] * 100 / total:.1f}%"></span></span></li>' for k in order)
     said2 = (f"AIが根拠にしたページ{total}件のうち、公的機関のページは{s.get('public', 0)}件（{d['public_pct']}%）、"
              f"民間のサイトは{s.get('private', 0)}件（{pct_txt('private')}）でした。")
-    return f'''<section id="research" class="rs" aria-labelledby="rs-h" style="background:var(--bg2)">
+    # 見た目は補助金サイトの DESIGN.md（左に見出し・右に中身の2列、罫線で区切る、英字の飾りを付けない）。
+    # 外側の .sec・.sec-grid・.sec-head・.sec-body・.lead・.btn はトップの CSS と ss-common が持つ
+    return f'''<section id="research" class="sec rs" aria-labelledby="rs-h">
 <style>
-#research .rs-grid{{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;margin-top:30px}}
-@media(max-width:860px){{#research .rs-grid{{grid-template-columns:1fr}}}}
-#research .rs-card{{margin:0;min-width:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 24px 20px;box-shadow:var(--shadow)}}
-#research .rs-k{{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px}}
-#research .rs-big{{font-family:var(--num);color:var(--navy);line-height:1.1;margin-bottom:14px}}
-#research .rs-big b{{font-size:52px;font-weight:600;letter-spacing:.02em}}
-#research .rs-big small{{font-family:var(--sans);font-size:15px;color:var(--muted);margin-left:6px}}
+#research .rs-grid{{display:grid;grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:700px){{#research .rs-grid{{grid-template-columns:1fr;gap:28px}}}}
+#research .rs-card{{margin:0;min-width:0;padding-top:16px;border-top:1px solid var(--rule-strong)}}
+#research .rs-k{{margin:0 0 10px;font-size:15px;font-weight:700;color:var(--ink)}}
+#research .rs-big{{margin:0 0 14px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}}
+#research .rs-big b{{font-size:56px;font-weight:700;letter-spacing:-.01em}}
+#research .rs-big small{{margin-left:6px;font-size:15px;color:var(--ink-2)}}
 #research .rs-cells{{display:grid;grid-template-columns:repeat({min(n, 25)},1fr);gap:3px;max-width:420px}}
-#research .rs-cells i{{display:block;height:26px;border-radius:4px;background:#ebe5d6}}
-#research .rs-cells i.is-split{{background:var(--navy2)}}
-#research .rs-key{{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:13px;color:var(--muted)}}
-#research .rs-key span::before{{content:"";display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:#ebe5d6}}
-#research .rs-key span.is-split::before{{background:var(--navy2)}}
-#research .rs-bars{{list-style:none;margin:0;padding:0;display:grid;gap:12px}}
-#research .rs-bars li{{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:baseline;font-size:14px}}
-#research .rs-l{{color:var(--text)}}
-#research .rs-v{{font-family:var(--num);font-size:17px;color:var(--text);white-space:nowrap}}
-#research .rs-v small{{font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-left:2px}}
-#research .rs-t{{grid-column:1/-1;display:block;height:12px;border-radius:6px;background:#f1ece0;overflow:hidden}}
-#research .rs-t span{{display:block;height:100%;min-width:3px;border-radius:6px;background:#c9bfa6}}
-#research li.is-em .rs-l{{font-weight:700;color:var(--navy)}}
-#research li.is-em .rs-t span{{background:var(--navy2)}}
-#research figcaption{{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:14px;color:var(--muted);line-height:1.8}}
-#research .rs-note{{margin-top:22px;font-size:14px;color:var(--muted);max-width:860px}}
-#research .rs-cta{{margin-top:18px}}
+#research .rs-cells i{{display:block;height:24px;background:var(--rule)}}
+#research .rs-cells i.is-split{{background:var(--ai)}}
+#research .rs-key{{display:flex;flex-wrap:wrap;gap:4px 16px;margin:10px 0 0;font-size:var(--fs-14);color:var(--ink-2)}}
+#research .rs-key span::before{{content:"";display:inline-block;width:10px;height:10px;margin-right:6px;vertical-align:-1px;background:var(--rule)}}
+#research .rs-key span.is-split::before{{background:var(--ai)}}
+#research .rs-bars{{list-style:none;margin:0;padding:0;display:grid;gap:14px}}
+#research .rs-bars li{{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:baseline;margin:0;font-size:var(--fs-14)}}
+#research .rs-l{{color:var(--ink)}}
+#research .rs-v{{font-size:17px;font-weight:700;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}}
+#research .rs-v small{{margin-left:2px;font-size:13px;font-weight:400;color:var(--ink-2)}}
+#research .rs-t{{grid-column:1/-1;display:block;height:10px;background:var(--sheet)}}
+#research .rs-t span{{display:block;height:100%;min-width:3px;background:var(--rule-strong)}}
+#research li.is-em .rs-l{{font-weight:700}}
+#research li.is-em .rs-t span{{background:var(--ai)}}
+#research figcaption{{margin-top:14px;font-size:var(--fs-14);line-height:1.8;color:var(--ink-2)}}
+#research .rs-note{{margin:28px 0 0;padding:12px 16px;border-left:3px solid var(--shu);background:var(--shu-tint);font-size:15px;line-height:1.85;color:var(--ink)}}
+#research .rs-cta{{margin:20px 0 0}}
 </style>
-  <div class="wrap rev">
-    <p class="kicker">Research</p>
-    <h2 id="rs-h">補助金をAIに聞くと、<br class="sp"><span class="accent">答えは割れます</span></h2>
-    <p class="lead">当社が{esc(when)}に{esc(who)}へ、補助金について読者が聞きそうな問いを{n}問聞き、AIの結論と、根拠にしたページを数えました（当社調べ）。</p>
-    <div class="rs-grid">
-      <figure class="rs-card">
-        <p class="rs-k">AIどうしで結論が分かれた問い</p>
-        <div role="img" aria-label="{esc(said1)}">
-          <p class="rs-big"><b>{split}</b>問<small>／{n}問中</small></p>
-          <div class="rs-cells">{cells}</div>
-          <p class="rs-key"><span class="is-split">結論が分かれた {split}問</span><span>結論が同じ {same}問</span></p>
-        </div>
-        <figcaption>{esc(said1)}</figcaption>
-      </figure>
-      <figure class="rs-card">
-        <p class="rs-k">AIが根拠にしたページの種類（{total}件）</p>
-        <ol class="rs-bars" role="img" aria-label="{esc(said2)}">{bars}</ol>
-        <figcaption>{esc(said2)}</figcaption>
-      </figure>
+  <div class="wrap sec-grid">
+    <div class="sec-head">
+      <h2 id="rs-h">補助金をAIに聞くと、答えは割れます</h2>
+      <p class="lead">当社が{esc(when)}に{esc(who)}へ、補助金について読者が聞きそうな問いを{n}問聞き、AIの結論と、根拠にしたページを数えました（当社調べ）。</p>
     </div>
-    <p class="rs-note">AIの答えは、申請の可否を決める根拠になりません。補助の対象・金額・締切は、公募要領と事務局のページで確かめてください。調べた日は{esc(when)}で、その日の1回の結果です。</p>
-    <p class="rs-cta"><a class="btn btn-ghost" href="{d["url"]}" data-cta="top_research">問いごとの答えと根拠を見る</a></p>
+    <div class="sec-body">
+      <div class="rs-grid">
+        <figure class="rs-card">
+          <p class="rs-k">AIどうしで結論が分かれた問い</p>
+          <div role="img" aria-label="{esc(said1)}">
+            <p class="rs-big"><b>{split}</b>問<small>／{n}問中</small></p>
+            <div class="rs-cells">{cells}</div>
+            <p class="rs-key"><span class="is-split">結論が分かれた {split}問</span><span>結論が同じ {same}問</span></p>
+          </div>
+          <figcaption>{esc(said1)}</figcaption>
+        </figure>
+        <figure class="rs-card">
+          <p class="rs-k">AIが根拠にしたページの種類（{total}件）</p>
+          <ol class="rs-bars" role="img" aria-label="{esc(said2)}">{bars}</ol>
+          <figcaption>{esc(said2)}</figcaption>
+        </figure>
+      </div>
+      <p class="rs-note">AIの答えは、申請の可否を決める根拠になりません。補助の対象・金額・締切は、公募要領と事務局のページで確かめてください。調べた日は{esc(when)}で、その日の1回の結果です。</p>
+      <p class="rs-cta"><a class="btn btn-ghost" href="{d["url"]}" data-cta="top_research">問いごとの答えと根拠を見る</a></p>
+    </div>
   </div>
 </section>'''
 
