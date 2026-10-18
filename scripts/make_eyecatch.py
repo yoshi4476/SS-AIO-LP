@@ -142,58 +142,7 @@ def parse_frontmatter(slug):
     return meta["title"], cat_name, brand
 
 
-# AI集客ラボの見た目（DESIGN.md「出典つきの実測ノート」2026-10-18）。紙の地に墨の題、題の最後の行に蛍光ペン、
-# 左上にカテゴリの札。ほかの社・事業のサイトは下の render のまま（色を変えない）
-LAB_CATS = {"AIO・LLMO運用": (14, 90, 82), "SEO運用": (51, 80, 138), "MEO運用": (111, 106, 42),
-            "AI集客・活用全般": (122, 74, 134)}
-LAB_INK, LAB_INK2, LAB_PAPER, LAB_MARKER = (21, 40, 44), (75, 94, 97), (250, 251, 248), (255, 216, 74)
-
-
-def render_lab(slug, cat, lines_or_title, brand):
-    accent = LAB_CATS.get(cat, LAB_CATS["AIO・LLMO運用"])
-    img = Image.new("RGB", (W, H), LAB_PAPER)
-    d = ImageDraw.Draw(img)
-    # 外枠（紙の端）と、上の札
-    d.rectangle([0, 0, W - 1, H - 1], outline=(214, 221, 214), width=2)
-    bf = font(26)
-    tw = d.textlength(cat, font=bf)
-    d.rectangle([80, 80, 96, 96], fill=accent)
-    d.rounded_rectangle([112, 70, 112 + tw + 40, 106], radius=6, outline=accent, width=3)
-    d.text((112 + 20 + tw / 2, 88), cat, font=bf, fill=accent, anchor="mm")
-    # 題（折り返し・縮小は従来と同じ規則）。最後の行の下 30% に蛍光ペン
-    if isinstance(lines_or_title, str):
-        lines, tf = wrap_title(d, lines_or_title, W - 160)
-    else:
-        lines, tf = lines_or_title, font(64)
-        while any(d.textlength(x, font=tf) > W - 160 for x in lines) and tf.size > 40:
-            tf = font(tf.size - 4)
-    line_h = int(tf.size * 1.5)
-    y0 = 318 - (len(lines) - 1) * line_h // 2
-    last = len(lines) - 1
-    lw = d.textlength(lines[last], font=tf)
-    ly = y0 + last * line_h
-    d.rectangle([76, ly + int(tf.size * .12), 80 + lw + 6, ly + int(tf.size * .5)], fill=LAB_MARKER)
-    for i, line in enumerate(lines):
-        d.text((80, y0 + i * line_h), line, font=tf, fill=LAB_INK, anchor="lm")
-    # 下の罫と出どころ
-    d.rectangle([80, H - 118, W - 80, H - 116], fill=LAB_INK)
-    logo_path = ROOT / "site" / "images" / "company" / "logo.png"
-    tx = 80
-    if logo_path.exists():
-        logo = Image.open(logo_path).convert("RGBA")
-        lh = 44
-        lwid = int(logo.width * lh / logo.height)
-        logo = logo.resize((lwid, lh), Image.LANCZOS)
-        img.paste(logo, (80, H - 64 - lh // 2), logo)
-        tx = 80 + lwid + 24
-    d.text((tx, H - 64), brand, font=font(30), fill=LAB_INK, anchor="lm")
-    d.text((W - 80, H - 64), "セブンセンシズ株式会社", font=font(22), fill=LAB_INK2, anchor="rm")
-    save_png(img, ROOT / "site" / "images" / slug / "eyecatch.png")
-
-
 def render(slug, cat, lines_or_title, brand="AI集客ラボ"):
-    if brand == "AI集客ラボ" and cat in LAB_CATS:
-        return render_lab(slug, cat, lines_or_title, brand)
     accent = CAT_COLORS.get(cat, (37, 99, 235))
 
     img = Image.new("RGB", (W, H))
