@@ -52,6 +52,8 @@ faq:
 
 **札幌で記帳を頼める先は、税理士事務所・記帳代行会社・オンラインの経理BPO・商工会議所の記帳指導の4つです。**
 
+あわせて[介護事業の記帳代行は何を任せる？](/blog/kaigo-kichodaiko/)もご覧ください。
+
 関連する内容として[美容室の記帳代行は何を任せる？](/blog/biyoushitsu-kichodaiko/)も公開しています。
 
 <figure><img src="/images/kichodaiko-sapporo/tanomisaki.png" alt="札幌で選べる記帳の頼み先を、税理士事務所・記帳代行会社・オンラインの経理BPO・商工会議所の記帳指導の4つに分けた図"></figure>
