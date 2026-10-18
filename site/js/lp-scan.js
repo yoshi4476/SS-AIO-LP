@@ -77,7 +77,7 @@
     var ring = el("div", "lx-ring");
     var r = 64, len = 2 * Math.PI * r, pct = Math.max(0, Math.min(100, d.score)) / 100;
     ring.innerHTML = '<svg viewBox="0 0 150 150" aria-hidden="true"><circle cx="75" cy="75" r="64" fill="none" stroke="#dfe6ef" stroke-width="12"/>' +
-      '<circle cx="75" cy="75" r="64" fill="none" stroke="' + (d.critical && d.critical.length ? "#c2362b" : "#2563eb") +
+      '<circle cx="75" cy="75" r="64" fill="none" stroke="' + (d.critical && d.critical.length ? "#b5422b" : "#0e5a52") +
       '" stroke-width="12" stroke-linecap="round" stroke-dasharray="' + (len * pct).toFixed(1) + " " + len.toFixed(1) + '"/></svg>';
     var v = el("div", "v"); var b = el("b", null, String(d.score)); v.appendChild(b); v.appendChild(el("small", null, "/ 100点"));
     ring.appendChild(v);

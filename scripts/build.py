@@ -1434,7 +1434,7 @@ BLOG_PAGE = """<!DOCTYPE html>
 <title>{title}｜{site}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}/blog/">
-<meta name="theme-color" content="#071a38">
+<meta name="theme-color" content="#fafbf8">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="{title}｜{site}">

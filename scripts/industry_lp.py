@@ -97,46 +97,57 @@ LPS = {
 BY_HUB = {s: k for k, v in LPS.items() for s in v["slugs"]}
 
 STYLE = """<style>
-.ilp{max-width:1120px;margin:0 auto;display:grid;gap:3.4rem}
-.ilp-eb{display:block;font-family:var(--sans);font-size:.8125rem;letter-spacing:.1em;color:var(--blue);font-weight:700;margin-bottom:.35rem}
-.ilp h2{font-size:clamp(1.3rem,2.5vw,1.75rem);margin:0 0 1.1rem;line-height:1.45;text-wrap:balance}
-.ilp-cards{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
-.ilp-card{border:1px solid var(--line);border-radius:18px;padding:1.25rem 1.3rem;background:#fff;box-shadow:var(--shadow-sm)}
-.ilp-card h3{font-size:1.02rem;margin:0 0 .5rem;line-height:1.5}
-.ilp-card p{margin:0;font-size:.93rem;line-height:1.85;color:var(--muted)}
-.ilp-pain .ilp-card{border-top:4px solid #d9932b}
-.ilp-fix .ilp-card{border-top:4px solid var(--blue);background:var(--bg-alt)}
+/* 業種LP の本文（DESIGN.md）。物語の順: 1 問題 → 2 原因（当社の調査）→ 3 やり方 → 4 相談、その後に記事と質問 */
+.ilp{max-width:1200px;margin:0 auto;display:grid;gap:0}
+.ilp>section{padding:clamp(48px,7vw,104px) 0;border-top:1px solid var(--line)}
+.ilp>section:first-child{border-top:0;padding-top:clamp(24px,4vw,48px)}
+.ilp-eb{display:block;font-family:var(--sans);font-size:.86rem;letter-spacing:.04em;color:var(--pine);font-weight:700;margin-bottom:.5rem}
+.ilp h2{font-size:clamp(1.55rem,2.9vw,2.25rem);margin:.5em 0 1.4rem;line-height:1.42;text-wrap:balance;font-feature-settings:"palt" 1;letter-spacing:.02em}
+.ilp .story-step+h2{margin-top:.55em}
+.ilp-cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr))}
+.ilp-card{border:1px solid var(--line);border-radius:var(--r-m);padding:22px 22px 20px;background:var(--sheet)}
+.ilp-card h3{font-size:1.04rem;margin:0 0 .5rem;line-height:1.55}
+.ilp-card p{margin:0;font-size:.93rem;line-height:1.85;color:var(--ink-2)}
+.ilp-pain .ilp-cards{grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:0 32px;border-top:2px solid var(--ink)}
+.ilp-pain .ilp-card{position:relative;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;padding:20px 0 20px 2.4em}
+.ilp-pain .ilp-card::before{content:"";position:absolute;left:.2em;top:1.55em;width:1.1em;height:1.1em;border:2px solid var(--ink);border-radius:3px}
+.ilp-pain .ilp-card::after{content:"";position:absolute;left:.55em;top:1.62em;width:.38em;height:.72em;border-right:2.5px solid var(--alert);border-bottom:2.5px solid var(--alert);transform:rotate(40deg)}
+.ilp-fix .ilp-card{background:var(--sheet)}
 .ilp-photo-card{overflow:hidden;padding-top:0}
-.ilp-photo-card img{display:block;width:calc(100% + 2.6rem);max-width:none;margin:0 -1.3rem 1rem;aspect-ratio:16/9;object-fit:cover}
-.ilp-data{background:linear-gradient(135deg,#0b2447,#123a72);border-radius:26px;padding:clamp(1.5rem,3.4vw,2.6rem);color:#fff}
-.ilp-data .ilp-eb{color:#8fb7ff}
+.ilp-photo-card img{display:block;width:calc(100% + 44px);max-width:none;margin:0 -22px 18px;aspect-ratio:16/10;object-fit:cover}
+.ilp-data{background:var(--pine-deep);border-radius:var(--r-l);padding:clamp(28px,4vw,56px)!important;color:#fff;border-top:0!important;margin:clamp(24px,4vw,48px) 0}
+.ilp-data .ilp-eb,.ilp-data .story-step{color:var(--marker)}
+.ilp-data .story-step b{background:var(--marker);color:var(--ink)}
 .ilp-data h2{color:#fff}
-.ilp-data .ilp-proof{color:rgba(255,255,255,.78)}
-.ilp-data .ilp-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);box-shadow:none}
-.ilp-stat .ilp-k{font-size:.8rem;color:rgba(255,255,255,.72);font-weight:700;margin:0 0 .35rem}
-.ilp-stat .ilp-n{font-size:clamp(2rem,3.8vw,2.7rem);font-weight:800;color:#fff;margin:0;line-height:1.15;font-variant-numeric:tabular-nums}
-.ilp-stat p{color:rgba(255,255,255,.86)}
-.ilp-stat .ilp-src{margin-top:.7rem;font-size:.82rem}
-.ilp-stat .ilp-src a{color:#8fb7ff}
-.ilp-proof{font-size:.9rem;color:var(--muted);margin:0}
-.ilp-band{background:var(--navy-deep);color:#fff;border-radius:26px;padding:clamp(1.6rem,3.6vw,2.6rem);display:grid;gap:1rem;justify-items:center;text-align:center}
-.ilp-band h2{color:#fff;margin:0}
-.ilp-band p{margin:0;color:rgba(255,255,255,.8)}
-.ilp-band .btns{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
-.ilp-band .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff}
-.ilp-faq details{border-bottom:1px solid var(--line);padding:1rem 0}
-.ilp-faq-grid{display:grid;gap:1.6rem}
-@media(min-width:900px){.ilp-faq-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2.4rem;align-items:start}.ilp-faq-ph{position:sticky;top:96px}}
-.ilp-faq-ph{margin:0;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-md)}
+.ilp-data .ilp-proof{color:rgba(255,255,255,.8)}
+.ilp-data .ilp-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2)}
+.ilp-stat .ilp-k{font-size:.84rem;color:rgba(255,255,255,.78);font-weight:700;margin:0 0 .4rem}
+.ilp-stat .ilp-n{font-family:var(--num);font-size:clamp(2.2rem,4vw,3rem);font-weight:700;color:#fff;margin:0;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.ilp-stat p{color:rgba(255,255,255,.88)}
+.ilp-stat .ilp-src{margin-top:.8rem;font-size:.84rem}
+.ilp-stat .ilp-src a{color:var(--marker)}
+.ilp-proof{font-size:.92rem;color:var(--ink-2);margin:0;max-width:46em}
+.ilp-band{background:var(--paper-2);border-radius:var(--r-l);padding:clamp(32px,4.4vw,56px)!important;display:grid;gap:16px;justify-items:start;border-top:0!important;margin:clamp(24px,4vw,48px) 0}
+.ilp-band h2{margin:0}
+.ilp-band p{margin:0;color:var(--ink-2)}
+.ilp-band .btns{display:flex;gap:12px;flex-wrap:wrap}
+.ilp-faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.ilp-faq details:first-child{border-top:2px solid var(--ink)}
+.ilp-faq-grid{display:grid;gap:28px}
+@media(min-width:900px){.ilp-faq-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:48px;align-items:start}.ilp-faq-ph{position:sticky;top:96px}}
+.ilp-faq-ph{margin:0;border-radius:var(--r-m);overflow:hidden;background:var(--paper-2)}
 .ilp-faq-ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
-.ilp-faq summary{font-weight:700;cursor:pointer;list-style-position:outside}
-.ilp-faq details p{margin:.6rem 0 0;color:var(--muted);line-height:1.85}
-.ilp-more{margin-top:1rem}
-.ilp-console .lx-stat{padding:.9rem 0;border-top:1px solid rgba(255,255,255,.14)}
-.ilp-console .lx-stat:first-of-type{border-top:0;padding-top:.2rem}
-.ilp-console .lx-stat b{display:block;font-size:2.3rem;line-height:1.1;font-variant-numeric:tabular-nums;color:#fff}
-.ilp-console .lx-stat span{font-size:.86rem;color:rgba(255,255,255,.82);line-height:1.7}
-.ilp-hero .lx-h1{font-size:clamp(1.9rem,4.4vw,3.1rem)}
+.ilp-faq summary{font-weight:700;cursor:pointer;list-style:none;position:relative;padding-right:2em;line-height:1.7}
+.ilp-faq summary::-webkit-details-marker{display:none}
+.ilp-faq summary::after{content:"";position:absolute;right:.4em;top:.55em;width:.5em;height:.5em;border-right:2px solid var(--ink-2);border-bottom:2px solid var(--ink-2);transform:rotate(45deg);transition:transform var(--t-open) var(--ease-out)}
+.ilp-faq details[open] summary::after{transform:rotate(-135deg)}
+.ilp-faq details p{margin:.7rem 0 0;color:var(--ink-2);line-height:1.9}
+.ilp-more{margin-top:1.4rem}
+.ilp-console .lx-stat{padding:14px 0;border-top:1px solid var(--line)}
+.ilp-console .lx-stat:first-of-type{border-top:0;padding-top:4px}
+.ilp-console .lx-stat b{display:block;font-family:var(--num);font-size:2.4rem;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em}
+.ilp-console .lx-stat span{font-size:.88rem;color:var(--ink-2);line-height:1.75}
+.ilp-hero .lx-h1{font-size:clamp(2rem,4.4vw,3.4rem)}
 @media (prefers-reduced-motion:reduce){.ilp *{transition:none!important}}
 </style>"""
 
@@ -160,7 +171,7 @@ def hero(key, c):
                  f'<small>{_e(label)}・{hl["questions"]}問×4つのAI</small></div>'
                  f'<div class="lx-stat"><b>{_e(first[0])}</b><span>{_e(first[1])}</span></div>'
                  f'<div class="lx-stat"><b>{hl["oa"]}%</b><span>{_e(T["other_short"])}を調べる質問で、回答が{_e(T["owner_site"])}を1つ以上出典にしていた割合</span></div>'
-                 f'<p class="lx-console-foot"><a href="/research/{r}-ai-sources/" style="color:#8fb7ff" data-cta="lp_{key}_hero_research">調査の詳細を見る（{hl["date"]}）</a></p></div>')
+                 f'<p class="lx-console-foot"><a href="/research/{r}-ai-sources/" data-cta="lp_{key}_hero_research">調査の詳細を見る（{hl["date"]}）</a></p></div>')
         break
     if not stats:
         items = "".join(f'<li class="lx-item"><span class="mk" aria-hidden="true"></span><span>{_e(t)}</span></li>' for t, _ in c["fixes"])
@@ -170,7 +181,7 @@ def hero(key, c):
     return (f'<section class="lx-hero ilp-hero" data-area="メインビジュアル" data-area-id="mv">'
             f'<div class="lx-wrap lx-hero-grid"><div>'
             f'<ul class="lx-kicker"><li>SEO・AIO・LLMO対策</li><li>{_e(c["name"])}向け</li></ul>'
-            f'<h1 class="lx-h1">{_e(name)}の<br><em>SEO・AI検索対策</em></h1>'
+            f'<h1 class="lx-h1">{_e(name)}の<br>SEO・AI検索対策</h1>'
             f'<p class="lx-lead">{_e(c["desc"].split("。")[1] if c["desc"].count("。") > 1 else c["desc"])}。まず、御社のサイトがAIと検索に読まれているかを30秒で確かめてください。</p>'
             f'<form class="lx-form" id="scan-start" action="/lp/" method="get">'
             f'<input type="hidden" name="ind" value="{_e(c["scan_ind"])}"><input type="hidden" name="src" value="lp_{key}">'
@@ -223,7 +234,7 @@ def data_section(key, c):
             f'　<a href="{IAS.checklist_url(r)}" data-cta="lp_{key}_checklist_{r}">チェックリスト（PDF）</a></p></div>')
     if not cards:
         return ""
-    return ('<section class="ilp-data"><span class="ilp-eb">当社の調査</span><h2>データで見る：AIは何を出典に答えているか</h2>'
+    return ('<section class="ilp-data"><p class="story-step"><b>2</b>原因｜当社の調査</p><h2>データで見る：AIは何を出典に答えているか</h2>'
             '<p class="ilp-proof" style="margin:0 0 1rem">当社が、実際に調べられそうな質問を ChatGPT・Gemini・Claude などのAIに聞き、'
             '回答の出典になったサイトを種類ごとに数えた結果です。</p>'
             f'<div class="ilp-cards">{"".join(cards)}</div></section>')
@@ -250,12 +261,12 @@ def body(key, metas, faq_pairs, post_tile, site_url):
             '<input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL">'
             f'<button type="submit" class="btn btn-primary" data-cta="lp_{key}_scan">30秒で診断する</button></form></section>')
     out = [STYLE, '<div class="ilp">',
-           f'<section class="ilp-pain"><span class="ilp-eb">課題</span><h2>{_e(c["name"])}によくあるお悩み</h2><div class="ilp-cards">{pains}</div></section>',
+           f'<section class="ilp-pain"><p class="story-step"><b>1</b>問題｜よくあるお悩み</p><h2>{_e(c["name"])}によくあるお悩み</h2><div class="ilp-cards">{pains}</div></section>',
            data_section(key, c),
-           f'<section class="ilp-fix"><span class="ilp-eb">支援内容</span><h2>セブンセンシズが行うこと</h2><div class="ilp-cards">{fixes}</div>'
+           f'<section class="ilp-fix"><p class="story-step"><b>3</b>やり方｜支援内容</p><h2>セブンセンシズが行うこと</h2><div class="ilp-cards">{fixes}</div>'
            '<p class="ilp-proof" style="margin-top:1rem">集客支援の実務: 店舗集客「G-ran」で通算3,200店舗以上（2026年7月時点）の運用に携わってきました。'
            'ここに挙げた業種のほかにも対応しています。</p></section>',
-           '<section class="ilp-band"><h2>まずは、今の状態を知るところから</h2>'
+           '<section class="ilp-band"><p class="story-step"><b>4</b>相談</p><h2>まずは、今の状態を知るところから</h2>'
            '<p>現状分析は無料です。30秒の診断だけでも、直す順番が分かります。</p><div class="btns">'
            f'<a class="btn btn-primary" href="{_e(consult_url(key))}" data-cta="lp_{key}_consult">無料で相談する（現状分析つき）</a>'
            f'<a class="btn btn-ghost" href="#scan-start" data-cta="lp_{key}_band_scan">30秒で診断する</a>'

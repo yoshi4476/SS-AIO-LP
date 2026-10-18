@@ -127,10 +127,17 @@ def test_h51_lp_is_blue_white_and_its_links_are_visible():
                                            if w in lp], [])
     check("LP: 全体のリンクを墨色にする指定が無い（ヒーローの白いリンクに勝っていた）",
           [s for sels, _ in _rules(lp) for s in sels if s == "body.lp-doc a"], [])
-    check("LP: ヒーローの上の文字リンクは白", _decl(lp, "body.lp-doc .lx-hero a:not(.btn)", "color"), "#fff")
+    # 2026-10-18 のデザインの作り直しで、ヒーローは明るい紙の地（DESIGN.md）。リンクと点数は地に対して 4.5:1 以上
+    root = dict(re.findall(r"--([a-z0-9-]+):\s*(#[0-9a-f]{6})", _css()))
+    paper, sheet = _hex(root["paper"]), _hex(root["sheet"])
+    link = _decl(lp, "body.lp-doc .lx-hero a:not(.btn)", "color") or ""
+    m = re.fullmatch(r"var\(--([a-z0-9-]+)\)", link)
+    check("LP: ヒーローの上の文字リンクは地に対して 4.5:1 以上（明るい地に白い文字にしない）",
+          bool(m and m.group(1) in root and _contrast(_hex(root[m.group(1)]), paper) >= 4.5), True)
     v2 = _css("lp-v2.css")
-    alpha = re.search(r"rgba\(255, ?255, ?255, ?\.(\d+)\)", _decl(v2, ".lx-item .pt", "color") or "")
-    check("LP: 14項目の点数は白75%以上（50%で 2.55:1）", bool(alpha) and int(alpha.group(1).ljust(2, "0")) >= 75, True)
+    pt = _decl(v2, ".lx-item .pt", "color") or ""
+    check("LP: 14項目の点数は白い計測盤の上で 4.5:1 以上（以前は紺の上の白50%で 2.55:1）",
+          pt == "var(--lx-mute)" and _contrast(_hex(root["ink-2"]), sheet) >= 4.5, True)
     check("LP: 入力欄の外の案内も覆いの上に出す", _decl(v2, ".lx-hero > p", "z-index"), "2")
     check("style.css に LP の金の飾りが残っていない", "var(--gold)" in _css(), False)
     page = (ROOT / "site" / "lp" / "index.html").read_text(encoding="utf-8")

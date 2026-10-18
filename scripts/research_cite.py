@@ -50,15 +50,15 @@ def license_url(page_url):
     return usage_url(page_url)
 
 
-STYLE = ("<style>.cite-box{border:1px solid #d3e0f0;border-radius:16px;padding:1.1rem 1.3rem;background:#f5f8fc;display:grid;gap:.8rem}"
-         ".cite-box h3{font-size:1rem;margin:0}.cite-text{background:#fff;border:1px solid #d3e0f0;border-radius:10px;"
+STYLE = ("<style>.cite-box{border:1px solid #d6ddd6;border-radius:8px;padding:1.1rem 1.3rem;background:#eef2ec;display:grid;gap:.8rem}"
+         ".cite-box h3{font-size:1rem;margin:0}.cite-text{background:#fff;border:1px solid #d6ddd6;border-radius:4px;"
          "padding:.7rem .9rem;margin:0;font-size:.92rem;line-height:1.7;word-break:break-all}"
          ".cite-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start}.cite-row>.cite-text{flex:1 1 18em}"
-         ".cite-copy{border:1px solid #2563eb;background:#fff;color:#2563eb;border-radius:999px;padding:.45rem 1rem;"
-         "font-weight:700;cursor:pointer;font-size:.88rem}.cite-copy:hover{background:#eaf2fe}"
-         ".cite-terms{font-size:.88rem;margin:0}.cite-fig img{max-width:100%;height:auto;border:1px solid #d3e0f0;border-radius:10px}"
-         ".cite-fig textarea{width:100%;font-family:ui-monospace,monospace;font-size:.8rem;border:1px solid #d3e0f0;"
-         "border-radius:10px;padding:.6rem;box-sizing:border-box}</style>")
+         ".cite-copy{border:1.5px solid #15282c;background:#fff;color:#15282c;border-radius:8px;padding:.45rem 1rem;"
+         "font-weight:700;cursor:pointer;font-size:.88rem}.cite-copy:hover{background:#eef2ec}"
+         ".cite-terms{font-size:.88rem;margin:0}.cite-fig img{max-width:100%;height:auto;border:1px solid #d6ddd6;border-radius:4px}"
+         ".cite-fig textarea{width:100%;font-family:ui-monospace,monospace;font-size:.8rem;border:1px solid #d6ddd6;"
+         "border-radius:4px;padding:.6rem;box-sizing:border-box}</style>")
 
 # ボタンを押すと文をコピーする。JS が無くても文はそのまま選んでコピーできる（文は常に表示）。
 # 同じページで2回読み込んでも1回だけ動くように印を付ける
