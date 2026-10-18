@@ -8,6 +8,7 @@ AI検索が最も引用したがるのは「そこにしかない数値」。外
 自社実績と自サイトのGSC実測を、出典と時点つきで提示する。
 """
 import json
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -186,7 +187,22 @@ def load_for(site_id):
         allow = None
     if allow is not None:
         got = [f for f in got if any(fnmatch.fnmatch(f.get("id", ""), p) for p in allow)]
-    return data, got
+    return data, [hide_private_urls(f) for f in got]
+
+
+DATA_URL = re.compile(r"\s*https?://ai\.7senses\.co\.jp/data/\S*")
+
+
+def hide_private_urls(f):
+    """一次データのページ（/data/）を止めている間は、出典の文から URL を外して渡す。書く AI が出典ごと写し、
+    非公開のページへのリンクを記事に入れていた（2026-10-18 のコーポレートの記事2本。配信では文字に戻していた）"""
+    try:
+        import data_intake
+        if data_intake.PUBLIC:
+            return f
+    except Exception:
+        return f
+    return {k: (DATA_URL.sub("", v) if isinstance(v, str) else v) for k, v in f.items()}
 
 
 def main():

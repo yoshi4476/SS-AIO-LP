@@ -107,3 +107,25 @@ def test_publish_gap_redelivers_unconverted_markdown():
         got = PG.delivered_leftovers(c, ["bad", "good", "none"], work=d)
         other = PG.delivered_leftovers({**c, "type": "external-html"}, ["bad"], work=d)
     check("変換漏れの記事だけを拾う・作業コピーに無い記事と他の配信方式は見ない", (got, other), (["bad"], []))
+
+
+def test_writers_do_not_get_private_data_urls():
+    import json
+    import facts as F
+    import data_intake
+    print("\n■ 一次データのページを止めている間は、書く AI に渡す出典から /data/ の URL を外す")
+    f = {"id": "x", "claim": "10社の中央値", "source": "当社の一次データ「月次決算」 https://ai.7senses.co.jp/data/keiri/"}
+    old = data_intake.PUBLIC
+    try:
+        data_intake.PUBLIC = False
+        hidden = F.hide_private_urls(f)
+        data_intake.PUBLIC = True
+        shown = F.hide_private_urls(f)
+    finally:
+        data_intake.PUBLIC = old
+    check("止めている間は URL を外し、出典の文は残す・公開中はそのまま",
+          (hidden["source"], shown["source"] == f["source"], hidden["claim"]), ("当社の一次データ「月次決算」", True, "10社の中央値"))
+    if not old:
+        left = [s for s in ("corporate", "subsidy", "ai-lab")
+                if any("ai.7senses.co.jp/data/" in json.dumps(x, ensure_ascii=False) for x in F.load_for(s)[1])]
+        check("いまの登録で、書く AI に渡る出典に /data/ の URL が無い", left, [])
