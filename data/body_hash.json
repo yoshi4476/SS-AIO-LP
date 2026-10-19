@@ -43,6 +43,10 @@
 "hash": "43d113edab566ae2c4719c91d88c875c",
 "modified": "2026-09-15"
 },
+"aio-gaichuu": {
+"hash": "39269024c8df399c2161ea720130ad8a",
+"modified": "2026-10-20"
+},
 "aio-ijou-kenchi-alert-settei": {
 "hash": "aed7bb973850f69dd47db28d3e86c75d",
 "modified": "2026-10-10"
@@ -84,7 +88,7 @@
 "modified": "2026-09-15"
 },
 "aio-service-hikaku": {
-"hash": "0fcbb37bdbb529884917009123e5e419",
+"hash": "7b0d87a95521c1017dfc56c1ae768f54",
 "modified": "2026-10-04"
 },
 "aio-shindan-yarikata": {
@@ -124,7 +128,7 @@
 "modified": "2026-09-08"
 },
 "aio-taisaku-guide": {
-"hash": "acda06c97b1c4ae339a1efa2ccd385b6",
+"hash": "7584726ced390dee80f2433a55166514",
 "modified": "2026-09-01"
 },
 "aio-taisaku-gutairei": {
