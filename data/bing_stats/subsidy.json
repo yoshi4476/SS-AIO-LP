@@ -11,6 +11,38 @@
 "2026-10-09": {
 "imp": 25,
 "clicks": 1
+},
+"2026-10-10": {
+"imp": 5,
+"clicks": 1
+},
+"2026-10-11": {
+"imp": 8,
+"clicks": 0
+},
+"2026-10-12": {
+"imp": 36,
+"clicks": 3
+},
+"2026-10-13": {
+"imp": 27,
+"clicks": 1
+},
+"2026-10-14": {
+"imp": 64,
+"clicks": 4
+},
+"2026-10-15": {
+"imp": 39,
+"clicks": 2
+},
+"2026-10-16": {
+"imp": 16,
+"clicks": 2
+},
+"2026-10-17": {
+"imp": 5,
+"clicks": 0
 }
 },
 "weeks": {
@@ -53,10 +85,311 @@
 "pos": 38
 }
 ],
-"pages": []
+"pages": [
+{
+"key": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-etsuran/",
+"imp": 39,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/",
+"imp": 37,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://lp.7senses.co.jp/blog/shakaihoken-denshishinsei-gimuka-chusho/",
+"imp": 9,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/",
+"imp": 3,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-nagoya-support/",
+"imp": 1,
+"clicks": 0,
+"pos": 38
+}
+]
+},
+"2026-10-16": {
+"queries": [
+{
+"key": "再構築補助金採択後に個人から法人になったらどうすればいいか",
+"imp": 4,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "事業再構築補助金 事業化状況報告",
+"imp": 4,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "建設関連業者閲覧システム",
+"imp": 3,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "事業再構築補助金 5年間 報告終わったら",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "ai導入補助金　公募要項",
+"imp": 2,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "gビズid　ai補助金",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "セブンセンシズ株式会社",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "名古屋　ai導入支援",
+"imp": 2,
+"clicks": 0,
+"pos": 40
+},
+{
+"key": "建設業許可電子閲覧システム",
+"imp": 2,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "aiit導入補助金 成功報酬",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "it導入補助金 2026 納税証明",
+"imp": 1,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "デジタル化・ai導入補助金2026 納税証明書",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "ベンダー登録とは？",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "原口 優",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "導入対応業者とは",
+"imp": 1,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "美容室　別事業",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "補助金申請システムの義務化",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "農業補助事業の機械発注と納期、稼働条件は",
+"imp": 1,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "aiit導入補助金 報酬月額",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "it導入補助金 申請サポート 紹介報酬 アフィリエイト 完全成功報酬 安い",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "ベンダー登録",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "事業再構築補助金申請　承継　とは",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "施工実績　下請け　必須",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "社会保険 電子申請 義務化 2026年 改正 拡大",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "社会保険 電子申請義務化 対象拡大 令和7年 令和8年",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "電子申請義務化 対象 中小企業 拡大 予定 なし",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+}
+],
+"pages": [
+{
+"key": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/",
+"imp": 18,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/youkou/",
+"imp": 9,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://lp.7senses.co.jp/blog/kensetsugyou-denshishinsei-etsuran/",
+"imp": 9,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/about/",
+"imp": 8,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/",
+"imp": 6,
+"clicks": 2,
+"pos": 4
+},
+{
+"key": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/",
+"imp": 6,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "https://lp.7senses.co.jp/blog/egov-denshishinsei-kojinjigyonushi/",
+"imp": 5,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://lp.7senses.co.jp/blog/shakaihoken-denshishinsei-gimuka-chusho/",
+"imp": 5,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://lp.7senses.co.jp/blog/it-hojokin-vendor/",
+"imp": 3,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/hojokin-denshishinsei-gimuka-itsukara/",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-biyoushitsu-jirei/",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-fusaitaku-riyu/",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-gbizid-shutoku/",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-nagoya-support/",
+"imp": 2,
+"clicks": 0,
+"pos": 40
+},
+{
+"key": "https://lp.7senses.co.jp/blog/nougyou-kikai-hojokin/",
+"imp": 1,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-taisho-tool-2026/",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://lp.7senses.co.jp/blog/it-hojokin-daiko-hiyou/",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+}
+]
 }
 },
-"updated": "2026-10-12",
+"updated": "2026-10-19",
 "site": "subsidy",
 "domain": "lp.7senses.co.jp"
 }

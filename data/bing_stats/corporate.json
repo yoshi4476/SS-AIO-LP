@@ -11,6 +11,38 @@
 "2026-10-09": {
 "imp": 107,
 "clicks": 1
+},
+"2026-10-10": {
+"imp": 64,
+"clicks": 2
+},
+"2026-10-11": {
+"imp": 87,
+"clicks": 1
+},
+"2026-10-12": {
+"imp": 406,
+"clicks": 3
+},
+"2026-10-13": {
+"imp": 536,
+"clicks": 8
+},
+"2026-10-14": {
+"imp": 529,
+"clicks": 10
+},
+"2026-10-15": {
+"imp": 461,
+"clicks": 5
+},
+"2026-10-16": {
+"imp": 141,
+"clicks": 7
+},
+"2026-10-17": {
+"imp": 62,
+"clicks": 2
 }
 },
 "weeks": {
@@ -77,10 +109,413 @@
 "pos": 7
 }
 ],
-"pages": []
+"pages": [
+{
+"key": "https://corp.7senses.co.jp/blog/bpo-toha",
+"imp": 199,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tekikaku-seikyusho-youken",
+"imp": 54,
+"clicks": 2,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata",
+"imp": 49,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/rakurakuseisan-keihi-seisan-yarikata",
+"imp": 47,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-mitsuori-yarikata",
+"imp": 38,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/freee-keihi-seisan-yarikata",
+"imp": 35,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/ginko-kicho-yarikata",
+"imp": 30,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template",
+"imp": 20,
+"clicks": 2,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-fuutou-kakikata",
+"imp": 13,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata",
+"imp": 12,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
+"imp": 11,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-kanjoukamoku",
+"imp": 7,
+"clicks": 2,
+"pos": 3
+},
+{
+"key": "https://corp.7senses.co.jp/company",
+"imp": 5,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-nashi",
+"imp": 4,
+"clicks": 2,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gyomu-flowchart-kakikata",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+}
+]
+},
+"2026-10-16": {
+"queries": [
+{
+"key": "bpoとは",
+"imp": 893,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "セブンセンシズ",
+"imp": 19,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "bpo業務とは",
+"imp": 15,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "経理業務フローチャート図",
+"imp": 10,
+"clicks": 3,
+"pos": 4
+},
+{
+"key": "セブンセンシズ株式会社",
+"imp": 6,
+"clicks": 3,
+"pos": 2
+},
+{
+"key": "楽楽精算 経費申請",
+"imp": 4,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "経理　ワークフローシステム　業務フロー図",
+"imp": 4,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "適格請求書　要件",
+"imp": 3,
+"clicks": 1,
+"pos": 9
+},
+{
+"key": "株式会社セブンセンシズ",
+"imp": 2,
+"clicks": 2,
+"pos": 4
+},
+{
+"key": "外注先に請求書には何を記入する",
+"imp": 2,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "経理外注費用相場",
+"imp": 2,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "経理業務フローチャート 図の書き方",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "セブンスセンス ホームページ　事業展開",
+"imp": 2,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "費用を銀行口座から支払いした場合の仕分けはどうなりますか",
+"imp": 2,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "会計士に記帳代行　してもらう　振替仕分け",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "大家さん個人事業　経理費用　最低相場",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "経理 業務フロー テンプレート",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "経理　外注　1件　相場",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "経理業務の業務フロー",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "請求書 送付状 重ねて折る時",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "請求書折り方三つ折り",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "銀行口座　記帳　mscとは",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "ツウフリコミと記帳あり",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "四半期決算 月次決算 違い 経理 業務",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "振込作業確認　手順書",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "決算業務 フロー",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "経理 bpo 月額 料金 最低 契約 仕訳",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "請求書払い 銀行振込 流れ",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "通帳にネットと記載しているのは引き出しですか",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "適格簡易請求書 要件",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+}
+],
+"pages": [
+{
+"key": "https://corp.7senses.co.jp/blog/bpo-toha",
+"imp": 973,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/ginko-kicho-yarikata",
+"imp": 199,
+"clicks": 3,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata",
+"imp": 136,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tekikaku-seikyusho-youken",
+"imp": 82,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-mitsuori-yarikata",
+"imp": 68,
+"clicks": 2,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-kanjoukamoku",
+"imp": 40,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-fuutou-kakikata",
+"imp": 38,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template",
+"imp": 31,
+"clicks": 4,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/freee-keihi-seisan-yarikata",
+"imp": 30,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
+"imp": 29,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata",
+"imp": 18,
+"clicks": 3,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/rakurakuseisan-keihi-seisan-yarikata",
+"imp": 17,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/",
+"imp": 16,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/company",
+"imp": 15,
+"clicks": 5,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gyomu-flowchart-kakikata",
+"imp": 13,
+"clicks": 3,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-ginko-furikomi-yarikata",
+"imp": 5,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gaichuu-hiyou-souba",
+"imp": 4,
+"clicks": 2,
+"pos": 3
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-kakikata-kojin",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/getsuji-shihanki-kessan-chigai",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-bpo-hiyou-uchiwake",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "https://corp.7senses.co.jp/services",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+}
+]
 }
 },
-"updated": "2026-10-12",
+"updated": "2026-10-19",
 "site": "corporate",
 "domain": "corp.7senses.co.jp"
 }

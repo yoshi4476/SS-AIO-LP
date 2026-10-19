@@ -291,6 +291,38 @@
 "2026-10-09": {
 "imp": 3,
 "clicks": 0
+},
+"2026-10-10": {
+"imp": 4,
+"clicks": 0
+},
+"2026-10-11": {
+"imp": 2,
+"clicks": 1
+},
+"2026-10-12": {
+"imp": 14,
+"clicks": 1
+},
+"2026-10-13": {
+"imp": 21,
+"clicks": 2
+},
+"2026-10-14": {
+"imp": 20,
+"clicks": 2
+},
+"2026-10-15": {
+"imp": 31,
+"clicks": 0
+},
+"2026-10-16": {
+"imp": 13,
+"clicks": 0
+},
+"2026-10-17": {
+"imp": 5,
+"clicks": 1
 }
 },
 "weeks": {
@@ -1827,10 +1859,329 @@
 "pos": 7
 }
 ],
-"pages": []
+"pages": [
+{
+"key": "https://ai.7senses.co.jp/meo/meo-algorithm-kouryaku/",
+"imp": 6,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-erabareru-kiji-kakikata/",
+"imp": 5,
+"clicks": 2,
+"pos": 5
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-guide/",
+"imp": 5,
+"clicks": 2,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/",
+"imp": 3,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/",
+"imp": 2,
+"clicks": 2,
+"pos": 1
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+"imp": 2,
+"clicks": 2,
+"pos": 4
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/clinic-shukyaku-jirei/",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/kengakukai-shukyaku-hoho/",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-jibunde/",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "https://ai.7senses.co.jp/meo/meo-settei-guide/",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/obkyaku-shoukai-shikumi/",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/reform-instagram-shukyaku/",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "https://ai.7senses.co.jp/aio/btob-llmo-taisaku/",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://ai.7senses.co.jp/diagnosis/meo/",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "https://ai.7senses.co.jp/meo/clinic-meo-taisaku/",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+}
+]
+},
+"2026-10-16": {
+"queries": [
+{
+"key": "クローラーとは　aio",
+"imp": 4,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "aio対策",
+"imp": 3,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "医療費控除 整骨院",
+"imp": 3,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "整骨院 医療費控除になるか",
+"imp": 3,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "aio対策　意味ない",
+"imp": 2,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "施工事例 題名",
+"imp": 2,
+"clicks": 1,
+"pos": 10
+},
+{
+"key": "無料aio診断",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "aio 構築方法",
+"imp": 2,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "aio無料診断",
+"imp": 2,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "原口 優",
+"imp": 2,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "aio診断　おすすめ　無料",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "aio診断するときのai設定",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "申込獲得数　参加率",
+"imp": 1,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "aio・meoとは",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "chatgpt 集客 おすすめ",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "plの要素　クリニック",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "インスタグラム用 画像編集 リフォーム",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "クリニックのインスタに載せる文章お願い",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "確定申告で医療費控除をしようと思います。整骨院の保険外診療も申告できますか",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "集患 読み方",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+}
+],
+"pages": [
+{
+"key": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+"imp": 11,
+"clicks": 3,
+"pos": 2
+},
+{
+"key": "https://ai.7senses.co.jp/seo/seikotsuin-hiyou-iryouhikojo/",
+"imp": 8,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/donyu-jirei-kakikata/",
+"imp": 3,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-jibunde/",
+"imp": 3,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-yarikata/",
+"imp": 3,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/",
+"imp": 2,
+"clicks": 1,
+"pos": 10
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/clinic-instagram-yarikata/",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/webinar-shukyaku-hoho/",
+"imp": 1,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-chuiten/",
+"imp": 1,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/clinic-kaigyou-yarikata/",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/reform-instagram-shukyaku/",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-seo-meo-chigai/",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://ai.7senses.co.jp/seo/ai-jidai-seo-taisaku/",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/seo/clinic-hp-hissu-koumoku/",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+}
+]
 }
 },
-"updated": "2026-10-12",
+"updated": "2026-10-19",
 "site": "ai-lab",
 "domain": "ai.7senses.co.jp"
 }
