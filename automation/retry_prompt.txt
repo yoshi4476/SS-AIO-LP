@@ -32,7 +32,9 @@
 2. `TODO: <slug> を品質基準まで直して score を更新し、再ビルドする`
    - articles/<slug>.md を CLAUDE.md Phase 5 の基準で修正する（不足セクション追加・AIO構造・マーカー・
      5,000字・FAQ整合）。全文の書き直しはせず、指摘箇所のピンポイント修正にとどめる
-   - `python scripts/score_check.py <slug>` を全PASSにしてから3観点採点（rubric.py）をやり直し、90点以上で score を更新する
+   - `python scripts/score_check.py <slug>` を全PASSにする。score・score_breakdown・quality_ の項目は書き換えない（点数は自分で付けない。
+     点数の無い記事は、この後の機械の手順 scripts/quality_loop.py が公開の前に別工程で3観点を採点し、届くまで直してから配信する）
+   - IMPROVING（品質の改善中）と出る記事は直さない（quality_loop が採点者の指摘に沿って直し続けている）
    - 最大3サイクル。到達しない場合は articles/ に残したまま理由をログに書き、次のTODOへ進む
 
 3. `TODO: <slug> は <site> の領域。... 301転送する`

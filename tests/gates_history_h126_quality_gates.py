@@ -66,8 +66,16 @@ def _article(title="AIO対策のはじめ方を中小企業向けに解説", dat
 
 def test_publish_quarantines_only_new_articles_that_fail_score_check():
     import agent_guard as G
+    import quality_loop as QL
     import score_check as SC
     print("\n■ AI が書いた新しい記事だけを採点し、落ちたものを隔離する（公開済みの記事は落ちていても動かさない）")
+    # 2026-10-20 から、配る新しい記事は公開前の別工程の採点（quality_loop）の合格の記録も要る（門 h128）。
+    # この門は隔離の範囲を見るものなので、合格の記録はあることにする
+    with patched((QL, "machine_passed", lambda *a, **k: True), (QL, "released", lambda *a, **k: [])):
+        _quarantine_case(G, SC)
+
+
+def _quarantine_case(G, SC):
     with tempfile.TemporaryDirectory() as d:
         root = Path(d)
         (root / "articles").mkdir()
@@ -307,7 +315,10 @@ def test_prompts_and_docs_match_the_rubric_and_operation():
     check("CLAUDE.md の題・説明文の字数と飾りの年号",
           [w in cm for w in ("【2026年最新】検討", "タイトル30文字以内", "メタディスク120文字以内", "「◯年の実務経験から」等",
                              "自分の体験・感想を先に述べ", "一人称の観察・体験談2箇所以上")], [False] * 6)
-    check("CLAUDE.md Phase 5 に今の運用（通過印の 90・score_audit）を書く", "機械採点の通過印" in cm, True)
+    # 2026-10-20 に運用者が「公開前に別工程で3観点を採点する」と決めた（この門を作った時点では未決で、通過印の 90 が今の運用だった）。
+    # 今の運用は公開前の採点（quality_loop）。通過印の 90 を書かせる文が残っていないこと（門 h128）
+    check("CLAUDE.md Phase 5 に今の運用（公開前の別工程の採点・quality_loop）を書く",
+          ("quality_loop.py --new" in cm, "機械採点の通過印" in cm), (True, False))
     check("win_patterns は見出しの並びを写させない", ("土台にして" in wp, "これに揃える" in wp, "写さない" in wp), (False, False, True))
     check("書く AI の CLAUDE.md に「受託運用での分離」が残る", "受託運用での分離" in M.slim(cm, "writer"), True)
 

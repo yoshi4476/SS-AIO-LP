@@ -1190,6 +1190,26 @@ jobs:
           python scripts/fact_cite.py --write --limit 3 2>&1 | tail -5 || true
           python scripts/exit_fix.py --write 2>&1 | tail -5 || true
 
+      # 公開済みの記事を、公開前と同じ別工程の3観点で採点し直す（社ごとに4本・sites/<id>.json の quality_rescore で変えられる）。
+      # 前に届かなかった記事を先に、次に一度も採点していない記事を公開の古い順に。届かない記事は公開したまま、検算つきで直す
+      # （取り下げない。2026-10-20 運用者の決定）。採点の AI は読むだけ、直しの AI はその1本の写しだけを書く
+      - name: 公開済みの記事を公開前と同じ基準で採点し直す
+        # 週次のジョブは180分。ほかの工程の時間を食わないよう30分で次を始めない（残りは翌週）
+        timeout-minutes: 40
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          HUB_SECRET: ""      # 全権の合言葉を空で上書き（管制塔へは通行証で入る。2026-10-20）
+        run: |
+          mkdir -p automation/logs
+          if ! python scripts/agent_guard.py --verify; then
+            echo "要対応: 週次の公開済みの記事の採点し直しの作業場に鍵が残っていたため、AI を動かしませんでした（実行ログの AGENT_JAIL）" >> automation/logs/findings.txt
+            exit 0
+          fi
+          export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
+          out=$(python scripts/quality_loop.py --rescore 4 --budget-min 30 2>&1) || true
+          echo "$out" | tail -30
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+
       - name: 質問形・鮮度などの書き直しの後に触ってはいけない場所を戻す
         if: always() && steps.lock_kinds.outcome != 'skipped'
         run: python scripts/agent_guard.py --protect

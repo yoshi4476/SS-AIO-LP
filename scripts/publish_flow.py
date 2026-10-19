@@ -103,6 +103,14 @@ def main():
 
     src = ROOT / "articles" / f"{slug}.md"
     meta, body = load_article(slug)
+    # 採点の前の門（2026-10-20 運用者の決定: 公開前に、書いた AI とは別の工程が3観点で採点する）。書く AI は点数を書かないので、
+    # --check で点数の無い新しい記事を名指ししたときは、点数以外の門（画像・機械採点・食い合い・領域・法令の表現・ビルド）だけを通す。
+    # 点数は scripts/quality_loop.py が採点して書く。配信（--check なし）は今までどおり点数が要る
+    import rubric
+    prescore = check and meta.get("score") is None and not meta.get("quality_state")
+    if prescore:
+        import os
+        os.environ[rubric.PRESCORE_ENV] = str(meta.get("slug") or slug)
 
     # 0. カテゴリ検証（他サイトのカテゴリが混入するとbuild.pyが黙って除外し、
     #    記事が公開されないまま放置される。ここで即座に落として書き直させる）
@@ -173,7 +181,7 @@ def main():
         raise SystemExit("機械採点で不合格。指摘を直してから再実行すること")
 
     score = meta.get("score") or 0
-    if score < 90:
+    if not prescore and score < 90:
         raise SystemExit(f"score={score} のため公開しません（90点以上が必要）")
 
     # 2-2. 食い合いゲート（執筆後）を配信の前に置く。
@@ -253,7 +261,8 @@ def main():
             raise SystemExit(f"BLOCKED(公開不可): build.py が {_shown(slug)} を止めました。"
                              "上の BLOCKED の理由を直してから再実行すること")
         if check:
-            print(f"PUBLISH_CHECK=ok（{_shown(slug)}: 門を通りました。配信・管制塔への記録は機械の手順が行います）")
+            print(f"PUBLISH_CHECK=ok（{_shown(slug)}: 門を通りました。" + ("点数は書かないこと。この後の機械の手順が別工程で3観点を採点し、"
+                  "基準に届くまで直してから配信します）" if prescore else "配信・管制塔への記録は機械の手順が行います）"))
             return
         # IndexNow / Indexing API の通知は、デプロイの後にワークフローが送る
         # （ここで送ると、まだ配信されていないURLを知らせて404を踏ませる）
@@ -269,7 +278,8 @@ def main():
                 exit_held()
             raise SystemExit(f"失敗: {' '.join(str(a) for a in args)}")
         if check:
-            print(f"PUBLISH_CHECK=ok（{_shown(slug)}: 門を通りました。配信・管制塔への記録は機械の手順が行います）")
+            print(f"PUBLISH_CHECK=ok（{_shown(slug)}: 門を通りました。" + ("点数は書かないこと。この後の機械の手順が別工程で3観点を採点し、"
+                  "基準に届くまで直してから配信します）" if prescore else "配信・管制塔への記録は機械の手順が行います）"))
             return
 
     finish(site_id, slug, cfg, meta, body, push)

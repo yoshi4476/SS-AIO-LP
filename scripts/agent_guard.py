@@ -696,7 +696,16 @@ def publish(root=None, only=None):
         return [c[0] for c in checks if not c[1] and not c[3]]
 
     new, changed = changes(root)
-    res = {"published": 0, "held": 0, "failed": 0, "other": 0, "quality": 0}
+    # 前の回から直していて、この回の公開前の採点で基準に届いた記事も、新しい記事と同じ道（publish_flow）で配る
+    # （中身が変わっただけの扱いだと、管制塔の「公開済み」・SNS・検索エンジンへの通知が飛ぶ。2026-10-20 quality_loop）
+    try:
+        import quality_loop as QL
+        rel = [s for s in QL.released() if s in changed and s not in new]
+    except Exception as e:  # noqa: BLE001  台帳が読めなくても新しい記事の配信は続ける
+        print(f"   公開前の採点の台帳を読めませんでした（{type(e).__name__}）", flush=True)
+        QL, rel = None, []
+    new = new + rel
+    res = {"published": 0, "held": 0, "failed": 0, "other": 0, "quality": 0, "improving": 0}
     py = sys.executable
     hide_all = bool(only) and S.is_client(only)
     for slug in new:
@@ -725,6 +734,26 @@ def publish(root=None, only=None):
             print(f"   × {name}: 機械採点で不合格のため articles/_conflicted/ へ移しました（{'・'.join(fails[:3])}）",
                   flush=True)
             continue
+        # 公開前の別工程の採点（quality_loop）を通っていない記事は配らない（2026-10-20 運用者の決定）。直している途中の記事と、
+        # 採点の台帳に合格の記録が無い記事（書く AI が自分で点数を書いた・採点の工程が動かなかった）は改善中にして次の回へ回す。
+        # 失敗には数えない（捨てない。次の回の --pending が新しい記事より先に直し続ける）
+        _art = root / "articles" / f"{slug}.md"
+        try:
+            import rubric
+            if QL is None:
+                raise RuntimeError("quality_loop を読めません")
+            _text = _art.read_text(encoding="utf-8-sig")
+            _imp = rubric.improving(QL.meta_of(_text))
+            _waiting = _imp or not QL.machine_passed(slug, QL.meta_of(_text))
+        except Exception as e:  # noqa: BLE001  確かめられなければ配らない（点数の無い・書く AI の点数のまま出さない）
+            print(f"   公開前の採点の記録を確かめられませんでした（{type(e).__name__}）", flush=True)
+            _waiting, _imp = True, True
+        if _waiting:
+            if not _imp:
+                _art.write_text(QL.improving_text(_text), encoding="utf-8", newline="")
+            res["improving"] += 1
+            print(f"   … {name}: 公開前の採点で基準に届くまで直しています（改善中。公開しません）", flush=True)
+            continue
         r = subprocess.run([py, "scripts/publish_flow.py", site, slug], cwd=root, capture_output=True, text=True,
                            encoding="utf-8", errors="replace")
         out = (r.stdout or "") + (r.stderr or "")
@@ -748,7 +777,8 @@ def publish(root=None, only=None):
         print(f"   配り直し（{S.public_id(site) if hasattr(S, 'public_id') else site}）: 終了コード {r.returncode}", flush=True)
     bad = res["failed"] + res["other"] + res["quality"]
     print(f"AGENT_PUBLISH={'ng' if bad else 'ok'}（新しい記事 {len(new)}本: 公開 {res['published']}・"
-          f"監修待ち {res['held']}・失敗 {res['failed']}・別の社 {res['other']}・採点で隔離 {res['quality']} / "
+          f"監修待ち {res['held']}・改善中 {res['improving']}・失敗 {res['failed']}・別の社 {res['other']}・"
+          f"採点で隔離 {res['quality']} / "
           f"中身の変わった記事 {len(changed)}本・配り直し {len(ext)}サイト）", flush=True)
     if bad:
         # AI はもういないので、止まった記事は人が見る。通知の本文（findings.txt）に要対応として載せる

@@ -2366,17 +2366,27 @@ def main():
             print(f"BLOCKED(公開不可): {p.stem}: フロントマター不正 → {e}")
             continue
         sc = meta.get("score")
-        if not isinstance(sc, (int, float)):
+        import rubric
+        # 公開前の別工程の採点で基準に届かず、直している途中の記事（quality_state: improving）。BLOCKED と分けるのは、
+        # 救済の工程が BLOCKED を「直して score を更新する」対象として拾い、AI が自分で点数を書いてしまうため。
+        # 直して採点し直すのは scripts/quality_loop.py（2026-10-20 運用者の決定）
+        if rubric.improving(meta):
+            print(f"IMPROVING(品質の改善中): {meta['slug']} → 別工程の採点が基準に届くまで公開しません"
+                  "（python scripts/quality_loop.py --pending が直し続けます）")
+            blocked_metas.append(meta)
+            continue
+        # 採点の前の門だけを見る回（publish_flow --check が、点数の無い新しい記事を名指ししたときだけ）は点数を問わない
+        _pre = rubric.prescore(meta)
+        if not isinstance(sc, (int, float)) and not _pre:
             blocked.append(f"{meta['slug']}: 未審査（score が数値で記載されていない: {sc!r}）")
             blocked_metas.append(meta)
             continue
-        if sc < QUALITY_GATE:
+        if not _pre and sc < QUALITY_GATE:
             blocked.append(f"{meta['slug']}: {sc}点 < 基準{QUALITY_GATE}点")
             blocked_metas.append(meta)
             continue
         # 足切り: score_breakdown がある場合、1観点でも下限未満なら不合格（合計点で壊滅観点を隠さない）。
         # 規則は rubric に1か所だけ置く（配信側も rubric.gate_ok で同じ判定をする）
-        import rubric
         weak = rubric.weak_axes(meta)
         if weak:
             th, full = rubric.cutoff(meta.get("score_breakdown") or {})
@@ -2626,8 +2636,13 @@ def main():
     # 台帳から落とすと、戻ったときに新規扱いになり、警告1つで HTML ごと取り下げられる。
     # 原稿が無くなった slug（統合で _merged/ へ移したもの等）だけは外す
     alive = {f.stem for f in ARTICLES.rglob("*.md") if "_merged" not in f.parts}
+    # 採点の前の門だけを見た記事（publish_flow --check の点数の無い1本）は公開していないので台帳に載せない。
+    # 載せると次から「新しい記事」でなくなり、量産の指紋・監修の記録の門が外れる（2026-10-20）
+    import os
+    import rubric
+    _pre_slug = os.environ.get(rubric.PRESCORE_ENV, "")
     save_published({s for s in (_known or set()) if s in alive}
-                   | {m["slug"] for m, _ in entries + hidden_entries})
+                   | {m["slug"] for m, _ in entries + hidden_entries if m["slug"] != _pre_slug})
     if _known is None:
         print(f"公開台帳を作りました（{len(entries)}本）。"
               "次のビルドからは、品質検査に落ちた新規記事は公開されません")

@@ -707,6 +707,23 @@ def serp_guard(before, after, title0, title1, heads):
     return ""
 
 
+# 公開前の採点の直し（quality_loop）で AI に変えさせない項目。点数と quality_ の印は機械だけが書く（書く AI が自分で点を
+# 付けると門にならない。2026-10-20）。題・説明文・日付も変えさせない（直すのは中身）
+QUALITY_FIXED = ("score", "score_breakdown", "quality_state", "quality_since", "quality_attempts",
+                 "title", "description", "slug", "date")
+
+
+def quality_guard(before, after):
+    """quality_loop の直しの検算（空なら合格）。機械だけが書く項目が変わった・本文が1割を超えて減った、を止める"""
+    f0, f1 = front_safe(before), front_safe(after)
+    moved = [k for k in QUALITY_FIXED if f0.get(k) != f1.get(k)]
+    if moved:
+        return "変えてはいけない項目が変わりました（" + "・".join(moved) + "）"
+    if len(after) < len(before) * 0.9:
+        return f"本文が減りすぎました（{len(before)}→{len(after)}字）"
+    return ""
+
+
 def copied_heads(before, after, heads, min_len=10):
     """競合の見出しを、そのまま本文に写したもの（直す前には無かったもの）"""
     nz = lambda s: re.sub(r"[\s　、。・「」（）()【】|｜:：!！?？]", "", s or "")
@@ -944,6 +961,28 @@ WHAT = {
                 "- 制度名・金額・締切は本文にあるものだけを使い、新しく足さない\n"
                 "- title・keyword・slug・category は変えない。FAQ はフロントマターと本文の両方を同じ文にする\n"
                 "登録済みの一次情報:\n{facts}"),
+    # 公開前（と週次の採点し直し）に、書いた AI とは別の工程の3観点の採点（quality_loop）で基準に届かなかった記事を直す。
+    # 事実を作って点を上げない: 使ってよいのは登録済みの一次情報・登録した体験・集めてある調べだけ（2026-10-20 運用者の決定）
+    "quality_loop": ("この記事は、書いた AI とは別の工程の3観点の採点（一次性・抽出性・決定支援。各80点以上・平均90点以上で合格）に\n"
+                     "届きませんでした。点の低い軸から直してください。採点者の指摘と、採点者が根拠に挙げた本文の文:\n{weak}\n\n"
+                     "直し方:\n"
+                     "- 一次性: 下の「使ってよい材料」だけを使う。登録済みの一次情報は、記事の主題に合うものを2つ以上、文言・数字・\n"
+                     "  出典・時点を変えずに入れる。登録した体験は、文に目印の語を入れて一人称で書く。材料に無い数字・事例・体験談・\n"
+                     "  お客様の声は書かない（作った事実で点を上げない）。材料が足りなければ、当社の判断とその理由・失敗しやすい点・\n"
+                     "  確かめ方を具体的に書く\n"
+                     "- 数字は、記事にすでにあるものと下の一次情報のものだけ。「3点」「2つ」「1か月」「5分」のような数え方・期間・\n"
+                     "  回数も新しい数字に数えて機械が戻す。項目を挙げるときは「次の点」「次の手順」のように数を書かずに並べる\n"
+                     "- 抽出性: 冒頭の2文で結論を言い切る。各H2の直後の1文は、その節の問いへの答えを単体で通る形で言い切る。\n"
+                     "  「これ」「それ」で前を指さない\n"
+                     "- 決定支援: 「◯◯なら A、△△なら B」の条件の分かれ目と、やらない判断の材料、今日できる次の一歩を置く\n"
+                     "- 出典の URL は、記事にあるものと下の一次情報に書かれたものだけ。新しい URL・制度名・金額・締切を足さない\n"
+                     "- title・description・keyword・slug・category・date は変えない。点数（score・score_breakdown）と quality_ で始まる\n"
+                     "  項目は書かない・変えない・消さない（機械が書く）。FAQ はフロントマターと本文の両方を同じ文にする\n"
+                     "- 本文を大きく削らない。指摘の箇所を直し、足りないものを足す\n\n"
+                     "使ってよい材料:\n"
+                     "【登録済みの一次情報（数字はこれだけ）】\n{facts}\n"
+                     "【登録した体験（一人称で書いてよいのはこれだけ）】\n{experiences}\n"
+                     "【集めてある調べ（観点の手がかり。見出し・文を写さない。数字は書かない）】\n{research}"),
     "split": ("この記事と、同じサイトの別記事「{other_title}」（{other_url}）が、検索語「{shared}」で\n"
               "同時に検索結果に出て、互いの順位を下げています。主題は別なので統合はしません。\n"
               "この記事の title と description を、この記事の狙う語（keyword）の主題に寄せてください。\n"
@@ -1593,8 +1632,12 @@ def guard_message(rc):
     return f"既存記事と食い合います（kw_guard 終了コード{rc}）"
 
 
-def check(slug, before, before_warns, snap=None, allowed="", terms=()):
-    """直した結果を検算する。通らない理由を返す（空なら合格）"""
+def check(slug, before, before_warns, snap=None, allowed="", terms=(), blocked_ok=None):
+    """直した結果を検算する。通らない理由を返す（空なら合格）。
+
+    blocked_ok は直す前からビルドが止めていた行（BLOCKED の行の集まり）。渡したときは、その行は検算に数えない
+    （公開前の採点で直している記事を、ほかの記事が先に止まっていても直せるようにする。2026-10-20 quality_loop）。
+    渡さなければ今までどおり BLOCKED が1行でもあれば通さない"""
     if snap is not None:
         other = [c for c in changed_since(snap) if c != f"{slug}.md"]
     else:
@@ -1666,8 +1709,9 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
             return f"本文が減りました（{len(b)}→{len(after)}字）。足す直しのはずです"
 
     r = sh([sys.executable, "scripts/build.py"], timeout=1800)
-    if r.returncode or "BLOCKED" in (r.stdout or ""):
-        return "ビルドが通りません"
+    stopped = [ln for ln in (r.stdout or "").splitlines() if "BLOCKED" in ln and ln not in (blocked_ok or ())]
+    if r.returncode or stopped:
+        return "ビルドが通りません" + (f"（{stopped[0][:80]}）" if stopped and blocked_ok is not None else "")
     return ""
 
 
@@ -1861,6 +1905,11 @@ def build_prompt(item):
         allowed = "\n".join(f"- {f.get('claim', '')}" for f in fs if f.get("claim"))
         what = what.format(weak=item.get("why", "")[:1500],
                            facts=allowed or "（登録された一次情報がありません。数字は足さないでください）")
+    if kind == "quality_loop":
+        # 材料（一次情報・体験・調べ）と、増えてよい数字・URL（一次情報の文と出典・体験の文）は quality_loop が1か所で決める
+        import quality_loop as QL
+        allowed, mats = QL.materials(item.get("site") or site_of(slug), slug)
+        what = what.format(weak=str(item.get("weak") or item.get("why", ""))[:3000], **mats)
     if kind == "aisplit":
         allowed = "\n".join(item["claims"])
         what = what.format(claims="\n".join(f"「{c}」" for c in item["claims"][:1]))
@@ -2053,11 +2102,11 @@ def _apply_one(item, edited, orig):
             p.write_text(t2, encoding="utf-8", newline="")
 
     ng = check(slug, before, before_warns, snap, allowed,
-               item.get("terms") or ())
+               item.get("terms") or (), item.get("blocked_ok"))
     if ng.startswith("警告が増えました") and fix_mechanical(slug, before_warns):
         # 長さの警告は分ける道具が決まった形で直せる。他の検算は1つも緩めず、もう1回だけ通す
         ng = check(slug, before, before_warns, snap, allowed,
-                   item.get("terms") or ())
+                   item.get("terms") or (), item.get("blocked_ok"))
     if not ng and kind == "aisplit":
         after_now = p.read_text(encoding="utf-8-sig")
         if item["claims"][0] not in after_now:
@@ -2109,6 +2158,8 @@ def _apply_one(item, edited, orig):
         toks = [w for w in re.split(r"[\s　]+", item["shared"][0].lower()) if w]
         if toks and all(w in t_now[:max(len(t_now) // 2, 1)].lower() for w in toks):
             ng = f"共通の語「{item['shared'][0]}」がタイトルの前半に残っています"
+    if not ng and kind == "quality_loop":
+        ng = quality_guard(before[2], p.read_text(encoding="utf-8-sig"))
     if not ng and kind == "compete":
         ng = compete_guard(before[2], p.read_text(encoding="utf-8-sig"), before[0], meta(slug)[0], item["gap"])
     if not ng and kind == "early":

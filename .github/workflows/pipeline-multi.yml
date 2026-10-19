@@ -590,8 +590,42 @@ jobs:
           mkdir -p "$RUNNER_TEMP/hub_tokens"
           python scripts/hub_token.py --scope "${{ steps.site.outputs.pub }}" --out "$RUNNER_TEMP/hub_tokens/${{ steps.site.outputs.pub }}" || true
 
-      - name: 記事生成（Phase 1〜7）
+      # 公開前の品質ループ（2026-10-20 運用者の決定「公開前に、書いたAIとは別の工程で3観点を採点し、基準未満なら公開を止める」
+      # 「書かない選択肢はない。1度や2度で完璧に」）。前の回で基準に届かなかった記事（quality_state: improving）を、新しい記事より
+      # 先に直す。届かないまま残れば、この社の新しい記事はこの回は書かない（捨てずに、届くまで直し続ける）。
+      # 採点の AI は読むだけ、直しの AI はその1本の写しだけを書く（quality_loop・auto_rewrite の検算）。鍵は外したまま動かす
+      - name: 公開前の品質ループ（前の回から直している記事を先に）
+        id: qpending
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        timeout-minutes: 35
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+        run: |
+          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
+          # 鍵が外れていなければ AI を動かさない（この後の記事生成も同じ確かめで止まる）
+          python scripts/agent_guard.py --verify || exit 0
+          HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/${{ steps.site.outputs.pub }}" 2>/dev/null || true)"
+          export HUB_AGENT_TOKEN
+          # ジョブの75分のうち、記事を書く時間と配信・コミットの時間を残す（直しは25分まで）
+          used=$(( ( $(date -u +%s) - $(date -u -d "$RUN_START" +%s) ) / 60 ))
+          budget=$(( 30 - used )); [ "$budget" -gt 25 ] && budget=25
+          python scripts/quality_loop.py --pending --sites "${{ steps.site.outputs.id }}" --budget-min "$budget" \
+            > "$RUNNER_TEMP/quality_pending.txt" 2>&1 || true
+          # お客様の社の回は記事の名前を伏せた行だけを出す（quality_loop は「（お客様の記事）」で出す）
+          cat "$RUNNER_TEMP/quality_pending.txt"
+          mkdir -p automation/logs
+          grep '^要対応' "$RUNNER_TEMP/quality_pending.txt" >> automation/logs/findings.txt || true
+          left=$(sed -n 's/^QUALITY_PENDING=//p' "$RUNNER_TEMP/quality_pending.txt" | tail -1)
+          if [ -n "$left" ] && [ "$left" != "0" ]; then
+            echo "hold=yes" >> "$GITHUB_OUTPUT"
+            echo "::notice::公開前の採点に届いていない記事が ${left}本あるため、この回は新しい記事を書かずに直し続けます"
+            echo "公開前の品質ループ（${{ steps.site.outputs.pub }}）: 直している記事 ${left}本。新しい記事は書きません" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: 記事生成（Phase 1〜7）
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite' && steps.qpending.outputs.hold != 'yes'
         env:
           SITE_ID: ${{ steps.site.outputs.id }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -651,6 +685,37 @@ jobs:
             fi
           done
           python scripts/agent_memory.py --restore || true
+
+      # 書いた記事を、書いた AI とは別の工程が3観点で採点し、基準（各80点以上・平均90点以上）に届くまで直す（1回の実行で2回まで）。
+      # 届けば機械が score を書き、この後の配信の手順が配る。届かなければ quality_state: improving のまま公開せず、次の回が先に直す。
+      # 時間が足りない回は印だけ付けて次の回へ回す（点数の無いまま・書く AI の点数のまま公開しない。2026-10-20 運用者の決定）
+      - name: 公開前の品質ループ（この回に書いた記事を別工程で採点し、届くまで直す）
+        if: always() && steps.lock.outcome == 'success' && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        timeout-minutes: 45
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+        run: |
+          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
+          # 鍵が外れていなければ AI を動かさない。採点しなかった記事は、配信の手順が台帳の合格の記録が無いため配らない
+          if ! python scripts/agent_guard.py --verify; then
+            mkdir -p automation/logs
+            echo "要対応: ${{ steps.site.outputs.pub }} の公開前の採点を動かしませんでした（作業場に鍵が残っていました。記事は改善中のまま公開しません）" >> automation/logs/findings.txt
+            exit 0
+          fi
+          HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/${{ steps.site.outputs.pub }}" 2>/dev/null || true)"
+          export HUB_AGENT_TOKEN
+          # ジョブの75分のうち、配信・コミット・デプロイに15分を残す（直しを始めるのは残りがあるときだけ）
+          used=$(( ( $(date -u +%s) - $(date -u -d "$RUN_START" +%s) ) / 60 ))
+          budget=$(( 60 - used )); [ "$budget" -gt 35 ] && budget=35
+          python scripts/quality_loop.py --new --sites "${{ steps.site.outputs.id }}" --budget-min "$budget" \
+            > "$RUNNER_TEMP/quality_new.txt" 2>&1 || true
+          cat "$RUNNER_TEMP/quality_new.txt"
+          mkdir -p automation/logs
+          grep '^要対応' "$RUNNER_TEMP/quality_new.txt" >> automation/logs/findings.txt || true
+          r=$(sed -n 's/^QUALITY_LOOP=//p' "$RUNNER_TEMP/quality_new.txt" | tail -1)
+          echo "公開前の品質ループ（${{ steps.site.outputs.pub }}）: ${r:-結果の印がありません}" >> "$GITHUB_STEP_SUMMARY"
 
       # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
       - name: AIの変更のうち触ってはいけない場所を戻す

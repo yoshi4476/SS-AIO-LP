@@ -308,8 +308,9 @@ def save_backfill(b, pub=None):
 # お客様の記事・社の行は置き場へ書き、読むときに合わせる（2026-10-08 の点検で、どれも public に載りうる形だった）
 # 取り下げの記録（retractions.jsonl）には配信先の URL と slug が入るので、お客様の社の分は置き場へ（2026-10-12 の点検）
 # 表示速度の記録（cwv.jsonl）にはお客様の社のドメインの URL が入る（2026-10-12 の週次が public に1行 push した）
+# 公開前の採点の記録（quality_loop.jsonl）には記事の slug と点数が入る（2026-10-20）
 SPLIT_JSONL = ("automation/logs/auto_fix.jsonl", "data/lessons.jsonl", "data/merges.jsonl", "data/editorial_reviews.jsonl",
-               "data/retractions.jsonl", "data/cwv.jsonl")
+               "data/retractions.jsonl", "data/cwv.jsonl", "data/quality_loop.jsonl")
 
 
 def _split_rel(p):

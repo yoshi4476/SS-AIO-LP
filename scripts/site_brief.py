@@ -355,10 +355,12 @@ def main():
 
     # 一次情報を毎回目に入れる。ブリーフに出ないと外部統計の引き写しだけになり、
     # どのサイトでも書ける記事＝引用先に選ばれない記事になる
-    print("\n■ この記事に入れる一次情報（最低1つ）")
+    # 公開前の別工程の採点で、一次性がいちばん割れていた（採点し直した25本の一次性は50〜60点。2026-10-20）。
+    # 主題に合うものを2つ以上、文言どおり出典と時点つきで入れると、一次性の80点の目安（自社の経験や数字が2箇所以上）に届く
+    print("\n■ この記事に入れる一次情報（主題に合うものを2つ以上。文言・数字を変えず、出典と時点を添えて入れる）")
+    kwtxt = (nxt or {}).get("keyword", "") if isinstance(nxt, dict) else ""
     try:
         import subprocess
-        kwtxt = (nxt or {}).get("keyword", "") if isinstance(nxt, dict) else ""
         r = subprocess.run([sys.executable, "scripts/facts.py", cfg["id"], kwtxt],
                            cwd=ROOT, capture_output=True, text=True,
                            encoding="utf-8", errors="ignore")
@@ -373,6 +375,27 @@ def main():
             print(line)
     except Exception as e:
         print(f"  （登録した体験を読めませんでした: {e}）")
+
+    # 書いた後、公開の前に別工程がこの基準で採点する（scripts/quality_loop.py）。書く側と採点する側で同じ文を見せ、
+    # 1回目で届く記事にする（2026-10-20 運用者「1度や2度で完璧にするように」）
+    try:
+        import rubric
+        print("\n■ 公開前の採点の基準（書いた後、別工程がこの3軸で採点する。届かなければ公開されず、指摘に沿って直される）")
+        print("\n".join("  " + ln for ln in rubric.criteria_text().strip("\n").splitlines()))
+        print(f"  合格: 各軸{rubric.PASS_EACH}点以上・平均{rubric.PASS_TOTAL}点以上。"
+              "score・score_breakdown・quality_ の項目は書かない（機械が採点して書く）")
+    except Exception as e:
+        print(f"  （採点の基準を出せませんでした: {e}）")
+    # 検索上位が扱っていて、この記事にまだ無い観点（ラッコで取った見出し・共起語・実際の質問）
+    try:
+        import kw_serp
+        got = kw_serp.brief(cfg["id"], kwtxt) if kwtxt else []
+        if got:
+            print("")
+            print("\n".join(got))
+            print("  ※ 上位にあって構成に無い観点のうち、主題に含まれるものを節にする（決定支援・抽出性の採点で見られる）")
+    except Exception as e:
+        print(f"  （上位ページの調べを出せませんでした: {e}）")
 
     show_brief(cfg["id"])
 

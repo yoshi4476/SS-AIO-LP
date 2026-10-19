@@ -88,6 +88,40 @@ PASS_TOTAL = 90        # 総合（3軸の平均）の下限
 RECOMMEND = 95         # 推奨水準。90は「公開してよい最低ライン」であり目標ではない
 
 
+def criteria_text():
+    """3軸の基準の文（各軸の目安の点）。公開後の採点（prompt_for）・公開前の採点（quality_loop）・
+    書く AI への案内（site_brief）が同じ文を使う（2026-10-20。書く側と採点側で基準がずれないように）"""
+    nl = chr(10)
+    parts = []
+    for i, a in enumerate(AXES, 1):
+        parts.append(f"{nl}{i}. {a['name']}（{MAX}点）— {a['what']}")
+        parts.append(f"   なぜ見るか: {a['why']}")
+        for pt, desc in a["anchors"]:
+            parts.append(f"   {pt:>3}点: {desc}")
+    return nl.join(parts)
+
+
+# 公開前の採点（quality_loop）で基準に届かず、直している途中の記事の印。この印がある間は公開しない（2026-10-20 運用者の決定:
+# 「基準未満なら公開を止める」「書かない選択肢はない」= 捨てずに、通るまで直し続ける）
+IMPROVING = "improving"
+# publish_flow --check が、まだ採点していない新しい記事の「採点の前の門」を見るときだけ立てる（書く AI は環境変数を付けられない）
+PRESCORE_ENV = "SS_PRESCORE_SLUG"
+
+
+def improving(meta):
+    """直している途中（quality_state が付いていて passed でない）か"""
+    qs = meta.get("quality_state")
+    return bool(qs) and str(qs) != "passed"
+
+
+def prescore(meta):
+    """採点の前の門だけを見る回か。点数も quality_state も無い、名指しされた1本だけ（配信はしない --check の中だけ）"""
+    import os
+    want = os.environ.get(PRESCORE_ENV, "")
+    return bool(want) and str(meta.get("slug") or "") == want and meta.get("score") is None \
+        and not meta.get("quality_state")
+
+
 def prompt_for(path):
     """採点の指示。証拠を必ず書かせる"""
     nl = chr(10)
@@ -98,11 +132,7 @@ def prompt_for(path):
         "リンクの本数・FAQの個数）は別の工程がすでに判定済みなので、"
         "**ここでは数えないでください**。見るのは中身の質だけです。" + nl,
     ]
-    for i, a in enumerate(AXES, 1):
-        parts.append(f"{nl}{i}. {a['name']}（{MAX}点）— {a['what']}")
-        parts.append(f"   なぜ見るか: {a['why']}")
-        for pt, desc in a["anchors"]:
-            parts.append(f"   {pt:>3}点: {desc}")
+    parts.append(criteria_text())
     parts.append(nl + "守ること:")
     parts.append("- 各軸について、**本文から根拠を1つ引用**してから点を付ける。"
                  "引用の無い点数は認めません")
@@ -171,7 +201,14 @@ def gate_why(meta):
     score だけを見ていたので、内訳の平均が90未満でも score: 90 と書けば通り、score: .nan（YAML の nan）は
     「90未満」の比較が偽になって通っていた（2026-10-20 の点検）。3観点の内訳があるときは平均を計算し直し、
     書かれた score と低い方で判定する。旧6観点（満点20）は観点がそろっていて数字であることだけを見る
-    （旧基準の総合は合計の換算で、平均と比べられない）"""
+    （旧基準の総合は合計の換算で、平均と比べられない）
+
+    公開前の採点で基準に届かず直している途中（quality_state: improving）の記事は、score があっても止める（2026-10-20）"""
+    if improving(meta):
+        return (f"品質の改善中（quality_state: {meta.get('quality_state')}。別工程の3観点の採点が基準に届くまで公開しません。"
+                "直すのは scripts/quality_loop.py）")
+    if prescore(meta):
+        return ""
     sc = meta.get("score")
     if not _num(sc):
         return f"score が数字ではありません（{sc!r}）"

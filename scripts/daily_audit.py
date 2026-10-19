@@ -212,7 +212,7 @@ def articles_by_site():
         if site:
             out[site].append({"slug": p.stem, "date": fv("date"), "score": fv("score"),
                               "title": fv("title"), "category": fv("category"),
-                              "makeup_for": made.get(p.stem, "")})
+                              "makeup_for": made.get(p.stem, ""), "quality_state": fv("quality_state")})
     return out
 
 
@@ -224,8 +224,12 @@ def _is_published(a, need_review=True):
     誤表示され、check_liveでは「公開したのに404」という偽の不具合を報告する。
     監修の記録が無い記事（HELD）も公開されていないので、need_review=True では数えない。
     ただし本数と月の上限は need_review=False で数える。監修待ちを「書いていない」と数えると、
-    救済が毎日記事を書き足し、書いた分もまた監修待ちになって本数が膨らみ続ける
+    救済が毎日記事を書き足し、書いた分もまた監修待ちになって本数が膨らみ続ける。
+    公開前の採点で直している途中の記事（quality_state: improving）も同じく、本数と月の上限には数える（書いた記事。
+    直すのは quality_loop で、救済が別の記事を書き足す理由にしない。2026-10-20）。公開済みには数えない
     """
+    if a.get("quality_state") and a.get("quality_state") != "passed":
+        return not need_review
     try:
         if int(a.get("score") or 0) < 90:
             return False

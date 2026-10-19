@@ -236,6 +236,46 @@ jobs:
           AGENT_WORK_KIND=rescue bash scripts/agent_passes.sh automation/retry_prompt.txt 300 \
             || echo "::warning::救済の claude 工程が失敗（書けた分の配信とコミットは続けます）"
 
+      # 公開前の品質ループ（2026-10-20 運用者の決定）。直している途中の記事を先に、次にこの回に書いた・直した点数の無い記事を、
+      # 書いた AI とは別の工程が3観点で採点し、基準に届くまで直す（1回の実行で2回まで。届かなければ improving のまま公開しない）。
+      # 範囲（自社の社・お客様の社ごと）を絞って回す（A社の回の AI にB社の原稿を見せない。agent_passes.sh と同じ）
+      - name: 公開前の品質ループ（別工程の3観点の採点と直し）
+        if: always() && (steps.mode.outputs.mode == 'main' || steps.audit.outputs.need == 'yes')
+        timeout-minutes: 120
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+        run: |
+          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
+          if ! python scripts/agent_guard.py --verify; then
+            mkdir -p automation/logs
+            echo "要対応: 救済の公開前の採点を動かしませんでした（作業場に鍵が残っていました。記事は改善中のまま公開しません）" >> automation/logs/findings.txt
+            exit 0
+          fi
+          mkdir -p automation/logs
+          start=$(date -u +%s)
+          for sc in $(cat "$RUNNER_TEMP/agent_scopes" 2>/dev/null || echo own); do
+            # 絞れなかった・控えを作れなかった範囲は AI を起こさない（agent_passes.sh と同じ）
+            python scripts/private_store.py --scope "$sc" || continue
+            python scripts/agent_guard.py --checkpoint || continue
+            HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/$sc" 2>/dev/null || true)"
+            export HUB_AGENT_TOKEN
+            # 全部の範囲で100分まで。1つの範囲は直している記事15分・新しい記事30分まで
+            used=$(( ( $(date -u +%s) - start ) / 60 ))
+            left=$(( 100 - used ))
+            p=$left; [ "$p" -gt 15 ] && p=15
+            python scripts/quality_loop.py --pending --scope "$sc" --budget-min "$p" > "$RUNNER_TEMP/quality_pass.txt" 2>&1 || true
+            used=$(( ( $(date -u +%s) - start ) / 60 ))
+            left=$(( 100 - used )); [ "$left" -gt 30 ] && left=30
+            python scripts/quality_loop.py --new --scope "$sc" --budget-min "$left" >> "$RUNNER_TEMP/quality_pass.txt" 2>&1 || true
+            # 記事の名前は quality_loop がお客様の分を伏せて出す
+            cat "$RUNNER_TEMP/quality_pass.txt"
+            grep '^要対応' "$RUNNER_TEMP/quality_pass.txt" >> automation/logs/findings.txt || true
+            python scripts/agent_guard.py --protect --site "$sc" --pass
+          done
+          python scripts/private_store.py --scope all
+
       # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
       - name: AIの変更のうち触ってはいけない場所を戻す
         if: always() && (steps.mode.outputs.mode == 'main' || steps.audit.outputs.need == 'yes')
