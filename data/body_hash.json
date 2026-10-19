@@ -68,7 +68,7 @@
 "modified": "2026-10-11"
 },
 "aio-muryou-soudan": {
-"hash": "fb696895a437eba916a7a15e4986a030",
+"hash": "adf845c49afe16ad48ee68647a27d7cf",
 "modified": "2026-10-13"
 },
 "aio-seo-audit": {
@@ -88,7 +88,7 @@
 "modified": "2026-10-04"
 },
 "aio-shindan-yarikata": {
-"hash": "8a833ddce745c105025388d83f753003",
+"hash": "4d9310db83a1f88c6cdf0ad832fef1d4",
 "modified": "2026-08-25"
 },
 "aio-shukyaku": {
@@ -156,7 +156,7 @@
 "modified": "2026-10-03"
 },
 "aio-taisaku-muryou-tool": {
-"hash": "4f55013607ffa9917da1cad3bb5d2d03",
+"hash": "23fdcc1332fc3d46a59bf7233762257b",
 "modified": "2026-09-28"
 },
 "aio-taisaku-souba": {
@@ -170,6 +170,10 @@
 "aio-to-seo-no-chigai": {
 "hash": "86230c9cd925e88493360ced5f823771",
 "modified": "2026-09-14"
+},
+"aio-tool-hyouban-kuchikomi": {
+"hash": "eeadb6ed919b1e7632a6f7fe8b39235b",
+"modified": "2026-10-19"
 },
 "aio-towa": {
 "hash": "503103be14f4332c93a1ced41d464199",
@@ -260,7 +264,7 @@
 "modified": "2026-09-13"
 },
 "clinic-kanja-shukyaku": {
-"hash": "42575d438403584a2560a8fdb2cfb84d",
+"hash": "461a8db041ea85b828585cba8932d6b1",
 "modified": "2026-10-15"
 },
 "clinic-kenchiku-jirei": {
