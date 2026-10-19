@@ -75,7 +75,12 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
+      # 記事のグループ（article-pipeline）で並んで待った回は、起動した時の版のまま動くと、待つ間に入ったコミットと
+      # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
+      # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
@@ -129,7 +134,12 @@ jobs:
       HUB_URL: ${{ secrets.HUB_URL }}
       HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
+      # 記事のグループ（article-pipeline）で並んで待った回は、起動した時の版のまま動くと、待つ間に入ったコミットと
+      # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
+      # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.ref_name }}
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
@@ -361,6 +371,12 @@ jobs:
           python scripts/notify_slack.py --routine "$icon 集中モード: ${{ job.status }}
           $found
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
+
+      # お客様の社に当てた直しの台帳の行（auto_fix.jsonl）・順位・共起語は public に置かず置き場に書く。始めに戻すだけで
+      # 残していなかったため、この回の分が次の回で消え、effect_ab・rewrite_rollback が前後を比べられなかった（2026-10-20）
+      - uses: ./.github/actions/client-private
+        if: always()
+        with: {mode: save}
 
       - name: 鍵の後始末
         if: always()

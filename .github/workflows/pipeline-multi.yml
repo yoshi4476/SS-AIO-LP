@@ -261,7 +261,12 @@ jobs:
       group: article-pipeline
       cancel-in-progress: false
     steps:
+      # 記事のグループ（article-pipeline）で並んで待った回は、起動した時の版のまま動くと、待つ間に入ったコミットと
+      # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
+      # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.ref_name }}
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
@@ -411,6 +416,17 @@ jobs:
       # 「11〜30位で需要のある語に答えていない」→「競合がAIの出典に出ている」。直近28日に直した記事は外す
       # （effect_ab・rewrite_rollback が前後28日で比べる）。候補が無い日は何もしない（新しい記事にも戻さない）。
       # 台帳（auto_fix.jsonl）には印 spare-slot を付け、週次の直しと分けて効きを測る
+      # 書き直しの道具（auto_rewrite）は中から AI を呼び、AI は記事と検索上位の見出しを読む。記事の枠と同じく、
+      # 作業場から鍵（Google の鍵・push の資格）を外してから動かす（2026-10-20 の点検で鍵の置かれたまま動いていた）。
+      # Google は読むだけ・1時間で切れる許可証になり、候補選び（GSC の順位）はそのまま読める。書き直しは45分で切るので
+      # 許可証の作り直し（--refresh）は要らない
+      - name: 浮いた枠：作業場から鍵を外す
+        id: spare_lock
+        if: steps.site.outputs.mode == 'rewrite' && steps.guard.outputs.ok == 'yes'
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: python scripts/agent_guard.py --lock
+
       - name: 浮いた枠：主力の記事を1本書き直す
         if: steps.site.outputs.mode == 'rewrite' && steps.guard.outputs.ok == 'yes'
         timeout-minutes: 45
@@ -420,15 +436,11 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # 台帳と検算に使う。道具の中から呼ぶ AI には渡らない（agent_guard.child_env が外す）
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
-          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
           [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
-          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
-            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
-            chmod 600 indexing-service-account.json
-          fi
           # 配信の基点。書き直した記事だけを後の工程で配信先へ届ける
           echo "BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
           # 道具の中から呼ぶ AI も、その社の分だけを置いて動かす（ほかのお客様の原稿・順位を読ませない）
@@ -436,11 +448,26 @@ jobs:
           out=$(python scripts/auto_rewrite.py --write --kind spare --main-only --sites "${{ steps.site.outputs.id }}" \
             --limit 1 --skip-recent 28 --tag spare-slot 2>&1) || true
           python scripts/private_store.py --scope all
-          rm -f indexing-service-account.json
           echo "$out"
           r=$(echo "$out" | sed -n 's/^SPARE_SLOT=//p')
           echo "::notice::浮いた枠（${{ steps.site.outputs.pub }}）: ${r:-結果の印がありません（上のログを確認）}"
           echo "浮いた枠（${{ steps.site.outputs.pub }}）: ${r:-結果の印がありません}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 浮いた枠：触ってはいけない場所を戻す
+        if: always() && steps.spare_lock.outcome != 'skipped'
+        run: python scripts/agent_guard.py --protect
+
+      - name: 浮いた枠：作業場へ鍵を戻す
+        if: always() && steps.spare_lock.outcome != 'skipped'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          # 絞った範囲を全部へ戻してから鍵を戻す（書き直しが途中で切られたときも、この後の配信・保存は全社の分を見る）
+          python scripts/private_store.py --scope all || true
+          python scripts/agent_guard.py --unlock
 
       - name: 執筆ブリーフの表示（KW残数と担当領域をログに残す）
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
@@ -676,12 +703,19 @@ jobs:
         if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          # 隔離した記事の語を台帳で対象外にする（hub_client.retire_kw）。渡していなかったため何もせず、
+          # 次の回にまた同じ語が選ばれていた（2026-10-20）
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
           fi
           out=$(python scripts/kw_gate.py --after --site "${{ steps.site.outputs.id }}") || true
           rm -f indexing-service-account.json
+          # 台帳で対象外にできなかった回は通知の本文へ（語・slug は書かない行だけ）
+          mkdir -p automation/logs
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
           if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
             echo "$out" | grep -E '^KW_GATE=' || true
             echo "隔離 $(echo "$out" | grep -c '隔離:') 本（お客様の社の語はログに出しません）"
@@ -967,6 +1001,17 @@ jobs:
           BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}   # 配信と一緒に Bing の確認ファイルを置く
           HUB_URL: ${{ secrets.HUB_URL }}          # 配信できた記事の公開の後の手順（台帳への記録）に使う
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          # 公開の後の手順（publish_flow --finish → post_social）の SNS 投稿。「書いた記事を配信する」と同じ鍵。
+          # 渡していなかったため、ここで配信できた記事は SNS に1度も出ていなかった（2026-10-20）。未登録の媒体は黙って飛ばす
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
+          LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
+          LINKEDIN_PERSON_ID: ${{ secrets.LINKEDIN_PERSON_ID }}
+          SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}
         run: |
           # 公開確認の起点。finish が呼ばれた時刻を起点にすると、既に始まった配信先のビルドを見失い1本8分待つ
           since=$(date -u +%Y-%m-%dT%H:%M:%SZ)

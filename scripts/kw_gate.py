@@ -269,11 +269,18 @@ def main():
             if src.is_file():
                 src.replace(qdir / f"{slug}.md")
             print(f"  隔離: {slug}（「{kw}」: {reason}）")
+            # 台帳で対象外にできないと、次の回にまた同じ語が選ばれる。黙って捨てず、要対応で知らせる
+            # （CI の工程に管制塔の鍵が無く、何もしないまま見過ごされていた。2026-10-20）。
+            # 語・slug はこの行に書かない（お客様の社の語は通知・ログに出さない）
             try:
                 import hub_client
-                hub_client.retire_kw(a.site, [kw], reason, force=True)
-            except Exception:
-                pass
+                r = hub_client.retire_kw(a.site, [kw], reason, force=True)
+                if not (isinstance(r, dict) and r.get("ok")):
+                    err = r.get("error", r) if isinstance(r, dict) else r
+                    why = "管制塔の設定（HUB_URL）がありません" if r is None else f"管制塔の応答: {str(err)[:60]}"
+                    print(f"要対応: 隔離した記事の語を台帳で対象外にできませんでした（{why}）。次の回にまた同じ語が選ばれます")
+            except Exception as e:
+                print(f"要対応: 隔離した記事の語を台帳で対象外にできませんでした（{type(e).__name__}）。次の回にまた同じ語が選ばれます")
         print("\nKW_GATE=quarantined")
         print("食い合う・担当領域の外の記事は articles/_conflicted/ へ移しました。残りは公開できます")
         return 0

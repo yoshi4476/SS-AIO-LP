@@ -286,6 +286,10 @@ jobs:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           # Claude は鍵が無ければサブスク（Claude Code）で聞く
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Gemini の月の検索回数は管制塔の台帳で数える（ai_cite_check.gemini_budget_ok）。渡していなかったため
+          # 残りを読めず「予算なし」として Gemini を黙って飛ばしていた（2026-10-20）
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           npm install -g @anthropic-ai/claude-code || true
           out=$(python scripts/ai_cite_check.py); echo "$out"
@@ -307,15 +311,30 @@ jobs:
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
           echo "$out" | grep -q '^要対応' && echo "::warning::3倍計画から遅れています（通知に載せます）" || true
 
+      # 改善の実行は道具の中から AI（auto_rewrite・auto_merge の claude）を呼び、AI は記事と検索上位の文章を読む。
+      # ほかの AI の工程と同じく、作業場から鍵を外してから動かす（2026-10-20 の点検。Google の鍵・push の資格が
+      # 作業場に置かれたままだった）。Google は読むだけ・1時間で切れる許可証にし、鍵を環境変数に持たない別の
+      # プロセスが40分ごとに作り直す（見直し3回と検算で1時間を超えることがある）。配信の鍵はこの後の機械の手順だけが持つ
+      - name: 改善の実行の前に作業場から鍵を外す
+        id: lock
+        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python scripts/agent_guard.py --lock
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
+              nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
+          fi
+
       - name: レポートの改善点を実行し、残りを人へ知らせる
+        id: actions
         if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # 台帳への積み足し（kw_discover）に使う。道具の中から呼ぶ AI には渡らない（agent_guard.child_env が外す）
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
-          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
-          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
-          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
@@ -325,7 +344,31 @@ jobs:
           out=$(python scripts/report_actions.py --apply --rounds 3 --budget-min 60 2>&1) || true
           echo "$out" | tail -60
           echo "$out" | grep -q "ACTIONS_OK=yes" || echo "::warning::改善の自動実行で検算に落ちた回があります（実行ログ参照）"
-          # 直した記事は配信先にも届ける（届かなければ直した意味が無い）
+
+      # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
+      - name: 改善の実行で触ってはいけない場所を戻す
+        if: always() && steps.lock.outcome != 'skipped'
+        run: python scripts/agent_guard.py --protect
+
+      - name: 改善の実行の後に作業場へ鍵を戻す
+        if: always() && steps.lock.outcome != 'skipped'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: python scripts/agent_guard.py --unlock
+
+      # 直した記事は配信先にも届ける（届かなければ直した意味が無い）。鍵を持つ機械の手順
+      - name: 改善の実行で直した記事をコミットし配信先へ届ける
+        if: steps.actions.outcome == 'success'
+        env:
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+          HUB_SECRET: ${{ secrets.HUB_SECRET }}
+        run: |
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
           # 範囲を決めて足す。レポート（reports/）は .gitignore で外れ、非公開のリポジトリへ残す（2026-10-10 守秘義務）。
@@ -394,6 +437,12 @@ jobs:
           if [ -f automation/logs/findings.txt ]; then found=$(cat automation/logs/findings.txt); fi
           python scripts/notify_slack.py --routine "$icon 月次レポート: ${{ job.status }}（info.ai@7senses.co.jp へ送付）
           $found" || true
+
+      # 「認証情報の配置」が書いた Google の鍵と .env（メールの鍵）を消す。消していなかった（2026-10-20 の点検）。
+      # ほかのワークフローと同じく、ジョブの終わりに必ず消す
+      - name: 鍵の後始末
+        if: always()
+        run: rm -f indexing-service-account.json .env
 
       # この回に書いた・直したお客様の社の記事・画像・台本・記録を非公開のリポジトリへ残す（公開側の git には入れない。
       # 公開側に commit が無い回も残す。門 gates_history_h77）

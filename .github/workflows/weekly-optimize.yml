@@ -78,7 +78,12 @@ jobs:
       HUB_URL: ${{ secrets.HUB_URL }}
       HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
+      # 記事のグループ（article-pipeline）で並んで待った回は、起動した時の版のまま動くと、待つ間に入ったコミットと
+      # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
+      # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.ref_name }}
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
@@ -224,7 +229,12 @@ jobs:
       HUB_URL: ${{ secrets.HUB_URL }}
       HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
+      # 記事のグループ（article-pipeline）で並んで待った回は、起動した時の版のまま動くと、待つ間に入ったコミットと
+      # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
+      # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.ref_name }}
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
@@ -301,7 +311,12 @@ jobs:
       HUB_URL: ${{ secrets.HUB_URL }}
       HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
+      # 記事のグループ（article-pipeline）で並んで待った回は、起動した時の版のまま動くと、待つ間に入ったコミットと
+      # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
+      # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.ref_name }}
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
@@ -474,7 +489,12 @@ jobs:
       HUB_URL: ${{ secrets.HUB_URL }}
       HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
+      # 記事のグループ（article-pipeline）で並んで待った回は、起動した時の版のまま動くと、待つ間に入ったコミットと
+      # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
+      # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.ref_name }}
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
@@ -825,6 +845,25 @@ jobs:
       # 時間切れになったりしても、ここまでの分は捨てられない。
       # 他サイトへの配信は、後段の直しも含めて最終コミットの後に1回だけ行う
       # （ここで配信すると、後段の直しが corporate/subsidy に届かなかった）
+      # 並行の KW 補充（kw-refill）が終わるのを待つ。この後の pull が自社の分を、client-private の戻しがお客様の分を
+      # 受け取るが、待っていなかったため補充が遅れた週は前の週の写しを読んでいた（2026-10-20 の点検）。
+      # needs で待つと optimize の始まりが補充の分（最大40分）だけ遅れるので、ここまで進めてから待つ。
+      # 状態を読めないときや上限（40分）を過ぎたら待たずに進む（週次を止めない）
+      - name: 並行のKW補充が終わるのを待つ
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 80); do
+            st=$(gh api "repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs" \
+              --jq '.jobs[] | select(.name == "kw-refill") | .status' 2>/dev/null | head -1) || st=""
+            if [ -z "$st" ] || [ "$st" = "completed" ]; then
+              echo "KW補充: ${st:-状態を読めません}（待たずに進みます）"; exit 0
+            fi
+            [ "$i" = 1 ] && echo "KW補充がまだ動いています（$st）。終わるまで待ちます（最大40分）"
+            sleep 30
+          done
+          echo "::warning::KW補充が40分で終わらなかったため、待たずに進みます（お客様の社の AI の語は前の週の写しを読みます）"
+
       - name: 途中までの直しを正本へ保存
         run: |
           git add -A

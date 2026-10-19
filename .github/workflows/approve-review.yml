@@ -87,6 +87,17 @@ jobs:
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          # --finish → post_social の SNS 投稿。記事の枠の「書いた記事を配信する」と同じ鍵。渡していなかったため、
+          # 監修を記録して公開した記事は SNS に1度も出ていなかった（2026-10-20）。未登録の媒体は黙って飛ばす
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
+          LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
+          LINKEDIN_PERSON_ID: ${{ secrets.LINKEDIN_PERSON_ID }}
+          SOCIAL_TOKENS_JSON: ${{ secrets.SOCIAL_TOKENS_JSON }}
         run: |
           since=$(cat "$RUNNER_TEMP/gap_since.txt")
           python - "$RUNNER_TEMP/approved.txt" "$RUNNER_TEMP/gap.txt" > "$RUNNER_TEMP/finish.txt" <<'EOF'
