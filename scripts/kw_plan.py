@@ -1345,6 +1345,8 @@ def budget_ok(S):
     print(f"RAKKO_EST={sum(parts.values()):.0f}")
     print("RAKKO_EST_PARTS=" + (",".join(f"{p}:{v:g}" for p, v in parts.items()) or "なし"))
     if not parts:
+        # 許可は出さない。前の社の許可が残っていると、この社の予備の取得がその枠で課金しうる（2026-10-20 の点検）
+        rakko.revoke()
         print("   ラッコの課金は要りません（控えと無料の材料で組めます）")
         print("RAKKO_GUARD=ok")
         return True
@@ -1399,11 +1401,16 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
     在庫を28本まで減らして残りをまた周辺の制度で埋めるだけだった（2026-10-09 の試算）"""
     # お客様の社は、非公開のデータ（サイト設定の戦略の部分・記事の材料の狙う語）が読めなければ組まない。
     # 空の設定で組むと、担当外の語を積み、ラッコのクレジットを使う
+    # 前の社の許可（rakko.allow）を持ち越さない。1つの実行で全社を回すので、許可が残ると次の社がその枠で課金しうる
+    # （見積もりが空の社・途中で落ちた社の後。2026-10-20 の点検）
+    rakko.revoke()
     import private_store
     if not private_store.require(site_id, "キーワードの計画"):
         return
     S = KD.site_config(site_id)
-    print(f"\n■ {site_id}（{S['cfg']['name']}）")
+    import sites as _S
+    # お客様の社は公開の id だけを出す（社名・社の id は CI のログに出さない。2026-10-20 の点検）
+    print(f"\n■ {_S.public_id(site_id)}" if _S.is_client(site_id) else f"\n■ {site_id}（{S['cfg']['name']}）")
     month = rakko.this_month()
     if if_needed:
         n = todo_count(site_id)
@@ -1513,7 +1520,6 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
            "serp": got, "keep": {norm(k) for k in st["todo"]}}
     out = write_plan(site_id, S, picked, dropped, deep, sheet_fate, cands, ctx)
     # お客様の社は語・主力の名前をログに出さない（CI のログは public。件数だけ）
-    import sites as _S
     quiet = _S.is_client(site_id)
     print(f"   採用 {len(picked)}本 → {'（非公開の置き場）' if quiet else out.relative_to(ROOT).as_posix()}"
           f"（ラッコ消費 {rakko.spent():.0f} クレジット）")
@@ -1539,7 +1545,7 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
         return
     if rakko.enabled():
         mark_done(site_id, month)          # 1社1か月1回（鍵の無い回は、鍵が入ったらすぐ組み直せるよう残さない）
-        print(f"KW_PLAN_DONE={site_id}:{month}")
+        print(f"KW_PLAN_DONE={_S.public_id(site_id)}:{month}")
 
 
 def main():
@@ -1567,9 +1573,10 @@ def main():
         try:
             run(sid, a.deep, a.replace, a.if_needed, a.main_first)
         except Exception as e:           # 1社の失敗で他の社の在庫を止めない（組みは済んだことにしない＝翌日やり直す）
+            rakko.revoke()               # 落ちた社の許可を次の社へ持ち越さない（2026-10-20）
             import traceback
             traceback.print_exc()
-            print(f"KW_PLAN_ERROR={sid}: {type(e).__name__}" + ("" if S_.is_client(sid) else f": {str(e)[:120]}"))
+            print(f"KW_PLAN_ERROR={S_.public_id(sid)}: {type(e).__name__}" + ("" if S_.is_client(sid) else f": {str(e)[:120]}"))
     if not DRY:
         rakko.sync_shared()                 # この回の消費を管制塔の台帳へ写す（手元とCIで同じ合計にする）
     print(f"\nRAKKO_SPENT={rakko.spent():.0f}（今月の合計 {rakko.month_spent():.0f} / 全体の上限 {rakko.TOTAL_CAP}）")

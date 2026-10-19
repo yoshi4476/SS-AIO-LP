@@ -325,6 +325,14 @@ def allow(site, est, dry=False, purpose="reserve"):
     return not skip
 
 
+def revoke():
+    """出した許可を消す。1つの実行で社を順に回すとき、前の社の許可（_GRANT）が次の社へ残らないように、
+    社の始まり・見積もりが空の回・社の途中の例外で呼ぶ（2026-10-20 の点検）"""
+    global _GRANT
+    _GRANT = None
+    _SAID.clear()
+
+
 def granted(purpose=None):
     """この回は課金の呼び出しを許されているか（allow を通ったか。purpose を渡すとその目的で）"""
     return _GRANT is not None and (purpose is None or purpose in _GRANT["plimit"])
@@ -494,6 +502,9 @@ def call(path, body=None, method="POST", purpose=None):
             # 時間切れは、向こうで処理されて課金だけ済んでいることがある。この回の枠では使ったものとして数える
             if cost:
                 _spend(purpose, cost)
+                # 月の記録にも残す（多めに数える側）。以前はこの回の枠にだけ数え、月の合計・管制塔の台帳に載らず、
+                # 実際に課金された分だけ上限の判定が甘くなっていた（2026-10-20 の点検）
+                _log_spend(path, cost, (_GRANT or {}).get("site"), purpose=purpose, uncertain=True)
             if i < len(RETRY_WAIT):
                 print(f"  ラッコAPI 通信失敗（{type(e).__name__}）。{RETRY_WAIT[i]}秒待ってやり直します")
                 time.sleep(RETRY_WAIT[i])

@@ -203,12 +203,23 @@ def next_kw(site):
             "note": "未着手のKWはすべて既存記事と食い合います。台帳の補充が必要です"}
 
 
+def _claim_order(rs, site, n):
+    """同じ社・同じ語の行の、着手に選ぶ順（GAS の claimOrder_ と同じ）。「未着手」「執筆中」→「公開済み」→残り（台帳の順）。
+    以前は台帳の先頭の行を選び、先に「対象外」や「公開済み」の行があると、生きている行があるのに
+    「同じ語が台帳にすでにあります」で止まっていた（2026-10-20 の点検）"""
+    mine = [i for i, r in enumerate(rs) if str(r[0]) == site and norm_kw(r[1]) == n]
+    rank = lambda i: {"未着手": 0, "執筆中": 0, "公開済み": 1}.get(str(rs[i][2]).strip(), 2)
+    return sorted(mine, key=rank)
+
+
 def claim_kw(site, keyword, ctx=None):
     rs = rows("KW台帳", KW_COLS)
     n = norm_kw(keyword)
-    for i, r in enumerate(rs):
-        if str(r[0]) != site or norm_kw(r[1]) != n:
-            continue
+    for i in _claim_order(rs, site, n)[:1]:     # 選ぶのは1行だけ（無ければ下の「見つかりません」）
+        r = rs[i]
+        # もう公開済み（監修待ちの記事を公開した後に呼ばれた等）なら何もしない。執筆中に戻すと公開本数が減る
+        if str(r[2]).strip() == "公開済み":
+            return {"ok": True, "overlaps": [], "already": "公開済み"}
         live = [x for j, x in enumerate(rs)
                 if j != i and norm_kw(x[1]) == n and str(x[2]).strip() not in ("対象外", "取り下げ")]
         rec = lambda x: {"site": x[0], "keyword": x[1], "status": str(x[2]).strip(), "url": x[9]}
@@ -241,9 +252,11 @@ def unclaim_kw(site, keywords):
 
 def retire_kw(site, keywords, reason="", force=False):
     rs, n = rows("KW台帳", KW_COLS), 0
-    want = set(keywords or [])
+    # 表記ゆれを吸収して照合する（GAS の retireKw_ と同じ normKw_）。文字のままの一致だと、全角・空白・記号の違いで
+    # 1行も外れず retired=0 のまま「外した」と扱われ、次の回に同じ語が選ばれていた（2026-10-20 の点検）
+    want = {norm_kw(k) for k in keywords or [] if norm_kw(k)}
     for i, r in enumerate(rs):
-        if str(r[0]) != site or str(r[1]) not in want:
+        if str(r[0]) != site or norm_kw(r[1]) not in want:
             continue
         if str(r[2]).strip() == "公開済み":
             if not force:

@@ -27,7 +27,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cannibal_check import dice, load_articles  # noqa: E402
-from kw_status import is_written, plan_keywords, written_corpus  # noqa: E402
+from kw_status import is_written, plan_file, plan_keywords, written_corpus  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DUP_THRESHOLD = 0.50
@@ -267,12 +267,16 @@ def main():
     quiet = _sm.is_client(site_id)
     S = site_config(site_id)
     if not S["industries"]:
-        print(f"{site_id}: sites/{site_id}.json に kw_seeds が未定義のため発掘できません")
+        shown = _sm.public_id(_sm.resolve(site_id))
+        print(f"{shown}: サイト設定に kw_seeds が未定義のため発掘できません")
         return
-    print(f"KW_DISCOVER_SITE={site_id}（{S['cfg']['name']}）")
+    # お客様の社は公開の id だけを出す（社名・社の id は CI のログに出さない。2026-10-20 の点検）
+    print(f"KW_DISCOVER_SITE={_sm.public_id(_sm.resolve(site_id))}" if quiet
+          else f"KW_DISCOVER_SITE={site_id}（{S['cfg']['name']}）")
     arts = load_articles()
     corpus = written_corpus()
-    planned = {k for _, k in plan_keywords()}
+    # 既知の語はその社の計画だけ（以前は社を問わず AI集客ラボの計画を読み、他の社の候補をそれで除いていた。2026-10-20）
+    planned = {k for _, k in plan_keywords(plan_file(site_id))}
     # 台帳（管制塔）にすでに積まれているKWも既知として扱う。
     # 計画ファイルだけを見ていたため、台帳にあるKWを「新規」として毎回積み直し、
     # 補助金サイトでは補充16件がすべて重複で、実質0件しか増えていなかった。

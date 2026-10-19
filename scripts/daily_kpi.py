@@ -18,6 +18,7 @@ GASは受け取って書くだけにしている。認証は既存のサービ�
     sites/*.json の ga4_property_id … 未設定のサイトはGA4分をスキップする
 """
 import json
+import os
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -348,6 +349,7 @@ def main():
         jobs = [(d, sids) for d, sids in sorted(retry_sites().items()) if sids]
     jobs += [(d, None) for d in days]
     sent = 0
+    all_waiting = []      # 全社が取り直し待ちで1行も送れなかった日
     for ga_day, only in jobs:
         rows = collect(ga_day) if only is None else collect(ga_day, only=only)
         if "--send" not in a:
@@ -355,15 +357,21 @@ def main():
         keep, wait = split_rows(rows, final=not once or last_chance(ga_day, today))
         if wait:
             print(f"  {ga_day}: {len(wait)}社は数字を取れなかったため送らず、次の回に取り直します")
+            if not keep:
+                all_waiting.append(ga_day)
         if keep:
             body = {"action": "kpi_log", "rows": keep}
-            if only is not None:
-                body["partial"] = True       # 取り直した社だけの行。ダッシュボード（全社の合計）は書き換えない
+            # 取り直した社だけの行（only）と、取り直し待ちの社がある日（wait）の行は、ダッシュボード（全社の合計）を
+            # 書き換えない。残りの社だけの合計で上書きすると、待っている社の分だけ少ない合計が「全社」として残る（2026-10-20）
+            if only is not None or wait:
+                body["partial"] = True
             r = hub_client._post(body)
             if r.get("ok") is False:
                 raise SystemExit(f"管制塔が受け取りませんでした（{ga_day}）: {r.get('error')}")
             print(f"\n管制塔へ送信（{ga_day}）: {r.get('rows', 0)}件"
-                  + ("（取り直した社）" if only is not None else " / ダッシュボード更新済み"))
+                  + ("（取り直した社）" if only is not None
+                     else "（取り直し待ちの社があるため、ダッシュボードは更新しません）" if wait
+                     else " / ダッシュボード更新済み"))
             sent += 1
         if once:
             if only is None:
@@ -372,6 +380,13 @@ def main():
                 clear_retry(ga_day, set(only) - wait)      # 一覧から外れた社も待ち続けない
     if "--send" not in a:
         print("\n※ 確認モードです。管制塔へ送るには --send を付けてください。")
+    if all_waiting and not sent:
+        # 黙って KPI_SENT=0 で終えると、GA4・Search Console の鍵や通信が落ちた日が「送る日が無かった日」と区別できない（2026-10-20）
+        msg = (f"要対応: 日次KPIを1件も送れませんでした（{'・'.join(all_waiting)} は全社の数字を取れず、次の回に取り直します。"
+               "GA4・Search Console の鍵と通信を確かめてください）")
+        print(msg)
+        if os.environ.get("GITHUB_ACTIONS"):
+            print("::warning::" + msg)      # 実行の画面に出す（この工程の出力は通知の本文へ回らないため）
     print(f"KPI_SENT={sent}")
 
 

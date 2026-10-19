@@ -34,13 +34,15 @@ def scheme_of(text):
 
 
 def local_next_kw(cfg, limit=5):
-    """管制塔が使えないときのフォールバック（KW計画ファイルから未執筆を拾う）"""
+    """台帳から次の語が返らないときのフォールバック（その社の KW 計画ファイルから未執筆を拾う）。
+    新しく書く語の判定（kw_fit.judge_new == 0）を通った語だけ。以前は判定を見ず、担当領域語の無い語・
+    kw_require に当たらない語まで「次に書く語」として案内していた（2026-10-20 の点検）"""
     import re
     from cannibal_check import load_articles
-    import private_store
-    plan = (private_store.client_path(cfg["id"], "kw.md") if sites_mod.is_client(cfg.get("id"))
-            else ROOT / cfg.get("kw_plan", ""))
-    if not cfg.get("kw_plan") and not sites_mod.is_client(cfg.get("id")) or not plan.is_file():
+    import kw_fit
+    import kw_status
+    plan = kw_status.plan_file(cfg.get("id"))
+    if plan is None:
         return []
     corpus = [f"{a['slug']} {a['title']} {a['desc']}" for a in load_articles()]
     out = []
@@ -55,6 +57,8 @@ def local_next_kw(cfg, limit=5):
                 continue
             tokens = [t for t in re.split(r"[\s　]+", kw) if t]
             if any(all(t in doc for t in tokens) for doc in corpus):
+                continue
+            if kw_fit.judge_new(kw, cfg["id"])[0] != 0:
                 continue
             out.append({"keyword": kw, "aim": aim})
             if len(out) >= limit:
@@ -191,6 +195,21 @@ def _show(b):
           "憶測で補うと、事実と違う記事が公開されます。")
 
 
+def require_materials(site_id):
+    """記事を書く工程では、お客様の社は記事の材料（brief.json）と一次情報（facts.json）の両方が要る。
+    require は4つの材料のどれか1つがあれば通すため、設定（site_private.json）だけ読める回に材料なしで書かせていた
+    （2026-10-20 の点検）。配信の require は変えない（書いた記事の配信は止めない）。知らせる文には公開の id だけを出す"""
+    import private_store
+    if not sites_mod.is_client(site_id):
+        return
+    miss = [n for n in ("brief.json", "facts.json") if not private_store.client_path(site_id, n).is_file()]
+    if miss:
+        print(f"要対応: お客様の社 {sites_mod.public_id(site_id)} の記事を止めました。非公開の置き場に"
+              f"{'・'.join(miss)} がありません（記事の材料と一次情報の両方が要ります）", flush=True)
+        print("PRIVATE_OK=no", flush=True)
+        raise SystemExit(3)
+
+
 def main():
     if len(sys.argv) < 2:
         raise SystemExit("使い方: python scripts/site_brief.py <site_id>\n" + sites_mod.summary())
@@ -199,6 +218,7 @@ def main():
     # 材料なしで書くと、書かれていないことを憶測で補った記事が公開される（2026-10-10 運用者の指示）
     import private_store
     private_store.require_or_exit(cfg["id"], "記事")
+    require_materials(cfg["id"])
 
     print("=" * 68)
     print(f"■ 対象サイト: {cfg['name']}（{cfg['id']}）")
@@ -330,7 +350,8 @@ def main():
             print(f"     狙い: {cands[0]['aim']}")
             for c in cands[1:]:
                 print(f"     次点: {c['keyword']}")
-        print("  ※ 管制塔が未接続のためローカルのKW計画を使用")
+        # 「未接続」とは限らない（台帳に書ける語が無い日も同じ形で返る）。見た事実だけを書く（2026-10-20）
+        print("  ※ 管制塔の台帳から次の語が返らなかったため、このサイトのKW計画（新しく書ける語だけ）を使用")
 
     # 一次情報を毎回目に入れる。ブリーフに出ないと外部統計の引き写しだけになり、
     # どのサイトでも書ける記事＝引用先に選ばれない記事になる

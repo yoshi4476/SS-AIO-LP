@@ -637,11 +637,13 @@ function allKw_() {
 function retireKw_(site, keywords, reason, force) {
   const sh = sheet_('KW台帳');
   const rows = kwRows_();
+  // 表記ゆれを吸収して照合する（normKw_。claim・unclaim と同じ）。文字のままの一致だと全角・空白・記号の違いで
+  // 1行も外れず retired=0 のまま、次の回に同じ語が選ばれていた（2026-10-20 の点検。hub_sheets.retire_kw と同じ）
   const set = {};
-  (keywords || []).forEach(function (k) { set[k] = true; });
+  (keywords || []).forEach(function (k) { const m = normKw_(k); if (m) set[m] = true; });
   let n = 0;
   for (let i = 0; i < rows.length; i++) {
-    if (String(rows[i][0]) !== site || !set[String(rows[i][1])]) continue;
+    if (String(rows[i][0]) !== site || !set[normKw_(rows[i][1])]) continue;
     // 公開済みは既定で触らない（誤って生きている記事を落とさないため）。
     // ただし実際に取り下げた記事は台帳も現況に合わせる必要があるため、
     // force 指定時だけ「取り下げ」にする。反映しないと本数を過大に報告する。
@@ -678,8 +680,22 @@ function claimKw_(site, keyword, ctx) {
   const sh = sheet_('KW台帳');
   const rows = kwRows_();
   const n = normKw_(keyword);
-  for (let i = 0; i < rows.length; i++) {
-    if (String(rows[i][0]) !== site || normKw_(rows[i][1]) !== n) continue;
+  // 同じ社・同じ語の行から選ぶのは1行だけ。「未着手」「執筆中」→「公開済み」→残り（台帳の順）。
+  // 以前は台帳の先頭の行を選び、先に「対象外」「公開済み」の行があると、生きている行があるのに
+  // 「同じ語が台帳にすでにあります」で止まっていた（2026-10-20 の点検。hub_sheets._claim_order と同じ）
+  const rank = function (st) {
+    st = String(st).trim();
+    return (st === '未着手' || st === '執筆中') ? 0 : (st === '公開済み' ? 1 : 2);
+  };
+  let pick = -1;
+  for (let j = 0; j < rows.length; j++) {
+    if (String(rows[j][0]) !== site || normKw_(rows[j][1]) !== n) continue;
+    if (pick < 0 || rank(rows[j][2]) < rank(rows[pick][2])) pick = j;
+  }
+  if (pick >= 0) {
+    const i = pick;
+    // もう公開済み（監修待ちの記事を公開した後に呼ばれた等）なら何もしない。執筆中に戻すと公開本数が減る
+    if (String(rows[i][2]).trim() === '公開済み') return { ok: true, overlaps: [], already: '公開済み' };
     // 自分の行を除いて、生きている同じ語がないか見る。止めるのは同じ組の中だけ
     const dup = [], other = [];
     rows.forEach(function (r, j) {

@@ -54,19 +54,20 @@ def _canon(kw, same=()):
     return frozenset(w for w in t.split() if w)
 
 
-def same_site_published(kw, site, arts=None):
+def same_site_published(kw, site, arts=None, exclude_slug=""):
     """同じサイトの公開済みの記事（score 90 以上）のうち、狙う語が同じ検索のもの（slug の一覧）。
     文字の似かたでは「条件」と「学習塾」のような別の記事まで同じに見えるので、語の組で比べる（2026-10-12 の点検:
-    執筆前の門が「デジタル化 ai導入補助金2026 個人事業主」を、公開済みの「it導入補助金 2026 個人事業主」があるのに選んだ）"""
+    執筆前の門が「デジタル化 ai導入補助金2026 個人事業主」を、公開済みの「it導入補助金 2026 個人事業主」があるのに選んだ）。
+    exclude_slug は書いた後の門で自分自身を除くため（書いた記事も score 90 以上でディスクにある。2026-10-20）"""
     import sites as S
     from cannibal_check import load_articles
-    cfg = S.load_all().get(site) or {}
+    cfg = S.load_all().get(S.resolve(site)) or {}
     cats = set(cfg.get("categories") or {})
     same = cfg.get("kw_same") or []
     want = _canon(kw, same)
     out = []
     for a in (load_articles() if arts is None else arts):
-        if a.get("cat") not in cats or not a.get("kw"):
+        if a.get("cat") not in cats or not a.get("kw") or (exclude_slug and a.get("slug") == exclude_slug):
             continue
         p = ROOT / "articles" / f"{a['slug']}.md"
         if arts is None:
@@ -79,7 +80,7 @@ def same_site_published(kw, site, arts=None):
 
 
 def next_keyword(site):
-    """次に書くKWを管制塔から取る。取れなければローカルの計画から"""
+    """次に書くKWを管制塔から取る。取れなければその社のローカルの計画から"""
     try:
         import hub_client
         n = hub_client.next_kw(site)
@@ -90,16 +91,34 @@ def next_keyword(site):
     try:
         import kw_fit
         import kw_status
+        import sites as S
         from cannibal_check import kw_conflicts, load_articles
+        site = S.resolve(site)
+        # その社の計画だけを見る（site_brief.local_next_kw と同じ置き場）。以前は社を問わず AI集客ラボの計画を読み、
+        # 他の社の枠に AI集客ラボの語を返していた。お客様の社で非公開の kw.md が読めなければ何も返さない（2026-10-20）
+        plan = kw_status.plan_file(site)
+        if plan is None:
+            return "", ""
         arts = load_articles()
-        for _g, k in kw_status.plan_keywords():
-            # 管制塔の next_kw と同じく、新しく書けない語（担当の外・kw_require に当たらない）は選ばない。
-            # 選ぶと書いた後の点検で隔離され、その枠の執筆が無駄になる
-            if not kw_conflicts(k, arts) and kw_fit.judge_new(k, site)[0] < 2:
+        for _g, k in kw_status.plan_keywords(plan):
+            # 新しく書く語は judge_new == 0 だけ（担当領域語の無い語＝判定1も選ばない）。
+            # 管制塔の next_kw と同じく、選ぶと書いた後の点検で隔離され、その枠の執筆が無駄になる
+            if not kw_conflicts(k, arts) and kw_fit.judge_new(k, site)[0] == 0:
                 return k, "ローカルの計画"
     except Exception:
         pass
     return "", ""
+
+
+def retired_any(r):
+    """retire_kw の応答で1行以上外れたか。retired の無い応答（古い管制塔）は外れたものとして扱う"""
+    if not isinstance(r, dict):
+        return False
+    n = r.get("retired")
+    try:
+        return n is None or int(n) > 0
+    except (TypeError, ValueError):
+        return False
 
 
 def published_html(slug):
@@ -218,6 +237,12 @@ def main():
                 print("要対応: 管制塔の台帳を書き換えられません。GitHub Secrets の HUB_SECRET が"
                       "管制塔の合言葉と一致しているか確かめてください")
                 return 1
+            if not retired_any(r):
+                # 応答は ok でも1行も外れていない（台帳の語と表記が違う・別の社の行など）。次を取ると同じ語が返り、
+                # 「全部食い合う」と誤って止まる（2026-10-20 の点検）。語はこの行に書かない
+                print("KW_GATE=block")
+                print("要対応: 台帳から語を外せませんでした（retired=0。台帳の語の表記・社の id を確かめてください）")
+                return 1
             print("   → 台帳から退避しました。次の候補を探します\n")
         if not tried:
             print("次のKWを取得できませんでした。KW台帳の補充が必要です")
@@ -257,6 +282,11 @@ def main():
                 ng.append((slug, kw, f"担当領域の外（kw_fit: {why}）"))
             elif level == 2:
                 ng.append((slug, kw, "既存ページと食い合うため隔離（kw_gate）"))
+            # 書く前の門と同じく、同じサイトの公開済みの記事と同じ検索（年号・言い換えだけ違う）の記事も出さない。
+            # 書き手が台帳と違う語を選ぶと、書く前の門を通らずに同じ検索の2本目が出ていた（2026-10-20 の点検）
+            elif same_site_published(kw, a.site, exclude_slug=slug):
+                print("   同じサイトの公開済みの記事が同じ検索を狙っています")
+                ng.append((slug, kw, "同じサイトの公開済みの記事と同じ検索のため隔離（kw_gate。既存の記事を書き足す）"))
         if not ng:
             print("\nKW_GATE=ok")
             return 0
@@ -279,6 +309,9 @@ def main():
                     err = r.get("error", r) if isinstance(r, dict) else r
                     why = "管制塔の設定（HUB_URL）がありません" if r is None else f"管制塔の応答: {str(err)[:60]}"
                     print(f"要対応: 隔離した記事の語を台帳で対象外にできませんでした（{why}）。次の回にまた同じ語が選ばれます")
+                elif not retired_any(r):
+                    # 応答は ok でも1行も外れていない（台帳の語と表記が違う・台帳に無い語を書いた）。黙って捨てない（2026-10-20）
+                    print("要対応: 隔離した記事の語を台帳で対象外にできませんでした（retired=0。台帳の語の表記・社の id を確かめてください）")
             except Exception as e:
                 print(f"要対応: 隔離した記事の語を台帳で対象外にできませんでした（{type(e).__name__}）。次の回にまた同じ語が選ばれます")
         print("\nKW_GATE=quarantined")

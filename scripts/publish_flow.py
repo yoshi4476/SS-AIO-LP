@@ -188,13 +188,21 @@ def main():
             raise SystemExit(
                 f"BLOCKED(食い合い): 「{kw}」は既存ページと食い合うため配信しません。\n"
                 "  この後の kw_gate --after が articles/_conflicted/ へ隔離します")
-        # 担当領域の外（kw_fit）の新しい記事も配信しない。公開済み記事の再配信（書き直し）は止めない
+        # 担当領域の外の新しい記事も配信しない。公開済み記事の再配信（書き直し）は止めない。
+        # 新しい記事は書く前と同じ判定（judge_new: kw_require を含む）と、同じサイトの公開済みの記事と同じ検索か
+        # （年号・言い換えだけ違う）を見る。以前は judge だけで、書く前の門で止まる語が配信の前では通っていた（2026-10-20）
         import kw_fit
-        fit, why = kw_fit.judge(kw, site_id)
-        if fit >= 2 and slug in {s for s, _k in kw_gate.written_keyword(site_id)}:
-            raise SystemExit(
-                f"BLOCKED(担当領域の外): 「{kw}」は{why}のため配信しません。\n"
-                "  この後の kw_gate --after が articles/_conflicted/ へ隔離します")
+        new_slugs = {s for s, _k in kw_gate.written_keyword(site_id)}
+        if slug in new_slugs:
+            fit, why = kw_fit.judge_new(kw, cfg["id"])
+            if fit >= 2:
+                raise SystemExit(
+                    f"BLOCKED(担当領域の外): 「{kw}」は{why}のため配信しません。\n"
+                    "  この後の kw_gate --after が articles/_conflicted/ へ隔離します")
+            if kw_gate.same_site_published(kw, cfg["id"], exclude_slug=slug):
+                raise SystemExit(
+                    "BLOCKED(同じ検索): 同じサイトの公開済みの記事が同じ検索を狙っているため配信しません"
+                    "（既存の記事を書き足す）。\n  この後の kw_gate --after が articles/_conflicted/ へ隔離します")
 
     import editorial_review
 

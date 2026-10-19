@@ -19,12 +19,30 @@ PLAN = ROOT / "docs" / "industry-pillar-plan.md"
 REPLENISH_THRESHOLD = 5  # 残りがこの数以下になったらKWリストの補充を促す
 
 
-def plan_keywords():
-    """計画ファイルの「**〜（N本）**: KW / KW / …」行からKWを抽出"""
-    if not PLAN.exists():
+def plan_file(site):
+    """その社の KW 計画ファイル。自社は sites/<id>.json の kw_plan、お客様の社は非公開の kw.md。無ければ None。
+    以前は社を問わず AI集客ラボの計画（docs/industry-pillar-plan.md）を読み、補助金・コーポレート・お客様の社の
+    次の語に AI集客ラボの語を返していた（2026-10-20 の点検）"""
+    import private_store
+    import sites as S
+    sid = S.resolve(site) if site else site
+    if not sid:
+        return None
+    if S.is_client(sid):
+        p = private_store.client_path(sid, "kw.md")
+    else:
+        rel = (S.load_all().get(sid) or {}).get("kw_plan")
+        p = ROOT / rel if rel else None
+    return p if p is not None and p.is_file() else None
+
+
+def plan_keywords(path=PLAN):
+    """計画ファイルの「**〜（N本）**: KW / KW / …」行からKWを抽出。path は plan_file(社) で社の計画を渡す
+    （既定は AI集客ラボの計画。このファイルの main が読む）"""
+    if path is None or not Path(path).exists():
         return []
     out = []
-    for line in PLAN.read_text(encoding="utf-8-sig").splitlines():
+    for line in Path(path).read_text(encoding="utf-8-sig").splitlines():
         m = re.match(r"^\*\*(.+?)\*\*\s*[:：]\s*(.+)$", line.strip())
         if not m:
             continue

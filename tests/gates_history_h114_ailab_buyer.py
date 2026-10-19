@@ -38,8 +38,14 @@ def test_new_article_entrances_use_judge_new_and_existing_ones_do_not():
     check("kw_plan・kw_discover・ai_kw_research・kw_gate",
           ["judge_new" in src(n) for n in ("kw_plan.py", "kw_discover.py", "ai_kw_research.py", "kw_gate.py")],
           [True] * 4)
-    check("kw_guard・publish_flow は judge のまま",
-          ["judge_new" in src(n) for n in ("kw_guard.py", "publish_flow.py")], [False, False])
+    check("kw_guard は judge のまま", "judge_new" in src("kw_guard.py"), False)
+    # 2026-10-20 の点検で変えた: publish_flow はこの回に書いた新しい記事（written_keyword）だけ judge_new で見る
+    # （書く前の門で止まる語が配信の前では通っていた）。書き直しの再配信は今までどおり担当領域で止めない
+    pf = src("publish_flow.py")
+    check("publish_flow: judge_new は新しい記事（new_slugs）の中だけ",
+          ("if slug in new_slugs:" in pf, pf.count("kw_fit.judge_new("),
+           pf.index("if slug in new_slugs:") < pf.index("kw_fit.judge_new(")),
+          (True, 1, True))
 
 
 def test_unwritable_keywords_are_not_counted_as_stock():
