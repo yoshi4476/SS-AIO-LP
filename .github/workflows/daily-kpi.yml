@@ -56,6 +56,8 @@ jobs:
       go: ${{ steps.g.outputs.sched_go }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - id: g
         env:
           GH_TOKEN: ${{ github.token }}
@@ -68,6 +70,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
@@ -156,6 +160,7 @@ jobs:
       HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）

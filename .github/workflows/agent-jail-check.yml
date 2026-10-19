@@ -16,6 +16,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] 鍵を外す仕組みの確かめ（checkout の資格が残る状態から agent_guard --lock が外せるかを見る）
 
       - uses: ./.github/actions/private-data
         with:
@@ -118,6 +119,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] 鍵を外す仕組みの確かめ（checkout の資格が残る状態から agent_guard --lock が外せるかを見る）
 
       - uses: ./.github/actions/private-data
         with:

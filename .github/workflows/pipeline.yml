@@ -26,7 +26,8 @@ on:
         default: ""
 
 permissions:
-  contents: write
+  # 書き込みの権限は正本へ push するジョブにだけ付ける（ジョブごとの permissions。zizmor excessive-permissions・2026-10-20）
+  contents: read
   actions: read      # 同じ予定を先に受け持った回があるかを見る（sched_guard）
 
 env:
@@ -42,12 +43,17 @@ jobs:
       go: ${{ steps.g.outputs.sched_go }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - id: g
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/sched_guard.py
 
   pipeline:
+    permissions:
+      contents: write
+      actions: read
     needs: sched
     if: ${{ !cancelled() && needs.sched.outputs.go != 'no' }}
     concurrency:
@@ -61,6 +67,7 @@ jobs:
       # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           ref: ${{ github.ref_name }}
 
@@ -72,9 +79,13 @@ jobs:
 
       - name: 実行モード判定（21:30の枠だけ救済モード）
         id: mode
-        run: |
+        env:
+          # 入力は環境変数で受ける（run に直接埋めると、値がコマンドとして読まれうる。zizmor template-injection・2026-10-20）。
+          # 予定（github.event.schedule）は cron の文字で外から変えられず、起動役の表（scheduler_build）がこの形を読むので残す
+          IN_MODE: ${{ inputs.mode }}
+        run: | # zizmor: ignore[template-injection] 残る値は github.event.schedule（このファイルの cron の文字）だけで外から変えられない
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+            case "$IN_MODE" in main|rescue) echo "mode=$IN_MODE" >> "$GITHUB_OUTPUT" ;; *) echo "mode=main" >> "$GITHUB_OUTPUT" ;; esac
           elif [ "${{ github.event.schedule }}" = "30 12 * * *" ]; then
             echo "mode=rescue" >> "$GITHUB_OUTPUT"
           else

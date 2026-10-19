@@ -3,7 +3,7 @@
 
 AIO・SEO・LLMO対策の相場は data/price_ranges.json だけを正とする。
 記事ごとに別の相場（外注で月3万円台から、月10万〜30万円 など）を書くと、同じサイトの中で
-数字が食い違い、当社の見立てとも矛盾する。当社の価格（月20万円）も書かない。
+数字が食い違い、当社の見立てとも矛盾する。当社の価格（例: 月99万円。本当の額は非公開の sales/prices.json）も書かない。
 
 検出器は「悪い例を拾う」「良い例を拾わない」を先に確かめてから記事に当てる（CLAUDE.md 0.1）。
 """
@@ -14,7 +14,26 @@ from test_gates import check, ROOT
 
 PRICE = json.loads((ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
 FLOOR = PRICE["outsource_min_yen"]
-OWN_PRICE_MAN = PRICE["own_price_yen"] // 10000
+
+
+def _own_price_man():
+    """当社の月額（万円）。本当の額は非公開の sales/prices.json にだけ置く（public のリポジトリに当社の料金を書かない。
+    2026-10-20 の点検で、price_ranges.json の注記とこの門の例に本当の額が書かれていた）。読めなければ
+    price_ranges.json の架空の値（門の例は動くが、記事に本当の額が書かれていても拾えない）"""
+    try:
+        import sys
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import private_store as PS
+        monthly = str(((PS.sales_json("prices.json") or {}).get("aio_media") or {}).get("monthly") or "")
+        m = re.search(r"([0-9]+)\s*万", monthly)
+        if m:
+            return int(m.group(1))
+    except Exception:
+        pass
+    return PRICE["own_price_yen"] // 10000
+
+
+OWN_PRICE_MAN = _own_price_man()
 
 # 対象は AI集客ラボの AIO・SEO・AIマーケティング（MEO は別の商材なので外す）
 CATS = {"aio", "seo", "ai-marketing"}
@@ -155,7 +174,8 @@ def test_hist_price_ranges_consistent():
         check(f"相場: 悪い例を拾う「{s[:24]}」", bool(low_claims("## AIO対策の費用\n" + s)), True)
     for s in good:
         check(f"相場: 良い例を拾わない「{s[:24]}」", low_claims("## AIO対策の費用\n" + s), [])
-    check("当社の価格: 悪い例を拾う", bool(own_price("当社のAIO対策は月20万円です。")), True)
+    # 額は書かずに組み立てる（public のリポジトリに当社の料金を書かない。2026-10-20）
+    check("当社の価格: 悪い例を拾う", bool(own_price(f"当社のAIO対策は月{OWN_PRICE_MAN}万円です。")), True)
     check("当社の価格: 良い例を拾わない", own_price("当社の見立てでは月数十万円〜です。厚労省の統計では120万円です。"), [])
 
     low, own = [], []
@@ -165,4 +185,4 @@ def test_hist_price_ranges_consistent():
     for x in low + own:
         print("    " + x)
     check("AI集客ラボの記事: 外部委託の月額を数十万円より下に書かない", low, [])
-    check("AI集客ラボの記事: 当社の価格（月20万円）を書かない", own, [])
+    check("AI集客ラボの記事: 当社の価格を書かない", own, [])

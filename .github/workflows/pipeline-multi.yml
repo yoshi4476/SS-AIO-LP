@@ -81,7 +81,8 @@ on:
         default: ""
 
 permissions:
-  contents: write
+  # 書き込みの権限は正本へ push するジョブにだけ付ける（ジョブごとの permissions。zizmor excessive-permissions・2026-10-20）
+  contents: read
   actions: read      # 同じ予定を先に受け持った回があるかを見る（sched_guard）
 
 # concurrency はワークフロー単位ではなく、記事を書く job（write）にだけ付ける。
@@ -111,6 +112,7 @@ jobs:
       # 外すのは下の5つだけで、判定が読む scripts/・sites/・data/・articles/・.github/ はそのまま取る
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /*
@@ -144,6 +146,9 @@ jobs:
         env:
           IN_SLOT: ${{ inputs.slot }}
           IN_AT: ${{ inputs.scheduled_for }}
+          # 入力と予定は環境変数で受ける（run に直接埋めると、値がコマンドとして読まれうる。zizmor template-injection・2026-10-20）
+          IN_SITE: ${{ inputs.site }}
+          EV_SCHEDULE: ${{ github.event.schedule }}
         run: |
           # sites/*.json の並び順で決める。サイトIDを直接書くと、
           # 別の会社へ移したときに存在しないサイトを指したまま毎日空振りする。
@@ -163,7 +168,7 @@ jobs:
           # 20行を手で書いていたため、cron を足しても case を足し忘れると枠0に潰れた。
           # cron を1行足せば枠が1つ増える（上限＝cron の本数÷2 社）
           # 起動役（Worker）の回は枠の番号を入力 slot で受け取る（無ければ今までどおり cron の位置）
-          read -r slot SLOTS < <(python - "${{ github.event.schedule }}" "$IN_SLOT" <<'PY'
+          read -r slot SLOTS < <(python - "$EV_SCHEDULE" "$IN_SLOT" <<'PY'
           import re, sys
           crons = re.findall(r'^\s*- cron:\s*"([^"]+)"', open(".github/workflows/pipeline-multi.yml", encoding="utf-8").read(), re.M)
           s, n = sys.argv[1].strip(), sys.argv[2].strip()
@@ -173,8 +178,8 @@ jobs:
           # この枠が予定されていた日。定時が遅れて日付をまたいでも、書いた記事は予定の日の本数に数える
           # （公開日 date: は公開した日のまま。daily_audit.stamp_makeup が data/makeup.json に記録する）。
           # 起動役の回は予定の時刻（scheduled_for）の日
-          echo "slot_day=$(python scripts/daily_audit.py --slot-day "${{ github.event.schedule }}" "$IN_AT")" >> "$GITHUB_OUTPUT"
-          s="${{ inputs.site }}"
+          echo "slot_day=$(python scripts/daily_audit.py --slot-day "$EV_SCHEDULE" "$IN_AT")" >> "$GITHUB_OUTPUT"
+          s="$IN_SITE"
           if [ -z "$s" ]; then
             if [ "$N" -eq 0 ]; then
               echo "skip=yes" >> "$GITHUB_OUTPUT"
@@ -250,6 +255,9 @@ jobs:
 
 
   write:
+    permissions:
+      contents: write
+      actions: read
     needs: select
     if: needs.select.outputs.skip != 'yes'
     runs-on: ubuntu-latest
@@ -265,6 +273,7 @@ jobs:
       # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           ref: ${{ github.ref_name }}
 

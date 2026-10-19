@@ -23,8 +23,9 @@ on:
         default: ""
 
 permissions:
-  contents: write
-  actions: write           # 動画を記事に埋めたあと、デプロイを起動する（GITHUB_TOKEN の push では動かない）
+  # 書き込みの権限は正本へ push するジョブにだけ付ける（ジョブごとの permissions。zizmor excessive-permissions・2026-10-20）
+  contents: read
+  actions: read
 
 jobs:
   # 起動役（Worker）の回と予備の定時の回のうち、同じ予定を先に受け持った回だけが動画を上げる（1日に2本上げない）。
@@ -36,12 +37,17 @@ jobs:
       go: ${{ steps.g.outputs.sched_go }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - id: g
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/sched_guard.py
 
   video:
+    permissions:
+      contents: write
+      actions: write
     needs: sched
     if: ${{ !cancelled() && needs.sched.outputs.go != 'no' }}
     concurrency:
@@ -53,6 +59,7 @@ jobs:
       TZ: Asia/Tokyo
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）

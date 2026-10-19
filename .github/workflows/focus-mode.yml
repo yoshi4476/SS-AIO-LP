@@ -30,8 +30,9 @@ on:
         default: ""
 
 permissions:
-  contents: write
-  actions: write     # 期限後に gh workflow disable で自分を止める
+  # 書き込みの権限は正本へ push するジョブにだけ付ける（ジョブごとの permissions。zizmor excessive-permissions・2026-10-20）
+  contents: read
+  actions: read
 
 env:
   TZ: Asia/Tokyo
@@ -46,6 +47,8 @@ jobs:
       state: ${{ steps.st.outputs.state }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - id: st
         env:
           GH_TOKEN: ${{ github.token }}
@@ -65,6 +68,9 @@ jobs:
 
   # 期限を過ぎた回: 書き直しも内部リンクもせず、4週間のまとめを書いて自分を無効にする
   stop:
+    permissions:
+      contents: write
+      actions: write
     needs: gate
     if: needs.gate.outputs.state == 'expired'
     runs-on: ubuntu-latest
@@ -79,6 +85,7 @@ jobs:
       # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           ref: ${{ github.ref_name }}
 
@@ -120,6 +127,9 @@ jobs:
         run: rm -f indexing-service-account.json
 
   focus:
+    permissions:
+      contents: write
+      actions: read
     needs: gate
     if: needs.gate.outputs.state == 'active'
     runs-on: ubuntu-latest
@@ -138,6 +148,7 @@ jobs:
       # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           ref: ${{ github.ref_name }}
 
@@ -217,6 +228,25 @@ jobs:
               "auto_rewrite の検算が効いていません（集中モードの書き換えは飛ばしました）" || true
           fi
 
+      # 書き直しの道具（auto_rewrite）は中から AI を呼び、AI は記事と検索上位の見出しを読む。週次・記事の枠と同じく、
+      # 作業場から鍵（Google の鍵・push の資格）を外してから動かし、全権の合言葉の代わりに台帳とエラーの記録にだけ効く
+      # 通行証を渡す（2026-10-20 の点検）。Google は読むだけ・1時間で切れる許可証（40分ごとに作り直す）
+      - name: 書き直しの前に作業場から鍵を外す
+        id: lock
+        if: steps.guard.outputs.ok == 'yes' && github.run_attempt == 1
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          HUB_AGENT_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+        run: |
+          python scripts/agent_guard.py --lock
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
+              nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
+          fi
+          mkdir -p "$RUNNER_TEMP/hub_tokens"
+          python scripts/agent_guard.py --tools-token "$RUNNER_TEMP/hub_tokens/tools" \
+            --sites "$(python scripts/focus_report.py --sites)" || true
+
       # 書き直しは最初の回だけ。selfheal の再実行（一時的な失敗のとき1回）では飛ばし、二重に直さない。
       # 4〜10位でクリックが取れていない記事の題（rank_up の対象）。
       # 直近7日に週次や前の回が手を付けた記事は外す（効いたかを分けて測れなくなる）。
@@ -227,7 +257,13 @@ jobs:
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_SECRET: ""      # 全権の合言葉を空で上書き（管制塔へは通行証で入る。2026-10-20）
         run: |
+          if ! python scripts/agent_guard.py --verify; then
+            echo "要対応: 集中モードの書き直しの作業場に鍵が残っていたため、AI を動かしませんでした（実行ログの AGENT_JAIL）" >> automation/logs/findings.txt
+            exit 0
+          fi
+          export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
           n=$(python -c "import json;print(json.load(open('data/focus_mode.json',encoding='utf-8'))['title_per_run'])")
           python scripts/auto_rewrite.py --write --kind title --limit "$n" --skip-recent 7 --tag focus \
             --sites "$(python scripts/focus_report.py --sites)" \
@@ -240,11 +276,33 @@ jobs:
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_SECRET: ""      # 全権の合言葉を空で上書き（管制塔へは通行証で入る。2026-10-20）
         run: |
+          if ! python scripts/agent_guard.py --verify; then
+            echo "要対応: 集中モードの書き直しの作業場に鍵が残っていたため、AI を動かしませんでした（実行ログの AGENT_JAIL）" >> automation/logs/findings.txt
+            exit 0
+          fi
+          export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
           n=$(python -c "import json;print(json.load(open('data/focus_mode.json',encoding='utf-8'))['stuck_per_run'])")
           python scripts/auto_rewrite.py --write --kind stuck --limit "$n" --skip-recent 7 --tag focus \
             --sites "$(python scripts/focus_report.py --sites)" \
             --parallel 3 --budget-min 30 || true
+
+      # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更を戻してから鍵を戻す（この後の git add -A に入れない）
+      - name: 書き直しの後に触ってはいけない場所を戻す
+        if: always() && steps.lock.outcome != 'skipped'
+        run: python scripts/agent_guard.py --protect
+
+      - name: 書き直しの後に作業場へ鍵を戻す
+        if: always() && steps.lock.outcome != 'skipped'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          rm -f "$RUNNER_TEMP/hub_tokens/tools"
+          python scripts/agent_guard.py --unlock
 
       # 11〜30位へは --rescue（週次と同じ上限）、4〜10位へは自分より上位の記事からだけ送る（--band）。
       # 4〜20位へは本文に既にある語句を囲む文中リンク（--inline）。リンクだけの段落は上限に当たった記事が多いため

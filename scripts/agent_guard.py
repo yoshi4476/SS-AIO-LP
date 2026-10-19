@@ -11,6 +11,8 @@ AI の手順には AI 用の鍵（claude の鍵と、台帳の操作だけ通る
                                             #   --site があればその回の社でない記事）の変更を戻す
   python scripts/agent_guard.py --unlock    # AI の後（鍵のある手順）: 鍵のファイルと git の資格を戻す
   python scripts/agent_guard.py --publish [--site <社>]   # AI の後（鍵のある手順）: AI が書いた新しい記事を配信する（--site の社だけ）
+  python scripts/agent_guard.py --tools-token <OUT> [--sites a,b]   # 全社を1回で回す道具（週次・集中モード・月次）の
+                                            #   管制塔の通行証を書く（全権の合言葉の代わり。2026-10-20）
 
 --lock / --unlock / --protect / --publish は CI（GITHUB_ACTIONS=true）でだけ動く（手元の鍵と .env を消さないため）。
 記録（$RUNNER_TEMP/agent_guard.json）には鍵の値を書かない。
@@ -38,6 +40,9 @@ SECRET_FILES = {
     "youtube-token-*.json": "YOUTUBE_TOKENS_JSON", "gbp-client.json": "GBP_CLIENT_JSON",
     "gbp-token-*.json": "GBP_TOKENS_JSON", "ftp-credentials.json": "FTP_CREDENTIALS_JSON",
     "wp-credentials.json": "WP_CREDENTIALS_JSON", "sheets-token.json": "", "credentials.json": "",
+    # 月次の「認証情報の配置」が書く（メールの鍵 RESEND_API_KEY など）。AI の間は作業場所の外へよけ、--unlock で戻す
+    # （2026-10-20 の点検: 月次の改善の実行の AI の作業場に置かれたままだった）
+    ".env": "",
 }
 HOME_SECRET_FILES = {".codex/auth.json": "CODEX_AUTH_JSON", ".git-credentials": ""}
 # AI の手順に置いてよい鍵（claude の鍵と、台帳の操作だけ通る管制塔の合言葉）
@@ -83,6 +88,10 @@ def _state_path():
 
 def _pid_path():
     return _state_path().with_suffix(".pid")
+
+
+def _stash_dir():
+    return _state_path().with_suffix(".stash")
 
 
 def _load_state():
@@ -256,10 +265,23 @@ def lock(root=None, mint=True):
                 sa_path.unlink()
     elif sa_path.exists() and _sa_is_key(root):
         sa_path.unlink()
-    # ファイルの鍵
+    # ファイルの鍵。戻す元の環境変数が無いファイル（.env など）は消さずに作業場所の外（$RUNNER_TEMP。AI の許可の一覧で
+    # 読ませない場所）へよけ、--unlock で戻す。消すと後の工程（月次のまとめのメール）が鍵を失う（2026-10-20）。
+    # 前の回によけたまま戻していない分は引き継ぐ（記録を上書きすると二度と戻せない）
+    import shutil
+    st["files"] = [f for f in (_load_state().get("files") or [])
+                   if f.get("stash") and Path(f["stash"]).is_file() and not Path(f["path"]).exists()]
     for p, env in _secret_files(root):
-        p.unlink()
-        st["files"].append({"path": str(p), "env": env})
+        rec = {"path": str(p), "env": env}
+        if env:
+            p.unlink()
+        else:
+            dst = _stash_dir() / f"{len(st['files'])}-{p.name}"
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(p), str(dst))
+            os.chmod(dst, 0o600)
+            rec["stash"] = str(dst)
+        st["files"].append(rec)
     # git に残った資格（checkout と非公開の置き場の取得が設定に書く）
     for repo in repos(root):
         for cfg, key in _headers(repo):
@@ -391,6 +413,16 @@ def unlock(root=None):
     for f in st.get("files", []):
         val = os.environ.get(f["env"] or "", "")
         p = Path(f["path"])
+        if f.get("stash"):
+            s = Path(f["stash"])
+            if not s.is_file():
+                miss.append(p.name)
+                continue
+            import shutil
+            p.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(s), str(p))
+            os.chmod(p, 0o600)
+            continue
         if not val:
             miss.append(p.name)
             continue
@@ -735,11 +767,43 @@ def publish(root=None, only=None):
     return res
 
 
+def tools_token(out, sites=None, root=None):
+    """全社を1回で回す道具（週次・集中モードの書き直しと統合・月次の改善の実行）に渡す管制塔の通行証を out に書く。
+    道具の中の AI は鍵の無い環境で動くが、道具の手順に全権の合言葉（HUB_SECRET）を置くと、AI が親の環境（/proc）から
+    読めた（2026-10-20 の点検）。通行証は狙う語の台帳とエラーの記録にしか効かず、問い合わせ・管理には触れない。
+    道具は1回で全社の記事を直す（食い合いの確かめは全社の台帳を読む）ので、書ける社・読める社は sites（無ければ全社）。
+    この手順の作業場所には全社の原稿と材料が置かれたままなので、通行証で読める範囲は増えない。
+    印 HUB_TOKEN=ok / none。鍵（HUB_AGENT_SECRET）が無ければ書かない（道具は管制塔に書けずに続ける）"""
+    sys.path.insert(0, str(Path(root or ROOT) / "scripts"))
+    import hub_token as HT
+    import sites as S
+    secret = os.environ.get("HUB_AGENT_SECRET", "").replace("﻿", "").strip().strip("'\"")
+    if len(secret) < HT.KEY_MIN:
+        print("HUB_AGENT_SECRET が無い（短い）ため通行証を作りません（道具は管制塔の台帳に書けません）", flush=True)
+        print("HUB_TOKEN=none", flush=True)
+        return False
+    allsites = S.load_all()
+    want = [S.resolve(s) if hasattr(S, "resolve") else s for s in re.split(r"[\s,]+", sites or "") if s]
+    ids = sorted(s for s in (want or allsites) if s in allsites)
+    if not ids:
+        print("HUB_TOKEN=none（社が見つかりません）", flush=True)
+        return False
+    tok = HT.mint(ids, ids, secret=secret)
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        print(f"::add-mask::{tok}", flush=True)
+    HT._write(Path(out), tok)
+    print(f"HUB_TOKEN=ok（書ける社・読める社 {len(ids)}）", flush=True)
+    return True
+
+
 def main():
     ap = argparse.ArgumentParser()
     g = ap.add_mutually_exclusive_group(required=True)
     for f in ("lock", "verify", "unlock", "protect", "publish", "refresh", "checkpoint"):
         g.add_argument(f"--{f}", action="store_true")
+    g.add_argument("--tools-token", metavar="OUT", default="",
+                   help="全社を1回で回す道具に渡す管制塔の通行証を OUT に書く（--sites で社を絞る）")
+    ap.add_argument("--sites", default="", help="--tools-token の社（空白かカンマ区切り。無ければ全社）")
     ap.add_argument("--scope", default="article", choices=["article", "jail"])
     ap.add_argument("--site", default="", help="その回の社（公開の id でも社の id でもよい。own は自社の社）")
     ap.add_argument("--pass", dest="by_pass", action="store_true",
@@ -752,6 +816,9 @@ def main():
         site = S.resolve(a.site) if hasattr(S, "resolve") else a.site
     if a.verify:
         return 0 if verify() else 1
+    if a.tools_token:
+        tools_token(a.tools_token, a.sites)
+        return 0
     if a.refresh:
         refresher()
         return 0

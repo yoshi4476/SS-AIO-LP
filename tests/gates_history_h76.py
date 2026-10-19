@@ -41,6 +41,27 @@ CLIENT_FILES = re.compile(r"^data/clients/[^/]+/(company|brief|facts|site_privat
 # （初期費用は平均755万円）は拾わない
 PRICE = re.compile(r"(?:月額|初期費用)\s*[0-9０-９]+(?:\.[0-9]+)?\s*万|[0-9]+万(?:〜[0-9]+万)?円\s*[／/]\s*月"
                    r"|[\"'][0-9]+万〜[0-9]+万円[\"']")
+# 「月◯万円」の形（2026-10-20 の点検: data/price_ranges.json の注記と門の例に「当社の価格（月◯万円）」が書かれていた）。
+# 相場・検索語・AI の答え（広告に月◯万円・予算は月◯万円以内）にも出るので、当社を指す語と同じ行のときだけ拾う
+MONTHLY = re.compile(r"月\s*[0-9０-９]+(?:\.[0-9]+)?\s*万円")
+OWN_WORDS = re.compile(r"当社|弊社|私たち|AI集客ラボ|セブンセンス|Seven Senses|own_price", re.I)
+AMOUNT = re.compile(r"(?<![0-9.])([0-9０-９]+(?:\.[0-9]+)?)\s*万")
+FICTION = "99"          # 門の例に使う架空の額（本当の料金ではない）
+
+
+def price_lines(text, wide=False):
+    """料金の書き方の行の番号。wide（data/・tests/）は当社を指す語と同じ行のときだけ（相場・AI の答え・門の例を拾わない）。
+    額が架空の額（99万）だけの行は拾わない"""
+    out = []
+    for i, ln in enumerate(text.splitlines(), 1):
+        if wide:
+            hit = (PRICE.search(ln) or MONTHLY.search(ln)) and OWN_WORDS.search(ln)
+        else:
+            hit = PRICE.search(ln) or (MONTHLY.search(ln) and OWN_WORDS.search(ln))
+        amounts = AMOUNT.findall(ln)
+        if hit and not (amounts and all(a == FICTION for a in amounts)):
+            out.append(i)
+    return out
 
 
 def _ignored(rel):
@@ -133,6 +154,11 @@ def test_no_prices_in_public_code():
     check("検出器: 検索数や記事の例文は拾わない",
           [bool(PRICE.search(s)) for s in ("（660万/月）", "農業の初期費用は平均755万円", "5万5千件の検索")],
           [False] * 3)
+    own = "当社" + "の価格は月"      # 例の行そのものがこの門に拾われないよう、語を分けて組み立てる
+    check("検出器: 当社を指す「月◯万円」を拾い、相場・検索語・架空の額（99万）は拾わない",
+          [bool(price_lines(s, wide=True)) for s in (own + "55万円です", "リスティング広告（月10万円で問い合わせ0件）",
+                                                    "予算月1万円以内でできるAIO", own + "99万円です")],
+          [True, False, False, False])
     targets = [p for p in (ROOT / "scripts").rglob("*.py")] + list((ROOT / "automation").glob("*.txt")) + \
         [ROOT / "PROJECT.md", ROOT / "CLAUDE.md", ROOT / "site.config.json"] + list((ROOT / "docs").rglob("*.md")) + \
         list((ROOT / ".github").rglob("*.yml"))
@@ -140,10 +166,19 @@ def test_no_prices_in_public_code():
     for p in targets:
         if not p.is_file() or "private" in p.relative_to(ROOT).parts:
             continue
-        for i, ln in enumerate(p.read_text(encoding="utf-8", errors="ignore").splitlines(), 1):
-            if PRICE.search(ln):
-                hits.append(f"{p.relative_to(ROOT).as_posix()}:{i}")
-    check("公開側のコード・指示・文書に料金の数字が無い", hits, [])
+        hits += [f"{p.relative_to(ROOT).as_posix()}:{i}"
+                 for i in price_lines(p.read_text(encoding="utf-8", errors="ignore"))]
+    # data/・tests/ も見る（2026-10-20 の点検: 相場の注記と門の例に当社の価格が書かれていた）。追跡しているものだけ
+    for rel in _tracked():
+        if not rel.startswith(("data/", "tests/")) or rel.startswith("data/clients/") \
+                or not rel.endswith((".py", ".json", ".jsonl", ".md", ".txt", ".csv")):
+            continue
+        try:
+            text = (ROOT / rel).read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        hits += [f"{rel}:{i}" for i in price_lines(text, wide=True)]
+    check("公開側のコード・指示・文書・データ・門に料金の数字が無い", hits, [])
     check("営業の台本と提案資料の生成は公開側に無い（非公開のリポジトリの sales/）",
           [n for n in ("sales_script_doc", "sales_script_demo", "sales_script_pr", "sales_shift", "sales_deck",
                        "sales_pptx") if (ROOT / "scripts" / f"{n}.py").is_file()], [])

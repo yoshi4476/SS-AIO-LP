@@ -33,7 +33,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-MAX_WORDS = 800          # 1ジョブで伏せる語の上限（ログの1行ごとに全部の語を照らすので、多すぎると遅くなる）
+MAX_WORDS = 800          # 1ジョブで伏せる一般の語の上限（ログの1行ごとに全部の語を照らすので、多すぎると遅くなる）。
+                         # 社が特定できる語（社名・ドメイン・題・slug）は上限の外で全部伏せる（2026-10-20）
 MAX_RANK_WORDS = 300     # 順位の記録（GSC の検索語）から取る語の上限（表示の多い順）
 SKIP_COMPANY = ("name", "name_en", "_readme")
 NUMERIC = re.compile(r"^[\d\s.,:/%\-+年月日時分〜~()（）]+$")
@@ -121,7 +122,13 @@ def _plan_words(text):
 
 
 def site_words(sid, corpus=None):
-    """お客様の社1つの伏せる語（重要なものから並べる）"""
+    """お客様の社1つの伏せる語（重要なものから並べる。社が特定できる語が先）"""
+    ident, general = site_parts(sid, corpus)
+    return ident + general
+
+
+def site_parts(sid, corpus=None):
+    """(社が特定できる語, 一般の語)。社が特定できる語（社名・ドメイン・題・slug）は上限の外で全部伏せる"""
     import private_store as PS
     import sites as S
     corpus = own_corpus() if corpus is None else corpus
@@ -152,12 +159,16 @@ def site_words(sid, corpus=None):
     if ranks:
         last = ranks[sorted(ranks)[-1]] or []
         cand += [r.get("kw", "") for r in sorted(last, key=lambda r: -int(r.get("imp") or 0))[:MAX_RANK_WORDS]]
-    out = []
+    keep, out = [], []
     for w in cand:
         w = str(w).strip()
-        if w and w not in out and ((w in ident and w.lower() not in public) or usable(w, corpus, public)):
+        if not w or w in keep or w in out:
+            continue
+        if w in ident and w.lower() not in public:
+            keep.append(w)
+        elif usable(w, corpus, public):
             out.append(w)
-    return out
+    return keep, out
 
 
 def article_title(slug):
@@ -214,15 +225,18 @@ def identity_terms():
 
 
 def words():
-    """伏せる語の全部（社ごとに重要なものから、上限まで）"""
+    """伏せる語の全部。社が特定できる語（社名・ドメイン・記事の題と slug）は全部、一般の語（検索語・材料の文言）は
+    社ごとに重要なものから上限まで。社が特定できる語まで上限に入れていたため、記事が増えた社・社の多い回で
+    題と slug が上限からあふれ、ログで伏せられなかった（2026-10-20 の点検）"""
     import sites as S
     clients = [s for s in S.load_all() if S.is_client(s)]
     if not clients:
         return {}
     corpus = own_corpus()
-    per = {sid: site_words(sid, corpus) for sid in clients}
+    parts = {sid: site_parts(sid, corpus) for sid in clients}
+    per = {sid: g for sid, (_i, g) in parts.items()}
     # 上限を社に順に配る（1社が上限を食い切らないように）
-    out, i = {sid: [] for sid in per}, 0
+    out, i = {sid: list(parts[sid][0]) for sid in per}, 0
     total = 0
     while total < MAX_WORDS and any(i < len(v) for v in per.values()):
         for sid, ws in per.items():

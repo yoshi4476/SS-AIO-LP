@@ -32,13 +32,13 @@ def test_patch_policy_lets_ordinary_fixes_through():
     import patch_policy as PP
     ok = [_patch("scripts/kw_plan.py", ["    if not rows:", "        return []"], ["    rows = rows or []"]),
           _patch("tests/test_gates.py", ["    check(\"空の台帳でも落ちない\", f([]), [])"]),
-          _patch("data/lessons.jsonl", ["{\"rule\": \"x\"}"]),
+          # 記事・データ（data/lessons.jsonl など）は 2026-10-20 から枝へ回す（gates_history_h125_ci_hardening）
           _patch("site/sitemap.xml", ["<url/>"]) + _patch("scripts/kw_gate.py", ["    n = len(xs)"]),
           # ふつうの直しに出る書き方（2026-10-12 の点検で、これらまで枝に回り自動で直らなかった）
           _patch("scripts/kw_plan.py", ["RX = re.compile(r'^x')", "    max_tokens = 400", "    v = getattr(args, \"site\", \"\")",
                                         "    tmp.unlink(missing_ok=True)", "ROOT = Path(__file__).resolve().parent",
                                         "    s = s.replace(\"\\u3000\", \" \")", "if __name__ == \"__main__\":"])]
-    check("ふつうの直し（コード・門を足す・データ・生成物つき・よく使う書き方）は取り込む",
+    check("ふつうの直し（コード・門を足す・生成物つき・よく使う書き方）は取り込む",
           [PP.judge(p)[0] for p in ok], [True] * len(ok))
     hunk = lambda path, lines: (f"diff --git a/{path} b/{path}\n--- a/{path}\n+++ b/{path}\n"
                                 f"@@ -1,0 +1,{len(lines)} @@\n" + "".join(f"+{x}\n" for x in lines))
@@ -75,6 +75,8 @@ def test_patch_policy_lets_ordinary_fixes_through():
         "; の後ろの import": _patch("scripts/kw_plan.py", ["x = 1; import webbrowser"]),
         "ワークフローを書き出す": _patch("scripts/kw_plan.py", ["    Path('.github/workflows/x.yml').write_text(y)"]),
         "隠した文字": _patch("scripts/kw_plan.py", ["    m = '\\x6f\\x73\\x2e\\x73'"]),
+        # 2026-10-20: 学び（書く AI が読む）・記事の点数の書き換えは門を通らずに効くので、人が確かめる
+        "記事・データ": _patch("data/lessons.jsonl", ["{\"rule\": \"x\"}"]) + _patch("articles/zz.md", ["score: 99"]),
     }
     got = {k: PP.judge(v)[0] for k, v in bad.items()}
     check("危ない書き方・守る場所・依存・門を弱める・見えない変更・多すぎる・中身が無い・検査そのものは取り込まない",

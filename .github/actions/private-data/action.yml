@@ -40,9 +40,14 @@ runs:
       shell: bash
       run: python3 scripts/ci_mask.py
 
+    # 名前は環境変数で受ける（run に直接埋めると、値がコマンドとして読まれうる。zizmor template-injection・2026-10-20）
     - if: inputs.mode == 'save'
       shell: bash
+      env:
+        WF_NAME: ${{ github.workflow }}
+        JOB_NAME: ${{ github.job }}
+        RUN_ID: ${{ github.run_id }}
       run: |
-        python3 scripts/private_store.py --push "CI: ${{ github.workflow }} / ${{ github.job }}（run ${{ github.run_id }}）" | tee "$RUNNER_TEMP/private_push.log" || true
+        python3 scripts/private_store.py --push "CI: ${WF_NAME} / ${JOB_NAME}（run ${RUN_ID}）" | tee "$RUNNER_TEMP/private_push.log" || true
         # 書けない（権限が無い）ときだけ工程を失敗にして異常の知らせに載せる。private/ が無い回（none）は止めない
         if grep -q '^PRIVATE_PUSH=failed' "$RUNNER_TEMP/private_push.log"; then exit 1; fi

@@ -7,11 +7,13 @@
 repair-branch が master のままのコードで呼ぶ）。
 
 取り込んでよい場所:
-  - scripts/**/*.py … 新しい import の行を足さない・下の危ない書き方が無い
+  - scripts/**/*.py … 既にあるファイルの変更だけ・足す行は scripts 全体で40行まで・新しい import の行を足さない・
+    下の危ない書き方が無い
   - tests/*.py … 足すだけ（消す・書き換える行が無い。門を弱めない）・危ない書き方が無い
-  - articles/**/*.md・data/**/*.json(l)・data/**/*.csv … 中身はデータ
-それ以外（指示書・CLAUDE.md・sites/・templates/・ワークフロー・依存・守秘の仕組み）、名前の変更・写し・引用符つきの
-ファイル名・中身の見えない変更・量の多い変更は枝へ。
+それ以外（記事・データ・指示書・CLAUDE.md・sites/・templates/・ワークフロー・依存・守秘の仕組み）、名前の変更・写し・
+引用符つきのファイル名・中身の見えない変更・量の多い変更は枝へ。
+記事（articles/）とデータ（data/）は枝へ（2026-10-20 の点検）。記事は点数（score:）を書き換えれば門を通らずに公開でき、
+data/ には書く AI が読む学び（lessons.jsonl）があり、仕込んだ指示が以後の記事に効いた。コードの修復に要らない
 
     python scripts/patch_policy.py <差分のファイル>
 出す印: PATCH_POLICY=auto（取り込んでよい）/ review（枝に置く。理由を下に出す）
@@ -23,13 +25,16 @@ from pathlib import Path
 
 MAX_FILES = 15
 MAX_ADDED = 400
+# scripts/ に足す行の上限（門の追加は数えない）。修復は小さな直しで足りる。大きな書き足しは人が読む（2026-10-20）
+MAX_CODE_ADDED = 40
 
 # 許可の一覧に入っていても取り込まない場所（鍵の外し方・守秘の仕組み・判定そのもの・埋め込みの形・通知）
 FORBID = [r"^scripts/(agent_guard|gcreds|private_store|client_private|ci_mask|log_leak_check|html_safety|patch_policy|embeds|"
           r"md2html|notify_slack|set_secrets|gas_deploy|hub_token|hub_client|agent_work)\.py$",
           r"^tests/gates_history_h91_agent_jail\.py$", r"(^|/)(sitecustomize|usercustomize|conftest|setup|__init__)\.py$"]
-ALLOW = [(r"^scripts/[\w/-]+\.py$", "code"), (r"^tests/[\w-]+\.py$", "test"),
-         (r"^articles/[\w/-]+\.md$", "data"), (r"^data/(?!.*\.\.)[\w/.-]+\.(json|jsonl|csv)$", "data")]
+ALLOW = [(r"^scripts/[\w/-]+\.py$", "code"), (r"^tests/[\w-]+\.py$", "test")]
+# 記事とデータは自動で取り込まない（上の説明。2026-10-20）
+CONTENT = re.compile(r"^(articles|data)/")
 # Python の足した行に1つでもあれば枝へ（外へ送る・コマンド・環境変数・鍵のファイル・書き方を隠す）。
 # ふつうの直しに出る書き方（re.compile・Path(__file__)・getattr(args, "x")・max_tokens・"　"）は通す
 RISKY = [
@@ -46,6 +51,13 @@ RISKY = [
     (r"\.git\b|\.github\b|credential|indexing-service-account|\btoken\b|\bsecret\b|password|private/|/proc/|\.ssh|"
      r"\.env\b|RUNNER_TEMP|GITHUB_", "鍵・資格・ワークフローの場所"),
     (r"\bshutil\.rmtree\b|\bos\.rmdir\b", "フォルダの削除"),
+    # 文字列をつないで場所や名前を隠す（"/pr" + "oc/self/environ"・"indexing-service-" + "account.json" は上の
+    # 「鍵・資格の場所」に当たらなかった。2026-10-20 の点検）
+    (r"[\"']\s*\+\s*[rbfu]{0,2}[\"']", "文字列の連結（名前や場所を隠す）"),
+    # ファイルへの書き込み・写し・移し（鍵を記事やデータへ写す・道具そのものを書き換える）。str の replace（引数2つ）は通し、
+    # Path の replace（引数1つ＝ファイルの移し）だけを拾う
+    (r"\.write_(text|bytes)\s*\(|\bopen\s*\((?:(?:[^()]|\([^()]*\))*,)?\s*(?:mode\s*=\s*)?[rbfu]{0,2}[\"'][rbt]*[wax+][rbtwax+]*[\"']|"
+     r"\bshutil\.|\.rename\s*\(|\bos\.replace\s*\(|\.replace\s*\((?:[^,()]|\([^()]*\))*\)", "ファイルへの書き込み・写し"),
 ]
 # 行頭のほか、; や : の後ろに置いた import も見る（x = 1; import socket・if x: import os）
 IMPORT = re.compile(r"(^|[;:])\s*(import\s|from\s+\S+\s+import\s)")
@@ -135,6 +147,9 @@ def judge(patch):
     added = sum(len(f["add"]) for f in fs)
     if added > MAX_ADDED:
         why.append(f"足した行が {added} 行（{MAX_ADDED} 行まで）")
+    code = sum(len(f["add"]) for f in fs if not f["odd"] and re.search(ALLOW[0][0], f["path"]))
+    if code > MAX_CODE_ADDED:
+        why.append(f"scripts/ に足した行が {code} 行（{MAX_CODE_ADDED} 行まで）")
     for f in fs:
         p = f["path"]
         if f["odd"]:
@@ -146,12 +161,15 @@ def judge(patch):
         if any(re.search(rx, x) for x in {p, f["old"]} for rx in FORBID):
             why.append(f"{p}: 守る場所（鍵・守秘の仕組み・判定・埋め込み・通知）")
             continue
+        if CONTENT.search(p) or CONTENT.search(f["old"]):
+            why.append(f"{p[:80]}: 記事・データの変更（点数や学びを書き換えると門を通らずに効く。人が確かめる）")
+            continue
         kind = next((k for rx, k in ALLOW if re.search(rx, p)), None)
         if kind is None:
-            why.append(f"{p}: 自動で取り込める場所ではない（scripts の .py・門の追加・記事・データだけ）")
+            why.append(f"{p}: 自動で取り込める場所ではない（scripts の既存の .py の変更・門の追加だけ）")
             continue
-        if kind == "data":
-            continue
+        if kind == "code" and f["new"]:
+            why.append(f"{p}: scripts/ に新しいファイルを足している（既存のファイルの変更だけ取り込む）")
         if kind == "test" and (f["del"] or f["gone"]):
             why.append(f"{p}: 門を消す・書き換える変更（門を足すだけなら取り込む）")
         if f["gone"]:

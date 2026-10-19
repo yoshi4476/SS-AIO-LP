@@ -145,6 +145,7 @@ def test_site_lists_come_from_sites_json():
                                  'link_boost.py "$s" --write', 'link_boost.py "$s" --rescue --write',
                                  'coverage.py --site "$s"')), True)
     check("集中モード: 内部リンクは focus_report --sites の社", "for s in $(python scripts/focus_report.py --sites); do" in fc, True)
+    # 書き直し2つと、その間に渡す管制塔の通行証（agent_guard --tools-token。2026-10-20）が同じ社
     check("集中モード: 書き直しも同じ社に絞る",
-          fc.count('--sites "$(python scripts/focus_report.py --sites)"'), 2)
+          fc.count('--sites "$(python scripts/focus_report.py --sites)"'), 3)
     check("集中モード: Bing は自社だけ", "for s in $(python scripts/sites.py --own); do" in fc, True)

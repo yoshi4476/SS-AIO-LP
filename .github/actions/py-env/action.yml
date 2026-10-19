@@ -67,6 +67,6 @@ runs:
         key: py-env-v1-${{ steps.key.outputs.os }}-py${{ steps.py.outputs.python-version }}-${{ steps.key.outputs.reqs }}-${{ steps.key.outputs.week }}
 
     - shell: bash
-      run: |
+      run: | # zizmor: ignore[github-env] 書くのは固定の場所（$HOME/.venv-ci）だけで、外から来た値を入れない
         echo "$HOME/.venv-ci/bin" >> "$GITHUB_PATH"
         echo "VIRTUAL_ENV=$HOME/.venv-ci" >> "$GITHUB_ENV"

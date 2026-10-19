@@ -34,11 +34,15 @@ runs:
         key: client-${{ inputs.family }}-${{ github.run_id }}-${{ github.run_attempt }}
         restore-keys: client-${{ inputs.family }}-
 
+    # 入力は環境変数で受ける（run に直接埋めると、値がコマンドとして読まれうる。zizmor template-injection・2026-10-20）
     - if: inputs.mode == 'restore'
       shell: bash
+      env:
+        KINDS: ${{ inputs.kinds }}
       run: |
         python3 scripts/client_private.py --mark-after || true
-        python3 scripts/client_private.py --unpack ${{ inputs.kinds != '' && format('--kinds {0}', inputs.kinds) || '' }} || true
+        if [ -n "$KINDS" ]; then set -- --kinds "$KINDS"; else set --; fi
+        python3 scripts/client_private.py --unpack "$@" || true
 
     # 戻した記録（お客様の検索語・順位・キーワード計画）の語もログで伏せる。CI のログは public（守秘義務。2026-10-10）。
     # 非公開のリポジトリの取得と最初の伏せは .github/actions/private-data（checkout の直後）が行う
@@ -49,10 +53,13 @@ runs:
     - if: inputs.mode == 'save'
       id: pack
       shell: bash
+      env:
+        KINDS: ${{ inputs.kinds }}
       run: |
         # AI の間だけ外へよけたほかの社の分を先に戻す（よけたまま残すと、次に読む工程でその社の分が消えて見える）
         python3 scripts/private_store.py --scope all || true
-        python3 scripts/client_private.py --pack ${{ inputs.kinds != '' && format('--kinds {0}', inputs.kinds) || '' }} || true
+        if [ -n "$KINDS" ]; then set -- --kinds "$KINDS"; else set --; fi
+        python3 scripts/client_private.py --pack "$@" || true
         n=$(python3 scripts/client_private.py --stash 2>/dev/null | sed -n 's/^CLIENT_PRIVATE_STASHED=//p')
         echo "このジョブで書いた・変えたお客様のファイル: ${n:-数えられません}"
         if ! compgen -G "data/clients/*/private" > /dev/null; then exit 0; fi
@@ -86,5 +93,9 @@ runs:
     # 元の情報は非公開のリポジトリに置く（private_store）。private/ が無い回は何もしない
     - if: inputs.mode == 'save'
       shell: bash
+      env:
+        WF_NAME: ${{ github.workflow }}
+        JOB_NAME: ${{ github.job }}
+        RUN_ID: ${{ github.run_id }}
       run: |
-        python3 scripts/private_store.py --push "CI: ${{ github.workflow }} / ${{ github.job }}（run ${{ github.run_id }}）" || true
+        python3 scripts/private_store.py --push "CI: ${WF_NAME} / ${JOB_NAME}（run ${RUN_ID}）" || true

@@ -251,7 +251,10 @@ def test_manual_dispatch_is_unchanged():
     check("select: 入力は環境変数で受ける（run に直接埋めない）", ("${{ inputs.slot }}" in site["run"],
           (site.get("env") or {}).get("IN_SLOT"), (site.get("env") or {}).get("IN_AT")),
           (False, "${{ inputs.slot }}", "${{ inputs.scheduled_for }}"))
-    check("select: 予定の日は起動役の予定の時刻から（--slot-day に渡す）", '--slot-day "${{ github.event.schedule }}" "$IN_AT"' in site["run"], True)
+    # 予定（github.event.schedule）と入力の社も環境変数で受ける（2026-10-20 zizmor template-injection）
+    check("select: 予定の日は起動役の予定の時刻から（--slot-day に渡す）",
+          ('--slot-day "$EV_SCHEDULE" "$IN_AT"' in site["run"], (site.get("env") or {}).get("EV_SCHEDULE"),
+           "${{ inputs.site }}" in site["run"]), (True, "${{ github.event.schedule }}", False))
     t = _utc("2026-10-08T22:00:00Z")
     check("予定の日: 手で動かした回は今日（日本時間）", D.slot_day("", t), "2026-10-09")
     check("予定の日: 起動役の回は予定の時刻の日", D.slot_day("", t, at="2026-10-08T20:07+09:00"), "2026-10-08")
@@ -268,8 +271,10 @@ def test_manual_dispatch_is_unchanged():
         check(f"{wf}: 足した入力は既定が空で必須でない（手で動かすときは空のまま）",
               [(ins[k].get("default"), bool(ins[k].get("required"))) for k in new], [("", False)] * len(new))
     mode = next(s for s in _y("pipeline.yml")["jobs"]["pipeline"]["steps"] if s.get("id") == "mode")["run"]
+    # 入力は環境変数で受け、main / rescue だけを通す（2026-10-20 zizmor template-injection）
     check("同日救済: 起動された回は入力の mode を使う（起動役の mode=rescue が効く）",
-          'if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then\n  echo "mode=${{ inputs.mode }}"' in mode, True)
+          ('if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then\n  case "$IN_MODE" in main|rescue) echo "mode=$IN_MODE"' in mode,
+           "${{ inputs.mode }}" in mode), (True, False))
 
 
 def test_receivers_are_wired():

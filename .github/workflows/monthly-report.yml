@@ -29,7 +29,8 @@ on:
         default: ""
 
 permissions:
-  contents: write  # 記事の直し・在庫計画を保存するため（レポートと目標値は非公開のリポジトリへ。private_store）
+  # 書き込みの権限は正本へ push するジョブにだけ付ける（ジョブごとの permissions。zizmor excessive-permissions・2026-10-20）
+  contents: read
   actions: read    # 同じ日に済んだ run があるかを見る（schedule_guard）
 
 env:
@@ -45,6 +46,8 @@ jobs:
       go: ${{ steps.g.outputs.go }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - id: g
         env:
           GH_TOKEN: ${{ github.token }}
@@ -58,12 +61,16 @@ jobs:
           if echo "$out" | grep -q '^ALREADY_RAN=yes'; then echo "go=false" >> "$GITHUB_OUTPUT"; else echo "go=true" >> "$GITHUB_OUTPUT"; fi
 
   report:
+    permissions:
+      contents: write
+      actions: read
     needs: guard
     if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120  # 20社までのレポート・競合比較・改善の実行に余裕を持つ（在庫の組みは毎日の kw-stock へ移した）
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
       # （public のリポジトリでは CI のログも誰でも読める。2026-10-10 運用者の指示・門 gates_history_h76）
@@ -320,30 +327,44 @@ jobs:
         if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
         env:
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          HUB_AGENT_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
         run: |
+          # .env（メールの鍵）も作業場所の外へよける（--unlock で戻す。2026-10-20 の点検）
           python scripts/agent_guard.py --lock
           if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
             printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
               nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
           fi
+          # 管制塔へは全権の合言葉ではなく、台帳とエラーの記録にだけ効く通行証で入る（改善の実行は全社を1回で回す）
+          mkdir -p "$RUNNER_TEMP/hub_tokens"
+          python scripts/agent_guard.py --tools-token "$RUNNER_TEMP/hub_tokens/tools" || true
 
       - name: レポートの改善点を実行し、残りを人へ知らせる
         id: actions
         if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          # 台帳への積み足し（kw_discover）に使う。道具の中から呼ぶ AI には渡らない（agent_guard.child_env が外す）
+          # 台帳への積み足し（kw_discover）は通行証で入る。全権の合言葉はこの手順に置かない（道具の中の AI が親の環境を
+          # 読めた。2026-10-20 の点検）。人へ知らせる文は鍵を戻した後に送る（メールの鍵は .env にあり、ここではよけている）
           HUB_URL: ${{ secrets.HUB_URL }}
-          HUB_SECRET: ${{ secrets.HUB_SECRET }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+          HUB_SECRET: ""
         run: |
           npm install -g @anthropic-ai/claude-code || true
+          if ! python scripts/agent_guard.py --verify; then
+            echo "::warning::改善の実行の作業場に鍵が残っていたため、AI を動かしませんでした"
+            mkdir -p automation/logs
+            echo "要対応: 月次の改善の実行の作業場に鍵が残っていたため、AI を動かしませんでした（実行ログの AGENT_JAIL）" >> automation/logs/findings.txt
+            exit 0
+          fi
+          export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
           # 検算が壊れたまま当てると、悪い直しがそのまま配信される。壊れていたら当てずに終える
           python scripts/report_actions.py --selftest || { echo "::warning::report_actions の selftest NG — 改善の自動実行を飛ばします"; exit 0; }
           out=$(python scripts/report_actions.py --apply --rounds 3 --budget-min 60 2>&1) || true
           echo "$out" | tail -60
           echo "$out" | grep -q "ACTIONS_OK=yes" || echo "::warning::改善の自動実行で検算に落ちた回があります（実行ログ参照）"
+          # 人へ知らせる文（report_actions.body）を鍵を戻した後の手順へ渡す（ここではメールの鍵が無く送れない）
+          printf '%s\n' "$out" | sed -n '/^月次レポートの改善項目を機械で実行しました/,/^台帳: automation\/logs\/report_actions.jsonl/p' \
+            > "$RUNNER_TEMP/report_actions_notice.txt" || true
 
       # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
       - name: 改善の実行で触ってはいけない場所を戻す
@@ -357,7 +378,9 @@ jobs:
           PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
           GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
-        run: python scripts/agent_guard.py --unlock
+        run: |
+          rm -f "$RUNNER_TEMP/hub_tokens/tools"
+          python scripts/agent_guard.py --unlock
 
       # 直した記事は配信先にも届ける（届かなければ直した意味が無い）。鍵を持つ機械の手順
       - name: 改善の実行で直した記事をコミットし配信先へ届ける
@@ -368,7 +391,16 @@ jobs:
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
         run: |
+          # 改善の実行が残した「人の手が要るもの」を、メールの鍵（.env）を戻した後のここで送る（2026-10-20）
+          f="$RUNNER_TEMP/report_actions_notice.txt"
+          if [ -s "$f" ] && grep -qE '^(■ 人の手が要るもの|🚨)' "$f"; then
+            python scripts/notify_slack.py "$(cat "$f")" || true
+          fi
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"
           # 範囲を決めて足す。レポート（reports/）は .gitignore で外れ、非公開のリポジトリへ残す（2026-10-10 守秘義務）。

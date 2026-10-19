@@ -777,7 +777,9 @@ def test_hist_no_hardcoded_site_list():
 
 # ══ 42. ラッコの控えが CI で毎回消え、毎週課金（2026-09-27）════════════════════════
 RAKKO_USERS = re.compile(r"python3? scripts/(kw_plan|kw_discover|rakko|findings)\.py")
-RAKKO_WRITERS = {"kw_plan", "kw_discover"}
+# kw_discover は 2026-10-08 から rakko.allow を通さず控えを読むだけ（課金も控えへの書き込みもしない）。書くのは kw_plan だけ。
+# 週次が戻した古い控え（利用の記録）を rakko- の鍵で残すと、毎日の見張りが前方一致で戻して消費を失いえた（2026-10-20 の点検）
+RAKKO_WRITERS = {"kw_plan"}
 
 
 def rakko_paths():
@@ -814,10 +816,10 @@ def test_hist_rakko_cache_persists():
     paths = rakko_paths()
     check("Git 対象外のラッコの控えを見つけられた", "data/rakko_cache" in paths, True)
     pstr = "\n".join(paths)
-    bad = {"jobs": {"w": {"steps": [{"name": "補充", "run": "python scripts/kw_discover.py --append"}]}}}
+    bad = {"jobs": {"w": {"steps": [{"name": "補充", "run": "python scripts/kw_plan.py --all --if-needed"}]}}}
     good = {"jobs": {"w": {"steps": [
         {"name": "戻す", "uses": "actions/cache/restore@v4", "with": {"path": pstr}},
-        {"name": "補充", "run": "python scripts/kw_discover.py --append"},
+        {"name": "補充", "run": "python scripts/kw_plan.py --all --if-needed"},
         {"name": "残す", "uses": "actions/cache/save@v4", "with": {"path": pstr}}]}}}
     check("検出器: 控えを戻さず残さない工程を拾う", len(rakko_cache_problems(bad, paths)), 2)
     check("検出器: 戻して残していれば通す", rakko_cache_problems(good, paths), [])

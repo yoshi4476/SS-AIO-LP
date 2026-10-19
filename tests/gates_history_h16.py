@@ -57,7 +57,8 @@ def test_focus_mode_stops_after_deadline():
           any(x in st for x in ("auto_rewrite", "link_boost", "auto_review", "publish_changed", "wrangler")), False)
     added = set(re.findall(r"for p in ([^;]+); do", st)[0].split()) if "for p in" in st else set()
     check("期限後に残すのは台帳とまとめだけ", added, {"docs/focus-mode-result.md", "data/focus_mode.json"})
-    check("自分を止める権限（actions: write）", (y.get("permissions") or {}).get("actions"), "write")
+    # 書き込みの権限はジョブごとに付ける（2026-10-20 zizmor excessive-permissions）。止めるのは stop のジョブ
+    check("自分を止める権限（actions: write）", (stop.get("permissions") or {}).get("actions"), "write")
 
 
 def test_focus_mode_skips_recently_rewritten():

@@ -26,7 +26,8 @@ on:
         default: ""
 
 permissions:
-  contents: write
+  # 書き込みの権限は正本へ push するジョブにだけ付ける（ジョブごとの permissions。zizmor excessive-permissions・2026-10-20）
+  contents: read
   actions: read      # 同じ週に済んだ run があるかを見る（schedule_guard）
 
 concurrency:
@@ -47,6 +48,8 @@ jobs:
       go: ${{ steps.g.outputs.go }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - id: g
         env:
           GH_TOKEN: ${{ github.token }}
@@ -70,6 +73,9 @@ jobs:
   # 書き出すのは docs/ai-kw-*.md・data/ai_kw/・data/ai_cache/・KW計画の追記だけで、
   # optimize が読むのは中盤の pull の後（実測・共起語の工程）なので、先に終わっていれば同じ結果になる
   kw-refill:
+    permissions:
+      contents: write
+      actions: read
     needs: guard
     if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
@@ -82,6 +88,7 @@ jobs:
       # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           ref: ${{ github.ref_name }}
 
@@ -168,15 +175,9 @@ jobs:
         if: always()
         with: {mode: save, family: ai-kw, kinds: ai_kw}
 
-      - name: ラッコの控えを残す
-        if: always()
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: |
-            data/rakko_cache
-            data/rakko_volume.json
-            data/rakko_spend.jsonl
-          key: rakko-${{ github.run_id }}-weekly
+      # ラッコの控えはここでは残さない（2026-10-20 の点検）。週次はラッコを呼ばない（kw_discover は控えを読むだけ）ので
+      # 新しく残すものが無い。残していた写しは始めに戻した古い利用記録（rakko_spend.jsonl）を含み、鍵名が rakko- で
+      # 始まるため、毎日の在庫の見張り（kw-stock）が前方一致で戻して、その間に数えた消費を失いえた（月の上限が効かない）
 
       # 鍵・ラッコの控えは .gitignore 済みなので git add -A に入らない
       - name: 補充の記録を正本へ保存
@@ -221,6 +222,9 @@ jobs:
         with: {mode: save}
 
   index-inspect:
+    permissions:
+      contents: write
+      actions: read
     needs: guard
     if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
@@ -233,6 +237,7 @@ jobs:
       # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           ref: ${{ github.ref_name }}
 
@@ -316,6 +321,7 @@ jobs:
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
           ref: ${{ github.ref_name }}
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
@@ -451,6 +457,27 @@ jobs:
             python scripts/rewrite_list.py --top 12 || true
           fi
 
+      # ワークフローとアクションの危ない書き方（値がコマンドになる・広すぎる権限・資格の持ち越し・危ない起動）を zizmor で見る
+      # （2026-10-20 運用者の指示）。版は固定（2026-09-09 公開の 1.30.1）。外す指摘は各ファイルに理由つきの
+      # 「zizmor: ignore[規則]」で書く。印 ZIZMOR_OK=yes（高・中が0件）/ no（要対応）/ unknown（検査が動かなかった）
+      - name: ワークフローの危ない書き方の検査（zizmor）
+        run: |
+          mkdir -p automation/logs
+          ok=unknown
+          if pip install --quiet "zizmor==1.30.1"; then
+            rc=0
+            zizmor --offline --min-severity medium .github/workflows .github/actions > /tmp/zizmor.txt 2>&1 || rc=$?
+            tail -40 /tmp/zizmor.txt
+            # 0 は指摘なし、13・14 は中・高の指摘あり。それ以外（1 など）は検査そのものが動かなかった
+            case "$rc" in 0) ok=yes ;; 13|14) ok=no ;; esac
+          fi
+          echo "ZIZMOR_OK=$ok"
+          if [ "$ok" = "no" ]; then
+            echo "要対応: ワークフローに危ない書き方があります（zizmor の高・中 $(grep -cE '^(error|warning)\[' /tmp/zizmor.txt) 件。実行ログの「ワークフローの危ない書き方の検査」）" >> automation/logs/findings.txt
+          elif [ "$ok" = "unknown" ]; then
+            echo "要対応: ワークフローの危ない書き方の検査（zizmor）が動きませんでした" >> automation/logs/findings.txt
+          fi
+
       # このジョブは通知しない。問い合わせの疎通・AI診断・生成エンジン向けの要対応は optimize が通知本文へ足す
       # （kw-refill と同じ渡し方）。以前は注釈と管制塔のエラーログだけで、メールに載らなかった（2026-10-07 の点検）
       - name: 要対応を渡す（キャッシュへ写す）
@@ -477,6 +504,9 @@ jobs:
 
 
   optimize:
+    permissions:
+      contents: write
+      actions: read
     needs: guard
     if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
@@ -493,6 +523,7 @@ jobs:
       # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           ref: ${{ github.ref_name }}
 
@@ -757,17 +788,45 @@ jobs:
               "auto_rewrite の検算が効いていません（書き換えは飛ばしました）" || true
           fi
 
+      # 書き直しと統合の道具（auto_rewrite・auto_merge）は中から AI を呼び、AI は記事と検索上位の見出し・AI の答えを読む。
+      # 記事の枠・救済・浮いた枠と同じく、作業場から鍵（Google の鍵・push の資格・.env）を外してから動かす（2026-10-20 の
+      # 点検。週次のこの工程は鍵の置かれたまま、全権の合言葉を環境に持ったまま動いていた）。Google は読むだけ・1時間で
+      # 切れる許可証にし（候補選びの GSC は gcreds が許可証で読む）、鍵を環境変数に持たない別のプロセスが40分ごとに作り直す。
+      # 管制塔へは全権の合言葉ではなく、台帳とエラーの記録にだけ効く通行証で入る（道具は全社を1回で直すので全社の分）
+      - name: 書き直し・統合の前に作業場から鍵を外す
+        id: lock_rewrite
+        if: steps.guard.outputs.ok == 'yes'
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          HUB_AGENT_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+        run: |
+          python scripts/agent_guard.py --lock
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
+              nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
+          fi
+          mkdir -p "$RUNNER_TEMP/hub_tokens"
+          python scripts/agent_guard.py --tools-token "$RUNNER_TEMP/hub_tokens/tools" || true
+
       - name: タイトル・検索意図の直し
         if: steps.guard.outputs.ok == 'yes'
         # claude を呼ぶ工程。鍵を渡し忘れると1本も直せないまま `|| true` で成功扱いになる
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # ジョブ全体の env にある全権の合言葉を空で上書きする（AI は親の環境を読めた）。管制塔へは通行証で入る
+          HUB_SECRET: ""
         # 対象37件に対して週6本では追いつかない（検索での取りこぼしは28日で
         # 約100クリック）。リポジトリはpublicでActionsの時間制限が無いため
         # 本数を上げる。1本最大30分かかるので、時計でも止める（ジョブの上限は60分で、
         # 途中で切られると直した分がcommitされずに捨てられる）
         run: |
+          # 鍵が残っていれば AI を動かさない。週次の残り（コミット・配信）は止めずに、要対応で知らせる
+          if ! python scripts/agent_guard.py --verify; then
+            echo "要対応: 週次の書き直しの作業場に鍵が残っていたため、AI を動かしませんでした（実行ログの AGENT_JAIL）" >> automation/logs/findings.txt
+            exit 0
+          fi
+          export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
           # 本数は社数に比例させる（1社あたり週8本）。上限の時間は budget-min が守る。
           # 2026-09-28 は15本を試して9本直し6本は検算で戻した（15分）。待ちが50件あり、
           # 11〜20位の記事を1ページ目へ上げるのが最大の伸びしろのため本数を上げた（2026-10-02）
@@ -782,7 +841,13 @@ jobs:
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_SECRET: ""      # 全権の合言葉を空で上書き（管制塔へは通行証で入る。2026-10-20）
         run: |
+          if ! python scripts/agent_guard.py --verify; then
+            echo "要対応: 週次の統合の作業場に鍵が残っていたため、AI を動かしませんでした（実行ログの AGENT_JAIL）" >> automation/logs/findings.txt
+            exit 0
+          fi
+          export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
           if python scripts/auto_merge.py --selftest; then
             # 記事を増やした分が伸びていないサイトがある週は4組（content_yield。本数は減らさず統合で整える）
             n=2; python scripts/content_yield.py --any-flagged >/dev/null 2>&1 && n=4
@@ -802,7 +867,13 @@ jobs:
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_SECRET: ""      # 全権の合言葉を空で上書き（管制塔へは通行証で入る。2026-10-20）
         run: |
+          if ! python scripts/agent_guard.py --verify; then
+            echo "要対応: 週次の同型記事の統合の作業場に鍵が残っていたため、AI を動かしませんでした（実行ログの AGENT_JAIL）" >> automation/logs/findings.txt
+            exit 0
+          fi
+          export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
           if python scripts/auto_merge.py --scaled --selftest; then
             n=2; python scripts/content_yield.py --any-flagged >/dev/null 2>&1 && n=4
             python scripts/auto_merge.py --scaled --write --limit $n --budget-min 25 --parallel 2 || true
@@ -811,6 +882,22 @@ jobs:
             python scripts/hub_client.py error_log merge \
               "auto_merge --scaled の検算が効いていません（同型記事の統合は飛ばしました）" || true
           fi
+
+      # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更を戻してから鍵を戻す。この後の git add -A に入れない
+      - name: 書き直し・統合の後に触ってはいけない場所を戻す
+        if: always() && steps.lock_rewrite.outcome != 'skipped'
+        run: python scripts/agent_guard.py --protect
+
+      - name: 書き直し・統合の後に作業場へ鍵を戻す
+        if: always() && steps.lock_rewrite.outcome != 'skipped'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          rm -f "$RUNNER_TEMP/hub_tokens/tools"
+          python scripts/agent_guard.py --unlock
 
       # 当てた修正の積み上がりを見る。link_boost・tool_links・auto_improve は
       # どれも1本ずつしか見ないため、ここでしか全体の偏りに気づけない。
@@ -1021,12 +1108,36 @@ jobs:
           key: compete-${{ github.run_id }}
           restore-keys: compete-
 
+      # 質問形・説明文・鮮度などの書き直しと、表示ゼロの統合も中から AI を呼ぶ。上の書き直し・統合と同じく、作業場から
+      # 鍵を外してから動かし、全権の合言葉の代わりに通行証を渡す（2026-10-20 の点検）。多言語の要約（i18n）は AI に
+      # 道具を渡さず（--allowedTools ""）、訳した後に配信先へ push するので、鍵を戻した後に回す
+      - name: 質問形・鮮度などの書き直しの前に作業場から鍵を外す
+        id: lock_kinds
+        env:
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+          HUB_AGENT_SECRET: ${{ secrets.HUB_AGENT_SECRET }}
+        run: |
+          python scripts/agent_guard.py --lock
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" | env -i PATH="$PATH" HOME="$HOME" RUNNER_TEMP="$RUNNER_TEMP" \
+              nohup python scripts/agent_guard.py --refresh > "$RUNNER_TEMP/agent_guard_refresh.log" 2>&1 &
+          fi
+          mkdir -p "$RUNNER_TEMP/hub_tokens"
+          python scripts/agent_guard.py --tools-token "$RUNNER_TEMP/hub_tokens/tools" || true
+
       # 見出しに質問形が無い記事へ、2〜3本だけ質問形の見出しを入れる（本数・順番は変えない）
       - name: 見出しを質問形へ（週2本）
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          HUB_SECRET: ""      # 全権の合言葉を空で上書き（管制塔へは通行証で入る。2026-10-20）
+          SCALE: ${{ steps.measure.outputs.scale }}
         run: |
-          n=2; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=1
+          if ! python scripts/agent_guard.py --verify; then
+            echo "要対応: 週次の質問形などの書き直しの作業場に鍵が残っていたため、AI を動かしませんでした（実行ログの AGENT_JAIL）" >> automation/logs/findings.txt
+            exit 0
+          fi
+          export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
+          n=2; [ "$SCALE" = "half" ] && n=1
           python scripts/auto_rewrite.py --write --kind question --limit $n --budget-min 12 2>&1 | tail -6 || true
           # 公開2〜5週目に15位以内へ入った細い語を題・H2・FAQへ（山から落ちる前に。6週以降も残る記事の目印）
           python scripts/auto_rewrite.py --write --kind early --limit $n --budget-min 12 2>&1 | tail -6 || true
@@ -1043,8 +1154,51 @@ jobs:
           # 一次データが無いと勝てない語は書き直さず、findings（compete --check）が要対応で知らせる
           python scripts/auto_rewrite.py --write --kind compete --limit $n --budget-min 15 2>&1 | tail -6 || true
 
+      # 効かなかった直しは戻す（28日・対照群比）。表示ゼロの記事は近い記事へ統合する。
+      # 6か月更新の無い記事は時点表記と dateModified を更新する（数字は年月以外増やさない）。
+      # ここの道具は配信先へ push しない（配信は最後の「直した記事を他サイトへ配信」）ので、配信の鍵は渡さない（2026-10-20）
+      - name: 効かなかった直しを戻す・表示ゼロを整理・鮮度を更新
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          HUB_SECRET: ""      # 全権の合言葉を空で上書き（管制塔へは通行証で入る。2026-10-20）
+        run: |
+          export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
+          # compete の本文の直しも28日・対照群比で判定し、効かなければ直す前の原稿へ戻す（後から別の直しが入った記事は要対応）
+          mkdir -p automation/logs
+          out=$(python scripts/rewrite_rollback.py --write 2>&1) || true
+          echo "$out" | tail -8
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+          # AI を呼ぶのは統合（retire_stale → auto_merge）と鮮度の書き直しだけ。鍵が残っていればそこだけ飛ばす
+          if python scripts/agent_guard.py --verify; then
+            python scripts/retire_stale.py --write --limit 2 --budget-min 15 2>&1 | tail -8 || true
+            # 書き直しを2回しても一次性が80点に届かない記事を、同じ手法・業種の近い記事へ（表示・クリックが少ないものだけ）
+            python scripts/retire_stale.py --quality --write --limit 1 --budget-min 15 2>&1 | tail -8 || true
+            python scripts/auto_rewrite.py --write --kind fresh --limit 2 --budget-min 12 2>&1 | tail -6 || true
+          else
+            echo "要対応: 週次の統合・鮮度の更新の作業場に鍵が残っていたため、AI を動かしませんでした（実行ログの AGENT_JAIL）" >> automation/logs/findings.txt
+          fi
+          # 一次情報の1文を関係する記事へ（週3本）／離脱が最大の区画の手前に導線（固定ページ）
+          python scripts/fact_cite.py --write --limit 3 2>&1 | tail -5 || true
+          python scripts/exit_fix.py --write 2>&1 | tail -5 || true
+
+      - name: 質問形・鮮度などの書き直しの後に触ってはいけない場所を戻す
+        if: always() && steps.lock_kinds.outcome != 'skipped'
+        run: python scripts/agent_guard.py --protect
+
+      - name: 質問形・鮮度などの書き直しの後に作業場へ鍵を戻す
+        if: always() && steps.lock_kinds.outcome != 'skipped'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
+        run: |
+          rm -f "$RUNNER_TEMP/hub_tokens/tools"
+          python scripts/agent_guard.py --unlock
+
       # 多言語の要約ページ（英語・中国語・韓国語）。**sites/<id>.json に languages を書いた社だけ**作る
-      # （指示が無ければ何もしない）。AIが切り出す単位だけを訳し、数字が1つでも変われば捨てる
+      # （指示が無ければ何もしない）。AIが切り出す単位だけを訳し、数字が1つでも変われば捨てる。
+      # 訳す AI には道具を渡さない（--allowedTools ""）。配信先へ push するので鍵を戻した後に回す（2026-10-20 にここへ移した）
       - name: 多言語の要約を訳す（指示のある社だけ・週10記事）
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -1052,31 +1206,10 @@ jobs:
           SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
           FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
           WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
+          SCALE: ${{ steps.measure.outputs.scale }}
         run: |
-          n=10; [ "${{ steps.measure.outputs.scale }}" = "half" ] && n=5
+          n=10; [ "$SCALE" = "half" ] && n=5
           python scripts/i18n.py --all --write --publish --limit $n --budget-min 25 2>&1 | tail -8 || true
-
-      # 効かなかった直しは戻す（28日・対照群比）。表示ゼロの記事は近い記事へ統合する。
-      # 6か月更新の無い記事は時点表記と dateModified を更新する（数字は年月以外増やさない）
-      - name: 効かなかった直しを戻す・表示ゼロを整理・鮮度を更新
-        env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
-          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
-          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
-        run: |
-          # compete の本文の直しも28日・対照群比で判定し、効かなければ直す前の原稿へ戻す（後から別の直しが入った記事は要対応）
-          mkdir -p automation/logs
-          out=$(python scripts/rewrite_rollback.py --write 2>&1) || true
-          echo "$out" | tail -8
-          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
-          python scripts/retire_stale.py --write --limit 2 --budget-min 15 2>&1 | tail -8 || true
-          # 書き直しを2回しても一次性が80点に届かない記事を、同じ手法・業種の近い記事へ（表示・クリックが少ないものだけ）
-          python scripts/retire_stale.py --quality --write --limit 1 --budget-min 15 2>&1 | tail -8 || true
-          python scripts/auto_rewrite.py --write --kind fresh --limit 2 --budget-min 12 2>&1 | tail -6 || true
-          # 一次情報の1文を関係する記事へ（週3本）／離脱が最大の区画の手前に導線（固定ページ）
-          python scripts/fact_cite.py --write --limit 3 2>&1 | tail -5 || true
-          python scripts/exit_fix.py --write 2>&1 | tail -5 || true
 
       # 記事動画は daily-video.yml が毎日1本ずつ上げる（週にまとめて上げると量産に見えるため移した）
 
@@ -1185,8 +1318,8 @@ jobs:
           echo "$out" | tail -10
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
 
-      # findings.py はラッコの消費（rakko.py --check）も見る。KWの補充は並行ジョブ（kw-refill）が
-      # 済ませて控えを残しているので、ここで最新の控えを戻す（前方一致で一番新しいものが戻る）
+      # findings.py はラッコの消費（rakko.py --check）も見る。毎日の在庫の見張り（kw-stock）が残した最新の控えを
+      # 戻す（前方一致で一番新しいものが戻る。週次は控えを残さない）
       - name: ラッコの控えを戻す
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:

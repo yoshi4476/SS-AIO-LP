@@ -88,7 +88,7 @@ def test_hist_lessons_faq_matches_body():
     print("\n■ 学びL0014: FAQ の問いと答えが、フロントマター（構造化データ）と本文で同じ")
     body = '<details><summary>費用は？</summary><p class="faq-a">月10万円からです。</p></details>'
     check("検出器: 本文だけ直した答えを拾う",
-          faq_mismatch([{"q": "費用は？", "a": "月20万円からです。"}], body), ["a: 月20万円からです。"])
+          faq_mismatch([{"q": "費用は？", "a": "月99万円からです。"}], body), ["a: 月99万円からです。"])
     check("検出器: 空白・タグ・強調の違いは同じとみなす",
           faq_mismatch([{"q": "費用は？", "a": "**月10万円**から です。"}], body), [])
     bad = [f"{s}: {x}" for s, fm, b in articles() for x in faq_mismatch(fm.get("faq"), b)]
