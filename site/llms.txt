@@ -66,7 +66,7 @@
 - [相場記事の作り方｜不動産・住宅会社が信頼される6つの要素](https://ai.7senses.co.jp/ai-marketing/souba-kiji-tsukurikata/): 相場記事の作り方とは、公的データと自社実績を組み合わせ、出典と時点を明記して数値を書くことです。信頼を失う失敗パターンと信頼される6つの構成要素を解説します。
 - [資料請求を増やす方法とは？6つの施策と見直す順序](https://ai.7senses.co.jp/ai-marketing/shiryoseikyu-fuyasu-hoho/): フォーム改善からフォロー体制まで、資料請求を増やす6つの施策と着手順を解説
 - [OB客紹介の仕組み化とは？増やす5つの施策と法律の注意点](https://ai.7senses.co.jp/ai-marketing/obkyaku-shoukai-shikumi/): 国交省調査データをもとに、紹介の仕組みを作る5つの施策と景品表示法・宅建業法の注意点を解説
-- [AIO診断のやり方｜無料チェック8項目とツールの使い分け](https://ai.7senses.co.jp/aio/aio-shindan-yarikata/): AIO診断とは、自社サイトがAI検索にどれだけ引用されやすいかを確認する作業です。クローラー許可や構造化データなど8つの視点と、自分でできる診断手順を解説します。
+- [AIO診断で90点でも引用されない理由｜無料チェック8項目](https://ai.7senses.co.jp/aio/aio-shindan-yarikata/): AIO診断とは、自社サイトがAI検索にどれだけ引用されやすいかを確認する作業です。クローラー許可や構造化データなど8つの視点と、自分でできる診断手順を解説します。
 - [AIO対策の注意点とは？始める前に知る7つの落とし穴](https://ai.7senses.co.jp/aio/aio-taisaku-chuiten/): 検索順位を無視した構造化・クローラーの誤ブロックなど、AIO対策で成果につながらない7つの落とし穴と対処法を解説します。
 - [AI検索とは？AIO対策との違いと5種類の対応ポイント](https://ai.7senses.co.jp/aio/aio-taisaku-ai-kensaku/): AI検索とAIO対策の関係と、プラットフォーム別に対策を使い分ける5つのポイントを解説します。
 - [AIO対策なのに表示されない8つの原因と対処法](https://ai.7senses.co.jp/aio/aio-taisaku-hyouji-sarenai/): AIO対策をしても表示されない・引用されない原因を8つ整理し、自分でできる診断手順と対処法を解説します。

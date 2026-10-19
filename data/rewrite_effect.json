@@ -2,24 +2,48 @@
  "days": 28,
  "kinds": {
   "aio": {
-   "total": 13,
+   "total": 34,
    "judged": 0,
-   "pending": 13,
+   "pending": 34,
    "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
+   "verdict": "判定前"
+  },
+  "aisplit": {
+   "total": 4,
+   "judged": 0,
+   "pending": 4,
+   "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
    "verdict": "判定前"
   },
   "desc": {
+   "total": 4,
+   "judged": 0,
+   "pending": 4,
+   "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
+   "verdict": "判定前"
+  },
+  "early": {
    "total": 1,
    "judged": 0,
    "pending": 1,
    "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
    "verdict": "判定前"
   },
   "merge": {
-   "total": 2,
+   "total": 3,
    "judged": 0,
-   "pending": 2,
+   "pending": 3,
    "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
    "verdict": "判定前"
   },
   "merge-scaled": {
@@ -27,27 +51,53 @@
    "judged": 0,
    "pending": 5,
    "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
    "verdict": "判定前"
   },
   "question": {
-   "total": 1,
+   "total": 5,
    "judged": 0,
-   "pending": 1,
+   "pending": 5,
    "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
+   "verdict": "判定前"
+  },
+  "stock": {
+   "total": 4,
+   "judged": 0,
+   "pending": 4,
+   "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
    "verdict": "判定前"
   },
   "stuck": {
-   "total": 3,
+   "total": 12,
    "judged": 0,
-   "pending": 3,
+   "pending": 12,
    "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
+   "verdict": "判定前"
+  },
+  "stuck（浮き枠）": {
+   "total": 2,
+   "judged": 0,
+   "pending": 2,
+   "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
    "verdict": "判定前"
   },
   "title": {
-   "total": 6,
+   "total": 36,
    "judged": 0,
-   "pending": 6,
+   "pending": 36,
    "low_imp": 0,
+   "held": 0,
+   "control_n": 0,
    "verdict": "判定前"
   }
  },
@@ -237,7 +287,481 @@
    "at": "2026-09-28",
    "kind": "aio",
    "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-donyu-hoho",
+   "at": "2026-10-05",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "unsougyou-jissekihoukokusho",
+   "at": "2026-10-05",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-yarikata",
+   "at": "2026-10-05",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-checker",
+   "at": "2026-10-05",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "llmo-dairiten-boshu",
+   "at": "2026-10-05",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "shika-heiin-hiyou",
+   "at": "2026-10-05",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-shougou-jidoka",
+   "at": "2026-10-05",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "yucho-kicho-yarikata",
+   "at": "2026-10-05",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "it-hojokin-2026-kojinjigyonushi",
+   "at": "2026-10-05",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "vendor-touroku-toha",
+   "at": "2026-10-05",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "nougyou-shoki-hiyou",
+   "at": "2026-10-05",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "jizokuka-hojokin-jidousha-seibi",
+   "at": "2026-10-05",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "keiri-marunage-dekiru-hani",
+   "at": "2026-10-05",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "keiri-haken-jikyu-souba",
+   "at": "2026-10-05",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "it-hojokin-gakushujuku",
+   "at": "2026-10-05",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "ai-hojokin-clinic-2026-schedule",
+   "at": "2026-10-05",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-donyu-hoho",
+   "at": "2026-10-05",
+   "kind": "merge",
+   "status": "観測中"
+  },
+  {
+   "slug": "donyu-jirei-kakikata",
+   "at": "2026-10-05",
+   "kind": "question",
+   "status": "観測中"
+  },
+  {
+   "slug": "koumuten-instagram-shukyaku",
+   "at": "2026-10-05",
+   "kind": "aisplit",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-donyu-hoho",
+   "at": "2026-10-05",
+   "kind": "desc",
+   "status": "観測中"
+  },
+  {
+   "slug": "kojinjigyonushi-kaigyoutodoke-denshishinsei",
+   "at": "2026-10-06",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-fuutou-kakikata",
+   "at": "2026-10-06",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-jidoka-ai",
+   "at": "2026-10-06",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "ai-hojokin-jissekihoukoku-kakikata",
+   "at": "2026-10-09",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "it-hojokin-osusume",
+   "at": "2026-10-09",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "nougyou-kikai-hojokin",
+   "at": "2026-10-09",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "monozukuri-hojokin-biyoushitsu",
+   "at": "2026-10-09",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "ai-hojokin-nozeishomeisho-dore",
+   "at": "2026-10-12",
+   "kind": "stuck（浮き枠）",
+   "status": "観測中"
+  },
+  {
+   "slug": "kichodaiko-toha",
+   "at": "2026-10-12",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "llmo-dairiten-boshu",
+   "at": "2026-10-12",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "koumuten-meo-taisaku",
+   "at": "2026-10-12",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "shika-heiin-hiyou",
+   "at": "2026-10-12",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-shougou-jidoka",
+   "at": "2026-10-12",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "backoffice-bpo-toha",
+   "at": "2026-10-12",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "it-hojokin-2026-kojinjigyonushi",
+   "at": "2026-10-12",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "middle-office-backoffice-chigai",
+   "at": "2026-10-12",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-template-muryou",
+   "at": "2026-10-12",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "jizokuka-hojokin-kensetsugyou",
+   "at": "2026-10-12",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "monozukuri-hojokin-biyoushitsu",
+   "at": "2026-10-12",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "btob-lead-kakutoku-hoho",
+   "at": "2026-10-12",
+   "kind": "question",
+   "status": "観測中"
+  },
+  {
+   "slug": "zeirishi-shukyaku-channel",
+   "at": "2026-10-12",
+   "kind": "aisplit",
+   "status": "観測中"
+  },
+  {
+   "slug": "ai-hojokin-chakkin-itsu",
+   "at": "2026-10-13",
+   "kind": "stuck（浮き枠）",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-donyu-hoho",
+   "at": "2026-10-17",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-yarikata",
+   "at": "2026-10-17",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "it-hojokin-2026-kojinjigyonushi",
+   "at": "2026-10-17",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "jieigyou-keiri-yarikata",
+   "at": "2026-10-19",
+   "kind": "stock",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-muryou-tool",
+   "at": "2026-10-19",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-towa",
+   "at": "2026-10-19",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "backoffice-bpo-toha",
+   "at": "2026-10-19",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "middle-office-backoffice-chigai",
+   "at": "2026-10-19",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "keiri-hitode-busoku-taisaku",
+   "at": "2026-10-19",
+   "kind": "stuck",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-yarikata",
+   "at": "2026-10-19",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-donyu-hoho",
+   "at": "2026-10-19",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-chuiten",
+   "at": "2026-10-19",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "llmo-dairiten-boshu",
+   "at": "2026-10-19",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "koumuten-meo-taisaku",
+   "at": "2026-10-19",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-shougou-jidoka",
+   "at": "2026-10-19",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "it-hojokin-2026-kojinjigyonushi",
+   "at": "2026-10-19",
+   "kind": "aio",
+   "status": "観測中"
+  },
+  {
+   "slug": "corporate-backoffice-chigai",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "byoin-kuchikomi-henshin-reibun",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "keiri-bu-keiri-ka-chigai",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "jigyou-saikouchiku-kojinjigyonushi-houjinnari",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "osaka-meo-aio-kaisha",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "keiri-jimu-hojo-chigai",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "kojin-jigyonushi-kuruma-kounyu-hojokin",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "gemini-inyou-noru-houhou",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "shika-heiin-hiyou",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "btob-seo-taisaku",
+   "at": "2026-10-19",
+   "kind": "question",
+   "status": "観測中"
+  },
+  {
+   "slug": "ai-hojokin-clinic-katsuyou",
+   "at": "2026-10-19",
+   "kind": "question",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-yarikata",
+   "at": "2026-10-19",
+   "kind": "early",
+   "status": "観測中"
+  },
+  {
+   "slug": "shokibo-jigyousha-keiri-taisei",
+   "at": "2026-10-19",
+   "kind": "stock",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikotsuin-shukyaku-chirashi",
+   "at": "2026-10-19",
+   "kind": "stock",
+   "status": "観測中"
+  },
+  {
+   "slug": "keiri-yarikata-kojin-jigyonushi",
+   "at": "2026-10-19",
+   "kind": "stock",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-muryou-tool",
+   "at": "2026-10-19",
+   "kind": "aisplit",
+   "status": "観測中"
+  },
+  {
+   "slug": "seikyusho-excel-jidoka",
+   "at": "2026-10-19",
+   "kind": "aisplit",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-taisaku-muryou-tool",
+   "at": "2026-10-19",
+   "kind": "desc",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-towa",
+   "at": "2026-10-19",
+   "kind": "desc",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-seo-taisaku",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
+  },
+  {
+   "slug": "aio-shindan-yarikata",
+   "at": "2026-10-19",
+   "kind": "title",
+   "status": "観測中"
   }
  ],
- "generated": "2026-10-05"
+ "generated": "2026-10-19"
 }

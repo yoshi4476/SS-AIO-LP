@@ -689,6 +689,25 @@ def stock_items(limit=3):
     return rows[:limit]
 
 
+def stock_first(items):
+    """決まり文句の残る記事は、題・説明文より先に決まり文句を直す（2026-10-19: 題の書き直しが本文の
+    「半年後に…何度も見てきました」を拾い「半年で引用を競合に奪われた理由」という題にした。サイトは7月開始で、
+    裏付けの無い体験談が題に上がった）。題・説明文の候補を、その記事の決まり文句の直し（stock）に差し替える"""
+    import originality
+    out = []
+    for x in items:
+        if x["kind"] in ("title", "desc"):
+            p = ROOT / "articles" / f"{x['slug']}.md"
+            t = p.read_text(encoding="utf-8-sig") if p.is_file() else ""
+            m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
+            found = originality.stock_phrases(m.group(2), x.get("site")) if m else []
+            if found:
+                x = {"kind": "stock", "slug": x["slug"], "site": x.get("site"), "phrases": [s for s, _ in found],
+                     "why": f"題・説明文の前に、出どころの無い体験談の決まり文句 {len(found)}か所を直す"}
+        out.append(x)
+    return out
+
+
 def question_items(limit=4):
     """H2に質問形が1本も無い公開記事（表示の多い順は取らず、古い順）"""
     rows = []
@@ -853,7 +872,9 @@ WHAT = {
               "この記事は表示されているのにクリックされていません。検索結果に並ぶ他の\n"
               "ページと同じことを言っているためです。**検索結果に出せないもの**\n"
               "（違反になる例・失敗した事例・自社で実際に測った数字）をタイトルの前半に置いて\n"
-              "ください。15〜45字。狙う語（keyword）は必ず残すこと。\n"
+              "ください。ただし失敗事例・数字は、本文に出どころ（自社の計測・登録した体験・公的資料）があるものだけ。\n"
+              "「何度も見てきました」のような出どころの無い体験談を題に上げないこと。\n"
+              "15〜45字。狙う語（keyword）は必ず残すこと。\n"
               "【2026年最新】【2026年】のような飾りの年号は外してください（自社の実測で負けた型）。\n"
               "「2024年問題」のように中身として要る年は残します。\n"
               "description は100〜160字（目安100〜150字）。狙う語を含め、タイトルで言っていないことを書く\n"
@@ -1204,6 +1225,11 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
         return f"タイトルが{len(title)}字（{TITLE_MIN}〜{TITLE_MAX}字）"
     if not title_covers_kw(title, kw):
         return f"タイトルに狙う語が入っていません（{kw}）"
+    # 説明文はどの種類の直しでも変わりうる。字数は desc の種類だけが見ていて、題の直しが98字の説明文を
+    # 公開した（2026-10-19 keiri-jimu-hojo-chigai）。変わったときだけ見る（元から外れている記事を巻き込まない）
+    d1 = _desc_of(after)
+    if d1 != _desc_of(before[2]) and not (100 <= len(d1) <= 160):
+        return f"説明文が{len(d1)}字（100〜160字）"
 
     b = before[2]
     new_nums = new_fact_numbers(b, after, allowed)
@@ -1847,6 +1873,7 @@ def main():
     # 検索から外した記事（noindex）は書き直さない（本数の枠と下書きの時間を使わせない）
     import noindex
     items = noindex.drop(items)
+    items = stock_first(items)
     if a.skip_recent:
         busy = recently_touched(a.skip_recent)
         # 判定期間中の題は run_one が必ず見送る。先に外さないと、本数の枠と下書きの時間をそれに使う

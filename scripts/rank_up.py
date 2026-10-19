@@ -180,6 +180,13 @@ def diagnose(slug, d, texts, all_pages):
     except ValueError:
         pass
 
+    # 飾りの年号（【2026年】【2026年最新】）は自社の実測でクリック率が負けた型。新しい記事は score_check が止めるが、
+    # 決まりを入れる前の題が残り、2026-10-19 の時点で33本・28日のクリック合計2回（表示104回・95回でクリック0の記事もあった）
+    import score_check
+    deco = score_check.DECOR_YEAR.search(title)
+    if deco and d["imp"] >= MIN_IMP and not d["clicks"] and band in ("1〜3位", "4〜10位", "11〜20位", "21〜50位"):
+        out.append(("deco", f"題に飾りの年号「{deco.group(0)}」があり、表示{d['imp']}回でクリック0", 0))
+
     # --- 帯ごとに見るもの ---
     if band in ("1〜3位", "4〜10位"):
         # 1ページ目にいる。足りないのは順位ではなくクリック。
@@ -239,8 +246,9 @@ def human_items(site=""):
       4. 21位以下で狙う語が合っていない   … 直しても届くまで時間がかかる
     """
     import sites as S
-    order = {"snippet": 0, "title": 1, "rival": 2, "thin": 3, "intent": 4}
+    order = {"snippet": 0, "deco": 1, "title": 1, "rival": 2, "thin": 3, "intent": 4}
     why = {"snippet": "1ページ目にいるのにクリックが取れていない",
+           "deco": "題の飾りの年号がクリックを落としている（自社の実測で負けた型）",
            "title": "タイトルに狙う語が入っていない",
            "rival": "同じ語で自社の別ページと competing している",
            "thin": "本文が薄い", "intent": "狙う語が記事の中身と合っていない"}
@@ -258,7 +266,7 @@ def human_items(site=""):
                 continue
             for kind, msg, _ in diagnose(d["slug"], d, texts, pages):
                 if kind in order:
-                    out.append({"kind": "title" if kind in ("snippet", "title") else "review",
+                    out.append({"kind": "title" if kind in ("snippet", "title", "deco") else "review",
                                 "slug": d["slug"], "site": sid,
                                 "why": f"{d['pos']:.0f}位・表示{d['imp']}・"
                                        f"クリック{d['clicks']}｜{why[kind]}",
@@ -415,7 +423,7 @@ def main():
                         if n and a.write:
                             hub_rewrite_log(sid, slug, f"{name}・内部リンク不足",
                                             f"内部リンクを{n}本追加", round(d["pos"], 1))
-                    elif kind in ("title", "rival", "snippet", "thin", "intent"):
+                    elif kind in ("title", "deco", "rival", "snippet", "thin", "intent"):
                         human.setdefault(kind, []).append(slug)
                 if a.write:
                     log[slug] = {"at": date.today().isoformat(),

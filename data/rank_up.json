@@ -28,10 +28,9 @@
  },
  "aio-shindan-yarikata": {
   "at": "2026-10-19",
-  "pos": 12.7,
-  "imp": 20,
-  "band": "11〜20位",
-  "site": "ai-lab"
+  "pos": 13.0,
+  "site": "ai-lab",
+  "by": "auto_rewrite"
  },
  "zeirishi-shukyaku-channel": {
   "at": "2026-10-19",
@@ -550,11 +549,10 @@
   "by": "auto_rewrite"
  },
  "keiri-daiko-service": {
-  "at": "2026-10-01",
-  "pos": 18.2,
-  "imp": 103,
-  "band": "11〜20位",
-  "site": "corporate"
+  "at": "2026-10-19",
+  "pos": 18.0,
+  "site": "corporate",
+  "by": "auto_rewrite"
  },
  "kichodaiko-zeirishihou-ihan": {
   "at": "2026-10-01",
@@ -833,6 +831,12 @@
   "at": "2026-10-19",
   "pos": 5.5,
   "site": "ai-lab",
+  "by": "auto_rewrite"
+ },
+ "keiri-outsourcing-hiyou-souba": {
+  "at": "2026-10-19",
+  "pos": 17.0,
+  "site": "corporate",
   "by": "auto_rewrite"
  }
 }
