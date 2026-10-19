@@ -1,0 +1,10 @@
+{
+  "name": "ss-aio-textlint",
+  "private": true,
+  "description": "記事のAIっぽい言い回しの検出と機械の直し（scripts/ai_writing.py が呼ぶ。止めたルールと理由は RULES.txt）",
+  "dependencies": {
+    "@textlint-ja/textlint-rule-preset-ai-writing": "1.7.0",
+    "textlint": "15.8.0",
+    "textlint-rule-preset-ja-technical-writing": "12.0.2"
+  }
+}

@@ -110,6 +110,10 @@ jobs:
             node "$(npm root -g)/@anthropic-ai/claude-code/install.cjs" || true
           fi
           claude --version
+          # AI っぽい言い回しの検出（textlint。版は automation/textlint/package-lock.json で固定）。公開前の品質ループが使う。
+          # 入らなくても止めない（品質ループは言い回しの直しを飛ばして採点を続ける）
+          npm ci --prefix automation/textlint --no-audit --no-fund > /tmp/npm_textlint.log 2>&1 \
+            || { tail -5 /tmp/npm_textlint.log; echo "::warning::textlint を入れられませんでした（言い回しの直しを飛ばします）"; }
 
       # お客様の社の順位・AIの語（.gitignore）を前の回から戻す。順位の記録（rank_track）は毎晩ここに積み足す
       - uses: ./.github/actions/client-private

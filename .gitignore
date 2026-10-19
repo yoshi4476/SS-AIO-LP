@@ -193,3 +193,5 @@ docs/sales/
 data/clients/*/private/
 # 日次KPIを送った日（daily_kpi.py --once）。CI は daily-kpi.yml のキャッシュで持ち越す
 data/kpi_sent.json
+# AI っぽい言い回しの検出（textlint）の依存。CI は npm ci --prefix automation/textlint で入れる（版は package-lock.json）
+automation/textlint/node_modules/

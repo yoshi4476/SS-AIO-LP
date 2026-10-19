@@ -187,9 +187,11 @@ def test_article_slot_does_not_wait_or_repeat():
     check("本番の確認: 固定の sleep 45 が無く、新しい版を返すまで短い間隔で確かめる（上限つき）",
           ("sleep 45" in live, "deadline=" in live and "deploy_check.py) && break" in live), (False, True))
     deps = _step(wf, "依存インストール")
-    check("依存: pip・apt・npm を同時に入れ、どれか失敗したら止める",
-          (deps.count(" & p") == 3, "wait $p1 ||" in deps and "wait $p3 ||" in deps, '[ "$ok" = 1 ] || exit 1' in deps),
-          (True, True, True))
+    # 4本目は AI っぽい言い回しの検出（textlint の npm ci。2026-10-20）。入らなくても記事は止めない（警告だけ）
+    check("依存: pip・apt・npm（と textlint）を同時に入れ、pip・apt・npm のどれか失敗したら止める",
+          (deps.count(" & p") == 4, "wait $p1 ||" in deps and "wait $p3 ||" in deps, '[ "$ok" = 1 ] || exit 1' in deps,
+           "ok=0" not in deps.split("wait $p4 ||", 1)[-1].split("\n", 1)[0]),
+          (True, True, True, True))
     check("依存: yt-dlp もまとめて入れる（一次情報の工程で入れ直さない）",
           ("yt-dlp" in deps, "pip install --quiet yt-dlp" in _step(wf, "一次情報の収集")), (True, False))
     brief = _step(wf, "執筆ブリーフの表示")

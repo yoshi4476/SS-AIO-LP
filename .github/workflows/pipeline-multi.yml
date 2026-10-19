@@ -334,10 +334,14 @@ jobs:
           pip install -q -r requirements.txt yt-dlp > /tmp/pip.log 2>&1 & p1=$!
           (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1 & p2=$!
           npm install -g @anthropic-ai/claude-code > /tmp/npm.log 2>&1 & p3=$!
+          # AI っぽい言い回しの検出（textlint。版は automation/textlint/package-lock.json で固定）。公開前の品質ループが使う。
+          # 入らなくても記事は止めない（品質ループは言い回しの直しを飛ばして採点を続ける）
+          npm ci --prefix automation/textlint --no-audit --no-fund > /tmp/npm_textlint.log 2>&1 & p4=$!
           ok=1
           wait $p1 || { cat /tmp/pip.log; ok=0; }
           wait $p2 || { cat /tmp/apt.log; ok=0; }
           wait $p3 || { cat /tmp/npm.log; ok=0; }
+          wait $p4 || { tail -5 /tmp/npm_textlint.log; echo "::warning::textlint を入れられませんでした（言い回しの直しを飛ばします）"; }
           [ "$ok" = 1 ] || exit 1
           # ネイティブバイナリが落ちてこないことがある（postinstallが走らない／
           # optional依存が省かれる）。実行時まで気づけず、記事生成ごと落ちる。

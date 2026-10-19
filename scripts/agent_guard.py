@@ -61,7 +61,9 @@ KNOWN_SECRETS = {
 }
 SECRETISH = re.compile(r"(TOKEN|SECRET|PASSWORD|_KEY|_JSON|CREDENTIALS)$")
 # AI が触ってはいけない場所。記事の AI が変えても、配信・コミットの前に元へ戻す
+# automation/textlint は AI っぽい言い回しの検出のルール（記事の AI が止めると検出が効かなくなる。node_modules は .gitignore）
 PROTECTED = ["scripts", "tests", ".github", ".claude", "templates", "tools", "automation/gas", "automation/wordpress",
+             "automation/textlint",
              "CLAUDE.md", "PROJECT.md", "requirements.txt", "package.json", "package-lock.json",
              "automation/*.txt", "automation/agent_settings_*.json"]
 # 自動修復の AI はコードを直すのが仕事なので、守るのは鍵の外し方そのものだけ

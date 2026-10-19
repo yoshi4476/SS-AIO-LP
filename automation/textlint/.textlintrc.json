@@ -1,0 +1,37 @@
+{
+  "rules": {
+    "preset-ja-technical-writing": {
+      "sentence-length": false,
+      "max-comma": false,
+      "max-ten": false,
+      "max-kanji-continuous-len": false,
+      "no-doubled-joshi": false,
+      "no-exclamation-question-mark": false,
+      "ja-no-mixed-period": false,
+      "arabic-kanji-numbers": false,
+      "ja-no-weak-phrase": false,
+      "ja-no-successive-word": false,
+      "no-unmatched-pair": false,
+      "ja-unnatural-alphabet": false,
+      "no-mix-dearu-desumasu": {
+        "preferInHeader": "",
+        "preferInBody": "ですます",
+        "preferInList": "",
+        "strict": false
+      },
+      "ja-no-redundant-expression": {
+        "dictOptions": {
+          "dict5": {"disabled": true},
+          "dict6": {"disabled": true}
+        }
+      }
+    },
+    "@textlint-ja/preset-ai-writing": {
+      "ai-tech-writing-guideline": {
+        "severity": "error",
+        "enableDocumentAnalysis": false,
+        "disableStructureGuidance": true
+      }
+    }
+  }
+}

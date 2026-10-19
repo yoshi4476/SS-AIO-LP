@@ -551,6 +551,10 @@ jobs:
             node "$(npm root -g)/@anthropic-ai/claude-code/install.cjs" || true
           fi
           claude --version
+          # AI っぽい言い回しの検出（textlint。版は automation/textlint/package-lock.json で固定）。週次の言い回しの直しと
+          # findings の推移が使う。入らなくても止めない（その工程が要対応で知らせる）
+          npm ci --prefix automation/textlint --no-audit --no-fund > /tmp/npm_textlint.log 2>&1 \
+            || { tail -5 /tmp/npm_textlint.log; echo "::warning::textlint を入れられませんでした（言い回しの直しを飛ばします）"; }
 
       # お客様の社の順位・共起語・引用の記録（.gitignore と置き場）を前の回から戻す（最後に残す）
       - uses: ./.github/actions/client-private
@@ -1152,6 +1156,18 @@ jobs:
           python scripts/auto_rewrite.py --write --kind early --limit $n --budget-min 12 2>&1 | tail -6 || true
           # 出どころの無い体験談の決まり文句を、当社の判断と理由に言い換える（2026-10-19 に126本。毎週3本ずつ。originality.py）
           python scripts/auto_rewrite.py --write --kind stock --limit $((n + 1)) --budget-min 15 2>&1 | tail -6 || true
+          # AI っぽい言い回し（textlint。2026-10-20 運用者「AIぽい言い回しは自動で直すこと」）。機械で安全に直せるもの
+          # （誤用の辞書・文字の正規化）を公開済みの全記事に当て、判断の要るもの（誇張・「〜することができます」・
+          # 箇条書きの「**札**:」など）は、指摘の多い記事から社ごとに週4本（sites/<id>.json の ai_writing_weekly）、
+          # 指摘の文だけを AI に言い換えさせる。先に検算が悪い直しを止めるかを確かめ、効いていなければ AI は動かさない
+          python scripts/ai_writing.py --fix --write 2>&1 | tail -4 || true
+          if python scripts/auto_rewrite.py --kind aiwriting --selftest > /tmp/aiwriting_selftest.txt 2>&1; then
+            m=25; [ "$SCALE" = "half" ] && m=12
+            python scripts/auto_rewrite.py --write --kind aiwriting --limit 40 --budget-min $m --parallel 3 2>&1 | tail -8 || true
+          else
+            tail -14 /tmp/aiwriting_selftest.txt
+            echo "要対応: AIっぽい言い回しの直しの検算が効いていません（言い回しの書き直しは飛ばしました）" >> automation/logs/findings.txt
+          fi
           # AIに聞いた調査で答えが割れた問いを、記事の冒頭に調査の文のまま入れ、記事の出典だけで答える
           python scripts/auto_rewrite.py --write --kind aisplit --limit $n --budget-min 12 2>&1 | tail -6 || true
           # 流入語が説明文の先頭に無い記事の説明文だけを直す（本文が1文字でも変われば戻す）
@@ -1467,7 +1483,8 @@ jobs:
           # Bing の検索の成績は自社3サイトの分だけ（お客様の分は .gitignore で外れる）
           # findings_seen は前の週に出たもの（来週の要対応と情報の振り分けが読む）。pull は未コミットの変更があっても通す
           # functions/_turnstile_enforce.js は、ロボットよけを「断る」へ切り替えた週に書き換わる（AI集客ラボの受付へ配信される）
-          for p in data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json data/bing_stats data/findings_seen.json functions/_turnstile_enforce.js; do if [ -e "$p" ]; then git add "$p"; fi; done
+          # ai_writing_trend.json は AI っぽい言い回しの検出件数（社ごとの件数だけ。来週の findings が前の週と比べる）
+          for p in data/yield_state.json data/lessons.jsonl data/pace_state.json data/pace_manual.json data/bing_stats data/findings_seen.json data/ai_writing_trend.json functions/_turnstile_enforce.js; do if [ -e "$p" ]; then git add "$p"; fi; done
           sw=0
           git diff --cached --name-only | grep -qx functions/_turnstile_enforce.js && sw=1
           attention() {

@@ -339,6 +339,9 @@ def weak_text(sc):
         out.append(f"  採点者が根拠に挙げた本文: 「{sc['quotes'][k][:120]}」")
         for w in sc["weak"][k]:
             out.append(f"  - {w[:200]}")
+    if sc.get("ai_writing"):
+        # textlint が見つけた AI っぽい言い回し（採点の前の直しで残った分）。指摘の文だけを言い換える
+        out.append("■ AIっぽい言い回し（textlint の検出。直すのは指摘の文だけ・意味と数字は変えない）:\n" + sc["ai_writing"])
     if sc.get("retry_note"):
         # 前の直しが検算で戻された理由。同じ直し方を繰り返させない（2026-10-20 の実地の試しで、2回とも「3点」「1か月近く」を
         # 足して数字の検算で戻された）
@@ -429,6 +432,63 @@ def _improve(slug, sc, blocked):
 IMPROVE = _improve
 
 
+# ── AI っぽい言い回し（textlint。2026-10-20 運用者「AIぽい言い回しは自動で直すこと」） ──────────
+
+AIW_MIN = 10                # 言い回しの直し（AI＋検算＋ビルド）の見込み（分）
+
+
+def _aiwriting(slug, blocked):
+    """検出された文だけを auto_rewrite（kind aiwriting）で言い換える。返すのは (直したか, 理由)"""
+    import ai_writing as AW
+    import auto_rewrite as A
+    item = AW.item_for(slug, AW.DETECT([read(slug)])[0] or [])
+    if not item:
+        return False, "指摘なし"
+    item["blocked_ok"] = blocked
+    ok, why = A.run_one(item, True)
+    A.note(slug, "aiwriting", ok, why)
+    return ok and why.startswith("直しました"), why
+
+
+AIWRITE = _aiwriting
+
+
+def polish(slug, budget, ctx, base):
+    """採点の前に、AI っぽい言い回しを直す。機械で直せるもの（誤用の辞書・文字の正規化）は textlint の直しを当て、
+    判断の要るものは時間があれば別の AI が指摘の文だけ言い換える（どちらも検算に外れたら戻す）。
+    道具が無い・落ちたときは飛ばす（採点は続ける。残った指摘は直しの指示に添える）"""
+    try:
+        import ai_writing as AW
+        if not AW.available():
+            print("  （AIっぽい言い回しの検査を飛ばしました: textlint が入っていません）")
+            return
+        st, why = AW.machine_fix(slug, path=path_of(slug))
+        if st != "none":
+            record({**base, "action": "aiwriting_fix", "state": st, "why": str(why)[:200]})
+        n = AW.count(read(slug))
+        if n and budget.ok(AIW_MIN + SCORE_MIN):
+            if "blocked" not in ctx:
+                ctx["blocked"] = blocked_lines()
+            good, why = AIWRITE(slug, ctx["blocked"])
+            after = AW.count(read(slug))
+            record({**base, "action": "aiwriting", "ok": good, "before": n, "after": after, "why": str(why)[:200]})
+            print(f"     言い回しの直し: {'直しました' if good else '戻しました・変更なし'}（指摘 {n}→{after}件）")
+    except Exception as e:  # noqa: BLE001  言い回しの直しで採点を止めない
+        print(f"  （AIっぽい言い回しの直しを飛ばしました: {type(e).__name__}: {str(e)[:60]}）")
+
+
+def aiwriting_note(slug):
+    """直しの指示に添える、残っている AI っぽい言い回し（無ければ空）"""
+    try:
+        import ai_writing as AW
+        if not AW.available():
+            return ""
+        hits = AW.DETECT([read(slug)])[0] or []
+        return AW.hits_text(hits, limit=6) if hits else ""
+    except Exception:  # noqa: BLE001
+        return ""
+
+
 # ── 記録 ─────────────────────────────────────────────────────────────
 
 def record(row):
@@ -499,6 +559,9 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         print(f"  … {name}: 時間の残りが足りないため採点しません（改善中のまま。次の回が続けます）")
         record({**base, "action": "skip", "state": "improving" if not published else "unscored"})
         return "skipped"
+    if not published:
+        # 公開前の記事は、採点の前に AI っぽい言い回しを直す（公開済みの記事は週次の auto_rewrite --kind aiwriting が受け持つ）
+        polish(slug, budget, ctx, base)
     sc, why = score(slug)
     if not sc:
         print(f"要対応: {name} を採点できませんでした（{why}）。"
@@ -515,6 +578,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         done += 1
         if "blocked" not in ctx:
             ctx["blocked"] = blocked_lines()
+        sc["ai_writing"] = aiwriting_note(slug)
         good, why = IMPROVE(slug, sc, ctx["blocked"])
         record({**base, "action": "improve", "round": prior + done, "ok": good, "why": str(why)[:200]})
         print(f"     直し{done}回目: {'直しました' if good else '戻しました・変更なし'}（"

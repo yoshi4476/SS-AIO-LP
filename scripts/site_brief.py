@@ -388,6 +388,15 @@ def main():
               "score・score_breakdown・quality_ の項目は書かない（機械が採点して書く）")
     except Exception as e:
         print(f"  （採点の基準を出せませんでした: {e}）")
+    # AI っぽい言い回し（textlint で検出し、公開前に機械と別工程の AI が直す。2026-10-20 運用者「AIぽい言い回しは自動で直すこと」）。
+    # 止めていないルールの要点だけ（12行まで）。最初から書かなければ直しの時間が要らない
+    try:
+        import ai_writing
+        lines = ai_writing.brief()
+        if lines:
+            print("\n" + "\n".join(lines))
+    except Exception as e:
+        print(f"  （言い回しの案内を出せませんでした: {e}）")
     # 検索上位が扱っていて、この記事にまだ無い観点（ラッコで取った見出し・共起語・実際の質問）
     try:
         import kw_serp

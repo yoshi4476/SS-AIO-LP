@@ -1,0 +1,48 @@
+AI っぽい言い回しの検出（textlint）で止めたルールと理由（2026-10-20）
+====================================================================
+
+使う道具: scripts/ai_writing.py（検出・機械の直し・推移）、scripts/auto_rewrite.py --kind aiwriting（判断の要る直し）。
+ルール集: textlint-rule-preset-ja-technical-writing 12.0.2 と @textlint-ja/textlint-rule-preset-ai-writing 1.7.0
+（textlint 15.8.0。版は package-lock.json。2026-10-06 より前に出た版だけを npm install --before で入れた）。
+
+正は CLAUDE.md 6章（本サイトの書式の決まり）。ぶつかるルールは止める側にした。
+件数は 2026-10-20、自社3サイトの公開済み記事 440本（score 90以上・noindex でない）に全部のルールを当てた実測
+（node の run.cjs と textlint の CLI の2通りで数え、止めた後の合計 523件が一致）。
+
+■ 止めたルール（.textlintrc.json で false）
+- sentence-length（171件）: 1文100字の決まりは score_check と split_sentences が受け持つ。数え方が違い
+  （リンクの <a href> の URL まで字数に数える）、同じ指摘が二重になる
+- max-ten（63件）・max-comma（6件）: H2 直下の1文結論で手順を「、」で並べる書き方と衝突する。max-comma は
+  金額の桁区切り（1,500〜6,000円）を数える
+- max-kanji-continuous-len（2,160件）: 制度名・機関名・社名の正式名称（中小企業基盤整備機構・見積書作成支援）。
+  言い換えると固有名詞が変わる
+- no-doubled-joshi（1,687件・427本）: 一般の文体の指摘で AI らしさではない。全記事の書き直しになる
+- no-exclamation-question-mark（539件）: 質問形の H2（「〜とは？」）はサイトの決まり（auto_rewrite の question）
+- ja-no-mixed-period（18件）: ==マーカー== の閉じ（「。==」）と「失敗2: …」の札を誤検出する
+- arabic-kanji-numbers（145件）: 「三つ折り」「二次元コード」「選び方一つで」を算用数字に変える（意味が変わる）。
+  さらに2本で数字の読み取りが落ちて検査が止まる
+- ja-no-weak-phrase（15件）: 15件中10件が誤検出（「不安に思う」「思うように」、口コミ返信の文例の「嬉しく思います」）
+- ja-no-successive-word（14件）: 14件とも誤検出（★★二つ星・○○の伏せ字・ＭＭ総研）
+- no-unmatched-pair（3件）: 括弧の中で文が切れる書き方を2件誤検出（本当の閉じ忘れは1件）
+- ja-unnatural-alphabet（1件）: 社名の全角（株式会社ＭＭ総研）
+- ja-no-redundant-expression の dict5・dict6（「〜を行う」「〜を実行」）: 91件が決まった断り書き
+  「当社は内容の確認と助言を行います」と、公的資料の「」引用。dict1・dict2（「〜することができます」
+  「〜することも可能です」）は残す
+- ai-tech-writing-guideline の構造化の提案（41件）と文書全体のまとめ（1記事1件）: 箇条書きにすると
+  「3連続箇条書き」の決まりとぶつかる。まとめは文を指さない
+- no-mix-dearu-desumasu は止めずに、箇条書きを「である」に固定する既定を外した（本文はですます調のまま）
+
+■ 機械で直してよいルール（.textlintrc.fix.json）
+ja-no-abusage（誤用の辞書。例: 目が止まる→目が留まる）・no-nfd・no-zero-width-spaces・
+no-invalid-control-character・no-hankaku-kana（文字の正規化）。意味の変わらない直しだけ。
+直した後に ai_writing.fix_guard（auto_review.guard・数字・出典・見出し・フロントマター）に外れたら書かない。
+
+■ 判断の要るルール（AI が指摘の文だけを言い換える。ai_writing.rewrite_guard ＋ auto_rewrite の検算）
+no-ai-hype-expressions・no-ai-list-formatting・no-ai-emphasis-patterns・no-ai-colon-continuation・
+ai-tech-writing-guideline（簡潔性・具体性・明確性）・ja-no-redundant-expression（dict1〜4）・
+no-mix-dearu-desumasu・no-doubled-conjunction・no-doubled-conjunctive-particle-ga・no-double-negative-ja・
+no-dropping-the-ra
+
+■ 検査しない場所（scripts/ai_writing.py の mask・hits_of）
+フロントマター・「よくある質問」の節（本文とフロントマターの FAQ は同じ文）・コードブロックと HTML のブロック・
+リンクの URL・「」『』の中（公的資料・文例の引用）・> の引用の行

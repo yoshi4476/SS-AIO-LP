@@ -1036,6 +1036,20 @@ WHAT = {
               "または (b) その文が無くても意味が通るなら削る。\n"
               "「相談を受ける中で」「何度も見てきました」「何度も聞いてきました」「ある医院では」の形を使わない。\n"
               "数字・社名・事例を新しく書かない。見出し・タイトル・狙う語・FAQ・ほかの文は変えない"),
+    # textlint（ai_writing.py）が見つけた AI っぽい言い回しを、指摘の文だけ言い換える（2026-10-20 運用者の決定
+    # 「AIぽい言い回しは自動で直すこと」）。機械で直せるもの（誤用の辞書・文字の正規化）は ai_writing --fix が先に当てる
+    "aiwriting": ("この記事には、AI が書いた文に多い言い回しが残っています（textlint の検出）。次の行の文だけを言い換えてください:\n"
+                  "{hits}\n\n"
+                  "直し方:\n"
+                  "- 直すのは上の行の指摘の箇所だけ。ほかの行・見出しの数・表の形・リンクは変えない。行を足さない・消さない\n"
+                  "- 太字（**）の数を減らさない（強調は機械の決まりで8箇所以上。札の太字を外すなら、同じ行の核心の語へ移す）\n"
+                  "- 意味と主張を変えない。言い換えで数字・社名・制度名・固有名詞・出典を足さない・変えない\n"
+                  "- 誇張（完璧な・完全に・大幅に）は、本文にある数字か条件に言い換える。本文に無い数字は書かない。\n"
+                  "  事実として要る言い方（「NAPを完全に一致させる」など）は、そのまま残してよい\n"
+                  "- 一人称の体験・事例・お客様の声を新しく書かない（体験は登録した体験だけ。この直しでは足さない）\n"
+                  "- 「」の中の引用（公的資料・文例）は1文字も変えない\n"
+                  "- ですます調。1文は50字を目安、100字を超えない\n"
+                  "- フロントマター（title・description・keyword・faq・点数）と「よくある質問」の節は変えない"),
     "question": ("この記事のH2見出しは名詞句ばかりで、質問の形がありません。自社の実測で、H2の1〜3割が\n"
                  "質問形の記事は、質問形ゼロの記事より平均4.2位上にいます。AI Overview は質問形の\n"
                  "クエリで64.7%出ます。\n"
@@ -1881,6 +1895,13 @@ def pick_slugs(items, slugs, kind):
             out.append(have[s])
         elif kind in ("title", "question", "fresh") and (ROOT / "articles" / f"{s}.md").is_file():
             out.append({"kind": kind, "slug": s, "site": site_of(s), "why": "運用者が選んだ記事（GSC で見て直す）"})
+        elif kind == "aiwriting" and (ROOT / "articles" / f"{s}.md").is_file():
+            import ai_writing as AW
+            it = AW.item_for(s)
+            if it:
+                out.append(it)
+            else:
+                print(f"  {shown(s)}: AIっぽい言い回しの指摘がありません")
         elif kind == "stuck" and (ROOT / "articles" / f"{s}.md").is_file() and cooccur_item(s):
             # 候補に出ていない記事も、上位・AIの出典の見出しにあって自記事に無い語をその場で調べて直す（無料）
             out.append(cooccur_item(s))
@@ -1922,6 +1943,9 @@ def build_prompt(item):
         what = what.format(queries="\n".join(f"- {q}" for q in item.get("queries") or []))
     if kind == "stock":
         what = what.format(phrases="\n".join(f"- {s}" for s in item.get("phrases") or []))
+    if kind == "aiwriting":
+        import ai_writing as AW
+        what = what.format(hits=AW.hits_text(item.get("hits") or []))
     if kind == "title":
         # 自社のGSCで実測した「効いた型」を渡す（通説ではなく、このサイトの数字で決める）
         try:
@@ -2162,6 +2186,11 @@ def _apply_one(item, edited, orig):
             ng = f"共通の語「{item['shared'][0]}」がタイトルの前半に残っています"
     if not ng and kind == "quality_loop":
         ng = quality_guard(before[2], p.read_text(encoding="utf-8-sig"))
+    if not ng and kind == "aiwriting":
+        # 指摘の文だけを直したか・指摘が減ったか・引用とフロントマターを変えていないか（ai_writing.rewrite_guard）
+        import ai_writing as AW
+        ng = AW.rewrite_guard(before[2], p.read_text(encoding="utf-8-sig"), item.get("hits") or [],
+                              int(item.get("count") or len(item.get("hits") or [])))
     if not ng and kind == "compete":
         ng = compete_guard(before[2], p.read_text(encoding="utf-8-sig"), before[0], meta(slug)[0], item["gap"])
     if not ng and kind == "early":
@@ -2320,6 +2349,12 @@ def main():
     global TAG
     TAG = a.tag
 
+    if a.selftest and a.kind == "aiwriting":
+        # AI っぽい言い回しの直しの検算（ai_writing.rewrite_guard・fix_guard）。textlint が要るので、ほかの種類の
+        # 自己診断とは分ける（textlint が入らなかった回に、ほかの書き直しまで止めない）
+        import ai_writing as AW
+        print("■ AIっぽい言い回しの直しの検算の自己診断（悪い直しを当てて、止まるか見る）\n")
+        return AW.selftest()
     if a.selftest:
         print("■ 検算の自己診断（やってはいけない書き換えを当てて、止まるか見る）\n")
         return selftest()
@@ -2333,6 +2368,13 @@ def main():
         items = stock_items(10 ** 6 if a.slugs else max(a.limit, 3))
     elif a.kind == "desc":
         items = desc_items(max(a.limit, 4))
+    elif a.kind == "aiwriting":
+        # 名指し（--slugs）は pick_slugs がその記事を検査する。全部を検査しない
+        import ai_writing as AW
+        if not AW.available():
+            print("要対応: AIっぽい言い回しの直しを動かせません（textlint が入っていません。npm ci --prefix automation/textlint）")
+            return 0
+        items = [] if a.slugs else AW.items(AW._sites(a.sites))
     elif a.kind == "aisplit":
         items = aisplit_items(max(a.limit, 2))
     elif a.kind == "split":
