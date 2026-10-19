@@ -1399,7 +1399,7 @@ LAST = {}      # slug → 直す前後のタイトル・説明文（rewrite_roll
 
 def _desc_of(text):
     m = re.search(r"^description:\s*(.+)$", text, re.M)
-    return m.group(1).strip().strip('"') if m else ""
+    return m.group(1).strip().strip("\"'") if m else ""
 
 
 TITLE_LOCK_DAYS = 28   # rewrite_rollback.DAYS と同じ。この間に題を変えると効いたか判定できない

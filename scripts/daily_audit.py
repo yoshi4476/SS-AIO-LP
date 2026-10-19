@@ -30,6 +30,7 @@ import sites as sites_mod  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 ARTICLES = ROOT / "articles"
+SKIPPED = []           # 動かなかった検査（取得できなかった）。TODO が出ないのは「無い」ではなく「分からない」
 DAILY_TARGET = 2       # 1サイトあたりの1日の公開本数
 MONTHLY_CAP = 60       # 1サイトあたりの1か月の上限。31日ある月は2本/日で62本になり
                        # 上限を超える。同一ドメインへ短期に大量投入すると機械的な
@@ -406,6 +407,7 @@ def check_serp_overlap(todo, limit=5):
         hits = cannibal_check.serp_overlap()
     except Exception as e:
         print(f"  GSCから取得できません（{str(e)[:60]}）")
+        SKIPPED.append("食い合い")
         return
     print(f"  {len(hits)}語")
     for h in hits[:limit]:
@@ -432,6 +434,7 @@ def check_growth(todo):
         alerts = growth_guard.main()
     except Exception as e:
         print(f"  GSCから取得できません（{str(e)[:60]}）")
+        SKIPPED.append("表示の推移")
         return
     if growth_guard.LAST_UNKNOWN and not alerts:
         todo.append(f"TODO: {', '.join(growth_guard.LAST_UNKNOWN)} の表示の推移を GSC から確かめられませんでした"
@@ -482,8 +485,10 @@ def check_supply(todo, fix=False):
         print(f"  ?   管制塔から取得できず判定できません（{str(err)[:60]}）")
         return
     per = {}
+    import kw_fit
     for k in rows:
-        if (k.get("status") or "").strip() == "未着手":
+        # 新しく書けない語（judge_new の判定2・next_kw が飛ばす）は在庫に数えない
+        if (k.get("status") or "").strip() == "未着手" and kw_fit.judge_new(k.get("keyword", ""), k.get("site") or "")[0] < 2:
             per[k.get("site") or "?"] = per.get(k.get("site") or "?", 0) + 1
     for sid in sites_mod.load_all():
         n = per.get(sid, 0)
@@ -616,6 +621,7 @@ def check_brand(todo):
         d = B.collect(28)
     except Exception as e:
         print(f"  （取得できません: {str(e)[:40]}）")
+        SKIPPED.append("指名検索")
         return
     ti = sum(v["cur"]["imp"] for v in d.values())
     pi = sum(v["prev"]["imp"] for v in d.values())
@@ -650,6 +656,7 @@ def check_unseen(todo):
         sc = _G.client()
     except Exception as e:
         print(f"  （GSCに接続できないため確認できません: {str(e)[:40]}）")
+        SKIPPED.append("検索に出ていないページ")
         return
     end = _date.today() - _td(days=3)
     start = end - _td(days=27)
@@ -811,6 +818,10 @@ def main():
     check_unseen(todo)
     check_deploy(todo)
 
+    if SKIPPED:
+        # 救済の再監査はこの印を見て、管制塔の「未対応」を「解消」にしない
+        # （鍵の無い再監査が毎晩、見えなかっただけの課題を消していた。2026-10-20）
+        print(f"AUDIT_SKIPPED={','.join(SKIPPED)}")
     print("\n===== 結果 =====")
     if not todo:
         print("AUDIT_OK=yes（本日の運用は計画どおりです）")

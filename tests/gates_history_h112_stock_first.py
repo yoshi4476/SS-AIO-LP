@@ -60,3 +60,6 @@ def test_decor_year_titles_with_impressions_become_title_candidates():
     check("クリックが取れていれば候補にしない", "deco" in [k for k, _, _ in rank_up.diagnose("zz", d2, {"zz": t}, {"zz": d2})], False)
     t3 = t.replace("【2026年】", "と2024年問題")
     check("中身として要る年は候補にしない", "deco" in [k for k, _, _ in rank_up.diagnose("zz", d, {"zz": t3}, {"zz": d})], False)
+    t4 = t.replace("【2026年】", "【2024年問題】")
+    check("かっこの中でも中身として要る年（【2024年問題】）は候補にしない",
+          "deco" in [k for k, _, _ in rank_up.diagnose("zz", d, {"zz": t4}, {"zz": d})], False)

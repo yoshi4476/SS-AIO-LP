@@ -88,11 +88,14 @@ def next_keyword(site):
     except Exception as e:
         print(f"   （管制塔から取得できません: {type(e).__name__}）")
     try:
+        import kw_fit
         import kw_status
         from cannibal_check import kw_conflicts, load_articles
         arts = load_articles()
         for _g, k in kw_status.plan_keywords():
-            if not kw_conflicts(k, arts):
+            # 管制塔の next_kw と同じく、新しく書けない語（担当の外・kw_require に当たらない）は選ばない。
+            # 選ぶと書いた後の点検で隔離され、その枠の執筆が無駄になる
+            if not kw_conflicts(k, arts) and kw_fit.judge_new(k, site)[0] < 2:
                 return k, "ローカルの計画"
     except Exception:
         pass

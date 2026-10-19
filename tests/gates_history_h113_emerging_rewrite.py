@@ -25,17 +25,14 @@ def test_subsidy_writes_no_new_articles_and_rewrites_both_slots():
 def test_emerging_scope_widens_main_only():
     import auto_rewrite as A
     print("\n■ emerging の社は --main-only でも主力の語に絞らない（他の社は従来どおり主力の語だけ）")
-    A._MAIN["zz-main"] = lambda s: "主力" in s
-    orig = A.emerging_scope
+    orig, orig_main = A.emerging_scope, A.is_main
     try:
         A.emerging_scope = lambda s: s == "zz-emerging"
-        A.is_main = (lambda f: (lambda slug, site="": False))(A.is_main)
+        A.is_main = lambda slug, site="": False
         check("emerging の社の主力でない記事は対象", A.in_scope("x", "zz-emerging"), True)
         check("emerging でない社の主力でない記事は対象外", A.in_scope("x", "zz-main"), False)
     finally:
-        A.emerging_scope = orig
-        import importlib
-        importlib.reload(A)
+        A.emerging_scope, A.is_main = orig, orig_main
     src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
     check("無料の補充（free_spare_items）も in_scope で絞る", "not in_scope(slug, sid)" in src, True)
     check("足す語が無い日は題の直しを候補にする", "emerging_title_items(a.sites" in src, True)

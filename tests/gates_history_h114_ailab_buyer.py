@@ -42,6 +42,26 @@ def test_new_article_entrances_use_judge_new_and_existing_ones_do_not():
           ["judge_new" in src(n) for n in ("kw_guard.py", "publish_flow.py")], [False, False])
 
 
+def test_unwritable_keywords_are_not_counted_as_stock():
+    import hub_client
+    import kw_plan
+    print("\n■ 新しく書けない語は在庫に数えない（数えると書ける語が尽きても積み足さない）")
+    rows = [{"site": "ai-lab", "status": "未着手", "keyword": "aio やり方"},
+            {"site": "ai-lab", "status": "未着手", "keyword": "歯科 ai 集客"}]
+    o_en, o_all = hub_client.enabled, hub_client.all_kw
+    try:
+        hub_client.enabled, hub_client.all_kw = (lambda: True), (lambda strict=False: rows)
+        got = kw_plan.stock("ai-lab")["todo"]
+    finally:
+        hub_client.enabled, hub_client.all_kw = o_en, o_all
+    check("kw_plan.stock: 書ける語だけ", got, ["歯科 ai 集客"])
+    src = lambda n: (ROOT / "scripts" / n).read_text(encoding="utf-8")
+    check("daily_audit の在庫の点検も judge_new で数える", "kw_fit.judge_new(k.get(\"keyword\"" in src("daily_audit.py"), True)
+    check("台帳が読めない日の代わりの語（kw_gate.next_keyword）も judge_new を通す",
+          "kw_conflicts(k, arts) and kw_fit.judge_new(k, site)" in src("kw_gate.py"), True)
+    check("--ledger --retire で外せる（ledger_unfit も judge_new）", "lv, why = judge_new(r.get(\"keyword\"" in src("kw_fit.py"), True)
+
+
 def test_named_boosts_do_not_silently_find_nothing():
     import link_boost
     import auto_rewrite as A

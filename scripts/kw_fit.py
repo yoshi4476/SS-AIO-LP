@@ -153,7 +153,8 @@ def ledger_unfit(rows, site=""):
             continue
         if str(r.get("status", "")).strip() not in LIVE:
             continue
-        lv, why = judge(r.get("keyword", ""), r.get("site", ""))
+        # 新しく書く語の決まり（kw_require）も見る。台帳に残すと在庫に見えるので、--retire で外せるようにする
+        lv, why = judge_new(r.get("keyword", ""), r.get("site", ""))
         if lv >= 2:
             out.append((r, lv, why))
     return out

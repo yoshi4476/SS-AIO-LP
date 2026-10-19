@@ -63,6 +63,23 @@ def test_conflicted_files_keep_upstream_and_logs_union():
     check("見送ったファイルを警告に出す", "x.md のこちらの直しを見送りました" in r.stdout, True)
 
 
+def test_union_only_touches_conflict_blocks_and_never_skips_real_work():
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import rebase_push as R
+    print("\n■ 記録の合わせ方はぶつかった箇所だけ・中身のあるコミットは飛ばさない・こちらだけが足したファイルで落ちない")
+    with tempfile.TemporaryDirectory() as d:
+        p = Path(d) / "log.jsonl"
+        p.write_text('{"n":1}\n{"n":1}\n<<<<<<< HEAD\n{"n":"a"}\n||||||| base\n{"n":0}\n=======\n{"n":"a"}\n{"n":"b"}\n'
+                     '>>>>>>> local\n', encoding="utf-8")
+        R.union_lines(str(p))
+        got = p.read_text(encoding="utf-8").splitlines()
+    check("ぶつかっていない同じ行は残す・元の版（diff3）は捨てる・両側の行は重ねない",
+          got, ['{"n":1}', '{"n":1}', '{"n":"a"}', '{"n":"b"}'])
+    src = SCRIPT.read_text(encoding="utf-8")
+    check("rebase --skip は中身が空のときだけ（skip_if_empty）", src.count('git("rebase", "--skip")'), 1)
+    check("UA（こちらだけが足したファイル）は checkout --ours を通さない", 'elif st == "UA":' in src, True)
+
+
 def test_weekly_uses_rebase_push():
     print("\n■ 週次の最後の送り出しが rebase_push を使う")
     wk = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")

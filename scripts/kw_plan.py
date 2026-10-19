@@ -1085,7 +1085,10 @@ def stock(site_id):
         kw = str(r.get("keyword") or "")
         if r.get("site") in group and kw:
             out["keys"] |= ledger_keys(kw)
-        if r.get("site") == site_id and str(r.get("status", "")).strip() == "未着手" and kw:
+        # 新しく書けない語（kw_fit.judge_new の判定2。next_kw が飛ばす）は在庫に数えない。数えると、書ける語が
+        # 尽きても1か月分あるように見えて積み足さない（2026-10-20: AI集客ラボの一般の語22本）
+        if (r.get("site") == site_id and str(r.get("status", "")).strip() == "未着手" and kw
+                and kw_fit.judge_new(kw, site_id)[0] < 2):
             out["todo"].append(kw)
             if str(r.get("priority") or "").strip() == "A":
                 out["a"].append(kw)

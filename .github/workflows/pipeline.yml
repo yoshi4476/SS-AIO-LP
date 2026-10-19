@@ -257,13 +257,20 @@ jobs:
           python scripts/retract.py --pending --push || true
           rm -f indexing-service-account.json
 
+      # 鍵を渡す。渡していなかった間（〜2026-10-19）は食い合い・指名検索・未登録の確認が毎晩「取得できません」で、
+      # 下の error_sync がその TODO を「解消」にしていた（見えなかっただけの課題が消えていた）
       - name: 救済後の再監査（残った問題をログとエラーログに残す）
         if: steps.mode.outputs.mode == 'rescue'
         env:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
+          GCP_SERVICE_ACCOUNT_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
         run: |
+          if [ -n "$GCP_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GCP_SERVICE_ACCOUNT_JSON" > indexing-service-account.json
+          fi
           out=$(python scripts/daily_audit.py --fix-kw); echo "$out"
+          rm -f indexing-service-account.json
           if echo "$out" | grep -q "AUDIT_OK=no"; then
             echo "$out" | grep "^TODO:" | while IFS= read -r t; do
               echo "::warning::救済後も未解決: $t"
@@ -273,8 +280,11 @@ jobs:
             done
           fi
           # 今回出なかったTODOは「解消」にする。書き足すだけだと214行が全部「未対応」で並ぶ
-          # 監査そのものが動かなかった回（AUDIT_OK= が無い）は同期しない。全部「解消」にしてしまう
-          if echo "$out" | grep -q "AUDIT_OK="; then
+          # 監査そのものが動かなかった回（AUDIT_OK= が無い）は同期しない。全部「解消」にしてしまう。
+          # 一部の検査が動かなかった回（AUDIT_SKIPPED=）も同期しない（その検査の TODO を消してしまう）
+          if echo "$out" | grep -q "AUDIT_SKIPPED="; then
+            echo "一部の検査が動かなかったため、未対応の解消は同期しません: $(echo "$out" | grep '^AUDIT_SKIPPED=')"
+          elif echo "$out" | grep -q "AUDIT_OK="; then
             echo "$out" | grep "^TODO:" > "$RUNNER_TEMP/todos.txt" || true
             python scripts/hub_client.py error_sync rescue "$RUNNER_TEMP/todos.txt" || true
           fi

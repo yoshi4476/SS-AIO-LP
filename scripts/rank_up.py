@@ -182,8 +182,8 @@ def diagnose(slug, d, texts, all_pages):
 
     # 飾りの年号（【2026年】【2026年最新】）は自社の実測でクリック率が負けた型。新しい記事は score_check が止めるが、
     # 決まりを入れる前の題が残り、2026-10-19 の時点で33本・28日のクリック合計2回（表示104回・95回でクリック0の記事もあった）
-    import score_check
-    deco = score_check.DECOR_YEAR.search(title)
+    # 「【2024年問題】」のように中身として要る年は拾わない（かっこの中が年・年度・最新・版だけのものを飾りとみなす）
+    deco = re.search(r"【\s*20\d{2}\s*(年度?|年版)?\s*(最新版?|版)?\s*】|20\d{2}年?最新", title)
     if deco and d["imp"] >= MIN_IMP and not d["clicks"] and band in ("1〜3位", "4〜10位", "11〜20位", "21〜50位"):
         out.append(("deco", f"題に飾りの年号「{deco.group(0)}」があり、表示{d['imp']}回でクリック0", 0))
 
