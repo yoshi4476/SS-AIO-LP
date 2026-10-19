@@ -11,11 +11,11 @@
   }
  },
  "subsidy": {
-  "at": "2026-10-12",
-  "fp": "40ab0b49aac5",
+  "at": "2026-10-19",
+  "fp": "eb57d7fd97c4",
   "parts": {
    "dest/template": "42ff73367826",
-   "sites": "70648ca9921e"
+   "sites": "489900d9abbd"
   }
  }
 }
