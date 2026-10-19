@@ -568,7 +568,12 @@ def run_site(cfg, hints=None, today=None):
         st, _, b, _ = ctx.get(p["path"])
         title = p.get("title") or ""
         feat = {"i18n": "i18n", "i18n_index": "i18n"}.get(p["kind"])
-        shown = st == 200 and (title and title in _html.unescape(b) or "ss-aggregate" in b)
+        # 自前で作るサイト（AI集客ラボ）のまとめのページは、題が「比較表から探す｜料金・違い…」のように配る形の
+        # 「比較表から探す（AIO・LLMO運用）」と違う。末尾の括弧書きを除いた題でも照らす（2026-10-20: 中身のある3ページを
+        # 「開けますが中身が出ていません」と誤って要対応にしていた）
+        base = re.sub(r"（[^（）]*）$", "", title).strip() if title else ""
+        page = _html.unescape(b) if st == 200 else ""
+        shown = st == 200 and (bool(title) and (title in page or (len(base) >= 3 and base in page)) or "ss-aggregate" in b)
         if shown:
             add(cid, "ok", p["path"], feat)
         elif st is None:
