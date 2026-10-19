@@ -67,6 +67,19 @@ def test_ledger_leftovers_skip_noindex_and_recent_but_catch_real_ones():
     check("要対応の行が出る", "公開済みなのに公開中に無い記事 1本" in out, True)
 
 
+def test_weekly_body_and_agent_rewrite_log():
+    import yaml
+    print("\n■ 週次の知らせは findings.py --body で作る・管制塔は通行証の書き直しの記録を受け付ける")
+    wf = yaml.safe_load((ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8"))
+    runs = "\n".join(str(s.get("run", "")) for j in wf["jobs"].values() for s in j.get("steps", []))
+    check("週次の通知の本文は findings.py --body", "python scripts/findings.py --body" in runs, True)
+    check("通知に条件語の無い決まり文句を使わない", "found=\"（検査の結果を取得できませんでした）\"" in runs, False)
+    gs = (ROOT / "automation" / "gas" / "hub.gs").read_text(encoding="utf-8")
+    check("AGENT_POSTS に rewrite_log", "rewrite_log: true };" in gs, True)
+    check("通行証の rewrite_log は書ける社だけ・1日の上限 log", ("case 'rewrite_log': out = rewriteLog_(b); break;" in gs,
+                                                         "a === 'rewrite_log' ? ['log', 1]" in gs, "log: 200" in gs), (True, True, True))
+
+
 def test_reading_issues_are_resolved_or_still_listed():
     print("\n■ 読み違いの記録: 直した語には理由がある・確かめていない語は直ったと書かない")
     rows = [json.loads(l) for l in (ROOT / "data" / "yomi_issues.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]

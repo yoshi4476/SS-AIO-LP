@@ -1561,10 +1561,9 @@ jobs:
         run: |
           if [ "${{ job.status }}" = "success" ]; then icon="🔧"; else icon="🚨"; fi
           # 検査が見つけたものを本文に載せる。リンクだけの通知は開かれない
-          found="（検査の結果を取得できませんでした）"
-          if [ -f automation/logs/findings.txt ]; then
-            found=$(cat automation/logs/findings.txt)
-          fi
+          # findings.py --body は、結果のファイルが無い・空の週も「要対応: 検査の結果を取得できませんでした」を返す。
+          # 以前の決まり文句「（検査の結果を…）」は通知の条件に当たらず、検査が動かなかった週に知らせが送られなかった（2026-10-20）
+          found=$(python scripts/findings.py --body 2>/dev/null) || found="要対応: 検査の結果を取得できませんでした（findings.py --body が動きませんでした）"
           python scripts/notify_slack.py --routine "$icon 週次最適化: ${{ job.status }}
           $found
           https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true

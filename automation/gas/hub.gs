@@ -208,13 +208,15 @@ const KW_READS = { next_kw: true, all_kw: true, kw_status: true, kw_overlaps: tr
 const AGENT_SECRET = 'AGENT_SECRET_XXXXXXXX';
 // 読む操作は GET（KW_READS）、書く操作は POST（AGENT_POSTS）でだけ通す。POST に読む操作の名前を付けると、
 // 受付に該当の操作が無いためフォーム（問い合わせの台帳・自動返信）へ落ちていた。toString などの元の名前も通さない
-const AGENT_POSTS = { claim_kw: true, kw_conflict: true, add_kw: true, retire_kw: true, unclaim_kw: true, error_log: true };
+// rewrite_log: 週次・集中モード・月次の書き直しは AI の工程の通行証で動く（2026-10-20 から鍵を外して動かす）。
+// 受け付けないと管制塔のリライトログに直した記録が載らなくなる。書ける社だけ・1日の量に上限
+const AGENT_POSTS = { claim_kw: true, kw_conflict: true, add_kw: true, retire_kw: true, unclaim_kw: true, error_log: true, rewrite_log: true };
 // 鍵が空・短いまま配られると誰でも署名を作れる（scripts/hub_token.py の KEY_MIN と同じ値）
 const AGENT_KEY_MIN = 16;
 // 区切りの ~ と , を社の id に入れさせない（hub_token.py の SITE と同じ）
 const AGENT_SITE = /^[A-Za-z0-9_-]{1,64}$/;
 // 1つの通行証で1日にできる量。外の指示に従って台帳を埋め尽くす・取り下げ尽くすのを止める
-const AGENT_DAY_LIMITS = { add: 60, retire: 30, claim: 30 };
+const AGENT_DAY_LIMITS = { add: 60, retire: 30, claim: 30, log: 200 };
 
 /** 通行証を照合して { w: 書ける社, r: 読める社（書ける社を含む）, sig } を返す。通らなければ null（hub_token.verify と同じ照合） */
 function agentPass_(token, now) {
@@ -307,7 +309,7 @@ function agentWrite_(pass, b) {
   const a = b.action;
   const many = Array.isArray(b.keywords) ? b.keywords.length : 1;
   const use = a === 'add_kw' ? ['add', many] : a === 'retire_kw' ? ['retire', many]
-    : a === 'claim_kw' ? ['claim', 1] : a === 'unclaim_kw' ? ['claim', many] : null;
+    : a === 'claim_kw' ? ['claim', 1] : a === 'unclaim_kw' ? ['claim', many] : a === 'rewrite_log' ? ['log', 1] : null;
   if (use && !agentQuota_(pass, use[0], use[1])) return { ok: false, error: 'limit' };
   let out;
   switch (a) {
@@ -317,6 +319,7 @@ function agentWrite_(pass, b) {
     case 'unclaim_kw':  out = unclaimKw_(b.site, b.keywords); break;
     case 'add_kw':      out = addKw_(b.site, b.keywords || [], agentCtx_(pass, b.ctx)); break;
     case 'error_log':   out = errorLog_(b); break;
+    case 'rewrite_log': out = rewriteLog_(b); break;
     default:            return { ok: false, error: 'unauthorized' };
   }
   return agentScrub_(pass, out);
