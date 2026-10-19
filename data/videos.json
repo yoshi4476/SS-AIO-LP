@@ -679,5 +679,64 @@
       ],
       "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
     }
+  },
+  "ai-kensaku-taisaku-dairiten-junbi": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-19",
+      "keyword": "ai検索対策 代理店",
+      "queries": [
+        "ai検索対策 代理店"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "ai検索エンジン",
+        "ai 事例",
+        "aiガイドライン",
+        "ai マーケティング"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
+  },
+  "aio-kotoba": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-19",
+      "keyword": "aio 言葉",
+      "queries": [
+        "aio 言葉"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "aiどん",
+        "言葉様"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
+  },
+  "aio-itsukara": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-19",
+      "keyword": "aio いつから",
+      "queries": [
+        "aio いつから"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "aio"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
+  },
+  "research-dental": {
+    "site": "ai-lab",
+    "kind": "research",
+    "date": "2026-10-19",
+    "sec": 201,
+    "mp4": "automation/video/research-dental.mp4",
+    "format": "duo",
+    "url": "https://ai.7senses.co.jp/research/dental-ai-sources/",
+    "youtube": "xG1QVgQrf-E"
   }
 }
