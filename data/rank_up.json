@@ -768,18 +768,16 @@
   "by": "auto_rewrite"
  },
  "gyoseishoshi-kichodaiko-souba": {
-  "at": "2026-10-19",
-  "pos": 7.8,
-  "imp": 22,
-  "band": "4〜10位",
-  "site": "corporate"
+  "at": "2026-10-20",
+  "pos": 7.0,
+  "site": "corporate",
+  "by": "auto_rewrite"
  },
  "keiri-jikyu-souba": {
-  "at": "2026-10-19",
-  "pos": 6.9,
-  "imp": 22,
-  "band": "4〜10位",
-  "site": "corporate"
+  "at": "2026-10-20",
+  "pos": 7.0,
+  "site": "corporate",
+  "by": "auto_rewrite"
  },
  "keiri-koritsuka-seminar": {
   "at": "2026-10-19",
