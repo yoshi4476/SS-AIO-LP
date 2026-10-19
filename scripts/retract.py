@@ -105,6 +105,46 @@ def push(cfg, dest: Path, msg):
     return False
 
 
+def repoint_refs(cfg, sid, row, root=None):
+    """取り下げたページへ向いた管制塔の原稿のリンクと site/_redirects の転送先を、最終の記事へ付け替える。
+    配信先だけ直すと、別のサイトの記事・転送が取り下げたページを経由する2段の転送になる
+    （2026-10-20: AI集客ラボの転送と補助金の記事の1本が、取り下げた gbizid-shutoku を指したまま残った）"""
+    import sites as S
+    root = Path(root) if root else ROOT
+    host = (cfg.get("domain") or "").strip().strip("/")
+    old, new = row["from"], row["to"]
+    pats = []
+    if host:
+        pats.append((re.compile(rf"https?://{re.escape(host)}{re.escape(old)}(?=[)\s\"'#?])"), f"https://{host}{new}"))
+    same = re.compile(rf"\]\({re.escape(old)}(?=[)#?])")
+    touched = []
+    for p in sorted((root / "articles").glob("*.md")):
+        t = p.read_text(encoding="utf-8")
+        u = t
+        for rx, rep in pats:
+            u = rx.sub(rep, u)
+        m = re.search(r"^category:\s*(.+)$", u, re.M)
+        try:
+            mine = bool(m) and S.find_category_owner(m.group(1).strip().strip("\"'")) == sid
+        except (SystemExit, Exception):
+            mine = False
+        if mine:
+            u = same.sub(f"]({new}", u)
+        if u != t:
+            p.write_text(u, encoding="utf-8", newline="\n")
+            touched.append(p.name)
+    red = root / "site" / "_redirects"
+    if red.is_file():
+        t = red.read_text(encoding="utf-8")
+        u = t
+        for rx, rep in pats:
+            u = rx.sub(rep, u)
+        if u != t:
+            red.write_text(u, encoding="utf-8", newline="\n")
+            touched.append("site/_redirects")
+    return touched
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pending", action="store_true", help="未処理の取り下げを対象にする")
@@ -126,6 +166,17 @@ def main():
                 _site(sid, items, a.push)
             except (SystemExit, Exception) as e:
                 print(f"  [{_label(sid)}] 取り下げを続けられませんでした（次回また試します）: {type(e).__name__}")
+            # 取り下げ終えた記事へ向いた、管制塔の原稿のリンクと転送を最終の記事へ付け替える（2段の転送を作らない）
+            import sites as S
+            for r in items:
+                if r.get("done_at") and a.push:
+                    try:
+                        n = repoint_refs(S.load(sid), sid, r)
+                    except (SystemExit, Exception) as e:
+                        print(f"  [{_label(sid)}] 参照の付け替えを続けられませんでした: {type(e).__name__}")
+                        continue
+                    if n:
+                        _say(sid, r, f"管制塔の参照 {len(n)}か所を最終の記事へ付け替えました")
     finally:
         save(rows)
     return 0

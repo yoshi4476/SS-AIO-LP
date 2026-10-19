@@ -12,7 +12,7 @@
 /ai-marketing/ai-donyu-hojokin-jirei/     https://lp.7senses.co.jp/blog/ai-hojokin-ai-katsuyo-jirei/        301
 # ↑ 転送先が向こうで改名され2段の転送になっていたため、最終の行き先へ直接送る（2026-10-03）
 /ai-marketing/ai-hojokin-futaitaku-riyu/  https://lp.7senses.co.jp/blog/ai-hojokin-fusaitaku-riyu/       301
-/ai-marketing/ai-hojokin-gbizid-shutoku/  https://lp.7senses.co.jp/blog/gbizid-shutoku/                  301
+/ai-marketing/ai-hojokin-gbizid-shutoku/  https://lp.7senses.co.jp/blog/ai-hojokin-gbizid-shutoku/                  301
 # 主力（AIO）へ寄せる書き換えでカテゴリが変わった記事。
 # 旧URLを放置すると404になり、積み上げた評価も引き継げない。
 /seo/seikotsuin-hiyou-heikin/  /aio/seikotsuin-hiyou-heikin/  301

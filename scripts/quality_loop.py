@@ -508,7 +508,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
     done = 0
     prior = tries_before(slug)
     record({**base, "action": "score", "round": prior, "axes": sc["axes"], "total": sc["total"], "ok": sc["ok"],
-            "double": sc["double"], "state": "passed" if sc["ok"] else "scoring"})
+            "double": sc["double"], "state": "passed" if sc["ok"] else "scoring", "weak": sc.get("weak", {})})
     print(f"  {'○' if sc['ok'] else '×'} {name}: 総合{sc['total']}（" + "・".join(
         f"{AXIS_NAME[k]}{sc['axes'][k]}" for k in AXIS_KEYS) + f"）{'・2回採点' if sc['double'] else ''}")
     while not sc["ok"] and done < rounds and budget.ok(IMPROVE_MIN):
@@ -529,7 +529,8 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
             break
         sc = sc2
         record({**base, "action": "score", "round": prior + done, "axes": sc["axes"], "total": sc["total"],
-                "ok": sc["ok"], "double": sc["double"], "state": "passed" if sc["ok"] else "scoring"})
+                "ok": sc["ok"], "double": sc["double"], "state": "passed" if sc["ok"] else "scoring",
+                "weak": sc.get("weak", {})})
         print(f"     採点し直し: 総合{sc['total']}（" + "・".join(f"{AXIS_NAME[k]}{sc['axes'][k]}" for k in AXIS_KEYS) + "）")
     if sc["ok"]:
         old_day = str(meta_of(read(slug)).get("date") or "")[:10]

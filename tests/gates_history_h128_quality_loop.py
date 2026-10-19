@@ -195,8 +195,11 @@ def test_pending_first_next_run():
         check("届いたら今日の日付で公開", str(e.meta("zz-old").get("date")), date.today().isoformat())
         check("この実行で届いた記事は配信の手順へ渡る", QL.released(os.environ.get("GITHUB_RUN_ID", ""), e.log), ["zz-old"])
     w = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
-    check("直している記事が残る回は、その社の新しい記事を書かない",
-          "steps.qpending.outputs.hold != 'yes'" in w and 'echo "hold=yes"' in w, True)
+    # 運用者「書かない選択肢はない」（2026-10-20）: 直している記事が残っても、その回の新しい記事は書く
+    check("直している記事が残っても新しい記事は書く（hold で止めない）",
+          "steps.qpending.outputs.hold" in w or 'echo "hold=yes"' in w, False)
+    check("記事の枠は120分・採点と直しは配信の15分を残す",
+          ("timeout-minutes: 120" in w, "budget=$(( 105 - used ))" in w), (True, True))
 
 
 def test_scorer_output_without_quotes_is_rejected():

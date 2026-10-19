@@ -261,7 +261,8 @@ jobs:
     needs: select
     if: needs.select.outputs.skip != 'yes'
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    # 公開前の品質ループ（直している記事→執筆→採点と直し）を入れて120分（2026-10-20。public なので Actions の料金はかからない）
+    timeout-minutes: 120
     env:
       AUDIT_DAY: ${{ needs.select.outputs.slot_day }}
     # 並ぶのは実際に記事を書く枠だけ。週次・救済（pipeline.yml）とも同じグループで直列にする
@@ -592,7 +593,7 @@ jobs:
 
       # 公開前の品質ループ（2026-10-20 運用者の決定「公開前に、書いたAIとは別の工程で3観点を採点し、基準未満なら公開を止める」
       # 「書かない選択肢はない。1度や2度で完璧に」）。前の回で基準に届かなかった記事（quality_state: improving）を、新しい記事より
-      # 先に直す。届かないまま残れば、この社の新しい記事はこの回は書かない（捨てずに、届くまで直し続ける）。
+      # 先に直す。届かないまま残っても、この回の新しい記事は書く（運用者「書かない選択肢はない」。残った記事は次の回も先に直す）。
       # 採点の AI は読むだけ、直しの AI はその1本の写しだけを書く（quality_loop・auto_rewrite の検算）。鍵は外したまま動かす
       - name: 公開前の品質ループ（前の回から直している記事を先に）
         id: qpending
@@ -608,7 +609,7 @@ jobs:
           python scripts/agent_guard.py --verify || exit 0
           HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/${{ steps.site.outputs.pub }}" 2>/dev/null || true)"
           export HUB_AGENT_TOKEN
-          # ジョブの75分のうち、記事を書く時間と配信・コミットの時間を残す（直しは25分まで）
+          # ジョブの120分のうち、記事を書く時間・採点と直し・配信の時間を残す（直しは25分まで）
           used=$(( ( $(date -u +%s) - $(date -u -d "$RUN_START" +%s) ) / 60 ))
           budget=$(( 30 - used )); [ "$budget" -gt 25 ] && budget=25
           python scripts/quality_loop.py --pending --sites "${{ steps.site.outputs.id }}" --budget-min "$budget" \
@@ -619,13 +620,12 @@ jobs:
           grep '^要対応' "$RUNNER_TEMP/quality_pending.txt" >> automation/logs/findings.txt || true
           left=$(sed -n 's/^QUALITY_PENDING=//p' "$RUNNER_TEMP/quality_pending.txt" | tail -1)
           if [ -n "$left" ] && [ "$left" != "0" ]; then
-            echo "hold=yes" >> "$GITHUB_OUTPUT"
-            echo "::notice::公開前の採点に届いていない記事が ${left}本あるため、この回は新しい記事を書かずに直し続けます"
-            echo "公開前の品質ループ（${{ steps.site.outputs.pub }}）: 直している記事 ${left}本。新しい記事は書きません" >> "$GITHUB_STEP_SUMMARY"
+            echo "::notice::公開前の採点に届いていない記事が ${left}本残っています（次の回も先に直します。新しい記事は書きます）"
+            echo "公開前の品質ループ（${{ steps.site.outputs.pub }}）: 直している記事 ${left}本が残りました。新しい記事は書きます" >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: 記事生成（Phase 1〜7）
-        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite' && steps.qpending.outputs.hold != 'yes'
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
         env:
           SITE_ID: ${{ steps.site.outputs.id }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -691,7 +691,7 @@ jobs:
       # 時間が足りない回は印だけ付けて次の回へ回す（点数の無いまま・書く AI の点数のまま公開しない。2026-10-20 運用者の決定）
       - name: 公開前の品質ループ（この回に書いた記事を別工程で採点し、届くまで直す）
         if: always() && steps.lock.outcome == 'success' && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
-        timeout-minutes: 45
+        timeout-minutes: 55
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -706,9 +706,9 @@ jobs:
           fi
           HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/${{ steps.site.outputs.pub }}" 2>/dev/null || true)"
           export HUB_AGENT_TOKEN
-          # ジョブの75分のうち、配信・コミット・デプロイに15分を残す（直しを始めるのは残りがあるときだけ）
+          # ジョブの120分のうち、配信・コミット・デプロイに15分を残す（直しを始めるのは残りがあるときだけ。1本で最大20分前後×2回）
           used=$(( ( $(date -u +%s) - $(date -u -d "$RUN_START" +%s) ) / 60 ))
-          budget=$(( 60 - used )); [ "$budget" -gt 35 ] && budget=35
+          budget=$(( 105 - used )); [ "$budget" -gt 50 ] && budget=50
           python scripts/quality_loop.py --new --sites "${{ steps.site.outputs.id }}" --budget-min "$budget" \
             > "$RUNNER_TEMP/quality_new.txt" 2>&1 || true
           cat "$RUNNER_TEMP/quality_new.txt"
