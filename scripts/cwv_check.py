@@ -546,6 +546,7 @@ def main():
     if a.crux:
         return run_crux(a.site)
     bad, rows, pages = [], [], []
+    missed = []          # 1ページでも測れなかったサイト（公開の id）
 
     def record(p, m):
         rows.append({"date": date.today().isoformat(), "site": p["sid"],
@@ -567,6 +568,8 @@ def main():
                 m = measure(url)
             except Exception as e:
                 print(f"   {name}: 計測できません {shown_url[:50]} ({str(e)[:300]})")
+                if name not in missed:
+                    missed.append(name)
                 continue
             p = {"sid": sid, "url": url, "name": name, "shown": shown_url, "runs": [m], "at": time.monotonic()}
             pages.append(p)
@@ -597,8 +600,13 @@ def main():
     if not rows:
         print("CWV_OK=unknown（計測できませんでした。429=鍵なしの上限、403=Google Cloud で "
               "「PageSpeed Insights API」が未有効。有効にするか PAGESPEED_API_KEY を設定）")
+    elif bad:
+        print("CWV_OK=no")
+    elif missed:
+        # 測れたページが基準内でも、測れなかったサイトがあるのに yes と出さない（2026-10-20）
+        print(f"CWV_OK=unknown（測れなかったサイト: {'・'.join(missed)}）")
     else:
-        print(f"CWV_OK={'no' if bad else 'yes'}")
+        print("CWV_OK=yes")
     if a.no_crux or a.url:
         return 0
     return run_crux(a.site)

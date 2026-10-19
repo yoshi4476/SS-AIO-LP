@@ -25,18 +25,31 @@ SA = ROOT / "indexing-service-account.json"
 STRIKING_LO, STRIKING_HI = 11, 30
 
 
-def fetch(site_url, days=28):
-    creds = gcreds.load(SA, ["https://www.googleapis.com/auth/webmasters.readonly"])
-    from googleapiclient.discovery import build
-    sc = build("searchconsole", "v1", credentials=creds)
+PAGE = 25000          # Search Console の1回の上限
+
+
+def fetch(site_url, days=28, sc=None):
+    if sc is None:
+        creds = gcreds.load(SA, ["https://www.googleapis.com/auth/webmasters.readonly"])
+        from googleapiclient.discovery import build
+        sc = build("searchconsole", "v1", credentials=creds)
     # GSCは直近2〜3日が未確定なので、少し前までを見る
     end = date.today() - timedelta(days=3)
-    res = sc.searchanalytics().query(siteUrl=site_url, body={
-        "startDate": (end - timedelta(days=days)).isoformat(),
-        "endDate": end.isoformat(),
-        "dimensions": ["query", "page"], "rowLimit": 1000}).execute()
+    # rowLimit 1000 で切っていて、AI集客ラボは987行まで来ていた。超えた分の語は順位の記録から黙って消える。
+    # 他の工程（content_yield・focus_report）と同じく startRow でページ送りする（2026-10-20）
+    rows, at = [], 0
+    while True:
+        res = sc.searchanalytics().query(siteUrl=site_url, body={
+            "startDate": (end - timedelta(days=days)).isoformat(),
+            "endDate": end.isoformat(),
+            "dimensions": ["query", "page"], "rowLimit": PAGE, "startRow": at}).execute()
+        got = res.get("rows", [])
+        rows += got
+        if len(got) < PAGE:
+            break
+        at += PAGE
     out = []
-    for r in res.get("rows", []):
+    for r in rows:
         q, p = r["keys"]
         out.append({"kw": q, "url": p, "pos": round(r["position"], 1),
                     "imp": int(r["impressions"]), "clicks": int(r["clicks"]),

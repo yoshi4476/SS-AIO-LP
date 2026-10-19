@@ -905,15 +905,19 @@ function kpiLog_(b) {
   rows.forEach(function (r) {
     // Search Console の数字がまだ出ていない日（daily_kpi が表示・クリックを送らない）は空欄。0 と書くと表示0の日として残る
     const sc = function (v) { return (v === undefined || v === null) ? '' : (Number(v) || 0); };
-    kpi.appendRow([r.date || '', siteLabel_(r.site), r.sessions || 0, r.pv || 0,
+    // GA4 が取れなかった社（daily_kpi が取り直しの期限切れで送る行）も、セッション・PV・CV・AI参照を空欄にする。
+    // 以前は無い値を0で書き、取れなかった日が「0セッションの日」として残った（2026-10-20）
+    kpi.appendRow([r.date || '', siteLabel_(r.site), sc(r.sessions), sc(r.pv),
                    sc(r.impressions), sc(r.clicks), sc(r.ctr), sc(r.position),
-                   r.cv || 0, r.note || '']);
+                   sc(r.cv), r.note || '']);
     const bd = r.breakdown || {};
+    const ga = !(r.ai === undefined || r.ai === null);
+    const eng = function (k) { return ga ? (Number(bd[k]) || 0) : ''; };
     // AI Overview の表示回数はAPIで取れない。CTRの歪みからの推定（ai_citation_check）を
     // 「推定」と明記して入れる。空欄のままだと計測していないように見えた
     aio.appendRow([r.date || '', siteLabel_(r.site),
-                   (r.aio_est === undefined || r.aio_est === null) ? '' : r.aio_est, r.ai || 0,
-                   bd.chatgpt || 0, bd.perplexity || 0, bd.gemini || 0, bd.copilot || 0,
+                   (r.aio_est === undefined || r.aio_est === null) ? '' : r.aio_est, sc(r.ai),
+                   eng('chatgpt'), eng('perplexity'), eng('gemini'), eng('copilot'),
                    r.aio_note || '']);
     // AI検索からの流入は「どのページに着地したか」が価値。0か非0かだけでは何も分からない
     (r.ai_pages || []).forEach(function (p) {
@@ -923,7 +927,8 @@ function kpiLog_(b) {
     Object.keys(total).forEach(function (k) { total[k] += Number(r[k] || 0); });
   });
 
-  writeDashboard_(total, (rows[0] && rows[0].date) || '');
+  // 取り直した社だけの行（partial）でダッシュボードを書くと、全社の合計が1社分に置き換わる
+  if (!b.partial) writeDashboard_(total, (rows[0] && rows[0].date) || '');
   return { ok: true, rows: rows.length };
 }
 

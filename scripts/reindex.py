@@ -100,7 +100,9 @@ def rotated(urls, per_site):
 WORKERS = 5   # 1件ずつ順に聞くと週次で15分かかっていた。URL検査APIの枠は1分600件なので5本並べても余裕がある
 
 
-def unindexed(sc, urls, site_url, deadline=None, cache=None):
+def unindexed(sc, urls, site_url, deadline=None, cache=None, stats=None):
+    """未登録の [(URL, 状態)]。stats（dict）を渡すと、確かめた・失敗した・時間切れで見送った件数を入れる。
+    全件が失敗（URL検査の枠切れ）でも [] が返るので、呼ぶ側はこれを見て「すべて登録済み」と言わない（2026-10-20）"""
     import threading
     from concurrent.futures import ThreadPoolExecutor
     local = threading.local()
@@ -118,22 +120,37 @@ def unindexed(sc, urls, site_url, deadline=None, cache=None):
         except Exception as e:
             return u, None, str(e)[:50]
 
-    out, skipped = [], 0
+    out, skipped, failed, checked = [], 0, 0, 0
     with ThreadPoolExecutor(WORKERS) as ex:
         for u, s, err in ex.map(one, urls):
             if err == "skip":
                 skipped += 1
                 continue
             if err:
+                failed += 1
                 print(f"    検査に失敗: {u[-40:]} {err}")
                 continue
+            checked += 1
             if cache is not None:
                 cache[u] = {"verdict": s.get("verdict", ""), "state": s.get("coverageState", ""), "at": time.time()}
             if s.get("verdict") != "PASS":
                 out.append((u, s.get("coverageState", "—")))
     if skipped:
         print(f"    時間の上限に達したため、残り{skipped}件は次回に回します")
+    if stats is not None:
+        stats.update(checked=checked, failed=failed, skipped=skipped)
     return out
+
+
+def summary(ng, stats):
+    """1サイトの結果の一言。確かめられなかった分があれば、未登録の数を言い切らない"""
+    miss = stats.get("failed", 0) + stats.get("skipped", 0)
+    if not miss:
+        return "すべて登録済み" if not ng else ""
+    if not stats.get("checked"):
+        return f"未登録は不明（{miss}件を確かめられませんでした: 失敗{stats.get('failed', 0)}・時間切れ{stats.get('skipped', 0)}）"
+    return (f"確かめた{stats['checked']}件のうち未登録{len(ng)}件。ほか{miss}件は確かめられず"
+            f"（失敗{stats.get('failed', 0)}・時間切れ{stats.get('skipped', 0)}）")
 
 
 def main():
@@ -173,11 +190,15 @@ def _loop(sc, idx, only, dry, deadline, cache):
             continue
         need = [u for u in urls if needs_check(u, cache)]
         picked = rotated(need, PER_SITE)
-        ng = unindexed(sc, picked, site_url, deadline, cache)
+        stats = {}
+        ng = unindexed(sc, picked, site_url, deadline, cache, stats)
+        known = stats.get("checked") or not (stats.get("failed") or stats.get("skipped"))
         print(f"■ {cfg['name']}  sitemap {len(urls)}件（登録済みの確認済み {len(urls) - len(need)}件は省略・"
-              f"今回 {len(picked)}件を検査）/ 未登録 {len(ng)}件")
+              f"今回 {len(picked)}件を検査）/ 未登録 {f'{len(ng)}件' if known else '不明'}")
+        note = summary(ng, stats)
+        if note:
+            print(f"    {note}")
         if not ng:
-            print("    すべて登録済み")
             continue
         _publish(idx, d, ng, dry)
 

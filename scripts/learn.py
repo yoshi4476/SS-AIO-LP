@@ -29,23 +29,32 @@ sys.path.insert(0, str(ROOT / "scripts"))
 DATA = ROOT / "data"
 
 
+def _pattern(m):
+    """title_patterns の「寄せる型・避ける型」の値。型が無い週の書き置き（「（全体比1.15倍以上の型なし…）」「なし」）は
+    型として扱わない。扱うと「「（全体比…型なし…）」の型を優先し」という学びが台帳に入った（2026-10-20）"""
+    v = (m.group(1).strip() if m else "")
+    if not v or v == "なし" or v.startswith("（") or "型なし" in v:
+        return ""
+    return v
+
+
 def title_signal():
     """題の型ごとの実測CTR（title_patterns が週次で書く）。寄せる型・避ける型を新しい記事の題にも効かせる"""
     p = DATA / "title_patterns.md"
     if not p.is_file():
         return []
     t = p.read_text(encoding="utf-8")
-    good = re.search(r"寄せる型:\s*(.+)", t)
-    bad = re.search(r"避ける型:\s*(.+)", t)
+    good = _pattern(re.search(r"寄せる型:\s*(.+)", t))
+    bad = _pattern(re.search(r"避ける型:\s*(.+)", t))
     tot = re.search(r"表示([\d,]+)回", t)
     if not (good or bad) or not tot or int(tot.group(1).replace(",", "")) < 1000:
         return []
-    rule = "新しい記事の題は"
+    parts = []
     if good:
-        rule += f"「{good.group(1).strip()}」の型を優先し"
+        parts.append(f"「{good}」の型を優先し")
     if bad:
-        rule += f"、「{bad.group(1).strip()}」の型は避ける"
-    rule += "（狙う語と題の15〜45字の決まりは守る）"
+        parts.append(f"「{bad}」の型は避ける")
+    rule = "新しい記事の題は" + "、".join(parts) + "（狙う語と題の15〜45字の決まりは守る）"
     return [("learn:title", "success", "design", [], rule,
              f"自社3サイト1〜20位の実測CTR（{re.search(r'（(.+?)）', t).group(1) if re.search(r'（(.+?)）', t) else ''}"
              f"・表示{tot.group(1)}回）。data/title_patterns.md")]
@@ -56,12 +65,10 @@ def originality_signal():
     p = DATA / "score_audit.json"
     if not p.is_file():
         return []
-    try:
-        import rubric as R
-        d = json.loads(p.read_text(encoding="utf-8"))
-    except Exception:
-        return []
-    cur = [v["audit"] for v in d.values() if (v.get("audit") or {}).get("version") == R.VERSION]
+    # 読めないときは例外のまま返す（[] にすると「根拠が消えた」と読まれ、学びが退役する）
+    import rubric as R
+    d = json.loads(p.read_text(encoding="utf-8"))
+    cur =[v["audit"] for v in d.values() if (v.get("audit") or {}).get("version") == R.VERSION]
     o = [a["axes"]["originality"] for a in cur if (a.get("axes") or {}).get("originality") is not None]
     if len(o) < 4:
         return []
@@ -111,6 +118,13 @@ def rollback_signal():
 
 
 SIGNALS = (title_signal, originality_signal, yield_signal, rollback_signal)
+# 各信号が書く学びの鍵（source）。信号が読めなかった回は、その鍵の学びを退役させずにそのまま残す
+SOURCES = {title_signal: "learn:title", originality_signal: "learn:originality",
+           yield_signal: "learn:yield", rollback_signal: "learn:rollback"}
+
+
+def _from(key, prefixes):
+    return any(key == p or key.startswith(p + ":") for p in prefixes)
 
 
 def main():
@@ -118,13 +132,17 @@ def main():
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args()
     import lessons as L
-    found = {}
+    found, broken = {}, set()
     for f in SIGNALS:
         try:
-            for key, kind, phase, sites, rule, detail in f():
-                found[key] = (kind, phase, sites, rule, detail)
+            got = list(f())
         except Exception as e:
-            print(f"  （{f.__name__} を読めません: {str(e)[:60]}）")
+            # 読めなかった回を「根拠が消えた」と扱わない。yield_signal が落ちた週に learn:yield:* が全部退役していた（2026-10-20）
+            broken.add(SOURCES.get(f, f"learn:{f.__name__}"))
+            print(f"  （{f.__name__} を読めません: {str(e)[:60]}。この学びは前の週のまま残します）")
+            continue
+        for key, kind, phase, sites, rule, detail in got:
+            found[key] = (kind, phase, sites, rule, detail)
     rows = L.load()
     mine = {r.get("source"): r for r in rows if str(r.get("source", "")).startswith("learn:") and r.get("status") == "active"}
     added = updated = retired = 0
@@ -148,7 +166,7 @@ def main():
             added += 1
             print(f"   追加 {key}: {rule[:70]}")
     for key, r in mine.items():
-        if key not in found:
+        if key not in found and not _from(key, broken):
             r["status"] = "retired"
             r["detail"] = (r.get("detail", "") + f"｜{date.today().isoformat()} 根拠が消えたため退役").strip("｜")
             retired += 1

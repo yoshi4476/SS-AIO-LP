@@ -19,9 +19,10 @@ from datetime import date, timedelta
 # 数字の性質。方向が逆のものがあるため、良し悪しを機械で決められるようにする
 #   up_is_good … 増えるほど良い
 #   lower_is_better … 小さいほど良い（順位）
+#   gsc … Search Console の数字（確定まで GSC_LAG 日かかる）
 METRICS = {
-    "impressions": {"name": "表示回数", "up_is_good": True},
-    "clicks": {"name": "検索クリック", "up_is_good": True},
+    "impressions": {"name": "表示回数", "up_is_good": True, "gsc": True},
+    "clicks": {"name": "検索クリック", "up_is_good": True, "gsc": True},
     "sessions": {"name": "セッション", "up_is_good": True},
     "cv": {"name": "リード獲得", "up_is_good": True},
     "ctr": {"name": "クリック率", "up_is_good": True, "unit": "%", "rate": True},
@@ -29,17 +30,45 @@ METRICS = {
 }
 
 
+GSC_LAG = 3      # Search Console の確定値は3日ほど遅れる（rank_track・effect_ab と同じ）
+
+
+def _today():
+    return date.today()
+
+
 def days_in(label, through=None):
-    """その月の日数。途中なら、経過した日数を返す"""
+    """その月の日数。途中なら、経過した日数を返す。through がその月より前なら0（まだ1日も無い）"""
     y, m = map(int, label.split("-"))
     last = (date(y + (m == 12), (m % 12) + 1, 1) - timedelta(days=1)).day
+    if through and (through.year, through.month) < (y, m):
+        return 0
     if through and through.year == y and through.month == m:
         return min(through.day, last)
     return last
 
 
-def per_day(value, label, through=None):
-    d = days_in(label, through) or 1
+def gsc_through(label, through=None, today=None):
+    """その月の Search Console の数字が実際に入っている最後の日（= min(頼まれた終わり, 今日−GSC_LAG)）。
+
+    15日の途中経過は GA4 を15日まで、Search Console を確定の12日ごろまでしか持たないのに、
+    両方を15日で割っていた。検索の1日あたりが2割ほど少なく出て、前月比が「下がった」と読めた（2026-10-20）"""
+    y, m = map(int, label.split("-"))
+    end = date(y + (m == 12), (m % 12) + 1, 1) - timedelta(days=1)
+    if through and through < end:
+        end = through
+    return min(end, (today or _today()) - timedelta(days=GSC_LAG))
+
+
+def cover(key, label, through=None, today=None):
+    """その指標が実際に入っている最後の日。GSC の指標だけ確定の遅れを引く"""
+    if METRICS.get(key, {}).get("gsc"):
+        return gsc_through(label, through, today)
+    return through
+
+
+def per_day(value, label, through=None, key=None):
+    d = days_in(label, cover(key, label, through) if key else through) or 1
     return value / d
 
 
@@ -51,15 +80,21 @@ def compare(cur, prev, key, cur_label, prev_label, through=None):
     meta = METRICS.get(key, {"name": key, "up_is_good": True})
     a, b = cur.get(key, 0) or 0, prev.get(key, 0) or 0
     if not b:
-        return {"dir": "flat", "good": True, "pct": 0.0,
+        return {"dir": "flat", "good": True, "pct": 0.0, "name": meta["name"],
                 "text": "前月の数字が無いため、比べられません"}
 
     if meta.get("lower_is_better") or meta.get("rate"):
         # 順位・率は1日あたりに直さない（平均値・比率なので、日数で割ると意味が変わる）
         pa, pb = a, b
+        ca = dn = dp = None
     else:
-        pa = per_day(a, cur_label, through)
-        pb = per_day(b, prev_label)
+        # 検索の数字は確定している日までで割る（GA4 と同じ日数で割ると、確定前の日の分だけ少なく出る）
+        ca = cover(key, cur_label, through)
+        dn, dp = days_in(cur_label, ca), days_in(prev_label, cover(key, prev_label))
+        if not dn or not dp:
+            return {"dir": "flat", "good": True, "pct": 0.0, "name": meta["name"],
+                    "text": "確定した日の数字がまだ無いため、比べられません"}
+        pa, pb = a / dn, b / dp
 
     pct = (pa - pb) / pb * 100 if pb else 0.0
     if abs(pct) < 3:
@@ -78,10 +113,11 @@ def compare(cur, prev, key, cur_label, prev_label, through=None):
         elif a > b:
             body += f"（{a - b:.1f}{unit}下がりました）"
     else:
-        dn, dp = days_in(cur_label, through), days_in(prev_label)
         body = f"{b:,} → {a:,}"
         if dn != dp:
-            body += f"（1日あたり {pb:.1f} → {pa:.1f}。{prev_label}は{dp}日、{cur_label}は{dn}日）"
+            upto = (f"・{ca.month}月{ca.day}日まで" if meta.get("gsc") and ca
+                    and ca.day < days_in(cur_label) else "")
+            body += f"（1日あたり {pb:.1f} → {pa:.1f}。{prev_label}は{dp}日、{cur_label}は{dn}日{upto}）"
         body += f" {'+' if pct >= 0 else ''}{pct:.0f}%"
     return {"dir": d, "good": good, "pct": pct, "text": body, "name": meta["name"]}
 
@@ -117,10 +153,17 @@ def partial_warning(label, through):
     if not through or f"{through.year}-{through.month:02d}" != label:
         return ""
     d, full = through.day, days_in(label)
+    g = gsc_through(label, through)
+    gn = days_in(label, g)
+    gsc = ""
+    if gn < d:
+        gsc = (f'検索の数字（表示回数・クリック）は Search Console の確定を待つため'
+               + (f'<b>{g.month}月{g.day}日まで（{gn}日分）</b>で、1日あたりもその日数で割っています。' if gn
+                  else '<b>まだ確定した日がありません</b>。'))
     return (f'<p class="note stop"><b>{label} は {through.month}月{d}日までの'
             f'途中経過です（{d}日／{full}日・{d / full * 100:.0f}%が経過）。</b>'
             f'月の合計をそのまま前月と比べると、必ず少なく見えます。'
-            f'このレポートの前月比は、<b>1日あたりに直してから</b>比べています。</p>')
+            f'このレポートの前月比は、<b>1日あたりに直してから</b>比べています。{gsc}</p>')
 
 
 def main():

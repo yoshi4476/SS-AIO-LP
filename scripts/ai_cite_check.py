@@ -470,6 +470,41 @@ def domain_of(u):
     return (m.group(1) if m else "").lower().replace("www.", "")
 
 
+def measure_site(qs, site_engines, dom, quiet=False):
+    """1社の語を聞いて数える。**数えるのは、どれかのAIが答えた語だけ。**
+    以前は全エンジンが 429 などで落ちた回も {"queries": 20, "cited": 0} と書き、日次KPIに「引用0/20語」と
+    出ていた（2026-10-20）。queries は答えが取れた語の数、asked は聞いた語の数。1語も答えが無ければ queries=0 と note"""
+    items, cited, answered = [], 0, 0
+    for q in qs:
+        row = {"kw": q, "engines": {}}
+        hit, got = False, False
+        for name, fn in site_engines.items():
+            try:
+                urls = fn(q)
+            except Exception as e:
+                row["engines"][name] = {"error": str(e)[:80]}
+                continue
+            if urls is None:                 # 鍵が無い・予算が無いなどで聞いていない
+                row["engines"][name] = {"error": "答えなし"}
+                continue
+            got = True
+            ours = [u for u in urls if domain_of(u) == dom]
+            row["engines"][name] = {"cited": bool(ours), "ours": ours[:3],
+                                    "sources": sorted({domain_of(u) for u in urls})[:8]}
+            hit = hit or bool(ours)
+        row["cited"], row["answered"] = hit, got
+        cited += hit
+        answered += got
+        items.append(row)
+        if not quiet:                # お客様の社の検索語は CI のログに出さない（件数は呼ぶ側の行）
+            print(f"   {'○' if hit else ('－' if got else '？')} {q[:30]:<30} " + " ".join(
+                f"{n}:{_mark(r)}" for n, r in row["engines"].items()))
+    rec = {"queries": answered, "asked": len(qs), "cited": cited, "items": items}
+    if not answered:
+        rec["note"] = "AIの答えが1語も取れず、引用は不明（0ではありません）"
+    return rec
+
+
 def main():
     import sites as S
     ap = argparse.ArgumentParser()
@@ -498,32 +533,23 @@ def main():
         if not qs:
             print(f"   {sid}: 順位の記録が無く語を選べません（rank_track を先に）")
             continue
-        items, cited = [], 0
         quiet = S.is_client(sid)
         site_engines = engines_available(site=sid)      # お客様の社の答えは置き場へ
-        for q in qs:
-            row = {"kw": q, "engines": {}}
-            hit = False
-            for name, fn in site_engines.items():
-                try:
-                    urls = fn(q) or []
-                except Exception as e:
-                    row["engines"][name] = {"error": str(e)[:80]}
-                    continue
-                ours = [u for u in urls if domain_of(u) == dom]
-                row["engines"][name] = {"cited": bool(ours), "ours": ours[:3],
-                                        "sources": sorted({domain_of(u) for u in urls})[:8]}
-                hit = hit or bool(ours)
-            row["cited"] = hit
-            cited += hit
-            items.append(row)
-            if quiet:
-                continue                 # お客様の社の検索語は CI のログに出さない（件数は下の行）
-            print(f"   {'○' if hit else '－'} {q[:30]:<30} " + " ".join(
-                f"{n}:{_mark(r)}" for n, r in row["engines"].items()))
-        measured["sites"][sid] = {"queries": len(qs), "cited": cited, "items": items}
-        total_q += len(qs); total_cited += cited
-        print(f"   {S.public_id(sid) if quiet else cfg['name']}: 引用 {cited}/{len(qs)}語")
+        rec = measure_site(qs, site_engines, dom, quiet)
+        shown = cfg["name"]
+        if quiet:
+            shown = S.public_id(sid)                    # お客様の社名は CI のログに出さない
+        if not rec["queries"]:
+            # 1語も答えが無い回を「0/20語」と書かない。前に測れた記録があれば残す
+            prev = measured["sites"].get(sid) or {}
+            if not prev.get("queries"):
+                measured["sites"][sid] = rec
+            print(f"   {shown}: 引用は不明（{rec['asked']}語ともAIの答えが取れません。上限・障害）")
+            continue
+        measured["sites"][sid] = rec
+        total_q += rec["queries"]; total_cited += rec["cited"]
+        print(f"   {shown}: 引用 {rec['cited']}/{rec['queries']}語"
+              + (f"（ほか{rec['asked'] - rec['queries']}語は答えが取れず数えていません）" if rec["asked"] > rec["queries"] else ""))
     CP.save_citations(p.name, d)
     print(f"AI_CITED={total_cited}/{total_q}")
     print(f"記録: {p.relative_to(ROOT).as_posix()}")

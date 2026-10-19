@@ -345,6 +345,17 @@ def band(v, good, ok, reverse=False):
     return "良好" if v >= good else ("標準" if v >= ok else "要改善")
 
 
+def avg_position(sites, idx=-1):
+    """サイトをまたいだ平均掲載順位。**表示回数で重みを付ける**（Search Console の平均順位と同じ数え方）。
+    単純平均だと、表示100回で3位の社と表示1万回で30位の社が同じ重みになり、全体が実際より上に見えた（2026-10-20）"""
+    ms = [s["months"][idx] for s in sites]
+    w = [(m.get("pos"), m.get("impressions") or 0) for m in ms if m.get("pos")]
+    imp = sum(i for _, i in w)
+    if imp:
+        return round(sum(p * i for p, i in w) / imp, 1)
+    return round(sum(p for p, _ in w) / len(w), 1) if w else 0
+
+
 def analyze(sites, labels, arts, pipeline):
     def total(key, idx=-1):
         return sum((s["months"][idx].get(key) or 0) for s in sites)
@@ -359,8 +370,7 @@ def analyze(sites, labels, arts, pipeline):
     ctr = round(cur["clicks"] / cur["impressions"] * 100, 2) if cur["impressions"] else 0
     cvr = round(cur["cv"] / cur["sessions"] * 100, 2) if cur["sessions"] else 0
     ai_ratio = round(ai / cur["sessions"] * 100, 1) if cur["sessions"] else 0
-    poss = [s["months"][-1].get("pos") for s in sites if s["months"][-1].get("pos")]
-    pos = round(sum(poss) / len(poss), 1) if poss else 0
+    pos = avg_position(sites)
     ad_value = cur["clicks"] * CPC
 
     assess = [

@@ -117,11 +117,16 @@ def daily_by_slug():
     end = date.today() - timedelta(days=3)
     start = end - timedelta(days=119)
     out = defaultdict(lambda: defaultdict(lambda: [0, 0, 0.0]))   # slug -> day -> [imp, clk, pos*imp]
-    for cfg in S.load_all().values():
+    # G.q は既定で失敗を [] にして返すため、取れなかったサイトが「表示0」と区別できず EFFECT_AB_OK=yes と出ていた。
+    # 失敗は例外で受け、取れなかったサイトを FAILED に残す。1サイトも取れなければ例外にする（2026-10-20）
+    FAILED.clear()
+    sites = list(S.load_all().values())
+    for cfg in sites:
         try:
-            rows = G.q(sc, cfg["domain"], str(start), str(end), ["date", "page"], 25000)
+            rows = G.q(sc, cfg["domain"], str(start), str(end), ["date", "page"], 25000, raise_errors=True)
         except Exception as e:
-            print(f"  {cfg['id']}: GSCから取れません（{str(e)[:40]}）")
+            FAILED.append(cfg["id"])
+            print(f"  {S.public_id(cfg['id']) if S.is_client(cfg['id']) else cfg['id']}: GSCから取れません（{str(e)[:40]}）")
             continue
         for r in rows:
             day, url = r["keys"][0], r["keys"][1]
@@ -130,7 +135,12 @@ def daily_by_slug():
             a[0] += r["impressions"]
             a[1] += r["clicks"]
             a[2] += r["position"] * r["impressions"]
+    if sites and len(FAILED) == len(sites):
+        raise RuntimeError(f"Search Console から{len(sites)}サイトとも取れません")
     return out, start, end
+
+
+FAILED = []          # 直前の daily_by_slug で GSC から取れなかったサイト
 
 
 def window(daily, slug, a, b):
@@ -312,7 +322,7 @@ def rewrite_main(days):
     if weak:
         print(f"  効かない種類: {', '.join(weak)} → 続ける前に、対象の選び方と指示を見直してください")
         print(f"   ::warning::書き直しのうち対照群と差が出ていない種類が{len(weak)}件あります: {', '.join(weak)}")
-    print("REWRITE_EFFECT_OK=" + ("no" if weak else "yes"))
+    print("REWRITE_EFFECT_OK=" + ("no" if weak else "unknown" if FAILED else "yes"))
     return 0
 
 
@@ -375,7 +385,16 @@ def main():
         print("EFFECT_AB_OK=yes")
         return 0
 
-    daily, gsc_start, gsc_end = daily_by_slug()
+    try:
+        daily, gsc_start, gsc_end = daily_by_slug()
+    except Exception as e:
+        # 取れなかった回を「差の無い施策なし（yes）」と出さない
+        print(f"  GSC の日次が取れません（{str(e)[:60]}）")
+        print("EFFECT_AB_OK=unknown")
+        return 0
+    partial = list(FAILED)
+    if partial:
+        print(f"  ※ {len(partial)}サイトは GSC から取れず、そのサイトの記事は判定に入っていません")
     print(f"■ 打った手の効き（前後{a.days}日・公開からの日数が近い、触っていない記事と比較）\n")
     print(f"{'施策':<14}{'本数':>5}{'保留':>5}{'対照':>5}{'表示の倍率':>12}{'対照群':>10}{'順位の改善':>12}{'対照群':>10}")
     rows_out = kind_effects(acts, daily, a.days, published())
@@ -387,7 +406,7 @@ def main():
     if not rows_out:
         print("  まだ判定できる記録がありません"
               f"（直してから{a.days * 2}日たった記事が必要です）")
-        print("EFFECT_AB_OK=yes")
+        print("EFFECT_AB_OK=" + ("unknown" if partial else "yes"))
         return 0
 
     print("\n■ 判定")
@@ -403,7 +422,7 @@ def main():
         print(f"\n  差が無い施策: {', '.join(weak)}")
         print("  → 続ける前に、基準や当て方を見直してください。"
               "効かない手を毎週続けると、効く手に使う時間が減ります")
-    print("EFFECT_AB_OK=" + ("no" if weak else "yes"))
+    print("EFFECT_AB_OK=" + ("no" if weak else "unknown" if partial else "yes"))
     if weak:
         print(f"   ::warning::対照群と差が出ていない施策が{len(weak)}件あります: "
               f"{', '.join(weak)}")

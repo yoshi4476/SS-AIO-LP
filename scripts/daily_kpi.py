@@ -160,24 +160,65 @@ def aio_estimate(site_id):
         note = f"推定（{d.get('date', '')} CTR歪み・判定{s.get('judged', 0)}語中）"
         # 実測（ai_cite_check）があれば添える。推定と実測を同じ欄で区別できるように
         m = ((d.get("measured") or {}).get("sites") or {}).get(site_id)
-        if m:
+        # queries は AI が答えた語の数（ai_cite_check.measure_site）。0なら全部落ちた回で、引用0ではなく不明
+        if m and m.get("queries"):
             note += f"／実測: 引用{m.get('cited', 0)}/{m.get('queries', 0)}語（{'・'.join((d.get('measured') or {}).get('engines') or [])}）"
+        elif m:
+            note += "／実測: 不明（AIの答えが取れませんでした）"
         return {"aio_est": n, "aio_note": note}
     except Exception:
         return {}
 
 
-def sent_days():
+def _state():
     try:
-        return set(json.loads(SENT.read_text(encoding="utf-8")).get("days") or [])
-    except (OSError, ValueError, AttributeError):
-        return set()
+        d = json.loads(SENT.read_text(encoding="utf-8"))
+        return d if isinstance(d, dict) else {}
+    except (OSError, ValueError):
+        return {}
 
 
-def mark_sent(day):
+def _write_state(days, retry):
     SENT.parent.mkdir(parents=True, exist_ok=True)
-    SENT.write_text(json.dumps({"days": sorted(sent_days() | {day})[-60:]}, ensure_ascii=False, indent=1) + "\n",
-                    encoding="utf-8")
+    out = {"days": sorted(days)[-60:]}
+    if retry:
+        out["retry"] = {d: sorted(s) for d, s in sorted(retry.items()) if s}
+    SENT.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+
+
+def sent_days():
+    return set(_state().get("days") or [])
+
+
+def retry_sites():
+    """送り直す社 {GA4 の日: [社]}。GA4 や Search Console が落ちて数字の無かった社だけを、CATCH_UP 日まで取り直す"""
+    r = _state().get("retry") or {}
+    return {d: set(s or []) for d, s in r.items()} if isinstance(r, dict) else {}
+
+
+def mark_sent(day, retry=None):
+    """day を送り済みにする。retry（社の集まり）を渡すと、その社だけ次の回に取り直す。
+    以前は GA4 が落ちた日も送り済みにして0で書き、二度と取り直さなかった（2026-10-20）"""
+    pend = retry_sites()
+    pend.pop(day, None)
+    if retry:
+        pend[day] = set(retry)
+    _write_state(sent_days() | {day}, pend)
+
+
+def clear_retry(day, done):
+    pend = retry_sites()
+    left = pend.get(day, set()) - set(done)
+    if left:
+        pend[day] = left
+    else:
+        pend.pop(day, None)
+    _write_state(sent_days(), pend)
+
+
+def last_chance(day, today):
+    """CATCH_UP 日の窓から次の回に外れる日。この回で取れなければ空欄で送り、取り直しをやめる"""
+    return date.fromisoformat(day) <= today - timedelta(days=CATCH_UP)
 
 
 def days_to_send(sent, today):
@@ -196,15 +237,29 @@ def days_to_send(sent, today):
     return out
 
 
-def collect(ga_day):
-    """GA4 は ga_day、Search Console は確定を待って2日前（毎日送る回の「前日」と「3日前」の関係のまま）"""
+def _no_permission(e):
+    s = str(e)
+    return "403" in s or "sufficient permission" in s or "PERMISSION_DENIED" in s
+
+
+def collect(ga_day, only=None):
+    """GA4 は ga_day、Search Console は確定を待って2日前（毎日送る回の「前日」と「3日前」の関係のまま）。
+    取れなかった社の行には _retry（何が落ちたか）を付ける。送る側が取り直すか空欄で送るかを決める"""
     sc_day = (date.fromisoformat(ga_day) - timedelta(days=2)).isoformat()
     rows = []
     for sid, cfg in sites_mod.load_all().items():
+        if only is not None and sid not in only:
+            continue
         row = {"site": sid, "date": ga_day, "note": f"GSCは{sc_day}時点"}
+        failed = []
         try:
             row.update(ga4(cfg.get("ga4_property_id", ""), ga_day))
         except Exception as e:
+            # 権限が無い（導入直後のお客様など）は取り直しても直らない。空欄で送り、理由を書き添える
+            if _no_permission(e):
+                row["note"] = row["note"] + "／GA4は権限が無く空欄（0ではありません）"
+            else:
+                failed.append("GA4")
             print(f"  {sid}: GA4取得スキップ（{e}）")
         try:
             got = gsc(f"https://{cfg['domain']}/", sc_day)
@@ -212,8 +267,10 @@ def collect(ga_day):
                 row["note"] = row["note"] + "／GSCの数字がまだ出ていません（未取得。0ではありません）"
             row.update(got)
         except Exception as e:
+            if not _no_permission(e):
+                failed.append("GSC")
             # 403の正体は「権限が制限付き」。長い例外をそのまま出すと原因が埋もれる
-            if "403" in str(e) or "sufficient permission" in str(e):
+            if _no_permission(e):
                 print(f"  {sid}: GSC取得スキップ（権限不足。"
                       "python scripts/gsc_check.py で対処手順を確認してください）")
             else:
@@ -233,17 +290,36 @@ def collect(ga_day):
                 row["note"] = row["note"] + f"／CVは台帳の相談（売り込み{c['sales']}・テスト{c['test']}を除く）"
         except Exception as e:
             print(f"  {sid}: 台帳の問い合わせを数えられず、CV は GA4 の送信のまま（{str(e)[:60]}）")
+        if failed:
+            row["_retry"] = failed
         rows.append(row)
         if sites_mod.is_client(sid):     # お客様の社の数字は CI のログに出さない（日次の記録とメールには入る）
             print(f"{ga_day} {sid:10s} 取得しました")
             continue
+        ses = f"{row['sessions']:5d}" if "sessions" in row else "未取得"
         if "impressions" not in row:
-            print(f"{ga_day} {sid:10s} セッション{row.get('sessions', 0):5d}  表示・クリック: 未取得（Search Console の遅れ）"
+            print(f"{ga_day} {sid:10s} セッション{ses}  表示・クリック: 未取得（Search Console の遅れ）"
                   f"  AI参照{row.get('ai', 0):3d}")
             continue
-        print(f"{ga_day} {sid:10s} セッション{row.get('sessions', 0):5d}  表示{row.get('impressions', 0):6d}  "
+        print(f"{ga_day} {sid:10s} セッション{ses}  表示{row.get('impressions', 0):6d}  "
               f"クリック{row.get('clicks', 0):4d}  AI参照{row.get('ai', 0):3d}")
     return rows
+
+
+def split_rows(rows, final):
+    """送る行と、取り直す社に分ける。取れなかった社は CATCH_UP 日の窓の中では送らずに取り直す
+    （kpi_log は行を足すだけなので、空欄で送ってから送り直すと同じ日の行が2本並ぶ）。
+    窓から外れる回（final）は空欄のまま送る。0 と書かない（管制塔は無い数字を空欄で書く）"""
+    keep, wait = [], set()
+    for r in rows:
+        failed = r.pop("_retry", None)
+        if failed and not final:
+            wait.add(r["site"])
+            continue
+        if failed:
+            r["note"] = (r.get("note") or "") + f"／{'・'.join(failed)}を取れず空欄（取り直しの期限切れ。0ではありません）"
+        keep.append(r)
+    return keep, wait
 
 
 def main():
@@ -265,18 +341,35 @@ def main():
         days = [d for d in days if d not in done]
     if "--send" in a and not hub_client.enabled():
         raise SystemExit("HUB_URL が未設定です")
+    today = date.today()
+    # 前の回に取れなかった社（GA4・Search Console が落ちた社）を先に取り直す。--day の手動は触らない
+    jobs = []
+    if once and "--day" not in a:
+        jobs = [(d, sids) for d, sids in sorted(retry_sites().items()) if sids]
+    jobs += [(d, None) for d in days]
     sent = 0
-    for ga_day in days:
-        rows = collect(ga_day)
+    for ga_day, only in jobs:
+        rows = collect(ga_day) if only is None else collect(ga_day, only=only)
         if "--send" not in a:
             continue
-        r = hub_client._post({"action": "kpi_log", "rows": rows})
-        if r.get("ok") is False:
-            raise SystemExit(f"管制塔が受け取りませんでした（{ga_day}）: {r.get('error')}")
-        print(f"\n管制塔へ送信（{ga_day}）: {r.get('rows', 0)}件 / ダッシュボード更新済み")
-        sent += 1
+        keep, wait = split_rows(rows, final=not once or last_chance(ga_day, today))
+        if wait:
+            print(f"  {ga_day}: {len(wait)}社は数字を取れなかったため送らず、次の回に取り直します")
+        if keep:
+            body = {"action": "kpi_log", "rows": keep}
+            if only is not None:
+                body["partial"] = True       # 取り直した社だけの行。ダッシュボード（全社の合計）は書き換えない
+            r = hub_client._post(body)
+            if r.get("ok") is False:
+                raise SystemExit(f"管制塔が受け取りませんでした（{ga_day}）: {r.get('error')}")
+            print(f"\n管制塔へ送信（{ga_day}）: {r.get('rows', 0)}件"
+                  + ("（取り直した社）" if only is not None else " / ダッシュボード更新済み"))
+            sent += 1
         if once:
-            mark_sent(ga_day)
+            if only is None:
+                mark_sent(ga_day, wait)
+            else:
+                clear_retry(ga_day, set(only) - wait)      # 一覧から外れた社も待ち続けない
     if "--send" not in a:
         print("\n※ 確認モードです。管制塔へ送るには --send を付けてください。")
     print(f"KPI_SENT={sent}")
