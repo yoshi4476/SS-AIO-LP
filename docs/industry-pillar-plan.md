@@ -85,3 +85,5 @@
 **自動補充 2026-10-12（GSC実証10件+サジェスト0件・10本）**: aio コンテキスト 理解 促進 / ai overview 店舗集客 / saas llmo / aio 無料相談 / aio 攻略 / aio分析ツール / aio いつから / aio 複数 / ai optimization / aio 内製化
 
 **自動補充 2026-10-19（GSC実証10件+サジェスト0件・10本）**: aio ツール 評判 口コミ / ai overview 一次情報 / aio サーチコンソール 活用 術 / aio 音声検索 最適化 手法 / 不動産 seoコンサル / aio 外注 / aio aim / aio メリット / aioverview キーワード / aioって結局何なの？
+
+**自動補充 2026-10-19（GSC実証4件+サジェスト0件・4本）**: ai overview チェック / llmo診断ツール 無料 / aio 略 / aio ランキング付き検索順位チェックツール
