@@ -53,3 +53,13 @@ def test_quality_loop_records_weak_points():
     print("\n■ 公開前の採点の弱い点を台帳に残す（80点で止まる原因を後から調べられるように。2026-10-20）")
     src = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
     check("採点の記録2か所に weak を残す", src.count('"weak": sc.get("weak", {})'), 2)
+
+
+def test_redeliver_only_changed_articles():
+    import subprocess
+    print("\n■ 記事の枠の配り直しは、この回に中身の変わった記事だけを送る（全記事に当てるとコーポレートは毎回約20分。2026-10-20）")
+    g = (ROOT / "scripts" / "agent_guard.py").read_text(encoding="utf-8")
+    check("agent_guard は変わった記事を --slugs で渡し、無い社は呼ばない",
+          ('"--slugs", ",".join(mine)' in g, "if not mine:" in g), (True, True))
+    src = (ROOT / "scripts" / "publish_changed.py").read_text(encoding="utf-8")
+    check("publish_changed に --slugs", 'ap.add_argument("--slugs"' in src and "targets = [x for x in targets if x in want]" in src, True)

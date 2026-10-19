@@ -774,8 +774,12 @@ def publish(root=None, only=None):
     ext = sorted({s for s in (_site_of(x, root) for x in changed)
                   if s and (not only or s == only) and S.load(s).get("type") != "self-static"})
     for site in ext:
-        r = subprocess.run([py, "scripts/publish_changed.py", "--site", site, "--push"], cwd=root, capture_output=True,
-                           text=True, encoding="utf-8", errors="replace")
+        # この回に中身の変わった記事だけを送る（全記事に当てるとコーポレートは毎回約20分。2026-10-20）
+        mine = [x for x in changed if x not in new and _site_of(x, root) == site]
+        if not mine:
+            continue
+        r = subprocess.run([py, "scripts/publish_changed.py", "--site", site, "--slugs", ",".join(mine), "--push"],
+                           cwd=root, capture_output=True, text=True, encoding="utf-8", errors="replace")
         print(f"   配り直し（{S.public_id(site) if hasattr(S, 'public_id') else site}）: 終了コード {r.returncode}", flush=True)
     bad = res["failed"] + res["other"] + res["quality"]
     print(f"AGENT_PUBLISH={'ng' if bad else 'ok'}（新しい記事 {len(new)}本: 公開 {res['published']}・"

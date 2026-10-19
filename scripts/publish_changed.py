@@ -83,6 +83,9 @@ def main():
     ap.add_argument("--all", action="store_true", help="全サイトを対象にする")
     ap.add_argument("--since", default="", help="この地点からの差分だけを見る（例: HEAD~30）")
     ap.add_argument("--push", action="store_true", help="実際に配信する")
+    # 記事の枠は「この回に中身の変わった記事」が分かっている。--since も --slugs も無いと公開記事の全部に publish.py を
+    # 1本ずつ当て（送り出しは省けても1本約7.6秒）、コーポレートは154本で毎回約20分かかっていた（2026-10-20 実測）
+    ap.add_argument("--slugs", default="", help="この記事だけ（カンマ区切り）")
     ap.add_argument("--limit", type=int, default=0, help="1回に配信する本数の上限")
     a = ap.parse_args()
 
@@ -99,6 +102,9 @@ def main():
             continue
 
         targets = changed_by_git(sid, a.since) if a.since else site_articles(sid)
+        if a.slugs:
+            want = {x.strip() for x in a.slugs.split(",") if x.strip()}
+            targets = [x for x in targets if x in want]
         if a.limit:
             targets = targets[:a.limit]
         print(f"■ {public_name(sid) if is_client(sid) else cfg['name'] + '（' + (cfg.get('repo') or cfg['type']) + '）'}: 対象 {len(targets)}本")
