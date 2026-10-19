@@ -146,6 +146,14 @@ def main():
     if a.add:
         if not (a.key and a.text and a.when):
             ap.error("--key・--text・--when が要ります（本当にあったことだけを登録する）")
+        # sites が空の体験は load_experiences で全社（お客様の社も）に流れ、当社の体験がお客様の記事に
+        # 一人称で書かれうる（2026-10-20 の点検）。社を必ず決め、お客様の体験は公開側の台帳に書かない
+        import sites
+        if not a.site:
+            ap.error("--site が要ります（その体験を書いてよい社。空にすると全社の記事に流れます）")
+        if a.site not in sites.own_ids():
+            ap.error("自社のサイトだけを登録できます。お客様の体験は非公開の clients/<id>/experiences.json"
+                     "（ヒアリングシートの一言・事例から client_intake が作る）に置きます")
         add(a.site, a.key, a.text, a.when)
     elif a.check:
         t = (ROOT / "articles" / f"{a.check}.md").read_text(encoding="utf-8-sig")

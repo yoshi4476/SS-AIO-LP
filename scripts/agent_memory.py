@@ -62,6 +62,11 @@ def slim(text, profile):
             parts.append(b)
     note = (f"{MARK}\n> CI の AI 用に、この仕事に要る章だけを載せた版（{profile}）。全文は git の CLAUDE.md。"
             "載っていない章（導入・納品方式・週次の工程・守秘の置き場など）は機械の工程が受け持つ。\n\n")
+    # 3.0 章は導入の手順なので外すが、「受託運用での分離」（お客様の記事に当社の実績を書かない）だけは書く仕事の決まり。
+    # 章ごと外していたので、お客様の社の記事を書く AI に届いていなかった（2026-10-20 の点検）。見出しにせず段落だけ残す
+    sep = re.search(r"(?m)^\*\*受託運用での分離\*\*.*$", text)
+    if sep:
+        note += sep.group(0).strip() + "\n\n"
     return note + "".join(parts)
 
 

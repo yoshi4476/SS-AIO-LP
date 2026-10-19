@@ -87,7 +87,7 @@ def write(site_id):
     n = len(hits)
     avg = lambda k: round(sum(h[k] for h in hits) / n, 1)
     lines = [f"# AI検索に引用された記事の型（{site_id}・{n}本）", "",
-             "引用が取れた記事に共通する数え方（これに揃える）:",
+             "引用が取れた記事に共通する数え方（参考にする。見出しの並び・言い回しは写さない）:",
              f"- H2のうち質問形の割合 {avg('q_ratio')} / 比較表 {avg('tables')}個 / FAQ {avg('faq')}問 / 定義ブロック {avg('defbox')}個 / 出典つき数字 {avg('sourced_numbers')}箇所", ""]
     for h in hits[:3]:
         lines += [f"## {h['title']}（狙う語: {h['keyword']}）", "冒頭:", "> " + h["lead"], "見出し:"]
@@ -153,7 +153,10 @@ def main():
             if rows:
                 iname = next((i["name"] for i in __import__("industry_hub").load()[0] if i["slug"] == ind), ind)
                 print(f"# 同じ{'業種（' + iname + '）' if ind else 'サイト'}で検索1ページ目にいる記事の型（引用実績はまだ無いので、順位で選んだ）")
-                print("構成を考え直す手間を省くため、この見出しの並びを土台にして、今回の語に合わせて足し引きする。\n")
+                # 「見出しの並びを土台に」と渡すと、同じ並びの記事が増えて量産の指紋になり、検索上位に無い節も生まれない
+                # （2026-10-20 の点検）。扱っている問いと表・FAQ の数え方は参考にし、並びは写さない
+                print("扱っている問いと、表・FAQ の数え方を参考にする。見出しの並び・言い回しは写さず、"
+                      "今回の語の読者に合う構成を考える。\n")
                 for r in rows:
                     print(f"## {r['title']}（{r['pos']:.1f}位・狙う語: {r['keyword']}）")
                     print(f"質問形の見出し {r['q_ratio']:.0%} / 表 {r['tables']} / FAQ {r['faq']}問 / 定義 {r['defbox']}")

@@ -1340,6 +1340,40 @@ def fit_title_tag(tpl, title, vals):
     return tpl[:m.start()] + "<title>{{TITLE}}</title>" + tpl[m.end():]
 
 
+_LD_BLOCK = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.S)
+_ARTICLE_TYPE = re.compile(r'("@type"\s*:\s*"(?:Article|BlogPosting|NewsArticle)"\s*,)')
+
+
+def ld_image(page):
+    """構造化データの Article（BlogPosting）に image が無ければ、og:image と同じ写真を入れる。
+
+    補助金サイトの雛形（配信先の blog/_template.html）の Article に image が無く、記事の写真が検索の構造化データに
+    載っていなかった（2026-10-20 の点検）。雛形は配信先のリポジトリにあるので、書き出すときにここで足す。
+    書式を崩さないよう "@type" の直後に1項目だけ差し込み、差し込んだ後に JSON として読めないブロックは元のまま残す"""
+    m = re.search(r'<meta property="og:image" content="(https?://[^"]+)"', page)
+    if not m:
+        return page
+
+    def one(b):
+        try:
+            data = json.loads(b.group(2))
+        except ValueError:
+            return b.group(0)
+        items = data.get("@graph", [data]) if isinstance(data, dict) else data if isinstance(data, list) else []
+        arts = [x for x in items if isinstance(x, dict) and x.get("@type") in ("Article", "BlogPosting", "NewsArticle")]
+        if len(arts) != 1 or arts[0].get("image"):
+            return b.group(0)
+        new = _ARTICLE_TYPE.sub(lambda t: t.group(1) + ' "image": ' + json.dumps(m.group(1)) + ",", b.group(2), count=1)
+        try:
+            ok = any(isinstance(x, dict) and x.get("image") == m.group(1)
+                     for x in (lambda d: d.get("@graph", [d]) if isinstance(d, dict) else d)(json.loads(new)))
+        except ValueError:
+            ok = False
+        return b.group(1) + new + b.group(3) if ok else b.group(0)
+
+    return _LD_BLOCK.sub(one, page)
+
+
 def write_external_html(cfg, dest: Path, meta, body, src: Path):
     """別リポジトリの静的サイト用: 相手のテンプレートに流し込んでHTMLを生成する。
 
@@ -1492,6 +1526,7 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     # Git の社（external-html）は先方の雛形が計測を持つ（補助金サイトは site.js）
     if cfg.get("type") in deliver_files.TYPES:
         out = add_measure(out, cfg)
+    out = ld_image(out)
     page = dest / page_dir(cfg) / meta["slug"] / "index.html"
     page.parent.mkdir(parents=True, exist_ok=True)
     page.write_text(out, encoding="utf-8", newline="\n")
@@ -2299,6 +2334,19 @@ def _delivered(cfg, meta):
     return bool(where and where.is_file()), dest
 
 
+# 原稿の画像 ![説明](場所) は render_check のリンクの数え方（[文字](場所)）にも当たり、出力の <a> と数が合わない
+# （全476本のうち12本がこれだけで「取りこぼし」と出た。2026-10-20）。数える側の原稿でだけ画像の記法を <img> にする。
+# 行内のコード（`- [記事タイトル](URL)` のような書き方の例）もリンクに数えられるので、数える前に外す（1本）
+_MD_IMAGE = re.compile(r"!\[[^\]\n]*\]\([^)\n]*\)")
+
+
+def render_gaps(body):
+    """原稿と変換結果で、表・リスト・見出し・画像・リンクの数が合わないもの [(名前, 原稿の数, 出力の数)]。空なら取りこぼしなし"""
+    html = md2html.convert(body)[0]
+    counted = re.sub(r"`[^`\n]+`", "", re.sub(r"(?s)```.*?```", "", body))
+    return render_check.structure_gap(_MD_IMAGE.sub("<img>", counted), "<article>" + html + "</article>")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", required=True)
@@ -2390,6 +2438,16 @@ def main():
     for name, sample, fix in render_check.problems(md2html.convert(body)[0]):
         print(f"  [警告] {meta['slug']}: {name}"
               + (f" 「{sample}」" if sample else "") + f" → {fix}")
+
+    # 原稿と出力で塊（表・リスト・見出し・画像・リンク）の数が合わない記事は配信しない。症状の一覧（上の警告）は
+    # 知っている壊れ方しか拾えず、build.py は数の突き合わせを警告にとどめていた（2026-10-20 の点検。全476本で0本を確かめた）
+    import private_store
+    gaps = render_gaps(body)
+    if gaps:
+        what = " / ".join(f"{n} 原稿{a}→出力{b}" for n, a, b in gaps)
+        print(f"要対応: {private_store.shown(args.slug)} は原稿にあるものが出力に出ていません（{what}）", flush=True)
+        raise SystemExit(f"BLOCKED(公開不可): {private_store.shown(args.slug)}: 原稿と出力で数が合いません（{what}）。"
+                         "表・リストの前の空行、生の HTML の中の Markdown を確かめてください")
 
     # 入れてはいけない HTML（ld+json 以外の script・on 属性・iframe・外部への form・javascript: の URL・自動の転送）も
     # 全方式がここを通る。外の文章（字幕・上位の見出し）の指示に従った AI が入れると、どの配信先でも読者の画面で動く。

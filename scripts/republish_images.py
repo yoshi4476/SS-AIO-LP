@@ -46,6 +46,12 @@ def missing_live(cfg, site_id):
     return out
 
 
+def shown(slug):
+    """CI のログ（public）に出す記事の名前。お客様の記事は slug を出さない"""
+    import private_store
+    return private_store.shown(slug)
+
+
 def publish_image_prefix(cfg):
     import publish
     return publish.image_prefix(cfg)
@@ -73,20 +79,23 @@ def main():
     for slug in slugs:
         md = ROOT / "articles" / f"{slug}.md"
         if not md.is_file():
-            print(f"   × 記事がありません: {slug}")
+            print(f"   × 記事がありません: {shown(slug)}")
             continue
         meta, body = publish.parse_article(md)
         # --slugs は人が手で渡す。publish.py と同じ門（基準・担当サイト・監修の記録）を
         # 通さないと、未公開の記事や他社の記事がこの経路から配信先へ出てしまう
         if S.find_category_owner(meta.get("category", "")) != a.site:
-            print(f"   × {a.site} の記事ではありません: {slug}（category {meta.get('category')}）")
+            print(f"   × {S.public_id(a.site)} の記事ではありません: {shown(slug)}")
             continue
-        if not publish.gate_ok(meta):
-            print(f"   × 公開基準未達: {slug}（score {meta.get('score')}）")
-            continue
-        import editorial_review
-        if not editorial_review.reviewed(slug):
-            print(f"   × HELD(監修待ち): {slug}")
+        # 公開基準・監修の記録だけを見ていたので、publish.py が止める記事（表示の決まりに当たる文・入れてはいけない HTML・
+        # お客様の使えない表現・非公開のデータが読めない社）もこの経路からは届いた（2026-10-20 の点検）。
+        # publish_rerender と同じ門の並び（redeliver_problems）と、原稿と出力の数の突き合わせ（render_gaps）を通す
+        import publish_rerender
+        why = publish_rerender.redeliver_problems(cfg, meta, body, md, dest)
+        if publish.render_gaps(body):
+            why.append("原稿と出力で数が合わない")
+        if why:
+            print(f"   × 配信の門で見送り: {shown(slug)}（{'・'.join(why)}）")
             continue
         if cfg["type"] == "nextjs-json":
             publish.write_nextjs_json(cfg, dest, meta, body)
@@ -97,7 +106,7 @@ def main():
             continue
         publish.stamp_manifest(cfg, dest, meta, md)
         done.append(slug)
-        print(f"   ○ {slug}")
+        print(f"   ○ {shown(slug)}")
     st = subprocess.run(["git", "status", "--porcelain"], cwd=dest, capture_output=True, text=True, encoding="utf-8").stdout
     print(f"描き直し {len(done)}本 / 配信先で変わるファイル {len([l for l in st.splitlines() if l.strip()])}")
     if not a.push:

@@ -653,8 +653,18 @@ def publish(root=None, only=None):
     sys.path.insert(0, str(root / "scripts"))
     import private_store as PS
     import sites as S
+    def _score_fails(root, slug):
+        """機械採点（score_check）の FAIL の項目名。採点そのものが動かなければ空（隔離せず publish_flow の判定に任せる）"""
+        try:
+            import score_check
+            checks = score_check.run(slug, path=Path(root) / "articles" / f"{slug}.md")
+        except (Exception, SystemExit) as e:      # フロントマターが無い（SystemExit）など。止めるのは publish_flow と build.py
+            print(f"   機械採点を動かせませんでした（{type(e).__name__}）。隔離はしません", flush=True)
+            return []
+        return [c[0] for c in checks if not c[1] and not c[3]]
+
     new, changed = changes(root)
-    res = {"published": 0, "held": 0, "failed": 0, "other": 0}
+    res = {"published": 0, "held": 0, "failed": 0, "other": 0, "quality": 0}
     py = sys.executable
     hide_all = bool(only) and S.is_client(only)
     for slug in new:
@@ -668,6 +678,20 @@ def publish(root=None, only=None):
         if only and site != only:
             print(f"   × {name}: この回の社の記事ではないため配信しません", flush=True)
             res["other"] += 1
+            continue
+        # この回の新しい記事（lock の控えに無い原稿）だけを機械採点にかけ、落ちたものは配信の前に隔離する。
+        # publish_flow は採点に落ちると止まるが、原稿は articles/ に残り、build.py（AI集客ラボ）と publish_gap（別の
+        # リポジトリの社）がそのまま公開していた（2026-10-20 の点検）。publish_flow の終了コードで決めると、配信の後の
+        # 確かめの失敗まで隔離してしまうので、score_check を直接呼ぶ。公開済みの記事は new に入らないので動かさない
+        # （2026-10-13 に公開中の280本を誤って隔離した。門 gates_history_h126 が確かめる）
+        fails = _score_fails(root, slug)
+        if fails:
+            qdir = root / "articles" / "_conflicted"
+            qdir.mkdir(parents=True, exist_ok=True)
+            (root / "articles" / f"{slug}.md").replace(qdir / f"{slug}.md")
+            res["quality"] += 1
+            print(f"   × {name}: 機械採点で不合格のため articles/_conflicted/ へ移しました（{'・'.join(fails[:3])}）",
+                  flush=True)
             continue
         r = subprocess.run([py, "scripts/publish_flow.py", site, slug], cwd=root, capture_output=True, text=True,
                            encoding="utf-8", errors="replace")
@@ -690,15 +714,16 @@ def publish(root=None, only=None):
         r = subprocess.run([py, "scripts/publish_changed.py", "--site", site, "--push"], cwd=root, capture_output=True,
                            text=True, encoding="utf-8", errors="replace")
         print(f"   配り直し（{S.public_id(site) if hasattr(S, 'public_id') else site}）: 終了コード {r.returncode}", flush=True)
-    bad = res["failed"] + res["other"]
+    bad = res["failed"] + res["other"] + res["quality"]
     print(f"AGENT_PUBLISH={'ng' if bad else 'ok'}（新しい記事 {len(new)}本: 公開 {res['published']}・"
-          f"監修待ち {res['held']}・失敗 {res['failed']}・別の社 {res['other']} / 中身の変わった記事 {len(changed)}本・"
-          f"配り直し {len(ext)}サイト）", flush=True)
+          f"監修待ち {res['held']}・失敗 {res['failed']}・別の社 {res['other']}・採点で隔離 {res['quality']} / "
+          f"中身の変わった記事 {len(changed)}本・配り直し {len(ext)}サイト）", flush=True)
     if bad:
         # AI はもういないので、止まった記事は人が見る。通知の本文（findings.txt）に要対応として載せる
         who = S.public_id(only) if only and hasattr(S, "public_id") else "AI の回"
         line = (f"要対応: {who} で AI が書いた記事のうち {bad}本を配信できませんでした"
-                f"（失敗 {res['failed']}・別の社 {res['other']}。実行ログの「書いた記事を配信する」を確認）")
+                f"（失敗 {res['failed']}・別の社 {res['other']}・機械採点で不合格のため articles/_conflicted/ へ隔離 "
+                f"{res['quality']}。実行ログの「書いた記事を配信する」を確認）")
         print(line, flush=True)
         try:
             log = root / "automation" / "logs" / "findings.txt"

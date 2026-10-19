@@ -58,18 +58,30 @@ _YEAR = re.compile(r"(?:19|20)\d\d")
 _UNIT = tuple("件社店本人名回個円万億%％倍字語秒台枚")
 
 
-def fact_tokens(claim):
+def fact_tokens(claim, strict=False):
     """一次情報（first_party_facts.json の claim）のうち、本文にあれば「その事実を使った」とみなす目印。
 
     3桁以上の数字をそのまま目印にしていたため、claim の期間（2023年5月〜2026年9月）の年が、鮮度の表記
     （「2026年10月時点」）を持つどの記事にも当たり、一次情報の検査が全記事で通っていた（2026-10-20）。
-    年の形の数字は単位が続くときだけ残す。社名・立場の語は従来どおり"""
+    年の形の数字は単位が続くときだけ残す。社名・立場の語は従来どおり。
+
+    strict（FACTS_FROM 以降の記事の判定）: 区切りの無い3桁の数字（「100」「196」）は、claim で単位が続くときだけ
+    「数字＋単位」（「196本」「100%」）を目印にする。数字だけでは「100万円」「150字」のような別の話に当たる"""
     toks = []
     for m in re.finditer(r"[0-9][0-9,]{2,}", claim):
         num = m.group(0).rstrip(",")
-        if _YEAR.fullmatch(num) and not claim[m.end():m.end() + 1].startswith(_UNIT):
+        unit = claim[m.end():m.end() + 1]
+        if _YEAR.fullmatch(num) and not unit.startswith(_UNIT):
             continue
+        if strict and re.fullmatch(r"[0-9]{3}", num):
+            if not (unit and unit in _UNIT):
+                continue
+            num += unit
         toks.append(num)
+    if strict:
+        # 「」で括った名前（サービス名・その社の言い回し）。お客様の事実は年数・社数のような小さな数字が多く、
+        # 数字だけでは1つも目印が作れなかった（2026-10-20 にお客様の社の4件で0個）
+        toks += [q for q in re.findall(r"「([^「」\n]{4,40})」", claim)]
     toks += re.findall(r"G-ran|セブンセンシズ|大阪市東成区", claim)
     toks += [t for t in ("登録支援事業者", "当社は自社サイト", "自社メディア",
                          "支援の現場", "申請の現場", "導入支援", "支援する現場",
@@ -77,9 +89,38 @@ def fact_tokens(claim):
     return toks
 
 
-def run(slug):
-    """1本を採点して checks を返す。CLI からも、全体の集計からも使う"""
-    p = ROOT / "articles" / f"{slug}.md"
+# この日以降の記事は、一次情報をその社が使ってよい事実（facts.load_for）だけで確かめる（2026-10-20 の点検）。
+# 全社の事実の、社名・所在地まで目印にしていたため、お客様の記事は当社の実績で、自社の記事は社名だけで通っていた。
+# 公開済みの記事は今の判定のまま（DECOR_YEAR_FROM と同じく、決まりを入れた後の記事だけを止める）
+FACTS_FROM = "2026-10-21"
+
+
+def site_fact_marks(sid, cfg=None):
+    """その社の記事で「一次情報を使った」とみなす目印 {事実の id: [目印]}。
+
+    お客様の社は非公開の facts.json だけ、自社は自分のサイトに許した事実だけ（facts.load_for）。
+    当社の名前・所在地（sites.OPERATOR_MARKS）とその社に許した当社の表記（operator_ok）は、事実ではなく名前なので
+    目印にしない（数字の目印は残す）"""
+    if not sid:
+        return {}
+    import facts
+    _, got = facts.load_for(sid)
+    names = [m for m in (*sites_mod.OPERATOR_MARKS, *((cfg or {}).get("operator_ok") or [])) if m]
+    out = {}
+    for f in got:
+        toks = [t for t in fact_tokens(str(f.get("claim") or ""), strict=True)
+                if re.search(r"[0-9]", t) or not any(n in t or t in n for n in names)]
+        out[str(f.get("id") or "")] = toks
+    return out
+
+
+def _has(tok, body):
+    return tok in body or tok.replace("%", "％") in body
+
+
+def run(slug, path=None):
+    """1本を採点して checks を返す。CLI からも、全体の集計からも使う。path は原稿の場所（既定は articles/<slug>.md）"""
+    p = Path(path) if path else ROOT / "articles" / f"{slug}.md"
     if not p.exists():
         raise SystemExit(f"articles/{slug}.md が見つかりません")
     text = p.read_text(encoding="utf-8-sig")
@@ -150,6 +191,11 @@ def run(slug):
     if str(meta.get("date", "")) >= DECOR_YEAR_FROM:
         deco = DECOR_YEAR.search(str(meta.get("title", "")))
         add("タイトルに飾りの年号を入れない", not deco, deco.group(0) if deco else "")
+
+    # 字数は build.py の quality_checks（15〜45字）と同じ数え方。build.py は警告で、採点では見ていなかったので
+    # 範囲外の題も採点を通って配信まで進んだ（2026-10-20 の点検。入れた時点で範囲外は0本）
+    tl = len(str(meta.get("title") or ""))
+    add("タイトル15〜45字", 15 <= tl <= 45, f"{tl}字")
 
     # --- 説明文 ---
     # 60字で通していたら Bing Webmaster Tools に「短すぎる」と54ページ指摘された（2026-10-05）。
@@ -228,7 +274,15 @@ def run(slug):
     import json as _json
     _fp = ROOT / "data" / "first_party_facts.json"
     own_hit = []
-    if _fp.is_file():
+    try:
+        _fsid = sites_mod.find_category_owner(str(meta.get("category") or "")) if meta.get("category") else None
+    except SystemExit:
+        _fsid = None
+    if str(meta.get("date", "")) >= FACTS_FROM:
+        for fid, toks in site_fact_marks(_fsid, sites_mod.load_all().get(_fsid) if _fsid else None).items():
+            if any(_has(t, body) for t in toks):
+                own_hit.append(fid)
+    elif _fp.is_file():
         for f in _json.loads(_fp.read_text(encoding="utf-8")).get("facts", []):
             # 主張そのものの一致ではなく、固有の数値・名称が本文にあるかで見る
             # 数値・社名だけを見ていたため、「登録支援事業者として支援している」のような

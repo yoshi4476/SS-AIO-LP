@@ -1109,15 +1109,44 @@ QUALITY_ISSUES = {}
 PUBLISHED_LEDGER = ROOT / "data" / "published.json"
 
 
-def published_slugs():
-    """これまでに公開した記事。初回は空を返さず、今ある記事で台帳を作る"""
+def _ledger(text):
+    """台帳の中身（slug の配列）を集合にする。形が違えば None"""
     import json
-    if PUBLISHED_LEDGER.is_file():
-        try:
-            return set(json.loads(PUBLISHED_LEDGER.read_text(encoding="utf-8")))
-        except Exception:
-            return None
-    return None                      # 台帳が無い＝初回。今回は何も止めない
+    try:
+        d = json.loads(text)
+    except ValueError:
+        return None
+    return set(d) if isinstance(d, list) and all(isinstance(s, str) for s in d) else None
+
+
+def published_slugs():
+    """これまでに公開した記事。初回は空を返さず、今ある記事で台帳を作る。
+
+    読めない台帳を「初回」と同じ None にしていたため、壊れた回は新しい記事の門（量産の指紋・監修の記録・品質の警告）が
+    全部外れ、最後の save_published がその回の記事だけで台帳を上書きしていた（2026-10-20 の点検）。
+    壊れていれば git の HEAD の台帳で続け、それも読めなければビルドを止める（全記事を新しい記事として扱うと、
+    公開中の記事が警告1つで取り下げられる）"""
+    import subprocess
+    here = PUBLISHED_LEDGER.is_file()
+    if here:
+        got = _ledger(PUBLISHED_LEDGER.read_text(encoding="utf-8", errors="replace"))
+        if got is not None:
+            return got
+    try:
+        rel = PUBLISHED_LEDGER.relative_to(ROOT).as_posix()
+        r = subprocess.run(["git", "-C", str(ROOT), "show", f"HEAD:{rel}"], capture_output=True, text=True,
+                           encoding="utf-8", errors="replace")
+        got = _ledger(r.stdout) if r.returncode == 0 else None
+    except (OSError, ValueError):
+        rel, got = PUBLISHED_LEDGER.name, None
+    if not here and got is None:
+        return None                  # 台帳が無く、git にも無い＝初回。今回は何も止めない
+    if got is None:
+        raise SystemExit(f"要対応: 公開台帳 {rel} が読めず、git の HEAD の台帳も読めません。どの記事が新しいか決まらないため"
+                         "ビルドを止めます（台帳を直すか、git checkout HEAD -- data/published.json で戻してください）")
+    print(f"要対応: 公開台帳 {rel} が{'読めない' if here else '見つからない'}ため、git の HEAD の台帳（{len(got)}本）で"
+          "続けます。台帳の中身を確かめてください")
+    return got
 
 
 def save_published(slugs):
@@ -2352,6 +2381,12 @@ def main():
         if weak:
             th, full = rubric.cutoff(meta.get("score_breakdown") or {})
             blocked.append(f"{meta['slug']}: 観点足切り {weak}（各{th}/{full}以上が必要）")
+            blocked_metas.append(meta)
+            continue
+        # score: .nan（「90未満」の比較が偽になる）・内訳の欠けや文字・内訳の平均が90未満も止める（2026-10-20。rubric.gate_why）
+        _why = rubric.gate_why(meta)
+        if _why:
+            blocked.append(f"{meta['slug']}: {_why}")
             blocked_metas.append(meta)
             continue
         # 当社の採択率・支援社数、当社が申請書類を作成・代行すると読める文は公開しない（publish.py と同じ判定）

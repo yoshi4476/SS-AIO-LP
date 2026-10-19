@@ -156,15 +156,62 @@ def weak_axes(meta):
     return {k: v for k, v in bd.items() if isinstance(v, (int, float)) and v < th}
 
 
+# 旧基準（v2・6観点×20点）の観点。2026-09 より前の記事361本がこの内訳で公開されている
+OLD_AXES = ("aio", "design", "editorial", "expert", "persona", "seo")
+
+
+def _num(v):
+    import math
+    return isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v)
+
+
+def gate_why(meta):
+    """公開してはいけない理由（空なら公開してよい）。build.py・publish.py・配り直しが同じ判定を使う。
+
+    score だけを見ていたので、内訳の平均が90未満でも score: 90 と書けば通り、score: .nan（YAML の nan）は
+    「90未満」の比較が偽になって通っていた（2026-10-20 の点検）。3観点の内訳があるときは平均を計算し直し、
+    書かれた score と低い方で判定する。旧6観点（満点20）は観点がそろっていて数字であることだけを見る
+    （旧基準の総合は合計の換算で、平均と比べられない）"""
+    sc = meta.get("score")
+    if not _num(sc):
+        return f"score が数字ではありません（{sc!r}）"
+    if sc < PASS_TOTAL:
+        return f"score {sc} < {PASS_TOTAL}"
+    bd = meta.get("score_breakdown")
+    if bd is None or bd == {}:
+        return ""
+    if not isinstance(bd, dict):
+        return f"score_breakdown が観点ごとの表になっていません（{type(bd).__name__}）"
+    keys = [a["key"] for a in AXES]
+    if set(bd) & set(keys):
+        need = keys
+    elif set(bd) & set(OLD_AXES):
+        need = OLD_AXES
+    else:
+        return f"score_breakdown の観点が分かりません（{', '.join(map(str, bd))[:60]}）"
+    lack = [k for k in need if k not in bd]
+    if lack:
+        return f"score_breakdown に観点が欠けています（{', '.join(lack)}）"
+    bad = [k for k in need if not _num(bd[k])]
+    if bad:
+        return f"score_breakdown の値が数字ではありません（{', '.join(bad)}）"
+    weak = weak_axes(meta)
+    if weak:
+        th, full = cutoff(bd)
+        return f"観点足切り {weak}（各{th}/{full}以上が必要）"
+    if need is keys:
+        avg = round(sum(bd[k] for k in keys) / len(keys))
+        if min(avg, sc) < PASS_TOTAL:
+            return f"3観点の平均 {avg} < {PASS_TOTAL}（score には {sc} と書かれています）"
+    return ""
+
+
 def gate_ok(meta):
-    """公開してよいか。総合が PASS_TOTAL 以上で、1観点も足切りを割っていないこと。
+    """公開してよいか。総合が PASS_TOTAL 以上で、1観点も足切りを割っていないこと（理由は gate_why）。
 
     build.py と同じ規則。配信（publish.py など）もここを見れば、ビルドと判定がずれない
     """
-    sc = meta.get("score")
-    if isinstance(sc, bool) or not isinstance(sc, (int, float)) or sc < PASS_TOTAL:
-        return False
-    return not weak_axes(meta)
+    return not gate_why(meta)
 
 
 def main():

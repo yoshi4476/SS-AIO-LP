@@ -46,4 +46,6 @@ python scripts/originality.py --list --site ai-lab
 python scripts/originality.py --check <slug>        # 1本の決まり文句と、上位との差を見る
 ```
 
-お客様の社の体験は、ここではなく非公開の置き場（brief.json の事例）に置く。
+`--site` は必ず付ける（空の体験は全社の記事に流れる）。登録できるのは自社のサイトだけ。
+お客様の社の体験は、ここではなく非公開の置き場の `clients/<id>/experiences.json` に置く
+（ヒアリングシートの「お客さんの一言」・掲載してよい事例から `client_intake` が作る）。
