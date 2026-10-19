@@ -52,6 +52,36 @@ def today_iso():
     return date.today().isoformat()
 
 
+# CI のログ・管制塔のエラーログは public / 共有なので、お客様の社は公開の id、記事は「（お客様の記事）」で出す。
+# TODO の行に公開の id を残すのは、範囲ごとに AI を回す回（agent_work.rescue_count）がその社の仕事として数えるため（2026-10-20）
+def site_shown(sid):
+    try:
+        return sites_mod.public_id(sid) if sites_mod.is_client(sid) else sid
+    except Exception:
+        return sid
+
+
+_OWNERS = {}
+
+
+def slug_shown(slug, sid=None):
+    """記事の出し方。お客様の記事は「<公開の id> の（お客様の記事）」（slug・題を出さない）"""
+    if sid is None:
+        try:
+            if not _OWNERS:
+                import private_store
+                _OWNERS.update(private_store.client_slugs() or {"": ""})
+            sid = _OWNERS.get(slug)
+        except Exception:
+            sid = None
+        if sid is None:
+            return slug
+    try:
+        return f"{site_shown(sid)} の（お客様の記事）" if sites_mod.is_client(sid) else slug
+    except Exception:
+        return "（お客様の記事）"
+
+
 def audit_day():
     """監査で本数を数える日。AUDIT_DAY（同日救済のワークフローが --rescue-day で入れる）が無ければ今日"""
     d = os.environ.get("AUDIT_DAY", "").strip()
@@ -289,7 +319,7 @@ def check_volume(todo):
             left = min(left, site_cap(sid) - sum(1 for a in arts if a["date"][:7] == today_iso()[:7]))
         if left <= 0:
             # 上限に達したら「不足」と言わない。言えば救済が走って超過する
-            print(f"  上限 {sid:10s} 今月 {month}/{site_cap(sid)}本 — 今月はこれ以上公開しません")
+            print(f"  上限 {site_shown(sid):10s} 今月 {month}/{site_cap(sid)}本 — 今月はこれ以上公開しません")
             continue
         # 量産の兆候で本数を落とした週・運用者が1日の本数を減らした社（daily_articles）は、その本数を目標にする。
         # 2本のままだと救済が「不足」とみなし、落とした分を書き足してしまう
@@ -298,19 +328,19 @@ def check_volume(todo):
         # 多すぎる日も印で分かるようにする（書き足しはしない。知らせるのは outcome_watch）
         mark = "超過" if n > want else ("OK " if n >= due else "不足")
         yet = "" if due >= want else f"（この時刻での期待は{due}本）"
-        print(f"  {mark} {sid:10s} {'前日' if past else '本日'} {n}/{want}本  今月 {month}/{site_cap(sid)}本"
+        print(f"  {mark} {site_shown(sid):10s} {'前日' if past else '本日'} {n}/{want}本  今月 {month}/{site_cap(sid)}本"
               f"  （累計 {len(arts)}本）{yet}")
         # 公開の時刻より前に「不足」と言うと、救済が先回りして1日分を
         # まとめて書こうとする。時刻が来たぶんだけを不足として数える
         if n < due and past and want < DAILY_TARGET:
             # 1日の本数を絞っている社（オーナーの指示で1日1本の お客様の社・量産の兆候で落とした週）は、前日の分を
             # 今日書き足さない。書き足すと暦の上で1日2本になり、絞った理由（指示・量産の見え方）に反する
-            print(f"     {sid} は1日{want}本に絞っているため、前日の不足分は書き足しません")
+            print(f"     {site_shown(sid)} は1日{want}本に絞っているため、前日の不足分は書き足しません")
         elif n < due and past:
-            todo.append(f"TODO: {sid} の記事を前日（{day}）の不足分としてあと {due - n} 本作成して公開する"
+            todo.append(f"TODO: {site_shown(sid)} の記事を前日（{day}）の不足分としてあと {due - n} 本作成して公開する"
                         "（date: は公開する今日の日付。publish_flow が前日の分として記録する）")
         elif n < due:
-            todo.append(f"TODO: {sid} の記事を本日あと {due - n} 本作成して公開する")
+            todo.append(f"TODO: {site_shown(sid)} の記事を本日あと {due - n} 本作成して公開する")
     return by_site
 
 
@@ -337,7 +367,7 @@ def check_live(todo, by_site):
             # ここで開くと必ず404で、救済の書いた記事が毎回「救済後も未解決」と知らされる
             # （配信先の社は publish_flow が公開を確かめてから記録している）
             if is_new_article(a["slug"]):
-                print(f"  ―   {a['slug']}: この実行で書いた記事。公開の確認はデプロイの後（翌日の publish_gap）")
+                print(f"  ―   {slug_shown(a['slug'], sid)}: この実行で書いた記事。公開の確認はデプロイの後（翌日の publish_gap）")
                 continue
             meta = {"slug": a["slug"], "category": a.get("category", "")}
             import wp_bridge     # WordPress はパーマリンク設定が決めたURLで確かめる
@@ -353,8 +383,13 @@ def check_live(todo, by_site):
             except Exception:
                 code = 0
             mark = "OK " if code == 200 else "未公開"
-            print(f"  {mark} [{code or '接続不可'}] {url}")
-            if code != 200:
+            client = sites_mod.is_client(sid)
+            # お客様の社は URL（ドメイン・slug）を出さない
+            print(f"  {mark} [{code or '接続不可'}] {site_shown(sid) + ' の（お客様の記事）' if client else url}")
+            if code != 200 and client:
+                todo.append(f"TODO: {site_shown(sid)} の当日の記事1本（お客様の記事）がサイトで見られない（{code or '接続不可'}）。"
+                            "python scripts/publish_gap.py で配信の漏れを確かめ、--publish で配信し直す")
+            elif code != 200:
                 todo.append(f"TODO: {a['slug']} がサイトで見られない（{url}）。"
                             f"python scripts/publish.py --site {sid} --slug {a['slug']} --push "
                             "で配信し直す")
@@ -377,9 +412,10 @@ def check_blocked(todo):
         print("  OK  BLOCKEDなし")
         return
     for ln in blocked:
-        print(f"  不合格 {ln.strip()}")
         slug = ln.split(":")[1].strip() if ":" in ln else "?"
-        todo.append(f"TODO: {slug} を品質基準まで直して score を更新し、再ビルドする")
+        shown = slug_shown(slug)
+        print(f"  不合格 {ln.strip() if shown == slug else shown}")
+        todo.append(f"TODO: {shown} を品質基準まで直して score を更新し、再ビルドする")
 
 
 def check_territory(todo):
@@ -388,8 +424,8 @@ def check_territory(todo):
     import cannibal_check
     bad = cannibal_check.written_territory_check()
     for slug, site, invader, _ in bad:
-        todo.append(f"TODO: {slug} は {invader} の領域。{site} から取り下げて"
-                    f"{invader} へ配信し直し、旧URLを site/_redirects で301転送する")
+        todo.append(f"TODO: {slug_shown(slug)} は {site_shown(invader)} の領域。{site_shown(site)} から取り下げて"
+                    f"{site_shown(invader)} へ配信し直し、旧URLを site/_redirects で301転送する")
 
 
 def check_external_dup(todo):
@@ -401,6 +437,10 @@ def check_external_dup(todo):
     if getattr(cannibal_check.external_dup_check, "failed", False):
         SKIPPED.append("配信先の既存記事との重複")
     for h in hits:
+        if sites_mod.is_client(h["site"]):
+            todo.append(f"TODO: {slug_shown(h['mine']['slug'], h['site'])} は配信先の既存記事と重複"
+                        f"（類似度{h['score']}）。自作側を取り下げて既存記事へ301転送する")
+            continue
         todo.append(f"TODO: {h['mine']['slug']} は {h['site']} の既存記事と重複"
                     f"（類似度{h['score']}・{h['theirs']['url']}）。"
                     "自作側を取り下げて既存記事へ301転送する")
@@ -426,6 +466,11 @@ def check_serp_overlap(todo, limit=5):
         SKIPPED.append("食い合い（一部のサイト）")
     print(f"  {len(hits)}語")
     for h in hits[:limit]:
+        if sites_mod.is_client(h["site"]):
+            # お客様の社の検索語・URL は出さない
+            todo.append(f"TODO: {site_shown(h['site'])} で同じ検索語に自社ページが{1 + len(h['drag'])}本並んでいる"
+                        "（python scripts/cannibal_check.py --serp で確かめ、勝たせる1本へ内部リンクを集約する）")
+            continue
         drag = "・".join(f"{x[0]}({x[1]:.0f}位)" for x in h["drag"][:3])
         todo.append(f"TODO: 「{h['kw']}」で自社ページが競合（{h['site']}）。"
                     f"{h['win'][0]}({h['win'][1]:.0f}位)を勝たせ、{drag}から"
@@ -452,12 +497,13 @@ def check_growth(todo):
         SKIPPED.append("表示の推移")
         return
     if growth_guard.LAST_UNKNOWN and not alerts:
-        todo.append(f"TODO: {', '.join(growth_guard.LAST_UNKNOWN)} の表示の推移を GSC から確かめられませんでした"
+        todo.append(f"TODO: {', '.join(site_shown(s) for s in growth_guard.LAST_UNKNOWN)} の表示の推移を GSC から確かめられませんでした"
                     "（下落なしではありません）")
     for sid, di, lost, worse, pages in alerts or []:
-        todo.append(f"TODO: {sid} の表示が前の期間より{abs(di) * 100:.0f}%落ちた。"
+        page = "該当ページ" if not pages or sites_mod.is_client(sid) else pages[0]
+        todo.append(f"TODO: {site_shown(sid)} の表示が前の期間より{abs(di) * 100:.0f}%落ちた。"
                     f"消えた語{lost}語・順位が下がった語{worse}語。"
-                    f"まず {pages[0] if pages else '該当ページ'} が200を返すか確認する")
+                    f"まず {page} が200を返すか確認する")
 
 
 def readability_lines(out):
@@ -488,8 +534,8 @@ def check_readability(todo, limit=3):
     print(f"  {len(bad)}本に超過あり（1晩に最大{limit}本ずつ直す）")
     for slug, fails in bad[:limit]:
         detail = " / ".join(f.split("|", 2)[-1].strip() for f in fails)
-        print(f"  要修正 {slug}: {detail}")
-        todo.append(f"TODO: {slug} の段落と文を短く分ける（{detail}）。"
+        print(f"  要修正 {slug_shown(slug)}: {detail}")
+        todo.append(f"TODO: {slug_shown(slug)} の段落と文を短く分ける（{detail}）。"
                     "本文の意味は変えず、区切りだけを直すこと")
 
 
@@ -520,20 +566,20 @@ def check_supply(todo, fix=False):
         # 何日分かは、その社の1日の本数で数える（1日1本の社を2本で割ると、在庫が半分の日数に見える）
         rate = daily_quota(sid)
         if not rate:
-            print(f"  OK  {sid:10s} 未着手 {n:3d}件（新しい記事は1日0本のため減りません）")
+            print(f"  OK  {site_shown(sid):10s} 未着手 {n:3d}件（新しい記事は1日0本のため減りません）")
             continue
         need = rate * KW_MIN_DAYS
         days = n / rate
         mark = "OK " if n >= need else "不足"
-        print(f"  {mark} {sid:10s} 未着手 {n:3d}件（{days:.1f}日分）")
+        print(f"  {mark} {site_shown(sid):10s} 未着手 {n:3d}件（{days:.1f}日分）")
         # サジェスト由来の候補は有限で、掘り尽くすと補充が0件になる。
         # 8日分を切ってから気づいても手が打てないため、30日分の時点で知らせる。
         if need <= n < rate * KW_WARN_DAYS:
-            todo.append(f"TODO: {sid} のKW在庫が残り{days:.0f}日分"
+            todo.append(f"TODO: {site_shown(sid)} のKW在庫が残り{days:.0f}日分"
                         f"（kw_seeds を広げるか、GSCの実データ取得を有効にすること）")
         if n < need:
             if fix:
-                print(f"      → {sid} のKWを自動補充します")
+                print(f"      → {site_shown(sid)} のKWを自動補充します")
                 r = subprocess.run([PY, "scripts/kw_discover.py", "--site", sid, "--append"],
                                    cwd=ROOT, capture_output=True, text=True,
                                    encoding="utf-8", errors="replace", env=CHILD_ENV)
@@ -544,15 +590,15 @@ def check_supply(todo, fix=False):
                 # 0件のまま放置すると在庫が静かに枯れる。実際に補助金サイトで起きた。
                 # 監査を不合格にして、通知とエラーログに必ず乗せる。
                 if added == 0:
-                    todo.append(f"TODO: {sid} のKW補充が0件だった"
-                                f"（sites/{sid}.json の kw_seeds を広げるか、"
+                    todo.append(f"TODO: {site_shown(sid)} のKW補充が0件だった"
+                                f"（sites/{site_shown(sid)}.json の kw_seeds を広げるか、"
                                 "台帳・サジェストの取得を確認する）")
                     for line in out.splitlines():
                         if "警告" in line or "中止" in line:
                             print(f"      {line}")
             else:
-                todo.append(f"TODO: {sid} のKWを補充する"
-                            f"（python scripts/kw_discover.py --site {sid} --append）")
+                todo.append(f"TODO: {site_shown(sid)} のKWを補充する"
+                            f"（python scripts/kw_discover.py --site {site_shown(sid)} --append）")
 
 
 def check_scaled_risk(todo):
@@ -648,6 +694,13 @@ def check_brand(todo):
         print(f"  （取得できません: {str(e)[:40]}）")
         SKIPPED.append("指名検索")
         return
+    # collect は取れなかった社を黙って外す。全社が取れなかった回は合計0→0で「OK」と出ていた（2026-10-20）
+    failed = getattr(B, "LAST_FAILED", [])
+    if failed:
+        print(f"  ?   {len(failed)}社は GSC から取得できず確かめられません")
+        SKIPPED.append("指名検索" if not d else "指名検索（一部のサイト）")
+    if not d:
+        return
     ti = sum(v["cur"]["imp"] for v in d.values())
     pi = sum(v["prev"]["imp"] for v in d.values())
     tc = sum(v["cur"]["clicks"] for v in d.values())
@@ -715,7 +768,7 @@ def check_unseen(todo):
                          raise_errors=True)}
         except Exception as e:
             # 取れなかったのを「表示ゼロ」と数えると、全記事が未登録に見える
-            print(f"  （{cfg['name'][:18]}: GSCから取得できず確かめられません: {str(e)[:40]}）")
+            print(f"  （{(site_shown(sid) if sites_mod.is_client(sid) else cfg['name'])[:18]}: GSCから取得できず確かめられません: {str(e)[:40]}）")
             failed.append(sid)
             continue
         old = []
@@ -731,10 +784,10 @@ def check_unseen(todo):
         if old:
             total += len(old)
             old.sort(reverse=True)
-            print(f"  注意 {cfg['name'][:18]}: 公開30日以上で表示ゼロ {len(old)}件"
+            print(f"  注意 {(site_shown(sid) if sites_mod.is_client(sid) else cfg['name'])[:18]}: 公開30日以上で表示ゼロ {len(old)}件"
                   f"（最長{old[0][0]}日）")
             for d_, s_ in old[:3]:
-                print(f"         {d_}日 {s_[:44]}")
+                print(f"         {d_}日 {slug_shown(s_, sid)[:44]}")
     if failed:
         # 取れなかったサイトがあるのに「すべて出ています」と言わない（全サイト失敗でも OK と出ていた。2026-10-20）
         SKIPPED.append("検索に出ていないページ（一部のサイト）")

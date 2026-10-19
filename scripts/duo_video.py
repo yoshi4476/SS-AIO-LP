@@ -149,8 +149,43 @@ def article(slug):
     return {"slug": slug, "title": g("title"), "category": g("category"), "text": text}
 
 
+_KD = {"〇": 0, "零": 0, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
+_KU = {"十": 10, "百": 100, "千": 1000}
+# 漢数字を数として読むのは、数え方の語が続くときだけ（「一緒」「一度」「十分」「一部」を数に読まない）。
+# 「一」1字は「一人で」「一つずつ」のような言い回しが多いので、割合・金額・社数の語に限る
+_COUNTER = r"(?:割|成|万|億|兆|円|倍|社|件|人|名|店|回|年|か月|ヶ月|カ月|ヵ月|月|日|時間|分|秒|歳|個|つ|点|位|本|枚|種類|項目|週|段階|ステップ|%|パーセント|坪|等級)"
+_KANJI_NUM = re.compile(rf"([〇零一二三四五六七八九十百千]+)(?={_COUNTER})")
+
+
+def _kanji_value(k):
+    """漢数字の並びを数にする（四百五十 → 450・二〇二六 → 2026・十五 → 15）"""
+    if not any(c in _KU for c in k):
+        return int("".join(str(_KD[c]) for c in k))
+    total, cur = 0, 0
+    for c in k:
+        if c in _KD:
+            cur = _KD[c]
+        else:
+            total += (cur or 1) * _KU[c]
+            cur = 0
+    return total + cur
+
+
+def _kanji_to_digits(s):
+    def rep(m):
+        k = m.group(1)
+        if k == "一" and not re.match(r"(?:割|成|万|億|兆|円|倍|社|件)", s[m.end():]):
+            return k
+        if k == "十" and s[m.end():m.end() + 1] == "分":       # 「十分に」は数ではない
+            return k
+        return str(_kanji_value(k))
+    return _KANJI_NUM.sub(rep, s)
+
+
 def _nums(s):
-    return re.findall(r"\d+(?:\.\d+)?", s.replace(",", ""))
+    """数字の一覧。漢数字（三割・四百五十万円・五十社）も数字にそろえてから拾う。
+    算用数字だけを拾っていたため、記事に無い「三割」「五十社」を台本に書かせても通っていた（2026-10-20）"""
+    return re.findall(r"\d+(?:\.\d+)?", _kanji_to_digits(s).replace(",", ""))
 
 
 def validate(sc, art):

@@ -98,21 +98,101 @@ def summary(slug):
     return src
 
 
-def _digits(obj):
-    """数字の集合。全角は半角に、桁区切りは外す。日本語の「10万」「3億」は 100000 / 300000000 にも展開して比べる
-    （訳では 100,000 yen と書くのが正しく、これを「数字が変わった」と落とすと訳が1本も通らない）"""
-    s = json.dumps(obj, ensure_ascii=False).translate(str.maketrans("０１２３４５６７８９", "0123456789"))
+_MONTHS = {m: i for i, m in enumerate(
+    ("january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november",
+     "december"), 1)}
+_MON_ABBR = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "jun": 6, "jul": 7, "aug": 8, "sep": 9, "sept": 9, "oct": 10,
+             "nov": 11, "dec": 12}
+_UNIT = {"千": 1e3, "천": 1e3, "万": 1e4, "萬": 1e4, "만": 1e4, "億": 1e8, "亿": 1e8, "억": 1e8,
+         "thousand": 1e3, "million": 1e6, "billion": 1e9, "trillion": 1e12}
+
+
+def _fmt(v):
+    return str(int(v)) if v == int(v) else f"{v:g}"
+
+
+def _norm_text(s):
+    """数字を比べられる形にそろえた文。桁（万・億・million・억）は掛けた値に、割合の「割・成・할」は % に、
+    英語の月名は数に直す（2026-10-20）。
+    「10万円」を "10 yen"、「3割」を "3%"、「9月」を "October" と訳しても、数字の集合だけ見る比べ方
+    （展開前の数字・月の数字を落とした形も許していた）で通っていた"""
+    s = str(s).translate(str.maketrans("０１２３４５６７８９．", "0123456789."))
     s = re.sub(r"(?<=\d)[,，](?=\d{3})", "", s)
-    out = []
-    for m in re.finditer(r"(\d+(?:\.\d+)?)(万|億|千)?", s):
-        n, unit = m.group(1), m.group(2)
-        if unit:
-            mult = {"千": 1000, "万": 10000, "億": 100000000}[unit]
-            v = float(n) * mult
-            out.append(str(int(v)) if v == int(v) else str(v))
-        else:
-            out.append(n.lstrip("0") or "0")
-    return sorted(out)
+    # 「1億5000万」は1つの数（150 million と訳すのが正しい）
+    s = re.sub(r"(\d+(?:\.\d+)?)\s*[億亿억]\s*(\d+(?:\.\d+)?)\s*[万萬만]",
+               lambda m: _fmt(float(m.group(1)) * 1e8 + float(m.group(2)) * 1e4), s)
+    s = re.sub(r"(\d+(?:\.\d+)?)\s*(?:千万|千萬|천만)", lambda m: _fmt(float(m.group(1)) * 1e7), s)
+    # 「3〜5万円」の3も万（30,000〜50,000 と訳すのが正しい）
+    s = re.sub(r"(\d+(?:\.\d+)?)(\s*[〜～~]\s*)(\d+(?:\.\d+)?)\s*(万|萬|만|億|亿|억)",
+               lambda m: _fmt(float(m.group(1)) * _UNIT[m.group(4)]) + m.group(2)
+               + _fmt(float(m.group(3)) * _UNIT[m.group(4)]), s)
+    s = re.sub(r"(\d+(?:\.\d+)?)\s*(千|천|万|萬|만|億|亿|억)",
+               lambda m: _fmt(float(m.group(1)) * _UNIT[m.group(2)]), s)
+    s = re.sub(r"(\d+(?:\.\d+)?)\s+(thousand|million|billion|trillion)\b",
+               lambda m: _fmt(float(m.group(1)) * _UNIT[m.group(2).lower()]), s, flags=re.I)
+    s = re.sub(r"(\d+(?:\.\d+)?)\s*(?:割|成|할)", lambda m: _fmt(float(m.group(1)) * 10) + "%", s)
+    # 月名。助動詞の may と取り違えないよう、May は大文字で日付・年・前置詞と並ぶときだけ
+    s = re.sub(r"\b(January|February|March|April|June|July|August|September|October|November|December)\b",
+               lambda m: str(_MONTHS[m.group(1).lower()]), s)
+    s = re.sub(r"\b(Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec)\.?(?=\s*\d)",
+               lambda m: str(_MON_ABBR[m.group(1).lower()]), s)
+    s = re.sub(r"(?:(?<=\bin )|(?<=\bof )|(?<=\bby )|(?<=\buntil )|(?<=\bfrom )|(?<=\bsince ))May\b|\bMay(?=\s*\d|,)",
+               "5", s)
+    return s
+
+
+def _digits(obj):
+    """数字の集合。全角は半角に、桁区切りは外す。日本語の「10万」「3億」は 100000 / 300000000 に展開して比べる
+    （訳では 100,000 yen と書くのが正しく、これを「数字が変わった」と落とすと訳が1本も通らない）"""
+    s = _norm_text(json.dumps(obj, ensure_ascii=False))
+    return sorted(n.lstrip("0") or "0" if "." not in n else n for n in re.findall(r"\d+(?:\.\d+)?", s))
+
+
+def _leaves(a, b):
+    """同じ形の2つの JSON から、対応する文の組 [(元, 訳)] を取り出す（形が違う所は飛ばす）"""
+    if isinstance(a, dict) and isinstance(b, dict):
+        return [x for k in a if k in b for x in _leaves(a[k], b[k])]
+    if isinstance(a, list) and isinstance(b, list) and len(a) == len(b):
+        return [x for i in range(len(a)) for x in _leaves(a[i], b[i])]
+    if isinstance(a, str) and isinstance(b, str):
+        return [(a, b)]
+    return []
+
+
+_RANGE = re.compile(r"(\d+(?:\.\d+)?)%?\s*(?:〜|～|~|–|から)\s*(\d+(?:\.\d+)?)")
+_N = r"(\d+(?:\.\d+)?)"
+# 元の上限・下限（「上限5万円」「最大3回」「5万円まで」「10社以上」）
+_SRC_MAX = re.compile(rf"(?:上限|最大|最高|最多)(?:は|で|額|額は)?\s*約?{_N}|{_N}\D{{0,3}}?(?:まで|以内|以下|未満)")
+_SRC_MIN = re.compile(rf"(?:下限|最低|最少)(?:は|で|額|額は)?\s*約?{_N}|{_N}\D{{0,3}}?(?:以上|超)")
+# 訳の上限・下限（英・中・韓）
+_OUT_MAX = re.compile(rf"(?:up to|maximum(?: of)?|max\.?|at most|no more than|not exceed(?:ing)?|cap(?:ped)? (?:of|at)|"
+                      rf"最多|最高|上限|不超过|최대|상한)\s*\D{{0,6}}?{_N}|{_N}\D{{0,8}}?(?:or less|or fewer|at most|以内|以下|이하|이내|까지)",
+                      re.I)
+_OUT_MIN = re.compile(rf"(?:at least|minimum(?: of)?|min\.?|no less than|more than|over|最低|最少|至少|下限|최소|하한)\s*\D{{0,6}}?{_N}|"
+                      rf"{_N}\D{{0,8}}?(?:or more|or above|or over|以上|이상|초과)", re.I)
+
+
+def _nums(pat, s):
+    return {next(g for g in m.groups() if g) for m in pat.finditer(s)}
+
+
+def _bounds_ok(src, out):
+    """範囲の上と下・上限と下限が入れ替わっていないか（数字の集合は同じでも意味が逆になる。2026-10-20）"""
+    for a, b in _leaves(src, out):
+        sa, sb = _norm_text(a), _norm_text(b)
+        for m in _RANGE.finditer(sa):
+            lo, hi = m.group(1), m.group(2)
+            if float(lo) >= float(hi) or lo not in sb or hi not in sb:
+                continue                     # 下から上への範囲だけを見る（「2026年〜10月」のような並びは範囲ではない）
+            pos_lo = [x.start() for x in re.finditer(rf"(?<![\d.]){re.escape(lo)}(?![\d.])", sb)]
+            pos_hi = [x.start() for x in re.finditer(rf"(?<![\d.]){re.escape(hi)}(?![\d.])", sb)]
+            if pos_lo and pos_hi and min(pos_lo) > max(pos_hi):
+                return False, f"範囲の順が入れ替わった（{lo}〜{hi}）"
+        swapped = (_nums(_SRC_MAX, sa) & _nums(_OUT_MIN, sb) - _nums(_OUT_MAX, sb)) | \
+                  (_nums(_SRC_MIN, sa) & _nums(_OUT_MAX, sb) - _nums(_OUT_MIN, sb))
+        if swapped:
+            return False, f"上限と下限が入れ替わった（{', '.join(sorted(swapped))}）"
+    return True, ""
 
 
 _EN_WORDS = {"two": "2", "three": "3", "four": "4", "five": "5", "six": "6", "seven": "7", "eight": "8",
@@ -139,24 +219,12 @@ def _normalize_numwords(obj, lang):
 
 
 def _digits_ok(src, out):
-    """訳の数字が元と一致するか。「10万」は 10 と 100000 のどちらで書かれてもよい"""
+    """訳の数字が元と一致するか。桁（万・億・million・억）・割合（割と%）・月（9月と September）をそろえて比べ、
+    範囲の上下・上限と下限の入れ替えも見る。
+    展開前の「10」・月を落とした形を許していたため、「10万円」→「10 yen」、「9月」→「October」が通っていた（2026-10-20）"""
     a, b = _digits(src), _digits(out)
     if a == b:
-        return True, ""
-    # 元の「N万」を展開前（N）で書いた訳も許す
-    raw_src = sorted((x.lstrip("0") or "0") for x in re.findall(
-        r"\d+(?:\.\d+)?", json.dumps(src, ensure_ascii=False).translate(str.maketrans("０１２３４５６７８９", "0123456789")).replace(",", "")))
-    if sorted(b) == raw_src:
-        return True, ""
-    # 「2026年9月」は訳では "September 2026" になり、月の数字だけが消える。月（◯月）だけは無くてもよい
-    src_txt = json.dumps(src, ensure_ascii=False).translate(str.maketrans("０１２３４５６７８９", "0123456789"))
-    months = sorted(re.findall(r"(?<!\d)(\d{1,2})(?=月)", src_txt))
-    a2 = list(a)
-    for m_ in months:
-        if m_ in a2:
-            a2.remove(m_)
-    if sorted(a2) == b:
-        return True, ""
+        return _bounds_ok(src, out)
     from collections import Counter
     ca, cb = Counter(a), Counter(b)
     diff = {k: (ca.get(k, 0), cb.get(k, 0)) for k in set(ca) | set(cb) if ca.get(k, 0) != cb.get(k, 0)}

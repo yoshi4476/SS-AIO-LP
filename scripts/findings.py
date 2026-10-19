@@ -370,7 +370,9 @@ def notice(key, lines, seen, today, state="要対応", steady="", deadline=""):
     first = (prev or {}).get("first") or today
     count, n = counted(lines), len(lines)
     nums = dict(list(line_numbers(lines).items())[:300])
-    rec = {"first": first, "sigs": sorted(set(all_sigs))[:300], "n": n, "count": count, "nums": nums}
+    # 明細のハッシュは全部残す。300で切ると、301行目より後ろ（並びの後ろのハッシュ）が毎週「新しい明細」に
+    # 数えられ、続いているだけの検査が毎週要対応になっていた（2026-10-20）。1行12字なので数千行でも小さい
+    rec = {"first": first, "sigs": sorted(set(all_sigs)), "n": n, "count": count, "nums": nums}
     try:
         weeks = (date.fromisoformat(today) - date.fromisoformat(first)).days // 7 + 1
     except ValueError:
@@ -378,6 +380,9 @@ def notice(key, lines, seen, today, state="要対応", steady="", deadline=""):
     rest = [ln for ln in lines if ln not in new]
     if deadline:
         return True, deadline, new + rest, rec
+    if state == "動かせず":
+        # 検査が動かないのは、続いていても直すまで要対応（情報に下げると、検査が止まったまま誰も気づかない。2026-10-20）
+        return True, ("新しく出ました" if not prev else f"{weeks}週目・検査が動かないまま"), list(lines), rec
     if steady:
         return False, f"{weeks}週目 — {steady}", list(lines), rec
     if not prev:
@@ -556,6 +561,23 @@ def annotate(level, msg):
     print("::%s::%s" % (level, for_log(msg).replace("\n", " ")))
 
 
+MISSING = "要対応: 検査の結果を取得できませんでした"
+
+
+def body_text(path=None):
+    """通知に載せる本文。findings.txt が無い・空の回は「要対応: 検査の結果を取得できませんでした」を返す。
+    呼び出し側（週次の通知）が「（検査の結果を取得できませんでした）」と要対応の語の無い文を載せていたため、
+    findings.py が落ちた週は notify_slack --routine が送らず、誰にも届かなかった（2026-10-20）"""
+    p = Path(path or OUT)
+    try:
+        text = p.read_text(encoding="utf-8")
+    except OSError:
+        return MISSING + "（findings.txt がありません。週次の findings.py が動いたかを実行ログで確かめる）"
+    if not [l for l in text.splitlines() if l.strip() and not HEADER.match(l)]:
+        return MISSING + "（findings.txt が空です）"
+    return text.rstrip("\n")
+
+
 def main():
     ap = argparse.ArgumentParser(
         description="週次の検査をまとめて回し、見つかったものを集める")
@@ -563,8 +585,29 @@ def main():
                     help="各検査の生の出力を表示しない")
     ap.add_argument("--remember", action="store_true",
                     help="今回出たものを data/findings_seen.json に残す（CI では付けなくても残す）")
+    ap.add_argument("--body", action="store_true",
+                    help="通知に載せる本文を出すだけ（findings.txt が無ければ要対応の1行）")
     a = ap.parse_args()
+    if a.body:
+        print(body_text())
+        return 0
+    try:
+        return _main(a)
+    except Exception as e:
+        # 途中で落ちても、前の工程が足した要対応を残したまま、検査が動かなかったことを必ず書く
+        try:
+            old = OUT.read_text(encoding="utf-8") if OUT.exists() else ""
+        except OSError:
+            old = ""
+        OUT.parent.mkdir(parents=True, exist_ok=True)
+        io.open(OUT, "w", encoding="utf-8", newline="\n").write(
+            "%s（findings.py が途中で止まりました: %s）\n%s" % (MISSING, type(e).__name__, old))
+        print("findings.py が途中で止まりました: %s: %s" % (type(e).__name__, e))
+        print("FINDINGS=unknown")
+        return 0   # 知らせるのが仕事。ここで止めない
 
+
+def _main(a):
     rows, lines = [], []
     # 遅い検査（PARALLEL）は最初に同時に始めておき、順番が来たら結果を受け取る。表示・判定の順は今までと同じ
     from concurrent.futures import ThreadPoolExecutor

@@ -326,6 +326,11 @@ def report(name, rows, show=4):
 
 
 def main():
+    # 手元の Windows（cp932）で、題に cp932 に無い字（— など）があると print で落ち、SEO_AUDIT_OK の印が出なかった（2026-10-20）
+    try:
+        sys.stdout.reconfigure(errors="replace")
+    except (AttributeError, ValueError):
+        pass
     ap = argparse.ArgumentParser()
     ap.add_argument("--live", action="store_true")
     ap.add_argument("--site", default="")

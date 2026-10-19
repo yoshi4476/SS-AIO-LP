@@ -53,7 +53,9 @@ def check_articles(day, bad):
     import sites as S
     cfgs = S.load_all()
     for sid, arts in D.articles_by_site().items():
-        name = cfgs[sid].get("name", sid)
+        # お客様の社は公開の id で、記事の URL も出さない（CI のログ・知らせの本文に社名・ドメイン・slug を出さない。2026-10-20）
+        client = S.is_client(sid)
+        name = S.public_id(sid) if client else cfgs[sid].get("name", sid)
         # 前日の不足分として翌日に書いた記事（data/makeup.json）は、その前日の本数に数える（公開日は書いた日のまま）
         done = [a for a in arts if D.counted_day(a) == day.isoformat() and D._is_published(a, need_review=False)]
         want = expected_articles(sid, arts, day)
@@ -75,7 +77,10 @@ def check_articles(day, bad):
             except Exception as e:
                 st = getattr(e, "code", str(e)[:40])
             if st != 200:
-                bad.append(f"要対応: {name} — 公開したはずの記事が開けません（{st}）: {url}")
+                if client:
+                    st = st if isinstance(st, int) else "接続できません"
+                bad.append(f"要対応: {name} — 公開したはずの記事が開けません（{st}）: "
+                           + ("（お客様の記事）" if client else url))
 
 
 def check_video(day, bad):

@@ -357,7 +357,8 @@ def test_weekly_notice_raises_only_new_worse_or_deadline():
            N.worth_sending("🔧 週次最適化: success\n" + "\n".join(b2), True)), (False, True))
     check("要対応の行は「要対応: <検査名>」のまま（前の回の自分の行を持ち越さない carry_over の目印）",
           f"要対応: {sns}" in b2, True)
-    src = inspect.getsource(F.main)
+    # 2026-10-20: 本体は _main に移した（main は途中で落ちた回にも「要対応」を書く包み）。両方を読む
+    src = inspect.getsource(F.main) + inspect.getsource(getattr(F, "_main", F.main))
     # 2026-10-20: judge に検査の明細の型（pat）も渡す（印が無く1で終わった回を、明細があれば要対応・無ければ動かせずに分ける）
     check("判定（judge・*_OK= の印）と終了コード0は変えない",
           ("state = judge(text, rc" in src, "return 0   # 知らせるのが仕事" in src), (True, True))

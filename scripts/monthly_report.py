@@ -1221,6 +1221,9 @@ def analyze(d):
         必ず少なく見える。実際、同じページに -13% と +12% が並んだ。
         計算はレポート全体で report_context の1本に統一する。
         """
+        if k == "cv" and min(cur.get("cv") or 0, prev.get("cv") or 0) < 10:
+            # 10件未満の割合は1件で何十%も動く（2件→3件で +50%）。件数だけを出す（2026-10-20）
+            return f"前月{prev.get('cv') or 0}件"
         if not prev.get(k):
             return "―"
         import report_context as RC
@@ -1238,11 +1241,30 @@ def analyze(d):
         return RC.compare(cur, prev, k, cur.get("label", ""), prev.get("label", ""),
                           THROUGH)["dir"]
 
+    def _overall():
+        ups = [trend(k) == "up" for k in ("sessions", "clicks", "cv")]
+        if all(ups):
+            return "揃って伸長しました"
+        if not any(ups):
+            return "伸び悩みました"
+        return "まちまちでした（伸びた指標と伸び悩んだ指標があります）"
+
+    def pos_improved():
+        """平均順位は数字が小さいほど良い。dir が down（数字が減った）のときだけ改善。
+        「up」を改善と読み、順位が下がった月にも「改善したことが主因」と書いていた（2026-10-20）"""
+        if not prev.get("pos") or not cur.get("pos"):
+            return False
+        import report_context as RC
+        r = RC.compare(cur, prev, "pos", cur.get("label", ""), prev.get("label", ""), THROUGH)
+        return r["dir"] == "down" and r["good"]
+
     grown = []
     if trend("clicks") == "up":
         grown.append(f"検索クリックが <b>{prev['clicks']}→{cur['clicks']}（{mom('clicks')}）</b>。"
-                     f"平均順位が {prev.get('pos','-')}位→{cur.get('pos','-')}位 に改善したことが主因で、"
-                     "記事の内部リンク網とE-E-A-T整備が順位を押し上げています。")
+                     + (f"平均順位が {prev.get('pos','-')}位→{cur.get('pos','-')}位 に改善しています。"
+                        if pos_improved() else
+                        f"平均順位は {prev.get('pos','-')}位→{cur.get('pos','-')}位 です（順位は改善していません）。"
+                        if prev.get("pos") and cur.get("pos") else ""))
     if trend("cv") == "up":
         grown.append(f"CV（相談・資料DL）が <b>{prev['cv']}→{cur['cv']}件</b>。"
                      "記事下CTAと追従サイドバー経由のLP到達が増えています。")
@@ -1309,7 +1331,9 @@ def analyze(d):
         "来月の優先順位は8章「改善点の一覧と、その直し方」に載せています。") if ga_na else (
         f"当月はセッション{cur_.get('sessions', 0):,}（前月比{mom('sessions')}）、"
         f"検索クリック{cur_.get('clicks', 0):,}（{mom('clicks')}）、CV{cur_.get('cv', 0)}件（{mom('cv')}）と、"
-        f"主要指標が{'揃って伸長しました' if trend('sessions') == 'up' else '伸び悩みました'}。"
+        # 「揃って」はセッション・クリック・CV が全部上向きのときだけ。セッションだけ見ていたため、
+        # CV が減った月にも「揃って伸長」と書いていた（2026-10-20）
+        f"主要指標が{_overall()}。"
         f"平均掲載順位は{prev_.get('pos', '-')}位→{cur_.get('pos', '-')}位。"
         f"AI経由の参照流入は{d.get('ai_sessions', 0)}セッションでした。"
         "来月の優先順位は8章「改善点の一覧と、その直し方」に載せています。")
@@ -1460,7 +1484,8 @@ def analyze(d):
          f'セッション{cur.get("sessions", 0):,}（前月比{mom("sessions")}）、'
          f'検索クリック{cur.get("clicks", 0):,}（{mom("clicks")}）。'),
         ('成果（CV）はGA4未接続のため未計測です。' if ga_na else
-         f'成果は{"前進しました" if trend("cv") == "up" else "横ばいでした"}。'
+         # 減った月を「横ばい」と書かない（2026-10-20）
+         f'成果は{ {"up": "前進しました", "down": "前月より減りました"}.get(trend("cv"), "横ばいでした")}。'
          f'CV{cur.get("cv", 0)}件（{mom("cv")}）。')
         + (f'広告で同じクリックを買うと約{ad_value:,}円相当の流入を、記事の資産で獲得しています。'
            if ad_value > 0 else
@@ -1954,15 +1979,21 @@ def _ai_brand():
     """指名検索。AI検索の可視性との相関 0.392（被リンク 0.218 の約2倍）"""
     try:
         import brand_search as B
-        # 全サイト分が返る。このサイトの分だけにしないと、3サイト合計が1社のレポートに載る
-        mine = B.collect().get(SITE_ID)
+        # このサイトの分だけ。collect は社の id（非公開の設定の id）で返すので、公開の id で呼ばれた回も引けるようにする。
+        # お客様の社は company.json の社名で数え、作れなければカードを出さない（当社の名前の検索を載せていた。2026-10-20）
+        sid = _sites_mod.resolve(SITE_ID)
+        mine = B.collect(only={sid}).get(sid)
         return {SITE_ID: mine} if mine else None
     except Exception:
         return None
 
 
 def _ai_mentions():
-    """外部での言及。リンクの有無で分けずに数える（AI回答がリンクするのは28%だけ）"""
+    """外部での言及。リンクの有無で分けずに数える（AI回答がリンクするのは28%だけ）。
+    data/mentions.json は当社（セブンセンシズ・AI集客ラボ）の言及の台帳。お客様の社のレポートには載せない
+    （当社の言及の数をお客様の数字として出していた。2026-10-20）。返す None は「未登録」"""
+    if _sites_mod.is_client(SITE_ID):
+        return None
     try:
         import json
         p = ROOT / "data" / "mentions.json"
@@ -2027,8 +2058,10 @@ def ai_measured_html(ym):
             cards.append(("指名検索（28日）", f"{ti:,}", f"前の28日 {pi:,} → {rate}"))
         except Exception:
             pass
-    n_m, n_l = _ai_mentions()
-    cards.append(("外部での言及", f"{n_m}件", f"うちリンクあり {n_l}件"))
+    got = _ai_mentions()
+    n_m, n_l = got if got is not None else (None, None)
+    cards.append(("外部での言及", f"{n_m}件", f"うちリンクあり {n_l}件") if got is not None
+                 else ("外部での言及", "未登録", "この社の言及の台帳はまだありません"))
     g = _ai_genai(ym)
     cards.append(("生成AIでの表示回数", f"{g:,}" if g is not None else "未取込",
                   "Search Console（月1回CSVを取り込み）"))
@@ -2039,7 +2072,7 @@ def ai_measured_html(ym):
                    f'<div class="v">{v}</div><div class="s">{html.escape(s)}</div></div>')
     out.append('</div>')
 
-    if n_m == 0:
+    if not n_m:
         out.append('<div class="callout"><b>外部での言及が登録されていません。</b>'
                    'AI検索で名前が出るかどうかに最も効くのは、リンクの有無ではなく'
                    '「どれだけ多くの場所で名前が出ているか」です。'

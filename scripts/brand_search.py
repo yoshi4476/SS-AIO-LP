@@ -36,15 +36,51 @@ BRAND = re.compile(
     re.I)
 
 
-def collect(days=28):
+CORP = re.compile(r"株式会社|有限会社|合同会社|合資会社|合名会社|一般社団法人|一般財団法人|医療法人(?:社団|財団)?|"
+                  r"社会福祉法人|特定非営利活動法人|NPO法人|[（(]株[）)]|㈱|[（(]有[）)]|㈲|\s")
+LAST_FAILED = []      # 直前の collect() で GSC から取れなかった社（呼び出し側が「減っていない」と読まないため）
+
+
+def pattern_for(site_id):
+    """その社の指名検索の語。自社は BRAND、お客様の社は company.json の社名（法人の種類を外した部分）。
+    作れなければ None（その社の指名検索は出さない）。
+    全社に当社の語（セブンセンシズ・AI集客ラボ）を当てていたため、お客様のレポートの「指名検索」は
+    お客様の社名ではなく当社の名前の検索を数えていた（2026-10-20）"""
+    import sites as S
+    if not S.is_client(site_id):
+        return BRAND
+    try:
+        import private_store
+        name = (private_store.read_json(site_id, "company.json", {}) or {}).get("name") or ""
+    except Exception:
+        name = ""
+    core = CORP.sub("", name)
+    return re.compile(re.escape(core), re.I) if len(core) >= 2 else None
+
+
+def shown(site_id, cfg):
+    """ログに出す社の名前。お客様の社は公開の id（CI のログは public）"""
+    import sites as S
+    return S.public_id(site_id) if S.is_client(site_id) else cfg.get("name", site_id)
+
+
+def collect(days=28, only=None):
+    """{社の id: {name, prev, cur, span}}。only を渡すとその社だけ GSC に聞く。
+    取れなかった社は入れず LAST_FAILED に残す。指名の語が作れないお客様の社は入れない（失敗ではない）"""
     import gsc_detail as G
     import sites as S
+    del LAST_FAILED[:]
     sc = G.client()
     end = date.today() - timedelta(days=3)          # GSCの確定分
     cur = (end - timedelta(days=days - 1), end)
     prev = (cur[0] - timedelta(days=days), cur[0] - timedelta(days=1))
     out = {}
     for sid, cfg in S.load_all().items():
+        if only and sid not in only:
+            continue
+        pat = pattern_for(sid)
+        if pat is None:
+            continue
         got = []
         for a, b in (prev, cur):
             try:
@@ -53,8 +89,9 @@ def collect(days=28):
             except Exception:
                 # 取れなかった期を0と数えると「指名検索が減った」と誤って知らせる。そのサイトごと外す
                 got = None
+                LAST_FAILED.append(sid)
                 break
-            hit = [r for r in rows if BRAND.search(r["keys"][0])]
+            hit = [r for r in rows if pat.search(r["keys"][0])]
             got.append({
                 "imp": sum(r["impressions"] for r in hit),
                 "clicks": sum(r["clicks"] for r in hit),
@@ -63,8 +100,8 @@ def collect(days=28):
             })
         if got is None:
             continue
-        out[sid] ={"name": cfg["name"], "prev": got[0], "cur": got[1],
-                    "span": (str(cur[0]), str(cur[1]))}
+        out[sid] = {"name": shown(sid, cfg), "prev": got[0], "cur": got[1],
+                    "span": (str(cur[0]), str(cur[1])), "client": S.is_client(sid)}
     return out
 
 
@@ -80,9 +117,16 @@ def main():
     ap.add_argument("--list", action="store_true", help="検索された語を出す")
     a = ap.parse_args()
 
-    d = collect(a.days)
+    # 取れなかった回に BRAND_OK の印を出さずに終わると、findings は「問題なし」と読んでいた（2026-10-20）
+    try:
+        d = collect(a.days)
+    except Exception as e:
+        print(f"  GSCに接続できませんでした（{type(e).__name__}）")
+        print("BRAND_OK=unknown")
+        return 0
     if not d:
         print("  GSCから取得できませんでした")
+        print("BRAND_OK=unknown")
         return 0
     span = list(d.values())[0]["span"]
     print(f"■ 指名検索の推移（{span[0]} 〜 {span[1]} と、その前の{a.days}日）\n")
@@ -102,7 +146,7 @@ def main():
         print("\n■ どの語で検索されたか（今期）")
         for sid, v in d.items():
             rows = v["cur"]["rows"]
-            if not rows:
+            if not rows or v.get("client"):        # お客様の社の検索語（社名）はログに出さない
                 continue
             print(f"\n  {v['name'][:20]}")
             for r in rows[:8]:
@@ -121,6 +165,10 @@ def main():
         print(f"  前の28日より減っています（{pi} → {ti}表示）。"
               "引用が減ったか、外部での言及が止まっている可能性があります")
         print("BRAND_OK=no")
+    elif LAST_FAILED:
+        # 取れなかった社を外した合計で「減っていない」とは言えない
+        print(f"  {len(LAST_FAILED)}社は GSC から取れず、比べられませんでした")
+        print("BRAND_OK=unknown")
     else:
         print("BRAND_OK=yes")
     return 0

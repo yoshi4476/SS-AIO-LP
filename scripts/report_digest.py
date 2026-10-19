@@ -58,8 +58,38 @@ def partial(r):
     return f"（{int(t[8:10])}日までの途中経過）" if t else ""
 
 
+def log_body(lines, rows):
+    """CI のログ（public）に出す本文。お客様の社の名前・社の id・宛名の入った行は伏せ、件数だけを添える。
+    メールの本文（運用者にだけ届く）はそのまま。print(body) がお客様の社名と要対応の中身をログに出していた（2026-10-20）"""
+    try:
+        import sites as S
+        cl = [r for r in rows if S.is_client(r["site"])]
+        words = {w for r in cl for w in (r.get("name"), r["site"], S.public_id(r["site"])) if w}
+        try:
+            words |= {s for s in S.load_all() if S.is_client(s)}
+        except Exception:
+            pass
+    except Exception:
+        return f"（本文は {len(lines)} 行。社の判定ができないため、ログには出しません）"
+    out, hidden, inside = [], 0, False
+    for ln in lines:
+        # 「・<社名>:」の下の字下げした明細（その社の要対応）も一緒に伏せる
+        if inside and ln.startswith("    "):
+            hidden += 1
+            continue
+        inside = False
+        if any(w in ln for w in words):
+            hidden += 1
+            inside = ln.rstrip().endswith(":")
+            continue
+        out.append(ln)
+    if hidden:
+        out.append(f"（お客様の社 {len(cl)}社の行 {hidden}行はログに出しません。メールの本文には載ります）")
+    return "\n".join(out)
+
+
 def main():
-    rows = [json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()] if QUEUE.is_file() else []
+    rows =[json.loads(l) for l in QUEUE.read_text(encoding="utf-8").splitlines() if l.strip()] if QUEUE.is_file() else []
     if not rows:
         print("まとめて送るレポートがありません")
         print("DIGEST_OK=yes")
@@ -105,7 +135,7 @@ def main():
         attach.append({"filename": fn, "content": base64.b64encode(b).decode()})
         lines.append(f"・{r['name']}（{fn}）{issuer_label(r['site'])}")
     body = "\n".join(lines)
-    print(body)
+    print(log_body(lines, rows))
     if "--email" not in sys.argv:
         print("DIGEST_OK=yes")
         return 0

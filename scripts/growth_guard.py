@@ -51,22 +51,24 @@ def fetch(sc, dom, span, dims):
         return None
 
 
-def totals(sc, dom, span):
+def totals(sc, dom, span, label=None):
     """表示・クリックの合計。**2通りで一致したものだけ**を返す（measure 経由）。
 
     次元を付けた合計は信用しない。measure.gsc_totals が
     「次元なし」と「日次の合算」を突き合わせ、食い違えば例外を投げる。
     「概ね合っている」で先に進めないようにするのが目的。
+    label を渡した社（お客様の社）はドメインと例外の文（URL が入る）をログに出さない
     """
     import measure
     try:
         return measure.gsc_totals(dom, span[0], span[1])
     except measure.Disagree as e:
-        print(f"  {dom}: 計測が一致しないため、この数字は使いません → {e}")
+        print(f"  {label or dom}: 計測が一致しないため、この数字は使いません" + ("" if label else f" → {e}"))
         return None
     except Exception as e:
         # 0 を返すと前期との比較で -100% の下落として警告してしまう
-        print(f"  {dom}: GSCから取得できないため、この数字は使いません → {str(e)[:60]}")
+        print(f"  {label or dom}: GSCから取得できないため、この数字は使いません"
+              + (f"（{type(e).__name__}）" if label else f" → {str(e)[:60]}"))
         return None
 
 
@@ -83,14 +85,18 @@ def main():
     print(f"■ {now[0]}〜{now[1]}  と  {prev[0]}〜{prev[1]} の比較\n")
     alerts, unknown = [], []
     for sid, cfg in S.load_all().items():
+        # お客様の社は公開の id と件数だけを出す（語・URL・社名は CI のログに出さない。2026-10-20）
+        client = S.is_client(sid)
+        name = S.public_id(sid) if client else cfg["name"]
         # 内訳（どの語が消えたか）には語が要るので query+page で取る。
         # ただし合計はこれで数えない — query次元は検索数の少ない語を返さないため、
         # 実測で補助金のクリックが 51回→2回 に見えていた（CLAUDE.md 0.1）
         a = fetch(sc, cfg["domain"], now, ["query", "page"])
         b = fetch(sc, cfg["domain"], prev, ["query", "page"])
-        tn, tp = totals(sc, cfg["domain"], now), totals(sc, cfg["domain"], prev)
+        lab = name if client else None
+        tn, tp = totals(sc, cfg["domain"], now, lab), totals(sc, cfg["domain"], prev, lab)
         if tn is None or tp is None:
-            print(f"  {cfg['name']}: 合計が確かめられないため比較しません\n")
+            print(f"  {name}: 合計が確かめられないため比較しません\n")
             unknown.append(sid)
             continue
         (ai, ac), (bi, bc) = tn, tp
@@ -103,7 +109,7 @@ def main():
             return "—" if v is None else f"{v * 100:+.0f}%"
 
         mark = "×" if (di is not None and di < -DROP) else "○"
-        print(f"{mark} {cfg['name']}")
+        print(f"{mark} {name}")
         print(f"    表示    {bi:>6,} → {ai:>6,}  {pct(di)}")
         print(f"    クリック {bc:>6,} → {ac:>6,}  {pct(dc)}")
 
@@ -133,15 +139,15 @@ def main():
         worse_imp = sum(x["impressions"] - y["impressions"] for x, y in worse)
         print(f"    内訳: 消えた語 {len(lost)}語（表示{lost_imp:,}） / "
               f"順位が下がった語 {len(worse)}語（表示{worse_imp:,}）")
-        for x in lost[:3]:
+        for x in ([] if client else lost[:3]):
             print(f"      消えた  「{x['keys'][0][:26]}」表示{x['impressions']}"
                   f" {x['position']:.0f}位 {x['keys'][1].rstrip('/').split('/')[-1][:24]}")
-        for x, y in worse[:3]:
+        for x, y in ([] if client else worse[:3]):
             print(f"      下降    「{x['keys'][0][:26]}」"
                   f"{x['position']:.0f}→{y['position']:.0f}位 "
                   f"表示{x['impressions']}→{y['impressions']}")
         top = sorted(gone_page.items(), key=lambda kv: -kv[1])[:2]
-        for url, imp in top:
+        for url, imp in ([] if client else top):
             print(f"      要確認  {url}（消えた表示{imp:,}）")
         alerts.append((sid, di, len(lost), len(worse), [u for u, _ in top]))
         print()
@@ -149,7 +155,7 @@ def main():
     # 取れなかったサイトがあるのに no と出すと「下落なし」と読まれる（GSC が落ちた週も no だった）
     print("GROWTH_DROP=" + ("yes" if alerts else "unknown" if unknown else "no"))
     if unknown and not alerts:
-        print(f"  確かめられなかったサイト: {', '.join(unknown)}")
+        print(f"  確かめられなかったサイト: {', '.join(S.public_id(s) if S.is_client(s) else s for s in unknown)}")
     global LAST_UNKNOWN
     LAST_UNKNOWN = unknown
     if alerts:

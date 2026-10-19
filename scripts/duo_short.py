@@ -114,10 +114,29 @@ def validate(sc, art):
         ng.append(f"最初の N のセリフが「{br['name']}のナナです。」で始まっていない")
     if lines and f"『{br['search']}』" not in lines[-1].get("text", ""):
         ng.append(f"最後のセリフで『{br['search']}』の検索を案内していない")
-    return ng + DV.brand_ng(sc, art) + count_ng(sc)
+    return ng + DV.brand_ng(sc, art) + count_ng(sc) + own_ng(sc, art)
 
 
-COUNT = re.compile(r"(\d+)\s*(?:つ|点|個|項目|ステップ)(?!目)")
+# 決まり8（当社の運用実績・実測の数字は使わない）。指示に書くだけで検査が無く、記事にある「当社の支援実績では12社」を
+# そのまま台本にしても通っていた（2026-10-20）。記事にある数字でも、当社が主語の文の数字は通さない
+OWN = r"(?:当社|弊社|私たち|わたしたち|自社|うちの会社|運用実績|支援実績|実測|当サイト)"
+
+
+def own_ng(sc, art):
+    br = re.escape(DV.brand(art)["name"])
+    own = re.compile(rf"{OWN}|{br}の(?:調べ|調査|実績|データ|記事|運用)")
+    ng = []
+    for i, ln in enumerate(sc.get("lines") or []):
+        bd = ln.get("board") or {}
+        said = ln.get("text", "") + "。" + "。".join(str(v) for k, v in bd.items() if k != "type")
+        for s in re.split(r"[。！？!?\n]", said):
+            if own.search(s) and DV._nums(s):
+                ng.append(f"{i}: 当社の実績・実測の数字は使わない（決まり8）「{s[:24]}」")
+                break
+    return ng
+
+
+COUNT =re.compile(r"(\d+)\s*(?:つ|点|個|項目|ステップ)(?!目)")
 
 
 def count_ng(sc):
@@ -481,8 +500,13 @@ def selftest():
     many["lines"][2]["text"] = "確かめる点は6つあります。"
     other = json.loads(json.dumps(good))
     other["lines"][1]["text"] = "セブンセンシズのナナです。"
+    own = json.loads(json.dumps(good))
+    own["lines"][2]["text"] = "当社の実績では延床32坪です。"
+    kanji = json.loads(json.dumps(good))
+    kanji["lines"][2]["text"] = "相談は三割増えます。"
     ok = (not validate(good, art) and any("「3」" in x for x in validate(bad, art))
-          and any("6つ" in x for x in validate(many, art)) and any("ナナです" in x for x in validate(other, art)))
+          and any("6つ" in x for x in validate(many, art)) and any("ナナです" in x for x in validate(other, art))
+          and any("決まり8" in x for x in validate(own, art)) and any("「30」" in x or "「3」" in x for x in validate(kanji, art)))
     print("SHORT_SELFTEST=" + ("ok" if ok else "ng"))
     return 0 if ok else 1
 

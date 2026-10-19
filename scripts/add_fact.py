@@ -99,7 +99,11 @@ def problems(f, existing_ids):
     known = {p.stem for p in (ROOT / "sites").glob("*.json")} | set(S.load_all())
     for s in sites:
         if s not in known:
-            out.append(f"sites の「{s}」は存在しません（候補: {', '.join(sorted(known))}）")
+            out.append(f"sites の「{s}」は存在しません（候補: {', '.join(sorted(S.own_ids()))}）")
+        elif S.is_client(s):
+            # data/first_party_facts.json は公開リポジトリにある。お客様の数字をここへ書くと守秘の外へ出る（2026-10-20）
+            out.append(f"sites の「{S.public_id(s)}」はお客様の社です。お客様の一次情報は非公開の facts.json へ"
+                       "（private/clients/<id>/facts.json。ヒアリングシート・jisseki_intake から登録する）")
     if not str(f.get("as_of", "")).count("-") == 1:
         out.append("as_of は YYYY-MM の形で書いてください")
     return out

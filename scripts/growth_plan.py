@@ -67,9 +67,9 @@ def next_month(label, k=1):
 def measure(label):
     """その月の3サイト合算（group_report と同じ取り方）。取れなければ None"""
     import group_report as G
-    import sites as S
-    tot = {k: 0 for k, _ in METRICS}
-    for cfg in S.load_all().values():
+    tot ={k: 0 for k, _ in METRICS}
+    # 3倍計画は自社のグループの道筋。お客様の数字を足すと、お客様が増えた月に「伸びた」と読む（2026-10-20）
+    for cfg in G.own_cfgs().values():
         s = G.fetch_site(cfg, [label])
         m = s["months"][0]
         # 片方だけ欠けたサイトを0で足すと、合計が小さく出て「遅れ」や小さい起点になる。

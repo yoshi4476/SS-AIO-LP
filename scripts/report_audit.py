@@ -129,8 +129,10 @@ def audit_group(pdf, month, through=None):
     end = through or M.month_end(month)
     tot = {"表示回数": 0, "クリック": 0, "リード": 0}
     per = []
-    import sites as S                    # お客様の社のドメインは非公開の置き場の設定
-    for cfg in S.load_all().values():
+    # 合算レポートは自社のグループだけを足す（group_report.own_cfgs と同じ範囲）。全社で取り直すと、
+    # お客様の数字が合計に入って照合が毎回食い違い、お客様の社の id と数字がログに出ていた（2026-10-20）
+    import group_report as GR
+    for cfg in GR.own_cfgs().values():
         if not cfg.get("domain"):
             continue
         url = cfg.get("gsc_site_url") or f"https://{cfg['domain']}/"
