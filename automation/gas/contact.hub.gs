@@ -20,7 +20,7 @@ const LEAD_HOT_WORDS = ['補助金', '見積', '見積もり', '見積り', '導
                         '予算', '急ぎ', '至急', '締め切り', '締切'];
 const LEAD_TYPE_LABELS = {
   contact: '無料相談', diagnosis: '無料診断',
-  download: '資料ダウンロード', site_audit: 'サイト無料診断',
+  download: '資料ダウンロード', site_audit: 'サイト無料診断', ai_check: 'AIチェック',
 };
 const DIAG_KIND_LABELS = { hojokin: 'AI補助金診断', meo: 'MEO集客診断', ai: 'AI活用診断' };
 // 同じメールから24時間以内の再送信は、新しい行を作らず既存行に追記する
@@ -631,8 +631,11 @@ function leadSave_(site, type, temp, d, route) {
     }
   }
 
+  // AI紹介チェック（受付の type は diagnosis）は、30秒のサイト診断などの「無料診断」と分けて「AIチェック」と書く
+  // （2026-10-20 運用者の決定: 問い合わせの台帳に AIチェックとして入れ、後追いの対象にする。後追いは toolKind_ が詳細欄で見分ける）
+  const label = /AI紹介チェック/.test(String(d.form_type || '')) ? LEAD_TYPE_LABELS.ai_check : (LEAD_TYPE_LABELS[type] || type);
   sh.appendRow(cells_([
-    now, site, LEAD_TYPE_LABELS[type] || type, clean_(d.company), clean_(d.name), '',
+    now, site, label, clean_(d.company), clean_(d.name), '',
     email, clean_(d.tel || d.phone), body_(d.message || d.body),
     // 流入経路は80字で切る clean_ を通さない（入口・送信のページまで入れると80字を超える）
     leadDetail_(type, d), '', String(route || '').replace(/[\r\n]+/g, ' ').slice(0, 200), temp, '未対応',
