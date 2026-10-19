@@ -25,6 +25,41 @@ def test_onboard_check_matches_self_built_aggregate_titles():
     check("中身の無いページ（題が無い）には当たらない", base in "<title>404</title>", False)
 
 
+def test_ledger_leftovers_skip_noindex_and_recent_but_catch_real_ones():
+    import hub_client as HC
+    import external_index as EI
+    import history_checks_c as H
+    import io
+    from contextlib import redirect_stdout
+    from datetime import date
+    print("\n■ 台帳の取り下げの残り: 検索から外した記事・公開14日以内は除き、本当の残りは拾う")
+    arts = ROOT / "articles"
+    today = date.today().isoformat()
+    files = {"zz-gate-noidx": f"---\ntitle: a\nscore: 92\ndate: 2026-08-01\nnoindex: true\n---\n本文\n",
+             "zz-gate-recent": f"---\ntitle: b\nscore: 92\ndate: {today}\n---\n本文\n"}
+    rows = [{"site": "zz", "status": "公開済み", "keyword": k, "url": f"https://zz.example/blog/{k}/"}
+            for k in ("zz-gate-noidx", "zz-gate-recent", "zz-gate-gone", "zz-gate-live")]
+    o = (HC.enabled, HC.all_kw, EI.load)
+    try:
+        for s, t in files.items():
+            (arts / f"{s}.md").write_text(t, encoding="utf-8")
+        HC.enabled, HC.all_kw = (lambda: True), (lambda strict=False: rows)
+        EI.load = lambda: {"sites": {"zz": [{"slug": "zz-gate-live"}]}}
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            try:
+                H.main()
+            except SystemExit:
+                pass
+        out = buf.getvalue()
+    finally:
+        HC.enabled, HC.all_kw, EI.load = o
+        for s in files:
+            (arts / f"{s}.md").unlink(missing_ok=True)
+    check("本当の残り（原稿も公開も無い）は1本として拾う", "台帳に残った取り下げ 1本" in out, True)
+    check("要対応の行が出る", "公開済みなのに公開中に無い記事 1本" in out, True)
+
+
 def test_reading_issues_are_resolved_or_still_listed():
     print("\n■ 読み違いの記録: 直した語には理由がある・確かめていない語は直ったと書かない")
     rows = [json.loads(l) for l in (ROOT / "data" / "yomi_issues.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]

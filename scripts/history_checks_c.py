@@ -14,6 +14,7 @@
     python scripts/history_checks_c.py
 出す印: HISTC_OK=yes|no|unknown（見つかっても終了コード0。何も確かめられなかったときだけ1）
 """
+import re
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -79,20 +80,39 @@ def main():
             print("  管制塔が未接続のため比べません（HUB_URL）")
             skipped.append("公開本数の突き合わせ")
         else:
-            ledger = {}
+            # 本数の大小ではなく「台帳で公開済みなのに公開中に無い記事」を1本ずつ見る（2026-10-20）。件数で比べていた間は、
+            # 検索から外した記事（noindex。URL は残す決まりで公開中の一覧には入らない）と、公開から日が浅く一覧の控えに
+            # まだ無い記事まで「取り下げの残り」と数えていた。本当の残り（301 で取り下げた記事）だけを出す
+            from datetime import date as _date, timedelta as _td
+            import private_store as PS
+            recent = (_date.today() - _td(days=14)).isoformat()
+            idx = EI.load()["sites"]
+            ledger, left = {}, {}
             for k in HC.all_kw(strict=True):
-                if str(k.get("status", "")).strip() == "公開済み":
-                    ledger[k.get("site")] = ledger.get(k.get("site"), 0) + 1
-            live = {s: len(v) for s, v in EI.load()["sites"].items()}
+                if str(k.get("status", "")).strip() != "公開済み":
+                    continue
+                sid = k.get("site")
+                ledger[sid] = ledger.get(sid, 0) + 1
+                slug = str(k.get("url") or "").rstrip("/").rsplit("/", 1)[-1]
+                if not slug or sid not in idx or slug in {x.get("slug") for x in idx[sid]}:
+                    continue
+                art = ROOT / "articles" / f"{slug}.md"
+                t = art.read_text(encoding="utf-8-sig", errors="replace") if art.is_file() else ""
+                if re.search(r"^noindex:\s*true", t, re.M):
+                    continue
+                m = re.search(r"^date:\s*(\S+)", t, re.M)
+                if m and m.group(1)[:10] >= recent:
+                    continue
+                left.setdefault(sid, []).append(slug)
             ran += 1
-            for sid in sorted(live):
-                a, b = ledger.get(sid, 0), live[sid]
-                mark = "○" if a <= b else "×"
-                print(f"  {mark} {sid}: 台帳の公開済み {a}本 / 公開中 {b}本")
-                # 公開中には当パイプライン以前の記事も入るので、多いのは正常。台帳の方が多いのは取り下げの残り
-                if a > b:
-                    found.append(f"要対応: {sid} の台帳の公開済み {a}本が公開中の {b}本より多い"
-                                 "（取り下げた記事が台帳に残っている。レポートは公開中で数えるが、台帳も直す）")
+            for sid in sorted(idx):
+                bad = left.get(sid, [])
+                print(f"  {'×' if bad else '○'} {sid}: 台帳の公開済み {ledger.get(sid, 0)}本 / 公開中 {len(idx[sid])}本"
+                      f"（台帳に残った取り下げ {len(bad)}本。検索から外した記事・公開14日以内は除く）")
+                if bad:
+                    found.append(f"要対応: {sid} の台帳で公開済みなのに公開中に無い記事 {len(bad)}本（取り下げた記事が台帳に残っている。"
+                                 "hub_client.retire_kw(社, [語], 理由, force=True) で「取り下げ」にする）: "
+                                 + "、".join(PS.shown(s) for s in bad[:5]))
     except Exception as e:
         print(f"  比べられません（{type(e).__name__}: {str(e)[:60]}）")
         skipped.append("公開本数の突き合わせ")
