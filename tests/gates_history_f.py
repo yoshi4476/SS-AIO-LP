@@ -270,7 +270,7 @@ def test_hist_lessons_kw_append_needs_readable_ledger():
 # ── L0045: claude -p の書き換えが権限待ちで止まり、24本連続「変更なし」（2026-09-23）──────
 def can_edit(perm_json):
     p = (json.loads(perm_json) or {}).get("permissions") or {}
-    return p.get("defaultMode") == "acceptEdits" and any(str(a).startswith("Edit") for a in p.get("allow") or [])
+    return p.get("defaultMode") in ("acceptEdits", "dontAsk") and any(str(a).startswith("Edit") for a in p.get("allow") or [])
 
 
 def test_hist_lessons_claude_rewrite_can_edit():
@@ -281,10 +281,9 @@ def test_hist_lessons_claude_rewrite_can_edit():
           can_edit(json.dumps({"permissions": {"allow": ["Edit(articles/**)"], "defaultMode": "acceptEdits"}})), True)
     sys.path.insert(0, str(ROOT / "scripts"))
     import auto_rewrite as AR
-    check("auto_rewrite の権限設定で Edit が承認なしに通る", can_edit(AR.PERM), True)
-    src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
-    check("claude 呼び出しに --settings PERM と claude_bin() を使う",
-          '"--settings", PERM' in src and "exe = claude_bin()" in src, True)
+    check("auto_rewrite の権限設定で Edit が承認なしに通る", can_edit(AR.perm(["zz-post"])), True)
+    args = AR.claude_args.__code__.co_names
+    check("claude 呼び出しに許可の設定（perm）と claude_bin() を使う", ("perm" in args, "claude_bin" in args), (True, True))
 
 
 # ── L0116: 出典の種類を .or.jp の末尾で「公的機関」にした（2026-10-02 jidv.org は紹介サイト）──

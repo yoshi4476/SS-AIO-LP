@@ -166,7 +166,7 @@ def test_merge_drafts_in_parallel_but_checks_one_by_one():
             AR.warns = lambda slug: []
             AR.snapshot = lambda: {}
             AM.url_of = lambda site, slug: f"/x/{slug}/"
-            AM._claude = lambda prompt, cwd=None: calls.append(prompt) or subprocess.CompletedProcess([], 0, "", "")
+            AM._claude = lambda prompt, cwd=None, **kw: calls.append(prompt) or subprocess.CompletedProcess([], 0, "", "")
             AM.ARTICLES = Path(tmp)
             base = art.read_text(encoding="utf-8")
             AM.run_one(pair, True, draft={"base": base, "loser": "loser", "text": base})

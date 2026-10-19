@@ -33,6 +33,7 @@ auto_improve は、タイトルの書き換えと検索意図の見直しを人�
 import argparse
 import collections
 import json
+import os
 import re
 import subprocess
 import sys
@@ -72,12 +73,35 @@ def sh(args, timeout=1800, stdin_text=None, cwd=None):
         else:
             import agent_memory
             with agent_memory.slimmed("writer"):
-                return subprocess.run(args, cwd=cwd or ROOT, capture_output=True, text=True,
-                                      encoding="utf-8", errors="ignore", timeout=timeout,
-                                      input=stdin_text, env=env)
-    return subprocess.run(args, cwd=cwd or ROOT, capture_output=True, text=True,
-                          encoding="utf-8", errors="ignore", timeout=timeout,
-                          input=stdin_text, env=env)
+                return _run(args, cwd=cwd or ROOT, timeout=timeout, input=stdin_text, env=env)
+    return _run(args, cwd=cwd or ROOT, timeout=timeout, input=stdin_text, env=env)
+
+
+WINDOWS = os.name == "nt"
+
+
+def _run(args, cwd=None, timeout=None, input=None, env=None):
+    """subprocess.run と同じ結果を返す。Windows だけ、時間切れのときに子プロセスごと止める。
+
+    Windows の claude は claude.CMD（cmd.exe）から node を起こす。subprocess.run は時間切れで cmd.exe だけを止め、
+    出力の管を握ったままの node を待ち続けるので、時間切れが効かず手元の実行が止まらなかった（2026-10-20 の点検）。
+    taskkill /T /F で木ごと止める。CI は Linux なので subprocess.run のまま"""
+    kw = dict(cwd=cwd, capture_output=True, text=True, encoding="utf-8", errors="ignore", env=env)
+    if not WINDOWS:
+        return subprocess.run(args, timeout=timeout, input=input, **kw)
+    kw.pop("capture_output")
+    p = subprocess.Popen(args, stdin=subprocess.PIPE if input is not None else None,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE, **kw)
+    try:
+        out, err = p.communicate(input, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        subprocess.run(["taskkill", "/T", "/F", "/PID", str(p.pid)], capture_output=True)
+        try:
+            p.communicate(timeout=30)
+        except subprocess.TimeoutExpired:
+            pass
+        raise subprocess.TimeoutExpired(args, timeout)
+    return subprocess.CompletedProcess(args, p.returncode, out, err)
 
 
 def aio_items():
@@ -625,7 +649,10 @@ def is_main(slug, site=""):
     rule = _MAIN[site]
     if not rule:
         return False
-    title, kw, _ = meta(slug)
+    try:
+        title, kw, _ = meta(slug)
+    except FrontMatterError:
+        return False                           # 読めない記事は書き直しの候補にしない（直す前の検算で落ちる）
     return bool(rule(kw or title))
 
 
@@ -816,6 +843,10 @@ def desc_items(limit=4, days=28):
             if slug in metas and kw_fit.judge(r["keys"][0], cfg["id"])[0] < 2:
                 by.setdefault(slug, []).append((r["keys"][0], int(r["impressions"])))
         for slug, qs in by.items():
+            # 題の判定期間中の記事は説明文も直さない。28日後に題を戻すとき、説明文も題と一緒に直す前へ戻すので、
+            # その間に直した説明文まで消していた（2026-10-20 の点検）
+            if title_locked(slug):
+                continue
             qs.sort(key=lambda x: -x[1])
             top = [q for q, imp in qs[:3] if imp >= 10]
             if not top:
@@ -888,9 +919,9 @@ PROMPT = """articles/{slug}.md を直してください。この1ファイル以
 
 必ず守ること:
 - 事実を変えない。数字・社名・出典・年月日は1文字も変えない。**新しい数字を書かない**
-- 外部の出典リンク（href="http…"）を消さない
+- 外部の出典リンク（href="http…"）を消さない。新しい出典のURLを足さない（記事にある出典だけを使う）
 - ですます調。1文は50字を目安、100字を超えない
-- フロントマターの keyword は変えない
+- フロントマターの keyword・category は変えない。同じ項目を2行に書かない
 - 記事の主張をずらさない。読者が求めている答えを先に書く
 - 当社の採択率・支援社数は書かない。当社が申請書類を作成する・申請を代行すると読める文を書かない
   （当社は申請に向けた相談・助言と内容の確認を行い、申請書類はお客様が作成する）
@@ -1052,14 +1083,39 @@ READ_DENY = [
     "Read(//**/_temp/**)",
 ]
 
-PERM = json.dumps({"permissions": {
-    # articles/ の書き換えだけを許す。Bash も外部通信も渡さないので、
-    # この工程にできるのは原稿1本の書き換えだけ。
-    # 全権限を飛ばす指定は使わない（ゲートが綴りの有無で見張っている）
-    "allow": ["Read", "Edit(articles/**)"],
-    "deny": READ_DENY,
-    "defaultMode": "acceptEdits",
-}}, ensure_ascii=False)
+# 読み書き以外の道具は名指しで拒む。許可に無い道具は dontAsk が断るが、ほかの設定（~/.claude の許可）が
+# 混ざっても通らないようにする（2026-10-20 の点検）
+TOOL_DENY = ["Bash", "Write", "WebFetch", "WebSearch", "NotebookEdit"]
+SLUG_OK = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+
+
+def edit_rules(slugs):
+    """書いてよい原稿の許可（Edit(articles/<slug>.md)）。slug は記事の名前の形だけ（許可の書き方を崩させない）"""
+    bad = [s for s in slugs if not SLUG_OK.fullmatch(str(s))]
+    if bad:
+        raise ValueError(f"記事の名前の形ではありません: {bad[:2]}")
+    return [f"Edit(articles/{s}.md)" for s in slugs]
+
+
+def perm(slugs):
+    """claude に渡す許可の設定。読むのと、名指しした原稿の書き換えだけ。
+    articles/** を丸ごと許していたので、外の文章（競合の見出し・検索語）に仕込まれた指示でほかの記事も書けた。
+    acceptEdits は許可に無い書き換えも承認なしで通すので、許可に無いものは断る dontAsk にする（2026-10-20 の点検）。
+    Edit は allow に名指しで入れる（入れないと「承認待ち」で止まり、16本続けて「変更なし」で空振りした）。
+    全権限を飛ばす指定は使わない（ゲートが綴りの有無で見張っている）"""
+    return json.dumps({"permissions": {
+        "allow": ["Read", *edit_rules(slugs)],
+        "deny": READ_DENY + TOOL_DENY,
+        "defaultMode": "dontAsk",
+    }}, ensure_ascii=False)
+
+
+def claude_args(slugs, max_turns=40):
+    """書き直し・統合で claude を呼ぶ引数。書けるのは slugs の原稿（一時フォルダの写しの articles/ の下）だけ。
+    プロンプトは stdin で渡す（引数だと1行目しか届かない）"""
+    tools = ",".join(["Read", *edit_rules(slugs)])
+    return [claude_bin(), "-p", "--max-turns", str(max_turns), *model_args(),
+            "--allowedTools", tools, "--settings", perm(slugs)]
 
 
 KW_NOISE = re.compile(r"[\s　のをにはがともへやかでるな・｜|【】\[\]「」（）()？?！!、。,.:：/／-]")
@@ -1129,20 +1185,174 @@ def model_args():
 
 
 def warns(slug):
+    """score_check の WARN と FAIL の行。FAIL を見ていなかったので、書き直しで FAIL が増えても通っていた（2026-10-20 の点検）"""
     r = sh([sys.executable, "scripts/score_check.py", slug], timeout=300)
-    return [l for l in (r.stdout or "").splitlines() if l.startswith("WARN")]
+    return [l for l in (r.stdout or "").splitlines() if l.startswith(("WARN", "FAIL"))]
+
+
+def worse_warns(before, now):
+    """書き直しで悪くなった警告の説明（空なら悪化なし）。WARN は件数で、FAIL は項目の名前で比べる
+    （WARN が FAIL に変わっても件数は同じなので、名前で見ないと素通りする）。既にある FAIL は止めない"""
+    name = lambda l: (l.split(" | ") + [""])[1].strip()
+    fail0 = {name(l) for l in before if l.startswith("FAIL")}
+    fails = [l for l in now if l.startswith("FAIL") and name(l) not in fail0]
+    if fails:
+        return "警告が増えました（FAIL）: " + " / ".join(fails)[:400]
+    w0 = [l for l in before if l.startswith("WARN")]
+    w1 = [l for l in now if l.startswith("WARN")]
+    if len(w1) > len(w0):
+        # 何の警告かを返す。件数だけでは、やり直しのときに直す場所が分からない
+        return f"警告が増えました（{len(w0)} → {len(w1)}）: " + " / ".join(w for w in w1 if w not in w0)[:400]
+    return ""
+
+
+class FrontMatterError(ValueError):
+    """フロントマターが YAML として読めない、または同じ項目が2行ある"""
+
+
+def front(text):
+    """フロントマターを build.py と同じ yaml.safe_load で読んだ dict。
+    正規表現で1行目を拾っていたので、AI が keyword を2行に書く（yaml と build.py は後の行を使う）と、
+    検算は前の行を見て「狙う語は変わっていない」と通していた（2026-10-20 の点検）。同じ項目が2行あれば止める"""
+    import yaml
+    m = re.match(r"^---\s*\n(.*?)\n---", text, re.S)
+    if not m:
+        return {}
+    keys = re.findall(r"^([^\s#:\-][^:]*):", m.group(1), re.M)
+    dup = sorted({k for k in keys if keys.count(k) > 1})
+    if dup:
+        raise FrontMatterError("同じ項目が2行あります: " + "・".join(dup[:3]))
+    try:
+        d = yaml.safe_load(m.group(1))
+    except yaml.YAMLError as e:
+        raise FrontMatterError(f"YAML として読めません（{str(e)[:60]}）") from e
+    if d is None:
+        return {}
+    if not isinstance(d, dict):
+        raise FrontMatterError("項目の形になっていません")
+    return d
+
+
+def front_safe(text):
+    try:
+        return front(text)
+    except FrontMatterError:
+        return {}
+
+
+def _str(v):
+    return "" if v is None else str(v).strip()
 
 
 def meta(slug):
+    """(title, keyword, 原稿の全文)。フロントマターが壊れていれば FrontMatterError"""
     t = (ROOT / "articles" / f"{slug}.md").read_text(encoding="utf-8-sig")
-    fm = re.match(r"^---\s*\n(.*?)\n---", t, re.S)
-    fm = fm.group(1) if fm else ""
-    g = lambda k: (re.search(rf"^{k}:\s*(.+)$", fm, re.M) or [0, ""])[1].strip().strip('"')
-    return g("title"), g("keyword"), t
+    d = front(t)
+    return _str(d.get("title")), _str(d.get("keyword")), t
+
+
+# ── 数字の検算（2026-10-20 の点検で作り直した）────────────────────────
+# 数字だけを比べていたので「3つ」があれば「3倍」、「450万円」があれば「450億円」が通り、漢数字（三割・四百五十万円）は
+# 数えておらず、「約」「以上」を付けて意味を変えても同じ数字とみなしていた。数を単位・前後の限定とひとまとまりで比べ、
+# 漢数字・桁区切り・万億の書き方の違いは同じ値にそろえる
+_ZEN = str.maketrans("０１２３４５６７８９．，％～", "0123456789.,%〜")
+_KD = {"〇": 0, "零": 0, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
+_ARAB = r"\d+(?:,\d{3})*(?:\.\d+)?"
+_KAN = r"[〇零一二三四五六七八九十百千]+"
+_NUM = rf"(?:{_ARAB}|{_KAN})(?:[千万億兆](?:{_ARAB}|{_KAN})?)*"
+_TOK = re.compile(
+    r"(?P<pre>約|およそ|第|(?:最大|最高|最低|最小|上限|下限)[はがで]?)?"
+    rf"(?P<num>{_NUM})"
+    r"(?P<unit>年度|か月|ヶ月|カ月|ヵ月|ケ月|箇月|週間|時間|店舗|パーセント|ページ|か所|カ所|ヶ所|箇所|文字"
+    r"|%|割|倍|円|ドル|社|人|名|件|回|本|店|年|月|週|日|分|秒|歳|位|点|つ|個|台|枚|校|字|坪)?"
+    r"(?P<post>以上|以下|超え|超(?!過)|未満|程度|前後|ほど|近く)?")
+_PRE = {"最高": "最大", "上限": "最大", "最小": "最低", "下限": "最低", "およそ": "約"}   # 同じ意味の限定をそろえる
+_UNIT = {"ヶ月": "か月", "カ月": "か月", "ヵ月": "か月", "ケ月": "か月", "箇月": "か月",
+         "カ所": "か所", "ヶ所": "か所", "箇所": "か所", "パーセント": "%", "文字": "字"}
+# 記事の組み立ての個数（「3つのポイント」「5ステップ」「10選」「2つ目」）は事実ではない。節を足す直しで必ず増える
+_STRUCT = re.compile(r"(?:の)?(?:ポイント|観点|視点|ステップ|項目|段階|手順|コツ|注意点|理由|方法|パターン|質問|見出し"
+                     r"|章|節|選|目|番目)")
+_RANGE = re.compile(r"\s*[〜~\-－–]\s*")
+
+
+def _value(s):
+    """「四百五十万」「450万」「4,500,000」→ 4500000、「二〇二六」→ 2026、「1.5万」→ 15000（文字列）"""
+    from decimal import Decimal
+    s = s.replace(",", "")
+    total = section = Decimal(0)
+    num, kd = None, False
+    i = 0
+    while i < len(s):
+        c = s[i]
+        if c.isdigit() and c not in _KD:
+            j = i
+            while j < len(s) and (s[j].isdigit() or s[j] == ".") and s[j] not in _KD:
+                j += 1
+            num, kd, i = Decimal(s[i:j]), False, j
+            continue
+        if c in _KD:
+            num = num * 10 + _KD[c] if (kd and num is not None) else Decimal(_KD[c])
+            kd = True
+        elif c in "十百千":
+            section += (num if num is not None else 1) * {"十": 10, "百": 100, "千": 1000}[c]
+            num, kd = None, False
+        elif c in "万億兆":
+            total += ((section + (num or 0)) or 1) * {"万": 10 ** 4, "億": 10 ** 8, "兆": 10 ** 12}[c]
+            section, num, kd = Decimal(0), None, False
+        i += 1
+    v = (total + section + (num or 0)).normalize()
+    return format(v, "f")
+
+
+def _clean_for_numbers(s):
+    t = (s or "").translate(_ZEN)
+    t = re.sub(r"(?m)^(date|modified):.*$", "", t)            # 更新日は事実ではない（fresh・統合が今日に変える）
+    t = re.sub(r"https?://[^\s)\"'<>]+", " ", t)              # URL の中の数字（出典は別の検算が見る）
+    t = re.sub(r"\]\([^)]*\)", "] ", t)                       # リンク先・画像のパス
+    t = re.sub(r"<[^>]+>", " ", t)                            # タグの属性
+    return re.sub(r"(?m)^(\s*(?:#{1,6}\s*)?)\d+[.)）]\s+", r"\1", t)   # 番号つきの箇条・見出しの番号
 
 
 def numbers(s):
-    return collections.Counter(re.findall(r"[0-9０-９][0-9０-９,，.．%％]*", s))
+    """本文の数を「限定＋値＋単位＋限定」のまとまりで数える（Counter）。例: 「約450万円」→ 約4500000円、
+    「三割」→ 3割、「90パーセント以上」→ 90%以上。記事の組み立ての個数・型番（GA4・H2）・漢字の熟語（一般・十分）は数えない"""
+    t = _clean_for_numbers(s)
+    out = collections.Counter()
+    for m in _TOK.finditer(t):
+        num, unit, pre, post = m.group("num"), m.group("unit") or "", m.group("pre") or "", m.group("post") or ""
+        start, end = m.start("num"), m.end("num")
+        before_c = t[start - 1] if start and not pre else ""
+        after_c = t[end] if end < len(t) else ""
+        kanji = not re.search(r"\d", num)
+        if re.match(r"[A-Za-z0-9_.]", before_c) or (not unit and re.match(r"[A-Za-z]", after_c)):
+            continue                                              # 型番・識別子（GA4・H2・4K・Web3）
+        if not pre and re.search(r"(?:ステップ|手順|その)$", t[:start]):
+            continue
+        if kanji and (not unit or unit == "分" or (num == "一" and not post) or (before_c and before_c in "数何幾")
+                      or re.fullmatch(r"[〇零]+(?:[千万億兆][〇零]*)*", num)):
+            continue                                              # 熟語の漢字（一般・一人ひとり・十分・数十社）・伏せ字（〇〇万円）
+        val = _value(num)
+        if not post and unit in ("", "つ") and not pre:
+            try:
+                small = float(val) <= 20
+            except ValueError:
+                small = False
+            if small and _STRUCT.match(t, m.end()):
+                continue
+        if not unit and not post:
+            r = _RANGE.match(t, m.end())                          # 「1,600〜2,500円」の前の数は後ろの単位で数える
+            nxt = _TOK.match(t, r.end()) if r else None
+            if nxt and nxt.group("unit"):
+                unit = nxt.group("unit")
+        pre = re.sub(r"[はがで]$", "", pre)                     # 「上限は450万円」も「上限450万円」と同じ
+        out[_PRE.get(pre, pre) + val + _UNIT.get(unit, unit) + post] += 1
+    return out
+
+
+def date_tokens(y, m, d):
+    """鮮度の更新（fresh）で増えてよい数: 「YYYY年」「M月」「D日」「YYYY年M月」の形の今日の日付だけ。
+    年・月・日の数字をそのまま許していたので、今日が20日なら「20万円」「20社」も通っていた（2026-10-20 の点検）"""
+    return f"{y}年{m}月{d}日"
 
 
 def fact_numbers(added, had):
@@ -1191,6 +1401,12 @@ def false_alarms():
         ("同じ事実を2回目に書く",
          not new_fact_numbers(base, base + "3,200店舗の例です。\n3,200店舗では\n", "3,200店舗")),
         ("既出の個数「3」が1回増えるだけ", not new_fact_numbers(base, base + "3つの観点で見ます。\n")),
+        ("節の組み立ての個数（5つのポイント・2つ目）", not new_fact_numbers(base, base + "5つのポイントの2つ目です。\n")),
+        ("既出の金額を漢数字・万の書き方で繰り返す",
+         not new_fact_numbers(base + "上限450万円。補助は200万円。\n",
+                              base + "上限450万円。補助は200万円。\n上限は四百五十万円です。補助の2,000,000円は\n")),
+        ("今日の日付で時点を更新する（fresh）",
+         not new_fact_numbers(base, base + "2026年10月時点の情報です。\n", date_tokens(2026, 10, 20))),
         ("英語表記の語を日本語の見出しで扱う", heads_cover_terms(["AIOツールの選び方"], ["tool"])),
         ("ハイフンつきの AI-OCR を見出しで扱う", heads_cover_terms(["AI-OCRで請求書を読む"], ["aiocr"])),
         ("題の助詞違い", title_covers_kw("中小企業の助成金とは？申請の流れ", "中小企業助成金")),
@@ -1254,6 +1470,75 @@ def revert_since(orig, d=None):
     return out
 
 
+# AI を動かす間に変わってはいけない場所（記事のほか）。AI が一時フォルダの外へ書けた場合に、道具・台帳・手順の
+# 書き換えが commit・配信されないよう、変わっていたら全部戻して止める（2026-10-20 の点検）
+WATCH = ("scripts", "data", ".github")
+
+
+def outside_snapshot():
+    """WATCH の下の全ファイルの中身（作業場所からの相対パス → バイト列）。__pycache__ は Python 自身が書くので見ない"""
+    out = {}
+    for d in WATCH:
+        base = ROOT / d
+        if base.is_dir():
+            for p in base.rglob("*"):
+                if p.is_file() and "__pycache__" not in p.parts:
+                    out[p.relative_to(ROOT).as_posix()] = p.read_bytes()
+    return out
+
+
+def outside_restore(snap):
+    """snap の後に変わった・増えた・消えたファイルを snap の中身へ戻す。戻した相対パスを返す"""
+    now = outside_snapshot()
+    out = []
+    for rel in sorted(set(snap) | set(now)):
+        if snap.get(rel) == now.get(rel):
+            continue
+        p = ROOT / rel
+        if rel not in snap:
+            p.unlink()
+        else:
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_bytes(snap[rel])
+        out.append(rel)
+    return out
+
+
+class Escaped(Exception):
+    """AI が一時フォルダの外（作業場所の記事・scripts/・data/・.github/）を変えた。全部戻してある"""
+
+    def __init__(self, arts, outside):
+        self.arts, self.outside = arts, outside
+        names = [shown(n[:-3]) for n in arts[:3]]
+        super().__init__("、".join(names + ([f"記事の外 {len(outside)}件"] if outside else [])))
+
+
+def guarded(fn, articles=None):
+    """AI を動かす fn() の前後で、作業場所の記事と WATCH が変わっていないかを見る。変わっていれば全部
+    fn() の前の中身へ戻して Escaped。AI は一時フォルダの写しで書くので、作業場所は変わらないはず"""
+    arts, outside = originals(articles), outside_snapshot()
+    try:
+        res = fn()
+    finally:
+        moved, moved_out = revert_since(arts, articles), outside_restore(outside)
+    if moved or moved_out:
+        raise Escaped(moved, moved_out)
+    return res
+
+
+def in_copy(texts, run):
+    """texts（{slug: 原稿の中身}）を一時フォルダの articles/ へ写し、run(一時フォルダ) で AI に書かせる。
+    返すのは ({slug: 書いた後の写しの中身}, run の戻り値)。作業場所の原稿には触らせない（当てるのは呼び出し側）"""
+    import tempfile
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
+        d = Path(tmp) / "articles"
+        d.mkdir()
+        for s, t in texts.items():
+            (d / f"{s}.md").write_text(t, encoding="utf-8", newline="")
+        r = run(tmp)
+        return {s: (d / f"{s}.md").read_text(encoding="utf-8-sig") for s in texts}, r
+
+
 def rebuild_quietly():
     """差し戻した後のビルド。ここで落ちても差し戻しは済んでいるので、例外で呼び出し側の記録を失わない"""
     try:
@@ -1270,7 +1555,7 @@ def spare_guarded(items, limit, tries=6):
     for x in items[:tries]:
         try:
             _title, kw, _t = meta(x["slug"])
-        except OSError:
+        except (OSError, ValueError):
             kw = ""
         if kw:
             r = sh([sys.executable, "scripts/kw_guard.py", kw, "--site", site_of(x["slug"]),
@@ -1319,10 +1604,17 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
     if other:
         return f"別の記事まで変わっています: {', '.join(other[:3])}"
 
-    title, kw, after = meta(slug)
+    try:
+        title, kw, after = meta(slug)
+    except FrontMatterError as e:
+        return f"フロントマターが読めません（{e}）"
     _, kw0, _ = before
     if kw != kw0:
         return f"狙う語が変わりました（{kw0} → {kw}）"
+    # カテゴリが変わると URL と担当のサイトが変わる（転送の無い 404・別サイトへの配信）。指示で変えさせていない
+    cat0, cat1 = _str(front_safe(before[2]).get("category")), _str(front(after).get("category"))
+    if cat1 != cat0:
+        return f"カテゴリが変わりました（{cat0} → {cat1}）"
     if not (TITLE_MIN <= len(title) <= TITLE_MAX):
         return f"タイトルが{len(title)}字（{TITLE_MIN}〜{TITLE_MAX}字）"
     if not title_covers_kw(title, kw):
@@ -1340,12 +1632,15 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=()):
     lost = sources(b) - sources(after)
     if lost:
         return f"出典リンクが消えました: {list(lost)[:2]}"
+    # 出典の URL を足すのは、どの種類の直しでも許さない（compete・serp・aisplit・early だけが見ていた。AI は存在しない
+    # URL を作ることがある。2026-10-20 の点検）。許可した一次情報（allowed）にある URL だけは例外
+    more = sources(after) - sources(b) - set(re.findall(r"https?://[^\s)）」\"'<>]+", allowed or ""))
+    if more:
+        return "出典のURLが増えました（記事にあった出典だけで書くこと）: " + str(sorted(more)[:2])
 
-    now = warns(slug)
-    if len(now) > len(before_warns):
-        # 何の警告かを返す。件数だけでは、やり直しのときに直す場所が分からない
-        new = [w for w in now if w not in before_warns]
-        return f"警告が増えました（{len(before_warns)} → {len(now)}）: " + " / ".join(new)[:400]
+    worse = worse_warns(before_warns, warns(slug))
+    if worse:
+        return worse
 
     # --exclude-slug を必ず渡す。渡さないと、その記事自身が食い合い相手として
     # 数えられ、順位を持つ記事のリライトは100%差し戻される。
@@ -1401,7 +1696,8 @@ def fix_mechanical(slug, before_warns):
 def site_of(slug):
     import sites as S
     t = (ROOT / "articles" / f"{slug}.md").read_text(encoding="utf-8-sig")
-    cat = (re.search(r"^category:\s*(.+)$", t, re.M) or [0, ""])[1].strip()
+    # 本文の「category: …」の行や、2行目の category を拾わない（build.py と同じ読み方。2026-10-20 の点検）
+    cat = _str(front(t).get("category"))
     return S.find_category_owner(cat) or "ai-lab"
 
 
@@ -1449,8 +1745,8 @@ LAST = {}      # slug → 直す前後のタイトル・説明文（rewrite_roll
 
 
 def _desc_of(text):
-    m = re.search(r"^description:\s*(.+)$", text, re.M)
-    return m.group(1).strip().strip("\"'") if m else ""
+    """フロントマターの説明文（build.py と同じ読み方。rewrite_rollback が戻すかを決めるのにも使う）"""
+    return _str(front_safe(text).get("description"))
 
 
 TITLE_LOCK_DAYS = 28   # rewrite_rollback.DAYS と同じ。この間に題を変えると効いたか判定できない
@@ -1627,11 +1923,11 @@ def build_prompt(item):
         what = what.format(age=item.get("age", ""), query=item["query"], pos=f"{item['pos']:.1f}",
                            imp=item["imp"], title_rule=rule)
     if kind == "fresh":
-        # 年月の更新だけを許す。今日の年・月・日のトークンは「増えた数字」に数えない
+        # 年月の更新だけを許す。今日の「YYYY年」「M月」「D日」だけを「増えた数字」に数えない
         t = time.localtime()
         ym = f"{t.tm_year}年{t.tm_mon}月"
         what = what.format(ym=ym)
-        allowed = f"{t.tm_year} {t.tm_mon} {t.tm_mon:02d} {t.tm_mday:02d} {t.tm_mday}"
+        allowed = date_tokens(t.tm_year, t.tm_mon, t.tm_mday)
     prompt = PROMPT.format(slug=slug, why=item["why"], what=what)
     return prompt, allowed
 
@@ -1660,27 +1956,24 @@ def map_each(fn, items, workers):
         return list(ex.map(safe, items))
 
 
+def draft_one(item, prompt):
+    """その1本の原稿の写し（一時フォルダ）で AI に書かせる。返すのは (書いた後の中身, claude の結果)。
+    書けるのはその1本だけ（claude_args）。作業場所の原稿は変えない"""
+    slug = item["slug"]
+    text = (ROOT / "articles" / f"{slug}.md").read_text(encoding="utf-8-sig")
+    texts, r = in_copy({slug: text}, lambda tmp: sh(claude_args([slug]), timeout=1800, stdin_text=prompt, cwd=tmp))
+    return texts[slug], r
+
+
 def draft_all(items, workers):
     """各記事の書き直し案を、記事のコピー（一時フォルダ）で同時に書かせる。
 
     1本の書き直しのほぼ全部は AI の応答待ち。指示は「この1ファイルだけを直す」なので、コピーの上で
-    書かせても中身は同じになる。当てて検算するのは呼び出し側（run_one(edited=…)）で1本ずつ行う"""
-    import tempfile
-    exe = claude_bin()
-
-    def one(item):
-        src = ROOT / "articles" / f"{item['slug']}.md"
-        if not src.is_file():
-            return None
-        prompt, _ = build_prompt(item)
-        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
-            dst = Path(tmp) / "articles" / src.name
-            dst.parent.mkdir(parents=True)
-            dst.write_bytes(src.read_bytes())
-            sh([exe, "-p", "--max-turns", "40", *model_args(), "--allowedTools", "Read,Edit",
-                "--settings", PERM], timeout=1800, stdin_text=prompt, cwd=tmp)
-            return dst.read_text(encoding="utf-8-sig")
-    return map_each(one, items, workers)
+    書かせても中身は同じになる。当てて検算するのは呼び出し側（run_one(edited=…)）で1本ずつ行う。
+    指示は先に全部作る（指示を作る道具が data/ を書いても、AI の見張り（guarded）に数えない）。
+    作業場所が変わっていれば全部戻して Escaped"""
+    jobs = [(it, build_prompt(it)[0]) if (ROOT / "articles" / f"{it['slug']}.md").is_file() else None for it in items]
+    return guarded(lambda: map_each(lambda j: draft_one(*j)[0] if j else None, jobs, workers))
 
 
 def run_one(item, write, edited=None):
@@ -1697,7 +1990,8 @@ def run_one(item, write, edited=None):
             return False, "claude が見つかりません（npm install -g @anthropic-ai/claude-code）"
     if not write:
         return True, "（確認のみ）"
-    if kind == "title" and title_locked(slug):
+    if kind in ("title", "desc") and title_locked(slug):
+        # desc も見送る（28日後に題を戻すとき、説明文も題と一緒に戻すため。2026-10-20 の点検）
         return False, f"{title_locked(slug)} に変えたタイトルの判定期間中のため見送ります"
 
     # 戻すときは HEAD ではなくこの時点の中身へ。同じ週次で先に当てた未コミットの直しを消さない
@@ -1720,27 +2014,25 @@ def _apply_one(item, edited, orig):
     slug, kind = item["slug"], item["kind"]
     p = ROOT / "articles" / f"{slug}.md"
     raw = orig[f"{slug}.md"]
-    before, before_warns, snap = meta(slug), warns(slug), snapshot()
+    try:
+        before = meta(slug)
+    except FrontMatterError as e:
+        return False, f"直す前のフロントマターが読めません（{e}）"
+    before_warns, snap = warns(slug), snapshot()
     prompt, allowed = build_prompt(item)
-    # 権限を全部飛ばすのではなく、使える道具を読み書きだけに絞る。
-    # この工程がやるのは1ファイルの書き換えだけで、コマンド実行も外部通信も要らない
-    if edited is not None:
-        # 並列で先に書かせた案（draft_all）。当てた後の検算は1本ずつのときと同じ
-        if edited != before[2]:
-            p.write_text(edited, encoding="utf-8", newline="")
-        r = subprocess.CompletedProcess([], 0, "", "")
+    if edited is None:
+        # 並列の下書き（draft_all）と同じく、その1本の写し（一時フォルダ）で書かせ、書けるのもその1本だけにする。
+        # 作業場所で書かせていたので、外の文章に仕込まれた指示でほかの記事・道具も書き換えられた（2026-10-20 の点検）。
+        # 作業場所が変わっていれば guarded が全部戻す
+        try:
+            edited, r = guarded(lambda: draft_one(item, prompt))
+        except Escaped as e:
+            return False, f"別の記事まで変わっています（AI の作業場所の外が変わったため全部戻しました）: {e}"
     else:
-        exe = claude_bin()
-        # --permission-mode acceptEdits が無いと、Edit は「承認待ち」で止まり、
-        # 何も書き換わらないまま「変更なし」で終わる。実際 16本連続で空振りし、
-        # 手で1本動かして初めて「権限の許可が必要です」と出ているのが分かった。
-        # 道具は Read,Edit に絞ったままなので、できるのは1ファイルの書き換えだけ。
-        # 悪い書き換えは check() が見つけて直前の中身へ戻す
-        # プロンプトは stdin で渡す（引数だと1行目しか届かない）
-        r = sh([exe, "-p", "--max-turns", "40",
-                *model_args(),
-                "--allowedTools", "Read,Edit",
-                "--settings", PERM], timeout=1800, stdin_text=prompt)
+        r = subprocess.CompletedProcess([], 0, "", "")
+    # 当てた後の検算は、並列の下書きのときも1本ずつのときも同じ
+    if edited != before[2]:
+        p.write_text(edited, encoding="utf-8", newline="")
     if p.read_text(encoding="utf-8-sig") == before[2] and changed_since(snap):
         # 対象は変えずにほかの記事だけ変えた回も、ほかの記事を戻す（そのまま commit・配信されていた）
         revert_since(orig)
@@ -1834,7 +2126,7 @@ def _apply_one(item, edited, orig):
             ng = f"{lk} に変えたタイトルの判定期間（{TITLE_LOCK_DAYS}日）中です"
     after_text = p.read_text(encoding="utf-8-sig")
     LAST[slug] = {"before_title": before[0], "before_description": _desc_of(before[2]),
-                  "after_title": meta(slug)[0], "after_description": _desc_of(after_text)}
+                  "after_title": _str(front_safe(after_text).get("title")), "after_description": _desc_of(after_text)}
     if ng:
         # 対象の1本だけでなく、AI が触ったほかの記事も戻す（check の「別の記事まで変わっています」）
         revert_since(orig)
@@ -1906,7 +2198,15 @@ def selftest():
         ("狙う語を変える", body.replace(f"keyword: {kw}", "keyword: 別の語", 1)),
         ("タイトルを短くしすぎる",
          body.replace(f"title: {title}", "title: 短い", 1)),
+        # 2026-10-20 の点検で足した検算（出典の URL を作る・狙う語を2行に書く・単位を変えて数字を作る）
+        ("出典のURLを足す", body.replace("。", "。[出典](https://zz.example/source)", 1)),
+        ("狙う語を2行に書く", re.sub(r"^(keyword:.*)$", r"\1\nkeyword: 別の語", body, count=1, flags=re.M)),
     ]
+    num = next((m for m in _TOK.finditer(_clean_for_numbers(body.split("---", 2)[-1]))
+                if re.fullmatch(r"\d+", m.group("num")) and m.group("unit") == "円" and not m.group("pre")), None)
+    wrong = body.replace(num.group(0), num.group("num") + "億円", 1) if num else body
+    if new_fact_numbers(body, wrong):
+        cases.append(("金額の桁を変える（円→億円）", wrong))
     # stuck 種別の検算は terms を渡したときだけ効く。別に試す
     stuck_cases = [
         ("語を本文にちりばめるだけ（見出しに入れない）",
@@ -2006,7 +2306,7 @@ def main():
     if a.skip_recent:
         busy = recently_touched(a.skip_recent)
         # 判定期間中の題は run_one が必ず見送る。先に外さないと、本数の枠と下書きの時間をそれに使う
-        busy |= {x["slug"] for x in items if x["kind"] == "title" and title_locked(x["slug"])}
+        busy |= {x["slug"] for x in items if x["kind"] in ("title", "desc") and title_locked(x["slug"])}
         held = [x["slug"] for x in items if x["slug"] in busy]
         items = [x for x in items if x["slug"] not in busy]
         if held:
@@ -2046,7 +2346,11 @@ def main():
     drafts = [None] * len(todo)
     if a.parallel > 1:
         k = draft_quota(len(todo), a.parallel, a.budget_min, per_min=30)
-        drafts[:k] = draft_all(todo[:k], a.parallel)
+        try:
+            drafts[:k] = draft_all(todo[:k], a.parallel)
+        except Escaped as e:
+            print(f"要対応: 書き直し案を書かせる間に、AI の作業場所の外が変わりました。全部戻して止めます（{e}）")
+            return 1
     for x, edited in zip(todo, drafts):
         used = (time.time() - started) / 60
         # 書き終えた下書きは AI を待たずに当てられるので、予算を過ぎても捨てない

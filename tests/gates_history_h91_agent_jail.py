@@ -361,10 +361,11 @@ def test_tools_calling_claude_deny_key_files():
     import auto_rewrite as AR
     AR = importlib.reload(AR)
     seen = []
-    with mock.patch.object(AR.subprocess, "run", side_effect=lambda args, **kw: seen.append(list(args)) or
+    # 起動は AR._run を通る（Windows は Popen で子プロセスごと止めるので、subprocess.run の差し替えでは止まらない）
+    with mock.patch.object(AR, "_run", side_effect=lambda args, **kw: seen.append(list(args)) or
                            subprocess.CompletedProcess(args, 0, "", "")):
         AR.sh([AR.claude_bin(), "-p", "--max-turns", "1"], stdin_text="x")
-        AR.sh([AR.claude_bin(), "-p", "--settings", AR.PERM], stdin_text="x")
+        AR.sh([AR.claude_bin(), "-p", "--settings", AR.perm(["zz-post"])], stdin_text="x")
         AR.sh(["git", "status"])
     deny = json.loads(seen[0][seen[0].index("--settings") + 1])["permissions"]["deny"] if "--settings" in seen[0] else []
     check("設定の無い呼び出しに拒否を付け、設定のある呼び出しは二重にしない・claude 以外には付けない",

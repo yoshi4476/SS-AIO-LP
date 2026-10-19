@@ -72,18 +72,18 @@ def test_one_turn_calls_run_without_claude_md():
     import auto_rewrite as AR
     print("\n■ 1手で答えるだけの呼び出しは CLAUDE.md の無い場所で起こす。ファイルを読む呼び出しは ROOT のまま")
     seen = []
-    real = subprocess.run
+    real = AR._run      # 起動は AR._run を通る（Windows は Popen なので subprocess.run の差し替えでは止まらない。2026-10-20）
 
     def fake(args, cwd=None, **kw):
         seen.append(Path(cwd))
         return subprocess.CompletedProcess(args, 0, "", "")
-    AR.subprocess.run = fake
+    AR._run = fake
     try:
         AR.sh(["claude", "-p", "--max-turns", "1"], stdin_text="x")
         AR.sh(["claude", "-p", "--max-turns", "40", "--allowedTools", "Read,Edit"], stdin_text="x")
         AR.sh(["claude", "-p", "--max-turns", "1"], stdin_text="x", cwd=ROOT / "scripts")
     finally:
-        AR.subprocess.run = real
+        AR._run = real
     check("1手: ROOT の外・CLAUDE.md が無い", (seen[0] != ROOT, (seen[0] / "CLAUDE.md").exists()), (True, False))
     check("40手（Read・Edit）: ROOT", seen[1], ROOT)
     check("呼ぶ側が場所を決めていればそのまま", seen[2], ROOT / "scripts")

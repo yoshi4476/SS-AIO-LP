@@ -333,9 +333,15 @@ def check(pair, before, before_warns, loser_text, snap):
     if other:
         return f"別の記事まで変わっています: {', '.join(other[:3])}"
 
-    title, kw, after = AR.meta(s)
+    try:
+        title, kw, after = AR.meta(s)
+    except AR.FrontMatterError as e:
+        return f"フロントマターが読めません（{e}）"
     if kw != before[1]:
         return f"狙う語が変わりました（{before[1]} → {kw}）"
+    cat0, cat1 = AR._str(AR.front_safe(before[2]).get("category")), AR._str(AR.front(after).get("category"))
+    if cat1 != cat0:
+        return f"カテゴリが変わりました（{cat0} → {cat1}）"
     if not (AR.TITLE_MIN <= len(title) <= AR.TITLE_MAX):
         return f"タイトルが{len(title)}字（{AR.TITLE_MIN}〜{AR.TITLE_MAX}字）"
     parts = [w for w in re.split(r"[\s　]+", kw) if len(w) >= 2]
@@ -354,15 +360,19 @@ def check(pair, before, before_warns, loser_text, snap):
     lost = AR.sources(b) - AR.sources(after)
     if lost:
         return f"出典リンクが消えました: {list(lost)[:2]}"
+    # 出典は2本のどちらかにあったものだけ（AI が存在しない URL を作ることがある。2026-10-20 の点検）
+    more = AR.sources(after) - AR.sources(b) - AR.sources(loser_text)
+    if more:
+        return "2本のどちらにも無かった出典のURLが増えました: " + str(sorted(more)[:2])
     if plain_len(after) < plain_len(b):
         return f"本文が減りました（{plain_len(b)} → {plain_len(after)}字）"
     distinct = distinct_terms(loser_text, b)
     if distinct and not any(t.lower() in after.lower() for t in distinct):
         return f"吸収した形跡がありません（{', '.join(distinct[:3])} のどれも入っていない）"
 
-    now = AR.warns(s)
-    if len(now) > len(before_warns):
-        return f"警告が増えました（{len(before_warns)} → {len(now)}）"
+    worse = AR.worse_warns(before_warns, AR.warns(s))     # FAIL の増加も見る（2026-10-20 の点検）
+    if worse:
+        return worse
     # 残す記事と消す記事の両方を照合から外す。消す側はまだ検索の実績を持っているため、
     # 外さないと「既に順位を持つページがある」で必ず止まった（統合の目的そのものなのに）
     r = AR.sh([sys.executable, "scripts/kw_guard.py", kw, "--site", pair["site"], "--title", title,
@@ -509,14 +519,17 @@ def build_prompt(pair, keyword):
                          loser_url=url_of(pair["site"], l), keyword=keyword)
 
 
-def _claude(prompt, cwd=None):
-    # 実行ファイルの解決と書き込み承認は auto_rewrite と揃える。
-    # どちらが欠けても、統合は静かに「変更なし」で終わる
-    # プロンプトは stdin で渡す（引数だと1行目しか届かない）
-    return AR.sh([AR.claude_bin(), "-p", "--max-turns", "60",
-                  *AR.model_args(),
-                  "--allowedTools", "Read,Edit",
-                  "--settings", AR.PERM], timeout=2400, stdin_text=prompt, cwd=cwd)
+def _claude(prompt, cwd=None, survivor=""):
+    # 実行ファイルの解決と許可は auto_rewrite と揃える（AR.claude_args）。書けるのは survivor の1本だけ
+    # （loser は読むだけ。2026-10-20 の点検までは articles/** を丸ごと書けた）
+    return AR.sh(AR.claude_args([survivor] if survivor else [], 60), timeout=2400, stdin_text=prompt, cwd=cwd)
+
+
+def draft_one(pair, prompt):
+    """survivor と loser の写し（一時フォルダ）で統合させる。返すのは (書いた後の survivor, claude の結果)"""
+    s, l = pair["survivor"], pair["loser"]
+    texts, r = AR.in_copy({s: AR.meta(s)[2], l: fm(l)["text"]}, lambda tmp: _claude(prompt, cwd=tmp, survivor=s))
+    return texts[s], r
 
 
 def draft_all(pairs, workers):
@@ -525,22 +538,20 @@ def draft_all(pairs, workers):
     1組の統合はほぼ全部が AI の応答待ち（最長40分）。指示は「survivor の1ファイルだけを直す」なので、
     コピーの上で書かせても中身は同じになる。当てて検算するのは run_one(draft=…) が1組ずつ行う。
     返すのは組ごとの {"base": 書かせたときの survivor, "loser": 同じく loser, "text": 書いた後の survivor}"""
-    import tempfile
-
-    def one(pair):
+    jobs = []
+    for pair in pairs:
         s, l = pair["survivor"], pair["loser"]
         if not (is_article(s) and is_article(l)):
-            return None
-        base, lt = AR.meta(s)[2], fm(l)["text"]
-        prompt = build_prompt(pair, AR.meta(s)[1])
-        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
-            (Path(tmp) / "articles").mkdir()
-            for slug in (s, l):
-                (Path(tmp) / "articles" / f"{slug}.md").write_bytes((ARTICLES / f"{slug}.md").read_bytes())
-            _claude(prompt, cwd=tmp)
-            return {"base": base, "loser": lt,
-                    "text": (Path(tmp) / "articles" / f"{s}.md").read_text(encoding="utf-8-sig")}
-    return AR.map_each(one, pairs, workers)
+            jobs.append(None)
+            continue
+        base = AR.meta(s)
+        jobs.append((pair, {"base": base[2], "loser": fm(l)["text"]}, build_prompt(pair, base[1])))
+
+    def one(job):
+        pair, d, prompt = job
+        return {**d, "text": draft_one(pair, prompt)[0]}
+    # 指示は先に全部作る。作業場所が変わっていれば全部戻して AR.Escaped（AI は写しで書くので変わらないはず）
+    return AR.guarded(lambda: AR.map_each(lambda j: one(j) if j else None, jobs, workers), ARTICLES)
 
 
 def skip_noindex(pairs):
@@ -594,7 +605,14 @@ def _merge_and_check(pair, draft, orig):
             p.write_text(draft["text"], encoding="utf-8", newline="")
         r = subprocess.CompletedProcess([], 0, "", "")
     else:
-        r = _claude(build_prompt(pair, before[1]))
+        # 1組ずつの統合も2本の写しで書かせ、書いた survivor だけを当てる（2026-10-20 の点検）
+        prompt = build_prompt(pair, before[1])
+        try:
+            text, r = AR.guarded(lambda: draft_one(pair, prompt), ARTICLES)
+        except AR.Escaped as e:
+            return f"別の記事まで変わっています（AI の作業場所の外が変わったため全部戻しました）: {e}"
+        if text != before[2]:
+            p.write_text(text, encoding="utf-8", newline="")
     if p.read_text(encoding="utf-8-sig") == before[2]:
         # survivor は変わらず、ほかの記事だけ変わった回も戻す（そのまま commit・配信されていた）
         if AR.revert_since(orig, ARTICLES):
@@ -752,7 +770,11 @@ def main():
                 seen |= {p["loser"], p["survivor"]}
                 batch.append(p)
         batch = batch[: AR.draft_quota(len(batch), a.parallel, a.budget_min, per_min=40)]
-        drafts = {id(p): d for p, d in zip(batch, draft_all(batch, a.parallel))}
+        try:
+            drafts = {id(p): d for p, d in zip(batch, draft_all(batch, a.parallel))}
+        except AR.Escaped as e:
+            print(f"要対応: 統合案を書かせる間に、AI の作業場所の外が変わりました。全部戻して止めます（{e}）")
+            return 1
     for p in todo:
         used = (time.time() - started) / 60
         # 書き終えた統合案は AI を待たずに当てられるので、予算を過ぎても捨てない

@@ -190,19 +190,25 @@ def shown_path(slug, d):
 
 
 SKIPPED = {}    # 戻すべきと判定したのに戻さなかった記事 → 理由（判定の記録に残す）
+MISSING = set()  # 戻すべきと判定したのに、直す前の原稿が見つからなかった記事（判定済みにせず保留にする）
 
 
-def _fm_title(fm):
-    """フロントマターの題（引用符・エスケープを外した値）"""
-    m = re.search(r"^title:\s*(.*)$", fm, re.M)
+def _fm_value(fm, key):
+    """フロントマターの1項目（引用符・エスケープを外した値）"""
+    m = re.search(rf"^{key}:\s*(.*)$", fm, re.M)
     if not m:
         return ""
     import yaml
     try:
         v = yaml.safe_load("k: " + m.group(1)).get("k")
-        return "" if v is None else str(v)
+        return "" if v is None else str(v).strip()
     except Exception:
         return m.group(1).strip().strip('"')
+
+
+def _fm_title(fm):
+    """フロントマターの題（引用符・エスケープを外した値）"""
+    return _fm_value(fm, "title")
 
 
 def title_moved(slug, d, fm):
@@ -244,6 +250,12 @@ def before_file(d):
         who = shown(slug) if SLUG.fullmatch(slug) else "?"
         print(f"要対応: {who} の台帳の直す前の原稿が data/rewrite_before/ の外を指しているため、読みません")
         return None
+    if found is None:
+        # 見つからない回を「戻さない（KEPT）」と判定済みにすると、二度と戻せなかった（2026-10-20 の点検）。
+        # 非公開の置き場を取れなかった回などは、置き場が戻れば次の週に戻せるので保留にする
+        MISSING.add(slug)
+        print(f"要対応: {shown(slug)} の直す前の原稿（{shown_path(slug, d)}）が見つかりません。"
+              "判定を保留します（非公開の置き場が取れているか確かめてください）")
     return found
 
 
@@ -310,9 +322,17 @@ def restore(slug, d):
     # 題・説明文は YAML として読める形で書く（「: 」や「 #」を含む題をそのまま書くと、フロントマターが壊れて記事が消える）
     import desc_fill
     fm2 = re.sub(r"^title:.*$", lambda _m: "title: " + desc_fill.yaml_scalar(d["before_title"]), fm, count=1, flags=re.M)
-    if d.get("before_description"):
-        fm2 = re.sub(r"^description:.*$", lambda _m: "description: " + desc_fill.yaml_scalar(d["before_description"]),
-                     fm2, count=1, flags=re.M)
+    # 説明文は、直した後の説明文（after_description）のままのときだけ戻す。題の判定期間中に説明文だけを直した回
+    # （desc の書き直し・手での直し）まで、題と一緒に直す前へ戻していた（2026-10-20 の点検）
+    cur = _fm_value(fm, "description")
+    if d.get("before_description") and cur != d["before_description"]:
+        if d.get("after_description") is not None and cur == d["after_description"]:
+            fm2 = re.sub(r"^description:.*$",
+                         lambda _m: "description: " + desc_fill.yaml_scalar(d["before_description"]),
+                         fm2, count=1, flags=re.M)
+        else:
+            print(f"要対応: {shown(slug)} は直した後に説明文が変わっています。題だけ戻し、説明文は戻しません"
+                  "（直す前の説明文と見比べてください）")
     if fm2 == fm:
         return False
     p.write_text(t.replace(fm, fm2, 1), encoding="utf-8", newline="")
@@ -365,7 +385,13 @@ def main():
                    "kind": d.get("kind") or "title"}
         print(f"   {'×' if worse else '○'} {shown(slug)[:38]:<38} 表示×{me[0]:.2f}（対照×{base:.2f}）"
               f" 順位{'+' if (me[1] or 0) > 0 else ''}{me[1] if me[1] is not None else '-'}")
-        if worse and a.write and restore(slug, d):
+        restored = worse and a.write and restore(slug, d)
+        if slug in MISSING:
+            # 直す前の原稿が見つからず戻せなかった。判定済みにしないで翌週以降にまた見る
+            MISSING.discard(slug)
+            held += 1
+            continue
+        if restored:
             verdict["rolled_back"] = True
             rolled += 1
             import client_private as CP

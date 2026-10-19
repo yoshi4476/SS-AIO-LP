@@ -219,7 +219,7 @@ def test_rewrite_rollback_reads_only_rewrite_before():
 def test_tool_agent_cannot_read_keys():
     import auto_rewrite as AR
     print("\n■ 道具の中から呼ぶ AI（auto_rewrite・auto_merge）: 鍵のファイル・/proc・ホームの鍵・非公開の置き場を読ませない")
-    p = json.loads(AR.PERM)["permissions"]
+    p = json.loads(AR.perm(["zz-post"]))["permissions"]
     deny = p.get("deny") or []
     must = ["Read(.env)", "Read(**/.env)", "Read(**/.env.*)", "Read(//proc/**)", "Read(~/.ssh/**)", "Read(~/.config/**)",
             "Read(~/.git-credentials)", "Read(~/.codex/**)", "Read(**/.git/config)", "Read(indexing-service-account.json)",
@@ -234,11 +234,11 @@ def test_tool_agent_cannot_read_keys():
           [a for a in absol if a not in deny], [])
     check("// の形への直し方（Windows はドライブを /c/ に）", (AR._abs_rule("C:/x/y"), AR._abs_rule("/home/r/w")),
           ("//c/x/y", "//home/r/w"))
-    check("書けるのは記事だけで、承認なしで Edit が通る形は変えない", (p["allow"], p["defaultMode"]),
-          (["Read", "Edit(articles/**)"], "acceptEdits"))
+    # 2026-10-20: 書けるのは直す1本だけ（articles/** 丸ごとではない）。許可に無いものは dontAsk が断る
+    check("書けるのはその記事だけで、許可に無いものは断る", (p["allow"], p["defaultMode"]),
+          (["Read", "Edit(articles/zz-post.md)"], "dontAsk"))
     ar = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
     am = (ROOT / "scripts" / "auto_merge.py").read_text(encoding="utf-8")
-    calls = (ar.count('"--allowedTools", "Read,Edit"'), ar.count('"--settings", PERM]'),
-             am.count('"--allowedTools", "Read,Edit"'), am.count('"--settings", AR.PERM]'))
-    check("auto_rewrite・auto_merge の claude の呼び出しはすべてこの許可（PERM）を渡す",
-          (calls[0] == calls[1] >= 2, calls[2] == calls[3] >= 1), (True, True))
+    raw = [s for s in (ar, am) if '"--allowedTools", "Read,Edit"' in s or "PERM]" in s]
+    check("auto_rewrite・auto_merge の claude の呼び出しはすべて claude_args（記事ごとの許可）を通す",
+          (len(raw), ar.count("sh(claude_args(") >= 1, am.count("AR.claude_args(") >= 1), (0, True, True))

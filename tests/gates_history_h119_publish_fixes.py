@@ -176,18 +176,28 @@ def test_reject_and_timeout_restore_every_touched_article():
             AR.snapshot = lambda: {}
             AR.sh = lambda *a, **k: subprocess.CompletedProcess([], 0, "", "")
 
-            def claude(prompt, cwd=None):
-                (md / "s.md").write_text("S1", encoding="utf-8")
-                (md / "l.md").write_text("L1", encoding="utf-8")
+            mode["escape"] = False
+
+            def claude(prompt, cwd=None, **kw):
+                # 写し（cwd/articles）で書く。escape の回は作業場所の記事を直接書き換える（写しの外へ出た AI）
+                at = md if mode["escape"] else Path(cwd) / "articles"
+                (at / "s.md").write_text("S1", encoding="utf-8")
+                (at / "l.md").write_text("L1", encoding="utf-8")
                 if mode["raise"]:
                     raise subprocess.TimeoutExpired("claude", 2400)
                 return subprocess.CompletedProcess([], 0, "", "")
             AM._claude = claude
             mode["raise"] = False
             ok, why = AM.run_one(pair, True)
-            check("auto_merge: 検算に落ちたら survivor も loser も戻る",
+            check("auto_merge: 写しで書いた統合が検算に落ちたら survivor も loser も戻る",
                   (ok, why, (md / "s.md").read_text(encoding="utf-8"), (md / "l.md").read_text(encoding="utf-8")),
                   (False, "検算に落ちました", "S0", "L0"))
+            mode["escape"] = True
+            ok, why = AM.run_one(pair, True)
+            check("auto_merge: AI が作業場所の記事を直接変えたら、全部戻して止める",
+                  (ok, why.startswith("別の記事まで変わっています"),
+                   (md / "s.md").read_text(encoding="utf-8"), (md / "l.md").read_text(encoding="utf-8")),
+                  (False, True, "S0", "L0"))
             mode["raise"] = True
             ok, why = AM.run_one(pair, True)
             check("auto_merge: 時間切れも差し戻しとして返り、全部戻る",
@@ -244,7 +254,9 @@ def test_rollback_keeps_second_title_and_writes_yaml_safely():
         p = r / "articles" / "zz-post.md"
         saved = RR.ROOT
         d = {"slug": "zz-post", "kind": "title", "before_title": "経理代行の費用: 相場と #3 の選び方",
-             "after_title": "経理代行の費用と選び方", "before_description": "説明: 相場の話"}
+             "after_title": "経理代行の費用と選び方", "before_description": "説明: 相場の話",
+             # 説明文は直した後の説明文のままのときだけ戻す（2026-10-20。違う回は h122 が確かめる）
+             "after_description": "今"}
         try:
             RR.ROOT = r
             p.write_text("---\ntitle: 2回目に直した題\ndescription: 今\n---\n本文\n", encoding="utf-8")
