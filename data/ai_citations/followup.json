@@ -849,10 +849,434 @@
     }
    },
    "cited": false
+  },
+  "atm-kicho-yarikata": {
+   "checked": "2026-10-19",
+   "site": "corporate",
+   "kw": "記帳 やり方 atm",
+   "published": "2026-09-09",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "bk.mufg.jp",
+      "detail.chiebukuro.yahoo.co.jp",
+      "faq.chuo.rokin.com",
+      "faq.lawsonbank.jp",
+      "faqsearch.sevenbank.co.jp",
+      "joetsu-shinkin.jp",
+      "youtube.com"
+     ]
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "adachiseiwa.co.jp",
+      "ai-shiwake.com",
+      "bk.mufg.jp",
+      "detail.chiebukuro.yahoo.co.jp",
+      "faq.mizuhobank.co.jp",
+      "faq.smtb.jp",
+      "faq01.bk.mufg.jp",
+      "shoushin.co.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "allabout.co.jp",
+      "bk.mufg.jp",
+      "eetimes.itmedia.co.jp",
+      "jbc-ltd.com",
+      "media.moneyforward.com",
+      "smbc.co.jp",
+      "tkgje.jp",
+      "tohobank.co.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "iphone-kicho-jidoka": {
+   "checked": "2026-10-19",
+   "site": "corporate",
+   "kw": "iPhone 記帳 自動化",
+   "published": "2026-09-09",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "applefans.today",
+      "apps.apple.com",
+      "techbang.com",
+      "vertexaisearch.cloud.google.com",
+      "youtube.com"
+     ]
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "apps.apple.com",
+      "bnext.com.tw",
+      "feishu.cn",
+      "hk.ulifestyle.com.hk",
+      "mrmad.com.tw",
+      "sspai.com"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "app-liv.jp",
+      "appllio.com",
+      "getfinny.app",
+      "help.travel-spend.com",
+      "idropnews.com",
+      "m-s-y.com",
+      "mwm.ai"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "kojinjigyonushi-pc-hojokin-hikaku": {
+   "checked": "2026-10-19",
+   "site": "subsidy",
+   "kw": "補助金パソコン 個人事業主",
+   "published": "2026-09-09",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "pfu.ricoh.com"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "aismiley.co.jp",
+      "biz.moneyforward.com",
+      "hojokin-agent.jp",
+      "hojyokin-portal.jp",
+      "leadbrain.co.jp",
+      "note.com",
+      "office-usagi.jp",
+      "remogu.jp"
+     ]
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "biz.moneyforward.com",
+      "carearc.co.jp",
+      "grantos.jp",
+      "hojokin-agent.jp",
+      "hojyokin-portal.jp",
+      "leadbrain.co.jp",
+      "note.com",
+      "sogyotecho.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "atsoho.com",
+      "biz.moneyforward.com",
+      "hojyokin-portal.jp",
+      "sogyotecho.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "nail-salon-hojokin-hikaku": {
+   "checked": "2026-10-19",
+   "site": "subsidy",
+   "kw": "ネイルサロン 補助金",
+   "published": "2026-09-09",
+   "engines": {
+    "ChatGPT": {
+     "cited": true,
+     "ours": [
+      "https://lp.7senses.co.jp/blog/nail-salon-hojokin-hikaku/?utm_source=openai",
+      "https://lp.7senses.co.jp/blog/nail-salon-hojokin-hikaku/?utm_source=openai"
+     ],
+     "sources": [
+      "agaroot.jp",
+      "lp.7senses.co.jp",
+      "salon-kaigyo-lab.biz",
+      "wangan-consultant.com",
+      "youtube.com"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "cited": true,
+     "ours": [
+      "https://lp.7senses.co.jp/blog/nail-salon-kaigyou-joseikin/",
+      "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nail-salon/"
+     ],
+     "sources": [
+      "agaroot.jp",
+      "beautyshare.jp",
+      "grants-guide.com",
+      "lp.7senses.co.jp",
+      "nailist.co.jp",
+      "note.com",
+      "so-labo.co.jp",
+      "sunmego.co.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "agaroot.jp",
+      "biz.moneyforward.com",
+      "biz.ne.jp",
+      "canaeru.usen.com",
+      "chusho.meti.go.jp",
+      "freee.co.jp",
+      "go.freee.co.jp",
+      "hojokin-agent.jp"
+     ]
+    }
+   },
+   "cited": true
+  },
+  "nail-salon-hojokin-tejun": {
+   "checked": "2026-10-19",
+   "site": "subsidy",
+   "kw": "ネイルサロン 手順",
+   "published": "2026-09-09",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "beauty.hotpepper.jp",
+      "belle.ac.jp",
+      "esnailtokyo.jp",
+      "haruka.co.jp",
+      "heartnail.jp",
+      "itmedia.co.jp",
+      "kobe.belebel.jp",
+      "nice-nail.com"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "allabout.co.jp",
+      "beauty.hotpepper.jp",
+      "ekiten.jp",
+      "library.libecity.com",
+      "macaro-ni.jp",
+      "maquia.hpplus.jp",
+      "mhlw.go.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "notion-kicho-jidoka": {
+   "checked": "2026-10-19",
+   "site": "corporate",
+   "kw": "notion 記帳 自動化",
+   "published": "2026-09-09",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "21notion.com",
+      "cashbacksis.com",
+      "lashiblog.com",
+      "notion.com",
+      "vocus.cc",
+      "youtube.com"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "dev.to",
+      "notion.com",
+      "notioneverything.com",
+      "toumaro.gumroad.com",
+      "trustmrr.com"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "shika-heiin-hiyou": {
+   "checked": "2026-10-19",
+   "site": "ai-lab",
+   "kw": "歯科医院 閉院 費用",
+   "published": "2026-09-09",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "asahi-int.com",
+      "barton.co.jp",
+      "m-assets.com",
+      "nent.co.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "bizarq.group",
+      "intsugu.com",
+      "jigyoshokei.jp",
+      "medicallives.com",
+      "phchd.com",
+      "tsunagupartners.com",
+      "urashico2.com",
+      "vertexaisearch.cloud.google.com"
+     ]
+    },
+    "Perplexity": {
+     "cited": true,
+     "ours": [
+      "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/"
+     ],
+     "sources": [
+      "ai.7senses.co.jp",
+      "aim-ptns.co.jp",
+      "asahi-int.com",
+      "barton.co.jp",
+      "bc-kouji.com",
+      "intsugu.com",
+      "jfsc.jp",
+      "m-assets.com"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "batonz.jp",
+      "beancount.io",
+      "coki.jp",
+      "m-assets.com",
+      "mhlw.go.jp"
+     ]
+    }
+   },
+   "cited": true
+  },
+  "shika-kaigyou-hiyou": {
+   "checked": "2026-10-19",
+   "site": "ai-lab",
+   "kw": "歯科医院 開業 費用",
+   "published": "2026-09-09",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "l-c-style.co.jp",
+      "m-assets.com",
+      "shika-pro.jp",
+      "youtube.com"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "121.dental-plaza.com",
+      "apotool.jp",
+      "emdi.co.jp",
+      "service.yoshida-dental.co.jp",
+      "sougyou.lib-zeirishi.jp",
+      "stores.fun",
+      "v-spirits.com",
+      "yamaji-dental.net"
+     ]
+    },
+    "Perplexity": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "d.dental-plaza.com",
+      "dreamgate.gr.jp",
+      "emdi.co.jp",
+      "freee.co.jp",
+      "m-assets.com",
+      "mic.jp",
+      "nkgr.co.jp",
+      "shika-kaigyo.jp"
+     ]
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "biz.moneyforward.com",
+      "freee.co.jp",
+      "m-assets.com",
+      "squareup.com",
+      "stock-sun.com"
+     ]
+    }
+   },
+   "cited": false
   }
  },
  "last_run": {
-  "date": "2026-10-12",
+  "date": "2026-10-19",
   "state": "ok",
   "checked": 8,
   "failed": 0,

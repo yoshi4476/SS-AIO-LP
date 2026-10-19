@@ -1,5 +1,5 @@
 {
- "date": "2026-10-12",
+ "date": "2026-10-19",
  "same_as": [
   "https://www.linkedin.com/in/yu-haraguchi",
   "https://note.com/yu_haraguchi",
@@ -67,6 +67,18 @@
    "title": "research-clinic",
    "url": "https://www.youtube.com/watch?v=nQbOv2DGj4U",
    "date": "2026-10-12"
+  },
+  {
+   "kind": "動画",
+   "title": "リフォームの集客代行は何を任せる？AI検索まで見る依頼の線引き",
+   "url": "https://www.youtube.com/watch?v=1-M1hFo734s",
+   "date": "2026-10-16"
+  },
+  {
+   "kind": "動画",
+   "title": "research-dental",
+   "url": "https://www.youtube.com/watch?v=xG1QVgQrf-E",
+   "date": "2026-10-19"
   }
  ],
  "credentials": [],
@@ -189,9 +201,9 @@
   }
  ],
  "counts": {
-  "articles": 441,
+  "articles": 477,
   "datasets": 12,
-  "videos": 10,
+  "videos": 12,
   "research": 29
  }
 }

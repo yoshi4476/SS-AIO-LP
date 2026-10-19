@@ -1,6 +1,6 @@
 ---
 title: AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説
-description: AIOとは、GoogleのAI Overview・AIモードで自社ページが引用される状態をつくる施策です。表示される検索の実測、Googleが公式に否定した5つの通説、効くと明記された3条件、成果の測り方を整理します。
+description: AI Overviewの計測は、表示をSearch Console、訪問をGA4で分けて見ます。AIOとは何か、Googleが公式に否定した5つの通説、効くと明記された3条件、成果の測り方まで整理します。
 slug: aio-towa
 keyword: aioとは
 category: aio

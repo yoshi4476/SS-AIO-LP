@@ -12,3 +12,9 @@
 {"date": "2026-10-12", "site": "ai-lab", "url": "https://ai.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 4732.947614396402, "CLS": 0, "INP": null, "score": 78}
 {"date": "2026-10-12", "site": "corporate", "url": "https://corp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 2718.029473524136, "CLS": 0.0014712988784744967, "INP": null, "score": 85}
 {"date": "2026-10-12", "site": "subsidy", "url": "https://lp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 1155.5141869148104, "CLS": 0, "INP": null, "score": 99}
+{"date": "2026-10-19", "site": "ai-lab", "url": "https://ai.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 1729.0826379234036, "CLS": 0, "INP": null, "score": 96}
+{"date": "2026-10-19", "site": "ai-lab", "url": "https://ai.7senses.co.jp/seo/zeirishi-shukyaku-site/", "strategy": "mobile", "source": "lab", "LCP": 1815.1710127678462, "CLS": 0, "INP": null, "score": 99}
+{"date": "2026-10-19", "site": "corporate", "url": "https://corp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 2266.0046588149053, "CLS": 0.0014712988784744967, "INP": null, "score": 98}
+{"date": "2026-10-19", "site": "corporate", "url": "https://corp.7senses.co.jp/blog/shiwake-jidoka-houhou", "strategy": "mobile", "source": "lab", "LCP": 2101.0191045869433, "CLS": 0, "INP": null, "score": 98}
+{"date": "2026-10-19", "site": "subsidy", "url": "https://lp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 1351.5, "CLS": 0, "INP": null, "score": 99}
+{"date": "2026-10-19", "site": "subsidy", "url": "https://lp.7senses.co.jp/blog/it-hojokin-schedule/", "strategy": "mobile", "source": "lab", "LCP": 1202.536867332575, "CLS": 0, "INP": null, "score": 100}

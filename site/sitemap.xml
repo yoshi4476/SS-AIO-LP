@@ -282,7 +282,7 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-towa/eyecatch-main.jpg</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-towa/tsusetsu.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-towa/kiku-jouken.png</image:loc></image:image>
-    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/nSRNr6klTZM/hqdefault.jpg</video:thumbnail_loc><video:title>AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説</video:title><video:description>AIOとは、GoogleのAI Overview・AIモードで自社ページが引用される状態をつくる施策です。表示される検索の実測、Googleが公式に否定した5つの通説、効くと明記された3条件、成果の測り方を整理します。</video:description><video:player_loc>https://www.youtube.com/embed/nSRNr6klTZM</video:player_loc><video:duration>319</video:duration><video:publication_date>2026-10-03T00:00:00+09:00</video:publication_date></video:video>
+    <video:video><video:thumbnail_loc>https://i.ytimg.com/vi/nSRNr6klTZM/hqdefault.jpg</video:thumbnail_loc><video:title>AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説</video:title><video:description>AI Overviewの計測は、表示をSearch Console、訪問をGA4で分けて見ます。AIOとは何か、Googleが公式に否定した5つの通説、効くと明記された3条件、成果の測り方まで整理します。</video:description><video:player_loc>https://www.youtube.com/embed/nSRNr6klTZM</video:player_loc><video:duration>319</video:duration><video:publication_date>2026-10-03T00:00:00+09:00</video:publication_date></video:video>
   </url>
   <url><loc>https://ai.7senses.co.jp/aio/aio-yarikata/</loc><lastmod>2026-09-17</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-yarikata/steps.png</image:loc></image:image>

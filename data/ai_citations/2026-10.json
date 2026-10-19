@@ -426,5 +426,780 @@
         }
       ]
     }
+  },
+  "measured": {
+    "date": "2026-10-19",
+    "engines": [
+      "ChatGPT",
+      "Gemini",
+      "Perplexity",
+      "Claude"
+    ],
+    "sites": {
+      "ai-lab": {
+        "queries": 5,
+        "cited": 1,
+        "items": [
+          {
+            "kw": "aioチェッカー",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "aio-check.ai",
+                  "bring-flower.com",
+                  "devo.jp",
+                  "gyro-n.com",
+                  "note.com",
+                  "ui.userlocal.jp",
+                  "white-link.com",
+                  "willgate.co.jp"
+                ]
+              },
+              "Perplexity": {
+                "cited": true,
+                "ours": [
+                  "https://ai.7senses.co.jp/aio/aio-checker/"
+                ],
+                "sources": [
+                  "ai-search.techsuite.co.jp",
+                  "ai.7senses.co.jp",
+                  "aiopulse.jp",
+                  "boring-tool.com",
+                  "devo.jp",
+                  "jiji.com",
+                  "news.livedoor.com",
+                  "seedinc.jp"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "aipicks.jp",
+                  "commercepick.com",
+                  "huntscreens.com",
+                  "jinrai.co.jp",
+                  "uravation.com",
+                  "voix.jp",
+                  "webtan.impress.co.jp"
+                ]
+              }
+            },
+            "cited": true
+          },
+          {
+            "kw": "aio 診断",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "ai-hack.co.jp",
+                  "aio-check.ai",
+                  "aioscore.jp",
+                  "digitalidentity.co.jp",
+                  "prtimes.jp"
+                ]
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "0120.co.jp",
+                  "aiosoken.com",
+                  "hakuhodody-one.co.jp",
+                  "i-cept.jp",
+                  "icrossborderjapan.com",
+                  "japan.zdnet.com",
+                  "prtimes.jp",
+                  "y-ono.jp"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "0120.co.jp",
+                  "0510office.co.jp",
+                  "aio-check-lab.com",
+                  "aio-check.ai",
+                  "aioagent.jp",
+                  "aiosoken.com",
+                  "boring-tool.com",
+                  "m-lb.jp"
+                ]
+              }
+            },
+            "cited": false
+          },
+          {
+            "kw": "aio ツール",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "bring-flower.com",
+                  "connecty.co.jp",
+                  "coosy.co.jp",
+                  "gyro-n.com",
+                  "jinrai.co.jp",
+                  "jp.linkshare.com",
+                  "kiyono-co.jp",
+                  "mieru-ca.com"
+                ]
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "ai-hack.co.jp",
+                  "aio-tools.net",
+                  "aio.as",
+                  "jiji.com",
+                  "news.infoseek.co.jp",
+                  "prtimes.jp",
+                  "tv-tokyo.co.jp"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "creati.ai",
+                  "everydev.ai",
+                  "getdrio.com",
+                  "github.com",
+                  "gittrend.io",
+                  "ja.wordpress.org",
+                  "jinrai.co.jp",
+                  "koukoku.jp"
+                ]
+              }
+            },
+            "cited": false
+          },
+          {
+            "kw": "ai overview 計測",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "developers.google.com",
+                  "digitalapplied.com",
+                  "mayecreate.com",
+                  "searchenginejournal.com",
+                  "semrush.com",
+                  "seo.com",
+                  "vertexaisearch.cloud.google.com",
+                  "wpseoai.com"
+                ]
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "ai-search.techsuite.co.jp",
+                  "aio.archcorp.jp",
+                  "dym.asia",
+                  "hachinosu-seisaku.co.jp",
+                  "koukoku.jp",
+                  "news.livedoor.com",
+                  "pdf.irpocket.com",
+                  "protea-inc.co.jp"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "ai-search.techsuite.co.jp",
+                  "ax.gsgs.co.jp",
+                  "gmotech.jp",
+                  "inno-mark.jp",
+                  "jinrai.co.jp",
+                  "koukoku.jp",
+                  "sego.jp",
+                  "sugoyoku.com"
+                ]
+              }
+            },
+            "cited": false
+          },
+          {
+            "kw": "aio対策 費用",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "0120.co.jp",
+                  "ai-and-marketing.jp",
+                  "mesut.co.jp"
+                ]
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "aspicjapan.org",
+                  "atoz-design.jp",
+                  "conmark.jp",
+                  "geo-code.co.jp",
+                  "giginc.co.jp",
+                  "gmotech.jp",
+                  "jinrai.co.jp",
+                  "prtimes.jp"
+                ]
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "0120.co.jp",
+                  "ai-search.techsuite.co.jp",
+                  "coomil.co.jp",
+                  "jinrai.co.jp",
+                  "nexer.co.jp",
+                  "note.com",
+                  "shopowner-support.net",
+                  "similarweb.com"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "0120.co.jp",
+                  "ai-search.techsuite.co.jp",
+                  "aioj.jp",
+                  "jinrai.co.jp",
+                  "leadplus.co.jp",
+                  "nex-t-planning.co.jp",
+                  "nexer.co.jp"
+                ]
+              }
+            },
+            "cited": false
+          }
+        ]
+      },
+      "corporate": {
+        "queries": 5,
+        "cited": 1,
+        "items": [
+          {
+            "kw": "ゆうちょ 記帳",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "allabout.co.jp",
+                  "detail.chiebukuro.yahoo.co.jp",
+                  "faq.jp-bank.japanpost.jp",
+                  "youtube.com"
+                ]
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "apps.apple.com",
+                  "detail.chiebukuro.yahoo.co.jp",
+                  "ja.wikipedia.org",
+                  "jbc-ltd.com",
+                  "otayoripost.net",
+                  "otoku.awaisora.com",
+                  "shiho-tax.com",
+                  "uebuginko.com"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "allabout.co.jp",
+                  "news.mynavi.jp"
+                ]
+              }
+            },
+            "cited": false
+          },
+          {
+            "kw": "送金 振込 違い ゆうちょ",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "detail.chiebukuro.yahoo.co.jp",
+                  "kotokurabe.com",
+                  "oriki.cart.fc2.com",
+                  "vertexaisearch.cloud.google.com"
+                ]
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "faq.jp-bank.japanpost.jp",
+                  "jp-bank.japanpost.jp",
+                  "post.japanpost.jp"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "allabout.co.jp",
+                  "dime.jp",
+                  "gamashin.com",
+                  "jp-bank.japanpost.jp",
+                  "money-lifehack.com",
+                  "news.allabout.co.jp",
+                  "post.japanpost.jp",
+                  "shinkin.co.jp"
+                ]
+              }
+            },
+            "cited": false
+          },
+          {
+            "kw": "バックオフィス bpo",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "backofficeforce.jp",
+                  "bewith.net",
+                  "datt.co.jp",
+                  "employment.en-japan.com",
+                  "ntt-nexia.co.jp",
+                  "ntt.com",
+                  "office-expo.jp",
+                  "pasona.co.jp"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "bpo-pro.org",
+                  "fujiko-san.com",
+                  "kantec.ne.jp",
+                  "marunagekanri.com",
+                  "pasona-ns.co.jp",
+                  "pasona.co.jp",
+                  "persol-bd.co.jp",
+                  "solution.bell24.co.jp"
+                ]
+              }
+            },
+            "cited": false
+          },
+          {
+            "kw": "コーポレートとは",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "dictionary.cambridge.org",
+                  "ei-navi.jp",
+                  "ejje.weblio.jp",
+                  "ferret-plus.com",
+                  "ja.wikipedia.org",
+                  "jp.indeed.com",
+                  "kotobank.jp",
+                  "ldoceonline.com"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "directscout.recruit.co.jp",
+                  "ejje.weblio.jp",
+                  "freee.co.jp",
+                  "kotobank.jp",
+                  "kpmg.com",
+                  "limo.media",
+                  "unistyleinc.com",
+                  "weblio.jp"
+                ]
+              }
+            },
+            "cited": false
+          },
+          {
+            "kw": "ゆうちょ 記帳 やり方",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "detail.chiebukuro.yahoo.co.jp",
+                  "faq.jp-bank.japanpost.jp",
+                  "nomad-saving.com",
+                  "youtube.com"
+                ]
+              },
+              "Perplexity": {
+                "cited": true,
+                "ours": [
+                  "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata"
+                ],
+                "sources": [
+                  "corp.7senses.co.jp",
+                  "detail.chiebukuro.yahoo.co.jp",
+                  "dev.worshipu.com",
+                  "godigin.com",
+                  "jp-bank.japanpost.jp",
+                  "kobe-kango.jp",
+                  "nomad-saving.com",
+                  "otayoripost.net"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "nomad-saving.com",
+                  "otayoripost.net"
+                ]
+              }
+            },
+            "cited": true
+          }
+        ]
+      },
+      "subsidy": {
+        "queries": 5,
+        "cited": 1,
+        "items": [
+          {
+            "kw": "ベンダー登録とは",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "ardent.jp",
+                  "b-top.co.jp",
+                  "crenlylaw.com",
+                  "helpleft.com",
+                  "hojyokin-migiude.info",
+                  "listing-partners.com",
+                  "nozaki-gyousei-office.com",
+                  "planbase.co.jp"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "ardent.jp",
+                  "bcompany.co.jp",
+                  "hojokin-office.essencimo.co.jp",
+                  "hojyokin-migiude.info",
+                  "japan-finance.jp",
+                  "planbase.co.jp",
+                  "sakamoto316.tokyo"
+                ]
+              }
+            },
+            "cited": false
+          },
+          {
+            "kw": "it導入補助金 個人事業主",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "ipros.com"
+                ]
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "freee.co.jp",
+                  "it-shien.smrj.go.jp",
+                  "l3.j-carnet.co.jp",
+                  "leadbrain.co.jp",
+                  "planbase.co.jp",
+                  "smart-hojokin.jp",
+                  "squareup.com",
+                  "tatsuzin.info"
+                ]
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "biz.moneyforward.com",
+                  "chusho.meti.go.jp",
+                  "freee.co.jp",
+                  "hojyokin-portal.jp",
+                  "jpn.nec.com",
+                  "pfu.ricoh.com",
+                  "seisansei.smrj.go.jp",
+                  "shigyo.co.jp"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "carearc.co.jp",
+                  "freee.co.jp",
+                  "furi-ten.com",
+                  "hojyokin-portal.jp",
+                  "hojyokinnomadoguchi.jp",
+                  "jpn.nec.com",
+                  "leadbrain.co.jp",
+                  "morishita-zeimu.com"
+                ]
+              }
+            },
+            "cited": false
+          },
+          {
+            "kw": "ものづくり 商業 サービス生産性向上促進補助金 運送業",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "app-logi.co.jp",
+                  "portal.monodukuri-hojo.jp"
+                ]
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "55truck.com",
+                  "core.co.jp",
+                  "hojokin-office.essencimo.co.jp",
+                  "ichidokiri.co.jp",
+                  "inu-llc.co.jp",
+                  "mi-souken.com",
+                  "office-akasaki.com",
+                  "roboware.ai"
+                ]
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "chusho.meti.go.jp",
+                  "core.co.jp",
+                  "hkd.mlit.go.jp",
+                  "note.com",
+                  "portal.monodukuri-hojo.jp",
+                  "seisansei.smrj.go.jp",
+                  "smrj.go.jp",
+                  "tohoku.meti.go.jp"
+                ]
+              },
+              "Claude": {
+                "cited": true,
+                "ours": [
+                  "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/"
+                ],
+                "sources": [
+                  "app-logi.co.jp",
+                  "hojyokin-portal.jp",
+                  "ichidokiri.co.jp",
+                  "inu-llc.co.jp",
+                  "lp.7senses.co.jp",
+                  "mirasapo.jp",
+                  "portal.monodukuri-hojo.jp",
+                  "samurai-law.com"
+                ]
+              }
+            },
+            "cited": true
+          },
+          {
+            "kw": "it導入補助金 ランキング",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "front.it-trend.jp",
+                  "it-trend.jp"
+                ]
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "ardent.jp",
+                  "carearc.co.jp",
+                  "it-shien.smrj.go.jp",
+                  "itreview.jp",
+                  "jicoo.com",
+                  "note.com",
+                  "sogyotecho.jp",
+                  "upshift.jp"
+                ]
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "chusho.meti.go.jp",
+                  "hojokin-agent.jp",
+                  "kaminashi.jp",
+                  "mirasapo-plus.go.jp",
+                  "seisansei.smrj.go.jp"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "ardent.jp",
+                  "financeinjapan.com",
+                  "hojoguide.jp",
+                  "hojyokin-portal.jp",
+                  "it-seibishi.or.jp",
+                  "it-trend.jp",
+                  "mono.ipros.com",
+                  "nippon-smes-project.com"
+                ]
+              }
+            },
+            "cited": false
+          },
+          {
+            "kw": "美容室 レジ 補助金",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "jobvr.co.jp",
+                  "salog.jp"
+                ]
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "airregi.jp",
+                  "busicom.co.jp",
+                  "carearc.co.jp",
+                  "catalog.monex.co.jp",
+                  "hojyokin-portal.jp",
+                  "jyoseikin-support.net",
+                  "mono-support.com",
+                  "note.com"
+                ]
+              },
+              "Perplexity": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "11consul.com",
+                  "activemedia.co.jp",
+                  "bireki.jp",
+                  "carearc.co.jp",
+                  "catalog.monex.co.jp",
+                  "gxo.co.jp",
+                  "hojonavi.org",
+                  "kaigyou.tb-net.jp"
+                ]
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "aspicjapan.org",
+                  "atsoho.com",
+                  "hojyokin-portal.jp",
+                  "office-tree.jp"
+                ]
+              }
+            },
+            "cited": false
+          }
+        ]
+      }
+    }
   }
 }
