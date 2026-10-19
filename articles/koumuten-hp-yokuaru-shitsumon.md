@@ -67,6 +67,10 @@ faq:
 
 **施主の質問は「いくら」「何等級」「何か月」のように答えが1つに決まりやすく、AIの回答が出やすい種類です。**
 
+あわせて[歯科医院の症状ページの作り方](/aio/shika-shoujou-page-tsukurikata/)もご覧ください。
+
+関連する内容として[クリニックの症状ページの作り方](/aio/clinic-shoujou-page-tsukurikata/)も公開しています。
+
 関連する内容として[工務店のAIO対策は自社で続けられる？](/aio/koumuten-aio-taisaku-taisei/)も公開しています。
 
 55,393件の検索を調べた<a href="https://arxiv.org/abs/2605.14021" target="_blank" rel="noopener">2026年の学術調査（arXiv 2605.14021）</a>では、AI Overviewが出た割合は全体で13.7%でした。質問形の検索に絞ると**64.7%**まで上がります。

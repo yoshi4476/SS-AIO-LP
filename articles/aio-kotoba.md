@@ -43,6 +43,10 @@ faq:
 
 **Web集客でAIOと言えば、GoogleのAI回答に自社ページが出典として選ばれるための対策のことです。**
 
+あわせて[外壁塗装のAI検索集客](/aio/gaiheki-tosou-ai-kensaku-shukyaku/)もご覧ください。
+
+あわせて[AIO無料相談で聞く5つのこと](/aio/aio-muryou-soudan/)もご覧ください。
+
 AIOは英字3文字の略語なので、分野によって意味が変わります。検索すると、パソコンや冷却装置の話が混ざるのはそのためです。
 
 <figure><img src="/images/aio-kotoba/imi.png" alt="AIOという言葉の3つの意味: Web集客ではAI検索への対策、パソコンでは一体型のモデル、冷却では簡易水冷クーラー"><figcaption>AIOという言葉の3つの意味（当メディア作成）</figcaption></figure>
@@ -60,6 +64,10 @@ Web集客の意味でも、略す元の英語は人によって違います。�
 ## AIO・LLMO・GEO・AEOは何が違う？
 
 **4つの言葉は対象の範囲が少しずつ違うだけで、やる作業の中心はほぼ同じです。**
+
+近い論点を[AIOツールの評判・口コミは信じていい？](/aio/aio-tool-hyouban-kuchikomi/)で扱っています。
+
+関連する内容として[AIOのログ分析ツールはどれ？4種の比較と選び方](/aio/aio-log-bunseki-tool-hikaku/)も公開しています。
 
 違いが出るのは「どのAIを主に見ているか」と「誰が言い出したか」の2点です。表にまとめました。
 

@@ -49,13 +49,13 @@ faq:
 
 **AIO集客とは、AIの回答の中で引用され、そこから指名検索や問い合わせにつながる状態をつくることです。**
 
+あわせて[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
+
 選ぶときの基準は、[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)で解説しています。
 
 関連する内容として[大阪でMEOとAIOを両方任せられる会社の選び方](/aio/osaka-meo-aio-kaisha/)も公開しています。
 
 あわせて[税理士事務所の集客とは？](/ai-marketing/zeirishi-shukyaku-channel/)もご覧ください。
-
-あわせて[歯科医院の集客方法とは？新患を増やす5つの基本施策](/ai-marketing/shika-iin-shukyaku/)もご覧ください。
 
 <div class="definition-box"><span class="term">AIO集客とは</span>、Google の AI Overview や ChatGPT・Perplexity などの生成AIが検索意図に答える際、自社の情報を引用元として選ばせ、そこから指名検索・問い合わせ・来店につなげる集客の考え方です。</div>
 

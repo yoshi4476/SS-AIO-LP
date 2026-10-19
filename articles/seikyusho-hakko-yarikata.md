@@ -90,9 +90,9 @@ faq:
 
 請求書の発行は、記載項目を確認する・請求書を作成する・取引先へ送付する・控えを保存する、という4ステップで進めます。
 
-関連する内容として[御中と様を重ねるのはNG](/blog/seikyusho-fuutou-kakikata/)も公開しています。
+前提となる考え方を先に押さえるなら、[請求書照合の自動化とは？](/blog/seikyusho-shougou-jidoka/)が参考になります。
 
-あわせて[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)もご覧ください。
+関連する内容として[御中と様を重ねるのはNG](/blog/seikyusho-fuutou-kakikata/)も公開しています。
 
 <figure><img src="/images/seikyusho-hakko-yarikata/step.png" alt="請求書発行の基本4ステップ: 記載項目を確認する、請求書を作成する、取引先へ送付する、控えを保存する" loading="lazy"><figcaption>請求書発行の基本4ステップ</figcaption></figure>
 

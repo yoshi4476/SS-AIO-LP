@@ -414,7 +414,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <div class="article-layout">
     <aside class="article-side">
       <div class="side-sticky">
-        <nav class="toc" aria-label="目次"><details><summary class="toc-title">目次<span class="toc-n">14項目</span></summary><ol><li><a href="#aioaio">AIOツールの無料版とは？AIO計測でできることとできないこと</a></li><li><a href="#aioaio_1">無料AIOチェックと無料AIOツールは何が違うか</a></li><li><a href="#_1">なぜ無料ツールから始めるべきか</a></li><li><a href="#ai3">【計測編】AI引用状況を無料で確認できるツール3選</a></li><li><a href="#2">【構造化データ編】無料でエラーを検出できるツール2選</a></li><li><a href="#ai">【クローラー確認編】AIクローラーの許可状況を無料で確認する方法</a></li><li><a href="#_2">規模別・目的別のおすすめの選び方</a></li><li><a href="#_4">無料ツールの限界と有料化を検討すべきタイミング</a></li><li><a href="#_5">無料の次に検討する安い有料ツールの価格帯</a></li><li><a href="#_6">ツール代より先に削れる費用</a></li><li><a href="#_7">よくある失敗と対処法</a></li><li><a href="#3_1">導入の進め方（3ステップ）</a></li><li><a href="#_8">よくある質問</a></li><li><a href="#aio">まとめ: AIO対策はまず無料ツールで現状を知ることから</a></li></ol></details></nav><script>if(matchMedia("(min-width: 1100px)").matches)document.currentScript.previousElementSibling.querySelector("details").open=true</script>
+        <nav class="toc" aria-label="目次"><details><summary class="toc-title">目次<span class="toc-n">15項目</span></summary><ol><li><a href="#aioaio">AIOツールの無料版とは？AIO計測でできることとできないこと</a></li><li><a href="#aioaio_1">無料AIOチェックと無料AIOツールは何が違うか</a></li><li><a href="#_1">なぜ無料ツールから始めるべきか</a></li><li><a href="#ai3">【計測編】AI引用状況を無料で確認できるツール3選</a></li><li><a href="#2">【構造化データ編】無料でエラーを検出できるツール2選</a></li><li><a href="#ai">【クローラー確認編】AIクローラーの許可状況を無料で確認する方法</a></li><li><a href="#aiollmo">AIO診断・LLMO診断を無料ツールで行うチェックリスト</a></li><li><a href="#_2">規模別・目的別のおすすめの選び方</a></li><li><a href="#_4">無料ツールの限界と有料化を検討すべきタイミング</a></li><li><a href="#_5">無料の次に検討する安い有料ツールの価格帯</a></li><li><a href="#_6">ツール代より先に削れる費用</a></li><li><a href="#_7">よくある失敗と対処法</a></li><li><a href="#3_1">導入の進め方（3ステップ）</a></li><li><a href="#_8">よくある質問</a></li><li><a href="#aio">まとめ: AIO対策はまず無料ツールで現状を知ることから</a></li></ol></details></nav><script>if(matchMedia("(min-width: 1100px)").matches)document.currentScript.previousElementSibling.querySelector("details").open=true</script>
         <div class="side-cta">
           <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
           <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
@@ -514,6 +514,20 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <p>当社は自社サイトをAIO対策の実験場にしており、主要AIクローラーを許可したうえで日次で計測しています。ブロックの有無を確認する習慣がなければ、この体制は作れなかったはずです。</p>
 <p>サーバーログやCDNのアクセスログが見られる環境なら、GPTBotなどのUser-Agentの実際のアクセスも合わせて確認してください。robots.txtの設定ミスに早く気づけます。ログを数える道具の選び方は<a href="/aio/aio-log-bunseki-tool-hikaku/">AIOのログ分析ツールの比較</a>で解説しています。</p>
+<h2 id="aiollmo">AIO診断・LLMO診断を無料ツールで行うチェックリスト</h2>
+<p><strong>無料のAIO診断は、引用・構造化データ・クローラー許可の3点を順に確認すれば完了します。</strong></p>
+<p>「LLMO診断ツール」と「AIO診断」は呼び方が違うだけで、確認する中身はほぼ同じです。AIO診断はGoogleのAI Overviewを、LLMO診断はChatGPTなどのAIチャットを主に指します。ただ、どちらも見るのは引用されているか、構造が読み取れるか、クローラーが入れるかの3点です。専用の診断ツールを探さなくても、ここまで紹介した無料ツールで足ります。</p>
+<p>次のチェックリストを上から順に確認してください。</p>
+<ul>
+<li>[ ] AIチャットに狙うキーワードで質問し、社名やURLが回答に出るか確認した（ツール3）</li>
+<li>[ ] Search ConsoleでAI OverviewやAIモードの表示回数を確認した（ツール1）</li>
+<li>[ ] GA4でAI経由の流入を確認した（ツール2）</li>
+<li>[ ] リッチリザルトテストで構造化データのエラーがないか確認した（ツール4）</li>
+<li>[ ] Schema Markup Validatorでも構文エラーがないか確認した（ツール5）</li>
+<li>[ ] robots.txtでAIクローラーをブロックしていないか確認した（ツール6）</li>
+<li>[ ] 結果をシートに記録し、見つかったエラーを直した</li>
+</ul>
+<p>点数でひと目で知りたい場合は、<a href="/tools/aio-check/">AI検索の対応度チェック</a>も無料で使えます。診断の項目ごとの意味は<a href="/aio/aio-shindan-yarikata/">AIO診断のやり方</a>で解説しています。</p>
 <h2 id="_2">規模別・目的別のおすすめの選び方</h2>
 <p><strong>中小企業は計測ツール1つ、大企業は定点観測の自動化から始めるのが確実です。</strong></p>
 <p>AI検索経由で「うちの規模だとどれを使えばいいか」という質問が実際に届きます。</p>
@@ -596,7 +610,6 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </table></div>
 <p>表の右2行に該当する場合は、有料ツールの導入を検討するタイミングです。私も、記事数が数十本を超えたあたりから、無料ツールだけでの毎月確認に限界を感じた経験があります。</p>
 <p>判断に迷う場合は、いきなり契約せず無料トライアルのあるツールから試すのが安全です。多くの有料監視ツールは2週間程度の無料期間を用意しています。自社の運用に合うかを確認してから契約すれば、費用を無駄にせずに済みます。</p>
-<p>AIOツールの評判や口コミをどこまで信じてよいかは、<a href="/aio/aio-tool-hyouban-kuchikomi/">AIOツールの評判・口コミの読み方と契約前の確かめ方</a>で整理しています。</p>
 <p>有料化を検討する目安は「毎月の確認作業に何時間かかっているか」です。無料ツールを手作業で回して1記事あたり数分で終わるうちは無料の範囲で十分です。ただし、月3時間を超えて手作業の確認に追われるようになったら、自動化された有料ツールのほうが人件費に見合います。私たちも、この境界線を意識して有料化のタイミングを判断しています。</p>
 <p>当社の実測でも、当サイトは直近28日間で316個の検索語からのべ2,321回表示され、クリックは5回でした。<strong>表示回数だけを追っていても、AIにどう引用されているかまでは見えません。</strong>ここに有料ツールの出番があります。</p>
 <h2 id="_5">無料の次に検討する安い有料ツールの価格帯</h2>

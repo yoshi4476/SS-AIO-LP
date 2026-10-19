@@ -51,6 +51,8 @@ faq:
 
 **AIOで書く記事の文字数に決まった基準は無く、Googleは優先する文字数は存在しないと明言しています。**
 
+関連する内容として[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)も公開しています。
+
 関連する内容を先に押さえるなら、[AIOという言葉の意味は？](/aio/aio-kotoba/)が参考になります。
 
 関連する内容は[AIOはいつから？日本は2024年8月・AIモードは2025年9月から](/aio/aio-itsukara/)でも扱っています。
@@ -58,8 +60,6 @@ faq:
 関連する内容は[AIO無料相談で聞く5つのこと](/aio/aio-muryou-soudan/)で整理しています。
 
 関連する内容として[歯科医院の症状ページの作り方](/aio/shika-shoujou-page-tsukurikata/)も公開しています。
-
-あわせて[クリニックの症状ページの作り方](/aio/clinic-shoujou-page-tsukurikata/)もご覧ください。
 
 <div class="definition-box"><span class="term">AIO（AI Overview Optimization）とは</span>、GoogleのAI OverviewやChatGPTなどが回答を作るときに、自社サイトの情報が根拠として使われるよう整える取り組みです。</div>
 
@@ -95,8 +95,6 @@ Googleのガイドが効くと書いているのは、一次体験にもとづ�
 ## 記事の長さは検索意図で決める
 
 **記事の長さは、狙う語が1つの疑問か、比較か、網羅かという検索意図で決めます。**
-
-あわせて[AIOのログ分析ツールはどれ？4種の比較と選び方](/aio/aio-log-bunseki-tool-hikaku/)もご覧ください。
 
 <figure><img src="/images/aio-mojisuu/nagasa-kimekata.png" alt="検索意図ごとの記事の長さの目安を3段階で比べた表"></figure>
 
@@ -149,7 +147,6 @@ Googleは、AIのために内容を細かく刻む必要は無いと説明して
 原因は、字数が足りないときに本題の前へ説明を足したことです。冒頭はAIが答えを探す場所なので、そこが一般論だと切り出す文がありません。
 
 避け方は、足りないときに本題の後ろを見直すことです。<span class="txt-red">字数を埋めるための前置きはNGです。</span>足すなら、失敗例・条件による分岐・自社の実測のように、読者の判断に効く内容にします。
-
 
 AI検索への対応で抜けている箇所は、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で確かめられます。登録は不要で、その場で点数が出ます。
 

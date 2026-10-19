@@ -76,13 +76,13 @@ diagrams:
 
 **歯科医院SEOは、症状KWでのページ構成から自由診療の専門ページ強化、歯科用の構造化データ実装まで5段階で進めます。**
 
+費用の目安については、[歯科医院のリフォーム費用とは？](/meo/shika-reform-hiyou/)にまとめています。
+
 あわせて[リフォームSEOとは？受注につながる5つの施策](/seo/reform-seo-taisaku/)もご覧ください。
 
 あわせて[歯科医院のAIO対策にかかる費用はいくら？内訳と相場](/aio/shika-aio-taisaku-hiyou/)もご覧ください。
 
 関連する内容として整骨院の費用は保険でいくら？自己負担3割の目安と相場も公開しています。
-
-費用の目安は[歯科医院の開業費用は5000万円？内訳と抑え方](/meo/shika-kaigyou-hiyou/)で整理しています。
 
 <figure><img src="/images/shika-seo-taisaku/steps.png" alt="歯科医院SEO基本5ステップ: 症状KWで構成、自由診療ページ強化、内部リンクで回遊、歯科用データ実装、ポータルと併用" loading="lazy"><figcaption>歯科医院SEO基本5ステップ。前半3つがコンテンツ整備、後半2つが技術・戦略面の対応です</figcaption></figure>
 

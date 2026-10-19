@@ -55,13 +55,13 @@ diagrams:
 
 整骨院のMEO対策とは、柔道整復師という国家資格をGoogleマップ上で明示し、無資格の整体院と区別させる施策です。
 
+あわせて[MEOアルゴリズム攻略](/meo/meo-algorithm-kouryaku/)もご覧ください。
+
 関連する内容は[医療機関のMEO対策](/meo/iryou-meo-taisaku/)で整理しています。
 
 あわせて[大阪でMEOとAIOを両方任せられる会社の選び方](/aio/osaka-meo-aio-kaisha/)もご覧ください。
 
 前提となる考え方は、[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)で解説しています。
-
-近い論点を[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)で扱っています。
 
 直す接点は4つだけです。G-ranの運用で実際に手を入れている順に並べました。
 

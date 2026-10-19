@@ -65,6 +65,8 @@ faq:
 
 **介護事業所の帳簿は、会計の区分・入金の時期・加算の賃金の3点で一般の会社と違います**。記帳代行を選ぶときは、この3点を扱えるかを聞きます。
 
+あわせて[飲食店の記帳代行｜任せる範囲と選び方・失敗しない5つの確認点](/blog/inshokuten-kicho-daiko/)もご覧ください。
+
 <figure><img src="/images/kaigo-kichodaiko/nyukin-wakekata.png" alt="介護事業所の収入を国保連からの介護報酬・利用者負担・保険外のサービス代に分けた図"></figure>
 
 1つ目は会計の区分です。訪問介護の基準省令の第38条は、2つの区分を求めています（<a href="https://laws.e-gov.go.jp/law/411M50000100037" target="_blank" rel="noopener">e-Gov法令検索「指定居宅サービス等の事業の人員、設備及び運営に関する基準」</a>）。

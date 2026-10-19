@@ -1,6 +1,6 @@
 ---
-title: AIOでGeminiの引用に載る方法は？18語の実測と5つの手順
-description: Geminiの引用に載るには、Google検索の索引に入り、質問1つに1ページで答えることが土台です。当サイトがGeminiに18語を聞いた実測では、出典に入った3語はどれも、聞かれた語1つに絞ったページが選ばれました。Google-Extendedの確認から計測まで5つの手順で解説します。
+title: AIOでGeminiの引用に載る方法は？18語中3語しか載らなかった実測
+description: Geminiに聞いた18語のうち、出典つきで答えたのは15語、当サイトが載ったのは3語でした。載った3語はどれも、聞かれた語1つに絞ったページです。Google-Extendedの確認から計測まで、aio gemini 引用 載る方法を5つの手順で解説します。
 slug: gemini-inyou-noru-houhou
 keyword: aio gemini 引用 載る方法
 category: aio

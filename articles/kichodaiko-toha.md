@@ -69,6 +69,8 @@ faq:
 
 記帳代行は入力作業のみ、経理代行は請求書発行まで、経理BPOは給与計算まで範囲が広がります。
 
+あわせて[記帳代行料金表は税理士事務所でどう読む？](/blog/kichodaiko-ryokinhyo-zeirishi/)もご覧ください。
+
 関連する内容として[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)も公開しています。
 
 近い論点を[記帳代行のアウトソーシング活用](/blog/kichodaiko-outsourcing/)で扱っています。
@@ -127,8 +129,6 @@ faq:
 あわせて[経理効率化の事例4選｜方法別のポイントと進め方](/blog/keiri-koritsuka-jirei/)もご覧ください。
 
 あわせて記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方もご覧ください。
-
-関連する内容として[記帳代行は税理士法違反？3つの独占業務とNG事例](/blog/kichodaiko-zeirishihou-ihan/)も公開しています。
 
 <figure><img src="/images/kichodaiko-toha/shippai.png" alt="記帳代行で起きやすい失敗3つ: 範囲を思い込んで契約する、税務相談まで任せられると誤解する、資料を渡さないまま運用を始める" loading="lazy"><figcaption>記帳代行で起きやすい失敗3つ</figcaption></figure>
 
