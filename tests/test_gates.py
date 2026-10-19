@@ -1528,7 +1528,7 @@ def test_findings_judges_by_marker_not_exit_code():
         ("見つかった（終了コードは0）", "NAP_OK=no", 0, "要対応"),
         ("見つからなかった", "NAP_OK=yes", 0, "問題なし"),
         ("印が故障より優先される", "AIO_OK=no", 1, "要対応"),
-        ("印が無ければ終了コードを見る", "なにも出ていません", 1, "要対応"),
+        ("印が無く1で終わり明細も無ければ動かせず（8.7・2026-10-20・h118）", "なにも出ていません", 1, "動かせず"),
         ("印が無く終了コードも0", "なにも出ていません", 0, "問題なし"),
         ("検査が動かない", "（起動できません）", 127, "動かせず"),
     ]
@@ -2484,7 +2484,7 @@ def test_outcome_watch_counts_what_was_made():
     print(chr(10) + "■ 結果の見張り")
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "outcome_watch.py"), "--day", "2026-10-02", "--no-net"],
                        capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=300)
-    check("記事が0本の日を要対応にする", "WATCH_OK=no" in r.stdout and r.stdout.count("の記事が 0/") >= 3, True)
+    check("記事が0本の日を要対応にする（補助金は 2026-10-19 から新しい記事0本で数えない）", "WATCH_OK=no" in r.stdout and r.stdout.count("の記事が 0/") >= 2, True)
     import daily_audit as D
     import outcome_watch as OW
     from datetime import date as _d

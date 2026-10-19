@@ -91,20 +91,46 @@ def check_video(day, bad):
         bad.append(f"要対応: {day} に動画が1本も上がっていません（daily-video の実行記録を確かめる）")
 
 
+SEND_STEP = "ダイジェスト配信"     # digest.yml の週刊の回だけが動かす手順（毎日の回は飛ばす）
+
+
+def run_steps(run_id):
+    """その回の手順の [{name, conclusion}]。読めなければ []"""
+    try:
+        out = subprocess.run(["gh", "run", "view", str(run_id), "--json", "jobs"],
+                             capture_output=True, text=True, timeout=60)
+        return [s for j in (json.loads(out.stdout or "{}").get("jobs") or []) for s in (j.get("steps") or [])]
+    except Exception:
+        return []
+
+
+def newsletter_sent(runs, day, steps_of):
+    """その日（UTC の日付）に始まった定時の回のうち、配信の手順が成功した回があるか。
+
+    digest.yml は週刊（月曜 0:00 UTC）と毎日（23:30 UTC）の2つの定時を持ち、どちらの回も同じ名前になる。
+    「月曜 3:00 UTC より前に始まった回」で週刊の回と見なしていたため、遅れて 03:36Z に始まった週刊の回を外し、
+    遅れて月曜 02:09Z に始まった毎日の回（配信の手順は飛ばす）を週刊の回と取り違えていた（2026-10-20）。
+    始まった時刻ではなく、配信の手順が実際に動いて成功したかで見る"""
+    mine = [r for r in runs if r.get("event") == "schedule" and str(r.get("createdAt", ""))[:10] == day.isoformat()]
+    for r in mine[:6]:
+        if any(s.get("name") == SEND_STEP and s.get("conclusion") == "success" for s in steps_of(r.get("databaseId"))):
+            return True
+    return False
+
+
 def check_newsletter(day, bad):
     """月曜 9:00 JST（= 月曜 0:00 UTC）の週刊ニュースレターが成功したか"""
     if day.weekday() != 0:
         return
     try:
         out = subprocess.run(["gh", "run", "list", "--workflow", "digest.yml", "-L", "20",
-                              "--json", "conclusion,createdAt,event"], capture_output=True, text=True, timeout=60)
+                              "--json", "databaseId,conclusion,createdAt,event"],
+                             capture_output=True, text=True, timeout=60)
         runs = json.loads(out.stdout or "[]")
     except Exception as e:
         print(f"  ニュースレター: 実行記録を読めません（{str(e)[:40]}）")
         return
-    mine = [r for r in runs if r.get("event") == "schedule" and r["createdAt"][:10] == day.isoformat()
-            and int(r["createdAt"][11:13]) < 3]
-    ok = any(r.get("conclusion") == "success" for r in mine)
+    ok = newsletter_sent(runs, day, run_steps)
     print(f"  ニュースレター: {'配信の実行あり' if ok else '成功した実行なし'}")
     if not ok:
         bad.append(f"要対応: {day}（月）の週刊ニュースレターが成功していません（Weekly Newsletter Digest の実行記録を確かめる）")

@@ -358,8 +358,9 @@ def test_weekly_notice_raises_only_new_worse_or_deadline():
     check("要対応の行は「要対応: <検査名>」のまま（前の回の自分の行を持ち越さない carry_over の目印）",
           f"要対応: {sns}" in b2, True)
     src = inspect.getsource(F.main)
+    # 2026-10-20: judge に検査の明細の型（pat）も渡す（印が無く1で終わった回を、明細があれば要対応・無ければ動かせずに分ける）
     check("判定（judge・*_OK= の印）と終了コード0は変えない",
-          ("state = judge(text, rc)" in src, "return 0   # 知らせるのが仕事" in src), (True, True))
+          ("state = judge(text, rc" in src, "return 0   # 知らせるのが仕事" in src), (True, True))
     check("前の週の記録は CI の回だけ書く（手元で試した回を比べる相手にしない）",
           'os.environ.get("GITHUB_ACTIONS")' in src and "save_seen(" in src, True)
 

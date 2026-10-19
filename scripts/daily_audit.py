@@ -39,6 +39,9 @@ KW_MIN_DAYS = 8        # 未着手KWがこの日数分を切ったら補充す�
 KW_WARN_DAYS = 30      # この日数分を切ったら早期警戒（補充の井戸が枯れていないか見る）
                        # 週次補充まで最大7日空くため、4日分では次の補充を待てずに枯れる
 PY = sys.executable
+# 子の Python に UTF-8 で書かせる。手元の Windows では既定が cp932 で、utf-8 として読むと文字が欠け、
+# 「BLOCKED(公開不可)」「段落」などの印を読み落としていた（2026-10-20）
+CHILD_ENV = {**os.environ, "PYTHONIOENCODING": "utf-8"}
 JST = timezone(timedelta(hours=9))
 # 前日の不足分として書いた記事（slug → どの日の分か）。公開日（date:）は公開した日のまま変えず、
 # 本数だけ前日に数える。frontmatter に書くと配信先（external-md）の原稿にまで載るため、台帳に分ける
@@ -363,9 +366,14 @@ def check_blocked(todo):
     """build.py が公開不可としている記事"""
     print("\n■ 品質ゲート（build.py）")
     r = subprocess.run([PY, "scripts/build.py"], cwd=ROOT, capture_output=True,
-                       text=True, encoding="utf-8", errors="ignore")
+                       text=True, encoding="utf-8", errors="replace", env=CHILD_ENV)
     blocked = [ln for ln in (r.stdout or "").splitlines() if "BLOCKED(公開不可)" in ln]
-    if not blocked:
+    # build.py は途中で落ちたときだけ 0 以外を返す。落ちた回は BLOCKED の行が出ないので「なし」と読まない（2026-10-20）
+    if r.returncode != 0:
+        tail = ((r.stderr or "").strip().splitlines() or ["?"])[-1]
+        print(f"  ?   build.py が途中で止まり判定できません（{tail[:80]}）")
+        SKIPPED.append("品質ゲート")
+    elif not blocked:
         print("  OK  BLOCKEDなし")
         return
     for ln in blocked:
@@ -388,7 +396,11 @@ def check_external_dup(todo):
     """配信先サイトに元からある記事との重複（移管前の記事は台帳にないため見落としやすい）"""
     print("\n■ 配信先サイトの既存記事との重複")
     import cannibal_check
-    for h in cannibal_check.external_dup_check():
+    hits = cannibal_check.external_dup_check()
+    # 配信先の一覧が取れなかった回は [] が返る。重複なしと区別する（2026-10-20）
+    if getattr(cannibal_check.external_dup_check, "failed", False):
+        SKIPPED.append("配信先の既存記事との重複")
+    for h in hits:
         todo.append(f"TODO: {h['mine']['slug']} は {h['site']} の既存記事と重複"
                     f"（類似度{h['score']}・{h['theirs']['url']}）。"
                     "自作側を取り下げて既存記事へ301転送する")
@@ -409,6 +421,9 @@ def check_serp_overlap(todo, limit=5):
         print(f"  GSCから取得できません（{str(e)[:60]}）")
         SKIPPED.append("食い合い")
         return
+    # 一部のサイトだけ GSC から取れなかった回は、そのサイトの食い合いが見えていない（2026-10-20）
+    if getattr(cannibal_check.serp_overlap, "failed", False):
+        SKIPPED.append("食い合い（一部のサイト）")
     print(f"  {len(hits)}語")
     for h in hits[:limit]:
         drag = "・".join(f"{x[0]}({x[1]:.0f}位)" for x in h["drag"][:3])
@@ -445,6 +460,15 @@ def check_growth(todo):
                     f"まず {pages[0] if pages else '該当ページ'} が200を返すか確認する")
 
 
+def readability_lines(out):
+    """score_check の出力から、段落と文の長さで落ちた行だけを拾う。
+
+    score_check はこの2項目を「WARN | ［警告］段落が…」「WARN | ［警告］長文が…」と出す。
+    FAIL で始まり「1文」を含む行を探していたため、超過があっても1本も拾えていなかった（2026-10-20）"""
+    return [l for l in out.splitlines()
+            if l.startswith(("FAIL", "WARN")) and ("段落" in l or "長文" in l)]
+
+
 def check_readability(todo, limit=3):
     """公開済み記事の読みやすさ（段落・文の長さ）を検査する。
 
@@ -457,9 +481,8 @@ def check_readability(todo, limit=3):
         if p.name.startswith("_"):
             continue
         r = subprocess.run([PY, "scripts/score_check.py", p.stem], cwd=ROOT,
-                           capture_output=True, text=True, encoding="utf-8", errors="ignore")
-        fails = [l for l in (r.stdout or "").splitlines()
-                 if l.startswith("FAIL") and ("段落" in l or "1文" in l)]
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", env=CHILD_ENV)
+        fails = readability_lines(r.stdout or "")
         if fails:
             bad.append((p.stem, fails))
     print(f"  {len(bad)}本に超過あり（1晩に最大{limit}本ずつ直す）")
@@ -476,6 +499,7 @@ def check_supply(todo, fix=False):
     import hub_client
     if not hub_client.enabled():
         print("  ?   管制塔が未接続のため判定できません（HUB_URL未設定）")
+        SKIPPED.append("KW供給")
         return
     # 失敗を握りつぶすと在庫0件と区別がつかない。実際、通信が一瞬切れただけで
     # 「全サイト在庫0」と出て、補充が必要だと誤解する状態になっていた。
@@ -483,6 +507,7 @@ def check_supply(todo, fix=False):
         rows = hub_client.all_kw(strict=True)
     except Exception as err:
         print(f"  ?   管制塔から取得できず判定できません（{str(err)[:60]}）")
+        SKIPPED.append("KW供給")
         return
     per = {}
     import kw_fit
@@ -511,7 +536,7 @@ def check_supply(todo, fix=False):
                 print(f"      → {sid} のKWを自動補充します")
                 r = subprocess.run([PY, "scripts/kw_discover.py", "--site", sid, "--append"],
                                    cwd=ROOT, capture_output=True, text=True,
-                                   encoding="utf-8", errors="ignore")
+                                   encoding="utf-8", errors="replace", env=CHILD_ENV)
                 out = (r.stdout or "") + (r.returncode and (r.stderr or "") or "")
                 m = re.search(r"管制塔の台帳へ (\d+)件を追加しました", out)
                 added = int(m.group(1)) if m else 0
@@ -679,6 +704,7 @@ def check_unseen(todo):
             mine.setdefault(owner, []).append((p_.stem, d_.group(1), c_.group(1).strip()))
 
     total = 0
+    failed = []
     for sid, cfg in sites_mod.load_all().items():
         rows = mine.get(sid, [])
         if not rows:
@@ -690,6 +716,7 @@ def check_unseen(todo):
         except Exception as e:
             # 取れなかったのを「表示ゼロ」と数えると、全記事が未登録に見える
             print(f"  （{cfg['name'][:18]}: GSCから取得できず確かめられません: {str(e)[:40]}）")
+            failed.append(sid)
             continue
         old = []
         for slug, dt, cat in rows:
@@ -699,10 +726,7 @@ def check_unseen(todo):
                 continue
             if days < 30:
                 continue          # 評価が定まる前に手を当てても意味がない
-            # サイトごとにURLの形が違う。どれかに当たれば「出ている」とみなす
-            cands = {f"https://{cfg['domain']}/{cat}/{slug}",
-                     f"https://{cfg['domain']}/blog/{slug}"}
-            if not (cands & seen):
+            if not page_seen(cfg, slug, cat, seen):
                 old.append((days, slug))
         if old:
             total += len(old)
@@ -711,11 +735,34 @@ def check_unseen(todo):
                   f"（最長{old[0][0]}日）")
             for d_, s_ in old[:3]:
                 print(f"         {d_}日 {s_[:44]}")
+    if failed:
+        # 取れなかったサイトがあるのに「すべて出ています」と言わない（全サイト失敗でも OK と出ていた。2026-10-20）
+        SKIPPED.append("検索に出ていないページ（一部のサイト）")
     if total:
         todo.append(f"TODO: 公開30日以上たっても検索に出ないページが{total}件ある"
                     "（python scripts/reindex.py で登録状況を確認して再通知する）")
+    elif failed:
+        print(f"  ?   {len(failed)}サイトは確かめられませんでした（表示ゼロが無いとは言えません）")
     else:
         print("  OK  公開30日以上のページは、すべて検索に出ています")
+
+
+def page_seen(cfg, slug, cat, seen):
+    """GSC のページ一覧（末尾の / を外した URL の集合）に、その記事が出ているか。
+
+    URL の形を /{カテゴリ}/ と /blog/ に決め打ちしていたため、url_prefix を持つ社（例 /journal）や
+    WordPress のパーマリンクの社は、出ていても全部「表示ゼロ」に数えていた（2026-10-20）。
+    公開の URL は sites.article_url と同じ組み立てで作り、WordPress は先方へ問い合わせず
+    パスの最後の区切りが slug かで見る（記事ごとに通信すると監査が終わらない）"""
+    c = {k: v for k, v in cfg.items() if k != "type"} if cfg.get("type") == "wordpress" else cfg
+    cands = {sites_mod.article_url(c, {"slug": slug, "category": cat}).rstrip("/"),
+             f"https://{cfg['domain']}/{cat}/{slug}",
+             f"https://{cfg['domain']}/blog/{slug}"}
+    if cands & seen:
+        return True
+    if cfg.get("type") == "wordpress":
+        return any(u.rsplit("/", 1)[-1] == slug for u in seen)
+    return False
 
 
 def check_deploy(todo):
@@ -727,11 +774,18 @@ def check_deploy(todo):
     """
     print("\n■ 本番への反映")
     r = subprocess.run([PY, "scripts/deploy_check.py"], cwd=ROOT,
-                       capture_output=True, text=True, encoding="utf-8", errors="ignore")
+                       capture_output=True, text=True, encoding="utf-8", errors="replace", env=CHILD_ENV)
     out = (r.stdout or "")
     for line in out.splitlines():
         if line.strip() and "DEPLOY_OK" not in line:
             print(f"  {line.strip()}")
+    # 確かめられなかった回（本番の sitemap が取れない・手元の sitemap が無いなどで印が無い）は
+    # 「本番が古い」とも「一致」とも言わない（2026-10-20）
+    if "DEPLOY_OK=" not in out or "sitemapを取得できません" in out:
+        if "DEPLOY_OK=" not in out:
+            print(f"  ?   deploy_check が判定を出せませんでした（{(r.stderr or '?').strip()[-80:]}）")
+        SKIPPED.append("本番への反映")
+        return
     if "DEPLOY_OK=no" in out:
         todo.append("TODO: 本番が手元のビルドより古い。Deployワークフローを実行して反映する"
                     "（python scripts/deploy_check.py で差分を確認）")

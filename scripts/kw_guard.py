@@ -41,6 +41,7 @@ CRED = ROOT / "indexing-service-account.json"
 # 判定不能。GSC を読めない日に「要差別化（1）」を返すと、呼び出し側は
 # 「既存記事と食い合います」と読み、食い合っていない書き換えや統合を差し戻していた
 UNKNOWN = 3
+GSC_ROW_LIMIT = 5000    # 1サイト1回の行数の上限
 
 
 def gsc_rows(site_id):
@@ -85,11 +86,16 @@ def gsc_rows(site_id):
             r = sc.searchanalytics().query(
                 siteUrl="https://" + dom + "/", body={
                     "startDate": str(end - timedelta(days=90)), "endDate": str(end),
-                    "dimensions": ["query", "page"], "rowLimit": 5000}).execute().get("rows", [])
+                    "dimensions": ["query", "page"], "rowLimit": GSC_ROW_LIMIT}).execute().get("rows", [])
         except Exception as e:
-            if sid == site_id:
+            # 同じ組の他サイトも照合の相手（ドメインをまたいでも自社どうしで食い合う）。黙って飛ばすと、
+            # その日は他サイトが取っている語を「着手可」で通していた（2026-10-20）。取れなければ判定不能にする
+            if sid == site_id or not gsc_rows.failed:
                 gsc_rows.failed = f"{dom} の実績を取れません（{type(e).__name__}）"
-            continue          # 他サイトの権限の無いプロパティは黙って飛ばす
+            continue
+        if len(r) >= GSC_ROW_LIMIT:
+            # 上限で切れた分（表示の少ない語）は照合に入らない。食い合いが無いとは言えないので知らせる
+            print(f"   （{dom} の実績が上限{GSC_ROW_LIMIT}行に達しました。表示の少ない語は照合から漏れます）")
         for x in r:
             x["_site"] = sid
             x["_own"] = (sid == site_id)

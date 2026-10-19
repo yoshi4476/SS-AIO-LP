@@ -363,7 +363,7 @@ def main():
         import sites as S
         cfgs = S.load_all()
         ids = list(cfgs) if a.all or not a.site else [a.site]
-        ran = 0
+        ran, failed = 0, []
         for sid in ids:
             dom = (cfgs.get(sid) or {}).get("domain")
             if not dom:
@@ -375,9 +375,14 @@ def main():
                 bad += report(f"{cfgs[sid].get('name', sid)}（本番）", rows)
                 ran += 1
             except Exception as e:
-                print(f"■ {sid}: 巡回できません（{str(e)[:60]}）")
+                failed.append(sid)
+                print(f"要対応: {sid}: 巡回できません（{str(e)[:60]}）")
         if not ran:
             return 1
+        # sitemap を読めなかったサイトがあるのに yes と出していた（巡回できたサイトだけで判定していた。2026-10-20）
+        if failed and not bad:
+            print(f"SEO_AUDIT_OK=unknown（{len(failed)}サイトを巡回できませんでした）")
+            return 0
     print(f"SEO_AUDIT_OK={'no' if bad else 'yes'}")
     return 0
 

@@ -92,7 +92,30 @@ def _rules(site):
             "drop": tuple(flat(x) for x in (cfg.get("drop_kw") or []) + (cfg.get("ng_terms") or []) if x)}
 
 
-_RIVALS = tuple(flat(t) for t in RIVALS)
+# 英語の普通の語でもある製品名。製品を使いたい人の語（ログイン・料金…）と一緒のときだけ他社名とみなす
+# （「invoice 対応 経理代行」はインボイス制度への対応を外注したい買い手の語。2026-10-20）
+GENERIC_EN = {"invoice"}
+BRAND_INTENT = re.compile(r"ログイン|login|料金|価格|評判|口コミ|使い方|解約|アプリ|ダウンロード|株式会社")
+
+
+def rival(kw, names=RIVALS):
+    """語に含まれる他社の製品・サービス名（無ければ None）。
+
+    英字の名前は英字の語の途中で当てない（「dashboard」の board・「epca」の pca を他社名と読んでいた。2026-10-20）。
+    日本語の名前は従来どおり空白を除いた形の部分一致（「マネー フォワード」も当てる）"""
+    low, fl = norm(kw), flat(kw)
+    for t in names:
+        n = norm(t)
+        if re.fullmatch(r"[a-z0-9 ]+", n):
+            body = r"\s*".join(re.escape(w) for w in n.split())
+            if not re.search(r"(?<![a-z0-9])" + body + r"(?![a-z0-9])", low):
+                continue
+            if n in GENERIC_EN and not BRAND_INTENT.search(low):
+                continue
+            return n
+        if flat(t) in fl:
+            return n
+    return None
 
 
 def judge(kw, site):
@@ -106,9 +129,9 @@ def judge(kw, site):
     m = NOT_BUYER.search(fl)
     if m:
         return 2, f"見込み客でない（{m.group(0)}）"
-    t = next((t for t in _RIVALS if t in fl), None)
+    t = rival(kw)
     if t:
-        return 2, f"他社の製品・サービス名（{t}）"
+        return 2, f"他社の製品・サービス名（{flat(t)}）"
     t = next((t for t in R["drop"] if t in fl), None)
     if t:
         return 2, f"打ち出しから外した語・除外語（{t}）"

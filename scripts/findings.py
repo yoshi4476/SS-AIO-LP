@@ -296,7 +296,68 @@ def sig(line):
 
 
 def counted(lines):
-    return sum(int(m.group(1).replace(",", "")) for ln in lines for m in COUNT.finditer(ln))
+    # 1日の本数は件数に数えない（0本→2本に戻ったのを「増えた」と読まない）
+    return sum(int(m.group(1).replace(",", "")) for ln in lines for m in COUNT.finditer(QUOTA.sub(" ", str(ln))))
+
+
+# 1日の本数（pace の「1日0本」）。件数と違い、減るほうが悪い
+QUOTA = re.compile(r"1日\s*(\d+)\s*本")
+PCT = re.compile(r"(\d+(?:\.\d+)?)\s*[%％]")
+PCT_STEP = 5      # 割合は向きが決まらない（未登録率は上がると悪い・達成率は下がると悪い）。5ポイント動いたら「変わった」
+
+
+def numbers(line):
+    """明細1行の数字を種類つきで並べる: c=件数（増えたら悪化）・q=1日の本数（減ったら悪化）・p=割合（動いたら変化）"""
+    s = str(line)
+    out = [["q", int(m.group(1))] for m in QUOTA.finditer(s)]
+    s = QUOTA.sub(" ", s)
+    out += [["c", int(m.group(1).replace(",", ""))] for m in COUNT.finditer(s)]
+    out += [["p", float(m.group(1))] for m in PCT.finditer(s)]
+    return out
+
+
+_MARKS = []
+
+
+def _marks_once():
+    if not _MARKS:
+        _MARKS.append(_client_marks())
+    return _MARKS[0]
+
+
+def line_numbers(lines, marks=None):
+    """{明細の伏せた形のハッシュ: その行の数字}。伏せた形が同じ行が2つあれば数字をつなげる。
+    記録（findings_seen.json）は public に置くので、お客様の社の行の割合（未登録率など）は残さない"""
+    marks = _marks_once() if marks is None else marks
+    d = {}
+    for ln in lines:
+        n = numbers(ln)
+        if any(m in str(ln).lower() for m in marks):
+            n = [x for x in n if x[0] != "p"]
+        d.setdefault(sig(ln), []).extend(n)
+    return d
+
+
+def worse_numbers(prev_nums, lines):
+    """前の週と同じ明細（伏せた形が同じ行）で、数字が悪いほうへ動いたか。理由の文を返す（動いていなければ空）。
+
+    件数の合計の増加だけを見ていたため、1日1本→0本（減るほうが悪い）・5件,2件→1件,6件（合計は同じ）・
+    割合の変化を「先週と同じ」として情報に下げていた（2026-10-20）"""
+    for key, cur in line_numbers(lines).items():
+        old = (prev_nums or {}).get(key)
+        if not old:
+            continue
+        for kind in ("q", "c", "p"):
+            a = [v for k, v in old if k == kind]
+            b = [v for k, v in cur if k == kind]
+            for x, y in zip(a, b):
+                if kind == "q" and y < x:
+                    return f"1日の本数が減りました（{x}→{y}本）"
+                if kind == "c" and y > x:
+                    return f"件数が増えました（{x}→{y}）"
+                if kind == "p" and abs(y - x) >= PCT_STEP:
+                    return f"割合が変わりました（{x:g}%→{y:g}%）"
+    return ""
 
 
 def notice(key, lines, seen, today, state="要対応", steady="", deadline=""):
@@ -308,7 +369,8 @@ def notice(key, lines, seen, today, state="要対応", steady="", deadline=""):
     new = [ln for ln in lines if sig(ln) not in was] if prev else list(lines)
     first = (prev or {}).get("first") or today
     count, n = counted(lines), len(lines)
-    rec = {"first": first, "sigs": sorted(set(all_sigs))[:300], "n": n, "count": count}
+    nums = dict(list(line_numbers(lines).items())[:300])
+    rec = {"first": first, "sigs": sorted(set(all_sigs))[:300], "n": n, "count": count, "nums": nums}
     try:
         weeks = (date.fromisoformat(today) - date.fromisoformat(first)).days // 7 + 1
     except ValueError:
@@ -324,6 +386,9 @@ def notice(key, lines, seen, today, state="要対応", steady="", deadline=""):
         return True, f"新しい明細 {len(new)}件" if new else "状態が変わりました", new + rest, rec
     if count > int(prev.get("count") or 0):
         return True, f"先週より増えました（{prev.get('count')}→{count}）", list(lines), rec
+    moved = worse_numbers(prev.get("nums"), lines)
+    if moved:
+        return True, f"先週より悪くなりました: {moved}", list(lines), rec
     if n > int(prev.get("n") or 0):
         return True, f"先週より増えました（{prev.get('n')}→{n}件）", list(lines), rec
     return False, f"{weeks}週目・先週と同じ", list(lines), rec
@@ -402,9 +467,11 @@ def run(script):
         parts = script.split()
         name, extra = parts[0], parts[1:]
         args = (["--check"] if name == "rakko.py" else []) + extra
+        # 子に UTF-8 で書かせる。手元の Windows では既定が cp932 で、utf-8 で読むと印や明細が化けた（2026-10-20）
         r = subprocess.run([sys.executable, str(ROOT / "scripts" / name)] + args,
                            cwd=str(ROOT), capture_output=True, text=True,
-                           encoding="utf-8", errors="replace", timeout=TIMEOUT)
+                           encoding="utf-8", errors="replace", timeout=TIMEOUT,
+                           env={**os.environ, "PYTHONIOENCODING": "utf-8"})
         return (r.stdout or "") + (r.stderr or ""), r.returncode
     except subprocess.TimeoutExpired:
         return "（%d秒で応答がありませんでした）" % TIMEOUT, 124
@@ -412,7 +479,7 @@ def run(script):
         return "（起動できません: %s）" % e, 127
 
 
-def judge(text, rc):
+def judge(text, rc, pat=None):
     """印を最優先で見る。印が無い検査だけ終了コードに頼る。
 
     印を先に見るのは、終了コードが「見つかった」と「壊れた」を
@@ -422,11 +489,18 @@ def judge(text, rc):
         return "要対応"
     if UNKNOWN.search(text):
         return "動かせず"
-    if GOOD.search(text):
-        return "問題なし"
     if rc in (124, 127):
         return "動かせず"
-    return "問題なし" if rc == 0 else "要対応"
+    if GOOD.search(text):
+        # 「問題なし」の印を出した後で落ちた回は、印より後ろを確かめていない（2026-10-20）
+        return "問題なし" if rc == 0 else "動かせず"
+    if rc == 0:
+        return "問題なし"
+    # 印が無く 0 以外で終わった回。見つけた明細が出ていれば要対応、出ていなければ検査が動かなかった
+    # （CLAUDE.md 8.7: 見つかったら0・動かなかったら1）。落ちた回の Traceback の字下げを明細と読まない
+    if pat is not None and "Traceback (most recent call last)" not in text and details(text, pat):
+        return "要対応"
+    return "動かせず"
 
 
 def details(text, pat):
@@ -508,7 +582,7 @@ def main():
         text, rc = started.pop(script).result() if script in started else run(script)
         if not a.quiet:
             print(for_log(text).rstrip())
-        state = judge(text, rc)
+        state = judge(text, rc, pat)
         rows.append((label, state, details(text, pat) if state == "要対応" else []))
     pool.shutdown(wait=True)
 

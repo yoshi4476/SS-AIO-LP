@@ -119,14 +119,40 @@ def same(a, b):
     return dice(core(a), core(b)) >= 0.7
 
 
+GSC_DOWN = []    # この回の所有語の照合が取れなかった理由（取れなかった日は、実績の語を新しい記事として積まない）
+
+
 def gsc_owned(site_id):
-    """自社ページが既に順位を持つ語。ここに当たる候補は新規で書かない（食い合う）"""
+    """自社ページが既に順位を持つ語。ここに当たる候補は新規で書かない（食い合う）
+
+    kw_guard.gsc_rows は取れないと空を返して .failed に理由を残す。それを見ずに空を「所有語なし」と読み、
+    GSC が落ちた日に、既存記事が順位を持つ実績の語を新しい記事として積んでいた（2026-10-20）"""
+    GSC_DOWN.clear()          # --all で前の社の失敗を次の社へ持ち越さない
     try:
         import kw_guard
-        return kw_guard.owned(kw_guard.gsc_rows(site_id))
+        rows = kw_guard.gsc_rows(site_id)
+        why = getattr(kw_guard.gsc_rows, "failed", "")
     except Exception as e:
-        print(f"   （GSCの所有語を取れないため、この照合は飛ばします: {str(e)[:60]}）")
+        rows, why = [], str(e)[:60]
+    if why:
+        if why not in GSC_DOWN:
+            GSC_DOWN.append(why)
+            print(f"   （GSCの所有語を取れません: {why}。この回は検索の実績の語を新しい記事として積みません）")
         return []
+    return kw_guard.owned(rows)
+
+
+def drop_proven_if_gsc_down(cands):
+    """所有語を照合できなかった回は、検索の実績の語（proven）を候補から外す。実績の語は自社ページが
+    すでに順位を持っていることが多く、照合なしで積むとそのまま食い合う。翌日以降、照合できた回に積む"""
+    if not GSC_DOWN:
+        return 0
+    gone = [k for k, c in cands.items() if c.get("proven")]
+    for k in gone:
+        cands.pop(k, None)
+    if gone:
+        print(f"   GSC を照合できないため、検索の実績の語 {len(gone)}件をこの回は積みません")
+    return len(gone)
 
 
 # 外注・比較を考えている人の語。検索数は少ないが、問い合わせに近い。
@@ -456,7 +482,7 @@ def cheap_reject(c, S):
         return "除外語"
     if any(t in low for t in NOT_BUYER):
         return "見込み客でない"
-    if any(t in low for t in RIVALS):
+    if kw_fit.rival(low, RIVALS):      # 英字の名前は英字の語の途中で当てない（dashboard の board）
         return "他社名"
     if KD.is_brand_query(low):
         return "指名検索"
@@ -490,7 +516,7 @@ def relevant(c, S, corpus, arts, owned, picked_norms):
         return "除外語"
     if any(t in low for t in NOT_BUYER):
         return "見込み客でない"
-    if any(t in low for t in RIVALS):
+    if kw_fit.rival(low, RIVALS):      # 英字の名前は英字の語の途中で当てない（dashboard の board）
         return "他社名"
     if KD.is_brand_query(low):
         return "指名検索"
@@ -1424,6 +1450,7 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
     print(f"   無料の候補 {len(cands) + sum(pre.values())}件 → 事前選別で {sum(pre.values())}件を除外（"
           + " / ".join(f"{k} {v}" for k, v in sorted(pre.items(), key=lambda x: -x[1])) + "）")
     owned = [o for o in gsc_owned(site_id) if not is_glossary(o["page"])]
+    drop_proven_if_gsc_down(cands)
     arts = site_articles(site_id)
     to_rw, blocked = route_proven(site_id, cands, owned, arts)
     rewrites = rewrite_targets(site_id, arts, to_rw)

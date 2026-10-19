@@ -52,6 +52,31 @@ DECOR_YEAR = re.compile(r"【[^】]*20\d{2}[^】]*】|20\d{2}年?最新")
 DECOR_YEAR_FROM = "2026-10-05"
 
 
+# 年を表す数字（2026年・2023-01・2026/09・単独の2026）。一次情報の目印に数えない
+_YEAR = re.compile(r"(?:19|20)\d\d")
+# 件数・金額などの単位。年の形の数字でも、これが続けば件数（「2034件」）として目印に残す
+_UNIT = tuple("件社店本人名回個円万億%％倍字語秒台枚")
+
+
+def fact_tokens(claim):
+    """一次情報（first_party_facts.json の claim）のうち、本文にあれば「その事実を使った」とみなす目印。
+
+    3桁以上の数字をそのまま目印にしていたため、claim の期間（2023年5月〜2026年9月）の年が、鮮度の表記
+    （「2026年10月時点」）を持つどの記事にも当たり、一次情報の検査が全記事で通っていた（2026-10-20）。
+    年の形の数字は単位が続くときだけ残す。社名・立場の語は従来どおり"""
+    toks = []
+    for m in re.finditer(r"[0-9][0-9,]{2,}", claim):
+        num = m.group(0).rstrip(",")
+        if _YEAR.fullmatch(num) and not claim[m.end():m.end() + 1].startswith(_UNIT):
+            continue
+        toks.append(num)
+    toks += re.findall(r"G-ran|セブンセンシズ|大阪市東成区", claim)
+    toks += [t for t in ("登録支援事業者", "当社は自社サイト", "自社メディア",
+                         "支援の現場", "申請の現場", "導入支援", "支援する現場",
+                         "会計ソフト", "受発注ソフト") if t in claim]
+    return toks
+
+
 def run(slug):
     """1本を採点して checks を返す。CLI からも、全体の集計からも使う"""
     p = ROOT / "articles" / f"{slug}.md"
@@ -208,11 +233,7 @@ def run(slug):
             # 主張そのものの一致ではなく、固有の数値・名称が本文にあるかで見る
             # 数値・社名だけを見ていたため、「登録支援事業者として支援している」のような
             # 立場の記述を一次情報と認めていなかった。自社しか書けない表現も拾う。
-            toks = re.findall(r"[0-9][0-9,]{2,}|G-ran|セブンセンシズ|大阪市東成区", f["claim"])
-            toks += [t for t in ("登録支援事業者", "当社は自社サイト", "自社メディア",
-                                 "支援の現場", "申請の現場", "導入支援", "支援する現場",
-                                 "会計ソフト", "受発注ソフト") if t in f["claim"]]
-            for tok in toks:
+            for tok in fact_tokens(f["claim"]):
                 if tok in body:
                     own_hit.append(f["id"])
                     break

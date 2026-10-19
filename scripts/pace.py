@@ -327,7 +327,9 @@ def main():
     end = date.today() - timedelta(days=3)
     arts = [x for x in (CY._fm(p) for p in (ROOT / "articles").glob("*.md")) if x and x["score"] >= 90]
     manual = _manual()
-    state, ran, low = {}, 0, 0
+    import client_private as CP
+    prev = CP.load_dict("data/pace_state.json", pub=STATE)
+    state, ran, low, failed = {}, 0, 0, []
     print("■ 量産と見られている兆候（Google の大量生成の不正使用の定義にもとづく）と、1日の本数\n")
     for sid, cfg in S.load_all().items():
         own = [x for x in arts if S.find_category_owner(x["category"]) == sid]
@@ -336,7 +338,15 @@ def main():
         try:
             r = measure(sid, cfg, own, end, use_inspect=not a.no_inspect)
         except Exception as e:
-            print(f"  {cfg.get('name', sid)}: 測れません（{str(e)[:60]}）→ 既定の{DEFAULT}本のまま")
+            # 保存はファイル全体の書き直しなので、測れなかった社を外すと前の判定（例: 0本）が消え、
+            # 翌日から黙って2本に戻っていた。前の判定をそのまま残し、要対応で知らせる（2026-10-20）
+            if sid in prev:
+                state[sid] = prev[sid]
+                keep = f"前回の判定（1日{prev[sid].get('quota', DEFAULT)}本・{prev[sid].get('date', '?')}）を残します"
+            else:
+                keep = f"判定が無いため既定の{DEFAULT}本のまま"
+            failed.append(sid)
+            print(f"  要対応: {cfg.get('name', sid)}: 量産の兆候を測れません（{str(e)[:60]}）→ {keep}")
             continue
         if sid in manual:
             r["quota"] = min(r["quota"], int(manual[sid].get("quota") or 0))
@@ -356,9 +366,8 @@ def main():
         return 1
     if a.write:
         # お客様の社の兆候（URL検査の内訳・表示の推移）は public に置かない（client_private の置き場へ）
-        import client_private as CP
         CP.save_dict("data/pace_state.json", state, CP.site_key, pub=STATE)
-    print(f"\nPACE_OK={'no' if low else 'yes'}")
+    print(f"\nPACE_OK={'no' if low else ('unknown' if failed else 'yes')}")
     return 0
 
 
