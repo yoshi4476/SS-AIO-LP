@@ -38,7 +38,8 @@
   sites/<id>.json の daily_articles（0〜2）。1日の本数は「兆候の判定」と「設定」の小さい方。
   設定で浮いた枠は、spare_slot が "rewrite_main" の社だけ主力の記事の書き直しに回す（slot()）。
   兆候・手動の対策で止めた枠は書き直しにも回さない。設定で減らした社は一覧で「要対応」にしない
-  （2026-10-09 運用者の決定: 補助金は新しい記事を1日1本にし、浮いた1枠で主力の記事を書き直す）
+  （2026-10-09 運用者の決定: 補助金は新しい記事を1日1本にし、浮いた1枠で主力の記事を書き直す。
+   2026-10-19: 補助金は新しい記事0本・2枠とも書き直し。spare_scope "emerging" で表示が出始めた記事全体を対象にする）
 
     python scripts/pace.py                 # 測って見るだけ
     python scripts/pace.py --write         # 判定を残す（週次）
@@ -133,7 +134,8 @@ def slot(sid, rank):
         why = "手動による対策" if (_manual().get(sid) or {}).get("quota") is not None else "量産の兆候"
         return "skip", f"今週1日{sig}本（{why}。python scripts/pace.py で理由を確認）"
     if _site(sid).get("spare_slot") == SPARE_REWRITE:
-        return "rewrite", f"新しい記事は1日{mine}本（運用者の設定）。浮いた枠で主力の記事を書き直す"
+        what = "表示が出始めた記事" if _site(sid).get("spare_scope") == "emerging" else "主力の記事"
+        return "rewrite", f"新しい記事は1日{mine}本（運用者の設定）。浮いた枠で{what}を書き直す"
     return "skip", f"新しい記事は1日{mine}本（運用者の設定）"
 
 

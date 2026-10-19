@@ -87,9 +87,11 @@ def test_daily_articles_caps_the_days_quota():
     with fake_pace(SITES, state={"x": 2}, manual={"x": {"quota": 0, "reason": "手動による対策"}}):
         check("手動による対策（0本）は設定より優先して0本", pace.quota("x"), 0)
     cfg = json.loads((ROOT / "sites" / "subsidy.json").read_text(encoding="utf-8"))
-    check("補助金: 1日1本・浮いた枠は主力の書き直し（理由の注記つき）",
-          (cfg.get("daily_articles"), cfg.get("spare_slot"), "2026-10-09" in str(cfg.get("_daily_articles_note", ""))),
-          (1, "rewrite_main", True))
+    # 2026-10-19 運用者の決定で、新しい記事0本・2枠とも表示が出始めた記事の書き直し（gates_history_h113）
+    check("補助金: 新しい記事0本・浮いた枠は表示が出始めた記事の書き直し（理由の注記つき）",
+          (cfg.get("daily_articles"), cfg.get("spare_slot"), cfg.get("spare_scope"),
+           "2026-10-19" in str(cfg.get("_daily_articles_note", ""))),
+          (0, "rewrite_main", "emerging", True))
     # CI の select は pip の前に呼ぶ。標準ライブラリだけで動くこと（site-packages を読まない -S で確かめる）
     r = subprocess.run([sys.executable, "-S", "scripts/pace.py", "--quota", "subsidy"], cwd=ROOT,
                        capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
@@ -200,7 +202,8 @@ def test_main_only_keeps_main_articles():
         _write_art(base, "a", "AI導入補助金 申請 方法", "AI導入補助金の申請方法")
         _write_art(base, "b", "ものづくり補助金 運送業", "ものづくり補助金は運送業も使える？AI導入補助金との違い")
         _write_art(base, "c", "it導入補助金 おすすめ", "IT導入補助金のおすすめの選び方")
-        with patched(AR, ROOT=base):
+        # 補助金は 2026-10-19 から spare_scope emerging（全記事）。主力に絞る決まりそのものを、絞る社として確かめる
+        with patched(AR, ROOT=base, emerging_scope=lambda s: False):
             items = [{"kind": "stuck", "slug": s, "site": "subsidy", "why": ""} for s in ("a", "b", "c")]
             got = [x["slug"] for x in AR.only_main(items)]
     # 旧称の IT導入補助金も主力に数える（2026-10-09 運用者の決定・sites/subsidy.json の main_schemes。gates_history_h73）
@@ -245,6 +248,7 @@ def test_spare_candidates_order_and_empty_day():
                         "--limit", "1", "--skip-recent", "28", "--tag", "spare-slot"]
             # 無料の補充（free_spare_items・gates_history_h73）も空の日。本物の調べ（Gemini・取得）を門で呼ばない
             with patched(AR, LOG=log, spare_items=lambda: [], free_spare_items=lambda s, skip=(): [],
+                         emerging_title_items=lambda s, skip=(): [],
                          run_one=lambda *a, **k: calls.append(a) or (True, "")):
                 rc, out = _quiet(AR.main)
             check("候補が無い日: 何もしない（書き直しも新しい記事もしない）・実行ログに残す",
@@ -255,7 +259,7 @@ def test_spare_candidates_order_and_empty_day():
                                        "kind": "stuck", "ok": True, "note": "直しました（…）"}, ensure_ascii=False) + "\n",
                            encoding="utf-8")
             with patched(AR, LOG=log, spare_items=lambda: cands, only_main=lambda items: items,
-                         free_spare_items=lambda s, skip=(): [],
+                         free_spare_items=lambda s, skip=(): [], emerging_title_items=lambda s, skip=(): [],
                          run_one=lambda x, w, edited=None: calls.append(x["slug"]) or (True, "直しました（a… → b…）"),
                          hub_rewrite_log=lambda *a, **k: None):
                 rc, out = _quiet(AR.main)

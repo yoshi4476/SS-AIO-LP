@@ -547,7 +547,7 @@ def free_spare_items(sites, skip=()):
         for slug, kw in KP.site_articles(sid).items():
             p, imp = pos.get(slug, (None, 0))
             if (p is None or imp < KP.REWRITE_MIN_IMP or not (FREE_BAND[0] <= p <= FREE_BAND[1])
-                    or slug in skip or not is_main(slug, sid) or noindex.drop([{"slug": slug}]) == []):
+                    or slug in skip or not in_scope(slug, sid) or noindex.drop([{"slug": slug}]) == []):
                 continue
             cands.append((imp * (31 - p), slug, kw, p, imp))
         for _, slug, kw, p, imp in sorted(cands, reverse=True)[:FREE_TRY]:
@@ -565,8 +565,9 @@ def free_spare_items(sites, skip=()):
             # 主力の記事に、ほかの制度の名前（持続化補助金・キャリアアップ助成金など）を節として足させない。
             # 主力の割合を上げるための書き直しで、周辺の制度を広げてしまう（2026-10-09 の本物の調べで混ざった）
             rule = _MAIN.get(sid) or KP.main_rule(sid)[0]
+            main = is_main(slug, sid)
             miss = [w for w in (rec or {}).get("missing") or []
-                    if not (re.search(r"補助金|助成金|給付金|支援金", w) and not (rule and rule(w)))]
+                    if not (main and re.search(r"補助金|助成金|給付金|支援金", w) and not (rule and rule(w)))]
             if miss:
                 import client_private as CP
                 f = CP.site_file(sid, f"data/cooccur/{slug}.json")
@@ -576,6 +577,17 @@ def free_spare_items(sites, skip=()):
                             "why": (f"{p:.1f}位・表示{imp}回。上位・AIの出典の記事の見出しにあって、この記事に無い語"
                                     f"（無料の調べ）: {'／'.join(miss[:8])}")})
     return out
+
+
+def emerging_title_items(sites, skip=()):
+    """emerging の社で、足す語も見つからない日の最後の候補: rank_up の「表示があるのにクリックが取れない」題
+    （1〜20位・表示20回以上）。題の判定期間中の記事は外す"""
+    import rank_up
+    out = []
+    for sid in [s for s in re.split(r"[\s,]+", sites or "") if s and emerging_scope(s)]:
+        out += [x for x in rank_up.human_items(sid) if x["kind"] == "title" and x["slug"] not in skip
+                and not title_locked(x["slug"])]
+    return stock_first(out)
 
 
 _MAIN = {}
@@ -595,10 +607,27 @@ def is_main(slug, site=""):
     return bool(rule(kw or title))
 
 
+def emerging_scope(site):
+    """浮いた枠の書き直しを主力の語に絞らず、表示が出始めた記事（4〜30位・表示15回以上）全体に広げる社か
+    （sites/<id>.json の spare_scope: "emerging"）。2026-10-19 運用者の決定: 補助金は新しい記事を止め、2枠とも
+    表示が出始めた既存記事の書き直しに回す。主力の語だけでは 10/14 から候補が尽き、浮いた枠が空振りしていた"""
+    try:
+        import sites as S
+        return (S.load_all().get(site) or {}).get("spare_scope") == "emerging"
+    except Exception:
+        return False
+
+
+def in_scope(slug, site=""):
+    """--main-only の対象か（主力の語の記事。spare_scope が emerging の社は全記事）"""
+    site = site or site_of(slug)
+    return emerging_scope(site) or is_main(slug, site)
+
+
 def only_main(items):
-    """--main-only。主力の決まり（scheme_mix / category_mix）が無い社の記事は残さない"""
+    """--main-only。主力の決まり（scheme_mix / category_mix）が無い社の記事は残さない（emerging の社は全記事）"""
     return [x for x in items if (ROOT / "articles" / f"{x['slug']}.md").is_file()
-            and is_main(x["slug"], x.get("site", ""))]
+            and in_scope(x["slug"], x.get("site", ""))]
 
 
 def serp_heads(slug):
@@ -1886,6 +1915,10 @@ def main():
         items = free_spare_items(a.sites, recently_touched(a.skip_recent) if a.skip_recent else set())
         if items:
             print(f"  上位の見出しがある候補が尽きたので、無料の調べ（cooccur）で {len(items)}本を候補にしました")
+        else:
+            items = emerging_title_items(a.sites, recently_touched(a.skip_recent) if a.skip_recent else set())
+            if items:
+                print(f"  足す語も見つからないので、表示があるのにクリックの取れない {len(items)}本の題を候補にしました")
     print(f"■ 人の判断に回っていた直し: {len(items)}件"
           + (f"（1回に{a.limit}本まで）\n" if a.write else "\n"))
     if not items:
