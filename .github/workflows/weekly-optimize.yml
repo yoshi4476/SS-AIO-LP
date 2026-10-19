@@ -1056,13 +1056,10 @@ jobs:
             git commit -m "weekly-optimize: auto $(date '+%Y-%m-%d')" || true
             # 並行ジョブ（kw-refill・index-inspect）も正本へ push するため、pull と push の間に
             # 割り込まれても落ちないよう再試行する（触るファイルは重ならない）
-            pushed=0
-            for i in 1 2 3; do
-              if git pull --rebase origin "${GITHUB_REF_NAME}" && git push; then pushed=1; break; fi
-              git rebase --abort 2>/dev/null || true     # 途中の rebase を残すと、次の再試行も必ず失敗する
-              sleep 5
-            done
-            [ "$pushed" = 1 ] || { echo "::error::週次の直しを push できませんでした"; exit 1; }
+            # 週次の間に毎日の記事の枠が同じ記事を書き換えると、ぶつかって直しが全部失われていた（2026-10-19）。
+            # ぶつかった記事は先に入った側を残してその記事だけ見送り、記録（*.jsonl）は両方の行を残し、残りは送り出す
+            python scripts/rebase_push.py --branch "${GITHUB_REF_NAME}" \
+              || { echo "::error::週次の直しを push できませんでした"; exit 1; }
           fi
 
       # 直した記事は他サイトへ配信しないと本番に反映されない。週次の最初に記録した
