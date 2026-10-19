@@ -55,6 +55,8 @@ faq:
 
 **自営業の経理は、土台を先に4つ決めておくと、取引が増えても自分だけで回しやすくなります。**
 
+実際の進め方は[建設業の経理のやり方は？](/blog/kensetsugyou-keiri-yarikata)でも扱っています。
+
 近い論点を[飲食店の経理のやり方](/blog/inshokuten-keiri-yarikata/)で扱っています。
 
 実際の進め方は[会社の経理のやり方｜個人事業主と違う4つのポイント](/blog/kaisha-keiri-yarikata/)で整理しています。
