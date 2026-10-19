@@ -97,7 +97,12 @@ def brief_lines(site):
                    "「相談を受ける中で」「ある医院では」のような出来事を作らない（score_check が止める）")
         return out
     for r in rows[:12]:
-        out.append(f"  - {r['text']}（{r.get('when', '時期不明')}。文に必ず「{r['key']}」を入れる）")
+        tag = f"［{r['industry']}］" if r.get("industry") else ""
+        out.append(f"  - {tag}{r['text']}（{r.get('when', '時期不明')}。文に必ず「{r['key']}」を入れる）")
+    trends = sorted({r["trend"] for r in rows if r.get("trend")})
+    for t in trends:
+        out.append(f"  ※ {t}")
+    out.append("  使うのは記事の主題（業種・相談の中身）に合う体験だけ。時期が未確認の体験に日付を書かない")
     return out
 
 
