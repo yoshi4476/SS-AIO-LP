@@ -195,6 +195,25 @@ def site_file(sid, rel):
     return private_path(sid, rel) if is_private(sid) else ROOT / rel
 
 
+# 直す前の原稿（auto_rewrite が残し、28日後に rewrite_rollback が読む）。data/rewrite_before/ は公開側で追跡しているので、
+# お客様の記事の原稿をそこへ書くと次の commit で公開されていた（2026-10-20 の点検）。お客様の社の分は非公開のリポジトリ
+# （private/clients/<id>/data/rewrite_before/）に置く。キャッシュ（7日で消える）では28日後の判定まで残らない。
+# 社ごとの区画なので、AI の間に範囲を絞る（private_store.scope）と、ほかの社の原稿も一緒に外れる
+REWRITE_BEFORE = "data/rewrite_before"
+
+
+def rewrite_before_root(sid):
+    """台帳の before_path（data/rewrite_before/<名前>。どの社でも同じ形）を解く基点。お客様の社は非公開の置き場"""
+    if is_private(sid):
+        import private_store
+        return private_store.client_dir(sid)
+    return ROOT
+
+
+def rewrite_before_dir(sid):
+    return rewrite_before_root(sid) / REWRITE_BEFORE
+
+
 def find_file(rel):
     """どの社のものか分からないファイル（共起語の <slug>.json など）。お客様の置き場を先に見る"""
     for sid in clients():

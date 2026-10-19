@@ -561,7 +561,29 @@ def run_one(pair, write, draft=None):
         return False, "検索から外した記事（noindex）を含む組は統合しません"
     if not write:
         return True, "（確認のみ）"
-    raw = (ARTICLES / f"{s}.md").read_bytes()
+    # 差し戻すときは、AI が触った全部の記事をこの時点の中身へ戻す（survivor だけ戻していたので、loser など
+    # ほかの記事の書き換えが残って commit・配信されていた。2026-10-20 の点検）。時間切れ（TimeoutExpired）などの
+    # 例外でも同じく戻し、差し戻しとして記録する（書きかけの survivor が残っていた）
+    orig = AR.originals(ARTICLES)
+    try:
+        ng = _merge_and_check(pair, draft, orig)
+    except BaseException as e:
+        AR.revert_since(orig, ARTICLES)
+        AR.rebuild_quietly()
+        if not isinstance(e, Exception):
+            raise
+        return False, f"途中で止まりました（{type(e).__name__}）。統合の前の中身へ戻しました"
+    if ng:
+        return False, ng
+    p = ARTICLES / f"{s}.md"
+    why = f"統合しました（{l} → {s}、本文 {plain_len(orig[f'{s}.md'].decode('utf-8-sig').replace(chr(13) + chr(10), chr(10)))} → {plain_len(p.read_text(encoding='utf-8-sig'))}字）"
+    apply(pair, why)
+    return True, why
+
+
+def _merge_and_check(pair, draft, orig):
+    """AI に統合させて検算する。通らなければ orig へ戻して理由を返す（空なら合格）"""
+    s, l = pair["survivor"], pair["loser"]
     before, before_warns, snap = AR.meta(s), AR.warns(s), AR.snapshot()
     loser_text = fm(l)["text"]
     p = ARTICLES / f"{s}.md"
@@ -573,19 +595,21 @@ def run_one(pair, write, draft=None):
         r = subprocess.CompletedProcess([], 0, "", "")
     else:
         r = _claude(build_prompt(pair, before[1]))
-    if r.returncode and p.read_text(encoding="utf-8-sig") == before[2]:
-        return False, f"claude が動きませんでした（{(r.stderr or '')[:60]}）"
     if p.read_text(encoding="utf-8-sig") == before[2]:
-        return False, "変更なし（統合されませんでした）"
+        # survivor は変わらず、ほかの記事だけ変わった回も戻す（そのまま commit・配信されていた）
+        if AR.revert_since(orig, ARTICLES):
+            return "survivor は変わらず、ほかの記事だけが変わったため戻しました"
+        if r.returncode:
+            return f"claude が動きませんでした（{(r.stderr or '')[:60]}）"
+        return "変更なし（統合されませんでした）"
     ng = check(pair, before, before_warns, loser_text, snap)
     if ng:
-        # survivor を統合の直前の中身へ戻す。HEAD へ戻すと、先に走った工程の未コミットの直しまで消える
-        p.write_bytes(raw)
+        # 統合の直前の中身へ戻す（survivor だけでなく AI が触った全部の記事）。HEAD へ戻すと、先に走った工程の
+        # 未コミットの直しまで消える
+        AR.revert_since(orig, ARTICLES)
         AR.sh([sys.executable, "scripts/build.py"], timeout=1800)
-        return False, ng
-    why = f"統合しました（{l} → {s}、本文 {plain_len(before[2])} → {plain_len(p.read_text(encoding='utf-8-sig'))}字）"
-    apply(pair, why)
-    return True, why
+        return ng
+    return ""
 
 
 def selftest(scaled=False):

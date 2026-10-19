@@ -707,11 +707,14 @@ def keep_before(slug, raw, after_raw):
     """28日後に効かなければ戻すため、直す前の原稿を残す（rewrite_rollback が読む）。
     戻すのは、その後だれも触っていないとき（after_sha が一致）だけ"""
     import hashlib
-    d = ROOT / "data" / "rewrite_before"
+    # お客様の記事は非公開の置き場へ（data/rewrite_before/ は公開側で追跡している。2026-10-20 の点検）。
+    # 台帳の before_path はどの社でも data/rewrite_before/<名前> の形のまま残し、読む側（rewrite_rollback）が社で基点を決める
+    sid = CP.owner_of_slug(slug)
+    d = CP.rewrite_before_dir(sid) if CP.is_private(sid) else ROOT / CP.REWRITE_BEFORE
     d.mkdir(parents=True, exist_ok=True)
-    p = d / f"{slug}@{time.strftime('%Y-%m-%d')}.md"
-    p.write_bytes(raw)
-    return {"before_path": p.relative_to(ROOT).as_posix(), "after_sha": hashlib.sha1(after_raw).hexdigest()}
+    name = f"{slug}@{time.strftime('%Y-%m-%d')}.md"
+    (d / name).write_bytes(raw)
+    return {"before_path": f"{CP.REWRITE_BEFORE}/{name}", "after_sha": hashlib.sha1(after_raw).hexdigest()}
 
 
 def stock_items(limit=3):
@@ -1206,7 +1209,9 @@ def false_alarms():
 
 
 def sources(s):
-    return set(re.findall(r'href="(https?://[^"]+)"', s))
+    """「出典リンクが消えました」の検算に使う外部URL。href だけを見ていたので、Markdown の [出典](https://…) を
+    消す書き直しが通っていた（2026-10-20 の点検）。ext_links と同じく両方の形を見る"""
+    return ext_links(s)
 
 
 def snapshot():
@@ -1224,6 +1229,39 @@ def changed_since(snap):
     return sorted(n for n in set(snap) | set(now) if snap.get(n) != now.get(n))
 
 
+def originals(d=None):
+    """articles/*.md の今の中身（名前 → バイト列）。差し戻すときに、AI が触った全部の記事をこの時点へ戻すために取る"""
+    return {p.name: p.read_bytes() for p in Path(d or ROOT / "articles").glob("*.md")}
+
+
+def revert_since(orig, d=None):
+    """orig を取った後に変わった articles/*.md を orig の中身へ戻し、後から現れたものは消す。戻した名前を返す。
+
+    差し戻しは直す対象の1本しか戻しておらず、AI が別の記事まで書き換えた回（「別の記事まで変わっています」）は、
+    その別の記事が書き換わったまま commit・配信されていた（2026-10-20 の点検）。
+    戻すのは orig を取った後の変更だけ。その前に先の工程が入れた未コミットの直しは orig に入っているので消えない"""
+    out = []
+    d = Path(d or ROOT / "articles")
+    now = {p.name for p in d.glob("*.md")}
+    for n in sorted(set(orig) | now):
+        p = d / n
+        if n not in orig:
+            p.unlink()
+            out.append(n)
+        elif not p.is_file() or p.read_bytes() != orig[n]:
+            p.write_bytes(orig[n])
+            out.append(n)
+    return out
+
+
+def rebuild_quietly():
+    """差し戻した後のビルド。ここで落ちても差し戻しは済んでいるので、例外で呼び出し側の記録を失わない"""
+    try:
+        sh([sys.executable, "scripts/build.py"], timeout=1800)
+    except Exception as e:  # noqa: BLE001
+        print(f"  （差し戻した後のビルドが動きませんでした: {type(e).__name__}）", file=sys.stderr)
+
+
 def spare_guarded(items, limit, tries=6):
     """浮いた枠の候補のうち、書き直す前から食い合う（kw_guard 終了コード2）ものを外す。同じ語を狙う公開済みの組の
     片方が選ばれ、書き直しても検算で必ず戻されて、枠が2日続けて空いた（2026-10-11 の補助金。2026-10-12 の点検）。
@@ -1238,12 +1276,25 @@ def spare_guarded(items, limit, tries=6):
             r = sh([sys.executable, "scripts/kw_guard.py", kw, "--site", site_of(x["slug"]),
                     "--exclude-slug", x["slug"]], timeout=600)
             if r.returncode == 2:
-                print(f"  見送り [{x['kind']}] {x['slug'][:34]}: 書き直す前から既存記事と食い合います（統合の候補）")
+                print(f"  見送り [{x['kind']}] {shown(x['slug'])[:34]}: 書き直す前から既存記事と食い合います（統合の候補）")
                 continue
         out.append(x)
         if len(out) >= limit:
             break
     return out
+
+
+def shown(slug):
+    """CI のログ（public）に出す記事の名前。お客様の記事は slug を出さない（private_store.shown）"""
+    import private_store
+    return private_store.shown(slug)
+
+
+def said(slug, why):
+    """CI のログに出す理由。お客様の記事は題・別の記事の slug が入りうるので、理由は台帳（置き場）にだけ残す"""
+    if shown(slug) == slug:
+        return why
+    return "直しました（中身は台帳に残しました）" if why.startswith("直しました") else "（お客様の記事のため、理由は台帳に残しました）"
 
 
 def guard_message(rc):
@@ -1650,7 +1701,25 @@ def run_one(item, write, edited=None):
         return False, f"{title_locked(slug)} に変えたタイトルの判定期間中のため見送ります"
 
     # 戻すときは HEAD ではなくこの時点の中身へ。同じ週次で先に当てた未コミットの直しを消さない
-    raw = p.read_bytes()
+    orig = originals()
+    try:
+        return _apply_one(item, edited, orig)
+    except BaseException as e:
+        # AI・検算・ビルドの時間切れ（TimeoutExpired）や途中の例外で、書きかけの記事が残って commit・配信されていた
+        # （2026-10-20 の点検）。どこで止まっても、この時点の中身へ戻してから差し戻しとして記録する
+        LAST.pop(slug, None)
+        revert_since(orig)
+        rebuild_quietly()
+        if not isinstance(e, Exception):
+            raise
+        return False, f"途中で止まりました（{type(e).__name__}）。直す前の中身へ戻しました"
+
+
+def _apply_one(item, edited, orig):
+    """run_one の本体（AI に直させ、検算し、通らなければ orig へ戻す）。例外は run_one が受けて orig へ戻す"""
+    slug, kind = item["slug"], item["kind"]
+    p = ROOT / "articles" / f"{slug}.md"
+    raw = orig[f"{slug}.md"]
     before, before_warns, snap = meta(slug), warns(slug), snapshot()
     prompt, allowed = build_prompt(item)
     # 権限を全部飛ばすのではなく、使える道具を読み書きだけに絞る。
@@ -1672,6 +1741,10 @@ def run_one(item, write, edited=None):
                 *model_args(),
                 "--allowedTools", "Read,Edit",
                 "--settings", PERM], timeout=1800, stdin_text=prompt)
+    if p.read_text(encoding="utf-8-sig") == before[2] and changed_since(snap):
+        # 対象は変えずにほかの記事だけ変えた回も、ほかの記事を戻す（そのまま commit・配信されていた）
+        revert_since(orig)
+        return False, "直す記事は変わらず、ほかの記事だけが変わったため戻しました"
     if r.returncode and not p.read_text(encoding="utf-8-sig") != before[2]:
         return False, f"claude が動きませんでした（{(r.stderr or '')[:60]}）"
 
@@ -1711,7 +1784,7 @@ def run_one(item, write, edited=None):
         elif item.get("queries") and not any(w in d[:40].lower() for w in re.split(r"[\s　]+", item["queries"][0].lower()) if len(w) >= 2):
             ng = "流入語が説明文の先頭に入っていません"
         if ng:
-            p.write_bytes(raw)
+            revert_since(orig)
             sh([sys.executable, "scripts/build.py"], timeout=1800)
             return False, ng
     if not ng and kind == "question":
@@ -1724,7 +1797,7 @@ def run_one(item, write, edited=None):
         elif not any(re.search(r"[?？]", h) for h in h_after):
             ng = "質問形の見出しが1本も入りませんでした"
         if ng:
-            p.write_bytes(raw)
+            revert_since(orig)
             sh([sys.executable, "scripts/build.py"], timeout=1800)
             return False, ng
     if not ng and kind == "stock":
@@ -1763,7 +1836,8 @@ def run_one(item, write, edited=None):
     LAST[slug] = {"before_title": before[0], "before_description": _desc_of(before[2]),
                   "after_title": meta(slug)[0], "after_description": _desc_of(after_text)}
     if ng:
-        p.write_bytes(raw)
+        # 対象の1本だけでなく、AI が触ったほかの記事も戻す（check の「別の記事まで変わっています」）
+        revert_since(orig)
         sh([sys.executable, "scripts/build.py"], timeout=1800)
         return False, ng
     if keep_original(kind):
@@ -1936,7 +2010,7 @@ def main():
         held = [x["slug"] for x in items if x["slug"] in busy]
         items = [x for x in items if x["slug"] not in busy]
         if held:
-            print(f"  直近{a.skip_recent}日に手を付けた・題の判定期間中の{len(held)}本を外しました: {', '.join(held[:6])}")
+            print(f"  直近{a.skip_recent}日に手を付けた・題の判定期間中の{len(held)}本を外しました: {', '.join(shown(s) for s in held[:6])}")
     if not items and a.kind == "spare" and a.main_only:
         items = free_spare_items(a.sites, recently_touched(a.skip_recent) if a.skip_recent else set())
         if items:
@@ -1955,7 +2029,7 @@ def main():
         return 0
     if not a.write:
         for x in items[:12]:
-            print(f"  [{x['kind']}] {x['slug'][:36]:<36} {x['why'][:40]}")
+            print(f"  [{x['kind']}] {shown(x['slug'])[:36]:<36} {said(x['slug'], x['why'])[:40]}")
         print("\n  --write を付けると claude が直し、機械が検算します"
               "（通らなければ元に戻します）")
         return 0
@@ -1981,7 +2055,7 @@ def main():
                   f"（残りは次回。上限{a.budget_min}分）")
             break
         good, why = run_one(x, True, edited=edited) if edited is not None else run_one(x, True)
-        print(f"  {'○' if good else '×'} [{x['kind']}] {x['slug'][:34]:<34} {why[:56]}")
+        print(f"  {'○' if good else '×'} [{x['kind']}] {shown(x['slug'])[:34]:<34} {said(x['slug'], why)[:56]}")
         note(x["slug"], x["kind"], good, why)
         if good and why.startswith("直しました"):
             hub_rewrite_log(x, why)
@@ -1990,7 +2064,7 @@ def main():
     print(f"\n  直した {ok}件 / 戻した {ng}件 / {(time.time() - started) / 60:.0f}分")
     print("  台帳: automation/logs/auto_fix.jsonl")
     if a.kind == "spare":
-        print("SPARE_SLOT=" + ("rewrote " + ",".join(rewrote) if rewrote else
+        print("SPARE_SLOT=" + ("rewrote " + ",".join(shown(s) for s in rewrote) if rewrote else
                               "reverted（検算で戻しました）" if ng else "unchanged（直す必要なしと判断）"))
     return 0
 

@@ -490,6 +490,26 @@ def overlay_in(mark=True):
     return len(rels)
 
 
+def rehome_rewrite_before(slugs):
+    """公開側の data/rewrite_before/ にあるお客様の記事の直す前の原稿を、その社の非公開の置き場
+    （client_private.rewrite_before_dir）へ移し、移したものの相対パスを返す。auto_rewrite が公開側へ書いていた
+    （2026-10-20 の点検。追跡している場所なので、次の commit で公開されていた）。読む側は両方を見るので移しても読める"""
+    import shutil
+    d = ROOT / "data" / "rewrite_before"
+    moved = []
+    for f in (sorted(d.glob("*@*.md")) if d.is_dir() and slugs else ()):
+        sid = slugs.get(f.name.split("@", 1)[0])
+        if not sid:
+            continue
+        dst = client_dir(sid) / "data" / "rewrite_before" / f.name
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        if not dst.is_file():
+            shutil.copy2(f, dst)
+        f.unlink()
+        moved.append(f.relative_to(ROOT).as_posix())
+    return moved
+
+
 def overlay_out(unstage=True):
     """公開側の作業場所のお客様の社のファイルを非公開の置き場へ戻し、公開側の git から外す（追跡されていれば
     git rm --cached）。重ねて置いた後に消えた・移ったファイルは非公開の置き場からも消す。戻したファイルを返す"""
@@ -498,6 +518,11 @@ def overlay_out(unstage=True):
     if not (b / ".git").is_dir():
         return []
     files = client_files()
+    rehomed = rehome_rewrite_before(client_slugs())
+    if unstage and rehomed:
+        tracked = [x for x in _public_git("ls-files", "--", *rehomed).stdout.splitlines() if x]
+        if tracked:
+            _public_git("rm", "--cached", "-q", "--", *tracked)
     for rel in files:
         src, dst = ROOT / rel, b / rel
         if not dst.is_file() or dst.read_bytes() != src.read_bytes():

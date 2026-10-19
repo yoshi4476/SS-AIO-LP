@@ -149,7 +149,8 @@ def test_early_rewrite_targets_narrow_words_in_weeks_2_to_5():
     check("出典のURLを増やしたら止める",
           A.early_guard(b, good + '<a href="https://example.com/x">x</a>\n', t0, t0, it).startswith("出典のURL"), True)
     check("selftest の誤検出の点検に early が入っている", "（early）" in inspect.getsource(A.false_alarms), True)
-    rsrc = inspect.getsource(A.run_one)
+    # 本体は _apply_one（例外でも直す前へ戻すため run_one から分けた。2026-10-20）
+    rsrc = inspect.getsource(A.run_one) + inspect.getsource(A._apply_one)
     check("run_one が early_guard を通し、直す前の原稿を残す（28日後に戻せる）",
           # 残すかは keep_original が決める（2026-10-09 に serp・浮いた枠の直しも残すようにした）
           ("early_guard(" in rsrc, "keep_original(kind)" in rsrc and A.keep_original("early")), (True, True))

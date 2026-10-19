@@ -18,7 +18,8 @@ def test_rewrite_fixes_only_length_warnings():
     check("明細に「長文」が出るだけの別の警告は直さない", f(["WARN | マーカー数 | 長文・100字超・段落が200字以内"]), False)
     check("増えた警告が無ければ直さない", f([]), False)
 
-    src = inspect.getsource(AR.run_one)
+    # 本体は _apply_one（例外でも直す前へ戻すため run_one から分けた。2026-10-20）
+    src = inspect.getsource(AR.run_one) + inspect.getsource(AR._apply_one)
     check("書き直しは警告が増えたときだけ機械で直して検算をやり直す",
           'ng.startswith("警告が増えました") and fix_mechanical(' in src and src.count("ng = check(") == 2, True)
     fm = inspect.getsource(AR.fix_mechanical)

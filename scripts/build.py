@@ -2276,15 +2276,15 @@ def prune_orphan_articles(entries, unparsable):
         print(f"   {cat}/{d.name}/"
               + (f" → /{moved_to[d.name]}/{d.name}/ へ301" if d.name in moved_to else ""))
     rd = SITE / "_redirects"
-    have = rd.read_text(encoding="utf-8") if rd.is_file() else ""
-    srcs = {ln.split()[0] for ln in have.splitlines() if ln.strip() and not ln.startswith("#")}
+    # 記事のあるURLを転送元にした行は外し、足さない（aio→seo→aio と移すと転送の輪になっていた。2026-10-20。drop_live_sources）
+    live_urls = {f"/{c}/{s}/" for c, s in live}
+    have, dropped = drop_live_sources(rd.read_text(encoding="utf-8") if rd.is_file() else "", live_urls)
+    srcs = {ln.split()[0] for ln in have.splitlines() if ln.strip() and not ln.startswith("#")} | live_urls
     add = [f"/{cat}/{d.name}/  /{moved_to[d.name]}/{d.name}/  301" for cat, d in victims
            if d.name in moved_to and f"/{cat}/{d.name}/" not in srcs]
-    if add:
-        head = "" if "# build.py: カテゴリを移した記事" in have else (
-            "# build.py: カテゴリを移した記事。旧URLの評価を新URLへ引き継ぐ（自動で追記）\n")
-        rd.write_text(have.rstrip("\n") + "\n" + head + "\n".join(add) + "\n",
-                      encoding="utf-8", newline="\n")
+    if add or dropped:
+        head = "" if (not add or "# build.py: カテゴリを移した記事" in have) else "# build.py: カテゴリを移した記事。旧URLの評価を新URLへ引き継ぐ（自動で追記）\n"
+        rd.write_text((have.rstrip("\n") + "\n" if have.strip() else "") + head + "".join(a + "\n" for a in add), encoding="utf-8", newline="\n")
     for _, d in victims:
         shutil.rmtree(d)
     return [f"{c}/{d.name}" for c, d in victims]
@@ -2611,6 +2611,21 @@ def main():
     for n, src, dst in html_safety.drop_bad_redirects(SITE / "_redirects"):
         print(f"要対応: site/_redirects {n}行目 {src} → {dst[:80]} を外しました"
               "（転送先は / で始まるサイトの中の場所か、自社のドメインだけ。誰が書いたかを確かめてください）")
+
+
+def drop_live_sources(text, live_urls):
+    """_redirects の行のうち、いま記事のあるURLを転送元にしたものを外す。返すのは (残した本文, 外した行の数)。
+
+    カテゴリを aio→seo→aio と2回移すと「/aio/x/ → /seo/x/」が残ったまま「/seo/x/ → /aio/x/」を足し、
+    公開中の記事が転送の輪になっていた（2026-10-20 の点検）。Cloudflare Pages は _redirects をページより先に当てるので、
+    記事のあるURLを転送元にした行は全部外す。prune_orphan_articles の行の位置を変えないよう、ここに置く
+    （配信の仕組みの表 data/capabilities.json が build.py の行番号を根拠にしている）"""
+    keep = [ln for ln in text.splitlines()
+            if not (ln.strip() and not ln.lstrip().startswith("#") and ln.split()[0] in live_urls)]
+    n = len(text.splitlines()) - len(keep)
+    if n:
+        print(f"   公開中の記事を転送元にしていた行を {n}件外しました（転送の輪を作らない）")
+    return "\n".join(keep) + ("\n" if keep else ""), n
 
 
 if __name__ == "__main__":

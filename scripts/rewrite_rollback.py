@@ -178,20 +178,73 @@ def later_rewrites(slug, d):
 SLUG = re.compile(r"[a-z0-9][a-z0-9-]*")
 
 
+def shown(slug):
+    """CI のログ（public）に出す記事の名前。お客様の記事は slug を出さない"""
+    import private_store
+    return private_store.shown(slug)
+
+
+def shown_path(slug, d):
+    """見比べる原稿の場所。お客様の記事は名前に slug が入るので出さない"""
+    return d.get("before_path", "") if shown(slug) == slug else "非公開の置き場の直す前の原稿"
+
+
+SKIPPED = {}    # 戻すべきと判定したのに戻さなかった記事 → 理由（判定の記録に残す）
+
+
+def _fm_title(fm):
+    """フロントマターの題（引用符・エスケープを外した値）"""
+    m = re.search(r"^title:\s*(.*)$", fm, re.M)
+    if not m:
+        return ""
+    import yaml
+    try:
+        v = yaml.safe_load("k: " + m.group(1)).get("k")
+        return "" if v is None else str(v)
+    except Exception:
+        return m.group(1).strip().strip('"')
+
+
+def title_moved(slug, d, fm):
+    """題をこの直しの後の題（after_title）から変えた理由。空なら戻してよい。
+    判定は直してから31日後、題の判定期間（auto_rewrite.TITLE_LOCK_DAYS）は28日。28〜31日目に入った2回目の題の直しを、
+    1回目の「直す前の題」で上書きしていた（2026-10-20 の点検）。after_title が無い古い行は確かめられないので戻さない"""
+    want = d.get("after_title")
+    if not want:
+        return "台帳に直した後の題が無く、その後に題が変わっていないか確かめられません"
+    if _fm_title(fm) != want:
+        return "直した後に題がまた変わっています（後の直しを消さない）"
+    return ""
+
+
 def before_file(d):
     """直す前の原稿。置き場（data/rewrite_before/）の中のファイルだけを返し、外を指していれば None。
     台帳（auto_fix.jsonl）は公開側で追跡していて書き換えられうる。before_path が .. や絶対パスで鍵のファイルや
     コードを指していると、その中身を記事へ書き写して公開してしまう"""
     rel = str(d.get("before_path") or "")
-    base = (ROOT / "data" / "rewrite_before").resolve()
     bad = (not rel or ".." in re.split(r"[\\/]", rel) or Path(rel).is_absolute()
            or rel.startswith(("/", "\\")) or re.match(r"^[A-Za-z]:", rel))
-    src = None if bad else (ROOT / rel).resolve()
-    if src is None or base not in src.parents:
-        who = d.get("slug") if SLUG.fullmatch(str(d.get("slug") or "")) else "?"
+    # お客様の記事の原稿は非公開の置き場（client_private.rewrite_before_root）にある（2026-10-20。公開側に置いていた）。
+    # それより前に公開側へ書いた分も読めるよう、公開側の置き場も見る。どちらも data/rewrite_before/ の中だけ
+    import client_private as CP
+    slug = str(d.get("slug") or "")
+    sid = CP.owner_of_slug(slug) if SLUG.fullmatch(slug) else None
+    roots = ([CP.rewrite_before_root(sid)] if CP.is_private(sid) else []) + [ROOT]
+    found, inside = None, False
+    for root in ([] if bad else roots):
+        base = (Path(root) / CP.REWRITE_BEFORE).resolve()
+        src = (Path(root) / rel).resolve()
+        if base not in src.parents:
+            continue
+        inside = True
+        if src.is_file():
+            found = src
+            break
+    if not inside:
+        who = shown(slug) if SLUG.fullmatch(slug) else "?"
         print(f"要対応: {who} の台帳の直す前の原稿が data/rewrite_before/ の外を指しているため、読みません")
         return None
-    return src if src.is_file() else None
+    return found
 
 
 def restore_early(slug, d):
@@ -208,12 +261,12 @@ def restore_early(slug, d):
         return True
     later = later_rewrites(slug, d)
     if later:
-        print(f"要対応: {slug} は early の後に別の直し（{later[-1].get('kind') or later[-1].get('by')}・"
-              f"{str(later[-1].get('at'))[:10]}）が入ったため、自動では戻しません（{d['before_path']} と見比べてください）")
+        print(f"要対応: {shown(slug)} は early の後に別の直し（{later[-1].get('kind') or later[-1].get('by')}・"
+              f"{str(later[-1].get('at'))[:10]}）が入ったため、自動では戻しません（{shown_path(slug, d)} と見比べてください）")
         return False
     text, why = undo_early(src.read_bytes().decode("utf-8-sig"), raw.decode("utf-8-sig"), d)
     if text is None:
-        print(f"要対応: {slug} の early を自動では戻せません（{why}。{d['before_path']} と見比べてください）")
+        print(f"要対応: {shown(slug)} の early を自動では戻せません（{why}。{shown_path(slug, d)} と見比べてください）")
         return False
     p.write_text(text, encoding="utf-8", newline="")
     return True
@@ -227,7 +280,7 @@ def restore_file(slug, d):
     if not p.is_file() or src is None:
         return False
     if hashlib.sha1(p.read_bytes()).hexdigest() != d.get("after_sha"):
-        print(f"要対応: {slug} は直した後に別の変更が入ったため、自動では戻しません（{d['before_path']} と見比べてください）")
+        print(f"要対応: {shown(slug)} は直した後に別の変更が入ったため、自動では戻しません（{shown_path(slug, d)} と見比べてください）")
         return False
     p.write_bytes(src.read_bytes())
     return True
@@ -248,14 +301,18 @@ def restore(slug, d):
     if not m:
         return False
     fm = m.group(1)
-    # 後から足した記録は、その後に題がまた変わっていれば戻さない（後の直しまで消してしまう）
-    now = re.search(r"^title:\s*(.*)$", fm, re.M)
-    if d.get("by") == "manual" and d.get("after_title") and (now.group(1).strip().strip('"') if now else "") != d["after_title"]:
-        print(f"要対応: {slug} は記録の後に題が変わったため、自動では戻しません")
+    # その後に題がまた変わっていれば戻さない（後の直しまで消してしまう）。手で足した記録（manual）も auto_rewrite の行も同じ
+    why = title_moved(slug, d, fm)
+    if why:
+        print(f"要対応: {shown(slug)} は{why}。自動では戻しません")
+        SKIPPED[slug] = why
         return False
-    fm2 = re.sub(r"^title:.*$", "title: " + d["before_title"], fm, count=1, flags=re.M)
+    # 題・説明文は YAML として読める形で書く（「: 」や「 #」を含む題をそのまま書くと、フロントマターが壊れて記事が消える）
+    import desc_fill
+    fm2 = re.sub(r"^title:.*$", lambda _m: "title: " + desc_fill.yaml_scalar(d["before_title"]), fm, count=1, flags=re.M)
     if d.get("before_description"):
-        fm2 = re.sub(r"^description:.*$", "description: " + d["before_description"], fm2, count=1, flags=re.M)
+        fm2 = re.sub(r"^description:.*$", lambda _m: "description: " + desc_fill.yaml_scalar(d["before_description"]),
+                     fm2, count=1, flags=re.M)
     if fm2 == fm:
         return False
     p.write_text(t.replace(fm, fm2, 1), encoding="utf-8", newline="")
@@ -297,7 +354,7 @@ def main():
         if ctrl is None or len(ctrl) < min_controls():
             # 判定済みにしない。翌週以降に同じ週数の記事が育てば判定できる
             held += 1
-            print(f"   保留 {slug[:38]:<38} 公開からの週数が近い対照が"
+            print(f"   保留 {shown(slug)[:38]:<38} 公開からの週数が近い対照が"
                   + ("分かりません（公開日なし）" if ctrl is None else f"{len(ctrl)}本（{min_controls()}本以上で判定）"))
             continue
         base = statistics.median(ctrl)
@@ -306,7 +363,7 @@ def main():
         verdict = {"ratio": round(me[0], 2), "control": round(base, 2),
                    "pos_gain": me[1], "rolled_back": False, "control_n": len(ctrl),
                    "kind": d.get("kind") or "title"}
-        print(f"   {'×' if worse else '○'} {slug[:38]:<38} 表示×{me[0]:.2f}（対照×{base:.2f}）"
+        print(f"   {'×' if worse else '○'} {shown(slug)[:38]:<38} 表示×{me[0]:.2f}（対照×{base:.2f}）"
               f" 順位{'+' if (me[1] or 0) > 0 else ''}{me[1] if me[1] is not None else '-'}")
         if worse and a.write and restore(slug, d):
             verdict["rolled_back"] = True
@@ -320,6 +377,8 @@ def main():
                                      "元のタイトルへ戻した")})
         else:
             kept += 1
+            if slug in SKIPPED:
+                verdict["skipped"] = SKIPPED.pop(slug)
         if a.write:
             decided[key] = verdict
     if a.write:

@@ -3619,7 +3619,7 @@ def test_report_actions_close_the_loop():
     check("rollback: 対照の8割を割ったら戻す", RB.WORSE, 0.8)
     check("retire_stale: 近い記事が無ければ統合しない（Dice下限）", RS.MIN_SIM >= 0.3, True)
     check("auto_rewrite: 鮮度の種別がある", "fresh" in AR2.WHAT, True)
-    check("auto_rewrite: 直す前のタイトルを台帳に残す", "before_title" in inspect.getsource(AR2.run_one), True)
+    check("auto_rewrite: 直す前のタイトルを台帳に残す", "before_title" in (inspect.getsource(AR2.run_one) + inspect.getsource(AR2._apply_one)), True)
     fb = IH.faq_body({"slug": "x", "name": "テスト"},
                      [{"faq": [{"q": f"q{i}", "a": f"a{i}"}], "title": "t", "category": "c", "slug": f"s{i}"} for i in range(5)],
                      lambda m: "/c/" + m["slug"] + "/")
@@ -3647,7 +3647,7 @@ def test_report_actions_close_the_loop():
     import cert_check as CC2
     check("cert_check: 30日前に知らせる", CC2.WARN_DAYS, 30)
     check("auto_rewrite: 質問形の種別がある", "question" in AR2.WHAT, True)
-    check("auto_rewrite: 質問形はH2の本数を守る", "H2の本数が変わりました" in inspect.getsource(AR2.run_one), True)
+    check("auto_rewrite: 質問形はH2の本数を守る", "H2の本数が変わりました" in (inspect.getsource(AR2.run_one) + inspect.getsource(AR2._apply_one)), True)
     import social_post as SP2
     check("social_post: note 用の長文を作る", '"note"' in inspect.getsource(SP2.compose), True)
     check("週次CIが実測（速度・表記・インデックス・AI引用）を回す",
@@ -3718,7 +3718,7 @@ def test_report_actions_close_the_loop():
     check("topics: 主題語を拾う", "口コミ" in TPX._terms("クリニック 口コミ 返信"), True)
     check("cooccur: 自社ドメインは出典に数えない", "7senses" in inspect.getsource(CO.source_urls), True)
     check("title_patterns: 表示300回未満の型は出さない", TPT.MIN_IMP, 300)
-    check("auto_rewrite: 説明文だけの種別がある", "desc" in AR2.WHAT and "説明文以外が変わりました" in inspect.getsource(AR2.run_one), True)
+    check("auto_rewrite: 説明文だけの種別がある", "desc" in AR2.WHAT and "説明文以外が変わりました" in (inspect.getsource(AR2.run_one) + inspect.getsource(AR2._apply_one)), True)
     check("auto_rewrite: タイトルの型と共起語を指示に渡す",
           "title_patterns" in inspect.getsource(AR2.build_prompt) and "cooccur" in inspect.getsource(AR2.build_prompt), True)
     check("rich_check: searchAppearance は単独で取る", "['searchAppearance']" in inspect.getsource(RC.appearances).replace('"', "'"), True)

@@ -347,7 +347,9 @@ def test_hist_lessons_publish_changed_retries_and_continues():
         rc = seq.pop(0) if len(seq) > 1 else seq[0]
         return types.SimpleNamespace(returncode=rc, stdout="", stderr="x")
     cfg = {"type": "external-md", "name": "X", "repo": "r"}
-    fake_sites = types.SimpleNamespace(load_all=lambda: {"x": cfg}, load=lambda sid: cfg)
+    # お客様の社かどうか（ログで伏せる。2026-10-20）も見るので、自社の社として答える
+    fake_sites = types.SimpleNamespace(load_all=lambda: {"x": cfg}, load=lambda sid: cfg,
+                                       is_client=lambda sid: False, public_id=lambda sid: sid)
     saved = PC.sites_mod, PC.site_articles, PC.subprocess, PC.time, sys.argv
     try:
         PC.sites_mod = fake_sites

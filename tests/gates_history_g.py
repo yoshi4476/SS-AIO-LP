@@ -207,6 +207,8 @@ def test_rewrite_targets_measurable_and_parallel_keeps_checks():
     tg = src.split("def targets():", 1)[1].split("\ndef ", 1)[0]
     check("書き直しの対象に採点だけの記事（audit_items）を入れない", "audit_items()" in tg, False)
     ro = src.split("def run_one(item, write, edited=None):", 1)[1].split("\ndef ", 1)[0]
+    # 本体は _apply_one（例外でも直す前へ戻すため run_one から分けた。2026-10-20）
+    ro += src.split("def _apply_one(item, edited, orig):", 1)[1].split("\ndef ", 1)[0]
     check("並列の案も、当てた後に同じ検算（check）を通す", "edited" in ro and "check(slug" in ro, True)
     fn = (ROOT / "scripts" / "funnel.py").read_text(encoding="utf-8")
     check("ファネルの送信は問い合わせの数え方（lead_reconcile）に揃える", "LR.ga4_by_day" in fn, True)
