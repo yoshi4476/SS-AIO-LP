@@ -1082,6 +1082,15 @@ jobs:
           out=$(python scripts/actions_budget.py 2>&1) || true; echo "$out" | tail -2
           if echo "$out" | grep -q "ACTIONS_BUDGET=warn"; then echo "scale=half" >> "$GITHUB_OUTPUT"; else echo "scale=full" >> "$GITHUB_OUTPUT"; fi
 
+      # 自社3サイトの本番を本物のブラウザで開く点検（browser_check.py）は findings.py が回す。このジョブは
+      # Chromium を入れていないので、ここで月次と同じ入れ方で入れる。入らなければ findings が「動かせず」で知らせる
+      # （2026-10-20 運用者の指示「ブラウザでの表示確認の拡張」）
+      - name: ブラウザでの表示確認の準備（Chromium）
+        run: |
+          python -c "from playwright.sync_api import sync_playwright as s; p=s().start(); p.chromium.launch().close(); p.stop()" 2>/dev/null \
+            || python -m playwright install --with-deps chromium \
+            || echo "::warning::Chromium を入れられませんでした（ブラウザでの表示確認は動かせず）"
+
       # 実利用者の表示速度（cwv_check の CrUX）。お客様の分は .gitignore なので、月次レポートへキャッシュで渡す
       - name: 実利用者の表示速度（お客様の分）を残す
         if: always() && hashFiles('data/cwv_crux/*.json', '!data/cwv_crux/ai-lab.json', '!data/cwv_crux/corporate.json', '!data/cwv_crux/subsidy.json') != ''

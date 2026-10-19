@@ -168,6 +168,11 @@ CHECKS = [
     # Ahrefs の Site Audit と同じ観点を3サイトの本番に当てる（外部リンク切れ・乗っ取られたドメインへの転送も）
     ("サイト監査（Ahrefs相当・3サイトの本番）", "seo_audit.py --live --all --external",
      re.compile(r"^要対応:")),
+    # HTML を読む検査では分からない、読者の画面にだけ出る崩れ（スマホ幅の横のはみ出し・JavaScript のエラー・
+    # 読み込めない画像・残った Markdown の記法）。自社3サイトの本番を Chromium で開く。Chromium は週次の
+    # optimize が「ブラウザでの表示確認の準備」で入れる（2026-10-20 運用者の指示「ブラウザでの表示確認の拡張」）
+    ("ブラウザでの表示（自社3サイトの本番・スマホ幅とPC幅）", "browser_check.py",
+     re.compile(r"^要対応:")),
     # 先方の作り次第の項目（まとめのページ・head の構造化データ/hreflang/robots/OGP・sitemap・llms.txt・robots.txt・計測・
     # IndexNow/Bing のファイル・動画の CSP・統合の301）が本番で動いているか。先方に頼む1文まで出す
     ("最初の接続の点検（先方の作り次第の項目）", "onboard_check.py --all",
@@ -248,7 +253,9 @@ CHECKS = [
 # KW重複 38秒）、どれも読むだけでファイルを書かない（ほかの検査の読む控えを書き換えない）ものに限る。
 # 書く検査（控え・台帳を更新するもの）をここに足すと、同時に動く検査と書き合う
 PARALLEL = {"pace.py", "seo_audit.py --live --all --external", "scaled_guard.py", "hub_client.py overlaps",
-            "log_leak_check.py --max-runs 1500", "log_leak_check.py --tracked"}
+            "log_leak_check.py --max-runs 1500", "log_leak_check.py --tracked",
+            # 本番を約20ページ開くので2〜3分かかる。書くのは --screens を付けたときの写真だけ（週次では付けない）
+            "browser_check.py"}
 
 # 「問題あり」を表す印。検査ごとに語尾が違うため、値の側で見る
 BAD = re.compile(r"(?:[A-Z_]+_OK=no|LIVE_CHECK=ng|KW_GATE=block|RAKKO_MONTH=over)")
