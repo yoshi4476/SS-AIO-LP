@@ -15,6 +15,8 @@
    "Skill(aio-seo-specialist *)",
    "Skill(fact-checker)",
    "Skill(fact-checker *)",
+   "Skill(original-content *)",
+   "Skill(original-content)",
    "WebFetch(domain:go.jp)",
    "WebFetch(domain:*.go.jp)",
    "WebFetch(domain:lg.jp)",

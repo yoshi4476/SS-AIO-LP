@@ -221,6 +221,22 @@ def run(slug):
     # --- 人間味 ---
     first_person = len(re.findall(r"私たち|私も|私は|私が|当社|弊社", body_nc))
     add("一人称の体験・観察2箇所以上", first_person >= 2, f"{first_person}箇所")
+    # オリジナルとして認められるか（originality.py）。出どころの無い体験談の決まり文句は止める
+    # （作り話になりうるうえ、同じ文句が多くの記事に並ぶと量産の指紋になる。2026-10-19 に164本で見つかった）
+    import originality
+    try:
+        _sid = sites_mod.find_category_owner(str(meta.get("category") or "")) if meta.get("category") else None
+    except SystemExit:
+        _sid = None
+    stock = originality.stock_phrases(body, _sid)
+    add("出どころの無い体験談の決まり文句ゼロ（体験は data/experiences.json の登録から書く）", not stock,
+        "、".join(f"「{w}」" for _, w in stock[:3]) or "なし")
+    gain = originality.info_gain(_sid, meta.get("keyword"), core_h2)
+    if gain is None:
+        add("検索上位の見出しに無い節が2つ以上", False, "上位の見出しのデータが無いため確かめていません", warn=True)
+    else:
+        add("検索上位の見出しに無い節が2つ以上", gain[0] >= originality.MIN_NOVEL,
+            f"{gain[0]}/{gain[1]}節（上位{gain[2]}ページと比べた）")
     koreni = body_nc.count("これにより")
     add("「これにより」ゼロ", koreni == 0, f"{koreni}回")
     juyou = body_nc.count("重要です")

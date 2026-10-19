@@ -663,6 +663,32 @@ def keep_before(slug, raw, after_raw):
     return {"before_path": p.relative_to(ROOT).as_posix(), "after_sha": hashlib.sha1(after_raw).hexdigest()}
 
 
+def stock_items(limit=3):
+    """出どころの無い体験談の決まり文句（originality.STOCK）が残る公開記事。多い順（2026-10-19 に126本）"""
+    import originality
+    rows = []
+    for p in (ROOT / "articles").glob("*.md"):
+        t = p.read_text(encoding="utf-8-sig")
+        m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, re.S)
+        if not m or re.search(r"^noindex:\s*true", m.group(1), re.M):
+            continue
+        sc = re.search(r"^score:\s*(\d+)", m.group(1), re.M)
+        if not sc or int(sc.group(1)) < 90:
+            continue
+        cat = re.search(r"^category:\s*(\S+)", m.group(1), re.M)
+        try:
+            import sites
+            sid = sites.find_category_owner(cat.group(1)) if cat else None
+        except SystemExit:
+            sid = None
+        found = originality.stock_phrases(m.group(2), sid)
+        if found:
+            rows.append({"kind": "stock", "slug": p.stem, "site": sid, "phrases": [s for s, _ in found],
+                         "why": f"出どころの無い体験談の決まり文句 {len(found)}か所"})
+    rows.sort(key=lambda r: -len(r["phrases"]))
+    return rows[:limit]
+
+
 def question_items(limit=4):
     """H2に質問形が1本も無い公開記事（表示の多い順は取らず、古い順）"""
     rows = []
@@ -855,6 +881,14 @@ WHAT = {
                 "   答えの根拠は、**この記事にすでにある出典リンクと本文の内容だけ**を使う。新しいURLは足さない\n"
                 "   （AIが存在しないURLを作ることがあるため）。記事の中に根拠が無ければ、断言せず条件を分けて書く\n"
                 "3. 見出しは足さない。上の調査の文以外の数字は足さない。狙う語・タイトル・FAQは変えない"),
+    "stock": ("この記事には、出どころの書かれていない体験談の決まり文句があります（下の文）。\n"
+              "本当にあった体験か確かめられないため、出来事として書きません。決まり文句が多くの記事に並ぶと量産の指紋にもなります。\n"
+              "次の文だけを直してください:\n{phrases}\n"
+              "直し方: (a) 出来事の形をやめ、「当社の判断とその理由」に言い換える"
+              "（例: 「当社では、担当者を専任で置けない場合は外部委託を勧めています。更新が止まりやすいためです」）、"
+              "または (b) その文が無くても意味が通るなら削る。\n"
+              "「相談を受ける中で」「何度も見てきました」「何度も聞いてきました」「ある医院では」の形を使わない。\n"
+              "数字・社名・事例を新しく書かない。見出し・タイトル・狙う語・FAQ・ほかの文は変えない"),
     "question": ("この記事のH2見出しは名詞句ばかりで、質問の形がありません。自社の実測で、H2の1〜3割が\n"
                  "質問形の記事は、質問形ゼロの記事より平均4.2位上にいます。AI Overview は質問形の\n"
                  "クエリで64.7%出ます。\n"
@@ -1408,6 +1442,8 @@ def build_prompt(item):
                            shared="」「".join(item["shared"][:3]))
     if kind == "desc":
         what = what.format(queries="\n".join(f"- {q}" for q in item.get("queries") or []))
+    if kind == "stock":
+        what = what.format(phrases="\n".join(f"- {s}" for s in item.get("phrases") or []))
     if kind == "title":
         # 自社のGSCで実測した「効いた型」を渡す（通説ではなく、このサイトの数字で決める）
         try:
@@ -1611,6 +1647,17 @@ def run_one(item, write, edited=None):
             p.write_bytes(raw)
             sh([sys.executable, "scripts/build.py"], timeout=1800)
             return False, ng
+    if not ng and kind == "stock":
+        # 決まり文句が残っていない・見出しの本数が同じ・本文が5%を超えて減っていない（文を直す・削るだけの直し）
+        import originality
+        after_now = p.read_text(encoding="utf-8-sig")
+        left = originality.stock_phrases(after_now.split("---", 2)[-1], item.get("site"))
+        if left:
+            ng = f"決まり文句が残っています: 「{left[0][1]}」"
+        elif len(re.findall(r"^##\s+", after_now, re.M)) != len(re.findall(r"^##\s+", before[2], re.M)):
+            ng = "見出しの本数が変わりました"
+        elif len(after_now) < len(before[2]) * 0.95:
+            ng = f"本文が減りすぎました（{len(before[2])}→{len(after_now)}字）"
     if not ng and kind == "split":
         # 共通の語がまだタイトルの前半にそろって残っていれば、付け分けになっていない
         t_now = meta(slug)[0]
@@ -1774,6 +1821,8 @@ def main():
         items = fresh_items(max(a.limit, 4))
     elif a.kind == "question":
         items = question_items(max(a.limit, 4))
+    elif a.kind == "stock":
+        items = stock_items(max(a.limit, 3))
     elif a.kind == "desc":
         items = desc_items(max(a.limit, 4))
     elif a.kind == "aisplit":

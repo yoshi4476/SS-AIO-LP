@@ -1,6 +1,6 @@
 ---
 name: ui-ux-pro-max
-description: "UI/UX design intelligence for web and mobile. Searchable local database with 84 styles, 192 color palettes, 74 font pairings, 192 product types, 98 UX guidelines, 104 icon entries, 16 GSAP motion presets, and 25 chart types across 22 stacks (React, Next.js, Vue, Nuxt, Svelte, Astro, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, WPF, WinUI, Avalonia, Uno Platform, UWP, Three.js, and HTML/CSS). Use when designing, building, or reviewing UI: pages, components, color schemes, typography, layout, accessibility, animation, or data visualization."
+description: "UI/UX のデータ集（スタイル・配色・フォントの組み合わせ・製品の型・UX の指針・アイコン・動きの型・グラフの型を検索できる。React・Next.js・HTML/CSS など22の技術）。使う場面：配色・フォント・部品の候補を具体的に引きたいとき。使わない場面：デザインの方向づけそのもの→/frontend-design、プロジェクトに DESIGN.md があるときはそちらが優先。"
 ---
 
 # UI/UX Pro Max - Design Intelligence

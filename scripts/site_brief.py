@@ -345,6 +345,13 @@ def main():
             print(line)
     except Exception as e:
         print(f"  （一次情報を取得できませんでした: {e}）")
+    # 一人称で書いてよい本当の体験（登録したものだけ）。登録の無い体験談を作らせない（originality.py）
+    try:
+        import originality
+        for line in originality.brief_lines(cfg["id"]):
+            print(line)
+    except Exception as e:
+        print(f"  （登録した体験を読めませんでした: {e}）")
 
     show_brief(cfg["id"])
 
