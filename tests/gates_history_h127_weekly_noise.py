@@ -6,6 +6,7 @@
 - 動画の読み違い（yomi_guard）: 直した語の記録に resolved を付け忘れ、直す前の記録を14日分数えていた。
 """
 import json
+from pathlib import Path
 import sys
 
 from test_gates import check, ROOT
@@ -33,7 +34,13 @@ def test_ledger_leftovers_skip_noindex_and_recent_but_catch_real_ones():
     from contextlib import redirect_stdout
     from datetime import date
     print("\n■ 台帳の取り下げの残り: 検索から外した記事・公開14日以内は除き、本当の残りは拾う")
-    arts = ROOT / "articles"
+    # 本物の articles/ に試しの原稿を置かない（並べて回す別の門がそれを公開記事として拾った。2026-10-20）
+    import tempfile
+    tmp = tempfile.TemporaryDirectory()
+    arts = Path(tmp.name) / "articles"
+    arts.mkdir()
+    old_root = H.ROOT
+    H.ROOT = Path(tmp.name)
     today = date.today().isoformat()
     files = {"zz-gate-noidx": f"---\ntitle: a\nscore: 92\ndate: 2026-08-01\nnoindex: true\n---\n本文\n",
              "zz-gate-recent": f"---\ntitle: b\nscore: 92\ndate: {today}\n---\n本文\n"}
@@ -54,8 +61,8 @@ def test_ledger_leftovers_skip_noindex_and_recent_but_catch_real_ones():
         out = buf.getvalue()
     finally:
         HC.enabled, HC.all_kw, EI.load = o
-        for s in files:
-            (arts / f"{s}.md").unlink(missing_ok=True)
+        H.ROOT = old_root
+        tmp.cleanup()
     check("本当の残り（原稿も公開も無い）は1本として拾う", "台帳に残った取り下げ 1本" in out, True)
     check("要対応の行が出る", "公開済みなのに公開中に無い記事 1本" in out, True)
 
