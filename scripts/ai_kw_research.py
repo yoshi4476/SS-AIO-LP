@@ -92,7 +92,7 @@ def in_territory(kw, cfg):
     """担当領域の語か（kw_fit の判定0）。業種名だけでは通さない。業種名を担当領域とみなしていたため、
     「保険代理店 選び方」「保険代理店とは」（保険を選ぶ消費者の検索）を台帳に積んでいた（2026-10-08）"""
     import kw_fit
-    return kw_fit.judge(kw, cfg.get("id", ""))[0] == 0
+    return kw_fit.judge_new(kw, cfg.get("id", ""))[0] == 0
 
 
 def probe(kw, dom, site=None):

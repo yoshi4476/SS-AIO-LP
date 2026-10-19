@@ -471,7 +471,7 @@ def outside(kw, S):
     サイト設定の無い呼び出し（門の作り物の S）では見ない"""
     if not S.get("id"):
         return ""
-    lv, why = kw_fit.judge(kw, S["id"])
+    lv, why = kw_fit.judge_new(kw, S["id"])
     return f"担当の外（{why}）" if lv >= 2 else ""
 
 

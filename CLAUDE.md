@@ -613,6 +613,7 @@ AI Overview・AIモードのインプレッションとページ別引用状況�
    コーポレートの表示の約4割が銀行の通帳・ゆうちょの記事だった）。台帳へ積む（`add_kw`）・次に書く語を選ぶ（`next_kw`）・
    書いた後（`kw_gate --after`・`publish_flow`）も同じ判定を通る。同じ字で別の意味の担当領域語（「記帳」と通帳の記帳、「申請」と開業届）は
    `sites/<id>.json` の `kw_needs`（その意味を示す語）、担当の外の文脈は `kw_off` に書く。台帳に残った語は `python scripts/kw_fit.py --ledger` で一覧にする（`--retire` は運用者が確かめてから）。
+   **新しく書く語だけの決まり**は `kw_require`（どれか1つに当たる語だけ新しく書く。`kw_fit.judge_new`）。AI集客ラボは 2026-10-19 から「業種」か「依頼する人の語」を含む語だけ（一般の AIO・LLMO の語は表示の約6割なのにクリック率0.22%だった）。既存の記事の書き直し・配信には効かない。
 
    **公開済みの担当領域の外の記事は、消さずに検索から外す**（`scripts/noindex.py`。2026-10-08 運用者の決定で26本）。フロントマターに
    `noindex: true`・`noindex_reason`・`noindex_date` を書くと、4つの描き方（build.py・nextjs-json・external-html・external-md）で

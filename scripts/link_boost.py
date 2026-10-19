@@ -576,7 +576,8 @@ def run_inline(site, arts, poor, cnt, ranks, pre, write, log=None, use=None, kin
             continue
         url = f"{pre.rstrip('/')}/{tgt}/" if pre else f"/{a['cat']}/{tgt}/"
         added = 0
-        for _, _, src in sources(site, tgt, arts, cnt, ranks):
+        # 順位の表が空（--only）なら順位で絞らない。空の表で絞ると全記事が「送り先より下位」になり0本だった
+        for _, _, src in sources(site, tgt, arts, cnt, ranks or None):
             if added >= ADD_PER:
                 break
             b = arts[src]

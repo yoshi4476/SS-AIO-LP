@@ -88,6 +88,7 @@ def _rules(site):
         str(x).strip() for x in xs) else None
     needs = {flat(k): re.compile(norm(v)) for k, v in (cfg.get("kw_needs") or {}).items() if k and v}
     return {"own": own, "other": other, "needs": needs, "off": rx(cfg.get("kw_off") or []),
+            "require": rx(cfg.get("kw_require") or []),
             "drop": tuple(flat(x) for x in (cfg.get("drop_kw") or []) + (cfg.get("ng_terms") or []) if x)}
 
 
@@ -128,6 +129,20 @@ def judge(kw, site):
         if t:
             return 2, f"別のサイト（{sid}）の担当領域（{t}）"
     return 1, "担当領域語を含まない"
+
+
+def judge_new(kw, site):
+    """新しく書く語の判定。judge に加え、sites/<id>.json の kw_require（どれか1つに当たる語だけ新しく書く）を見る。
+    既存の記事の書き直し・配信は judge のまま（書いた記事を配信から外さない）。
+    2026-10-19 運用者の決定: AI集客ラボの新しい記事は「業種＋依頼する人の語」だけ。AIO・LLMO の一般語は
+    28日で表示の約6割（2,720回）なのにクリック率0.22%で、問い合わせにつながっていなかった"""
+    lv, why = judge(kw, site)
+    if lv >= 2:
+        return lv, why
+    R = _rules(site)
+    if R and R["require"] and not R["require"].search(norm(kw)) and not R["require"].search(flat(kw)):
+        return 2, "新しく書く語の決まり（kw_require: 業種か依頼する人の語）に当たらない"
+    return lv, why
 
 
 def ledger_unfit(rows, site=""):

@@ -579,6 +579,28 @@ def free_spare_items(sites, skip=()):
     return out
 
 
+_COOC = {}
+
+
+def cooccur_item(slug):
+    """名指しした記事（--slugs）の stuck の材料を、無料の調べ（cooccur）でその場で作る。語が無ければ None"""
+    if slug not in _COOC:
+        import cooccur
+        sid = site_of(slug)
+        title, kw, t = meta(slug)
+        m = re.match(r"^---\s*\n.*?\n---\s*\n(.*)$", t, re.S)
+        try:
+            rec = cooccur.cover(sid, slug, kw or title, m.group(1) if m else t)
+        except Exception as e:
+            print(f"  （{slug}: 無料の調べに失敗 {type(e).__name__}）")
+            rec = None
+        miss = (rec or {}).get("missing") or []
+        _COOC[slug] = ({"kind": "stuck", "slug": slug, "site": sid, "terms": miss[:6],
+                        "why": f"運用者が選んだ記事。上位・AIの出典の見出しにあって、この記事に無い語（無料の調べ）: {'／'.join(miss[:8])}"}
+                       if miss else None)
+    return _COOC[slug]
+
+
 def emerging_title_items(sites, skip=()):
     """emerging の社で、足す語も見つからない日の最後の候補: rank_up の「表示があるのにクリックが取れない」題
     （1〜20位・表示20回以上）。題の判定期間中の記事は外す"""
@@ -1466,6 +1488,9 @@ def pick_slugs(items, slugs, kind):
             out.append(have[s])
         elif kind in ("title", "question", "fresh") and (ROOT / "articles" / f"{s}.md").is_file():
             out.append({"kind": kind, "slug": s, "site": site_of(s), "why": "運用者が選んだ記事（GSC で見て直す）"})
+        elif kind == "stuck" and (ROOT / "articles" / f"{s}.md").is_file() and cooccur_item(s):
+            # 候補に出ていない記事も、上位・AIの出典の見出しにあって自記事に無い語をその場で調べて直す（無料）
+            out.append(cooccur_item(s))
         else:
             print(f"  {s}: 種類 {kind or '（指定なし）'} の材料が無いので飛ばします")
     return out
@@ -1877,7 +1902,8 @@ def main():
     elif a.kind == "question":
         items = question_items(max(a.limit, 4))
     elif a.kind == "stock":
-        items = stock_items(max(a.limit, 3))
+        # 記事を名指しした直し（--slugs）は、多い順の上位に入らない記事も選べるよう全部から探す
+        items = stock_items(10 ** 6 if a.slugs else max(a.limit, 3))
     elif a.kind == "desc":
         items = desc_items(max(a.limit, 4))
     elif a.kind == "aisplit":

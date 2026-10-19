@@ -198,7 +198,7 @@ def main():
             # 担当領域の外の語は、食い合いと書かずに理由を残す（台帳の掃除の記録になる）。
             # 通常は next_kw が先に飛ばすので、ここに来るのは台帳の一覧を読めなかった日だけ
             import kw_fit
-            fit, why = kw_fit.judge(kw, a.site)
+            fit, why = kw_fit.judge_new(kw, a.site)
             reason = (f"担当領域の外（kw_fit: {why}）" if fit >= 2
                       else "同じサイトの公開済みの記事と同じ検索のため自動退避（kw_gate。既存の記事を書き足す）" if dup
                       else "既存ページと食い合うため自動退避（kw_gate）")
@@ -248,7 +248,7 @@ def main():
             if level == 3:
                 print("   食い合いの検査が動きませんでした（鍵・通信を確認）。隔離はしません")
             # 書き手が台帳と違う語を選んでも、担当領域の外の記事は世に出さない
-            fit, why = kw_fit.judge(kw, a.site)
+            fit, why = kw_fit.judge_new(kw, a.site)
             if fit >= 2:
                 print(f"   担当領域の外: {why}")
                 ng.append((slug, kw, f"担当領域の外（kw_fit: {why}）"))

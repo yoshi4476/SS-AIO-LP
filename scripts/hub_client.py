@@ -293,7 +293,7 @@ def _unfit(site):
         import kw_fit
     except Exception:
         return lambda k: False
-    return lambda k: kw_fit.judge(k, site)[0] >= 2
+    return lambda k: kw_fit.judge_new(k, site)[0] >= 2
 
 
 def _norm(s):
@@ -386,7 +386,7 @@ def add_kw(site, keywords):
         kw = str(k.get("keyword", "") if isinstance(k, dict) else k)
         if unfit(kw):
             import kw_fit
-            skipped.append({"keyword": kw, "why": kw_fit.judge(kw, site)[1]})
+            skipped.append({"keyword": kw, "why": kw_fit.judge_new(kw, site)[1]})
         else:
             keep.append(k)
     if not keep:

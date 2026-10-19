@@ -226,7 +226,7 @@ def fits(kw, S):
     以前は担当領域語か汎用語（費用・やり方・事例…）のどちらかを含めば通していたため、
     「クリニック 電話予約 やり方」「歯科医院 閉院 費用」が業種名＋汎用語だけで台帳に入った（2026-08-04）"""
     import kw_fit
-    return kw_fit.judge(kw, S.get("id") or S["cfg"].get("id", ""))[0] == 0
+    return kw_fit.judge_new(kw, S.get("id") or S["cfg"].get("id", ""))[0] == 0
 
 
 

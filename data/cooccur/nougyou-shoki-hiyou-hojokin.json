@@ -1,0 +1,24 @@
+{
+ "keyword": "農業 初期 費用 補助金",
+ "sources": [
+  "https://www.maff.go.jp/j/new_farmer/n_syunou/roudou.html",
+  "https://www.be-farmer.jp/support/subsidy/",
+  "https://tochi-no.jp/article/detail/615",
+  "https://hojyokin-portal.jp/columns/syuno_jyunbi_shikin"
+ ],
+ "missing": [
+  "information",
+  "新規就農者育成総合対策",
+  "収支シミュレーション",
+  "アスパラガス農家",
+  "シミュレーション",
+  "新規就農支援施策",
+  "ジャパンフルーツ",
+  "給付金コラム",
+  "自動車整備士",
+  "交付期間延長",
+  "プライベート",
+  "先進農業法人"
+ ],
+ "covered": 0.26
+}
