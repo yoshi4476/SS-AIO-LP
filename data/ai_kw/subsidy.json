@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-12",
+  "date": "2026-10-19",
   "asked": 4,
   "items": [
     {
       "kw": "it導入補助金 選び方",
-      "imp": 26,
-      "pos": 30.3,
+      "imp": 33,
+      "pos": 30.1,
       "src": "gsc",
       "written": false,
       "ai": {
@@ -40,12 +40,12 @@
           }
         }
       },
-      "score": 8.4
+      "score": 8.5
     },
     {
       "kw": "it導入支援事業者 選び方",
-      "imp": 7,
-      "pos": 17.9,
+      "imp": 8,
+      "pos": 16,
       "src": "gsc",
       "written": true,
       "ai": {
@@ -60,12 +60,12 @@
           }
         }
       },
-      "score": 6.9
+      "score": 7.0
     },
     {
       "kw": "デジタル化 ai導入補助金 選び方",
-      "imp": 9,
-      "pos": 33,
+      "imp": 10,
+      "pos": 32.1,
       "src": "gsc",
       "written": false,
       "ai": {
