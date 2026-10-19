@@ -252,7 +252,7 @@ FIELDS = [
      "「月: 語」を改行区切り。その語の記事を山の6〜10週前に優先して書きます",
      "12月: 年末調整\n3月: 決算", False),
 
-    ("#facts", "5-1. 一次情報（最重要）",
+    ("#facts", "5-1. 自社の数字（一次情報・最重要）",
      "その会社にしか出せない数値です。AI検索が最も引用したがる材料で、"
      "ここが空だと「どこにでもある記事」になり引用されません。"
      "確認できない数値は書かないでください（書いた時点で信頼を失います）。", "", False),
@@ -271,37 +271,54 @@ FIELDS = [
     ("facts.2.as_of", "② の時点", "", "2026-09", False),
     ("facts.2.denominator", "② の母数", "割合を書く場合のみ", "", False),
     ("facts.2.period", "② の集計期間", "割合を書く場合のみ", "", False),
-    ("facts.3.claim", "実績・数値 ③", "", "", False),
-    ("facts.3.source", "③ の出典", "", "", False),
-    ("facts.3.as_of", "③ の時点", "", "", False),
-    ("facts.3.denominator", "③ の母数", "割合を書く場合のみ", "", False),
-    ("facts.3.period", "③ の集計期間", "割合を書く場合のみ", "", False),
-    ("facts.note", "事例・体験",
+    *[f for i, n in ((3, "③"), (4, "④"), (5, "⑤")) for f in (
+        (f"facts.{i}.claim", f"実績・数値 {n}", "", "", False),
+        (f"facts.{i}.source", f"{n} の出典", "", "", False),
+        (f"facts.{i}.as_of", f"{n} の時点", "", "", False),
+        (f"facts.{i}.denominator", f"{n} の母数", "割合を書く場合のみ", "", False),
+        (f"facts.{i}.period", f"{n} の集計期間", "割合を書く場合のみ", "", False))],
+    ("facts.note", "現場で見てきたこと",
      "数値でなくても、現場で見てきたことがあれば。記事の一人称パートに使います",
      "担当者が1人の会社ほど、退職時に業務が止まるリスクを挙げられます", False),
 
+    # お客さんの一言は、相談・商談・施術などの場で実際に聞いた言葉。体験の台帳（非公開の clients/<id>/experiences.json）に
+    # 入り、記事の「相談の場でよく聞く言葉」の材料になる。作った言葉は書かない（裏付けの無い体験談を止める検査が通さない）
+    ("#quotes", "5-2. お客さんの一言（実際に聞いた言葉）",
+     "相談や商談の場で、お客さんが実際に口にした言葉です。読者が「自分のことだ」と思う材料になり、"
+     "AIにも「その会社にしか書けない記事」と判断されます。個人や会社が分からない形で書いてください。", "", False),
+    *[f for i, n in ((1, "①"), (2, "②"), (3, "③")) for f in (
+        (f"quote.{i}.text", f"お客さんの一言 {n}", "聞いた言葉のまま（言い換えない）",
+         "経理の担当が辞めると言ってきて、来月の締めができるか分からない" if i == 1 else "", False),
+        (f"quote.{i}.who", f"一言 {n} の相手", "業種・立場・規模など（名前は書かない）",
+         "従業員20名の製造業の社長" if i == 1 else "", False),
+        (f"quote.{i}.when", f"一言 {n} の時期", "YYYY-MM。分からなければ「不明」", "2026-08" if i == 1 else "", False),
+        (f"quote.{i}.use", f"一言 {n} を記事に使う", "可 / 不可", "可" if i == 1 else "", False))],
+
     # 事例とお客様の声は、掲載が「可」で本人の確認が済んだものだけを記事の材料へ渡す（to_brief）。
     # 事業者が作った感想を「お客様の声」として出すのはステルスマーケティング規制の違反
-    ("#cases", "5-2. 事例とお客様の声",
+    ("#cases", "5-3. 過去の事例とお客様の声",
      "記事に載せてよいものだけを使います。掲載が「可」で、ご本人の確認が済んだものだけが記事に出ます。", "", False),
-    ("case.1.summary", "事例 ①（どんな会社の、何を）", "", "従業員30名の製造業。月次決算の代行", False),
-    ("case.1.result", "事例 ① の結果", "数字は実際の値だけ", "月次決算が翌月25日 → 翌月10日に", False),
-    ("case.1.publish", "事例 ① の掲載", "可（社名を出す）/ 可（社名を出さない）/ 不可", "可（社名を出さない）", False),
-    ("case.1.confirmed", "事例 ① のご本人の確認", "済 / 未", "済", False),
-    ("case.2.summary", "事例 ②（どんな会社の、何を）", "", "", False),
-    ("case.2.result", "事例 ② の結果", "", "", False),
-    ("case.2.publish", "事例 ② の掲載", "", "", False),
-    ("case.2.confirmed", "事例 ② のご本人の確認", "", "", False),
-    ("voice.1.text", "お客様の声 ①", "ご本人の言葉のまま", "引き継ぎの資料まで作ってもらえて、退職の不安が無くなりました", False),
-    ("voice.1.name", "お客様の声 ① の表示名", "会社名を出さない場合は「大阪市の製造業」など", "大阪市の製造業", False),
-    ("voice.1.publish", "お客様の声 ① の掲載", "可 / 不可", "可", False),
-    ("voice.1.by", "お客様の声 ① の書き手", "本人が書いた / 本人が内容を確認した / 未確認", "本人が書いた", False),
-    ("voice.2.text", "お客様の声 ②", "", "", False),
-    ("voice.2.name", "お客様の声 ② の表示名", "", "", False),
-    ("voice.2.publish", "お客様の声 ② の掲載", "", "", False),
-    ("voice.2.by", "お客様の声 ② の書き手", "", "", False),
+    *[f for i, n in ((1, "①"), (2, "②"), (3, "③"), (4, "④")) for f in (
+        (f"case.{i}.summary", f"事例 {n}（どんな会社の、何を）", "", "従業員30名の製造業。月次決算の代行" if i == 1 else "", False),
+        (f"case.{i}.before", f"事例 {n} の依頼前の困りごと", "",
+         "経理担当の退職で、月次の締めが翌月25日までずれ込んでいた" if i == 1 else "", False),
+        (f"case.{i}.did", f"事例 {n} でやったこと", "", "記帳と月次決算を引き受け、締めの手順書を作った" if i == 1 else "", False),
+        (f"case.{i}.period", f"事例 {n} の期間", "いつからいつまで（YYYY-MM〜YYYY-MM）", "2025-10〜2026-03" if i == 1 else "", False),
+        (f"case.{i}.result", f"事例 {n} の結果", "数字は実際の値だけ" if i == 1 else "",
+         "月次決算が翌月25日 → 翌月10日に" if i == 1 else "", False),
+        (f"case.{i}.publish", f"事例 {n} の掲載", "可（社名を出す）/ 可（社名を出さない）/ 不可" if i == 1 else "",
+         "可（社名を出さない）" if i == 1 else "", False),
+        (f"case.{i}.confirmed", f"事例 {n} のご本人の確認", "済 / 未" if i == 1 else "", "済" if i == 1 else "", False))],
+    *[f for i, n in ((1, "①"), (2, "②"), (3, "③"), (4, "④")) for f in (
+        (f"voice.{i}.text", f"お客様の声 {n}", "ご本人の言葉のまま" if i == 1 else "",
+         "引き継ぎの資料まで作ってもらえて、退職の不安が無くなりました" if i == 1 else "", False),
+        (f"voice.{i}.name", f"お客様の声 {n} の表示名", "会社名を出さない場合は「大阪市の製造業」など" if i == 1 else "",
+         "大阪市の製造業" if i == 1 else "", False),
+        (f"voice.{i}.publish", f"お客様の声 {n} の掲載", "可 / 不可" if i == 1 else "", "可" if i == 1 else "", False),
+        (f"voice.{i}.by", f"お客様の声 {n} の書き手", "本人が書いた / 本人が内容を確認した / 未確認" if i == 1 else "",
+         "本人が書いた" if i == 1 else "", False))],
 
-    ("#author", "5-3. 記事の書き手",
+    ("#author", "5-4. 記事の書き手",
      "誰が書いたか分からない記事は、検索エンジンにもAIにも信用されません。"
      "実在する方のお名前と肩書きをお願いします。", "", False),
     ("author.name", "著者名", "記事に表示するお名前", "山田 太郎", True),
@@ -427,14 +444,11 @@ CHOICES = {
     "gsc_owner": ["済", "未"],
     "bing_consent": ["可", "不可"],
     "service.price_policy": ["載せてよい", "目安だけ", "載せない"],
-    "case.1.publish": ["可（社名を出す）", "可（社名を出さない）", "不可"],
-    "case.2.publish": ["可（社名を出す）", "可（社名を出さない）", "不可"],
-    "case.1.confirmed": ["済", "未"],
-    "case.2.confirmed": ["済", "未"],
-    "voice.1.publish": ["可", "不可"],
-    "voice.2.publish": ["可", "不可"],
-    "voice.1.by": ["本人が書いた", "本人が内容を確認した", "未確認"],
-    "voice.2.by": ["本人が書いた", "本人が内容を確認した", "未確認"],
+    **{f"case.{i}.publish": ["可（社名を出す）", "可（社名を出さない）", "不可"] for i in range(1, 5)},
+    **{f"case.{i}.confirmed": ["済", "未"] for i in range(1, 5)},
+    **{f"voice.{i}.publish": ["可", "不可"] for i in range(1, 5)},
+    **{f"voice.{i}.by": ["本人が書いた", "本人が内容を確認した", "未確認"] for i in range(1, 5)},
+    **{f"quote.{i}.use": ["可", "不可"] for i in range(1, 4)},
     "supervisor.consent": ["可", "不可"],
     "supervisor.review": ["公開前に確かめる", "公開後に確かめる"],
     "tone.style": ["ですます", "だ・である"],
@@ -667,7 +681,8 @@ FLOW = {
     "kw_seeds.priority": "非公開の site_private.json の kw_seeds.priority → KWの計画の枠と加点（kw_plan）",
     "season.peaks": "非公開の site_private.json の season.peaks → 季節の前出し（season.py。1年分の検索データがそろうまで）",
     "facts.": "非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない）",
-    "case.": "brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内",
+    "case.": "brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳）",
+    "quote.": "非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う）",
     "voice.": "brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内",
     "author.": "brief.json の author → 記事の著者（publish.client_credit の Person）・執筆の案内",
     "supervisor.": "company.json の supervisor → 記事の監修の表示と reviewedBy（publish.py）・brief.json",
@@ -1192,6 +1207,7 @@ def to_brief(got, industry=""):
         # 掲載が「可」で、ご本人の確認が済んだものだけ（事業者が作った感想を声として出さない）
         "cases": usable_cases(got),
         "voices": usable_voices(got),
+        "quotes": usable_quotes(got),
     }
     # 業種別の項目だけを拾う（業種別の章に定義された接頭辞の許可リスト）。
     # 接頭辞を除外リストで見ていたため、章を足すたびに担当者のメールなどが public の brief.json に出うる
@@ -1222,20 +1238,47 @@ def to_brief(got, industry=""):
 def usable_cases(got):
     """記事に使ってよい事例。掲載が「可」でご本人の確認が「済」のものだけ"""
     out = []
-    for i in ("1", "2"):
+    for i in ("1", "2", "3", "4"):
         if not got.get(f"case.{i}.summary"):
             continue
         pub = choice(got, f"case.{i}.publish")
         if pub.startswith("可") and choice(got, f"case.{i}.confirmed") == "済":
             out.append({"summary": got[f"case.{i}.summary"], "result": got.get(f"case.{i}.result", ""),
-                        "show_name": pub == "可（社名を出す）"})
+                        "before": got.get(f"case.{i}.before", ""), "did": got.get(f"case.{i}.did", ""),
+                        "period": got.get(f"case.{i}.period", ""), "show_name": pub == "可（社名を出す）"})
+    return out
+
+
+def usable_quotes(got):
+    """記事に使ってよいお客さんの一言。「可」のものだけ（相手は業種・立場までで、名前は持たない）"""
+    out = []
+    for i in ("1", "2", "3"):
+        t = str(got.get(f"quote.{i}.text") or "").strip().strip("「」")
+        if t and choice(got, f"quote.{i}.use") == "可":
+            out.append({"text": t, "who": got.get(f"quote.{i}.who", ""), "when": got.get(f"quote.{i}.when", "") or "不明"})
+    return out
+
+
+def to_experiences(got, site_id):
+    """体験の台帳（data/experiences.json と同じ形）。お客様の社の分は非公開の clients/<id>/experiences.json に置く。
+    originality.stock_phrases は、ここにある目印（key）を含む文を「登録した体験」として通す。
+    目印は一言そのもの（記事では「」で引く）・事例の概要。作った体験は入れない"""
+    out = []
+    for n, q in enumerate(usable_quotes(got), 1):
+        out.append({"id": f"{site_id}-quote{n}", "sites": [site_id], "key": q["text"][:24], "kind": "お客さんの一言",
+                    "text": f"{q['who'] or 'お客さん'}から「{q['text']}」と言われた", "when": q["when"],
+                    "industry": q["who"]})
+    for n, c in enumerate(usable_cases(got), 1):
+        out.append({"id": f"{site_id}-case{n}", "sites": [site_id], "key": c["summary"][:24], "kind": "事例",
+                    "text": "。".join(x for x in (c["summary"], c["before"], c["did"], c["result"]) if x),
+                    "when": c["period"] or "時期未確認", "outcome": c["result"]})
     return out
 
 
 def usable_voices(got):
     """記事に使ってよいお客様の声。掲載が「可」で、本人が書いたか本人が内容を確認したものだけ"""
     out = []
-    for i in ("1", "2"):
+    for i in ("1", "2", "3", "4"):
         if not got.get(f"voice.{i}.text"):
             continue
         if choice(got, f"voice.{i}.publish") == "可" and choice(got, f"voice.{i}.by") in ("本人が書いた", "本人が内容を確認した"):
@@ -1270,7 +1313,7 @@ def to_company(got):
 
 def to_facts(got, site_id):
     out = []
-    for i in ("1", "2", "3"):
+    for i in ("1", "2", "3", "4", "5"):
         claim = got.get(f"facts.{i}.claim")
         if not claim:
             continue
@@ -1324,9 +1367,16 @@ def review(got, cfg):
                     "URLプレフィックスのプロパティを足して当社を追加していただくまで、順位・検索語が取れません")
     if lines(got.get("tone.regulation")) and not str(got.get("review_before_publish", "")).startswith("要"):
         warn.append("業種の表現の決まりがあるのに、公開前の確認が「要」ではありません（医療・金融などは「要」を推奨）")
-    for i in ("1", "2"):
+    for i, n in (("1", "①"), ("2", "②"), ("3", "③"), ("4", "④")):
         if got.get(f"voice.{i}.text") and choice(got, f"voice.{i}.by") not in ("本人が書いた", "本人が内容を確認した"):
-            warn.append(f"お客様の声 {'①' if i == '1' else '②'} は本人の確認が無いため記事に使いません")
+            warn.append(f"お客様の声 {n} は本人の確認が無いため記事に使いません")
+        if got.get(f"case.{i}.summary") and not (choice(got, f"case.{i}.publish").startswith("可")
+                                                 and choice(got, f"case.{i}.confirmed") == "済"):
+            warn.append(f"事例 {n} は掲載が「可」でないか本人の確認が「済」でないため記事に使いません")
+    # 体験の材料が1つも無いと、記事の一人称は「当社の判断」だけになり、その会社らしさが出にくい（止めはしない）
+    if not usable_quotes(got) and not usable_cases(got) and not got.get("facts.note"):
+        warn.append("お客さんの一言・掲載してよい事例・現場で見てきたことが1つもありません。"
+                    "1つでもあると、その会社にしか書けない記事になります（作った体験は書きません）")
     # 同意が「可」でない方を監修者として表示すると、事実と違う表示になる
     if got.get("supervisor.name") and str(got.get("supervisor.consent", "")).strip() != "可":
         ng.append("監修者の「掲載の同意」が「可」ではありません（同意をいただいてから登録します）")
@@ -1492,6 +1542,12 @@ def apply(got, cfg, industry=""):
             "_readme": "この会社にしか出せない一次情報。記事はここから最低1つ引く。"
                        "確認できない数値は載せない（載せた瞬間に信頼を失う）。",
             "facts": facts}, root=ROOT))
+
+    exps = to_experiences(got, site_id)
+    if exps:
+        made.append(PS.write_json(site_id, "experiences.json", {
+            "_readme": "この会社で実際にあったこと（お客さんの一言・掲載してよい事例）。記事の体験談はここからだけ書く。",
+            "experiences": exps}, root=ROOT))
 
     if not PS.client_path(site_id, "kw.md", root=ROOT).is_file():
         seeds = cfg.get("kw_seeds", {})

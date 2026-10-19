@@ -42,10 +42,22 @@ NOVEL_SHARE = 0.4       # 節の語のうち、上位の見出しに出る語が
 
 
 def load_experiences(site=None):
+    """体験の台帳。自社の分は data/experiences.json、お客様の社の分は非公開の clients/<id>/experiences.json
+    （ヒアリングシートの「お客さんの一言」・掲載してよい事例。client_intake.to_experiences）"""
     try:
         rows = json.loads(EXPERIENCES.read_text(encoding="utf-8")).get("experiences", [])
     except (OSError, ValueError):
-        return []
+        rows = []
+    if site:
+        try:
+            import private_store
+            import sites as S
+            if (S.load_all().get(site) or {}).get("client"):
+                p = private_store.client_path(site, "experiences.json")
+                if p.is_file():
+                    rows = rows + json.loads(p.read_text(encoding="utf-8")).get("experiences", [])
+        except Exception:
+            pass
     return [r for r in rows if not r.get("retired") and (not site or not r.get("sites") or site in r["sites"])]
 
 

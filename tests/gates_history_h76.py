@@ -248,9 +248,10 @@ def test_intake_writes_to_private_store():
             priv = r / "private" / "clients" / "h76-git"
             check("公開側の sites/<id>.json は公開してよい項目だけ（client: true 付き）",
                   (sorted(set(raw) - set(S.PUBLIC_KEYS)), raw.get("client")), ([], True))
-            check("会社情報・記事の材料・一次情報・キーワード計画・設定の戦略の部分は非公開の置き場",
+            # 体験の台帳（お客さんの一言・掲載してよい事例。2026-10-20 gates_history_h116）も非公開の置き場
+            check("会社情報・記事の材料・一次情報・体験の台帳・キーワード計画・設定の戦略の部分は非公開の置き場",
                   sorted(p.name for p in priv.iterdir()),
-                  ["brief.json", "company.json", "facts.json", "kw.md", "private.json", "site_private.json"])
+                  ["brief.json", "company.json", "experiences.json", "facts.json", "kw.md", "private.json", "site_private.json"])
             check("公開側の data/clients/<id>/ と docs/kw-<id>.md には書かない",
                   ((r / "data" / "clients" / "h76-git").exists(), (r / "docs" / "kw-h76-git.md").exists()),
                   (False, False))

@@ -127,41 +127,91 @@
 | 5. 記事の材料：狙う語 | 優先して狙う業種 | `kw_seeds.priority` | 非公開の site_private.json の kw_seeds.priority → KWの計画の枠と加点（kw_plan） |
 | 5. 記事の材料：狙う語 | 検索の意図 | `kw_seeds.intents` | 非公開の site_private.json の kw_seeds → KWの計画（kw_plan・kw_discover） |
 | 5. 記事の材料：狙う語 | 繁忙期と、その時期に増える相談 | `season.peaks` | 非公開の site_private.json の season.peaks → 季節の前出し（season.py。1年分の検索データがそろうまで） |
-| 5-1. 一次情報（最重要） | 実績・数値 ① | `facts.1.claim` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ① の出典 | `facts.1.source` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ① の時点 | `facts.1.as_of` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ① の母数 | `facts.1.denominator` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ① の集計期間 | `facts.1.period` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | 実績・数値 ② | `facts.2.claim` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ② の出典 | `facts.2.source` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ② の時点 | `facts.2.as_of` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ② の母数 | `facts.2.denominator` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ② の集計期間 | `facts.2.period` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | 実績・数値 ③ | `facts.3.claim` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ③ の出典 | `facts.3.source` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ③ の時点 | `facts.3.as_of` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ③ の母数 | `facts.3.denominator` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | ③ の集計期間 | `facts.3.period` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-1. 一次情報（最重要） | 事例・体験 | `facts.note` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
-| 5-2. 事例とお客様の声 | 事例 ①（どんな会社の、何を） | `case.1.summary` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | 事例 ① の結果 | `case.1.result` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | 事例 ① の掲載 | `case.1.publish` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | 事例 ① のご本人の確認 | `case.1.confirmed` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | 事例 ②（どんな会社の、何を） | `case.2.summary` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | 事例 ② の結果 | `case.2.result` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | 事例 ② の掲載 | `case.2.publish` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | 事例 ② のご本人の確認 | `case.2.confirmed` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | お客様の声 ① | `voice.1.text` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | お客様の声 ① の表示名 | `voice.1.name` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | お客様の声 ① の掲載 | `voice.1.publish` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | お客様の声 ① の書き手 | `voice.1.by` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | お客様の声 ② | `voice.2.text` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | お客様の声 ② の表示名 | `voice.2.name` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | お客様の声 ② の掲載 | `voice.2.publish` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
-| 5-2. 事例とお客様の声 | お客様の声 ② の書き手 | `voice.2.by` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
-| 5-3. 記事の書き手 | 著者名 | `author.name` | brief.json の author → 記事の著者（publish.client_credit の Person）・執筆の案内 |
-| 5-3. 記事の書き手 | 肩書き | `author.title` | brief.json の author → 記事の著者（publish.client_credit の Person）・執筆の案内 |
-| 5-3. 記事の書き手 | 保有資格・経歴 | `author.credential` | brief.json の author → 記事の著者（publish.client_credit の Person）・執筆の案内 |
+| 5-1. 自社の数字（一次情報・最重要） | 実績・数値 ① | `facts.1.claim` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ① の出典 | `facts.1.source` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ① の時点 | `facts.1.as_of` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ① の母数 | `facts.1.denominator` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ① の集計期間 | `facts.1.period` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | 実績・数値 ② | `facts.2.claim` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ② の出典 | `facts.2.source` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ② の時点 | `facts.2.as_of` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ② の母数 | `facts.2.denominator` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ② の集計期間 | `facts.2.period` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | 実績・数値 ③ | `facts.3.claim` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ③ の出典 | `facts.3.source` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ③ の時点 | `facts.3.as_of` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ③ の母数 | `facts.3.denominator` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ③ の集計期間 | `facts.3.period` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | 実績・数値 ④ | `facts.4.claim` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ④ の出典 | `facts.4.source` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ④ の時点 | `facts.4.as_of` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ④ の母数 | `facts.4.denominator` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ④ の集計期間 | `facts.4.period` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | 実績・数値 ⑤ | `facts.5.claim` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ⑤ の出典 | `facts.5.source` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ⑤ の時点 | `facts.5.as_of` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ⑤ の母数 | `facts.5.denominator` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | ⑤ の集計期間 | `facts.5.period` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-1. 自社の数字（一次情報・最重要） | 現場で見てきたこと | `facts.note` | 非公開の clients/<id>/facts.json → 記事の一次情報（facts.py。割合は母数と期間が無いと登録しない） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | お客さんの一言 ① | `quote.1.text` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | 一言 ① の相手 | `quote.1.who` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | 一言 ① の時期 | `quote.1.when` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | 一言 ① を記事に使う | `quote.1.use` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | お客さんの一言 ② | `quote.2.text` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | 一言 ② の相手 | `quote.2.who` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | 一言 ② の時期 | `quote.2.when` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | 一言 ② を記事に使う | `quote.2.use` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | お客さんの一言 ③ | `quote.3.text` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | 一言 ③ の相手 | `quote.3.who` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | 一言 ③ の時期 | `quote.3.when` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-2. お客さんの一言（実際に聞いた言葉） | 一言 ③ を記事に使う | `quote.3.use` | 非公開の clients/<id>/experiences.json（体験の台帳。記事に使うが「可」だけ）・brief.json の quotes → 執筆の案内（originality が登録した体験として扱う） |
+| 5-3. 過去の事例とお客様の声 | 事例 ①（どんな会社の、何を） | `case.1.summary` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ① の依頼前の困りごと | `case.1.before` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ① でやったこと | `case.1.did` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ① の期間 | `case.1.period` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ① の結果 | `case.1.result` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ① の掲載 | `case.1.publish` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ① のご本人の確認 | `case.1.confirmed` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ②（どんな会社の、何を） | `case.2.summary` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ② の依頼前の困りごと | `case.2.before` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ② でやったこと | `case.2.did` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ② の期間 | `case.2.period` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ② の結果 | `case.2.result` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ② の掲載 | `case.2.publish` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ② のご本人の確認 | `case.2.confirmed` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ③（どんな会社の、何を） | `case.3.summary` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ③ の依頼前の困りごと | `case.3.before` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ③ でやったこと | `case.3.did` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ③ の期間 | `case.3.period` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ③ の結果 | `case.3.result` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ③ の掲載 | `case.3.publish` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ③ のご本人の確認 | `case.3.confirmed` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ④（どんな会社の、何を） | `case.4.summary` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ④ の依頼前の困りごと | `case.4.before` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ④ でやったこと | `case.4.did` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ④ の期間 | `case.4.period` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ④ の結果 | `case.4.result` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ④ の掲載 | `case.4.publish` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | 事例 ④ のご本人の確認 | `case.4.confirmed` | brief.json の cases（掲載が「可」で本人の確認が「済」だけ）→ 執筆の案内・非公開の experiences.json（体験の台帳） |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ① | `voice.1.text` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ① の表示名 | `voice.1.name` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ① の掲載 | `voice.1.publish` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ① の書き手 | `voice.1.by` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ② | `voice.2.text` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ② の表示名 | `voice.2.name` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ② の掲載 | `voice.2.publish` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ② の書き手 | `voice.2.by` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ③ | `voice.3.text` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ③ の表示名 | `voice.3.name` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ③ の掲載 | `voice.3.publish` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ③ の書き手 | `voice.3.by` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ④ | `voice.4.text` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ④ の表示名 | `voice.4.name` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ④ の掲載 | `voice.4.publish` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-3. 過去の事例とお客様の声 | お客様の声 ④ の書き手 | `voice.4.by` | brief.json の voices（掲載が「可」で本人が書いた・確認したものだけ）→ 執筆の案内 |
+| 5-4. 記事の書き手 | 著者名 | `author.name` | brief.json の author → 記事の著者（publish.client_credit の Person）・執筆の案内 |
+| 5-4. 記事の書き手 | 肩書き | `author.title` | brief.json の author → 記事の著者（publish.client_credit の Person）・執筆の案内 |
+| 5-4. 記事の書き手 | 保有資格・経歴 | `author.credential` | brief.json の author → 記事の著者（publish.client_credit の Person）・執筆の案内 |
 | 5-4. 記事の監修者 | 監修者のお名前 | `supervisor.name` | company.json の supervisor → 記事の監修の表示と reviewedBy（publish.py）・brief.json |
 | 5-4. 記事の監修者 | 役職 | `supervisor.title` | company.json の supervisor → 記事の監修の表示と reviewedBy（publish.py）・brief.json |
 | 5-4. 記事の監修者 | 資格 | `supervisor.qualification` | company.json の supervisor → 記事の監修の表示と reviewedBy（publish.py）・brief.json |
