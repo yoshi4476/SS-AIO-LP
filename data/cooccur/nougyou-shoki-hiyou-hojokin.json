@@ -1,24 +1,26 @@
 {
  "keyword": "農業 初期 費用 補助金",
  "sources": [
-  "https://www.maff.go.jp/j/new_farmer/n_syunou/roudou.html",
   "https://www.be-farmer.jp/support/subsidy/",
-  "https://tochi-no.jp/article/detail/615",
-  "https://hojyokin-portal.jp/columns/syuno_jyunbi_shikin"
+  "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEGyDVveCjnoRbPu4XGvvPbUtJ7oD-2DjxkHaPLklw0SksRNCiEalp2hy3_h6vs9vwJD_GwfeqZtGJOS6U-T45_cSlqDmGuStTA3ye8t06LtClb25zGAR1IkYDmu1UZ1zaInPVDURGGclbB",
+  "https://seimitsu-nougyo.com/new-farmer-startup-funding-guide/",
+  "https://note.com/agri_legal/n/n6dc5b92db396",
+  "https://hojokin.loreos.jp/subsidy/H-00008911",
+  "https://www.maff.go.jp/j/new_farmer/n_syunou/attach/pdf/roudou-152.pdf"
  ],
  "missing": [
-  "information",
   "新規就農者育成総合対策",
-  "収支シミュレーション",
-  "アスパラガス農家",
-  "シミュレーション",
+  "農業次世代人材投資資金",
+  "自治体別ガイドライン",
+  "都道府県農業振興公社",
+  "公式ページ掲載本文",
+  "認定新規就農者制度",
+  "就農支援センター",
+  "農地中間管理機構",
+  "新規就農支援制度",
   "新規就農支援施策",
-  "ジャパンフルーツ",
-  "給付金コラム",
-  "自動車整備士",
-  "交付期間延長",
-  "プライベート",
-  "先進農業法人"
+  "募集スケジュール",
+  "サポートチーム"
  ],
- "covered": 0.26
+ "covered": 0.25
 }

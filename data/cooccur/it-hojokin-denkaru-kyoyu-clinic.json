@@ -2,25 +2,25 @@
  "keyword": "電子カルテ情報共有サービス 補助金 クリニック",
  "sources": [
   "https://www.yamanashi-med.or.jp/assets/files/medical/20251021sisutemuhojokin.pdf",
+  "https://digikar.m3.com/articles/how-to-choice-emr/article59",
   "https://www.wiseman.co.jp/column/welfare/31324/",
   "https://www.hokeniryo.metro.tokyo.lg.jp/iryo/jigyo/h_gaiyou/clinic_digital_suishin",
-  "https://medimo.ai/column/emr-mandatory",
-  "https://iryohokenjyoho.service-now.com/csm?id=kb_article_view&sysparm_article=KB0010765",
-  "https://www.phchd.com/jp/medicom/park/idea/management-information-sharing"
+  "https://www.phchd.com/jp/medicom/park/idea/opening-subsidy-introduction",
+  "https://iryohokenjyoho.service-now.com/csm?id=kb_article_view&sysparm_article=KB0010765"
  ],
  "missing": [
-  "クリニック収益構造再設計",
   "電子カルテ導入補助金活用",
-  "連携強化診療情報提供料",
-  "クリニック経営最前線",
-  "categories",
+  "東京都電子カルテ補助金",
+  "診療科別クリニック開業",
   "電子カルテ補助金申請",
-  "レセプト請求ガイド",
-  "年資格更新制度廃止",
+  "categories",
   "サービス担当者会議",
-  "新型コロナウイルス",
+  "エムスリーデジカル",
+  "年資格更新制度廃止",
+  "クリニック開業戦略",
+  "フィジカルロック",
   "文章テンプレート",
-  "フィジカルロック"
+  "物件選定セミナー"
  ],
- "covered": 0.23
+ "covered": 0.25
 }
