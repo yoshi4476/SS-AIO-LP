@@ -32,5 +32,9 @@ def test_social_connect_browser_link_paste():
                          'def facebook(site, page_hint, mode="browser"):' in src, 'def threads(site, mode="browser"):' in src),
           (True, True, True))
     check("印の名前は推測できない長さ", len(SC.new_state()) >= 20 and SC.new_state().startswith("sns_"), True)
+    check("LinkedIn も管制塔を戻り先にし、お客様には --link（localhost はつなぐ道具の控え）",
+          ('def linkedin(site, mode="browser"):' in src, 'linkedin(a.site, "link" if a.link else "browser")' in src,
+           "_linkedin_finish(site, d, app, redirect, wait_code(url, \"LinkedIn\", mode == \"link\"))" in src),
+          (True, True, True))
     check("投稿に要る権限を求める", ("pages_manage_posts" in SC.FB_SCOPES, "instagram_content_publish" in SC.FB_SCOPES,
                                   "threads_content_publish" in SC.TH_SCOPES), (True, True, True))

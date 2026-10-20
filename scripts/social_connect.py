@@ -10,7 +10,7 @@
     python scripts/social_connect.py --site _default --facebook --paste  # 前の方法（グラフ API エクスプローラのトークンを貼る）
     python scripts/social_connect.py --site <社のID> --facebook --page "ページ名の一部"
     python scripts/social_connect.py --site <社のID> --threads
-    python scripts/social_connect.py --site <社のID> --linkedin
+    python scripts/social_connect.py --site <社のID> --linkedin            # --link でお客様に送るリンクを出す
     python scripts/social_connect.py --list                              # つないだ社と期限
     python scripts/social_connect.py --check                             # 期限の近い鍵（週次の findings が呼ぶ）
 
@@ -191,8 +191,10 @@ def threads(site, mode="browser"):
     print(f"  {site}: Threads @{me.get('username')} をつなぎました（期限 {ent['THREADS_EXPIRES']}）")
 
 
-def linkedin(site):
-    """個人として投稿する許可（Share on LinkedIn・審査なし）。ブラウザで許可すると戻ってくる"""
+def linkedin(site, mode="browser"):
+    """個人として投稿する許可（Share on LinkedIn・審査なし）。ブラウザで許可すると戻ってくる。
+    戻り先は管制塔（Facebook・Threads と同じ）。お客様には --link で送るリンクを出す（2026-10-21。localhost では
+    お客様が自分の PC で押せなかった）。管制塔が使えないときだけ、この PC の localhost で受ける"""
     import http.server
     import secrets as _s
     import webbrowser
@@ -201,6 +203,16 @@ def linkedin(site):
     if not app.get("id"):
         app["id"] = ask("LinkedIn のアプリ", "Client ID（Auth タブ）", secret=False)
         app["secret"] = ask("LinkedIn のアプリ", "Client Secret（Auth タブ）")
+    import hub_client as Hc
+    if Hc.enabled():
+        redirect = redirect_uri()
+        url = "https://www.linkedin.com/oauth/v2/authorization?" + urllib.parse.urlencode({
+            "response_type": "code", "client_id": app["id"], "redirect_uri": redirect, "state": new_state(),
+            "scope": "openid profile w_member_social"})
+        _linkedin_finish(site, d, app, redirect, wait_code(url, "LinkedIn", mode == "link"))
+        return
+    if mode == "link":
+        raise SystemExit("HUB_URL が無いため、お客様に送るリンクは作れません")
     redirect, state, got = "http://localhost:8765/callback", _s.token_urlsafe(16), {}
 
     class H(http.server.BaseHTTPRequestHandler):
@@ -223,8 +235,13 @@ def linkedin(site):
     http.server.HTTPServer(("localhost", 8765), H).handle_request()
     if got.get("state") != state or not got.get("code"):
         raise SystemExit(f"許可を受け取れませんでした（{got.get('error_description') or got.get('error') or '不明'}）")
+    _linkedin_finish(site, d, app, redirect, got["code"])
+
+
+def _linkedin_finish(site, d, app, redirect, code):
+    """許可の印を鍵に替え、投稿者の ID と期限を残す"""
     req = urllib.request.Request("https://www.linkedin.com/oauth/v2/accessToken", data=urllib.parse.urlencode({
-        "grant_type": "authorization_code", "code": got["code"], "redirect_uri": redirect,
+        "grant_type": "authorization_code", "code": code, "redirect_uri": redirect,
         "client_id": app["id"], "client_secret": app["secret"]}).encode())
     with urllib.request.urlopen(req, timeout=60) as r:
         tok = json.loads(r.read().decode("utf-8"))
@@ -343,9 +360,11 @@ def main():
         print("Meta のアプリに入れる設定（最初に1回）:")
         print(f"  Facebook ログイン → 有効な OAuth リダイレクト URI: {redirect_uri()}")
         print(f"  Threads API → リダイレクトコールバック URL: {redirect_uri()}")
+        print(f"  LinkedIn → Auth タブの Authorized redirect URLs: {redirect_uri()}")
         print(f"  Facebook・Instagram の権限: {FB_SCOPES}")
         print(f"  Threads の権限: {TH_SCOPES}")
         print("  お客様の分は、お客様を Threads のテスター（アプリの役割）に招待してから --link で送る")
+        print("  LinkedIn の製品: Sign In with LinkedIn using OpenID Connect と Share on LinkedIn（審査なし）")
         return 0
     if not a.site:
         raise SystemExit("--site に社のID（自社3サイト共通は _default）を入れてください")
@@ -355,7 +374,7 @@ def main():
     if a.threads:
         threads(a.site, mode)
     if a.linkedin:
-        linkedin(a.site)
+        linkedin(a.site, "link" if a.link else "browser")
     return 0
 
 
