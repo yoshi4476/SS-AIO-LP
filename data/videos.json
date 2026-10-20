@@ -738,5 +738,36 @@
     "format": "duo",
     "url": "https://ai.7senses.co.jp/research/dental-ai-sources/",
     "youtube": "xG1QVgQrf-E"
+  },
+  "aio-tool-hyouban-kuchikomi": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-20",
+      "keyword": "aio ツール 評判 口コミ",
+      "queries": [
+        "aio ツール 評判 口コミ",
+        "ツール 評判 口コミ",
+        "aio 評判 口コミ",
+        "aio ツール 口コミ",
+        "aio ツール 評判"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "ai 便利ツール",
+        "ai英会話 おすすめ",
+        "ai 便利",
+        "aiアダプター",
+        "ツール",
+        "ai レビュー",
+        "aio"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-10-20",
+      "sec": 47,
+      "title": "AIOツールの口コミ、信じて契約していい？",
+      "youtube": "fldhzY2W0nI"
+    }
   }
 }
