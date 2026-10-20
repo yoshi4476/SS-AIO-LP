@@ -75,9 +75,15 @@ def test_own_survey_order_and_keep_old():
 def test_score_check_extract_and_decide():
     import score_check as SC
     print("\n■ 機械採点: H2直下の1文が単体で通じるか・分かれ道/やらない判断/今日の一歩があるか")
-    bad = "## 選び方\n4つのうち、最初に決めるのは予算です。\n## 理由\n理由は、調べ方が変わったためです。\n"
+    bad = ("**庭木の剪定は、木の高さで頼むか決めます。**\n\n## 選び方\n4つのうち、最初に決めるのは予算です。\n## 理由\n"
+           "理由は、調べ方が変わったためです。\n## よくある質問\n<details><summary>頼む時期は？</summary><p class=\"faq-a\">その場合は秋です。</p></details>\n")
     good = "## 選び方\n庭木の剪定を頼む業者は、見積もりの内訳で選びます。\n"
-    check("悪い例は拾い、良い例は拾わない", (SC.extract_issues(bad), SC.extract_issues(good)), (["選び方", "理由"], []))
+    check("抽出の単位（H2直下の1文・FAQ の答え）の悪い例は拾い、良い例は拾わない",
+          (SC.extract_issues(bad), SC.extract_issues(good)), (["選び方", "理由", "FAQ: 頼む時期は？"], []))
+    check("冒頭の書き出しが前を指していれば拾う", SC.extract_issues("それは秋です。\n\n## a\n庭木は秋に切ります。\n"), ["冒頭"])
+    import quality_loop as Q
+    check("採点の指示: 段の間の点も付ける・抽出性は基準の単位で判断する（運用者の決定 2026-10-21）",
+          ("）の間も付ける" in Q.SCORE_PROMPT, "基準に書いた単位" in Q.SCORE_PROMPT), (True, True))
     yes = ("木が3本以下なら自分で切ってください。高い木の場合は業者に頼むほうが安全です。"
            "毎年切る必要が無い木なら見送ってください。まず木の高さを測ってください。")
     check("分かれ道・やらない判断・今日の一歩がそろえば空", SC.decision_issues(yes), [])

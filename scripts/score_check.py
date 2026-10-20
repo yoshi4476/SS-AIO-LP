@@ -160,12 +160,19 @@ def _core_sections(body):
 
 
 def extract_issues(body):
-    """H2 直下の1文のうち、単体で切り出すと何の話か分からない書き出しの見出し"""
+    """抽出性の単位（冒頭200字・各H2直下の1文・FAQ の答え）のうち、単体で切り出すと何の話か分からない書き出し。
+    採点の基準（rubric の抽出性100点）が名指しする単位を全部見る（2026-10-21。見出し直下だけを見ていた）"""
     out = []
+    lead = next((x.strip() for x in body.splitlines() if x.strip() and not x.lstrip().startswith(("<", "#", "!", "|"))), "")
+    if LONE.match(lead) or POINT.match(lead):
+        out.append("冒頭")
     for h, sec in _core_sections(body):
         first = next((x.strip() for x in sec.splitlines() if x.strip() and not x.lstrip().startswith(("<!--", "!["))), "")
         if LONE.match(re.sub(r"^<[^>]+>", "", first)):
             out.append(h[:30])
+    for q, a_ in re.findall(r"<summary>(.*?)</summary>\s*<p[^>]*>(.*?)</p>", body, re.S):
+        if LONE.match(re.sub(r"<[^>]+>", "", a_).strip()) or POINT.match(re.sub(r"<[^>]+>", "", a_).strip()):
+            out.append("FAQ: " + re.sub(r"<[^>]+>", "", q)[:24])
     return out
 
 
@@ -247,7 +254,7 @@ def run(slug, path=None):
                 bad_lead.append(ln[3:])
     add("全H2直下がリード文（表・リスト直置きなし）", not bad_lead, "、".join(bad_lead[:3]))
     lone = extract_issues(body_nc)
-    add("H2直下の1文が単体で通じる（「これ」「その」「◯つのうち」「起きるのは」で始めない）", not lone,
+    add("抽出の単位（冒頭・H2直下の1文・FAQ の答え）が単体で通じる（「これ」「その」「◯つのうち」「起きるのは」で始めない）", not lone,
         "、".join(lone[:3]))
     miss = decision_issues(body_nc)
     add("決定支援: 条件の分かれ目2つ以上・やらない判断・今日できる一歩がある", not miss, "、".join(miss))

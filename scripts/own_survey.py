@@ -105,12 +105,17 @@ def ask(site, kw):
     try:
         for name, fn in engines(site).items():
             try:
-                urls = fn(q) or []
-            except Exception:  # noqa: BLE001  1つの AI が落ちても他で数える
+                urls = fn(q)
+            except Exception as e:  # noqa: BLE001  1つの AI が落ちても他で数える
+                print(f"OWN_SURVEY_ENGINE={name} 失敗: {type(e).__name__}: {str(e)[:120]}", file=sys.stderr)
                 continue
             text = AC.answer_text(fn, q)
+            if urls is None:
+                print(f"OWN_SURVEY_ENGINE={name} 使えません（道具が無いか、ログインしていません）", file=sys.stderr)
+            elif not text:
+                print(f"OWN_SURVEY_ENGINE={name} 答えの本文がありません", file=sys.stderr)
             if text:
-                out[name] = {"text": text, "domains": sorted({AC.domain_of(u) for u in urls if AC.domain_of(u)})}
+                out[name] = {"text": text, "domains": sorted({AC.domain_of(u) for u in urls or [] if AC.domain_of(u)})}
     finally:
         AC.NEED_TEXT = keep
     return q, out
@@ -240,6 +245,9 @@ def targets(sites=()):
 
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if "--engines" in sys.argv:
+        print("OWN_SURVEY_ENGINES=" + ",".join(engines("")))
+        return 0
     import quality_loop as Q
     if "--rescore" in sys.argv:
         # 週次の公開済みの記事の採点し直し（quality_loop --rescore N と同じ選び方）

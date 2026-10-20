@@ -55,11 +55,13 @@ runs:
           printf '%s' "$CODEX_AUTH_JSON" > ~/.codex/auth.json
           chmod 600 ~/.codex/auth.json
           before=$(sha256sum ~/.codex/auth.json | cut -c1-64)
+          codex login status 2>&1 | head -1 || echo "codex が動きません"
         else
           echo "::warning::CODEX_AUTH_JSON 未登録（当社調べは ChatGPT に聞かずに進む）"
         fi
         unset CODEX_AUTH_JSON
         # shellcheck disable=SC2086
+        python scripts/own_survey.py --engines || true
         python scripts/own_survey.py $ARGS $SITES 2>&1 | grep -E '^OWN_SURVEY' || true
 
     # AI を動かさない手順で書き戻し、写しを消す（この後に続く AI の手順にログイン情報を残さない）

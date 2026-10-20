@@ -971,7 +971,8 @@ WHAT = {
                      "  お客様の声は書かない（作った事実で点を上げない）。材料が足りなければ、当社の判断とその理由・失敗しやすい点・\n"
                      "  確かめ方を具体的に書く\n"
                      "- 決定支援に要る仮の計算例（「仮に時給2,000円の担当者が月10時間かけるなら」）と判断の目安（「3つ以上当てはまるなら」）は\n"
-                     "  書いてよい。仮の数字は「仮に」「例えば」で始まる文に書き、実際の数字と取り違えない書き方にする。当社の実績・\n"
+                     "  書いてよい。仮の数字は「仮に」「例えば」で始まる文に書き、実際の数字と取り違えない書き方にする。\n"
+                     "  仮の計算例でも金額（◯円）は書かず、時間・件数・割合で示す（料金と食い違って読まれる）。当社の実績・\n"
                      "  統計・相場として書く数字は、記事にすでにあるものと下の一次情報のものを使う\n"
                      "- 一次情報の文が長いとき（1文が100字を超える）は、数字・出典・時点を変えずに2〜3文に分けて入れ、1段落は150字以内に\n"
                      "  収める。1文を丸ごと貼ると「長文」「段落が200字以内」の警告が増えて機械が戻す（2026-10-20 の実地の試し）\n"
@@ -1249,12 +1250,17 @@ def warns(slug):
     return [l for l in (r.stdout or "").splitlines() if l.startswith(("WARN", "FAIL"))]
 
 
+# 採点（3観点）で見る観点の機械の検査。書く段階では止めるが、直しの検算では増えても直し全体を捨てない
+# （採点し直しと、次の直しの指示の名指しで扱う。2026-10-21 CI で「どちら」1つで直しが丸ごと捨てられた）
+SOFT_FAILS = ("前の文を読まないと分からない文が無い", "仮の計算例がある", "決定支援:", "抽出の単位", "H2直下の1文が単体で通じる")
+
+
 def worse_warns(before, now):
     """書き直しで悪くなった警告の説明（空なら悪化なし）。WARN は件数で、FAIL は項目の名前で比べる
     （WARN が FAIL に変わっても件数は同じなので、名前で見ないと素通りする）。既にある FAIL は止めない"""
     name = lambda l: (l.split(" | ") + [""])[1].strip()
     fail0 = {name(l) for l in before if l.startswith("FAIL")}
-    fails = [l for l in now if l.startswith("FAIL") and name(l) not in fail0]
+    fails = [l for l in now if l.startswith("FAIL") and name(l) not in fail0 and not name(l).startswith(SOFT_FAILS)]
     if fails:
         return "警告が増えました（FAIL）: " + " / ".join(fails)[:400]
     w0 = [l for l in before if l.startswith("WARN")]
@@ -1691,7 +1697,10 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=(), blocked_o
     b = before[2]
     # 公開前の品質ループの直しは数字の検算をしない（2026-10-20 運用者「事実でない数字を防ぐ検算なしにして」。
     # 決定支援の90点に要る仮の計算例・判断の目安の数字まで戻していた）。ほかの種類の直しは今までどおり見る
-    new_nums = new_fact_numbers(b, after, allowed) if numbers else {}
+    new_nums = new_fact_numbers(b, after, allowed) if numbers else {
+        # 数字の検算を外した直しでも、金額だけは見る。仮の計算例に書いた月の金額が、AI集客ラボの料金の決まり
+        # （外部委託の月額を数十万円より下に書かない）に当たった（2026-10-21 CI）
+        k: v for k, v in new_fact_numbers(b, after, allowed).items() if re.search(r"円", k)}
     if new_nums:
         return f"本文に無かった数字が増えました: {dict(list(new_nums.items())[:4])}"
     lost = sources(b) - sources(after)
