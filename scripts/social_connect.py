@@ -5,7 +5,9 @@
 自社の3サイトは共通のアカウント（_default）、クライアントはその社のアカウントにだけ投稿する
 （その社の鍵が無ければ投稿しない。post_social.pick）。
 
-    python scripts/social_connect.py --site _default --facebook          # Facebook ページと Instagram
+    python scripts/social_connect.py --site _default --facebook          # ブラウザで許可を押すだけ（Facebook ページと Instagram）
+    python scripts/social_connect.py --site <社のID> --facebook --link    # お客様に送るリンクを出し、押されるのを待つ
+    python scripts/social_connect.py --site _default --facebook --paste  # 前の方法（グラフ API エクスプローラのトークンを貼る）
     python scripts/social_connect.py --site <社のID> --facebook --page "ページ名の一部"
     python scripts/social_connect.py --site <社のID> --threads
     python scripts/social_connect.py --site <社のID> --linkedin
@@ -64,6 +66,46 @@ def get(url):
         return json.loads(r.read().decode("utf-8"))
 
 
+FB_SCOPES = "pages_show_list,pages_manage_posts,pages_read_engagement,instagram_basic,instagram_content_publish,business_management"
+TH_SCOPES = "threads_basic,threads_content_publish"
+
+
+def redirect_uri():
+    """許可の後の戻り先。管制塔（Apps Script）が許可の印を15分だけ預かる（hub.gs の SNS_STATE・sns_code）。
+    お客様は別の PC で許可を押すので、localhost ではなくインターネットから届く場所にする（2026-10-21）"""
+    import hub_client as H
+    if not H.enabled():
+        raise SystemExit("HUB_URL が無いため、ブラウザの許可は使えません（--paste で前の方法を使ってください）")
+    return H.HUB_URL
+
+
+def wait_code(url, label, link):
+    """許可の画面を開き（--link のときはリンクを出し）、管制塔に届いた印を取りに行く"""
+    import time
+    import webbrowser
+    import hub_client as H
+    if link:
+        print(f"  このリンクをお客様に送り、{label} の許可を押してもらってください（30分待ちます）:\n  {url}")
+    else:
+        print(f"  ブラウザで {label} の許可を押してください")
+        webbrowser.open(url)
+    state = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)["state"][0]
+    end = time.time() + (1800 if link else 600)
+    while time.time() < end:
+        r = H._post({"action": "sns_code", "state": state})
+        if r.get("code"):
+            return r["code"]
+        if not r.get("ok"):
+            raise SystemExit(f"{label} の許可を受け取れませんでした（{r.get('error')}）")
+        time.sleep(5)
+    raise SystemExit(f"時間内に {label} の許可がありませんでした。もう一度実行してください")
+
+
+def new_state():
+    import secrets as _s
+    return "sns_" + _s.token_urlsafe(18)
+
+
 def meta_app(d):
     """Meta のアプリ ID とシークレット。一度入れたら控えを使う"""
     app = d.setdefault("_meta_app", {})
@@ -73,10 +115,19 @@ def meta_app(d):
     return app
 
 
-def facebook(site, page_hint):
+def facebook(site, page_hint, mode="browser"):
     d = load()
     app = meta_app(d)
-    short = ask("Facebook", "グラフ API エクスプローラで作ったユーザーのトークン")
+    if mode == "paste":
+        short = ask("Facebook", "グラフ API エクスプローラで作ったユーザーのトークン")
+    else:
+        rd = redirect_uri()
+        url = "https://www.facebook.com/v21.0/dialog/oauth?" + urllib.parse.urlencode({
+            "client_id": app.get("id", ""), "redirect_uri": rd, "state": new_state(),
+            "scope": FB_SCOPES, "response_type": "code"})
+        code = wait_code(url, "Facebook", mode == "link")
+        short = get(f"{GRAPH}/oauth/access_token?" + urllib.parse.urlencode({
+            "client_id": app["id"], "client_secret": app["secret"], "redirect_uri": rd, "code": code}))["access_token"]
     if not (app.get("id") and app.get("secret") and short):
         raise SystemExit("入力が空のため中止しました")
     # 短期（1〜2時間）→ 長期（60日）のユーザートークン。そこから取ったページのトークンは期限が無い
@@ -105,13 +156,28 @@ def facebook(site, page_hint):
     print(f"  {site}: Facebook「{p['name']}」" + (f"と Instagram @{ig.get('username')}" if ig else "") + " をつなぎました")
 
 
-def threads(site):
+def threads(site, mode="browser"):
     d = load()
-    # Threads は Meta アプリ本体とは別の「Threads アプリシークレット」で交換する（本体のものでは通らない）
+    # Threads は Meta アプリ本体とは別の「Threads アプリ ID・シークレット」で交換する（本体のものでは通らない）
     app = d.setdefault("_threads_app", {})
     if not app.get("secret"):
         app["secret"] = ask("Threads のアプリ", "Threads アプリシークレット（ユースケース → Threads API → 設定）")
-    short = ask("Threads", "Threads のユーザートークン（アプリの「Threads API の利用」→ トークン生成）")
+    if mode == "paste":
+        short = ask("Threads", "Threads のユーザートークン（アプリの「Threads API の利用」→ トークン生成）")
+    else:
+        if not app.get("id"):
+            app["id"] = ask("Threads のアプリ", "Threads アプリ ID（ユースケース → Threads API → 設定）", secret=False)
+            save(d)
+        rd = redirect_uri()
+        url = "https://threads.net/oauth/authorize?" + urllib.parse.urlencode({
+            "client_id": app["id"], "redirect_uri": rd, "scope": TH_SCOPES, "response_type": "code",
+            "state": new_state()})
+        code = wait_code(url, "Threads", mode == "link")
+        req = urllib.request.Request("https://graph.threads.net/oauth/access_token", data=urllib.parse.urlencode({
+            "client_id": app["id"], "client_secret": app["secret"], "grant_type": "authorization_code",
+            "redirect_uri": rd, "code": code.split("#")[0]}).encode())
+        with urllib.request.urlopen(req, timeout=60) as r:
+            short = json.loads(r.read().decode("utf-8"))["access_token"]
     if not short:
         raise SystemExit("入力が空のため中止しました")
     tok = get("https://graph.threads.net/access_token?" + urllib.parse.urlencode({
@@ -260,6 +326,9 @@ def main():
     ap.add_argument("--threads", action="store_true")
     ap.add_argument("--linkedin", action="store_true")
     ap.add_argument("--page", default="", help="Facebook ページ名の一部（複数ページを管理しているとき）")
+    ap.add_argument("--link", action="store_true", help="お客様に送る許可のリンクを出し、押されるのを待つ")
+    ap.add_argument("--paste", action="store_true", help="前の方法（トークンを貼る）")
+    ap.add_argument("--setup", action="store_true", help="Meta のアプリに入れる戻り先の URL と権限を出す")
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--refresh", action="store_true", help="Threads の鍵を切れる前に更新する（週次）")
@@ -270,12 +339,21 @@ def main():
         return listing()
     if a.check:
         return check()
+    if a.setup:
+        print("Meta のアプリに入れる設定（最初に1回）:")
+        print(f"  Facebook ログイン → 有効な OAuth リダイレクト URI: {redirect_uri()}")
+        print(f"  Threads API → リダイレクトコールバック URL: {redirect_uri()}")
+        print(f"  Facebook・Instagram の権限: {FB_SCOPES}")
+        print(f"  Threads の権限: {TH_SCOPES}")
+        print("  お客様の分は、お客様を Threads のテスター（アプリの役割）に招待してから --link で送る")
+        return 0
     if not a.site:
         raise SystemExit("--site に社のID（自社3サイト共通は _default）を入れてください")
+    mode = "paste" if a.paste else "link" if a.link else "browser"
     if a.facebook:
-        facebook(a.site, a.page)
+        facebook(a.site, a.page, mode)
     if a.threads:
-        threads(a.site)
+        threads(a.site, mode)
     if a.linkedin:
         linkedin(a.site)
     return 0

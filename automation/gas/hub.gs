@@ -325,8 +325,28 @@ function agentWrite_(pass, b) {
   return agentScrub_(pass, out);
 }
 
+const SNS_STATE = /^sns_[A-Za-z0-9_-]{16,64}$/;
+
+/** 預かった SNS の許可の印を1回だけ渡す（渡したら消す）。まだ届いていなければ pending */
+function snsCode_(state) {
+  if (!SNS_STATE.test(String(state || ''))) return { ok: false, error: 'state' };
+  const c = CacheService.getScriptCache();
+  const v = c.get(String(state));
+  if (!v) return { ok: true, pending: true };
+  c.remove(String(state));
+  return v.indexOf('code:') === 0 ? { ok: true, code: v.slice(5) } : { ok: false, error: v.slice(6) };
+}
+
 function doGet(e) {
   const p = (e && e.parameter) || {};
+  // SNS の許可の戻り先（scripts/social_connect.py。2026-10-21）。許可の印（code）を15分だけ預かり、当社の道具が
+  // 合言葉つきの sns_code で取りに来る。印だけでは鍵にならない（当社のアプリの秘密の値が無いと交換できない）
+  if (p.state && SNS_STATE.test(String(p.state)) && (p.code || p.error)) {
+    CacheService.getScriptCache().put(String(p.state),
+      p.code ? 'code:' + String(p.code) : 'error:' + String(p.error_description || p.error), 900);
+    return HtmlService.createHtmlOutput('<meta charset="utf-8"><p style="font-family:sans-serif;font-size:18px;padding:24px">'
+      + (p.code ? '接続の許可を受け取りました。この画面を閉じてください。' : '接続を取りやめました。この画面を閉じてください。') + '</p>');
+  }
   if (Object.prototype.hasOwnProperty.call(KW_READS, String(p.action || '')) && (!SHARED_SECRET || p.secret !== SHARED_SECRET)) {
     const pass = agentOk_(p.secret, p.action, true);
     if (!pass) return json_({ ok: false, error: 'unauthorized' });
@@ -383,6 +403,8 @@ function doPost(e) {
       // 執筆中のまま記事が残らなかったKWを、未着手へ戻す。
       // ゲートの不具合で実行が途中で落ちると、KWだけが執筆中で取り残される
       case 'unclaim_kw':  return json_(unclaimKw_(body.site, body.keywords));
+      // SNS の許可の印を取りに来る（social_connect.py。全権の合言葉の道具だけが通る）
+      case 'sns_code':    return json_(snsCode_(body.state));
       case 'publish_log': return json_(publishLog_(body));
       // 公開済みなのに執筆中のまま止まった語を「公開済み」にする（記事作成ログには足さない。kw_published_sync.py）
       case 'kw_published': return json_(kwPublished_(body));
