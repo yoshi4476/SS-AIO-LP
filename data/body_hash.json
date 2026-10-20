@@ -328,8 +328,12 @@
 "modified": "2026-10-09"
 },
 "fudousan-hankyou-konai": {
-"hash": "651080445a1eb444532014ffc5fa4ff9",
+"hash": "7b9773e60460add40bf8f7d4611ad49a",
 "modified": "2026-08-27"
+},
+"fudousan-kaisha-shukyaku-houhou": {
+"hash": "a1cf91904391de29d4548cddf213cf3d",
+"modified": "2026-10-20"
 },
 "fudousan-kojin-shukyaku": {
 "hash": "2fb00ebc9051c4872bee2e4049f8b0cf",
@@ -364,7 +368,7 @@
 "modified": "2026-08-30"
 },
 "fudousan-shukyaku-houhou": {
-"hash": "a1c84b1f03085480e9cbeaca406e318f",
+"hash": "f2fa4be5b666e44eaa38dc7adeef3213",
 "modified": "2026-09-12"
 },
 "gaiheki-tosou-ai-kensaku-shukyaku": {
