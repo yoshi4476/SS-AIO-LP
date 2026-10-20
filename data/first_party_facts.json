@@ -401,6 +401,37 @@
       "denominator": 1000,
       "period": "2023-10〜2026-08",
       "verifiable": true
+    },
+    {
+      "id": "ailab-fudousan-shien",
+      "sites": [
+        "ai-lab"
+      ],
+      "topic": [
+        "不動産",
+        "集客",
+        "不動産会社"
+      ],
+      "claim": "AI集客ラボは2026年10月までに、不動産会社4社の集客を支援しました",
+      "source": "自社の支援実績",
+      "as_of": "2026-10",
+      "verifiable": true
+    },
+    {
+      "id": "corp-kensetsu-keiri",
+      "sites": [
+        "corporate"
+      ],
+      "topic": [
+        "建設業",
+        "経理代行",
+        "仕訳",
+        "記帳代行"
+      ],
+      "claim": "セブンセンシズは2026年10月までに、建設業の会社3社の経理代行を担当しました",
+      "source": "自社の支援実績",
+      "as_of": "2026-10",
+      "verifiable": true
     }
   ],
   "pending": [
