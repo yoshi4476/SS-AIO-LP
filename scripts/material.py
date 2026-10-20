@@ -88,32 +88,33 @@ def hits(kw, mats, pool=()):
     return sum(1 for m in mats if any(t in m.lower() for t in distinct))
 
 
-def _load_requests(site):
+def _load_requests(site, path=None):
     import private_store as P
     if P.is_client(site):
         return P.read_json(site, REQUESTS, {}) or {}
     try:
-        return json.loads(OWN_REQUESTS.read_text(encoding="utf-8")).get(site, {})
+        return json.loads((path or OWN_REQUESTS).read_text(encoding="utf-8")).get(site, {})
     except (OSError, ValueError):
         return {}
 
 
-def _save_requests(site, data):
+def _save_requests(site, data, path=None):
     import private_store as P
     if P.is_client(site):
         P.write_json(site, REQUESTS, data)
         return
+    path = path or OWN_REQUESTS
     try:
-        allr = json.loads(OWN_REQUESTS.read_text(encoding="utf-8"))
+        allr = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         allr = {}
     allr[site] = data
-    OWN_REQUESTS.write_text(json.dumps(allr, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    path.write_text(json.dumps(allr, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
-def ask(site, slug, kw, weak=()):
+def ask(site, slug, kw, weak=(), path=None):
     """材料の依頼を残す（記事ごとに1件。同じ記事は書き直す）。お客様の社は非公開の置き場にだけ書く"""
-    data = _load_requests(site)
+    data = _load_requests(site, path)
     data[slug] = {
         "keyword": kw,
         "since": (data.get(slug) or {}).get("since") or date.today().isoformat(),
@@ -124,14 +125,14 @@ def ask(site, slug, kw, weak=()):
         ],
         "scorer": [str(w) for w in (weak or [])][:4],
     }
-    _save_requests(site, data)
+    _save_requests(site, data, path)
 
 
-def resolve(site, slug):
+def resolve(site, slug, path=None):
     """材料が届いて記事が通ったら、依頼を消す"""
-    data = _load_requests(site)
+    data = _load_requests(site, path)
     if data.pop(slug, None) is not None:
-        _save_requests(site, data)
+        _save_requests(site, data, path)
 
 
 def main():

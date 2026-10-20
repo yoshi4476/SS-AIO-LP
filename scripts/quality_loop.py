@@ -629,7 +629,8 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
                 "rounds": prior + done, "since": since})
         try:
             import material
-            material.resolve(site, slug)
+            # 依頼は台帳と同じフォルダに置く（門が台帳を一時フォルダへ差し替えたとき、本物の依頼に架空の記事を書かない）
+            material.resolve(site, slug, path=LOG.parent / material.REQUESTS)
         except Exception:  # noqa: BLE001  依頼が消せなくても合格は止めない
             pass
         return "passed"
@@ -640,7 +641,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         try:
             import material
             material.ask(site, slug, str(meta_of(read(slug)).get("keyword") or ""),
-                         (sc.get("weak") or {}).get("originality") or [])
+                         (sc.get("weak") or {}).get("originality") or [], path=LOG.parent / material.REQUESTS)
             need, asked = "materials", material.fingerprint(site)
         except Exception as e:  # noqa: BLE001
             print(f"  （材料の依頼を残せませんでした: {type(e).__name__}）")

@@ -108,7 +108,9 @@ def test_material_first_and_wait_for_materials():
     check("お客様の社は材料のある題を先に・自社は変えない",
           ((hit or {}).get("keyword"), (hit or {}).get("picked_by"), own), ("芝生 張替え 料金", "材料のある題", None))
     src = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
-    check("止めるときに依頼を残し、通ったら消す", ("material.ask(" in src, "material.resolve(site, slug)" in src), (True, True))
+    check("止めるときに依頼を残し、通ったら消す", ("material.ask(" in src, "material.resolve(site, slug" in src), (True, True))
+    check("依頼は台帳と同じフォルダに書く（門の一時フォルダの架空の記事を本物の依頼に書かない。2026-10-20 zz-pub が混ざった）",
+          src.count("path=LOG.parent / material.REQUESTS"), 2)
 
 
 def test_redeliver_only_changed_articles():
