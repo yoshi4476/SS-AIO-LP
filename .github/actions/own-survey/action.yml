@@ -1,0 +1,73 @@
+name: 当社調べ（記事の狙う語を契約の枠の AI に聞いて数える）
+description: >-
+  公開前の採点の前に、直している記事・書いた記事の狙う語を Claude（Claude Code）・ChatGPT（Codex）・Gemini に聞き、
+  答えに出た語・出なかった語と出典の種類を数えて、直しの材料（母数と時期のある自社の実測）にする（scripts/own_survey.py）。
+  ChatGPT は契約の Codex で聞き、従量課金の API（OpenAI・Perplexity）は使わない（2026-10-20 運用者）。
+  記事の枠ではこの後に記事を書く AI の手順が続くので、Codex のログイン情報はこの部品の中だけに置いて必ず消す。
+  Codex がログイン情報を更新したら、AI を動かさない手順で Secrets に書き戻す（書き戻さないと業種調査の Codex も止まる）。
+
+inputs:
+  sites:
+    description: 対象の社（社の id。空なら全社の直している記事と新しい記事）
+    default: ""
+  claude_token:
+    description: CLAUDE_CODE_OAUTH_TOKEN
+    required: true
+  codex_auth:
+    description: CODEX_AUTH_JSON（手元の ~/.codex/auth.json）
+    default: ""
+  gemini_key:
+    description: GEMINI_API_KEY（無料の枠の内でだけ使う）
+    default: ""
+  gh_token:
+    description: GH_SECRET_TOKEN（更新されたログイン情報を Secrets に戻すときだけ使う）
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        CLAUDE_CODE_OAUTH_TOKEN: ${{ inputs.claude_token }}
+        CODEX_AUTH_JSON: ${{ inputs.codex_auth }}
+        GEMINI_API_KEY: ${{ inputs.gemini_key }}
+        SITES: ${{ inputs.sites }}
+      run: |
+        rm -f "$RUNNER_TEMP/codex_auth_new"
+        before=""
+        # 途中で落ちても、ログイン情報を残さない（更新されていれば書き戻し用の写しだけ残して消す）
+        cleanup() {
+          if [ -f ~/.codex/auth.json ]; then
+            if [ -n "$before" ] && [ "$(sha256sum ~/.codex/auth.json | cut -c1-64)" != "$before" ]; then
+              cp ~/.codex/auth.json "$RUNNER_TEMP/codex_auth_new" && chmod 600 "$RUNNER_TEMP/codex_auth_new"
+            fi
+            rm -f ~/.codex/auth.json
+          fi
+        }
+        trap cleanup EXIT
+        if [ -n "$CODEX_AUTH_JSON" ]; then
+          command -v codex >/dev/null 2>&1 || npm i -g @openai/codex >/dev/null 2>&1 || true
+          mkdir -p ~/.codex
+          printf '%s' "$CODEX_AUTH_JSON" > ~/.codex/auth.json
+          chmod 600 ~/.codex/auth.json
+          before=$(sha256sum ~/.codex/auth.json | cut -c1-64)
+        else
+          echo "::warning::CODEX_AUTH_JSON 未登録（当社調べは ChatGPT に聞かずに進む）"
+        fi
+        unset CODEX_AUTH_JSON
+        # shellcheck disable=SC2086
+        python scripts/own_survey.py --targets $SITES 2>&1 | grep -E '^OWN_SURVEY' || true
+
+    # AI を動かさない手順で書き戻し、写しを消す（この後に続く AI の手順にログイン情報を残さない）
+    - shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.gh_token }}
+      run: |
+        [ -f "$RUNNER_TEMP/codex_auth_new" ] || exit 0
+        if [ -n "$GH_TOKEN" ]; then
+          gh secret set CODEX_AUTH_JSON --repo "$GITHUB_REPOSITORY" < "$RUNNER_TEMP/codex_auth_new" \
+            && echo "Codex のログイン情報を更新しました" || echo "::warning::Codex のログイン情報を Secrets に戻せませんでした"
+        else
+          echo "::warning::GH_SECRET_TOKEN が無く、更新された Codex のログイン情報を戻せません"
+        fi
+        rm -f "$RUNNER_TEMP/codex_auth_new"

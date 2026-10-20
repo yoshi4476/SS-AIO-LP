@@ -118,6 +118,50 @@ def _has(tok, body):
     return tok in body or tok.replace("%", "％") in body
 
 
+# 抽出性: AI 検索は段落の単位で切り出す。前を読まないと何の話か分からない書き出しは引用されない（別工程の採点の
+# 指摘「『4つのうち、最初に…』は前の表を見ないと4つが何か分からない」2026-10-20）
+LONE = re.compile(r"^(?:\*\*)?(?:これ|それ|あれ|この|その|あの|こう|そう|こちら|そちら|ここ|そこ|上記|前述|後述|同様に|"
+                  r"[0-9０-９一二三四五六七八九十]+つ(?:のうち|とも|目)|起きるのは|理由は|答えは|結論は|ポイントは)")
+# 決定支援: 「◯◯なら A」の分かれ目・やらない判断・今日の一歩（採点の基準 rubric の 80〜100点の条件）
+BRANCH = re.compile(r"(?:なら|場合は|ときは|会社は|方は)[、]?[^。\n]{0,40}?"
+                    r"(?:向いて|選んで|選ぶ|選びます|任せ|依頼|頼|始め|優先|使って|使います|検討して|外注|内製|整えて|進めて|"
+                    r"ください|しましょう|ほうが|方が|がよい|が早い|が先)")
+SKIP = re.compile(r"(?:向かない|向いていない|向きません|見送|見合わせ|やめ(?:た|る)(?:方|ほう)|不要です|必要ありません|"
+                  r"しなくてよい|任せない|頼まない|やらない|待った(?:方|ほう)|急がな|まだ早い|後回し|避けて|しない(?:方|ほう)が)")
+STEP = re.compile(r"(?:今日|まず|最初に|手始めに|今週)[^。\n]{0,40}?(?:してください|しましょう|ください|確かめ|決め|書き出|用意|"
+                  r"集め|開いて|見直)")
+
+
+def _core_sections(body):
+    """FAQ・まとめを除く H2 の節（見出し, 本文）"""
+    parts = re.split(r"^## (.+)$", body, flags=re.M)
+    return [(parts[i].strip(), parts[i + 1]) for i in range(1, len(parts) - 1, 2)
+            if not re.search(r"よくある質問|FAQ", parts[i]) and not parts[i].startswith("まとめ")]
+
+
+def extract_issues(body):
+    """H2 直下の1文のうち、単体で切り出すと何の話か分からない書き出しの見出し"""
+    out = []
+    for h, sec in _core_sections(body):
+        first = next((x.strip() for x in sec.splitlines() if x.strip() and not x.lstrip().startswith(("<!--", "!["))), "")
+        if LONE.match(re.sub(r"^<[^>]+>", "", first)):
+            out.append(h[:30])
+    return out
+
+
+def decision_issues(body):
+    """決定支援で足りないもの（空なら足りている）"""
+    text = re.sub(r"<[^>]+>", "", body)
+    out = []
+    if len(BRANCH.findall(text)) < 2:
+        out.append("「◯◯なら A」の条件の分かれ目が2つ未満")
+    if not SKIP.search(text):
+        out.append("やらない判断（向かない・見送る条件）が無い")
+    if not STEP.search(text):
+        out.append("今日できる一歩（まず◯◯してください）が無い")
+    return out
+
+
 def run(slug, path=None):
     """1本を採点して checks を返す。CLI からも、全体の集計からも使う。path は原稿の場所（既定は articles/<slug>.md）"""
     p = Path(path) if path else ROOT / "articles" / f"{slug}.md"
@@ -182,6 +226,11 @@ def run(slug, path=None):
             if nxt.startswith(("| ", "|-", "- ", "* ", "<figure", "<div", "```", "#", "1. ")):
                 bad_lead.append(ln[3:])
     add("全H2直下がリード文（表・リスト直置きなし）", not bad_lead, "、".join(bad_lead[:3]))
+    lone = extract_issues(body_nc)
+    add("H2直下の1文が単体で通じる（「これ」「その」「◯つのうち」「起きるのは」で始めない）", not lone,
+        "、".join(lone[:3]))
+    miss = decision_issues(body_nc)
+    add("決定支援: 条件の分かれ目2つ以上・やらない判断・今日できる一歩がある", not miss, "、".join(miss))
 
     # --- タイトル ---
     # 飾りの年号（【2026年最新】【2026年】）は自社GSCの実測でクリック率が負けた型（title_patterns）。

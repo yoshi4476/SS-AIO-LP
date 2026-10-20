@@ -240,6 +240,21 @@ jobs:
           AGENT_WORK_KIND=rescue bash scripts/agent_passes.sh automation/retry_prompt.txt 300 \
             || echo "::warning::救済の claude 工程が失敗（書けた分の配信とコミットは続けます）"
 
+      # 当社調べ（own_survey）: 記事の狙う語を複数の AI に聞き、答えに出た語・出なかった語と出典の種類を数えて、
+      # 直しの材料（母数と時期のある自社の実測）にする（2026-10-20 運用者「情報がなくても90以上になるように」）。
+      # 採点の工程は鍵を外して動くので、ここ（鍵のある機械の手順）で先に測る。同じ月に測った記事は聞き直さない。
+      # 聞くのは Claude（Claude Code）・ChatGPT（契約の Codex）・Gemini（無料の枠の内）。従量課金の API は使わない。ログには件数だけ
+      - name: 当社調べ（直している記事・救済で書いた記事・鍵のある機械の手順）
+        if: always() && (steps.mode.outputs.mode == 'main' || steps.audit.outputs.need == 'yes')
+        timeout-minutes: 15
+        uses: ./.github/actions/own-survey
+        with:
+          sites: ""
+          claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
+          gemini_key: ${{ secrets.GEMINI_API_KEY }}
+          gh_token: ${{ secrets.GH_SECRET_TOKEN }}
+
       # 公開前の品質ループ（2026-10-20 運用者の決定）。直している途中の記事を先に、次にこの回に書いた・直した点数の無い記事を、
       # 書いた AI とは別の工程が3観点で採点し、基準に届くまで直す（1回の実行で2回まで。届かなければ improving のまま公開しない）。
       # 範囲（自社の社・お客様の社ごと）を絞って回す（A社の回の AI にB社の原稿を見せない。agent_passes.sh と同じ）

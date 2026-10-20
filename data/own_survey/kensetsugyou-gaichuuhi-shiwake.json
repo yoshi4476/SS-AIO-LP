@@ -1,0 +1,116 @@
+{
+ "slug": "kensetsugyou-gaichuuhi-shiwake",
+ "ok": true,
+ "date": "2026-10-21",
+ "question": "建設業 外注費 仕訳について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "建設業の外注費は、どの勘定科目で仕訳する？",
+   "words": [
+    "勘定科目"
+   ],
+   "engines": [
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "月末に終わっていない工事の外注費は、どう仕訳する？",
+   "words": [
+    "月末",
+    "工事"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "免税の一人親方に払う分は、2026年10月から7割控除に",
+   "words": [
+    "一人親方",
+    "免税"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "一人親方への支払いは、外注費か給与か？",
+   "words": [
+    "一人親方",
+    "給与"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "月末の振替を自社で続けるか、外に任せるか？",
+   "words": [
+    "月末",
+    "振替"
+   ],
+   "engines": [
+    "Gemini"
+   ]
+  }
+ ],
+ "sources": {
+  "biz.moneyforward.com": "peer",
+  "dxnavi.jp": "peer",
+  "keiriplus.jp": "peer",
+  "kendweb.net": "peer",
+  "kuraemon.com": "peer",
+  "note.com": "video",
+  "nta.go.jp": "public",
+  "pca.jp": "peer",
+  "pluscad.jp": "peer",
+  "procan.co.jp": "peer",
+  "rakuoh.jp": "peer",
+  "rstandard.co.jp": "peer",
+  "store.skattsei.co.jp": "peer",
+  "tax-startup.jp": "peer",
+  "tsukunobi.com": "peer",
+  "uconnect.jp": "peer",
+  "y-itax.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": [
+   "ChatGPT",
+   "Gemini"
+  ],
+  "期間（◯か月・◯日など）": [
+   "Claude"
+  ],
+  "注意点・失敗・リスク": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [],
+  "専門家への相談": [
+   "Gemini"
+  ]
+ },
+ "chars": {
+  "ChatGPT": 1661,
+  "Claude": 2176,
+  "Gemini": 2422
+ },
+ "claims": [
+  "当社が2026年10月に3つのAI（ChatGPT・Claude・Gemini）へ「建設業 外注費 仕訳について教えてください」と聞いたところ、3つすべての答えに『月末』『一人親方』の語が出てきました",
+  "当社が2026年10月に3つのAI（ChatGPT・Claude・Gemini）へ「建設業 外注費 仕訳について教えてください」と聞いたところ、『勘定科目』の語が答えに出てきたのは3つ中1つでした",
+  "当社が2026年10月に3つのAI（ChatGPT・Claude・Gemini）へ「建設業 外注費 仕訳について教えてください」と聞いたところ、進め方の手順に触れたAIはありません、期間（◯か月・◯日など）に触れたのは3つ中1つ、専門家への相談に触れたのは3つ中1つでした",
+  "当社が2026年10月に3つのAI（ChatGPT・Claude・Gemini）へ「建設業 外注費 仕訳について教えてください」と聞いたところ、出典に挙がったページは17件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが0件、動画・SNS・ブログが2件でした"
+ ]
+}

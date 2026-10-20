@@ -1,0 +1,74 @@
+{
+ "slug": "aio-gaichuu",
+ "ok": true,
+ "date": "2026-10-20",
+ "question": "aio 外注について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "AIO外注とは？外部に渡せるものと渡せないもの",
+   "words": [
+    "外部"
+   ],
+   "engines": [
+    "Gemini"
+   ]
+  }
+ ],
+ "sources": {
+  "0120.co.jp": "peer",
+  "7eyese.com": "peer",
+  "ad-market.jp": "peer",
+  "ai-search.techsuite.co.jp": "peer",
+  "aisearch.similarweb.com": "peer",
+  "akarumi.jp": "peer",
+  "atglobal.co.jp": "peer",
+  "bakuyasu.techsuite.co.jp": "peer",
+  "developers.google.com": "peer",
+  "fungry.co.jp": "peer",
+  "geo-code.co.jp": "peer",
+  "n-works.link": "peer",
+  "nexer.co.jp": "media",
+  "note.com": "video",
+  "one-produce.co.jp": "peer",
+  "owned.co.jp": "peer",
+  "prtimes.jp": "media",
+  "sambushi.jp": "peer",
+  "stockvalue.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "期間（◯か月・◯日など）": [
+   "Claude"
+  ],
+  "注意点・失敗・リスク": [
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [
+   "ChatGPT"
+  ],
+  "専門家への相談": [
+   "ChatGPT",
+   "Gemini"
+  ]
+ },
+ "chars": {
+  "ChatGPT": 1562,
+  "Claude": 1657,
+  "Gemini": 1688
+ },
+ "claims": [
+  "当社が2026年10月に3つのAI（ChatGPT・Claude・Gemini）へ「aio 外注について教えてください」と聞いたところ、『外部』の語が答えに出てきたのは3つ中1つでした",
+  "当社が2026年10月に3つのAI（ChatGPT・Claude・Gemini）へ「aio 外注について教えてください」と聞いたところ、期間（◯か月・◯日など）に触れたのは3つ中1つ、進め方の手順に触れたのは3つ中1つ、注意点・失敗・リスクに触れたのは3つ中2つでした",
+  "当社が2026年10月に3つのAI（ChatGPT・Claude・Gemini）へ「aio 外注について教えてください」と聞いたところ、出典に挙がったページは19件で、同業・競合サイトが16件、ニュース・メディア・まとめが2件、動画・SNS・ブログが1件でした"
+ ]
+}

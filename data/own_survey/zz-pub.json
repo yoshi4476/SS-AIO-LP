@@ -1,0 +1,63 @@
+{
+ "slug": "zz-pub",
+ "ok": true,
+ "date": "2026-10-21",
+ "question": "aio 対策について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [],
+ "sources": {
+  "acedirection.co.jp": "peer",
+  "axone.co.jp": "peer",
+  "bakuri.co.jp": "peer",
+  "bamboo-h.com": "peer",
+  "bing.com": "peer",
+  "cozies.jp": "peer",
+  "cross-emo.jp": "peer",
+  "developers.google.com": "peer",
+  "digitaldrop.co.jp": "peer",
+  "digitalidentity.co.jp": "peer",
+  "frank-pr.jp": "peer",
+  "geo-code.co.jp": "peer",
+  "gicp.co.jp": "peer",
+  "giginc.co.jp": "peer",
+  "jinrai.co.jp": "peer",
+  "local-mp.co.jp": "peer",
+  "media.souzoh-official.com": "peer",
+  "mercart.jp": "peer",
+  "n-works.link": "peer",
+  "scale-basics.com": "peer",
+  "sitest.jp": "peer",
+  "start-link.jp": "media",
+  "switchitmaker2.com": "peer",
+  "thinktion.net": "peer",
+  "uravation.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": [],
+  "期間（◯か月・◯日など）": [],
+  "注意点・失敗・リスク": [
+   "Gemini"
+  ],
+  "進め方の手順": [
+   "ChatGPT",
+   "Claude"
+  ],
+  "専門家への相談": [
+   "ChatGPT",
+   "Gemini"
+  ]
+ },
+ "chars": {
+  "ChatGPT": 1917,
+  "Claude": 2206,
+  "Gemini": 3577
+ },
+ "claims": [
+  "当社が2026年10月に3つのAI（ChatGPT・Claude・Gemini）へ「aio 対策について教えてください」と聞いたところ、費用の金額（◯円）に触れたAIは無く、期間（◯か月・◯日など）に触れたAIは無く、注意点・失敗・リスクに触れたのは3つ中1つでした",
+  "当社が2026年10月に3つのAI（ChatGPT・Claude・Gemini）へ「aio 対策について教えてください」と聞いたところ、出典に挙がったページは25件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件でした"
+ ]
+}

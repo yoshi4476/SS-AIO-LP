@@ -1,0 +1,126 @@
+# -*- coding: utf-8 -*-
+"""2026-10-20 運用者「全て網羅させて。情報がなくても90以上になるように」。
+公開前の採点で、一次性（材料が無い題）・抽出性（前を読まないと分からない書き出し）・決定支援（分かれ道が無い）が
+足りずに止まる記事が続いた。
+- 当社調べ（own_survey）: 記事の狙う語を複数の AI に聞き、答えに出た語・出なかった語と出典の種類を数えて、
+  母数と時期のある自社の実測にする（数えたことだけを書く。解釈は書かない）
+- 抽出性・決定支援は score_check が書く段階で止め、直しの指示にも機械の指摘として渡す
+- 領域の判定は、移す先の社が担当の外とする語の記事を報告しない（「aio 外注」を外注の社の領域と誤判定した）
+"""
+import json
+import re
+import sys
+import tempfile
+from pathlib import Path
+
+from test_gates import check, ROOT
+
+sys.path.insert(0, str(ROOT / "scripts"))
+
+
+def test_own_survey_counts_only_what_it_saw():
+    import own_survey as O
+    print("\n■ 当社調べ: 見出しの論点の語・答えに出た観点・出典の種類を数えた文だけを作る")
+    body = ("## 庭木の剪定とは？\n本文\n## 剪定を業者に頼むときの見積もりの見方\n本文\n"
+            "## 丸投げで失敗する3つの判断\n本文\n## 2026年10月からの変更\n本文\n## よくある質問\n本文\n")
+    tp = O.topics(body)
+    words = [w for _, ws in tp for w in ws]
+    check("論点の語は名詞の続きだけ（送り仮名の続く語幹「丸投」・数字入り・FAQ は拾わない）",
+          ("丸投" in words, any(re.search(r"\d", w) for w in words), "剪定" in words),
+          (False, False, True))
+    res = {"ok": True, "date": "2026-10-20", "question": "庭木 剪定について教えてください",
+           "engines": ["Claude", "ChatGPT", "Gemini"],
+           "topics": [{"topic": "a", "words": ["業者"], "engines": []},
+                      {"topic": "b", "words": ["見積"], "engines": ["Claude", "ChatGPT", "Gemini"]}],
+           "dims": {"費用の金額（◯円）": [], "期間（◯か月・◯日など）": ["Claude"], "注意点・失敗・リスク": ["Claude", "ChatGPT", "Gemini"]},
+           "sources": {"a.go.jp": "public", "b.example": "", "c.example": ""}}
+    cs = O.claims(res)
+    check("時期・AI の数と名前・質問をそろえて書く", all(c.startswith("当社が2026年10月に3つのAI（Claude・ChatGPT・Gemini）へ")
+                                                for c in cs) and len(cs) >= 3, True)
+    dim = next((c for c in cs if "費用の金額" in c), "")
+    check("0件は「触れたAIは無く」と書き、全部に出た観点は後ろに回す",
+          ("費用の金額（◯円）に触れたAIは無く" in dim, dim.find("費用の金額") < dim.find("注意点")), (True, True))
+    check("見分けのつかない出典を「同業」と書かない", any("出典に挙がったページは3件で、公的機関・学会・業界団体が1件" in c for c in cs)
+          and not any("同業" in c for c in cs), True)
+    check("2つ未満の AI しか答えなければ書かない", O.claims({"ok": False}), [])
+
+
+def test_own_survey_order_and_keep_old():
+    import ai_cite_check as AC
+    import own_survey as O
+    print("\n■ 当社調べ: Claude・ChatGPT は契約の枠（Codex）、Gemini は無料の枠。従量課金の API は使わない（2026-10-20 運用者）")
+    sub, paid = AC.subscription_engines, AC.engines_available
+    AC.engines_available = lambda site=None: {"ChatGPT": "api", "Gemini": "g", "Perplexity": "p"}
+    try:
+        AC.subscription_engines = lambda: {"Claude": "c", "ChatGPT": "codex"}
+        got = O.engines("ai-lab")
+        AC.subscription_engines = lambda: {"Claude": "c"}
+        no_codex = O.engines("ai-lab")
+    finally:
+        AC.subscription_engines, AC.engines_available = sub, paid
+    check("聞く AI と経路（ChatGPT は Codex・Perplexity は使わない）", got, {"Claude": "c", "ChatGPT": "codex", "Gemini": "g"})
+    check("Codex が無ければ ChatGPT は API で聞かない", no_codex, {"Claude": "c", "Gemini": "g"})
+    act = (ROOT / ".github" / "actions" / "own-survey" / "action.yml").read_text(encoding="utf-8")
+    check("部品: Codex のログイン情報は途中で落ちても消し、従量課金の鍵を受け取らない",
+          ("trap cleanup EXIT" in act, "rm -f ~/.codex/auth.json" in act, "OPENAI_API_KEY" in act or "PERPLEXITY" in act),
+          (True, True, False))
+    check("部品: 書き戻しは AI を動かさない別の手順（GH_TOKEN は当社調べの手順に渡さない）",
+          act.index("GH_TOKEN: ${{ inputs.gh_token }}") > act.index("python scripts/own_survey.py"), True)
+    src = (ROOT / "scripts" / "own_survey.py").read_text(encoding="utf-8")
+    check("聞けなかった回は前に測った結果を返す", 'if not res.get("ok") and old.get("ok"):\n        return old' in src, True)
+    check("お客様の社の文はログに出さない", "if not CP.is_private(site):" in src, True)
+
+
+def test_score_check_extract_and_decide():
+    import score_check as SC
+    print("\n■ 機械採点: H2直下の1文が単体で通じるか・分かれ道/やらない判断/今日の一歩があるか")
+    bad = "## 選び方\n4つのうち、最初に決めるのは予算です。\n## 理由\n理由は、調べ方が変わったためです。\n"
+    good = "## 選び方\n庭木の剪定を頼む業者は、見積もりの内訳で選びます。\n"
+    check("悪い例は拾い、良い例は拾わない", (SC.extract_issues(bad), SC.extract_issues(good)), (["選び方", "理由"], []))
+    yes = ("木が3本以下なら自分で切ってください。高い木の場合は業者に頼むほうが安全です。"
+           "毎年切る必要が無い木なら見送ってください。まず木の高さを測ってください。")
+    check("分かれ道・やらない判断・今日の一歩がそろえば空", SC.decision_issues(yes), [])
+    check("無ければ3つとも挙げる", len(SC.decision_issues("剪定の方法を説明します。")), 3)
+
+
+def test_quality_loop_uses_survey_and_machine_notes():
+    import own_survey as O
+    import quality_loop as Q
+    print("\n■ 品質ループ: 採点の前に当社調べを測り、その文を材料（増えてよい数字）に入れ、機械の指摘を直しの指示に渡す")
+    load = O.load
+    O.load = lambda site, slug: {"ok": True, "claims": ["当社が2026年10月に3つのAIへ聞いたところ、Xに触れたのは3つ中1つでした"]}
+    try:
+        allowed, mats = Q.materials("ai-lab", "zz-none")
+    finally:
+        O.load = load
+    check("当社調べの文が一次情報と増えてよい数字に入る", ("当社調べ" in mats["facts"], "3つ中1つ" in allowed), (True, True))
+    src = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
+    check("採点の前に測る・機械の指摘を直しに渡す",
+          ("    survey(slug, budget, base)\n    sc, why = score(slug)" in src, 'sc["machine"] = machine_note(slug)' in src,
+           "機械が見つけた抽出性・決定支援の足りない所" in src), (True, True, True))
+    wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    a = wf.index("- name: 当社調べ（直している記事")
+    b = wf.index("- name: 公開前の品質ループ（前の回から直している記事を先に）")
+    c = wf.index("- name: 当社調べ（この回に書いた記事")
+    d = wf.index("- name: 公開前の品質ループ（この回に書いた記事を別工程で採点し、届くまで直す）")
+    check("記事の枠: 当社調べは各採点の前（鍵のある機械の手順）", (a < b, c < d), (True, True))
+    step = wf[a:b]
+    check("当社調べの手順に全権の合言葉を渡さない", "HUB_SECRET" in step, False)
+    pl = (ROOT / ".github" / "workflows" / "pipeline.yml").read_text(encoding="utf-8")
+    check("救済: 当社調べは品質ループの前",
+          pl.index("- name: 当社調べ（直している記事・救済") < pl.index("- name: 公開前の品質ループ（別工程の3観点の採点と直し）"), True)
+
+
+def test_territory_skips_keywords_the_invader_refuses():
+    import cannibal_check as C
+    import kw_fit
+    print("\n■ 領域の判定: 移す先の社が担当の外とする語の記事は、本文に移す先の語が多くても報告しない")
+    judge = kw_fit.judge_new
+    kw_fit.judge_new = lambda kw, site: (2, "担当の外の文脈") if "zz" in kw else (0, "")
+    try:
+        r = (C._invader_refuses("title: t\nkeyword: zz 外注\n", "client-zz"),
+             C._invader_refuses("title: t\nkeyword: 開発 外注\n", "client-zz"),
+             C._invader_refuses("title: t\n", "client-zz"))
+    finally:
+        kw_fit.judge_new = judge
+    check("担当の外なら報告しない・担当なら報告する・狙う語が無ければ従来どおり", r, (True, False, False))

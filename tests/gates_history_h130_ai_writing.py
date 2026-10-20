@@ -363,5 +363,5 @@ def test_brief_and_workflows():
     check("推移の記録をコミットする", "data/ai_writing_trend.json" in wk, True)
     ql = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
     check("公開前の品質ループは採点の前に polish を呼ぶ（公開済みの採点し直しでは呼ばない）",
-          re.search(r"if not published:\n\s+#[^\n]*\n\s+polish\(slug, budget, ctx, base\)\n\s+sc, why = score\(slug\)", ql)
+          re.search(r"if not published:\n\s+#[^\n]*\n\s+polish\(slug, budget, ctx, base\)\n\s+survey\(slug, budget, base\)\n\s+sc, why = score\(slug\)", ql)
           is not None, True)

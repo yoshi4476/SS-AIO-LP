@@ -47,6 +47,7 @@ LOG = ROOT / "data" / "quality_loop.jsonl"
 ROUNDS = 2                  # 1回の実行で直す回数（運用者「1度や2度で完璧に」）
 SCORE_MIN = 4               # 1回の採点の見込み（分）。予算の残りがこれより少なければ採点を始めない
 IMPROVE_MIN = 14            # 1回の直し（AI＋検算＋ビルド）と採点し直しの見込み（分）
+SURVEY_MIN = 6              # 当社調べ（AI に聞いて数える）の見込み（分）。同じ月に測った記事は聞き直さない
 NEAR_TOTAL = (88, 93)       # 平均がこの間なら、採点のぶれで合否が変わりうる → 2回採点して低い方を使う
 NEAR_AXIS = (78, 84)        # 1軸がこの間でも同じ
 STALE_DAYS = 3              # 改善中がこれより長い記事は要対応
@@ -342,6 +343,9 @@ def weak_text(sc):
     if sc.get("ai_writing"):
         # textlint が見つけた AI っぽい言い回し（採点の前の直しで残った分）。指摘の文だけを言い換える
         out.append("■ AIっぽい言い回し（textlint の検出。直すのは指摘の文だけ・意味と数字は変えない）:\n" + sc["ai_writing"])
+    if sc.get("machine"):
+        # score_check の抽出性・決定支援の検出（決まった形で直せる所）
+        out.append("■ 機械が見つけた抽出性・決定支援の足りない所:\n" + sc["machine"])
     if sc.get("retry_note"):
         # 前の直しが検算で戻された理由。同じ直し方を繰り返させない（2026-10-20 の実地の試しで、2回とも「3点」「1か月近く」を
         # 足して数字の検算で戻された）
@@ -374,6 +378,15 @@ def materials(site, slug):
         when = str(f.get("as_of") or "").strip()
         facts.append(f"- {c}（出典: {src or '自社'}{'・' + when + '時点' if when else ''}）")
         allowed += [c, src, as_of_text(when)]
+    try:
+        # 当社調べ（own_survey）: 記事の狙う語を複数の AI に聞いて数えた結果。材料が届かない題でも、母数と時期のある
+        # 自社の実測として書ける（2026-10-20 運用者「情報がなくても90以上になるように」）
+        import own_survey
+        for c in own_survey.load(site, slug).get("claims") or []:
+            facts.append(f"- {c}（出典: 当社調べ）")
+            allowed.append(c)
+    except Exception:  # noqa: BLE001  調べが読めなくても直しは続ける
+        pass
     try:
         rows = originality.load_experiences(site)
     except Exception:
@@ -484,6 +497,33 @@ def polish(slug, budget, ctx, base):
         print(f"  （AIっぽい言い回しの直しを飛ばしました: {type(e).__name__}: {str(e)[:60]}）")
 
 
+def survey(slug, budget, base):
+    """採点の前に当社調べを測っておく（直しの材料になる）。時間が足りない・AI に聞けないときは飛ばす"""
+    # 本物の記事の置き場のときだけ聞く（門が一時フォルダで工程を試すとき、本物の AI に聞きにいかない）。
+    # 結果は data/own_survey に残り、採点の台帳には書かない（台帳の行の順で工程を確かめる門があるため）
+    if ARTICLES != ROOT / "articles" or not budget.ok(SURVEY_MIN + SCORE_MIN):
+        return
+    try:
+        import own_survey
+        res = own_survey.run(slug)
+        print(f"     当社調べ: {'文 ' + str(len(res.get('claims') or [])) + 'つ' if res.get('ok') else res.get('why', '測れませんでした')}")
+    except Exception as e:  # noqa: BLE001  調べで採点を止めない
+        print(f"  （当社調べを飛ばしました: {type(e).__name__}: {str(e)[:60]}）")
+
+
+def machine_note(slug):
+    """直しの指示に添える、機械が見つけた抽出性・決定支援の足りない所（無ければ空）"""
+    try:
+        import score_check as SC
+        body = _split(read(slug))[3]
+        out = [f"- 見出し「{h}」の直後の1文が、前を読まないと分からない書き出し（主語・対象を入れて言い切る）"
+               for h in SC.extract_issues(body)]
+        out += [f"- {x}" for x in SC.decision_issues(body)]
+        return "\n".join(out)
+    except Exception:  # noqa: BLE001
+        return ""
+
+
 def aiwriting_note(slug):
     """直しの指示に添える、残っている AI っぽい言い回し（無ければ空）"""
     try:
@@ -587,6 +627,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
     if not published:
         # 公開前の記事は、採点の前に AI っぽい言い回しを直す（公開済みの記事は週次の auto_rewrite --kind aiwriting が受け持つ）
         polish(slug, budget, ctx, base)
+    survey(slug, budget, base)
     sc, why = score(slug)
     if not sc:
         print(f"要対応: {name} を採点できませんでした（{why}）。"
@@ -604,6 +645,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         if "blocked" not in ctx:
             ctx["blocked"] = blocked_lines()
         sc["ai_writing"] = aiwriting_note(slug)
+        sc["machine"] = machine_note(slug)
         good, why = IMPROVE(slug, sc, ctx["blocked"])
         record({**base, "action": "improve", "round": prior + done, "ok": good, "why": str(why)[:200]})
         print(f"     直し{done}回目: {'直しました' if good else '戻しました・変更なし'}（"

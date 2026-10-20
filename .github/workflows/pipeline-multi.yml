@@ -595,6 +595,21 @@ jobs:
           mkdir -p "$RUNNER_TEMP/hub_tokens"
           python scripts/hub_token.py --scope "${{ steps.site.outputs.pub }}" --out "$RUNNER_TEMP/hub_tokens/${{ steps.site.outputs.pub }}" || true
 
+      # 当社調べ（own_survey）: 記事の狙う語を複数の AI に聞き、答えに出た語・出なかった語と出典の種類を数えて、
+      # 直しの材料（母数と時期のある自社の実測）にする（2026-10-20 運用者「情報がなくても90以上になるように」）。
+      # 採点の工程は鍵を外して動くので、ここ（鍵のある機械の手順）で先に測る。同じ月に測った記事は聞き直さない。
+      # 聞くのは Claude（Claude Code）・ChatGPT（契約の Codex）・Gemini（無料の枠の内）。従量課金の API は使わない。ログには件数だけ
+      - name: 当社調べ（直している記事・鍵のある機械の手順）
+        if: steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        timeout-minutes: 15
+        uses: ./.github/actions/own-survey
+        with:
+          sites: "${{ steps.site.outputs.id }}"
+          claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
+          gemini_key: ${{ secrets.GEMINI_API_KEY }}
+          gh_token: ${{ secrets.GH_SECRET_TOKEN }}
+
       # 公開前の品質ループ（2026-10-20 運用者の決定「公開前に、書いたAIとは別の工程で3観点を採点し、基準未満なら公開を止める」
       # 「書かない選択肢はない。1度や2度で完璧に」）。前の回で基準に届かなかった記事（quality_state: improving）を、新しい記事より
       # 先に直す。届かないまま残っても、この回の新しい記事は書く（運用者「書かない選択肢はない」。残った記事は次の回も先に直す）。
@@ -689,6 +704,21 @@ jobs:
             fi
           done
           python scripts/agent_memory.py --restore || true
+
+      # 当社調べ（own_survey）: 記事の狙う語を複数の AI に聞き、答えに出た語・出なかった語と出典の種類を数えて、
+      # 直しの材料（母数と時期のある自社の実測）にする（2026-10-20 運用者「情報がなくても90以上になるように」）。
+      # 採点の工程は鍵を外して動くので、ここ（鍵のある機械の手順）で先に測る。同じ月に測った記事は聞き直さない。
+      # 聞くのは Claude（Claude Code）・ChatGPT（契約の Codex）・Gemini（無料の枠の内）。従量課金の API は使わない。ログには件数だけ
+      - name: 当社調べ（この回に書いた記事・鍵のある機械の手順）
+        if: always() && steps.lock.outcome == 'success' && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        timeout-minutes: 15
+        uses: ./.github/actions/own-survey
+        with:
+          sites: "${{ steps.site.outputs.id }}"
+          claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
+          gemini_key: ${{ secrets.GEMINI_API_KEY }}
+          gh_token: ${{ secrets.GH_SECRET_TOKEN }}
 
       # 書いた記事を、書いた AI とは別の工程が3観点で採点し、基準（各80点以上・平均90点以上）に届くまで直す（1回の実行で2回まで）。
       # 届けば機械が score を書き、この後の配信の手順が配る。届かなければ quality_state: improving のまま公開せず、次の回が先に直す。

@@ -602,6 +602,20 @@ def external_dup_check():
     return real
 
 
+def _invader_refuses(front, invader):
+    """記事の狙う語を、移す先の社が担当の外（kw_fit の判定2）とするか。移す先が受け取らない語なら、
+    本文に移す先の語が多くても領域外として報告しない。「aio 外注」の記事は、担当の語に「外注」を持つ社の領域と
+    判定されたが、その社にとって aio は担当の外の文脈だった（2026-10-20）"""
+    kw = (re.search(r"^keyword:\s*(.+?)\s*$", front, re.M) or [None, ""])[1].strip("\"'")
+    if not kw:
+        return False
+    try:
+        import kw_fit
+        return kw_fit.judge_new(kw, invader)[0] >= 2
+    except Exception:  # noqa: BLE001  判定が読めなければ従来どおり報告する
+        return False
+
+
 def written_territory_check():
     """公開済み記事の本文を検査し、他サイトの領域を主題にしているものを報告する。
 
@@ -623,7 +637,7 @@ def written_territory_check():
         if not site:
             continue
         invader, scores = article_territory(title.strip('"'), m.group(2), site)
-        if invader:
+        if invader and not _invader_refuses(m.group(1), invader):
             bad.append((p.stem, site, invader, scores))
 
     print(f"WRITTEN_TERRITORY_CHECK: {len(list((ROOT / 'articles').glob('*.md')))}記事の本文を検査 "
