@@ -7,6 +7,20 @@
   <updated>2026-10-21T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
   <entry>
+    <title>AIO外注の丸投げで失敗する4つの判断｜渡すもの一覧</title>
+    <link href="https://ai.7senses.co.jp/aio/aio-gaichuu/"/>
+    <id>https://ai.7senses.co.jp/aio/aio-gaichuu/</id>
+    <updated>2026-10-21T00:00:00+09:00</updated>
+    <summary>AIO外注で任せられるのは記事の修正・計測・報告で、自社の一次情報と狙う語の最終判断は社内に残ります。丸投げで失敗する4つの判断、外注前に渡すもの一覧、始めて90日の進め方、今すぐ頼む会社と待つ会社の分かれ目を、当社の運用実績から整理します。</summary>
+  </entry>
+  <entry>
+    <title>飲食店の集客コンサルの落とし穴｜依頼前に数える3つの数字</title>
+    <link href="https://ai.7senses.co.jp/aio/inshokuten-shukyaku-consul/"/>
+    <id>https://ai.7senses.co.jp/aio/inshokuten-shukyaku-consul/</id>
+    <updated>2026-10-21T00:00:00+09:00</updated>
+    <summary>飲食店の集客コンサルは、頼める仕事が4つの型に分かれ、店の状況で選ぶ相手が変わります。依頼前に予約の経路・新規客の割合・検索の順位の3つを数えてください。当社の実測クリック率（1〜3位6.28%、4〜10位1.02%）をもとに、頼む店と見送る店の分かれ目を解説します。</summary>
+  </entry>
+  <entry>
     <title>AI検索対策を代理店に頼んだら何を準備する？最初の90日の進み方</title>
     <link href="https://ai.7senses.co.jp/aio/ai-kensaku-taisaku-dairiten-junbi/"/>
     <id>https://ai.7senses.co.jp/aio/ai-kensaku-taisaku-dairiten-junbi/</id>
@@ -131,19 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/aio-junni-hendou-riyuu/</id>
     <updated>2026-10-10T00:00:00+09:00</updated>
     <summary>AIOの順位が変動する主な理由は、AIが回答のたびに出典を選び直すことと、通常の検索順位そのものが動くことの2つです。変動の原因を4種類に分け、Search Consoleで原因を切り分ける5つの分析手順と、手を打つべき変動・待つべき変動の見分け方を解説します。</summary>
-  </entry>
-  <entry>
-    <title>AIOでGeminiの引用に載る方法は？18語中3語しか載らなかった実測</title>
-    <link href="https://ai.7senses.co.jp/aio/gemini-inyou-noru-houhou/"/>
-    <id>https://ai.7senses.co.jp/aio/gemini-inyou-noru-houhou/</id>
-    <updated>2026-10-10T00:00:00+09:00</updated>
-    <summary>Geminiに聞いた18語のうち、出典つきで答えたのは15語、当サイトが載ったのは3語でした。載った3語はどれも、聞かれた語1つに絞ったページです。Google-Extendedの確認から計測まで、aio gemini 引用 載る方法を5つの手順で解説します。</summary>
-  </entry>
-  <entry>
-    <title>不動産会社のAIO対策のやり方は？業態別の質問表と6つの作業手順</title>
-    <link href="https://ai.7senses.co.jp/aio/fudousan-aio-taisaku-yarikata/"/>
-    <id>https://ai.7senses.co.jp/aio/fudousan-aio-taisaku-yarikata/</id>
-    <updated>2026-10-09T00:00:00+09:00</updated>
-    <summary>不動産会社のAIO対策は、賃貸・売買・管理の業態ごとにAIへ聞かれる質問を10個選び、入れ替わる物件ページではなく会社側のページで答える作業です。6つの手順と週ごとの進め方、広告の決まりで外す表現、毎月の計測の見方を整理します。</summary>
   </entry>
 </feed>

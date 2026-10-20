@@ -44,7 +44,7 @@
 "modified": "2026-09-15"
 },
 "aio-gaichuu": {
-"hash": "6f789782e00b4d4a998916f70e1f9ed7",
+"hash": "e596605fc1a99f5e351e61a20cdd93d1",
 "modified": "2026-10-21"
 },
 "aio-ijou-kenchi-alert-settei": {
@@ -332,7 +332,7 @@
 "modified": "2026-08-27"
 },
 "fudousan-kaisha-shukyaku-houhou": {
-"hash": "13d2b7465afcc39fbe4c2cc67a02b57c",
+"hash": "a136267dcf5f509d634d099b49695652",
 "modified": "2026-10-20"
 },
 "fudousan-kojin-shukyaku": {
@@ -396,12 +396,16 @@
 "modified": "2026-09-08"
 },
 "inshokuten-shukyaku-consul": {
-"hash": "3ca5979ac1f9952a09dd4c58565ff809",
+"hash": "3f8711b1cd42b67f25448cabe9613a91",
 "modified": "2026-10-21"
 },
 "inshokuten-shukyaku-hoho": {
-"hash": "95edaa7e746d7b55846745bb1ff3b583",
+"hash": "4e4cfdbb28cb25a602cd43714b7ca97c",
 "modified": "2026-09-04"
+},
+"inshokuten-shukyaku-service": {
+"hash": "45518585f063f22dbac2404097af8080",
+"modified": "2026-10-21"
 },
 "iryou-koukoku-guideline-web": {
 "hash": "1676d6c8f9569bf361da6e0ebf66d232",

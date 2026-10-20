@@ -28,6 +28,8 @@
   <url><loc>https://ai.7senses.co.jp/industry/clinic/faq/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/industry/fudosan/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/industry/fudosan/faq/</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://ai.7senses.co.jp/industry/inshokuten/</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://ai.7senses.co.jp/industry/inshokuten/faq/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/industry/koumuten/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/industry/koumuten/faq/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/industry/reform/</loc><lastmod>2026-10-21</lastmod></url>
@@ -136,6 +138,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-erabareru-kiji-kakikata/before-after.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-erabareru-kiji-kakikata/kotsu5.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-erabareru-kiji-kakikata/check-steps.png</image:loc></image:image>
+  </url>
+  <url><loc>https://ai.7senses.co.jp/aio/aio-gaichuu/</loc><lastmod>2026-10-21</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-gaichuu/buntan.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-gaichuu/hajime90.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/aio-gaichuu/maitsuki.png</image:loc></image:image>
   </url>
   <url><loc>https://ai.7senses.co.jp/aio/aio-ijou-kenchi-alert-settei/</loc><lastmod>2026-10-10</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/aio-ijou-kenchi-alert-settei/shurui.png</image:loc></image:image>
@@ -513,6 +520,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-seo-taisaku/yakuwari.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-seo-taisaku/steps.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-seo-taisaku/shippai.png</image:loc></image:image>
+  </url>
+  <url><loc>https://ai.7senses.co.jp/aio/inshokuten-shukyaku-consul/</loc><lastmod>2026-10-21</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-shukyaku-consul/kata.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-shukyaku-consul/ctr.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-shukyaku-consul/erabikata.png</image:loc></image:image>
   </url>
   <url><loc>https://ai.7senses.co.jp/ai-marketing/inshokuten-shukyaku-hoho/</loc><lastmod>2026-09-04</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-shukyaku-hoho/steps.png</image:loc></image:image>
