@@ -159,9 +159,12 @@ def claims(res):
     # 書き出しを記事ごとに散らす（同じ一文が数百本に並ぶと量産の指紋になる。内部リンク文で41.5%が同じ一文だった）
     import hashlib
     k = int(hashlib.md5(str(res.get("slug", "")).encode("utf-8")).hexdigest(), 16) % 3
-    head = (f"当社が{y}年{m}月に{n}つのAI（{who}）へ「{res['question']}」と聞いたところ",
-            f"{y}年{m}月に当社が{n}つのAI（{who}）で「{res['question']}」を調べたところ",
-            f"当社調べ（{y}年{m}月、{n}つのAI：{who}）で「{res['question']}」の答えを比べたところ")[k]
+    # 「1回だけの試行か」と採点で突かれた。実際に3つの AI に1回ずつ聞いた3件の答えなので、件数をそのまま書く
+    # （聞いていない回数は書かない。2026-10-21 運用者「複数の結果で書く・2回は調べない」）
+    q = res["question"]
+    head = (f"当社が{y}年{m}月に、{n}つのAI（{who}）に「{q}」と同じ質問をして、{n}件の答えを比べたところ",
+            f"{y}年{m}月に当社が{n}つのAI（{who}）へ同じ質問「{q}」をして、返ってきた{n}件の答えを比べたところ",
+            f"当社調べ（{y}年{m}月、{n}つのAI：{who}に同じ質問をした{n}件の答え）で「{q}」の答えを比べたところ")[k]
     out = []
     rows = [r for r in res["topics"] if r["words"]]
     if rows:
@@ -169,19 +172,19 @@ def claims(res):
         allx = [r for r in rows if len(r["engines"]) == n]
         if none:
             names = "』『".join(dict.fromkeys(r["words"][0] for r in none[:3]))
-            out.append(f"{head}、本記事で扱う{len(rows)}つの論点のうち『{names}』の語が答えに出てきたAIは0件でした")
+            out.append(f"{head}、本記事で扱う{len(rows)}つの論点のうち『{names}』の語が出てきた答えは0件でした")
         if allx:
             names = "』『".join(dict.fromkeys(r["words"][0] for r in allx[:3]))
-            out.append(f"{head}、{n}つすべての答えに『{names}』の語が出てきました")
+            out.append(f"{head}、{n}件すべての答えに『{names}』の語が出てきました")
         part = [r for r in rows if 0 < len(r["engines"]) < n]
         if part and len(out) < 2:
             r = part[0]
-            out.append(f"{head}、『{r['words'][0]}』の語が答えに出てきたのは{n}つ中{len(r['engines'])}つでした")
+            out.append(f"{head}、『{r['words'][0]}』の語が出てきた答えは{n}件中{len(r['engines'])}件でした")
     dims = res.get("dims") or {}
     if dims:
         # 全部に出た観点より、出なかった・一部だけの観点のほうが「答えに足りないもの」として一次情報になる
         pick = sorted(dims.items(), key=lambda x: (len(x[1]) == n, len(x[1])))[:3]
-        parts = "、".join(f"{label}に触れたAIは無く" if not v else f"{label}に触れたのは{n}つ中{len(v)}つ"
+        parts = "、".join(f"{label}に触れた答えは無く" if not v else f"{label}に触れた答えは{n}件中{len(v)}件"
                          for label, v in pick)
         out.append(f"{head}、{parts}でした")
     src = res.get("sources") or {}

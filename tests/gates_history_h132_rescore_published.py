@@ -51,6 +51,47 @@ def test_rescore_published_after_new_articles_pass():
           True)
 
 
+def test_quality_loop_fix_skips_number_check_only_there():
+    import auto_rewrite as A
+    import quality_loop as Q
+    print("\n■ 公開前の品質ループの直しだけ数字の検算をしない（運用者「事実でない数字を防ぐ検算なしにして」2026-10-20）。ほかの直しは残す")
+    src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
+    check("品質ループの種類だけ numbers=False", ('nums = kind != "quality_loop"' in src, src.count("numbers=nums")), (True, 2))
+    check("ほかの種類は今までどおり無かった数字を止める", bool(A.new_fact_numbers("本文。", "本文。相場は1,500円です。")), True)
+    check("直す回数は1回の実行で2回まで（運用者「最大でも二回で90に」）", (Q.ROUNDS, Q.MAX_ROUNDS), (2, 2))
+    w = Q.lower({"axes": {"originality": 80, "extractability": 90, "decision": 90},
+                 "quotes": {"originality": "a", "extractability": "a", "decision": "a"},
+                 "weak": {"originality": ["x"], "extractability": ["y"], "decision": ["z"]}},
+                {"axes": {"originality": 85, "extractability": 80, "decision": 90},
+                 "quotes": {"originality": "b", "extractability": "b", "decision": "b"},
+                 "weak": {"originality": ["x2"], "extractability": ["y2"], "decision": ["z"]}})
+    check("2回採点の弱い点は合わせて渡す（同じ指摘は1つ）", (w["weak"]["originality"], w["weak"]["decision"]),
+          (["x", "x2"], ["z"]))
+    pr = (ROOT / "automation" / "multi_site_prompt.txt").read_text(encoding="utf-8")
+    check("書く指示: 採点の100点の書き方と、専門家に確認で終わらせない決まり",
+          ("90点以上で書くための条件" in pr, "「税理士（専門家）に確認してください」で終わらせない" in pr), (True, True))
+
+
+def test_sns_posts_are_article_summaries_without_x():
+    import post_social as PS
+    print("\n■ SNS: 記事 → 要約 → 投稿（冒頭の答えと各H2の1文結論だけ）。X は使わない（運用者 2026-10-20）")
+    body = ("**庭木の剪定は、木の高さで頼むか決めます。**3m以上なら業者です。\n\n## 自分で切れる木は？\n"
+            "高さ3m未満の木は、自分で剪定できます。\n\n## 業者の選び方は？\n見積もりの内訳で業者を選びます。\n\n"
+            "## よくある質問\n答え。\n")
+    pts = PS.points(body)
+    check("要点は冒頭の答えと H2 の1文結論（FAQ は入れない）",
+          pts, ["庭木の剪定は、木の高さで頼むか決めます。", "高さ3m未満の木は、自分で剪定できます。", "見積もりの内訳で業者を選びます。"])
+    meta = {"title": "庭木の剪定の頼み方", "description": "説明", "slug": "zz-niwaki"}
+    cfg = {"domain": "zz.example", "cta": {"url": "/lp/", "label": "相談"}}
+    th = PS.compose(meta, "https://zz.example/a/", cfg, "threads", body)
+    ig = PS.compose(meta, "https://zz.example/a/", cfg, "instagram", body)
+    check("Threads は500字未満・Instagram は本文にリンクを置かない",
+          (len(th) <= PS.STYLE["threads"]["limit"], "https://" in ig), (True, False))
+    check("X は投稿の媒体に無い", "x" in PS.STYLE, False)
+    src = (ROOT / "scripts" / "post_social.py").read_text(encoding="utf-8")
+    check("X に投稿しない", "x_post(t[" in src, False)
+
+
 def test_codex_runs_without_step_keys_and_heads_vary():
     import own_survey as O
     print("\n■ Codex は手順の鍵を引き継がずに呼ぶ・当社調べの書き出しは記事ごとに散らす")

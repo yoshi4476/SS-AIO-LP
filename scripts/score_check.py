@@ -132,6 +132,26 @@ STEP = re.compile(r"(?:今日|まず|最初に|手始めに|今週)[^。\n]{0,40
                   r"集め|開いて|見直)")
 
 
+# 本文の途中で前を指す語（採点の指摘: 「前者」「どちら」「両方ともはいなら」「この20日」）
+POINT = re.compile(r"^(?:\*\*)?(?:これ|それ|この|その|上記|前述|両方|どちら|前者|後者)|前者|後者")
+HYPO = re.compile(r"(?:仮に|例えば|たとえば)[^。\n]{0,80}?\d")
+
+
+def pointing_sentences(body, limit=6):
+    """前の文を読まないと分からない文（段落の書き出し、または「前者」「後者」を含む文）。直しの指示に名指しする"""
+    out = []
+    for h, sec in _core_sections(body):
+        for para in re.split(r"\n\s*\n", sec):
+            para = re.sub(r"<[^>]+>", "", para).strip()
+            if not para or para.startswith(("|", "#", "!", "-", "<")):
+                continue
+            for i, sent in enumerate(re.split(r"(?<=。)", para)):
+                sent = sent.strip()
+                if sent and (i == 0 and POINT.match(sent) or re.search(r"前者|後者", sent)):
+                    out.append(sent[:60])
+    return out[:limit]
+
+
 def _core_sections(body):
     """FAQ・まとめを除く H2 の節（見出し, 本文）"""
     parts = re.split(r"^## (.+)$", body, flags=re.M)
@@ -231,6 +251,11 @@ def run(slug, path=None):
         "、".join(lone[:3]))
     miss = decision_issues(body_nc)
     add("決定支援: 条件の分かれ目2つ以上・やらない判断・今日できる一歩がある", not miss, "、".join(miss))
+    pointing = pointing_sentences(body_nc)
+    add("前の文を読まないと分からない文が無い（「前者」「後者」「どちら」「両方」で前を指さない）", not pointing,
+        "、".join(pointing[:2]))
+    add("仮の計算例がある（「仮に◯◯なら」で読者が自分の数字を当てはめられる）",
+        bool(HYPO.search(re.sub(r"<[^>]+>", "", body_nc))), "")
 
     # --- タイトル ---
     # 飾りの年号（【2026年最新】【2026年】）は自社GSCの実測でクリック率が負けた型（title_patterns）。

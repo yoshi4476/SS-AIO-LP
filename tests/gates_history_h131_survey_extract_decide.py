@@ -35,11 +35,12 @@ def test_own_survey_counts_only_what_it_saw():
            "dims": {"費用の金額（◯円）": [], "期間（◯か月・◯日など）": ["Claude"], "注意点・失敗・リスク": ["Claude", "ChatGPT", "Gemini"]},
            "sources": {"a.go.jp": "public", "b.example": "", "c.example": ""}}
     cs = O.claims(res)
-    check("時期・AI の数と名前・質問をそろえて書く", all(c.startswith("当社が2026年10月に3つのAI（Claude・ChatGPT・Gemini）へ")
-                                                for c in cs) and len(cs) >= 3, True)
+    check("時期・AI の数と名前・答えの件数をそろえて書く（聞いていない回数は書かない）",
+          all("2026年10月" in c and "3つのAI（Claude・ChatGPT・Gemini）" in c and "3件の答え" in c for c in cs)
+          and len(cs) >= 3 and not any("複数回" in c for c in cs), True)
     dim = next((c for c in cs if "費用の金額" in c), "")
-    check("0件は「触れたAIは無く」と書き、全部に出た観点は後ろに回す",
-          ("費用の金額（◯円）に触れたAIは無く" in dim, dim.find("費用の金額") < dim.find("注意点")), (True, True))
+    check("0件は「触れた答えは無く」と書き、全部に出た観点は後ろに回す",
+          ("費用の金額（◯円）に触れた答えは無く" in dim, dim.find("費用の金額") < dim.find("注意点")), (True, True))
     check("見分けのつかない出典を「同業」と書かない", any("出典に挙がったページは3件で、公的機関・学会・業界団体が1件" in c for c in cs)
           and not any("同業" in c for c in cs), True)
     check("2つ未満の AI しか答えなければ書かない", O.claims({"ok": False}), [])

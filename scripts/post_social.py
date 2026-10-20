@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-"""公開した記事をSNSへ配る（X / Facebook / Instagram / Threads / LinkedIn）
+"""公開した記事をSNSへ配る（Facebook / Instagram / Threads / LinkedIn。X は使わない＝2026-10-20 運用者）
+
+投稿文は記事の要約を媒体に合わせて組む（記事 → 要約 → 投稿。運用者 2026-10-20）。要約の材料は記事の冒頭の答えと
+各H2直下の1文結論だけで、記事に無い事実・数字は足さない。お客様の記事はお客様のアカウントにだけ投稿する。
 
 使い方:
     python scripts/post_social.py <site_id> <slug>        # 設定済みの媒体へ配信
@@ -96,12 +99,38 @@ def pick(e, name, site_id):
 #   lead   … 要点の長さ。読む場所の性質に合わせる
 #   cta    … 相談窓口への導線を載せるか。Xは280字で窮屈になるため記事URLのみ
 STYLE = {
-    "x":         {"limit": 280,  "tags": 2, "url": True,  "lead": 70,  "cta": False},
-    "facebook":  {"limit": None, "tags": 0, "url": True,  "lead": 110, "cta": True},
-    "linkedin":  {"limit": 2900, "tags": 3, "url": True,  "lead": 140, "cta": True},
-    "instagram": {"limit": 2100, "tags": 5, "url": False, "lead": 110, "cta": False},
-    "threads":   {"limit": 490,  "tags": 2, "url": True,  "lead": 80,  "cta": False},
+    "facebook":  {"limit": None, "tags": 0, "url": True,  "lead": 110, "cta": True,  "points": 4},
+    "linkedin":  {"limit": 2900, "tags": 3, "url": True,  "lead": 140, "cta": True,  "points": 5},
+    "instagram": {"limit": 2100, "tags": 5, "url": False, "lead": 110, "cta": False, "points": 5},
+    "threads":   {"limit": 490,  "tags": 2, "url": True,  "lead": 80,  "cta": False, "points": 2},
 }
+# 要点の見出しは記事ごとに散らす（同じ一文が並ぶと量産の指紋になる）
+POINT_HEADS = ("この記事のポイント", "押さえておきたい点", "先に結論だけ")
+
+
+def _plain(t):
+    t = re.sub(r"<[^>]+>", "", t)
+    t = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", t)
+    t = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", t)
+    t = re.sub(r"[*_=`]+", "", t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def points(body):
+    """記事の要約の材料: 冒頭の答え（最初の段落の1文目）と、FAQ・まとめを除く各H2直下の1文結論"""
+    out = []
+    first = next((ln for ln in body.splitlines() if ln.strip() and not ln.lstrip().startswith(("#", "<", "|", "!", "-"))), "")
+    lead = _plain(first).split("。")[0]
+    if lead:
+        out.append(lead + "。")
+    for h, sec in re.findall(r"^## (.+)\n+((?:.*\n?)*?)(?=^## |\Z)", body, re.M):
+        if re.search(r"よくある質問|FAQ|まとめ", h):
+            continue
+        line = next((x for x in sec.splitlines() if x.strip() and not x.lstrip().startswith(("<", "|", "!", "-", "#"))), "")
+        sent = _plain(line).split("。")[0]
+        if 12 <= len(sent) <= 90 and sent + "。" not in out:
+            out.append(sent + "。")
+    return out
 
 
 def utm(url, platform):
@@ -114,12 +143,16 @@ def utm(url, platform):
     return url + ("&" if "?" in url else "?") + q
 
 
-def compose(meta, url, cfg, platform="x"):
-    """媒体に合わせた投稿文を作る。タイトルの再掲だけでは読む理由にならない"""
-    s = STYLE.get(platform, STYLE["x"])
+def compose(meta, url, cfg, platform="facebook", body=""):
+    """媒体に合わせた投稿文を作る（記事の要約）。タイトルの再掲だけでは読む理由にならない"""
+    s = STYLE.get(platform, STYLE["facebook"])
     title = meta["title"]
-    lead_full = re.sub(r"\s+", "", str(meta.get("description", "")))
+    pts = points(body) if body else []
+    lead_full = pts[0] if pts else re.sub(r"\s+", "", str(meta.get("description", "")))
     lead = lead_full[:s["lead"]]
+    import hashlib
+    head = POINT_HEADS[int(hashlib.md5(str(meta.get("slug") or title).encode("utf-8")).hexdigest(), 16) % len(POINT_HEADS)]
+    rest = pts[1:1 + s["points"]] if pts else []
     tags = " ".join(f"#{t}" for t in (cfg.get("social_tags") or cfg.get("x_tags") or [])[:s["tags"]])
     link = utm(url, platform) if s["url"] else ""
     # Instagramは本文にリンクを置けない。何を見に行くのかを書かないと踏まれないため、
@@ -138,9 +171,12 @@ def compose(meta, url, cfg, platform="x"):
             cta_url = f"https://{cfg['domain']}{cta_url}"
         cta_line = f"\n\n▼{cta['label']}\n{utm(cta_url, platform)}"
 
-    def build(l):
+    def build(l, k=None):
         b = f"{title}\n\n{l}"
         b += "…" if len(l) < len(lead_full) else ""
+        use = rest[:len(rest) if k is None else k]
+        if use:
+            b += f"\n\n【{head}】\n" + "\n".join(f"・{x}" for x in use)
         if link:
             b += f"\n\n{link}"
         b += guide
@@ -150,15 +186,17 @@ def compose(meta, url, cfg, platform="x"):
             b += f"\n{tags}"
         return b
 
-    body = build(lead)
+    k = len(rest)
+    text = build(lead, k)
     if s["limit"]:
-        # Xでは実際の長さに関わらずURLは23字で数えられる
-        def length(b):
-            return len(b) - (len(link) - 23 if link and link in b else 0)
-        while length(body) > s["limit"] and len(lead) > 12:
+        # 字数を超えたら、要点を後ろから減らし、それでも超えれば書き出しを詰める
+        while len(text) > s["limit"] and k > 0:
+            k -= 1
+            text = build(lead, k)
+        while len(text) > s["limit"] and len(lead) > 12:
             lead = lead[:-5]
-            body = build(lead)
-    return body
+            text = build(lead, k)
+    return text
 
 
 def image_url(meta, cfg):
@@ -287,6 +325,12 @@ def article(slug):
     return yaml.safe_load(m.group(1))
 
 
+def article_body(slug):
+    p = ROOT / "articles" / f"{slug}.md"
+    m = re.match(r"^---\s*\n.*?\n---\s*\n(.*)$", p.read_text(encoding="utf-8-sig"), re.S)
+    return m.group(1) if m else ""
+
+
 def deliver(site_id, slug, e, dry):
     cfg = sites_mod.load(site_id)
     meta = article(slug)
@@ -295,7 +339,9 @@ def deliver(site_id, slug, e, dry):
     url = wp_bridge.article_url(cfg, meta)
     img = image_url(meta, cfg)
     # 媒体ごとに文面を作り分ける。同じ文を全媒体に流すと、どこでも中途半端になる
-    t = {p: compose(meta, url, cfg, p) for p in STYLE}
+    meta.setdefault("slug", slug)
+    body = article_body(slug)
+    t = {p: compose(meta, url, cfg, p, body) for p in STYLE}
 
     print(f"\n■ {site_id} / {slug}")
     print(f"  記事: {url}")
@@ -303,22 +349,12 @@ def deliver(site_id, slug, e, dry):
     print(f"  CTA : {cfg.get('cta', {}).get('url') or '（未設定）'}")
 
     if dry:
-        for p in ("x", "facebook", "linkedin", "instagram", "threads"):
+        for p in ("facebook", "linkedin", "instagram", "threads"):
             print(f"\n― {p} ―")
             print(t[p])
         return
 
-    # X
-    c = {k: pick(e, f"X_{k.upper()}", site_id) for k in
-         ("api_key", "api_secret", "access_token", "access_secret")}
-    if all(is_set(v) for v in c.values()):
-        try:
-            r = x_post(t["x"], c)
-            print(f"  X: 投稿 https://x.com/i/status/{(r.get('data') or {}).get('id')}")
-        except Exception as ex:
-            print(f"  X: 失敗 {str(ex)[:110]}")
-    else:
-        print("  X: スキップ（X_API_KEY / X_API_SECRET / X_ACCESS_TOKEN / X_ACCESS_SECRET）")
+    # X は使わない（2026-10-20 運用者）
 
     # Facebook ページ
     fbt, fbp = pick(e, "FB_PAGE_TOKEN", site_id), pick(e, "FB_PAGE_ID", site_id)

@@ -970,15 +970,17 @@ WHAT = {
                      "  出典・時点を変えずに入れる。登録した体験は、文に目印の語を入れて一人称で書く。材料に無い数字・事例・体験談・\n"
                      "  お客様の声は書かない（作った事実で点を上げない）。材料が足りなければ、当社の判断とその理由・失敗しやすい点・\n"
                      "  確かめ方を具体的に書く\n"
-                     "- 数字は、記事にすでにあるものと下の一次情報のものだけ。「3点」「2つ」「1か月」「5分」のような数え方・期間・\n"
-                     "  回数も新しい数字に数えて機械が戻す。項目を挙げるときは「次の点」「次の手順」のように数を書かずに並べる\n"
+                     "- 決定支援に要る仮の計算例（「仮に時給2,000円の担当者が月10時間かけるなら」）と判断の目安（「3つ以上当てはまるなら」）は\n"
+                     "  書いてよい。仮の数字は「仮に」「例えば」で始まる文に書き、実際の数字と取り違えない書き方にする。当社の実績・\n"
+                     "  統計・相場として書く数字は、記事にすでにあるものと下の一次情報のものを使う\n"
                      "- 一次情報の文が長いとき（1文が100字を超える）は、数字・出典・時点を変えずに2〜3文に分けて入れ、1段落は150字以内に\n"
                      "  収める。1文を丸ごと貼ると「長文」「段落が200字以内」の警告が増えて機械が戻す（2026-10-20 の実地の試し）\n"
                      "- 当社調べ（出典: 当社調べ）の文は記事に2つまで。書き出し（いつ・いくつの AI に聞いたか）は1回だけ書き、\n"
                      "  2つ目は「同じ調べでは」で続ける。数字・AI の数・時期・質問の文は変えない\n"
                      "- 抽出性: 冒頭の2文で結論を言い切る。各H2の直後の1文は、その節の問いへの答えを単体で通る形で言い切る。\n"
                      "  「これ」「それ」で前を指さない\n"
-                     "- 決定支援: 「◯◯なら A、△△なら B」の条件の分かれ目と、やらない判断の材料、今日できる次の一歩を置く\n"
+                     "- 決定支援: 「◯◯なら A、△△なら B」の条件の分かれ目と、やらない判断の材料、今日できる次の一歩を、分かれ道ごとに置く。\n"
+                     "  税・法律の判断を「税理士に確認してください」で終わらせず、「◯◯なら自分で決めてよい／△△なら税理士に聞く」と書く\n"
                      "- 出典の URL は、記事にあるものと下の一次情報に書かれたものだけ。新しい URL・制度名・金額・締切を足さない\n"
                      "- title・description・keyword・slug・category・date は変えない。点数（score・score_breakdown）と quality_ で始まる\n"
                      "  項目は書かない・変えない・消さない（機械が書く）。FAQ はフロントマターと本文の両方を同じ文にする\n"
@@ -1650,7 +1652,7 @@ def guard_message(rc):
     return f"既存記事と食い合います（kw_guard 終了コード{rc}）"
 
 
-def check(slug, before, before_warns, snap=None, allowed="", terms=(), blocked_ok=None):
+def check(slug, before, before_warns, snap=None, allowed="", terms=(), blocked_ok=None, numbers=True):
     """直した結果を検算する。通らない理由を返す（空なら合格）。
 
     blocked_ok は直す前からビルドが止めていた行（BLOCKED の行の集まり）。渡したときは、その行は検算に数えない
@@ -1687,7 +1689,9 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=(), blocked_o
         return f"説明文が{len(d1)}字（100〜160字）"
 
     b = before[2]
-    new_nums = new_fact_numbers(b, after, allowed)
+    # 公開前の品質ループの直しは数字の検算をしない（2026-10-20 運用者「事実でない数字を防ぐ検算なしにして」。
+    # 決定支援の90点に要る仮の計算例・判断の目安の数字まで戻していた）。ほかの種類の直しは今までどおり見る
+    new_nums = new_fact_numbers(b, after, allowed) if numbers else {}
     if new_nums:
         return f"本文に無かった数字が増えました: {dict(list(new_nums.items())[:4])}"
     lost = sources(b) - sources(after)
@@ -2129,12 +2133,13 @@ def _apply_one(item, edited, orig):
         if t2 != t:
             p.write_text(t2, encoding="utf-8", newline="")
 
+    nums = kind != "quality_loop"
     ng = check(slug, before, before_warns, snap, allowed,
-               item.get("terms") or (), item.get("blocked_ok"))
+               item.get("terms") or (), item.get("blocked_ok"), numbers=nums)
     if ng.startswith("警告が増えました") and fix_mechanical(slug, before_warns):
         # 長さの警告は分ける道具が決まった形で直せる。他の検算は1つも緩めず、もう1回だけ通す
         ng = check(slug, before, before_warns, snap, allowed,
-                   item.get("terms") or (), item.get("blocked_ok"))
+                   item.get("terms") or (), item.get("blocked_ok"), numbers=nums)
     if not ng and kind == "aisplit":
         after_now = p.read_text(encoding="utf-8-sig")
         if item["claims"][0] not in after_now:

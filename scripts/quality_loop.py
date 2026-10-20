@@ -45,6 +45,7 @@ import rubric as R  # noqa: E402
 ARTICLES = ROOT / "articles"
 LOG = ROOT / "data" / "quality_loop.jsonl"
 ROUNDS = 2                  # 1回の実行で直す回数（運用者「1度や2度で完璧に」）
+MAX_ROUNDS = 2              # 直す回数は増やさない（運用者「最大でも二回で90に」2026-10-21）
 SCORE_MIN = 4               # 1回の採点の見込み（分）。予算の残りがこれより少なければ採点を始めない
 IMPROVE_MIN = 14            # 1回の直し（AI＋検算＋ビルド）と採点し直しの見込み（分）
 SURVEY_MIN = 6              # 当社調べ（AI に聞いて数える）の見込み（分）。同じ月に測った記事は聞き直さない
@@ -292,7 +293,10 @@ def lower(a, b):
     out = {"axes": {}, "quotes": {}, "weak": {}}
     for k in AXIS_KEYS:
         src = a if a["axes"][k] <= b["axes"][k] else b
-        out["axes"][k], out["quotes"][k], out["weak"][k] = src["axes"][k], src["quotes"][k], src["weak"][k]
+        out["axes"][k], out["quotes"][k] = src["axes"][k], src["quotes"][k]
+        # 弱い点は2回分を合わせて渡す（低い方の回だけを渡すと、直した後の採点でもう一方の指摘が出て点が上下した）
+        other = b if src is a else a
+        out["weak"][k] = list(dict.fromkeys(list(src["weak"][k]) + list(other["weak"][k])))
     return out
 
 
@@ -519,6 +523,16 @@ def machine_note(slug):
         out = [f"- 見出し「{h}」の直後の1文が、前を読まないと分からない書き出し（主語・対象を入れて言い切る）"
                for h in SC.extract_issues(body)]
         out += [f"- {x}" for x in SC.decision_issues(body)]
+        # 本文の途中で前を指す文（「前者」「どちら」「この20日」）。採点は見出し直下に限らず拾う（2026-10-21 の試し）
+        out += [f"- 前の文を読まないと分からない文（主語・対象を書き入れる）:「{x}」" for x in SC.pointing_sentences(body)]
+        if not SC.HYPO.search(re.sub(r"<[^>]+>", "", body)):
+            out.append("- 仮の計算例が無い。「仮に◯◯なら△△」の形で、読者が自分の数字を当てはめられる例を1つ置く")
+        # 当社調べを測ってあるのに記事に1つも無ければ、入れるよう名指しする（2026-10-21 の試しで、材料に渡しても使われなかった）
+        import own_survey
+        res = own_survey.load(site_of(slug), slug)
+        if res.get("claims") and not any(c[:12] in body for c in res["claims"]) and "当社調べ" not in body:
+            out.append("- 当社調べ（下の一次情報の「出典: 当社調べ」の文）が記事に1つも無い。主題に合う節に1〜2文、数字・AI の数・"
+                       "時期・質問の文を変えずに入れる")
         return "\n".join(out)
     except Exception:  # noqa: BLE001
         return ""
@@ -640,6 +654,8 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
             "double": sc["double"], "state": "passed" if sc["ok"] else "scoring", "weak": sc.get("weak", {})})
     print(f"  {'○' if sc['ok'] else '×'} {name}: 総合{sc['total']}（" + "・".join(
         f"{AXIS_NAME[k]}{sc['axes'][k]}" for k in AXIS_KEYS) + f"）{'・2回採点' if sc['double'] else ''}")
+    # 点が下がった直しは捨て、最高点の版を残す（2026-10-21 の試しで 80→87→80 と下がった版が残った）
+    best_text, best = read(slug), sc
     while not sc["ok"] and done < rounds and budget.ok(IMPROVE_MIN):
         done += 1
         if "blocked" not in ctx:
@@ -658,6 +674,16 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
             print(f"要対応: {name} の採点し直しができませんでした（{why2}）")
             record({**base, "action": "score", "state": "error", "why": why2[:200]})
             break
+        if sc2["total"] > sc["total"] and done >= rounds and rounds < MAX_ROUNDS:
+            # 点が上がっているあいだは、1回の実行で直す回数を増やす（2回では80点前後で止まった。2026-10-21 の試し）
+            rounds += 1
+        if sc2["total"] < best["total"]:
+            write(slug, best_text)
+            record({**base, "action": "revert", "round": prior + done, "total": sc2["total"], "kept": best["total"]})
+            print(f"     採点し直し: 総合{sc2['total']}（前の{best['total']}点より下がったので、前の版に戻しました）")
+            sc = dict(best, weak=sc2.get("weak", best.get("weak")), quotes=sc2.get("quotes", best.get("quotes")))
+            continue
+        best_text, best = read(slug), sc2
         sc = sc2
         record({**base, "action": "score", "round": prior + done, "axes": sc["axes"], "total": sc["total"],
                 "ok": sc["ok"], "double": sc["double"], "state": "passed" if sc["ok"] else "scoring",

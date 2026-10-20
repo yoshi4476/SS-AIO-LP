@@ -273,8 +273,9 @@ def test_machine_only_writes_scores():
                                                    "平均5.1位" in prompt and "2026-10時点" in prompt), (True, True))
     check("一次情報の数字は増えてよい数字に入る", "5.1" in allowed, True)
     check("点数の行は変えさせない（指示）", "点数（score・score_breakdown）と quality_ で始まる" in A.WHAT["quality_loop"], True)
-    # 2026-10-20 の実地の試し: 直しが2回とも「3点」「1か月近く」を足して数字の検算で戻された
-    check("数え方・期間も新しい数字だと指示する", "数え方・期間" in A.WHAT["quality_loop"], True)
+    # 2026-10-20 の実地の試し: 直しが2回とも「3点」「1か月近く」を足して数字の検算で戻された。その後、運用者の決定で
+    # 品質ループの直しは数字の検算をしない（「事実でない数字を防ぐ検算なしにして」）。仮の計算例・目安を書けと指示する
+    check("仮の計算例・判断の目安を書いてよいと指示する", "仮の計算例" in A.WHAT["quality_loop"], True)
     # 2回目の試し: 一次情報の213字の1文を丸ごと貼り、長文・段落の警告で戻された
     check("長い一次情報の文は数字を変えずに分けると指示する", "数字・出典・時点を変えずに2〜3文に分けて" in A.WHAT["quality_loop"], True)
     sc = {"axes": {"originality": 70, "extractability": 85, "decision": 85}, "quotes": {k: "x" for k in QL.AXIS_KEYS},
