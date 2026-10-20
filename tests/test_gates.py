@@ -2473,8 +2473,10 @@ def test_question_and_faq_pages():
     data = [(e["name"], e["acceptedAnswer"]["text"]) for e in faq[0]["mainEntity"]] if len(faq) == 1 else []
     check("よくある質問: 画面と構造化データが同じ", shown == data and len(data) >= 10, True)
     facts = (ROOT / "data" / "first_party_facts.json").read_text(encoding="utf-8")
-    check("よくある質問: 実績の数字は登録済みの事実から（AIO 15件・10件）",
-          '"denominator": 15' in facts and "AIO運用を2026年5月に開始した10件" in facts, True)
+    # AIO・SEO の件数は 2026-10-20 に運用者がシートの数字（AIO 22件・SEO 37件）を正とした
+    check("よくある質問: 実績の数字は登録済みの事実から（AIO 22件・SEO 37件・10件）",
+          ("AIO対策の運用を22件" in facts, "SEO対策の運用を37件" in facts, "AIO運用を2026年5月に開始した10件" in facts,
+           "AIO運用15件" in s), (True, True, True, False))
     check("よくある質問: フッターから行ける", 'href="/faq/"' in (site / "index.html").read_text(encoding="utf-8"), True)
 
 

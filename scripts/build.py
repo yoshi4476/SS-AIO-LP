@@ -205,7 +205,7 @@ def organization():
 _B = _C.get("byline") or {}
 AUTHOR_NAME = _B.get("name") or "原口 優"
 AUTHOR_ROLE = _B.get("role") or "セブンセンシズ株式会社 代表取締役／MEO・AI検索対策の実務歴6年"
-AUTHOR_BIO = _B.get("bio") or "通算3,200店舗以上の運営実績を持つMEO支援「G-ran」をはじめとする集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。"
+AUTHOR_BIO = _B.get("bio") or "AIO・SEO・MEOで累計3,200件以上（うちMEO支援「G-ran」で2,000件以上）の集客支援の実務経験をもとに、AIO・LLMO・SEO・MEOの実践情報を発信しています。"
 # 経歴・実績の実体があるページへ。無い人を指すと E-E-A-T の主張が空振りする
 AUTHOR_URL = _B.get("url") or f"{SITE_URL}/author/haraguchi/"
 # 外部の実在プロフィール。サイトの外でも同じ人物だと機械が結び付けられるようにする

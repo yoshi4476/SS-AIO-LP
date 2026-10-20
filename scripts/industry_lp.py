@@ -4,7 +4,7 @@
 全業種向けの /lp/ だけでは、医療・不動産・工務店の読者が「自分の業種の話か」を確かめられない。
 業種ならではの悩み → 当社が行うこと → 業種が選ばれた状態の30秒診断 → その業種の記事 → よくある質問、の順に並べる。
 記事一覧とよくある質問は、その業種の公開済み記事から集める（新しい文は作らない。記事が増えるほど厚くなる）。
-悩みと対策の文に数字は書かない。実績は公開済みの表現（G-ran 通算3,200店舗以上・2026年7月時点）だけを使う。
+悩みと対策の文に数字は書かない。実績は公開済みの表現（AIO・SEO・MEOで累計3,200件以上・うちMEO 2,000件以上・2026年10月時点）だけを使う。
 """
 import html
 import json
@@ -253,7 +253,7 @@ def body(key, metas, faq_pairs, post_tile, site_url):
            f'<section class="ilp-pain"><span class="ilp-eb">課題</span><h2>{_e(c["name"])}によくあるお悩み</h2><div class="ilp-cards">{pains}</div></section>',
            data_section(key, c),
            f'<section class="ilp-fix"><span class="ilp-eb">支援内容</span><h2>セブンセンシズが行うこと</h2><div class="ilp-cards">{fixes}</div>'
-           '<p class="ilp-proof" style="margin-top:1rem">集客支援の実務: 店舗集客「G-ran」で通算3,200店舗以上（2026年7月時点）の運用に携わってきました。'
+           '<p class="ilp-proof" style="margin-top:1rem">集客支援の実務: AIO・SEO・MEOで累計3,200件以上（うちMEO「G-ran」で2,000件以上）の支援に携わってきました（2026年10月時点）。'
            'ここに挙げた業種のほかにも対応しています。</p></section>',
            '<section class="ilp-band"><h2>まずは、今の状態を知るところから</h2>'
            '<p>現状分析は無料です。30秒の診断だけでも、直す順番が分かります。</p><div class="btns">'
