@@ -90,7 +90,7 @@ faq:
 
 途中でも試算表は出せます。記帳の後に出す試算表は、照合の前の確認用です。**経営判断に使ってよいのは、最後の段階で出した試算表だけ**と考えてください。
 
-締め後の試算表は、月次の報告書の元になります。報告書の書き方は[月次決算報告書の書き方](/blog/getsuji-kessan-houkokusho-kakikata/)にまとめています。
+締め後の試算表は、月次の報告書の元になります。報告書の書き方は[月次決算報告書の書き方](/blog/getsuji-kessan-houkokusho-kakikata/)にまとめています。締め後の試算表を前月・前年同月・予算と比べる手順は、[月次決算の分析方法](/blog/getsuji-kessan-bunseki-houhou/)で解説しています。
 
 法律は試算表の様式までは定めていません。<a href="https://laws.e-gov.go.jp/law/417AC0000000086" target="_blank" rel="noopener">会社法</a>の第432条が求めるのは、適時に、正確な会計帳簿を作ることです。中小機構の<a href="https://j-net21.smrj.go.jp/qa/financial/Q0807.html" target="_blank" rel="noopener">J-Net21</a>も、経営状況をつかむ前提として記帳を挙げています。毎月締めるかどうかは、会社が決めることです。
 
