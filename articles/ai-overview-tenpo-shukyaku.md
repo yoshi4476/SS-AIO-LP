@@ -190,7 +190,9 @@ AIの回答に自社サイトが載る準備ができているかは、[AI検索
 
 当社のAIO運用を2026年5月に始めた10件では、6件が1か月以内に主要な語の平均順位が上がりました。2か月以内では8件、3か月以内では10件です（2026年5〜8月の集計。わずかな上昇も含みます）。出典は<a href="https://ai.7senses.co.jp/data/aio-junni-madeno-tsukisuu/" target="_blank" rel="noopener">当社の一次データ</a>です。
 
-当社はMEO運用サービス「G-ran」を含むAIO・SEO・MEOの支援で累計3,200件以上（うちMEO 2,000件以上）を運用してきました。地図とサイトの両方を見て、どちらを先に整えるかを一緒に決められます。業種ごとの進め方は[クリニックのAI検索対策](/aio/clinic-ai-kensaku-taisaku/)や[LLMO店舗集客とは？](/aio/llmo-tenpo-shukyaku/)も参考にしてください。
+当社はMEO運用サービス「G-ran」を含むAIO・SEO・MEOの支援で累計3,200件以上（うちMEO 2,000件以上）を運用してきました。地図とサイトの両方を見て、どちらを先に整えるかを一緒に決められます。
+
+業種ごとの進め方は[クリニックのAI検索対策](/aio/clinic-ai-kensaku-taisaku/)や[LLMO店舗集客とは？](/aio/llmo-tenpo-shukyaku/)も参考にしてください。
 
 <div class="cta-box"><p>SEO・AIO・LLMOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
 

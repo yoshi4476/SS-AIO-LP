@@ -53,7 +53,9 @@ diagrams:
 
 <div class="definition-box"><span class="term">飲食店の集客方法とは</span>、MEO(マップ集客)・SEO(検索集客)・AIO(AI検索対策)という3つの施策を、どの順番で・どこまで自店でやるかを決めて実行することです。グルメサイトやSNSは、この3施策を補う個別の媒体という位置づけになります。</div>
 
-基本の手順は[飲食店のMEO対策](/meo/inshokuten-meo-taisaku/)や[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)で個別に解説しています。本記事はそれらをどの順番で・どれだけ自店でやるかという==全体地図の役割==を担います。個別の手順を知っていても、着手する順番を誤ると成果が出るまでの期間が伸びてしまいます。
+基本の手順は[飲食店のMEO対策](/meo/inshokuten-meo-taisaku/)や[MEO対策のやり方7ステップ](/meo/meo-taisaku-yarikata/)で個別に解説しています。本記事はそれらをどの順番で・どれだけ自店でやるかという==全体地図の役割==を担います。
+
+個別の手順を知っていても、着手する順番を誤ると成果が出るまでの期間が伸びてしまいます。外部に任せる場合は、[飲食店の集客コンサルを依頼前に見極める3つの数字](/aio/inshokuten-shukyaku-consul/)で頼み先の型を確かめてください。
 
 <figure><img src="/images/inshokuten-shukyaku-hoho/steps.png" alt="飲食店集客の優先順位3ステップ: MEO整備、SEO記事整備、AI検索対応" loading="lazy"><figcaption>飲食店集客の優先順位3ステップ</figcaption></figure>
 

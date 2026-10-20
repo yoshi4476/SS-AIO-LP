@@ -1,4 +1,4 @@
-# KPIフィードバック（自動更新: 2026-10-20 ローカル集計）
+# KPIフィードバック（自動更新: 2026-10-21 ローカル集計）
 
 > Daily KPI Report（毎日22:13）が自動更新する。Morning/Afternoon Pipeline は冒頭でこのファイルを読み込み、成功パターンを踏襲・失敗パターンを回避する。
 
@@ -6,16 +6,16 @@
 
 | 指標 | 値 | 備考 |
 |:----|:--|:----|
-| 累計公開記事数 | 467本 | カテゴリ内訳: AIO・LLMO76本、SEO25本、MEO20本、AI集客50本 |
-| 直近7日の公開 | 27本 | 目標: 週14本（毎日2本） |
+| 累計公開記事数 | 468本 | カテゴリ内訳: AIO・LLMO76本、SEO25本、MEO20本、AI集客50本 |
+| 直近7日の公開 | 25本 | 目標: 週14本（毎日2本） |
 | 品質スコア平均 | 93.8点 | 公開基準90点・推奨95点 |
-| 平均文字数 | 5,582字 | 基準5,000字以上 |
-| 非公開（審査未達） | 4本 | aio-gaichuu、fudousan-kaisha-shukyaku-houhou、getsuji-kessan-bunseki-houhou、kensetsugyou-gaichuuhi-shiwake |
+| 平均文字数 | 5,599字 | 基準5,000字以上 |
+| 非公開（審査未達） | 4本 | aio-gaichuu、fudousan-kaisha-shukyaku-houhou、getsuji-kessan-bunseki-houhou、inshokuten-shukyaku-consul |
 | DR / KW数 / AI計測 | — | GA4・GSC・Ahrefs稼働後に自動反映 |
 
 ## 今日の主な動き
 
-- 2026-10-20 公開: 本日分は未公開（8:00/19:00の実行結果を確認）
+- 2026-10-21 公開: 建設業の外注費の仕訳で起きやすい3つの誤り｜未成工事・一人親方・7割控除
 
 ## 成功パターン（これを踏襲せよ）
 
