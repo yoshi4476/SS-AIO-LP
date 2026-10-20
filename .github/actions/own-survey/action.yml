@@ -7,6 +7,9 @@ description: >-
   Codex がログイン情報を更新したら、AI を動かさない手順で Secrets に書き戻す（書き戻さないと業種調査の Codex も止まる）。
 
 inputs:
+  args:
+    description: own_survey.py に渡す選び方（--targets＝直している記事と新しい記事／--rescore-auto N＝点の低い公開済みの記事）
+    default: --targets
   sites:
     description: 対象の社（社の id。空なら全社の直している記事と新しい記事）
     default: ""
@@ -32,6 +35,7 @@ runs:
         CODEX_AUTH_JSON: ${{ inputs.codex_auth }}
         GEMINI_API_KEY: ${{ inputs.gemini_key }}
         SITES: ${{ inputs.sites }}
+        ARGS: ${{ inputs.args }}
       run: |
         rm -f "$RUNNER_TEMP/codex_auth_new"
         before=""
@@ -56,7 +60,7 @@ runs:
         fi
         unset CODEX_AUTH_JSON
         # shellcheck disable=SC2086
-        python scripts/own_survey.py --targets $SITES 2>&1 | grep -E '^OWN_SURVEY' || true
+        python scripts/own_survey.py $ARGS $SITES 2>&1 | grep -E '^OWN_SURVEY' || true
 
     # AI を動かさない手順で書き戻し、写しを消す（この後に続く AI の手順にログイン情報を残さない）
     - shell: bash

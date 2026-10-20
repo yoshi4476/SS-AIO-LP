@@ -748,14 +748,59 @@ def new_articles(sites=()):
     return out
 
 
+def _audit_scores():
+    """公開後の抜き取り採点（score_audit）の点。100点に直した値（無ければ空）"""
+    try:
+        d = json.loads((ROOT / "data" / "score_audit.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    out = {}
+    for slug, v in d.items():
+        a = (v or {}).get("audit") or {}
+        if a.get("total") is not None and a.get("max"):
+            out[slug] = round(100 * a["total"] / a["max"])
+    return out
+
+
+def _well_read(sid):
+    """よく読まれているページの URL（直近28日に10位以内でクリックのある語を持つ）。直すと順位が揺れるので後回しにする"""
+    import client_private as CP
+    try:
+        p = CP.find_file(f"data/ranks/{sid}.json")
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001  順位が読めなければ後回しにしない
+        return set()
+    since = (date.today() - timedelta(days=28)).isoformat()
+    out = set()
+    for day, items in d.items():
+        if day < since:
+            continue
+        for r in items or []:
+            if (r.get("clicks") or 0) > 0 and (r.get("pos") or 99) <= 10:
+                out.add(str(r.get("url", "")).rstrip("/"))
+    return out
+
+
+def control(slug, month=None):
+    """対照群（触らない記事）。月ごとに5本に1本を入れ替える。全部を直すと、直した効果を比べる相手がいなくなる"""
+    import hashlib
+    month = month or date.today().isoformat()[:7]
+    return int(hashlib.md5(f"{slug}@{month}".encode("utf-8")).hexdigest(), 16) % 5 == 0
+
+
 def rescore_targets(per_site=None, sites=(), path=None):
-    """週次の採点し直し: 公開済み（点数が基準以上）の記事を社ごとに per_site 本。前に届かなかった記事を先に、
-    次に一度も採点していない記事を公開の古い順に"""
+    """公開済みの記事の採点し直し: 社ごとに per_site 本。前に届かなかった記事を点の低い順に、次に一度も採点していない
+    記事を、公開後の抜き取り採点の点が低い順（点が無ければ公開の古い順）に。よく読まれている記事（10位以内でクリックあり）は
+    後回しにし、対照群（月ごとに5本に1本）は触らない（一気に直したときの順位の揺れと、効果を比べられなくなることを防ぐ）"""
     import sites as S
-    seen = {}
+    seen, last_total = {}, {}
     for r in rows(path):
         if r.get("slug") and r.get("state") in ("passed", "improving") and r.get("action") in ("pass", "hold"):
             seen[r["slug"]] = r["state"]
+            if r.get("total") is not None:
+                last_total[r["slug"]] = r["total"]
+    audit = _audit_scores()
+    read_well = {}
     by_site = {}
     for s in _articles():
         m = meta_of(read(s))
@@ -765,9 +810,13 @@ def rescore_targets(per_site=None, sites=(), path=None):
         if sites and sid not in sites:
             continue
         rank = 0 if seen.get(s) == "improving" else 1 if s not in seen else 2
-        if rank == 2:
+        if rank == 2 or (rank == 1 and control(s)):
             continue
-        by_site.setdefault(sid, []).append((rank, str(m.get("date") or ""), s))
+        if sid not in read_well:
+            read_well[sid] = _well_read(sid)
+        busy = any(u.endswith(f"/{s}") for u in read_well[sid])
+        score = last_total.get(s, 100) if rank == 0 else audit.get(s, 100)
+        by_site.setdefault(sid, []).append((rank, busy, score, str(m.get("date") or ""), s))
     out = []
     for sid, items in sorted(by_site.items()):
         n = RESCORE_PER_SITE if per_site is None else per_site
@@ -775,7 +824,48 @@ def rescore_targets(per_site=None, sites=(), path=None):
             n = int((S.load(sid) or {}).get("quality_rescore", n))     # 社ごとの設定が先
         except Exception:
             pass
-        out += [s for _, _, s in sorted(items)[:max(0, n)]]
+        out += [x[-1] for x in sorted(items)[:max(0, n)]]
+    return out
+
+
+RESCORE_WEEK_CAP = 12      # 毎日の記事の枠で直す公開済みの記事の上限（社ごと・7日）
+READY_PASSES, READY_RATE = 3, 0.5
+
+
+def auto_ready(path=None, today=None, days=14):
+    """公開済みの記事を毎日直し始めてよいか: 直近14日の公開前の採点で、合格3本以上・合格率50%以上
+    （運用者「これで90点以上であれば評価が低い記事を修正していって」2026-10-20）"""
+    today = today or date.today()
+    since = (today - timedelta(days=days)).isoformat()
+    scored, passed = set(), set()
+    for r in rows(path):
+        if r.get("mode") not in ("new", "pending") or str(r.get("at", ""))[:10] < since or not r.get("slug"):
+            continue
+        if r.get("action") == "score":
+            scored.add(r["slug"])
+        if r.get("action") == "pass":
+            passed.add(r["slug"])
+    ok = len(passed) >= READY_PASSES and len(passed) >= READY_RATE * max(1, len(scored))
+    return ok, len(passed), len(scored)
+
+
+def week_done(sid, path=None, today=None):
+    """この7日に公開済みの記事として採点し直した本数（社ごと）"""
+    today = today or date.today()
+    since = (today - timedelta(days=7)).isoformat()
+    return len({r["slug"] for r in rows(path) if r.get("mode") == "rescore" and r.get("action") == "score"
+                and r.get("site") == sid and str(r.get("at", ""))[:10] >= since and r.get("slug")})
+
+
+def auto_targets(n, sites=(), path=None):
+    """毎日の記事の枠で直す公開済みの記事（社ごとに n 本まで・7日で RESCORE_WEEK_CAP 本まで）。始めてよくなければ空"""
+    ok, _, _ = auto_ready(path)
+    if not ok:
+        return []
+    out = []
+    for s in rescore_targets(n, sites, path):
+        if week_done(site_of(s), path) < RESCORE_WEEK_CAP:
+            out.append(s)
     return out
 
 
@@ -858,6 +948,8 @@ def main(argv=None):
     ap.add_argument("--rescore", type=int, default=None, metavar="N",
                     help="公開済みの記事を社ごとに N 本採点し直す（sites/<id>.json の quality_rescore があればそちら）")
     ap.add_argument("--report", action="store_true", help="直近28日の通過率")
+    ap.add_argument("--rescore-auto", type=int, default=None, metavar="N",
+                    help="公開前の採点で90点以上が出ていれば、点の低い公開済みの記事を社ごとに N 本直す（7日で12本まで）")
     ap.add_argument("--sites", default="", help="この社の記事だけ（空白かカンマ区切り。公開の id も可）")
     ap.add_argument("--slugs", default="", help="この記事だけ（カンマ区切り）")
     ap.add_argument("--budget-min", type=int, default=None,
@@ -879,7 +971,7 @@ def main(argv=None):
         for s in fresh:
             if path_of(s).is_file():
                 mark_improving(s)
-    if a.pending or a.new or a.rescore is not None:
+    if a.pending or a.new or a.rescore is not None or a.rescore_auto is not None:
         import shutil
         if not (shutil.which("claude") or shutil.which("claude.cmd")):
             print("要対応: claude が見つかりません。採点できないため、新しい記事は改善中のまま公開しません")
@@ -900,6 +992,15 @@ def main(argv=None):
     if a.new:
         print(f"■ この回に書いた記事: {len(fresh)}本（別工程の3観点の採点 → 届くまで直す）")
         add(run(fresh, "new", budget, a.rounds))
+    if a.rescore_auto is not None:
+        ok, np_, ns = auto_ready()
+        if not ok:
+            print(f"RESCORE_AUTO=wait（直近14日の公開前の採点で合格 {np_}本 / {ns}本。{READY_PASSES}本以上・"
+                  f"{int(READY_RATE * 100)}%以上で始めます）")
+        else:
+            todo = auto_targets(a.rescore_auto, sites)
+            print(f"■ 点の低い公開済みの記事を直す: {len(todo)}本（合格 {np_}本 / {ns}本）")
+            add(run(todo, "rescore", budget, a.rounds))
     if a.rescore is not None:
         todo = want or rescore_targets(a.rescore, sites)
         print(f"■ 公開済みの記事の採点し直し: {len(todo)}本（届かなければ公開のまま直す）")

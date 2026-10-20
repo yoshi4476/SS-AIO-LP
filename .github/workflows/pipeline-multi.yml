@@ -751,6 +751,43 @@ jobs:
           r=$(sed -n 's/^QUALITY_LOOP=//p' "$RUNNER_TEMP/quality_new.txt" | tail -1)
           echo "公開前の品質ループ（${{ steps.site.outputs.pub }}）: ${r:-結果の印がありません}" >> "$GITHUB_STEP_SUMMARY"
 
+      # 点の低い公開済みの記事を、残った時間で1本直す（運用者「これで90点以上であれば評価が低い記事を修正していって」2026-10-20）。
+      # 公開前の採点で合格が出てから（直近14日で合格3本以上・50%以上）。社ごとに7日で12本まで。よく読まれている記事
+      # （10位以内でクリックあり）は後回し、対照群（月ごとに5本に1本）は触らない。届かなければ公開のまま直す（取り下げない）
+      - name: 当社調べ（点の低い公開済みの記事・鍵のある機械の手順）
+        if: always() && steps.lock.outcome == 'success' && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        timeout-minutes: 10
+        uses: ./.github/actions/own-survey
+        with:
+          args: --rescore-auto 1
+          sites: "${{ steps.site.outputs.id }}"
+          claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
+          gemini_key: ${{ secrets.GEMINI_API_KEY }}
+          gh_token: ${{ secrets.GH_SECRET_TOKEN }}
+
+      - name: 点の低い公開済みの記事を1本直す（公開前の採点で90点以上が出てから）
+        if: always() && steps.lock.outcome == 'success' && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        timeout-minutes: 35
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_URL: ${{ secrets.HUB_URL }}
+        run: |
+          [ -z "$ANTHROPIC_API_KEY" ] && unset ANTHROPIC_API_KEY
+          python scripts/agent_guard.py --verify || exit 0
+          HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/${{ steps.site.outputs.pub }}" 2>/dev/null || true)"
+          export HUB_AGENT_TOKEN
+          # 配信・コミットの15分を残し、1本を直しきれる時間（25分）が無ければ始めない
+          used=$(( ( $(date -u +%s) - $(date -u -d "$RUN_START" +%s) ) / 60 ))
+          budget=$(( 105 - used )); [ "$budget" -gt 30 ] && budget=30
+          if [ "$budget" -lt 25 ]; then echo "残り時間が足りないため、公開済みの記事は直しません（${budget}分）"; exit 0; fi
+          python scripts/quality_loop.py --rescore-auto 1 --sites "${{ steps.site.outputs.id }}" --budget-min "$budget" \
+            > "$RUNNER_TEMP/quality_rescore.txt" 2>&1 || true
+          cat "$RUNNER_TEMP/quality_rescore.txt"
+          mkdir -p automation/logs
+          grep '^要対応' "$RUNNER_TEMP/quality_rescore.txt" >> automation/logs/findings.txt || true
+
       # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更は戻す。この後のコミットに入れない
       - name: AIの変更のうち触ってはいけない場所を戻す
         # 鍵を外す手順が動かなかった回（前の手順の失敗・取り消し）は動かさない。控えが無いまま戻すと全部の原稿を

@@ -155,7 +155,13 @@ def claims(res):
     import compete
     y, m = res["date"][:4], int(res["date"][5:7])
     n = len(res["engines"])
-    head = f"当社が{y}年{m}月に{n}つのAI（{'・'.join(res['engines'])}）へ「{res['question']}」と聞いたところ"
+    who = "・".join(res["engines"])
+    # 書き出しを記事ごとに散らす（同じ一文が数百本に並ぶと量産の指紋になる。内部リンク文で41.5%が同じ一文だった）
+    import hashlib
+    k = int(hashlib.md5(str(res.get("slug", "")).encode("utf-8")).hexdigest(), 16) % 3
+    head = (f"当社が{y}年{m}月に{n}つのAI（{who}）へ「{res['question']}」と聞いたところ",
+            f"{y}年{m}月に当社が{n}つのAI（{who}）で「{res['question']}」を調べたところ",
+            f"当社調べ（{y}年{m}月、{n}つのAI：{who}）で「{res['question']}」の答えを比べたところ")[k]
     out = []
     rows = [r for r in res["topics"] if r["words"]]
     if rows:
@@ -231,13 +237,28 @@ def targets(sites=()):
 
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    if "--targets" in sys.argv:
+    import quality_loop as Q
+    if "--rescore" in sys.argv:
+        # 週次の公開済みの記事の採点し直し（quality_loop --rescore N と同じ選び方）
+        n = int(args[0]) if args and args[0].isdigit() else 4
+        args = Q.rescore_targets(n)
+        print(f"OWN_SURVEY_TARGETS={len(args)}")
+    elif "--rescore-auto" in sys.argv:
+        # 毎日の記事の枠で直す公開済みの記事（公開前の採点で90点以上が出てから。quality_loop.auto_targets と同じ選び方）
+        import sites as S
+        n = int(args[0]) if args and args[0].isdigit() else 1
+        sids = {S.resolve(x) for x in args[1:]}
+        args = Q.auto_targets(n, sids)
+        print(f"OWN_SURVEY_TARGETS={len(args)}")
+    elif "--targets" in sys.argv:
         # CI の記事の枠: 鍵のある機械の手順で、採点の前に測っておく（採点の工程は鍵を外して動くため、そこでは聞けない）
         import sites as S
         sids = [S.resolve(x) if hasattr(S, "resolve") else x for x in args]
         args = targets(set(sids))
         print(f"OWN_SURVEY_TARGETS={len(args)}")
     if not args:
+        if "--targets" in sys.argv or "--rescore-auto" in sys.argv or "--rescore" in sys.argv:
+            return 0             # 測る記事が無い回
         print(__doc__)
         return 1
     import client_private as CP

@@ -169,9 +169,13 @@ def ask_chatgpt_codex(q):
               "答えの最後に、検索で見て根拠にしたページのURLを全部、1行に1つずつ `SOURCE: <URL>` の形で書いてください。")
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         # 指示は標準入力で渡す（Windows の codex.cmd は引数の改行で切れる）
+        # 手順の鍵（Gemini・Claude など）を引き継がせない。検索で読んだページの指示で答えに鍵を書かせられると、答えの控え
+        # （data/ai_cache）に残る。Codex に要るのは ~/.codex のログイン情報だけ（2026-10-20 の点検）
+        env = {k: v for k, v in __import__("agent_guard").child_env().items()
+               if k not in ("CLAUDE_CODE_OAUTH_TOKEN", "ANTHROPIC_API_KEY")}
         r = subprocess.run([exe, "--search", "exec", "--skip-git-repo-check", "--ephemeral", "-s", "read-only",
                             "-c", 'model_reasoning_effort="low"', "-"], input=prompt, cwd=tmp, capture_output=True,
-                           text=True, encoding="utf-8", errors="replace", timeout=420)
+                           text=True, encoding="utf-8", errors="replace", timeout=420, env=env)
     if r.returncode != 0:
         err = (r.stderr or r.stdout or "")
         if "usage limit" in err.lower():

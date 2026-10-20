@@ -1209,6 +1209,17 @@ jobs:
       # 公開済みの記事を、公開前と同じ別工程の3観点で採点し直す（社ごとに4本・sites/<id>.json の quality_rescore で変えられる）。
       # 前に届かなかった記事を先に、次に一度も採点していない記事を公開の古い順に。届かない記事は公開したまま、検算つきで直す
       # （取り下げない。2026-10-20 運用者の決定）。採点の AI は読むだけ、直しの AI はその1本の写しだけを書く
+      # 採点し直す記事の当社調べを先に測る（採点の工程は鍵を外して動くので、ここで聞く。同じ月は聞き直さない）
+      - name: 当社調べ（採点し直す公開済みの記事・鍵のある機械の手順）
+        timeout-minutes: 15
+        uses: ./.github/actions/own-survey
+        with:
+          args: --rescore 4
+          claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
+          gemini_key: ${{ secrets.GEMINI_API_KEY }}
+          gh_token: ${{ secrets.GH_SECRET_TOKEN }}
+
       - name: 公開済みの記事を公開前と同じ基準で採点し直す
         # 週次のジョブは180分。ほかの工程の時間を食わないよう30分で次を始めない（残りは翌週）
         timeout-minutes: 40
