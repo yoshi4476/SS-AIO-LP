@@ -649,10 +649,15 @@ def test_hist_links_only_to_published():
         m = publish.read_meta(p) or {}
         owner = S.find_category_owner(str(m.get("category", "")))
         if owner and S.load(owner).get("url_prefix"):
-            metas[p.stem] = (owner, publish.gate_ok(m) and ER.reviewed(p.stem), read(p))
+            # 配信される本文で見る（parse_article が未公開の記事へのリンクを文字に戻す。2026-10-20 書く AI が既存の記事に
+            # 改善中の記事へのリンクを足し、コーポレートで404になった）
+            metas[p.stem] = (owner, publish.gate_ok(m) and ER.reviewed(p.stem), publish.parse_article(p)[1])
     fake = {"a": ("s", True, "[x](/blog/b/) [y](https://s.test/blog/c/)"), "b": ("s", False, ""), "c": ("s", True, "")}
     check("検出器: 未公開の原稿へのリンクを拾い、公開済みへのリンクは拾わない",
           links_to_unpublished(fake, {"s": "s.test"}), ["a→b"])
+    check("配信の入口で未公開の記事へのリンクを文字に戻す（似た slug・公開済みは残す）",
+          publish.unlink_unpublished("[x](/blog/b/) [y](https://s.test/blog/b/#h) [z](/blog/b-2/) [w](/blog/c/)", {"b"}),
+          "x y [z](/blog/b-2/) [w](/blog/c/)")
     doms = {o: S.load(o)["domain"] for o, _, _ in metas.values()}
     check("配信する原稿から、同じサイトの未公開の原稿へのリンクが無い", links_to_unpublished(metas, doms), [])
     # 配信先の原稿で、同じサイトの存在しない記事へのリンク（404）

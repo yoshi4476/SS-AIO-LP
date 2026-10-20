@@ -149,7 +149,43 @@ def parse_article(path: Path):
         raise SystemExit(f"フロントマターがありません: {path}")
     # 検索から外した記事（noindex）へのリンクも配信の入口で外す（文は残す。build.py と同じ関数）。
     # main() だけで外すと、描き直し（publish_rerender・republish_images・wp_bridge）が素の原稿で書き戻す
-    return yaml.safe_load(m.group(1)), noindex.unlink(strip_private_links(m.group(2)))[0]
+    return yaml.safe_load(m.group(1)), unlink_unpublished(noindex.unlink(strip_private_links(m.group(2)))[0])
+
+
+_UNPUBLISHED = None
+
+
+def unpublished_slugs(root=None):
+    """原稿はあるが公開の門を通らない記事（改善中・点数なし・足切り）"""
+    global _UNPUBLISHED
+    if _UNPUBLISHED is None or root:
+        out = set()
+        for p in ((root or ROOT) / "articles").glob("*.md"):
+            # read_meta は parse_article を通り、ここへ戻ってくるのでフロントマターだけを直に読む
+            m = re.match(r"^---\s*\n(.*?)\n---\s*\n", p.read_text(encoding="utf-8-sig"), re.S)
+            try:
+                meta = yaml.safe_load(m.group(1)) if m else None
+            except yaml.YAMLError:
+                meta = None
+            if isinstance(meta, dict) and not gate_ok(meta):
+                out.add(p.stem)
+        if root:
+            return out
+        _UNPUBLISHED = out
+    return _UNPUBLISHED
+
+
+def unlink_unpublished(body, slugs=None):
+    """未公開の記事へのリンクを文字に戻す（文は残す）。build.py は自サイトの分を文字に戻すが配信には無く、
+    書く AI が既存の記事に足した改善中の記事へのリンクが本番で404になった（2026-10-20 コーポレート）。
+    改善中の記事が通れば、次の配り直しでリンクが戻る"""
+    slugs = unpublished_slugs() if slugs is None else slugs
+    if not slugs:
+        return body
+    alt = "|".join(re.escape(s) for s in sorted(slugs))
+    url = rf"(?:https?://[^/\s)\"]+)?/(?:[a-z0-9-]+/)*(?:{alt})/?(?:#[^)\s\"]*)?"
+    body = re.sub(rf"\[([^\]]+)\]\({url}\)", r"\1", body)
+    return re.sub(rf'<a\s[^>]*href="{url}"[^>]*>(.*?)</a>', r"\1", body, flags=re.S)
 
 
 def strip_private_links(body):

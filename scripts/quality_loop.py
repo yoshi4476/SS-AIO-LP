@@ -349,6 +349,13 @@ def weak_text(sc):
     return "\n".join(out)
 
 
+def as_of_text(when):
+    """一次情報の時点（2026-07）を本文の書き方（2026年7月）にする。指示では「母数と時期つき」で書かせるのに、
+    時点の数字を許していなかったので「7月」が増えたとして直しが2回とも差し戻された（2026-10-20 aio-gaichuu）"""
+    m = re.fullmatch(r"(\d{4})-(\d{1,2})", str(when or "").strip())
+    return f"{m.group(1)}年{int(m.group(2))}月" if m else ""
+
+
 def materials(site, slug):
     """直しに使ってよい材料と、増えてよい数字・URL（auto_rewrite の検算に渡す allowed）。
     (allowed, {"facts", "experiences", "research"})。材料に無い事実は使わせない"""
@@ -366,7 +373,7 @@ def materials(site, slug):
         src = str(f.get("source") or "").strip()
         when = str(f.get("as_of") or "").strip()
         facts.append(f"- {c}（出典: {src or '自社'}{'・' + when + '時点' if when else ''}）")
-        allowed += [c, src]
+        allowed += [c, src, as_of_text(when)]
     try:
         rows = originality.load_experiences(site)
     except Exception:
@@ -539,6 +546,18 @@ class Budget:
         return self.left() >= need
 
 
+def waiting_materials(slug, site, path=None):
+    """前の回が「材料が足りない」で止めた記事で、材料がまだ増えていないか"""
+    last = [r for r in rows(path) if r.get("slug") == slug and r.get("action") == "hold"]
+    if not last or last[-1].get("need") != "materials":
+        return False
+    try:
+        import material
+        return material.fingerprint(site) == last[-1].get("materials")
+    except Exception:  # noqa: BLE001  材料が読めなければ直しを止めない
+        return False
+
+
 def tries_before(slug, path=None):
     """これまでの実行で直した回数（台帳の improve の行）"""
     return sum(1 for r in rows(path) if r.get("slug") == slug and r.get("action") == "improve")
@@ -555,6 +574,12 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
     else:
         since = ""
     base = {"site": site, "slug": slug, "mode": mode}
+    if mode != "new" and waiting_materials(slug, site):
+        # 材料が足りず一次性が届かなかった記事は、材料が増えるまで Claude で直さない（何度直しても事実を作らない限り上がらず、
+        # 利用枠だけを使う。2026-10-20）。依頼は material_requests.json に残してある
+        print(f"  … {name}: 材料（一次情報・体験・事例）の追加を待っています（改善中のまま。材料が増えた回に直します）")
+        record({**base, "action": "skip", "state": "improving" if not published else "unscored", "why": "材料待ち"})
+        return "skipped"
     if not budget.ok(SCORE_MIN):
         print(f"  … {name}: 時間の残りが足りないため採点しません（改善中のまま。次の回が続けます）")
         record({**base, "action": "skip", "state": "improving" if not published else "unscored"})
@@ -602,9 +627,29 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
                    refresh_date=(mode == "pending" and old_day and old_day < date.today().isoformat()))
         record({**base, "action": "pass", "state": "passed", "total": sc["total"], "axes": sc["axes"],
                 "rounds": prior + done, "since": since})
+        try:
+            import material
+            material.resolve(site, slug)
+        except Exception:  # noqa: BLE001  依頼が消せなくても合格は止めない
+            pass
         return "passed"
     state = "improving"
-    record({**base, "action": "hold", "state": state, "total": sc["total"], "rounds": prior + done, "since": since})
+    need = asked = ""
+    if sc["axes"].get("originality", 100) < 80:
+        # 材料のある直しをしても一次性が届かなければ、足りないのは書き方ではなく材料。何を教えてほしいかを残す
+        try:
+            import material
+            material.ask(site, slug, str(meta_of(read(slug)).get("keyword") or ""),
+                         (sc.get("weak") or {}).get("originality") or [])
+            need, asked = "materials", material.fingerprint(site)
+        except Exception as e:  # noqa: BLE001
+            print(f"  （材料の依頼を残せませんでした: {type(e).__name__}）")
+    record({**base, "action": "hold", "state": state, "total": sc["total"], "rounds": prior + done, "since": since,
+            "axes": sc["axes"], "need": need, "materials": asked})
+    if need:
+        print(f"要対応: {name} は一次性が{sc['axes']['originality']}点で、登録された材料では80点に届きません。"
+              "何を教えてほしいかを material_requests.json に残しました（python scripts/material.py --requests）。"
+              "材料が増えるまで直しを待ちます")
     if published:
         print(f"要対応: 公開済みの {name} が基準に届きません（総合{sc['total']}・{sc['why']}）。公開は続け、来週も直します")
     else:

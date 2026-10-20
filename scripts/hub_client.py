@@ -216,6 +216,12 @@ def next_kw(site):
                     "picked_by": "打ち出し外の語を飛ばした" if dropped(kw0) else "担当領域の外の語を飛ばした"})
         kw0 = got["keyword"]
 
+    # お客様の社は、材料（一次情報・体験・事例）のある題を先に書く。材料の無い題は一次性が40点前後で止まり、
+    # 事実を作らない限り何度直しても公開できない（2026-10-20）。ある題が尽きたら無い題も書く（書かない選択はしない）
+    hit = _with_material(site, got, kw0, todo)
+    if hit:
+        return hit
+
     # 同じ規則に当たる語の中では、15位以内に届きそうな細い語を先に書く（kw_reach の段。
     # 段が同じなら台帳の並びのまま）。公開1〜4週に15位以内へ入った記事だけが6週以降も残った（2026-10-05）
     try:
@@ -273,6 +279,29 @@ def next_kw(site):
         if hit:
             return hit
     return got                           # 主力の語が尽きていれば、あるものを書く
+
+
+def _with_material(site, got, kw0, todo):
+    """お客様の社で、台帳の先頭の題に材料が無く、材料のある題が未着手にあればそれを返す（無ければ None）"""
+    try:
+        import private_store as P
+        if not P.is_client(site):
+            return None
+        import material
+        mats = material.lines(site)
+        pool = [str(r.get("keyword", "")) for r in todo]
+        has = lambda k: material.hits(k, mats, pool) > 0
+        if not mats or has(kw0):
+            return None
+        for r in todo:
+            if has(str(r["keyword"])):
+                out = dict(got)
+                out.update({"keyword": str(r["keyword"]), "aim": r.get("aim", ""),
+                            "category": r.get("category", ""), "picked_by": "材料のある題"})
+                return out
+    except Exception:  # noqa: BLE001  材料が読めなくても次に書く語は返す
+        return None
+    return None
 
 
 def _drop_pattern(site):
