@@ -836,5 +836,11 @@
   "pos": 17.0,
   "site": "corporate",
   "by": "auto_rewrite"
+ },
+ "nougyou-shoki-hiyou-hojokin": {
+  "at": "2026-10-20",
+  "pos": 8.1,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  }
 }
