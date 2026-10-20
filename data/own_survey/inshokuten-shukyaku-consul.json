@@ -1,6 +1,98 @@
 {
  "slug": "inshokuten-shukyaku-consul",
- "ok": false,
- "why": "答えられた AI が1つ（2つ以上で数える）",
- "claims": []
+ "ok": true,
+ "date": "2026-10-21",
+ "question": "飲食店 集客 コンサルについて教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "飲食店の集客コンサルとは？頼める仕事は4つの型に分かれる",
+   "words": [
+    "仕事"
+   ],
+   "engines": []
+  },
+  {
+   "topic": "依頼の前に飲食店が数える3つの数字",
+   "words": [
+    "依頼",
+    "数字"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "集客コンサルの成果が見えるまでの期間",
+   "words": [
+    "成果",
+    "期間"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "観光客や多店舗の飲食店がコンサルに店舗ページまで任せる線引き",
+   "words": [
+    "観光客",
+    "多店舗"
+   ],
+   "engines": []
+  },
+  {
+   "topic": "集客コンサルとの契約前に確かめる4点と今日やること",
+   "words": [
+    "契約前"
+   ],
+   "engines": []
+  }
+ ],
+ "sources": {
+  "biz.moneyforward.com": "peer",
+  "chusho.meti.go.jp": "public",
+  "crexgroup.com": "media",
+  "magnifico.tokyo": "peer",
+  "squareup.com": "peer",
+  "stock-sun.com": "media",
+  "sungrove.co.jp": "peer",
+  "webtan.impress.co.jp": "media"
+ },
+ "dims": {
+  "費用の金額（◯円）": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "期間（◯か月・◯日など）": [],
+  "注意点・失敗・リスク": [
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [
+   "ChatGPT"
+  ],
+  "専門家への相談": [
+   "ChatGPT"
+  ]
+ },
+ "chars": {
+  "ChatGPT": 1316,
+  "Claude": 1349,
+  "Gemini": 2459
+ },
+ "claims": [
+  "当社が2026年10月に、3つのAI（ChatGPT・Claude・Gemini）に「飲食店 集客 コンサルについて教えてください」と同じ質問をして、3件の答えを比べたところ、本記事で扱う5つの論点のうち『仕事』『観光客』『契約前』の語が出てきた答えは0件でした",
+  "当社が2026年10月に、3つのAI（ChatGPT・Claude・Gemini）に「飲食店 集客 コンサルについて教えてください」と同じ質問をして、3件の答えを比べたところ、3件すべての答えに『依頼』『成果』の語が出てきました",
+  "当社が2026年10月に、3つのAI（ChatGPT・Claude・Gemini）に「飲食店 集客 コンサルについて教えてください」と同じ質問をして、3件の答えを比べたところ、期間（◯か月・◯日など）に触れた答えは無く、進め方の手順に触れた答えは3件中1件、専門家への相談に触れた答えは3件中1件でした",
+  "当社が2026年10月に、3つのAI（ChatGPT・Claude・Gemini）に「飲食店 集客 コンサルについて教えてください」と同じ質問をして、3件の答えを比べたところ、出典に挙がったページは8件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが3件でした"
+ ]
 }
