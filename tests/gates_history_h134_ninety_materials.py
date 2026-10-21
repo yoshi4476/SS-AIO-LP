@@ -77,6 +77,12 @@ def test_pass_85_target_90_pdca():
                 if m.group(1) == "90":
                     odd.append(f"{p.name}:{i}")
     check("点数の判定に 90 を直接書いていない（下限は rubric.PASS_TOTAL）", odd, [])
+    # 公開している説明が基準とずれない（FAQ のページは build では作られず faq_page.py を手で動かすので、変え忘れた）
+    shown_pages = {rel: (ROOT / "site" / rel).read_text(encoding="utf-8")
+                   for rel in ("faq/index.html", "editorial-policy/index.html")}
+    check("公開しているページの基準の表示が下限と同じ（faq_page.py → build.py で作り直す）",
+          (f"総合{R.PASS_TOTAL}点以上" in shown_pages["faq/index.html"], "総合90点以上" in shown_pages["faq/index.html"],
+           f"{R.PASS_TOTAL}点未満は非公開" in shown_pages["editorial-policy/index.html"]), (True, False, True))
     php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
     check("WordPress の門も85", "const SSQG_MIN_SCORE  = 85;" in php, True)
 
