@@ -1,22 +1,22 @@
 {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
-      "judged": 24,
-      "suspect_taken": 18,
+      "judged": 25,
+      "suspect_taken": 19,
       "healthy": 6,
-      "too_thin": 271,
+      "too_thin": 277,
       "items": [
         {
           "kw": "aio 診断",
           "url": "https://ai.7senses.co.jp/diagnosis/aio/",
-          "pos": 5.6,
-          "imp": 85,
+          "pos": 5.4,
+          "imp": 89,
           "clicks": 1,
-          "ctr": 1.18,
-          "expected_ctr": 5.0,
-          "ratio": 0.24
+          "ctr": 1.12,
+          "expected_ctr": 7.0,
+          "ratio": 0.16
         },
         {
           "kw": "aio診断",
@@ -41,11 +41,21 @@
         {
           "kw": "aio やり方",
           "url": "https://ai.7senses.co.jp/aio/aio-yarikata/",
-          "pos": 7.8,
-          "imp": 49,
+          "pos": 7.9,
+          "imp": 51,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
+          "ratio": 0.0
+        },
+        {
+          "kw": "aio コンテキスト 理解 促進",
+          "url": "https://ai.7senses.co.jp/aio/aio-towa/",
+          "pos": 10,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 2.5,
           "ratio": 0.0
         },
         {
@@ -71,8 +81,8 @@
         {
           "kw": "aio 導入 メリット 費用",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-merit-hiyou/",
-          "pos": 6.4,
-          "imp": 14,
+          "pos": 6.5,
+          "imp": 13,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -82,7 +92,7 @@
           "kw": "aio対策 キーワード選定",
           "url": "https://ai.7senses.co.jp/aio/aio-taisaku-keyword-sentei/",
           "pos": 4.3,
-          "imp": 20,
+          "imp": 21,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -141,11 +151,11 @@
         {
           "kw": "リフォーム工務店 ai記事",
           "url": "https://ai.7senses.co.jp/research/koumuten-ai-sources/",
-          "pos": 8.9,
-          "imp": 10,
+          "pos": 8.2,
+          "imp": 12,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.0,
+          "expected_ctr": 3.5,
           "ratio": 0.0
         },
         {
@@ -161,21 +171,21 @@
         {
           "kw": "歯科 ai 集客",
           "url": "https://ai.7senses.co.jp/industry/shika/",
-          "pos": 6.6,
-          "imp": 11,
+          "pos": 6.5,
+          "imp": 12,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 4.0,
+          "expected_ctr": 5.0,
           "ratio": 0.0
         },
         {
-          "kw": "税理士 ブログ 集客 テーマ選び",
-          "url": "https://ai.7senses.co.jp/seo/zeirishi-blog-shukyaku/",
-          "pos": 6.6,
-          "imp": 10,
+          "kw": "無料で試せるaioツールを探しています。おすすめをいくつか教えてください。",
+          "url": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+          "pos": 9.1,
+          "imp": 12,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 4.0,
+          "expected_ctr": 3.0,
           "ratio": 0.0
         },
         {
@@ -194,7 +204,7 @@
       "judged": 37,
       "suspect_taken": 34,
       "healthy": 3,
-      "too_thin": 215,
+      "too_thin": 224,
       "items": [
         {
           "kw": "セブンセンシズ株式会社",
@@ -209,10 +219,10 @@
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
-          "pos": 6.8,
-          "imp": 541,
+          "pos": 6.9,
+          "imp": 585,
           "clicks": 2,
-          "ctr": 0.37,
+          "ctr": 0.34,
           "expected_ctr": 4.0,
           "ratio": 0.09
         },
@@ -220,9 +230,9 @@
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/company",
           "pos": 1,
-          "imp": 60,
+          "imp": 61,
           "clicks": 2,
-          "ctr": 3.33,
+          "ctr": 3.28,
           "expected_ctr": 28.0,
           "ratio": 0.12
         },
@@ -240,11 +250,11 @@
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/services",
           "pos": 1,
-          "imp": 15,
+          "imp": 16,
           "clicks": 1,
-          "ctr": 6.67,
+          "ctr": 6.25,
           "expected_ctr": 28.0,
-          "ratio": 0.24
+          "ratio": 0.22
         },
         {
           "kw": "ゆうちょ 振込 送金 違い",
@@ -357,6 +367,16 @@
           "ratio": 0.0
         },
         {
+          "kw": "セブンセンシズ",
+          "url": "https://corp.7senses.co.jp/press/kit",
+          "pos": 9.9,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 2.5,
+          "ratio": 0.0
+        },
+        {
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/press/kit",
           "pos": 1,
@@ -369,7 +389,7 @@
         {
           "kw": "バックオフィス 略",
           "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha",
-          "pos": 6.1,
+          "pos": 6.5,
           "imp": 15,
           "clicks": 0,
           "ctr": 0,
@@ -385,22 +405,12 @@
           "ctr": 0,
           "expected_ctr": 2.5,
           "ratio": 0.0
-        },
-        {
-          "kw": "三点照合 自動化",
-          "url": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka",
-          "pos": 5.3,
-          "imp": 10,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 7.0,
-          "ratio": 0.0
         }
       ]
     },
     "subsidy": {
-      "judged": 4,
-      "suspect_taken": 2,
+      "judged": 5,
+      "suspect_taken": 3,
       "healthy": 2,
       "too_thin": 52,
       "items": [
@@ -408,9 +418,9 @@
           "kw": "セブンセンシズ株式会社",
           "url": "https://lp.7senses.co.jp/about/",
           "pos": 1.3,
-          "imp": 54,
+          "imp": 55,
           "clicks": 4,
-          "ctr": 7.41,
+          "ctr": 7.27,
           "expected_ctr": 28.0,
           "ratio": 0.26
         },
@@ -422,6 +432,16 @@
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 15.0,
+          "ratio": 0.0
+        },
+        {
+          "kw": "農業補助金 返済不要",
+          "url": "https://lp.7senses.co.jp/blog/nogyo-hojokin-hensai-fuyou/",
+          "pos": 8.3,
+          "imp": 11,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 3.5,
           "ratio": 0.0
         }
       ]
