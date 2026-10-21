@@ -80,6 +80,12 @@ def test_pass_85_target_90_pdca():
                 if m.group(1) == "90":
                     odd.append(f"{p.name}:{i}")
     check("点数の判定に 90 を直接書いていない（下限は rubric.PASS_TOTAL）", odd, [])
+    # 定数の形（QUALITY_GATE = 90）も見る。比べる式だけを探していたので build.py の定数を見落とし、85〜89点で合格した記事が
+    # サイトに出ず404になった（2026-10-21）
+    const = re.compile(r"^\s*[A-Z_]*(?:GATE|PASS|MIN_SCORE|PUBLISH)[A-Z_]*\s*=\s*9\d\b")
+    left = [f"{p.name}:{i}" for p in (ROOT / "scripts").glob("*.py") if p.name != "rubric.py"
+            for i, ln in enumerate(p.read_text(encoding="utf-8").splitlines(), 1) if const.match(ln)]
+    check("公開の下限を定数で直接書いていない（QUALITY_GATE・PUBLISH_SCORE など）", left, [])
     # 公開している説明が基準とずれない（FAQ のページは build では作られず faq_page.py を手で動かすので、変え忘れた）
     shown_pages = {rel: (ROOT / "site" / rel).read_text(encoding="utf-8")
                    for rel in ("faq/index.html", "editorial-policy/index.html")}

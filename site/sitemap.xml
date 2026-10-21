@@ -28,6 +28,8 @@
   <url><loc>https://ai.7senses.co.jp/industry/clinic/faq/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/industry/fudosan/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/industry/fudosan/faq/</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://ai.7senses.co.jp/industry/inshokuten/</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://ai.7senses.co.jp/industry/inshokuten/faq/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/industry/koumuten/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/industry/koumuten/faq/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/industry/reform/</loc><lastmod>2026-10-21</lastmod></url>
@@ -92,6 +94,7 @@
   <url><loc>https://ai.7senses.co.jp/topics/98870933/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/topics/a494ab79/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/topics/da9a2779/</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://ai.7senses.co.jp/topics/web/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/seo/ai-jidai-seo-taisaku/</loc><lastmod>2026-08-31</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/ai-jidai-seo-taisaku/steps.png</image:loc></image:image>
   </url>
@@ -443,6 +446,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-hankyou-konai/vs.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-hankyou-konai/steps.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/fudousan-kaisha-shukyaku-houhou/</loc><lastmod>2026-10-21</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-kaisha-shukyaku-houhou/kikan.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-kaisha-shukyaku-houhou/ctr.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-kaisha-shukyaku-houhou/nissu.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/ai-marketing/fudousan-kojin-shukyaku/</loc><lastmod>2026-08-30</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-kojin-shukyaku/walls.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-kojin-shukyaku/hikaku.png</image:loc></image:image>
@@ -490,6 +498,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-shukyaku-houhou/steps.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-shukyaku-houhou/shippai.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/fudousan-web-shukyaku/</loc><lastmod>2026-10-21</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-web-shukyaku/koshin.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-web-shukyaku/pages.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-web-shukyaku/kikan.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/aio/gaiheki-tosou-ai-kensaku-shukyaku/</loc><lastmod>2026-10-09</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/gaiheki-tosou-ai-kensaku-shukyaku/kikkake-tree.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/gaiheki-tosou-ai-kensaku-shukyaku/ctr-bars.png</image:loc></image:image>
@@ -529,6 +542,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-shukyaku-hoho/steps.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-shukyaku-hoho/gyoutai.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-shukyaku-hoho/shippai.png</image:loc></image:image>
+  </url>
+  <url><loc>https://ai.7senses.co.jp/aio/inshokuten-shukyaku-service/</loc><lastmod>2026-10-21</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-shukyaku-service/meigi.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-shukyaku-service/jiki.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-shukyaku-service/maitsuki.png</image:loc></image:image>
   </url>
   <url><loc>https://ai.7senses.co.jp/seo/iryou-koukoku-guideline-web/</loc><lastmod>2026-08-31</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/iryou-koukoku-guideline-web/ng-types.png</image:loc></image:image>
@@ -748,6 +766,16 @@
   <url><loc>https://ai.7senses.co.jp/meo/seikotsuin-shukyaku/</loc><lastmod>2026-08-31</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/seikotsuin-shukyaku/steps.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/seikotsuin-shukyaku/ng-ok.png</image:loc></image:image>
+  </url>
+  <url><loc>https://ai.7senses.co.jp/aio/shigyou-hp-houshu-nosekata/</loc><lastmod>2026-10-21</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-hp-houshu-nosekata/shutten.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-hp-houshu-nosekata/katachi.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-hp-houshu-nosekata/hyouki.png</image:loc></image:image>
+  </url>
+  <url><loc>https://ai.7senses.co.jp/aio/shigyou-portal-ai-kensaku/</loc><lastmod>2026-10-21</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-portal-ai-kensaku/kaitou.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-portal-ai-kensaku/kakunin.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-portal-ai-kensaku/yakuwari.png</image:loc></image:image>
   </url>
   <url><loc>https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/</loc><lastmod>2026-08-08</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-seo-taisaku/mistakes.png</image:loc></image:image>

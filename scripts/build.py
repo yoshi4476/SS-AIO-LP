@@ -14,7 +14,7 @@ category: aio | seo | meo | ai-marketing
 date: 2026-07-27
 modified: 2026-07-27
 eyecatch: /images/url-slug/eyecatch.png   # 省略可
-score: 93        # 品質審査スコア(100点満点)。90点未満・未記載はビルド対象外(公開不可)
+score: 93        # 品質審査スコア(100点満点)。公開の下限（85点）未満・未記載はビルド対象外(公開不可)
 faq:
   - q: 質問文
     a: 回答文（40-60字・本文FAQと完全一致させる）
@@ -2346,8 +2346,10 @@ def main():
 
     llms = (SITE / "llms.txt").read_text(encoding="utf-8")
 
-    # 品質審査ゲート: score(100点満点) 90点未満・未審査はアップロードしない
-    QUALITY_GATE = 90
+    # 品質審査ゲート: score(100点満点) が公開の下限（rubric.PASS_TOTAL）未満・未審査はアップロードしない。
+    # 90 を直接書いていたので、下限を85へ下げた後も85〜89点で合格した記事がサイトに出ず404になった（2026-10-21）
+    import rubric
+    QUALITY_GATE = rubric.PASS_TOTAL
     paths, all_metas, blocked, blocked_metas = [], [], [], []
     unparsable = set()             # フロントマターが読めなかった記事。生成済みHTMLは消さない
     client_skip = 0                # お客様の社の記事（slug・社は CI のログに出さず、本数だけ出す。2026-10-10）
