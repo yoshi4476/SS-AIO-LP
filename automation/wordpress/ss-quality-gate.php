@@ -2,7 +2,7 @@
 /**
  * Plugin Name: 品質ゲートと橋渡し（管制塔との接続）
  * Description: 採点を通っていない記事が公開されるのを、保存のたびに止める。あわせて、管制塔が人の手なしで回すための窓口（転送・llms.txt・IndexNow の鍵・計測・公開URLの一覧・訳のページとの hreflang・表示速度・画像と動画のサイトマップ・配信の指紋・追加CSSと head・フッターの小さな追記・自己更新）を持つ。
- * Version: 2.0.5
+ * Version: 2.0.6
  *
  * ■ 先方が最初に1回だけすること
  *   1. このファイルを wp-content/mu-plugins/ に置く
@@ -44,7 +44,7 @@ const SSQG_HUMAN_MIN_CHARS = 3000;
 const SSQG_HUMAN_MIN_H2    = 4;
 
 // 自己更新で、届いたファイルの中にこの行があることを確かめる（版の書き換えだけの差し替えを通さない）
-const SSB_VERSION = '2.0.5';
+const SSB_VERSION = '2.0.6';
 const SSB_META_JSONLD_EXTRA = '_ss_jsonld_extra';   // FAQPage など BlogPosting 以外の実体（JSON の配列）
 const SSB_META_ALTERNATES = '_ss_alternates';       // 訳のページとの組（{"en": URL, …} の JSON。同じサイトの URL だけ出す）
 const SSB_META_MANAGED = '_ss_managed';             // 管制塔が作った固定ページの印
