@@ -8,9 +8,9 @@
 |:----|:--|:----|
 | 累計公開記事数 | 470本 | カテゴリ内訳: AIO・LLMO78本、SEO25本、MEO20本、AI集客50本 |
 | 直近7日の公開 | 27本 | 目標: 週14本（毎日2本） |
-| 品質スコア平均 | 93.8点 | 公開基準90点・推奨95点 |
+| 品質スコア平均 | 93.8点 | 公開基準85点・目標90点 |
 | 平均文字数 | 5,604字 | 基準5,000字以上 |
-| 非公開（審査未達） | 4本 | fudousan-kaisha-shukyaku-houhou、fudousan-web-shukyaku、getsuji-kessan-bunseki-houhou、inshokuten-shukyaku-service |
+| 非公開（審査未達） | 6本 | fudousan-kaisha-shukyaku-houhou、fudousan-web-shukyaku、gaichuuhi-seikyuusho-shiwake、getsuji-kessan-bunseki-houhou、inshokuten-shukyaku-service、shigyou-portal-ai-kensaku |
 | DR / KW数 / AI計測 | — | GA4・GSC・Ahrefs稼働後に自動反映 |
 
 ## 今日の主な動き
