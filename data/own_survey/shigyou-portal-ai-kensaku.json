@@ -1,0 +1,110 @@
+{
+ "slug": "shigyou-portal-ai-kensaku",
+ "ok": true,
+ "date": "2026-10-21",
+ "question": "士業 ポータルサイト AIについて教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "事務所を探す質問ではAIの出典の63.1%がポータルサイト",
+   "words": [
+    "事務所",
+    "質問"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "費用と手続きの質問ではAIは事務所の公式サイトを選ぶ",
+   "words": [
+    "公式サイト",
+    "事務所",
+    "質問"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "AIごとにポータルサイトの比重が違うので4つで確かめる",
+   "words": [
+    "比重"
+   ],
+   "engines": []
+  },
+  {
+   "topic": "ポータルサイトと自社サイトに載せる情報の分け方",
+   "words": [
+    "自社サイト",
+    "情報"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "ポータル中心・自社サイト中心・見送りの分かれ目",
+   "words": [
+    "自社サイト中心",
+    "ポータル中心"
+   ],
+   "engines": []
+  }
+ ],
+ "sources": {
+  "0120.co.jp": "peer",
+  "adv.freee.co.jp": "peer",
+  "ai-flow.jp": "peer",
+  "bengo4.com": "portal",
+  "buffett-code-archives.s3.ap-northeast-1.amazonaws.com": "peer",
+  "dcross.impress.co.jp": "media",
+  "diamond.jp": "media",
+  "digirise.ai": "peer",
+  "hokkaido-np.co.jp": "peer",
+  "legalbrain.com": "peer",
+  "note.com": "video",
+  "prtimes.jp": "media",
+  "shigyo-ai.com": "peer",
+  "shigyo-hyogo.com": "peer",
+  "uravation.com": "peer",
+  "weel.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": [],
+  "期間（◯か月・◯日など）": [
+   "Claude"
+  ],
+  "注意点・失敗・リスク": [
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [],
+  "専門家への相談": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ]
+ },
+ "chars": {
+  "ChatGPT": 1199,
+  "Claude": 1051,
+  "Gemini": 2471
+ },
+ "claims": [
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「士業 ポータルサイト AIについて教えてください」と質問しました。3件の答えのうち、本記事の論点『比重』『自社サイト中心』の語が出たものは0件でした。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「士業 ポータルサイト AIについて教えてください」と質問しました。3件の答えのすべてに『事務所』『公式サイト』『自社サイト』の語が出てきました。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「士業 ポータルサイト AIについて教えてください」と質問しました。3件の答えのうち、費用の金額（◯円）に触れた答えは無く、進め方の手順に触れた答えは無く、期間（◯か月・◯日など）に触れた答えは3件中1件でした。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「士業 ポータルサイト AIについて教えてください」と質問しました。3件の答えの出典に挙がったページは16件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが3件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
+}

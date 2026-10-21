@@ -57,6 +57,8 @@ faq:
 
 第二に、検索行動そのものが専門家選びの起点になっていることです。<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、**日本の個人の生成AI利用経験は26.7%**です。中国の81.2%、米国の68.8%と比べれば低いものの、前年から明確に増加しています。士業選びの相談先として検索エンジンとAIチャットの両方が使われ始めています。
 
+AIが事務所を紹介するときに士業のポータルサイトと自社サイトのどこを出典にするかは、[士業のポータルサイトとAIの出典の使い分け](/aio/shigyou-portal-ai-kensaku/)で当社の調査をもとに整理しました。
+
 第三に、AI Overviewの表示範囲が急拡大していることです。<a href="https://www.semrush.com/blog/semrush-ai-overviews-study/" target="_blank" rel="noopener">Semrushの2025年調査</a>では、AI Overviewの表示クエリ比率が2ヶ月で6.49%から13.14%へ倍増しました。「地域名+専門分野」のような相談系クエリはAI Overviewの対象になりやすく、検索上位に情報がない事務所はAIの回答候補からも外れます。
 
 | データ | 数値 | 出典 |
