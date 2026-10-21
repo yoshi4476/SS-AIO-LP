@@ -87,6 +87,36 @@ def test_pass_85_target_90_pdca():
     check("WordPress の門も85", "const SSQG_MIN_SCORE  = 85;" in php, True)
 
 
+def test_pre_improve_and_unused_materials():
+    import quality_loop as Q
+    print("\n■ 最初の採点の前に、機械の指摘と使っていない材料で1回直す・使っていない材料があれば材料待ちで止めない（2026-10-21）")
+    facts = "\n".join([
+        "- 当社は2026年10月に、3つのAI（Claude・ChatGPT・Gemini）へ「庭木」と同じ質問をしました。3件の答えのうち0件でした。（出典: 当社調べ）",
+        "- お客様の声「助かりました」（庭の会社・2026-09・同じ業種。声は言い換えずに…）",
+        "- お客様の声「別の業種です」（製造業・2026-09。声は…）",
+        "- 外部委託（部分支援）の相場は月数十万円〜（出典: 2026年10月時点の相場の見立て。…）"])
+    old = Q.materials, Q.read, Q._split, Q.site_of
+    Q.materials = lambda site, slug: ("", {"facts": facts, "experiences": "", "research": ""})
+    Q.site_of = lambda slug: "ai-lab"
+    try:
+        Q.read = lambda slug: "body"
+        Q._split = lambda t: ("", "", "", "## 見出し\n本文です。\n")
+        none_used = [x[2:].split("が記事に")[0] for x in Q.unused_materials("zz")]
+        Q._split = lambda t: ("", "", "", "## 見出し\n当社は2026年10月に、3つのAIへ聞きました。「助かりました」。外部委託（部分支援）の相場は月数十万円〜です。\n")
+        all_used = Q.unused_materials("zz")
+    finally:
+        Q.materials, Q.read, Q._split, Q.site_of = old
+    check("使っていない材料を名指し（声は同じ業種の声があるときだけ）", none_used,
+          ["当社調べ（複数のAIに同じ質問をして数えた結果）", "お客様の声", "費用の相場"])
+    check("全部使っていれば空", all_used, [])
+    src = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
+    check("先回りの直しは最初の採点の前（公開前の記事だけ）・材料待ちでも使っていない材料があれば直す",
+          ("    if not published:\n        pre_improve(slug, budget, ctx, base)\n    sc, why = score(slug)" in src,
+           "if unused_materials(slug, site):\n" in src), (True, True))
+    fx = (ROOT / "scripts" / "facts.py").read_text(encoding="utf-8")
+    check("書く AI にも相場と同じ業種のお客様の声を渡す", ("費用の相場（" in fx, "お客様の声（同じ業種" in fx), (True, True))
+
+
 def test_materials_and_repair_pass():
     print("\n■ 直しの材料と流れ: 相場・お客様の声・控え書きを外した出典・機械の指摘だけを直す2回目")
     ql = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")

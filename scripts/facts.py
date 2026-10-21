@@ -218,11 +218,11 @@ def main():
     # その記事にしかない数字を先に出す。同じ「3,200店舗」を全記事に書いても
     # 記事ごとの独自性にはならない（実測で126本が同じ数字を載せていた）
     picked = own_query_facts(site_id, kw) + picked + own_data_facts(site_id)
-    if kw and site_id == "ai-lab":
+    if kw:
         # 業種の記事には、その業種の調査（AI の答えの出典を数えたもの）を先に出す。採点で一番多い減点が
         # 「その業種の数字が無い」だった（2026-10-21）。数字は調査ページと同じ headline から取る
         import industry_ai_sources as IAS
-        cs, url = IAS.for_article("", kw)
+        cs, url = IAS.for_site(site_id, "", kw)
         ym = lambda c: "{}-{:02d}".format(*map(int, re.search(r"(\d{4})年(\d{1,2})月", c).groups()))
         picked = [{"claim": c, "source": f"当社の業種調査 {url}", "as_of": ym(c), "topic": []} for c in cs] + picked
 
@@ -231,6 +231,26 @@ def main():
         print(f"\n  ・{f['claim']}")
         # 台帳の控え書き（「運用者の申告」）は記事に出さない（quality_loop.materials と同じ。採点で「申告止まり」と減点された）
         print(f"    出典: {re.sub(r'[（(][^）)]*申告[^）)]*[）)]', '', f['source']).strip()}（{f['as_of']}時点）")
+    # 直しの材料（quality_loop.materials）と同じものを書く段階から渡す。相場とお客様の声は直しにしか渡っておらず、
+    # 最初の採点で「費用の目安が無い」「現場の声が無い」と減点されていた（2026-10-21 運用者「最初の1回で届くことを多くして」）
+    try:
+        pr = json.loads((ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pr = {}
+    if site_id in pr.get("sites", []):
+        print(f"\n■ 費用の相場（{pr.get('as_of', '')}時点の相場の見立て。費用の目安として書く。「当社」の語を金額と同じ文に書かない）")
+        for r in pr.get("ranges", []):
+            print(f"  ・{r['label']}の相場は{r['range']}" + (f"（{r['note']}）" if r.get("note") else ""))
+    try:
+        vs = json.loads((ROOT / "data" / "voices.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        vs = []
+    same = [v for v in vs if site_id in (v.get("sites") or []) and v.get("quote") and kw
+            and str(v.get("industry") or "~") in kw]
+    if same:
+        print("\n■ お客様の声（同じ業種。言い換えずに「」で引用し、お客様の声だと分かるように書く）")
+        for v in same[:3]:
+            print(f"  ・「{v['quote']}」（{v.get('who', '')}・{v.get('as_of', '')}）")
     if data.get("pending"):
         print("\n  ＜まだ書けない数値＞")
         for p in data["pending"]:

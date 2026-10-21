@@ -341,7 +341,7 @@ def score(slug, ask=None):
 def weak_text(sc):
     """直す AI に渡す採点者の指摘。点の低い軸から"""
     out = []
-    for k in sorted(AXIS_KEYS, key=lambda x: sc["axes"][x]):
+    for k in sorted(AXIS_KEYS, key=lambda x: sc["axes"][x]) if sc.get("axes") else []:
         v = sc["axes"][k]
         mark = "（基準割れ・最優先）" if v < R.PASS_EACH else ""
         out.append(f"■ {AXIS_NAME[k]} {v}点（各{R.PASS_EACH}点以上・平均{R.PASS_TOTAL}点以上で合格）{mark}")
@@ -399,16 +399,15 @@ def materials(site, slug):
         pass
     # その業種の調査（AI の答えの出典を種類ごとに数えた自社の調査・公開済み）。採点で一番多い減点が
     # 「その業種の数字が無い」だった（2026-10-21）。数字は調査ページと同じ headline から取る
-    if site == "ai-lab":
-        try:
-            import industry_ai_sources as IAS
-            mt = meta_of(read(slug))
-            cs, url = IAS.for_article(str(mt.get("title") or ""), str(mt.get("keyword") or ""))
-        except Exception:  # noqa: BLE001  調査が読めなくても直しは続ける
-            cs, url = [], ""
-        for c in cs:
-            facts.append(f"- {c}（出典: 当社の業種調査 {url}。調べ方の1文は記事に1回だけ書く）")
-            allowed += [c, url]
+    try:
+        import industry_ai_sources as IAS
+        mt = meta_of(read(slug))
+        cs, url = IAS.for_site(site, str(mt.get("title") or ""), str(mt.get("keyword") or ""))
+    except Exception:  # noqa: BLE001  調査が読めなくても直しは続ける
+        cs, url = [], ""
+    for c in cs:
+        facts.append(f"- {c}（出典: 業種調査 {url}。調べ方の1文は記事に1回だけ書く。調べた会社の名前は変えない）")
+        allowed += [c, url]
     # お客様の声（data/voices.json。掲載が「可」で本人が確かめたものだけが入っている）。運営者情報と LP にしか
     # 使われておらず、「現場の声が無い」と減点されていた（2026-10-21）。同じ業種の声を先に、3件まで
     try:
@@ -423,7 +422,7 @@ def materials(site, slug):
     for v in vs:
         n = v.get("number") or {}
         num = f"。数字: {n.get('metric', '')} {n.get('before', '')}→{n.get('after', '')}" if n else ""
-        facts.append(f"- お客様の声「{v['quote']}」（{v.get('who', '')}・{v.get('as_of', '')}{num}。"
+        facts.append(f"- お客様の声「{v['quote']}」（{v.get('who', '')}・{v.get('as_of', '')}{num}{'・同じ業種' if v in same else ''}。"
                      "声は言い換えずに「」で引用し、お客様の声だと分かるように書く）")
         allowed += [v["quote"], num]
     # 費用の相場（data/price_ranges.json）。決定支援で毎回「費用の目安が無い」と突かれていた（2026-10-21 運用者「相場は書いていい」）
@@ -657,10 +656,57 @@ class Budget:
         return self.left() >= need
 
 
+def unused_materials(slug, site=None):
+    """登録・測定済みなのに記事が使っていない材料（当社調べ・業種調査・お客様の声・相場）を、直しの指示の形で返す。
+    今日（2026-10-21）の不合格の多くは、材料が無いのではなく、ある材料を記事が使っていない形だった"""
+    site = site or site_of(slug)
+    try:
+        body = _split(read(slug))[3]
+        _, mats = materials(site, slug)
+    except Exception:  # noqa: BLE001
+        return []
+    out = []
+    rows_ = [ln[2:] for ln in mats["facts"].splitlines() if ln.startswith("- ")]
+    kinds = (("出典: 当社調べ", "当社調べ（複数のAIに同じ質問をして数えた結果）"), ("出典: 業種調査", "業種調査（AIの答えの出典を数えた結果）"),
+             ("お客様の声「", "お客様の声"), ("の相場は", "費用の相場"))
+    for mark, label in kinds:
+        cand = [r for r in rows_ if mark in r and (mark != "お客様の声「" or "・同じ業種" in r)]   # 声は同じ業種の声があるときだけ求める
+        if not cand:
+            continue
+        # 記事に入っているかは、文の頭（声は「」の中）で見る。「」の後ろの注記まで含めると、入っていても無いと判定した
+        key = lambda r: (r.split("お客様の声「", 1)[1].split("」", 1)[0] if "お客様の声「" in r
+                         else re.sub(r"（出典.*$|（.*見立て.*$", "", r))[:14]
+        if not any(key(r) and key(r) in body for r in cand):
+            out.append(f"- {label}が記事に1つも無い。下の一次情報の該当の文を、主題に合う節に1〜2文、数字を変えずに入れる")
+    return out
+
+
+PRE_MIN = 12                # 採点の前の先回りの直し（AI＋検算＋ビルド）の見込み（分）
+
+
+def pre_improve(slug, budget, ctx, base):
+    """最初の採点の前に、機械の指摘と使っていない材料を名指しして1回直す（運用者「最初の1回で届くことを多くして」2026-10-21）。
+    最初の採点で85点に届いたのは11本中1本で、届かない理由の多くは採点の前から機械で分かるもの（前を指す文・決定支援の欠け・
+    当社調べや業種調査の使い忘れ）だった。直しは公開前の直しと同じ検算を通し、外れたら戻す。回数には数えない"""
+    note = "\n".join(x for x in (machine_note(slug), "\n".join(unused_materials(slug))) if x)
+    if not note or not budget.ok(PRE_MIN + SCORE_MIN):
+        return
+    if "blocked" not in ctx:
+        ctx["blocked"] = blocked_lines()
+    sc = {"why": "採点の前の先回りの直し（機械の指摘と、使っていない材料）", "axes": {}, "quotes": {}, "weak": {}, "machine": note}
+    good, why = IMPROVE(slug, sc, ctx["blocked"])
+    record({**base, "action": "preimprove", "ok": good, "why": str(why)[:200]})
+    print(f"     採点の前の直し: {'直しました' if good else '戻しました・変更なし'}")
+
+
 def waiting_materials(slug, site, path=None):
     """前の回が「材料が足りない」で止めた記事で、材料がまだ増えていないか"""
     last = [r for r in rows(path) if r.get("slug") == slug and r.get("action") == "hold"]
     if not last or last[-1].get("need") != "materials":
+        return False
+    if unused_materials(slug, site):
+        # 機械で作った材料（当社調べ・業種調査・自社の実測）や登録済みの声・相場を記事がまだ使っていなければ、待たずに直す
+        # （運用者「材料の無い記事でも届くように」2026-10-21。依頼した材料が届くまで止めていたので、届かない記事が残った）
         return False
     try:
         import material
@@ -699,6 +745,8 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         # 公開前の記事は、採点の前に AI っぽい言い回しを直す（公開済みの記事は週次の auto_rewrite --kind aiwriting が受け持つ）
         polish(slug, budget, ctx, base)
     survey(slug, budget, base)
+    if not published:
+        pre_improve(slug, budget, ctx, base)
     sc, why = score(slug)
     if not sc:
         print(f"要対応: {name} を採点できませんでした（{why}）。"

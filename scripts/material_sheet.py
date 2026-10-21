@@ -328,6 +328,10 @@ def apply(src, do_write=False, ask=None):
         write(site, f, e)
         if P.is_client(site):
             P.push(f"質問シートの答えを一次情報 {len(f)}件・体験 {len(e)}件として登録")
+    if do_write:
+        vd = voice_draft(site, answers)
+        if vd:
+            msg += f"。お客様の声は下書き {vd.relative_to(ROOT).as_posix()} に写しました（お客様に確かめて「可」にし、intake/ へ移すと登録）"
     if held:
         note = "保留にした答え（直して intake/ に戻すか、運用者が確かめてください）:\n" + "\n".join(f"  - 問{n}: {w}" for n, w in held)
         print(note)
@@ -361,6 +365,152 @@ def measure(site, url, day, what, days=28):
     return {"claim": claim, "topic": ["自社サイト", "実測"], "period": f"{(d - timedelta(days=days)).isoformat()[:7]}〜{(d + timedelta(days=days)).isoformat()[:7]}"}
 
 
+# 書き直しの種類 → 一次情報の文に書く「やったこと」。台帳（data/rewrite_effect.json）の種類だけを使い、中身を作らない
+KIND_WHAT = {"title": "記事の題を書き直した", "desc": "検索結果に出る説明文を書き直した",
+             "aio": "冒頭の答えと見出しの直下の1文を書き直した", "question": "見出しを質問の形に直した",
+             "fresh": "記事の時点の表記を新しくした", "stuck": "足りない見出しと内容を足した",
+             "compete": "ほかのサイトにあって自社に無い節を足した", "serp": "検索上位のページにある論点を足した",
+             "stock": "決まり文句の言い回しを直した", "quality": "採点で足りない所を直した"}
+MEASURED = ROOT / "data" / "measured_changes.json"
+MIN_IMP = 30      # 前と後のどちらかの表示がこれ未満なら、数字が小さすぎて一次情報にしない
+
+
+def auto_measure(limit=3, today=None, measure_fn=None):
+    """書き直しから31日（後の28日＋Search Console の遅れ3日）たった自社の記事の前と後を測り、一次情報にする。
+    運用者「施策の前と後を自動で測る」（2026-10-21）。お客様の社は測らない（お客様の数字を自社の一次情報にしない）"""
+    import private_store as P
+    import sites as S
+    today = today or date.today()
+    try:
+        items = json.loads((ROOT / "data" / "rewrite_effect.json").read_text(encoding="utf-8")).get("items") or []
+    except (OSError, ValueError):
+        items = []
+    try:
+        done = json.loads(MEASURED.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        done = {}
+    made = []
+    for it in sorted(items, key=lambda x: str(x.get("at", ""))):
+        if len(made) >= limit:
+            break
+        slug, at, kind = str(it.get("slug", "")), str(it.get("at", "")), str(it.get("kind", ""))
+        key = f"{slug}|{at}|{kind}"
+        if key in done or kind not in KIND_WHAT or not at or date.fromisoformat(at) > today - timedelta(days=31):
+            continue
+        art = ROOT / "articles" / f"{slug}.md"
+        if not art.is_file():
+            continue
+        import quality_loop as Q
+        meta = Q.meta_of(art.read_text(encoding="utf-8-sig"))
+        site = Q.site_of(slug)
+        if P.is_client(site) or meta.get("noindex"):
+            continue
+        url = S.article_url(S.load(site) or {}, {"slug": slug, "category": meta.get("category", "")})
+        try:
+            got = (measure_fn or measure)(site, url, at, KIND_WHAT[kind])
+        except Exception as e:  # noqa: BLE001  Search Console が読めない回は次の週に測る（記録しない）
+            print(f"  測れませんでした（{type(e).__name__}）: {slug}")
+            continue
+        imp = [int(n) for n in re.findall(r"表示(\d+)回", got["claim"])]
+        if len(imp) < 2 or max(imp) < MIN_IMP:
+            done[key] = "small"
+            continue
+        if imp[0] == 0:
+            # 前の28日が0回なのは、記事がまだ検索に出ていなかっただけ。直した効果として書くと事実と違う（2026-10-21 の試しで0→218回）
+            done[key] = "new"
+            continue
+        write(site, [got], [])
+        done[key] = "fact"
+        made.append(got["claim"])
+    MEASURED.write_text(json.dumps(done, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
+    print(f"MEASURE_FACTS={len(made)}")
+    for c in made:
+        print("  " + c)
+    return made
+
+
+def voice_draft(site, answers, out_dir=None, today=None):
+    """質問シートのお客様の声を、実績の記入シートの下書きに写す（掲載可否は「要確認」。お客様に確かめて「可」にし、
+    intake/ へ移すと jisseki_intake が登録する）。機械は声を掲載しない（本人の確認が要る。ステルスマーケティング規制）"""
+    rows = [a for a in answers if (a["key"].endswith(":voice") or "お客様の声" in a["item"]) and a["ok"] not in ("不可", "×")]
+    if not rows:
+        return None
+    import jisseki_intake as J
+    from openpyxl import load_workbook
+    today = today or date.today().isoformat()
+    out_dir = Path(out_dir or (ROOT / "intake" / "下書き"))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = out_dir / f"お客様の声_{site}_{today}.xlsx"
+    J.make_sheet(path)
+    wb = load_workbook(path)
+    ws = wb["お客様の声"]
+    for r in range(3, ws.max_row + 1):          # 雛形の空行（掲載可否「可」が入っている）を空にする
+        for c in range(1, len(J.VOICE_COLS) + 1):
+            ws.cell(row=r, column=c).value = None        # cell(..., value=None) は「変えない」扱いで消えない
+    for i, a in enumerate(rows, 3):
+        ws.cell(row=i, column=1, value="要確認")
+        ws.cell(row=i, column=6, value=a["answer"][:240])
+        ws.cell(row=i, column=10, value=a["period"])
+        ws.cell(row=i, column=11, value=site)
+    wb.save(path)
+    return path
+
+
+MAIL_STATE = ROOT / "data" / "material_mail.json"
+
+
+def _req_hash(site):
+    import hashlib
+    reqs = requests_of(site)
+    body = json.dumps({k: (v.get("keyword"), v.get("questions")) for k, v in sorted(reqs.items())}, ensure_ascii=False)
+    return hashlib.sha1(body.encode("utf-8")).hexdigest()[:12]
+
+
+def mail(out_dir, send=None):
+    """週次: 材料の依頼が新しく出た・変わった社の質問シートを作り、1通のメールに添付して運用者へ送る。
+    デスクトップに作るだけでは開き忘れる（運用者「質問シートを毎週メールで届ける」2026-10-21）。変わらない週は送らない
+    （うまくいった報告は送らない決まり。CLAUDE.md 8.7）。ログには社名を出さず件数だけ出す"""
+    import base64
+    import urllib.request
+    import sites as S
+    try:
+        prev = json.loads(MAIL_STATE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        prev = {}
+    changed = [s for s in targets() if prev.get(S.public_id(s)) != _req_hash(s)]
+    if not changed:
+        print("MATERIAL_MAIL=none")
+        return 0
+    files = [make(s, out_dir)[0] for s in changed]
+    key = os.environ.get("RESEND_API_KEY", "")
+    to = os.environ.get("NOTIFY_TO_EMAIL") or os.environ.get("LEAD_TO_EMAIL", "")
+    if not key or not to:
+        print(f"MATERIAL_MAIL=unset（{len(files)}社分を作ったが、送り先か鍵が無い）")
+        return 0
+    payload = {
+        "from": os.environ.get("LEAD_FROM_EMAIL", ""), "to": [to],
+        "subject": f"【記事の材料】質問シート {len(files)}社分（{date.today().isoformat()}）",
+        "text": ("採点で材料が足りないと出た記事の質問シートです。答えを書いて intake/ に置くと、次の回に一次情報として登録します"
+                 "（python scripts/intake_watch.py --apply）。答えに無い数字・既存と食い違う答えは登録せずに知らせます。\n\n"
+                 + "\n".join(f"・{f.name}" for f in files)),
+        "attachments": [{"filename": f.name, "content": base64.b64encode(f.read_bytes()).decode()} for f in files],
+    }
+    if send:
+        send(payload)
+    else:
+        req = urllib.request.Request("https://api.resend.com/emails", data=json.dumps(payload).encode(),
+                                     headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json",
+                                              "User-Agent": "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"})
+        with urllib.request.urlopen(req, timeout=60) as res:
+            if res.status >= 300:
+                raise SystemExit(f"送れませんでした（{res.status}）")
+    for s in changed:
+        prev[S.public_id(s)] = _req_hash(s)
+    MAIL_STATE.write_text(json.dumps(prev, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
+    print(f"MATERIAL_MAIL=sent {len(files)}")
+    return len(files)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--make", action="store_true")
@@ -370,6 +520,8 @@ def main():
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--measure", nargs=3, metavar=("SITE", "URL", "DAY"))
     ap.add_argument("--what", default="")
+    ap.add_argument("--auto-measure", type=int, default=0, help="書き直しから31日たった自社の記事の前と後を N 本測る（週次）")
+    ap.add_argument("--mail", action="store_true", help="依頼が変わった社の質問シートをメールで送る（週次・CI だけ）")
     a = ap.parse_args()
     if a.make:
         if os.environ.get("GITHUB_ACTIONS"):
@@ -380,6 +532,15 @@ def main():
             p, n = make(s, a.out)
             print(f"  {p.name}: 質問{n}問")
         print(f"MATERIAL_SHEET={len(ts)}")
+        return 0
+    if a.mail:
+        if not os.environ.get("GITHUB_ACTIONS"):
+            print("MATERIAL_MAIL=skip（手元からは送らない。手元では --make でデスクトップに作る）")
+            return 0
+        mail(Path(tempfile.mkdtemp()))
+        return 0
+    if a.auto_measure:
+        auto_measure(a.auto_measure)
         return 0
     if a.apply:
         ok, msg = apply(Path(a.apply), a.write)

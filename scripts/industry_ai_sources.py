@@ -240,6 +240,12 @@ def ask_all(ind, workers=6, sub=False):
     import ai_cite_check as AC
     # sub=True は課金APIを使わない（ChatGPT・Claude はサブスク、Gemini は無料枠）
     eng = AC.subscription_engines() if sub else AC.engines_available()
+    if sub and AC.gemini_budget_ok():
+        # 説明には「Gemini は無料枠」とあるのに、sub では Gemini を入れていなかった（2026-10-21 システム開発の調査が2つの AI だけに
+        # なった）。月の無料枠の残りがあるときは Gemini も聞く（従量課金の API は使わない）
+        g = AC.engines_available().get("Gemini")
+        if g:
+            eng = {**eng, "Gemini": g}
     qs = questions(ind)
     tasks = [(g, q, name) for g, q in qs for name in eng]
     res = defaultdict(dict)
@@ -602,7 +608,7 @@ def headline(ind):
             "url": f"https://ai.7senses.co.jp/research/{ind}-ai-sources/"}
 
 
-def material_claims(ind):
+def material_claims(ind, who="当社"):
     """記事の直し・執筆に渡す、その業種の調査の文（調べ方の1文＋結果の1文）。数字は headline からだけ取る。
     業種の記事の採点で一番多い減点が「その業種の数字が無い」だった（2026-10-21）。調査は公開済みなのに材料に入っていなかった"""
     h = headline(ind)
@@ -611,7 +617,8 @@ def material_claims(ind):
     s = json.loads((OUT / f"{ind}-summary.json").read_text(encoding="utf-8"))
     T, y, m = h["T"], h["date"][:4], int(h["date"][5:7])
     tot = sum(s["total"].values())
-    head = (f"当社は{y}年{m}月に、{h['n_engines']}つのAI（{h['engines_text']}）へ{h['name']}に関する質問を{h['questions']}問聞き、"
+    # お客様の社の記事で「当社は」と書くと、お客様が調べたことになり事実と違う。調べたのはセブンセンシズ（2026-10-21）
+    head = (f"{who}{'は' if who == '当社' else 'が'}{y}年{m}月に、{h['n_engines']}つのAI（{h['engines_text']}）へ{h['name']}に関する質問を{h['questions']}問聞き、"
             f"答えの出典{tot}件を種類ごとに数えました。")
     return [head + f"{T['owner']}を探す質問では、出典の{h['lp']}%が{T['portal']}、{h['lc']}%が{T['owner_site']}でした。",
             head + f"{T['owner']}を探す質問で、{T['owner_site']}を出典にした回答は{h['ac']}%、"
@@ -628,6 +635,26 @@ def for_article(title, keyword):
         return [], ""
     cs = material_claims(ind)
     return cs, (f"https://ai.7senses.co.jp/research/{ind}-ai-sources/" if cs else "")
+
+
+def for_site(site, title, keyword):
+    """社の記事に渡す調査の文と URL。社の設定に research（調査の業種の一覧）があればそれ、無ければ AI集客ラボの
+    業種の判定（for_article）。コーポレート（経理代行）にも業種の数字を渡す（2026-10-21）。
+    お客様の社には渡さない: お客様の記事に当社の名前と調べたことを書けない（配信の門が止める。rag-donyu で実際に止まった）"""
+    import sites as S
+    import private_store as P
+    if P.is_client(site):
+        return [], ""
+    inds = list((S.load(site) or {}).get("research") or [])
+    if inds:
+        out, url = [], ""
+        for ind in inds:
+            cs = material_claims(ind, "当社")
+            if cs:
+                out += cs
+                url = url or f"https://ai.7senses.co.jp/research/{ind}-ai-sources/"
+        return out, url
+    return for_article(title, keyword) if site == "ai-lab" else ([], "")
 
 
 def hero(ind):

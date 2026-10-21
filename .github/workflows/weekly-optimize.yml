@@ -381,6 +381,16 @@ jobs:
           python scripts/effect_ab.py || true
           # 書き直し・統合の種類ごとの効き（前後28日・対照群比）。結果は data/rewrite_effect.json
           python scripts/effect_ab.py --rewrites || true
+          # 書き直しから31日たった自社の記事の前と後（表示・平均順位）を一次情報にする（週3本。運用者 2026-10-21）
+          python scripts/material_sheet.py --auto-measure 3 || true
+
+      # 採点で材料が足りないと出た記事の質問シートを、依頼が新しく出た・変わった週だけメールで送る（運用者 2026-10-21）
+      - name: 材料の質問シートを送る
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+        run: python scripts/material_sheet.py --mail || true
 
       # どの業種×手法が空いているかを盤面で出す。空きマスは、そのまま
       # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない

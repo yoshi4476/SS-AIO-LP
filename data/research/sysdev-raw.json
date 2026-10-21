@@ -1,0 +1,1428 @@
+{
+ "industry": "sysdev",
+ "date": "2026-10-21",
+ "engines": [
+  "ChatGPT",
+  "Claude"
+ ],
+ "answers": {
+  "大阪 システム開発 会社 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.skygroup.jp/software/",
+     "https://www.skygroup.jp/news/260601_01/",
+     "https://www.fenrir-inc.com/jp/lp/pages/service/",
+     "https://www.fenrir-inc.com/jp/about/company/",
+     "https://agileware.jp/business/entrusted/",
+     "https://agileware.jp/company/",
+     "https://www.systena-bsol.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hnavi.co.jp/knowledge/blog/osaka_ec_companies/",
+     "https://www.biz.ne.jp/matome/2002527/",
+     "https://stock-sun.com/column/system-development-osaka/",
+     "https://www.1st-net.jp/blog/system-development-company/",
+     "https://system-kanji.com/posts/osaka",
+     "https://system-rev.ai/blog/comparison/osaka-system-companies/",
+     "https://neeed.jp/system-development-company-osaka/",
+     "https://www.igac.net/system.html",
+     "https://dev.epic-s.co.jp/system-development-osaka/"
+    ],
+    "error": ""
+   }
+  },
+  "東京 業務システム 受託開発 依頼": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.coresoft-net.co.jp/compnay/profile/",
+     "https://www.eyebrains.co.jp/system_development/",
+     "https://toyoko-sys.co.jp/service/system-dev/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hnavi.co.jp/knowledge/blog/tokyo_system_companies/",
+     "https://digi-mado.jp/articles/2f82a22e-9a71-4e01-bea0-7cb738d98994/",
+     "https://hnavi.co.jp/knowledge/blog/contract-development_companies/",
+     "https://stock-sun.com/column/system-development-tokyo/",
+     "https://www.biz.ne.jp/subject/system/13_tokyo/",
+     "https://www.c3reve.co.jp/post/tokyo-system-companies",
+     "https://www.1st-net.jp/blog/system-kaihatsu-tokyo/",
+     "https://allgrow-labo.jp/blog/tokyo-system-companies-recommend/",
+     "https://nocoderi.co.jp/2024/10/01/tokyo-system-development-company/"
+    ],
+    "error": ""
+   }
+  },
+  "名古屋 アプリ開発 会社 比較": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://fenrir-inc.com/jp/business/product-development/",
+     "https://fenrir-inc.com/jp/about/company/",
+     "https://www.inbility.co.jp/service_application.html",
+     "https://www.c3index.co.jp/",
+     "https://www.c3index.co.jp/service/no-code/",
+     "https://www.gzoe.co.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://imitsu.jp/list/app-developer/aichi/nagoya-city",
+     "https://www.biz.ne.jp/matome/2008548/",
+     "https://liginc.co.jp/blog/system/637300",
+     "https://www.aidma-hd.jp/ai/nagoya-aikigyo/",
+     "https://freeconsul.co.jp/cs/systemdevelopment-nagoya/",
+     "https://pentagon.tokyo/app/list/4635/",
+     "https://system-kanji.com/posts/nagoya",
+     "https://emeao.jp/guide/appli/appli-recomend/post-48652/",
+     "https://swooo.net/dev/nagoya-app-development-company/",
+     "https://www.biz.ne.jp/list/smartphone-app/",
+     "https://probel.jp/promaga/b/2352/",
+     "https://imitsu.jp/ct-app-developer/pr-aichi/ci-nagoya-city/",
+     "https://hnavi.co.jp/knowledge/blog/nagoya-app_companies/",
+     "https://www.biz.ne.jp/list/smartphone-app/23_aichi/nagoyashi/"
+    ],
+    "error": ""
+   }
+  },
+  "福岡 システム開発 外注 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://fusic.co.jp/service/web",
+     "https://fusic.co.jp/service/ai",
+     "https://www.city.co.jp/development/",
+     "https://www.city.co.jp/development/nearshore/",
+     "https://www.kuzilla.co.jp/",
+     "https://www.media5.co.jp/service/si/",
+     "https://system-kaihatu.com/location/fukuoka"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hnavi.co.jp/knowledge/blog/hukuoka_app_companies/",
+     "https://hnavi.co.jp/knowledge/blog/fukuoka_system_companies/",
+     "https://www.biz.ne.jp/list/web-system/40_fukuoka/fukuokashi/",
+     "https://hnavi.co.jp/knowledge/blog/kyushu_system_companies/",
+     "https://ai-market.jp/services/fukuoka_ai_company/",
+     "https://stock-sun.com/column/system-development-fukuoka/",
+     "https://stock-sun.com/column/fukuoka-app-development/",
+     "https://system-kanji.com/posts/fukuoka-city-system-development",
+     "https://nocoderi.co.jp/2024/10/01/fukuoka-system-development-company/"
+    ],
+    "error": ""
+   }
+  },
+  "札幌 受託開発 会社 探し方": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.hicta.or.jp/profile/memberlist/",
+     "https://www.s-ail.org/company/",
+     "https://www.sapporo-cci.or.jp/content/enterprise_search.html",
+     "https://dx.ipa.go.jp/youken-teigi",
+     "https://www.ipa.go.jp/digital/model/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://imitsu.jp/list/web-system/hokkaido/sapporo-city",
+     "https://stock-sun.com/column/system-development-hokkaido/",
+     "https://digi-mado.jp/articles/42b6755d-946a-44a5-ad69-d557ed8b6a80/",
+     "https://stock-sun.com/column/system-development-sapporo/",
+     "https://freeconsul.co.jp/cs/systemdevelopment-sapporo/",
+     "https://allgrow-labo.jp/blog/hokkaido-companies-recommend/",
+     "https://pitta-lab.com/posts/577294",
+     "https://kame-rad.co.jp/sapporo-system-development/",
+     "https://bolt-dev.net/posts/17033/",
+     "https://www.biz.ne.jp/matome/2008555/",
+     "https://hnavi.co.jp/corporation/hokkaido/sapporo/",
+     "https://hnavi.co.jp/knowledge/blog/sapporo_system_companies/",
+     "https://mid-works.com/columns/business/company/1139823",
+     "https://houjin.goo.to/corporations/prefs/hokkaido/category-s-system-development-contracted-development/page10"
+    ],
+    "error": ""
+   }
+  },
+  "横浜 業務システム 開発 相談": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.idec.or.jp/business/innovation/it_iot.html",
+     "https://ysr.co.jp/",
+     "https://tamat.jp/services/system",
+     "https://linkandbase.co.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://digi-mado.jp/articles/2b379bf3-6a52-491b-9812-f940ba1d608b/",
+     "https://hnavi.co.jp/knowledge/blog/yokohama_system_companies/",
+     "https://www.biz.ne.jp/list/web-system/14_kanagawa/yokohamashi/",
+     "https://hnavi.co.jp/knowledge/blog/kanagawa_system_companies/",
+     "https://mid-works.com/columns/business/company/1139822",
+     "https://hnavi.co.jp/corporation/kanagawa/yokohama/",
+     "https://www.biz.ne.jp/list/system/14_kanagawa/city_2300000/",
+     "https://freeconsul.co.jp/cs/systemdevelopment-yokohama/",
+     "https://emeao.jp/guide/system/system-recomend/post-46785/"
+    ],
+    "error": ""
+   }
+  },
+  "京都 システム開発 会社 中小企業": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ccandc.co.jp/",
+     "https://www.netasp.kyoto/company_info/",
+     "https://u-l.jp/system-development",
+     "https://www.lyretec.com/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://imitsu.jp/list/web-system/kyoto/",
+     "https://www.biz.ne.jp/matome/2008573/",
+     "https://hnavi.co.jp/knowledge/blog/kyoto_system_companies/",
+     "https://www.biz.ne.jp/list/web-system/26_kyoto/kyotoshi/",
+     "https://hnavi.co.jp/knowledge/blog/small-system_companies/",
+     "https://www.biz.ne.jp/list/system/26_kyoto/?datacnt=10",
+     "https://gicp.co.jp/manegementnote/small-scale-system-development/",
+     "https://system-kanji.com/posts/kyouto-city-system-development",
+     "https://swooo.net/dev/system-development-kyoto/"
+    ],
+    "error": ""
+   }
+  },
+  "神戸 アプリ開発 依頼 費用": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://kobesoft.co.jp/mobile/pricing/",
+     "https://tkwriteworks.co.jp/service/system/",
+     "https://kobesoft.co.jp/mobile/faq/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.biz.ne.jp/matome/2004001/",
+     "https://iridge.jp/blog/202408/33355/",
+     "https://stores.fun/magazine/articles/app-production-tool",
+     "https://moduleapps.com/mobile-marketing/app-dev-cost/",
+     "https://blog.xincere.jp/articles/app-development-outsourcing-cost",
+     "https://swooo.net/dev/application%EF%BD%B0development%EF%BD%B0requestcost/",
+     "https://yoshida-web-office.com/blog/app-development-individual-request/",
+     "https://nocoderi.co.jp/2024/08/20/app-development-cost/",
+     "https://nocoderi.co.jp/2024/11/29/app-development-request-cost/",
+     "https://www.biz.ne.jp/matome/2004408/",
+     "https://www.biz.ne.jp/list/smartphone-app/28_hyougo/",
+     "https://www.biz.ne.jp/matome/2008553/",
+     "https://system-kanji.com/posts/koube-city-app-development",
+     "https://nocodesemi.epic-s.co.jp/hyougo-app-developer/",
+     "https://walker-s.co.jp/media/app-development-cost/",
+     "https://system-kanji.com/posts/smartphone-app-development-cost",
+     "https://pentagon.tokyo/app/1997/"
+    ],
+    "error": ""
+   }
+  },
+  "仙台 システム開発 外注 会社": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.sjc-sendai.co.jp/business/system/",
+     "https://www.uknow.co.jp/service/development",
+     "https://www.milsys.co.jp/",
+     "https://www.aws-net.com/",
+     "https://dejjis.co.jp/",
+     "https://www.arces.co.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hnavi.co.jp/knowledge/blog/tohoku_system_companies/",
+     "https://hnavi.co.jp/knowledge/blog/sendai_system_companies/",
+     "https://www.biz.ne.jp/matome/2008556/",
+     "https://www.biz.ne.jp/list/smartphone-app/04_miyagi/sendaishi/",
+     "https://www.selva-i.co.jp/selecto/archives/1704",
+     "https://system-kanji.com/posts/sendai",
+     "https://system-kanji.com/posts/senndai-city-system-development",
+     "https://pitta-lab.com/posts/848674",
+     "https://system-rev.ai/blog/comparison/miyagi-system-companies/",
+     "https://comperu.jp/sys-development-miyagi/",
+     "https://imitsu.jp/list/web-system/miyagi/sendai-city",
+     "https://atsoho.com/blog/system-development-company-sendai",
+     "https://mid-works.com/columns/business/company/1139824",
+     "https://digi-mado.jp/articles/da75958e-cc0f-46f8-b24c-8eb792120fa9/"
+    ],
+    "error": ""
+   }
+  },
+  "広島 受託開発 会社 おすすめ": {
+   "group": "地域で探す",
+   "ChatGPT": {
+    "urls": [
+     "https://www.systemfriend.co.jp/company/overview",
+     "https://www.systemfriend.co.jp/business/si",
+     "https://www.systemfriend.co.jp/",
+     "https://www.coresoft-net.co.jp/compnay/profile/",
+     "https://www.coresoft-net.co.jp/service/development/",
+     "https://www.tss-sw.co.jp/",
+     "https://advtec.co.jp/company/greeting/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hnavi.co.jp/knowledge/blog/contract-development_companies/",
+     "https://hnavi.co.jp/knowledge/blog/hiroshima_system_companies/",
+     "https://digi-mado.jp/articles/56636aa6-0c86-4dca-9403-5c3235cc555f/",
+     "https://www.biz.ne.jp/matome/2008528/",
+     "https://www.biz.ne.jp/matome/2008580/",
+     "https://stock-sun.com/column/system-development-hiroshima/",
+     "https://system-kanji.com/posts/hiroshima-app",
+     "https://pentagon.tokyo/app/list/4646/",
+     "https://swooo.net/dev/hiroshima-app-development-company/",
+     "https://imitsu.jp/list/web-system/hiroshima/",
+     "https://system-kanji.com/posts/hirosima-city-app-development",
+     "https://system-kanji.com/posts/hiroshima",
+     "https://comperu.jp/sys-development-hiroshima/",
+     "https://n-v-l.co/magazine/hiroshima-system-companies/"
+    ],
+    "error": ""
+   }
+  },
+  "業務システム 開発 費用 相場": {
+   "group": "費用・見積",
+   "ChatGPT": {
+    "urls": [
+     "https://www.siainc.jp/topic/system-development-cost",
+     "https://www.geek-bridge.com/public/column/business-system-development-cost"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.1st-net.jp/blog/business-system-development/",
+     "https://ai-revolution.co.jp/media/business-system-cost/",
+     "https://egsystem.co.jp/egs/column/system-development-cost-2026/",
+     "https://onetrace.lyn-company.jp/articles/system-development-cost",
+     "https://nodelabs.co.jp/column-system-kaihatsu-hiyo.html",
+     "https://swooo.net/dev/nocode/business-application-development/",
+     "https://casually.clyr.co.jp/guides/cost-guide",
+     "https://casually.clyr.co.jp/pricing-examples",
+     "https://funbrew.tech/blog/system-development-cost-2026",
+     "https://sun-asterisk.com/service/development/topics/business-system/5370/",
+     "https://minna-systems.co.jp/column/system-development-cost-market-rate/",
+     "https://weblossom.jp/blog/scratch-price/",
+     "https://rekaizen.com/article/detail/business-system/1158",
+     "https://fixit.co.jp/insights/system-development-quote-market-price/",
+     "https://sophiate.co.jp/%E6%A5%AD%E5%8B%99%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA%E8%B2%BB%E7%94%A8%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%A85%E5%B9%B4%E3%83%88%E3%83%BC%E3%82%BF%E3%83%AB%E3%82%B3%E3%82%B9%E3%83%88/",
+     "https://swooo.net/dev/webapp-estimate_4/",
+     "https://www.ripla.co.jp/blog/system/scratch-development-costs/"
+    ],
+    "error": ""
+   }
+  },
+  "アプリ開発 見積 いくら": {
+   "group": "費用・見積",
+   "ChatGPT": {
+    "urls": [
+     "https://www.init-inc.com/column/245",
+     "https://iridge.jp/blog/202408/33355/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://iridge.jp/blog/202408/33355/",
+     "https://stores.fun/magazine/articles/app-production-tool",
+     "https://moduleapps.com/mobile-marketing/app-dev-cost/",
+     "https://walker-s.co.jp/media/app-development-cost/",
+     "https://www.webharu.com/posts/app-development-cost",
+     "https://swooo.net/business/application-cost/",
+     "https://www.jcc-ltd.com/column/column240505apsouba/",
+     "https://nocoderi.co.jp/2024/08/20/app-development-cost/",
+     "https://ysinc.co.jp/blog/mobile-app-development-cost/",
+     "https://gmo-app.jp/column/5619.html",
+     "https://lassic.co.jp/media/column/mobile-app-development-cost/",
+     "https://sun-asterisk.com/service/development/topics/app-dev/4959/",
+     "https://rabiloo.co.jp/blog/app-development-costs",
+     "https://www.zealz.co.jp/knowledge/smartphone-app-development-cost/",
+     "https://nocoderi.co.jp/2025/04/23/mobile-app-cost-market-price-development-system/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 見積 内訳 見方": {
+   "group": "費用・見積",
+   "ChatGPT": {
+    "urls": [
+     "https://www.mhlw.go.jp/content/12600000/001448078.pdf",
+     "https://www.c3index.co.jp/blog/blog_3216/",
+     "https://www.ipa.go.jp/archive/digital/iot-en-ci/teiryou/ent01-c.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.c3index.co.jp/blog/blog_3216/",
+     "https://minna-systems.co.jp/blogs/3113/",
+     "https://www.siainc.jp/topic/outsourced-development-cost-factors-2025",
+     "https://blog.xincere.jp/articles/system-development-man-month-unit-price",
+     "https://nichicoma.co.jp/blog/system-development-estimate-guide",
+     "https://nocoderi.co.jp/2025/04/06/system-development-complete-guide-considerations-cost-market/",
+     "https://nocoderi.co.jp/2025/04/05/software-development-guide-cost-market-price-system/",
+     "https://incubation-base.com/column/system-development-cost/",
+     "https://gelatocms.com/blog/system-development-estimate/",
+     "https://corp.tech.hipro-job.jp/column/226",
+     "https://genee.jp/contents/system0009/",
+     "https://www.1st-net.jp/blog/system-development-estimate-breakdown/",
+     "https://beekle.jp/column/system-development-cost-breakdown",
+     "https://www.htrust-inc.jp/blog/system-estimation-cost-breakdown",
+     "https://fixit.co.jp/insights/system-development-quote-market-price/",
+     "https://incubation-base.com/column/system-development-estimate/"
+    ],
+    "error": ""
+   }
+  },
+  "受託開発 単価 人月 相場": {
+   "group": "費用・見積",
+   "ChatGPT": {
+    "urls": [
+     "https://overx.co.jp/media/man-month-rate/",
+     "https://blog.xincere.jp/articles/system-development-man-month-unit-price",
+     "https://www.floatengineering.co.jp/blog/outsourcing-development-guide"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hnavi.co.jp/knowledge/blog/person-month-unit-price_sales/",
+     "https://hnavi.co.jp/knowledge/blog/entrusted-development-cost/",
+     "https://www.siainc.jp/topic/system-development-cost",
+     "https://www.siainc.jp/topic/outsourced-development-cost-factors-2025",
+     "https://blog.xincere.jp/articles/system-development-man-month-unit-price",
+     "https://koromo.io/blog/contract-development-estimate-market-rate/",
+     "https://sucsak.com/contents/contract-development-cost",
+     "https://techtionary.jp/3224/",
+     "https://www.ripla.co.jp/blog/system/contract-development-costs/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 費用 安く抑える方法": {
+   "group": "費用・見積",
+   "ChatGPT": {
+    "urls": [
+     "https://dx.ipa.go.jp/youken-teigi",
+     "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/4abc3a06-5590-4ff1-a542-7f29198b2a81/8f314c0a/20260106_procurement_system_agreement_03.pdf",
+     "https://www.ipa.go.jp/digital/model/model20201222.html",
+     "https://it-shien.smrj.go.jp/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.pasona.co.jp/clients/service/xtech/column/column163/",
+     "https://techtus-eg.mynavi.jp/resources/system-fee",
+     "https://enlyt.co.jp/blog/system-dev-pricing",
+     "https://walker-s.co.jp/media/system-development-cost/",
+     "https://casually.clyr.co.jp/guides/cost-guide",
+     "https://zero-startup.com/system-development-estimate-cost",
+     "https://nocoderi.co.jp/2025/04/06/system-development-cost-reduction/",
+     "https://nocoderi.co.jp/2025/04/06/system-development-pricing-cost-market-price/",
+     "https://nocoderi.co.jp/2024/08/20/system-development-cost/",
+     "https://www.focus-s.com/note/0040",
+     "https://techtouch.jp/media/development/cost-reduction-methods-system-development/",
+     "https://sun-asterisk.com/service/development/topics/systemdev/4876/",
+     "https://nocode.plumsa.co.jp/?p=2013",
+     "https://overx.co.jp/media/cost-reduction/",
+     "https://toppa-jp.com/column-glossary/system-development-cost-reduction/",
+     "https://www.talentbasevn.com/blog/system-kaihatsu-cost-sakugen/",
+     "https://solashi.com/media/how-to-reduce-system-development-costs/"
+    ],
+    "error": ""
+   }
+  },
+  "スクラッチ開発 費用 目安": {
+   "group": "費用・見積",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ripla.co.jp/blog/system/scratch-development-costs/",
+     "https://www.geek-bridge.com/public/column/scratch-development-cost-guide"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://giginc.co.jp/blog/giglab/scratch-dev",
+     "https://www.c3index.co.jp/blog/blog_1483/",
+     "https://mallento.com/method/matching-site-scratch-development/",
+     "https://syusodo.co.jp/blog/articles/fullscratch-development-guide",
+     "https://swooo.net/dev/webapp-estimate_4/",
+     "https://nocoderi.co.jp/2026/06/12/scratch-development/",
+     "https://nocoderi.co.jp/2024/12/27/development-from-scratch/",
+     "https://www.ripla.co.jp/blog/system/scratch-development-costs/",
+     "https://www.digital-reclame.co.jp/blog/scratch-development-cost-guide/",
+     "https://hnavi.co.jp/knowledge/blog/scratch-development-cost/",
+     "https://weblossom.jp/blog/scratch-price/",
+     "https://rekaizen.com/article/detail/business-system/1158",
+     "https://fixit.co.jp/insights/system-development-quote-market-price/",
+     "https://incubation-base.com/column/system-development-cost/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 見積 比較 複数社": {
+   "group": "費用・見積",
+   "ChatGPT": {
+    "urls": [
+     "https://www.geek-bridge.com/public/column/system-development-quote-comparison-guide",
+     "https://www.ipa.go.jp/archive/files/000072323.pdf",
+     "https://juas.or.jp/cms/media/2025/04/K-5_itp_ver1.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://it-trend.jp/column/article/644-5504",
+     "https://gxo.co.jp/column/system-estimate-reading-11-comparison-sheet-202605",
+     "https://note.com/ripla_business/n/n5ad10adf8b74",
+     "https://sophiate.co.jp/how-to-compare-development-estimates-key-evaluation-points-and-how-to-use-multiple-quotes-effectively/",
+     "https://lassic.co.jp/media/column/system-development-multiple-quotes/",
+     "https://hnavi.co.jp/knowledge/blog/rfp/",
+     "https://gxo.co.jp/column/system-estimate-reading-10-rfp-before-quote-202605",
+     "https://ai-revolution.co.jp/media/ai-rfp-template/"
+    ],
+    "error": ""
+   }
+  },
+  "小規模 業務システム 開発 予算": {
+   "group": "費用・見積",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ripla.co.jp/blog/system/business-system-costs/",
+     "https://nocoderi.co.jp/2026/01/25/business-system-development-cost/",
+     "https://www.siainc.jp/topic/system-development-cost",
+     "https://pentagon.tokyo/web-system/10335/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://enlyt.co.jp/blog/system-dev-pricing",
+     "https://ai-revolution.co.jp/media/business-system-cost/",
+     "https://www.siainc.jp/topic/system-development-cost",
+     "https://egsystem.co.jp/egs/column/system-development-cost-2026/",
+     "https://minna-systems.co.jp/column/system-development-cost-market-rate/",
+     "https://onetrace.lyn-company.jp/articles/system-development-cost",
+     "https://nodelabs.co.jp/column-system-kaihatsu-hiyo.html",
+     "https://funbrew.tech/blog/system-development-cost-2026",
+     "https://nocoderi.co.jp/2025/04/05/software-development-guide-cost-market-price-system/",
+     "https://syusodo.co.jp/blog/articles/system-development-cost-guide",
+     "https://optisource.co.jp/business-system-dev-insourcing-outsourcing/",
+     "https://arinti.jp/blog/business-system-development-cost-guide",
+     "https://sophiate.co.jp/%E6%A5%AD%E5%8B%99%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA%E8%B2%BB%E7%94%A8%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%A8%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%E5%88%A4%E6%96%AD%E5%9F%BA%E6%BA%96/",
+     "https://sophiate.co.jp/%E6%A5%AD%E5%8B%99%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA%E8%B2%BB%E7%94%A8%E3%81%AE%E7%9B%B8%E5%A0%B4%E3%81%A85%E5%B9%B4%E3%83%88%E3%83%BC%E3%82%BF%E3%83%AB%E3%82%B3%E3%82%B9%E3%83%88/",
+     "https://incubation-base.com/column/system-development-cost/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 追加費用 発生 理由": {
+   "group": "費用・見積",
+   "ChatGPT": {
+    "urls": [
+     "https://syusodo.co.jp/blog/articles/spec-change-cost-prevention",
+     "https://gxo.co.jp/column/system-estimate-reading-06-additional-cost-items-202605",
+     "https://www.ipa.go.jp/digital/model/ug65p90000001ljh-att/20250424-kouen.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://techtouch.jp/media/development/cost-reduction-methods-system-development/",
+     "https://c-limber.co.jp/blog/6677",
+     "https://xtech.nikkei.com/atcl/nxt/column/18/00177/022100003/",
+     "https://atsoho.com/blog/system-development-additional-cost-dispute",
+     "https://montecampo.co.jp/11437.html/",
+     "https://toppa-jp.com/column-glossary/system-development-cost-reduction/",
+     "https://www.jcc-ltd.com/column/column_3247/",
+     "https://system-kaihatu.com/archives/256",
+     "https://beast-technology.com/blog/why-outsourcing-extra-costs-happen",
+     "https://syusodo.co.jp/blog/articles/spec-change-cost-prevention",
+     "https://wurinc.jp/blog/system-development-estimate-guide/",
+     "https://sophiate.co.jp/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%EF%BC%9A%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%E3%81%A7%E6%90%8D%E3%81%97%E3%81%AA%E3%81%84%E8%AA%AD/",
+     "https://buerger-consulting.com/columns/566/",
+     "https://note.com/miraikyoso/n/n5f9b33e323ee"
+    ],
+    "error": ""
+   }
+  },
+  "アプリ開発 費用 補助金": {
+   "group": "費用・見積",
+   "ChatGPT": {
+    "urls": [
+     "https://iridge.jp/blog/202408/33355/",
+     "https://syusodo.co.jp/blog/articles/app-development",
+     "https://portal.monodukuri-hojo.jp/about.html",
+     "https://portal.monodukuri-hojo.jp/common/bunsho/ippan/23th/%E5%85%AC%E5%8B%9F%E8%A6%81%E9%A0%98_23%E6%AC%A1%E7%B7%A0%E5%88%87_20260206.pdf",
+     "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+     "https://mirasapo-plus.go.jp/wordpress/wp-content/uploads/2026/03/05162722/it2026_koubo_tsujyo.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://imitsu.jp/matome/app-developer/5147431276320825",
+     "https://iridge.jp/blog/202605/41972/",
+     "https://www.issoh.co.jp/column/details/3767/",
+     "https://note.com/ripla_business/n/nb99e049b2de8",
+     "https://pentagon.tokyo/app/2806/",
+     "https://ichidokiri.co.jp/column/app_subsidy/",
+     "https://hojyokin-concierge.com/media/2026/01/09/apurikaihatsu_hojyokin",
+     "https://hojokin-joseikin.com/2007/",
+     "https://hojokin-dx.com/articles/app-system-ai-dev-subsidy-guide-2026/",
+     "https://minna-systems.co.jp/column/subsidy-for-development/",
+     "https://www.aies.jp/blog/hojokin-guide",
+     "https://procon-hojyokin.com/system2026/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発会社 選び方 ポイント": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.geek-bridge.com/column/system-development-company-selection",
+     "https://www.ipa.go.jp/digital/model/ug65p90000001ljh-att/20250424-kouen.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://genee.jp/contents/system-development-company-recommended/",
+     "https://cone-c-slide.com/liblog/system-development/",
+     "https://freeconsul.co.jp/cs/system-development/",
+     "https://walker-s.co.jp/media/software-company/",
+     "https://cal.co.jp/blog/2107/",
+     "https://swooo.net/business/introduce/software-development-company/",
+     "https://nocoderi.co.jp/2025/04/06/system-development-company-comparison/",
+     "https://nocoderi.co.jp/2025/04/05/software-development-selection-guide-comparison-mistakes-system/",
+     "https://uiuxdesign.jp/vendor-selection-criteria-2026/"
+    ],
+    "error": ""
+   }
+  },
+  "受託開発 会社 比較 基準": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.meti.go.jp/policy/it_policy/softseibi/model_tuiho/model_tuiho.pdf",
+     "https://www.siainc.jp/topic/system-development-vendor-selection-guide",
+     "https://www.ipa.go.jp/digital/model/model20201222.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://digi-mado.jp/article/122876/",
+     "https://japan-ai.co.jp/media/5590/",
+     "https://lassic.co.jp/media/column/ai-outsourcing-vendor-selection-guide/",
+     "https://cone-c-slide.com/liblog/aicontract-development/",
+     "https://note.com/ripla_business/n/n349434653c40",
+     "https://nexa-corp.jp/ai-development-company-selection/",
+     "https://fixit.co.jp/insights/business-system-vendor-comparison-guide/",
+     "https://sophiate.co.jp/%E5%8F%97%E8%A8%97%E9%96%8B%E7%99%BA%E3%81%8A%E3%81%99%E3%81%99%E3%82%81%E4%BC%9A%E7%A4%BE%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%EF%BD%9C%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%847%E3%81%A4%E3%81%AE/",
+     "https://nocoderi.co.jp/2025/04/06/contract-system-development-guide/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 外注 失敗しない 選び方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ipa.go.jp/archive/files/000072323.pdf",
+     "https://www.ipa.go.jp/choutatsu/nyusatsu/2024/begoj90000009sf5-att/nyusatsu20241025ex.pdf",
+     "https://www.ipa.go.jp/digital/model/model20201222.html",
+     "https://www.ipa.go.jp/archive/digital/chousa/sys-security.html",
+     "https://www.ipa.go.jp/archive/files/000069023.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://genee.jp/contents/system-development-company-recommended/",
+     "https://www.c3index.co.jp/blog/blog_3298/",
+     "https://briller-inc.co.jp/2024/10/16/2024-10-7-system-development-outsourcing/",
+     "https://zealz.co.jp/knowledge/how-to-choose-system-development-company/",
+     "https://tokyo-scaler.com/blog/system-development-outsourcing/",
+     "https://buerger-consulting.com/columns/518/",
+     "https://nocoderi.co.jp/2025/04/05/software-development-selection-guide-comparison-mistakes-system/",
+     "https://nocoderi.co.jp/2025/04/06/contract-system-development-guide/",
+     "https://uiuxdesign.jp/vendor-selection-criteria-2026/",
+     "https://hubspot.100inc.co.jp/system-development-outsourcing-failure",
+     "https://note.com/ripla_business/n/n236321cf4aa3",
+     "https://www.revcreate.co.jp/blog/development/p6242/",
+     "https://clane.co.jp/blog/system-development/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA%E3%81%AE%E7%99%BA%E6%B3%A8%E5%A4%B1%E6%95%97%E4%BA%8B%E4%BE%8B10%E9%81%B8%EF%BD%9C%E5%8E%9F%E5%9B%A0%E3%83%BB%E5%85%B1%E9%80%9A%E3%83%91%E3%82%BF/",
+     "https://overx.co.jp/media/outsourcing-failure/",
+     "https://swooo.net/dev/system-development-failure/",
+     "https://sucsak.com/contents/system-development-failure",
+     "https://www.ripla.co.jp/blog/system/system-development-outsourcing/",
+     "https://nocoderi.co.jp/2025/04/04/system-development-failure-cases/"
+    ],
+    "error": ""
+   }
+  },
+  "開発会社 実績 見るべき点": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://c-limber.co.jp/blog/8020",
+     "https://www.geek-bridge.com/column/system-development-company-selection"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://liginc.co.jp/blog/system/619444",
+     "https://genee.jp/contents/system-development-company-recommended/",
+     "https://kaopiz.com/ja-news-system-development-companies/",
+     "https://liginc.co.jp/blog/system/543411",
+     "https://walker-s.co.jp/media/software-company/",
+     "https://bizitora.jp/topics/dev-system/",
+     "https://swooo.net/business/introduce/software-development-company/",
+     "https://nocoderi.co.jp/2025/04/06/system-development-track-record/",
+     "https://linktach.com/system-dev/system-development-company-selection-criteria/",
+     "https://ysinc.co.jp/blog/system-development-companies/",
+     "https://blog.xincere.jp/articles/system-development-request-checklist",
+     "https://nichicoma.co.jp/blog/system-development-company-selection",
+     "https://lastscene.co.jp/column/system-development/system-development-company-selection",
+     "https://sophiate.co.jp/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA%E4%BE%9D%E9%A0%BC%E3%81%A7%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%E3%80%90%E5%88%A4%E6%96%AD/",
+     "https://ops-in.com/blog/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA%E4%BC%9A%E7%A4%BE%E3%82%92%E6%AF%94%E8%BC%83%E6%A4%9C%E8%A8%8E%EF%BC%81%E9%81%B8%E3%81%B3%E6%96%B9%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88/",
+     "https://boss.soulc.com/system-basics/dev-company-selection/",
+     "https://nocoderi.co.jp/2025/04/05/software-development-selection-guide-comparison-mistakes-system/"
+    ],
+    "error": ""
+   }
+  },
+  "アプリ開発 会社 大手 中小 違い": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://d-oneapp.com/guide/oote-chusho-kaihatsu/",
+     "https://www.ipa.go.jp/digital/model/agile20200331.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://iridge.jp/blog/202408/33430/",
+     "https://pentagon.tokyo/app/list/8723/",
+     "https://www.biz.ne.jp/matome/2009135/",
+     "https://swooo.net/business/introduce/software-development-company/",
+     "https://sophiate.co.jp/%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA%E4%BC%9A%E7%A4%BE%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9%E3%81%A8%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%80%90%E4%B8%AD%E5%B0%8F%E4%BC%81%E6%A5%AD%E5%90%91/",
+     "https://human-mode.com/dev/blog/011"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 会社 相見積もり 進め方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ipa.go.jp/archive/files/000072323.pdf",
+     "https://dx.ipa.go.jp/youken-teigi"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://lassic.co.jp/media/column/system-development-multiple-quotes/",
+     "https://note.com/ripla_business/n/n5ad10adf8b74",
+     "https://www.c3index.co.jp/blog/blog_3216/",
+     "https://www.argent-technology.co.jp/post/how-to-calculate-system-cost",
+     "https://dptr.jp/news/system-development-estimate-comparison/",
+     "https://sophiate.co.jp/%E7%9B%B8%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%E3%81%AE%E5%8F%96%E3%82%8A%E6%96%B9%EF%BC%9A%E6%9D%A1%E4%BB%B6%E3%82%92%E6%8F%83%E3%81%88%E3%81%A6%E5%A4%96%E6%B3%A8%E5%85%88%E3%82%92%E6%AF%94%E8%BC%83/",
+     "https://sucsak.com/contents/system-development-multiple-quotes",
+     "https://bolt-dev.net/posts/132/",
+     "https://mattock.jp/blog/system-development/estimate/multiple-estimates-for-system-development/"
+    ],
+    "error": ""
+   }
+  },
+  "受託開発 オフショア 国内 比較": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.offshore-kaihatsu.com/contents/general/offshore-nearshore/",
+     "https://www.argent-technology.co.jp/post/offshore-vs-domestic",
+     "https://gxo.co.jp/column/offshore-vs-domestic-development-comparison"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gxo.co.jp/column/offshore-vs-domestic-development-comparison",
+     "https://www.issoh.co.jp/column/details/13213/",
+     "https://lassic.co.jp/media/column/offshore-vs-nearshore-development/",
+     "https://cone-c-slide.com/liblog/offshore-development/",
+     "https://kaopiz.com/ja-news-offshore-domestic-comparison/",
+     "https://syusodo.co.jp/blog/articles/offshore-vs-domestic-development-2026",
+     "https://syusodo.co.jp/blog/articles/offshore-development-cost-comparison-2026",
+     "https://www.argent-technology.co.jp/post/offshore-vs-domestic",
+     "https://www.jcc-ltd.com/column/column052205/",
+     "https://liginc.co.jp/blog/system/612621",
+     "https://www.1st-net.jp/blog/offshore-development/",
+     "https://www.co-well.jp/blog/offshore/offshore_development_costs",
+     "https://allgrow-labo.jp/blog/offshore-development-costs/",
+     "https://ecco.co.jp/blog/blog-13543/",
+     "https://apptime.co.jp/media/%E3%82%AA%E3%83%95%E3%82%B7%E3%83%A7%E3%82%A2%E9%96%8B%E7%99%BA%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%AF%EF%BC%9F%E9%96%8B%E7%99%BA%E4%BC%9A%E7%A4%BE%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B/",
+     "https://toppa-jp.com/column-glossary/offshore-development-prices/",
+     "https://www.galk-jp.com/blog/offshore-development-costs/"
+    ],
+    "error": ""
+   }
+  },
+  "開発会社 信頼できる 見分け方": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.jisa.or.jp/Portals/0/report/26-J004check_sheet.pdf",
+     "https://www.ipa.go.jp/digital/model/model20201222.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://nocoderi.co.jp/2025/04/05/software-development-selection-guide-comparison-mistakes-system/",
+     "https://uiuxdesign.jp/vendor-selection-criteria-2026/",
+     "https://genee.jp/contents/system-development-company-recommended/",
+     "https://nocoderi.co.jp/2025/04/06/system-development-track-record/",
+     "https://nocoderi.co.jp/2025/04/06/system-development-company-comparison/",
+     "https://swooo.net/business/introduce/software-development-company/",
+     "https://swooo.net/dev/in-house-system-development-company/",
+     "https://walker-s.co.jp/media/software-company/",
+     "https://genee.jp/contents/major-system-dev-company/"
+    ],
+    "error": ""
+   }
+  },
+  "業務システム パッケージ スクラッチ どちらがいい": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://egsystem.co.jp/egs/column/scratch-vs-package/",
+     "https://hipro-job.jp/corp/service/tech/column/introduction/192/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.oro.com/zac/blog/package-system/",
+     "https://www.c3index.co.jp/blog/blog_1483/",
+     "https://www.venture-net.co.jp/odoo/package-vs-scratch/",
+     "https://aladdin-office.com/column/column59/",
+     "https://service.customedia.co.jp/marketing/package-scratch/",
+     "https://www.cloud-erp-guide.com/blog/package-or-scratch",
+     "https://nocoderi.co.jp/2026/06/12/scratch-vs-package/",
+     "https://incubation-base.com/column/system-development-scratch/",
+     "https://www.oflight.co.jp/ja/columns/scratch-vs-package-2026",
+     "https://techtus-eg.mynavi.jp/resources/system-package",
+     "https://it-trend.jp/column/article/644-5724",
+     "https://imitsu.jp/matome/web-system/5909281775734489",
+     "https://www.e-xtreme.co.jp/blog/36517/",
+     "https://wakka-inc.com/blog/3632/",
+     "https://wakka-inc.com/blog/2417/",
+     "https://boss.soulc.com/system-basics/full-scratch-dev/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 パートナー 選定 チェックリスト": {
+   "group": "選び方",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ipa.go.jp/archive/digital/iot-en-ci/jyouryuu/hikinou/ent03-b.html",
+     "https://www.ipa.go.jp/digital/model/model20201222.html",
+     "https://www.meti.go.jp/policy/netsecurity/downloadfiles/IS_Management_Standard_H28.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hnavi.co.jp/knowledge/blog/development-partner/",
+     "https://hnavi.co.jp/knowledge/blog/system-development-service/",
+     "https://digilo.co.jp/blogs/archives/858",
+     "https://freshet.co.jp/column/2444/",
+     "https://nichicoma.co.jp/blog/system-development-company-selection",
+     "https://gradion.com/ja/blog/how-to-choose-software-development-partner-2026-checklist",
+     "https://www.ripla.co.jp/blog/system/system-development-companies/",
+     "https://nocoderi.co.jp/2025/04/05/software-development-selection-guide-comparison-mistakes-system/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 外注 流れ": {
+   "group": "外注の進め方・失敗",
+   "ChatGPT": {
+    "urls": [
+     "https://www.meti.go.jp/policy/it_policy/keiyaku/model_keiyakusyo.pdf",
+     "https://www.ipa.go.jp/digital/model/ug65p90000001ljh-att/20250424-kouen.pdf",
+     "https://dx.ipa.go.jp/youken-teigi",
+     "https://www.ipa.go.jp/digital/model/model20201222.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://sun-asterisk.com/service/development/topics/systemdev/3165/",
+     "https://biz.moneyforward.com/invoice/basic/62507/",
+     "https://www.c3index.co.jp/blog/blog_3298/",
+     "https://briller-inc.co.jp/2024/10/16/2024-10-7-system-development-outsourcing/",
+     "https://overx.co.jp/media/outsourcing-flow/",
+     "https://trywith.co.jp/blog/system-development-outsourcing-guide",
+     "https://btobee.co.jp/cms/system-development-outsourcing/",
+     "https://www.fake.inc/blog/system-development-outsourcing",
+     "https://sucsak.com/contents/process-flow"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 要件定義 進め方": {
+   "group": "外注の進め方・失敗",
+   "ChatGPT": {
+    "urls": [
+     "https://dx.ipa.go.jp/youken-teigi",
+     "https://www.ipa.go.jp/archive/digital/iot-en-ci/jyouryuu/youkenteigi20190912.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.impl.co.jp/whitepaper/requirement-definition-system-dev/",
+     "https://sun-asterisk.com/service/development/topics/systemdev/2770/",
+     "https://www.biprogy.com/solution/other/hybrish_column7.html",
+     "https://www.cm-net.co.jp/blog/requirement-definition/",
+     "https://www.c3index.co.jp/blog/blog_221/",
+     "https://www.co-well.jp/blog/system_dev_RequirementDefinition",
+     "https://kaishi.ac.jp/info-d/column/column-list/requirements-definition/",
+     "https://yoyaku-package.com/useful/detail/system-requirement-definition/",
+     "https://blog.xincere.jp/articles/requirements-definition-process"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 外注 失敗 原因": {
+   "group": "外注の進め方・失敗",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ipa.go.jp/archive/digital/iot-en-ci/jyouryuu/ent03-a.html",
+     "https://www.ipa.go.jp/archive/publish/qv6pgp0000000wo6-att/000071982.pdf",
+     "https://www.pmaj.or.jp/sympo/2020/docs/2cgr/b_1.pdf",
+     "https://www.ipa.go.jp/archive/digital/iot-en-ci/vol18_column.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hubspot.100inc.co.jp/system-development-outsourcing-failure",
+     "https://wp.techtarget.itmedia.co.jp/contents/101184",
+     "https://syusodo.co.jp/blog/articles/outsourcing-failure-cases",
+     "https://overx.co.jp/media/outsourcing-failure/",
+     "https://egsystem.co.jp/egs/column/outsourcing-failure-causes/",
+     "https://machi-it.jp/system-development-failure/",
+     "https://buerger-consulting.com/columns/518/",
+     "https://rc-ltd-alliance.com/column/case-build-system-fault",
+     "https://gelatocms.com/blog/websystem-outsourcing/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 発注 前に準備すること": {
+   "group": "外注の進め方・失敗",
+   "ChatGPT": {
+    "urls": [
+     "https://dx.ipa.go.jp/youken-teigi",
+     "https://www.ipa.go.jp/digital/kaihatsu/link/planning.html",
+     "https://www.ipa.go.jp/digital/model/ug65p90000001ljh-att/20250424-kouen.pdf",
+     "https://www.ipa.go.jp/digital/model/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hnavi.co.jp/knowledge/blog/rfp/",
+     "https://gxo.co.jp/column/rfp-requirements-definition-guide-2026",
+     "https://readycrew.jp/media/post/11",
+     "https://www.nomura-system.co.jp/contents/rfp-kakikata/",
+     "https://clane.co.jp/blog/system-development/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA%E3%81%AE%E7%99%BA%E6%B3%A8%E6%89%8B%E9%A0%86-%E6%BA%96%E5%82%99%E3%83%BBrfp%E3%83%BB%E3%83%99%E3%83%B3%E3%83%80%E3%83%BC/",
+     "https://sophiate.co.jp/%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E3%80%8C%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA-%E7%99%BA%E6%B3%A8%E3%80%8D%E5%85%A5%E9%96%80%EF%BC%9A%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6/",
+     "https://sucsak.com/contents/rfp_how-to-write",
+     "https://www.suskcorp.com/blog/rfp-template-system-development/",
+     "https://incubation-base.com/column/system-development-rfp/",
+     "https://aka-link.net/rfp-requirements-specification/",
+     "https://persol-xtech.co.jp/column/tech-solutions/20251126-014373.html",
+     "https://lassic.co.jp/media/column/system-development-outsourcing-pros-cons/",
+     "https://hubspot.100inc.co.jp/system-development-outsourcing-failure",
+     "https://freshet.co.jp/column/1714/",
+     "https://sophiate.co.jp/preparation-of-system-development/",
+     "https://www.revcreate.co.jp/blog/development/p7879/",
+     "https://twostone-s.com/columns/dx/dx-guide/8311/",
+     "https://www.ripla.co.jp/blog/system/system-development-outsourcing/",
+     "https://gelatocms.com/blog/websystem-outsourcing/"
+    ],
+    "error": ""
+   }
+  },
+  "RFP 作り方 システム開発": {
+   "group": "外注の進め方・失敗",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ipa.go.jp/archive/files/000072323.pdf",
+     "https://www.meti.go.jp/policy/it_policy/softseibi/model_tuiho/model_tuiho.pdf",
+     "https://readycrew.jp/media/post/11",
+     "https://www.ipa.go.jp/archive/files/000082316.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hnavi.co.jp/knowledge/blog/rfp/",
+     "https://genee.jp/contents/how-to-write-rfp/",
+     "https://readycrew.jp/media/post/11",
+     "https://www.c3index.co.jp/blog/blog_225/",
+     "https://system-kanji.com/posts/system-request-for-proposal",
+     "https://swooo.net/dev/rfp/",
+     "https://freshet.co.jp/column/1045/",
+     "https://sucsak.com/contents/rfp_how-to-write",
+     "https://navi-dx.com/what-is-rfp-guide",
+     "https://service.digital.panasonic.co.jp/column/rfp",
+     "https://syusodo.co.jp/blog/articles/rfp-how-to-write",
+     "https://www.jcc-ltd.com/column/column_1538/",
+     "https://incubation-base.com/column/system-development-rfp/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 納期 遅れる 対策": {
+   "group": "外注の進め方・失敗",
+   "ChatGPT": {
+    "urls": [
+     "https://www.pmi.org/learning/library/earned-value-measures-corrective-action-7725",
+     "https://www.pmi.org/learning/library/delayed-projects-schedule-strategy-10148",
+     "https://dx.ipa.go.jp/youken-teigi",
+     "https://www.ipa.go.jp/archive/publish/qv6pgp0000000xvu-att/000030719.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gxo.co.jp/column/system-development-project-failure-recovery",
+     "https://note.com/framescript/n/n2e4ecd9056f7",
+     "https://kaidoc.jp/sysdev-trouble-delay.html",
+     "https://pentagon.tokyo/web-system/5885/",
+     "https://studio-masho.com/blog/system-development-delivery-delay-client-measures",
+     "https://studio-masho.com/blog/prevent-system-development-delay-with-visibility",
+     "https://studio-masho.com/blog/prevent-delivery-delay-schedule-management",
+     "https://service.shiftinc.jp/column/16147/",
+     "https://service.shiftinc.jp/column/14105/",
+     "https://backlog.com/ja/blog/project-management-system-development/",
+     "https://www.impl.co.jp/whitepaper/risk-system-development/",
+     "https://funbrew.tech/blog/schedule-management-guide"
+    ],
+    "error": ""
+   }
+  },
+  "アプリ開発 外注 初めて 注意点": {
+   "group": "外注の進め方・失敗",
+   "ChatGPT": {
+    "urls": [
+     "https://works.saaske.com/knowledge-blog/select/app-outsourcing-guide.html",
+     "https://www.ipa.go.jp/digital/model/agile20200331.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://iridge.jp/blog/202407/36562/",
+     "https://www.impl.co.jp/whitepaper/appdev-outsourcing/",
+     "https://syusodo.co.jp/blog/articles/app-development",
+     "https://tenpoapp.com/tips/tips-985/",
+     "https://pentagon.tokyo/app/10006/",
+     "https://lastscene.co.jp/column/app-development/app-development-outsourcing-3",
+     "https://tokyo-scaler.com/blog/system-development-outsourcing/",
+     "https://lassic.co.jp/media/column/app-outsourcing-failure/",
+     "https://lassic.co.jp/media/column/app-development-outsourcing-flow/",
+     "https://hubspot.100inc.co.jp/system-development-outsourcing-failure",
+     "https://note.com/app_dev_lab/n/n0e315fceeca8",
+     "https://sophiate.co.jp/%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA%E4%BE%9D%E9%A0%BC%E3%81%A7%E5%A4%B1%E6%95%97%E3%81%97%E3%81%AA%E3%81%84%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BC%9A%E8%A6%81%E4%BB%B6%E5%AE%9A/"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 契約 請負 準委任 違い": {
+   "group": "外注の進め方・失敗",
+   "ChatGPT": {
+    "urls": [
+     "https://laws.e-gov.go.jp/law/129AC0000000089",
+     "https://www.ipa.go.jp/digital/model/agile20200331.html",
+     "https://www.ipa.go.jp/digital/model/model20201222.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://sun-asterisk.com/service/development/topics/systemdev/3848/",
+     "https://sun-asterisk.com/service/development/topics/systemdev/3852/",
+     "https://sun-asterisk.com/service/development/topics/systemdev/4347/",
+     "https://lassic.co.jp/media/column/quasi-mandate-vs-contract-system-development/",
+     "https://www.dssolution.jp/ja/differences_in_system_development_contracts/",
+     "https://hybrid-technologies.co.jp/blog/knowhow/20221912_2/",
+     "https://montecampo.co.jp/11447.html/",
+     "https://tomodahinata.com/blog/system-development-contract-types-guide",
+     "https://salto.site/media/complete-contract-development-about-6"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 仕様変更 追加費用 トラブル": {
+   "group": "外注の進め方・失敗",
+   "ChatGPT": {
+    "urls": [
+     "https://monolith.law/corporate/increase-of-estimate",
+     "https://www.ipa.go.jp/publish/qv6pgp000000107j-att/000062659.pdf",
+     "https://www.ipa.go.jp/digital/model/index.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://atsoho.com/blog/system-development-additional-cost-dispute",
+     "https://corporate-a-lawoffice.com/cdis-system-dev-additional-fee/",
+     "https://beast-technology.com/blog/why-outsourcing-extra-costs-happen",
+     "https://syusodo.co.jp/blog/articles/spec-change-cost-prevention",
+     "https://syusodo.co.jp/blog/articles/change-management-process",
+     "https://montecampo.co.jp/11437.html/",
+     "https://montecampo.co.jp/11470.html/",
+     "https://www.jcc-ltd.com/column/column_3247/",
+     "https://engineer-notes.net/articles/additional-development-vs-spec-change-estimate-criteria"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 プロジェクト 頓挫 原因": {
+   "group": "外注の進め方・失敗",
+   "ChatGPT": {
+    "urls": [
+     "https://dx.ipa.go.jp/youken-teigi",
+     "https://www.ipa.go.jp/shiken/mondai-kaiotu/ug65p900000038er-att/2012h24h_pm_pm2_qs.pdf",
+     "https://www.ipa.go.jp/archive/publish/qv6pgp0000000zef-att/000005141.pdf",
+     "https://www.ipa.go.jp/archive/digital/iot-en-ci/teiryou/ent01-d.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://hnavi.co.jp/knowledge/blog/system-development-failure-cases/",
+     "https://www.magicsoftware.com/ja/enterprise-dev-columns/failure/",
+     "https://menter.jp/blog/system-kaihatsu-rate27",
+     "https://sun-asterisk.com/service/development/topics/systemdev/3251/",
+     "https://plus.cmknet.co.jp/systemshippaijirei/",
+     "https://kaidoc.jp/sysdev-failure-case.html",
+     "https://hive-consulting.co.jp/knowledge/post/system-development-failure/",
+     "https://www.fake.inc/blog/system-development-failure",
+     "https://www.jcc-ltd.com/column/column052206/"
+    ],
+    "error": ""
+   }
+  },
+  "システム 保守 費用 相場": {
+   "group": "保守・引き継ぎ",
+   "ChatGPT": {
+    "urls": [
+     "https://grip-space.co.jp/websys-db/column/system-maintenance-price",
+     "https://www.c3index.co.jp/blog/blog_1636/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.cloudec.jp/ecnews/ec-maintenance-cost/",
+     "https://levtech.jp/partner/guide/article/detail/372/",
+     "https://www.c3index.co.jp/blog/blog_1636/",
+     "https://www.1st-net.jp/blog/system-maintenance-cost/",
+     "https://www.c3index.co.jp/blog/blog_1752/",
+     "https://ai-revolution.co.jp/media/ai-maintenance-cost/",
+     "https://www.jcc-ltd.com/column/column_2068/",
+     "https://syusodo.co.jp/blog/articles/system-maintenance-cost-guide",
+     "https://funbrew.tech/blog/system-maintenance-cost-guide"
+    ],
+    "error": ""
+   }
+  },
+  "システム開発 保守契約 内容": {
+   "group": "保守・引き継ぎ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ipa.go.jp/digital/model/model20201222.html",
+     "https://mysign.jp/templates/system-maintenance-contract",
+     "https://koromo.io/blog/maintenance-contract-scope/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://genee.jp/contents/system-maintenance/",
+     "https://lassic.co.jp/media/column/system-development-contract-trouble-prevention/",
+     "https://biz.moneyforward.com/contract/basic/4380/",
+     "https://www.c3index.co.jp/blog/blog_1636/",
+     "https://www.c3index.co.jp/blog/blog_3424/",
+     "https://lucris.jp/2026/06/25/1110/",
+     "https://overx.co.jp/media/maintenance-cost/",
+     "https://www.jcc-ltd.com/column/column_2068/",
+     "https://boss.soulc.com/system-basics/system-maintenance-cost/"
+    ],
+    "error": ""
+   }
+  },
+  "システム 開発会社 変更 引き継ぎ": {
+   "group": "保守・引き継ぎ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.intens.co.jp/web/guide/websystem_maintenance_takeover.php",
+     "https://www.meti.go.jp/policy/netsecurity/downloadfiles/system_kanri_h30r.pdf",
+     "https://www.oflight.co.jp/ja/columns/dev-vendor-switch-2026"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://clane.co.jp/blog/system-development/vendor-switch/",
+     "https://syusodo.co.jp/blog/articles/system-handover-guide",
+     "https://wurinc.jp/blog/system-handover-guide/",
+     "https://freshet.co.jp/column/2587/",
+     "https://it-advisor.co.jp/system-development-handover-documents/",
+     "https://fixit.co.jp/insights/system-vendor-handover/",
+     "https://www.jcc-ltd.com/column/column_2370/",
+     "https://www.jcc-ltd.com/column/other-vendor-system-modification/",
+     "https://funbrew.tech/blog/system-maintenance-handover-complete-guide"
+    ],
+    "error": ""
+   }
+  },
+  "ソースコード 納品 引き継ぎ 注意点": {
+   "group": "保守・引き継ぎ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.it-houmu.com/archives/2204",
+     "https://www.ipa.go.jp/digital/model/model20201222.html",
+     "https://docs.github.com/ja/repositories/creating-and-managing-repositories/transferring-a-repository",
+     "https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://gxo.co.jp/column/system-development-deliverables-acceptance-guide",
+     "https://minna-systems.co.jp/column/system-development-handover/",
+     "https://www.c3index.co.jp/blog/blog_3436/",
+     "https://fixit.co.jp/insights/system-vendor-handover/",
+     "https://it-advisor.co.jp/system-development-handover-documents/",
+     "https://sucsak.com/contents/contract-development-deliverables",
+     "https://funbrew.tech/blog/system-maintenance-handover-complete-guide",
+     "https://www.it-houmu.com/archives/2204",
+     "https://naruki-eng.com/blog/system-handoff-checklist",
+     "https://note.com/ripla_business/n/ndc8cbcdf055c",
+     "https://syusodo.co.jp/blog/articles/system-development-copyright",
+     "https://syusodo.co.jp/blog/articles/system-development-deliverable-rights",
+     "https://sophiate.co.jp/copyrights-and-intellectual-property-rights/",
+     "https://freshet.co.jp/column/1753/",
+     "https://sucsak.com/contents/contract-development-contract",
+     "https://ip.darwin.law/system-software/",
+     "https://www.oflight.co.jp/ja/columns/system-dev-copyright-source-ownership-2026"
+    ],
+    "error": ""
+   }
+  },
+  "システム 保守 運用 外注 違い": {
+   "group": "保守・引き継ぎ",
+   "ChatGPT": {
+    "urls": [
+     "https://business.ntt-east.co.jp/content/cloudsolution/column-235.html",
+     "https://www.persol-group.co.jp/service/business/article/9764/"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.skygroup.jp/media/article/5027/",
+     "https://techtus-eg.mynavi.jp/resources/system-maintenance",
+     "https://hnavi.co.jp/knowledge/blog/operation-maintenance-system/",
+     "https://hnavi.co.jp/knowledge/blog/operation-and-maintenance/",
+     "https://www.c3index.co.jp/blog/blog_1752/",
+     "https://www.co-well.jp/blog/system_dev_maintenance",
+     "https://ic-solution.jp/blog/system-operations-vs-maintenance",
+     "https://syusodo.co.jp/blog/articles/system-maintenance-operation-difference",
+     "https://syusodo.co.jp/blog/articles/system-maintenance-cost-guide",
+     "https://sucsak.com/contents/system-development-operation-maintenance",
+     "https://system-kanji.com/posts/system-development-maintenance-cost-quote",
+     "https://wakka-inc.com/blog/1750/",
+     "https://www.jcc-ltd.com/column/column_2068/"
+    ],
+    "error": ""
+   }
+  },
+  "システム 開発 会社 倒産 対策": {
+   "group": "保守・引き継ぎ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ipa.go.jp/digital/model/model20201222.html",
+     "https://www.softic.or.jp/index.php/service/escrow"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://patent-revenue.iprich.jp/%E4%B8%80%E8%88%AC%E5%90%91%E3%81%91/6343/",
+     "https://note.com/ripla_business/n/ndc8cbcdf055c",
+     "https://www.ishioroshi.com/biz/kaisetu/it/index/escrow/",
+     "https://crexgroup.com/ja/development/security/source-code-disclosure-obligation/",
+     "https://kobesoft.co.jp/mikata/words/system-procurement/source-code-escrow/",
+     "https://www.it-houmu.com/archives/1412",
+     "https://funbrew.tech/blog/vendor-gone-checklist",
+     "https://www.law-mizuki.com/itec/it15.html",
+     "https://www.consulnote.com/articles/project-mgmt/escrow-agreement/",
+     "https://www.fairsystem.co.jp/column/693/",
+     "https://gxo.co.jp/column/system-development-failure-recovery-guide",
+     "https://fixit.co.jp/insights/stalled-development-project-recovery/"
+    ],
+    "error": ""
+   }
+  },
+  "既存システム 改修 別の会社 依頼": {
+   "group": "保守・引き継ぎ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.intens.co.jp/web/guide/websystem_maintenance_takeover.php",
+     "https://www.ipa.go.jp/digital/model/ug65p90000001ljh-att/20250424-kouen.pdf",
+     "https://www.ipa.go.jp/digital/model/model20201222.html"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://axia.co.jp/2021-11-09",
+     "https://genee.jp/contents/legacy-system-development-companies/",
+     "https://hnavi.co.jp/knowledge/blog/system_revamp/",
+     "https://www.c3index.co.jp/blog/blog_3436/",
+     "https://www.praisol.jp/column/categories/system-handover",
+     "https://syusodo.co.jp/blog/articles/system-renovation",
+     "https://www.jcc-ltd.com/column/other-vendor-system-modification/",
+     "https://system-kaihatu.com/archives/212",
+     "https://crooz.biz/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E6%94%B9%E4%BF%AE%E3%81%AF%E3%81%A9%E3%81%86%E3%82%84%E3%81%A3%E3%81%A6%E8%A1%8C%E3%81%86%E3%81%8B/"
+    ],
+    "error": ""
+   }
+  },
+  "システム ドキュメント 引き継ぎ 必要なもの": {
+   "group": "保守・引き継ぎ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.moj.go.jp/content/001183692.pdf",
+     "https://www.ipa.go.jp/choutatsu/nyusatsu/2025/rcu1hd0000007zay-att/nyusatsu20260323.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://minna-systems.co.jp/blogs/2815/",
+     "https://minna-systems.co.jp/column/system-development-handover/",
+     "https://www.c3index.co.jp/blog/blog_3313/",
+     "https://syusodo.co.jp/blog/articles/system-handover-guide",
+     "https://freshet.co.jp/column/1048/",
+     "https://fixit.co.jp/insights/system-vendor-handover/",
+     "https://it-advisor.co.jp/system-development-handover-documents/",
+     "https://www.jcc-ltd.com/column/column_2370/",
+     "https://www.sysrrelay.com/tips/systemmaintenance-handover.html",
+     "https://www.extech.co.jp/tech/system-maintenance-guide-04-handover-checklist/",
+     "https://syusodo.co.jp/blog/articles/system-maintenance-handover-guide",
+     "https://wurinc.jp/blog/system-handover-guide/",
+     "https://likebird.jp/handover_notes/system-handover-checklist-complete",
+     "https://dptr.jp/news/system-handover-checklist/",
+     "https://www.fairsystem.co.jp/column/63/",
+     "https://funbrew.tech/blog/system-maintenance-handover-complete-guide",
+     "https://qiita.com/dich1/items/7aadd2103f1cde8e85b8"
+    ],
+    "error": ""
+   }
+  },
+  "システム 老朽化 リプレイス 進め方": {
+   "group": "保守・引き継ぎ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.meti.go.jp/press/2025/05/20250528003/20250528003.html",
+     "https://dx.ipa.go.jp/modernization",
+     "https://www.ipa.go.jp/archive/files/000072725.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.tdc.co.jp/service/digital-x-column075/",
+     "https://www.grandit.jp/erp/column/system_replace_points/",
+     "https://www.fgl-ts.co.jp/blog/josys53",
+     "https://recore-pos.com/column_post/coresystem-aging/",
+     "https://system.atcell.jp/mag/replace/",
+     "https://www.ksw.co.jp/media/column/a96",
+     "https://fixit.co.jp/insights/system-replacement-step-by-step-guide/",
+     "https://sucsak.com/contents/core-system-replacement",
+     "https://blog.ripla.co.jp/dx-consulting/legacy-system-replacement-process/"
+    ],
+    "error": ""
+   }
+  },
+  "システム 保守 打ち切り 対応 方法": {
+   "group": "保守・引き継ぎ",
+   "ChatGPT": {
+    "urls": [
+     "https://www.ipa.go.jp/about/ipanews/ipanews202503.html",
+     "https://learn.microsoft.com/ja-jp/lifecycle/faq/extended-security-updates",
+     "https://www.ipa.go.jp/security/controlsystem/ug65p90000019bkg-att/begoj9000000hpmv.pdf",
+     "https://docs.fujitsu/documents/001283/mis-multivendor-brochure-ja.pdf"
+    ],
+    "error": ""
+   },
+   "Claude": {
+    "urls": [
+     "https://www.sysrrelay.com/tips/cancelation-example.html",
+     "https://www.ans-net.co.jp/column/2813/",
+     "https://gxo.co.jp/column/end-of-support-response-guide-2026",
+     "https://cx.genech.co.jp/column/20260210",
+     "https://www.venture-net.co.jp/netsuite/risk-of-expiry-of-maintenance/",
+     "https://www.fanatic.co.jp/p2p/column/p2p-lan_info/",
+     "https://www.thirdparty-maintservices.com/knowledge/third-party-maintenance-switching-steps.html",
+     "https://syusodo.co.jp/blog/articles/system-maintenance-handover-guide",
+     "https://www.ys-law.jp/IT/column/column-3399/"
+    ],
+    "error": ""
+   }
+  }
+ }
+}

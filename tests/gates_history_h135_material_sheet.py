@@ -84,6 +84,65 @@ def test_apply_holds_invented_numbers_conflicts_and_voices():
         MS.requests_of, MS.display_name, MS.existing = old
 
 
+def test_auto_measure_mail_and_voice_draft():
+    import material_sheet as MS
+    print("\n■ 施策の前後を自動で測る・質問シートを週次に送る・お客様の声を下書きへ（運用者 2026-10-21）")
+    # 前後の測定: 31日たった自社の書き直しだけ・前が0回（まだ検索に出ていなかった）と小さすぎる数は一次情報にしない
+    src = (ROOT / "scripts" / "material_sheet.py").read_text(encoding="utf-8")
+    check("前が0回・30回未満は一次情報にしない・お客様の社は測らない・31日",
+          ("if imp[0] == 0:" in src, "MIN_IMP = 30" in src, "if P.is_client(site) or meta.get(\"noindex\"):" in src,
+           "timedelta(days=31)" in src), (True, True, True, True))
+    # メール: 依頼が変わった社だけ・送った後は印を残して同じ依頼では送らない
+    old = MS.targets, MS.requests_of, MS.MAIL_STATE, MS.make
+    with tempfile.TemporaryDirectory() as d:
+        sent = []
+        MS.targets = lambda only="": ["ai-lab"]
+        MS.requests_of = lambda s: {"zz": {"keyword": "庭木", "questions": ["a"]}}
+        MS.MAIL_STATE = Path(d) / "mail.json"
+        MS.make = lambda s, out, today=None: (Path(d) / "x.xlsx", 3)
+        (Path(d) / "x.xlsx").write_bytes(b"x")
+        env = dict(__import__("os").environ)
+        try:
+            __import__("os").environ.update({"RESEND_API_KEY": "k", "NOTIFY_TO_EMAIL": "a@example.com"})
+            first = MS.mail(Path(d), send=sent.append)
+            second = MS.mail(Path(d), send=sent.append)
+        finally:
+            __import__("os").environ.clear()
+            __import__("os").environ.update(env)
+            MS.targets, MS.requests_of, MS.MAIL_STATE, MS.make = old
+        check("依頼が変わった週だけ送り、同じ依頼では送らない", (first, second, len(sent), len(sent[0]["attachments"])), (1, 0, 1, 1))
+    check("手元からは送らない", "MATERIAL_MAIL=skip" in src, True)
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    check("週次で送る・測る", ("material_sheet.py --mail" in wf, "material_sheet.py --auto-measure 3" in wf), (True, True))
+    # お客様の声: 掲載可否は「要確認」で下書きへ（機械は掲載しない）
+    with tempfile.TemporaryDirectory() as d:
+        ans = [{"no": "7", "key": "tpl:voice", "item": "お客様の声", "question": "", "answer": "助かりました",
+                "period": "2025年", "count": "", "ok": "可"}]
+        p = MS.voice_draft("ai-lab", ans, out_dir=d, today="2026-10-21")
+        from openpyxl import load_workbook
+        ws = load_workbook(p)["お客様の声"]
+        rows = [r for r in ws.iter_rows(min_row=3, values_only=True) if any(r)]
+        check("声は「要確認」で下書きに1行だけ（雛形の「可」の空行は消す）", [(r[0], r[5]) for r in rows], [("要確認", "助かりました")])
+
+
+def test_research_reaches_other_sites_with_right_owner():
+    import industry_ai_sources as I
+    import private_store as P
+    import sites as S
+    print("\n■ 業種調査は自社の社にだけ渡す（社の設定 research）。お客様の記事に当社の名前と調べたことを書かない（rag-donyu が配信の門で止まった）")
+    old_load, old_client = S.load, P.is_client
+    S.load = lambda s: {"research": ["inshoku"]} if s in ("client-zz", "corporate") else {}
+    P.is_client = lambda s: s == "client-zz"
+    try:
+        cl, _ = I.for_site("client-zz", "", "")
+        own, _ = I.for_site("corporate", "", "")
+        none, _ = I.for_site("subsidy", "", "")
+    finally:
+        S.load, P.is_client = old_load, old_client
+    check("お客様の社には渡さない・自社は「当社は」・設定の無い社は渡さない",
+          (cl, all(c.startswith("当社は") for c in own) and bool(own), none), ([], True, []))
+
+
 def test_measure_claim_needs_past_tense_and_ci_skip():
     print("\n■ 施策の前と後: やったことは「〜した」で書かせる・CI では質問シートを作らない")
     src = (ROOT / "scripts" / "material_sheet.py").read_text(encoding="utf-8")

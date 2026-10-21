@@ -1,0 +1,197 @@
+{
+ "total": {
+  "maker": 59,
+  "media": 408,
+  "portal": 80,
+  "clinic": 46,
+  "public": 61,
+  "video": 13,
+  "other": 1
+ },
+ "by_engine": {
+  "ChatGPT": {
+   "maker": 42,
+   "clinic": 9,
+   "media": 28,
+   "public": 60,
+   "portal": 1,
+   "other": 1
+  },
+  "Claude": {
+   "media": 380,
+   "portal": 79,
+   "maker": 17,
+   "clinic": 37,
+   "video": 13,
+   "public": 1
+  }
+ },
+ "by_group": {
+  "地域で探す": {
+   "maker": 32,
+   "media": 41,
+   "portal": 47,
+   "clinic": 7,
+   "public": 5
+  },
+  "費用・見積": {
+   "media": 109,
+   "maker": 6,
+   "portal": 12,
+   "clinic": 13,
+   "public": 12,
+   "video": 4
+  },
+  "選び方": {
+   "maker": 5,
+   "public": 11,
+   "media": 86,
+   "clinic": 9,
+   "portal": 13,
+   "video": 3
+  },
+  "外注の進め方・失敗": {
+   "public": 21,
+   "clinic": 9,
+   "maker": 4,
+   "media": 82,
+   "portal": 5,
+   "video": 3
+  },
+  "保守・引き継ぎ": {
+   "clinic": 8,
+   "media": 90,
+   "portal": 3,
+   "public": 12,
+   "other": 1,
+   "maker": 12,
+   "video": 3
+  }
+ },
+ "answered": {
+  "ChatGPT": 50,
+  "Claude": 50
+ },
+ "has_clinic": {
+  "ChatGPT": 7,
+  "Claude": 31
+ },
+ "sources": {
+  "ChatGPT": 141,
+  "Claude": 527
+ },
+ "portal_top": [
+  [
+   "swooo.net",
+   13
+  ],
+  [
+   "biz.ne.jp",
+   11
+  ],
+  [
+   "system-kanji.com",
+   9
+  ],
+  [
+   "pentagon.tokyo",
+   8
+  ],
+  [
+   "imitsu.jp",
+   7
+  ],
+  [
+   "1st-net.jp",
+   6
+  ],
+  [
+   "freeconsul.co.jp",
+   4
+  ],
+  [
+   "mid-works.com",
+   3
+  ],
+  [
+   "emeao.jp",
+   2
+  ],
+  [
+   "comperu.jp",
+   2
+  ]
+ ],
+ "industry": "sysdev",
+ "name": "システム開発（受託開発）",
+ "date": "2026-10-21",
+ "questions": 50,
+ "engines": [
+  "ChatGPT",
+  "Claude"
+ ],
+ "groups": {
+  "地域で探す": 10,
+  "費用・見積": 10,
+  "選び方": 10,
+  "外注の進め方・失敗": 10,
+  "保守・引き継ぎ": 10
+ },
+ "per_answer": {
+  "全体": {
+   "answers": 100,
+   "maker": 36,
+   "portal": 30,
+   "media": 71,
+   "clinic": 38,
+   "public": 33,
+   "video": 11,
+   "other": 1
+  },
+  "地域で探す": {
+   "answers": 20,
+   "maker": 11,
+   "portal": 10,
+   "media": 12,
+   "clinic": 6,
+   "public": 2
+  },
+  "費用・見積": {
+   "answers": 20,
+   "media": 16,
+   "maker": 6,
+   "portal": 7,
+   "clinic": 11,
+   "public": 5,
+   "video": 3
+  },
+  "選び方": {
+   "answers": 20,
+   "maker": 5,
+   "public": 7,
+   "portal": 7,
+   "media": 15,
+   "clinic": 7,
+   "video": 3
+  },
+  "外注の進め方・失敗": {
+   "answers": 20,
+   "public": 11,
+   "clinic": 7,
+   "maker": 4,
+   "media": 13,
+   "portal": 4,
+   "video": 3
+  },
+  "保守・引き継ぎ": {
+   "answers": 20,
+   "clinic": 7,
+   "portal": 2,
+   "media": 15,
+   "other": 1,
+   "public": 8,
+   "maker": 10,
+   "video": 2
+  }
+ }
+}
