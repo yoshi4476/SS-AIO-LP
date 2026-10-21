@@ -769,5 +769,44 @@
       "title": "AIOツールの口コミ、信じて契約していい？",
       "youtube": "fldhzY2W0nI"
     }
+  },
+  "inshokuten-shukyaku-consul": {
+    "site": "ai-lab",
+    "date": "2026-10-21",
+    "sec": 242,
+    "mp4": "automation/video/inshokuten-shukyaku-consul.mp4",
+    "nums": [
+      "1",
+      "1.02",
+      "10",
+      "12",
+      "3",
+      "4",
+      "53.3",
+      "6.28"
+    ],
+    "format": "duo",
+    "long": {
+      "date": "2026-10-21",
+      "keyword": "飲食店 集客 コンサル",
+      "queries": [
+        "飲食店 集客 コンサル",
+        "集客 コンサル",
+        "飲食店 コンサル",
+        "飲食店 集客"
+      ],
+      "decision": "make",
+      "term": "飲食店 集客方法",
+      "title": "飲食店 集客方法は何から始める？｜依頼前に数える3つの数字",
+      "reason": "YouTube のサジェストに「飲食店 集客方法」が出ます"
+    },
+    "youtube": "Rf1-vUGjFfc",
+    "short": {
+      "date": "2026-10-21",
+      "sec": 44,
+      "title": "集客コンサルに頼む前、何を数える？",
+      "desc": "lead-long",
+      "youtube": "lyLAauZLuw0"
+    }
   }
 }
