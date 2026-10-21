@@ -53,6 +53,8 @@ faq:
 
 受け取った外注費の請求書を読み取り・仕訳まで自動化する方法は、[sweeepの請求書処理（現 freee支出管理 受取請求書）](/blog/sweeep-seikyusho)で整理しています。
 
+受け取る側が源泉や登録番号の有無でどう処理を変えるかは、[外注費の請求書の仕訳で起きる誤り](/blog/gaichuuhi-seikyuusho-shiwake/)で仕訳例とあわせて解説しています。
+
 近い論点を[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)で扱っています。
 
 あわせて[請求書封筒の書き方｜宛名・在中表記・差出人の3つの基本](/blog/seikyusho-fuutou-kakikata/)もご覧ください。
