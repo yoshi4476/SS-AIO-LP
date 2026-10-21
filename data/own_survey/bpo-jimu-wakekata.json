@@ -1,0 +1,98 @@
+{
+ "slug": "bpo-jimu-wakekata",
+ "ok": true,
+ "date": "2026-10-21",
+ "question": "bpo 事務について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "BPO事務とは？作業ではなく手順ごと任せる委託",
+   "words": [
+    "作業",
+    "委託"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "BPOに任せやすい事務は？件数が多く手順が決まった事務",
+   "words": [
+    "件数"
+   ],
+   "engines": [
+    "ChatGPT"
+   ]
+  },
+  {
+   "topic": "社内に残す事務は？判断・承認と書類の回収",
+   "words": [
+    "社内",
+    "承認",
+    "書類"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "自社で回すか、BPOに出すか、派遣かの分かれ道",
+   "words": [
+    "派遣"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "BPOの会社に聞く3つの質問と費用の目安",
+   "words": [
+    "質問"
+   ],
+   "engines": []
+  }
+ ],
+ "sources": {
+  "business.ntt-east.co.jp": "peer",
+  "crowdworks.jp": "portal",
+  "directscout.recruit.co.jp": "peer",
+  "jp.indeed.com": "peer",
+  "onamae.com": "peer",
+  "persol-bd.co.jp": "peer",
+  "persol-group.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": [],
+  "期間（◯か月・◯日など）": [],
+  "注意点・失敗・リスク": [
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [
+   "ChatGPT",
+   "Gemini"
+  ],
+  "専門家への相談": []
+ },
+ "chars": {
+  "ChatGPT": 1283,
+  "Claude": 1157,
+  "Gemini": 1927
+ },
+ "claims": [
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「bpo 事務について教えてください」と聞きました。3件の答えのうち、本記事の論点『質問』の語が出たものは0件でした。",
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「bpo 事務について教えてください」と聞きました。3件の答えのすべてに『作業』『社内』『派遣』の語が出てきました。",
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「bpo 事務について教えてください」と聞きました。3件の答えのうち、費用の金額（◯円）に触れた答えは無く、期間（◯か月・◯日など）に触れた答えは無く、専門家への相談に触れた答えは無くでした。",
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「bpo 事務について教えてください」と聞きました。3件の答えの出典に挙がったページは7件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが0件、ポータル・比較サイトが1件でした。"
+ ]
+}
