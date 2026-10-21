@@ -83,6 +83,9 @@ def kind(src):
     毎回「不備23件」で弾かれたり、名前に「実績」「データ」を含むヒアリングシートが
     上限の判定をすり抜けたりしていた"""
     tabs = _tabs(src)
+    # 材料の質問シート（material_sheet.py が作る。隠しタブ「材料の質問」）は、答えを一次情報・体験として登録する
+    if "材料の質問" in tabs:
+        return "material"
     # 実績・お客様の声の記入シートは会社の立ち上げではなく、一次情報と掲載の登録
     if tabs & {"経理BPOの効果", "継続率", "お客様の声"}:
         return "jisseki"
@@ -97,6 +100,12 @@ def kind(src):
 def one(src, write, k=None):
     """シート1枚を見る。(登録できたか, 説明) を返す"""
     k = k or kind(src)
+    if k == "material":
+        import material_sheet as MS
+        good, why = MS.apply(src, write)
+        if write and good:
+            move(src, DONE)
+        return good, why
     if k == "jisseki":
         import jisseki_intake as J
         return J.one(src, write)
@@ -206,6 +215,11 @@ def main():
         print("   置かれているシートはありません")
         print("   記入用シートを作る: python scripts/client_intake.py --sheet")
         print("INTAKE=none")
+        if a.apply:
+            import material_sheet as MS
+            for s in MS.targets():
+                path, n = MS.make(s, MS.Path.home() / "Desktop")
+                print("   質問シートを作りました: %s（%d問）" % (path.name, n))
         return 0
 
     before = site_count()
@@ -237,6 +251,12 @@ def main():
               "同じ名前の .不備.txt に直す箇所を書きました")
     else:
         print("INTAKE=ok")
+    # 登録の後に、材料の依頼が残っている社の質問シートを作り直す（デスクトップ。答えを書いて intake/ に置けば次の回に登録される）
+    if a.apply:
+        import material_sheet as MS
+        for s in MS.targets():
+            path, n = MS.make(s, MS.Path.home() / "Desktop")
+            print("   質問シートを作りました: %s（%d問）" % (path.name, n))
     return 0
 
 

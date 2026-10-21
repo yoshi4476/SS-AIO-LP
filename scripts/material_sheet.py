@@ -1,0 +1,404 @@
+# -*- coding: utf-8 -*-
+"""材料の質問シートを社ごとに機械で作り、返ってきたシートを一次情報・体験として登録する。
+
+採点で一次性が足りない記事には、quality_loop が「何を教えてほしいか」の依頼（material_requests.json）を残す。
+これまでは依頼を人が読んで質問シートに書き直していた（2026-10-21）。ここでは依頼の質問と、採点で何度も出る
+足りないもの（事例カード・失敗の件数・判断の基準の根拠・費用の実例・お客様の声・確認の一覧・担当者の経歴）を
+1枚にまとめる。返ってきたシートは intake/ に置けば intake_watch.py が拾う（隠しタブ「材料の質問」で見分ける）。
+
+**登録で守ること**:
+- 答えに無い数字は登録しない（AI が文に直すときに数字を作ると、事実と違う記事が公開される）
+- 既存の記録と食い違う答えは登録せず保留にして知らせる（2026-10-21 の CONFLUX の答えで、12件の費用の幅と
+  34件の原因が既存の記録と食い違った。そのまま記事に載せると読者にも採点にも矛盾として読まれる）
+- 「記事に出してよいか」が不可の答えと、お客様の声（掲載の許可の確認が要る）は登録しない
+
+  python scripts/material_sheet.py --make [--site <id>] [--out <フォルダ>]   # 依頼のある社の質問シート（既定はデスクトップ）
+  python scripts/material_sheet.py --apply <xlsx> [--write]                    # 返ってきたシートを登録（--write なしは見るだけ）
+  python scripts/material_sheet.py --measure <site> <URL> <YYYY-MM-DD> --what "<やったこと>" [--write]
+      # 自社サイトでやったことの前と後の28日（Search Console の表示・平均順位）を一次情報の文にする
+"""
+import argparse
+import json
+import os
+import re
+import sys
+import tempfile
+from datetime import date, timedelta
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+
+TAB, META = "質問", "材料の質問"
+OWN_FACTS = ROOT / "data" / "first_party_facts.json"
+OWN_EXPS = ROOT / "data" / "experiences.json"
+COLS = ["No", "記事・項目", "質問", "書き方の目安", "答え（ここに記入）", "時期・期間", "件数・母数", "記事に出してよいか（可・不可）"]
+
+# 採点で何度も足りないと言われる材料（2026-10-21 の採点の記録から）。client_only はお客様の社だけに聞く
+TEMPLATE = [
+    ("case1", "事例カード", "支援した事例を1件。業種・規模・始めた月・やったこと（何を何本・何を作ったか）・前と後の数字・期間",
+     "例の書き方: 2025年◯月／製造業・従業員◯名／◯◯を◯本作った／問い合わせ 月◯件→月◯件（◯か月）", False),
+    ("case2", "事例カード", "もう1件、別の業種か規模の事例を、上と同じ形で", "同上", False),
+    ("fail", "失敗の件数と理由", "全体の何件のうち、何件がうまくいかなかったか。それぞれの理由",
+     "例の書き方: ◯年◯月〜◯年◯月の◯件のうち◯件。理由: ◯◯が◯件・◯◯が◯件", False),
+    ("rule", "判断の基準の根拠", "記事で使っている判断の目安（「3か月で見直す」「8割以上なら」など）を、なぜその数字にしたか。元になった件数",
+     "例の書き方: ◯件のうち◯件が◯か月以内に◯◯だったので、◯か月を目安にした", False),
+    ("price", "費用の実例", "案件の金額の幅と中央値（いつからいつまでの何件か）",
+     "例の書き方: ◯年〜◯年の◯件で、◯万円〜◯万円・中央値◯万円", True),
+    ("check", "確認の一覧", "実際に使っている確認の一覧（業者に聞く質問・契約で確かめる条項・依頼の前に用意するもの）",
+     "社内で使っている文をそのまま貼ってください", False),
+    ("staff", "担当者の経歴", "記事を監修する担当者の資格・年数・担当した件数", "例の書き方: ◯◯の資格・◯年・担当◯件", False),
+    ("voice", "お客様の声", "掲載してよいお客様の声と、前と後の数字（本人が書いたか、本人が内容を確かめて掲載を許可したものだけ）",
+     "声は機械では登録しません。実績の記入シート（jisseki_intake）で登録します", False),
+]
+NUM = re.compile(r"\d+(?:[.,]\d+)*")
+
+
+# ── 対象 ─────────────────────────────────────────────────────────────
+
+def requests_of(site):
+    import material as M
+    return M._load_requests(site) or {}
+
+
+def display_name(site):
+    import private_store as P
+    import sites as S
+    if P.is_client(site):
+        c = P.read_json(site, "company.json", {}) or {}
+        if c.get("name"):
+            return str(c["name"])
+    return str((S.load(site) or {}).get("name") or site)
+
+
+def targets(only=""):
+    import sites as S
+    return [s for s in S.load_all() if (not only or s == only) and requests_of(s)]
+
+
+# ── 作る ─────────────────────────────────────────────────────────────
+
+def rows_for(site, reqs):
+    """(key, 項目, 質問, 目安) の並び。依頼の記事ごとの質問を先に、決まった質問を後に"""
+    import private_store as P
+    out = []
+    for slug, r in sorted(reqs.items(), key=lambda x: str(x[1].get("since", ""))):
+        why = "／".join(str(w)[:110] for w in (r.get("scorer") or [])[:2])
+        for i, q in enumerate(r.get("questions") or []):
+            out.append((f"req:{slug}:{i}", f"記事「{r.get('keyword', slug)}」", q,
+                        ("記事で足りないと言われている点: " + why) if (i == 0 and why) else ""))
+    client = P.is_client(site)
+    out += [(f"tpl:{k}", lab, q, hint) for k, lab, q, hint, only_client in TEMPLATE if client or not only_client]
+    return out
+
+
+def make(site, out_dir, today=None):
+    from openpyxl import Workbook
+    from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
+    today = today or date.today().isoformat()
+    name = display_name(site)
+    rows = rows_for(site, requests_of(site))
+    wb = Workbook()
+    ws = wb.active
+    ws.title = TAB
+    import private_store as P
+    client = P.is_client(site)
+    ws["A1"] = f"記事の材料の質問シート（{name}{' 様' if client else ''}・{today}）"
+    ws["A1"].font = Font(name="Arial", size=14, bold=True)
+    ws["A2"] = (("記事の中身を、御社にしかない実例と数字で厚くするための質問です。" if client else
+                 "自社の記事の中身を、当社にしかない実例と数字で厚くするための質問です。")
+                + "本当にあったことだけを書いてください。分からない欄は空欄で構いません。社名やお客様の名前は記事に出しません。"
+                + "書き終えたら intake/ に置いてください（機械が一次情報として登録します）。")
+    ws["A2"].font = Font(name="Arial", size=10)
+    ws["A2"].alignment = Alignment(wrap_text=True)
+    ws.merge_cells("A2:H2")
+    ws.row_dimensions[2].height = 32
+    ws.append([])
+    ws.append(COLS)
+    thin = Side(style="thin", color="BBBBBB")
+    for c in ws[4]:
+        c.font = Font(name="Arial", bold=True, color="FFFFFF")
+        c.fill = PatternFill("solid", start_color="1F3A5F")
+        c.alignment = Alignment(vertical="center", wrap_text=True)
+    for i, (_, lab, q, hint) in enumerate(rows, 1):
+        ws.append([i, lab, q, hint, "", "", "", ""])
+    for row in ws.iter_rows(min_row=5, max_row=4 + len(rows)):
+        for c in row:
+            c.font = Font(name="Arial", size=10)
+            c.alignment = Alignment(vertical="top", wrap_text=True)
+            c.border = Border(top=thin, bottom=thin, left=thin, right=thin)
+        row[3].font = Font(name="Arial", size=9, color="666666")
+        row[4].fill = PatternFill("solid", start_color="FFF8D6")
+    for col, w in zip("ABCDEFGH", (5, 22, 58, 40, 50, 16, 16, 14)):
+        ws.column_dimensions[col].width = w
+    for r in range(5, 5 + len(rows)):
+        ws.row_dimensions[r].height = 80
+    ws.freeze_panes = "A5"
+    meta = wb.create_sheet(META)
+    meta.append(["site", site])
+    meta.append(["made", today])
+    for i, (key, *_x) in enumerate(rows, 1):
+        meta.append([i, key])
+    meta.sheet_state = "hidden"
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    safe = re.sub(r'[\\/:*?"<>|\s]+', "_", name)
+    p = out_dir / f"材料の質問シート_{safe}_{today}.xlsx"
+    wb.save(p)
+    return p, len(rows)
+
+
+# ── 読む・登録する ────────────────────────────────────────────────────
+
+def read(src):
+    from openpyxl import load_workbook
+    wb = load_workbook(src, read_only=True, data_only=True)
+    try:
+        meta = {str(r[0]): str(r[1]) for r in wb[META].iter_rows(values_only=True) if r and r[0] is not None}
+        answers = []
+        for r in wb[TAB].iter_rows(min_row=5, values_only=True):
+            if not r or r[0] is None:
+                continue
+            no = str(r[0]).strip()
+            ans = str(r[4] or "").strip()
+            if not ans:
+                continue
+            answers.append({"no": no, "key": meta.get(no, ""), "item": str(r[1] or ""), "question": str(r[2] or ""),
+                            "answer": ans, "period": str(r[5] or "").strip(), "count": str(r[6] or "").strip(),
+                            "ok": str(r[7] or "").strip()})
+        return meta.get("site", ""), answers
+    finally:
+        wb.close()
+
+
+def existing(site):
+    """今の一次情報（id と文）と体験"""
+    import facts as F
+    import originality
+    try:
+        _, fs = F.load_for(site)
+    except Exception:  # noqa: BLE001
+        fs = []
+    return ([(str(f.get("id")), str(f.get("claim") or "")) for f in fs or []],
+            [str(r.get("text") or "") for r in originality.load_experiences(site)])
+
+
+PROMPT = """あなたは記事の一次情報の台帳の係です。お客様が質問シートに書いた答えを、記事に使える一次情報の文と体験の文に直します。
+答えに書かれていないことは一切書かないでください（数字・期間・業種・結果を作らない）。
+
+# 決まり
+- 一次情報（facts）: 1つの答えから数字のある事実を1〜3文。1文は100字以内。期間（いつからいつまで）と母数（何件のうち）を文の中に入れる。
+  「【記入例】」などの印は外す。数字は答えのまま（約・前後の言い方も変えない）
+- 体験（experiences）: 何が起き・どう判断し・どうなったかの話は体験にする。key は text の中にそのまま出る8〜16字の語
+- 食い違い（conflicts）: 下の「今の記録」と同じ対象（同じ件数のまとまり・同じ選び方の集計など）について数字や内訳が違う答えは、
+  文にせず conflicts に入れる（どの記録と何が違うかを書く）。迷ったら conflicts に入れる
+- 記事に出してよいかが「不可」の答え、お客様の声の答えは、文にしない
+
+# 今の記録
+{existing}
+
+# 答え
+{answers}
+
+# 返す形（JSON だけ。説明は書かない）
+{{"facts": [{{"no": "答えの番号", "claim": "文", "topic": ["語", "語"], "period": "YYYY-MM〜YYYY-MM か空", "denominator": 数字か null}}],
+ "experiences": [{{"no": "答えの番号", "key": "語", "text": "文", "when": "時期"}}],
+ "conflicts": [{{"no": "答えの番号", "existing": "記録の id", "why": "何が違うか"}}]}}
+"""
+
+
+def _nums(text):
+    return {n.replace(",", "") for n in NUM.findall(str(text or ""))}
+
+
+def invented(text, answer):
+    """答え（答え・時期・件数の欄）に無い数字"""
+    allowed = _nums(answer["answer"]) | _nums(answer["period"]) | _nums(answer["count"])
+    return sorted(_nums(text) - allowed)
+
+
+def _ask(prompt):
+    """読むだけの claude を1回呼ぶ（門ではこれを差し替える）"""
+    import auto_rewrite as A
+    import quality_loop as Q
+    with tempfile.TemporaryDirectory() as tmp:
+        r = A.sh(Q.scorer_args(), timeout=900, stdin_text=prompt, cwd=tmp)
+    return r.stdout or ""
+
+
+def _json(raw):
+    m = re.search(r"\{.*\}", raw or "", re.S)
+    try:
+        return json.loads(m.group(0)) if m else {}
+    except ValueError:
+        return {}
+
+
+def plan(site, answers, ask=None):
+    """登録する一次情報・体験と、保留にするもの（理由つき）"""
+    use = [a for a in answers if a["ok"] not in ("不可", "×") and not a["key"].endswith(":voice") and "お客様の声" not in a["item"]]
+    held = [(a["no"], "記事に出さない答え・お客様の声（機械では登録しない）") for a in answers if a not in use]
+    if not use:
+        return [], [], held
+    facts, exps = existing(site)
+    now = "\n".join([f"- {i}: {c}" for i, c in facts] + [f"- 体験: {t}" for t in exps]) or "（なし）"
+    prompt = PROMPT.format(
+        existing=now,
+        answers="\n\n".join(f"[{a['no']}] {a['item']}\n質問: {a['question']}\n答え: {a['answer']}\n時期: {a['period']}\n件数: {a['count']}"
+                            for a in use))
+    got = _json((ask or _ask)(prompt))
+    by_no = {a["no"]: a for a in use}
+    clash = {str(c.get("no")): c for c in got.get("conflicts") or []}
+    held += [(n, f"今の記録 {c.get('existing', '?')} と食い違い: {c.get('why', '')}") for n, c in clash.items()]
+    out_f, out_e = [], []
+    for kind, items, field in (("fact", got.get("facts") or [], "claim"), ("exp", got.get("experiences") or [], "text")):
+        for it in items:
+            n = str(it.get("no"))
+            a = by_no.get(n)
+            text = str(it.get(field) or "").strip()
+            if not a or n in clash or not text:
+                continue
+            bad = invented(text, a)
+            if bad:
+                held.append((n, f"答えに無い数字が入ったので登録しません（{'・'.join(bad[:3])}）: {text[:60]}"))
+                continue
+            if kind == "exp" and str(it.get("key") or "") not in text:
+                held.append((n, f"体験の目印の語が文に無いので登録しません: {text[:60]}"))
+                continue
+            (out_f if kind == "fact" else out_e).append(it)
+    return out_f, out_e, held
+
+
+def write(site, facts, exps, today=None):
+    """一次情報・体験を書き足す。お客様の社は非公開の置き場、自社は data/"""
+    import private_store as P
+    today = today or date.today().isoformat()
+    tag = today.replace("-", "")
+    src = f"自社実績（質問シート {today}）"
+    if P.is_client(site):
+        fd = P.read_json(site, "facts.json", {"facts": []}) or {"facts": []}
+        ed = P.read_json(site, "experiences.json", {"experiences": []}) or {"experiences": []}
+    else:
+        fd = json.loads(OWN_FACTS.read_text(encoding="utf-8"))
+        ed = json.loads(OWN_EXPS.read_text(encoding="utf-8"))
+    have = {str(x.get("id")) for x in fd.get("facts", [])} | {str(x.get("id")) for x in ed.get("experiences", [])}
+    n = 0
+    for it in facts:
+        n += 1
+        fid = f"{site}-m{tag}-{n}"
+        while fid in have:
+            n += 1
+            fid = f"{site}-m{tag}-{n}"
+        row = {"id": fid, "sites": [site], "topic": [str(t) for t in (it.get("topic") or [])][:6],
+               "claim": str(it["claim"]).strip(), "source": src, "as_of": today[:7], "verifiable": True}
+        if it.get("period"):
+            row["period"] = str(it["period"])
+        if isinstance(it.get("denominator"), (int, float)) and not isinstance(it.get("denominator"), bool):
+            row["denominator"] = it["denominator"]
+        fd.setdefault("facts", []).append(row)
+        have.add(fid)
+    for it in exps:
+        n += 1
+        ed.setdefault("experiences", []).append({"id": f"{site}-m{tag}-{n}", "sites": [site], "key": str(it["key"]),
+                                                 "text": str(it["text"]).strip(), "when": str(it.get("when") or ""),
+                                                 "added": today})
+    if P.is_client(site):
+        P.write_json(site, "facts.json", fd)
+        P.write_json(site, "experiences.json", ed)
+    else:
+        OWN_FACTS.write_text(json.dumps(fd, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+        OWN_EXPS.write_text(json.dumps(ed, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
+
+
+def apply(src, do_write=False, ask=None):
+    """intake_watch から呼ぶ。(登録できたか, 説明)"""
+    import private_store as P
+    try:
+        site, answers = read(src)
+    except Exception as e:  # noqa: BLE001
+        return False, f"読めません（{str(e)[:80]}）"
+    if not site:
+        return False, "どの社のシートか分かりません（隠しタブ「材料の質問」が無い）"
+    if not answers:
+        return False, f"{'（お客様の社）' if P.is_client(site) else site}: 答えが1つもありません"
+    f, e, held = plan(site, answers, ask)
+    who = "（お客様の社）" if P.is_client(site) else site
+    msg = f"{who}: 一次情報 {len(f)}件・体験 {len(e)}件を登録{'' if do_write else 'できます（--write で実行）'}、保留 {len(held)}件"
+    if do_write and (f or e):
+        write(site, f, e)
+        if P.is_client(site):
+            P.push(f"質問シートの答えを一次情報 {len(f)}件・体験 {len(e)}件として登録")
+    if held:
+        note = "保留にした答え（直して intake/ に戻すか、運用者が確かめてください）:\n" + "\n".join(f"  - 問{n}: {w}" for n, w in held)
+        print(note)
+        if do_write:
+            Path(src).with_suffix(".保留.txt").write_text(note + "\n", encoding="utf-8", newline="")
+    return bool(f or e), msg
+
+
+# ── 自社サイトでやったことの前と後 ──────────────────────────────────────
+
+def measure(site, url, day, what, days=28):
+    """やった日の前の days 日と、後の days 日（やった日の翌日から）の表示・平均順位。Search Console が無ければ None"""
+    import gsc_detail as G
+    import sites as S
+    d = date.fromisoformat(day)
+    dom = (S.load(site) or {}).get("domain", "")
+    sc = G.client()
+    body = lambda a, b: {"startDate": a.isoformat(), "endDate": b.isoformat(), "dimensions": ["page"],
+                         "dimensionFilterGroups": [{"filters": [{"dimension": "page", "operator": "equals", "expression": url}]}]}
+    out = []
+    for a, b in ((d - timedelta(days=days), d - timedelta(days=1)), (d + timedelta(days=1), d + timedelta(days=days))):
+        rows = sc.searchanalytics().query(siteUrl=f"https://{dom}/", body=body(a, b)).execute().get("rows", [])
+        imp = sum(r["impressions"] for r in rows)
+        pos = round(sum(r["position"] * r["impressions"] for r in rows) / imp, 1) if imp else None
+        out.append((imp, pos))
+    (i1, p1), (i2, p2) = out
+    y, m, dd = d.year, d.month, d.day
+    pos_text = f"、平均順位は{p1}位から{p2}位" if p1 and p2 else ""
+    claim = (f"{y}年{m}月{dd}日に{what}ページは、前の{days}日の表示{i1}回から、後の{days}日の表示{i2}回"
+             f"{pos_text}になりました（Search Console）")
+    return {"claim": claim, "topic": ["自社サイト", "実測"], "period": f"{(d - timedelta(days=days)).isoformat()[:7]}〜{(d + timedelta(days=days)).isoformat()[:7]}"}
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--make", action="store_true")
+    ap.add_argument("--site", default="")
+    ap.add_argument("--out", default=str(Path.home() / "Desktop"))
+    ap.add_argument("--apply", default="")
+    ap.add_argument("--write", action="store_true")
+    ap.add_argument("--measure", nargs=3, metavar=("SITE", "URL", "DAY"))
+    ap.add_argument("--what", default="")
+    a = ap.parse_args()
+    if a.make:
+        if os.environ.get("GITHUB_ACTIONS"):
+            print("MATERIAL_SHEET=skip（CI では作らない。手元で作る）")
+            return 0
+        ts = targets(a.site)
+        for s in ts:
+            p, n = make(s, a.out)
+            print(f"  {p.name}: 質問{n}問")
+        print(f"MATERIAL_SHEET={len(ts)}")
+        return 0
+    if a.apply:
+        ok, msg = apply(Path(a.apply), a.write)
+        print(msg)
+        return 0
+    if a.measure:
+        if not a.what:
+            raise SystemExit("--what にやったことを書いてください（例: 「よくある質問を約30問載せた」）")
+        if not a.what.endswith("た"):
+            raise SystemExit("--what は「〜した」の形で書いてください（例: 「よくある質問を約30問載せた」）")
+        got = measure(*a.measure, what=a.what)
+        print(got["claim"])
+        if a.write:
+            write(a.measure[0], [got], [])
+            print("一次情報に登録しました")
+        return 0
+    ap.print_help()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

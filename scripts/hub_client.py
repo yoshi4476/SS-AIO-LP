@@ -282,19 +282,23 @@ def next_kw(site):
 
 
 def _with_material(site, got, kw0, todo):
-    """お客様の社で、台帳の先頭の題に材料が無く、材料のある題が未着手にあればそれを返す（無ければ None）"""
+    """台帳の先頭の題に材料が無く、材料のある題が未着手にあればそれを返す（無ければ None）。
+    自社の3サイトにも当てる（2026-10-21 運用者「ほかの社もシートを題材にして自動的に」）。ただし自社は主力の語を先に書く
+    決まりがあるので、材料のある題のうち主力の語に当たるものだけを前に出す（主力の外の題で主力を後ろへ押し出さない）"""
     try:
+        import re
         import private_store as P
-        if not P.is_client(site):
-            return None
         import material
+        main = "" if P.is_client(site) else _main_offer_pattern(site)
         mats = material.lines(site)
         pool = [str(r.get("keyword", "")) for r in todo]
         has = lambda k: material.hits(k, mats, pool) > 0
         if not mats or has(kw0):
             return None
+        if not P.is_client(site) and not main:
+            return None
         for r in todo:
-            if has(str(r["keyword"])):
+            if has(str(r["keyword"])) and (not main or re.search(main, str(r["keyword"]).lower())):
                 out = dict(got)
                 out.update({"keyword": str(r["keyword"]), "aim": r.get("aim", ""),
                             "category": r.get("category", ""), "picked_by": "材料のある題"})

@@ -103,10 +103,15 @@ def test_material_first_and_wait_for_materials():
         got = {"keyword": "庭木 剪定 失敗"}
         hit = H._with_material("client-zz", got, got["keyword"], todo)
         own = H._with_material("ai-lab", got, got["keyword"], todo)
+        # 2026-10-21: 自社にも当てる。ただし主力の語（ai-lab は aio・llmo…）に当たる題だけを前に出す
+        M.lines = lambda site: mats + ["2025年に aio 外注で問い合わせが月2件から5件になった"]
+        own_todo = todo + [{"keyword": "aio 外注 費用"}]
+        own_main = H._with_material("ai-lab", got, got["keyword"], own_todo)
     finally:
         M.lines, P.is_client = lines, is_client
-    check("お客様の社は材料のある題を先に・自社は変えない",
+    check("お客様の社は材料のある題を先に・自社は主力の外の題を前に出さない",
           ((hit or {}).get("keyword"), (hit or {}).get("picked_by"), own), ("芝生 張替え 料金", "材料のある題", None))
+    check("自社は材料のある主力の題を先に", (own_main or {}).get("keyword"), "aio 外注 費用")
     src = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
     check("止めるときに依頼を残し、通ったら消す", ("material.ask(" in src, "material.resolve(site, slug" in src), (True, True))
     check("依頼は台帳と同じフォルダに書く（門の一時フォルダの架空の記事を本物の依頼に書かない。2026-10-20 zz-pub が混ざった）",
