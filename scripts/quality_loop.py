@@ -170,7 +170,12 @@ def write_pass(slug, sc, attempts, refresh_date=False):
             "quality_attempts": attempts}
     t2 = set_keys(drop_keys(t, MACHINE_KEYS), vals)
     if refresh_date:
-        # 前の日に書いて今日通った記事は、公開する今日の日付にする（公開日を偽らない。publish_flow の決まりと同じ）
+        # 前の日に書いて今日通った記事は、公開する今日の日付にする（公開日を偽らない。publish_flow の決まりと同じ）。
+        # 書いた日は written: に残し、本数はその日に数える（daily_audit.counted_day。今日の本数に二重に数えない）
+        old = str(meta_of(t).get("date") or "")[:10]
+        if old and not meta_of(t).get("written"):
+            vals["written"] = old
+            t2 = set_keys(t2, {"written": old})
         t2 = re.sub(r"^date:.*$", f"date: {date.today().isoformat()}", t2, count=1, flags=re.M)
     write(slug, t2)
     m = meta_of(read(slug))

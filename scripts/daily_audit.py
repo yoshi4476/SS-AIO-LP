@@ -145,8 +145,10 @@ def makeups():
 
 
 def counted_day(a):
-    """その記事を何日の本数に数えるか。前日の不足分として書いた記事は前日、それ以外は公開日"""
-    return a.get("makeup_for") or a["date"]
+    """その記事を何日の本数に数えるか。前日の不足分として書いた記事は前日、改善中のまま日をまたいで通った記事は
+    書いた日（written:）、それ以外は公開日。改善中の記事は書いた日の本数に数えているので、通った日に公開日を
+    今日へ移すと2日に数えていた（2026-10-21 の AI集客ラボが 7/2 本と出た。基準を85点にして改善中の記事がまとめて通った）"""
+    return a.get("makeup_for") or a.get("written") or a["date"]
 
 
 def is_new_article(slug):
@@ -212,7 +214,8 @@ def articles_by_site():
         if site:
             out[site].append({"slug": p.stem, "date": fv("date"), "score": fv("score"),
                               "title": fv("title"), "category": fv("category"),
-                              "makeup_for": made.get(p.stem, ""), "quality_state": fv("quality_state")})
+                              "makeup_for": made.get(p.stem, ""), "quality_state": fv("quality_state"),
+                              "written": fv("written")})
     return out
 
 
@@ -890,7 +893,22 @@ def cap_left(sid):
     return site_cap(sid) - n
 
 
+def day_left(sid, day=None):
+    """その日あと何本書けるか（1日の本数 pace.quota − その日に数える記事）。改善中の記事も書いた本数に数える"""
+    import pace
+    day = day or today_iso()
+    n = sum(1 for a in articles_by_site().get(sid, [])
+            if counted_day(a) == day and _is_published(a, need_review=False))
+    return pace.quota(sid) - n
+
+
 def main():
+    # 手で社を指定して起動した回（workflow_dispatch の site）は枠の判定を通らないので、その日の本数を書き終えていれば
+    # 新しい記事を書かない（2026-10-21: 品質ループを試すために手で4回起動し、AI集客ラボが 7/2 本になった）
+    if len(sys.argv) == 3 and sys.argv[1] == "--day-full":
+        left = day_left(sys.argv[2])
+        print(f"DAY_LEFT={left}")
+        return 0 if left <= 0 else 1
     # 書く前に止める（日次の枠が呼ぶ）。publish_flow の上限は書き終えた後にしか効かず、
     # 2026-09 は3サイトとも上限60を超えた（61・66・62本）
     if len(sys.argv) == 3 and sys.argv[1] == "--cap-reached":

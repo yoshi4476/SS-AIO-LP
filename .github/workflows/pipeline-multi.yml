@@ -180,6 +180,16 @@ jobs:
           # 起動役の回は予定の時刻（scheduled_for）の日
           echo "slot_day=$(python scripts/daily_audit.py --slot-day "$EV_SCHEDULE" "$IN_AT")" >> "$GITHUB_OUTPUT"
           s="$IN_SITE"
+          if [ -n "$s" ]; then
+            # 手で社を指定した回は枠の判定を通らない。その日の本数を書き終えていれば書かない（2026-10-21 に手で4回起動して
+            # AI集客ラボが 7/2 本になった）。改善中の記事は次の枠の --pending が直す
+            real=$(python3 scripts/private_store.py --resolve "$s" 2>/dev/null || echo "$s")
+            if python scripts/daily_audit.py --day-full "$real" >/dev/null 2>&1; then
+              echo "skip=yes" >> "$GITHUB_OUTPUT"
+              echo "$s は今日の本数を書き終えています。新しい記事は書きません（改善中の記事は次の枠が直します）"
+              exit 0
+            fi
+          fi
           if [ -z "$s" ]; then
             if [ "$N" -eq 0 ]; then
               echo "skip=yes" >> "$GITHUB_OUTPUT"

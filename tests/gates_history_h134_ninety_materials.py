@@ -158,3 +158,51 @@ def test_materials_and_repair_pass():
     pr = json.loads((ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
     check("相場: 記事作成ツールと一括の委託（数十万円より下に書かない決まりは残す）",
           ("article_tool" in [r["id"] for r in pr["ranges"]], pr["outsource_min_yen"] >= 200000), (True, True))
+
+
+def test_held_article_counts_on_the_day_it_was_written():
+    import daily_audit as D
+    import quality_loop as Q
+    import tempfile
+    from pathlib import Path
+    print("\n■ 改善中のまま日をまたいで通った記事は、書いた日の本数に数える（公開日は今日。2026-10-21 に 7/2 本と出た）")
+    check("数える日: 前日分の印 → 書いた日 → 公開日",
+          [D.counted_day({"date": "2026-10-21", "written": "2026-10-20"}),
+           D.counted_day({"date": "2026-10-21", "written": "2026-10-20", "makeup_for": "2026-10-19"}),
+           D.counted_day({"date": "2026-10-21", "written": ""})], ["2026-10-20", "2026-10-19", "2026-10-21"])
+    with tempfile.TemporaryDirectory() as d:
+        art = Path(d) / "zz-held.md"
+        art.write_text("---\ntitle: 架空の記事の題です\nslug: zz-held\ncategory: aio\ndate: 2000-01-01\n"
+                       "quality_state: improving\n---\n本文です。\n", encoding="utf-8")
+        old = Q.ARTICLES
+        Q.ARTICLES = Path(d)
+        try:
+            sc = {"total": 90, "axes": {"originality": 90, "extractability": 90, "decision": 90}}
+            Q.write_pass("zz-held", sc, attempts=2, refresh_date=True)
+            m = Q.meta_of(Q.read("zz-held"))
+        finally:
+            Q.ARTICLES = old
+    check("通った記事: 公開日は今日・書いた日を残す", (str(m.get("written")), str(m.get("date")) != "2000-01-01"),
+          ("2000-01-01", True))
+
+
+def test_manual_run_does_not_exceed_daily_quota():
+    import daily_audit as D
+    import pace
+    print("\n■ 手で社を指定して起動した回も、その日の本数を書き終えていれば書かない（2026-10-21 に 7/2 本）")
+    old = D.articles_by_site, pace.quota, D.today_iso
+    D.articles_by_site = lambda: {"zz": [{"date": "2026-10-21", "score": "90", "quality_state": ""},
+                                         {"date": "2026-10-21", "score": "", "quality_state": "improving"},
+                                         {"date": "2026-10-21", "written": "2026-10-20", "score": "90", "quality_state": ""}]}
+    pace.quota = lambda sid: 2
+    D.today_iso = lambda: "2026-10-21"
+    try:
+        full = D.day_left("zz")
+        pace.quota = lambda sid: 3
+        room = D.day_left("zz")
+    finally:
+        D.articles_by_site, pace.quota, D.today_iso = old
+    check("改善中も数え、前の日に書いた記事は数えない（2本書いた日は残り0・本数3なら残り1）", (full, room), (0, 1))
+    wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    check("手で社を指定した回は書く前に本数を確かめる",
+          wf.index('python scripts/daily_audit.py --day-full "$real"') < wf.index('if [ -z "$s" ]; then'), True)
