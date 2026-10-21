@@ -44,7 +44,7 @@
 "modified": "2026-09-15"
 },
 "aio-gaichuu": {
-"hash": "16326e5158517fd0306cc5cd81e831b5",
+"hash": "659a2669908fd6389c7ba86284d2ad5d",
 "modified": "2026-10-21"
 },
 "aio-ijou-kenchi-alert-settei": {
@@ -328,7 +328,7 @@
 "modified": "2026-10-09"
 },
 "fudousan-hankyou-konai": {
-"hash": "ed2de9b9e03d3f7be62cfc81a065e69b",
+"hash": "30888f71111becd7bd42b75d7ee1008a",
 "modified": "2026-08-27"
 },
 "fudousan-kaisha-shukyaku-houhou": {
@@ -400,7 +400,7 @@
 "modified": "2026-09-08"
 },
 "inshokuten-shukyaku-consul": {
-"hash": "3f8711b1cd42b67f25448cabe9613a91",
+"hash": "73211b0384c62b74e9097c662736b24c",
 "modified": "2026-10-21"
 },
 "inshokuten-shukyaku-hoho": {
@@ -536,7 +536,7 @@
 "modified": "2026-08-29"
 },
 "reform-shukyaku-daikou": {
-"hash": "397184f40f35b6ae575ed0a3bc1f70be",
+"hash": "6b284a9aeaedc2d8e09055d53c1c6bce",
 "modified": "2026-10-08"
 },
 "reform-shukyaku-hoho": {
@@ -600,7 +600,7 @@
 "modified": "2026-08-19"
 },
 "shigyou-hp-houshu-nosekata": {
-"hash": "7bd84e0d48fd3e78bf1224200a670cb9",
+"hash": "c1f983ff5180afffce26bd41ebe95a77",
 "modified": "2026-10-21"
 },
 "shigyou-portal-ai-kensaku": {
@@ -610,6 +610,10 @@
 "shigyou-seo-taisaku": {
 "hash": "8008f7f1520e1a34f02d5a03165ac828",
 "modified": "2026-08-08"
+},
+"shigyou-shukyaku-daikou": {
+"hash": "02f5e1adab808634017a8cdd554ffe05",
+"modified": "2026-10-22"
 },
 "shika-ai-kensaku-denai-genin": {
 "hash": "16f6d25b08d1821a07d6bbb2e36f35fe",
