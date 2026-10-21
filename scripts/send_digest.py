@@ -52,7 +52,7 @@ def recent_articles():
         if not m:
             continue
         meta = yaml.safe_load(m.group(1))
-        if (meta.get("score") or 0) < 90:
+        if (meta.get("score") or 0) < 85:
             continue
         if meta.get("category") not in sites.valid_categories(SITE):
             continue

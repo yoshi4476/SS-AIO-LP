@@ -87,7 +87,7 @@ def _article_title(slug):
 def render_block(prof):
     lis = []
     c = prof["counts"]
-    lis.append(f"<li>監修記事 {c['articles']}本（品質90点以上で公開したもの）／公開した一次データ {c['datasets']}件／解説動画 {c['videos']}本"
+    lis.append(f"<li>監修記事 {c['articles']}本（品質85点以上で公開したもの）／公開した一次データ {c['datasets']}件／解説動画 {c['videos']}本"
                + (f"／AIへの聞き取り調査 {c['research']}件" if c.get("research") else "") + "</li>")
     if prof.get("research"):
         lis.append('<li>調査: <a href="/research/">業種別「AIは何を出典に答えるか」の調査</a>（'

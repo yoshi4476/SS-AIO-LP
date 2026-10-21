@@ -51,7 +51,7 @@ def candidates(site_id):
         def g(k):
             x = re.search(rf"^{k}:\s*(.+)$", fm, re.M)
             return x.group(1).strip().strip('"') if x else ""
-        if int(g("score") or 0) < 90 or S.find_category_owner(g("category")) != site_id:
+        if int(g("score") or 0) < 85 or S.find_category_owner(g("category")) != site_id:
             continue
         import noindex
         if noindex.hidden_fm(fm):       # 検索から外した記事（noindex）には一次情報の文を入れない

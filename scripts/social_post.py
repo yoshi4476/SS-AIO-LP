@@ -62,7 +62,7 @@ def article(slug):
         return x.group(1).strip().strip('"') if x else ""
 
     sc = g("score")
-    if not sc.isdigit() or int(sc) < 90:
+    if not sc.isdigit() or int(sc) < 85:
         return None                      # 公開していない記事は投稿しない
     # 見出しの直下にある1文結論。記事の主張がここに入っている
     leads = []

@@ -34,7 +34,7 @@ def load_metas():
         meta = yaml.safe_load(m.group(1))
         body = re.sub(r"\s|<[^>]+>", "", re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", m.group(2)))
         meta["_chars"] = len(body)
-        (pub if (meta.get("score") or 0) >= 90 else blocked).append(meta)
+        (pub if (meta.get("score") or 0) >= 85 else blocked).append(meta)
     return pub, blocked
 
 
@@ -63,7 +63,7 @@ def main():
 |:----|:--|:----|
 | 累計公開記事数 | {len(pub)}本 | カテゴリ内訳: {cat_counts} |
 | 直近7日の公開 | {len(recent)}本 | 目標: 週14本（毎日2本） |
-| 品質スコア平均 | {avg_score}点 | 公開基準90点・推奨95点 |
+| 品質スコア平均 | {avg_score}点 | 公開基準85点・目標90点 |
 | 平均文字数 | {avg_chars:,}字 | 基準5,000字以上 |
 | 非公開（審査未達） | {len(blocked)}本 | {"、".join(m["slug"] for m in blocked) if blocked else "なし"} |
 | DR / KW数 / AI計測 | — | GA4・GSC・Ahrefs稼働後に自動反映 |

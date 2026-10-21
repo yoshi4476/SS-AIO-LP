@@ -65,7 +65,7 @@ def articles():
             continue
         fm, body = m.groups()
         sc = re.search(r"^score:\s*(\d+)", fm, re.M)
-        if not sc or int(sc.group(1)) < 90:
+        if not sc or int(sc.group(1)) < 85:
             continue
         cat = (re.search(r"^category:\s*(.+)$", fm, re.M) or [0, ""])[1].strip()
         sid = cat2site.get(cat)

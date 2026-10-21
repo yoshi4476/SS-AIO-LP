@@ -695,7 +695,14 @@ def publish(root=None, only=None):
         except (Exception, SystemExit) as e:      # フロントマターが無い（SystemExit）など。止めるのは publish_flow と build.py
             print(f"   機械採点を動かせませんでした（{type(e).__name__}）。隔離はしません", flush=True)
             return []
-        return [c[0] for c in checks if not c[1] and not c[3]]
+        # 採点の観点の検査（前を指す文・決定支援など。auto_rewrite.SOFT_FAILS）では隔離しない。別工程の採点が見ている観点で、
+        # 直しの検算でも止めていない。ここで止めたので、直している途中の記事（89点・85点）が _conflicted へ移され、
+        # 改善の対象から外れていた（2026-10-21）。改善中の記事は後ろの判定で配らずに残る
+        try:
+            from auto_rewrite import SOFT_FAILS
+        except Exception:  # noqa: BLE001
+            SOFT_FAILS = ()
+        return [c[0] for c in checks if not c[1] and not c[3] and not c[0].startswith(tuple(SOFT_FAILS))]
 
     new, changed = changes(root)
     # 前の回から直していて、この回の公開前の採点で基準に届いた記事も、新しい記事と同じ道（publish_flow）で配る

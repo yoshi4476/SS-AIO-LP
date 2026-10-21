@@ -181,8 +181,8 @@ def main():
         raise SystemExit("機械採点で不合格。指摘を直してから再実行すること")
 
     score = meta.get("score") or 0
-    if not prescore and score < 90:
-        raise SystemExit(f"score={score} のため公開しません（90点以上が必要）")
+    if not prescore and score < 85:
+        raise SystemExit(f"score={score} のため公開しません（85点以上が必要）")
 
     # 2-2. 食い合いゲート（執筆後）を配信の前に置く。
     #      ワークフローの kw_gate --after は、この工程（記事生成の中で呼ばれる）より後に走る。

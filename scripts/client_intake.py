@@ -87,7 +87,7 @@ FIELDS = [
     ("wp.admin_url", "管理画面のURL", "ログイン画面のURL", "https://example.co.jp/wp-admin/", "wordpress"),
     ("wp.user", "投稿用のユーザー名", "当社用に作ったユーザー（権限は「編集者」）", "ss-editor", "wordpress"),
     ("wp.plugin", "品質の検査のプラグイン",
-     "90点に届かない記事を公開させない小さなプラグイン（mu-plugin）を wp-content/mu-plugins/ に置きます。"
+     "85点に届かない記事を公開させない小さなプラグイン（mu-plugin）を wp-content/mu-plugins/ に置きます。"
      "当社が置く場合は FTP の接続情報が要ります", "当社が置く", "wordpress"),
     ("wp.admin_key", "改修用の管理者の鍵",
      "追加CSS・head への追記・メニューの変更には、管理者のアプリケーションパスワードが要ります", "出せる", False),
@@ -1360,8 +1360,8 @@ def review(got, cfg):
     if got.get("contact.email") and "@" not in str(got["contact.email"]):
         warn.append("ご担当者のメールがメールアドレスになっていません（導入の連絡が届きません）")
     if site_type == "wordpress" and choice(got, "wp.plugin") == "置けない":
-        warn.append("品質の検査のプラグインを置けないと、90点に届かない記事を WordPress 側で止められません"
-                    "（管制塔は90点未満を送りませんが、管理画面で公開されたものは止まりません）")
+        warn.append("品質の検査のプラグインを置けないと、85点に届かない記事を WordPress 側で止められません"
+                    "（管制塔は85点未満を送りませんが、管理画面で公開されたものは止まりません）")
     if choice(got, "gsc.property") == "ドメインだけ":
         warn.append(f"Search Console がドメインのプロパティだけです。https://{cfg.get('domain') or 'ドメイン'}/ の"
                     "URLプレフィックスのプロパティを足して当社を追加していただくまで、順位・検索語が取れません")

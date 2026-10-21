@@ -131,7 +131,7 @@ def gate_ok(meta):
     if f:
         return bool(f(meta))
     sc = meta.get("score")
-    return isinstance(sc, (int, float)) and not isinstance(sc, bool) and sc >= 90
+    return isinstance(sc, (int, float)) and not isinstance(sc, bool) and sc >= 85
 
 
 def read_meta(path: Path):

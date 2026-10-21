@@ -72,7 +72,7 @@ def test_stuck_keywords_are_marked_published_without_double_logging():
           [("ai-lab", "クリニック 建築 事例", "clinic-kenchiku-jirei")])
 
     posted = []
-    metas = {"a": {"score": 95, "category": "seo"}, "b": {"score": 85, "category": "seo"},
+    metas = {"a": {"score": 95, "category": "seo"}, "b": {"score": 84, "category": "seo"},
              "c": {"score": 95, "category": "seo"}, "d": {"score": 95, "category": "journal"}}
     cfgs = {"ai-lab": {"domain": "ai.example", "type": "self-static"},
             "cl": {"domain": "client.example", "type": "external-md", "client": True}}
@@ -90,7 +90,7 @@ def test_stuck_keywords_are_marked_published_without_double_logging():
             contextlib.redirect_stdout(out):
         K.main(["--write"])
     text = out.getvalue()
-    check("90点以上で本番で開けるものだけ直す（90点未満・本番に無いものは執筆中のまま）", sorted(posted), ["語a", "語d"])
+    check("公開の下限（85点）以上で本番で開けるものだけ直す（下限未満・本番に無いものは執筆中のまま）", sorted(posted), ["語a", "語d"])
     check("お客様の社の語はログに出さない", ("語d" in text, "（お客様の記事）" in text), (False, True))
 
     import datetime as dt

@@ -149,7 +149,7 @@ def article_index():
             return x.group(1).strip().strip('"') if x else ""
 
         score = g("score")
-        if not score.isdigit() or int(score) < 90:
+        if not score.isdigit() or int(score) < 85:
             continue                                 # 非公開の記事は押し上げない
         import noindex
         if noindex.hidden_fm(fm):

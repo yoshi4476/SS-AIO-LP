@@ -91,7 +91,7 @@ def stale(site_id=""):
         if site_id and sid != site_id:
             continue
         arts = [a for a in (_fm(p) for p in (ROOT / "articles").glob("*.md")) if a
-                and a["score"] >= 90 and S.find_category_owner(a["category"]) == sid]
+                and a["score"] >= 85 and S.find_category_owner(a["category"]) == sid]
         try:
             shown = shown_urls(cfg)
         except Exception as e:
@@ -202,7 +202,7 @@ def quality_pairs(site_id=""):
             out.append({**x, "survivor": "", "auto": False, "skip": "GSC を読めない"})
             continue
         arts = [b for b in (_fm(q) for q in (ROOT / "articles").glob("*.md")) if b
-                and b["score"] >= 90 and S.find_category_owner(b["category"]) == sid]
+                and b["score"] >= 85 and S.find_category_owner(b["category"]) == sid]
         url = lambda b: S.article_url(cfg, b).rstrip("/") + "/"
         # 同じ手法（カテゴリ）で、業種のある記事は同じ業種の記事へだけ寄せる。題の近さだけで選ぶと、
         # 型が同じ別業種（clinic-seo-taisaku → reform-seo-taisaku）や別の手法（→ clinic-meo-taisaku）が

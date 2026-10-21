@@ -213,7 +213,7 @@ def main():
         print(f"FLAGGED={'yes' if on else 'no'}")
         return 0 if on else 1
     end = date.today() - timedelta(days=3)      # GSC の確定待ち
-    arts = [a for a in (_fm(p) for p in (ROOT / "articles").glob("*.md")) if a and a["score"] >= 90]
+    arts = [a for a in (_fm(p) for p in (ROOT / "articles").glob("*.md")) if a and a["score"] >= 85]
     print(f"■ 記事を増やした分だけ伸びているか（{end - timedelta(days=27)}〜{end} と その前の28日）\n")
     alerts, ran, any_judged, state = [], 0, False, {}
     for sid, cfg in S.load_all().items():

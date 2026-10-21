@@ -109,7 +109,7 @@ def main(argv=None):
         except (TypeError, ValueError):
             score = 0
         url = S.article_url(cfg, {"slug": slug, "category": meta.get("category", "")}) if meta else ""
-        if score < 90 or not url or not live(url):
+        if score < 85 or not url or not live(url):
             left += 1                          # まだ公開されていない（90点未満・本番に無い）。執筆中のままが正しい
             continue
         if not a.write:

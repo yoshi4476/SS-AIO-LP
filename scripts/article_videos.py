@@ -106,7 +106,7 @@ def published(slug, score):
     global _REVIEWS
     import editorial_review as ER
     try:
-        if float(score or 0) < 90:
+        if float(score or 0) < 85:
             return False
     except (TypeError, ValueError):
         return False
@@ -116,7 +116,7 @@ def published(slug, score):
 
 
 def candidates(days, limit):
-    """直近 days 日に公開した記事（score>=90・監修の記録あり）で、まだ動画にしていないもの（新しい順）"""
+    """直近 days 日に公開した記事（score>=85・監修の記録あり）で、まだ動画にしていないもの（新しい順）"""
     import sites as S
     import youtube_upload as YT
     have = load()

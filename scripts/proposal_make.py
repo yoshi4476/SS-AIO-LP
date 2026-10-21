@@ -60,7 +60,7 @@ def industry_facts(name):
         title = re.search(r"^title:\s*(.+)$", fm, re.M)
         kw = re.search(r"^keyword:\s*(.+)$", fm, re.M)
         sc = re.search(r"^score:\s*(\d+)", fm, re.M)
-        if not title or not sc or int(sc.group(1)) < 90:
+        if not title or not sc or int(sc.group(1)) < 85:
             continue
         # 提案書は AI集客ラボの SEO・AIO の提案。補助金サイト（IT導入補助金）や MEO の記事は載せない
         cat = re.search(r"^category:\s*(\S+)", fm, re.M)

@@ -181,7 +181,7 @@ def judge(pair, stats, reverse_imp=0, arts=None):
         pair["skip"] = "逆向きの組の方が強い"
     elif not related(pair, arts):
         pair["skip"] = f"主題が違う（{pair.get('why_not', '')}）"
-    elif fm(pair["survivor"])["score"] < 90 or fm(pair["loser"])["score"] < 90:
+    elif fm(pair["survivor"])["score"] < 85 or fm(pair["loser"])["score"] < 85:
         pair["skip"] = "未公開の記事を含む"
     elif AR.site_of(pair["survivor"]) != AR.site_of(pair["loser"]):
         pair["skip"] = "別サイトの記事どうし（統合しない）"
@@ -275,7 +275,7 @@ def scaled_candidates(site="", min_sim=SCALED_MIN_SIM):
             pair["skip"] = f"実績で勝ちが決まらない（どちらもクリック{ka[0]}・表示{ka[1]}）"
         elif ls.get("clicks", 0) > MAX_LOSER_CLICKS:
             pair["skip"] = f"負けた側にクリックがある（{ls.get('clicks')}回。消すと失う）"
-        elif fm(win)["score"] < 90 or fm(lose)["score"] < 90:
+        elif fm(win)["score"] < 85 or fm(lose)["score"] < 85:
             pair["skip"] = "未公開の記事を含む"
         else:
             pair["skip"] = ""

@@ -35,7 +35,7 @@ def _articles():
         def g(k):
             x = re.search(rf"^{k}:\s*(.+)$", fm, re.M)
             return x.group(1).strip().strip('"') if x else ""
-        if int(g("score") or 0) < 90:
+        if int(g("score") or 0) < 85:
             continue
         # クライアントの記事の実数は、その会社の数字。運用会社名義で公開しない
         owner = S.find_category_owner(g("category")) or ""

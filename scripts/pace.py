@@ -325,7 +325,7 @@ def main():
     import content_yield as CY
     import sites as S
     end = date.today() - timedelta(days=3)
-    arts = [x for x in (CY._fm(p) for p in (ROOT / "articles").glob("*.md")) if x and x["score"] >= 90]
+    arts = [x for x in (CY._fm(p) for p in (ROOT / "articles").glob("*.md")) if x and x["score"] >= 85]
     manual = _manual()
     import client_private as CP
     prev = CP.load_dict("data/pace_state.json", pub=STATE)

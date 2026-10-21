@@ -262,7 +262,7 @@ def newest_articles(sid, cfg, n, live=None):
             continue
         if not isinstance(meta, dict) or meta.get("category") not in cats or not meta.get("slug"):
             continue
-        if meta.get("noindex") or int(meta.get("score") or 0) < 90 or str(meta.get("date", "")) > today:
+        if meta.get("noindex") or int(meta.get("score") or 0) < 85 or str(meta.get("date", "")) > today:
             continue
         rows.append((str(meta.get("date", "")), str(meta.get("modified", "")), meta))
     out = []

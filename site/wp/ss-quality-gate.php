@@ -35,7 +35,7 @@ if (!defined('ABSPATH')) {
 
 const SSQG_META_SCORE = '_ss_quality_score';   // 100点換算のスコア
 const SSQG_META_BY    = '_ss_written_by';      // 'agent' か 'human'
-const SSQG_MIN_SCORE  = 90;                    // これ未満は公開させない
+const SSQG_MIN_SCORE  = 85;                    // これ未満は公開させない
 const SSQG_META_JSONLD = '_ss_jsonld';         // 記事の構造化データ（JSON の文字列）
 
 // 人が管理画面で書いた記事に求める最低限。採点の仕組みを通らないぶん、

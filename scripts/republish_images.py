@@ -28,7 +28,7 @@ def missing_live(cfg, site_id):
         head = md.read_text(encoding="utf-8-sig")[:1500]
         cat = re.search(r"^category:\s*(\S+)", head, re.M)
         sc = re.search(r"^score:\s*(\d+)", head, re.M)
-        if not cat or S.find_category_owner(cat.group(1)) != site_id or not sc or int(sc.group(1)) < 90:
+        if not cat or S.find_category_owner(cat.group(1)) != site_id or not sc or int(sc.group(1)) < 85:
             continue
         if not re.search(r"^eyecatch:", head, re.M):
             continue

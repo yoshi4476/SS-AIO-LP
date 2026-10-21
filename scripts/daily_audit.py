@@ -217,7 +217,7 @@ def articles_by_site():
 
 
 def _is_published(a, need_review=True):
-    """score>=90（公開基準）が付いた記事だけを「公開済み」として数える。
+    """score>=85（公開基準）が付いた記事だけを「公開済み」として数える。
 
     score未設定の記事はまだPhase 5を通っておらず、publish.pyも配信を拒む
     （score<90はSystemExit）。それを「本日公開」に数えると、本数は満たしたと
@@ -231,7 +231,7 @@ def _is_published(a, need_review=True):
     if a.get("quality_state") and a.get("quality_state") != "passed":
         return not need_review
     try:
-        if int(a.get("score") or 0) < 90:
+        if int(a.get("score") or 0) < 85:
             return False
     except ValueError:
         return False

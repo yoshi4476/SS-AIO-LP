@@ -473,7 +473,7 @@ def analyze(sites, labels, arts, pipeline):
         ("AI経由参照", f"{ai}", f"{tgt(ai, 1.5, 5)}",
          "記事の蓄積とllms.txt更新によるAI引用の積み上がり"),
         ("公開記事（3サイト合計）", f'{arts["total"]}本', f'{arts["total"] + 60}本',
-         "月60本の生成体制の定常値（品質90点以上のみ）"),
+         "月60本の生成体制の定常値（品質85点以上のみ）"),
     ]
 
     headline = [
@@ -669,7 +669,7 @@ def render(sites, labels, arts, cross, links, pipeline, a):
 <div class="tiles">
 {tile("セッション", na(c.get("sessions")), f'前月比 {mom_site(c, p, "sessions")}')}
 {tile("検索クリック", na(c.get("clicks")), f'前月比 {mom_site(c, p, "clicks")}')}
-{tile("記事ストック", f'{arts["counts"].get(s["id"], 0)}本', "品質90点以上のみ")}
+{tile("記事ストック", f'{arts["counts"].get(s["id"], 0)}本', "品質85点以上のみ")}
 {tile("AI経由参照", str(s["ai"]) if not s["ga_error"] else "—", "ChatGPT・Perplexity等")}
 </div>
 {charts}
@@ -953,7 +953,7 @@ ol.head3 li::before {{ content:counter(h);position:absolute;left:0;top:9px;width
 <div class="sheet">
 <div class="sec"><span class="no">07</span><h2>コンテンツ資産の状況</h2><div class="gold"></div></div>
 <div class="tiles">
-{tile("公開記事（3サイト合計）", f'{arts["total"]}本', "品質90点以上のみ")}
+{tile("公開記事（3サイト合計）", f'{arts["total"]}本', "品質85点以上のみ")}
 {tile("平均品質スコア", f'{arts["avg_score"]}点', "3観点の平均/100点")}
 {tile("平均文字数", f'{arts["avg_len"]:,}字', "基準5,000字以上")}
 {tile("年間の想定増加", "720本", "月60本ペースの場合")}

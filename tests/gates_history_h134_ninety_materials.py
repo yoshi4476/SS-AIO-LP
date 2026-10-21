@@ -46,8 +46,39 @@ def test_pointing_and_faq_scope_detectors():
     faq = ("\n\n## よくある質問\n<details><summary>どのくらいで変化が見えますか？</summary>\n<p>{}</p></details>\n")
     main = "## 期間\n当社のAIO運用10件は、3か月以内に順位が上がりました（わずかな上昇も含みます）。\n"
     check("条件の落ちた答えを拾う", bool(S.faq_scope_issues(main + faq.format("10件すべてが3か月以内に上がりました。"))), True)
+    sc = (ROOT / "scripts" / "score_check.py").read_text(encoding="utf-8")
+    check("FAQ の条件の検査は警告（FAIL にすると点の上がる直しを捨てる。2026-10-21 の CI で89点の記事の直しを捨てた）",
+          'not scope, "、".join(scope[:2]), warn=True)' in sc, True)
     check("条件を書いた答えは拾わない",
           S.faq_scope_issues(main + faq.format("当社の10件（わずかな上昇も含む）は3か月以内に上がりました。")), [])
+
+
+def test_pass_85_target_90_pdca():
+    import rubric as R
+    print("\n■ 公開の下限85・目標90（運用者 2026-10-21）。85〜89点は公開しつつ直し続ける（PDCA）")
+    check("下限と目標", (R.PASS_TOTAL, R.TARGET, R.PASS_EACH), (85, 90, 80))
+    check("85点で合格・84点で不合格・1軸79点は不合格",
+          [R.judge({"originality": a, "extractability": b, "decision": c})["ok"]
+           for a, b, c in ((85, 85, 85), (84, 84, 84), (79, 90, 90))], [True, False, False])
+    ql = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
+    check("公開前の直しは90点未満なら回数の残りで続ける・85〜89点の合格は直す対象に残す",
+          ('while (not sc["ok"] or sc["total"] < R.TARGET)' in ql,
+           'low = r["state"] == "passed" and (r.get("total") or 0) < R.TARGET' in ql), (True, True))
+    # 点数の判定に下限以外の数字を直接書かない（90 を40か所近くに直接書いていて、1か所を変えても漏れた）
+    pat = re.compile(r"(?:score|total|_score\(p\)|\bsc\b)[^\n]{0,30}?(?:<|>=)\s*(\d{2})\b(?!\s*[日件本字%])")
+    odd = []
+    for p in (ROOT / "scripts").glob("*.py"):
+        if p.name in ("rubric.py",):
+            continue
+        for i, ln in enumerate(p.read_text(encoding="utf-8").splitlines(), 1):
+            if ln.lstrip().startswith("#"):
+                continue
+            for m in pat.finditer(ln):
+                if m.group(1) == "90":
+                    odd.append(f"{p.name}:{i}")
+    check("点数の判定に 90 を直接書いていない（下限は rubric.PASS_TOTAL）", odd, [])
+    php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
+    check("WordPress の門も85", "const SSQG_MIN_SCORE  = 85;" in php, True)
 
 
 def test_materials_and_repair_pass():
@@ -63,6 +94,14 @@ def test_materials_and_repair_pass():
     check("警告が増えた直しは、外れた検査だけを名指しして1回直させ、同じ検算を通す",
           ('ng.startswith("警告が増えました") and kind == "quality_loop"' in seg, "guarded(lambda: draft_one(item, fix))" in seg,
            seg.count("ng = check(") >= 3), (True, True, True))
+    ag = (ROOT / "scripts" / "agent_guard.py").read_text(encoding="utf-8")
+    check("配信前の検査は採点の観点の検査（SOFT_FAILS）だけでは隔離しない（直している記事を _conflicted へ移していた）",
+          "not c[0].startswith(tuple(SOFT_FAILS))" in ag, True)
+    import legal_claims as L
+    check("支援社数の検査: 1社の事例は拾わず、社数の表示は拾う",
+          [bool(L.find(s)) for s in ("当社の不動産会社1社の支援では、順位が上がりました。", "当社は200社の導入を支援しました。",
+                                      "当社は11社を支援しました。")], [False, True, True])
+    check("相場の注記に当社の語を金額と並べない（当社の価格を書いた形になる）", "「当社」の語を金額と同じ文に書かない" in ql, True)
     import json
     pr = json.loads((ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
     check("相場: 記事作成ツールと一括の委託（数十万円より下に書かない決まりは残す）",

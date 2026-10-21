@@ -142,7 +142,7 @@ def pending():
     recs = load()
     out = []
     for p in sorted((ROOT / "articles").glob("*.md")):
-        if p.stem in recs or not needs_review(p.stem) or _score(p) < 90:
+        if p.stem in recs or not needs_review(p.stem) or _score(p) < 85:
             continue
         sid = site_of(p.stem)
         if not REQUIRED and p.stem in _delivered(sid):

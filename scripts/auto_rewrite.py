@@ -271,7 +271,7 @@ def fresh_items(limit=4):
             continue
         fm = m.group(1)
         sc = re.search(r"^score:\s*(\d+)", fm, re.M)
-        if not sc or int(sc.group(1)) < 90:
+        if not sc or int(sc.group(1)) < 85:
             continue
         d = re.search(r"^modified:\s*(\d{4}-\d{2}-\d{2})", fm, re.M) or re.search(r"^date:\s*(\d{4}-\d{2}-\d{2})", fm, re.M)
         if not d or d.group(1) > old:
@@ -386,7 +386,7 @@ def early_items(limit=2, today=None, rows_of=None, log=None):
         g = lambda k: (re.search(rf"^{k}:\s*(.+)$", fm, re.M) or [0, ""])[1].strip().strip('"')
         kws[re.sub(r"\s", "", g("keyword").lower())] = p.stem
         sc, d = g("score"), g("date")[:10]
-        if not sc.isdigit() or int(sc) < 90 or not (lo <= d <= hi) or p.stem in done:
+        if not sc.isdigit() or int(sc) < 85 or not (lo <= d <= hi) or p.stem in done:
             continue
         heads = [g("title")] + re.findall(r"^#{2,3}\s*(.+)$", body, re.M)
         arts[p.stem] = {"kw": g("keyword"), "date": d, "heads": heads,
@@ -771,7 +771,7 @@ def stock_items(limit=3):
         if not m or re.search(r"^noindex:\s*true", m.group(1), re.M):
             continue
         sc = re.search(r"^score:\s*(\d+)", m.group(1), re.M)
-        if not sc or int(sc.group(1)) < 90:
+        if not sc or int(sc.group(1)) < 85:
             continue
         cat = re.search(r"^category:\s*(\S+)", m.group(1), re.M)
         try:
@@ -816,7 +816,7 @@ def question_items(limit=4):
             continue
         fm, body = m.group(1), m.group(2)
         sc = re.search(r"^score:\s*(\d+)", fm, re.M)
-        if not sc or int(sc.group(1)) < 90:
+        if not sc or int(sc.group(1)) < 85:
             continue
         h2 = re.findall(r"^##\s+(.+)$", body, re.M)
         if len(h2) < 4 or any(re.search(r"[?？]", h) for h in h2):

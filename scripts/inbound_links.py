@@ -51,7 +51,7 @@ def load_articles(site_id):
             score = int(fv("score") or 0)
         except ValueError:
             score = 0
-        if score < 90:      # 未公開の記事はリンク元にもリンク先にもしない
+        if score < 85:      # 未公開の記事はリンク元にもリンク先にもしない
             continue
         import noindex
         if noindex.hidden_fm(fm):   # 検索から外した記事（noindex）も、リンク元にもリンク先にもしない

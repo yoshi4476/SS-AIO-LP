@@ -123,14 +123,14 @@ def _quarantine_case(G, SC):
 
 def test_rubric_gate_rejects_nan_missing_and_low_average():
     import rubric as R
-    print("\n■ 公開の門: nan・内訳の欠け・文字の値・内訳の平均が90未満を通さない（旧6観点は今までどおり）")
+    print("\n■ 公開の門: nan・内訳の欠け・文字の値・内訳の平均が下限（85。2026-10-21 に90から下げた）未満を通さない（旧6観点は今までどおり）")
     v3 = {"originality": 94, "extractability": 92, "decision": 93}
     old = {"aio": 19, "design": 19, "editorial": 18, "expert": 19, "persona": 18, "seo": 19}
     cases = [
         ({"score": 93, "score_breakdown": v3}, True),
         ({"score": 90}, True),
         ({"score": 93, "score_breakdown": old}, True),
-        ({"score": 90, "score_breakdown": {"originality": 85, "extractability": 88, "decision": 86}}, False),
+        ({"score": 90, "score_breakdown": {"originality": 80, "extractability": 85, "decision": 84}}, False),
         ({"score": float("nan")}, False),
         ({"score": float("inf")}, False),
         ({"score": True}, False),
@@ -140,7 +140,8 @@ def test_rubric_gate_rejects_nan_missing_and_low_average():
         ({"score": 95, "score_breakdown": {"originality": 94, "extractability": float("nan"), "decision": 93}}, False),
         ({"score": 95, "score_breakdown": {"seo": 19, "aio": 19}}, False),
         ({"score": 95, "score_breakdown": {"foo": 99}}, False),
-        ({"score": 89, "score_breakdown": v3}, False),
+        ({"score": 84, "score_breakdown": v3}, False),
+        ({"score": 85}, True),
         ({"score": 93, "score_breakdown": {**v3, "decision": 79}}, False),
     ]
     check("判定の表", [R.gate_ok(m) for m, _ in cases], [w for _, w in cases])
@@ -309,7 +310,8 @@ def test_prompts_and_docs_match_the_rubric_and_operation():
     wp = (ROOT / "scripts" / "win_patterns.py").read_text(encoding="utf-8")
     check("旧基準（10点・24点・6観点の採点）が指示書に残っていない",
           [w in ms for w in ("各10点", "24点以上", "7点未満", "6観点採点は", "6点になり")], [False] * 5)
-    check("v3（各100点・80点未満は不合格・平均90）を書く", all(w in ms for w in ("各100点", "80点未満", "平均が90点以上")), True)
+    check("v3（各100点・80点未満は不合格・平均85で公開・目標90）を書く",
+          all(w in ms for w in ("各100点", "80点未満", "平均が85点以上で公開", "90点が目標")), True)
     check("当社の実績・立場は自社3サイトだけと書く", ms.count("自社3サイト") >= 3, True)
     check("pipeline_prompt も自分で採点しない（通過印の 90）", ("自分で点数は付けない" in pp, "score_breakdown（例" in pp), (True, False))
     check("CLAUDE.md の題・説明文の字数と飾りの年号",

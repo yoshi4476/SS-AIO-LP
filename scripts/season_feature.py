@@ -105,7 +105,7 @@ def related(e, n=3):
                 continue
             import noindex
             # 検索から外した記事（noindex）は特集に並べない
-            if (meta.get("score") or 0) >= 90 and meta.get("category") in cats and meta.get("title") \
+            if (meta.get("score") or 0) >= 85 and meta.get("category") in cats and meta.get("title") \
                     and not noindex.on(meta):
                 _ARTS.append((str(meta.get("date", "")), meta["title"], sites.article_url(site, meta).replace(SITE_URL, "")))
         _ARTS.sort(reverse=True)

@@ -201,8 +201,18 @@ def faq_scope_issues(body):
     return out
 
 
-def decision_issues(body):
-    """決定支援で足りないもの（空なら足りている）"""
+# 採点の決定支援で85〜90点に止まった記事の指摘（2026-10-21 の CI）: 費用の幅が広すぎる・条件が重なったときの優先が無い・
+# 業者の選び方を別の記事に任せている。外注・サービスを選ぶ題（OUTSOURCE）では相場の額と業者に聞く質問を求める
+OUTSOURCE = re.compile(r"外注|代行|依頼|業者|会社選び|選び方|サービス|コンサル|費用|相場|頼む|任せ|代理店")
+PRIORITY = re.compile(r"(?:複数|2つ以上|二つ以上|いくつか|両方|重なる|重なった)[^。\n]{0,25}?(?:当てはま|該当|重な)[^。\n]{0,40}?"
+                      r"(?:先に|優先|から始め|を選)|優先(?:順位|順|する)")
+PRICE = re.compile(r"相場[^。\n]{0,40}?\d[\d,.]*\s*(?:〜\s*\d[\d,.]*\s*)?万円|\d[\d,.]*\s*万円[^。\n]{0,30}?相場")
+ASK = re.compile(r"(?:業者|依頼先|外注先|会社|代理店|担当者|コンサル)(?:に|へ)[^。\n]{0,12}?(?:聞く|聞き|聞いて|確認する|確かめる|尋ね)"
+                 r"|(?:聞く|確認する|確かめる)(?:べき)?(?:質問|項目)")
+
+
+def decision_issues(body, topic=""):
+    """決定支援で足りないもの（空なら足りている）。topic は題と狙う語（外注・サービスを選ぶ題かを見る）"""
     text = re.sub(r"<[^>]+>", "", body)
     out = []
     if len(BRANCH.findall(text)) < 2:
@@ -211,6 +221,13 @@ def decision_issues(body):
         out.append("やらない判断（向かない・見送る条件）が無い")
     if not STEP.search(text):
         out.append("今日できる一歩（まず◯◯してください）が無い")
+    if not PRIORITY.search(text):
+        out.append("条件が重なったときの優先（「2つ以上に当てはまるなら◯◯を先に」）が無い")
+    if OUTSOURCE.search(topic):
+        if not PRICE.search(text):
+            out.append("費用の目安が無い（一次情報の「相場」の額を、相場として書く）")
+        if not ASK.search(text):
+            out.append("業者に聞く質問のひな形が無い（別の記事に任せず、聞く質問を3つほど記事の中に置く）")
     return out
 
 
@@ -281,13 +298,14 @@ def run(slug, path=None):
     lone = extract_issues(body_nc)
     add("抽出の単位（冒頭・H2直下の1文・FAQ の答え）が単体で通じる（「これ」「その」「◯つのうち」「起きるのは」で始めない）", not lone,
         "、".join(lone[:3]))
-    miss = decision_issues(body_nc)
-    add("決定支援: 条件の分かれ目2つ以上・やらない判断・今日できる一歩がある", not miss, "、".join(miss))
+    miss = decision_issues(body_nc, f"{meta.get('title') or ''} {meta.get('keyword') or ''}")
+    add("決定支援: 条件の分かれ目2つ以上・やらない判断・今日できる一歩・重なったときの優先がある（外注・サービスの題は相場の額と業者に聞く質問も）", not miss, "、".join(miss))
     pointing = pointing_sentences(body_nc)
     add("前の文を読まないと分からない文が無い（「前者」「後者」「どちら」「両方」「以下は」「◯つ目の状況」「ここを」で前を指さない）",
         not pointing, "、".join(pointing[:2]))
     scope = faq_scope_issues(body_nc)
-    add("［警告］FAQ の答えの数字に、本文と同じ条件（母数・期間・含むもの）を書く", not scope, "、".join(scope[:2]))
+    # warn=True を付け忘れて FAIL になり、89点の記事の直しを丸ごと捨てた（2026-10-21 の CI）。公開も直しも止めない警告
+    add("［警告］FAQ の答えの数字に、本文と同じ条件（母数・期間・含むもの）を書く", not scope, "、".join(scope[:2]), warn=True)
     add("仮の計算例がある（「仮に◯◯なら」で読者が自分の数字を当てはめられる）",
         bool(HYPO.search(re.sub(r"<[^>]+>", "", body_nc))), "")
 

@@ -288,9 +288,9 @@ ITEMS = [
      "WordPress: アプリケーションパスワード（WP_CREDENTIALS_JSON）／FTP: パスワード（FTP_CREDENTIALS_JSON）／"
      "Git: 当社の配信用トークン（SITE_PUSH_TOKEN）／新規構築: DNS のログイン情報（当社が行う場合）",
      "記事が1本も届かない", c_publish, ""),
-    ("quality_gate", "品質ゲート（WordPress 側で90点未満を公開させない）", ["quality_gate"],
+    ("quality_gate", "品質ゲート（WordPress 側で85点未満を公開させない）", ["quality_gate"],
      ["wp.plugin", "wp.ftp"], "当社が置く場合は FTP のパスワード",
-     "管理画面から公開された記事を止められない（管制塔からは90点未満を送らない）", c_quality, ""),
+     "管理画面から公開された記事を止められない（管制塔からは85点未満を送らない）", c_quality, ""),
     ("writing", "記事の中身（一次情報・FAQ・著者・監修の表示）", ["ld_author_person", "ld_faqpage", "ld_blogposting"],
      ["facts.1.claim", "customer.faq", "author.name", "supervisor.consent"], "",
      "どこにでもある記事になり、AI検索に引用されない。監修の表示が出せない", c_writing, ""),

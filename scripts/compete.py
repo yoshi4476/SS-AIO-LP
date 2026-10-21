@@ -187,7 +187,7 @@ def ledger_words(sid):
         cat = re.search(r"^category:\s*(\S+)", fm, re.M)
         kw = re.search(r"^keyword:\s*(.+)$", fm, re.M)
         sc = re.search(r"^score:\s*(\d+)", fm, re.M)
-        if cat and kw and sc and int(sc.group(1)) >= 90 and S.find_category_owner(cat.group(1)) == sid:
+        if cat and kw and sc and int(sc.group(1)) >= 85 and S.find_category_owner(cat.group(1)) == sid:
             out.append(kw.group(1).strip().strip('"'))
     return out
 

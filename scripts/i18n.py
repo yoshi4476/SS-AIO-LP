@@ -62,7 +62,7 @@ def summary(slug):
     except Exception:
         return None
     body = m.group(2)
-    if int(fm.get("score") or 0) < 90:
+    if int(fm.get("score") or 0) < 85:
         return None
     lead = ""
     for ln in body.split("\n"):

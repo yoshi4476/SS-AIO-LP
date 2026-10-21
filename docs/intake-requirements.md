@@ -8,7 +8,7 @@
 | 機能 | シートの欄 | 別経路で受け取るもの | 無いとどうなるか |
 |:--|:--|:--|:--|
 | 記事の配信（新記事・書き直し・まとめのページ・統合の転送） | サイトの形式（`type`）・公開ドメイン（`domain`）・記事URLの接頭辞（`url_prefix`）・管理画面のURL（`wp.admin_url`）・投稿用のユーザー名（`wp.user`）・配信先リポジトリ（`repo`）・ブランチ（`branch`）・記事の置き場所（`content_dir`）・画像の置き場所（`images_dir`）・まとめのページの置き場所（`pages_dir`）・当社アカウントの招待（Write）（`git.invited`）・FTP のホスト名（`ftp.host`）・接続の方式（`ftp.protocol`）・FTP のユーザー名（`ftp.user`）・公開フォルダ（`ftp.root`）・DNS の管理会社（`dns.provider`）・DNS の設定（`dns.access`）・別経路でお送りする鍵（`keys.sent`） | WordPress: アプリケーションパスワード（WP_CREDENTIALS_JSON）／FTP: パスワード（FTP_CREDENTIALS_JSON）／Git: 当社の配信用トークン（SITE_PUSH_TOKEN）／新規構築: DNS のログイン情報（当社が行う場合） | 記事が1本も届かない |
-| 品質ゲート（WordPress 側で90点未満を公開させない） | 品質の検査のプラグイン（`wp.plugin`）・FTP の接続情報（`wp.ftp`） | 当社が置く場合は FTP のパスワード | 管理画面から公開された記事を止められない（管制塔からは90点未満を送らない） |
+| 品質ゲート（WordPress 側で85点未満を公開させない） | 品質の検査のプラグイン（`wp.plugin`）・FTP の接続情報（`wp.ftp`） | 当社が置く場合は FTP のパスワード | 管理画面から公開された記事を止められない（管制塔からは85点未満を送らない） |
 | 記事の中身（一次情報・FAQ・著者・監修の表示） | 実績・数値 ①（`facts.1.claim`）・よく聞かれる質問（`customer.faq`）・著者名（`author.name`）・掲載の同意（`supervisor.consent`） | — | どこにでもある記事になり、AI検索に引用されない。監修の表示が出せない |
 | 監修の確認依頼（editorial_review） | 確認のご連絡先（`supervisor.contact`）・記事の確かめ方（`supervisor.review`） | — | 公開前の確認が「要」の社は、確認依頼が届かず記事が止まったままになる |
 | 計測（GA4・CTA・フォーム・入口） | GA4プロパティID（`ga4_property_id`）・GA4 に当社を閲覧者で追加（`ga4.viewer`）・サイトに GA4 が入っているか（`ga4.installed`）・GA4の測定ID（G-で始まる）（`ga4_measurement_id`） | — | 月次レポートに流入・問い合わせの数字が出ない。導線の効きが測れない |

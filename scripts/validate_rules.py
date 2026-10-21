@@ -65,7 +65,7 @@ def meta():
             return x.group(1).strip().strip('"') if x else ""
 
         sc = g("score")
-        if not sc.isdigit() or int(sc) < 90:
+        if not sc.isdigit() or int(sc) < 85:
             continue
         slug = g("slug") or p.stem
         dt = g("date")

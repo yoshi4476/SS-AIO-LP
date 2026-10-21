@@ -44,7 +44,7 @@ def published():
             continue
         fm, body = m.group(1), m.group(2)
         sc = re.search(r"^score:\s*(\d+)", fm, re.M)
-        if not sc or int(sc.group(1)) < 90:
+        if not sc or int(sc.group(1)) < 85:
             continue
         slug = (re.search(r"^slug:\s*(\S+)", fm, re.M) or [None, p.stem])[1] \
             if re.search(r"^slug:\s*(\S+)", fm, re.M) else p.stem
