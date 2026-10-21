@@ -360,7 +360,7 @@
 "modified": "2026-08-31"
 },
 "fudousan-seo-taisaku": {
-"hash": "0bb5b610472febdf80b8d060c3582fdb",
+"hash": "241187b9b071035567b135ca9c8312e9",
 "modified": "2026-08-29"
 },
 "fudousan-shukyaku-daikou": {
@@ -368,8 +368,12 @@
 "modified": "2026-08-30"
 },
 "fudousan-shukyaku-houhou": {
-"hash": "436d0c47722bcbd060f7deeaaec85838",
+"hash": "e6fea8c87e6f9158617f8e2d52bab372",
 "modified": "2026-09-12"
+},
+"fudousan-web-shukyaku": {
+"hash": "aa07d4e848ee1c2412852b4740ac085d",
+"modified": "2026-10-21"
 },
 "gaiheki-tosou-ai-kensaku-shukyaku": {
 "hash": "4b0157c5b4b4af5cb45aeac3f739ff55",
@@ -404,7 +408,7 @@
 "modified": "2026-09-04"
 },
 "inshokuten-shukyaku-service": {
-"hash": "45518585f063f22dbac2404097af8080",
+"hash": "ef5f97adf97094f13695be32a3a1bcf7",
 "modified": "2026-10-21"
 },
 "iryou-koukoku-guideline-web": {

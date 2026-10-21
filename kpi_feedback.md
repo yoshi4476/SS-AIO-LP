@@ -10,7 +10,7 @@
 | 直近7日の公開 | 27本 | 目標: 週14本（毎日2本） |
 | 品質スコア平均 | 93.8点 | 公開基準90点・推奨95点 |
 | 平均文字数 | 5,604字 | 基準5,000字以上 |
-| 非公開（審査未達） | 3本 | fudousan-kaisha-shukyaku-houhou、getsuji-kessan-bunseki-houhou、inshokuten-shukyaku-service |
+| 非公開（審査未達） | 4本 | fudousan-kaisha-shukyaku-houhou、fudousan-web-shukyaku、getsuji-kessan-bunseki-houhou、inshokuten-shukyaku-service |
 | DR / KW数 / AI計測 | — | GA4・GSC・Ahrefs稼働後に自動反映 |
 
 ## 今日の主な動き

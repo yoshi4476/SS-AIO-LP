@@ -1,0 +1,109 @@
+{
+ "slug": "fudousan-web-shukyaku",
+ "ok": true,
+ "date": "2026-10-21",
+ "question": "不動産 web 集客について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude"
+ ],
+ "topics": [
+  {
+   "topic": "不動産のWeb集客とは？ポータルの外で反響を受ける仕組み",
+   "words": [
+    "ポータル",
+    "反響"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude"
+   ]
+  },
+  {
+   "topic": "不動産のWeb集客で効かなかった2つの更新",
+   "words": [
+    "更新"
+   ],
+   "engines": [
+    "ChatGPT"
+   ]
+  },
+  {
+   "topic": "先に作る3つのページは査定・エリア・会社情報",
+   "words": [
+    "会社情報",
+    "ページ",
+    "エリア",
+    "査定"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude"
+   ]
+  },
+  {
+   "topic": "査定ページとエリアページに書く中身",
+   "words": [
+    "エリアページ",
+    "査定ページ",
+    "中身"
+   ],
+   "engines": []
+  },
+  {
+   "topic": "検索順位によって反響はどれだけ変わるか",
+   "words": [
+    "検索順位",
+    "反響"
+   ],
+   "engines": [
+    "Claude"
+   ]
+  },
+  {
+   "topic": "自社サイトの反響が増えるまでの期間",
+   "words": [
+    "自社サイト",
+    "反響",
+    "期間"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude"
+   ]
+  }
+ ],
+ "sources": {
+  "caa.go.jp": "public",
+  "developers.google.com": "peer",
+  "ieul.jp": "portal",
+  "lycbiz.com": "peer",
+  "pamxy.co.jp": "peer",
+  "shopowner-support.net": "media",
+  "stock-sun.com": "media",
+  "sungrove.co.jp": "peer",
+  "support.google.com": "peer",
+  "webtan.impress.co.jp": "media",
+  "yoshikazunomori.com": "peer",
+  "zennichi.or.jp": "public"
+ },
+ "dims": {
+  "費用の金額（◯円）": [],
+  "期間（◯か月・◯日など）": [],
+  "注意点・失敗・リスク": [
+   "Claude"
+  ],
+  "進め方の手順": [],
+  "専門家への相談": []
+ },
+ "chars": {
+  "ChatGPT": 1890,
+  "Claude": 1783
+ },
+ "claims": [
+  "当社が2026年10月に、2つのAI（ChatGPT・Claude）に「不動産 web 集客について教えてください」と同じ質問をして、2件の答えを比べたところ、本記事で扱う6つの論点のうち『エリアページ』の語が出てきた答えは0件でした",
+  "当社が2026年10月に、2つのAI（ChatGPT・Claude）に「不動産 web 集客について教えてください」と同じ質問をして、2件の答えを比べたところ、2件すべての答えに『ポータル』『会社情報』『自社サイト』の語が出てきました",
+  "当社が2026年10月に、2つのAI（ChatGPT・Claude）に「不動産 web 集客について教えてください」と同じ質問をして、2件の答えを比べたところ、費用の金額（◯円）に触れた答えは無く、期間（◯か月・◯日など）に触れた答えは無く、進め方の手順に触れた答えは無くでした",
+  "当社が2026年10月に、2つのAI（ChatGPT・Claude）に「不動産 web 集客について教えてください」と同じ質問をして、2件の答えを比べたところ、出典に挙がったページは12件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが3件、ポータル・比較サイトが1件でした"
+ ]
+}
