@@ -22,7 +22,7 @@
   抽出性   AIが答えとして切り出せる単位になっているか
   決定支援 読者が次の行動を決められるか
 
-各100点。**1軸でも80点未満なら不合格**（総合で壊滅軸を隠さない）。
+各100点。**一次性は80点未満、抽出性と決定支援は75点未満なら不合格**（総合で壊滅軸を隠さない。2026-10-21 に一次性以外を75点へ）。
 総合は3軸の**平均**で、85点以上が公開の条件（2026-10-21 運用者「100点満点中85までで通すようにしよう」）。
 90点が改善の目標で、85〜89点で公開した記事は公開後も採点と直しを続ける（運用者「改善できるようにPDCAを常に回すこと」）。
 推奨は95点。
@@ -84,7 +84,19 @@ AXES = [
 ]
 
 MAX = 100              # 各軸の満点（資料 v2 と同じ）
-PASS_EACH = 80         # 1軸でもこれ未満なら不合格
+PASS_EACH = 75         # 1軸でもこれ未満なら不合格（2026-10-21 に80から下げた。運用者「かなりではなく少し厳しいに」）
+# 一次性だけは80点のまま。AI が回答の根拠に選ぶのは「そこにしか無い情報」で、下げると AI に選ばれる力が直接落ちる
+# （運用者「緩和したとしても AI から選ばれる SEO から選ばれるように」2026-10-21）
+PASS_AXIS = {"originality": 80}
+
+
+def floor(key):
+    """観点ごとの足切りの点"""
+    return PASS_AXIS.get(key, PASS_EACH)
+
+
+def floor_text():
+    return "一次性80点以上・抽出性と決定支援は75点以上" if PASS_AXIS else f"各{PASS_EACH}点以上"
 PASS_TOTAL = 85        # 総合（3軸の平均）の公開の下限（2026-10-21 に90から下げた）
 TARGET = 90            # 改善の目標。これ未満で公開した記事は公開後も直し続ける（PDCA）
 RECOMMEND = 95         # 推奨水準
@@ -156,12 +168,12 @@ def judge(scores):
     vals = [scores.get(a["key"], 0) for a in AXES]
     total = round(sum(vals) / len(AXES))
     weak = {a["name"]: scores.get(a["key"], 0) for a in AXES
-            if scores.get(a["key"], 0) < PASS_EACH}
+            if scores.get(a["key"], 0) < floor(a["key"])}
     ok = not weak and total >= PASS_TOTAL
     why = []
     if weak:
         why.append("足切り: " + "・".join(f"{k}{v}点" for k, v in weak.items())
-                   + f"（各{PASS_EACH}点以上が必要）")
+                   + f"（{floor_text()}が必要）")
     if total < PASS_TOTAL:
         why.append(f"総合{total}点（{PASS_TOTAL}点以上が必要）")
     return {"total": total, "max": MAX, "ok": ok, "weak": weak,
@@ -184,8 +196,10 @@ def weak_axes(meta):
     bd = meta.get("score_breakdown") or {}
     if not isinstance(bd, dict):
         return {}
-    th, _ = cutoff(bd)
-    return {k: v for k, v in bd.items() if isinstance(v, (int, float)) and v < th}
+    th, mx = cutoff(bd)
+    # 3観点（100点満点）は観点ごとの足切り（一次性80・ほか75）、旧6観点（20点満点）は16
+    lim = (lambda k: floor(k)) if mx == MAX else (lambda k: th)
+    return {k: v for k, v in bd.items() if isinstance(v, (int, float)) and v < lim(k)}
 
 
 # 旧基準（v2・6観点×20点）の観点。2026-09 より前の記事361本がこの内訳で公開されている
@@ -261,7 +275,7 @@ def main():
         for pt, desc in a["anchors"][:2]:
             print(f"     {pt:>3}点: {desc[:60]}")
         print()
-    print(f"  合格: 各軸{PASS_EACH}点以上、かつ総合（3軸の平均）{PASS_TOTAL}点以上"
+    print(f"  合格: {floor_text()}、かつ総合（3軸の平均）{PASS_TOTAL}点以上"
           f"（各{MAX}点満点・推奨{RECOMMEND}点）")
     print("\n  機械で数えられることは score_check と build.py が判定します。"
           "ここでは中身の質だけを見ます。")

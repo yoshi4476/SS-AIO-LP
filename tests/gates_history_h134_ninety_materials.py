@@ -38,9 +38,10 @@ def test_pointing_and_faq_scope_detectors():
     print("\n■ 検査: 前を指す言い方を広げ（接続の「そこで」は拾わない）、FAQ の答えから落ちた条件を拾う")
     body = "## 見出し\n本文です。\n\n"
     bad = ["以下は、この不動産会社の支援での実績です。", "4つ目の状況に近く、まず社名を調べます。",
-           "両方ともはいなら、自社で続けられます。", "ここを取り違えると失敗します。", "上の図のとおり、4つに分かれます。"]
+           "両方ともはいなら、自社で続けられます。", "ここを取り違えると失敗します。"]
+    # 「上の表で2つ以上に当てはまるときは…」は優先の決まりが求める文なので拾わない（2026-10-21 両方の検査が食い違った）
     good = ["そこで当社は、週に1回数えます。", "ここでいう構造化データとは、タグです。",
-            "同じ調べでは、3件の答えのうち1件でした。"]
+            "同じ調べでは、3件の答えのうち1件でした。", "上の表で自社の状態が2つ以上に当てはまるときは、書類の回収を先にしてください。"]
     check("悪い例を拾う", [bool(S.pointing_sentences(body + s)) for s in bad], [True] * len(bad))
     check("良い例を拾わない", [bool(S.pointing_sentences(body + s)) for s in good], [False] * len(good))
     faq = ("\n\n## よくある質問\n<details><summary>どのくらいで変化が見えますか？</summary>\n<p>{}</p></details>\n")
@@ -56,10 +57,12 @@ def test_pointing_and_faq_scope_detectors():
 def test_pass_85_target_90_pdca():
     import rubric as R
     print("\n■ 公開の下限85・目標90（運用者 2026-10-21）。85〜89点は公開しつつ直し続ける（PDCA）")
-    check("下限と目標", (R.PASS_TOTAL, R.TARGET, R.PASS_EACH), (85, 90, 80))
-    check("85点で合格・84点で不合格・1軸79点は不合格",
+    # 2026-10-21 運用者「かなりではなく少し厳しいに」「緩和しても AI から選ばれるように」: 一次性だけ80、ほかは75
+    check("下限と目標・観点ごとの足切り", (R.PASS_TOTAL, R.TARGET, R.PASS_EACH, R.floor("originality")), (85, 90, 75, 80))
+    check("85点で合格・84点で不合格・一次性79は不合格・抽出性75は合格・74は不合格",
           [R.judge({"originality": a, "extractability": b, "decision": c})["ok"]
-           for a, b, c in ((85, 85, 85), (84, 84, 84), (79, 90, 90))], [True, False, False])
+           for a, b, c in ((85, 85, 85), (84, 84, 84), (79, 90, 90), (90, 75, 90), (90, 74, 95))],
+          [True, False, False, True, False])
     ql = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
     check("公開前の直しは90点未満なら回数の残りで続ける・85〜89点の合格は直す対象に残す",
           ('while (not sc["ok"] or sc["total"] < R.TARGET)' in ql,
@@ -85,6 +88,13 @@ def test_pass_85_target_90_pdca():
            f"{R.PASS_TOTAL}点未満は非公開" in shown_pages["editorial-policy/index.html"]), (True, False, True))
     php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
     check("WordPress の門も85", "const SSQG_MIN_SCORE  = 85;" in php, True)
+
+
+def test_publish_does_not_stop_on_scoring_axes():
+    print("\n■ 配信の前の検査は、採点の観点の検査（SOFT_FAILS）では止めない（90点の記事が配信できなかった 2026-10-21）")
+    src = (ROOT / "scripts" / "publish_flow.py").read_text(encoding="utf-8")
+    check("止めるのは採点の観点の外の不合格だけ",
+          ("!= 0 and hard_fails(slug):" in src, "not c[0].startswith(tuple(SOFT_FAILS))" in src), (True, True))
 
 
 def test_materials_and_repair_pass():

@@ -142,7 +142,9 @@ def test_rubric_gate_rejects_nan_missing_and_low_average():
         ({"score": 95, "score_breakdown": {"foo": 99}}, False),
         ({"score": 84, "score_breakdown": v3}, False),
         ({"score": 85}, True),
-        ({"score": 93, "score_breakdown": {**v3, "decision": 79}}, False),
+        ({"score": 93, "score_breakdown": {**v3, "decision": 74}}, False),
+        ({"score": 93, "score_breakdown": {**v3, "decision": 79}}, True),       # 2026-10-21 一次性以外は75点以上
+        ({"score": 93, "score_breakdown": {**v3, "originality": 79}}, False),   # 一次性は80点のまま
     ]
     check("判定の表", [R.gate_ok(m) for m, _ in cases], [w for _, w in cases])
     check("理由が書かれる", bool(R.gate_why({"score": float("nan")})), True)

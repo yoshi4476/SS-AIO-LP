@@ -83,6 +83,14 @@ def _shown(slug):
         return "（記事）"
 
 
+def hard_fails(slug):
+    """配信を止める機械の不合格。採点の観点の検査（前を指す文・決定支援など。auto_rewrite.SOFT_FAILS）は別の工程の採点が
+    見ているので止めない。ここで止めたので、採点で90点の記事が配信できなかった（2026-10-21 bpo-jimu-wakekata）"""
+    import score_check
+    from auto_rewrite import SOFT_FAILS
+    return [c[0] for c in score_check.run(slug) if not c[1] and not c[3] and not c[0].startswith(tuple(SOFT_FAILS))]
+
+
 def main():
     if "--finish" in sys.argv:
         a = [x for x in sys.argv[1:] if not x.startswith("--")]
@@ -177,7 +185,7 @@ def main():
     run([PY, "scripts/image_check.py", slug], check=False)
 
     # 2. 機械採点18項目（全PASSが公開条件）
-    if run([PY, "scripts/score_check.py", slug], check=False) != 0:
+    if run([PY, "scripts/score_check.py", slug], check=False) != 0 and hard_fails(slug):
         raise SystemExit("機械採点で不合格。指摘を直してから再実行すること")
 
     score = meta.get("score") or 0
