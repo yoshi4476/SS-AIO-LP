@@ -108,7 +108,7 @@ def test_quality_loop_uses_survey_and_machine_notes():
     check("当社調べの文が一次情報と増えてよい数字に入る", ("当社調べ" in mats["facts"], "3つ中1つ" in allowed), (True, True))
     src = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
     check("採点の前に測る・機械の指摘を直しに渡す",
-          ("    survey(slug, budget, base)\n    sc, why = score(slug)" in src, 'sc["machine"] = machine_note(slug)' in src,
+          ("    survey(slug, budget, base)\n    if not published:\n        pre_improve(slug, budget, ctx, base)\n    sc, why = score(slug)" in src, 'sc["machine"] = machine_note(slug)' in src,
            "機械が見つけた抽出性・決定支援の足りない所" in src), (True, True, True))
     wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
     a = wf.index("- name: 当社調べ（直している記事")

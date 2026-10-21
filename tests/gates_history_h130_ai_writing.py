@@ -281,7 +281,7 @@ def test_quality_loop_polishes_before_scoring():
         def imp(slug, sc, blocked):
             seen["weak"] = QL.weak_text(sc)
             return False, "戻しました（テスト）"
-        base = [(QL, "ARTICLES", root / "articles"), (QL, "LOG", root / "q.jsonl"), (QL, "IMPROVE", imp),
+        base = [(QL, "pre_improve", lambda *a, **k: None), (QL, "ARTICLES", root / "articles"), (QL, "LOG", root / "q.jsonl"), (QL, "IMPROVE", imp),
                 (QL, "blocked_lines", lambda: set()), (QL, "site_of", lambda s: "ai-lab"),
                 (AW, "DETECT", fake), (AW, "FIXER", lambda t: (t, [])), (AW, "available", lambda: True),
                 (AW, "LOG", root / "auto_fix.jsonl")]
@@ -363,5 +363,5 @@ def test_brief_and_workflows():
     check("推移の記録をコミットする", "data/ai_writing_trend.json" in wk, True)
     ql = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
     check("公開前の品質ループは採点の前に polish を呼ぶ（公開済みの採点し直しでは呼ばない）",
-          re.search(r"if not published:\n\s+#[^\n]*\n\s+polish\(slug, budget, ctx, base\)\n\s+survey\(slug, budget, base\)\n\s+sc, why = score\(slug\)", ql)
+          re.search(r"if not published:\n\s+#[^\n]*\n\s+polish\(slug, budget, ctx, base\)\n\s+survey\(slug, budget, base\)\n(?:\s+if not published:\n\s+pre_improve\(slug, budget, ctx, base\)\n)?\s+sc, why = score\(slug\)", ql)
           is not None, True)

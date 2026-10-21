@@ -21,7 +21,7 @@ def test_ai_followup_picks_each_new_article_once():
 
     items = [art("d27", date(2026, 9, 7)), art("d28", date(2026, 9, 6)), art("d40", date(2026, 8, 25)),
              art("d41", date(2026, 8, 24)), art("nokw", date(2026, 9, 1), kw=""),
-             art("draft", date(2026, 9, 1), score=85), art("noscore", date(2026, 9, 1), score=None),
+             art("draft", date(2026, 9, 1), score=84), art("noscore", date(2026, 9, 1), score=None),
              art("done", date(2026, 9, 1)), art("nodate", None)]
     got = [a["slug"] for a in F.targets(items, {"done"}, today)]
     check("公開28日と40日は対象、27日と41日は対象外", got, ["d40", "d28"])

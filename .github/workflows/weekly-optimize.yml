@@ -377,6 +377,11 @@ jobs:
       # 打った手が効いたかを、触っていない記事と比べて判定する。
       # サイト全体が伸びている時期は、何をしても「効いた」に見えるため
       - name: 打った手の効き（対照群と比較）
+        # material_sheet が読み込みの時点で通知の鍵を読む（--auto-measure ではメールを送らない）
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          LEAD_TO_EMAIL: ${{ secrets.LEAD_TO_EMAIL }}
         run: |
           python scripts/effect_ab.py || true
           # 書き直し・統合の種類ごとの効き（前後28日・対照群比）。結果は data/rewrite_effect.json

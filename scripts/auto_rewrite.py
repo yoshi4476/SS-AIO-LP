@@ -185,7 +185,7 @@ def quality_items(audits=None, tries=None, facts_of=None):
     for slug, r in audits.items():
         a = r.get("audit") or {}
         o = (a.get("axes") or {}).get("originality")
-        if o is None or o >= R.PASS_EACH or a.get("version") != R.VERSION:
+        if o is None or o >= R.floor("originality") or a.get("version") != R.VERSION:
             continue
         p = ROOT / "articles" / f"{slug}.md"
         if not p.is_file():
@@ -1259,7 +1259,7 @@ def warns(slug):
 
 # 採点（3観点）で見る観点の機械の検査。書く段階では止めるが、直しの検算では増えても直し全体を捨てない
 # （採点し直しと、次の直しの指示の名指しで扱う。2026-10-21 CI で「どちら」1つで直しが丸ごと捨てられた）
-SOFT_FAILS = ("前の文を読まないと分からない文が無い", "仮の計算例がある", "決定支援:", "抽出の単位", "H2直下の1文が単体で通じる")
+from score_check import SOFT as SOFT_FAILS  # noqa: E402  一覧は score_check の1か所
 
 
 def worse_warns(before, now):
@@ -1270,8 +1270,9 @@ def worse_warns(before, now):
     fails = [l for l in now if l.startswith("FAIL") and name(l) not in fail0 and not name(l).startswith(SOFT_FAILS)]
     if fails:
         return "警告が増えました（FAIL）: " + " / ".join(fails)[:400]
-    w0 = [l for l in before if l.startswith("WARN")]
-    w1 = [l for l in now if l.startswith("WARN")]
+    # 採点の観点の検査は警告になったので、件数に数えない（増えても直し全体を捨てない。2026-10-21）
+    w0 = [l for l in before if l.startswith("WARN") and not name(l).startswith(SOFT_FAILS)]
+    w1 = [l for l in now if l.startswith("WARN") and not name(l).startswith(SOFT_FAILS)]
     if len(w1) > len(w0):
         # 何の警告かを返す。件数だけでは、やり直しのときに直す場所が分からない
         return f"警告が増えました（{len(w0)} → {len(w1)}）: " + " / ".join(w for w in w1 if w not in w0)[:400]

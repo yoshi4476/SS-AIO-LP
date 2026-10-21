@@ -129,7 +129,7 @@ def test_research_reaches_other_sites_with_right_owner():
     import industry_ai_sources as I
     import private_store as P
     import sites as S
-    print("\n■ 業種調査は自社の社にだけ渡す（社の設定 research）。お客様の記事に当社の名前と調べたことを書かない（rag-donyu が配信の門で止まった）")
+    print("\n■ 業種調査は自社の社にだけ渡す（社の設定 research）。お客様の記事に当社の名前と調べたことを書かない（お客様の記事が配信の門で止まった 2026-10-22）")
     old_load, old_client = S.load, P.is_client
     S.load = lambda s: {"research": ["inshoku"]} if s in ("client-zz", "corporate") else {}
     P.is_client = lambda s: s == "client-zz"

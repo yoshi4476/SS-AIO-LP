@@ -27,7 +27,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 OUT = ROOT / "data" / "ai_citations" / "followup.json"
 MIN_AGE, MAX_AGE = 28, 40   # 週次で回すので、窓を2週分とって取りこぼしを防ぐ
 LIMIT = 8                   # 1回の実行の上限（語×エンジン数だけ課金・枠を使う）
-PUBLISH_SCORE = 90          # build.py が公開する点数の下限。未公開の記事は聞いても出典に出ない
+import rubric as _R  # noqa: E402
+PUBLISH_SCORE = _R.PASS_TOTAL   # build.py が公開する点数の下限。未公開の記事は聞いても出典に出ない
 
 
 def load():

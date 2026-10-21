@@ -101,7 +101,9 @@ class Env:
             return True, "直しました（テスト）"
         self.calls = calls
         return [(QL, "ARTICLES", self.root / "articles"), (QL, "LOG", self.log), (QL, "ASK", ask),
-                (QL, "IMPROVE", imp), (QL, "blocked_lines", lambda: set()), (QL, "site_of", lambda s: self.site)]
+                (QL, "IMPROVE", imp), (QL, "blocked_lines", lambda: set()), (QL, "site_of", lambda s: self.site),
+                # 採点の前の先回りの直し（回数に数えない）は h134 で確かめる。ここでは採点と直しの回数だけを見る
+                (QL, "pre_improve", lambda *a, **k: None)]
 
 
 def test_pass_on_first_score_machine_writes_score():
@@ -235,7 +237,7 @@ def test_scorer_output_without_quotes_is_rejected():
 def test_double_scoring_near_threshold_uses_lower():
     import quality_loop as QL
     # 2026-10-21 に公開の下限を85へ下げたので、基準の近くも 83〜88 へ動いた
-    print("\n■ 基準の近く（平均83〜88・1軸78〜84）は2回採点し、軸ごとに低い方を使う")
+    print("\n■ 基準の近く（平均83〜88・1軸78〜84）は2回採点し、軸ごとに平均を使う（2026-10-21 に低い方から平均へ）")
     check("近さの判定", (QL.near({"originality": 86, "extractability": 86, "decision": 86}),
                          QL.near({"originality": 96, "extractability": 82, "decision": 97}),
                          QL.near({"originality": 97, "extractability": 96, "decision": 98}),
@@ -243,13 +245,13 @@ def test_double_scoring_near_threshold_uses_lower():
     with tempfile.TemporaryDirectory() as d:
         e = Env(d)
         e.put("zz-aio", _art())
-        # 1回目は平均87（合格）でも、2回目に一次性が79なら低い方で不合格
+        # 1回目は一次性88、2回目は79 → 平均84（各軸80点以上で、総合は (84+91+91)/3≈89）
         with patched(*e.patches(QL, [_answer(88, 87, 86), _answer(79, 95, 96)]),
                      (QL, "IMPROVE", lambda s, sc, b: (False, "変更なし"))):
             sc, _ = QL.score("zz-aio")
         check("2回採点した", (sc["double"], sc["calls"]), (True, 2))
-        check("軸ごとに低い方", sc["axes"], {"originality": 79, "extractability": 87, "decision": 86})
-        check("低い方で不合格", sc["ok"], False)
+        check("軸ごとに平均", sc["axes"], {"originality": 84, "extractability": 91, "decision": 91})
+        check("平均で合格（低い方を採っていたら一次性79で不合格だった）", sc["ok"], True)
 
 
 def test_machine_only_writes_scores():

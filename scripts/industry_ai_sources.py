@@ -640,7 +640,7 @@ def for_article(title, keyword):
 def for_site(site, title, keyword):
     """社の記事に渡す調査の文と URL。社の設定に research（調査の業種の一覧）があればそれ、無ければ AI集客ラボの
     業種の判定（for_article）。コーポレート（経理代行）にも業種の数字を渡す（2026-10-21）。
-    お客様の社には渡さない: お客様の記事に当社の名前と調べたことを書けない（配信の門が止める。rag-donyu で実際に止まった）"""
+    お客様の社には渡さない: お客様の記事に当社の名前と調べたことを書けない（配信の門が止める。お客様の記事が実際に止まった 2026-10-22）"""
     import sites as S
     import private_store as P
     if P.is_client(site):
@@ -706,7 +706,7 @@ INDEX_GROUPS = [
     ("home", "住まい・家まわり", ("fudosan", "koumuten", "gaiheki", "kensetsu", "kaji", "fuyouhin")),
     ("life", "暮らしのサービス", ("jidousha", "hoken", "juku", "pet", "sougi", "wedding", "shashin")),
     ("food", "飲食・宿泊・買い物", ("inshoku", "hotel", "ec")),
-    ("biz", "会社向け・士業", ("saas", "seizou", "unso", "shigyou")),
+    ("biz", "会社向け・士業", ("saas", "seizou", "unso", "shigyou", "keiri", "sysdev")),
 ]
 
 

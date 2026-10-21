@@ -50,7 +50,7 @@ SCORE_MIN = 4               # 1回の採点の見込み（分）。予算の残�
 IMPROVE_MIN = 14            # 1回の直し（AI＋検算＋ビルド）と採点し直しの見込み（分）
 SURVEY_MIN = 6              # 当社調べ（AI に聞いて数える）の見込み（分）。同じ月に測った記事は聞き直さない
 NEAR_TOTAL = (R.PASS_TOTAL - 2, R.PASS_TOTAL + 3)   # 平均がこの間なら、採点のぶれで合否が変わりうる → 2回採点して低い方を使う
-NEAR_AXIS = (78, 84)        # 1軸がこの間でも同じ
+NEAR_AXIS = (R.PASS_EACH - 2, R.floor("originality") + 4)        # 1軸がこの間でも同じ
 STALE_DAYS = 3              # 改善中がこれより長い記事は要対応
 PASS_SHARE = 0.9            # 直近28日で「2回以内の直しで通った」割合の下限
 RESCORE_PER_SITE = 4        # 週次の採点し直し（社ごと。sites/<id>.json の quality_rescore で変えられる）
@@ -287,17 +287,20 @@ def parse(text, article):
 
 
 def near(axes):
-    """採点のぶれで合否が変わりうる点か（平均が下限の前後 83〜88・どれかの軸が 78〜84）"""
+    """採点のぶれで合否が変わりうる点か（平均が下限の前後 83〜88・どれかの軸が 78〜84）。2回採点して軸ごとに平均する"""
     mean = sum(axes[k] for k in AXIS_KEYS) / len(AXIS_KEYS)
     return NEAR_TOTAL[0] <= mean <= NEAR_TOTAL[1] or any(NEAR_AXIS[0] <= axes[k] <= NEAR_AXIS[1] for k in AXIS_KEYS)
 
 
 def lower(a, b):
-    """2回の採点を軸ごとに低い方でまとめる（引用と弱い点も低い方の回のもの）"""
+    """2回の採点を軸ごとに平均（四捨五入）でまとめる。根拠の引用は低い方の回のもの、弱い点は2回分を合わせる。
+    低い方を採っていたので、同じ記事でも±5点ほど揺れる採点の下振れだけが残り、85点の前後の記事が落ちやすかった
+    （2026-10-21 運用者「2回採点したら低い方を採る決まりを改善して」）。平均にして揺れを打ち消す"""
     out = {"axes": {}, "quotes": {}, "weak": {}}
     for k in AXIS_KEYS:
         src = a if a["axes"][k] <= b["axes"][k] else b
-        out["axes"][k], out["quotes"][k] = src["axes"][k], src["quotes"][k]
+        out["axes"][k] = int(round((a["axes"][k] + b["axes"][k]) / 2 + 1e-9))
+        out["quotes"][k] = src["quotes"][k]
         # 弱い点は2回分を合わせて渡す（低い方の回だけを渡すと、直した後の採点でもう一方の指摘が出て点が上下した）
         other = b if src is a else a
         out["weak"][k] = list(dict.fromkeys(list(src["weak"][k]) + list(other["weak"][k])))
@@ -343,8 +346,8 @@ def weak_text(sc):
     out = []
     for k in sorted(AXIS_KEYS, key=lambda x: sc["axes"][x]) if sc.get("axes") else []:
         v = sc["axes"][k]
-        mark = "（基準割れ・最優先）" if v < R.PASS_EACH else ""
-        out.append(f"■ {AXIS_NAME[k]} {v}点（各{R.PASS_EACH}点以上・平均{R.PASS_TOTAL}点以上で合格）{mark}")
+        mark = "（基準割れ・最優先）" if v < R.floor(k) else ""
+        out.append(f"■ {AXIS_NAME[k]} {v}点（{R.floor_text()}・平均{R.PASS_TOTAL}点以上で合格。目標{R.TARGET}点）{mark}")
         out.append(f"  採点者が根拠に挙げた本文: 「{sc['quotes'][k][:120]}」")
         for w in sc["weak"][k]:
             out.append(f"  - {w[:200]}")
@@ -810,7 +813,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         return "passed"
     state = "improving"
     need = asked = ""
-    if sc["axes"].get("originality", 100) < 80:
+    if sc["axes"].get("originality", 100) < R.floor("originality"):
         # 材料のある直しをしても一次性が届かなければ、足りないのは書き方ではなく材料。何を教えてほしいかを残す
         try:
             import material
@@ -822,7 +825,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
     record({**base, "action": "hold", "state": state, "total": sc["total"], "rounds": prior + done, "since": since,
             "axes": sc["axes"], "need": need, "materials": asked})
     if need:
-        print(f"要対応: {name} は一次性が{sc['axes']['originality']}点で、登録された材料では80点に届きません。"
+        print(f"要対応: {name} は一次性が{sc['axes']['originality']}点で、登録された材料では{R.floor('originality')}点に届きません。"
               "何を教えてほしいかを material_requests.json に残しました（python scripts/material.py --requests）。"
               "材料が増えるまで直しを待ちます")
     if published:

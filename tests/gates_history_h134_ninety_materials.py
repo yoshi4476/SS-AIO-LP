@@ -38,9 +38,10 @@ def test_pointing_and_faq_scope_detectors():
     print("\n■ 検査: 前を指す言い方を広げ（接続の「そこで」は拾わない）、FAQ の答えから落ちた条件を拾う")
     body = "## 見出し\n本文です。\n\n"
     bad = ["以下は、この不動産会社の支援での実績です。", "4つ目の状況に近く、まず社名を調べます。",
-           "両方ともはいなら、自社で続けられます。", "ここを取り違えると失敗します。", "上の図のとおり、4つに分かれます。"]
+           "両方ともはいなら、自社で続けられます。", "ここを取り違えると失敗します。"]
+    # 「上の表で2つ以上に当てはまるときは…」は優先の決まりが求める文なので拾わない（2026-10-21 両方の検査が食い違った）
     good = ["そこで当社は、週に1回数えます。", "ここでいう構造化データとは、タグです。",
-            "同じ調べでは、3件の答えのうち1件でした。"]
+            "同じ調べでは、3件の答えのうち1件でした。", "上の表で自社の状態が2つ以上に当てはまるときは、書類の回収を先にしてください。"]
     check("悪い例を拾う", [bool(S.pointing_sentences(body + s)) for s in bad], [True] * len(bad))
     check("良い例を拾わない", [bool(S.pointing_sentences(body + s)) for s in good], [False] * len(good))
     faq = ("\n\n## よくある質問\n<details><summary>どのくらいで変化が見えますか？</summary>\n<p>{}</p></details>\n")
@@ -56,10 +57,12 @@ def test_pointing_and_faq_scope_detectors():
 def test_pass_85_target_90_pdca():
     import rubric as R
     print("\n■ 公開の下限85・目標90（運用者 2026-10-21）。85〜89点は公開しつつ直し続ける（PDCA）")
-    check("下限と目標", (R.PASS_TOTAL, R.TARGET, R.PASS_EACH), (85, 90, 80))
-    check("85点で合格・84点で不合格・1軸79点は不合格",
+    # 2026-10-21 運用者「かなりではなく少し厳しいに」「緩和しても AI から選ばれるように」: 一次性だけ80、ほかは75
+    check("下限と目標・観点ごとの足切り", (R.PASS_TOTAL, R.TARGET, R.PASS_EACH, R.floor("originality")), (85, 90, 75, 80))
+    check("85点で合格・84点で不合格・一次性79は不合格・抽出性75は合格・74は不合格",
           [R.judge({"originality": a, "extractability": b, "decision": c})["ok"]
-           for a, b, c in ((85, 85, 85), (84, 84, 84), (79, 90, 90))], [True, False, False])
+           for a, b, c in ((85, 85, 85), (84, 84, 84), (79, 90, 90), (90, 75, 90), (90, 74, 95))],
+          [True, False, False, True, False])
     ql = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
     check("公開前の直しは90点未満なら回数の残りで続ける・85〜89点の合格は直す対象に残す",
           ('while (not sc["ok"] or sc["total"] < R.TARGET)' in ql,
@@ -77,6 +80,12 @@ def test_pass_85_target_90_pdca():
                 if m.group(1) == "90":
                     odd.append(f"{p.name}:{i}")
     check("点数の判定に 90 を直接書いていない（下限は rubric.PASS_TOTAL）", odd, [])
+    # 定数の形（QUALITY_GATE = 90）も見る。比べる式だけを探していたので build.py の定数を見落とし、85〜89点で合格した記事が
+    # サイトに出ず404になった（2026-10-21）
+    const = re.compile(r"^\s*[A-Z_]*(?:GATE|PASS|MIN_SCORE|PUBLISH)[A-Z_]*\s*=\s*9\d\b")
+    left = [f"{p.name}:{i}" for p in (ROOT / "scripts").glob("*.py") if p.name != "rubric.py"
+            for i, ln in enumerate(p.read_text(encoding="utf-8").splitlines(), 1) if const.match(ln)]
+    check("公開の下限を定数で直接書いていない（QUALITY_GATE・PUBLISH_SCORE など）", left, [])
     # 公開している説明が基準とずれない（FAQ のページは build では作られず faq_page.py を手で動かすので、変え忘れた）
     shown_pages = {rel: (ROOT / "site" / rel).read_text(encoding="utf-8")
                    for rel in ("faq/index.html", "editorial-policy/index.html")}
@@ -115,6 +124,13 @@ def test_pre_improve_and_unused_materials():
            "if unused_materials(slug, site):\n" in src), (True, True))
     fx = (ROOT / "scripts" / "facts.py").read_text(encoding="utf-8")
     check("書く AI にも相場と同じ業種のお客様の声を渡す", ("費用の相場（" in fx, "お客様の声（同じ業種" in fx), (True, True))
+
+
+def test_publish_does_not_stop_on_scoring_axes():
+    print("\n■ 配信の前の検査は、採点の観点の検査（SOFT_FAILS）では止めない（90点の記事が配信できなかった 2026-10-21）")
+    src = (ROOT / "scripts" / "publish_flow.py").read_text(encoding="utf-8")
+    check("止めるのは採点の観点の外の不合格だけ",
+          ("!= 0 and hard_fails(slug):" in src, "not c[0].startswith(tuple(SOFT_FAILS))" in src), (True, True))
 
 
 def test_materials_and_repair_pass():
