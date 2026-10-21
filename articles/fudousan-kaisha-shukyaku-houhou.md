@@ -4,7 +4,7 @@ description: 不動産会社の集客方法は、ポータルや広告のよう�
 slug: fudousan-kaisha-shukyaku-houhou
 keyword: 不動産 会社 集客 方法
 category: aio
-date: 2026-10-20
+date: 2026-10-21
 depth: quick
 eyecatch: /images/fudousan-kaisha-shukyaku-houhou/eyecatch.png
 diagrams:
@@ -37,8 +37,9 @@ faq:
     a: 自社サイトの問い合わせが3か月続くまで、やめないでください。当社のAIO運用10件は順位上昇まで最長3か月でした。
   - q: 検索で11位以下でも問い合わせは来ますか？
     a: ほとんど来ません。自社3サイトの6〜9月の実測（表示7,015回）で、11〜20位は0.09%、1〜3位は6.28%でした。
-quality_state: improving
-quality_since: 2026-10-20
+score: 89
+score_breakdown: {originality: 88, extractability: 88, decision: 90}
+quality_attempts: 13
 ---
 **不動産会社の集客方法は、反響が出るまでの期間で選びます。**ポータルサイトや広告は掲載した週から問い合わせが届きます。自社サイトやAI検索対策は、反響が届くまで数か月かかります。そのかわり、掲載費を止めても集客が残ります。短期の方法で今月の反響を保ちながら、長期の方法を同時に育てるのが基本の組み合わせです。
 

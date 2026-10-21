@@ -1,0 +1,98 @@
+{
+ "slug": "shigyou-hp-houshu-nosekata",
+ "ok": true,
+ "date": "2026-10-21",
+ "question": "士業 ホームページ 報酬 載せ方について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "報酬ページに書く3つの項目",
+   "words": [
+    "項目"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "士業の業務の型ごとに報酬の載せ方を変える",
+   "words": [
+    "業務"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "報酬の表示で守る決まりと、自分で決めてよい範囲",
+   "words": [
+    "表示",
+    "自分",
+    "範囲"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "金額を載せる・幅だけ載せる・載せないの分かれ目",
+   "words": [
+    "金額"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude"
+   ]
+  }
+ ],
+ "sources": {
+  "adv.freee.co.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "effata-leago.jp": "peer",
+  "issoh.co.jp": "peer",
+  "mof.go.jp": "public",
+  "nichizeiren.or.jp": "public",
+  "nta.go.jp": "public",
+  "onamae.com": "peer",
+  "shiho-shoshi.or.jp": "public",
+  "zekio.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": [
+   "ChatGPT",
+   "Gemini"
+  ],
+  "期間（◯か月・◯日など）": [],
+  "注意点・失敗・リスク": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [],
+  "専門家への相談": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ]
+ },
+ "chars": {
+  "ChatGPT": 2136,
+  "Claude": 780,
+  "Gemini": 3531
+ },
+ "claims": [
+  "当社は2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「士業 ホームページ 報酬 載せ方について教えてください」と同じ質問をしました。3件の答えのすべてに『業務』『表示』の語が出てきました。",
+  "当社は2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「士業 ホームページ 報酬 載せ方について教えてください」と同じ質問をしました。3件の答えのうち、『項目』の語が出たものは2件でした。",
+  "当社は2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「士業 ホームページ 報酬 載せ方について教えてください」と同じ質問をしました。3件の答えのうち、期間（◯か月・◯日など）に触れた答えは無く、進め方の手順に触れた答えは無く、費用の金額（◯円）に触れた答えは3件中2件でした。",
+  "当社は2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「士業 ホームページ 報酬 載せ方について教えてください」と同じ質問をしました。3件の答えの出典に挙がったページは10件で、公的機関・学会・業界団体が4件、ニュース・メディア・まとめが0件でした。"
+ ]
+}

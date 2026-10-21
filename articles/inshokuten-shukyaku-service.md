@@ -35,8 +35,9 @@ diagrams:
     type: cycle
     title: 毎月店で確かめる繰り返し
     items: ["予約を経路ごとに数える", "店名以外の語の順位を控える", "業者の報告と照らし合わせる", "続けるか止めるか決める"]
-quality_state: improving
-quality_since: 2026-10-21
+score: 86
+score_breakdown: {originality: 82, extractability: 88, decision: 88}
+quality_attempts: 9
 ---
 **飲食店の集客サービスは、解約後も店に残る入口と、契約中だけ借りる入口の2種類に分かれます。**自社サイトや地図の店舗情報は、店の名義なら解約後も残ります。予約サイトの掲載や広告は、支払いを止めた時点で入口が閉じます。
 

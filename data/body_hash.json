@@ -333,7 +333,7 @@
 },
 "fudousan-kaisha-shukyaku-houhou": {
 "hash": "486d7806d68df5c6c68bba7a14138c18",
-"modified": "2026-10-20"
+"modified": "2026-10-21"
 },
 "fudousan-kojin-shukyaku": {
 "hash": "8a46c17348dad007ea3c08dc4c904b2f",
@@ -599,12 +599,16 @@
 "hash": "cf69465e5e01222d7e626b9882d2b008",
 "modified": "2026-08-19"
 },
+"shigyou-hp-houshu-nosekata": {
+"hash": "7bd84e0d48fd3e78bf1224200a670cb9",
+"modified": "2026-10-21"
+},
 "shigyou-portal-ai-kensaku": {
-"hash": "d16d83b52bd9e57a4d4cfc1e0c580c5f",
+"hash": "84f388955b07c179fb30f64ca2af5f01",
 "modified": "2026-10-21"
 },
 "shigyou-seo-taisaku": {
-"hash": "ad4ce2fc118b266f095f355c40af9fac",
+"hash": "8008f7f1520e1a34f02d5a03165ac828",
 "modified": "2026-08-08"
 },
 "shika-ai-kensaku-denai-genin": {

@@ -1,6 +1,152 @@
 {
  "slug": "aio-taisaku-jibunde",
- "ok": false,
- "why": "答えられた AI が1つ（2つ以上で数える）",
- "claims": []
+ "ok": true,
+ "date": "2026-10-21",
+ "question": "AIO対策 自分でについて教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "AIO対策は自分でできる？結論と向き不向き",
+   "words": [
+    "自分",
+    "結論"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "自分で対策を始める前に確認すべき3つの前提条件",
+   "words": [
+    "前提条件",
+    "自分"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "自分でできるAIO対策5つの手順",
+   "words": [
+    "自分"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "自分でやる場合につまずきやすい3つの壁",
+   "words": [
+    "自分"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "自分でやる場合と外注する場合を比較する",
+   "words": [
+    "自分"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "自分でどこまでやるべきか業種別の見極め方",
+   "words": [
+    "業種別",
+    "自分"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "自分で対策する人によくある失敗と対処法",
+   "words": [
+    "対処法",
+    "自分"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "自分で対策を続けるための計測ルーティン",
+   "words": [
+    "計測ルーティン",
+    "自分"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  }
+ ],
+ "sources": {
+  "ai.7senses.co.jp": "self",
+  "auto-aio.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "bundlyze.co.jp": "peer",
+  "dejan.ai": "peer",
+  "developers.google.com": "peer",
+  "it-trend.jp": "portal",
+  "jinrai.co.jp": "peer",
+  "joinmassive.com": "peer",
+  "koukoku.jp": "peer",
+  "lifestyle.assist-all.co.jp": "peer",
+  "mercart.jp": "peer",
+  "note.com": "video",
+  "protea-inc.co.jp": "peer",
+  "shanon.co.jp": "peer",
+  "stellagent.ai": "peer",
+  "sungrove.co.jp": "peer",
+  "umoren.ai": "peer",
+  "uravation.com": "peer",
+  "vectorinc.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": [],
+  "期間（◯か月・◯日など）": [],
+  "注意点・失敗・リスク": [
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "専門家への相談": []
+ },
+ "chars": {
+  "ChatGPT": 1802,
+  "Claude": 1184,
+  "Gemini": 2052
+ },
+ "claims": [
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「AIO対策 自分でについて教えてください」と質問しました。3件の答えのすべてに『自分』『前提条件』の語が出てきました。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「AIO対策 自分でについて教えてください」と質問しました。3件の答えのうち、費用の金額（◯円）に触れた答えは無く、期間（◯か月・◯日など）に触れた答えは無く、専門家への相談に触れた答えは無くでした。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「AIO対策 自分でについて教えてください」と質問しました。3件の答えの出典に挙がったページは20件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが0件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
 }
