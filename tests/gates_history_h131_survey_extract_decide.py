@@ -112,7 +112,14 @@ def test_quality_loop_uses_survey_and_machine_notes():
     d = wf.index("- name: 公開前の品質ループ（この回に書いた記事を別工程で採点し、届くまで直す）")
     check("記事の枠: 当社調べは各採点の前（鍵のある機械の手順）", (a < b, c < d), (True, True))
     step = wf[a:b]
-    check("当社調べの手順に全権の合言葉を渡さない", "HUB_SECRET" in step, False)
+    # 2026-10-21: Gemini の残りを台帳で確かめるため合言葉を部品に渡す。ただし AI（claude・codex）が動く手順には置かず、
+    # 前後の機械の手順（残りを読む・検索の回数を送る）だけが使う。部品に渡さないと Gemini が外れ、2つの AI だけで聞いていた
+    act = (ROOT / ".github" / "actions" / "own-survey" / "action.yml").read_text(encoding="utf-8")
+    steps = act.split("\n    - shell: bash")[1:]
+    ai = [x for x in steps if "own_survey.py" in x]
+    check("当社調べの手順（AI が動く）に全権の合言葉を置かない・前後の機械の手順だけが持つ",
+          (len(ai), any("HUB_SECRET" in x for x in ai), sum("HUB_SECRET" in x for x in steps),
+           "GEMINI_USAGE_FILE" in ai[0] if ai else False), (1, False, 2, True))
     pl = (ROOT / ".github" / "workflows" / "pipeline.yml").read_text(encoding="utf-8")
     check("救済: 当社調べは品質ループの前",
           pl.index("- name: 当社調べ（直している記事・救済") < pl.index("- name: 公開前の品質ループ（別工程の3観点の採点と直し）"), True)

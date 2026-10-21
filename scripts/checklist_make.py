@@ -148,7 +148,8 @@ INDUSTRIES = {
 import json as _json
 # 外部に頼む場合の相場は data/price_ranges.json だけを正とする（当社の料金は書かない・匂わせない）
 PRICE = _json.loads((ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
-WHO = {"inhouse_tools": "社内にWebの担当者がいて、毎月の見直しの時間が取れる",
+WHO = {"article_tool": "記事の本数を安く増やしたい。全体のキーワード設計と記事の確認は社内で持てる",
+       "inhouse_tools":"社内にWebの担当者がいて、毎月の見直しの時間が取れる",
        "outsource_partial": "設定やページづくりの一部だけを任せ、運用は社内で続けたい",
        "outsource_full": "調査・ページづくり・掲載情報の整備・毎月の報告まで、まとめて任せたい"}
 

@@ -134,6 +134,10 @@ STEP = re.compile(r"(?:今日|まず|最初に|手始めに|今週)[^。\n]{0,40
 
 # 本文の途中で前を指す語（採点の指摘: 「前者」「どちら」「両方ともはいなら」「この20日」）
 POINT = re.compile(r"^(?:\*\*)?(?:これ|それ|この|その|上記|前述|両方|どちら|前者|後者)|前者|後者")
+# 採点で何度も「前の段落を読まないと分からない」と名指しされた言い方（2026-10-21 の CI の記録:「以下は、この不動産会社の…」
+# 「4つ目の状況に近く」「両方ともはいなら」「ここを取り違えると」「上の図のとおり」）。段落の書き出しと文の中で拾う
+POINT_MORE = re.compile(r"^(?:\*\*)?(?:以下は|上の(?:表|図|例|節)|ここ[をがは]|そこ[をがは])")   # 「そこで」「ここで」は接続なので拾わない
+POINT_ANY = re.compile(r"前者|後者|[0-9０-９一二三四五六]つ目の(?:状況|条件|場合|問い|型)|両方とも")
 HYPO = re.compile(r"(?:仮に|例えば|たとえば)[^。\n]{0,80}?\d")
 
 
@@ -147,7 +151,7 @@ def pointing_sentences(body, limit=6):
                 continue
             for i, sent in enumerate(re.split(r"(?<=。)", para)):
                 sent = sent.strip()
-                if sent and (i == 0 and POINT.match(sent) or re.search(r"前者|後者", sent)):
+                if sent and (i == 0 and (POINT.match(sent) or POINT_MORE.match(sent)) or POINT_ANY.search(sent)):
                     out.append(sent[:60])
     return out[:limit]
 
@@ -173,6 +177,27 @@ def extract_issues(body):
     for q, a_ in re.findall(r"<summary>(.*?)</summary>\s*<p[^>]*>(.*?)</p>", body, re.S):
         if LONE.match(re.sub(r"<[^>]+>", "", a_).strip()) or POINT.match(re.sub(r"<[^>]+>", "", a_).strip()):
             out.append("FAQ: " + re.sub(r"<[^>]+>", "", q)[:24])
+    return out
+
+
+SCOPE = re.compile(r"含み|含む|含め|のうち|集計|時点|期間|に限|だけで|ではありません")
+FAQ_NUM = re.compile(r"\d[\d,.]*\s*(?:件|社|店舗|%|か月|位)")
+
+
+def faq_scope_issues(body):
+    """FAQ の答えに数字があるのに、本文で同じ数字に付けた条件（母数・期間・「わずかな上昇も含む」）が答えから落ちているもの。
+    採点で「答えが単独で出ると実際より強く読める」と何度も減点された（2026-10-21）"""
+    out = []
+    main = re.split(r"^## .*(?:よくある質問|FAQ).*$", body, maxsplit=1, flags=re.M)[0]
+    paras = [re.sub(r"<[^>]+>", "", p) for p in re.split(r"\n\s*\n", main)]
+    for q, a_ in re.findall(r"<summary>(.*?)</summary>\s*<p[^>]*>(.*?)</p>", body, re.S):
+        a = re.sub(r"<[^>]+>", "", a_)
+        if SCOPE.search(a):
+            continue
+        for n in dict.fromkeys(m.group(0).replace(" ", "") for m in FAQ_NUM.finditer(a)):
+            if any(n in p.replace(" ", "") and SCOPE.search(p) for p in paras):
+                out.append(f"{re.sub(r'<[^>]+>', '', q)[:24]}（{n}）")
+                break
     return out
 
 
@@ -259,8 +284,10 @@ def run(slug, path=None):
     miss = decision_issues(body_nc)
     add("決定支援: 条件の分かれ目2つ以上・やらない判断・今日できる一歩がある", not miss, "、".join(miss))
     pointing = pointing_sentences(body_nc)
-    add("前の文を読まないと分からない文が無い（「前者」「後者」「どちら」「両方」で前を指さない）", not pointing,
-        "、".join(pointing[:2]))
+    add("前の文を読まないと分からない文が無い（「前者」「後者」「どちら」「両方」「以下は」「◯つ目の状況」「ここを」で前を指さない）",
+        not pointing, "、".join(pointing[:2]))
+    scope = faq_scope_issues(body_nc)
+    add("［警告］FAQ の答えの数字に、本文と同じ条件（母数・期間・含むもの）を書く", not scope, "、".join(scope[:2]))
     add("仮の計算例がある（「仮に◯◯なら」で読者が自分の数字を当てはめられる）",
         bool(HYPO.search(re.sub(r"<[^>]+>", "", body_nc))), "")
 

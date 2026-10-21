@@ -218,11 +218,19 @@ def main():
     # その記事にしかない数字を先に出す。同じ「3,200店舗」を全記事に書いても
     # 記事ごとの独自性にはならない（実測で126本が同じ数字を載せていた）
     picked = own_query_facts(site_id, kw) + picked + own_data_facts(site_id)
+    if kw and site_id == "ai-lab":
+        # 業種の記事には、その業種の調査（AI の答えの出典を数えたもの）を先に出す。採点で一番多い減点が
+        # 「その業種の数字が無い」だった（2026-10-21）。数字は調査ページと同じ headline から取る
+        import industry_ai_sources as IAS
+        cs, url = IAS.for_article("", kw)
+        ym = lambda c: "{}-{:02d}".format(*map(int, re.search(r"(\d{4})年(\d{1,2})月", c).groups()))
+        picked = [{"claim": c, "source": f"当社の業種調査 {url}", "as_of": ym(c), "topic": []} for c in cs] + picked
 
     print(f"■ {site_id} で使える一次情報（記事に最低1つ入れること）")
     for f in picked:
         print(f"\n  ・{f['claim']}")
-        print(f"    出典: {f['source']}（{f['as_of']}時点）")
+        # 台帳の控え書き（「運用者の申告」）は記事に出さない（quality_loop.materials と同じ。採点で「申告止まり」と減点された）
+        print(f"    出典: {re.sub(r'[（(][^）)]*申告[^）)]*[）)]', '', f['source']).strip()}（{f['as_of']}時点）")
     if data.get("pending"):
         print("\n  ＜まだ書けない数値＞")
         for p in data["pending"]:

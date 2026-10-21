@@ -382,7 +382,9 @@ def materials(site, slug):
         c = str(f.get("claim") or "").strip()
         if not c:
             continue
-        src = str(f.get("source") or "").strip()
+        # 台帳の控え書き（「運用者の申告」）が記事にそのまま出て、採点で毎回「申告にとどまり検証できない」と減点された。
+        # 記事に出す出典は「自社の支援実績」までにする（中身は同じ。控え書きは台帳にだけ残す）
+        src = re.sub(r"[（(][^）)]*申告[^）)]*[）)]", "", str(f.get("source") or "")).strip()
         when = str(f.get("as_of") or "").strip()
         facts.append(f"- {c}（出典: {src or '自社'}{'・' + when + '時点' if when else ''}）")
         allowed += [c, src, as_of_text(when)]
@@ -395,6 +397,47 @@ def materials(site, slug):
             allowed.append(c)
     except Exception:  # noqa: BLE001  調べが読めなくても直しは続ける
         pass
+    # その業種の調査（AI の答えの出典を種類ごとに数えた自社の調査・公開済み）。採点で一番多い減点が
+    # 「その業種の数字が無い」だった（2026-10-21）。数字は調査ページと同じ headline から取る
+    if site == "ai-lab":
+        try:
+            import industry_ai_sources as IAS
+            mt = meta_of(read(slug))
+            cs, url = IAS.for_article(str(mt.get("title") or ""), str(mt.get("keyword") or ""))
+        except Exception:  # noqa: BLE001  調査が読めなくても直しは続ける
+            cs, url = [], ""
+        for c in cs:
+            facts.append(f"- {c}（出典: 当社の業種調査 {url}。調べ方の1文は記事に1回だけ書く）")
+            allowed += [c, url]
+    # お客様の声（data/voices.json。掲載が「可」で本人が確かめたものだけが入っている）。運営者情報と LP にしか
+    # 使われておらず、「現場の声が無い」と減点されていた（2026-10-21）。同じ業種の声を先に、3件まで
+    try:
+        vs = json.loads((ROOT / "data" / "voices.json").read_text(encoding="utf-8"))
+        mt = meta_of(read(slug))
+        where = f"{mt.get('title') or ''} {mt.get('keyword') or ''}"
+    except (OSError, ValueError):
+        vs, where = [], ""
+    vs = [v for v in vs if site in (v.get("sites") or []) and v.get("quote")]
+    same = [v for v in vs if str(v.get("industry") or "~") in where]
+    vs = (same + [v for v in vs if v not in same][:1])[:3]     # ほかの業種の声は1件まで（業種の違う声を並べない）
+    for v in vs:
+        n = v.get("number") or {}
+        num = f"。数字: {n.get('metric', '')} {n.get('before', '')}→{n.get('after', '')}" if n else ""
+        facts.append(f"- お客様の声「{v['quote']}」（{v.get('who', '')}・{v.get('as_of', '')}{num}。"
+                     "声は言い換えずに「」で引用し、お客様の声だと分かるように書く）")
+        allowed += [v["quote"], num]
+    # 費用の相場（data/price_ranges.json）。決定支援で毎回「費用の目安が無い」と突かれていた（2026-10-21 運用者「相場は書いていい」）
+    try:
+        pr = json.loads((ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pr = {}
+    if site in pr.get("sites", []):
+        for r in pr.get("ranges", []):
+            c = f"{r['label']}の相場は{r['range']}" + (f"（{r['note']}）" if r.get("note") else "")
+            facts.append(f"- {c}（出典: {pr.get('label', '当社の見立て')}。費用の目安として書く。当社の料金としては書かない）")
+            allowed.append(c)
+        if pr.get("positioning"):
+            facts.append(f"- 書き方: {pr['positioning']}")
     try:
         rows = originality.load_experiences(site)
     except Exception:
@@ -529,6 +572,8 @@ def machine_note(slug):
         out += [f"- {x}" for x in SC.decision_issues(body)]
         # 本文の途中で前を指す文（「前者」「どちら」「この20日」）。採点は見出し直下に限らず拾う（2026-10-21 の試し）
         out += [f"- 前の文を読まないと分からない文（主語・対象を書き入れる）:「{x}」" for x in SC.pointing_sentences(body)]
+        out += [f"- FAQ の答えの数字に、本文で付けている条件（母数・期間・含むもの）が無い。答えにも同じ条件を書く:「{x}」"
+                for x in SC.faq_scope_issues(body)]
         if not SC.HYPO.search(re.sub(r"<[^>]+>", "", body)):
             out.append("- 仮の計算例が無い。「仮に◯◯なら△△」の形で、読者が自分の数字を当てはめられる例を1つ置く")
         # 当社調べを測ってあるのに記事に1つも無ければ、入れるよう名指しする（2026-10-21 の試しで、材料に渡しても使われなかった）

@@ -602,6 +602,34 @@ def headline(ind):
             "url": f"https://ai.7senses.co.jp/research/{ind}-ai-sources/"}
 
 
+def material_claims(ind):
+    """記事の直し・執筆に渡す、その業種の調査の文（調べ方の1文＋結果の1文）。数字は headline からだけ取る。
+    業種の記事の採点で一番多い減点が「その業種の数字が無い」だった（2026-10-21）。調査は公開済みなのに材料に入っていなかった"""
+    h = headline(ind)
+    if not h:
+        return []
+    s = json.loads((OUT / f"{ind}-summary.json").read_text(encoding="utf-8"))
+    T, y, m = h["T"], h["date"][:4], int(h["date"][5:7])
+    tot = sum(s["total"].values())
+    head = (f"当社は{y}年{m}月に、{h['n_engines']}つのAI（{h['engines_text']}）へ{h['name']}に関する質問を{h['questions']}問聞き、"
+            f"答えの出典{tot}件を種類ごとに数えました。")
+    return [head + f"{T['owner']}を探す質問では、出典の{h['lp']}%が{T['portal']}、{h['lc']}%が{T['owner_site']}でした。",
+            head + f"{T['owner']}を探す質問で、{T['owner_site']}を出典にした回答は{h['ac']}%、"
+                   f"{T['portal']}を出典にした回答は{h['ap']}%でした。",
+            head + f"{T['other_groups']}を調べる質問では、回答の{h['oa']}%が{T['owner_site']}を1つ以上出典にしていました。"]
+
+
+def for_article(title, keyword):
+    """記事の題と狙う語から業種を決め、その業種の調査の文と調査ページの URL を返す（無ければ ([], ""))"""
+    import industry_hub as IH
+    hub = IH.detect(title, keyword, IH.load()[0])
+    ind = HUB_TO_RESEARCH.get(hub or "")
+    if not ind:
+        return [], ""
+    cs = material_claims(ind)
+    return cs, (f"https://ai.7senses.co.jp/research/{ind}-ai-sources/" if cs else "")
+
+
 def hero(ind):
     """調査ページの最初の画面（トップ・業種別LPと同じ lx-hero）。数字は headline() からだけ取る"""
     import html as H

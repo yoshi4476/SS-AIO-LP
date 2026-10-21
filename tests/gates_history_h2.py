@@ -21,7 +21,8 @@ def test_rewrite_fixes_only_length_warnings():
     # 本体は _apply_one（例外でも直す前へ戻すため run_one から分けた。2026-10-20）
     src = inspect.getsource(AR.run_one) + inspect.getsource(AR._apply_one)
     check("書き直しは警告が増えたときだけ機械で直して検算をやり直す",
-          'ng.startswith("警告が増えました") and fix_mechanical(' in src and src.count("ng = check(") == 2, True)
+          # 3つ目は品質ループだけの「外れた検査を名指しして直させる2回目」の後の検算（2026-10-21・h134）
+          'ng.startswith("警告が増えました") and fix_mechanical(' in src and src.count("ng = check(") == 3, True)
     fm = inspect.getsource(AR.fix_mechanical)
     check("機械の直しはその1本だけに当てる", '"--only", slug' in fm and 'split_paragraphs.py", slug' in fm, True)
     ss = (ROOT / "scripts" / "split_sentences.py").read_text(encoding="utf-8")

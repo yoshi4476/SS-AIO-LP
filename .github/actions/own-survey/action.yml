@@ -25,10 +25,29 @@ inputs:
   gh_token:
     description: GH_SECRET_TOKEN（更新されたログイン情報を Secrets に戻すときだけ使う）
     default: ""
+  hub_url:
+    description: HUB_URL（Gemini の月の検索回数の残りを管制塔の台帳で確かめる）
+    default: ""
+  hub_secret:
+    description: >-
+      HUB_SECRET（同上。無いと Gemini の残りが確かめられず、2つの AI だけで聞く。2026-10-21 に CI の当社調べが
+      2つの AI になり、採点で「母数2は弱い」と毎回突かれた）。AI には agent_guard.child_env で外して渡す
+    default: ""
 
 runs:
   using: composite
   steps:
+    # Gemini の月の残りは、AI を動かさないこの手順で台帳から読み、ファイルで次の手順へ渡す
+    # （AI も動く当社調べの手順には全権の合言葉を置かない。門 h131）
+    - shell: bash
+      env:
+        HUB_URL: ${{ inputs.hub_url }}
+        HUB_SECRET: ${{ inputs.hub_secret }}
+      run: |
+        rm -f "$RUNNER_TEMP/gemini_usage.json" "$RUNNER_TEMP/gemini_log.txt"
+        [ -n "$HUB_SECRET" ] || { echo "::warning::HUB_SECRET が無く、当社調べは Gemini に聞かずに進む"; exit 0; }
+        python -c "import json, sys; sys.path.insert(0, 'scripts'); import hub_client as H; u = H._post({'action': 'gemini_usage'}) or {}; print('GEMINI_USAGE=' + ('ok' if u.get('ok') else 'none')); open(sys.argv[1], 'w', encoding='utf-8').write(json.dumps(u))" "$RUNNER_TEMP/gemini_usage.json" || echo "::warning::Gemini の残りを読めませんでした"
+
     - shell: bash
       env:
         CLAUDE_CODE_OAUTH_TOKEN: ${{ inputs.claude_token }}
@@ -37,6 +56,11 @@ runs:
         SITES: ${{ inputs.sites }}
         ARGS: ${{ inputs.args }}
       run: |
+        if [ -f "$RUNNER_TEMP/gemini_usage.json" ]; then
+          export GEMINI_USAGE_FILE="$RUNNER_TEMP/gemini_usage.json" GEMINI_LOG_FILE="$RUNNER_TEMP/gemini_log.txt"
+        else
+          export GEMINI_OFF=1
+        fi
         rm -f "$RUNNER_TEMP/codex_auth_new"
         before=""
         # 途中で落ちても、ログイン情報を残さない（更新されていれば書き戻し用の写しだけ残して消す）
@@ -63,6 +87,21 @@ runs:
         # shellcheck disable=SC2086
         python scripts/own_survey.py --engines || true
         python scripts/own_survey.py $ARGS $SITES 2>&1 | grep -E '^OWN_SURVEY' || true
+
+    # 当社調べで Gemini が行った検索の回数を、AI を動かさない手順で台帳へ送る（AI 診断と合わせて月の上限を数える）
+    - shell: bash
+      if: always()
+      env:
+        HUB_URL: ${{ inputs.hub_url }}
+        HUB_SECRET: ${{ inputs.hub_secret }}
+      run: |
+        rm -f "$RUNNER_TEMP/gemini_usage.json"
+        f="$RUNNER_TEMP/gemini_log.txt"
+        [ -s "$f" ] && [ -n "$HUB_SECRET" ] || { rm -f "$f"; exit 0; }
+        n=$(awk '{s+=$1} END {print s+0}' "$f")
+        rm -f "$f"
+        python -c "import sys; sys.path.insert(0, 'scripts'); import hub_client as H; H._post({'action': 'gemini_log', 'job': 'own_survey', 'searches': int(sys.argv[1])})" "$n" \
+          && echo "GEMINI_SEARCHES=$n" || echo "::warning::Gemini の検索回数を台帳に送れませんでした（$n 回）"
 
     # AI を動かさない手順で書き戻し、写しを消す（この後に続く AI の手順にログイン情報を残さない）
     - shell: bash

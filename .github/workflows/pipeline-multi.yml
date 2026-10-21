@@ -608,6 +608,8 @@ jobs:
           claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
           gemini_key: ${{ secrets.GEMINI_API_KEY }}
+          hub_url: ${{ secrets.HUB_URL }}
+          hub_secret: ${{ secrets.HUB_SECRET }}
           gh_token: ${{ secrets.GH_SECRET_TOKEN }}
 
       # 公開前の品質ループ（2026-10-20 運用者の決定「公開前に、書いたAIとは別の工程で3観点を採点し、基準未満なら公開を止める」
@@ -718,6 +720,8 @@ jobs:
           claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
           gemini_key: ${{ secrets.GEMINI_API_KEY }}
+          hub_url: ${{ secrets.HUB_URL }}
+          hub_secret: ${{ secrets.HUB_SECRET }}
           gh_token: ${{ secrets.GH_SECRET_TOKEN }}
 
       # 書いた記事を、書いた AI とは別の工程が3観点で採点し、基準（各80点以上・平均90点以上）に届くまで直す（1回の実行で2回まで）。
@@ -764,6 +768,8 @@ jobs:
           claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
           gemini_key: ${{ secrets.GEMINI_API_KEY }}
+          hub_url: ${{ secrets.HUB_URL }}
+          hub_secret: ${{ secrets.HUB_SECRET }}
           gh_token: ${{ secrets.GH_SECRET_TOKEN }}
 
       - name: 点の低い公開済みの記事を1本直す（公開前の採点で90点以上が出てから）

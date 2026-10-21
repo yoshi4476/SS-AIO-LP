@@ -209,9 +209,14 @@ def gemini_budget_ok():
     if not _env("GEMINI_API_KEY") or _env("GEMINI_OFF") == "1":
         return False
     if GEMINI["usage"] is None:
+        # AI も動く手順（当社調べ）には全権の合言葉を置かない。前の機械の手順が台帳から読んだ残りをファイルで受け取る
+        f = _env("GEMINI_USAGE_FILE")
         try:
-            import hub_client
-            u = hub_client._post({"action": "gemini_usage"}) or {}
+            if f:
+                u = json.loads(Path(f).read_text(encoding="utf-8"))
+            else:
+                import hub_client
+                u = hub_client._post({"action": "gemini_usage"}) or {}
         except Exception:
             u = {}
         GEMINI["usage"] = u if u.get("ok") else {}
@@ -225,6 +230,11 @@ def gemini_budget_ok():
 def gemini_note(searches):
     """実際に行われた検索の回数を台帳に残す（料金は検索1回ごと。1つの質問で何回も検索されうる）"""
     GEMINI["local"] += searches
+    if _env("GEMINI_LOG_FILE"):
+        # 台帳への記録は後の機械の手順がまとめて送る（この手順には合言葉が無い）
+        with open(_env("GEMINI_LOG_FILE"), "a", encoding="utf-8") as fh:
+            fh.write(f"{int(searches)}\n")
+        return
     try:
         import hub_client
         hub_client._post({"action": "gemini_log", "job": Path(sys.argv[0]).stem, "searches": searches})

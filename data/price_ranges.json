@@ -2,13 +2,39 @@
   "as_of": "2026年10月",
   "label": "2026年10月時点の当社の見立て",
   "unit": "月額",
-  "note": "AIO・SEO・LLMO対策の相場はここだけを正とする。当社の価格は書かない・匂わせない（本当の額は非公開の sales/prices.json にだけ置く。own_price_yen は門の例に使う架空の値）。外部委託の月額は数十万円より下に書かない",
-  "services": ["aio", "seo", "llmo"],
+  "note": "AIO・SEO・LLMO対策の相場はここだけを正とする。記事に相場を書いてよい（2026-10-21 運用者）。当社の額そのものは書かない（本当の額は非公開の sales/prices.json にだけ置く。own_price_yen は門の例に使う架空の値）。外部委託の月額は数十万円より下に書かない",
+  "services": [
+    "aio",
+    "seo",
+    "llmo"
+  ],
   "ranges": [
-    {"id": "inhouse_tools", "label": "内製＋有料ツール", "range": "月数万〜数十万円"},
-    {"id": "outsource_partial", "label": "外部委託（部分支援）", "range": "月数十万円〜"},
-    {"id": "outsource_full", "label": "外部委託（運用まで一括）", "range": "月数十万〜数百万円"}
+    {
+      "id": "article_tool",
+      "label": "記事作成ツール（記事を自動で作るシステム）",
+      "range": "月4〜5万円前後",
+      "note": "全体のキーワード設計が無いことがあり、記事の質は低〜中"
+    },
+    {
+      "id": "inhouse_tools",
+      "label": "内製＋有料ツール",
+      "range": "月数万〜数十万円"
+    },
+    {
+      "id": "outsource_partial",
+      "label": "外部委託（部分支援）",
+      "range": "月数十万円〜"
+    },
+    {
+      "id": "outsource_full",
+      "label": "外部委託（キーワード設計から運用まで一括）",
+      "range": "月20万円以上"
+    }
   ],
   "outsource_min_yen": 200000,
-  "own_price_yen": 990000
+  "own_price_yen": 990000,
+  "positioning": "キーワード設計から運用まで一括で任せる形を、記事作成ツールとの質の差として書く（全体のキーワード設計の有無・質）。2026-10-21 運用者",
+  "sites": [
+    "ai-lab"
+  ]
 }

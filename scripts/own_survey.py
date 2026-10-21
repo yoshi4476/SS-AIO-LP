@@ -52,9 +52,12 @@ def _path(site, slug):
 
 def load(site, slug):
     try:
-        return json.loads(_path(site, slug).read_text(encoding="utf-8"))
+        res = json.loads(_path(site, slug).read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return {}
+    if res.get("ok"):
+        res["claims"] = claims(res)   # 文の形を変えたら、測り直さずに前の結果から書き直す
+    return res
 
 
 def topics(body):
@@ -167,9 +170,12 @@ def claims(res):
     # 「1回だけの試行か」と採点で突かれた。実際に3つの AI に1回ずつ聞いた3件の答えなので、件数をそのまま書く
     # （聞いていない回数は書かない。2026-10-21 運用者「複数の結果で書く・2回は調べない」）
     q = res["question"]
-    head = (f"当社が{y}年{m}月に、{n}つのAI（{who}）に「{q}」と同じ質問をして、{n}件の答えを比べたところ",
-            f"{y}年{m}月に当社が{n}つのAI（{who}）へ同じ質問「{q}」をして、返ってきた{n}件の答えを比べたところ",
-            f"当社調べ（{y}年{m}月、{n}つのAI：{who}に同じ質問をした{n}件の答え）で「{q}」の答えを比べたところ")[k]
+    # 調べ方と結果を1文にすると110〜128字になり、直しに入れるたびに「100字超の文」で直し全体が戻された
+    # （2026-10-21 の CI で戻しの約半分）。調べ方の文と結果の文に分け、結果の文も件数から書き出して単体で通るようにする
+    head = (f"当社は{y}年{m}月に、{n}つのAI（{who}）へ「{q}」と同じ質問をしました。",
+            f"{y}年{m}月に当社が{n}つのAI（{who}）に「{q}」と聞きました。",
+            f"当社調べでは{y}年{m}月に、{n}つのAI（{who}）へ「{q}」と質問しました。")[k]
+    ans = f"{n}件の答えのうち"
     out = []
     rows = [r for r in res["topics"] if r["words"]]
     if rows:
@@ -177,21 +183,21 @@ def claims(res):
         allx = [r for r in rows if len(r["engines"]) == n]
         if none:
             names = "』『".join(dict.fromkeys(r["words"][0] for r in none[:3]))
-            out.append(f"{head}、本記事で扱う{len(rows)}つの論点のうち『{names}』の語が出てきた答えは0件でした")
+            out.append(f"{head}{ans}、本記事の論点『{names}』の語が出たものは0件でした。")
         if allx:
             names = "』『".join(dict.fromkeys(r["words"][0] for r in allx[:3]))
-            out.append(f"{head}、{n}件すべての答えに『{names}』の語が出てきました")
+            out.append(f"{head}{n}件の答えのすべてに『{names}』の語が出てきました。")
         part = [r for r in rows if 0 < len(r["engines"]) < n]
         if part and len(out) < 2:
             r = part[0]
-            out.append(f"{head}、『{r['words'][0]}』の語が出てきた答えは{n}件中{len(r['engines'])}件でした")
+            out.append(f"{head}{ans}、『{r['words'][0]}』の語が出たものは{len(r['engines'])}件でした。")
     dims = res.get("dims") or {}
     if dims:
         # 全部に出た観点より、出なかった・一部だけの観点のほうが「答えに足りないもの」として一次情報になる
         pick = sorted(dims.items(), key=lambda x: (len(x[1]) == n, len(x[1])))[:3]
         parts = "、".join(f"{label}に触れた答えは無く" if not v else f"{label}に触れた答えは{n}件中{len(v)}件"
                          for label, v in pick)
-        out.append(f"{head}、{parts}でした")
+        out.append(f"{head}{ans}、{parts}でした。")
     src = res.get("sources") or {}
     if src:
         by = {}
@@ -202,7 +208,7 @@ def claims(res):
         parts = "、".join(f"{compete.TYPES[k]}が{by.get(k, 0)}件" for k in known[:2])
         rest = [f"{compete.TYPES[k]}が{by[k]}件" for k in known[2:] if by.get(k)]
         parts = "、".join([parts] + rest)
-        out.append(f"{head}、出典に挙がったページは{len(src)}件で、{parts}でした")
+        out.append(f"{head}{n}件の答えの出典に挙がったページは{len(src)}件で、{parts}でした。")
     return out
 
 

@@ -253,6 +253,8 @@ jobs:
           claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
           gemini_key: ${{ secrets.GEMINI_API_KEY }}
+          hub_url: ${{ secrets.HUB_URL }}
+          hub_secret: ${{ secrets.HUB_SECRET }}
           gh_token: ${{ secrets.GH_SECRET_TOKEN }}
 
       # 公開前の品質ループ（2026-10-20 運用者の決定）。直している途中の記事を先に、次にこの回に書いた・直した点数の無い記事を、

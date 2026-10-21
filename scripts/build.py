@@ -1942,6 +1942,14 @@ def build_industry_hubs(all_metas):
             fpage = fpage.replace("</head>", '<script type="application/ld+json">'
                                   + _json.dumps(fld, ensure_ascii=False) + "</script></head>", 1)
             fo.write_text(fpage, encoding="utf-8", newline="\n")
+    # 記事が改善中になって本数を割った業種のページは消す。残すと一覧から外れたまま孤立する
+    # （2026-10-21 飲食店: 5本→4本で /industry/inshokuten/ がトップから辿れなくなった）
+    import shutil
+    live_slugs = {i["slug"] for i, _ in pairs}
+    for i in IH.load()[0]:
+        d = SITE / "industry" / i["slug"]
+        if i["slug"] not in live_slugs and (d / "index.html").is_file():
+            shutil.rmtree(d, ignore_errors=True)
     if made:
         out = SITE / "industry" / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)

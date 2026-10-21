@@ -56,7 +56,8 @@ def test_quality_loop_fix_skips_number_check_only_there():
     import quality_loop as Q
     print("\n■ 公開前の品質ループの直しだけ数字の検算をしない（運用者「事実でない数字を防ぐ検算なしにして」2026-10-20）。ほかの直しは残す")
     src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
-    check("品質ループの種類だけ numbers=False", ('nums = kind != "quality_loop"' in src, src.count("numbers=nums")), (True, 2))
+    # 3つ目は機械の指摘だけを直す2回目の後の検算（2026-10-21・h134）。どの検算も同じ nums を渡す
+    check("品質ループの種類だけ numbers=False", ('nums = kind != "quality_loop"' in src, src.count("numbers=nums")), (True, 3))
     check("ほかの種類は今までどおり無かった数字を止める", bool(A.new_fact_numbers("本文。", "本文。相場は1,500円です。")), True)
     check("直す回数は1回の実行で2回まで（運用者「最大でも二回で90に」）", (Q.ROUNDS, Q.MAX_ROUNDS), (2, 2))
     w = Q.lower({"axes": {"originality": 80, "extractability": 90, "decision": 90},

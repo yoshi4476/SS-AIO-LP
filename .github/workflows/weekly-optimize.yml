@@ -1218,6 +1218,8 @@ jobs:
           claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
           gemini_key: ${{ secrets.GEMINI_API_KEY }}
+          hub_url: ${{ secrets.HUB_URL }}
+          hub_secret: ${{ secrets.HUB_SECRET }}
           gh_token: ${{ secrets.GH_SECRET_TOKEN }}
 
       - name: 公開済みの記事を公開前と同じ基準で採点し直す
