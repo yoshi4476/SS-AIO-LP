@@ -146,6 +146,8 @@ written: 2026-10-21
 
 **外注費の仕訳で起きる誤りは、給与に近い支払いを外注費にする、源泉を預からない、7割控除を忘れる、割合を請求書の日付で選ぶ、の4つです。**
 
+関連する内容として[建設業の記帳代行が合わない3つの状況](/blog/kensetsugyou-kichodaiko/)も公開しています。
+
 関連する内容として[BPO事務で失敗しない分け方](/blog/bpo-jimu-wakekata/)も公開しています。
 
 <figure><img src="/images/gaichuuhi-seikyuusho-shiwake/ayamari.png" alt="当社が直した仕訳の誤りの件数を、外注費と給与の区分、備品の消耗品処理、前払費用の計上漏れ、源泉徴収の漏れで比べた棒グラフ"></figure>

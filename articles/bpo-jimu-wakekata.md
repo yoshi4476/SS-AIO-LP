@@ -67,6 +67,8 @@ BPOという言葉の意味や種類は、[BPOとは？意味と業務の種類5
 
 **BPOに任せやすいのは、毎月の件数が多く、誰がやっても同じ手順で終わる事務です。**
 
+関連する内容として[建設業の記帳代行が合わない3つの状況](/blog/kensetsugyou-kichodaiko/)も公開しています。
+
 <figure><img src="/images/bpo-jimu-wakekata/wakekata.png" alt="会社の事務を、BPOに任せる事務・社内に残す事務・社内でそろえる書類の3つに分けた図" loading="lazy"><figcaption>BPOに出す事務と社内に残す事務</figcaption></figure>
 
 当社が2023年4月から2026年9月までに担当した事務の範囲と数字は、次の表のとおりです。

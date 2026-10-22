@@ -1,0 +1,120 @@
+{
+ "slug": "kensetsugyou-kichodaiko",
+ "ok": true,
+ "date": "2026-10-22",
+ "question": "建設業 記帳代行について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "建設業の記帳代行では何を任せ、何を社内に残すか？",
+   "words": [
+    "社内"
+   ],
+   "engines": [
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "建設業の記帳代行が合わない3つの状況と失敗の避け方",
+   "words": [
+    "状況"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "建設業の記帳代行に渡す前に、社内で決める4つ",
+   "words": [
+    "社内"
+   ],
+   "engines": [
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "建設業の記帳代行で直した仕訳の誤りは何が多いか？",
+   "words": [
+    "仕訳"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "建設会社が記帳を外に出すか決める3つの分かれ道",
+   "words": [
+    "建設会社",
+    "記帳"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "建設業の記帳代行に見積もりを頼むとき、聞く4つの質問",
+   "words": [
+    "見積",
+    "質問"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  }
+ ],
+ "sources": {
+  "all-senmonka.jp": "portal",
+  "biz.moneyforward.com": "peer",
+  "charis-tax.jp": "peer",
+  "crowdworks.jp": "portal",
+  "meetsmore.com": "portal",
+  "nta.go.jp": "public",
+  "pca.jp": "peer",
+  "pref.kumamoto.jp": "public",
+  "properly-llc.com": "peer",
+  "saas.imitsu.jp": "portal",
+  "yayoi-kk.co.jp": "peer",
+  "zeiri4.com": "portal"
+ },
+ "dims": {
+  "費用の金額（◯円）": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "期間（◯か月・◯日など）": [],
+  "注意点・失敗・リスク": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [],
+  "専門家への相談": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ]
+ },
+ "chars": {
+  "ChatGPT": 1763,
+  "Claude": 2164,
+  "Gemini": 2237
+ },
+ "claims": [
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「建設業 記帳代行について教えてください」と質問しました。3件の答えのすべてに『仕訳』『建設会社』『見積』の語が出てきました。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「建設業 記帳代行について教えてください」と質問しました。3件の答えのうち、『社内』の語が出たものは1件でした。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「建設業 記帳代行について教えてください」と質問しました。3件の答えのうち、期間（◯か月・◯日など）に触れた答えは無く、進め方の手順に触れた答えは無く、費用の金額（◯円）に触れた答えは3件中3件でした。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「建設業 記帳代行について教えてください」と質問しました。3件の答えの出典に挙がったページは12件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが0件、ポータル・比較サイトが5件でした。"
+ ]
+}
