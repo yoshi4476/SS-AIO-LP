@@ -1,0 +1,26 @@
+{
+ "keyword": "農業 補助金 トラクター",
+ "sources": [
+  "https://food-hojo.jp/subsidy-for-tractors-and-agricultural-machinery-2026/",
+  "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFY3wyjClbNqB1-dxN0AfuOpUJJdeAc83nVisa3IUy3-h9ykm8ndvMg61uNE4vidkUFP24JfSnCOMiffg_9cFlQYIrQi1eQipcQlJj87dIsmpk7MAbOSgcg8r7B9WDscrMVL1rEIVi1gCEcPIAp4O32l1fexkZ3U0833DySa04=",
+  "https://www.noukinavi.com/blog/?p=34972",
+  "https://hojokin-kensaku.jp/subsidy/anan-nohojo-S63a7346a00",
+  "https://shoei-world.com/2026/05/13/noukigu-hojokin-loan-kumiawase/",
+  "https://www.maff.go.jp/j/kobetu_ninaite/n_pamph/pdf/005_kikai.pdf"
+ ],
+ "missing": [
+  "小規模事業者持続化補助金",
+  "中小企業省力化投資補助金",
+  "株式会社唐沢農機サービス",
+  "イノベーション株式会社",
+  "トラクター購入補助金",
+  "沖縄振興開発金融公庫",
+  "農業振興総合対策事業",
+  "経営体育成支援事業",
+  "創業支援事業補助金",
+  "ハンマーナイフモア",
+  "融資主体型補助事業",
+  "トラクター価格帯"
+ ],
+ "covered": 0.22
+}
