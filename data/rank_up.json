@@ -690,11 +690,10 @@
   "site": "corporate"
  },
  "kaikei-keiri-chigai": {
-  "at": "2026-10-12",
-  "pos": 19.4,
-  "imp": 37,
-  "band": "11〜20位",
-  "site": "corporate"
+  "at": "2026-10-23",
+  "pos": 25.3,
+  "site": "corporate",
+  "by": "auto_rewrite"
  },
  "keiri-zaimu-chigai": {
   "at": "2026-10-19",
@@ -787,11 +786,10 @@
   "site": "corporate"
  },
  "keiri-gaichuu-hikitsugi": {
-  "at": "2026-10-19",
-  "pos": 5.1,
-  "imp": 21,
-  "band": "4〜10位",
-  "site": "corporate"
+  "at": "2026-10-23",
+  "pos": 5.0,
+  "site": "corporate",
+  "by": "auto_rewrite"
  },
  "keiri-hitode-busoku-taisaku": {
   "at": "2026-10-19",
@@ -841,6 +839,18 @@
   "at": "2026-10-20",
   "pos": 8.1,
   "site": "subsidy",
+  "by": "auto_rewrite"
+ },
+ "sweeep-seikyusho": {
+  "at": "2026-10-23",
+  "pos": 5.0,
+  "site": "corporate",
+  "by": "auto_rewrite"
+ },
+ "kichodaiko-ryokinhyo-zeirishi": {
+  "at": "2026-10-23",
+  "pos": 27.4,
+  "site": "corporate",
   "by": "auto_rewrite"
  }
 }

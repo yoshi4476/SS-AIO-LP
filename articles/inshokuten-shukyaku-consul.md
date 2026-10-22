@@ -55,6 +55,8 @@ quality_attempts: 3
 
 **飲食店の集客コンサルが引き受ける仕事は、予約サイト運用・地図検索・検索とAI検索・店舗経営の4つの型に分かれます。**同じ「集客コンサル」の名前でも、型が違えば触る場所も成果の測り方も違います。
 
+関連する内容として[病院の口コミ返信、違反になるNG表現6種類は？](/meo/byoin-kuchikomi-henshin-reibun/)も公開しています。
+
 <div class="definition-box"><span class="term">飲食店の集客コンサルとは</span>、新しいお客様が店を見つけて予約するまでの経路を、外部から設計・運用する支援者です。メニュー開発や原価の見直しまで扱う会社もあれば、1つの経路だけを代行する会社もあります。</div>
 
 <figure><img src="/images/inshokuten-shukyaku-consul/kata.png" alt="飲食店の集客コンサルの4つの型: 予約サイト運用、地図検索、検索とAI検索、店舗経営" loading="lazy"><figcaption>飲食店の集客コンサルの4つの型</figcaption></figure>

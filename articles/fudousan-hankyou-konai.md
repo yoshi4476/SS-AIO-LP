@@ -65,7 +65,7 @@ faq:
 
 関連する内容として[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)も公開しています。
 
-あわせて[工務店のホームページ集客とは？反響を増やす必須6要素](/ai-marketing/koumuten-hp-shukyaku/)もご覧ください。
+近い論点を[工務店のホームページ集客とは？反響を増やす必須6要素](/ai-marketing/koumuten-hp-shukyaku/)で扱っています。
 
 ポータルに頼らず自社サイトで反響を取りたい場合は、[不動産のSEO対策で反響を増やす5つの施策](/seo/fudousan-seo-taisaku/)から着手してください。ポータルをいつ減らすかは、[不動産会社の集客方法を反響までの期間で選ぶ考え方](/aio/fudousan-kaisha-shukyaku-houhou/)で扱っています。
 

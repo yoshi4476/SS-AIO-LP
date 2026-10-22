@@ -61,8 +61,6 @@ faq:
 
 対象になる範囲を先に押さえるなら、[適格請求書の要件は6項目](/blog/tekikaku-seikyusho-youken/)が参考になります。
 
-近い論点を[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)で扱っています。
-
 <div class="definition-box"><span class="term">適格請求書(インボイス)とは</span>、発行事業者の登録番号など決められた項目を満たした請求書のことです。==この項目が欠けていると、仕入税額控除を受けられない場合があります。==</div>
 
 <figure><img src="/images/gaichuuhi-seikyuusho-kakikata/kisai.png" alt="適格請求書の必須記載項目6つ: 発行者の氏名・登録番号、取引年月日、取引内容、税率ごとの対価と適用税率、税率ごとの消費税額、受領者の氏名・名称" loading="lazy"><figcaption>適格請求書の必須記載項目6つ</figcaption></figure>

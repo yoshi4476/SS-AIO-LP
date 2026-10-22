@@ -61,8 +61,6 @@ faq:
 
 チャネルを選んだ後に、どの順番で始めるかは[反響までの期間で選ぶ不動産会社の集客方法](/aio/fudousan-kaisha-shukyaku-houhou/)で、自社の実測とあわせて整理しました。
 
-あわせて[AIO集客とは？向いている業種と始める3つの基準](/aio/aio-shukyaku/)もご覧ください。
-
 <div class="definition-box"><span class="term">不動産の集客方法とは</span>、ポータルサイトへの掲載だけでなく、自社サイト・MEO・SNS・紹介・AI検索対応まで含めた複数チャネルを、会社の商圏や専門分野に合わせて組み合わせることを指します。掲載費を払うだけの受け身の集客ではありません。</div>
 
 国土交通省の<a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">令和6年度宅地建物取引業法の施行状況調査</a>によると、**全国の宅地建物取引業者数は13万2,291業者（令和6年度末時点）**で11年連続の増加です。競合が増え続ける市場だからこそ、==複数チャネルで見つかる接点を増やす==ことが欠かせません。
