@@ -118,6 +118,9 @@ data/ranks/*
 !data/ranks/ai-lab.json
 !data/ranks/corporate.json
 !data/ranks/subsidy.json
+!data/ranks/ai-lab.pages.json
+!data/ranks/corporate.pages.json
+!data/ranks/subsidy.pages.json
 data/ai_kw/*
 !data/ai_kw/ai-lab.json
 !data/ai_kw/corporate.json

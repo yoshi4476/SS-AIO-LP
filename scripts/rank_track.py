@@ -57,6 +57,34 @@ def fetch(site_url, days=28, sc=None):
     return out
 
 
+def fetch_pages(site_url, sc=None):
+    """ページ単位の直近28日とその前の28日（{URL: [表示, クリック, 順位]}）。語×ページの集計は検索語の伏せられた分の
+    クリックが落ち、コーポレートでは「読まれている記事」が0本に見えた（ページ単位では12本。2026-10-22）。
+    記事の調子の判定（article_health）が読む"""
+    if sc is None:
+        creds = gcreds.load(SA, ["https://www.googleapis.com/auth/webmasters.readonly"])
+        from googleapiclient.discovery import build
+        sc = build("searchconsole", "v1", credentials=creds)
+    end = date.today() - timedelta(days=3)
+    out = {}
+    for name, (a, b) in (("cur", (end - timedelta(days=27), end)),
+                         ("prev", (end - timedelta(days=55), end - timedelta(days=28)))):
+        res = sc.searchanalytics().query(siteUrl=site_url, body={
+            "startDate": a.isoformat(), "endDate": b.isoformat(), "dimensions": ["page"], "rowLimit": PAGE}).execute()
+        d = {}
+        for r in res.get("rows", []):
+            u = r["keys"][0].split("#")[0].split("?")[0].rstrip("/") + "/"
+            v = d.setdefault(u, [0, 0, 0.0])
+            imp = int(r["impressions"])
+            if imp:
+                v[2] = round((v[2] * v[0] + r["position"] * imp) / (v[0] + imp), 1)
+            v[0] += imp
+            v[1] += int(r["clicks"])
+        out[name] = d
+    out["end"] = end.isoformat()
+    return out
+
+
 def load_hist(site_id):
     f = OUT / f"{site_id}.json"
     return json.loads(f.read_text(encoding="utf-8")) if f.is_file() else {}
@@ -82,6 +110,10 @@ def main():
                 hist.pop(d)
             (OUT / f"{sid}.json").write_text(
                 json.dumps(hist, ensure_ascii=False), encoding="utf-8")
+            try:
+                (OUT / f"{sid}.pages.json").write_text(json.dumps(fetch_pages(url), ensure_ascii=False), encoding="utf-8")
+            except Exception as e:  # noqa: BLE001  取れなければ前の回の分を残す（article_health は古さを見る）
+                print(f"  {sid}: ページ単位の記録を取れません（{str(e)[:70]}）")
 
         days = sorted(hist)
         if not days:

@@ -956,9 +956,15 @@ def rescore_targets(per_site=None, sites=(), path=None):
             continue
         if sid not in read_well:
             read_well[sid] = _well_read(sid)
+        # 伸びている記事は直さない。読まれている記事も、題・構成まで変わりうる品質の直しはしない（2026-10-22 運用者
+        # 「伸びているものは変えるとまずい」）。落ちている・表示はあるが弱い記事（需要はある）から直す
+        import article_health as AH
+        health = AH.of(s, sid, m)
+        if AH.protected(s, "quality", sid):
+            continue
         busy = any(u.endswith(f"/{s}") for u in read_well[sid])
         score = last_total.get(s, 100) if rank == 0 else audit.get(s, 100)
-        by_site.setdefault(sid, []).append((rank, busy, score, str(m.get("date") or ""), s))
+        by_site.setdefault(sid, []).append((rank, busy, AH.ORDER.get(health, 2), score, str(m.get("date") or ""), s))
     out = []
     for sid, items in sorted(by_site.items()):
         n = RESCORE_PER_SITE if per_site is None else per_site

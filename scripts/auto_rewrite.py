@@ -2440,6 +2440,10 @@ def main():
     # 検索から外した記事（noindex）は書き直さない（本数の枠と下書きの時間を使わせない）
     import noindex
     items = noindex.drop(items)
+    if not a.slugs:
+        # 伸びている記事には何も当てず、読まれている記事には題・構成を変える直しを当てない（運用者の名指しは除く。2026-10-22）
+        import article_health
+        items = article_health.drop_protected(items, a.kind)
     items = stock_first(items)
     if a.skip_recent:
         busy = recently_touched(a.skip_recent)

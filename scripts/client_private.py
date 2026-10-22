@@ -38,7 +38,7 @@ import sites as S  # noqa: E402
 # サイトごとの記録（種類 → 置き場の相対パス）。どれもお客様の分は .gitignore 済み。
 # 種類は「どのジョブが書くか」で分ける（並行ジョブの書いた分を、別のジョブの古い写しで上書きしないため）
 PER_SITE = {
-    "ranks": ("data/ranks/{}.json",),                                   # rank_track（毎晩の救済）
+    "ranks": ("data/ranks/{}.json", "data/ranks/{}.pages.json"),        # rank_track（毎晩の救済）
     "ai_kw": ("data/ai_kw/{}.json", "docs/ai-kw-{}.md"),                 # ai_kw_research（週次の KW 補充）
     "weekly": ("data/win_patterns/{}.md", "docs/kw-strong-{}.md",        # win_patterns・kw_reorder・
                "docs/kw-priority-{}.md",                                  # kw_reorder（弱い語の付け直し）
