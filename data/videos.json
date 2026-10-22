@@ -808,5 +808,66 @@
       "desc": "lead-long",
       "youtube": "lyLAauZLuw0"
     }
+  },
+  "fudousan-web-shukyaku": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-22",
+      "keyword": "不動産 web 集客",
+      "queries": [
+        "不動産 web 集客",
+        "web 集客",
+        "不動産 集客",
+        "不動産 web"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "賃貸ビジネス",
+        "賃貸不動産経営",
+        "web集客",
+        "web 集客",
+        "不動産 集客",
+        "不動産 賃貸 集客",
+        "賃貸 集客",
+        "賃貸経営",
+        "賃貸仲介 集客",
+        "貸家経営"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-10-22",
+      "sec": 49,
+      "title": "不動産のWeb集客、何から直す？",
+      "youtube": "AyjIxgeacVU"
+    }
+  },
+  "fudousan-kaisha-shukyaku-houhou": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-10-22",
+      "keyword": "不動産 会社 集客 方法",
+      "queries": [
+        "不動産 会社 集客 方法",
+        "会社 集客 方法",
+        "不動産 集客 方法",
+        "不動産 会社 方法",
+        "不動産 会社 集客"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "賃貸仲介 集客",
+        "賃貸 集客",
+        "個人サロン 集客方法",
+        "リフォーム 集客",
+        "集客力を上げるには",
+        "集客 方法",
+        "飲食店 集客方法",
+        "賃貸ビジネス",
+        "賃貸不動産経営",
+        "仲介業者"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
   }
 }
