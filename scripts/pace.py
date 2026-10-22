@@ -100,7 +100,12 @@ def _manual():
 
 
 def setting(sid):
-    """運用者が sites/<id>.json の daily_articles に決めた1日の本数（0〜2）。無い・読めないときは既定の2本"""
+    """運用者が sites/<id>.json の daily_articles に決めた1日の本数（0〜2）。無い・読めないときは既定の2本。
+    daily_articles_until（その日まで）があれば、過ぎた日から既定へ戻る（2026-10-22 運用者「3日間だけ1日1本」。
+    戻し忘れで本数が減ったままにならないように、期限を設定に書く）"""
+    until = _site(sid).get("daily_articles_until")
+    if until and str(until) < date.today().isoformat():
+        return DEFAULT
     v = _site(sid).get("daily_articles")
     if isinstance(v, bool) or not isinstance(v, int):
         return DEFAULT

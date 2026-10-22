@@ -206,3 +206,21 @@ def test_manual_run_does_not_exceed_daily_quota():
     wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
     check("手で社を指定した回は書く前に本数を確かめる",
           wf.index('python scripts/daily_audit.py --day-full "$real"') < wf.index('if [ -z "$s" ]; then'), True)
+
+
+def test_temporary_daily_setting_expires():
+    import pace as P
+    from datetime import date, timedelta
+    print("\n■ 1日の本数を期限つきで減らす（daily_articles_until）。期限を過ぎたら既定の2本へ戻る（2026-10-22 運用者「3日間だけ1日1本」）")
+    old = P._site
+    today = date.today()
+    try:
+        P._site = lambda sid: {"daily_articles": 1, "daily_articles_until": today.isoformat()}
+        on_last_day = P.setting("zz")
+        P._site = lambda sid: {"daily_articles": 1, "daily_articles_until": (today - timedelta(days=1)).isoformat()}
+        after = P.setting("zz")
+        P._site = lambda sid: {"daily_articles": 1}
+        no_limit = P.setting("zz")
+    finally:
+        P._site = old
+    check("期限の日までは1本・過ぎたら2本・期限なしは設定のまま", (on_last_day, after, no_limit), (1, 2, 1))
