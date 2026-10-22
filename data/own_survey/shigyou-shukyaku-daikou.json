@@ -1,0 +1,93 @@
+{
+ "slug": "shigyou-shukyaku-daikou",
+ "ok": true,
+ "date": "2026-10-22",
+ "question": "士業 集客 代行について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "士業の集客代行は何を任せ、何を事務所に残すか",
+   "words": [
+    "事務所"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "AIは士業の質問に、どこを出典に答えているか",
+   "words": [
+    "AI",
+    "質問",
+    "出典"
+   ],
+   "engines": [
+    "ChatGPT"
+   ]
+  },
+  {
+   "topic": "集客代行に向いている事務所・見送る事務所",
+   "words": [
+    "事務所",
+    "事務所"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  }
+ ],
+ "sources": {
+  "accs-c.co.jp": "peer",
+  "biz.ne.jp": "portal",
+  "crowdworks.jp": "portal",
+  "ecnomikata.com": "media",
+  "kotora.jp": "peer",
+  "mobinc.jp": "peer",
+  "professional.mynavi.jp": "peer",
+  "shopowner-support.net": "media",
+  "sincerejp.com": "peer",
+  "stock-sun.com": "media",
+  "toben.or.jp": "public",
+  "tokyo-lawyers-office.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "期間（◯か月・◯日など）": [],
+  "注意点・失敗・リスク": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [
+   "ChatGPT"
+  ],
+  "専門家への相談": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ]
+ },
+ "chars": {
+  "ChatGPT": 1713,
+  "Claude": 1782,
+  "Gemini": 2573
+ },
+ "claims": [
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「士業 集客 代行について教えてください」と聞きました。3件の答えのすべてに『事務所』の語が出てきました。",
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「士業 集客 代行について教えてください」と聞きました。3件の答えのうち、『AI』の語が出たものは1件でした。",
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「士業 集客 代行について教えてください」と聞きました。3件の答えのうち、期間（◯か月・◯日など）に触れた答えは無く、進め方の手順に触れた答えは3件中1件、費用の金額（◯円）に触れた答えは3件中3件でした。",
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「士業 集客 代行について教えてください」と聞きました。3件の答えの出典に挙がったページは12件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが3件、ポータル・比較サイトが2件でした。"
+ ]
+}
