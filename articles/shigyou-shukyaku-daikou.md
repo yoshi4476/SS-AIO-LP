@@ -53,6 +53,8 @@ quality_attempts: 3
 
 士業の集客代行に任せるのは集客の仕組みで、専門の中身の判断は資格者の事務所に残します。
 
+近い論点を[不動産会社ホームページのよくある質問](/aio/fudousan-hp-yokuaru-shitsumon/)で扱っています。
+
 あわせて[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)もご覧ください。
 
 <div class="definition-box"><span class="term">士業の集客代行とは</span>、事務所のサイトの設計・記事の更新・検索とAIでの見え方の計測を、外部の会社が受け持つことです。</div>

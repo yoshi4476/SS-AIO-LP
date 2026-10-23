@@ -448,6 +448,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-hankyou-konai/vs.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-hankyou-konai/steps.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/fudousan-hp-yokuaru-shitsumon/</loc><lastmod>2026-10-23</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-hp-yokuaru-shitsumon/ng-ok.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-hp-yokuaru-shitsumon/handan.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-hp-yokuaru-shitsumon/kakunin.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/aio/fudousan-kaisha-shukyaku-houhou/</loc><lastmod>2026-10-21</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-kaisha-shukyaku-houhou/kikan.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/fudousan-kaisha-shukyaku-houhou/ctr.png</image:loc></image:image>
@@ -779,7 +784,7 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-portal-ai-kensaku/kakunin.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-portal-ai-kensaku/yakuwari.png</image:loc></image:image>
   </url>
-  <url><loc>https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/</loc><lastmod>2026-08-08</lastmod>
+  <url><loc>https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/</loc><lastmod>2026-10-23</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-seo-taisaku/mistakes.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-seo-taisaku/steps.png</image:loc></image:image>
   </url>

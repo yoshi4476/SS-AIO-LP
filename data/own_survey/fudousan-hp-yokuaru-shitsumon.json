@@ -1,0 +1,57 @@
+{
+ "slug": "fudousan-hp-yokuaru-shitsumon",
+ "ok": true,
+ "date": "2026-10-23",
+ "question": "不動産会社 ホームページ よくある質問について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "載せる質問は、電話と店頭で聞かれた言葉から選ぶ",
+   "words": [
+    "質問",
+    "電話",
+    "店頭",
+    "言葉"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  }
+ ],
+ "sources": {
+  "aspicjapan.org": "public",
+  "biz.ne.jp": "portal",
+  "livable.co.jp": "peer",
+  "mec-h.com": "peer",
+  "mitsui-chintai.co.jp": "peer",
+  "sungrove.co.jp": "peer",
+  "value-press.com": "peer",
+  "xserver.ne.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": [],
+  "期間（◯か月・◯日など）": [],
+  "注意点・失敗・リスク": [
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [],
+  "専門家への相談": []
+ },
+ "chars": {
+  "ChatGPT": 1363,
+  "Claude": 897,
+  "Gemini": 2353
+ },
+ "claims": [
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「不動産会社 ホームページ よくある質問について教えてください」と質問しました。3件の答えのすべてに『質問』の語が出てきました。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「不動産会社 ホームページ よくある質問について教えてください」と質問しました。3件の答えのうち、費用の金額（◯円）に触れた答えは無く、期間（◯か月・◯日など）に触れた答えは無く、進め方の手順に触れた答えは無くでした。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「不動産会社 ホームページ よくある質問について教えてください」と質問しました。3件の答えの出典に挙がったページは8件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが0件、ポータル・比較サイトが1件でした。"
+ ]
+}
