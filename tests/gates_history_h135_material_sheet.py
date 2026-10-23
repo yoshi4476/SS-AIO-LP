@@ -33,7 +33,8 @@ def test_make_sheet_per_site_with_requests_and_template():
     print("\n■ 質問シート: 依頼の質問を先に、決まった質問（事例カード・失敗の件数・判断の根拠…）を後に。隠しタブで見分ける")
     reqs = {"zz-slug": {"keyword": "庭木 剪定 業者", "since": "2026-10-20",
                         "questions": ["実際にあったことを2〜3件", "全体で何件か", "1件の事例"], "scorer": ["母数が無い"]}}
-    old = MS.requests_of, MS.display_name
+    old = MS.requests_of, MS.display_name, MS.fact_gaps
+    MS.fact_gaps = lambda *a, **k: []          # 補いの行は test_fact_fill_rows_update_in_place で確かめる
     MS.requests_of, MS.display_name = (lambda s: reqs), (lambda s: "テストの社")
     try:
         with tempfile.TemporaryDirectory() as d:
@@ -48,13 +49,14 @@ def test_make_sheet_per_site_with_requests_and_template():
             import intake_watch as IW
             check("intake_watch が材料の質問シートと見分ける", IW.kind(p), "material")
     finally:
-        MS.requests_of, MS.display_name = old
+        MS.requests_of, MS.display_name, MS.fact_gaps = old
 
 
 def test_apply_holds_invented_numbers_conflicts_and_voices():
     import material_sheet as MS
     print("\n■ 登録: 答えに無い数字・既存と食い違う答え・掲載不可・お客様の声は登録しない")
-    old = MS.requests_of, MS.display_name, MS.existing
+    old = MS.requests_of, MS.display_name, MS.existing, MS.fact_gaps
+    MS.fact_gaps = lambda *a, **k: []
     MS.requests_of, MS.display_name = (lambda s: {}), (lambda s: "テストの社")
     MS.existing = lambda s: ([("zz-hiyou", "代表的な12件の費用は80万〜800万円でした")], [])
     try:
@@ -81,7 +83,7 @@ def test_apply_holds_invented_numbers_conflicts_and_voices():
             ok, msg = MS.apply(p, False, ask=lambda prompt: reply)
             check("--write なしは書かない（見るだけ）", (ok, "--write" in msg), (True, True))
     finally:
-        MS.requests_of, MS.display_name, MS.existing = old
+        MS.requests_of, MS.display_name, MS.existing, MS.fact_gaps = old
 
 
 def test_auto_measure_mail_and_voice_draft():
@@ -150,3 +152,41 @@ def test_measure_claim_needs_past_tense_and_ci_skip():
           ('if not a.what.endswith("た"):' in src, 'MATERIAL_SHEET=skip' in src), (True, True))
     iw = (ROOT / "scripts" / "intake_watch.py").read_text(encoding="utf-8")
     check("intake_watch --apply の後に、依頼の残る社の質問シートを作り直す", iw.count("MS.make(s, MS.Path.home() / \"Desktop\")"), 2)
+
+
+def test_fact_fill_rows_update_in_place():
+    import json
+    import tempfile
+    from pathlib import Path
+    import facts as F
+    import material_sheet as M
+    print("\n■ よく使う一次情報の補い: 記事でよく使われ、母数・ばらつき・期間・数え方の欠けた文をシートに出し、答えで書き換える（2026-10-22）")
+    fs = [{"id": "zz-a", "claim": "2023年4月から2026年9月までに担当した15社で、入力作業が月平均20時間から6時間になりました",
+           "period": "2023-04〜2026-09", "source": "運用者の申告"},
+          {"id": "zz-b", "claim": "請求書の台帳を担当者が月末に集計したところ、2025年4月から2026年3月までの42社のうち最も早い会社は5日でした"},
+          {"id": "own-x", "claim": "検索の表示は12件でした"}]
+    bodies = ["月平均20時間から6時間に減り、15社で…", "15社では20時間が6時間に", "42社のうち5日", "関係ない本文"]
+    old = F.load_for
+    F.load_for = lambda site: ("", fs)
+    try:
+        gaps = M.fact_gaps("zz", bodies=bodies)
+    finally:
+        F.load_for = old
+    check("欄（期間・出どころ）ではなく文で欠けを見る・機械の一次情報（own-）は聞かない・使う記事が2本未満は聞かない",
+          [(g[0], g[2], [m[:2] for m in g[3]]) for g in gaps], [("zz-a", 2, ["内訳", "数え"])])
+    ans = {"no": "1", "key": "fact:zz-a", "question": "今の文: 「…15社で、入力作業が月平均20時間から6時間…」",
+           "answer": "各社の担当者が作業の記録を月末に集計。最小は月3時間・最大は月10時間", "period": "", "count": ""}
+    check("補いの答えは、今の文の数字も使ってよい（作った数字だけを止める）",
+          (M.invented("15社で月平均20時間から6時間（最小3時間・最大10時間）", ans), M.invented("15社で7時間", ans)), ([], ["7"]))
+    with tempfile.TemporaryDirectory() as d:
+        own_f, own_e = M.OWN_FACTS, M.OWN_EXPS
+        M.OWN_FACTS, M.OWN_EXPS = Path(d) / "f.json", Path(d) / "e.json"
+        M.OWN_FACTS.write_text(json.dumps({"facts": [dict(fs[0])]}, ensure_ascii=False), encoding="utf-8")
+        M.OWN_EXPS.write_text(json.dumps({"experiences": []}), encoding="utf-8")
+        try:
+            M.write("ai-lab", [{"claim": "新しい文（15社・最小3時間・最大10時間）", "replaces": "zz-a"}], [], today="2026-10-22")
+            got = json.loads(M.OWN_FACTS.read_text(encoding="utf-8"))["facts"]
+        finally:
+            M.OWN_FACTS, M.OWN_EXPS = own_f, own_e
+    check("補いは同じ id の文を書き換える（同じ事実を2つ並べない）",
+          ([g["id"] for g in got], got[0]["claim"].startswith("新しい文"), "補い" in got[0]["source"]), (["zz-a"], True, True))

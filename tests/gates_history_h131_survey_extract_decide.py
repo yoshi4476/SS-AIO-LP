@@ -28,28 +28,40 @@ def test_own_survey_counts_only_what_it_saw():
     check("論点の語は名詞の続きだけ（送り仮名の続く語幹「丸投」・数字入り・FAQ は拾わない）",
           ("丸投" in words, any(re.search(r"\d", w) for w in words), "剪定" in words),
           (False, False, True))
-    res = {"ok": True, "date": "2026-10-20", "question": "庭木 剪定について教えてください",
-           "engines": ["Claude", "ChatGPT", "Gemini"],
-           "topics": [{"topic": "a", "words": ["業者"], "engines": []},
-                      {"topic": "b", "words": ["見積"], "engines": ["Claude", "ChatGPT", "Gemini"]}],
-           "dims": {"費用の金額（◯円）": [], "期間（◯か月・◯日など）": ["Claude"], "注意点・失敗・リスク": ["Claude", "ChatGPT", "Gemini"]},
+    # 2026-10-22 運用者「当社調べを記事の本題に寄せる」: 狙う語と見出しの問い（5問まで）を ChatGPT・Gemini に聞き、答えの件数で書く
+    check("聞く問い: 狙う語と見出しの問い（FAQ・まとめを除く・5問まで）",
+          O.questions("庭木 剪定", body)[:2], ["庭木 剪定について教えてください", "庭木 剪定について、「庭木の剪定とは？」を教えてください"])
+    res = {"v": 2, "ok": True, "date": "2026-10-20", "questions": ["q1", "q2", "q3", "q4", "q5"],
+           "engines": ["ChatGPT", "Gemini"], "answers": 10,
+           "topics": [{"topic": "a", "words": ["業者"], "hits": 0, "of": 8},
+                      {"topic": "b", "words": ["見積"], "hits": 3, "of": 8}],
+           "dims": {"費用の金額（◯円）": 0, "期間（◯か月・◯日など）": 2, "注意点・失敗・リスク": 10},
            "sources": {"a.go.jp": "public", "b.example": "", "c.example": ""}}
     cs = O.claims(res)
-    check("時期・AI の数と名前・答えの件数をそろえて書く（聞いていない回数は書かない）",
-          all("2026年10月" in c and "3つのAI（Claude・ChatGPT・Gemini）" in c and "3件の答え" in c for c in cs)
-          and len(cs) >= 3 and not any("複数回" in c for c in cs), True)
+    check("時期・AI の数と名前・論点の問いの数・答えの件数をそろえて書く",
+          all("2026年10月" in c and "2つのAI（ChatGPT・Gemini）" in c and "論点5問" in c and "10件" in c for c in cs)
+          and len(cs) >= 3, True)
+    topic = [c for c in cs if "ほかの論点を聞いた答え8件のうち" in c]
+    check("ほかの論点を聞いた答えに出なかった論点・一部だけの論点を、母数つきで書く",
+          (any("『業者』に触れたものは0件" in c for c in topic), any("『見積』に触れたものは3件" in c for c in topic)), (True, True))
     dim = next((c for c in cs if "費用の金額" in c), "")
-    check("0件は「触れた答えは無く」と書き、全部に出た観点は後ろに回す",
-          ("費用の金額（◯円）に触れた答えは無く" in dim, dim.find("費用の金額") < dim.find("注意点")), (True, True))
+    check("観点は少ない順（全部に出た観点は後ろ）", dim.find("費用の金額（◯円）は0件") < dim.find("期間"), True)
     check("見分けのつかない出典を「同業」と書かない", any("出典に挙がったページは3件で、公的機関・学会・業界団体が1件" in c for c in cs)
           and not any("同業" in c for c in cs), True)
-    check("2つ未満の AI しか答えなければ書かない", O.claims({"ok": False}), [])
+    check("測れなかった結果・前の形の結果からは書かない", (O.claims({"ok": False}), O.claims({"ok": True, "engines": ["Claude"]})), ([], []))
+    calls = []
+
+    def fake_ask(site, qs):
+        calls.append(len(qs))
+        return {("ChatGPT", i): {"text": "業者の見積もりは10万円です", "domains": []} for i in range(3)}
+    few = O.measure("ai-lab", "zz", body, "庭木 剪定", ask_fn=fake_ask)
+    check("答えが4件に満たなければ書かない（母数が小さいと一次性で減点される）", (few["ok"], calls), (False, [4]))
 
 
 def test_own_survey_order_and_keep_old():
     import ai_cite_check as AC
     import own_survey as O
-    print("\n■ 当社調べ: Claude・ChatGPT は契約の枠（Codex）、Gemini は無料の枠。従量課金の API は使わない（2026-10-20 運用者）")
+    print("\n■ 当社調べ: ChatGPT は契約の枠（Codex）、Gemini は無料の枠。Claude と従量課金の API は使わない（2026-10-20・22 運用者）")
     sub, paid = AC.subscription_engines, AC.engines_available
     AC.engines_available = lambda site=None: {"ChatGPT": "api", "Gemini": "g", "Perplexity": "p"}
     try:
@@ -59,8 +71,8 @@ def test_own_survey_order_and_keep_old():
         no_codex = O.engines("ai-lab")
     finally:
         AC.subscription_engines, AC.engines_available = sub, paid
-    check("聞く AI と経路（ChatGPT は Codex・Perplexity は使わない）", got, {"Claude": "c", "ChatGPT": "codex", "Gemini": "g"})
-    check("Codex が無ければ ChatGPT は API で聞かない", no_codex, {"Claude": "c", "Gemini": "g"})
+    check("聞く AI と経路（ChatGPT は Codex・Claude と Perplexity は使わない）", got, {"ChatGPT": "codex", "Gemini": "g"})
+    check("Codex が無ければ ChatGPT は API で聞かない", no_codex, {"Gemini": "g"})
     act = (ROOT / ".github" / "actions" / "own-survey" / "action.yml").read_text(encoding="utf-8")
     check("部品: Codex のログイン情報は途中で落ちても消し、従量課金の鍵を受け取らない",
           ("trap cleanup EXIT" in act, "rm -f ~/.codex/auth.json" in act, "OPENAI_API_KEY" in act or "PERPLEXITY" in act),

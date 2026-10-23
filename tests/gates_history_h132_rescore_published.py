@@ -99,8 +99,8 @@ def test_codex_runs_without_step_keys_and_heads_vary():
     src = (ROOT / "scripts" / "ai_cite_check.py").read_text(encoding="utf-8")
     seg = src[src.index("def ask_chatgpt_codex"):src.index("def subscription_engines")]
     check("Codex に鍵を外した環境を渡す", ("child_env()" in seg, "env=env" in seg), (True, True))
-    base = {"ok": True, "date": "2026-10-20", "question": "q", "engines": ["Claude", "ChatGPT"], "topics": [],
-            "dims": {"費用の金額（◯円）": []}, "sources": {}}
+    base = {"v": 2, "ok": True, "date": "2026-10-20", "questions": ["q1", "q2"], "engines": ["ChatGPT", "Gemini"],
+            "answers": 4, "topics": [], "dims": {"費用の金額（◯円）": 0}, "sources": {}}
     heads = {O.claims({**base, "slug": f"zz-{i}"})[0].split("、")[0] for i in range(30)}
     check("書き出しは3通りに散る", len(heads), 3)
     ar = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")

@@ -1,21 +1,28 @@
 {
+ "v": 2,
  "slug": "getsuji-kessan-bunseki-houhou",
  "ok": true,
- "date": "2026-10-21",
- "question": "月次決算 分析 方法について教えてください",
+ "date": "2026-10-23",
+ "questions": [
+  "月次決算 分析 方法について教えてください",
+  "月次決算 分析 方法について、「月次決算の分析は「3つの比較」で行う」を教えてください",
+  "月次決算 分析 方法について、「分析する科目はどう絞り込む？」を教えてください",
+  "月次決算 分析 方法について、「会社の状態で最初に見る数字は変わる」を教えてください",
+  "月次決算 分析 方法について、「接待交際費を分析の前に確かめる理由」を教えてください"
+ ],
  "engines": [
   "ChatGPT",
-  "Claude"
+  "Gemini"
  ],
+ "answers": 10,
  "topics": [
   {
    "topic": "分析する科目はどう絞り込む？",
    "words": [
     "科目"
    ],
-   "engines": [
-    "Claude"
-   ]
+   "hits": 5,
+   "of": 8
   },
   {
    "topic": "会社の状態で最初に見る数字は変わる",
@@ -23,52 +30,71 @@
     "状態",
     "数字"
    ],
-   "engines": [
-    "ChatGPT",
-    "Claude"
-   ]
+   "hits": 5,
+   "of": 8
   },
   {
    "topic": "接待交際費を分析の前に確かめる理由",
    "words": [
     "接待交際費"
    ],
-   "engines": []
+   "hits": 0,
+   "of": 8
   }
  ],
  "sources": {
+  "11consul.com": "peer",
   "biz.moneyforward.com": "peer",
+  "bizgrowth.co.jp": "peer",
+  "career.jusnet.co.jp": "peer",
+  "chusho.meti.go.jp": "public",
+  "compasso.jp": "peer",
   "freee.co.jp": "peer",
+  "graphul.jp": "peer",
+  "grow-tree.net": "peer",
   "ht-tax.or.jp": "peer",
-  "kaonavi.jp": "peer",
+  "kakegawa-sougoukaikei.com": "peer",
+  "katsuko-office.jp": "peer",
+  "kawtax.jp": "peer",
+  "keiei.freee.co.jp": "peer",
+  "kenshiokada-cpa.jp": "peer",
+  "koyano-cpa.gr.jp": "peer",
+  "m-assets.com": "peer",
+  "maeda-zeirishi.com": "peer",
+  "mecaro.jp": "peer",
+  "media.invoice.ne.jp": "peer",
+  "media.yayoi-kk.co.jp": "peer",
+  "meijidori.jp": "portal",
+  "note.com": "video",
+  "nta.go.jp": "public",
+  "obc.co.jp": "peer",
+  "persol-bd.co.jp": "peer",
+  "standardtax.jp": "peer",
+  "suitup.jp": "peer",
   "support.freee.co.jp": "peer",
   "support.yayoi-kk.co.jp": "peer",
-  "zeiken.co.jp": "media"
+  "tnktax.com": "video",
+  "toma.co.jp": "peer",
+  "toshin-sougou.or.jp": "peer",
+  "u-ks.jp": "peer",
+  "wheat-biz.com": "peer",
+  "yayoi-kk.co.jp": "peer",
+  "zai-me.jp": "peer",
+  "zeiken.co.jp": "media",
+  "zidotto.com": "peer"
  },
  "dims": {
-  "費用の金額（◯円）": [
-   "ChatGPT"
-  ],
-  "期間（◯か月・◯日など）": [
-   "ChatGPT"
-  ],
-  "注意点・失敗・リスク": [],
-  "進め方の手順": [
-   "ChatGPT",
-   "Claude"
-  ],
-  "専門家への相談": [
-   "Claude"
-  ]
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 5,
+  "専門家への相談": 1
  },
- "chars": {
-  "ChatGPT": 2261,
-  "Claude": 1130
- },
+ "chars": 15900,
  "claims": [
-  "当社調べ（2026年10月、2つのAI：ChatGPT・Claudeに同じ質問をした2件の答え）で「月次決算 分析 方法について教えてください」の答えを比べたところ、本記事で扱う3つの論点のうち『接待交際費』の語が出てきた答えは0件でした",
-  "当社調べ（2026年10月、2つのAI：ChatGPT・Claudeに同じ質問をした2件の答え）で「月次決算 分析 方法について教えてください」の答えを比べたところ、2件すべての答えに『状態』の語が出てきました",
-  "当社調べ（2026年10月、2つのAI：ChatGPT・Claudeに同じ質問をした2件の答え）で「月次決算 分析 方法について教えてください」の答えを比べたところ、注意点・失敗・リスクに触れた答えは無く、費用の金額（◯円）に触れた答えは2件中1件、期間（◯か月・◯日など）に触れた答えは2件中1件でした",
-  "当社調べ（2026年10月、2つのAI：ChatGPT・Claudeに同じ質問をした2件の答え）で「月次決算 分析 方法について教えてください」の答えを比べたところ、出典に挙がったページは7件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件でした"
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え8件のうち、『接待交際費』に触れたものは0件でした。",
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え8件のうち、『科目』に触れたものは5件でした。",
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは専門家への相談は1件、期間（◯か月・◯日など）は3件、注意点・失敗・リスクは3件でした。",
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは39件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが1件、ポータル・比較サイトが1件、動画・SNS・ブログが2件でした。"
  ]
 }

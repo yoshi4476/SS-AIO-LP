@@ -14,11 +14,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 def test_survey_claims_are_short_sentences():
     import own_survey as O
     print("\n■ 当社調べの文: 調べ方と結果の2文に分け、どの文も100字を超えない")
-    res = {"ok": True, "date": "2026-10-20", "question": "飲食店 集客 サービスについて教えてください", "slug": "zz",
-           "engines": ["Claude", "ChatGPT", "Gemini"],
-           "topics": [{"topic": "a", "words": ["業者"], "engines": []}],
-           "dims": {"費用の金額（◯円）": [], "期間（◯か月・◯日など）": ["Claude"], "注意点・失敗・リスク": ["Claude", "ChatGPT", "Gemini"]},
-           "sources": {"a.go.jp": "public"}}
+    res = {**{"v": 2, "ok": True, "date": "2026-10-20", "questions": ["q1", "q2", "q3", "q4", "q5"],
+               "engines": ["ChatGPT", "Gemini"], "answers": 10,
+               "topics": [{"topic": "a", "words": ["業者"], "hits": 0, "of": 8},
+                          {"topic": "b", "words": ["見積"], "hits": 3, "of": 8}],
+               "dims": {"費用の金額（◯円）": 0, "期間（◯か月・◯日など）": 2, "注意点・失敗・リスク": 10},
+               "sources": {"a.go.jp": "public", "b.example": "", "c.example": ""}}, "slug": "zz"}
     sents = [s for c in O.claims(res) for s in re.findall(r"[^。]+。", c)]
     check("文は全部100字以内", (bool(sents), max(map(len, sents)) <= 100), (True, True))
 

@@ -52,6 +52,15 @@ TEMPLATE = [
      "声は機械では登録しません。実績の記入シート（jisseki_intake）で登録します", False),
 ]
 NUM = re.compile(r"\d+(?:[.,]\d+)*")
+# よく使われている一次情報に足りないもの（一次性の採点の弱点に「母数」173回・「件数」109回・「期間」71回と出た。2026-10-22）。
+# 1つの一次情報を補えば、それを使う記事が全部厚くなる（記事ごとに聞くより効く。運用者「よく使う材料に母数・期間を足す」）
+FACT_ROWS = 8
+# 「担当した9社では」は母数がある。採点が突くのはその先（数え方・規模やばらつき）なので、母数は件数の有無で見る
+GAPS = (("母数（何社・何件のうちか）", re.compile(r"のうち|中\d|\d[\d,]*(?:社|件|名|人|店|院)")),
+        ("内訳・ばらつき（会社の規模、最小と最大など）", re.compile(r"最も|最小|最大|中央値|内訳|規模|\d+(?:名|人)以下|〜\d|～\d")),
+        ("期間（いつからいつまで）", re.compile(r"\d{4}年\d{1,2}月.{0,12}(?:まで|〜|～|から)|\d{4}[-/年]\d{1,2}.{0,3}[〜～-]")),
+        ("数え方（誰が・何で数えたか）", re.compile(r"数え|集計|台帳|記録|測|計測|調べ|調査")))
+UNIT = re.compile(r"\d[\d,.]*(?:社|件|名|人|本|日|か月|時間|円|万円|%|％|割|回)")
 
 
 # ── 対象 ─────────────────────────────────────────────────────────────
@@ -73,13 +82,45 @@ def display_name(site):
 
 def targets(only=""):
     import sites as S
-    return [s for s in S.load_all() if (not only or s == only) and requests_of(s)]
+    return [s for s in S.load_all() if (not only or s == only) and (requests_of(s) or fact_gaps(s))]
 
 
 # ── 作る ─────────────────────────────────────────────────────────────
 
+def fact_gaps(site, limit=FACT_ROWS, bodies=None):
+    """記事でよく使われているのに、母数・期間・数え方のどれかが無い一次情報。[(id, 文, 使っている記事の数, 足りないもの)]"""
+    import daily_audit as D
+    import facts as F
+    try:
+        _, fs = F.load_for(site)
+    except Exception:  # noqa: BLE001
+        return []
+    if bodies is None:
+        bodies = []
+        for a in D.articles_by_site().get(site, []):
+            try:
+                bodies.append((ROOT / "articles" / f"{a['slug']}.md").read_text(encoding="utf-8-sig"))
+            except OSError:
+                pass
+    out = []
+    for f in fs or []:
+        fid, claim = str(f.get("id") or ""), str(f.get("claim") or "")
+        marks = UNIT.findall(claim)
+        if not fid or not marks or fid.startswith(("own-", "q-")):
+            continue                 # 機械で作った一次情報（自社の実測・検索の実績）は人に聞かない
+        need = max(1, (len(marks) + 1) // 2)
+        used = sum(1 for b in bodies if sum(1 for m in set(marks) if m in b) >= need)
+        # 記事に出るのは文（claim）だけ。期間の欄・出どころの欄（「2023-04〜2026-09」「運用者の申告」）を数えると、
+        # 文に無いばらつき・数え方まで「ある」と見てしまう。期間だけは期間の欄も見る
+        miss = [name for name, rx in GAPS
+                if not rx.search(claim + (" " + str(f.get("period") or "") if name.startswith("期間") else ""))]
+        if used >= 2 and miss:
+            out.append((fid, claim, used, miss))
+    return sorted(out, key=lambda x: (-x[2], x[0]))[:limit]
+
+
 def rows_for(site, reqs):
-    """(key, 項目, 質問, 目安) の並び。依頼の記事ごとの質問を先に、決まった質問を後に"""
+    """(key, 項目, 質問, 目安) の並び。依頼の記事ごとの質問を先に、よく使う一次情報の補いを次に、決まった質問を後に"""
     import private_store as P
     out = []
     for slug, r in sorted(reqs.items(), key=lambda x: str(x[1].get("since", ""))):
@@ -87,6 +128,10 @@ def rows_for(site, reqs):
         for i, q in enumerate(r.get("questions") or []):
             out.append((f"req:{slug}:{i}", f"記事「{r.get('keyword', slug)}」", q,
                         ("記事で足りないと言われている点: " + why) if (i == 0 and why) else ""))
+    for fid, claim, used, miss in fact_gaps(site):
+        out.append((f"fact:{fid}", f"一次情報の補い（記事{used}本で使用）",
+                    f"次の一次情報に「{'・'.join(miss)}」を足してください。今の文: 「{claim}」",
+                    "例の書き方: 2025年4月〜2026年9月に支援した42社のうち／請求書の台帳を担当者が月末に集計"))
     client = P.is_client(site)
     out += [(f"tpl:{k}", lab, q, hint) for k, lab, q, hint, only_client in TEMPLATE if client or not only_client]
     return out
@@ -193,6 +238,9 @@ PROMPT = """あなたは記事の一次情報の台帳の係です。お客様�
 - 食い違い（conflicts）: 下の「今の記録」と同じ対象（同じ件数のまとまり・同じ選び方の集計など）について数字や内訳が違う答えは、
   文にせず conflicts に入れる（どの記録と何が違うかを書く）。迷ったら conflicts に入れる
 - 記事に出してよいかが「不可」の答え、お客様の声の答えは、文にしない
+- 補い（項目が「一次情報の補い」・質問に今の文がある答え）: 今の文に、答えの母数・期間・数え方を足した文に書き直し、
+  facts の項目に "replaces": "その一次情報の id"（答えの番号の行の「補う id」）を付ける。今の文の数字は変えない。
+  答えの数字が今の文と違うときだけ conflicts に入れる
 
 # 今の記録
 {existing}
@@ -212,8 +260,10 @@ def _nums(text):
 
 
 def invented(text, answer):
-    """答え（答え・時期・件数の欄）に無い数字"""
+    """答え（答え・時期・件数の欄）に無い数字。補いの答えは、質問に載せた今の文の数字も使ってよい"""
     allowed = _nums(answer["answer"]) | _nums(answer["period"]) | _nums(answer["count"])
+    if str(answer.get("key", "")).startswith("fact:"):
+        allowed |= _nums(answer["question"])
     return sorted(_nums(text) - allowed)
 
 
@@ -244,7 +294,8 @@ def plan(site, answers, ask=None):
     now = "\n".join([f"- {i}: {c}" for i, c in facts] + [f"- 体験: {t}" for t in exps]) or "（なし）"
     prompt = PROMPT.format(
         existing=now,
-        answers="\n\n".join(f"[{a['no']}] {a['item']}\n質問: {a['question']}\n答え: {a['answer']}\n時期: {a['period']}\n件数: {a['count']}"
+        answers="\n\n".join(f"[{a['no']}] {a['item']}" + (f"（補う id: {a['key'][5:]}）" if a["key"].startswith("fact:") else "")
+                            + f"\n質問: {a['question']}\n答え: {a['answer']}\n時期: {a['period']}\n件数: {a['count']}"
                             for a in use))
     got = _json((ask or _ask)(prompt))
     by_no = {a["no"]: a for a in use}
@@ -262,6 +313,8 @@ def plan(site, answers, ask=None):
             if bad:
                 held.append((n, f"答えに無い数字が入ったので登録しません（{'・'.join(bad[:3])}）: {text[:60]}"))
                 continue
+            if kind == "fact" and a["key"].startswith("fact:"):
+                it = dict(it, replaces=a["key"][5:])     # 補いは元の一次情報を書き換える（同じ事実を2つ並べない）
             if kind == "exp" and str(it.get("key") or "") not in text:
                 held.append((n, f"体験の目印の語が文に無いので登録しません: {text[:60]}"))
                 continue
@@ -283,7 +336,17 @@ def write(site, facts, exps, today=None):
         ed = json.loads(OWN_EXPS.read_text(encoding="utf-8"))
     have = {str(x.get("id")) for x in fd.get("facts", [])} | {str(x.get("id")) for x in ed.get("experiences", [])}
     n = 0
+    byid = {str(x.get("id")): x for x in fd.get("facts", [])}
     for it in facts:
+        old = byid.get(str(it.get("replaces") or ""))
+        if old is not None:
+            old["claim"] = str(it["claim"]).strip()
+            old["source"] = f"{old.get('source', '')}／補い（質問シート {today}）".lstrip("／")
+            if it.get("period"):
+                old["period"] = str(it["period"])
+            if isinstance(it.get("denominator"), (int, float)) and not isinstance(it.get("denominator"), bool):
+                old["denominator"] = it["denominator"]
+            continue
         n += 1
         fid = f"{site}-m{tag}-{n}"
         while fid in have:
