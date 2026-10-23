@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-10-23T00:00:00+09:00</updated>
+  <updated>2026-10-24T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>士業が地域名の検索で上位に出るには？誘導ページのNGと3つの準備</title>
+    <link href="https://ai.7senses.co.jp/seo/shigyou-chiikimei-kensaku-joui/"/>
+    <id>https://ai.7senses.co.jp/seo/shigyou-chiikimei-kensaku-joui/</id>
+    <updated>2026-10-24T00:00:00+09:00</updated>
+    <summary>士業が地域名の検索で上位に出るには、所在地と対応地域の表記をそろえ、分野ごとの相談ページに事務所の判断を書くことが先です。当社の士業100問の調査では、地域で探す質問の出典の63.1%が比較・紹介サイトでした。地名だけ替えたページを避ける理由も整理します。</summary>
+  </entry>
   <entry>
     <title>不動産会社ホームページのよくある質問｜NG回答3つと作る順番</title>
     <link href="https://ai.7senses.co.jp/aio/fudousan-hp-yokuaru-shitsumon/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/ai-marketing/clinic-kanja-shukyaku/</id>
     <updated>2026-10-15T00:00:00+09:00</updated>
     <summary>クリニックの患者集客は、地図検索・自院サイト・AI検索・紹介・口コミの5つの入口で整理すると優先順位が決まります。入口ごとの役割、医療広告ガイドライン上の注意、検索の実測データ、最初の90日の進め方、失敗例を解説します。</summary>
-  </entry>
-  <entry>
-    <title>AI Overviewで店舗集客はできる？出る検索と出ない検索の見分け方</title>
-    <link href="https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/"/>
-    <id>https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/</id>
-    <updated>2026-10-13T00:00:00+09:00</updated>
-    <summary>AI Overviewで店舗集客はできますが、効くのは来店前の質問形の検索です。「近くの店」を探す検索では効きにくい理由、AIが店の情報を拾う2つの入口、表示されてもクリックされない語の扱い方、自店でやるか任せるかの判断基準を自社の実測とあわせて解説します。</summary>
   </entry>
 </feed>

@@ -1,13 +1,20 @@
 {
+ "v": 2,
  "slug": "aio-taisaku-jibunde",
  "ok": true,
- "date": "2026-10-21",
- "question": "AIO対策 自分でについて教えてください",
+ "date": "2026-10-24",
+ "questions": [
+  "AIO対策 自分でについて教えてください",
+  "AIO対策 自分でについて、「AIO対策は自分でできる？結論と向き不向き」を教えてください",
+  "AIO対策 自分でについて、「自分で対策を始める前に確認すべき3つの前提条件」を教えてください",
+  "AIO対策 自分でについて、「自分でできるAIO対策5つの手順」を教えてください",
+  "AIO対策 自分でについて、「自分でやる場合につまずきやすい3つの壁」を教えてください"
+ ],
  "engines": [
   "ChatGPT",
-  "Claude",
   "Gemini"
  ],
+ "answers": 10,
  "topics": [
   {
    "topic": "AIO対策は自分でできる？結論と向き不向き",
@@ -15,11 +22,8 @@
     "自分",
     "結論"
    ],
-   "engines": [
-    "ChatGPT",
-    "Claude",
-    "Gemini"
-   ]
+   "hits": 8,
+   "of": 8
   },
   {
    "topic": "自分で対策を始める前に確認すべき3つの前提条件",
@@ -27,44 +31,32 @@
     "前提条件",
     "自分"
    ],
-   "engines": [
-    "ChatGPT",
-    "Claude",
-    "Gemini"
-   ]
+   "hits": 8,
+   "of": 8
   },
   {
    "topic": "自分でできるAIO対策5つの手順",
    "words": [
     "自分"
    ],
-   "engines": [
-    "ChatGPT",
-    "Claude",
-    "Gemini"
-   ]
+   "hits": 8,
+   "of": 8
   },
   {
    "topic": "自分でやる場合につまずきやすい3つの壁",
    "words": [
     "自分"
    ],
-   "engines": [
-    "ChatGPT",
-    "Claude",
-    "Gemini"
-   ]
+   "hits": 8,
+   "of": 8
   },
   {
    "topic": "自分でやる場合と外注する場合を比較する",
    "words": [
     "自分"
    ],
-   "engines": [
-    "ChatGPT",
-    "Claude",
-    "Gemini"
-   ]
+   "hits": 10,
+   "of": 10
   },
   {
    "topic": "自分でどこまでやるべきか業種別の見極め方",
@@ -72,11 +64,8 @@
     "業種別",
     "自分"
    ],
-   "engines": [
-    "ChatGPT",
-    "Claude",
-    "Gemini"
-   ]
+   "hits": 10,
+   "of": 10
   },
   {
    "topic": "自分で対策する人によくある失敗と対処法",
@@ -84,11 +73,8 @@
     "対処法",
     "自分"
    ],
-   "engines": [
-    "ChatGPT",
-    "Claude",
-    "Gemini"
-   ]
+   "hits": 10,
+   "of": 10
   },
   {
    "topic": "自分で対策を続けるための計測ルーティン",
@@ -96,57 +82,56 @@
     "計測ルーティン",
     "自分"
    ],
-   "engines": [
-    "ChatGPT",
-    "Claude",
-    "Gemini"
-   ]
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "自分で続けるか、相談に切り替えるかの判断基準",
+   "words": [
+    "判断基準",
+    "自分",
+    "相談"
+   ],
+   "hits": 10,
+   "of": 10
   }
  ],
  "sources": {
+  "0120.co.jp": "peer",
   "ai.7senses.co.jp": "self",
+  "atoz-design.jp": "peer",
   "auto-aio.jp": "peer",
-  "biz.moneyforward.com": "peer",
   "bundlyze.co.jp": "peer",
-  "dejan.ai": "peer",
   "developers.google.com": "peer",
-  "it-trend.jp": "portal",
+  "envydesign.jp": "peer",
   "jinrai.co.jp": "peer",
-  "joinmassive.com": "peer",
   "koukoku.jp": "peer",
-  "lifestyle.assist-all.co.jp": "peer",
+  "malna.co.jp": "peer",
   "mercart.jp": "peer",
+  "nexer.co.jp": "media",
   "note.com": "video",
+  "oro.com": "media",
   "protea-inc.co.jp": "peer",
   "shanon.co.jp": "peer",
-  "stellagent.ai": "peer",
+  "sora-michi.co.jp": "peer",
   "sungrove.co.jp": "peer",
   "umoren.ai": "peer",
   "uravation.com": "peer",
-  "vectorinc.co.jp": "peer"
+  "vectorinc.co.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "white-link.com": "peer",
+  "youtube.com": "video"
  },
  "dims": {
-  "費用の金額（◯円）": [],
-  "期間（◯か月・◯日など）": [],
-  "注意点・失敗・リスク": [
-   "Claude",
-   "Gemini"
-  ],
-  "進め方の手順": [
-   "ChatGPT",
-   "Claude",
-   "Gemini"
-  ],
-  "専門家への相談": []
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 7,
+  "専門家への相談": 5
  },
- "chars": {
-  "ChatGPT": 1802,
-  "Claude": 1184,
-  "Gemini": 2052
- },
+ "chars": 17053,
  "claims": [
-  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「AIO対策 自分でについて教えてください」と質問しました。3件の答えのすべてに『自分』『前提条件』の語が出てきました。",
-  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「AIO対策 自分でについて教えてください」と質問しました。3件の答えのうち、費用の金額（◯円）に触れた答えは無く、期間（◯か月・◯日など）に触れた答えは無く、専門家への相談に触れた答えは無くでした。",
-  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「AIO対策 自分でについて教えてください」と質問しました。3件の答えの出典に挙がったページは20件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが0件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は0件、注意点・失敗・リスクは2件でした。",
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは24件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが2件、動画・SNS・ブログが2件でした。"
  ]
 }
