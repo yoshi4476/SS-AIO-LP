@@ -1,0 +1,78 @@
+{
+ "slug": "aoiro-shinkokukai-kichodaiko",
+ "ok": true,
+ "date": "2026-10-23",
+ "question": "青色申告会 記帳代行について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "青色申告会・記帳代行会社・税理士の役割の違い",
+   "words": [
+    "税理士",
+    "役割"
+   ],
+   "engines": [
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "自分で記帳すると起きやすい仕訳の誤り",
+   "words": [
+    "自分",
+    "仕訳"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  }
+ ],
+ "sources": {
+  "aoiro.org": "peer",
+  "atsoho.com": "peer",
+  "freee.co.jp": "peer",
+  "hcci.jp": "peer",
+  "kagoshima-aoiro.com": "peer",
+  "meguro-aoiro-forum.com": "peer",
+  "meinaka.com": "peer",
+  "nta.go.jp": "public",
+  "vertexaisearch.cloud.google.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "期間（◯か月・◯日など）": [
+   "Gemini"
+  ],
+  "注意点・失敗・リスク": [
+   "Claude"
+  ],
+  "進め方の手順": [
+   "Gemini"
+  ],
+  "専門家への相談": [
+   "Claude",
+   "Gemini"
+  ]
+ },
+ "chars": {
+  "ChatGPT": 1477,
+  "Claude": 836,
+  "Gemini": 1863
+ },
+ "claims": [
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「青色申告会 記帳代行について教えてください」と質問しました。3件の答えのすべてに『自分』の語が出てきました。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「青色申告会 記帳代行について教えてください」と質問しました。3件の答えのうち、『税理士』の語が出たものは2件でした。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「青色申告会 記帳代行について教えてください」と質問しました。3件の答えのうち、期間（◯か月・◯日など）に触れた答えは3件中1件、注意点・失敗・リスクに触れた答えは3件中1件、進め方の手順に触れた答えは3件中1件でした。",
+  "当社調べでは2026年10月に、3つのAI（ChatGPT・Claude・Gemini）へ「青色申告会 記帳代行について教えてください」と質問しました。3件の答えの出典に挙がったページは9件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが0件でした。"
+ ]
+}
