@@ -1,0 +1,98 @@
+{
+ "slug": "clinic-keiri",
+ "ok": true,
+ "date": "2026-10-23",
+ "question": "クリニック 経理について教えてください",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini"
+ ],
+ "topics": [
+  {
+   "topic": "クリニックの経理は一般の会社と何が違うか？",
+   "words": [
+    "一般"
+   ],
+   "engines": [
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "保険診療の売上は、いつ入金されるか？",
+   "words": [
+    "保険診療",
+    "売上"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "保険診療と自由診療を分けないと何が困るか？",
+   "words": [
+    "保険診療",
+    "自由診療"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  },
+  {
+   "topic": "非常勤医師への報酬で起きやすい仕訳の誤り",
+   "words": [
+    "非常勤医師",
+    "報酬",
+    "仕訳"
+   ],
+   "engines": [
+    "ChatGPT",
+    "Claude",
+    "Gemini"
+   ]
+  }
+ ],
+ "sources": {
+  "atsoho.com": "peer",
+  "biz.moneyforward.com": "peer",
+  "gentosha-go.com": "media",
+  "nta.go.jp": "public",
+  "phchd.com": "peer",
+  "ssk.or.jp": "public",
+  "tkc.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": [
+   "Gemini"
+  ],
+  "期間（◯か月・◯日など）": [
+   "ChatGPT",
+   "Claude",
+   "Gemini"
+  ],
+  "注意点・失敗・リスク": [
+   "Claude",
+   "Gemini"
+  ],
+  "進め方の手順": [],
+  "専門家への相談": [
+   "Claude",
+   "Gemini"
+  ]
+ },
+ "chars": {
+  "ChatGPT": 1560,
+  "Claude": 1127,
+  "Gemini": 2182
+ },
+ "claims": [
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「クリニック 経理について教えてください」と聞きました。3件の答えのすべてに『保険診療』『非常勤医師』の語が出てきました。",
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「クリニック 経理について教えてください」と聞きました。3件の答えのうち、『一般』の語が出たものは1件でした。",
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「クリニック 経理について教えてください」と聞きました。3件の答えのうち、進め方の手順に触れた答えは無く、費用の金額（◯円）に触れた答えは3件中1件、注意点・失敗・リスクに触れた答えは3件中2件でした。",
+  "2026年10月に当社が3つのAI（ChatGPT・Claude・Gemini）に「クリニック 経理について教えてください」と聞きました。3件の答えの出典に挙がったページは7件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが1件でした。"
+ ]
+}
