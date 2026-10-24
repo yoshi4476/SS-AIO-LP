@@ -9,7 +9,7 @@
 | 累計公開記事数 | 482本 | カテゴリ内訳: AIO・LLMO85本、SEO26本、MEO20本、AI集客50本 |
 | 直近7日の公開 | 30本 | 目標: 週14本（毎日2本） |
 | 品質スコア平均 | 93.6点 | 公開基準85点・目標90点 |
-| 平均文字数 | 5,649字 | 基準5,000字以上 |
+| 平均文字数 | 5,650字 | 基準5,000字以上 |
 | 非公開（審査未達） | 3本 | clinic-keiri、getsuji-kessan-bunseki-houhou、keihi-seisan-mendokusai |
 | DR / KW数 / AI計測 | — | GA4・GSC・Ahrefs稼働後に自動反映 |
 

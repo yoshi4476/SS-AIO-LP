@@ -361,11 +361,10 @@
   "site": "subsidy"
  },
  "jizokuka-hojokin-inshokuten-jirei": {
-  "at": "2026-10-19",
-  "pos": 24.2,
-  "imp": 20,
-  "band": "21〜50位",
-  "site": "subsidy"
+  "at": "2026-10-24",
+  "pos": 20.9,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  },
  "it-hojokin-clinic": {
   "at": "2026-10-01",
