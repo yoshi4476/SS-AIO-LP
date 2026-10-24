@@ -211,7 +211,7 @@ jobs:
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
           mkdir -p automation/logs
-          npm install -g @anthropic-ai/claude-code || true
+          npm install -g @anthropic-ai/claude-code@2.1.302 || true
           # 課金の前に、何回聞くことになるかを必ず記録する
           python scripts/compete.py --measure --dry-run 2>&1 | tail -25 || true
           out=$(python scripts/compete.py --measure 2>&1) || true
@@ -298,7 +298,7 @@ jobs:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ${{ secrets.HUB_SECRET }}
         run: |
-          npm install -g @anthropic-ai/claude-code || true
+          npm install -g @anthropic-ai/claude-code@2.1.302 || true
           out=$(python scripts/ai_cite_check.py); echo "$out"
           if echo "$out" | grep -q "AI_CITED="; then
             mkdir -p automation/logs
@@ -349,7 +349,7 @@ jobs:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ""
         run: |
-          npm install -g @anthropic-ai/claude-code || true
+          npm install -g @anthropic-ai/claude-code@2.1.302 || true
           if ! python scripts/agent_guard.py --verify; then
             echo "::warning::改善の実行の作業場に鍵が残っていたため、AI を動かしませんでした"
             mkdir -p automation/logs

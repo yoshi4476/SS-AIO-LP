@@ -368,8 +368,14 @@ function doGet(e) {
         return json_({ ok: true, message: 'セブンセンシズ 自動化管制塔は正常に稼働しています' });
     }
   } catch (err) {
-    return json_({ ok: false, error: String(err) });
+    return json_({ ok: false, error: errText_(err, p.secret) });
   }
+}
+
+/** 例外の文。合言葉つきの呼び出し（当社の道具）にだけ詳しく返し、ほかは決まった文にする（中身は実行ログに残す） */
+function errText_(err, secret) {
+  console.error(String(err));
+  return SHARED_SECRET && secret === SHARED_SECRET ? String(err) : '受付で問題が起きました。時間をおいてもう一度お試しください';
 }
 
 function doPost(e) {
@@ -426,6 +432,8 @@ function doPost(e) {
       case 'register_site': return json_(registerSite_(body));
       // 診断の記録（業種・点数・ハッシュ化したサイト・紹介元）。audit.js が合言葉つきで送る
       case 'scan_log':    return json_(scanLog_(body));
+      // 回数の上限（Cloudflare の受付が合言葉つきで呼ぶ。購読の確認のメール・サイト診断。contact.hub.gs）
+      case 'rate_hit':    return json_(rateHit_(body));
       // 取りこぼした問い合わせを台帳へ戻す（lead_reconcile で見つけ、送信履歴から復元した分）。
       // メールは送らない。フォームの経路（form_）を通すと、今になって自動返信が相手に届く
       case 'restore_lead': return json_(restoreLead_(body));
@@ -469,7 +477,7 @@ function doPost(e) {
         return json_(form_(body));
     }
   } catch (err) {
-    return json_({ ok: false, error: String(err) });
+    return json_({ ok: false, error: errText_(err, body.secret) });
   }
 }
 

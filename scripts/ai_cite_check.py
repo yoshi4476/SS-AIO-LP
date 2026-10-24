@@ -187,16 +187,18 @@ def ask_chatgpt_codex(q):
     return list(dict.fromkeys(urls))
 
 
-def subscription_engines():
-    """課金APIを使わない聞き方: ChatGPT（サブスクの Codex）・Gemini（無料枠のAPIキー）・Claude（サブスクの Claude Code）"""
+def subscription_engines(site=None):
+    """課金APIを使わない聞き方: ChatGPT（サブスクの Codex）・Gemini（無料枠のAPIキー）・Claude（サブスクの Claude Code）。
+    site を渡すと、お客様の社の質問と答えは public に置かない（当社調べがお客様の狙う語と見出しで聞いた控えを
+    公開側にコミットしていた。2026-10-24 の点検）"""
     out = {}
     import shutil
     if shutil.which("codex") or shutil.which("codex.cmd"):
-        out["ChatGPT"] = _cached("ChatGPT-sub", ask_chatgpt_codex)
+        out["ChatGPT"] = _cached("ChatGPT-sub", ask_chatgpt_codex, site=site)
     # Gemini は入れない。検索つき回答は無料枠では使えず（公式の料金表: Free Tier は "Not available"。2026-10-04 確認）、
     # 月5,000回までの検索料0円は AI診断と自動処理で分け合う。この聞き方を使う業種調査（月約1,700問）は量が多すぎる
     if _claude_cli_ready():
-        out["Claude"] = _cached("Claude-sub", ask_claude_cli)
+        out["Claude"] = _cached("Claude-sub", ask_claude_cli, site=site)
     return out
 
 
@@ -355,6 +357,8 @@ ENGINE_KEYS = {"ChatGPT": "OPENAI_API_KEY", "Gemini": "GEMINI_API_KEY", "Perplex
 
 CACHE_DIR = ROOT / "data" / "ai_cache"
 CACHE_DAYS = 30
+LEAK_RX = re.compile(r"refresh_token|access_token|id_token|\"tokens\"|OPENAI_API_KEY|sk-[A-Za-z0-9_-]{20,}|"
+                     r"ghp_[A-Za-z0-9]{20,}|github_pat_|BEGIN [A-Z ]*PRIVATE KEY|ya29\.", re.I)
 
 
 TEXT = {}          # (関数名, 質問) → 答えの本文。出典URLだけでなく「何と答えたか」を数える調査が使う
@@ -419,6 +423,12 @@ def _cached(name, fn, site=None):
             except Exception:
                 pass
         urls = fn(q)
+        # 答えにログイン情報の形（refresh_token など）があれば使わず残さない。AI は Web の文章を読むので、仕込まれた指示で
+        # 手元の資格のファイルを答えに書く道がある（控えは公開側にコミットされる。2026-10-24 の点検）
+        if urls is not None and LEAK_RX.search(answer_text(fn, q) + " " + " ".join(map(str, urls))):
+            TEXT.pop((fn.__name__, q), None)
+            print(f"  {name}: 答えに資格の形があったため使いません", file=sys.stderr)
+            return []
         if urls is not None:
             p = cache_file(name, q, site)
             p.parent.mkdir(parents=True, exist_ok=True)

@@ -367,8 +367,13 @@ def main():
     if a.add:
         if not a.rule:
             raise SystemExit("--rule（次からこうする）が要ります")
-        rec, made = add(a.kind, a.phase, a.rule, a.detail,
-                        [s for s in a.sites.split(",") if s], a.gate, a.source)
+        # 学びは以後の記事の AI が「必ず守ること」として読む。外の文章（字幕・検索上位）に仕込まれた宛先を学びにさせない
+        if re.search(r"://|www\.", a.rule + " " + a.detail):
+            raise SystemExit("学びに URL は書けません（宛先は記事の出典として書く）")
+        # 記事の回（SITE_ID がある）で社を指定せずに足した学びは、その社にだけ効かせる。全社に効かせると、1社の回で
+        # 仕込まれた指示がお客様の社も含む全部の記事に効き、お客様の社の学びが公開側に残った（2026-10-24 の点検）
+        sites = [s for s in a.sites.split(",") if s] or ([os.environ["SITE_ID"]] if os.environ.get("SITE_ID") else [])
+        rec, made = add(a.kind, a.phase, a.rule, a.detail, sites, a.gate, a.source)
         if any(r is rec for r in HELD):
             # 文はお客様の語を含みうるので出さない（このログも public）
             print(f'保存しませんでした: {rec["id"]} [{rec["phase"]}]（お客様の伏せる語を取れない回）')

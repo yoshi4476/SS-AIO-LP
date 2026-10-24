@@ -403,7 +403,8 @@ def replies(src):
           # 結果メールの返信先は Script Properties で差し替えられる（未設定なら NOTIFY_TO）
           "PropertiesService={getScriptProperties:function(){return {getProperty:function(){return null;}};}};"
           f"var __c={json.dumps(REPLY_CASES)};var __o={{}};"
-          "Object.keys(__c).forEach(function(k){__m=[];var d=__c[k];leadReply_('AI集客ラボ',d.type,d);"
+          # 結果の文（直し方・AI紹介チェックの結果）は当社のサーバーが合言葉つきで送ったものだけ載る（server=true）
+          "Object.keys(__c).forEach(function(k){__m=[];var d=__c[k];leadReply_('AI集客ラボ',d.type,d,true);"
           "__o[k]=__m.length?(__m[0].subject+'\\n'+__m[0].body):'';});globalThis.__out=__o;")
     return node_run(src, js)
 
@@ -463,8 +464,22 @@ def test_hist_pinned_tool_versions():
     check("検出器: コメントで触れているだけは拾わない", bool(FONT_IMPORT.search("// next/font/google はビルドのたびに取りに行く")), False)
     npx = sorted({f"{n}: {s}" for n, _, t in workflows() for s in NPX.findall(t) if not pinned(s)})
     check("ワークフローの npx は版を x.y.z で固定", npx, [])
-    warn("npm install -g の版が固定されていない（claude-code・codex は版の更新を追うため保留）",
-         {f"{n}: {s}" for n, _, t in workflows() for s in NPM_G.findall(t) if not pinned(s)})
+    # claude-code・codex も版で固定する（鍵のあるジョブで、取りに行くたびに中身が変わらないように。2026-10-24 の点検）。
+    # 1行に複数の包みを並べた行（npm i -g a b）も全部を見る。同じ包みはどこでも同じ版
+    files = sorted(list((ROOT / ".github").rglob("*.yml")) + [ROOT / "automation" / "ai_container.Dockerfile"])
+    specs = [(f.relative_to(ROOT).as_posix(), s) for f in files
+             for line in re.findall(r"npm\s+(?:i|install)\s+(?:-g|--global)\s+([^\n>&|]+)", f.read_text(encoding="utf-8"))
+             for s in line.split() if not s.startswith("-")]
+    check("npm install -g の版は x.y.z で固定（ワークフロー・部品・AI のコンテナ）", sorted({f"{n}: {s}" for n, s in specs if not pinned(s)}), [])
+    vers = {}
+    for _, s in specs:
+        vers.setdefault(s.rsplit("@", 1)[0], set()).add(s)
+    check("同じ包みはどこでも同じ版", sorted(k for k, v in vers.items() if len(v) > 1), [])
+    pm = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    check("yt-dlp も版を固定", bool(re.search(r"yt-dlp==\d{4}\.\d+\.\d+", pm)) and not re.search(r"pip install[^\n]*\byt-dlp(?!==)", pm), True)
+    df = (ROOT / "automation" / "ai_container.Dockerfile").read_text(encoding="utf-8")
+    check("AI のコンテナの元のイメージはハッシュで固定", re.findall(r"^FROM\s+(\S+)", df, re.M) and
+          all("@sha256:" in x for x in re.findall(r"^FROM\s+(\S+)", df, re.M)), True)
     src = [f for f in tracked("*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs")
            if FONT_IMPORT.search((ROOT / f).read_text(encoding="utf-8", errors="ignore"))]
     check("このリポジトリのソースに next/font/google の import が無い", src, [])

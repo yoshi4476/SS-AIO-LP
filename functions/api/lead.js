@@ -14,6 +14,10 @@
  * ロボットよけ（Turnstile）は functions/_turnstile.js。答えを確かめ、結果を管制塔への転送に添える（台帳には残さない）。
  */
 import { ENFORCE, FIELD, REFUSAL, verify, refuse, log } from "../_turnstile.js";
+import { readAudit } from "../_audit_checks.js";
+
+// 管制塔の受付が別の意味に読む項目は、フォームから受け取らない（自動返信の本文・通知の止め方を外から決めさせない）
+const RESERVED = ["audit", "diagnosis", "secret", "silent", "site", "type", "audit_url", "audit_score", "audit_grade", "audit_fixes"];
 
 // ページの部品（site.js）が読むサイトキーと、断るかどうか（公開してよい値だけ返す）
 export async function onRequestGet({ env }) {
@@ -30,8 +34,8 @@ export async function onRequestPost(context) {
   } catch (_) {
     return new Response("フォーム形式で送信してください。", { status: 400 });
   }
-  // 直し方の一覧は長いので、そこだけ上限を広げる。ロボットよけの答え（最長2048字）は切らずに別に持ち、台帳へは送らない
-  for (const [k, v] of fd) if (k !== FIELD) data[k] = String(v).slice(0, k === "audit_fixes" ? 6000 : 2000);
+  // ロボットよけの答え（最長2048字）は切らずに別に持ち、台帳へは送らない
+  for (const [k, v] of fd) if (k !== FIELD && !RESERVED.includes(k)) data[k] = String(v).slice(0, 2000);
   const token = String(fd.get(FIELD) || "");
 
   // ハニーポット（botはこの不可視フィールドを埋める）
@@ -40,8 +44,20 @@ export async function onRequestPost(context) {
   for (const k of ["name", "company", "email"]) {
     if (!data[k] || !data[k].trim()) return new Response("必須項目が未入力です。", { status: 400 });
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+  // 長さも見る。管制塔は80字で切るため、長いアドレスは管制塔で弾かれて予備の送り方（Resend）へ回り、回数の上限なく送らせられた
+  const email = data.email.trim();
+  if (!/^[^\s@]{1,64}@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 80) {
     return new Response("メールアドレスの形式が正しくありません。", { status: 400 });
+  }
+  data.email = email;
+  // お名前は自動返信の宛名になる。長い文や URL を入れて、当社名義のメールに好きな文を載せさせない
+  data.name = data.name.trim();
+  if (data.name.length > 50 || /:\/\/|www\.|https?:/i.test(data.name)) {
+    return new Response("お名前は50字以内で、URL を含めずにご入力ください。", { status: 400 });
+  }
+  // AI紹介チェックの結果メールは /api/ai-check だけが作る（この入口から種別を名乗らせない）
+  if (String(data.form_type || "").includes("AI紹介チェック")) {
+    return new Response("このフォームからは送れない種別です。", { status: 400 });
   }
 
   const ts = await verify(env, token, request.headers.get("CF-Connecting-IP") || "");
@@ -71,14 +87,14 @@ export async function onRequestPost(context) {
     // 台帳に残っていなかった。種別を form_type から決め、本文が無ければ相談テーマか種別で補う
     // サイト診断の結果（URL・点数・直し方）が付いていれば site_audit。
     // これが無いと「無料診断」の汎用返信になり、画面で約束した直し方がメールに入らなかった
-    const type = data.audit_url ? "site_audit"
+    // 診断の結果は /api/audit の署名を確かめたものだけ使い、直し方の文は決まった文から作り直す（利用者が送った文を載せない）
+    const audit = await readAudit(env.GAS_SHARED_SECRET, data.audit_token);
+    const type = audit ? "site_audit"
       : ft.includes("資料") ? "download"
       : (ft.includes("診断") || ft.includes("結果送付")) ? "diagnosis" : "contact";
     const hub = { ...data, site: "ai-lab", type };
-    if (type === "site_audit") {
-      hub.audit = { url: data.audit_url, total: Number(data.audit_score), grade: data.audit_grade || "",
-                    fixes: data.audit_fixes || "" };
-    }
+    delete hub.audit_token;
+    if (audit) hub.audit = audit;
     if (!String(hub.message || "").trim()) hub.message = data.topic || ft || "（本文なし）";
     // 業種別のページ（/lp/medical/ など）から来た相談は、業種を本文の末尾に添える（台帳の列は増やさない）
     const ind = String(data.industry || "").replace(/\s+/g, " ").trim().slice(0, 30);
@@ -106,7 +122,7 @@ export async function onRequestPost(context) {
   const subj = (s) => String(s || "").replace(/[\r\n]+/g, " ").slice(0, 80);
   const label = subj(data.form_type) || "お問い合わせ";
   const lines = Object.entries(data)
-    .filter(([k]) => !k.startsWith("_"))
+    .filter(([k]) => !k.startsWith("_") && k !== "audit_token")
     .map(([k, v]) => `${k}: ${v}`)
     .join("\n");
 

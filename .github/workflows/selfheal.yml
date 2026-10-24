@@ -140,7 +140,7 @@ jobs:
         run: |
           python -m pip install --quiet --upgrade pip
           pip install --quiet -r requirements.txt || true
-          npm install -g @anthropic-ai/claude-code
+          npm install -g @anthropic-ai/claude-code@2.1.302
           # 図解の検査（image_check）が日本語フォントを使う。無いと門が途中で止まる（2026-10-05 に自動修復が提案）
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk > /dev/null 2>&1 || true
 
@@ -534,6 +534,14 @@ jobs:
           docker build -q -t selfheal-ai /tmp/img
           # 作業場の写し。.git も写す（AI が履歴を読む）が、ランナー側の .git には届かない
           rm -rf /tmp/ws && cp -a . /tmp/ws
+          # 外への通信の中継（Claude の API だけを通す）。AI のコンテナは外へ出られない内部の網に置き、中継だけを通す。
+          # 中継のプログラムは AI の写しではなく本体の写し（このランナーの checkout）から読む（2026-10-24 の点検）
+          docker network create --internal ai-int > /dev/null
+          docker run -d --name ai-egress --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges \
+            -v "$GITHUB_WORKSPACE/scripts/egress_proxy.py:/opt/egress_proxy.py:ro" selfheal-ai python /opt/egress_proxy.py > /dev/null
+          docker network connect ai-int ai-egress
+          for i in $(seq 40); do docker logs ai-egress 2>&1 | grep -q EGRESS_PROXY=ready && break; sleep 0.5; done
+          docker logs ai-egress 2>&1 | grep -q EGRESS_PROXY=ready || { echo "::error::外への通信の中継が立ち上がりませんでした"; exit 1; }
 
       - name: 不具合の自動修復（鍵の無いコンテナ）
         env:
@@ -541,12 +549,15 @@ jobs:
         run: |
           # 権限を全部外し、昇格もさせない。ランナーの /proc・docker・ファイルには届かない。終われば中の処理はすべて消える
           docker run --rm --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges --pids-limit 1024 \
+            --network ai-int -e HTTPS_PROXY=http://ai-egress:3128 -e HTTP_PROXY=http://ai-egress:3128 -e NO_PROXY=localhost,127.0.0.1 \
+            -e CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 -e DISABLE_AUTOUPDATER=1 \
             -e CLAUDE_CODE_OAUTH_TOKEN -e HOME=/tmp/home -v /tmp/ws:/ws -w /ws selfheal-ai bash -c '
               mkdir -p "$HOME" && git config --global --add safe.directory /ws
               python scripts/build.py > /tmp/prebuild.log 2>&1 || true
               # コードは直せるが、外へ送るコマンドと鍵の外し方そのもの（agent_guard・許可の一覧）には触れない
               claude -p "$(cat automation/selfheal_prompt.txt)" \
                 --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_maint.json --max-turns 120 || true' || true
+          echo "外への通信で中継が断った数: $(docker logs ai-egress 2>&1 | grep -c '^拒否' || true)"
 
       - name: 直った状態の検証と差分
         id: verify

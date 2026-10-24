@@ -52,6 +52,11 @@ class _Quiet(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a):
         pass
 
+    def guess_type(self, path):
+        # Windows の Python は初めての判定でレジストリを読み、手元で17.8秒かかる（gates_history_a.SERVE_TYPES と同じ理由）
+        from gates_history_a import SERVE_TYPES
+        return SERVE_TYPES.get(Path(path).suffix.lower(), "application/octet-stream")
+
 
 def _serve(root):
     srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), partial(_Quiet, directory=str(root)))

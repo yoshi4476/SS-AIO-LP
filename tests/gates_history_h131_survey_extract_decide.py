@@ -65,9 +65,9 @@ def test_own_survey_order_and_keep_old():
     sub, paid = AC.subscription_engines, AC.engines_available
     AC.engines_available = lambda site=None: {"ChatGPT": "api", "Gemini": "g", "Perplexity": "p"}
     try:
-        AC.subscription_engines = lambda: {"Claude": "c", "ChatGPT": "codex"}
+        AC.subscription_engines = lambda site=None: {"Claude": "c", "ChatGPT": "codex"}
         got = O.engines("ai-lab")
-        AC.subscription_engines = lambda: {"Claude": "c"}
+        AC.subscription_engines = lambda site=None: {"Claude": "c"}
         no_codex = O.engines("ai-lab")
     finally:
         AC.subscription_engines, AC.engines_available = sub, paid

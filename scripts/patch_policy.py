@@ -30,7 +30,7 @@ MAX_CODE_ADDED = 40
 
 # 許可の一覧に入っていても取り込まない場所（鍵の外し方・守秘の仕組み・判定そのもの・埋め込みの形・通知）
 FORBID = [r"^scripts/(agent_guard|gcreds|private_store|client_private|ci_mask|log_leak_check|html_safety|patch_policy|embeds|"
-          r"md2html|notify_slack|set_secrets|gas_deploy|hub_token|hub_client|agent_work)\.py$",
+          r"md2html|notify_slack|set_secrets|gas_deploy|hub_token|hub_client|agent_work|egress_proxy)\.py$",
           r"^tests/gates_history_h91_agent_jail\.py$", r"(^|/)(sitecustomize|usercustomize|conftest|setup|__init__)\.py$"]
 ALLOW = [(r"^scripts/[\w/-]+\.py$", "code"), (r"^tests/[\w-]+\.py$", "test")]
 # 記事とデータは自動で取り込まない（上の説明。2026-10-20）
@@ -41,7 +41,15 @@ RISKY = [
     (r"\b(urllib|requests|http\.client|httplib2|socket|smtplib|ftplib|paramiko|aiohttp|httpx|websocket|ssl|telnetlib|"
      r"xmlrpc|asyncio|multiprocessing|threading|webbrowser)\b", "外への通信・裏の処理"),
     (r"\bsubprocess\b|\bos\.(system|popen|exec\w*|spawn\w*|fork|kill)\b|\bpty\b", "コマンドの実行"),
-    (r"\bos\.environ\b|\bgetenv\b|\benviron\b", "環境変数の読み書き"),
+    # 語の境目で切らない（os.environb・os.getenvb は \benviron\b に当たらなかった。2026-10-24 の点検）
+    (r"environ|getenv", "環境変数の読み書き"),
+    # 鍵の名前の形（SITE_PUSH_TOKEN・HUB_SECRET・ANTHROPIC_API_KEY・WP_CREDENTIALS_JSON）。大文字の定数だけを見る
+    # （re.I の下でも大文字小文字を区別する。max_tokens のようなふつうの名前は通す）
+    (r"(?-i:\b[A-Z][A-Z0-9]*_(?:[A-Z0-9]+_)*(?:TOKEN|TOKENS|SECRET|KEY|PASSWORD|CREDENTIALS?|AUTH)(?:_[A-Z0-9]+)*\b)",
+     "鍵の名前"),
+    # 外の宛先と、既にある「送る・環境変数を読む」手助けの関数（新しい import 無しで外へ送れた。2026-10-24 の点検）
+    (r"\b[a-z]+://|\b\w*_(post|env|fetch|urlopen|request|upload|send)\s*\(|(?<![.\w])(post|fetch|urlopen|upload)\s*\(",
+     "外の宛先・送る手助けの関数"),
     (r"(?<![.\w])(exec|eval|compile)\s*\(|__import__|\bimportlib\b|\bbuiltins\b|\bglobals\s*\(|\blocals\s*\(|"
      r"\bgetattr\s*\(\s*(os|sys|subprocess|builtins|__builtins__|importlib|socket|shutil|io|pathlib|urllib)\b|"
      r"\bgetattr\s*\([^,()]+,\s*[^\"'\s]|\bsetattr\s*\(|\bvars\s*\(|"

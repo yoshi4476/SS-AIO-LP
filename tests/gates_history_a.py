@@ -330,6 +330,15 @@ MEASURE_JS = r"""() => {
 STILL_CSS = "*,*::before,*::after{transition:none!important;animation:none!important}.reveal{opacity:1!important}"
 
 
+# 門の簡易サーバーが答えるファイルの種類。Windows の Python は初めての判定（mimetypes）でレジストリを読みにいき、
+# 手元で17.8秒かかって描画の門が20秒で時間切れになった（2026-10-24 実測。CI の Linux では起きない）
+SERVE_TYPES = {".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".mjs": "text/javascript",
+               ".json": "application/json", ".xml": "application/xml", ".txt": "text/plain", ".svg": "image/svg+xml",
+               ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".gif": "image/gif",
+               ".ico": "image/x-icon", ".woff2": "font/woff2", ".woff": "font/woff", ".mp4": "video/mp4", ".webm": "video/webm",
+               ".pdf": "application/pdf", ".csv": "text/csv"}
+
+
 def _serve(d):
     import functools
     import http.server
@@ -338,6 +347,9 @@ def _serve(d):
     class Q(http.server.SimpleHTTPRequestHandler):
         def log_message(self, *a):
             pass
+
+        def guess_type(self, path):
+            return SERVE_TYPES.get(Path(path).suffix.lower(), "application/octet-stream")
     s = http.server.ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(Q, directory=str(d)))
     threading.Thread(target=s.serve_forever, daemon=True).start()
     return s
@@ -701,7 +713,8 @@ def test_hist_no_retired_scoring_claims():
          [p.name for p in list(sales.glob("*.html")) + [ROOT / "docs" / "client-readme.md"]
           if p.is_file() and STALE_RX.search(read(p))])
     js = read(ROOT / "functions" / "api" / "audit.js")
-    items = re.findall(r'name:\s*"([^"]+)",\s*pts:\s*(\d+)', js)
+    # 項目の名前と配点は functions/_audit_checks.js に置いた（結果送付のメールも同じ文から作る。2026-10-24）
+    items = re.findall(r'name:\s*"([^"]+)",\s*pts:\s*(\d+)', read(ROOT / "functions" / "_audit_checks.js"))
     pts = {n: int(v) for n, v in items}
     llms = [v for n, v in pts.items() if "llms" in n.lower()]
     check("診断: 配点表を読めた（検出器が働いている）", len(pts) >= 8, True)

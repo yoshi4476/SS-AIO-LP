@@ -557,7 +557,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
-          npm install -g @anthropic-ai/claude-code
+          npm install -g @anthropic-ai/claude-code@2.1.302
           # ネイティブバイナリが落ちてこないことがある（postinstallが走らない／
           # optional依存が省かれる）。実行時まで気づけず、記事生成ごと落ちる。
           # ここで動作を確かめ、駄目ならインストーラを直接叩き直す。
@@ -1290,6 +1290,8 @@ jobs:
 
       - name: 最終ビルドとコミット
         run: |
+          # この回に Claude が使ったトークン（実行の記録から数える。2026-10-24 運用者「トークン消費量がエグい」）
+          python scripts/claude_usage.py --job "週次" --write || true
           python scripts/build.py
           git add -A
           # 介入の台帳。effect_ab・rewrite_rollback が前後を比べる元なので、CI で毎回空に

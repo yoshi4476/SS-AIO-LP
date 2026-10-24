@@ -131,12 +131,16 @@ globalThis.fetch = async (url, o = {}) => {
     if (t.startsWith("DOWN")) throw new Error("offline");
     return Response.json(t.startsWith("GOOD") ? { success: true, hostname: "ai.7senses.co.jp" } : { success: false, "error-codes": ["invalid-input-response"] });
   }
-  if (url.includes("gas.test")) { calls.push(["gas", JSON.parse(o.body)]); return Response.json({ ok: true }); }
+  if (url.includes("gas.test")) {
+    const b = JSON.parse(o.body);
+    calls.push(["gas", b]);
+    return Response.json(b.action === "rate_hit" ? { ok: true, allowed: true } : { ok: true });
+  }
   calls.push(["other", url]);
   return Response.json({ id: "x" });
 };
 const env = { TURNSTILE_SITEKEY: "0xKEY", TURNSTILE_SECRET: "s", GAS_WEBHOOK_URL: "https://gas.test/exec", GAS_SHARED_SECRET: "hs",
-  RESEND_API_KEY: "r", RESEND_AUDIENCE_ID: "a" };
+  RESEND_API_KEY: "r", RESEND_AUDIENCE_ID: "a", LEAD_FROM_EMAIL: "f@example.jp" };
 const lead = await import(pathToFileURL(dir + "/api/lead.js").href);
 const sub = await import(pathToFileURL(dir + "/api/subscribe.js").href);
 async function post(m, fields, e = env) {

@@ -125,9 +125,14 @@ def page(url, limit=300000):
 def audit(t, call=None):
     """当社の無料診断（/api/audit）にかける。ref=prospect の分は診断の記録・同業の平均に入れない（functions/api/audit.js）"""
     if call is None:
+        import hub_client as H
+        mark = hashlib.sha256(("audit-key:" + H.HUB_SECRET).encode()).hexdigest()[:24] if H.HUB_SECRET else ""
+
         def call(url):
+            # 合言葉の印（functions/api/audit.js の X-SS-Audit-Key）。無いと回線ごとの回数の上限（1時間10回）に当たる
             req = urllib.request.Request(AUDIT_API, data=json.dumps({"url": url, "ref": "prospect"}).encode(),
-                                         headers={"Content-Type": "application/json", "User-Agent": "ss-aio-pipeline/1.0"})
+                                         headers={"Content-Type": "application/json", "User-Agent": "ss-aio-pipeline/1.0",
+                                                  **({"X-SS-Audit-Key": mark} if mark else {})})
             with urllib.request.urlopen(req, timeout=90) as r:
                 return json.loads(r.read().decode("utf-8"))
     res = call(t["url"])

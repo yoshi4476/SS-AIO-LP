@@ -180,6 +180,12 @@ jobs:
           # 起動役の回は予定の時刻（scheduled_for）の日
           echo "slot_day=$(python scripts/daily_audit.py --slot-day "$EV_SCHEDULE" "$IN_AT")" >> "$GITHUB_OUTPUT"
           s="$IN_SITE"
+          # 手で起動した回の社は、社の id の形だけ受ける。形を確かめずに Python のコードと後のジョブの run に埋めていたため、
+          # 起動の鍵を持つ人がコマンドを入れられた（2026-10-24 の点検）
+          if [ -n "$s" ] && ! [[ "$s" =~ ^[A-Za-z0-9_-]{1,40}$ ]]; then
+            echo "::error::入力 site の形が正しくありません（英数字・ハイフン・下線だけ）"
+            exit 1
+          fi
           if [ -n "$s" ]; then
             # 手で社を指定した回は枠の判定を通らない。その日の本数を書き終えていれば書かない（2026-10-21 に手で4回起動して
             # AI集客ラボが 7/2 本になった）。改善中の記事は次の枠の --pending が直す
@@ -250,7 +256,11 @@ jobs:
           # 自前でビルドするサイトかどうか。デプロイと配信の分岐に使う
           # 手で動かした回に社の id を入れられても、ジョブの間は公開の id で渡す
           s=$(python3 scripts/private_store.py --public-id "$s" 2>/dev/null || echo "$s")
-          own=$(python -c "import json;print(json.load(open('sites/$s.json',encoding='utf-8')).get('type')=='self-static')")
+          if ! [[ "$s" =~ ^[A-Za-z0-9_-]{1,40}$ ]] || [ ! -f "sites/$s.json" ]; then
+            echo "::error::対象の社が sites/ にありません"
+            exit 1
+          fi
+          own=$(python -c "import json,sys;print(json.load(open('sites/'+sys.argv[1]+'.json',encoding='utf-8')).get('type')=='self-static')" "$s")
           first="${SITES[0]}"
           echo "id=$s" >> "$GITHUB_OUTPUT"
           echo "own=$own" >> "$GITHUB_OUTPUT"
@@ -333,7 +343,7 @@ jobs:
           echo "対象サイト: ${{ needs.select.outputs.id }}（${{ needs.select.outputs.mode == 'rewrite' && '浮いた枠: 主力の記事の書き直し' || '新しい記事' }}）"
 
       # Python と依存（requirements.txt）を週ごとの控えから戻す。戻せた回は下の pip install が確かめるだけになる
-      # （yt-dlp は控えに入れず、今までどおり毎回その時の版を入れる）
+      # （yt-dlp は控えに入れない。版は固定し、YouTube 側の変更で字幕が取れなくなったら上げる。2026-10-24 の点検）
       - uses: ./.github/actions/py-env
         if: steps.site.outputs.skip != 'yes'
 
@@ -341,9 +351,9 @@ jobs:
         if: steps.site.outputs.skip != 'yes'
         run: |
           # 3つは互いに関係ないので同時に入れる（順に入れて約35秒・遅い日は5分）。1つでも失敗したら止める
-          pip install -q -r requirements.txt yt-dlp > /tmp/pip.log 2>&1 & p1=$!
+          pip install -q -r requirements.txt yt-dlp==2026.10.21 > /tmp/pip.log 2>&1 & p1=$!
           (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1 & p2=$!
-          npm install -g @anthropic-ai/claude-code > /tmp/npm.log 2>&1 & p3=$!
+          npm install -g @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 & p3=$!
           # AI っぽい言い回しの検出（textlint。版は automation/textlint/package-lock.json で固定）。公開前の品質ループが使う。
           # 入らなくても記事は止めない（品質ループは言い回しの直しを飛ばして採点を続ける）
           npm ci --prefix automation/textlint --no-audit --no-fund > /tmp/npm_textlint.log 2>&1 & p4=$!
@@ -952,6 +962,13 @@ jobs:
             python scripts/editorial_review.py --notify --site "${{ steps.site.outputs.id }}" | tee /tmp/review.txt || true
           fi
           cat /tmp/review.txt >> automation/logs/findings.txt || true
+
+      # この回に Claude が使ったトークン（実行の記録から数える。削る所を数字で決めるため。2026-10-24 運用者）
+      - name: Claude の使用量を記録する
+        if: steps.site.outputs.skip != 'yes'
+        env:
+          SITE_PUB: ${{ steps.site.outputs.id }}
+        run: python scripts/claude_usage.py --job "記事の枠" --site "$SITE_PUB" --write || true
 
       - name: 自リポジトリの記事をコミット
         if: steps.site.outputs.skip != 'yes'

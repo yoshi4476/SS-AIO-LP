@@ -492,6 +492,9 @@ function form_(body) {
     return { ok: false, error: 'お名前をご入力ください。' };
   }
 
+  // 自動返信に送り主の文（診断の直し方・AI紹介チェックの結果）を載せてよいのは、当社のサーバーが作って合言葉つきで送ったものだけ。
+  // フォーム専用の合言葉（form_secret）はお客様のページに書かれて誰でも読めるので、ここでは信用しない（2026-10-24 の点検）
+  const server = !!SHARED_SECRET && body.secret === SHARED_SECRET;
   // ロボットよけ（Turnstile）。記録だけの間（TURNSTILE_ENFORCE=false）は断らない。疎通確認は断らない
   const probe = /@pipeline-check\.invalid$/i.test(email);
   const bot = botCheck_(body, d, site, type, probe);
@@ -541,7 +544,7 @@ function form_(body) {
     }
     if (!sales) {
       try {
-        leadReply_(site, type, d);
+        leadReply_(site, type, d, server);
       } catch (err) {
         warn.push('自動返信: ' + err);
       }
@@ -552,7 +555,7 @@ function form_(body) {
     try {
       // 列は 日時・サイト・工程・エラー内容・対応・状態 の6つ。5列で書くと「未対応」が
       // 対応の列に入り、状態（6列目）を数えるダッシュボードと errorSync_ から見えなくなる
-      sheet_('エラーログ').appendRow([new Date(), site, 'メール送信', warn.join(' / '), '', '未対応']);
+      sheet_('エラーログ').appendRow(cells_([new Date(), site, 'メール送信', warn.join(' / '), '', '未対応']));
     } catch (e2) {}
   }
   // 温度（社内の見立て）と台帳の行番号（＝問い合わせの総数）は送信者に返さない。誰でも送れるフォームの返事のため
@@ -792,11 +795,87 @@ function replyMaterials_(site) {
   return ['', '▼ ご連絡までの間にご覧いただける資料'].concat(hit.lines).concat(['']).join('\n');
 }
 
-/** 送信者への自動返信。種別ごとに文面を変える */
-function leadReply_(site, type, d) {
+// 自動返信の回数の上限。他人のアドレスを入れて当社名義のメールを何通も出させない・MailApp の1日の上限を食い切らせない。
+// 宛先ごとは6時間（Apps Script のキャッシュが持てる最長。24時間を渡すと例外になり、数えられずに素通りした）
+const REPLY_PER_ADDRESS = 3;
+const REPLY_PER_HOUR = 40;
+const CACHE_MAX_SEC = 21600;
+
+/**
+ * 回数の上限（Cloudflare の受付から合言葉つきで呼ばれる）。limits: [{ key, limit, sec }]。
+ * 全部が上限の内なら全部を1つ数えて allowed: true。どれかが上限なら数えずに allowed: false と、その名前を返す
+ */
+function rateHit_(b) {
+  const limits = (Array.isArray(b.limits) ? b.limits : []).slice(0, 6).filter(function (x) {
+    return x && /^[A-Za-z0-9_:-]{1,80}$/.test(String(x.key)) && Number(x.limit) > 0;
+  });
+  if (!limits.length) return { ok: false, error: 'limits が必要です' };
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(10000)) return { ok: false, error: 'busy' };
+  try {
+    const c = CacheService.getScriptCache();
+    const keys = limits.map(function (x) { return 'rate_' + x.key; });
+    const now = c.getAll(keys) || {};
+    for (let i = 0; i < limits.length; i++) {
+      if (Number(now[keys[i]] || 0) >= Number(limits[i].limit)) return { ok: true, allowed: false, hit: String(limits[i].key).split('_')[0] };
+    }
+    limits.forEach(function (x, i) {
+      c.put(keys[i], String(Number(now[keys[i]] || 0) + 1), Math.min(Math.max(Number(x.sec) || 3600, 60), CACHE_MAX_SEC));
+    });
+    return { ok: true, allowed: true };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/** 自動返信を送ってよいか（宛先ごと6時間・全体1時間）。数えられないときは送る（本物の返信を落とさない） */
+function replyAllowed_(email) {
+  try {
+    const c = CacheService.getScriptCache();
+    const ka = 'reply_addr_' + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,
+      String(email).toLowerCase())).slice(0, 32);
+    const kh = 'reply_hour_' + Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyyMMddHH');
+    const na = Number(c.get(ka) || 0), nh = Number(c.get(kh) || 0);
+    if (na >= REPLY_PER_ADDRESS || nh >= REPLY_PER_HOUR) return false;
+    c.put(ka, String(na + 1), CACHE_MAX_SEC);
+    c.put(kh, String(nh + 1), 3700);
+    return true;
+  } catch (err) {
+    console.error('自動返信の回数を数えられませんでした: ' + err);
+    return true;
+  }
+}
+
+/** 宛名。長い文や URL は宛名にしない（当社名義のメールに外から好きな文を載せさせない） */
+function replyName_(s) {
+  const n = clean_(s).trim();
+  return n && n.length <= 50 && !/:\/\/|www\.|https?:/i.test(n) ? n : 'ご担当者';
+}
+
+/** 診断の点数（数字だけ。0〜100 に収まらない値・数字でない値は載せない） */
+function score_(v) {
+  const n = Number(v);
+  return typeof v !== 'boolean' && v !== '' && v !== null && isFinite(n) && n >= 0 && n <= 100 ? Math.round(n) : null;
+}
+
+/** 診断の見出し・判定（短い文だけ。URL を含むものは載せない） */
+function label_(s, max) {
+  const t = clean_(s).trim();
+  return t && t.length <= max && !/:\/\/|www\.|https?:|@/i.test(t) ? t : '';
+}
+
+/**
+ * 送信者への自動返信。種別ごとに文面を変える。
+ * server: 当社のサーバーが合言葉つきで送ったか。そうでない送信は、送り主の文（直し方・URL・結果の文）を本文に載せない
+ */
+function leadReply_(site, type, d, server) {
   const email = clean_(d.email);
   if (!isEmail_(email)) return;
-  const name = clean_(d.name) || 'ご担当者';
+  if (!replyAllowed_(email)) {
+    console.warn('自動返信の上限に達したため送りませんでした（記録と担当への通知は済んでいます）');
+    return;
+  }
+  const name = replyName_(d.name);
   const foot = REPLY_FOOT;
   let subject = 'お問い合わせありがとうございます';
   let body = '';
@@ -806,14 +885,19 @@ function leadReply_(site, type, d) {
   if (type === 'diagnosis' && d.diagnosis) {
     const g = d.diagnosis;
     subject = '【診断結果】' + (DIAG_KIND_LABELS[g.kind] || '無料診断') + 'のご回答ありがとうございます';
+    // 診断はページ（補助金・コーポレート）で計算して直接届く。見出しは短い文・点数は数字だけ載せる
     const rows = [];
-    if (g.scores) {
-      for (const k in g.scores) rows.push('  ' + k + ': ' + g.scores[k] + ' / 100');
+    if (g.scores && typeof g.scores === 'object') {
+      Object.keys(g.scores).slice(0, 12).forEach(function (k) {
+        const label = label_(k, 30), v = score_(g.scores[k]);
+        if (label && v !== null) rows.push('  ' + label + ': ' + v + ' / 100');
+      });
     }
+    const total = score_(g.total), grade = label_(g.grade, 30);
     body = [name + ' 様', '', 'このたびは無料診断にご回答いただきありがとうございます。',
             '結果をお送りします。', '',
-            '総合スコア: ' + (g.total !== undefined ? g.total + ' / 100' : '算出中'),
-            g.grade ? '判定: ' + g.grade : '', '',
+            '総合スコア: ' + (total !== null ? total + ' / 100' : '算出中'),
+            grade ? '判定: ' + grade : '', '',
             rows.length ? '項目別' : '', rows.join('\n'), '',
             '結果の読み解きや、次に何から着手すべきかのご相談は無料で承っています。',
             'このメールにご返信ください。3営業日以内にご連絡します。'].filter(function (x) {
@@ -821,14 +905,17 @@ function leadReply_(site, type, d) {
     }).join('\n');
     offer = REVIEW_OFFER;
   } else if (type === 'site_audit' && d.audit) {
-    const a = d.audit;
+    // 対象URL・判定・直し方は、/api/lead が診断の署名を確かめて決まった文から作り直したもの（合言葉つき）だけ載せる。
+    // 直接届いた診断の結果を載せると、他人のアドレスへ好きな本文の当社名義のメールを出させられた（2026-10-24 の点検）
+    const a = server ? d.audit : { total: d.audit.total };
+    const total = score_(a.total);
     subject = '【診断結果】サイト無料診断のご依頼ありがとうございます';
     body = [name + ' 様', '', 'サイト無料診断のご依頼をいただきありがとうございます。', '',
-            '対象URL: ' + (a.url || ''),
-            '総合スコア: ' + (a.total !== undefined ? a.total + ' / 100' : '算出中'),
-            a.grade ? '判定: ' + a.grade : '', '',
+            a.url ? '対象URL: ' + String(a.url).replace(/\s+/g, ' ').slice(0, 300) : '',
+            '総合スコア: ' + (total !== null ? total + ' / 100' : '算出中'),
+            a.grade ? '判定: ' + clean_(a.grade) : '', '',
             // 画面で「直し方をお送りします」と約束しているので、担当の連絡を待たせずに本文へ載せる
-            a.fixes ? '▼ 直す項目と直し方（点数の大きい順）\n' + String(a.fixes) : '', '',
+            a.fixes ? '▼ 直す項目と直し方（点数の大きい順）\n' + String(a.fixes).slice(0, 4000) : '', '',
             '自社で直すのが難しい項目は、このメールにご返信ください。無料でご相談を承ります。'].filter(function (x) {
       return x !== '';
     }).join('\n');
@@ -849,7 +936,8 @@ function leadReply_(site, type, d) {
         '印をつけ終えたら、AIに御社がどう紹介されているかも確かめてみてください（無料）。',
         '  https://ai.7senses.co.jp/tools/ai-check/', '',
         '何から直せばよいかのご相談は、このメールにご返信ください。無料で承ります。']).join('\n');
-  } else if (String(d.form_type || '').indexOf('AI紹介チェック') >= 0) {
+  } else if (server && String(d.form_type || '').indexOf('AI紹介チェック') >= 0) {
+    // 結果の文は /api/ai-check が作って合言葉つきで送ったものだけ（ほかの入口から種別を名乗らせない）
     // 相談ではないので「担当よりご連絡します」とは書かない（約束していない連絡を待たせない）
     const msg = String(d.message || '');
     const failed = msg.indexOf('チェック未実行') === 0;
@@ -1819,10 +1907,55 @@ function rakkoLog_(body) {
   return { ok: true, rakko: true };
 }
 
+/** 回線の数え方。IPv6 は同じ契約の中でアドレスを替えられるので、先頭の /64 で数える */
+function ipKey_(ip) {
+  const s = String(ip || '').trim().toLowerCase();
+  if (s.indexOf(':') < 0) return s;
+  const head = s.split('::')[0].split(':');
+  while (head.length < 4) head.push('0');
+  return head.slice(0, 4).join(':') + '::/64';
+}
+
+// 確かめてから記録するまでの間（AIへの問い合わせの数秒）に同時に送られた分も数えるため、確かめた時点で枠を予約する。
+// 記録（ai_check_log）で予約を外す。AIが失敗して記録されなかった予約は10分で消える（2026-10-24 の点検）
+const AI_CHECK_HOLD_SEC = 600;
+
+function aiHoldKeys_(email, ip) {
+  const h = function (x) {
+    return Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(x))).slice(0, 32);
+  };
+  return { e: 'aiq_e_' + h(email), i: ip ? 'aiq_i_' + h(ipKey_(ip)) : '',
+           m: 'aiq_m_' + Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyyMM') };
+}
+
+function aiHold_(keys, delta) {
+  const c = CacheService.getScriptCache();
+  const out = {};
+  ['e', 'i', 'm'].forEach(function (k) {
+    if (!keys[k]) return;
+    const n = Math.max(0, Number(c.get(keys[k]) || 0) + delta);
+    if (delta) c.put(keys[k], String(n), AI_CHECK_HOLD_SEC);
+    out[k] = n;
+  });
+  return out;
+}
+
 function aiCheckQuota_(body) {
   const email = clean_(body.email).toLowerCase();
   if (!email) return { ok: false, error: 'email' };
   const ip = clean_(body.ip);
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(15000)) return { ok: false, error: 'busy' };
+  try {
+    return aiCheckQuotaLocked_(email, ip);
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function aiCheckQuotaLocked_(email, ip) {
+  const keys = aiHoldKeys_(email, ip);
+  const held = aiHold_(keys, 0);
   const sh = aiCheckSheet_();
   let used = 0, ipToday = 0, searches = 0;
   const now = new Date();
@@ -1831,20 +1964,29 @@ function aiCheckQuota_(body) {
     sh.getRange(2, 1, sh.getLastRow() - 1, 12).getValues().forEach(function (r) {
       const at = r[0] instanceof Date ? r[0] : new Date(r[0]);
       if (String(r[1]).toLowerCase() === email) used++;
-      if (ip && String(r[10]) === ip && Utilities.formatDate(at, 'Asia/Tokyo', 'yyyy-MM-dd') === today) ipToday++;
+      if (ip && ipKey_(r[10]) === ipKey_(ip) && Utilities.formatDate(at, 'Asia/Tokyo', 'yyyy-MM-dd') === today) ipToday++;
       // 検索回数の列が無い古い行は、1回3問×最大の見込みで数える（少なく数えて上限を越えないように）
       if (at.getFullYear() === now.getFullYear() && at.getMonth() === now.getMonth())
         searches += r[11] === '' || r[11] === null ? AI_CHECK_MAX_SEARCHES_PER_CHECK : Number(r[11]) || 0;
     });
   }
-  const reason = used >= AI_CHECK_PER_EMAIL ? 'email'
-    : (ipToday >= AI_CHECK_PER_IP_DAY ? 'ip'
-    : (searches + geminiBatchSearches_() + AI_CHECK_MAX_SEARCHES_PER_CHECK > AI_CHECK_MONTH_SEARCHES ? 'month' : ''));
+  // 予約中（確かめた後、まだ記録されていない分）も使ったものとして数える
+  const reason = used + (held.e || 0) >= AI_CHECK_PER_EMAIL ? 'email'
+    : (ipToday + (held.i || 0) >= AI_CHECK_PER_IP_DAY ? 'ip'
+    : (searches + (held.m || 0) * AI_CHECK_MAX_SEARCHES_PER_CHECK + geminiBatchSearches_() + AI_CHECK_MAX_SEARCHES_PER_CHECK
+       > AI_CHECK_MONTH_SEARCHES ? 'month' : ''));
+  if (!reason) aiHold_(keys, 1);
   return { ok: true, used: used, perEmail: AI_CHECK_PER_EMAIL, perIpDay: AI_CHECK_PER_IP_DAY,
            searches: searches, allowed: !reason, reason: reason };
 }
 
 function aiCheckLog_(body) {
+  // 記録した分の予約を外す（予約と記録の両方で二重に数えない）
+  try {
+    aiHold_(aiHoldKeys_(clean_(body.email).toLowerCase(), clean_(body.ip)), -1);
+  } catch (err) {
+    console.error('AI紹介チェックの予約を外せませんでした（10分で消えます）: ' + err);
+  }
   // 会社名・地域・サイトは誰でも入れられるので、数式として読まれないようにする（cells_）
   aiCheckSheet_().appendRow(cells_([new Date(), clean_(body.email).toLowerCase(), clean_(body.company).slice(0, 80),
     clean_(body.word).slice(0, 20), clean_(body.area).slice(0, 40), Number(body.cited) || 0, Number(body.mentioned) || 0,

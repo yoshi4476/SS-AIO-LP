@@ -27,7 +27,7 @@ jobs:
       - name: 依存インストール
         run: |
           pip install -q -r requirements.txt
-          npm install -g @anthropic-ai/claude-code > /tmp/npm.log 2>&1 || { cat /tmp/npm.log; exit 1; }
+          npm install -g @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 || { cat /tmp/npm.log; exit 1; }
           claude --version
 
       - name: AIの作業場から鍵を外す
@@ -130,7 +130,7 @@ jobs:
       - name: 依存インストール
         run: |
           pip install -q -r requirements.txt
-          npm install -g @anthropic-ai/claude-code > /tmp/npm.log 2>&1 || { cat /tmp/npm.log; exit 1; }
+          npm install -g @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 || { cat /tmp/npm.log; exit 1; }
 
       - name: AIの作業場から鍵を外す（範囲の一覧と範囲ごとの通行証）
         env:

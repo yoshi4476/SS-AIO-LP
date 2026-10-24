@@ -74,7 +74,7 @@ runs:
         }
         trap cleanup EXIT
         if [ -n "$CODEX_AUTH_JSON" ]; then
-          command -v codex >/dev/null 2>&1 || npm i -g @openai/codex >/dev/null 2>&1 || true
+          command -v codex >/dev/null 2>&1 || npm i -g @openai/codex@0.163.0 >/dev/null 2>&1 || true
           mkdir -p ~/.codex
           printf '%s' "$CODEX_AUTH_JSON" > ~/.codex/auth.json
           chmod 600 ~/.codex/auth.json

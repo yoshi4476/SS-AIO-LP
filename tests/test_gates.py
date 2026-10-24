@@ -19,6 +19,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -3902,13 +3903,56 @@ def main():
               test_report_actions_close_the_loop,
               test_detectors_do_not_misread_neighbors,
               test_lessons_2026_10_03, *history_tests()):
+        # GATES_ONLY（正規表現）で、モジュール名か関数名が合う門だけを流す（直している途中の確認用。送る前は全部を流す）
+        if ONLY and not ONLY.search(f"{t.__module__}.{t.__name__}"):
+            continue
+        name = f"{t.__module__}.{t.__name__}"
+        if FAST and name in SLOW and not _touched(SLOW[name]):
+            print(f"\n■ 飛ばした（GATES_FAST・見ているファイルに変更なし）: {name}")
+            continue
+        t0 = time.perf_counter()
         try:
             t()
         except Exception as e:
             print(f"  NG  {t.__name__} が例外で止まりました: {type(e).__name__} {e}")
             FAIL.append(t.__name__)
+        SPENT.append((time.perf_counter() - t0, f"{t.__module__}.{t.__name__}"))
+    # どの門に時間を使ったか（遅いものから縮めるため。2026-10-24 運用者「確認の時間が長過ぎないか」）
+    total = sum(s for s, _ in SPENT)
+    print(f"\n■ 時間のかかった門（全{len(SPENT)}本・合計{total / 60:.1f}分）")
+    for s, n in sorted(SPENT, reverse=True)[:15]:
+        print(f"  {s:6.1f}秒  {n}")
     print(f"\n{'失敗 ' + str(len(FAIL)) + '件: ' + ', '.join(FAIL) if FAIL else 'すべて通りました'}")
     return 1 if FAIL else 0
+
+
+ONLY = re.compile(os.environ["GATES_ONLY"]) if os.environ.get("GATES_ONLY") else None
+SPENT = []
+# 手元の速い確認（GATES_FAST=1）で、見ているファイルが変わっていなければ飛ばす門。どれも一時のリポジトリで git を
+# 数百回呼び、手元の Windows では git の起動1回に1〜7秒かかって合計40分を超えた（2026-10-24 実測。CI の Linux では数秒）。
+# 見ているファイルを変えた回は必ず流す。CI（GATES_FAST なし）では常に流す
+FAST = os.environ.get("GATES_FAST") == "1" and not os.environ.get("GITHUB_ACTIONS")
+_RENOVATE = ("scripts/site_renovate.py", "scripts/site_change.py", "scripts/deliver_files.py", "scripts/speed_fix.py",
+             "scripts/html_safety.py", "tests/gates_history_h37.py")
+SLOW = {
+    "gates_history_h37.test_renovate_ftp_checks_apply_and_rollback": _RENOVATE,
+    "gates_history_h37.test_renovate_git_rolls_back_with_revert": _RENOVATE,
+    "gates_history_d.test_hist_rollback_keeps_earlier_fixes": ("scripts/auto_rewrite.py", "scripts/auto_review.py",
+                                                               "scripts/report_actions.py", "tests/gates_history_d.py"),
+    "gates_history_g.test_site_change_stays_in_its_own_repo": ("scripts/site_change.py", "tests/gates_history_g.py"),
+}
+
+
+def _touched(paths):
+    """コミットしていない変更（未追跡も）と、まだ送っていないコミットに、paths のどれかがあるか。分からなければ True（流す）"""
+    try:
+        out = subprocess.run(["git", "status", "--porcelain", "--", *paths], cwd=ROOT, capture_output=True, text=True,
+                             encoding="utf-8", errors="replace", timeout=120).stdout
+        ahead = subprocess.run(["git", "diff", "--name-only", "@{upstream}...HEAD", "--", *paths], cwd=ROOT,
+                               capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
+        return bool(out.strip()) or ahead.returncode != 0 or bool(ahead.stdout.strip())
+    except (OSError, subprocess.SubprocessError):
+        return True
 
 
 if __name__ == "__main__":

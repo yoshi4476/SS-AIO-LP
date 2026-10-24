@@ -672,36 +672,36 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1121",
+     "evidence": ".github/workflows/pipeline-multi.yml:1138",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "external-md": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1121",
+     "evidence": ".github/workflows/pipeline-multi.yml:1138",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "external-html": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1121",
+     "evidence": ".github/workflows/pipeline-multi.yml:1138",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1121",
+     "evidence": ".github/workflows/pipeline-multi.yml:1138",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1121",
+     "evidence": ".github/workflows/pipeline-multi.yml:1138",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "ftp": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1121",
+     "evidence": ".github/workflows/pipeline-multi.yml:1138",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
@@ -775,7 +775,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1118",
+     "evidence": ".github/workflows/pipeline-multi.yml:1135",
      "anchor": "python scripts/bing_webmaster.py --site \"$id\" || true"
     },
     "external-md": {
@@ -1896,7 +1896,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "tests/test_gates.py:2136",
+     "evidence": "tests/test_gates.py:2137",
      "note": "門が site/ に重い読み方が戻るのを止める",
      "anchor": "def test_speed_fix_keeps_pages_light():"
     },
@@ -2290,37 +2290,37 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "automation/gas/contact.hub.gs:963",
+     "evidence": "automation/gas/contact.hub.gs:1051",
      "note": "フォームを管制塔が直接受ける",
      "anchor": "function followUp() {"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:982",
+     "evidence": "automation/gas/contact.hub.gs:1070",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:982",
+     "evidence": "automation/gas/contact.hub.gs:1070",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:982",
+     "evidence": "automation/gas/contact.hub.gs:1070",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:982",
+     "evidence": "automation/gas/contact.hub.gs:1070",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:982",
+     "evidence": "automation/gas/contact.hub.gs:1070",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },

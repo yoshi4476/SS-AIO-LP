@@ -53,7 +53,7 @@ jobs:
           pip install --quiet -r requirements.txt
           if [ "$MODE" = "full" ]; then
             python -m playwright install --with-deps chromium
-            npm install -g @anthropic-ai/claude-code
+            npm install -g @anthropic-ai/claude-code@2.1.302
           fi
           git config user.name "AIO Pipeline Bot"
           git config user.email "noreply@7senses.co.jp"

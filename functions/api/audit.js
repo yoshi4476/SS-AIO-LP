@@ -12,6 +12,21 @@
  * 返す文字（detail）は HTML として安全な形にする。診断したサイトのタイトルをそのまま画面に差し込むと、
  * 悪意のあるタイトルが当社のドメイン上でスクリプトとして動く（XSS）。
  */
+import { CHECKS, GRADES, signAudit } from "../_audit_checks.js";
+import { digest, ipKey, rateHit } from "../_sign.js";
+
+// 1回の診断で相手のサイトへ4回取りに行く。回数の上限が無いと、他人のサイトへの負荷の踏み台にされ、
+// 同業の平均を偽の診断で動かせた（2026-10-24 の点検）。管制塔に届かないときは診断を止めない（無料の道具を落とさない）
+const RATE = [["audit_ip_h_", 10, 3600], ["audit_ip_6h_", 30, 21600]];
+const RATE_ALL = { key: "audit_all", limit: 400, sec: 3600 };
+
+/** 登録ドメイン（a1.evil.example・a2.evil.example を同じ会社として数える）。co.jp などは3つ目の段まで */
+export function siteOf(host) {
+  const p = String(host).toLowerCase().replace(/\.$/, "").split(".");
+  const second = /^(co|or|ne|ac|go|ed|gr|lg|ad|com|net|org|gov|edu)$/;
+  return p.slice(p.length >= 3 && p[p.length - 1].length === 2 && second.test(p[p.length - 2]) ? -3 : -2).join(".");
+}
+
 const PRIVATE = /^(localhost|127\.|10\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|0\.|\[::1\])/i;
 const UA = "SevenSenses-SiteAudit/1.1 (+https://ai.7senses.co.jp/lp/)";
 const GPTBOT_UA = "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.1; +https://openai.com/gptbot";
@@ -49,6 +64,15 @@ export async function onRequestPost({ request, env, waitUntil }) {
     return json({ error: "URLの形式が正しくありません" }, 400);
   }
   if (PRIVATE.test(host) || !host.includes(".")) return json({ error: "このURLは診断できません" }, 400);
+  // 当社の営業の下書き（prospect_outreach.py）は合言葉の印を付けて送る。それ以外は回線ごと・全体の回数に上限
+  const ours = env && env.GAS_SHARED_SECRET && request.headers.get("X-SS-Audit-Key") === await digest("audit-key:" + env.GAS_SHARED_SECRET);
+  if (!ours) {
+    const who = await digest(ipKey(request.headers.get("CF-Connecting-IP") || ""));
+    const rate = await rateHit(env || {}, [...RATE.map(([k, limit, sec]) => ({ key: k + who, limit, sec })), RATE_ALL]);
+    if (rate.allowed === false) {
+      return json({ error: "短い時間に診断が続いたため、いったん止めています。1時間ほどおいてもう一度お試しください。" }, 429);
+    }
+  }
 
   const page = await get(target);
   if (!page.ok) return json({ error: `ページを取得できませんでした（HTTP ${page.status || "接続失敗"}）` }, 422);
@@ -91,52 +115,33 @@ export async function onRequestPost({ request, env, waitUntil }) {
   // 名乗りだけで判定される設定もあるため「拒否された」事実だけを伝え、断定はしない
   const cdnBlocked = page.ok && [401, 403, 429, 503].includes(asBot.status);
 
-  const checks = [
-    { group: "AIが入れるか", name: "AIのクローラーを拒否していない（robots.txt）", pts: 12,
-      ok: robots.ok ? aiBlocked.length === 0 : true,
-      detail: aiBlocked.length ? `拒否中: ${aiBlocked.join(", ")}` : (robots.ok ? "主要なAIのクローラーを許可" : "robots.txtなし（既定で許可）"),
-      advice: "robots.txt で拒否しているクローラーの Disallow を外してください。拒否されたAIは、ページの中身を読めないため回答に使えません" },
-    { group: "AIが入れるか", name: "AIのクローラーが入口で弾かれていない（CDN・WAF）", pts: 8, ok: !cdnBlocked,
-      detail: cdnBlocked ? `GPTBotを名乗るアクセスがHTTP ${asBot.status}で拒否されました` : "拒否されませんでした",
-      advice: "Cloudflare等の「AIボットをブロック」設定を確認してください。AIのクローラーを既定で止める設定のCDNがあります" },
-    { group: "AIが入れるか", name: "常時SSL（HTTPS）", pts: 6, ok: page.finalUrl.startsWith("https://"), detail: "",
-      advice: "http のままのページは信頼性の前提を満たしません。常時SSLにしてください" },
-    { group: "検索に出るか", name: "検索に出さない設定（noindex）になっていない", pts: 12, ok: !noindex,
-      detail: noindex ? "noindex が指定されています" : "指定なし",
-      advice: "noindex が付いたページは検索にもAIの回答にも出ません。公開したいページなら外してください" },
-    { group: "検索に出るか", name: "タイトル（15〜45字）", pts: 10, ok: title.length >= 15 && title.length <= 45,
-      detail: title ? `${title.length}字: 「${title.slice(0, 40)}」` : "タイトルがありません",
-      advice: "検索される言葉を前半に入れ、15〜45字にしてください" },
-    { group: "検索に出るか", name: "説明文（メタディスクリプション・60〜160字）", pts: 8, ok: desc.length >= 60 && desc.length <= 160,
-      detail: desc ? `${desc.length}字` : "設定なし",
-      advice: "検索結果に出る説明文です。60〜160字で、このページで分かることを書いてください" },
-    { group: "検索に出るか", name: "正規URLの指定（canonical）", pts: 6, ok: /rel=["']canonical["']/i.test(html), detail: "",
-      advice: "同じ内容が複数のURLで見えると評価が分かれます。canonical で正規のURLを示してください" },
-    { group: "検索に出るか", name: "スマホ表示（viewport）", pts: 4, ok: /name=["']viewport["']/i.test(html), detail: "",
-      advice: "viewport を設定し、スマホで読める表示にしてください" },
-    { group: "内容を読み取れるか", name: "見出しH1がページに1つ", pts: 8, ok: h1s === 1, detail: `${h1s}個`,
-      advice: "H1はページの主題です。1つに整理してください" },
-    { group: "内容を読み取れるか", name: "会社情報（電話番号・所在地）の記載", pts: 8, ok: hasTel && hasAddr,
-      detail: `電話番号${hasTel ? "あり" : "なし"}・所在地${hasAddr ? "あり" : "なし"}`,
-      advice: "電話番号と所在地を文字で書いてください（画像だけでは読み取れません）。地域の質問で候補に入る前提です" },
-    { group: "内容を読み取れるか", name: "構造化データ（JSON-LD）", pts: 6, ok: /application\/ld\+json/i.test(html), detail: "",
-      advice: "会社情報やFAQを検索エンジンに正確に伝える記述です。リッチリザルトに使われます（AIに引用されるための必須条件ではない、とGoogleは明言しています）" },
-    { group: "内容を読み取れるか", name: "画像の代替テキスト（alt・80%以上）", pts: 4, ok: altRate >= 0.8,
-      detail: imgs.length ? `${withAlt}/${imgs.length}枚に設定（${Math.round(altRate * 100)}%）` : "画像なし",
-      advice: "画像の中の情報は読み取られません。alt に内容を書き、大事なことは本文にも書いてください" },
-    { group: "内容を読み取れるか", name: "SNS・チャット共有時の表示（OGP）", pts: 4,
-      ok: /property=["']og:title["']/i.test(html) && /property=["']og:image["']/i.test(html), detail: "",
-      advice: "og:title・og:image を設定すると、共有されたときにカードで表示されます" },
-    { group: "内容を読み取れるか", name: "llms.txt（参考）", pts: 2, ok: llms.ok && llms.text.trim().length > 10,
-      detail: llms.ok ? "あり" : "なし",
-      advice: "AI向けのサイト案内です。Googleは使わないと明言しているため優先度は低めです" },
-  ];
+  // 項目の名前・配点・直し方は _audit_checks.js（結果送付のメールも同じ文から作る）。ここでは合否と詳細だけを決める
+  const RESULT = {
+    robots: { ok: robots.ok ? aiBlocked.length === 0 : true,
+      detail: aiBlocked.length ? `拒否中: ${aiBlocked.join(", ")}` : (robots.ok ? "主要なAIのクローラーを許可" : "robots.txtなし（既定で許可）") },
+    cdn: { ok: !cdnBlocked, detail: cdnBlocked ? `GPTBotを名乗るアクセスがHTTP ${asBot.status}で拒否されました` : "拒否されませんでした" },
+    https: { ok: page.finalUrl.startsWith("https://"), detail: "" },
+    noindex: { ok: !noindex, detail: noindex ? "noindex が指定されています" : "指定なし" },
+    title: { ok: title.length >= 15 && title.length <= 45,
+      detail: title ? `${title.length}字: 「${title.slice(0, 40)}」` : "タイトルがありません" },
+    desc: { ok: desc.length >= 60 && desc.length <= 160, detail: desc ? `${desc.length}字` : "設定なし" },
+    canonical: { ok: /rel=["']canonical["']/i.test(html), detail: "" },
+    viewport: { ok: /name=["']viewport["']/i.test(html), detail: "" },
+    h1: { ok: h1s === 1, detail: `${h1s}個` },
+    nap: { ok: hasTel && hasAddr, detail: `電話番号${hasTel ? "あり" : "なし"}・所在地${hasAddr ? "あり" : "なし"}` },
+    jsonld: { ok: /application\/ld\+json/i.test(html), detail: "" },
+    alt: { ok: altRate >= 0.8,
+      detail: imgs.length ? `${withAlt}/${imgs.length}枚に設定（${Math.round(altRate * 100)}%）` : "画像なし" },
+    ogp: { ok: /property=["']og:title["']/i.test(html) && /property=["']og:image["']/i.test(html), detail: "" },
+    llms: { ok: llms.ok && llms.text.trim().length > 10, detail: llms.ok ? "あり" : "なし" },
+  };
+  const checks = CHECKS.map((c) => ({ group: c.group, name: c.name, pts: c.pts, ok: RESULT[c.id].ok,
+                                       detail: RESULT[c.id].detail, advice: c.advice, id: c.id }));
   const maxPts = checks.reduce((s, c) => s + c.pts, 0);
   const score = Math.round(checks.reduce((s, c) => s + (c.ok ? c.pts : 0), 0) * 100 / maxPts);
   const critical = checks.filter((c) => !c.ok && c.pts >= 12).map((c) => c.name);
-  const grade = critical.length ? "D（読まれない原因があります）"
-              : score >= 85 ? "A（土台は整っています）" : score >= 65 ? "B（あと一歩）"
-              : score >= 45 ? "C（重要項目に抜けあり）" : "D（基礎から整備が必要）";
+  const grade = critical.length ? GRADES[0] : score >= 85 ? GRADES[1] : score >= 65 ? GRADES[2]
+              : score >= 45 ? GRADES[3] : GRADES[4];
   const safe = checks.map((c) => ({ ...c, detail: esc(c.detail) }));
   // 同業平均のために記録する（業種・点数・紹介元と、サイトを特定できない形に変換した値だけ）。
   // 応答は待たせない。記録に失敗しても診断の結果はそのまま返す
@@ -150,14 +155,18 @@ export async function onRequestPost({ request, env, waitUntil }) {
     const ref = /^[A-Za-z0-9_-]{1,40}$/.test(String(body.ref || "")) ? body.ref : "";
     waitUntil((async () => {
       try {
-        const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("ss-bench:" + new URL(page.finalUrl).hostname));
-        const hostHash = [...new Uint8Array(digest)].slice(0, 16).map((b) => b.toString(16).padStart(2, "0")).join("");
+        // 同じ会社は登録ドメインで1つに数える（サブドメインを替えた偽の診断で平均を動かさせない）
+        const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("ss-bench:" + siteOf(new URL(page.finalUrl).hostname)));
+        const hostHash = [...new Uint8Array(d)].slice(0, 16).map((b) => b.toString(16).padStart(2, "0")).join("");
         await fetch(env.GAS_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ action: "scan_log", secret: env.GAS_SHARED_SECRET || "", industry, host: hostHash, score, ref }) });
       } catch (_) {}
     })());
   }
-  return json({ url: esc(page.finalUrl), score, grade, critical, checks: safe, measured_at: new Date().toISOString() });
+  // 結果送付のフォームはこの署名だけを送る。メールの直し方は /api/lead がこの署名から作り直す
+  const token = await signAudit(env && env.GAS_SHARED_SECRET, page.finalUrl, score, grade,
+                                checks.filter((c) => !c.ok).map((c) => c.id));
+  return json({ url: esc(page.finalUrl), score, grade, critical, checks: safe, token, measured_at: new Date().toISOString() });
 }
 
 function json(obj, status = 200) {

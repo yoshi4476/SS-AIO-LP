@@ -95,7 +95,7 @@ def topics(body):
 
 def engines(site):
     import ai_cite_check as AC
-    sub = dict(AC.subscription_engines())
+    sub = dict(AC.subscription_engines(site))
     try:
         paid = AC.engines_available(site)
     except Exception:  # noqa: BLE001  鍵が無ければ契約の枠だけで聞く

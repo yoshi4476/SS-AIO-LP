@@ -627,8 +627,9 @@ window.leadCapture = function (opts) {
         .then(function (r) {
           if (!r.ok) return r.text().then(function (t) { throw new Error(t); });
           if (window.trackLead) window.trackLead("newsletter_submit", { page_path: location.pathname });
-          f.innerHTML = '<p class="nl-done"><strong>登録しました。</strong>' +
-            '次回の配信からお届けします。</p>';
+          // 登録は本人の確認を挟む（/api/subscribe）。ここでは確認のメールを送っただけ
+          f.innerHTML = '<p class="nl-done"><strong>確認のメールを送りました。</strong>' +
+            'メールのリンクから登録を確定すると、次回の配信からお届けします。</p>';
         })
         .catch(function (err) {
           btn.disabled = false;
