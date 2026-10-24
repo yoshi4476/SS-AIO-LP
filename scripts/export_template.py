@@ -45,6 +45,8 @@ COPY_FILES = [
     # パイプラインの定義そのもの。全7工程・品質基準・AIO対応の規則が入る。
     # プロンプトはこれを参照する形で書かれている。
     "CLAUDE.md",
+    # CLAUDE.md は芯（要点と索引）だけで、全文は docs/pipeline/ にある（2026-10-25）。芯だけ渡すと索引の先が無い
+    *sorted(p.relative_to(ROOT).as_posix() for p in (ROOT / "docs" / "pipeline").glob("*.md")),
     # 認証情報の発行と反映の手順。発行URLと必要な権限まで書いてある。
     # .env と GitHub Secrets の片方だけを更新して食い違うのが最も多い事故で、
     # これが無いと渡した先で同じことが起きる。

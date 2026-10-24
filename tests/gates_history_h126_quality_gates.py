@@ -308,7 +308,8 @@ def test_prompts_and_docs_match_the_rubric_and_operation():
     print("\n■ 指示書・CLAUDE.md・win_patterns の食い違い（v3 の採点・通過印の 90・当社の実績は自社3サイトだけ）")
     ms = (ROOT / "automation" / "multi_site_prompt.txt").read_text(encoding="utf-8")
     pp = (ROOT / "automation" / "pipeline_prompt.txt").read_text(encoding="utf-8")
-    cm = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    from test_gates import pipeline_doc
+    cm = pipeline_doc()     # 芯の CLAUDE.md と docs/pipeline/ の全文（どちらにも古い基準を残さない）
     wp = (ROOT / "scripts" / "win_patterns.py").read_text(encoding="utf-8")
     check("旧基準（10点・24点・6観点の採点）が指示書に残っていない",
           [w in ms for w in ("各10点", "24点以上", "7点未満", "6観点採点は", "6点になり")], [False] * 5)
@@ -324,7 +325,7 @@ def test_prompts_and_docs_match_the_rubric_and_operation():
     check("CLAUDE.md Phase 5 に今の運用（公開前の別工程の採点・quality_loop）を書く",
           ("quality_loop.py --new" in cm, "機械採点の通過印" in cm), (True, False))
     check("win_patterns は見出しの並びを写させない", ("土台にして" in wp, "これに揃える" in wp, "写さない" in wp), (False, False, True))
-    check("書く AI の CLAUDE.md に「受託運用での分離」が残る", "受託運用での分離" in M.slim(cm, "writer"), True)
+    check("書く AI の CLAUDE.md に「受託運用での分離」が残る", "受託運用での分離" in M.slim(M.source(), "writer"), True)
 
 
 def test_originality_add_needs_own_site():

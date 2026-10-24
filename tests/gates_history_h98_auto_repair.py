@@ -69,7 +69,9 @@ def test_patch_policy_lets_ordinary_fixes_through():
         "引用符つきの名前": "diff --git \"a/scripts/k w.py\" \"b/scripts/k w.py\"\n@@ -1 +1 @@\n-a\n+b\n",
         "名前の変更": "diff --git a/scripts/a.py b/scripts/b.py\nsimilarity index 90%\nrename from scripts/a.py\nrename to scripts/b.py\n",
         "見出しと名前が違う": "diff --git a/scripts/a.py b/scripts/a.py\n--- a/scripts/a.py\n+++ b/sites/x.json\n@@ -1 +1 @@\n-a\n+b\n",
+        # 2026-10-25 から指示書の全文は docs/pipeline/（CLAUDE.md は芯だけ）。どちらも人が確かめる
         "指示書・設定": _patch("CLAUDE.md", ["- 新しい決まり"]) + _patch("sites/corporate.json", ["{}"])
+            + _patch("docs/pipeline/06-quality-rules.md", ["- 新しい決まり"])
             + _patch("automation/retry_prompt.txt", ["x"]),
         "データの名前で外へ": _patch("data/../sites/x.json", ["{}"]),
         "; の後ろの import": _patch("scripts/kw_plan.py", ["x = 1; import webbrowser"]),

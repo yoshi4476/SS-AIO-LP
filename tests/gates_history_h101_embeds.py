@@ -351,7 +351,8 @@ def test_writers_are_told_and_current_articles_do_not_collide():
         t = (ROOT / "automation" / f).read_text(encoding="utf-8")
         check(f"指示書 {f}: 地図・動画は記号の1行で書き、iframe は書かない", ("`@[地図](" in t and "`@[動画](" in t, "iframe は書かない" in t),
               (True, True))
-    cl = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    from test_gates import pipeline_doc
+    cl = pipeline_doc()     # 機械品質ゲートの表は docs/pipeline/06-quality-rules.md（CLAUDE.md は芯だけ）
     row = next((ln for ln in cl.splitlines() if ln.startswith("| **入れてはいけない HTML")), "")
     check("CLAUDE.md の機械品質ゲートの表に記号の埋め込みがある", ("@[地図]" in row, "embeds.py" in row), (True, True))
     files = sorted((ROOT / "articles").glob("*.md")) + sorted((ROOT / "private" / "articles").glob("*.md"))

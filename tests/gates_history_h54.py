@@ -431,7 +431,8 @@ def test_daily_kpi_runs_outside_the_article_slots():
            str(st[save].get("if", "")).startswith("always()") if save is not None else False), (True, True))
     m, h = crons[0].split()[:2] if crons else ("", "")
     jst = f"{(int(h) + 9) % 24:02d}:{int(m):02d}" if crons else ""
-    row = next((ln for ln in (ROOT / "CLAUDE.md").read_text(encoding="utf-8").splitlines()
+    from test_gates import pipeline_doc     # 5章の表は docs/pipeline/05-schedule.md（CLAUDE.md は芯だけ）
+    row = next((ln for ln in pipeline_doc().splitlines()
                 if ln.startswith("| Daily KPI Report")), "")
     check("CLAUDE.md 5章の表の時刻とワークフローの定時が合う", (f"毎日 {jst}" in row, "daily-kpi.yml" in row), (True, True))
 

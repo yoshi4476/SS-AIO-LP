@@ -20,24 +20,48 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 def test_claude_md_is_slimmed_for_ci_agents_and_restored():
     import agent_memory as M
-    print("\n■ CI の AI に読ませる CLAUDE.md は書く仕事に要る章だけ（戻すのは HEAD）")
-    full = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    print("\n■ CLAUDE.md は芯だけ・全文は docs/pipeline/。CI の AI には書く仕事に要る章の全文を組み立てて渡す（戻すのは芯）")
+    core = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    full = M.source()
+    pdir = ROOT / M.PIPELINE
+    check("docs/pipeline/ のファイルと PARTS が一致する（足したファイルが組み立てから漏れない）",
+          sorted(p.name for p in pdir.glob("*.md")), sorted(M.PARTS))
+    th = [M._title(b, 2) for b in M._blocks(full, 2)]
+    want = ("トリガー", "0.1", "0.2", "0.3", "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.", "付録")
+    check("全文に全部の章が順にそろう（移すときに章を落としていない）",
+          [next((i for i, t in enumerate(th) if t.startswith(w)), -1) for w in want] == sorted(
+              next((i for i, t in enumerate(th) if t.startswith(w)), -1) for w in want) and all(
+              any(t.startswith(w) for t in th) for w in want), True)
+    check("芯は2万字以内で、全文の25%未満（起動のたびに読む量）", (len(core) <= 20000, len(core) < len(full) * 0.25), (True, True))
+    check("芯の索引が docs/pipeline/ の全ファイルを指す", [p for p in M.PARTS if f"docs/pipeline/{p}" not in core], [])
+    check("芯に守秘の「守ること」と公開の基準が残る",
+          [w in core for w in ("PUBLIC_KEYS", "private_store.require", "pull_request_target", "::add-mask::",
+                               "一次性80点以上", "75点以上", "85点以上", "目標90点", "build.py` がビルド対象から除外")], [True] * 9)
     w = M.slim(full, "writer")
     heads = [ln for ln in w.splitlines() if ln.startswith("#")]
     has = lambda pre: any(h.lstrip("# ").startswith(pre) for h in heads)
-    check("writer: 0章・Phase 2〜6・6章・付録が残る",
+    check("writer: 0章・Phase 2〜6・6章・付録の全文が残る",
           [has(p) for p in ("0.1", "0.3", "Phase 2", "Phase 3", "Phase 5", "Phase 6", "6.", "付録")], [True] * 8)
+    check("writer: 6章と Phase 5 の本文は docs/pipeline/ と1字も違わない",
+          [b in w for b in M._blocks((pdir / "06-quality-rules.md").read_text(encoding="utf-8"), 2)]
+          + [s in w for s in M._blocks((pdir / "04-phases.md").read_text(encoding="utf-8"), 3)
+             if M._title(s, 3).startswith(("Phase 2", "Phase 3", "Phase 4", "Phase 5", "Phase 6"))], [True] * 6)
     check("writer: 導入・納品・守秘の置き場・週次・Phase 7・在庫の作り方は載せない",
           [has(p) for p in ("2.1", "3.0", "3.0.1", "8.", "Phase 7", "9.", "10.")] + ["在庫の作り方" in w], [False] * 8)
-    check("writer: 全文の35%未満", len(w) < len(full) * 0.35, True)
-    check("weekly: 8章（週次最適化）を足す", ("## 8." in M.slim(full, "weekly"), "## 8." in w), (True, False))
+    wk = M.slim(full, "weekly")
+    # AI に渡る量が元（移す前の CLAUDE.md＝全文。CI の外の呼び出しはこれを丸ごと読んでいた）より減ったこと
+    check("writer: 全文の35%未満・weekly: 全文の65%未満", (len(w) < len(full) * 0.35, len(wk) < len(full) * 0.65), (True, True))
+    check("weekly: 8章（週次最適化）を足す", ("## 8." in wk, "## 8." in w), (True, False))
     check("先頭に絞った印がある（二重に絞らない・戻す判定）", w.startswith(M.MARK), True)
     fake = "# t\n## 0.1 a\nx\n## 3. b\n```\n## 0.9 コードの中\n```\n## 6. c\ny\n"
     check("コードブロックの中の見出しでは分けない", "コードの中" in M.slim(fake, "writer"), False)
 
     with tempfile.TemporaryDirectory() as d:
         subprocess.run(["git", "init", "-q", d], check=True)
-        (Path(d) / "CLAUDE.md").write_text(full, encoding="utf-8")
+        (Path(d) / "CLAUDE.md").write_text(core, encoding="utf-8")
+        (Path(d) / M.PIPELINE).mkdir(parents=True)
+        for p in M.PARTS:
+            (Path(d) / M.PIPELINE / p).write_text((pdir / p).read_text(encoding="utf-8"), encoding="utf-8")
         subprocess.run(["git", "-C", d, "add", "CLAUDE.md"], check=True)
         subprocess.run(["git", "-C", d, "-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "x"], check=True)
         old = os.environ.get("GITHUB_ACTIONS")
@@ -45,7 +69,8 @@ def test_claude_md_is_slimmed_for_ci_agents_and_restored():
         try:
             first = M.write_slim("writer", d)
             again = M.write_slim("writer", d)
-            slimmed = (Path(d) / "CLAUDE.md").read_text(encoding="utf-8").startswith(M.MARK)
+            mid = (Path(d) / "CLAUDE.md").read_text(encoding="utf-8")
+            slimmed = mid.startswith(M.MARK) and mid == M.slim(full, "writer")
             M.restore(d)
         finally:
             if old is None:
@@ -53,10 +78,12 @@ def test_claude_md_is_slimmed_for_ci_agents_and_restored():
             else:
                 os.environ["GITHUB_ACTIONS"] = old
         back = (Path(d) / "CLAUDE.md").read_text(encoding="utf-8")
-    check("絞る → 二度目は触らない → 戻すと HEAD と同じ", (first, again, slimmed, back == full), (True, False, True, True))
+    check("組み立てる（docs/pipeline/ から）→ 二度目は触らない → 戻すと芯と同じ", (first, again, slimmed, back == core),
+          (True, False, True, True))
 
     import agent_guard as G
-    check("戻し損ねても protect が CLAUDE.md を HEAD へ戻す（守る場所に入っている）", "CLAUDE.md" in G.PROTECTED, True)
+    check("戻し損ねても protect が CLAUDE.md を HEAD へ戻す・全文の docs/pipeline も守る場所",
+          ("CLAUDE.md" in G.PROTECTED, M.PIPELINE in G.PROTECTED), (True, True))
     wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
     i, j = wf.find("agent_memory.py --slim writer"), wf.find("agent_memory.py --restore")
     k = wf.find('claude -p "$(cat automation/multi_site_prompt.txt)"')

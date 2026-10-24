@@ -28,6 +28,13 @@ sys.path.insert(0, str(ROOT / "scripts"))
 FAIL = []
 
 
+def pipeline_doc():
+    """パイプライン定義の文（芯の CLAUDE.md と docs/pipeline/*.md をつなげたもの）。「文書に書いてあるか」を見る門はこれを読む。
+    2026-10-25 に CLAUDE.md を芯だけにし、全文を docs/pipeline/ へ移した（CLAUDE.md だけ読むと細部が見つからない）"""
+    files = [ROOT / "CLAUDE.md"] + sorted((ROOT / "docs" / "pipeline").glob("*.md"))
+    return "\n".join(p.read_text(encoding="utf-8") for p in files)
+
+
 _HIDE = None
 
 
@@ -512,7 +519,7 @@ def test_auto_fixes_are_reviewed():
     check("全体の偏りに上限がある", ar.MAX_SHARE <= 0.2, True)
     check("1記事のリンク段落に上限がある", ar.MAX_LINK_PARA <= 6, True)
 
-    doc = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    doc = pipeline_doc()
     check("パイプライン定義に載っている", "自動修正と、その見直し" in doc, True)
 
 
@@ -1429,7 +1436,7 @@ def test_measurement_pitfalls_are_documented():
     人の注意に任せると忘れるので、手順を文書に残し、検算の道具を用意する。
     """
     print(chr(10) + "■ 測り方の落とし穴")
-    md = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
+    md = pipeline_doc()
     check("数字を出す前の手順がある", "数字を出す前に必ず通す手順" in md, True)
     for k in ("別の方法で同じ数字を出す", "内訳に分ける",
               "逆を探す", "前提を口に出して確かめる"):

@@ -64,7 +64,7 @@ SECRETISH = re.compile(r"(TOKEN|SECRET|PASSWORD|_KEY|_JSON|CREDENTIALS)$")
 # automation/textlint は AI っぽい言い回しの検出のルール（記事の AI が止めると検出が効かなくなる。node_modules は .gitignore）
 PROTECTED = ["scripts", "tests", ".github", ".claude", "templates", "tools", "automation/gas", "automation/wordpress",
              "automation/textlint",
-             "CLAUDE.md", "PROJECT.md", "requirements.txt", "package.json", "package-lock.json",
+             "CLAUDE.md", "docs/pipeline", "PROJECT.md", "requirements.txt", "package.json", "package-lock.json",
              "automation/*.txt", "automation/agent_settings_*.json"]
 # 自動修復の AI はコードを直すのが仕事なので、守るのは鍵の外し方そのものだけ
 PROTECTED_JAIL = ["scripts/agent_guard.py", "scripts/gcreds.py", "automation/agent_settings_*.json", ".claude",
