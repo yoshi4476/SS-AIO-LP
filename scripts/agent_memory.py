@@ -2,10 +2,11 @@
 
 CLAUDE.md は芯（要点と索引・約1万字）だけで、全文は docs/pipeline/*.md に章ごとにある（2026-10-25 に文言を変えずに移した。
 PARTS の順につなげると、移す前の CLAUDE.md と1字も違わない）。claude は起動時に CLAUDE.md を文脈に入れ、1手ごとに読み直すので、
-書く AI には芯の代わりに、書く仕事に要る章（0章・Phase 1〜6（在庫の作り方を除く）・6章・付録）の全文を渡す。
+書く AI には芯の代わりに、書く仕事に要る章（0章・Phase 1〜5（Phase 1 は AI が行う項目だけ）・6章・付録）の全文を渡す。
+2026-10-25: AI が行わない節（Phase 6・Phase 1 の Ahrefs とスプレッドシート・8章の機械の工程）も外した（DROP_SUB・DROP_PHASE1）。
 
-  python scripts/agent_memory.py --slim writer   # 0章・Phase 1〜6（在庫の作り方を除く）・6章・付録の全文にする
-  python scripts/agent_memory.py --slim weekly   # writer に 8章（週次最適化）を足す
+  python scripts/agent_memory.py --slim writer   # 0章・Phase 1〜5・6章・付録の全文にする
+  python scripts/agent_memory.py --slim weekly   # writer に 8章のうち週次の AI が使う節（8.1・8.2・8.3・8.6）を足す
   python scripts/agent_memory.py --restore       # 芯の CLAUDE.md へ戻す
   python scripts/agent_memory.py --show writer   # 組み立てた版の字数を見る（書き換えない）
 
@@ -29,7 +30,25 @@ PARTS = ("00-principles.md", "01-overview.md", "02-prereq-confidentiality.md", "
          "10-troubleshooting.md", "appendix-checklist.md")
 MARK = "<!-- agent_memory:slim -->"
 KEEP = {"writer": ("0.", "4.", "6.", "付録"), "weekly": ("0.", "4.", "6.", "8.", "付録")}
-DROP_SUB = ("Phase 7",)
+# 残す章の中で、AI が行わない節（### の見出しの先頭で外す。見出しを足しても既定では載る＝外し漏れより載せ過ぎに倒す）
+DROP_SUB = {
+    # Phase 6（画像・ビルド・Schema・sitemap・デプロイ）は publish_flow --check と機械の手順が行い、手順書が commit・push を禁じている。
+    # 書き方に効く決まり（図の英字禁止・alt・図の中身を本文にも・FAQ と Schema の一致）は 6章と Phase 5 に同じものがある
+    "4.": ("Phase 6", "Phase 7"),
+    # 8章のうち週次の AI が行わない節（全部スクリプト・月次・人の工程）。週次の AI の手順（weekly_optimize_prompt）が使う
+    # 8.1 カニバリ・8.2 書き直しの基準・8.3 内部リンク・8.6 自動修正の決まり（リンクの段落・言い回し・アンカーの長さ）は残す。
+    # 「8.1」と「8.10」を取り違えないよう、番号の後ろの空白まで書く
+    "8.": ("8.2.5 ", "8.4 ", "8.5 ", "8.7 ", "8.8 ", "8.9 ", "8.10 ", "8.11 ", "8.13 ", "8.14 ", "8.15 ", "8.16 ", "8.17 "),
+}
+# Phase 1 の中で AI が行わない項目（re.sub。見つからなければ何も外さない）
+DROP_PHASE1 = (
+    # 在庫の作り方（ラッコの枠・単価）は機械の工程
+    r"(?ms)^-1\. \*\*在庫の作り方.*?(?=^0\. \*\*)",
+    # 1〜4（記事作成ログのタブ・Ahrefs の競合・KW・AI Overview の取得）と 6（スプレッドシートの更新）。CI の AI には
+    # Ahrefs もスプレッドシートも無く、語は site_brief・kw_status が渡す。0（食い合い）・4.5（開く理由）・5（批判3周）は残す
+    r"(?ms)^1\. \*\*記事作成ログの確認\*\*.*?(?=^4\.5\. )",
+    r"(?ms)^6\. \*\*KW確定・スプレッドシート更新\*\*.*?(?=\n^### |\Z)",
+)
 
 
 def source(root=None):
@@ -71,13 +90,15 @@ def slim(text, profile):
         if not t:
             parts.append(b)
         elif t.startswith(keep):
+            drop = next((v for k, v in DROP_SUB.items() if t.startswith(k)), ())
+            if drop:
+                b = "".join(s for s in _blocks(b, 3) if not _title(s, 3).startswith(drop))
             if t.startswith("4."):
-                b = "".join(s for s in _blocks(b, 3) if not _title(s, 3).startswith(DROP_SUB))
-                # Phase 1 の在庫の作り方（ラッコの枠・単価）は機械の工程。書く AI は使わない
-                b = re.sub(r"(?ms)^-1\. \*\*在庫の作り方.*?(?=^0\. \*\*)", "", b)
+                for pat in DROP_PHASE1:
+                    b = re.sub(pat, "", b)
             parts.append(b)
     note = (f"{MARK}\n> CI の AI 用に、この仕事に要る章だけを載せた版（{profile}）。全文は docs/pipeline/。"
-            "載っていない章（導入・納品方式・週次の工程・守秘の置き場など）は機械の工程が受け持つ。\n\n")
+            "載っていない章（導入・納品方式・公開の工程（Phase 6・7）・週次の機械の工程・守秘の置き場など）は機械の工程が受け持つ。\n\n")
     # 3.0 章は導入の手順なので外すが、「受託運用での分離」（お客様の記事に当社の実績を書かない）だけは書く仕事の決まり。
     # 章ごと外していたので、お客様の社の記事を書く AI に届いていなかった（2026-10-20 の点検）。見出しにせず段落だけ残す
     sep = re.search(r"(?m)^\*\*受託運用での分離\*\*.*$", text)

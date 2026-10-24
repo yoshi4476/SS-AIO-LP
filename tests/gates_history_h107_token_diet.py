@@ -40,17 +40,40 @@ def test_claude_md_is_slimmed_for_ci_agents_and_restored():
     w = M.slim(full, "writer")
     heads = [ln for ln in w.splitlines() if ln.startswith("#")]
     has = lambda pre: any(h.lstrip("# ").startswith(pre) for h in heads)
-    check("writer: 0章・Phase 2〜6・6章・付録の全文が残る",
-          [has(p) for p in ("0.1", "0.3", "Phase 2", "Phase 3", "Phase 5", "Phase 6", "6.", "付録")], [True] * 8)
-    check("writer: 6章と Phase 5 の本文は docs/pipeline/ と1字も違わない",
-          [b in w for b in M._blocks((pdir / "06-quality-rules.md").read_text(encoding="utf-8"), 2)]
-          + [s in w for s in M._blocks((pdir / "04-phases.md").read_text(encoding="utf-8"), 3)
-             if M._title(s, 3).startswith(("Phase 2", "Phase 3", "Phase 4", "Phase 5", "Phase 6"))], [True] * 6)
-    check("writer: 導入・納品・守秘の置き場・週次・Phase 7・在庫の作り方は載せない",
-          [has(p) for p in ("2.1", "3.0", "3.0.1", "8.", "Phase 7", "9.", "10.")] + ["在庫の作り方" in w], [False] * 8)
+    check("writer: 0章・Phase 1〜5・6章・付録が残る",
+          [has(p) for p in ("0.1", "0.2", "0.3", "Phase 1", "Phase 2", "Phase 3", "Phase 4", "Phase 5", "6.", "付録")], [True] * 10)
     wk = M.slim(full, "weekly")
-    # AI に渡る量が元（移す前の CLAUDE.md＝全文。CI の外の呼び出しはこれを丸ごと読んでいた）より減ったこと
-    check("writer: 全文の35%未満・weekly: 全文の65%未満", (len(w) < len(full) * 0.35, len(wk) < len(full) * 0.65), (True, True))
+    # 必ず残す決まり（0.1・0.3・Phase 2〜5・6章の全節・Phase 1 の食い合いと開く理由・受託運用での分離）が両方の版に1字も違わず入る
+    ph = (pdir / "04-phases.md").read_text(encoding="utf-8")
+    must = [b for b in M._blocks((pdir / "00-principles.md").read_text(encoding="utf-8"), 2)
+            if M._title(b, 2).startswith(("0.1", "0.3"))]
+    must += [s for b in M._blocks((pdir / "06-quality-rules.md").read_text(encoding="utf-8"), 2)
+             if M._title(b, 2).startswith("6.") for s in M._blocks(b, 3)]
+    must += [s for s in M._blocks(ph, 3) if M._title(s, 3).startswith(("Phase 2", "Phase 3", "Phase 4", "Phase 5"))]
+    import re
+    must += [m.group(0) for m in (re.search(r"(?ms)^0\. \*\*食い合い審査.*?(?=^1\. \*\*)", ph),
+                                  re.search(r"(?ms)^4\.5\. \*\*.*?(?=^6\. \*\*)", ph)) if m]
+    must += [m.group(0) for m in [re.search(r"(?m)^\*\*受託運用での分離\*\*.*$", full)] if m]
+    check("必ず残す決まりの数（0.1・0.3・6章の頭と節9・Phase 2〜5・Phase 1 の2項目・受託運用での分離）", len(must), 19)
+    check("writer: 必ず残す決まりが docs/pipeline/ と1字も違わない", [i for i, b in enumerate(must) if b not in w], [])
+    check("weekly: 必ず残す決まりが docs/pipeline/ と1字も違わない", [i for i, b in enumerate(must) if b not in wk], [])
+    check("writer: 導入・納品・守秘の置き場・週次・Phase 6・7・在庫の作り方は載せない",
+          [has(p) for p in ("トリガー", "2.1", "3.0", "3.0.1", "8.", "Phase 6", "Phase 7", "9.", "10.")] + ["在庫の作り方" in w],
+          [False] * 10)
+    gone = ("記事作成ログの確認", "site-explorer-organic-competitors", "keywords-explorer-overview",
+            "KW確定・スプレッドシート更新")
+    check("Phase 1 の Ahrefs・スプレッドシートの項目（1〜4・6）は両方の版に載せない",
+          [g for g in gone if g in w or g in wk], [])
+    wheads = [ln.lstrip("# ") for ln in wk.splitlines() if ln.startswith("### ")]
+    check("weekly: 週次の AI が使う 8.1・8.2・8.3・8.6 は docs/pipeline/ と1字も違わない",
+          [s in wk for s in M._blocks((pdir / "08-weekly.md").read_text(encoding="utf-8"), 3)
+           if M._title(s, 3).startswith(("8.1 ", "8.2 ", "8.3 ", "8.6 "))], [True] * 4)
+    check("weekly: 機械・月次・人の工程の 8章の節（8.2.5・8.4・8.5・8.7〜8.17）と Phase 6・7 は載せない",
+          [h for h in wheads if h.startswith(M.DROP_SUB["8."] + ("Phase 6", "Phase 7"))], [])
+    check("weekly: 8章の節は 8.1・8.2・8.3・8.6 だけ（足した節は既定で載る＝外すなら DROP_SUB に書く）",
+          [h.split()[0] for h in wheads if h.startswith("8.")], ["8.1", "8.2", "8.3", "8.6"])
+    # AI に渡る量（2026-10-25 の実測: 全文 82,968字 → writer 22,695字・weekly 27,806字。前は 25,300字・50,200字）
+    check("writer: 全文の30%未満・weekly: 全文の35%未満", (len(w) < len(full) * 0.30, len(wk) < len(full) * 0.35), (True, True))
     check("weekly: 8章（週次最適化）を足す", ("## 8." in wk, "## 8." in w), (True, False))
     check("先頭に絞った印がある（二重に絞らない・戻す判定）", w.startswith(M.MARK), True)
     fake = "# t\n## 0.1 a\nx\n## 3. b\n```\n## 0.9 コードの中\n```\n## 6. c\ny\n"
