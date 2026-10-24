@@ -325,8 +325,8 @@ def ask_claude_cli(q):
               "`SOURCE: <URL>` の形で書いてください。")
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         # 質問は標準入力で渡す。Windows の claude.cmd は改行を含む引数を途中で切り、出典の指示が届かなかった
-        r = subprocess.run([exe, "-p", "--allowedTools", "WebSearch",
-                            "--model", _env("CLAUDE_CITE_MODEL") or "claude-sonnet-5-5"],
+        r = subprocess.run(__import__("auto_rewrite").lean([exe, "-p", "--allowedTools", "WebSearch",
+                                                            "--model", _env("CLAUDE_CITE_MODEL") or "claude-sonnet-5-5"]),
                            input=prompt, cwd=tmp, capture_output=True, text=True, encoding="utf-8",
                            errors="replace", timeout=300, env=__import__("agent_guard").child_env())
     if r.returncode != 0:

@@ -8,6 +8,9 @@
 #   bash scripts/agent_passes.sh <指示書> <最大のターン数> [claude に渡す追加の引数…]
 #   AGENT_WORK_KIND=rescue|weekly を付けると、その範囲の今日の仕事が0件の回は AI を起こさない（scripts/agent_work.py）
 set -u
+# 記事に使う情報を減らさずにトークンと待ち時間を減らす claude の設定（agent_guard.LEAN_ENV と同じ値。門がそろいを見る）
+export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 DISABLE_AUTOUPDATER=1 CLAUDE_CODE_DISABLE_TERMINAL_TITLE=1 \
+  CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS=1 CLAUDE_CODE_DISABLE_AUTO_MEMORY=1
 prompt_file="$1"
 turns="$2"
 shift 2
@@ -49,7 +52,7 @@ for sc in $scopes; do
   claude -p "$(cat "$prompt_file")
 
 【この回の範囲】${note}" --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json \
-    --max-turns "$turns" "$@" > "$out" 2>&1 || echo "::warning::AI の回が失敗しました（次の範囲へ続けます）"
+    --strict-mcp-config --exclude-dynamic-system-prompt-sections --max-turns "$turns" "$@" > "$out" 2>&1 || echo "::warning::AI の回が失敗しました（次の範囲へ続けます）"
   python scripts/agent_memory.py --restore || true
   [ "$sc" = "own" ] || echo "AI の出力 $(wc -l < "$out") 行（お客様の範囲のため、ログには出しません）"
   python scripts/agent_guard.py --protect --site "$sc" --pass

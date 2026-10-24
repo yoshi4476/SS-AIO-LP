@@ -217,8 +217,8 @@ def test_agent_guard_locks_verifies_protects_and_unlocks():
               ("AUTHORIZATION" in g("config", "--local", "--get", "http.https://github.com/.extraheader").stdout,
                (root / "youtube-token.json").exists()), (True, True))
         check("道具の中から呼ぶ AI には、claude の鍵以外の鍵の名前を渡さない",
-              sorted(A.child_env({"PATH": "p", "CLAUDE_CODE_OAUTH_TOKEN": "c", "HUB_SECRET": "h", "SITE_PUSH_TOKEN": "s",
-                                  "SOME_NEW_TOKEN": "n", "GCP_SERVICE_ACCOUNT_JSON": "g"})),
+              sorted(k for k in A.child_env({"PATH": "p", "CLAUDE_CODE_OAUTH_TOKEN": "c", "HUB_SECRET": "h", "SITE_PUSH_TOKEN": "s",
+                                             "SOME_NEW_TOKEN": "n", "GCP_SERVICE_ACCOUNT_JSON": "g"}) if k not in A.LEAN_ENV),
               ["CLAUDE_CODE_OAUTH_TOKEN", "PATH"])
     finally:
         for k, v in keep.items():

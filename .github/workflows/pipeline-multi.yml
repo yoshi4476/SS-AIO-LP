@@ -347,13 +347,19 @@ jobs:
       - uses: ./.github/actions/py-env
         if: steps.site.outputs.skip != 'yes'
 
+      # 版を固定した claude の npm の取得を控えから戻す（版を変えると鍵が変わり、取り直して控える）
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: steps.site.outputs.skip != 'yes'
+        with:
+          path: ~/.npm/_cacache
+          key: npm-cli-v1-${{ runner.os }}-claude-code-2.1.302
       - name: 依存インストール
         if: steps.site.outputs.skip != 'yes'
         run: |
           # 3つは互いに関係ないので同時に入れる（順に入れて約35秒・遅い日は5分）。1つでも失敗したら止める
           pip install -q -r requirements.txt yt-dlp==2026.10.21 > /tmp/pip.log 2>&1 & p1=$!
           (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1 & p2=$!
-          npm install -g @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 & p3=$!
+          npm install -g --prefer-offline @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 & p3=$!
           # AI っぽい言い回しの検出（textlint。版は automation/textlint/package-lock.json で固定）。公開前の品質ループが使う。
           # 入らなくても記事は止めない（品質ループは言い回しの直しを飛ばして採点を続ける）
           npm ci --prefix automation/textlint --no-audit --no-fund > /tmp/npm_textlint.log 2>&1 & p4=$!
@@ -670,6 +676,12 @@ jobs:
         env:
           SITE_ID: ${{ steps.site.outputs.id }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # 記事に使う情報を減らさずにトークンと待ち時間を減らす claude の設定（agent_guard.LEAN_ENV と同じ値。門がそろいを見る）
+          CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1"
+          DISABLE_AUTOUPDATER: "1"
+          CLAUDE_CODE_DISABLE_TERMINAL_TITLE: "1"
+          CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS: "1"
+          CLAUDE_CODE_DISABLE_AUTO_MEMORY: "1"
           # 社数が増えてサブスクの枠に当たったら、API の従量課金に切り替える（鍵を登録するだけ。
           # 記事1本 ¥50〜150 の目安。未登録なら空で、claude はサブスクの鍵を使う）
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -704,12 +716,12 @@ jobs:
             # 伏せる語の一覧に無いので伏せられない。2026-10-11 の回で出た）。出力はランナーの一時置き場にだけ残す
             if [ "${{ steps.site.outputs.quiet }}" = "yes" ]; then
               claude -p "$(cat automation/multi_site_prompt.txt)" \
-                $MODEL_ARG --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 160 \
+                $MODEL_ARG --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --strict-mcp-config --exclude-dynamic-system-prompt-sections --max-turns 160 \
                 > "$RUNNER_TEMP/claude_out_$try.txt" 2>&1 || true
               echo "AI の出力 $(wc -l < "$RUNNER_TEMP/claude_out_$try.txt") 行（お客様の社の回のため、ログには出しません）"
             else
               claude -p "$(cat automation/multi_site_prompt.txt)" \
-                $MODEL_ARG --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 160 || true
+                $MODEL_ARG --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --strict-mcp-config --exclude-dynamic-system-prompt-sections --max-turns 160 || true
             fi
             after=$(ls articles/*.md 2>/dev/null | wc -l)
             if [ "$after" -gt "$before" ]; then

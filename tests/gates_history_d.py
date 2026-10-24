@@ -956,10 +956,18 @@ AGENT_NAMES = {"claude", "codex", "claude.cmd", "codex.cmd"}
 def agent_call_problems(src):
     out = []
     for n in ast_nodes(src)[1]:
-        if not isinstance(n, ast.Call) or not n.args or not isinstance(n.args[0], ast.List) or not n.args[0].elts:
+        if not isinstance(n, ast.Call) or not n.args:
             continue
-        elts = n.args[0].elts
-        s = str_elems(n.args[0])
+        # AR.lean([...]) は引数を足すだけ。中の一覧を、stdin を渡す外側の呼び出しで見る
+        if getattr(n.func, "attr", getattr(n.func, "id", "")) == "lean":
+            continue
+        lst = n.args[0]
+        if isinstance(lst, ast.Call) and getattr(lst.func, "attr", getattr(lst.func, "id", "")) == "lean" and lst.args:
+            lst = lst.args[0]
+        if not isinstance(lst, ast.List) or not lst.elts:
+            continue
+        elts = lst.elts
+        s = str_elems(lst)
         head = elts[0]
         is_agent = (isinstance(head, ast.Constant) and head.value in AGENT_NAMES) \
             or (isinstance(head, ast.Call) and getattr(head.func, "attr", getattr(head.func, "id", "")) == "claude_bin") \
@@ -980,6 +988,9 @@ def test_hist_cli_agents_resolved_and_stdin():
     check("検出器: claude_bin() と input= なら通す",
           agent_call_problems("subprocess.run([AR.claude_bin(), '-p'], input=prompt)"), [])
     check("検出器: git log -p は対象外", agent_call_problems("sh(['git', 'log', '-p', '--', f])"), [])
+    check("検出器: AR.lean([...]) で包んでも外側の呼び出しで見る",
+          (len(agent_call_problems("subprocess.run(AR.lean([exe, '-p']))")),
+           agent_call_problems("subprocess.run(AR.lean([exe, '-p']), input=prompt)")), (1, []))
     cur = [f"{p.name}:{x}" for p, t in scripts() for x in agent_call_problems(t)]
     check("scripts/ の claude/codex 呼び出し", cur, [])
 

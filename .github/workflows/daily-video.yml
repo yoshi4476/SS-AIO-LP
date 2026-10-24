@@ -76,12 +76,17 @@ jobs:
         with:
           path: ~/.cache/huggingface
           key: whisper-medium-v1
+      # 版を固定した claude の npm の取得を控えから戻す（版を変えると鍵が変わり、取り直して控える）
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ~/.npm/_cacache
+          key: npm-cli-v1-${{ runner.os }}-claude-code-2.1.302
       - name: 準備
         run: |
           # apt・npm・pip は互いに関係ないので同時に入れる（順に入れて約70秒・遅い日は6分）
           (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk) > /dev/null 2>&1 & apt=$!
           # 掛け合いの台本を書かせる（動かなければスライド形式に落ちる）
-          npm install -g @anthropic-ai/claude-code@2.1.302 > /dev/null 2>&1 & npm=$!
+          npm install -g --prefer-offline @anthropic-ai/claude-code@2.1.302 > /dev/null 2>&1 & npm=$!
           pip install --quiet -r requirements.txt edge-tts
           # 作った声を聞き直して読み違いを直す（入らなくても動画づくりは止めない）
           pip install --quiet -r requirements-video.txt || echo "::warning::読みの聞き直しが入らず、読み違いを検査できません"

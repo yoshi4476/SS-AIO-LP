@@ -111,7 +111,7 @@ def write_long(art, url, md):
         # 1本の時間切れで全体を止めない（2026-10-02 に50本目の後で止まった）
         try:
             with tempfile.TemporaryDirectory() as tmp:
-                r = subprocess.run([exe, "-p", *AR.model_args()], input=p, cwd=tmp, env=__import__("agent_guard").child_env(),
+                r = subprocess.run(AR.lean([exe, "-p", *AR.model_args()]), input=p, cwd=tmp, env=__import__("agent_guard").child_env(),
                                    capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=600)
         except subprocess.TimeoutExpired:
             why = ["claude が10分で応答しませんでした"]

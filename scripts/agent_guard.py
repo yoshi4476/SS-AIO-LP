@@ -71,10 +71,23 @@ PROTECTED_JAIL = ["scripts/agent_guard.py", "scripts/gcreds.py", "automation/age
                   "tests/gates_history_h91_agent_jail.py", ".github"]
 
 
+# 自動の起動の claude で、記事に使う情報を減らさずにトークンと待ち時間を減らす環境変数（公式 code.claude.com/docs/en/env-vars）。
+# 更新の確認・利用状況の送信・題の自動生成（小さいモデルへの別の呼び出し）を止め、AI が使わない git の commit・PR の手順と
+# git status の写し・自動メモリ（CI では空。手元では運用者のメモが毎回載り、書き込みもされる）を文脈から外す。
+# 呼ぶ側で値を決めていればそちらを使う。workflow で直に起こす claude（agent_passes.sh・記事の枠・自動修復）も同じ値を渡す
+LEAN_ENV = {
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "DISABLE_AUTOUPDATER": "1",
+    "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1",
+    "CLAUDE_CODE_DISABLE_GIT_INSTRUCTIONS": "1",
+    "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+}
+
+
 def child_env(env=None):
     """道具の中から呼ぶ AI（claude -p）に渡す環境変数。呼ばれた AI は手順の環境変数をそのまま受け継ぎ、
     読み取りのコマンド（echo・cat）は許可なしで動くので、鍵の名前の変数を外して渡す（claude の鍵だけ残す）"""
-    env = dict(os.environ if env is None else env)
+    env = {**LEAN_ENV, **dict(os.environ if env is None else env)}
     keep = {"CLAUDE_CODE_OAUTH_TOKEN", "ANTHROPIC_API_KEY"}
     return {k: v for k, v in env.items()
             if k in keep or not (k.upper() in KNOWN_SECRETS or k.upper() == "HUB_SECRET" or SECRETISH.search(k.upper()))}

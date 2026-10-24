@@ -63,6 +63,7 @@ def sh(args, timeout=1800, stdin_text=None, cwd=None):
     if Path(str(args[0])).name.lower().startswith("claude"):
         import agent_guard
         env = agent_guard.child_env()
+        args = lean(args)
         if "--settings" not in args:
             args = [*args, "--settings", json.dumps({"permissions": {"deny": READ_DENY}}, ensure_ascii=False)]
         # 1手で答えるだけの呼び出し（台本・訳・返信案）はファイルを読まないので、CLAUDE.md の無い場所で起こす。
@@ -1210,6 +1211,45 @@ def title_covers_kw(title, kw):
         return False
     hit = sum(1 for x in toks if KW_NOISE.sub("", x) in nt)
     return hit / len(toks) >= 0.7
+
+
+# 自動の起動の claude に付ける指定（公式 code.claude.com/docs/en/cli-reference）。AI が使う情報は減らさない。
+# --strict-mcp-config: 起動の引数で渡した MCP の設定だけを使う。自動の起動は MCP を使わないので、.mcp.json・手元の
+#   ~/.claude.json のサーバーの道具の一覧と接続待ちを載せない
+# --exclude-dynamic-system-prompt-sections: 起動の場所ごとに変わる部分を最初の発言へ移す（中身は同じ）。一時フォルダで
+#   1本ずつ起こす書き直し・採点でも、指示の前半が前の呼び出しのキャッシュに当たる
+LEAN_ARGS = ["--strict-mcp-config", "--exclude-dynamic-system-prompt-sections"]
+
+
+def _no_skills(args):
+    """スキルを使えない起動か。許可（--allowedTools・--settings の allow）に Skill が無く、許可に無い道具を断る
+    dontAsk か1手だけの呼び出し。使えないスキルの一覧を毎回載せない（--disable-slash-commands）"""
+    allow, mode = [], ""
+    if "--allowedTools" in args:
+        allow += str(args[args.index("--allowedTools") + 1]).split(",")
+    if "--settings" in args:
+        try:
+            p = json.loads(args[args.index("--settings") + 1]).get("permissions") or {}
+        except (ValueError, AttributeError):
+            return False
+        allow += p.get("allow") or []
+        mode = p.get("defaultMode") or ""
+    if "--permission-mode" in args:
+        mode = args[args.index("--permission-mode") + 1]
+    one = "--max-turns" in args and str(args[args.index("--max-turns") + 1]) == "1"
+    return not any(str(a).strip().startswith("Skill") for a in allow) and (mode == "dontAsk" or one)
+
+
+def lean(args):
+    """claude -p の起動に LEAN_ARGS を足す（付いていれば足さない）。スキルを使えない起動は一覧も載せない"""
+    args = list(args)
+    if "-p" not in args:
+        return args
+    extra = [a for a in LEAN_ARGS if a not in args]
+    if _no_skills(args) and "--disable-slash-commands" not in args:
+        extra.append("--disable-slash-commands")
+    i = args.index("-p") + 1
+    return args[:i] + extra + args[i:]
 
 
 def claude_bin():

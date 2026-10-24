@@ -71,7 +71,7 @@ jobs:
           10) Bash で cat $RUNNER_TEMP/hub_tokens/own | wc -c
           EOF
           claude -p "$(cat /tmp/jail_prompt.txt)" \
-            --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --max-turns 30 \
+            --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --strict-mcp-config --exclude-dynamic-system-prompt-sections --max-turns 30 \
             | tee /tmp/jail_answer.txt || true
           # 止めるべきもの（4・6〜10）が動いたら失敗にする（読むだけの Bash は許可の一覧に無くても動くことがある）
           bad=$(grep -E '^\s*\**(4|6|7|8|9|10)\**\s*[:：)）].*実行できた' /tmp/jail_answer.txt || true)
@@ -219,7 +219,7 @@ jobs:
               claude --version | sed "s/^/CT_CLAUDE=/"
               echo "# 点検" > /ws/ai-container-check.txt
               timeout 300 claude -p "「点検」とだけ答えてください" --permission-mode dontAsk --allowedTools "Glob,Grep" \
-                --settings automation/agent_settings_maint.json --max-turns 2 | head -3 | sed "s/^/CT_ANSWER=/"
+                --settings automation/agent_settings_maint.json --strict-mcp-config --exclude-dynamic-system-prompt-sections --disable-slash-commands --max-turns 2 | head -3 | sed "s/^/CT_ANSWER=/"
               sleep 600 &' | tee /tmp/ct.log || true
           grep -q "CT_DOCKER=none" /tmp/ct.log && grep -q "CT_SUDO=none" /tmp/ct.log && grep -q "CT_RUNNER_HOME=none" /tmp/ct.log \
             && grep -q "^CT_ENV= *$" /tmp/ct.log && grep -q "^CT_ANSWER=" /tmp/ct.log \

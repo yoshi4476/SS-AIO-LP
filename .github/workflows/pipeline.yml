@@ -97,11 +97,22 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+      # 版を固定した claude の npm の取得を控えから戻す（版を変えると鍵が変わり、取り直して控える）
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ~/.npm/_cacache
+          key: npm-cli-v1-${{ runner.os }}-claude-code-2.1.302
       - name: 依存インストール（Python・日本語フォント・Claude Code）
         run: |
-          pip install -r requirements.txt
-          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
-          npm install -g @anthropic-ai/claude-code@2.1.302
+          # 3つは互いに関係ないので同時に入れる（記事の枠と同じ形）。1つでも失敗したら止める
+          pip install -r requirements.txt > /tmp/pip.log 2>&1 & p1=$!
+          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1 & p2=$!
+          npm install -g --prefer-offline @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 & p3=$!
+          ok=1
+          wait $p1 || { cat /tmp/pip.log; ok=0; }
+          wait $p2 || { cat /tmp/apt.log; ok=0; }
+          wait $p3 || { cat /tmp/npm.log; ok=0; }
+          [ "$ok" = 1 ] || exit 1
           # ネイティブバイナリが落ちてこないことがある（postinstallが走らない／
           # optional依存が省かれる）。実行時まで気づけず、記事生成ごと落ちる。
           # ここで動作を確かめ、駄目ならインストーラを直接叩き直す。
