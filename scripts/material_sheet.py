@@ -389,6 +389,13 @@ def apply(src, do_write=False, ask=None):
     msg = f"{who}: 一次情報 {len(f)}件・体験 {len(e)}件を登録{'' if do_write else 'できます（--write で実行）'}、保留 {len(held)}件"
     if do_write and (f or e):
         write(site, f, e)
+        # 答えのあった記事の下書きがしまわれていれば戻す（材料が届いたので、次の回が採点し直す）
+        import quality_loop as Q
+        back = [s for s in dict.fromkeys(a["key"].split(":")[1] for a in answers if a["key"].startswith("req:"))
+                if Q.unshelve(s)]
+        if back:
+            msg_back = f"しまっていた下書き {len(back)}本を戻しました"
+            print(msg_back)
         if P.is_client(site):
             P.push(f"質問シートの答えを一次情報 {len(f)}件・体験 {len(e)}件として登録")
     if do_write:

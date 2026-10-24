@@ -295,14 +295,16 @@ def _with_material(site, got, kw0, todo):
         has = lambda k: material.hits(k, mats, pool) > 0
         if not mats or has(kw0):
             return None
-        if not P.is_client(site) and not main:
-            return None
-        for r in todo:
-            if has(str(r["keyword"])) and (not main or re.search(main, str(r["keyword"]).lower())):
-                out = dict(got)
-                out.update({"keyword": str(r["keyword"]), "aim": r.get("aim", ""),
-                            "category": r.get("category", ""), "picked_by": "材料のある題"})
-                return out
+        # 材料のある主力の語を先に、無ければ材料のある題なら何でも（2026-10-22 運用者「シートがなくても基準点に行くように」。
+        # 材料の当たらない題は一次性が80点に届かず止まり続けた。主力の語でも材料が無ければ、材料のある題の後ろに回る）
+        ok = [r for r in todo if has(str(r["keyword"]))]
+        if main:
+            ok.sort(key=lambda r: not re.search(main, str(r["keyword"]).lower()))
+        for r in ok[:1]:
+            out = dict(got)
+            out.update({"keyword": str(r["keyword"]), "aim": r.get("aim", ""),
+                        "category": r.get("category", ""), "picked_by": "材料のある題"})
+            return out
     except Exception:  # noqa: BLE001  材料が読めなくても次に書く語は返す
         return None
     return None

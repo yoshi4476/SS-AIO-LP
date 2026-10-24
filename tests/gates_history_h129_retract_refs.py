@@ -109,8 +109,10 @@ def test_material_first_and_wait_for_materials():
         own_main = H._with_material("ai-lab", got, got["keyword"], own_todo)
     finally:
         M.lines, P.is_client = lines, is_client
-    check("お客様の社は材料のある題を先に・自社は主力の外の題を前に出さない",
-          ((hit or {}).get("keyword"), (hit or {}).get("picked_by"), own), ("芝生 張替え 料金", "材料のある題", None))
+    # 2026-10-22 運用者「シートがなくても基準点に行くように」: 自社も、先頭の題に材料が無ければ材料のある題を書く（主力の語が先）
+    check("お客様の社も自社も、材料のある題を先に書く",
+          ((hit or {}).get("keyword"), (hit or {}).get("picked_by"), (own or {}).get("keyword")),
+          ("芝生 張替え 料金", "材料のある題", "芝生 張替え 料金"))
     check("自社は材料のある主力の題を先に", (own_main or {}).get("keyword"), "aio 外注 費用")
     src = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
     check("止めるときに依頼を残し、通ったら消す", ("material.ask(" in src, "material.resolve(site, slug" in src), (True, True))

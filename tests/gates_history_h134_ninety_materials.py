@@ -225,3 +225,40 @@ def test_temporary_daily_setting_expires():
     finally:
         P._site = old
     check("期限の日までは1本・過ぎたら2本・期限なしは設定のまま", (on_last_day, after, no_limit), (1, 2, 1))
+
+
+def test_shelve_drafts_that_wait_for_materials():
+    import json
+    import tempfile
+    from pathlib import Path
+    import quality_loop as Q
+    print("\n■ 材料が足りないで2回止めた公開前の下書きはしまい、質問シートの答えが登録されたら戻す（2026-10-22 運用者「シートがなくても基準点に」）")
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        (d / "articles").mkdir()
+        (d / "articles" / "zz-a.md").write_text("---\ntitle: t\nslug: zz-a\nquality_state: improving\n---\n本文\n", encoding="utf-8")
+        log = d / "q.jsonl"
+        hold = json.dumps({"slug": "zz-a", "action": "hold", "need": "materials"}) + "\n"
+        old = Q.ARTICLES, Q.LOG, Q.unused_materials, Q.site_of
+        Q.ARTICLES, Q.LOG, Q.site_of = d / "articles", log, (lambda s: "ai-lab")
+        try:
+            log.write_text(hold, encoding="utf-8")
+            once = Q.shelve("zz-a", path=log)
+            log.write_text(hold * 2, encoding="utf-8")
+            Q.unused_materials = lambda slug, site=None: ["当社調べ"]
+            has_mat = Q.shelve("zz-a", path=log)
+            Q.unused_materials = lambda slug, site=None: []
+            twice = Q.shelve("zz-a", path=log)
+            moved = ((d / "articles" / "_held" / "zz-a.md").is_file(), (d / "articles" / "zz-a.md").exists(),
+                     "zz-a" in Q._articles())
+            back = Q.unshelve("zz-a")
+            restored = (d / "articles" / "zz-a.md").is_file()
+        finally:
+            Q.ARTICLES, Q.LOG, Q.unused_materials, Q.site_of = old
+    check("1回目は待つ・使っていない材料があれば直す・2回目でしまう", (once, has_mat, twice), (False, False, True))
+    check("しまった下書きは本数・採点・公開の対象（articles/*.md）から外れる", moved, (True, False, False))
+    check("戻すと改善中のまま articles/ に戻る", (back, restored), (True, True))
+    ql = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
+    ms = (ROOT / "scripts" / "material_sheet.py").read_text(encoding="utf-8")
+    check("公開済みの記事はしまわない・質問シートの答えで戻す",
+          ("if need and not published and shelve(slug):" in ql, "Q.unshelve(s)" in ms), (True, True))

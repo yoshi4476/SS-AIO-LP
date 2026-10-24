@@ -829,6 +829,12 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
             print(f"  （材料の依頼を残せませんでした: {type(e).__name__}）")
     record({**base, "action": "hold", "state": state, "total": sc["total"], "rounds": prior + done, "since": since,
             "axes": sc["axes"], "need": need, "materials": asked})
+    if need and not published and shelve(slug):
+        # 機械で作れる材料（当社調べ・業種調査・自社の実測）まで当てても一次性が届かない題は、材料が届くまでしまい、
+        # 次の枠は材料のある題を書く（2026-10-22 運用者「シートがなくても基準点に行くように」。届かない下書きを
+        # 毎回直して止まり続けていた）。題は質問シートに残り、答えが登録されたら material_sheet.apply が戻す
+        print(f"  {name}: 材料が届くまで下書きをしまいました（{SHELF}/。質問シートの答えが登録されたら自動で戻ります）")
+        return "shelved"
     if need:
         print(f"要対応: {name} は一次性が{sc['axes']['originality']}点で、登録された材料では{R.floor('originality')}点に届きません。"
               "何を教えてほしいかを material_requests.json に残しました（python scripts/material.py --requests）。"
@@ -839,6 +845,34 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         print(f"要対応: {name} は直しても基準に届きません（総合{sc['total']}・{sc['why']}）。改善中のまま公開せず、"
               "次の回が新しい記事より先に直し続けます")
     return state
+
+
+# ── 材料が届かない下書きをしまう ──────────────────────────────────────
+
+SHELF = "_held"            # articles/_held/。build・本数・採点の対象（articles/*.md）に入らない
+SHELVE_AFTER = 2           # 材料が足りないで止めた回数がこれに達したらしまう（1回目は当社調べ・業種調査の測り直しを待つ）
+
+
+def shelve(slug, path=None):
+    """材料が足りないで SHELVE_AFTER 回止めた公開前の下書きを articles/_held/ へ移す。移したら True"""
+    holds = sum(1 for r in rows(path) if r.get("slug") == slug and r.get("action") == "hold" and r.get("need") == "materials")
+    src = ARTICLES / f"{slug}.md"
+    if holds < SHELVE_AFTER or not src.is_file() or unused_materials(slug):
+        return False
+    dst = ARTICLES / SHELF / f"{slug}.md"
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    src.replace(dst)
+    record({"site": site_of(slug), "slug": slug, "action": "shelve", "state": "shelved"})
+    return True
+
+
+def unshelve(slug):
+    """しまった下書きを戻す（改善中の印のまま。次の回の --pending が採点し直す）。戻したら True"""
+    src = ARTICLES / SHELF / f"{slug}.md"
+    if not src.is_file() or (ARTICLES / f"{slug}.md").exists():
+        return False
+    src.replace(ARTICLES / f"{slug}.md")
+    return True
 
 
 # ── 対象を選ぶ ───────────────────────────────────────────────────────
