@@ -67,7 +67,7 @@ jobs:
       actions: write
       contents: read
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - name: 始まらなかった定時の回を起動する
@@ -121,7 +121,7 @@ jobs:
     outputs:
       broken: ${{ steps.diag.outputs.broken }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           fetch-depth: 0
@@ -132,12 +132,12 @@ jobs:
         with:
           token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
 
       # 版を固定した claude の npm の取得を控えから戻す（版を変えると鍵が変わり、取り直して控える）
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.npm/_cacache
           key: npm-cli-v1-${{ runner.os }}-claude-code-2.1.302
@@ -208,7 +208,7 @@ jobs:
       # その日の新しい記事のために残す）。送り切りの記録は二度送らないためコミットする（キャッシュは消えうる）
       - name: Bing への送信記録を戻す
         if: github.event_name != 'workflow_run'
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/bing_submit.json
           key: bing-submit-${{ github.run_id }}
@@ -231,7 +231,7 @@ jobs:
 
       - name: Bing への送信記録を残す
         if: always() && github.event_name != 'workflow_run' && hashFiles('data/bing_submit.json') != ''
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/bing_submit.json
           key: bing-submit-${{ github.run_id }}-backfill
@@ -457,7 +457,7 @@ jobs:
 
       - name: ワークフローの変更案を残す
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: workflow-change
           path: /tmp/workflow-change.patch
@@ -533,7 +533,7 @@ jobs:
     outputs:
       ok: ${{ steps.verify.outputs.ok }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
@@ -595,14 +595,14 @@ jobs:
 
       - name: 修復の差分を次のジョブへ渡す
         if: always()
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: selfheal-out
           key: selfheal-patch-${{ github.run_id }}
 
       - name: ワークフローの変更案を残す（修復）
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: workflow-change-repair
           path: selfheal-out/workflow-change.patch
@@ -622,14 +622,14 @@ jobs:
       contents: write
       actions: write     # 取り込んだ後の書き直しを自動修復の手動起動で動かす
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
 
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: selfheal-out
           key: selfheal-patch-${{ github.run_id }}
@@ -764,7 +764,7 @@ jobs:
       actions: write
       contents: read
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - name: 一時的な失敗なら1回だけ再実行
