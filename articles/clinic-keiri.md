@@ -128,6 +128,8 @@ quality_since: 2026-10-23
 
 **クリニックの経理は、収入の区分ができていれば院内、入力が負担なら記帳代行、経理の担い手がいなければ経理BPOを選びます。**
 
+あわせて[バックオフィスのコンサルが提案で終わる3つの原因](/blog/backoffice-consul-teian/)もご覧ください。
+
 <figure><img src="/images/clinic-keiri/erabikata.png" alt="院内で記帳・記帳代行・経理BPOを、任せる範囲・院内に残る作業・向く医院の3つの観点で比べた表"></figure>
 
 | 観点 | 院内で記帳 | 記帳代行 | 経理BPO |

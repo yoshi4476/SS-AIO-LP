@@ -1,0 +1,111 @@
+{
+ "v": 2,
+ "slug": "backoffice-consul-teian",
+ "ok": true,
+ "date": "2026-10-24",
+ "questions": [
+  "コンサル バックオフィスについて教えてください",
+  "コンサル バックオフィスについて、「バックオフィスのコンサルとは？業務の仕組みを設計する支援」を教えてください",
+  "コンサル バックオフィスについて、「助言で足りる仕事と、手を動かす人が要る仕事」を教えてください",
+  "コンサル バックオフィスについて、「バックオフィスのコンサルが提案で終わる3つの原因と避け方」を教えてください",
+  "コンサル バックオフィスについて、「コンサル・代行・組み合わせのどれを選ぶか」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "バックオフィスのコンサルとは？業務の仕組みを設計する支援",
+   "words": [
+    "業務",
+    "支援"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "助言で足りる仕事と、手を動かす人が要る仕事",
+   "words": [
+    "助言",
+    "仕事",
+    "仕事"
+   ],
+   "hits": 3,
+   "of": 8
+  },
+  {
+   "topic": "バックオフィスのコンサルが提案で終わる3つの原因と避け方",
+   "words": [
+    "提案",
+    "原因"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "コンサル・代行・組み合わせのどれを選ぶか",
+   "words": [
+    "代行"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "依頼の前にコンサル会社へ聞く3つの質問",
+   "words": [
+    "依頼",
+    "質問"
+   ],
+   "hits": 4,
+   "of": 10
+  },
+  {
+   "topic": "今日やること：止まっている作業を1つ書き出す",
+   "words": [
+    "作業"
+   ],
+   "hits": 8,
+   "of": 10
+  }
+ ],
+ "sources": {
+  "bewith.net": "peer",
+  "bijigu.net": "peer",
+  "bpio.co.jp": "peer",
+  "business.ntt-west.co.jp": "peer",
+  "curiosity-biz.co.jp": "peer",
+  "hitachiconsulting.co.jp": "peer",
+  "jmac.co.jp": "peer",
+  "jpc-net.jp": "peer",
+  "layers.co.jp": "peer",
+  "mhlw.go.jp": "public",
+  "note.com": "video",
+  "nta.go.jp": "public",
+  "osaka-consultingfirm.com": "peer",
+  "ozawa-project.com": "peer",
+  "pasona.co.jp": "media",
+  "persol-bd.co.jp": "peer",
+  "pro-d-use.jp": "peer",
+  "pwc.com": "peer",
+  "ricoh.co.jp": "peer",
+  "solution.bell24.co.jp": "peer",
+  "tepss.com": "peer",
+  "tsquare-ltd.com": "peer",
+  "zeroin.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 7,
+  "専門家への相談": 2
+ },
+ "chars": 18121,
+ "claims": [
+  "2026年10月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え8件のうち、『助言』に触れたものは3件でした。",
+  "2026年10月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は0件、専門家への相談は2件でした。",
+  "2026年10月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは23件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが1件、動画・SNS・ブログが1件でした。"
+ ]
+}
