@@ -55,7 +55,7 @@ jobs:
     outputs:
       go: ${{ steps.g.outputs.sched_go }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - id: g
@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
 
@@ -79,7 +79,7 @@ jobs:
         with:
           token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
           cache: pip
@@ -89,7 +89,7 @@ jobs:
 
       # 送った日の記録（.gitignore）。持ち越さないと毎回「記録なし」で前日だけになり、抜けた日を埋められない
       - name: 送った日の記録を戻す
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/kpi_sent.json
           key: kpi-sent-${{ github.run_id }}-${{ github.run_attempt }}
@@ -119,7 +119,7 @@ jobs:
 
       - name: 送った日の記録を残す
         if: always() && hashFiles('data/kpi_sent.json') != ''
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/kpi_sent.json
           key: kpi-sent-${{ github.run_id }}-${{ github.run_attempt }}
@@ -159,7 +159,7 @@ jobs:
       HUB_URL: ${{ secrets.HUB_URL }}
       HUB_SECRET: ${{ secrets.HUB_SECRET }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
 
       # 非公開のデータ（お客様の情報・料金・レポート）を private/ に取得し、お客様の守秘の語をログで伏せる
@@ -168,7 +168,7 @@ jobs:
         with:
           token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
           cache: pip
@@ -198,7 +198,7 @@ jobs:
 
       # ラッコの利用記録と応答の控え（30日）を、実行をまたいで持ち越す（公開リポジトリには置けないためキャッシュで）
       - name: ラッコの控えを戻す
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             data/rakko_cache
@@ -241,7 +241,7 @@ jobs:
 
       - name: ラッコの控えを残す
         if: always()
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             data/rakko_cache
