@@ -42,13 +42,6 @@ def rerender_wordpress(cfg, push):
             ng += 1
             print(f"  × {shown(meta['slug'])}: {str(e)[:80] if shown(meta['slug']) == meta['slug'] else '止まりました'}")
     print(f"送り直し {len(arts) - ng}本 / 失敗 {ng}本")
-    # 業種のまとめ・用語集のページと llms.txt も、いまの記事の並びで作り直す
-    try:
-        for n in wp_bridge.sync_pages(cfg):
-            print(n)
-        wp_bridge.push_settings(cfg)
-    except SystemExit as e:
-        print(f"要対応: {cfg['id']} の橋渡しに届きません（{str(e)[:80]}）")
     return 1 if ng else 0
 
 

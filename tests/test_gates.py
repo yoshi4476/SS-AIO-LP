@@ -600,31 +600,22 @@ def test_client_onboarding_is_one_sheet():
 def test_quality_gate_holds_on_wordpress():
     """納品方式が変わっても、基準に届かない記事が公開されないこと。
 
-    静的サイトはファイルごと生成しないため物理的に公開できない。
-    WordPressはデータベースに入ってしまうので、公開ステータスへの
-    遷移を先方側で止める必要がある。配信スクリプトだけで見ていると、
-    管理画面から直接投稿された記事を止められない。
+    静的サイトはファイルごと生成しないため物理的に公開できない。WordPress は先方の PHP のプラグインで
+    公開を止めていたが、2026-10-24 に廃止した（運用者「PHP では作らない一番セキュリティが高いもの」。
+    先方には何も置かない）。基準の判定は配信側の門（gate_ok）だけで、WordPress へ送る前に必ず通す。
     """
     sys.path.insert(0, str(ROOT / "scripts"))
+    import inspect
     import client_add as ca
     import publish
     check("WordPress納品に対応している", "wordpress" in ca.TYPES, True)
     check("WordPressへ配信できる", hasattr(publish, "write_wordpress"), True)
-
-    php = ROOT / "automation" / "wordpress" / "ss-quality-gate.php"
-    check("品質ゲートのプラグインがある", php.is_file(), True)
-    src = php.read_text(encoding="utf-8")
-    # 管理画面から止められる場所に置くと「忙しいので一旦切った」が起きる
-    check("mu-plugins に置く指示がある", "mu-plugins" in src, True)
-    # 個別の入口をふさぐ形にすると、入口が増えたときに漏れる
-    check("すべての保存が通る関所で止める", "wp_insert_post_data" in src, True)
-    check("公開を下書きへ戻す", "'draft'" in src or '"draft"' in src, True)
-    check("予約投稿も対象にする", "future" in src, True)
-    check("未採点は公開させない", "品質スコアがありません" in src, True)
-    check("止めた理由を管理画面に出す", "admin_notices" in src, True)
-    # 配信側でも見る。二重に見ないと、どちらか一方の抜け道が残る
+    check("先方に置くプラグインは無い", (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").exists(), False)
+    main = inspect.getsource(publish.main)
+    check("配信側の門（gate_ok）を WordPress への書き出しより先に通す",
+          0 <= main.find("if not gate_ok(meta):") < main.find("write_wordpress("), True)
+    check("投稿の前に鍵の権限（投稿者だけか）を確かめる", "wp_bridge.role_problems(cfg)" in inspect.getsource(publish.write_wordpress), True)
     pub = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
-    check("配信側も90点未満を止める", "公開基準未達" in pub, True)
     check("公開されなかったことに気づける", "公開されませんでした" in pub, True)
 
 

@@ -242,12 +242,8 @@ def connect(cfgs, key, ledger=None, today=None):
                 r["state"], r["msg"] = "error", "確認コードが返りません"
                 continue
             if cfg.get("type") == "wordpress":
-                # WordPress は直下にファイルを置けない。橋渡しへ確認コードを渡す（返す窓口はプラグインの版による）
-                import wp_bridge
-                try:
-                    wp_bridge.push_settings(cfg)
-                except SystemExit as e:
-                    r["msg"] = f"橋渡しへ確認コードを渡せません（{str(e)[:60]}）"
+                # WordPress は直下にファイルを置けない（投稿者の権限の鍵だけ）。確認ファイルは先方に置いてもらう
+                r["msg"] = "WordPress のため BingSiteAuth.xml を先方の直下に置いてもらう必要があります"
             if code not in auth_users(live_auth(dom)):
                 since = waits.setdefault(sid, today)
                 late = (date.fromisoformat(today) - date.fromisoformat(since)).days > WAIT_DAYS

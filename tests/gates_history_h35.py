@@ -178,20 +178,19 @@ def test_onboard_check_reads_live_and_asks_client():
     check("多言語・入口・Bing を指示していない社はその項目を見ない",
           ("hreflang" in noi18n, "measure_entry" in noi18n, "bing_auth" in noi18n), (False, False, False))
 
-    # WordPress: 橋渡しの版と、ナビ
+    # WordPress: 鍵の権限と、WordPress では作らないもの（まとめのページ・構造化データ・llms.txt・計測）を点検しない
     import wp_bridge
     wp = dict(CFG, type="wordpress", languages=[])
-    site = fake_site(True)
-    site["/wp-json/ss/v1/urls"] = (200, {}, json.dumps({"urls": [{"slug": "a1", "url": A1, "type": "post"}]}))
-    site["/"] = (200, {}, "<html><body><a href='/compare/'>比較</a></body></html>")
-    pages = PAGES + [{"kind": "industry", "path": "/industry/", "title": "業種から探す"}]
-    site["/industry/"] = (200, {}, "<h1>業種から探す</h1>")
-    with _swap(wp_bridge, check=lambda cfgs: ["要対応: h35-a の WordPress のプラグインが古い版です（2.0.1 → 2.0.3）"]):
-        r = _run(True, cfg=wp, site=site, expected_pages=lambda c, live: pages)
+    site = fake_site(False)
+    site["/wp-json/wp/v2/posts?per_page=100&_fields=link,slug"] = (200, {}, json.dumps([{"slug": "a1", "link": A1}]))
+    with _swap(wp_bridge, check=lambda cfgs: ["要対応: h35-a の投稿に使う鍵の権限が広すぎます（administrator）"]):
+        r = _run(False, cfg=wp, site=site)
     st, asks = _status(r), {c["id"]: c["ask"] for c in r["checks"]}
-    check("WordPress: 橋渡しが古ければ要対応・ナビから業種ハブへ辿れなければ要対応",
-          (st.get("wp_bridge"), st.get("hub_nav"), "mu-plugins" in asks["wp_bridge"], "メニュー" in asks["hub_nav"]),
-          ("ng", "ng", True, True))
+    check("WordPress: 鍵が広すぎれば要対応で、投稿者の権限の鍵に替えるよう頼む",
+          (st.get("wp_bridge"), "投稿者" in asks.get("wp_bridge", "")), ("ng", True))
+    check("WordPress: 作らないもの（まとめのページ・構造化データ・llms.txt・入口の計測）は点検しない",
+          sorted(set(st) & {"agg_compare", "ld_blogposting", "ld_faqpage", "llms_txt", "measure_entry",
+                            "hreflang", "sitemap_images", "og_image", "robots_meta", "hub_nav"}), [])
 
 
 def test_onboard_check_output_and_privacy():

@@ -137,17 +137,10 @@ def main(argv=None, cfgs=None):
         dom = cfg["domain"]
         key = cfg.get("indexnow_key") or base_key
         wp = cfg.get("type") == "wordpress"
-        if wp and not key_ok(dom, key):
-            # WordPress は鍵ファイルを置けない。先方の mu-plugin に鍵を渡すと、/<鍵>.txt を返すようになる
-            import wp_bridge
-            try:
-                wp_bridge.push_settings(cfg)
-            except SystemExit as e:
-                print(f"  {sid}: 橋渡しへ鍵を渡せません（{str(e)[:60]}）")
         if not key_ok(dom, key):
             print(f"  {sid}: 鍵ファイル https://{dom}/{key}.txt がありません（通知は拒否されます）")
             if only and S.is_client(sid):
-                # 鍵ファイルは配信と一緒に置いている（search_connect.place・WordPress は橋渡し）。出ていなければ置き場が違う
+                # 鍵ファイルは配信と一緒に置いている（search_connect.place。WordPress は先方に置いてもらう）。出ていなければ置き場が違う
                 print(f"要対応: {cfg.get('name', sid)} の IndexNow の鍵ファイル https://{dom}/{key}.txt が出ていません"
                       "（配信先の公開フォルダの直下に置かれているか確かめてください）")
             continue

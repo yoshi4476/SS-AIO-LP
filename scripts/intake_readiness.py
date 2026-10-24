@@ -133,19 +133,6 @@ def c_publish(ctx):
     return "todo", f"サイトの形式（{t}）を新規受付のある方式に", "お客様"
 
 
-def c_quality(ctx):
-    if ctx["cfg"].get("type") != "wordpress":
-        return "ok", "", ""
-    how = ctx["ob"].get("wp_plugin", "")
-    if how == "御社で置く":
-        return "ok", "", ""           # 置けたかは wp_bridge.py --check・onboard_check が本番で確かめる
-    if how == "当社が置く":
-        if not ctx["ob"].get("ftp_ok") and not ctx["have"].get("ftp"):
-            return "todo", "FTP の接続情報（品質の検査のプラグインを置くため）", "お客様"
-        return _key(ctx, "ftp", "FTP のパスワード")
-    return "todo", "品質の検査のプラグイン（mu-plugin）の置き方（当社が置く／御社で置く）", "お客様"
-
-
 def c_writing(ctx):
     hard = [f for f in ctx["facts"] if f.get("verifiable")]
     b, sup = ctx["brief"], (ctx["company"].get("supervisor") or {})
@@ -256,11 +243,8 @@ def c_renovate(ctx):
     cfg, ob, t = ctx["cfg"], ctx["ob"], ctx["cfg"].get("type")
     if not ob.get("renovate"):
         return "n/a", "", ""
-    if t == "wordpress":
-        return _first(_key(ctx, "wp", "WordPress のアプリケーションパスワード"),
-                      ("todo", "管理者のアプリケーションパスワード（追加CSS・メニューの変更）", "お客様")
-                      if not ob.get("wp_admin_key") else None)
-    if t == "ftp":
+    if t in ("wordpress", "ftp"):
+        # WordPress の改修は FTP だけ（預かる WordPress の鍵は投稿者の権限で、固定ページ・メニュー・配色を変えられない）
         return _key(ctx, "ftp", "FTP のパスワード")
     if t in GIT:
         return c_publish(ctx)
@@ -288,9 +272,6 @@ ITEMS = [
      "WordPress: アプリケーションパスワード（WP_CREDENTIALS_JSON）／FTP: パスワード（FTP_CREDENTIALS_JSON）／"
      "Git: 当社の配信用トークン（SITE_PUSH_TOKEN）／新規構築: DNS のログイン情報（当社が行う場合）",
      "記事が1本も届かない", c_publish, ""),
-    ("quality_gate", "品質ゲート（WordPress 側で85点未満を公開させない）", ["quality_gate"],
-     ["wp.plugin", "wp.ftp"], "当社が置く場合は FTP のパスワード",
-     "管理画面から公開された記事を止められない（管制塔からは85点未満を送らない）", c_quality, ""),
     ("writing", "記事の中身（一次情報・FAQ・著者・監修の表示）", ["ld_author_person", "ld_faqpage", "ld_blogposting"],
      ["facts.1.claim", "customer.faq", "author.name", "supervisor.consent"], "",
      "どこにでもある記事になり、AI検索に引用されない。監修の表示が出せない", c_writing, ""),
@@ -323,8 +304,8 @@ ITEMS = [
      "地図の説明文・属性を揃えられない。口コミの件数を知らせられない", c_gbp, ""),
     ("i18n", "多言語の要約ページ", ["i18n"], ["languages"], "", "作らない（既定）", c_i18n, ""),
     ("site_renovate", "指示でのサイト改修", ["site_change", "site_renovate"],
-     ["renovate.want", "renovate_auto", "renovate.protect", "renovate.wish", "wp.admin_key", "wp.ftp", "git.invited"],
-     "WordPress: 管理者のアプリケーションパスワード／FTP: パスワード／Git: 招待",
+     ["renovate.want", "renovate_auto", "renovate.protect", "renovate.wish", "wp.ftp", "git.invited"],
+     "WordPress・FTP: FTP のパスワード／Git: 招待",
      "サイトの改修を管制塔から行えない（記事の配信だけになる）", c_renovate, ""),
     ("speed_fix", "表示速度の直し（WordPress のテーマ）", ["speed_fix"], ["wp.ftp", "ftp.host"], "FTP のパスワード",
      "テーマに直書きのフォント・計測タグは測って知らせるだけになる", c_speed, ""),

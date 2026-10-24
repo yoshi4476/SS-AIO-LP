@@ -220,8 +220,8 @@ def _site(sid, items, do_push):
                 r["done_at"] = date.today().isoformat()
             print(f"  [{_label(sid)}] 取り下げ完了（{cfg['type']}・{len(items)}本）")
         return
-    # WordPress: 先方の mu-plugin の転送表に301を足してから、記事を下書きに戻す（公開から外す）。
-    # 転送元・転送先は台帳の組み立てたURLではなく、WordPress の実際のパーマリンクを使う。
+    # WordPress: 記事を下書きに戻す（公開から外す）。投稿者の権限の鍵では転送（301）を足せないので、
+    # 転送元・転送先を実際のパーマリンクで知らせ、先方に足してもらう。
     # 1件の失敗（接続・権限）で残りの件と済んだ印を失わないよう、1件ずつ受け止める
     if cfg.get("type") == "wordpress":
         import wp_bridge
@@ -232,24 +232,14 @@ def _site(sid, items, do_push):
                 src = found[0].get("link") if found else r["from"]
                 survivor = r.get("survivor") or r["to"].rstrip("/").rsplit("/", 1)[-1]
                 dst = wp_bridge.post_link(cfg, survivor) or r["to"]
-                n, rej = wp_bridge.add_redirects(cfg, [(src, dst)])
-                if not n:
-                    _say(sid, r, "転送を受け付けませんでした。次回また試します", f"（{rej}）")
-                    continue
                 for p in found:
                     publish._wp_call(cfg, f"posts/{p['id']}", {"status": "draft"})
             except (SystemExit, Exception) as e:
-                _say(sid, r, f"転送を足せません（橋渡しが無い・古い・接続できない）。次回また試します: {type(e).__name__}")
+                _say(sid, r, f"下書きに戻せません（接続できない・権限が無い）。次回また試します: {type(e).__name__}")
                 continue
             r["done_at"] = date.today().isoformat()
-            r["note"] = f"下書きに戻し、{src} → {dst} を301で送る"
-            _say(sid, r, "下書きに戻し、301で送りました", f"（{src} → {dst}）")
-        # llms.txt から外した記事を消す（静的サイトで llms.txt の行を消すのと同じ）
-        if any(r.get("done_at") for r in items):
-            try:
-                wp_bridge.push_settings(cfg)
-            except (SystemExit, Exception):
-                pass
+            r["note"] = f"下書きに戻した。{src} → {dst} の301は先方で足す"
+            _say(sid, r, "要対応: 下書きに戻しました。301は先方の WordPress で足してください", f"（{src} → {dst}）")
         return
     dest = publish.ensure_clone(cfg, publish._push_token())
     for r in items:

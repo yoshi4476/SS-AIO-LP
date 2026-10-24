@@ -2581,9 +2581,6 @@ def main():
         print(f"一覧の画像: 同じ画像が3回以上並ぶ一覧を {n}ページで直しました")
     warns += quality_checks(all_metas)
     stamp_assets()
-    # WordPress の社のプラグインが日に1回見に来る /wp/（署名がいまのプラグインと合うときだけ置く）
-    import wp_bridge
-    wp_bridge.publish_release(SITE)
     warns += link_check()
     warns += prefix_link_check()
     print(f"OK: {len(entries)}記事 / blog一覧 + sitemap.xml + feed.xml 更新")

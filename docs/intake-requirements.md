@@ -8,7 +8,6 @@
 | 機能 | シートの欄 | 別経路で受け取るもの | 無いとどうなるか |
 |:--|:--|:--|:--|
 | 記事の配信（新記事・書き直し・まとめのページ・統合の転送） | サイトの形式（`type`）・公開ドメイン（`domain`）・記事URLの接頭辞（`url_prefix`）・管理画面のURL（`wp.admin_url`）・投稿用のユーザー名（`wp.user`）・配信先リポジトリ（`repo`）・ブランチ（`branch`）・記事の置き場所（`content_dir`）・画像の置き場所（`images_dir`）・まとめのページの置き場所（`pages_dir`）・当社アカウントの招待（Write）（`git.invited`）・FTP のホスト名（`ftp.host`）・接続の方式（`ftp.protocol`）・FTP のユーザー名（`ftp.user`）・公開フォルダ（`ftp.root`）・DNS の管理会社（`dns.provider`）・DNS の設定（`dns.access`）・別経路でお送りする鍵（`keys.sent`） | WordPress: アプリケーションパスワード（WP_CREDENTIALS_JSON）／FTP: パスワード（FTP_CREDENTIALS_JSON）／Git: 当社の配信用トークン（SITE_PUSH_TOKEN）／新規構築: DNS のログイン情報（当社が行う場合） | 記事が1本も届かない |
-| 品質ゲート（WordPress 側で85点未満を公開させない） | 品質の検査のプラグイン（`wp.plugin`）・FTP の接続情報（`wp.ftp`） | 当社が置く場合は FTP のパスワード | 管理画面から公開された記事を止められない（管制塔からは85点未満を送らない） |
 | 記事の中身（一次情報・FAQ・著者・監修の表示） | 実績・数値 ①（`facts.1.claim`）・よく聞かれる質問（`customer.faq`）・著者名（`author.name`）・掲載の同意（`supervisor.consent`） | — | どこにでもある記事になり、AI検索に引用されない。監修の表示が出せない |
 | 監修の確認依頼（editorial_review） | 確認のご連絡先（`supervisor.contact`）・記事の確かめ方（`supervisor.review`） | — | 公開前の確認が「要」の社は、確認依頼が届かず記事が止まったままになる |
 | 計測（GA4・CTA・フォーム・入口） | GA4プロパティID（`ga4_property_id`）・GA4 に当社を閲覧者で追加（`ga4.viewer`）・サイトに GA4 が入っているか（`ga4.installed`）・GA4の測定ID（G-で始まる）（`ga4_measurement_id`） | — | 月次レポートに流入・問い合わせの数字が出ない。導線の効きが測れない |
@@ -22,7 +21,7 @@
 | SNS への投稿（Facebook・Instagram・Threads・LinkedIn） | Facebookページ（`channels.facebook`）・Instagram（`channels.instagram`）・Threads（`channels.threads`）・LinkedIn会社ページ（`channels.linkedin`）・当社を管理者に追加済みか（`channels.admin_added`）・SNS に付けるタグ（`channels.tags`） | 先方のアカウントでの許可（1回・当社が手続き） | その社の SNS には投稿しない |
 | Googleビジネスプロフィール（説明文・属性・口コミの返信案） | Googleビジネスプロフィール（`gbp.status`）・当社をプロフィールの管理者に追加（`gbp.invite`）・地図に出す説明文（`gbp.description`） | 先方の Google アカウントでの許可（1回・当社が手続き） | 地図の説明文・属性を揃えられない。口コミの件数を知らせられない |
 | 多言語の要約ページ | 多言語の要約ページ（`languages`） | — | 作らない（既定） |
-| 指示でのサイト改修 | 改修のご希望（`renovate.want`）・確認なしで反映してよい範囲（`renovate_auto`）・触ってはいけないページ（`renovate.protect`）・直したいところ（`renovate.wish`）・改修用の管理者の鍵（`wp.admin_key`）・FTP の接続情報（`wp.ftp`）・当社アカウントの招待（Write）（`git.invited`） | WordPress: 管理者のアプリケーションパスワード／FTP: パスワード／Git: 招待 | サイトの改修を管制塔から行えない（記事の配信だけになる） |
+| 指示でのサイト改修 | 改修のご希望（`renovate.want`）・確認なしで反映してよい範囲（`renovate_auto`）・触ってはいけないページ（`renovate.protect`）・直したいところ（`renovate.wish`）・FTP の接続情報（`wp.ftp`）・当社アカウントの招待（Write）（`git.invited`） | WordPress・FTP: FTP のパスワード／Git: 招待 | サイトの改修を管制塔から行えない（記事の配信だけになる） |
 | 表示速度の直し（WordPress のテーマ） | FTP の接続情報（`wp.ftp`）・FTP のホスト名（`ftp.host`） | FTP のパスワード | テーマに直書きのフォント・計測タグは測って知らせるだけになる |
 
 ## シートの欄が要らない機能
@@ -59,9 +58,7 @@
 | 2. サイトと納品方式 | 別経路でお送りする鍵 | `keys.sent` | 非公開の site_private.json の onboarding（済/未などの印だけ）→ 準備状況（intake_readiness）（受領待ちか要対応か） |
 | 2-1. WordPress の場合 | 管理画面のURL | `wp.admin_url` | private.json → 準備状況・導入の手続き |
 | 2-1. WordPress の場合 | 投稿用のユーザー名 | `wp.user` | private.json → 鍵の登録の雛形（--creds の WP_CREDENTIALS_JSON）・準備状況（配信） |
-| 2-1. WordPress の場合 | 品質の検査のプラグイン | `wp.plugin` | 非公開の site_private.json の onboarding（済/未などの印だけ）→ 準備状況（intake_readiness）（品質ゲート） |
-| 2-1. WordPress の場合 | 改修用の管理者の鍵 | `wp.admin_key` | 非公開の site_private.json の onboarding（済/未などの印だけ）→ 準備状況（intake_readiness）（サイト改修） |
-| 2-1. WordPress の場合 | FTP の接続情報 | `wp.ftp` | 非公開の site_private.json の onboarding（済/未などの印だけ）→ 準備状況（intake_readiness）（品質ゲート・表示速度の直し） |
+| 2-1. WordPress の場合 | FTP の接続情報 | `wp.ftp` | 非公開の site_private.json の onboarding（済/未などの印だけ）→ 準備状況（intake_readiness）（表示速度の直し・サイト改修） |
 | 2-1. WordPress の場合 | WordPressのAPIのURL | `wp_api` | 非公開の site_private.json → WordPress の REST の入口（publish.py） |
 | 2-2. Git（GitHub）の場合 | 配信先リポジトリ | `repo` | sites/<id>.json → 配信先（publish.py・site_change.py） |
 | 2-2. Git（GitHub）の場合 | ブランチ | `branch` | sites/<id>.json → 配信先のブランチ（publish.py） |
@@ -78,7 +75,7 @@
 | 3. 計測と検索エンジン | GA4プロパティID | `ga4_property_id` | 非公開の site_private.json → GA4 の数字（daily_kpi・月次レポート・lead_reconcile ほか） |
 | 3. 計測と検索エンジン | GA4 に当社を閲覧者で追加 | `ga4.viewer` | 非公開の site_private.json の onboarding（済/未などの印だけ）→ 準備状況（intake_readiness）（計測） |
 | 3. 計測と検索エンジン | サイトに GA4 が入っているか | `ga4.installed` | 非公開の site_private.json の onboarding（済/未などの印だけ）→ 準備状況（intake_readiness）（計測） |
-| 3. 計測と検索エンジン | GA4の測定ID（G-で始まる） | `ga4_measurement_id` | 非公開の site_private.json → WordPress のプラグイン・FTP の記事の雛形が計測タグを置く |
+| 3. 計測と検索エンジン | GA4の測定ID（G-で始まる） | `ga4_measurement_id` | 非公開の site_private.json → FTP の記事の雛形が計測タグを置く・WordPress は onboard_check が計測の有無を確かめる |
 | 3. 計測と検索エンジン | Search Console のプロパティの種類 | `gsc.property` | 非公開の site_private.json の onboarding（済/未などの印だけ）→ 準備状況（intake_readiness）（Search Console のプロパティの形） |
 | 3. 計測と検索エンジン | Search Consoleのオーナー権限 | `gsc_owner` | 非公開の site_private.json → Indexing API で送るか（notify_indexing）・接続の点検（search_connect） |
 | 3. 計測と検索エンジン | Bing・検索エンジンへの登録の同意 | `bing_consent` | 非公開の site_private.json → 当社の Bing への登録と確認ファイル（bing_webmaster・search_connect） |

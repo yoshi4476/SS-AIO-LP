@@ -69,10 +69,6 @@
   "wordpress": "訳の固定ページを「公開」のままにする（多言語プラグインで /en/ を別に使っていないか確かめる）",
   "ftp": "サーバーの公開フォルダ直下の en/・zh/・ko/ を消さない・転送しない"
  },
- "hub_nav": {
-  "_": "サイトのナビ（メニュー）に「業種から探す（/industry/）」「用語集（/glossary/）」を足す",
-  "wordpress": "WordPress の 外観 > メニュー（ブロックテーマなら ナビゲーション）に「業種から探す（/industry/）」「用語集（/glossary/）」を足す"
- },
  "ld_blogposting": {
   "_": "記事の雛形の head に、配った JSON-LD（BlogPosting）をそのまま出す",
   "external-md": {
@@ -83,7 +79,6 @@
   },
   "external-html": "記事の雛形（data/clients/<id>/template.html）に {{JSONLD}} の差し込みを残す",
   "nextjs-json": "記事ページ（app/blog/[slug]/page.tsx）で、JSON の jsonld を <script type=\"application/ld+json\"> として head に出す",
-  "wordpress": "テーマの header.php で wp_head() を呼ぶ（呼んでいないと橋渡しの構造化データが出ない）",
   "ftp": "記事の雛形（data/clients/<id>/template.html）に {{JSONLD}} の差し込みを残す"
  },
  "ld_faqpage": {
@@ -116,8 +111,7 @@
    "astro": "@astrojs/sitemap を外すか、配った public/sitemap.xml を優先する",
    "next": "app/sitemap.ts で記事ごとに images（アイキャッチか OG 画像の絶対URL）を返す（MetadataRoute.Sitemap の images）"
   },
-  "nextjs-json": "app/sitemap.ts で記事ごとに images（アイキャッチの絶対URL）を返す（templates/corporate_sitemap.ts の形）",
-  "wordpress": "画像のサイトマップを出す SEO プラグイン（Yoast・Rank Math 等）を有効にするか、橋渡しの最新版に置き直す"
+  "nextjs-json": "app/sitemap.ts で記事ごとに images（アイキャッチの絶対URL）を返す（templates/corporate_sitemap.ts の形）"
  },
  "og_image": {
   "_": "記事の head に <meta property=\"og:image\" content=\"（アイキャッチの絶対URL）\"> を出す",
@@ -163,12 +157,11 @@
   "external-md": "静的ファイルの置き場（Hugo は static/、Jekyll はルート、Astro は public/）に llms.txt を置き、ビルドで消えないようにする",
   "external-html": "配信先の直下（公開フォルダ）に llms.txt を置く",
   "nextjs-json": "public/llms.txt を置く（管制塔が記事を足していく）",
-  "wordpress": "橋渡し（mu-plugin）を最新版にする（llms.txt は橋渡しが返す。サーバーに実在の llms.txt があれば消す）",
   "ftp": "サーバーの直下に llms.txt を置く（管制塔が記事を足していく）"
  },
  "robots_txt": {
   "_": "robots.txt で AI クローラー（GPTBot・OAI-SearchBot・ClaudeBot・PerplexityBot・Google-Extended）を Disallow にしない（Cloudflare の「AI クローラーをブロック」も切る）",
-  "wordpress": "サーバーに実在する robots.txt を消すか AI クローラーの Disallow を外す（WordPress の仮想 robots.txt は橋渡しが整える）。Cloudflare の「AI クローラーをブロック」も切る",
+  "wordpress": "サーバーに実在する robots.txt を消すか AI クローラーの Disallow を外す（WordPress の仮想 robots.txt のままなら止めていない）。Cloudflare の「AI クローラーをブロック」も切る",
   "nextjs-json": "app/robots.ts（または public/robots.txt）で AI クローラーを Disallow にしない"
  },
  "measure_tag": {
@@ -179,8 +172,8 @@
    "jekyll": "記事のレイアウトの head に GA4 の計測タグ（gtag.js）を入れる"
   },
   "nextjs-json": "app/layout.tsx に GA4 の計測タグ（@next/third-parties の GoogleAnalytics など）を入れる",
-  "wordpress": "テーマの footer.php で wp_footer() を呼ぶ（呼んでいないと橋渡しの計測が出ない）。測定IDはヒアリングシートの欄に入れる",
-  "ftp": "ヒアリングシートに GA4 の測定ID（G-…）を記入する（管制塔の雛形が計測を置く）"
+  "ftp": "ヒアリングシートに GA4 の測定ID（G-…）を記入する（管制塔の雛形が計測を置く）",
+  "wordpress": "テーマかプラグインで、サイトの全ページに GA4 の計測タグ（シートに書いた測定ID）を入れる（当社の鍵は投稿者の権限で、計測を置けない）"
  },
  "measure_entry": {
   "_": "記事の本文の HTML（<aside class=\"cta-inline\"> と中の <script>）を消さずに出す",
@@ -189,15 +182,14 @@
    "hugo": "Hugo の設定で [markup.goldmark.renderer] unsafe = true にする",
    "jekyll": "kramdown の設定で生の HTML を消していないか確かめる（parse_block_html を無効にしない）"
   },
-  "nextjs-json": "記事ページで JSON の本文を dangerouslySetInnerHTML でそのまま出し、中の <script> を実行する（sanitize で落とさない。next/script で同じ処理を置いてもよい）",
-  "wordpress": "記事の本文から <script> を落とすプラグイン・設定（KSES の強化など）を外す"
+  "nextjs-json": "記事ページで JSON の本文を dangerouslySetInnerHTML でそのまま出し、中の <script> を実行する（sanitize で落とさない。next/script で同じ処理を置いてもよい）"
  },
  "indexnow_key": {
   "_": "配った IndexNow の鍵ファイル（<鍵>.txt）を直下で配信する（公開の対象から外さない）",
   "external-md": "静的ファイルの置き場（Hugo は static/、Jekyll はルート、Astro は public/）に置いた <鍵>.txt をビルドで消さない",
   "external-html": "配信先の直下の <鍵>.txt を公開の対象に入れる（tools/make_dist.py を使うなら PUBLIC_FILES に足す）",
   "nextjs-json": "public/<鍵>.txt を消さない",
-  "wordpress": "橋渡し（mu-plugin）を最新版にする（鍵ファイルは橋渡しが返す）",
+  "wordpress": "当社がお送りする <鍵>.txt を、サーバーの公開フォルダの直下（wp-config.php と同じ場所）に置く",
   "ftp": "サーバーの直下の <鍵>.txt を消さない"
  },
  "bing_auth": {
@@ -205,7 +197,7 @@
   "external-md": "静的ファイルの置き場に置いた BingSiteAuth.xml をビルドで消さない",
   "external-html": "配信先の直下の BingSiteAuth.xml を公開の対象に入れる",
   "nextjs-json": "public/BingSiteAuth.xml を消さない",
-  "wordpress": "橋渡し（mu-plugin）を最新版にする",
+  "wordpress": "当社がお送りする BingSiteAuth.xml を、サーバーの公開フォルダの直下（wp-config.php と同じ場所）に置く",
   "ftp": "サーバーの直下の BingSiteAuth.xml を消さない"
  },
  "video_embed": {
@@ -225,11 +217,11 @@
   "external-md": "配信先が Cloudflare Pages 以外なら、配った _redirects と同じ転送をホストの設定（Netlify の _redirects・Vercel の vercel.json の redirects・.htaccess）に入れる",
   "external-html": "配信先が Cloudflare Pages 以外なら、配った _redirects と同じ転送をホストの設定（Netlify の _redirects・Vercel の vercel.json・.htaccess）に入れる",
   "nextjs-json": "配った _redirects が効かないホストなら、next.config の redirects() に同じ転送（permanent: true）を入れる",
-  "wordpress": "橋渡し（mu-plugin）を最新版にする（転送は橋渡しが返す。リダイレクト系プラグインが上書きしていないか確かめる）",
+  "wordpress": "統合した記事の旧URLから残す記事への301を、リダイレクトのプラグイン（Redirection 等）かサーバーの設定に足す（当社の鍵は投稿者の権限で、転送を足せない）",
   "ftp": ".htaccess に Redirect 301 の行を足せるよう、サーバーが .htaccess を読む設定（AllowOverride）にする"
  },
  "wp_bridge": {
-  "_": "最新の automation/wordpress/ss-quality-gate.php を wp-content/mu-plugins/ に置き直す（サーバーがファイルの書き換えを許せば、以後は自動で更新される）"
+  "_": "記事の投稿の専用ユーザーを「投稿者」の権限で作り直し、そのアプリケーションパスワードをお送りください（管理者・編集者の鍵はお預かりしません）"
  },
  "wp_ftp": {
   "_": "レンタルサーバーの FTP（FTPS/SFTP）の接続情報（ホスト・ユーザー・パスワード・WordPress のあるフォルダ）を1回いただく。いただいた後は、テーマ由来の表示速度とサイト構成の変更も当社が自動で直し、直した後にトップが開かなければ自動で元に戻す"

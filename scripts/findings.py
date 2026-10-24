@@ -155,8 +155,8 @@ CHECKS = [
     ("個人情報の保存期間", "pii_retention.py --apply", re.compile(r"PII_RETENTION_OK=unknown")),
     ("問い合わせの取りこぼし（GA4と台帳）", "lead_reconcile.py --fix",
      re.compile(r"^\s*要対応:")),
-    # WordPress の社のプラグインは自分で新しい版に置き換わる。書き換えを許さないサーバーでは古いまま残るので知らせる
-    ("WordPress の橋渡し（プラグインの版・自己更新）", "wp_bridge.py --check",
+    # WordPress の社の鍵は投稿者の権限だけ。管理者・編集者の鍵に替えられていたら知らせる（漏れるとサイト全体に届く）
+    ("WordPress の鍵の権限（投稿者だけか）", "wp_bridge.py --check",
      re.compile(r"^要対応:")),
     # お客様の社の検索エンジンへの最初の接続（Search Console のオーナー・zip の残り）。先方にお願いするまで消えない
     ("検索エンジンへの接続（お客様の社）", "search_connect.py --check",

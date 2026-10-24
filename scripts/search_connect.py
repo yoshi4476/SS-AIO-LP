@@ -7,7 +7,7 @@
 
   IndexNow     鍵ファイル（<鍵>.txt）がドメインの直下にあること
                → 配信のたびに置く（place。Git の社は配信先リポジトリ・FTP の社はサーバーの直下。
-                 WordPress は橋渡しの mu-plugin が返す: wp_bridge.push_settings）
+                 WordPress は置けない＝先方に置いてもらう。投稿者の権限の鍵では直下にファイルを置けない）
   Bing         当社の Bing アカウントにドメインを足し、所有権を確かめること
                → ヒアリングシートで同意（bing_consent）を取った社だけ。確認ファイル BingSiteAuth.xml を
                  配信のたびに置き、本番に出たら bing_webmaster.connect が VerifySite で確かめる
@@ -27,7 +27,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 # 配信先リポジトリで公開されるフォルダの候補（publish._public_file と同じ並び）
 ROOTS = ("", "public", "static", "site")
 MARKERS = ("index.html", "robots.txt", "sitemap.xml", "llms.txt", "favicon.ico")
-# 直下に置くファイルを publish.py が扱う方式（自前ビルドは site/ に、WordPress は橋渡しが返す）
+# 直下に置くファイルを publish.py が扱う方式（自前ビルドは site/ に。WordPress は置けない）
 PLACE_TYPES = ("external-md", "external-html", "nextjs-json", "ftp", "zip")
 
 

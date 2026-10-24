@@ -361,10 +361,10 @@ def auto(cfg, write):
     if t not in AUTO_TYPES:
         return None, f"{t} は対象外"
     if t == "wordpress":
-        # 本文・アイキャッチ・計測タグ・Google Fonts の CSS は先方の mu-plugin が直す。残るのはテーマの PHP に
-        # 直書きされたものだけで、FTP の接続情報がある社だけ直せる
+        # テーマの PHP に直書きされたフォント・計測タグ・遅延読み込みは、FTP の接続情報がある社だけ直せる
+        # （先方には何も置かない。PHP のプラグインは 2026-10-24 に廃止）
         if not has_ftp(cfg):
-            return None, "FTP の接続情報が無いので、テーマの PHP は直せません（mu-plugin が直す範囲だけ）"
+            return None, "FTP の接続情報が無いので、テーマの PHP は直せません（測って知らせるだけ）"
         ch = _ftp_fix(cfg, _wp_theme_files(cfg), lambda x: fix_php(x, sid), write, "theme")
         return len(ch), "テーマの PHP・HTML"
     if t == "ftp":

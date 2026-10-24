@@ -57,9 +57,6 @@ def test_templates_carry_one_robots_meta():
     sub = (ROOT / "scripts" / "subsidy" / "pages.py").read_text(encoding="utf-8")
     check("補助金: 生成するページの robots に見え方の指定がある（index,follow だけのものが残っていない）",
           ['content="index,follow"' in sub, sub.count(FULL) >= 2], [False, True])
-    php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
-    check("WordPress: wp_robots で足し、noindex のときは足さない",
-          ["add_filter('wp_robots'" in php, "$robots['noindex']" in php], [True, True])
 
 
 def test_corporate_layout_and_sitemap_template():

@@ -3,8 +3,8 @@
 
 運用者の依頼: WordPress や FTP の社でも、記事だけでなくサイトの改修まで管制塔から行う。
 site_change は「取る・反映・戻す」を持っていたが、作業場所のファイルは人が直す前提だった。直す役を Claude に任せ、
-通してよいかは機械が決める。ここでは外部（FTP・WordPress・GitHub・Claude・本番の HTTP）に触れず、
-偽の FTP（一時フォルダ）・偽の WordPress（REST の形だけ真似る）・Git の一時リポジトリで確かめる:
+通してよいかは機械が決める。ここでは外部（FTP・GitHub・Claude・本番の HTTP）に触れず、
+偽の FTP（一時フォルダ）・Git の一時リポジトリで確かめる:
 
   - 良い直しは反映され、台帳（renovate.jsonl）に指示・変えたファイル・確認者が残る
   - 悪い直し（タグの壊れ・リンク切れ・大量削除・許可していない script・インライン script・鍵・Web フォント・
@@ -12,8 +12,8 @@ site_change は「取る・反映・戻す」を持っていたが、作業場�
   - 反映後の確認（200・ナビ・フッター・問い合わせの導線）が外れたら自動で戻し、--report が要対応を出す
   - 既定は止まって確認を待つ。renovate_auto の社だけ、その種類（css・text）の小さな直しを自動で反映する
   - 作業場所の外（管制塔）を触ったら捨てる。写真（_preview/）は先方へ送らない
-  - 橋渡しのプラグイン 2.0.4 の /ss/v1/design は、許可した項目（link・meta・ld+json・許可したドメインの script src）
-    しか通さず、追加CSSに </style> を入れさせない（PHP が無いので、定数と正規表現を取り出して同じ入力を当てる）
+  - WordPress は FTP の接続情報がある社だけ ftp と同じく改修する（預かる WordPress の鍵は投稿者の権限だけ。
+    PHP のプラグインの窓口 /ss/v1/design は 2026-10-24 に廃止）
 """
 import contextlib
 import io
@@ -256,94 +256,27 @@ def test_renovate_ftp_checks_apply_and_rollback():
 def test_renovate_wordpress_without_ftp():
     import site_change as SC
     import site_renovate as R
-    print("\n■ 指示での改修（WordPress・FTP の鍵なし）: 固定ページ・追加CSS・head の追記を REST で変え、外れたら戻す")
-    page0 = "<!-- wp:paragraph --><p>会社概要の本文です。</p><!-- /wp:paragraph -->"
-    store = {"page": {"id": 1, "title": {"raw": "会社概要"}, "content": {"raw": page0}, "slug": "about", "status": "publish"},
-             "design": {"css": "body{color:#333}", "head": [], "footer": []}}
-    posts = []
-
-    def fake(cfg, path, data=None, method=None):
-        if path.startswith("pages?"):
-            return [store["page"]]
-        if path.startswith(("menus?", "menu-items?", "navigation?", "templates?", "template-parts?", "widgets?")):
-            return []
-        if path == "settings" and data is None:
-            return {"title": "H37社", "description": ""}
-        if path.startswith("themes"):
-            return []
-        if path == "/ss/v1/design":
-            if data is None:
-                return json.loads(json.dumps(store["design"]))
-            posts.append(data)
-            store["design"].update({k: v for k, v in data.items() if k in ("css", "head", "footer")})
-            return {"saved": sorted(data)}
-        if path.startswith("pages/1") and data is None:
-            return store["page"]
-        if path == "pages/1":
-            store["page"]["content"]["raw"] = data["content"]
-            return store["page"]
-        return {}
-
-    def fetch(url):
-        p = urlsplit(url).path
-        body = "<nav></nav><main>{}</main><a href=\"/contact/\">相談</a><footer></footer>"
-        if p == "/":
-            return 200, body.format("トップ")
-        if p == "/about/":
-            c = store["page"]["content"]["raw"]
-            return (500, "") if "壊れる" in c else (200, body.format(c))
-        return 404, ""
-
-    with tempfile.TemporaryDirectory() as td:
-        td = Path(td)
-        log = td / "renovate.jsonl"
-        cfg = {"id": "h37-wp", "name": "H37社", "type": "wordpress", "domain": "h37wp.example",
-               "renovate_wait_sec": 0, "renovate_verify_tries": 1}
-        old_sc = _with(SC, WORK=td / "work", _wp=fake, _wp_routes=lambda cfg: set())
-        old_r = _with(R, LOG=log, fetch=fetch, screenshot=lambda urls: {}, tower_status=lambda: set())
+    import speed_fix as SP
+    print("\n■ 指示での改修（WordPress・FTP の鍵なし）: 投稿者の鍵では変えられないので止める（2026-10-24）")
+    cfg = {"id": "h37-wp", "name": "H37社", "type": "wordpress", "domain": "h37wp.example"}
+    old = _with(SP, has_ftp=lambda c: False)
+    try:
         try:
-            def go(edit, yes=True):
-                R.ask_claude = _editor(edit)
-                return _quiet(R.run, cfg, "会社概要と色を直して", yes=yes, preview=False)
-
-            m = SC.mirror(cfg)
-
-            def good(w):
-                _sub("pages/1.json", "会社概要の本文です。", "会社概要の本文です。創業は大阪です。")(w)
-                _sub("design/custom.css", "#333", "#222")(w)
-                (w / "design" / "head.json").write_text(json.dumps(
-                    [{"t": "meta", "a": {"name": "format-detection", "content": "telephone=no"}},
-                     {"t": "ld", "json": {"@context": "https://schema.org", "@type": "Organization", "name": "H37社"}}],
-                    ensure_ascii=False), encoding="utf-8")
-            rc, out = go(good)
-            check("取る: 追加CSS・head・フッターを design/ に取る（橋渡し 2.0.4 の窓口）",
-                  sorted(p.name for p in (m / "design").iterdir()), ["custom.css", "footer.json", "head.json"])
-            check("良い直し: 固定ページ・追加CSS・head の追記が REST で届く",
-                  (rc, "創業は大阪" in store["page"]["content"]["raw"], store["design"]["css"], len(store["design"]["head"])),
-                  (0, True, "body{color:#222}", 2))
-            check("追加CSS・head・フッターは1回の POST で送る", [sorted(p) for p in posts][-1:], [["css", "footer", "head"]])
-
-            for name, items in {
-                "許可していないドメインの script": [{"t": "script", "src": "https://evil.example/x.js"}],
-                "http-equiv の meta（転送）": [{"t": "meta", "a": {"http-equiv": "refresh", "content": "0;url=https://evil.example/"}}],
-                "任意の HTML": [{"t": "html", "a": {"x": "<img src=x onerror=alert(1)>"}}],
-                "Google Fonts の link": [{"t": "link", "a": {"rel": "preconnect", "href": "https://fonts.googleapis.com"}}],
-            }.items():
-                n = len(posts)
-                rc, out = go(lambda w, items=items: (w / "design" / "head.json").write_text(json.dumps(items), encoding="utf-8"))
-                check(f"head の追記で止める: {name}", (rc, _last(log).get("decision"), len(posts) == n), (1, "stopped", True))
-                R.discard(cfg)
-            rc, out = go(_sub("design/custom.css", "}", "}</style><script>alert(1)</script>"))
-            check("追加CSSに </style> と <script> を入れさせない", (rc, _last(log).get("decision")), (1, "stopped"))
-            R.discard(cfg)
-
-            rc, out = go(_sub("pages/1.json", "創業は大阪です。", "創業は大阪です。壊れる"))
-            check("反映後の確認が外れたら（会社概要が500）自動で戻す",
-                  (rc, _last(log).get("decision"), "壊れる" in store["page"]["content"]["raw"], "/about/" in str(_last(log).get("problems"))),
-                  (1, "rolled_back", False, True))
-        finally:
-            _with(SC, **old_sc)
-            _with(R, **old_r)
+            R.pull(cfg)
+            got = ""
+        except SystemExit as e:
+            got = str(e)
+    finally:
+        _with(SP, **old)
+    check("FTP の接続情報が無い WordPress の社は取らずに止める（REST の固定ページ・デザインの窓口を使わない）",
+          ("FTP の接続情報が無い" in got, hasattr(SC, "wp_pull")), (True, False))
+    old = _with(SP, has_ftp=lambda c: True)
+    oldsc = _with(SC, ftp_pull=lambda c: "ftp で取りました")
+    try:
+        check("FTP の接続情報がある WordPress の社は ftp と同じく取る", R.pull(cfg), "ftp で取りました")
+    finally:
+        _with(SP, **old)
+        _with(SC, **oldsc)
 
 
 def test_renovate_git_rolls_back_with_revert():
@@ -403,75 +336,6 @@ def test_renovate_git_rolls_back_with_revert():
             _with(R, **old_r)
 
 
-def _php():
-    return (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
-
-
-def _php_list(php, name):
-    m = re.search(rf"^const {name} = \[(.*?)\];", php, re.M | re.S)
-    return re.findall(r"'([^']*)'", m.group(1)) if m else None
-
-
-def _php_regex(php, name):
-    m = re.search(rf"^const {name} = '(.*?)';$", php, re.M)
-    body = m.group(1).replace("\\'", "'").replace("\\\\", "\\")
-    d = body[0]
-    pat, flags = body[1:].rsplit(d, 1)
-    return re.compile(pat, re.I if "i" in flags else 0)
-
-
-def test_bridge_design_window_is_safe():
-    import site_renovate as R
-    print("\n■ 橋渡し 2.0.4: 追加CSS・head・フッターの窓口は許可した項目しか通さない")
-    php = _php()
-    # 2.0.6: 公開の下限を85点に下げた版（2026-10-21）。版を上げないと先方の自己更新が新しい版と見なさない
-    check("版は 2.0.6（見出しと定数）", (re.search(r"^ \* Version: (\S+)", php, re.M).group(1),
-                                    re.search(r"^const SSB_VERSION = '(\S+)';", php, re.M).group(1)), ("2.0.6", "2.0.6"))
-    route = php.split("register_rest_route(SSB_NS, '/design'", 1)[1].split("register_rest_route(", 1)[0]
-    check("窓口: GET・POST とも、書き込みの条件（アプリケーションパスワード）＋外観の編集の権限",
-          (route.count("'permission_callback' => 'ssb_can_design'"),
-           "return ssb_can_write() && current_user_can('edit_theme_options');" in php), (2, True))
-    check("窓口: 1つでも受け付けない項目があれば何も保存しない（保存は検めた後）",
-          route.index("if ($bad)") < route.index("wp_update_custom_css_post(") < route.index("update_option('ssb_' . $k"), True)
-    check("許可の一覧は管制塔の検査と同じ（項目のキー・link の属性と rel・meta の属性・script のドメイン）",
-          [_php_list(php, n) for n in ("SSB_ITEM_KEYS", "SSB_LINK_ATTRS", "SSB_LINK_RELS", "SSB_META_ATTRS", "SSB_SCRIPT_HOSTS")],
-          [list(R.ITEM_KEYS), list(R.LINK_ATTRS), list(R.LINK_RELS), list(R.META_ATTRS), list(R.SCRIPT_HOSTS)])
-    check("meta に http-equiv（転送）・link に stylesheet を許さない",
-          ("http-equiv" in _php_list(php, "SSB_META_ATTRS"), "stylesheet" in _php_list(php, "SSB_LINK_RELS")), (False, False))
-    css_bad = _php_regex(php, "SSB_CSS_BAD")
-    samples = ["a{}</style><script>x</script>", "a{width:expression(1)}", "a{background:url(javascript:x)}",
-               "@import url(https://fonts.googleapis.com/css2?family=Noto+Sans+JP);", "<!-- x -->"]
-    check("追加CSS: </style>・<script>・expression・javascript:・Google Fonts を止める（PHP の正規表現そのものを当てる）",
-          ([bool(css_bad.search(s)) for s in samples], [bool(R.CSS_BAD.search(s)) for s in samples]), ([True] * 5, [True] * 5))
-    check("追加CSS: ふつうの CSS（子セレクタの > を含む）は通す",
-          [bool(css_bad.search(s)) for s in ("ul > li { color: #333 }", ".a::after{content:\"→\"}")], [False, False])
-    url = re.search(r"preg_match\('(#\^https://.*?#)', \$u\)", php).group(1)
-    rx = re.compile(url[1:-1].replace("\\'", "'").replace("\\\\\\\\", "\\\\"))
-    check("script src は https の URL だけ（空白・引用符・<>・バックスラッシュ・http・javascript: を通さない）",
-          [bool(rx.fullmatch(u)) for u in ("https://www.google.com/recaptcha/api.js", "http://www.google.com/x.js",
-                                            "https://x.example/a b", "https://x.example/\"onload=", "javascript:alert(1)",
-                                            "https://x.example/\\evil")],
-          [True, False, False, False, False, False])
-    item = php.split("function ssb_design_item($it)", 1)[1].split("\n}\n", 1)[0]
-    check("項目は link・meta・ld・script の4種だけ（style・任意のタグ・インラインの script の形が無い）",
-          sorted(set(re.findall(r"\$t === '(\w+)'", item))), ["ld", "link", "meta", "script"])
-    out = php.split("function ssb_design_html($items)", 1)[1].split("\n}\n", 1)[0]
-    check("出すときは組み立て直す（出す直前に検め直す・esc_url/esc_attr・ld+json は JSON_HEX_TAG）",
-          ["$it = ssb_design_item($it);" in out, "esc_url($it['src'])" in out, "esc_attr($v)" in out,
-           "JSON_HEX_TAG" in out], [True] * 4)
-    check("保存した追記を検めずに出す箇所が無い",
-          sorted(set(re.findall(r"echo ([^;]*get_option\('ssb_(?:head|footer)'[^;]*);", php))),
-          ["ssb_design_html(get_option('ssb_footer', []))", "ssb_design_html(get_option('ssb_head', []))"])
-    check("管制塔の検査: 許可した項目は通し、許可していない項目は止める",
-          (R.design_problems([{"t": "meta", "a": {"name": "x", "content": "y"}}, {"t": "ld", "json": {"@type": "Thing"}},
-                              {"t": "link", "a": {"rel": "canonical", "href": "/about/"}},
-                              {"t": "script", "src": "https://challenges.cloudflare.com/turnstile/v0/api.js", "async": True}]),
-           len(R.design_problems([{"t": "script", "src": "https://evil.example/a.js"}, {"t": "style", "a": {}},
-                                  {"t": "meta", "a": {"http-equiv": "refresh", "content": "0"}},
-                                  {"t": "link", "a": {"rel": "stylesheet", "href": "/x.css"}}, {"t": "ld", "json": "x"},
-                                  {"t": "meta", "a": {"name": "x", "content": "y"}, "html": "<b>"}]))), ([], 6))
-
-
 def test_renovate_is_wired():
     import site_change as SC
     import site_renovate as R
@@ -481,8 +345,8 @@ def test_renovate_is_wired():
     check("site_change --ask は site_renovate.run に渡す（取り方・反映の仕方を二重に持たない）",
           ("site_renovate.run(cfg, a.ask" in src, "def push_mirror(" in inspect.getsource(SC), "SC.push_mirror(" in inspect.getsource(R.apply)),
           (True, True, True))
-    check("WordPress: ウィジェットを取って戻す（wp/v2/widgets・instance は raw で書き戻す）",
-          ("widgets" in [n for n, _, _ in SC.WP_RES], 'data["instance"] = {"raw": inst}' in inspect.getsource(SC.wp_push)), (True, True))
+    check("WordPress: 反映は ftp と同じ（REST の書き戻しを持たない）",
+          (inspect.getsource(SC.push_mirror).count("ftp_push"), hasattr(SC, "wp_push")), (2, False))
     perm = json.loads(R.perm_settings())["permissions"]
     check("Claude の道具は読み書きと検索だけ（Bash・外部通信なし）、書けるのは作業場所の中だけ・.git は触れない",
           ("Bash" in json.dumps(perm), sorted(perm["allow"]), "Edit(./.git/**)" in perm["deny"]),
@@ -499,5 +363,5 @@ def test_renovate_is_wired():
           {m: c["status"] for m, c in cells.items()},
           {"self-static": "n/a", "external-md": "partial", "external-html": "ok", "nextjs-json": "partial",
            "wordpress": "partial", "ftp": "ok", "zip": "n/a"})
-    check("表: site_change × wordpress の要るものに 2.0.4 の窓口（追加CSS・head/フッター・ウィジェット）が書いてある",
-          all(x in caps["features"]["site_change"]["cells"]["wordpress"]["need"] for x in ("2.0.4", "追加CSS", "ウィジェット")), True)
+    check("表: site_change × wordpress の要るものに FTP の社だけと書いてある",
+          "FTP の接続情報がある社だけ" in caps["features"]["site_change"]["cells"]["wordpress"]["need"], True)

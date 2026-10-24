@@ -1104,7 +1104,7 @@ jobs:
         env:
           SA_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}
           BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
-          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}   # WordPress の社は橋渡しへ鍵・確認コードを渡す
+          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}   # WordPress の社の投稿（投稿者の権限の鍵）
         run: |
           id="${{ steps.site.outputs.id }}"
           mkdir -p automation/logs

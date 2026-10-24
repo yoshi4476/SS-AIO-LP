@@ -60,7 +60,7 @@ TYPES = {
     "nextjs-json": "Next.jsサイト。src/content/blog/<slug>.json を書き出す",
     "external-md": "別リポジトリの静的サイト。Markdownをそのまま置く",
     "external-html": "別リポジトリ。HTMLに変換して置く（相手のテンプレートを使う）",
-    "wordpress": "WordPress。REST APIで投稿する（品質ゲートは先方のmu-pluginが担う）",
+    "wordpress": "WordPress。本体の REST API で投稿する（投稿者の権限の鍵だけ。先方には何も置かない）",
     "ftp": "Gitを使わないレンタルサーバー。HTMLに変換してFTPS/FTP/SFTPで上げる（接続情報は FTP_CREDENTIALS_JSON）",
     "zip": "先方が自分で上げる。HTMLに変換して deliveries/<id>/ にZIPを作る（新規受付なし）",
 }

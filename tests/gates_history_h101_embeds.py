@@ -302,7 +302,7 @@ def test_each_delivery_format_gets_its_fixed_form():
         Image.new("RGB", (8, 8)).save(img / "eyecatch.png")
         old = H29._with(P, _wp_call=fake, ROOT=Path(td), client_credit=lambda c, url="": None)
         oldv = H29._with(VE, info=lambda s: None)
-        oldw = H29._with(W, _has_auth=lambda cfg: True)
+        oldw = H29._with(W, _has_auth=lambda cfg: True, _public=fake.public)
         try:
             with contextlib.redirect_stdout(io.StringIO()):
                 P.write_wordpress(H29.CFG, meta, H29.BODY + "\n" + GOOD, Path(td) / "a.md", push=False)

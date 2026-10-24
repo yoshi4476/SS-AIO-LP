@@ -42,33 +42,35 @@ BUDGET = 50
 TIMEOUT = 20
 ALL = ("self-static", "external-md", "external-html", "nextjs-json", "wordpress", "ftp", "zip")
 GIT_FTP = ("external-md", "external-html", "nextjs-json", "ftp", "zip")
+# WordPress の社で作らないもの（投稿者の権限の鍵だけで、固定ページ・<script>・直下のファイルを扱えない。2026-10-24 に
+# PHP のプラグインを廃止）。点検しても先方に頼むことが無いので、WordPress では点検しない
+NOT_WP = tuple(t for t in ALL if t != "wordpress")
 # 点検の項目 → (表の機能, 確かめる方式, 確かめる中身)。表の partial のうち、ここに挙がる方式のセルの note に
 # 「onboard_check で確かめる（中身）」を書く（tests/gates_history_h35.py が表と食い違わないかを見る）
 CHECKS = {
-    "agg_compare": (("compare",), ALL, "/compare/ が開けて中身が出る"),
-    "agg_topics": (("topics",), ALL, "/topics/ が開けて中身が出る"),
-    "agg_area": (("area",), ALL, "/area/ が開けて中身が出る"),
-    "agg_season": (("season_feature",), ALL, "季節の特集のページが開けて中身が出る"),
-    "agg_industry": (("industry_hub",), ALL, "/industry/ が開けて中身が出る"),
-    "agg_glossary": (("glossary",), ALL, "/glossary/ が開けて中身が出る"),
-    "agg_i18n": (("i18n",), ALL, "訳のページ（/en/ など）が開けて中身が出る"),
-    "hub_nav": (("industry_hub", "glossary"), ("wordpress",), "トップのナビから /industry/・/glossary/ へ辿れる"),
-    "ld_blogposting": (("ld_blogposting",), ALL, "記事の head に BlogPosting の JSON-LD"),
-    "ld_faqpage": (("ld_faqpage",), ALL, "FAQ のある記事の head に FAQPage の JSON-LD"),
-    "robots_meta": (("search_preview",), ALL, "記事の head に robots の meta（max-image-preview 等・noindex でない）"),
-    "sitemap_images": (("search_preview",), ALL, "sitemap.xml に記事の画像の行（image:loc）"),
-    "og_image": (("thumbnail_photo",), ALL, "記事の og:image が絶対URLで開ける"),
-    "hreflang": (("i18n",), ALL, "訳のある記事の head に hreflang"),
+    "agg_compare": (("compare",), NOT_WP, "/compare/ が開けて中身が出る"),
+    "agg_topics": (("topics",), NOT_WP, "/topics/ が開けて中身が出る"),
+    "agg_area": (("area",), NOT_WP, "/area/ が開けて中身が出る"),
+    "agg_season": (("season_feature",), NOT_WP, "季節の特集のページが開けて中身が出る"),
+    "agg_industry": (("industry_hub",), NOT_WP, "/industry/ が開けて中身が出る"),
+    "agg_glossary": (("glossary",), NOT_WP, "/glossary/ が開けて中身が出る"),
+    "agg_i18n": (("i18n",), NOT_WP, "訳のページ（/en/ など）が開けて中身が出る"),
+    "ld_blogposting": (("ld_blogposting",), NOT_WP, "記事の head に BlogPosting の JSON-LD"),
+    "ld_faqpage": (("ld_faqpage",), NOT_WP, "FAQ のある記事の head に FAQPage の JSON-LD"),
+    "robots_meta": (("search_preview",), NOT_WP, "記事の head に robots の meta（max-image-preview 等・noindex でない）"),
+    "sitemap_images": (("search_preview",), NOT_WP, "sitemap.xml に記事の画像の行（image:loc）"),
+    "og_image": (("thumbnail_photo",), NOT_WP, "記事の og:image が絶対URLで開ける"),
+    "hreflang": (("i18n",), NOT_WP, "訳のある記事の head に hreflang"),
     "sitemap": (("sitemap",), ALL, "sitemap.xml が開けて、本番で開ける記事が全部載る"),
-    "llms_txt": (("llms_txt",), ALL, "llms.txt が開けて、sitemap の記事が全部載る"),
+    "llms_txt": (("llms_txt",), NOT_WP, "llms.txt が開けて、sitemap の記事が全部載る"),
     "robots_txt": (("robots_txt",), ALL, "robots.txt が AI クローラーを止めていない"),
     "measure_tag": (("measurement",), ALL, "記事に GA4 の測定ID（計測タグ）が出る"),
-    "measure_entry": (("measurement",), ALL, "記事内の入口（cta-inline）と、その計測のスクリプトが残る"),
+    "measure_entry": (("measurement",), NOT_WP, "記事内の入口（cta-inline）と、その計測のスクリプトが残る"),
     "indexnow_key": (("indexnow",), ALL, "IndexNow の鍵ファイルが直下で返る"),
     "bing_auth": (("bing",), ALL, "BingSiteAuth.xml が直下で返る（同意の社）"),
     "video_embed": (("video_embed",), ALL, "動画のある記事に埋め込みが出て、CSP が YouTube を止めていない"),
     "merge_301": (("merge_redirect",), ALL, "統合した記事の旧URLが301で残す記事へ飛ぶ"),
-    "wp_bridge": (("quality_gate",), ("wordpress",), "橋渡し（mu-plugin）の版と自己更新"),
+    "wp_bridge": (("quality_gate",), ("wordpress",), "投稿の鍵が投稿者（author）の権限だけ"),
     # テーマ（PHP）由来の表示速度とサイト構成の変更は、FTP の接続情報がある社だけ自動で直せる
     "wp_ftp": (("speed_fix", "site_change"), ("wordpress",), "FTP の接続情報があり、テーマの速度・構成も自動で直せる"),
 }
@@ -264,7 +266,7 @@ def sitemap_locs(ctx, wp=False):
 # ---------- 社ごとの材料 ----------
 
 def articles(cfg, ctx):
-    """公開の基準を満たすその社の記事 [{slug, url, date, faq, title}]（新しい順）。WordPress は橋渡しのパーマリンク。
+    """公開の基準を満たすその社の記事 [{slug, url, date, faq, title}]（新しい順）。WordPress は本体の REST のパーマリンク。
     検索から外した記事（noindex）は数えない。sitemap・llms.txt から外すのが決まり（scripts/noindex.py）なので、
     数えると「本番で開けるのに sitemap に無い」と誤って知らせる（2026-10-12 の週次: 3サイトで9本）"""
     import noindex
@@ -273,12 +275,12 @@ def articles(cfg, ctx):
     rows = []
     wp_urls = {}
     if cfg.get("type") == "wordpress":
-        st, _, body, _ = ctx.get("/wp-json/ss/v1/urls")
+        st, _, body, _ = ctx.get("/wp-json/wp/v2/posts?per_page=100&_fields=link,slug")
         try:
-            data = json.loads(body) if st == 200 else {}
+            data = json.loads(body) if st == 200 else []
         except ValueError:
-            data = {}
-        wp_urls = {r.get("slug"): r.get("url") for r in (data.get("urls") or []) if isinstance(r, dict) and r.get("type") == "post"}
+            data = []
+        wp_urls = {r.get("slug"): r.get("link") for r in (data if isinstance(data, list) else []) if isinstance(r, dict)}
     for meta, body, _p in wp_bridge._site_articles(cfg):
         slug = meta.get("slug") or Path(_p).stem
         if noindex.on(meta):
@@ -369,6 +371,8 @@ def run_site(cfg, hints=None, today=None):
     gen = [""]
 
     def add(cid, status, detail="", feature=None, hint=None):
+        if t not in CHECKS[cid][1]:
+            return
         feats = CHECKS[cid][0]
         res.append({"id": cid, "feature": feature or feats[0], "status": status, "detail": detail,
                     "ask": ask(hints, hint or cid, t, gen[0], domain=cfg["domain"], site=cfg["id"]) if status == "ng" else ""})
@@ -389,7 +393,7 @@ def run_site(cfg, hints=None, today=None):
     arts = articles(cfg, ctx)
     live = [a for a in arts if key(a["url"]) in sm_keys] if sm_keys else []
     if t == "wordpress":
-        live = arts                                    # 橋渡しの一覧に載った＝公開済み
+        live = arts                                    # REST の一覧に載った＝公開済み
     old = [a for a in arts if a["date"][:10] <= (today - timedelta(days=2)).isoformat()]
 
     # robots.txt
@@ -585,12 +589,8 @@ def run_site(cfg, hints=None, today=None):
                 add(cid, "ng", f"{p['path']} が" + ("開けますが中身が出ていません" if st == 200 else f"開けません（HTTP {st}）"), feat)
             else:
                 add(cid, "skip", f"{p['path']} はまだ配っていません（次の配信で置く）", feat)
-    if t == "wordpress" and st_home == 200:
-        miss = [x for x in ("industry", "glossary") if any(p.get("kind") == x for p in exp) and f"/{x}/" not in home]
-        add("hub_nav", "ng" if miss else "ok",
-            f"トップのナビから {', '.join('/' + x + '/' for x in miss)} へ辿れません" if miss else "辿れる")
 
-    # WordPress の橋渡し
+    # WordPress の鍵の権限
     if t == "wordpress":
         import contextlib
         import io
@@ -600,8 +600,8 @@ def run_site(cfg, hints=None, today=None):
             try:
                 bad = wp_bridge.check({cfg["id"]: cfg})
             except Exception as e:
-                bad = [f"要対応: 橋渡しを確かめられません（{type(e).__name__}）"]
-        add("wp_bridge", "ng" if bad else "ok", "；".join(re.sub(r"^要対応:\s*", "", b) for b in bad)[:200] or "最新")
+                bad = [f"要対応: 鍵の権限を確かめられません（{type(e).__name__}）"]
+        add("wp_bridge", "ng" if bad else "ok", "；".join(re.sub(r"^要対応:\s*", "", b) for b in bad)[:200] or "投稿者の権限だけ")
         import speed_fix
         has = speed_fix.has_ftp(cfg)
         add("wp_ftp", "ok" if has else "ng",

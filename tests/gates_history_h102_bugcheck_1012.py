@@ -83,8 +83,6 @@ def test_retract_survives_one_failure_and_hides_client_names():
         st.enter_context(mock.patch.object(S, "load", lambda s: {"type": "wordpress", "id": s}))
         st.enter_context(mock.patch.object(publish, "_wp_call", wp_call))
         st.enter_context(mock.patch.object(wp_bridge, "post_link", lambda c, s: None))
-        st.enter_context(mock.patch.object(wp_bridge, "add_redirects", lambda c, pairs: (1, [])))
-        st.enter_context(mock.patch.object(wp_bridge, "push_settings", lambda c: None))
         out = st.enter_context(contextlib.redirect_stdout(io.StringIO()))
         R._site(CL, items, True)
     check("WordPress: 1件目の接続の失敗で止まらず、2件目は下書きに戻して済みにする（slug はログに出さない）",

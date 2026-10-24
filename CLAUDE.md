@@ -319,7 +319,7 @@ python scripts/add_fact.py --add <file.json>      # 通れば登録
 |:--|:--|:--|
 | `self-static` | 本リポジトリの静的サイト | build.py がビルド対象から除外。**ファイルが存在しない** |
 | `external-md` / `external-html` / `nextjs-json` | 別リポジトリの静的サイト | publish.py が85点未満を配信しない |
-| `wordpress` | WordPress（REST API） | **先方の mu-plugin が公開を止める**（下記） |
+| `wordpress` | WordPress（本体の REST API・投稿者の権限の鍵だけ） | publish.py が85点未満を送らない（先方には何も置かない。下記） |
 | `ftp` | Gitを使わないレンタルサーバー（FTPS既定 / FTP / SFTP） | publish.py が85点未満を上げない（`deliver_files.py`） |
 | `zip` | 先方が自分で上げる（`deliveries/<id>/` にZIP） | 同上。公開の照合（publish_gap）からは外す |
 
@@ -356,27 +356,27 @@ python scripts/site_renovate.py --site <id> --discard    # 捨てる（--ask …
 |:--|:--|
 | Git の社 | 全部（配信先リポジトリへ push） |
 | `ftp` | 全部（変えたファイルだけ上げる。WordPress 本体・アップロード画像・5MB超は取らない） |
-| `wordpress` | 固定ページ・メニュー・ナビ・テンプレート・テンプレートパーツ・ウィジェット・配色（ブロックテーマ）・サイト設定。橋渡し 2.0.4 以降は追加CSS・head とフッターの追記（link・meta・ld+json・許可したドメインの script src だけ）も FTP 無しで変えられる（外観の編集の権限が要る）。PHP のテーマは FTP の接続情報がある社だけ。メニュー・設定は管理者権限のユーザーが要る |
+| `wordpress` | FTP の接続情報がある社だけ ftp と同じ（テーマも含む）。無い社は変えられない（預かる WordPress の鍵は投稿者の権限だけ） |
 | `zip` | ZIP と手順書を先方へメール（先方の作業が残るので、登録時に ftp を勧める警告が出る） |
 
 作業場所の git は必ずその場所の `.git` を名指しする（壊れた `.git` から親の管制塔リポジトリへさかのぼり、
-本体へ4,821件を誤コミットした。門 `test_site_change_stays_in_its_own_repo_and_wp_roundtrip` が止める）。
+本体へ4,821件を誤コミットした。門 `test_site_change_stays_in_its_own_repo` が止める）。
 
-**WordPress納品での品質ゲート**
+**WordPress のお客様（2026-10-24 運用者「PHP では作らない一番セキュリティが高いもの」）**
 
-静的サイトは「基準に届かない記事はファイルごと生成されない」ため物理的に公開できない。WordPressはデータベースに入るため、公開ステータスへの遷移を先方側で止める必要がある。
+PHP のプラグイン（ss-quality-gate.php）は廃止し、公開サイトでの配布もやめた。先方のサーバーには何も置かない。
 
-1. `automation/wordpress/ss-quality-gate.php` を先方の `wp-content/mu-plugins/` に置く
-2. `.env` に `WP_USER_<SITE_ID>` と `WP_APP_PASSWORD_<SITE_ID>` を設定（アプリケーションパスワード）
-3. `python scripts/publish.py --site <id> --slug <slug>` で投稿
+| 形 | いつ | 預かるもの |
+|:--|:--|:--|
+| ① サブドメインの静的なページ（**標準**） | 同じドメインが要らない社。例: column.御社.jp に当社が作るページで出す | DNS に1行足してもらうだけ。WordPress の鍵は預からない |
+| ② WordPress へ直接投稿（`wordpress`） | 同じドメインがどうしても要る社だけ | 記事の投稿の専用ユーザー（**投稿者**の権限）のアプリケーションパスワードだけ |
 
-mu-plugins に置くのは、**管理画面に停止ボタンが出ない**ため。「忙しかったので一旦切った」が起きない。`wp_insert_post_data` で止めるのは、管理画面・REST API・WP-CLI・予約投稿のすべてが必ず通る場所だから。個別の入口をふさぐ形にすると、入口が増えたときに漏れる。
-
-- パイプラインが入れた記事: `_ss_quality_score` が90未満、または未設定なら下書きへ戻す
-- 人が管理画面で書いた記事: `_ss_written_by=human` として、文字数と見出し数の簡易チェックのみ
-- 止めた理由は管理画面に表示し、REST API経由の場合はメタに残す
-
-**限界**: サーバーのファイルを触れる人がこのファイルを消せば外れる。ただし管理画面からは無効化できないため、事故では起きない。
+- ② の鍵が管理者・編集者の権限なら、投稿せずに止める（`wp_bridge.role_problems`。漏れたときにサイト全体へ届くため）。週次の `wp_bridge.py --check` が権限を確かめる
+- 公開してよいかは publish.py の門（`gate_ok`・配信の前の検査）が決める。先方の管理画面で人が公開する記事は対象外
+- ② では作らないもの（投稿者の権限では固定ページ・<script>・直下のファイルを扱えない）: 構造化データ・計測・業種のまとめ・用語集・まとめのページ・
+  多言語のページ・llms.txt・301（下書きに戻して先方に足してもらう）・IndexNow と Bing の確認ファイル（先方に置いてもらう）。表は `data/capabilities.json`
+- サイトの構成の変更・表示速度の直しは、FTP の接続情報がある社だけ（ftp と同じ）
+- 計測のスクリプトはどの方式でも `automation/measure/ss-measure.js`（廃止したプラグインから取り出した）
 
 ### 3.1 ディレクトリ構成
 

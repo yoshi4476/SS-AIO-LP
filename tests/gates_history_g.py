@@ -105,10 +105,11 @@ def test_survey_classifier_reads_neighbors_right():
     check("調査の集計: 行き先の分からない転送URLだけの回答は数えない", SV.tally(rec)["answers"], 0)
 
 
-def test_site_change_stays_in_its_own_repo_and_wp_roundtrip():
+def test_site_change_stays_in_its_own_repo():
     """サイト構成の変更（site_change）は作業場所の .git だけを使う。壊れた .git があると git が親の
     管制塔リポジトリまでさかのぼり、本体に無関係なファイルを4,821件コミットした（2026-10-04 の試験。push 前に取り消し）。
-    WordPress は取った値を書き戻し、先方が後から変えたものは上書きしない"""
+    WordPress は REST で固定ページ・メニューを書き戻さず、FTP の社だけ ftp と同じ道で変える（預かる鍵は投稿者の権限。2026-10-24）"""
+    import inspect
     import subprocess as sp
     import tempfile
     import site_change as C
@@ -124,54 +125,10 @@ def test_site_change_stays_in_its_own_repo_and_wp_roundtrip():
         check("作業場所の記録が親リポジトリに入らない", n, "1")
         (m / "a.html").write_text("b", encoding="utf-8")
         check("作業場所の変化だけを数える", C.changes(m), [("M", "a.html")])
-
-        # 偽の WordPress（REST API の形だけ真似る）で、取る→直す→反映→先方の変更で止まる を確かめる
-        store = {"pages/1": {"id": 1, "title": {"raw": "会社概要"}, "content": {"raw": "旧"}, "slug": "about", "status": "publish"}}
-        calls = []
-
-        def fake(cfg, path, data=None, method=None):
-            calls.append((path, data, method))
-            if path.startswith("pages?"):
-                return [store["pages/1"]]
-            if path.startswith(("menus?", "menu-items?", "navigation?", "templates?", "template-parts?")):
-                return []
-            if path == "settings" and data is None:
-                return {"title": "テスト社", "description": ""}
-            if path.startswith("themes"):
-                return []
-            if path.startswith("pages/1") and data is None:
-                return store["pages/1"]
-            if path == "pages/1":
-                store["pages/1"]["content"]["raw"] = data["content"]
-                return store["pages/1"]
-            return {}
-        orig, orig_routes = C._wp, C._wp_routes
-        C._wp, C._wp_routes = fake, (lambda cfg: set())
-        cfg = {"id": "zz-wp", "type": "wordpress"}
-        orig_mirror = C.mirror
-        C.mirror = lambda c: parent / "work" / "wp-site"
-        try:
-            C.wp_pull(cfg)
-            w = parent / "work" / "wp-site"
-            p = w / "pages" / "1.json"
-            rec = json.loads(p.read_text(encoding="utf-8"))
-            rec["content"] = "新"
-            p.write_text(json.dumps(rec, ensure_ascii=False), encoding="utf-8")
-            C.wp_push(cfg, C.changes(w))
-            check("WordPress: 直した固定ページが反映される", store["pages/1"]["content"]["raw"], "新")
-            C.snapshot(w, "反映")
-            store["pages/1"]["content"]["raw"] = "先方が管理画面で直した"
-            rec["content"] = "さらに新"
-            p.write_text(json.dumps(rec, ensure_ascii=False), encoding="utf-8")
-            try:
-                C.wp_push(cfg, C.changes(w))
-                stopped = False
-            except SystemExit:
-                stopped = True
-            check("WordPress: 先方が後から変えた固定ページは上書きしない", (stopped, store["pages/1"]["content"]["raw"]),
-                  (True, "先方が管理画面で直した"))
-        finally:
-            C._wp, C._wp_routes, C.mirror = orig, orig_routes, orig_mirror
+    check("WordPress: REST で書き戻す道を持たない（wp_pull・wp_push・_wp が無い）",
+          [hasattr(C, x) for x in ("wp_pull", "wp_push", "_wp")], [False, False, False])
+    check("WordPress: 反映は ftp と同じ（push_mirror が ftp_push へ送る）",
+          '"wordpress": ftp_push' in inspect.getsource(C.push_mirror), True)
 
 
 def test_ai_check_cannot_be_abused():

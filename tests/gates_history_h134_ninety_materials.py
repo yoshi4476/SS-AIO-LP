@@ -93,8 +93,6 @@ def test_pass_85_target_90_pdca():
     check("公開しているページの基準の表示が下限と同じ（faq_page.py → build.py で作り直す）",
           (f"総合{R.PASS_TOTAL}点以上" in shown_pages["faq/index.html"], "総合90点以上" in shown_pages["faq/index.html"],
            f"{R.PASS_TOTAL}点未満は非公開" in shown_pages["editorial-policy/index.html"]), (True, False, True))
-    php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
-    check("WordPress の門も85", "const SSQG_MIN_SCORE  = 85;" in php, True)
 
 
 def test_pre_improve_and_unused_materials():

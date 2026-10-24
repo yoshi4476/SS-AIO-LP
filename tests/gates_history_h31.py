@@ -200,9 +200,9 @@ def test_nextjs_json_carries_entities_video_and_client_ld():
 
 def test_ftp_zip_template_carries_the_same_measurement_as_wordpress():
     import deliver_files as DF
-    print("\n■ FTP・ZIP: 汎用の雛形に GA4 の計測（WordPress の橋渡しと同じ出来事・同じ名前）")
-    php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
-    events = sorted(set(re.findall(r"ga\('([a-z_]+)'", php)))
+    print("\n■ FTP・ZIP: 汎用の雛形に GA4 の計測（automation/measure/ss-measure.js。どの方式でも同じ出来事・同じ名前）")
+    js = (ROOT / "automation" / "measure" / "ss-measure.js").read_text(encoding="utf-8")
+    events = sorted(set(re.findall(r"ga\('([a-z_]+)'", js)))
     for typ in ("ftp", "zip"):
         for gid in ("G-H31TEST9", ""):
             cfg = {"id": "h31-client", "type": typ, "domain": "example-ftp.test", "name": "試験の店",
@@ -222,7 +222,7 @@ def test_ftp_zip_template_carries_the_same_measurement_as_wordpress():
                     P.write_external_html(DF.stage_cfg(cfg), base, dict(META), BODY, src)
                     page = (base / "blog" / SLUG / "index.html").read_text(encoding="utf-8")
                 if gid:
-                    check(f"{typ}: 測定IDのある社は計測を1つ置く（WordPress と同じ本体・同じ出来事）",
+                    check(f"{typ}: 測定IDのある社は計測を1つ置く（共通の本体・同じ出来事）",
                           [page.count('id="ss-measure"'), f'window.SSB_GA4="{gid}"' in page,
                            [e for e in events if f"ga('{e}'" not in page],
                            page.index('id="ss-measure"') < page.index("</body>")], [1, True, [], True])
@@ -232,7 +232,7 @@ def test_ftp_zip_template_carries_the_same_measurement_as_wordpress():
                     check(f"{typ}: 測定IDの無い社には計測を出さない", ["ss-measure" in page, "googletagmanager" in page],
                           [False, False])
                 check(f"{typ}: 運用会社の名前が出ない", _leaks(page), [])
-    check("計測の出来事は WordPress と同じ（cta_click・form_submit・lead_capture・inline_tool_view など）",
+    check("計測の出来事がそろっている（cta_click・form_submit・lead_capture・inline_tool_view など）",
           {"cta_click", "form_submit", "lead_capture", "inline_tool_view", "form_abandon", "scroll_depth"} <= set(events), True)
 
 

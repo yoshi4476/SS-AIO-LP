@@ -115,9 +115,8 @@ def live_manifest(domain):
 
 
 def live_manifest_wp(cfg, rows=None):
-    """WordPress の配信済み原稿の指紋（橋渡し 2.0.3 の /ss/v1/urls が投稿メタ _ss_source_hash を返す）。
-    古い橋渡しは指紋を返さないので None（タイトルと本文の突き合わせに切り替える）。
-    配信時の指紋が無いと、本文だけ直した更新が届いたかを見られなかった"""
+    """WordPress の配信済み原稿の指紋。WordPress 本体の REST は指紋を返さない（投稿メタを出す PHP のプラグインは
+    2026-10-24 に廃止）ので、ふつうは None（タイトルと本文の突き合わせに切り替える）"""
     if rows is None:
         try:
             import wp_bridge

@@ -13,13 +13,12 @@
     external-html・ftp・zip → publish.write_aggregate_html（その社の雛形で HTML を作る）
     nextjs-json            → publish.write_aggregate_nextjs（pages.json と、それを描くページの雛形）
     external-md            → publish.write_aggregate_md（permalink つきの Markdown）
-    wordpress              → wp_bridge.sync_pages（固定ページ。業種ハブ・用語集と同じ upsert_page）
+    wordpress              → 作らない（投稿者の権限の鍵では固定ページを作れない。wp_bridge の説明）
 
 守ること（各モジュールの決まりのまま）: 比較表は3表未満のカテゴリを作らない・テーマは3本未満を作らない・
 エリアは5本未満を作らない・季節は12か月分の検索データがそろうまで作らない・業種ハブは5本未満の業種を作らない
 （業種が1つで記事の8割以上を占める社は、ブログの一覧と同じ中身になるので作らない）・用語集は10語未満なら作らない。
 業種ハブの説明文は data/industries.json の lead（AI集客ラボの集客向けの文）を使わない。数字は記事と検索データにあるものだけ。
-WordPress の業種ハブ・用語集は wp_bridge.sync_pages が作る（wp_bridge._aggregate はここの業種・用語集を頼まない）。
 sites/<id>.json の aggregate_skip に書いた種類は作らない（補助金サイトの業種ハブは subsidy/pages.py が作る）。
 お客様の社のページに運用会社の名前・著者が出たらそのページを捨てる（sites.operator_leaks）。
 先方が自分で作った同じパスのページは上書きも削除もしない（管制塔が作ったものには MARK を付ける）。
@@ -38,7 +37,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 KINDS = ("compare", "topics", "area", "season", "industry", "glossary", "i18n", "i18n_index")
 TOPS = ("compare", "topics", "area", "season")
-# 業種ハブ・用語集。WordPress は wp_bridge.sync_pages が別に作るので、WordPress の入口の一覧（TOPS）には入れない
+# 業種ハブ・用語集（入口の一覧 TOPS とは別に親子のページで作る）
 HUBS = ("industry", "glossary")
 LANGS = ("en", "zh", "ko")
 LANG_ATTR = {"ja": "ja", "en": "en", "zh": "zh-Hans", "ko": "ko"}

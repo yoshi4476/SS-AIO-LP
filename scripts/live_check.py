@@ -181,7 +181,7 @@ def targets(site_id, all_urls):
     cfg = sites_mod.load(site_id)
     base = "https://" + cfg["domain"]
     if cfg.get("type") == "wordpress":
-        # WordPress は sitemap が索引形式で、AI集客ラボの固定ページ（/lp/ 等）も無い。橋渡しの公開URLの一覧から選ぶ
+        # WordPress は sitemap が索引形式で、AI集客ラボの固定ページ（/lp/ 等）も無い。WordPress 本体の REST の公開URLの一覧から選ぶ
         import wp_bridge
         rows = wp_bridge.url_rows(cfg)
         if all_urls:

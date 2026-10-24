@@ -239,19 +239,8 @@ def build(site, push=False, write=True):
         qr(f"https://{cfg['domain']}/menu/{lg}/", out / f"qr-{lg}.png")
     print(f"   ページと QR: {out}（{'・'.join(have)}）")
     if push and cfg.get("type") == "wordpress":
-        # WordPress は固定ページ（/menu/ の下に言語ごと）。業種のまとめと同じ upsert_page で作る
-        import wp_bridge
-        pid, st = wp_bridge.upsert_page(cfg, "menu", f"{menu['shop']} {LABEL['ja'][0]}",
-                                        " / ".join(f'<a href="/menu/{o}/">{LABEL[o][0]}</a>' for o in have))
-        print(f"   /menu/: {st}")
-        if st == "taken":
-            print(f"要対応: {cfg['id']} に先方の固定ページ /menu/ があるため、メニューを置けません")
-            return len(have)
-        for lg, m in menus.items():
-            title, body, ld = parts(m, lg, cfg, have)
-            _, cst = wp_bridge.upsert_page(cfg, lg, title, body + '<script type="application/ld+json">'
-                                           + json.dumps(ld, ensure_ascii=False) + "</script>", parent=pid)
-            print(f"   /menu/{lg}/: {cst}")
+        # 投稿者の権限の鍵では固定ページを作れない。作ったページ（out）を先方に置いてもらう
+        print(f"要対応: {cfg['id']} は WordPress のため、メニューのページは自動で置けません（{out} を先方に渡してください）")
         return len(have)
     if push and cfg.get("type") in ("external-html", "external-md", "nextjs-json"):
         import aggregate_pages as AP

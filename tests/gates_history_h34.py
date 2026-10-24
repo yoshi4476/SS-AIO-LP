@@ -186,7 +186,7 @@ def test_speed_fix_runs_by_itself():
           [font in out, "<?php echo '<link href=\"https://fonts.googleapis.com" in out], [False, True])
     cfg = dict(CFG, type="wordpress")
     n, why = SP.auto(cfg, False) if not SP.has_ftp(cfg) else (None, "FTP")
-    check("WordPress で FTP の鍵が無い社は見送る（mu-plugin が直す範囲だけ）", [n, "FTP" in why], [None, True])
+    check("WordPress で FTP の鍵が無い社は見送る（測って知らせるだけ）", [n, "FTP" in why], [None, True])
     check("週次の対象の方式", sorted(SP.AUTO_TYPES), ["external-html", "external-md", "ftp", "nextjs-json", "wordpress"])
     src = (ROOT / "scripts" / "speed_fix.py").read_text(encoding="utf-8")
     body = src.split("def auto(cfg, write):", 1)[1].split("\ndef ", 1)[0]
@@ -198,48 +198,19 @@ def test_speed_fix_runs_by_itself():
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
     check("週次が speed_fix --auto --apply を回す", "python scripts/speed_fix.py --auto --apply" in wf, True)
     sc = (ROOT / "scripts" / "site_change.py").read_text(encoding="utf-8")
-    check("site_change: WordPress で FTP の鍵がある社はテーマを theme/ に取り、FTP で戻す（先方で変わったものは上書きしない）",
-          ["got.update(wp_theme_pull(cfg, m))" in sc, "done = wp_theme_push(cfg, theme) if theme else 0" in sc,
-           "取った後に変わったテーマのファイル" in sc], [True, True, True])
+    check("site_change: WordPress で FTP の鍵がある社は ftp と同じく取って戻す（無い社は変えない）",
+          ['"wordpress": ftp_push' in sc, "print(ftp_pull(cfg))" in sc, "FTP の接続情報がありません" in sc], [True, True, True])
 
 
-def test_wordpress_fingerprint_and_media_sitemap():
-    import publish
+def test_wordpress_fingerprint_falls_back_to_text():
     import publish_gap as PG
-    print("\n■ WordPress: 配信の指紋で本文の更新が届いたかを照合し、画像・動画のサイトマップを出す（橋渡し 2.0.3）")
-    rows = [{"slug": "a", "type": "post", "hash": "abc"}, {"slug": "b", "type": "post", "hash": ""},
-            {"slug": "p", "type": "page", "hash": ""}]
-    check("指紋を返す橋渡し: 投稿の slug → 指紋（未記録は載せず、配信し直しの対象になる）",
-          PG.live_manifest_wp(CFG, rows), {"a": "abc"})
-    check("指紋を返さない古い橋渡しは None（タイトルと本文の照合に切り替える）",
-          PG.live_manifest_wp(CFG, [{"slug": "a", "type": "post"}]), None)
+    print("\n■ WordPress: 本体の REST は配信の指紋を返さないので、タイトルと本文の照合に切り替える（2026-10-24）")
+    check("指紋の無い一覧は None（タイトルと本文の照合へ）", PG.live_manifest_wp(CFG, [{"slug": "a", "type": "post"}]), None)
     src = (ROOT / "scripts" / "publish_gap.py").read_text(encoding="utf-8")
-    check("publish_gap は WordPress でも指紋を読む", 'man = live_manifest_wp(c) if c.get("type") == "wordpress"' in src, True)
-    ld = {"video": {"@type": "VideoObject", "name": "動画", "description": "説明", "thumbnailUrl": ["https://i.ytimg.com/vi/x/hq.jpg"],
-                    "embedUrl": "https://www.youtube-nocookie.com/embed/x", "duration": "PT1M30S"}}
-    m = publish.wp_media('<p><img src="https://h34.example/wp-content/uploads/a.png"></p>', "https://h34.example/wp-content/uploads/eye.jpg", ld)
-    check("画像・動画のサイトマップの材料（上げた後の画像の URL・VideoObject）",
-          [m["images"], m["videos"][0]["player_loc"], m["videos"][0]["duration"]],
-          [["https://h34.example/wp-content/uploads/eye.jpg", "https://h34.example/wp-content/uploads/a.png"],
-           "https://www.youtube-nocookie.com/embed/x", 90])
+    check("publish_gap は WordPress でも同じ入口で照合する", 'man = live_manifest_wp(c) if c.get("type") == "wordpress"' in src, True)
     pub = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
-    check("write_wordpress が指紋と材料を投稿メタで送る",
-          ['"_ss_source_hash": source_hash(src)' in pub, '"_ss_media": json.dumps(wp_media(html, thumb_url, ld)' in pub], [True, True])
-    php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
-    check("橋渡し: 2つの投稿メタを REST で書けるように登録し、/ss/v1/urls が指紋を返す",
-          ["SSB_META_HASH => 'string', SSB_META_MEDIA => 'string'" in php,
-           "'hash' => (string) get_post_meta($id, SSB_META_HASH, true)" in php], [True, True])
-    sm = php.split("function ssb_media_sitemap()", 1)[1].split("\n}\n", 1)[0]
-    check("橋渡し: /ss-media-sitemap.xml は JSON として読めた http(s) の URL と文字だけを esc_xml で出す（任意の XML を出させない）",
-          ["json_decode(" in sm, "esc_xml(" in sm, "if (!is_array($m))" in sm,
-           "preg_match($https_only ? '#^https://#' : '#^https?://#', $u)" in php], [True] * 4)
-    check("橋渡し: 動画は必須（サムネイル・題・説明・再生の場所）がそろうものだけ", "if ($thumb === '' || $player === '' || $title === '' || $desc === '')" in sm, True)
-    check("橋渡し: 公開している robots.txt にだけ、画像・動画のサイトマップの Sitemap 行を足す",
-          "ssb_media_posts(1)" in php.split("add_filter('robots_txt'", 1)[1].split("}, 99, 2);", 1)[0], True)
-    # 版は上がっていく（2.0.4 で追加CSS・head とフッターの窓口を足した。h37）
-    check("橋渡しの版は 2.0.3 以降",
-          tuple(map(int, re.search(r"^const SSB_VERSION = '(\d+\.\d+\.\d+)';", php, re.M).group(1).split("."))) >= (2, 0, 3), True)
-
+    check("write_wordpress は投稿メタ（指紋・画像のサイトマップの材料）を送らない", ['"_ss_source_hash"' in pub, '"_ss_media"' in pub],
+          [False, False])
 
 def test_capability_cells_follow_the_work():
     print("\n■ 方式×機能の表: 工程に組み込んだものを ok に、意味の無いものを n/a に")
@@ -254,8 +225,8 @@ def test_capability_cells_follow_the_work():
     check("内部リンク: お客様の5方式は ok", st("internal_links", clients), ["ok"] * 5)
     check("問い合わせの自動回答: お客様の5方式は n/a（運用会社の無料ツールと名前の文面）", st("auto_reply", clients), ["n/a"] * 5)
     check("表示速度: WordPress 以外のお客様の4方式は ok", st("speed_fix", ["external-md", "external-html", "nextjs-json", "ftp"]), ["ok"] * 4)
-    check("本番の検査・検索での見え方: WordPress は ok", [f["live_check"]["cells"]["wordpress"]["status"],
-                                                f["search_preview"]["cells"]["wordpress"]["status"]], ["ok", "ok"])
+    check("本番の検査は WordPress も ok・検索での見え方は WordPress 本体の既定のまま（partial）",
+          [f["live_check"]["cells"]["wordpress"]["status"], f["search_preview"]["cells"]["wordpress"]["status"]], ["ok", "partial"])
     check("llms.txt: Git の3方式と ftp は ok", st("llms_txt", ["external-md", "external-html", "nextjs-json", "ftp"]), ["ok"] * 4)
     # n/a の根拠: 追いかけは ai-lab の行だけ、転送は silent（お客様の読者へ運用会社の名前で送らない）
     gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")

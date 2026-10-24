@@ -151,21 +151,6 @@ def test_industry_hub_and_glossary_come_from_the_common_collector():
         pages, _ = _quiet(AP.collect, cfg)
         check("1業種で記事のほとんどを占める社（歯科医院の自社サイト）は、ブログの一覧の写しになる業種ハブを作らない",
               "industry" in {p["kind"] for p in pages}, False)
-    import publish as P
-    import wp_bridge as W
-    with fixture() as (root, holder, slugs):
-        cfg = _cfg(holder, "wordpress")
-        rows = [{"slug": s, "url": f"https://h33.example/2026/10/06/{s}/", "type": "post"} for s in slugs]
-        got, _ = _quiet(W._aggregate, cfg, rows)
-        check("WordPress は業種ハブ・用語集を sync_pages が親子の固定ページで作るので、まとめのページからは作らない（二重にしない）",
-              sorted({p["kind"] for p in got} & set(AP.HUBS)), [])
-        old = _with(P, _wp_call=lambda *a, **k: [])          # カテゴリのリンクを聞きに行かない（外へ出ない）
-        try:
-            hubs = W.hub_pages(cfg, W._site_articles(cfg), rows)[0]
-        finally:
-            _with(P, **old)
-        check("WordPress の業種ハブ（sync_pages）も AI集客ラボ向けの説明文を使わない",
-              [len(hubs), "検索とAI検索" in "".join(b for _, _, b, _, _ in hubs)], [2, False])
 
 
 def test_every_static_method_gets_industry_and_glossary_pages():
@@ -284,76 +269,16 @@ def test_japanese_articles_point_to_translations_by_hreflang():
         check("Markdown: 日本語の記事のフロントマターに alternates（訳のページと同じ形）",
               ["alternates:" in t, "en: https://h33.example/en/blog/h33-d0/" in t], [True, True])
 
-    with fixture() as (root, holder, slugs):
-        cfg = _cfg(holder, "wordpress")
-        rows = [{"slug": s, "url": f"https://h33.example/2026/10/06/{s}/", "type": "post"} for s in slugs]
-        got, _ = _quiet(P.wp_alternates, cfg, rows, meta, rows[0]["url"])
-        check("WordPress: 投稿メタ _ss_alternates に入れる組（訳のページは固定ページ /en/<slug>/）",
-              got, {"ja": rows[0]["url"], "x-default": rows[0]["url"], "en": "https://h33.example/en/h33-d0/"})
-        got, _ = _quiet(P.wp_alternates, dict(cfg, languages=[]), rows, meta, rows[0]["url"])
-        check("WordPress: 多言語の指示が無い社は空", got, {})
-        import wp_bridge as W
-        from gates_history_h29 import FakeWP
-        fake = FakeWP(domain="h33.example")
-        old = _with(P, _wp_call=fake)
-        try:
-            _quiet(W.sync_aggregate, cfg, rows)
-        finally:
-            _with(P, **old)
-        en = next((p for p in fake.pages.values() if p["slug"] == "h33-d0"), {})
-        alts = json.loads((en.get("meta") or {}).get("_ss_alternates") or "{}")
-        check("WordPress: 訳のページ（固定ページ）にも同じ組を入れる（mu-plugin が双方の head に出す）・他のページには入れない",
-              [alts.get("ja"), alts.get("en"),
-               [p["slug"] for p in fake.pages.values() if p["slug"] != "h33-d0" and "_ss_alternates" in p["meta"]]],
-              [rows[0]["url"], "https://h33.example/en/h33-d0/", []])
-        src = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")
-        check("write_wordpress が _ss_alternates を送る", '"_ss_alternates": json.dumps(alts' in src, True)
-
-
-def test_wordpress_plugin_prints_hreflang_and_speeds_up():
-    import wp_bridge as W
-    print("\n■ WordPress の mu-plugin（2.0.2）: 訳のページへの hreflang と、テーマに触れずに出来る表示速度の直し")
-    php = (ROOT / "automation" / "wordpress" / "ss-quality-gate.php").read_text(encoding="utf-8")
-    # 版は上がっていく（2.0.3 で画像・動画のサイトマップと配信の指紋を足した）。2.0.2 以降で、見出しと定数がそろうこと
-    ver = W.plugin_version(php)
-    head_ver = (re.search(r"^ \* Version: (\d+\.\d+\.\d+)$", php, re.M) or [None, None])[1]
-    check("版は 2.0.2 以降（見出しの Version と SSB_VERSION がそろう）",
-          [tuple(map(int, ver.split("."))) >= (2, 0, 2), head_ver == ver], [True, True])
-    alt = php.split("function ssb_alternates($id)", 1)[1].split("\n}\n", 1)[0]
-    check("hreflang: 投稿メタ _ss_alternates を REST で書けるように登録する",
-          "SSB_META_ALTERNATES => 'string'" in php, True)
-    check("hreflang: 同じサイト（home_url のホスト）の http(s) の URL・言語の名前の形の鍵だけ・訳のページが公開済みのものだけ",
-          ["wp_parse_url(home_url('/'), PHP_URL_HOST)" in alt, "['http', 'https']" in alt,
-           "preg_match('/^(x-default|[a-z]{2,3}(-[A-Za-z0-9]{2,8})*)$/', $lang)" in alt,
-           "url_to_postid($url)" in alt and "get_post_status($pid) !== 'publish'" in alt], [True] * 4)
-    check("hreflang: 記事は自分（ja・x-default）をパーマリンクから・訳が無ければ出さない／訳のページは2言語そろうときだけ",
-          ["get_permalink($id)" in alt, "return $out ? array_merge(['ja' => $self, 'x-default' => $self], $out) : [];" in alt,
-           "count(array_diff(array_keys($out), ['x-default'])) >= 2" in alt], [True, True, True])
-    head = php.split("add_action('wp_head', function () {", 1)[1].split("\n});\n", 1)[0]
-    check("hreflang: 記事と訳のページ（固定ページ）の両方の head に、esc_attr・esc_url で出す（片側だけだと Google は使わない）",
-          ["printf('<link rel=\"alternate\" hreflang=\"%s\" href=\"%s\">' . \"\\n\", esc_attr($lang), esc_url($url));" in head,
-           head.index("foreach (ssb_alternates($id)") > head.rindex("if (is_singular('post')) {"),
-           "'page' => [SSQG_META_JSONLD => 'string', SSB_META_MANAGED => 'string', SSB_META_ALTERNATES => 'string']" in php],
-          [True, True, True])
-    sp = php.split("function ssb_speed_on()", 1)[1]
-    check("速度: 本文の画像に loading=lazy（既にあれば触らない）・アイキャッチに fetchpriority=high（1枚だけ）",
-          ["add_filter('the_content'" in sp, "(?![^>]*\\sloading=)" in sp,
-           "$attr['fetchpriority'] = 'high';" in sp, "static $done = false;" in sp], [True] * 4)
-    check("速度: gtag.js は load の1.2秒後に読む（前後のインラインの設定は残す）・日本語の Web フォントの CSS を読まない",
-          ["add_filter('script_loader_tag'" in sp, "},1200);});</script>" in sp, "preg_replace_callback(" in sp,
-           "add_filter('style_loader_tag'" in sp, "Noto\\+Sans\\+JP" in sp], [True] * 5)
-    check("速度: 管理画面・REST・フィードでは動かさず、wp-config で止められる（SSB_SPEED・SSB_KEEP_WEBFONTS）",
-          ["!is_admin()" in sp, "REST_REQUEST" in sp, "define('SSB_SPEED', true);" in php,
-           "defined('SSB_KEEP_WEBFONTS')" in sp], [True] * 4)
 
 
 def test_capability_cells_for_hubs_hreflang_and_wp_speed():
     print("\n■ 方式×機能の表: 業種ハブ・用語集・多言語・WordPress の表示速度に missing が無い")
     caps = json.loads((ROOT / "data" / "capabilities.json").read_text(encoding="utf-8"))
     F = caps["features"]
-    check("業種ハブ・用語集・多言語の missing", [f"{f} × {m}" for f in ("industry_hub", "glossary", "i18n", "speed_fix")
-                                     for m, c in F[f]["cells"].items() if c["status"] == "missing"], [])
+    check("業種ハブ・用語集・多言語の missing（WordPress は投稿者の権限の鍵だけなので作らない）",
+          [f"{f} × {m}" for f in ("industry_hub", "glossary", "i18n", "speed_fix")
+           for m, c in F[f]["cells"].items() if c["status"] == "missing"], [])
     check("業種ハブ・用語集の入口に共通の口（aggregate_pages.py）",
           ["scripts/aggregate_pages.py" in F[f]["entry"] for f in ("industry_hub", "glossary")], [True, True])
-    check("多言語の hreflang: Next.js と WordPress は ok（口がある）", [F["i18n"]["cells"][m]["status"] for m in ("nextjs-json", "wordpress")],
-          ["ok", "ok"])
+    check("多言語の hreflang: Next.js は ok・WordPress は n/a（固定ページを作れないので作らない）",
+          [F["i18n"]["cells"][m]["status"] for m in ("nextjs-json", "wordpress")], ["ok", "n/a"])

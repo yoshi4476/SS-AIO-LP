@@ -69,7 +69,9 @@ FIELDS = [
     ("name", "メディア名", "記事一覧やレポートに出る名前", "○○の集客ラボ", True),
     ("domain", "公開ドメイン", "https:// は不要。新しく作る場合は使いたいドメイン", "media.example.co.jp", True),
     ("type", "サイトの形式",
-     "WordPressをお使いなら wordpress（あわせて FTP の接続情報もいただくと、テーマ由来の表示速度とサイト構成の変更まで当社が自動で行います）。"
+     "WordPress をお使いの場合も、記事はサブドメイン（例: column.御社.jp）に当社が作る静的なページで出す形を標準にします"
+     "（御社のサーバーに何も置かず、WordPress の鍵も預かりません。DNS に1行足していただくだけです）。"
+     "同じドメインの WordPress に直接入れる必要がある場合だけ wordpress（記事の投稿の専用ユーザーを1つ作っていただきます）。"
      "当社で新規構築するなら self-static。"
      "既存の静的サイトへ配信する場合は external-html / external-md / nextjs-json（GitHub のリポジトリ）。"
      "Git を使わないレンタルサーバー（FTP で上げているサイト）なら ftp（FTP の接続情報を1回いただきます）。"
@@ -83,16 +85,14 @@ FIELDS = [
      "これから送る", False),
 
     ("#media_wp", "2-1. WordPress の場合",
-     "当社用のユーザーを1人作り、そのアプリケーションパスワード（ユーザー > プロフィール）を別経路でお送りください。", "", False),
+     "記事の投稿の専用ユーザーを1人作り（権限は「投稿者」）、そのアプリケーションパスワード（ユーザー > プロフィール）を"
+     "別経路でお送りください。管理者・編集者の鍵はお預かりしません（漏れたときにサイト全体に届くため）。"
+     "御社のサーバーにプラグインなどは置きません", "", False),
     ("wp.admin_url", "管理画面のURL", "ログイン画面のURL", "https://example.co.jp/wp-admin/", "wordpress"),
-    ("wp.user", "投稿用のユーザー名", "当社用に作ったユーザー（権限は「編集者」）", "ss-editor", "wordpress"),
-    ("wp.plugin", "品質の検査のプラグイン",
-     "85点に届かない記事を公開させない小さなプラグイン（mu-plugin）を wp-content/mu-plugins/ に置きます。"
-     "当社が置く場合は FTP の接続情報が要ります", "当社が置く", "wordpress"),
-    ("wp.admin_key", "改修用の管理者の鍵",
-     "追加CSS・head への追記・メニューの変更には、管理者のアプリケーションパスワードが要ります", "出せる", False),
+    ("wp.user", "投稿用のユーザー名", "当社用に作ったユーザー（権限は「投稿者」）", "ss-author", "wordpress"),
     ("wp.ftp", "FTP の接続情報",
-     "テーマ（PHP）の直し・表示速度の直し・プラグインの設置に使います（ホストなどは 2-3 に）", "出せる", False),
+     "テーマ（PHP）の直し・表示速度の直し・サイト構成の変更に使います。無くても記事の投稿はできます（ホストなどは 2-3 に）",
+     "出せる", False),
     ("wp_api", "WordPressのAPIのURL",
      "通常は空欄で構いません（https://ドメイン/wp-json/wp/v2 を自動で使います）", "", False),
 
@@ -126,8 +126,8 @@ FIELDS = [
     ("ga4.viewer", "GA4 に当社を閲覧者で追加", "済 / 未。導入時にメールでお知らせするアカウントを「閲覧者」で", "済", False),
     ("ga4.installed", "サイトに GA4 が入っているか", "入っている / 入っていない", "入っていない", False),
     ("ga4_measurement_id", "GA4の測定ID（G-で始まる）",
-     "形式が wordpress / ftp のときのみ。記事の計測（ボタン・フォーム・読了）を当社が入れます"
-     "（wordpress は当社のプラグイン、ftp は当社が書き出す記事のページ）。"
+     "形式が ftp・wordpress のときのみ。ftp は記事の計測（ボタン・フォーム・読了）を当社が書き出す記事のページに入れます。"
+     "wordpress は投稿者の権限では計測を置けないので、御社のサイトに入っている計測が記事にも出ているかを当社が確かめます。"
      "GA4 を既にサイトへ入れている場合は空欄で構いません（二重には入れません）", "G-XXXXXXXXXX", False),
     ("gsc.property", "Search Console のプロパティの種類",
      "当社の仕組みは https://ドメイン/ の形（URLプレフィックス）のプロパティを読みます。"
@@ -432,8 +432,6 @@ FIELDS = [
 # 値の判定は先頭の語で見る（「済（10/7）」のような書き足しは通す）
 CHOICES = {
     "keys.sent": ["送付済み", "これから送る", "不要"],
-    "wp.plugin": ["当社が置く", "御社で置く", "置けない"],
-    "wp.admin_key": ["出せる", "出せない"],
     "wp.ftp": ["出せる", "出せない"],
     "git.invited": ["済", "未"],
     "ftp.protocol": ["FTPS", "SFTP", "FTP"],
@@ -638,9 +636,7 @@ FLOW = {
     "keys.sent": _OB + "（受領待ちか要対応か）",
     "wp.admin_url": "private.json → 準備状況・導入の手続き",
     "wp.user": "private.json → 鍵の登録の雛形（--creds の WP_CREDENTIALS_JSON）・準備状況（配信）",
-    "wp.plugin": _OB + "（品質ゲート）",
-    "wp.admin_key": _OB + "（サイト改修）",
-    "wp.ftp": _OB + "（品質ゲート・表示速度の直し）",
+    "wp.ftp": _OB + "（表示速度の直し・サイト改修）",
     "wp_api": "非公開の site_private.json → WordPress の REST の入口（publish.py）",
     "repo": "sites/<id>.json → 配信先（publish.py・site_change.py）",
     "branch": "sites/<id>.json → 配信先のブランチ（publish.py）",
@@ -653,7 +649,7 @@ FLOW = {
     "dns.access": _OB + "（新規構築）",
     "ga4_property_id": "非公開の site_private.json → GA4 の数字（daily_kpi・月次レポート・lead_reconcile ほか）",
     "ga4.": _OB + "（計測）",
-    "ga4_measurement_id": "非公開の site_private.json → WordPress のプラグイン・FTP の記事の雛形が計測タグを置く",
+    "ga4_measurement_id": "非公開の site_private.json → FTP の記事の雛形が計測タグを置く・WordPress は onboard_check が計測の有無を確かめる",
     "gsc.property": _OB + "（Search Console のプロパティの形）",
     "gsc_owner": "非公開の site_private.json → Indexing API で送るか（notify_indexing）・接続の点検（search_connect）",
     "bing_consent": "非公開の site_private.json → 当社の Bing への登録と確認ファイル（bing_webmaster・search_connect）",
@@ -965,8 +961,9 @@ def to_config(got):
     for k in ("content_dir", "images_dir", "cta_title", "cta_desc", "wp_api"):
         if got.get(k):
             cfg[k] = got[k]
-    # 計測を当社が入れるのは、ページを当社が出す方式だけ。WordPress は当社のプラグイン、ftp（と互換で残す zip）は
-    # 当社が書き出す記事の雛形が、測定IDのある社だけ計測を置く。Git の方式は先方のテンプレートが持つ
+    # 計測を当社が入れるのは、ページを当社が出す方式だけ。ftp（と互換で残す zip）は当社が書き出す記事の雛形が、
+    # 測定IDのある社だけ計測を置く。Git の方式は先方のテンプレートが持つ。WordPress は投稿者の権限で <script> が消えるので
+    # 置かず、先方のサイトに入っている計測が記事に出ているかを onboard_check が測定IDで確かめる
     if cfg["type"] in ("wordpress", "ftp", "zip") and got.get("ga4_measurement_id"):
         cfg["ga4_measurement_id"] = str(got["ga4_measurement_id"]).strip()
     mix = pairs(got.get("category_mix"), num=True)
@@ -1031,8 +1028,6 @@ def to_config(got):
         "ga4_installed": choice(got, "ga4.installed") == "入っている",
         "gsc_property": choice(got, "gsc.property"),
         "git_invited": choice(got, "git.invited") == "済",
-        "wp_plugin": choice(got, "wp.plugin"),
-        "wp_admin_key": choice(got, "wp.admin_key") == "出せる",
         "ftp_ok": choice(got, "wp.ftp") == "出せる",
         "keys_sent": choice(got, "keys.sent"),
         "dns_access": choice(got, "dns.access"),
@@ -1359,9 +1354,9 @@ def review(got, cfg):
                         f"選択肢（{' / '.join(opts)}）にありません")
     if got.get("contact.email") and "@" not in str(got["contact.email"]):
         warn.append("ご担当者のメールがメールアドレスになっていません（導入の連絡が届きません）")
-    if site_type == "wordpress" and choice(got, "wp.plugin") == "置けない":
-        warn.append("品質の検査のプラグインを置けないと、85点に届かない記事を WordPress 側で止められません"
-                    "（管制塔は85点未満を送りませんが、管理画面で公開されたものは止まりません）")
+    if site_type == "wordpress":
+        warn.append("WordPress への直接の投稿では、構造化データ・計測・まとめのページ・llms.txt を置けません"
+                    "（預かる鍵が投稿者の権限だけのため）。同じドメインが要らなければ、サブドメインの静的なページを勧めます")
     if choice(got, "gsc.property") == "ドメインだけ":
         warn.append(f"Search Console がドメインのプロパティだけです。https://{cfg.get('domain') or 'ドメイン'}/ の"
                     "URLプレフィックスのプロパティを足して当社を追加していただくまで、順位・検索語が取れません")
@@ -1395,7 +1390,7 @@ def review(got, cfg):
         ng.append("配信先リポジトリが空です（自社構築以外は書き込み先が要ります）")
     # 以前は空欄に "/blog" を補っていた。実際の記事URLが違えば、sitemap も通知も
     # 存在しないURLを指す。推測で埋めず、書いてもらう。
-    # WordPress は記事のURLを先方のパーマリンク設定が決め、管制塔は REST で実際のURLを読む（wp_bridge）。
+    # WordPress は記事のURLを先方のパーマリンク設定が決め、管制塔は本体の REST で実際のURLを読む（wp_bridge）。
     # /%postname%/ の社は接頭辞が無いので、空欄で止めると登録できなかった
     if (cfg.get("type") in TYPES and cfg["type"] not in ("self-static", "wordpress")
             and not cfg.get("url_prefix")):

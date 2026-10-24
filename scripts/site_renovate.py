@@ -53,14 +53,8 @@ TEXT_EXT = (".html", ".htm", ".php", ".css", ".js", ".mjs", ".json", ".txt", ".x
 HTML_EXT = (".html", ".htm")
 # サーバーの設定・鍵。壊すとサイト全体が止まるか、鍵が漏れる。指示があっても自動の改修では触らない
 NEVER_TOUCH = (".htaccess", ".htpasswd", "wp-config.php", ".user.ini", "php.ini", ".env", "web.config", "_headers")
-# script src を許すドメイン（橋渡しのプラグインの SSB_SCRIPT_HOSTS と同じ。門がそろっているかを見る）
+# script src を許すドメイン（ほかは sites/<id>.json の renovate_script_hosts に書いた社だけ）
 SCRIPT_HOSTS = ("challenges.cloudflare.com", "www.google.com", "www.gstatic.com", "static.cloudflareinsights.com")
-# WordPress の head・フッターの追記（design/head.json・footer.json）の項目。プラグインの定数と同じ
-ITEM_KEYS = ("t", "a", "json", "src", "async", "defer")
-LINK_ATTRS = ("rel", "href", "as", "type", "crossorigin", "media", "sizes", "hreflang", "title")
-LINK_RELS = ("canonical", "alternate", "preconnect", "dns-prefetch", "preload", "icon", "apple-touch-icon",
-             "manifest", "author", "me", "license")
-META_ATTRS = ("name", "property", "content")
 CSS_BAD = re.compile(r"</style|<script|<!--|expression\s*\(|javascript:|fonts\.googleapis\.com", re.I)
 
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr",
@@ -126,10 +120,12 @@ def pull(cfg):
         import publish
         publish.ensure_clone(cfg, publish._push_token())
         return "配信先リポジトリを取りました"
-    if cfg["type"] == "ftp":
-        return SC.ftp_pull(cfg)
     if cfg["type"] == "wordpress":
-        return SC.wp_pull(cfg)
+        import speed_fix
+        if not speed_fix.has_ftp(cfg):
+            raise SystemExit("WordPress で FTP の接続情報が無い社は、指示での改修はできません（預かる鍵が投稿者の権限だけのため）")
+    if cfg["type"] in ("ftp", "wordpress"):
+        return SC.ftp_pull(cfg)
     raise SystemExit("この方式は先方のサーバーを取れないため、指示での改修はできません（ftp か Git の方式へ切り替えてください）")
 
 
@@ -319,40 +315,6 @@ def host_ok(cfg, url):
         or (own and (host == own or host.endswith("." + own)))
 
 
-def design_problems(items):
-    """WordPress の head・フッターの追記（design/*.json）を、プラグインと同じ決まりで検める"""
-    if not isinstance(items, list):
-        return ["項目の一覧（配列）ではありません"]
-    bad = []
-    for i, it in enumerate(items):
-        why = ""
-        if not isinstance(it, dict) or set(it) - set(ITEM_KEYS):
-            why = "知らないキーがあります"
-        elif it.get("t") in ("link", "meta"):
-            a = it.get("a")
-            allow = LINK_ATTRS if it["t"] == "link" else META_ATTRS
-            if not isinstance(a, dict) or not a or any(k not in allow or not isinstance(v, str) for k, v in a.items()):
-                why = f"{it['t']} に使えない属性があります"
-            elif it["t"] == "link" and (str(a.get("rel", "")).lower() not in LINK_RELS
-                                        or not re.match(r"^(?:/(?![/\\])|https://)", a.get("href", ""))
-                                        or FONTS.search(a.get("href", ""))):
-                why = "link の rel・href が許可の外です"
-            elif it["t"] == "meta" and ("content" not in a or not ({"name", "property"} & set(a))):
-                why = "meta は name か property と content が要ります"
-        elif it.get("t") == "ld":
-            if not isinstance(it.get("json"), (dict, list)) or not it.get("json"):
-                why = "ld の json がオブジェクトではありません"
-        elif it.get("t") == "script":
-            src = it.get("src") or ""
-            if not src.startswith("https://") or (urlsplit(src).hostname or "").lower() not in SCRIPT_HOSTS:
-                why = "script の読み込み先が許可したドメインではありません"
-        else:
-            why = "使えない種類です（link・meta・ld・script だけ）"
-        if why:
-            bad.append(f"{i}番目: {why}")
-    return bad
-
-
 def _texts_of(f, raw):
     """検査にかける文字列。WordPress の JSON は中の文字列（content など）を並べる"""
     t = raw.decode("utf-8", errors="replace")
@@ -519,9 +481,7 @@ def inspect_changes(cfg, ch, ask=""):
             except ValueError:
                 ng.append(f"{f}: JSON として読めません")
                 continue
-            if f.startswith(SC.DESIGN_DIR + "/") and f.endswith(".json") and cfg["type"] == "wordpress":
-                ng += [f"{f}: {x}" for x in design_problems(json.loads(after.decode("utf-8") or "[]"))]
-        html_like = ext in HTML_EXT or (cfg["type"] == "wordpress" and ext == ".json")
+        html_like = ext in HTML_EXT
         if html_like:
             ib, ia = imbalance(bt), imbalance(at)
             if ia != ib:
@@ -538,7 +498,7 @@ def inspect_changes(cfg, ch, ask=""):
             ng.append(f"{f}: on〜 属性か javascript: を足しています")
         if ext == ".php" and len(PHP_BAD.findall(at)) > len(PHP_BAD.findall(bt)):
             ng.append(f"{f}: 危険な PHP の関数・入力の直接読みを足しています")
-        if ext == ".css" or f == f"{SC.DESIGN_DIR}/custom.css":
+        if ext == ".css":
             if len(CSS_BAD.findall(at)) > len(CSS_BAD.findall(bt)):
                 ng.append(f"{f}: CSS に使えない記述（</style>・<script>・expression・javascript:・Google Fonts）を足しています")
         if len(FONTS.findall(at)) > len(FONTS.findall(bt)):
@@ -569,10 +529,10 @@ def inspect_changes(cfg, ch, ask=""):
             dead = sorted(u for u in new_links if not _resolves(root, w / f, u, cfg))
             if dead:
                 ng.append(f"{f}: 作業場所に無いページへのリンクがあります（{', '.join(dead[:3])}）")
-        elif ext in HTML_EXT or cfg["type"] == "wordpress":
+        elif ext in HTML_EXT:
             notes.append(f"{f}: 内部リンクは作業場所で解決できないため、反映後の確認で見ます")
         # 変更の種類（自動で反映してよいかの判断に使う）
-        if ext == ".css" or f == f"{SC.DESIGN_DIR}/custom.css":
+        if ext == ".css":
             kinds.add("css")
         elif st == "M" and html_like and _same_structure(f, before, after):
             kinds.add("text")

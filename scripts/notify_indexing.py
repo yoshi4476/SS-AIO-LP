@@ -35,7 +35,7 @@ def sitemap_of(cfg):
     import sites as S
     if cfg["id"] == S.primary() and local.is_file():
         return re.findall(r"<loc>(.*?)</loc>", local.read_text(encoding="utf-8"))
-    # WordPress の sitemap は索引形式（/wp-sitemap.xml）で、平らに読むと記事が0件だった。橋渡しの一覧から取る
+    # WordPress の sitemap は索引形式（/wp-sitemap.xml）で、平らに読むと記事が0件だった。本体の REST の一覧から取る
     if cfg.get("type") == "wordpress":
         import wp_bridge
         return wp_bridge.site_urls(cfg)

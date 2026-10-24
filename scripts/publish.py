@@ -12,7 +12,7 @@
   self-static  … 本リポジトリの静的サイト。build.py が担当するため何もしない
   nextjs-json  … Next.jsサイト。src/content/blog/<slug>.json を書き出す
   external-md  … 別リポジトリの静的サイト。Markdownを置く（画像・写真・構造化データ・動画・入口も揃える）
-  wordpress    … WordPress。REST APIで投稿する（公開可否は先方のmu-pluginが判定）
+  wordpress    … WordPress。本体の REST API で投稿する（投稿者の権限の鍵だけ。公開可否はこちらの門が決める）
 
 対象リポジトリへの書き込みには SITE_PUSH_TOKEN（repo権限のPAT）が必要。
 未設定ならローカルのクローンに書き込むだけで止まる（--push は失敗する）。
@@ -1065,19 +1065,16 @@ INLINE_SELF_MEASURE = re.compile(r"<script>\(function\(\)\{var b=document\.curre
 
 
 def measure_script(cfg):
-    """GA4 の計測（WordPress の橋渡しプラグインと同じ出来事・同じ名前・同じ引数）。測定IDが無い社は空。
+    """GA4 の計測（どの配信方式でも同じ出来事・同じ名前・同じ引数）。測定IDが無い社は空。
 
-    中身は automation/wordpress/ss-quality-gate.php の SSB_MEASURE_JS を唯一の正として読む。
+    中身は automation/measure/ss-measure.js を唯一の正として読む（廃止した WordPress のプラグインから取り出した）。
     写しを持つと、片方だけ直したときに方式ごとで数え方がずれ、月次の比較が成り立たなくなる"""
     import wp_bridge
     gid = wp_bridge.ga4_id(cfg)
     if not gid:
         return ""
-    php = (Path(__file__).resolve().parent.parent / "automation" / "wordpress" / "ss-quality-gate.php")
-    m = re.search(r"const SSB_MEASURE_JS = <<<'JS'\n(.*?)\nJS;", php.read_text(encoding="utf-8"), re.S)
-    if not m:
-        raise SystemExit("計測の本体（ss-quality-gate.php の SSB_MEASURE_JS）が見つかりません")
-    return f'<script id="ss-measure">window.SSB_GA4={json.dumps(gid)};\n{m.group(1)}</script>\n'
+    js = (Path(__file__).resolve().parent.parent / "automation" / "measure" / "ss-measure.js").read_text(encoding="utf-8").rstrip("\n")
+    return f'<script id="ss-measure">window.SSB_GA4={json.dumps(gid)};\n{js}</script>\n'
 
 
 def add_measure(page, cfg):
@@ -2007,13 +2004,13 @@ def _wp_api(cfg):
 
 
 def _wp_root(cfg):
-    """REST の根（…/wp-json）。橋渡しのプラグインの ss/v1 はここから引く"""
+    """REST の根（…/wp-json）"""
     api = _wp_api(cfg)
     return api[:-len("/wp/v2")] if api.endswith("/wp/v2") else api.rsplit("/wp/v2", 1)[0]
 
 
 def _wp_call(cfg, path, data=None, method=None, headers=None, raw=None):
-    """path が / で始まれば REST の根から（例: /ss/v1/urls）、それ以外は wp/v2 から引く"""
+    """path が / で始まれば REST の根から、それ以外は wp/v2 から引く"""
     import urllib.error
     import urllib.request
     url = f"{_wp_root(cfg) if path.startswith('/') else _wp_api(cfg)}/{path.lstrip('/')}"
@@ -2106,11 +2103,10 @@ def _wp_photo(cfg, meta):
 
 
 def _wp_jsonld(cfg, meta, base, url, html, image=""):
-    """WordPress の記事の構造化データ。(BlogPosting, そのほかの実体の配列)。
+    """記事の構造化データ。(BlogPosting, そのほかの実体の配列)。
 
-    base はお客様の記事の BlogPosting（credit_ld。著者・発行元・監修者つき）。
-    BlogPosting は投稿メタ _ss_jsonld、FAQPage は _ss_jsonld_extra に入れ、先方の mu-plugin が wp_head で出す。
-    自社の WordPress（お客様でない）では base が無く、以前は構造化データが空だった"""
+    base はお客様の記事の BlogPosting（credit_ld。著者・発行元・監修者つき）。base が無ければ発行元の組織で作る。
+    名前は WordPress の頃のまま（WordPress は投稿者の権限で <script> が消えるので、今は使っていない）"""
     if base:
         ld = dict(base)
     else:
@@ -2162,56 +2158,25 @@ def _wp_jsonld(cfg, meta, base, url, html, image=""):
     return ld, extra
 
 
-def wp_alternates(cfg, rows, meta, url):
-    """WordPress: 日本語の記事と訳のページ（固定ページ /en/<slug>/ など）の組。訳の無い記事・多言語の指示の無い社は {}。
-    訳のページを作る wp_bridge.sync_aggregate と同じ組（aggregate_pages.collect）を使う"""
-    if not [l for l in (cfg.get("languages") or []) if l in ("en", "zh", "ko")]:
-        return {}
-    try:
-        import wp_bridge
-        got = wp_bridge._aggregate(cfg, list(rows) + [{"slug": meta["slug"], "url": url, "type": "post"}], kinds=("i18n",))
-        return next((dict(p["alternates"]) for p in got
-                     if p["path"].endswith(f"/{meta['slug']}/") and p.get("alternates")), {})
-    except Exception as e:
-        print(f"  [警告] 訳のページとの組（hreflang）を飛ばしました（{str(e)[:60]}）")
-        return {}
-
-
-def wp_media(html, thumb_url, ld):
-    """WordPress の記事の画像・動画（サイトマップの材料）。画像は上げた後の URL（アイキャッチと本文）、
-    動画は構造化データの VideoObject から。必須（サムネイル・題・説明・再生の場所）のそろう動画だけ"""
-    import search_preview as SP
-    imgs = [u for u in dict.fromkeys([thumb_url] + re.findall(r'<img[^>]+src="(https?://[^"]+)"', html)) if u]
-    vids = []
-    v = (ld or {}).get("video")
-    for x in (v if isinstance(v, list) else [v] if isinstance(v, dict) else []):
-        thumb = x.get("thumbnailUrl")
-        thumb = thumb[0] if isinstance(thumb, list) and thumb else thumb
-        if thumb and x.get("name") and x.get("description") and x.get("embedUrl"):
-            vids.append({"thumbnail_loc": thumb, "title": x["name"],
-                         "description": str(x["description"])[:SP.MAX_VIDEO_DESC], "player_loc": x["embedUrl"],
-                         "duration": SP._seconds(x.get("duration"))})
-    return {"images": imgs[:SP.MAX_IMAGES], "videos": vids}
-
-
 def write_wordpress(cfg, meta, body, src: Path, push=False):
-    """記事をWordPressへ送る。
+    """記事を WordPress へ送る（本体の REST だけ。先方には何も置かない）。
 
-    公開してよいかの最終判断は、WordPress側の mu-plugin が行う。
-    こちらが publish で送っても、スコアが基準に届かなければ下書きへ戻る。
-    二重に見るのは、配信側だけの検査では管理画面からの投稿を止められないため。
-    """
+    鍵は投稿者（author）の専用ユーザーのものだけを使う。管理者・編集者の鍵なら投稿せずに止める
+    （漏れたときにサイト全体へ届くため。wp_bridge.role_problems）。公開してよいかは main() の門が先に決めている。
+    投稿者の権限では <script> が消えるので、構造化データ・計測・入口の塊の計測は本文に入れない"""
     import md2html
     import wp_bridge
+    bad = wp_bridge.role_problems(cfg)
+    if bad:
+        for b in bad:
+            print(f"要対応: {b}")
+        return False
     html, _ = md2html.convert(body, embeds="wp")
-    # 公開URLの一覧（パーマリンク）。本文の内部リンクを実際のURLへ直すのと、構造化データの URL に使う
     rows = wp_bridge.url_rows(cfg, fallback=False)
     html = wp_bridge.rewrite_links(html, rows)
-    # 入口・導線は他の配信方式と同じ関数で入れる。入口の塊の計測スクリプトは外す:
-    # 投稿者に unfiltered_html が無いと消され、計測は先方の mu-plugin（wp_footer）が同じ名前で送る
     html = insert_mid_cta(insert_inline_entry(html, cfg), cfg)
-    html = re.sub(r"<script>\(function\(\)\{var b=document\.currentScript.*?</script>", "", html, flags=re.S)
-    # 記事の動画は URL を1行で置く（WordPress が埋め込みに変える）。iframe は投稿者の権限によっては消される
+    html = wp_bridge._split_ld(INLINE_SELF_MEASURE.sub("", html))[0]
+    # 記事の動画は URL を1行で置く（WordPress が埋め込みに変える。iframe は投稿者の権限では消される）
     try:
         import video_embed
         rec = video_embed.info(meta["slug"])
@@ -2219,27 +2184,8 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
             html = f'\n<p>https://www.youtube.com/watch?v={rec["youtube"]}</p>\n' + html
     except Exception as e:
         print(f"  [警告] 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
-    # 同じ業種のまとめ（管制塔が作る固定ページ）があれば、記事の末尾から案内する
-    try:
-        import industry_hub as IH
-        ind = IH.detect(meta.get("title", ""), meta.get("keyword", ""))
-        hub = next((r["url"] for r in rows if r.get("managed")
-                    and r["url"].rstrip("/").endswith(f"/{wp_bridge.HUB_PARENT[0]}/{ind}")), "") if ind else ""
-        if hub:
-            name = next(i["name"] for i in IH.load()[0] if i["slug"] == ind)
-            html += f'\n<p class="ss-industry"><a href="{hub}" data-cta="article_industry_hub">{name}の記事をまとめて見る</a></p>\n'
-    except Exception:
-        pass
-    # テーマ・比較表・エリア・季節のまとめ（管制塔が作る固定ページ）のうち、この記事を含み、先方に既にあるものへ案内する
-    try:
-        html += wp_bridge.aggregate_links(cfg, rows, meta["slug"])
-    except Exception as e:
-        print(f"  [警告] まとめのページへの案内を飛ばしました（{str(e)[:60]}）")
     ensure_images(meta)
     html, n_img = _wp_body_images(cfg, html, meta["slug"])
-    # 監修の表示はテーマに欄が無くても出るよう本文に入れる。構造化データは本文に入れない:
-    # 投稿ユーザーに unfiltered_html が無いと <script> が除去される。投稿メタ _ss_jsonld に入れ、
-    # 先方の mu-plugin（ss-quality-gate.php）が wp_head で出す
     chars = len(re.sub(r"<[^>]+>|\s", "", html))
     credit = client_credit(cfg)
     if credit and credit["byline"]:
@@ -2254,29 +2200,13 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     eye = meta.get("eyecatch") or ""
     if not info.get("id") and eye:
         info = _wp_media_info(cfg, ROOT / "site" / eye.lstrip("/"), meta.get("title", ""), meta["slug"])
-    thumb, thumb_url = info.get("id", 0), info.get("url", "")
-
-    url = wp_bridge.url_map(cfg, rows).get(meta["slug"]) or sites_mod.article_url(cfg, meta)
-    ld, extra = _wp_jsonld(cfg, meta, credit_ld(credit, url, meta) if credit else None, url, html, thumb_url)
-    jsonld = json.dumps(ld, ensure_ascii=False)
-    alts = wp_alternates(cfg, rows, meta, url)
+    thumb = info.get("id", 0)
 
     # --push が付くまでは下書きで入れる。他の形式が「書き込むがpushしない」
     # のと揃える。ここを publish 固定にすると、確認のつもりの実行で公開される
-    payload = {
-        "slug": meta["slug"], "title": meta["title"], "content": html,
-        "excerpt": meta.get("description", ""),
-        "status": "publish" if push else "draft",
-        "categories": [cat_id],
-        "meta": {"_ss_quality_score": score, "_ss_written_by": "agent", "_ss_jsonld": jsonld,
-                 "_ss_jsonld_extra": json.dumps(extra, ensure_ascii=False) if extra else "",
-                 # 訳のページとの組。head の hreflang は先方の mu-plugin が出す（訳のページが公開されているものだけ）
-                 "_ss_alternates": json.dumps(alts, ensure_ascii=False) if alts else "",
-                 # 原稿の指紋（publish_gap が /ss/v1/urls で本文の更新が届いたかを照合する）と、画像・動画のサイトマップの
-                 # 材料（mu-plugin 2.0.3 が /ss-media-sitemap.xml に出す）。古い mu-plugin は黙って捨てる
-                 "_ss_source_hash": source_hash(src) if Path(src).is_file() else "",
-                 "_ss_media": json.dumps(wp_media(html, thumb_url, ld), ensure_ascii=False)},
-    }
+    payload = {"slug": meta["slug"], "title": meta["title"], "content": html,
+               "excerpt": meta.get("description", ""), "status": "publish" if push else "draft",
+               "categories": [cat_id]}
     if thumb:
         payload["featured_media"] = thumb
 
@@ -2287,54 +2217,20 @@ def write_wordpress(cfg, meta, body, src: Path, push=False):
     else:
         res = _wp_call(cfg, "posts", payload, method="POST")
         how = "新規"
-
-    # 先方のゲートは、メタが保存されたあとに公開を下書きへ戻す。
-    # 投稿時の応答は、その前の状態を返すことがある。取り直して確かめる
-    pid = res.get("id")
-    if pid:
-        after = _wp_call(cfg, f"posts/{pid}?context=edit&_fields=status,link,meta")
-        if isinstance(after, dict) and after.get("status"):
-            res = {**res, **after}
     status = res.get("status", "?")
-    link = res.get("link", "")
-    # 初めての記事は、投稿するまでパーマリンクが分からない。分かったら構造化データの URL を直す
-    if pid and status == "publish" and link and link != url:
-        ld2, _ = _wp_jsonld(cfg, meta, credit_ld(credit, link, meta) if credit else None, link, html, thumb_url)
-        _wp_call(cfg, f"posts/{pid}", {"meta": {"_ss_jsonld": json.dumps(ld2, ensure_ascii=False)}}, method="POST")
     print(f"配信先: {cfg['name']}（WordPress / {cfg['domain']}）")
     print(f"  {how}: 投稿ID {res.get('id')} / カテゴリ {cat_slug}"
           + (f" / アイキャッチ {thumb}" if thumb else "") + (f" / 本文の画像 {n_img}枚" if n_img else ""))
     print(f"  本文: {chars:,}字 / score {score}")
-    m = res.get("meta")
-    if jsonld and isinstance(m, dict) and not m.get("_ss_jsonld"):
-        # 古い mu-plugin は _ss_jsonld を登録していないので、WordPress が黙って捨てる
-        print(f"要対応: {cfg['id']} の構造化データが保存されませんでした。先方の mu-plugin を "
-              "automation/wordpress/ss-quality-gate.php の最新に差し替えてください")
-
     if status == "publish":
-        print(f"  公開しました: {link}")
-        # llms.txt・IndexNow の鍵・計測の設定を揃える（静的サイトの _update_external_index に当たる）
-        try:
-            for note in wp_bridge.sync_if_stale(cfg, rows):
-                print(note)
-            wp_bridge.push_settings(cfg)
-        except SystemExit as e:
-            print(f"要対応: {cfg['id']} の橋渡し（llms.txt・計測の設定）に届きません。先方の mu-plugin を "
-                  f"最新に差し替えてください（{str(e)[:80]}）")
-    elif not push:
+        print(f"  公開しました: {res.get('link', '')}")
+        return True
+    if not push:
         print(f"  下書きとして入れました（投稿ID {res.get('id')}）")
         print("  ※ --push を付けると公開します")
         return True
-    else:
-        why = ""
-        m = res.get("meta") or {}
-        if isinstance(m, dict):
-            why = m.get("_ss_gate_last_reason") or ""
-        print(f"  × 公開されませんでした（状態: {status}）")
-        print(f"    {why or 'WordPress側の品質ゲートが公開を止めています'}")
-        print("    基準を満たしてから再実行してください")
-        return False
-    return True
+    print(f"  × 公開されませんでした（状態: {status}。先方の WordPress の設定・権限を確かめてください）")
+    return False
 
 
 def search_files(cfg, dest: Path):

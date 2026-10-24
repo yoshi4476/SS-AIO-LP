@@ -166,8 +166,8 @@ def test_full_sheet_is_ready_and_missing_fields_point_to_features():
                 check("readiness.json に担当者のメールを書かない", "@" in saved, False)
 
     expect = {"ga4.viewer": {"measurement"}, "gsc_owner": {"search_console", "indexing_api"},
-              "compete.sites": {"compete"}, "season.peaks": {"season"}, "wp.plugin": {"quality_gate"},
-              "supervisor.contact": {"supervisor"}, "wp.admin_key": {"site_renovate"},
+              "compete.sites": {"compete"}, "season.peaks": {"season"},
+              "supervisor.contact": {"supervisor"},
               "gbp.invite": set(), "bing_consent": {"bing"}}
     for k, want in expect.items():
         with tree() as root:
@@ -183,8 +183,9 @@ def test_full_sheet_is_ready_and_missing_fields_point_to_features():
             got = dict(sample(C), **{"keys.sent": sent})
             C.apply(got, C.to_config(got))
             it = {x["id"]: x for x in R.compute("h38-wp", root, have)}
-            check(f"鍵が未登録・{sent} → 配信と改修が{R.LABEL[st]}（{who}）",
-                  (it["publish"]["status"], it["publish"]["who"], it["site_renovate"]["status"]), (st, who, st))
+            # WordPress の改修は FTP の鍵だけで行う（預かる WordPress の鍵は投稿者の権限。2026-10-24）
+            check(f"鍵が未登録・{sent} → 配信が{R.LABEL[st]}（{who}）・改修は FTP の鍵があれば ok",
+                  (it["publish"]["status"], it["publish"]["who"], it["site_renovate"]["status"]), (st, who, "ok"))
     # 許可の手続きが当社に残る（管理者の追加は済・鍵はまだ）
     with tree() as root:
         got = dict(sample(C), **{"channels.admin_added": "済"})
@@ -257,7 +258,7 @@ def test_new_fields_take_effect():
           [m for m in ("hanako@example.co.jp", "sato@example.jp", "taro@example.co.jp") if m in pub], [])
     priv = C.to_private(got)
     check("担当者・接続先は private.json へ", (priv["contact"]["email"], priv["ftp"]["host"], priv["wp"]["user"]),
-          ("hanako@example.co.jp", "sv1234.xserver.jp", "ss-editor"))
+          ("hanako@example.co.jp", "sv1234.xserver.jp", "ss-author"))
     t = C.creds_template("h38-wp", priv)
     check("鍵の登録の形はパスワードを空欄にして出す",
           (t["FTP_CREDENTIALS_JSON"]["h38-wp"]["host"], t["WP_CREDENTIALS_JSON"]["h38-wp"]["password"].startswith("<")),

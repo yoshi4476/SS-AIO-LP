@@ -325,63 +325,28 @@ def test_nextjs_and_markdown_get_pages():
                                                          "application/ld+json" in t], [True, True, True])
 
 
-def test_wordpress_gets_fixed_pages_and_menu():
-    import aggregate_pages as AP
+def test_wordpress_makes_no_fixed_pages():
     import menu_page as MP
     import publish as P
-    import wp_bridge as W
     from gates_history_h29 import FakeWP
-    print("\n■ wordpress: まとめのページとメニューを固定ページで作る（業種ハブ・用語集と同じ upsert_page）")
+    print("\n■ wordpress: まとめのページ・メニューは作らない（投稿者の権限の鍵では固定ページを作れない。2026-10-24）")
     with fixture() as (root, holder):
-        cfg = _cfg(holder, "wordpress", domain="wp.example")
+        _cfg(holder, "wordpress", domain="wp.example")
         fake = FakeWP()
-        for i, s in enumerate(FIVE):
-            fake.posts[i + 1] = {"id": i + 1, "slug": s, "status": "publish", "link": f"https://wp.example/2026/09/0{i + 1}/{s}/",
-                                 "meta": {}, "content": ""}
-        old = (_with(P, _wp_call=fake), _with(W, _has_auth=lambda c: True))
+        old = _with(P, _wp_call=fake)
         try:
-            with redirect_stdout(io.StringIO()):
-                W.sync_aggregate(cfg, W.url_rows(cfg))
-            pages = {p["link"].replace("https://wp.example", ""): p for p in fake.pages.values()}
-            check("比較表・テーマ・エリア・季節・多言語を固定ページで作る（親子の階層・管制塔の印）",
-                  [pages.get(x, {}).get("meta", {}).get("_ss_managed") for x in
-                   ("/compare/", "/compare/h30-gourmet/", "/topics/", "/area/dotonbori/", "/season/", "/en/", "/en/h30-a0/")],
-                  ["1"] * 7)
-            pg = pages["/compare/h30-gourmet/"]
-            check("本文に <script> を残さず、構造化データは _ss_jsonld へ（mu-plugin が head に出す）・記事はパーマリンク",
-                  ["<script" in pg["content"], json.loads(pg["meta"]["_ss_jsonld"])["@type"],
-                   "https://wp.example/2026/09/01/h30-a0/" in pg["content"]], [False, "ItemList", True])
-            rows = W.url_rows(cfg)
-            check("記事の末尾から、先方に既にあるまとめのページへ案内する",
-                  'href="https://wp.example/area/dotonbori/"' in W.aggregate_links(cfg, rows, "h30-a0"), True)
-            fake.posts[5]["status"] = "draft"
-            AP._CACHE.clear()
-            with redirect_stdout(io.StringIO()):
-                W.sync_aggregate(cfg, W.url_rows(cfg))
-            check("本数が下限を割ったページ（エリア）は下書きに戻す", (pages["/area/"]["status"], pages["/area/dotonbori/"]["status"]),
-                  ("draft", "draft"))
-            check("記事の公開のついでに作り直す（sync_pages から呼ぶ・1日1回の判定にまとめのページも入る）",
-                  ["sync_aggregate(cfg, rows, arts, made)" in (ROOT / "scripts" / "wp_bridge.py").read_text(encoding="utf-8"),
-                   "*AP.TOPS" in (ROOT / "scripts" / "wp_bridge.py").read_text(encoding="utf-8")], [True, True])
-            # メニュー: 日本語と、訳済みの英語（元のハッシュが同じなので訳し直さない＝Claude を呼ばない）
             import hashlib
             menu = {"site": SITE, "shop": "h30食堂", "items": [{"cat": "麺", "name": "醤油ラーメン", "price": 950, "desc": "", "note": ""}]}
-            h = hashlib.md5(json.dumps(menu["items"], ensure_ascii=False, sort_keys=True).encode()).hexdigest()
             MP.DATA.mkdir(parents=True)
             (MP.DATA / f"{SITE}.json").write_text(json.dumps(menu, ensure_ascii=False), encoding="utf-8")
-            (MP.DATA / f"{SITE}.en.json").write_text(json.dumps(
-                {"shop": "h30 Shokudo", "items": [{"cat": "Noodles", "name": "Shoyu Ramen", "price": 950, "desc": "", "note": ""}],
-                 "src_hash": h}), encoding="utf-8")
-            with redirect_stdout(io.StringIO()):
+            out = io.StringIO()
+            with redirect_stdout(out):
                 MP.build(SITE, push=True)
-            pages = {p["link"].replace("https://wp.example", ""): p for p in fake.pages.values()}
-            en = pages.get("/menu/en/", {})
-            check("メニューを /menu/ の下に言語ごとの固定ページで作る（Menu の構造化データはメタへ・価格はそのまま）",
-                  [pages.get("/menu/", {}).get("meta", {}).get("_ss_managed"), json.loads(en.get("meta", {}).get("_ss_jsonld") or "{}").get("@type"),
-                   "950" in en.get("content", ""), "/menu/ja/" in pages], ["1", "Menu", True, True])
         finally:
-            for o, m in zip(old, (P, W)):
-                _with(m, **o)
+            _with(P, **old)
+        check("メニュー: 固定ページを作らず、作ったページを先方に渡すよう要対応で知らせる",
+              ([p for p, d in fake.calls if p.startswith("pages")], "メニューのページは自動で置けません" in out.getvalue()), ([], True))
+        del hashlib
 
 
 def test_nextjs_menu_goes_to_public():
@@ -417,5 +382,8 @@ def test_capability_cells_for_aggregate_pages():
     feats = ("compare", "topics", "area", "season_feature", "i18n", "menu")
     miss = [f"{f} × {m}" for f in feats for m, c in caps["features"][f]["cells"].items() if c["status"] == "missing"]
     check("比較表・テーマ・エリア・季節・多言語・メニューの missing", miss, [])
+    check("WordPress は理由（投稿者の権限・固定ページ）を書いて n/a（安全のため作らない）",
+          [caps["features"][f]["cells"]["wordpress"]["status"] == "n/a" and "固定ページ" in caps["features"][f]["cells"]["wordpress"]["note"]
+           for f in feats], [True] * len(feats))
     check("入口に共通の口（aggregate_pages.py）が載っている",
           all("scripts/aggregate_pages.py" in caps["features"][f]["entry"] for f in feats[:5]), True)
