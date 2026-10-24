@@ -851,5 +851,11 @@
   "pos": 27.4,
   "site": "corporate",
   "by": "auto_rewrite"
+ },
+ "shika-iin-joseikin-taisho": {
+  "at": "2026-10-24",
+  "pos": 32.0,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  }
 }
