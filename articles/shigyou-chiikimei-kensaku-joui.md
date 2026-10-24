@@ -73,6 +73,8 @@ quality_attempts: 2
 
 士業事務所を地域で探す質問にAIが答えるとき、出典の63.1%は比較・紹介サイトでした。
 
+関連する内容として[士業の制度解説記事で集客するには？](/aio/shigyou-seido-kaisetsu-kiji/)も公開しています。
+
 <figure><img src="/images/shigyou-chiikimei-kensaku-joui/shutten.png" alt="地域で探す質問のAIの出典の内訳を、比較・紹介サイト、士業事務所の公式サイト、その他、口コミ・地図で比べた棒グラフ"></figure>
 
 当社は2026年10月、ChatGPT・Gemini・Claude・Perplexityの4つに士業の質問を100問聞きました。うち20問が「大阪 税理士 おすすめ」のような地域で探す質問です。答えの出典は、種類ごとに数えました。

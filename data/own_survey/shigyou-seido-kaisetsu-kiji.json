@@ -1,0 +1,108 @@
+{
+ "v": 2,
+ "slug": "shigyou-seido-kaisetsu-kiji",
+ "ok": true,
+ "date": "2026-10-25",
+ "questions": [
+  "士業 制度 解説 記事 集客について教えてください",
+  "士業 制度 解説 記事 集客について、「士業の制度解説記事は集客につながるのか」を教えてください",
+  "士業 制度 解説 記事 集客について、「制度の質問でAIが出典に選ぶのは事務所・公的機関・事業会社」を教えてください",
+  "士業 制度 解説 記事 集客について、「公的機関の説明と並んでも選ばれる制度記事に足す4つの要素」を教えてください",
+  "士業 制度 解説 記事 集客について、「制度解説記事から相談につなぐページのつなぎ方」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "制度の質問でAIが出典に選ぶのは事務所・公的機関・事業会社",
+   "words": [
+    "公的機関",
+    "事業会社",
+    "事務所"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "公的機関の説明と並んでも選ばれる制度記事に足す4つの要素",
+   "words": [
+    "公的機関",
+    "説明",
+    "要素"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "制度解説記事から相談につなぐページのつなぎ方",
+   "words": [
+    "ページ",
+    "相談"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "制度解説記事で起きる3つのNGと避け方",
+   "words": [
+    "NG"
+   ],
+   "hits": 8,
+   "of": 10
+  },
+  {
+   "topic": "制度解説記事を先に書く事務所・後回しにする事務所",
+   "words": [
+    "事務所",
+    "事務所"
+   ],
+   "hits": 9,
+   "of": 10
+  },
+  {
+   "topic": "制度が変わるたびに回す運用の手順",
+   "words": [
+    "運用"
+   ],
+   "hits": 1,
+   "of": 10
+  }
+ ],
+ "sources": {
+  "atelier-tsunagi.com": "peer",
+  "coplus-one.jp": "peer",
+  "developers.google.com": "peer",
+  "kanautech.jp": "peer",
+  "niben.jp": "public",
+  "nngroup.com": "peer",
+  "note.com": "video",
+  "nta.go.jp": "public",
+  "pascaljp.com": "media",
+  "pokerface.co.jp": "peer",
+  "pro-marketing.jp": "media",
+  "prtimes.jp": "media",
+  "relyne-kaikei.com": "peer",
+  "school.kijiraku.com": "peer",
+  "search-engine-pirates.co.jp": "peer",
+  "sensei-biz.com": "peer",
+  "sider-pro.com": "peer",
+  "support.freee.co.jp": "peer",
+  "tax.jusnet.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 6,
+  "進め方の手順": 4,
+  "専門家への相談": 9
+ },
+ "chars": 19279,
+ "claims": [
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『運用』に触れたものは1件でした。",
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は1件、進め方の手順は4件でした。",
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは19件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが3件、動画・SNS・ブログが1件でした。"
+ ]
+}
