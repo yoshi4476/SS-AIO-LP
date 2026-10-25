@@ -53,6 +53,8 @@ quality_attempts: 3
 
 士業のホームページに報酬を載せるべきなのは、AIが費用の質問に答えるとき、事務所の公式サイトを主な出典に選ぶためです。
 
+前提となる考え方は[士業事務所が選ばれるホームページとは？](/aio/shigyou-erabareru-homepage/)でも扱っています。
+
 関連する内容については、[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)にまとめています。
 
 <div class="definition-box"><span class="term">士業の報酬の載せ方とは</span>、業務ごとの金額だけでなく、金額が変わる条件と、報酬に含まれない費用までを1ページで読める形に書くことです。</div>

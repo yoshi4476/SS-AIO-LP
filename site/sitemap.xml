@@ -781,6 +781,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-chiikimei-kensaku-joui/junbi.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-chiikimei-kensaku-joui/yudou.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/shigyou-erabareru-homepage/</loc><lastmod>2026-10-25</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-erabareru-homepage/sentaku.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-erabareru-homepage/zairyou.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-erabareru-homepage/junban.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/aio/shigyou-hp-houshu-nosekata/</loc><lastmod>2026-10-21</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-hp-houshu-nosekata/shutten.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/shigyou-hp-houshu-nosekata/katachi.png</image:loc></image:image>

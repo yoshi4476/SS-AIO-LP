@@ -1,0 +1,101 @@
+{
+ "v": 2,
+ "slug": "shigyou-erabareru-homepage",
+ "ok": true,
+ "date": "2026-10-25",
+ "questions": [
+  "士業事務所 選ばれる ホームページについて教えてください",
+  "士業事務所 選ばれる ホームページについて、「士業事務所が選ばれるホームページとは？」を教えてください",
+  "士業事務所 選ばれる ホームページについて、「選び方の質問でAIが出典に選ぶのは士業事務所の公式サイト」を教えてください",
+  "士業事務所 選ばれる ホームページについて、「選ばれるホームページに載せる4つの判断材料」を教えてください",
+  "士業事務所 選ばれる ホームページについて、「「何でも対応します」はNG：受けない依頼を書く理由」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "選び方の質問でAIが出典に選ぶのは士業事務所の公式サイト",
+   "words": [
+    "公式サイト",
+    "質問",
+    "AI"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "選ばれるホームページに載せる4つの判断材料",
+   "words": [
+    "判断材料"
+   ],
+   "hits": 1,
+   "of": 8
+  },
+  {
+   "topic": "「何でも対応します」はNG：受けない依頼を書く理由",
+   "words": [
+    "NG",
+    "依頼"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "士業事務所の状況ごとに、どのページから直すか",
+   "words": [
+    "ページ"
+   ],
+   "hits": 9,
+   "of": 10
+  }
+ ],
+ "sources": {
+  "ai.7senses.co.jp": "self",
+  "atoz-design.jp": "peer",
+  "coomil.co.jp": "peer",
+  "cyber-intelligence.co.jp": "peer",
+  "developers.google.cn": "peer",
+  "docodoor.co.jp": "peer",
+  "exhige.com": "peer",
+  "gmo-rakurakuhp.jp": "peer",
+  "gmotech.jp": "peer",
+  "gorilla-web.net": "peer",
+  "hatakeyama-tax.com": "video",
+  "hp-senka.jp": "peer",
+  "hp-tantou.com": "peer",
+  "kakuyasuhp.com": "peer",
+  "koyama-consul.com": "peer",
+  "lany.co.jp": "peer",
+  "masudatax.jp": "peer",
+  "mkdesign-office.com": "peer",
+  "nodetokyo.com": "peer",
+  "noren-world.com": "peer",
+  "note.com": "video",
+  "osakaben.or.jp": "peer",
+  "pascaljp.com": "media",
+  "pokerface.co.jp": "peer",
+  "prtimes.jp": "media",
+  "scaleweb.jp": "peer",
+  "seikoprocess.co.jp": "peer",
+  "sitepick.jp": "peer",
+  "toben.or.jp": "public",
+  "web-kanji.com": "media",
+  "xserver.ne.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 6,
+  "進め方の手順": 3,
+  "専門家への相談": 8
+ },
+ "chars": 16566,
+ "claims": [
+  "2026年10月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え8件のうち、『判断材料』に触れたものは1件でした。",
+  "2026年10月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は1件、進め方の手順は3件でした。",
+  "2026年10月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは31件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが3件、動画・SNS・ブログが2件でした。"
+ ]
+}

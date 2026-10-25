@@ -68,6 +68,8 @@ quality_attempts: 3
 
 制度・ルールの質問でAIが出典に選んだサイトは、事業会社・士業事務所・公的機関がそれぞれ2割台で、ほぼ横並びでした。
 
+関連する内容として[士業事務所が選ばれるホームページとは？](/aio/shigyou-erabareru-homepage/)も公開しています。
+
 <figure><img src="/images/shigyou-seido-kaisetsu-kiji/shutten.png" alt="制度・ルールの質問でAIが出典にしたサイトの種類の割合を比べた棒グラフ"></figure>
 
 制度・ルールの20問で、出典を種類ごとに数えた結果は次のとおりです（出典451件・2026年10月）。
