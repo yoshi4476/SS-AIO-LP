@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-10-25T00:00:00+09:00</updated>
+  <updated>2026-10-26T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>士業ホームページのよくある質問で避けたい3つのNGと答えの線引き</title>
+    <link href="https://ai.7senses.co.jp/aio/shigyou-hp-yokuaru-shitsumon/"/>
+    <id>https://ai.7senses.co.jp/aio/shigyou-hp-yokuaru-shitsumon/</id>
+    <updated>2026-10-26T00:00:00+09:00</updated>
+    <summary>士業ホームページのよくある質問は、費用・手続き・依頼の範囲・相談の準備の4分野から、相談で実際に聞かれた質問を選んで載せます。AIは費用や手続きの質問で回答の72.1%が事務所の公式サイトを出典にしており、答え方の線引きとNGを解説します。</summary>
+  </entry>
   <entry>
     <title>士業事務所が選ばれるホームページとは？載せる4つの判断材料とNG</title>
     <link href="https://ai.7senses.co.jp/aio/shigyou-erabareru-homepage/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/seo/zeirishi-seo-keyword/</id>
     <updated>2026-10-17T00:00:00+09:00</updated>
     <summary>税理士のSEOキーワードは、依頼先を探す語・条件で絞る語・状況の語・自分で調べる語の4つに分け、依頼に近い順に選びます。順位ごとのクリック率の実測と、事務所のタイプ別に最初の1語を決める手順、よくある失敗を解説します。</summary>
-  </entry>
-  <entry>
-    <title>工務店ホームページのよくある質問は何を載せる？施主が聞く5分野</title>
-    <link href="https://ai.7senses.co.jp/aio/koumuten-hp-yokuaru-shitsumon/"/>
-    <id>https://ai.7senses.co.jp/aio/koumuten-hp-yokuaru-shitsumon/</id>
-    <updated>2026-10-16T00:00:00+09:00</updated>
-    <summary>工務店ホームページのよくある質問は、施主が商談で実際に聞く費用・性能・土地とエリア・工期・保証の5分野から選びます。条件を先に置く答え方、載せてはいけない答え、置き場所の決め方、AI検索で使われたかの確かめ方を解説します。</summary>
   </entry>
 </feed>
