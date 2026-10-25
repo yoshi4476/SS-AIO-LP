@@ -1,0 +1,92 @@
+{
+ "v": 2,
+ "slug": "kojinjigyonushi-gaichuuhi-seikyusho",
+ "ok": true,
+ "date": "2026-10-25",
+ "questions": [
+  "個人事業主 外注費 請求書について教えてください",
+  "個人事業主 外注費 請求書について、「個人事業主の外注費の請求書は、会社と何が違う？」を教えてください",
+  "個人事業主 外注費 請求書について、「給与を払っていない個人事業主は、報酬の源泉徴収をしなくてよい」を教えてください",
+  "個人事業主 外注費 請求書について、「登録番号の無い請求書の影響は、消費税の計算方法で決まる」を教えてください",
+  "個人事業主 外注費 請求書について、「家族に払う外注費は、請求書があっても経費にならない」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "給与を払っていない個人事業主は、報酬の源泉徴収をしなくてよい",
+   "words": [
+    "源泉徴収",
+    "給与",
+    "報酬"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "登録番号の無い請求書の影響は、消費税の計算方法で決まる",
+   "words": [
+    "登録番号",
+    "計算方法",
+    "消費税"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "家族に払う外注費は、請求書があっても経費にならない",
+   "words": [
+    "家族",
+    "経費"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "外注費の請求書の処理は、自分で続けるか外に任せるか？",
+   "words": [
+    "処理",
+    "自分"
+   ],
+   "hits": 6,
+   "of": 10
+  }
+ ],
+ "sources": {
+  "accomp.jp": "media",
+  "biz.moneyforward.com": "peer",
+  "jftc.go.jp": "public",
+  "keihi.com": "peer",
+  "keisan.nta.go.jp": "public",
+  "kkoyama-cpa.jp": "peer",
+  "machi-gr-blog.com": "peer",
+  "macpa.jp": "peer",
+  "note.com": "video",
+  "nta.go.jp": "public",
+  "progo-tax.com": "video",
+  "relance.jp": "peer",
+  "s-shibu.com": "peer",
+  "spreadoffice.com": "peer",
+  "suehirotax.jp": "peer",
+  "taxkimura.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yayoi-kk.co.jp": "peer",
+  "yktax.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 7,
+  "注意点・失敗・リスク": 6,
+  "進め方の手順": 0,
+  "専門家への相談": 5
+ },
+ "chars": 17001,
+ "claims": [
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え8件のうち、『登録番号』に触れたものは4件でした。",
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは進め方の手順は0件、費用の金額（◯円）は5件、専門家への相談は5件でした。",
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは19件で、公的機関・学会・業界団体が3件、ニュース・メディア・まとめが1件、動画・SNS・ブログが2件でした。"
+ ]
+}

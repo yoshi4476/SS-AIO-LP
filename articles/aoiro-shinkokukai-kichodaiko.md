@@ -54,6 +54,8 @@ quality_attempts: 3
 
 **青色申告会の中心は記帳指導で、入力の代行は国税庁の資料に書かれておらず、頼めるかは窓口で確かめます。**
 
+近い論点を[個人事業主の外注費の請求書で見落とす3点](/blog/kojinjigyonushi-gaichuuhi-seikyusho/)で扱っています。
+
 <div class="definition-box"><span class="term">青色申告会とは</span>、青色申告をする個人事業主が加入し、記帳や税の仕組みを学ぶ納税者団体です。税務署の管轄ごとなどに組織されています。</div>
 
 国税庁の資料によると、全国青色申告会総連合は1955年に任意団体として設立され、2013年に一般社団法人になりました。加入する単位会は約1,800会、単位会に加入する青色申告者は約59万人です（2019年3月時点）。出典は国税庁の<a href="https://www.nta.go.jp/about/introduction/torikumi/70th_html/02_11.htm" target="_blank" rel="noopener">関係民間団体の紹介ページ</a>です。
