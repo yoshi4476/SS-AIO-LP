@@ -1000,6 +1000,12 @@
         "副業 行政書士"
       ],
       "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-10-26",
+      "sec": 47,
+      "title": "士業の制度解説記事だけで相談は来る？",
+      "youtube": "3VYAxAIMIVE"
     }
   },
   "shigyou-hp-houshu-nosekata": {
@@ -1057,5 +1063,15 @@
       "reason": "YouTube のサジェストに「飲食店 集客」が出ます"
     },
     "youtube": "QJ9jbc7oaVQ"
+  },
+  "research-ec": {
+    "site": "ai-lab",
+    "kind": "research",
+    "date": "2026-10-26",
+    "sec": 223,
+    "mp4": "automation/video/research-ec.mp4",
+    "format": "duo",
+    "url": "https://ai.7senses.co.jp/research/ec-ai-sources/",
+    "youtube": "WxNUqXcg0gY"
   }
 }
