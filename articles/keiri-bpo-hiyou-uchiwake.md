@@ -51,7 +51,7 @@ faq:
 
 関連する内容を先に押さえるなら、[月次決算の経理BPO契約前に確認すべき5つのこと](/blog/getsuji-kessan-bpo-keiyakumae/)が参考になります。
 
-選ぶときの基準は[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)でも扱っています。
+選ぶときの基準は[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/backoffice-bpo-toha/)でも扱っています。
 
 あわせて[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)もご覧ください。
 

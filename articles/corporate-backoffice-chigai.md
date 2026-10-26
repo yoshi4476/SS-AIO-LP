@@ -43,6 +43,8 @@ faq:
 
 コーポレートは経営を支える本社機能全体、バックオフィスはその中の事務処理を指す傾向があります。
 
+関連する内容を先に押さえるなら、[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)が参考になります。
+
 <div class="definition-box"><span class="term">コーポレート部門とは</span>、経理・人事・総務・法務・経営企画・広報など、顧客と直接接しない本社の機能をまとめた呼び方です。<span class="term">バックオフィスとは</span>、営業などのフロントオフィスを後ろから支える事務の仕事や部門を指す言葉です。</div>
 
 2つの言葉は、辞書的にはほとんど区別されていません。<a href="https://directscout.recruit.co.jp/contents/?p=25955" target="_blank" rel="noopener">リクルートダイレクトスカウトの解説</a>は、人事・経理・法務・総務などの職種を「コーポレートスタッフ」と呼びます。そのうえで「バックオフィス」「間接部門」とも呼ばれると説明しています。
@@ -132,8 +134,6 @@ faq:
 - 経理以外の人事・総務もまとめて手放したいなら、複数部門を扱う委託先を探す
 
 どの業務まで任せられるかは[経理の外注は丸投げNG？](/blog/keiri-marunage-dekiru-hani/)で、複数部門の委託は[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)で扱っています。
-
-人手不足そのものの打ち手は[管理部門の人手不足解決｜5つの選択肢](/blog/kanribumon-hitodebusoku-kaiketsu/)にまとめました。
 
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 

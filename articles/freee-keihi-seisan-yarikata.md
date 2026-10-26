@@ -52,7 +52,7 @@ noindex_date: 2026-10-08
 
 **freeeの経費精算とは、従業員や経営者がスマホやWebで立て替え経費を申請し、承認を経てそのまま会計データに反映される仕組みのことです。**紙の申請書やExcelでの集計作業を減らせる点が特徴です。
 
-関連する内容として[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)も公開しています。
+関連する内容として[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/backoffice-bpo-toha/)も公開しています。
 
 関連する内容として[個人店の経理のやり方](/blog/kojinten-keiri-yarikata/)も公開しています。
 

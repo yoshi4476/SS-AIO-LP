@@ -53,13 +53,13 @@ faq:
 
 不動産の集客方法とは、複数チャネルを組み合わせ、ポータル依存から抜け出す仕組みづくりです。
 
+あわせて[BtoBリード獲得の方法とは？](/ai-marketing/btob-lead-kakutoku-hoho/)もご覧ください。
+
 関連する内容として[MEO会社の選び方｜LLMO対応の見極め3基準](/aio/meo-kaisha-llmo-taiou/)も公開しています。
 
 あわせて[不動産SEO記事のライター選び方](/seo/fudousan-seo-kiji-writer/)もご覧ください。
 
 関連する内容として[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)も公開しています。
-
-チャネルを選んだ後に、どの順番で始めるかは[反響までの期間で選ぶ不動産会社の集客方法](/aio/fudousan-kaisha-shukyaku-houhou/)で、自社の実測とあわせて整理しました。
 
 <div class="definition-box"><span class="term">不動産の集客方法とは</span>、ポータルサイトへの掲載だけでなく、自社サイト・MEO・SNS・紹介・AI検索対応まで含めた複数チャネルを、会社の商圏や専門分野に合わせて組み合わせることを指します。掲載費を払うだけの受け身の集客ではありません。</div>
 

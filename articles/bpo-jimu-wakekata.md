@@ -67,6 +67,8 @@ BPOという言葉の意味や種類は、[BPOとは？意味と業務の種類5
 
 **BPOに任せやすいのは、毎月の件数が多く、誰がやっても同じ手順で終わる事務です。**
 
+近い論点を[経費精算の領収書を紛失したら？](/blog/keihi-seisan-ryoshusho-funshitsu/)で扱っています。
+
 関連する内容として[建設業の記帳代行が合わない3つの状況](/blog/kensetsugyou-kichodaiko/)も公開しています。
 
 <figure><img src="/images/bpo-jimu-wakekata/wakekata.png" alt="会社の事務を、BPOに任せる事務・社内に残す事務・社内でそろえる書類の3つに分けた図" loading="lazy"><figcaption>BPOに出す事務と社内に残す事務</figcaption></figure>
@@ -145,8 +147,6 @@ BPOという言葉の意味や種類は、[BPOとは？意味と業務の種類5
 | 繁忙期だけ人手が足りず、社内で指示を出せる人がいる | 派遣を使う |
 | 件数が少なく、社長や担当者が全体を把握している | 自社で回す |
 | 担当者が1人で、その人が休むと事務が止まる | 手順を書き出し、BPOも使う |
-
-派遣は、社内の人が指示を出して働いてもらう契約です。BPOとの違いは、[経理BPOと人材派遣の違い5つ](/blog/keiri-bpo-haken-chigai/)で比べています。
 
 BPOで頼んだのに、社内の人が委託先の担当者へ作業の指示を出す運用は避けてください。厚生労働省の<a href="https://www.mhlw.go.jp/bunya/koyou/gigi_outou01.html" target="_blank" rel="noopener">労働者派遣と請負の区分に関する案内</a>は、派遣か請負かを契約の形ではなく実態で判断するとしています。直してほしい点は、決めた窓口を通して伝えます。
 

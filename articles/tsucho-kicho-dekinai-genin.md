@@ -51,7 +51,7 @@ noindex_date: 2026-10-08
 
 近い論点を[BPOとは？意味と業務の種類5つをわかりやすく解説](/blog/bpo-toha/)で扱っています。
 
-関連する内容として[会計と経理の違い｜税理士に任せても社内に残る経理の作業](/blog/kaikei-keiri-chigai/)も公開しています。
+関連する内容として[会計と経理の違い｜税理士に任せても社内に残る経理の作業](/blog/keiri-zaimu-chigai/)も公開しています。
 
 <figure><img src="/images/tsucho-kicho-dekinai-genin/genin.png" alt="通帳が記帳できない6つの原因: 磁気不良、通帳の繰越が必要、長期未記帳で利用停止、通帳なし口座へ切替、休眠預金、記帳できないATM" loading="lazy"><figcaption>通帳が記帳できない6つの原因</figcaption></figure>
 

@@ -68,9 +68,11 @@ quality_attempts: 3
 
 制度・ルールの質問でAIが出典に選んだサイトは、事業会社・士業事務所・公的機関がそれぞれ2割台で、ほぼ横並びでした。
 
+関連する内容として[工務店ホームページのよくある質問は何を載せる？](/aio/koumuten-hp-yokuaru-shitsumon/)も公開しています。
+
 関連する内容として[士業ホームページのよくある質問で避けたい3つのNGと答えの線引き](/aio/shigyou-hp-yokuaru-shitsumon/)も公開しています。
 
-関連する内容として[士業事務所が選ばれるホームページとは？](/aio/shigyou-erabareru-homepage/)も公開しています。
+あわせて[士業事務所が選ばれるホームページとは？](/aio/shigyou-erabareru-homepage/)もご覧ください。
 
 <figure><img src="/images/shigyou-seido-kaisetsu-kiji/shutten.png" alt="制度・ルールの質問でAIが出典にしたサイトの種類の割合を比べた棒グラフ"></figure>
 

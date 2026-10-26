@@ -53,6 +53,8 @@ quality_attempts: 3
 
 **個人事業主の外注費の請求書は、源泉徴収の要否・消費税・家族への支払いの3点で、会社と扱いが変わります。**
 
+あわせて[sweeepの請求書は旧資料のまま決めるとNG](/blog/sweeep-seikyusho/)もご覧ください。
+
 関連する内容として[AI OCRの請求書読み取りで防げない誤り4つ](/blog/ai-ocr-seikyusho/)も公開しています。
 
 <div class="definition-box"><span class="term">外注費とは</span>、自分の事業の仕事の一部を、雇っていない人や会社に請け負わせた対価です。所得税の計算では、事業の必要経費になります。</div>

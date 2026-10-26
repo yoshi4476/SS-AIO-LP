@@ -99,6 +99,8 @@ Googleは<a href="https://developers.google.com/search/docs/fundamentals/ai-opti
 
 費用・選び方・手続き・制度を調べる質問では、AIの出典の41.3%が士業事務所の公式サイトで、回答の72.1%が公式サイトを1つ以上出典にしていました。
 
+近い論点を[飲食店の集客コンサルの落とし穴](/aio/inshokuten-shukyaku-consul/)で扱っています。
+
 <figure><img src="/images/shigyou-portal-ai-kensaku/kaitou.png" alt="事務所の公式サイトを出典にした回答の割合を、地域で探す・費用・選び方・手続き・悩み・制度・ルールの質問の種類ごとに比べた棒グラフ"></figure>
 
 質問の種類ごとの数字は次のとおりです（各20問・当社の調査・2026年10月）。

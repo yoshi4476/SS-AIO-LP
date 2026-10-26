@@ -200,8 +200,6 @@ written: 2026-10-21
 - 原因は、10月に届いた請求書をすべて新しい割合で入れたことです。
 - 避け方は、10月に届いた請求書だけ、作業の終わった日を請求書の明細で確かめることです。
 
-仕訳の誤り全体の防ぎ方は、[仕訳ミスを防ぐ方法](/blog/shiwake-miss-fusegu-houhou/)で扱っています。
-
 <div class="cta-box"><p>経理・バックオフィスの外部委託についてご相談いただけます。</p><a class="cta-button" href="https://corp.7senses.co.jp/contact?s=keiri-bpo">経理BPOの無料相談</a></div>
 
 ## 外注費の請求書の処理を、自社で続けるか外に任せるか？

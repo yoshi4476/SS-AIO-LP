@@ -49,6 +49,7 @@ faq:
 
 美容室の集客方法は、新規のお客様を呼び込む取り組みと、既存のお客様に再来店してもらう取り組みを、別々に設計することが出発点です。
 
+あわせて[BtoBリード獲得の方法とは？](/ai-marketing/btob-lead-kakutoku-hoho/)もご覧ください。
 
 関連する内容として[美容室のMEO対策とは？](/meo/biyoushitsu-meo-taisaku/)も公開しています。
 
@@ -81,8 +82,6 @@ faq:
 関連する内容として[飲食店の集客方法とは？](/ai-marketing/inshokuten-shukyaku-hoho/)も公開しています。
 
 あわせて[整骨院の集客成功事例5選](/ai-marketing/seikotsuin-shukyaku-jirei/)もご覧ください。
-
-近い論点を[リフォームの集客方法とは？反響を増やす6つの施策](/ai-marketing/reform-shukyaku-hoho/)で扱っています。
 
 <figure><img src="/images/biyoushitsu-shukyaku-houhou/houhou.png" alt="集客導線を整える6つの取り組み: マップ表示を整える、Instagram発信、口コミに全件返信、指名検索の導線、来店後の声かけ、値引き表示を守る" loading="lazy"><figcaption>集客導線を整える6つの取り組み</figcaption></figure>
 
@@ -151,7 +150,6 @@ faq:
 
 生成AI検索の広がりにより、AIが店舗名を挙げて回答する場面が増えており、正確な情報発信の積み重ねが最大の対策になります。
 
-
 あわせてAI集客とは？無料で今日から始める5つの方法と落とし穴3つもご覧ください。
 <a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。「〇〇駅 美容室」のようにAIに候補を尋ねる利用者も、今後増えていくと見込まれます。
 
@@ -175,7 +173,6 @@ AI集客の全体像は[AI集客の完全ガイド](/ai-marketing/ai-shukyaku-gu
 <details><summary>Instagramのフォロワーが少なくても効果はありますか？</summary><p class="faq-a">あります。保存・検索経由での接点づくりが目的のため、投稿を続けること自体に価値があります。</p></details>
 <details><summary>開業したばかりの美容室でも集客できますか？</summary><p class="faq-a">できます。まずはマップの基本情報登録と口コミ依頼だけでも、地図検索での見え方が変わります。</p></details>
 </div>
-
 
 自社がAI検索からどう見えているかは、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で見られます。登録は要らず、結果はその場で出ます。
 

@@ -53,6 +53,8 @@ quality_attempts: 2
 
 士業事務所が選ばれるホームページは、受ける依頼・担当者・流れ・選ぶときの見方を相談者が読める形で載せたサイトです。
 
+費用の目安は[歯科医院ホームページの料金表の書き方](/aio/shika-hp-ryokinhyou-kakikata/)でも扱っています。
+
 <div class="definition-box"><span class="term">選ばれるホームページとは</span>、相談者が複数の事務所を比べたとき、自分の依頼を受けてもらえるか、誰が担当するか、どう進むかを、問い合わせる前に判断できるサイトを指します。</div>
 
 士業の依頼は、検索してすぐ決まる買い物ではありません。相談者は候補をいくつかに絞り、それぞれのサイトを読み比べてから連絡します。
@@ -98,6 +100,8 @@ Googleは<a href="https://developers.google.com/search/docs/fundamentals/creatin
 ## 選ばれるホームページに載せる4つの判断材料
 
 士業事務所のホームページに載せる判断材料は、受ける依頼と受けない依頼・担当者・流れと期間・選ぶときの見方の4つです。
+
+関連する内容として[不動産会社の集客方法](/aio/fudousan-kaisha-shukyaku-houhou/)も公開しています。
 
 <figure><img src="/images/shigyou-erabareru-homepage/zairyou.png" alt="受ける依頼と受けない依頼、担当する人の名前と資格、相談から依頼までの流れと期間、依頼先を決めるときの見方の4つを並べたチェックリスト"></figure>
 
@@ -147,7 +151,6 @@ Googleは<a href="https://developers.google.com/search/docs/fundamentals/creatin
 
 **分野を広く受けている事務所は、受けない依頼の代わりに「得意な依頼」を3つまで書いてください。**全部を並べるより、相談の多い依頼を先に読ませるほうが、比べられたときに残ります。
 
-
 自社サイトがAI検索にどこまで対応できているかは、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で確かめられます。登録は不要で、その場で点数が出ます。
 
 ## 選ばれないホームページで起きる3つの失敗と避け方
@@ -177,6 +180,8 @@ Googleは<a href="https://developers.google.com/search/docs/fundamentals/creatin
 ## 士業事務所の状況ごとに、どのページから直すか
 
 士業事務所のホームページは、分野の絞り方・所員の数・断る相談の多さで、先に直すページが変わります。
+
+関連する内容として[AIOサービス比較で外す5つの落とし穴](/aio/aio-service-hikaku/)も公開しています。
 
 <figure><img src="/images/shigyou-erabareru-homepage/junban.png" alt="分野を絞っている事務所・所員が複数いる事務所・相談後に断られる人が多い事務所ごとに、先に直すページと後回しでよいものを比べた表"></figure>
 

@@ -96,6 +96,8 @@ faq:
 
 **月次では、日次で溜めた仕入れ伝票から原価を集計し、シフト実績をもとに人件費を確定させます。**
 
+近い論点を[経費精算の領収書を紛失したら？](/blog/keihi-seisan-ryoshusho-funshitsu/)で扱っています。
+
 仕入れ原価の集計は、食材ごとの単価ではなく、月間の仕入れ総額を売上高で割った原価率で把握するのが実務的です。**原価率を毎月同じ計算方法で出し続けることが、値付けや仕入れ量の判断材料になります。**
 
 日本政策金融公庫の<a href="https://www.jfc.go.jp/n/findings/shihyou_kekka_m_index.html" target="_blank" rel="noopener">小企業の経営指標調査</a>では、一般飲食店の原価率は平均35%程度が目安とされています。業態によって差はありますが、自店の原価率がこの水準から大きく外れていないかを毎月確認してください。
@@ -108,7 +110,7 @@ faq:
 
 **飲食店は、店内飲食が10%、持ち帰り・宅配が軽減税率の8%という税率区分を、会計処理に正しく反映する必要があります。**
 
-近い論点を[請求書照合の自動化と導入4ステップ](/blog/seikyusho-shougou-jidoka/)で扱っています。
+関連する内容として[請求書照合の自動化と導入4ステップ](/blog/seikyusho-shougou-jidoka/)も公開しています。
 
 <figure><img src="/images/inshokuten-keiri-yarikata/zeiritsu.png" alt="飲食店の消費税区分: 店内飲食は10%、持ち帰り・宅配は軽減税率の8%" loading="lazy"><figcaption>飲食店の消費税区分（店内飲食10%・持ち帰り8%）</figcaption></figure>
 
@@ -127,8 +129,6 @@ faq:
 **飲食店の経理でつまずく典型は、現金記録の持ち越し・原価率の未把握・税率区分の混同という3つに集中します。**
 
 近い論点をfreeeの経費精算のやり方で扱っています。
-
-あわせて[個人経営の経理のやり方｜後回しにしない3つのコツ](/blog/kojin-keiei-keiri-yarikata/)もご覧ください。
 
 <figure><img src="/images/inshokuten-keiri-yarikata/tsumazuki.png" alt="飲食店の経理でつまずきやすい3つのポイント: 現金の記録が翌日以降に持ち越される、原価率をFLコストで把握できていない、税率区分と経費精算の科目が混同される" loading="lazy"><figcaption>飲食店の経理でつまずきやすい3つのポイント</figcaption></figure>
 
@@ -185,7 +185,6 @@ POSレジ導入の初期費用や運用の手間を考えると、すべてを�
 <details><summary>シフト制のアルバイトが多い場合の人件費計算はどうすればいいですか？</summary><p class="faq-a">シフト実績を締めてから給与計算し、確定額を月次の集計に反映させます。</p></details>
 <details><summary>自分で経理を回す限界はどう見極めればいいですか？</summary><p class="faq-a">月次の締めが慢性的に遅れ、仕込みや接客の時間を圧迫し始めたら外注を検討します。</p></details>
 </div>
-
 
 経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)からお問い合わせいただけます。ご相談だけでもかまいません。
 

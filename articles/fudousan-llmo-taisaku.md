@@ -110,8 +110,6 @@ Geminiは検索順位に加えてFAQPage・HowToといった構造化データ�
 
 会社選びの比較段階で使われやすい比較表と、40〜60字で回答するFAQを設置します。AIは単体で意味が完結する表や一問一答形式の文章を引用しやすい傾向があります。
 
-FAQに載せる質問の選び方は、[不動産会社ホームページのよくある質問で避けたい答え方](/aio/fudousan-hp-yokuaru-shitsumon/)にまとめました。
-
 #### ステップ3: AIボットのクロール許可を確認する
 
 robots.txtでGPTBot・PerplexityBot・ClaudeBotなどを拒否していないか確認します。<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google公式のガイド</a>も、AI機能はクローラーが読めるページを前提にすると案内しています。

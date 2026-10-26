@@ -61,6 +61,8 @@ BPOとは、特定の業務プロセスを、外部の専門会社に継続的�
 
 BPOは業務プロセスごと任せる点で、単発のアウトソーシングや、指揮命令が自社に残る人材派遣と異なります。
 
+関連する内容については、[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)にまとめています。
+
 関連して、[経理BPOと人材派遣の違い5つ｜費用・契約形態を比較](/blog/keiri-bpo-haken-chigai/)もあわせてご確認ください。
 
 | 項目 | BPO | 一般的なアウトソーシング | 人材派遣 | 業務委託 |
@@ -77,8 +79,6 @@ BPOは業務プロセスごと任せる点で、単発のアウトソーシン�
 BPOは対象業務によって、コールセンター・IT・人事・経理・バックオフィスなど5つの領域に大きく分かれます。
 
 前提となる考え方については、[バックオフィスBPOとは？](/blog/backoffice-bpo-toha/)にまとめています。
-
-あわせて[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)もご覧ください。
 
 <figure><img src="/images/bpo-toha/shurui.png" alt="BPOの主な種類5つ: コールセンターBPO、IT BPO、人事BPO、経理BPO、バックオフィスBPO" loading="lazy"><figcaption>BPOの主な種類5つ</figcaption></figure>
 

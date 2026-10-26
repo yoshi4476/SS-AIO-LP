@@ -112,11 +112,11 @@ BOXILは2025年10月、経費精算システムの導入担当者1,865人を対�
 
 **システムは入力と承認を効率化するツールで、BPOは判断業務まで人が代行する外部委託という違いがあります。**
 
-選ぶときの基準については、[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/keihi-seisan-kichodaiko-bpo-chigai/)にまとめています。
+関連する内容として[月次決算はいつまでに終えるか](/blog/getsuji-kessan-itsumade/)も公開しています。
 
-近い論点を[中小企業の経理効率化](/blog/chusho-keiri-koritsuka/)で扱っています。
+関連する内容として[経費精算の領収書を紛失したら？](/blog/keihi-seisan-ryoshusho-funshitsu/)も公開しています。
 
-関連する内容として[経理の仕事を効率化する9つの方法](/blog/keiri-shigoto-koritsuka/)も公開しています。
+選ぶときの基準については、[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/backoffice-bpo-toha/)にまとめています。
 
 <div class="caution-box"><span class="box-title">注意: システム導入だけでは判断業務は代行できない</span><br><span class="txt-red">経費として認めるかどうかの最終判断や、不正・不備が疑われる申請への対応は、システムを入れても人が行う必要があります。</span>この点を混同すると、導入後に「思ったより経理の負担が減らない」という結果になります。</div>
 

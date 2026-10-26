@@ -203,6 +203,8 @@ Googleの<a href="https://developers.google.com/search/docs/fundamentals/creatin
 
 不動産のWeb集客は、担当者が月に数時間を割けるなら自社で、改修と毎月の計測まで回せないなら外に頼み、紹介だけで足りているなら見送るのが目安です。
 
+近い論点を[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)で扱っています。
+
 | 会社の状況 | 向いている進め方 |
 |:--|:--|
 | 担当エリアが1〜2市区で、文面を書ける担当者がいる | 3つのページを自社で作る |
@@ -256,9 +258,6 @@ Googleの<a href="https://developers.google.com/search/docs/fundamentals/creatin
 <details><summary>ポータルに物件を載せていれば自社サイトは要りませんか？</summary><p class="faq-a">要ります。ポータルで比べられるのは物件です。売却の相談や会社名での指名は自社サイトで受けることになります。</p></details>
 <details><summary>記事を毎週出せば不動産のWeb集客は伸びますか？</summary><p class="faq-a">本数だけでは伸びません。当社の支援では、品質の基準に届かない更新と、どこにでもある内容の記事は効きませんでした。</p></details>
 </div>
-
-SEOの施策の全体は[不動産SEOの5つの施策と始め方](/seo/fudousan-seo-taisaku/)にまとめています。
-
 
 AI検索への対応で抜けている箇所は、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で見られます。登録は要らず、結果はその場で出ます。
 

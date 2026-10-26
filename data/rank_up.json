@@ -7,10 +7,11 @@
   "site": "ai-lab"
  },
  "aio-taisaku-muryou-tool": {
-  "at": "2026-10-19",
-  "pos": 18.7,
-  "site": "ai-lab",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 16.3,
+  "imp": 790,
+  "band": "11〜20位",
+  "site": "ai-lab"
  },
  "ai-kantan-shukyaku": {
   "at": "2026-10-05",
@@ -33,9 +34,9 @@
   "by": "auto_rewrite"
  },
  "zeirishi-shukyaku-channel": {
-  "at": "2026-10-19",
-  "pos": 16.3,
-  "imp": 31,
+  "at": "2026-10-26",
+  "pos": 15.8,
+  "imp": 20,
   "band": "11〜20位",
   "site": "ai-lab"
  },
@@ -54,10 +55,11 @@
   "site": "ai-lab"
  },
  "koumuten-meo-taisaku": {
-  "at": "2026-10-19",
-  "pos": 4.5,
-  "site": "ai-lab",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 5.9,
+  "imp": 24,
+  "band": "4〜10位",
+  "site": "ai-lab"
  },
  "biyou-hifuka-meo": {
   "at": "2026-09-20",
@@ -116,23 +118,25 @@
   "site": "subsidy"
  },
  "it-hojokin-osusume": {
-  "at": "2026-10-19",
-  "pos": 16.2,
-  "imp": 51,
+  "at": "2026-10-26",
+  "pos": 16.9,
+  "imp": 40,
   "band": "11〜20位",
   "site": "subsidy"
  },
  "byoin-kuchikomi-henshin-reibun": {
-  "at": "2026-10-19",
-  "pos": 10.0,
-  "site": "ai-lab",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 9.6,
+  "imp": 87,
+  "band": "4〜10位",
+  "site": "ai-lab"
  },
  "shika-heiin-hiyou": {
-  "at": "2026-10-19",
-  "pos": 9.0,
-  "site": "ai-lab",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 8.6,
+  "imp": 29,
+  "band": "4〜10位",
+  "site": "ai-lab"
  },
  "seikotsuin-hiyou-hoken": {
   "at": "2026-10-01",
@@ -156,15 +160,16 @@
   "site": "ai-lab"
  },
  "aio-taisaku-donyu-hoho": {
-  "at": "2026-10-19",
-  "pos": 5.9,
-  "site": "ai-lab",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 7.3,
+  "imp": 68,
+  "band": "4〜10位",
+  "site": "ai-lab"
  },
  "koumuten-instagram-shukyaku": {
-  "at": "2026-10-19",
-  "pos": 32.3,
-  "imp": 40,
+  "at": "2026-10-26",
+  "pos": 29.5,
+  "imp": 64,
   "band": "21〜50位",
   "site": "ai-lab"
  },
@@ -176,10 +181,10 @@
   "site": "ai-lab"
  },
  "chumon-jutaku-seo-taisaku": {
-  "at": "2026-10-19",
-  "pos": 23.1,
-  "imp": 40,
-  "band": "21〜50位",
+  "at": "2026-10-26",
+  "pos": 19.7,
+  "imp": 34,
+  "band": "11〜20位",
   "site": "ai-lab"
  },
  "fudousan-seo-taisaku": {
@@ -190,9 +195,9 @@
   "site": "ai-lab"
  },
  "seikotsuin-shukyaku-seminar": {
-  "at": "2026-10-19",
-  "pos": 23.1,
-  "imp": 32,
+  "at": "2026-10-26",
+  "pos": 22.6,
+  "imp": 37,
   "band": "21〜50位",
   "site": "ai-lab"
  },
@@ -253,10 +258,10 @@
   "site": "ai-lab"
  },
  "btob-lead-kakutoku-hoho": {
-  "at": "2026-09-20",
-  "pos": 66.4,
-  "imp": 22,
-  "band": "51位以下",
+  "at": "2026-10-26",
+  "pos": 47.9,
+  "imp": 34,
+  "band": "21〜50位",
   "site": "ai-lab"
  },
  "yucho-kicho-yarikata": {
@@ -273,10 +278,11 @@
   "site": "corporate"
  },
  "seikyusho-shougou-jidoka": {
-  "at": "2026-10-19",
-  "pos": 4.6,
-  "site": "corporate",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 9.7,
+  "imp": 109,
+  "band": "4〜10位",
+  "site": "corporate"
  },
  "keiri-koritsuka-hon": {
   "at": "2026-09-28",
@@ -307,16 +313,16 @@
   "site": "corporate"
  },
  "monozukuri-hojokin-unsougyou": {
-  "at": "2026-10-19",
-  "pos": 10.5,
-  "imp": 69,
+  "at": "2026-10-26",
+  "pos": 10.0,
+  "imp": 70,
   "band": "4〜10位",
   "site": "subsidy"
  },
  "ai-hojokin-jissekihoukoku-kakikata": {
-  "at": "2026-10-19",
-  "pos": 8.7,
-  "imp": 26,
+  "at": "2026-10-26",
+  "pos": 8.3,
+  "imp": 23,
   "band": "4〜10位",
   "site": "subsidy"
  },
@@ -354,9 +360,9 @@
   "by": "auto_rewrite"
  },
  "monozukuri-hojokin-biyoushitsu": {
-  "at": "2026-10-19",
-  "pos": 14.7,
-  "imp": 82,
+  "at": "2026-10-26",
+  "pos": 15.5,
+  "imp": 98,
   "band": "11〜20位",
   "site": "subsidy"
  },
@@ -381,9 +387,9 @@
   "site": "subsidy"
  },
  "it-hojokin-gakushujuku": {
-  "at": "2026-10-12",
-  "pos": 5.8,
-  "imp": 27,
+  "at": "2026-10-26",
+  "pos": 5.6,
+  "imp": 25,
   "band": "4〜10位",
   "site": "subsidy"
  },
@@ -427,15 +433,16 @@
   "by": "auto_merge"
  },
  "llmo-dairiten-boshu": {
-  "at": "2026-10-19",
-  "pos": 5.1,
-  "site": "ai-lab",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 18.3,
+  "imp": 40,
+  "band": "11〜20位",
+  "site": "ai-lab"
  },
  "btob-aio-taisaku-kaisha": {
-  "at": "2026-10-19",
-  "pos": 6.8,
-  "imp": 26,
+  "at": "2026-10-26",
+  "pos": 6.5,
+  "imp": 31,
   "band": "4〜10位",
   "site": "ai-lab"
  },
@@ -454,17 +461,17 @@
   "site": "corporate"
  },
  "keiri-marunage-dekiru-hani": {
-  "at": "2026-10-19",
-  "pos": 9,
-  "imp": 38,
+  "at": "2026-10-26",
+  "pos": 8.1,
+  "imp": 20,
   "band": "4〜10位",
   "site": "corporate"
  },
  "seikyusho-fuutou-kakikata": {
-  "at": "2026-10-19",
-  "pos": 11.0,
-  "imp": 136,
-  "band": "11〜20位",
+  "at": "2026-10-26",
+  "pos": 9.1,
+  "imp": 43,
+  "band": "4〜10位",
   "site": "corporate"
  },
  "keiri-daiko-kojin-jigyonushi": {
@@ -495,30 +502,30 @@
   "by": "auto_merge"
  },
  "aio-towa": {
-  "at": "2026-10-19",
-  "pos": 24.4,
+  "at": "2026-10-26",
+  "pos": 24.7,
   "site": "ai-lab",
   "by": "auto_rewrite"
  },
  "aio-yarikata": {
-  "at": "2026-10-19",
-  "pos": 1.1,
-  "site": "ai-lab",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 10,
+  "imp": 140,
+  "band": "4〜10位",
+  "site": "ai-lab"
  },
  "aio-taisaku-keyword-sentei": {
-  "at": "2026-10-19",
+  "at": "2026-10-26",
   "pos": 4.0,
-  "imp": 26,
+  "imp": 20,
   "band": "4〜10位",
   "site": "ai-lab"
  },
  "aio-taisaku-souba": {
-  "at": "2026-10-19",
-  "pos": 14.4,
-  "imp": 36,
-  "band": "11〜20位",
-  "site": "ai-lab"
+  "at": "2026-10-26",
+  "pos": 24.6,
+  "site": "ai-lab",
+  "by": "auto_rewrite"
  },
  "inshokuten-seo-taisaku": {
   "at": "2026-10-19",
@@ -542,10 +549,10 @@
   "site": "ai-lab"
  },
  "backoffice-bpo-toha": {
-  "at": "2026-10-19",
-  "pos": 21.1,
+  "at": "2026-10-26",
+  "pos": 20.861386138613863,
   "site": "corporate",
-  "by": "auto_rewrite"
+  "by": "auto_merge"
  },
  "keiri-daiko-service": {
   "at": "2026-10-19",
@@ -575,10 +582,11 @@
   "site": "corporate"
  },
  "it-hojokin-2026-kojinjigyonushi": {
-  "at": "2026-10-19",
-  "pos": 2.0,
-  "site": "subsidy",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 2.6,
+  "imp": 36,
+  "band": "1〜3位",
+  "site": "subsidy"
  },
  "vendor-touroku-toha": {
   "at": "2026-10-05",
@@ -593,9 +601,9 @@
   "by": "auto_rewrite"
  },
  "aio-checker": {
-  "at": "2026-10-19",
-  "pos": 9.5,
-  "imp": 205,
+  "at": "2026-10-26",
+  "pos": 9.7,
+  "imp": 266,
   "band": "4〜10位",
   "site": "ai-lab"
  },
@@ -628,29 +636,30 @@
   "site": "ai-lab"
  },
  "keiri-haken-jikyu-souba": {
-  "at": "2026-10-19",
-  "pos": 5.8,
-  "imp": 40,
+  "at": "2026-10-26",
+  "pos": 5.7,
+  "imp": 51,
   "band": "4〜10位",
   "site": "corporate"
  },
  "kichodaiko-hiyou-kanjoukamoku": {
-  "at": "2026-10-19",
-  "pos": 6.7,
-  "imp": 29,
+  "at": "2026-10-26",
+  "pos": 5.5,
+  "imp": 34,
   "band": "4〜10位",
   "site": "corporate"
  },
  "osaka-meo-aio-kaisha": {
-  "at": "2026-10-19",
-  "pos": 10.0,
-  "site": "ai-lab",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 10.2,
+  "imp": 79,
+  "band": "4〜10位",
+  "site": "ai-lab"
  },
  "aio-seo-taisaku": {
-  "at": "2026-10-19",
-  "pos": 5.6,
-  "imp": 42,
+  "at": "2026-10-26",
+  "pos": 5.7,
+  "imp": 46,
   "band": "4〜10位",
   "site": "ai-lab"
  },
@@ -669,42 +678,43 @@
   "site": "ai-lab"
  },
  "middle-office-backoffice-chigai": {
-  "at": "2026-10-19",
-  "pos": 11.1,
-  "site": "corporate",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 7.9,
+  "imp": 137,
+  "band": "4〜10位",
+  "site": "corporate"
  },
  "seikyusho-template-muryou": {
-  "at": "2026-10-19",
-  "pos": 8.2,
-  "imp": 60,
+  "at": "2026-10-26",
+  "pos": 9.4,
+  "imp": 68,
   "band": "4〜10位",
   "site": "corporate"
  },
  "freelance-keiri-hiyou-souba": {
-  "at": "2026-10-12",
-  "pos": 14.5,
-  "imp": 37,
+  "at": "2026-10-26",
+  "pos": 17.5,
+  "imp": 52,
   "band": "11〜20位",
   "site": "corporate"
  },
  "kaikei-keiri-chigai": {
-  "at": "2026-10-23",
-  "pos": 25.3,
-  "site": "corporate",
-  "by": "auto_rewrite"
- },
- "keiri-zaimu-chigai": {
-  "at": "2026-10-19",
-  "pos": 32.7,
-  "imp": 205,
+  "at": "2026-10-26",
+  "pos": 24.7,
+  "imp": 167,
   "band": "21〜50位",
   "site": "corporate"
  },
+ "keiri-zaimu-chigai": {
+  "at": "2026-10-26",
+  "pos": 30.854395604395606,
+  "site": "corporate",
+  "by": "auto_merge"
+ },
  "jizokuka-hojokin-kensetsugyou": {
-  "at": "2026-10-19",
-  "pos": 9.7,
-  "imp": 25,
+  "at": "2026-10-26",
+  "pos": 7,
+  "imp": 24,
   "band": "4〜10位",
   "site": "subsidy"
  },
@@ -716,10 +726,11 @@
   "site": "subsidy"
  },
  "kichodaiko-toha": {
-  "at": "2026-10-12",
-  "pos": 16.2,
-  "site": "corporate",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 25.4,
+  "imp": 99,
+  "band": "21〜50位",
+  "site": "corporate"
  },
  "ai-hojokin-chakkin-itsu": {
   "at": "2026-10-13",
@@ -728,36 +739,39 @@
   "by": "auto_rewrite"
  },
  "gemini-inyou-noru-houhou": {
-  "at": "2026-10-19",
-  "pos": 6.0,
-  "site": "ai-lab",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 6.6,
+  "imp": 81,
+  "band": "4〜10位",
+  "site": "ai-lab"
  },
  "shika-reform-hiyou": {
-  "at": "2026-10-19",
-  "pos": 11.0,
-  "imp": 77,
+  "at": "2026-10-26",
+  "pos": 10.6,
+  "imp": 87,
   "band": "11〜20位",
   "site": "ai-lab"
  },
  "meo-kaisha-llmo-taiou": {
-  "at": "2026-10-19",
-  "pos": 17.1,
-  "imp": 28,
+  "at": "2026-10-26",
+  "pos": 18.4,
+  "imp": 23,
   "band": "11〜20位",
   "site": "ai-lab"
  },
  "corporate-backoffice-chigai": {
-  "at": "2026-10-19",
-  "pos": 10.0,
-  "site": "corporate",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 9.4,
+  "imp": 525,
+  "band": "4〜10位",
+  "site": "corporate"
  },
  "keiri-bu-keiri-ka-chigai": {
-  "at": "2026-10-19",
-  "pos": 7.0,
-  "site": "corporate",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 6.8,
+  "imp": 238,
+  "band": "4〜10位",
+  "site": "corporate"
  },
  "keiri-jimu-hojo-chigai": {
   "at": "2026-10-19",
@@ -766,16 +780,18 @@
   "by": "auto_rewrite"
  },
  "gyoseishoshi-kichodaiko-souba": {
-  "at": "2026-10-20",
-  "pos": 7.0,
-  "site": "corporate",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 7.7,
+  "imp": 61,
+  "band": "4〜10位",
+  "site": "corporate"
  },
  "keiri-jikyu-souba": {
-  "at": "2026-10-20",
-  "pos": 7.0,
-  "site": "corporate",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 8.1,
+  "imp": 30,
+  "band": "4〜10位",
+  "site": "corporate"
  },
  "keiri-koritsuka-seminar": {
   "at": "2026-10-19",
@@ -785,10 +801,11 @@
   "site": "corporate"
  },
  "keiri-gaichuu-hikitsugi": {
-  "at": "2026-10-23",
-  "pos": 5.0,
-  "site": "corporate",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 5.5,
+  "imp": 31,
+  "band": "4〜10位",
+  "site": "corporate"
  },
  "keiri-hitode-busoku-taisaku": {
   "at": "2026-10-19",
@@ -797,34 +814,35 @@
   "by": "auto_rewrite"
  },
  "keiri-kaikeishi-chigai": {
-  "at": "2026-10-19",
+  "at": "2026-10-26",
   "pos": 23.5,
   "imp": 33,
   "band": "21〜50位",
   "site": "corporate"
  },
  "jigyou-saikouchiku-kojinjigyonushi-houjinnari": {
-  "at": "2026-10-19",
-  "pos": 6.0,
-  "site": "subsidy",
-  "by": "auto_rewrite"
- },
- "kojin-jigyonushi-kuruma-kounyu-hojokin": {
-  "at": "2026-10-19",
-  "pos": 7.0,
-  "site": "subsidy",
-  "by": "auto_rewrite"
- },
- "it-hojokin-denkaru-kyoyu-clinic": {
-  "at": "2026-10-19",
-  "pos": 13.4,
-  "imp": 42,
-  "band": "11〜20位",
+  "at": "2026-10-26",
+  "pos": 5.7,
+  "imp": 86,
+  "band": "4〜10位",
   "site": "subsidy"
  },
+ "kojin-jigyonushi-kuruma-kounyu-hojokin": {
+  "at": "2026-10-26",
+  "pos": 7.5,
+  "imp": 156,
+  "band": "4〜10位",
+  "site": "subsidy"
+ },
+ "it-hojokin-denkaru-kyoyu-clinic": {
+  "at": "2026-10-26",
+  "pos": 27.4,
+  "site": "subsidy",
+  "by": "auto_rewrite"
+ },
  "aio-taisaku-chuiten": {
-  "at": "2026-10-19",
-  "pos": 5.5,
+  "at": "2026-10-26",
+  "pos": 4.0,
   "site": "ai-lab",
   "by": "auto_rewrite"
  },
@@ -847,21 +865,130 @@
   "by": "auto_rewrite"
  },
  "kichodaiko-ryokinhyo-zeirishi": {
-  "at": "2026-10-23",
-  "pos": 27.4,
-  "site": "corporate",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 26.6,
+  "imp": 42,
+  "band": "21〜50位",
+  "site": "corporate"
  },
  "shika-iin-joseikin-taisho": {
-  "at": "2026-10-24",
-  "pos": 32.0,
-  "site": "subsidy",
-  "by": "auto_rewrite"
+  "at": "2026-10-26",
+  "pos": 32.8,
+  "imp": 21,
+  "band": "21〜50位",
+  "site": "subsidy"
  },
  "nail-salon-hojokin-hikaku": {
   "at": "2026-10-26",
-  "pos": 11.0,
+  "pos": 10.8,
+  "imp": 26,
+  "band": "11〜20位",
+  "site": "subsidy"
+ },
+ "aio-taisaku-gutairei": {
+  "at": "2026-10-26",
+  "pos": 10.0,
+  "imp": 58,
+  "band": "4〜10位",
+  "site": "ai-lab"
+ },
+ "aio-itsukara": {
+  "at": "2026-10-26",
+  "pos": 4.0,
+  "site": "ai-lab",
+  "by": "auto_rewrite"
+ },
+ "aio-mojisuu": {
+  "at": "2026-10-26",
+  "pos": 5.0,
+  "site": "ai-lab",
+  "by": "auto_rewrite"
+ },
+ "seikyusho-mitsuori-yarikata": {
+  "at": "2026-10-26",
+  "pos": 8.7,
+  "imp": 217,
+  "band": "4〜10位",
+  "site": "corporate"
+ },
+ "keiri-gaichuu-hiyou-souba": {
+  "at": "2026-10-26",
+  "pos": 9.8,
+  "imp": 39,
+  "band": "4〜10位",
+  "site": "corporate"
+ },
+ "kicho-daiko-coconala": {
+  "at": "2026-10-26",
+  "pos": 10.0,
+  "site": "corporate",
+  "by": "auto_rewrite"
+ },
+ "shiwake-miss-fusegu-houhou": {
+  "at": "2026-10-26",
+  "pos": 7.0,
+  "site": "corporate",
+  "by": "auto_rewrite"
+ },
+ "keihi-seisan-ryoshusho-funshitsu": {
+  "at": "2026-10-26",
+  "pos": 16.1,
+  "imp": 57,
+  "band": "11〜20位",
+  "site": "corporate"
+ },
+ "getsuji-kessan-itsumade": {
+  "at": "2026-10-26",
+  "pos": 10.6,
+  "imp": 24,
+  "band": "11〜20位",
+  "site": "corporate"
+ },
+ "inshokuten-kicho-daiko": {
+  "at": "2026-10-26",
+  "pos": 15.7,
+  "imp": 23,
+  "band": "11〜20位",
+  "site": "corporate"
+ },
+ "invoice-seido-keiri-jitsumu": {
+  "at": "2026-10-26",
+  "pos": 25.2,
+  "imp": 25,
+  "band": "21〜50位",
+  "site": "corporate"
+ },
+ "urikakekin-kanri-houhou": {
+  "at": "2026-10-26",
+  "pos": 30.8,
+  "imp": 21,
+  "band": "21〜50位",
+  "site": "corporate"
+ },
+ "nogyo-hojokin-hensai-fuyou": {
+  "at": "2026-10-26",
+  "pos": 7.0,
   "site": "subsidy",
   "by": "auto_rewrite"
+ },
+ "ai-hojokin-security-action-hoshi2": {
+  "at": "2026-10-26",
+  "pos": 6.4,
+  "imp": 21,
+  "band": "4〜10位",
+  "site": "subsidy"
+ },
+ "it-hojokin-joken": {
+  "at": "2026-10-26",
+  "pos": 7.0,
+  "site": "subsidy",
+  "by": "auto_rewrite"
+ },
+ "nougyou-hojokin-tractor": {
+  "at": "2026-10-26",
+  "pos": 12.8,
+  "imp": 26,
+  "band": "11〜20位",
+  "site": "subsidy"
  }
 }

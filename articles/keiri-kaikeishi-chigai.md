@@ -184,7 +184,7 @@ faq:
 
 向かない会社もあります。取引が月に数十件で、社長が自分で入力しても1日で終わるなら、外に出す費用の方が重くなります。この場合は会計ソフトの自動連携を先に試してください。
 
-記帳代行と経理BPOのどちらが合うかは、[記帳代行と経理BPOの違いを3つで比べた記事](/blog/keihi-seisan-kichodaiko-bpo-chigai/)で判断できます。費用の目安は、[税理士の記帳代行報酬相場と経理BPOの比較](/blog/zeirishi-houshu-kichodaiko-souba/)にまとめています。
+記帳代行と経理BPOのどちらが合うかは、[記帳代行と経理BPOの違いを3つで比べた記事](/blog/backoffice-bpo-toha/)で判断できます。費用の目安は、[税理士の記帳代行報酬相場と経理BPOの比較](/blog/zeirishi-houshu-kichodaiko-souba/)にまとめています。
 
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 

@@ -51,7 +51,6 @@ faq:
 
 月次決算とは、毎月の取引を締めて試算表を作成し、経営状態を毎月確認する仕組みです。
 
-
 あわせて[経理のやり方とは？初心者向け5ステップ](/blog/keiri-yarikata-shoshinsha/)もご覧ください。
 
 経理業務全体の中で月次決算がどう位置づくかは、[経理の属人化を解消する5つの方法｜原因とリスクも解説](https://corp.7senses.co.jp/blog/keiri-zokujinka-kaisho/)でも触れています。
@@ -65,6 +64,8 @@ faq:
 ## 月次決算と本決算（年次決算）の違い
 
 月次決算は毎月の社内向け仮決算で、本決算は年1回の対外向け確定決算です。
+
+関連する内容は[月次決算はいつまでに終えるか](/blog/getsuji-kessan-itsumade/)でも扱っています。
 
 近い論点を[現金払いは否認の落とし穴？](/blog/gaichuuhi-seikyuusho-nashi/)で扱っています。
 
@@ -131,8 +132,6 @@ faq:
 
 近い論点をSMBCグループの経理自動化事例で扱っています。
 
-関連する内容として[経理仕訳の自動化とは？人の確認が必要な5パターン](/blog/keiri-shiwake-jidoka-genkai/)も公開しています。
-
 <figure><img src="/images/getsuji-kessan-nyumon/tsumazuki.png" alt="初心者がつまずきやすい3つのポイント: 証憑の締切を社内に周知していない、仕訳のルールが担当者任せになっている、残高の不一致を確認せず放置してしまう" loading="lazy"><figcaption>初心者がつまずきやすい3つのポイント</figcaption></figure>
 
 Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-sansan.com/news/2024/0328_02.html" target="_blank" rel="noopener">「経理の人手不足に関する実態調査」</a>（経理担当者1,000名対象）があります。この調査では、**経理の人手不足を感じている割合は50.1%、そのうち85.2%が「深刻」と回答**しています。人手が足りない状態で月次決算を担当すると、締切の周知や判断基準の整備にまで手が回らないのが実情です。
@@ -185,7 +184,6 @@ Sansan株式会社が2024年3月28日に公表した<a href="https://jp.corp-san
 <details><summary>月次決算でよくある失敗は何ですか？</summary><p class="faq-a">締切の未周知、仕訳ルールの未統一、残高不一致の放置の3つが代表的です。</p></details>
 <details><summary>月次決算を自社で回すのが難しい場合はどうすればよいですか？</summary><p class="faq-a">属人化のリスクが高い場合は、経理BPOへの外部委託も選択肢になります。</p></details>
 </div>
-
 
 経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 

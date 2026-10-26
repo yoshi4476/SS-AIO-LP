@@ -48,13 +48,15 @@ faq:
 
 **記帳代行の費用は、税理士・記帳代行専門会社・フリーランスのどれに頼むかで大きく変わります。**
 
+近い論点を[飲食店の記帳代行｜任せる範囲と選び方・失敗しない5つの確認点](/blog/inshokuten-kicho-daiko/)で扱っています。
+
+あわせて[記帳代行を札幌で頼むなら](/blog/kichodaiko-sapporo/)もご覧ください。
+
+費用の目安を先に押さえるなら、[記帳代行費用の相場は法人でいくら？](/blog/kichodaiko-houjin-hiyou-souba/)が参考になります。
+
+あわせて[平均12万円台は落とし穴](/blog/gyoseishoshi-kichodaiko-souba/)もご覧ください。
+
 関連する内容として記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方も公開しています。
-
-選ぶときの基準については、[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)にまとめています。
-
-近い論点を[経理の時給相場と直接雇用の決め方](/blog/keiri-jikyu-souba/)で扱っています。
-
-費用の目安については、[経理外注の費用相場｜依頼先4タイプの料金](/blog/keiri-gaichuu-hiyou-souba/)にまとめています。
 
 <div class="definition-box"><span class="term">記帳代行とは</span>、日々の取引を帳簿に記録する仕訳入力の作業を、外部の専門家や会社に委託することです。==経理業務全体ではなく、記帳部分に絞った委託が中心です。==</div>
 
@@ -172,8 +174,6 @@ faq:
 ## 記帳代行選びで注意したい3つの落とし穴
 
 **記帳代行は、安さだけで選ぶと追加費用や対応範囲の食い違いが後から起きやすくなります。**
-
-あわせて[記帳代行は資格なしの会社でも頼める？](/blog/kichodaiko-shikaku-nashi/)もご覧ください。
 
 <figure><img src="/images/kichodaiko-hiyou-souba/hikaku.png" alt="記帳代行選びのNGとOK: NG例は安さだけで依頼先を決める・仕訳数の上限を確認せず契約する・対応範囲を書面で確認しない・見積もりを1社だけで決める、OK例は料金体系と対応範囲を含めて比較する・仕訳数の上限と超過単価を確認する・対応範囲を書面で確認する・複数社から見積もりを取る" loading="lazy"><figcaption>記帳代行選びのNGとOK</figcaption></figure>
 
