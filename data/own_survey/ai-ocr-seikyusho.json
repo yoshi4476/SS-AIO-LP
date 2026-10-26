@@ -1,0 +1,85 @@
+{
+ "v": 2,
+ "slug": "ai-ocr-seikyusho",
+ "ok": true,
+ "date": "2026-10-26",
+ "questions": [
+  "ai ocr 請求書について教えてください",
+  "ai ocr 請求書について、「入力を機械に任せた後、人に残る判断は何か？」を教えてください",
+  "ai ocr 請求書について、「入力が正しくても残る誤り4つ」を教えてください",
+  "ai ocr 請求書について、「2026年10月からの経過措置70%は、AI OCRの設定だけで済むか？」を教えてください",
+  "ai ocr 請求書について、「AI OCRに向いている会社・向かない会社」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "入力を機械に任せた後、人に残る判断は何か？",
+   "words": [
+    "入力",
+    "機械"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "入力が正しくても残る誤り4つ",
+   "words": [
+    "入力"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "AI OCRの導入で起きやすい失敗と避け方",
+   "words": [
+    "導入"
+   ],
+   "hits": 7,
+   "of": 10
+  }
+ ],
+ "sources": {
+  "ai.japanstep.jp": "peer",
+  "akin-ai.jp": "peer",
+  "dnd-inc.jp": "peer",
+  "dx-suite.com": "peer",
+  "fastaccounting.jp": "peer",
+  "freee.co.jp": "peer",
+  "genai-ai.co.jp": "peer",
+  "gxo.co.jp": "peer",
+  "hatenabase.jp": "media",
+  "invox.jp": "peer",
+  "ipa.go.jp": "public",
+  "jinbay.co.jp": "peer",
+  "kandi-sol.co.jp": "peer",
+  "keihi.com": "peer",
+  "m-assets.com": "peer",
+  "maki.ne.jp": "peer",
+  "mentor-capital.jp": "peer",
+  "note.com": "video",
+  "nta.go.jp": "public",
+  "pca.jp": "peer",
+  "pfu.ricoh.com": "peer",
+  "ricoh.co.jp": "peer",
+  "shigyo-ai.com": "peer",
+  "support.freee.co.jp": "peer",
+  "uravation.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 1,
+  "専門家への相談": 0
+ },
+ "chars": 15530,
+ "claims": [
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『導入』に触れたものは7件でした。",
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは専門家への相談は0件、進め方の手順は1件、費用の金額（◯円）は2件でした。",
+  "当社調べでは2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは25件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが1件、動画・SNS・ブログが1件でした。"
+ ]
+}
