@@ -857,5 +857,11 @@
   "pos": 32.0,
   "site": "subsidy",
   "by": "auto_rewrite"
+ },
+ "nail-salon-hojokin-hikaku": {
+  "at": "2026-10-26",
+  "pos": 11.0,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  }
 }
