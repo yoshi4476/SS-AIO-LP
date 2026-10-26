@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-19",
-  "asked": 5,
+  "date": "2026-10-26",
+  "asked": 3,
   "items": [
     {
       "kw": "派遣 経理 時給 相場",
@@ -40,8 +40,8 @@
     },
     {
       "kw": "コーポレート バックオフィス 違い",
-      "imp": 5,
-      "pos": 13.8,
+      "imp": 10,
+      "pos": 7.5,
       "src": "gsc",
       "written": true,
       "ai": {
@@ -56,14 +56,14 @@
           }
         }
       },
-      "score": 7.8
+      "score": 7.0
     },
     {
-      "kw": "バックオフィス 事務 違い",
-      "imp": 5,
-      "pos": 18.2,
+      "kw": "経理補助とは",
+      "imp": 35,
+      "pos": 6,
       "src": "gsc",
-      "written": true,
+      "written": false,
       "ai": {
         "answered": false,
         "ours": false,
@@ -76,47 +76,7 @@
           }
         }
       },
-      "score": 7.8
-    },
-    {
-      "kw": "バックオフィス コーポレート 違い",
-      "imp": 6,
-      "pos": 4.3,
-      "src": "gsc",
-      "written": true,
-      "ai": {
-        "answered": false,
-        "ours": false,
-        "sources": [],
-        "engines": {
-          "Gemini": {
-            "answered": false,
-            "ours": false,
-            "sources": []
-          }
-        }
-      },
-      "score": 6.8
-    },
-    {
-      "kw": "バックオフィス アウトソーシング メリット",
-      "imp": 5,
-      "pos": 25.4,
-      "src": "gsc",
-      "written": true,
-      "ai": {
-        "answered": false,
-        "ours": false,
-        "sources": [],
-        "engines": {
-          "Gemini": {
-            "answered": false,
-            "ours": false,
-            "sources": []
-          }
-        }
-      },
-      "score": 4.8
+      "score": 2.6
     }
   ]
 }
