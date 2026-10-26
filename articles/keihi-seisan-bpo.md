@@ -49,6 +49,8 @@ faq:
 
 経費精算BPOとは、立替経費のチェック・記帳という実務だけを外部に任せる委託形態です。
 
+あわせて[記帳代行費用の相場は法人でいくら？](/blog/kichodaiko-houjin-hiyou-souba/)もご覧ください。
+
 あわせて[月次決算はいつまでに終えるか](/blog/getsuji-kessan-itsumade/)もご覧ください。
 
 選ぶときの基準については、[経費精算｜記帳代行と経理BPOの違いを3つで比較](/blog/backoffice-bpo-toha/)にまとめています。
