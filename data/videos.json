@@ -45,11 +45,10 @@
   },
   "aio-towa": {
     "site": "ai-lab",
-    "date": "2026-10-03",
+    "date": "2026-10-27",
     "sec": 319,
     "mp4": "automation/video/aio-towa.mp4",
     "nums": [
-      "10",
       "13.7",
       "3",
       "4",
@@ -57,22 +56,20 @@
       "64.7"
     ],
     "format": "duo",
-    "youtube": "nSRNr6klTZM",
-    "short": {
-      "date": "2026-10-03",
-      "sec": 42,
-      "title": "AIOは何から始める？効く3条件",
-      "youtube": "gxtIYcbIXkY",
-      "retired": [
-        "vZiyBjb78Cg",
-        "koffj2Y5G60"
-      ]
-    },
+    "youtube": "wW5HjxLYcIU",
     "retired": [
       "zhgMOj4UkJ0",
       "rXVB1Nrhnsc",
-      "fq33o4HNrE4"
-    ]
+      "fq33o4HNrE4",
+      "nSRNr6klTZM"
+    ],
+    "short": {
+      "date": "2026-10-27",
+      "sec": 42,
+      "title": "AIOは何から始める？効く3条件",
+      "desc": "lead-long",
+      "youtube": "gxtIYcbIXkY"
+    }
   },
   "aio-checker": {
     "site": "ai-lab",
