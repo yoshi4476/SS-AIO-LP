@@ -1,5 +1,5 @@
 {
-  "fetched": "2026-10-22",
+  "fetched": "2026-10-30",
   "sites": {
     "corporate": [
       {
@@ -41,6 +41,56 @@
         "url": "https://corp.7senses.co.jp/blog/theme/kojin",
         "slug": "kojin",
         "title": "個人事業主・小規模事業者"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kicho-seikyusho",
+        "slug": "kicho-seikyusho",
+        "title": "請求書の記帳で間違えやすい計上日｜発行側・受取側の仕訳と失敗4つ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/ai-ocr-seikyusho",
+        "slug": "ai-ocr-seikyusho",
+        "title": "AI OCRの請求書読み取りで防げない誤り4つ｜人が見る項目と分担"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kojinjigyonushi-gaichuuhi-seikyusho",
+        "slug": "kojinjigyonushi-gaichuuhi-seikyusho",
+        "title": "個人事業主の外注費の請求書で見落とす3点｜源泉・登録番号・家族"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keihi-seisan-gaichuu",
+        "slug": "keihi-seisan-gaichuu",
+        "title": "経費精算の外注で失敗する引き継ぎ｜渡す資料5点と依頼先4種"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keihi-seisan-mendokusai",
+        "slug": "keihi-seisan-mendokusai",
+        "title": "経費精算がめんどくさい会社の落とし穴｜手間が出る3か所と減らし方"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/getsuji-kessan-excel",
+        "slug": "getsuji-kessan-excel",
+        "title": "月次決算をエクセルで回す落とし穴3つ｜残す表とやめる入力"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/backoffice-consul-teian",
+        "slug": "backoffice-consul-teian",
+        "title": "バックオフィスのコンサルが提案で終わる3つの原因｜代行との分け方"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/aoiro-shinkokukai-kichodaiko",
+        "slug": "aoiro-shinkokukai-kichodaiko",
+        "title": "青色申告会で記帳代行は頼める？指導と代行を取り違える落とし穴3つ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kensetsugyou-kichodaiko",
+        "slug": "kensetsugyou-kichodaiko",
+        "title": "建設業の記帳代行が合わない3つの状況｜渡す前に社内で決める4つ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-shiwake",
+        "slug": "gaichuuhi-seikyuusho-shiwake",
+        "title": "外注費の請求書の仕訳で起きる誤り4つ｜源泉と登録番号の確かめ方"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/kensetsugyou-gaichuuhi-shiwake",
@@ -90,7 +140,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/kicho-daiko-coconala",
         "slug": "kicho-daiko-coconala",
-        "title": "記帳代行をココナラで頼む前に｜個人出品と法人BPOの違い5つ"
+        "title": "記帳代行をココナラで頼む落とし穴｜試算表が届かない等の失敗3つ"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/getsuji-kessan-itsumade",
@@ -160,7 +210,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/sweeep-seikyusho",
         "slug": "sweeep-seikyusho",
-        "title": "sweeepの請求書処理は今どうなった？freee統合後の機能と料金"
+        "title": "sweeepの請求書は旧資料のまま決めるとNG｜freee統合後の料金"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/getsuji-nenji-kessan-chigai",
@@ -176,11 +226,6 @@
         "url": "https://corp.7senses.co.jp/blog/getsuji-shihanki-kessan-chigai",
         "slug": "getsuji-shihanki-kessan-chigai",
         "title": "月次決算と四半期決算の違いは？中小企業に要るのは月次だけ"
-      },
-      {
-        "url": "https://corp.7senses.co.jp/blog/kaikei-keiri-chigai",
-        "slug": "kaikei-keiri-chigai",
-        "title": "会計と経理の違い｜税理士に任せても社内に残る経理の作業"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-zaimu-chigai",
@@ -231,11 +276,6 @@
         "url": "https://corp.7senses.co.jp/blog/keiri-bpo-keiyakusho-kakunin",
         "slug": "keiri-bpo-keiyakusho-kakunin",
         "title": "経理BPOの契約書｜見落としやすい条項6つと確認手順"
-      },
-      {
-        "url": "https://corp.7senses.co.jp/blog/keihi-seisan-kichodaiko-bpo-chigai",
-        "slug": "keihi-seisan-kichodaiko-bpo-chigai",
-        "title": "経費精算｜記帳代行と経理BPOの違いを3つで比較"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/getsuji-kessan-bpo-keiyakumae",
@@ -635,7 +675,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/shiwake-miss-fusegu-houhou",
         "slug": "shiwake-miss-fusegu-houhou",
-        "title": "仕訳ミスを防ぐ方法とは？原因別4つの対策とチェック体制"
+        "title": "直接書き換えはNG！仕訳ミスを防ぐ方法と原因別の対策"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/keihi-seisan-rule-tsukurikata",
@@ -675,7 +715,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-gaichuu-hikitsugi",
         "slug": "keiri-gaichuu-hikitsugi",
-        "title": "経理外注の引き継ぎ｜必要資料と失敗しない5ステップ【2026年】"
+        "title": "経理外注の引き継ぎ失敗例｜質問の後回しで修正に約6時間・5ステップ"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-daiko-security",
@@ -792,7 +832,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/nogyo-hojokin-hensai-fuyou/",
         "slug": "nogyo-hojokin-hensai-fuyou",
-        "title": "農業の補助金は返済不要？返還を求められる5つの場面"
+        "title": "農業の補助金は返済不要でも返還に？5つのNG場面"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/ai-system-kaihatsu-hojo-taisho-keihi/",
@@ -852,7 +892,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-joken/",
         "slug": "it-hojokin-joken",
-        "title": "IT導入補助金の条件｜申請額150万円で変わる賃上げ要件と対象外"
+        "title": "IT導入補助金の条件｜賃上げ未達は返還、対象外と落とし穴"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/smart-nougyou-hojokin/",
@@ -867,7 +907,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/shika-iin-joseikin-taisho/",
         "slug": "shika-iin-joseikin-taisho",
-        "title": "歯科医院の助成金の対象は？医療法人も人数で決まる3制度"
+        "title": "歯科医院の助成金、対象外になる5つの失敗｜医療法人は100人以下"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/it-donyu-shienjigyosha-erabikata/",
@@ -1052,7 +1092,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/nail-salon-hojokin-hikaku/",
         "slug": "nail-salon-hojokin-hikaku",
-        "title": "ネイルサロンの補助金3種を比較｜IT導入・ものづくり・持続化"
+        "title": "ネイルサロンの補助金｜材料費と面貸しは対象外になる落とし穴"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/nail-salon-hojokin-tejun/",
