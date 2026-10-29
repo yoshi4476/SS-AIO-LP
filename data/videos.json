@@ -1073,7 +1073,7 @@
   },
   "shigyou-hp-yokuaru-shitsumon": {
     "site": "ai-lab",
-    "date": "2026-10-28",
+    "date": "2026-10-29",
     "sec": 132,
     "mp4": "automation/video/shigyou-hp-yokuaru-shitsumon.mp4",
     "nums": [
@@ -1083,20 +1083,9 @@
       "72.1"
     ],
     "format": "slides",
-    "long": {
-      "date": "2026-10-28",
-      "keyword": "士業 ホームページ よくある質問",
-      "queries": [
-        "士業 ホームページ よくある質問",
-        "ホームページ よくある質問",
-        "士業 よくある質問",
-        "士業 ホームページ"
-      ],
-      "decision": "make",
-      "term": "士業 ホームページ",
-      "title": "士業 ホームページは何から始める？｜士業ホームページのよくある質問で避けたい3つのNGと答えの線引き",
-      "reason": "YouTube のサジェストに「士業 ホームページ」が出ます"
-    },
-    "youtube": "arRyKQHEfAg"
+    "youtube": "xpFVu_cOarc",
+    "retired": [
+      "arRyKQHEfAg"
+    ]
   }
 }
