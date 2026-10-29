@@ -2431,3 +2431,12 @@
 {"at": "2026-10-27 04:18", "by": "link_boost", "slug": "gaichuuhi-seikyuusho-nashi", "kind": "link_decay", "ok": true, "note": "kicho-seikyusho から内部リンクを1本"}
 {"when": "2026-10-27T04:18:47.530122", "by": "auto_review", "slug": "(3記事)", "what": "言い回し0件を振り直し・1件を削除"}
 {"at": "2026-10-29 09:13", "by": "auto_rewrite", "slug": "monozukuri-hojokin-clinic", "kind": "stuck", "ok": false, "note": "claude が動きませんでした（）", "tag": "spare-slot"}
+{"at": "2026-10-30 04:17", "by": "auto_rewrite", "slug": "kichodaiko-hiyou-kanjoukamoku", "kind": "title", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-30 04:17", "by": "auto_rewrite", "slug": "seikyusho-excel-jidoka", "kind": "title", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-30 04:17", "by": "auto_rewrite", "slug": "gaichuuhi-seikyuusho-shiwake", "kind": "title", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-30 04:17", "by": "auto_rewrite", "slug": "shokibo-jigyousha-keiri-taisei", "kind": "title", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-30 04:17", "by": "auto_rewrite", "slug": "koumuten-chumon-jutaku-aio", "kind": "title", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-30 04:17", "by": "auto_rewrite", "slug": "kichodaiko-sapporo", "kind": "stuck", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-30 04:17", "by": "auto_rewrite", "slug": "inshokuten-kicho-daiko", "kind": "stuck", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
+{"at": "2026-10-30 04:18", "by": "link_boost", "slug": "gaichuuhi-seikyuusho-shiwake", "kind": "link_inline", "ok": true, "note": "seikyusho-shougou-jidoka の本文の「請求書の仕訳」を文中リンクに", "src": "seikyusho-shougou-jidoka", "anchor": "請求書の仕訳"}
+{"when": "2026-10-30T04:18:42.016721", "by": "auto_review", "slug": "(2記事)", "what": "言い回し1件を振り直し・0件を削除"}
