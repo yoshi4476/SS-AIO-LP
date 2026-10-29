@@ -385,3 +385,6 @@
 {"at": "2026-10-28 21:35", "run": "40688445067", "site": "corporate", "slug": "getsuji-kessan-bunseki-houhou", "mode": "pending", "action": "skip", "state": "improving", "why": "材料待ち"}
 {"at": "2026-10-28 21:35", "run": "40688445067", "site": "corporate", "slug": "clinic-keiri", "mode": "pending", "action": "skip", "state": "improving", "why": "材料待ち"}
 {"at": "2026-10-29 08:13", "run": "40785481739", "site": "ai-lab", "slug": "aio-taisaku-jibunde", "mode": "rescore", "action": "skip", "state": "unscored", "why": "材料待ち"}
+{"at": "2026-10-29 10:12", "run": "40798813051", "site": "corporate", "slug": "getsuji-kessan-bunseki-houhou", "mode": "pending", "action": "skip", "state": "improving", "why": "材料待ち"}
+{"at": "2026-10-29 10:12", "run": "40798813051", "site": "corporate", "slug": "clinic-keiri", "mode": "pending", "action": "skip", "state": "improving", "why": "材料待ち"}
+{"at": "2026-10-29 10:13", "run": "40798813051", "site": "corporate", "slug": "gaichuuhi-seikyuusho-shiwake", "mode": "rescore", "action": "skip", "state": "unscored", "why": "材料待ち"}
