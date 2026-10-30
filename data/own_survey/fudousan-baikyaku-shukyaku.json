@@ -1,0 +1,112 @@
+{
+ "v": 2,
+ "slug": "fudousan-baikyaku-shukyaku",
+ "ok": true,
+ "date": "2026-10-31",
+ "questions": [
+  "不動産 売却 集客について教えてください",
+  "不動産 売却 集客について、「不動産の売却集客とは？売主の依頼を自社サイトで受ける仕組み」を教えてください",
+  "不動産 売却 集客について、「売主が検索とAIに聞く4つの段階と受けるページ」を教えてください",
+  "不動産 売却 集客について、「不動産の売却集客で外す3つのNG」を教えてください",
+  "不動産 売却 集客について、「売却の質問に答えるページの作り方」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "不動産の売却集客とは？売主の依頼を自社サイトで受ける仕組み",
+   "words": [
+    "自社サイト",
+    "売主"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "売主が検索とAIに聞く4つの段階と受けるページ",
+   "words": [
+    "ページ",
+    "売主",
+    "検索",
+    "AI"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "不動産の売却集客で外す3つのNG",
+   "words": [
+    "NG"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "売却の質問に答えるページの作り方",
+   "words": [
+    "ページ",
+    "質問"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "検索順位と期間で見る売却集客の目安",
+   "words": [
+    "検索順位",
+    "期間"
+   ],
+   "hits": 4,
+   "of": 10
+  },
+  {
+   "topic": "一括査定に頼る会社・自社で受ける会社・見送る会社",
+   "words": [
+    "一括査定"
+   ],
+   "hits": 5,
+   "of": 10
+  }
+ ],
+ "sources": {
+  "asantech.co.jp": "peer",
+  "biz.homes.jp": "portal",
+  "caa.go.jp": "public",
+  "developers.google.com": "peer",
+  "erajapan.co.jp": "peer",
+  "eslab.branding-t.co.jp": "peer",
+  "f-mikata.jp": "peer",
+  "facilo.jp": "peer",
+  "ielove.co.jp": "portal",
+  "juutakuseisaku.metro.tokyo.lg.jp": "public",
+  "matsuyama-takken.jp": "peer",
+  "mecyes.co.jp": "peer",
+  "mlit.go.jp": "public",
+  "note.com": "video",
+  "ostance.com": "peer",
+  "property-force.jp": "peer",
+  "prtimes.jp": "media",
+  "reco-05.jp": "peer",
+  "shinwa-agency.co.jp": "peer",
+  "showtime24.co.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "youtube.com": "video",
+  "zennichi.or.jp": "public"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 6,
+  "進め方の手順": 6,
+  "専門家への相談": 2
+ },
+ "chars": 21992,
+ "claims": [
+  "当社は2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え10件のうち、『検索順位』に触れたものは4件でした。",
+  "当社は2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは費用の金額（◯円）は2件、専門家への相談は2件、期間（◯か月・◯日など）は3件でした。",
+  "当社は2026年10月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは23件で、公的機関・学会・業界団体が4件、ニュース・メディア・まとめが1件、ポータル・比較サイトが2件、動画・SNS・ブログが2件でした。"
+ ]
+}
