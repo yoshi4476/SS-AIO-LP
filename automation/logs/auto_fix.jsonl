@@ -2440,3 +2440,4 @@
 {"at": "2026-10-30 04:17", "by": "auto_rewrite", "slug": "inshokuten-kicho-daiko", "kind": "stuck", "ok": true, "note": "変更なし（直す必要なしと判断）", "tag": "focus"}
 {"at": "2026-10-30 04:18", "by": "link_boost", "slug": "gaichuuhi-seikyuusho-shiwake", "kind": "link_inline", "ok": true, "note": "seikyusho-shougou-jidoka の本文の「請求書の仕訳」を文中リンクに", "src": "seikyusho-shougou-jidoka", "anchor": "請求書の仕訳"}
 {"when": "2026-10-30T04:18:42.016721", "by": "auto_review", "slug": "(2記事)", "what": "言い回し1件を振り直し・0件を削除"}
+{"at": "2026-10-30 09:14", "by": "auto_rewrite", "slug": "smart-nougyou-hojokin", "kind": "stuck", "ok": false, "note": "claude が動きませんでした（）", "tag": "spare-slot"}
