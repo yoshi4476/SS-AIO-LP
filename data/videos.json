@@ -1073,7 +1073,7 @@
   },
   "shigyou-hp-yokuaru-shitsumon": {
     "site": "ai-lab",
-    "date": "2026-10-29",
+    "date": "2026-10-30",
     "sec": 132,
     "mp4": "automation/video/shigyou-hp-yokuaru-shitsumon.mp4",
     "nums": [
@@ -1083,9 +1083,10 @@
       "72.1"
     ],
     "format": "slides",
-    "youtube": "xpFVu_cOarc",
+    "youtube": "Qgdg5grpsnE",
     "retired": [
-      "arRyKQHEfAg"
+      "arRyKQHEfAg",
+      "xpFVu_cOarc"
     ]
   }
 }
