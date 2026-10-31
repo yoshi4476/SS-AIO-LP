@@ -394,7 +394,7 @@ def materials(site, slug):
         # 記事に出す出典は「自社の支援実績」までにする（中身は同じ。控え書きは台帳にだけ残す）
         src = re.sub(r"[（(][^）)]*申告[^）)]*[）)]", "", str(f.get("source") or "")).strip()
         when = str(f.get("as_of") or "").strip()
-        facts.append(f"- {c}（出典: {src or '自社'}{'・' + when + '時点' if when else ''}）")
+        facts.append(f"- {c}（出典: {src or '自社'}{'・' + when + '時点' if when else ''}）{F.scope_note(f)}")
         allowed += [c, src, as_of_text(when)]
     try:
         # 当社調べ（own_survey）: 記事の狙う語を複数の AI に聞いて数えた結果。材料が届かない題でも、母数と時期のある

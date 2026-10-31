@@ -190,6 +190,12 @@ def load_for(site_id):
     return data, [hide_private_urls(f) for f in got]
 
 
+def scope_note(f):
+    """使ってよい範囲（質問シートの「可（条件）」の条件。material_sheet が scope に残す）。書く・直す工程に数字と一緒に渡す"""
+    s = str(f.get("scope") or "").strip()
+    return f"（使ってよい範囲: {s}）" if s else ""
+
+
 DATA_URL = re.compile(r"\s*https?://ai\.7senses\.co\.jp/data/\S*")
 
 
@@ -228,7 +234,7 @@ def main():
 
     print(f"■ {site_id} で使える一次情報（記事に最低1つ入れること）")
     for f in picked:
-        print(f"\n  ・{f['claim']}")
+        print(f"\n  ・{f['claim']}{scope_note(f)}")
         # 台帳の控え書き（「運用者の申告」）は記事に出さない（quality_loop.materials と同じ。採点で「申告止まり」と減点された）
         print(f"    出典: {re.sub(r'[（(][^）)]*申告[^）)]*[）)]', '', f['source']).strip()}（{f['as_of']}時点）")
     # 直しの材料（quality_loop.materials）と同じものを書く段階から渡す。相場とお客様の声は直しにしか渡っておらず、

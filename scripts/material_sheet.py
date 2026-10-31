@@ -10,7 +10,11 @@
 - 答えに無い数字は登録しない（AI が文に直すときに数字を作ると、事実と違う記事が公開される）
 - 既存の記録と食い違う答えは登録せず保留にして知らせる（2026-10-21 のお客様の社の答えで、12件の費用の幅と
   34件の原因が既存の記録と食い違った。そのまま記事に載せると読者にも採点にも矛盾として読まれる）
-- 「記事に出してよいか」が不可の答えと、お客様の声（掲載の許可の確認が要る）は登録しない
+- 「記事に出してよいか」が不可の答えと、お客様の声（掲載の許可の確認が要る）は登録しない。「不可（…）」「要確認」のような
+  条件つきの書き方も読む。「可（条件）」の条件は使ってよい範囲（scope）として残し、条件に確認待ちが入るものは保留（permission）
+- 同じ集計の期間が後の計測は食い違いでなく更新として、古い値を消さずに足す（follows）。今の台帳の言い直しは重複として登録しない
+- 答えは CHUNK 件ずつ claude に渡し、応答が空・壊れたまとまりは「分からない」と件数で知らせる（0件と言わない）
+- 隠しタブの印と行の項目が合わない行は保留。記入した側が足した行（印つき）は、その行の質問への答えとして読む
 
   python scripts/material_sheet.py --make [--site <id>] [--out <フォルダ>]   # 依頼のある社の質問シート（既定はデスクトップ）
   python scripts/material_sheet.py --apply <xlsx> [--write]                    # 返ってきたシートを登録（--write なしは見るだけ）
@@ -205,25 +209,81 @@ def question_tab(wb, site, name, today, rows, extra_head=()):
 
 # ── 読む・登録する ────────────────────────────────────────────────────
 
+def _kinds():
+    """作るときに付ける印の種類と、その行の項目の書き出し（tpl は項目そのもの）"""
+    return {"req": ("記事「",), "fact": ("一次情報の補い",), "upd": ("一次情報の更新",), "gap": ("採点の指摘「",),
+            "kw": tuple(f"{label}（" for _k, label, *_x in KW_KINDS), "tpl": None}
+
+
+def _bind(key, item, twice=False):
+    """答えの行が隠しタブの印の質問に結びつくか。結びつかなければ保留の理由（空なら結びつく）。
+    2026-10-31 の3冊は、記入した側が作ったときの行（174行）の後に行を足し、隠しタブにも印（extra:）を足していた。
+    作ったときの印は項目の書き出しと種類が合うかを見る。作ったときに無い種類の印の行は、その行の質問への答えとして読む"""
+    kind, _, rest = str(key).partition(":")
+    if twice:
+        return "結びつかない行：同じ番号の行が2つある（どちらの答えか分からない）"
+    if not key:
+        return "結びつかない行：隠しタブに印が無い（作ったときに無い行で、どの質問の答えか分からない）"
+    kinds = _kinds()
+    if kind not in kinds:
+        return ""
+    good = (item == {k: lab for k, lab, *_x in TEMPLATE}.get(rest)) if kind == "tpl" else item.startswith(kinds[kind])
+    return "" if good else f"結びつかない行：項目「{item[:24]}」と隠しタブの印（{kind}）の種類が合わない"
+
+
 def read(src):
     from openpyxl import load_workbook
     wb = load_workbook(src, read_only=True, data_only=True)
     try:
-        meta = {str(r[0]): str(r[1]) for r in wb[META].iter_rows(values_only=True) if r and r[0] is not None}
+        meta = {str(r[0]).strip(): str(r[1]).strip() for r in wb[META].iter_rows(values_only=True)
+                if r and r[0] is not None and r[1] is not None}
+        rows = [r for r in wb[TAB].iter_rows(min_row=5, values_only=True) if r and r[0] is not None]
+        seen = {}
+        for r in rows:
+            seen[str(r[0]).strip()] = seen.get(str(r[0]).strip(), 0) + 1
         answers = []
-        for r in wb[TAB].iter_rows(min_row=5, values_only=True):
-            if not r or r[0] is None:
-                continue
+        for r in rows:
             no = str(r[0]).strip()
             ans = str(r[4] or "").strip()
             if not ans:
                 continue
-            answers.append({"no": no, "key": meta.get(no, ""), "item": str(r[1] or ""), "question": str(r[2] or ""),
+            key, item = meta.get(no, ""), str(r[1] or "")
+            answers.append({"no": no, "key": key, "item": item, "question": str(r[2] or ""),
                             "answer": ans, "period": str(r[5] or "").strip(), "count": str(r[6] or "").strip(),
-                            "ok": str(r[7] or "").strip()})
+                            "ok": str(r[7] or "").strip(), "target": str(r[10] or "").strip() if len(r) > 10 else "",
+                            "bind": _bind(key, item, seen[no] > 1),
+                            "added": bool(key) and key.partition(":")[0] not in _kinds()})
         return meta.get("site", ""), answers
     finally:
         wb.close()
+
+
+# 「記事に出してよいか」の欄。2026-10-31 の3冊は「不可（根拠確認後に判断）」「可（既存公開部分のみ。要確認事項は除外）」
+# のように条件つきで書かれ、「不可」「×」との完全一致では「不可（…）」が登録側に通っていた
+NG_HEAD = re.compile(r"^(?:不可|×|✕|NG|要確認|未確認|仮置き|保留)")
+NG_ANY = re.compile(r"不可|未確認|要確認|確認後|未確定|仮置き")
+OK_HEAD = re.compile(r"^(可|○|〇|OK|お客様の記事だけ)(.*)$", re.S)
+
+
+def permission(ok, site):
+    """(使ってよいか, 使ってよい範囲, 保留の理由)。「可（条件）」の条件は使ってよい範囲として一次情報に残す。
+    条件に確認待ち（未確認・要確認・確認後）が入るものは、確かめるまで保留"""
+    s = re.sub(r"\s+", " ", str(ok or "")).strip()
+    if not s:
+        return False, "", "不可：記事に出さない答え（記事に出してよいかが空欄）"
+    if NG_HEAD.match(s):
+        return False, "", f"不可：記事に出さない答え（{s[:40]}）"
+    m = OK_HEAD.match(s)
+    if not m:
+        return False, "", f"不可：記事に出さない答え（「{s[:30]}」を可と読めない）"
+    if NG_ANY.search(s):
+        return False, "", f"条件が未確認：記事に出す条件に確認待ちがある（{s[:40]}）"
+    if m.group(1) == "お客様の記事だけ":
+        import private_store as P
+        if not P.is_client(site):
+            return False, "", "不可：記事に出さない答え（お客様の記事だけの答えが自社のシートにある）"
+        return True, s, ""
+    return True, m.group(2).strip().strip("（）()").strip(), ""
 
 
 def existing(site):
@@ -238,6 +298,16 @@ def existing(site):
             [str(r.get("text") or "") for r in originality.load_experiences(site)])
 
 
+def records(site):
+    """今の一次情報 {id: 項目}。更新の判定に期間・時点を見る"""
+    import facts as F
+    try:
+        _, fs = F.load_for(site)
+    except Exception:  # noqa: BLE001
+        fs = []
+    return {str(f.get("id")): f for f in fs or [] if f.get("id")}
+
+
 PROMPT = """あなたは記事の一次情報の台帳の係です。お客様が質問シートに書いた答えを、記事に使える一次情報の文と体験の文に直します。
 答えに書かれていないことは一切書かないでください（数字・期間・業種・結果を作らない）。
 
@@ -248,6 +318,13 @@ PROMPT = """あなたは記事の一次情報の台帳の係です。お客様�
 - 食い違い（conflicts）: 下の「今の記録」と同じ対象（同じ件数のまとまり・同じ選び方の集計など）について数字や内訳が違う答えは、
   文にせず conflicts に入れる（どの記録と何が違うかを書く）。迷ったら conflicts に入れる
 - 記事に出してよいかが「不可」の答え、お客様の声の答えは、文にしない
+- 「使ってよい範囲」がある答えは、その範囲を超えない文にする（例: 「当社によるAI回答調査としてのみ」なら、当社がAIに聞いた結果として書く）
+- 答えの中の「要確認」「未確認」「未記載」「確定できない」とされた部分は文にしない（確かめられた部分だけを文にする）
+- 今の記録と同じ数字・同じ期間を言い直しただけの答え（新しい数字の無い答え）は文にしない
+- 更新（updates）: 今の記録と同じ集計（同じ id・同じ数え方）を、期間が後の新しい計測で数え直した答えは、conflicts ではなく
+  updates に入れる（"existing" にその id、"period" に新しい期間、文に新しい期間を入れる）。古い記録は書き換えない。
+  同じ対象か分からないもの（「◯件以上」と「約◯件」、期間や数え方が書かれていない）は conflicts に入れる
+- 足された質問（項目が「追加質問」など）は、その行の質問への答えとして読む。「関係する記録」はその答えが触れている記録
 - 補い（項目が「一次情報の補い」・質問に今の文がある答え）: 今の文に、答えの母数・期間・数え方を足した文に書き直し、
   facts の項目に "replaces": "その一次情報の id"（答えの番号の行の「補う id」）を付ける。今の文の数字は変えない。
   答えの数字が今の文と違うときだけ conflicts に入れる
@@ -264,6 +341,7 @@ PROMPT = """あなたは記事の一次情報の台帳の係です。お客様�
 # 返す形（JSON だけ。説明は書かない）
 {{"facts": [{{"no": "答えの番号", "claim": "文", "topic": ["語", "語"], "period": "YYYY-MM〜YYYY-MM か空", "denominator": 数字か null}}],
  "experiences": [{{"no": "答えの番号", "key": "語", "text": "文", "when": "時期"}}],
+ "updates": [{{"no": "答えの番号", "existing": "記録の id", "claim": "文", "topic": ["語"], "period": "新しい期間", "denominator": 数字か null}}],
  "conflicts": [{{"no": "答えの番号", "existing": "記録の id", "why": "何が違うか"}}]}}
 """
 
@@ -291,7 +369,8 @@ def _ask(prompt):
     """読むだけの claude を1回呼ぶ（門ではこれを差し替える）"""
     import auto_rewrite as A
     import quality_loop as Q
-    with tempfile.TemporaryDirectory() as tmp:
+    # Windows では claude の子の処理が一時フォルダを掴んだまま残り、片付けの失敗で答えごと捨てていた（2026-10-31）
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         r = A.sh(Q.scorer_args(), timeout=900, stdin_text=prompt, cwd=tmp)
     return r.stdout or ""
 
@@ -299,49 +378,190 @@ def _ask(prompt):
 def _json(raw):
     m = re.search(r"\{.*\}", raw or "", re.S)
     try:
-        return json.loads(m.group(0)) if m else {}
+        got = json.loads(m.group(0)) if m else {}
     except ValueError:
         return {}
+    return got if isinstance(got, dict) else {}
+
+
+# 1回の claude に渡す答えの数。2026-10-31 の自社の1冊は答え391件を1回に詰め、応答が壊れて {} になったのを
+# 「登録0件」と報告していた（答えの文を返す量が1回の出力に収まらない）
+CHUNK = 30
+REPLY_KEYS = ("facts", "experiences", "updates", "conflicts")
+CAVEAT = re.compile(r"要確認|未確認|未記載|確定できない|原記録が(?:ない|無い)")
+DATE = re.compile(r"\d{4}\s*[年/-]\s*\d{1,2}(?:\s*[月/-]\s*\d{1,2}\s*日?)?\s*月?|\d{4}年|\d{1,2}月\d{1,2}日|\d{1,2}月")
+
+
+def _core(text):
+    """日付を除いた数字（件数・時間・金額など）"""
+    return _nums(DATE.sub(" ", str(text or "")))
+
+
+def _dates(text):
+    return _nums(" ".join(DATE.findall(str(text or ""))))
+
+
+def _end(text):
+    """文・期間の中でいちばん後の日付 (年, 月, 日)。無ければ None"""
+    got = []
+    for y, mo, d in re.findall(r"(\d{4})\s*[年/-]\s*(\d{1,2})(?:\s*[月/-]\s*(\d{1,2}))?", str(text or "")):
+        got.append((int(y), int(mo), int(d or 0)))
+    got += [(int(y), 0, 0) for y in re.findall(r"(\d{4})年(?!\s*\d)", str(text or ""))]
+    return max(got) if got else None
+
+
+def _grams(text):
+    t = re.sub(r"[\d\s,.、。・（）()「」『』：:％%〜～-]", "", str(text or ""))
+    return {t[i:i + 2] for i in range(len(t) - 1)}
+
+
+def _dup(text, olds, grow=None):
+    """今の記録の言い直し（日付以外の数字が全部今の記録にあり、日付も今の記録の範囲で、語の半分以上が同じ）なら、その記録の id。
+    語を見ないと、小さな数字（3件・1件）だけの文が、数字の多い別の記録の言い直しに見える（2026-10-31 の当社調べの文）。
+    grow は書き換え（補い・更新）の元の文の長さ。書き換えは数え方などの語を足すので、文が伸びていれば言い直しにしない"""
+    core, grams = _core(text), _grams(text)
+    if not core or not grams:
+        return ""
+    for fid, old in olds:
+        if (core <= _core(old) and _dates(text) <= _dates(old) and len(grams & _grams(old)) >= len(grams) / 2
+                and (grow is None or len(text) <= grow + 15)):
+            return fid
+    return ""
+
+
+# 1冊の中の、工程が機械で作った台帳のタブ。答えがここを元にしている（対象の欄・［タブ!セル］の引用）なら、
+# その記録はすでに工程が使っている（当社調べは記事ごとの材料、図表は公開データのページ）。一次情報として
+# 足すと同じ数字が全記事の材料に並ぶ（2026-10-31 の3冊の足された行の多くが、これらのタブの数字の書き写しと計算だった）
+MACHINE_TABS = ("当社調べ", "AI引用の実測", "書き直しの前後", "図表の数字", "月次レポートの数字")
+
+
+def _ledger(a):
+    refs = [str(a.get("target") or "")] + re.findall(r"［([^］]*)］", str(a.get("answer") or ""))
+    return next((t for t in MACHINE_TABS if any(t in r for r in refs)), "")
+
+
+def _answers_text(part):
+    return "\n\n".join(
+        f"[{a['no']}] {a['item']}"
+        + (f"（{'更新する' if a['key'].startswith('upd:') else '補う'} id: {_refill(a['key'])}）" if _refill(a["key"]) else "")
+        + f"\n質問: {a['question']}\n答え: {a['answer']}\n時期: {a['period']}\n件数: {a['count']}"
+        + (f"\n使ってよい範囲: {a['scope']}" if a.get("scope") else "")
+        + (f"\n関係する記録: {a['target']}" if a.get("added") and a.get("target") else "")
+        for a in part)
 
 
 def plan(site, answers, ask=None):
-    """登録する一次情報・体験と、保留にするもの（理由つき）"""
-    use = [a for a in answers if a["ok"] not in ("不可", "×") and not a["key"].endswith(":voice") and "お客様の声" not in a["item"]]
-    held = [(a["no"], "記事に出さない答え・お客様の声（機械では登録しない）") for a in answers if a not in use]
+    """登録する一次情報・体験と、保留にするもの [(番号, "分類：理由")]。分類は 不可・条件が未確認・お客様の声・結びつかない行・
+    分からない・食い違い・答えに無い数字・重複・文にならなかった"""
+    held, use = [], []
+    for a in answers:
+        if a.get("bind"):
+            held.append((a["no"], a["bind"]))
+            continue
+        if a["key"].endswith(":voice") or "お客様の声" in a["item"]:
+            held.append((a["no"], "お客様の声：記事に出さない（掲載の許可の確認が要るので、機械では登録しない）"))
+            continue
+        ok, scope, why = permission(a["ok"], site)
+        if not ok:
+            held.append((a["no"], why))
+            continue
+        use.append(dict(a, scope=scope))
     if not use:
         return [], [], held
     facts, exps = existing(site)
-    now = "\n".join([f"- {i}: {c}" for i, c in facts] + [f"- 体験: {t}" for t in exps]) or "（なし）"
-    prompt = PROMPT.format(
-        existing=now,
-        answers="\n\n".join(f"[{a['no']}] {a['item']}"
-                            + (f"（{'更新する' if a['key'].startswith('upd:') else '補う'} id: {_refill(a['key'])}）"
-                               if _refill(a["key"]) else "")
-                            + f"\n質問: {a['question']}\n答え: {a['answer']}\n時期: {a['period']}\n件数: {a['count']}"
-                            for a in use))
-    got = _json((ask or _ask)(prompt))
+    recs = records(site)
+    now = "\n".join([f"- {i}: {c}" + (f"（期間: {recs[i].get('period')}）" if recs.get(i, {}).get("period") else "")
+                     for i, c in facts] + [f"- 体験: {t}" for t in exps]) or "（なし）"
+    got = {k: [] for k in REPLY_KEYS}
+    for i in range(0, len(use), CHUNK):
+        part = use[i:i + CHUNK]
+        prompt = PROMPT.format(existing=now, answers=_answers_text(part))
+        r = {}
+        for _ in range(2):       # 空・壊れた応答は1回だけ呼び直す
+            r = _json((ask or _ask)(prompt))
+            if any(k in r for k in REPLY_KEYS):
+                break
+        if not any(k in r for k in REPLY_KEYS):
+            held += [(a["no"], f"分からない：claude の応答が空か壊れていた（{len(part)}件のまとまり。登録できるものが無いとは限らない）")
+                     for a in part]
+            continue
+        for k in REPLY_KEYS:
+            got[k] += [x for x in r.get(k) or [] if isinstance(x, dict)]
     by_no = {a["no"]: a for a in use}
-    clash = {str(c.get("no")): c for c in got.get("conflicts") or []}
-    held += [(n, f"今の記録 {c.get('existing', '?')} と食い違い: {c.get('why', '')}") for n, c in clash.items()]
+    clash = {}
+    for c in got["conflicts"]:
+        n = str(c.get("no"))
+        if n in by_no and n not in clash:
+            clash[n] = c
+            held.append((n, f"食い違い：今の記録 {c.get('existing', '?')} と食い違い: {c.get('why', '')}"))
+    olds = [(i, c + " " + str(recs.get(i, {}).get("period") or "") + " " + str(recs.get(i, {}).get("as_of") or ""))
+            for i, c in facts] + [("体験", t) for t in exps]
+    claims = dict(olds)
     out_f, out_e = [], []
-    for kind, items, field in (("fact", got.get("facts") or [], "claim"), ("exp", got.get("experiences") or [], "text")):
-        for it in items:
-            n = str(it.get("no"))
-            a = by_no.get(n)
-            text = str(it.get(field) or "").strip()
-            if not a or n in clash or not text:
+    items = ([("fact", it, "claim") for it in got["facts"]] + [("upd", it, "claim") for it in got["updates"]]
+             + [("exp", it, "text") for it in got["experiences"]])
+    for kind, it, field in items:
+        n = str(it.get("no"))
+        a = by_no.get(n)
+        text = str(it.get(field) or "").strip()
+        if not a or n in clash or not text:
+            continue
+        if _ledger(a):
+            held.append((n, f"重複：1冊の台帳（{_ledger(a)}）の記録の書き写し・計算（その記録は工程がすでに使っている）: {text[:60]}"))
+            continue
+        bad = invented(text, a)
+        if bad:
+            held.append((n, f"答えに無い数字：答えに無い数字が入ったので登録しません（{'・'.join(bad[:3])}）: {text[:60]}"))
+            continue
+        if CAVEAT.search(text):
+            held.append((n, f"条件が未確認：文に確認待ちの語が残った: {text[:60]}"))
+            continue
+        grow, against = None, olds
+        if kind == "upd":
+            # 同じ集計の新しい期間の計測は、古い値を消さずに期間つきで足す（2026-10-31 の保留の多くは、同じ集計の
+            # 期間が後の計測だった）。期間が後だと確かめられないものは食い違いのまま
+            old_id = str(it.get("existing") or "")
+            old = recs.get(old_id)
+            period = str(it.get("period") or a["period"] or "")
+            new_end = _end(period)
+            old_end = _end(str((old or {}).get("period") or "") + " " + str((old or {}).get("as_of") or ""))
+            if old is None or not new_end or not old_end or new_end <= old_end:
+                held.append((n, f"食い違い：今の記録 {old_id or '?'} の更新と読めない（"
+                                + ("記録が無い" if old is None else "期間が新しいと確かめられない") + f"）: {text[:60]}"))
                 continue
-            bad = invented(text, a)
-            if bad:
-                held.append((n, f"答えに無い数字が入ったので登録しません（{'・'.join(bad[:3])}）: {text[:60]}"))
+            if old_id.startswith(("dataset-", "own-", "q-")):
+                # 機械で作る記録（公開データのページ・自社の実測）は、その工程が数え直す。台帳に手で足すと2つの数字が並ぶ
+                held.append((n, f"更新の候補：{old_id} の新しい期間（{period}）。公開データ・実測の工程で更新する: {text[:60]}"))
                 continue
-            if kind == "fact" and _refill(a["key"]):
-                # 補い・更新は元の一次情報を書き換える（同じ事実を2つ並べない）。更新は時点も新しくする
-                it = dict(it, replaces=_refill(a["key"]), updated=a["key"].startswith("upd:"))
-            if kind == "exp" and str(it.get("key") or "") not in text:
-                held.append((n, f"体験の目印の語が文に無いので登録しません: {text[:60]}"))
-                continue
-            (out_f if kind == "fact" else out_e).append(it)
+            it = dict(it, follows=old_id, period=period)
+        elif kind == "fact" and _refill(a["key"]):
+            # 補い・更新は元の一次情報を書き換える（同じ事実を2つ並べない）。更新は時点も新しくする
+            it = dict(it, replaces=_refill(a["key"]), updated=a["key"].startswith("upd:"))
+            against = [(it["replaces"], claims.get(it["replaces"], ""))]
+            grow = len(dict(facts).get(it["replaces"], ""))
+        if kind == "exp" and str(it.get("key") or "") not in text:
+            held.append((n, f"体験の目印の語が文に無い：登録しません: {text[:60]}"))
+            continue
+        dup = _dup(text, against, grow)
+        tgt = str(a.get("target") or "")
+        if not dup and a.get("added") and tgt in claims and _dates(text) <= _dates(claims[tgt]) \
+                and len(_grams(text) & _grams(claims[tgt])) >= len(_grams(text)) / 2:
+            # 足された行の多くは、記録を深掘りする問い（「何倍か」「何位改善か」）への計算。新しい一次情報ではない
+            dup = tgt
+        if dup:
+            held.append((n, f"重複：今の記録 {dup} の言い直し（新しい数字が無い）: {text[:60]}"))
+            continue
+        if a.get("scope"):
+            it = dict(it, scope=a["scope"])
+        (out_e if kind == "exp" else out_f).append(it)
+        olds = olds + [(f"今回の問{n}", text + " " + str(it.get("period") or ""))]   # 同じ答えが別の行にもあれば2つ目は重複
+    # 同じ記録について、別の答えが「食い違い」と読まれたなら、その記録の更新は確かめてから（期間・数え方が同じか分からない）
+    disputed = {str(c.get("existing") or "") for c in clash.values()}
+    for it in [x for x in out_f if x.get("follows") in disputed]:
+        out_f.remove(it)
+        held.append((str(it.get("no")), f"食い違い：記録 {it['follows']} の更新だが、別の答えでは同じ記録と食い違いと読まれた: {it['claim'][:60]}"))
+    done = {str(x.get("no")) for x in out_f + out_e} | {n for n, _w in held}
+    held += [(a["no"], "文にならなかった：答えから文にできる事実が無かった（claude が文にしなかった）") for a in use if a["no"] not in done]
     return out_f, out_e, held
 
 
@@ -371,19 +591,31 @@ def write(site, facts, exps, today=None):
                 old["period"] = str(it["period"])
             if isinstance(it.get("denominator"), (int, float)) and not isinstance(it.get("denominator"), bool):
                 old["denominator"] = it["denominator"]
+            if it.get("scope"):
+                old["scope"] = str(it["scope"])
             continue
         n += 1
         fid = f"{site}-m{tag}-{n}"
         while fid in have:
             n += 1
             fid = f"{site}-m{tag}-{n}"
-        row = {"id": fid, "sites": [site], "topic": [str(t) for t in (it.get("topic") or [])][:6],
+        prev = byid.get(str(it.get("follows") or ""))
+        row = {"id": fid, "sites": list((prev or {}).get("sites") or [site]),
+               "topic": [str(t) for t in (it.get("topic") or (prev or {}).get("topic") or [])][:6],
                "claim": str(it["claim"]).strip(), "source": src, "as_of": today[:7], "verifiable": True}
         if it.get("period"):
             row["period"] = str(it["period"])
         if isinstance(it.get("denominator"), (int, float)) and not isinstance(it.get("denominator"), bool):
             row["denominator"] = it["denominator"]
+        if it.get("scope"):
+            row["scope"] = str(it["scope"])      # 使ってよい範囲（「可（条件）」の条件）。書く工程に facts.scope_note で渡す
+        if it.get("follows"):
+            # 同じ集計の新しい期間の計測。古い値は消さず（期間つきで正しい）、どちらが新しいかを両方に記す
+            row["follows"] = str(it["follows"])
+            if prev is not None:
+                prev["newer"] = fid
         fd.setdefault("facts", []).append(row)
+        byid[fid] = row
         have.add(fid)
     for it in exps:
         n += 1
@@ -411,7 +643,19 @@ def apply(src, do_write=False, ask=None):
         return False, f"{'（お客様の社）' if P.is_client(site) else site}: 答えが1つもありません"
     f, e, held = plan(site, answers, ask)
     who = "（お客様の社）" if P.is_client(site) else site
-    msg = f"{who}: 一次情報 {len(f)}件・体験 {len(e)}件を登録{'' if do_write else 'できます（--write で実行）'}、保留 {len(held)}件"
+    msg = (f"{who}: 答え {len(answers)}行（うち作ったときに無い行 {sum(1 for a in answers if a.get('added'))}行は、その行の質問への答えとして読んだ）／"
+           f"一次情報 {len(f)}件（うち新しい期間の更新 {sum(1 for x in f if x.get('follows'))}件）・体験 {len(e)}件を登録"
+           f"{'' if do_write else 'できます（--write で実行）'}、保留 {len(held)}件")
+    reg = {str(x.get("no")) for x in f + e}
+    first = {}
+    for n, w in held:
+        if n not in reg:
+            first.setdefault(n, w.split("：")[0])
+    cats = {}
+    for c in first.values():
+        cats[c] = cats.get(c, 0) + 1
+    msg += (f"。行で数えると登録 {len(reg)}行・保留 {len(first)}行（" + "・".join(f"{k} {v}件" for k, v in
+                                                            sorted(cats.items(), key=lambda x: -x[1])) + "）")
     if do_write and (f or e):
         write(site, f, e)
         # 答えのあった記事の下書きがしまわれていれば戻す（材料が届いたので、次の回が採点し直す）
@@ -429,7 +673,8 @@ def apply(src, do_write=False, ask=None):
             msg += f"。お客様の声は下書き {vd.relative_to(ROOT).as_posix()} に写しました（お客様に確かめて「可」にし、intake/ へ移すと登録）"
     if held:
         note = "保留にした答え（直して intake/ に戻すか、運用者が確かめてください）:\n" + "\n".join(f"  - 問{n}: {w}" for n, w in held)
-        print(note)
+        if not (P.is_client(site) and os.environ.get("GITHUB_ACTIONS")):     # お客様の答えの文を CI のログ（public）に出さない
+            print(note)
         if do_write:
             Path(src).with_suffix(".保留.txt").write_text(note + "\n", encoding="utf-8", newline="")
     return bool(f or e), msg
@@ -527,7 +772,7 @@ def auto_measure(limit=3, today=None, measure_fn=None):
 def voice_draft(site, answers, out_dir=None, today=None):
     """質問シートのお客様の声を、実績の記入シートの下書きに写す（掲載可否は「要確認」。お客様に確かめて「可」にし、
     intake/ へ移すと jisseki_intake が登録する）。機械は声を掲載しない（本人の確認が要る。ステルスマーケティング規制）"""
-    rows = [a for a in answers if (a["key"].endswith(":voice") or "お客様の声" in a["item"]) and a["ok"] not in ("不可", "×")]
+    rows = [a for a in answers if (a["key"].endswith(":voice") or "お客様の声" in a["item"]) and permission(a["ok"], site)[0]]
     if not rows:
         return None
     import jisseki_intake as J
