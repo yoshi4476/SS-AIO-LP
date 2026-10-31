@@ -1,0 +1,82 @@
+{
+ "v": 2,
+ "slug": "fudousan-hp-tesuryo-setsumei",
+ "ok": true,
+ "date": "2026-11-01",
+ "questions": [
+  "不動産会社 ホームページ 手数料 説明について教えてください",
+  "不動産会社 ホームページ 手数料 説明について、「不動産会社のホームページで手数料を説明するのはなぜ？」を教えてください",
+  "不動産会社 ホームページ 手数料 説明について、「手数料の説明ページに書く4つの項目」を教えてください",
+  "不動産会社 ホームページ 手数料 説明について、「売買・賃貸・空き家で手数料の説明を書き分ける」を教えてください",
+  "不動産会社 ホームページ 手数料 説明について、「手数料の説明で外す3つのNGと避け方」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "手数料の説明ページに書く4つの項目",
+   "words": [
+    "項目"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "売買・賃貸・空き家で手数料の説明を書き分ける",
+   "words": [
+    "売買",
+    "賃貸"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "手数料の説明で外す3つのNGと避け方",
+   "words": [
+    "NG"
+   ],
+   "hits": 0,
+   "of": 4
+  }
+ ],
+ "sources": {
+  "dandanhome.co.jp": "peer",
+  "daynet.co.jp": "peer",
+  "demand.co.jp": "peer",
+  "e-estate.jp": "portal",
+  "estate-labo.com": "peer",
+  "f-mikata.jp": "peer",
+  "facilo.jp": "peer",
+  "iwaki-s.com": "peer",
+  "massugu-fudosan.com": "peer",
+  "mec-h.com": "peer",
+  "mlit.go.jp": "public",
+  "moriya-housedo.com": "peer",
+  "nakayamafudousan.co.jp": "peer",
+  "nomu.com": "peer",
+  "okamura-home.co.jp": "peer",
+  "pref.kochi.lg.jp": "public",
+  "realestate.iid.co.jp": "peer",
+  "takken-fudosan.com": "peer",
+  "teamr.jp": "peer",
+  "town-style.co.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yotsuyagakuin-tsushin.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 4,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 0,
+  "専門家への相談": 1
+ },
+ "chars": 10045,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え4件のうち、『NG』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え4件のうち、『項目』に触れたものは1件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは進め方の手順は0件、専門家への相談は1件、期間（◯か月・◯日など）は3件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは22件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが0件、ポータル・比較サイトが1件でした。"
+ ]
+}
