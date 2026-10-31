@@ -14,6 +14,8 @@
 
   python scripts/material_sheet.py --make [--site <id>] [--out <フォルダ>]   # 依頼のある社の質問シート（既定はデスクトップ）
   python scripts/material_sheet.py --apply <xlsx> [--write]                    # 返ってきたシートを登録（--write なしは見るだけ）
+  python scripts/material_sheet.py --book [--site <id>,<id>] [--out <フォルダ>]
+      # 社ごとの1冊: 今まで出した一次情報の台帳・図表にした数字・追加のヒアリング（質問のタブは --apply でそのまま登録できる）
   python scripts/material_sheet.py --measure <site> <URL> <YYYY-MM-DD> --what "<やったこと>" [--write]
       # 自社サイトでやったことの前と後の28日（Search Console の表示・平均順位）を一次情報の文にする
 """
@@ -139,11 +141,22 @@ def rows_for(site, reqs):
 
 def make(site, out_dir, today=None):
     from openpyxl import Workbook
-    from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
     today = today or date.today().isoformat()
     name = display_name(site)
     rows = rows_for(site, requests_of(site))
     wb = Workbook()
+    question_tab(wb, site, name, today, rows)
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    safe = re.sub(r'[\\/:*?"<>|\s]+', "_", name)
+    p = out_dir / f"材料の質問シート_{safe}_{today}.xlsx"
+    wb.save(p)
+    return p, len(rows)
+
+
+def question_tab(wb, site, name, today, rows, extra_head=()):
+    """質問のタブと隠しタブ。rows は (key, 項目, 質問, 目安, *読むだけの欄)。--apply は A〜H 列と隠しタブだけを読む"""
+    from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
     ws = wb.active
     ws.title = TAB
     import private_store as P
@@ -159,14 +172,14 @@ def make(site, out_dir, today=None):
     ws.merge_cells("A2:H2")
     ws.row_dimensions[2].height = 32
     ws.append([])
-    ws.append(COLS)
+    ws.append(COLS + list(extra_head))
     thin = Side(style="thin", color="BBBBBB")
     for c in ws[4]:
         c.font = Font(name="Arial", bold=True, color="FFFFFF")
         c.fill = PatternFill("solid", start_color="1F3A5F")
         c.alignment = Alignment(vertical="center", wrap_text=True)
-    for i, (_, lab, q, hint) in enumerate(rows, 1):
-        ws.append([i, lab, q, hint, "", "", "", ""])
+    for i, (_, lab, q, hint, *more) in enumerate(rows, 1):
+        ws.append([i, lab, q, hint, "", "", "", ""] + list(more)[:len(extra_head)])
     for row in ws.iter_rows(min_row=5, max_row=4 + len(rows)):
         for c in row:
             c.font = Font(name="Arial", size=10)
@@ -174,23 +187,20 @@ def make(site, out_dir, today=None):
             c.border = Border(top=thin, bottom=thin, left=thin, right=thin)
         row[3].font = Font(name="Arial", size=9, color="666666")
         row[4].fill = PatternFill("solid", start_color="FFF8D6")
-    for col, w in zip("ABCDEFGH", (5, 22, 58, 40, 50, 16, 16, 14)):
+    for col, w in zip("ABCDEFGHIJKLMN", (5, 22, 58, 40, 50, 16, 16, 14, 9, 30, 28, 22, 14, 10)):
         ws.column_dimensions[col].width = w
     for r in range(5, 5 + len(rows)):
         ws.row_dimensions[r].height = 80
-    ws.freeze_panes = "A5"
+    ws.freeze_panes = "C5"
+    if extra_head:
+        ws.auto_filter.ref = f"A4:{chr(64 + len(COLS) + len(extra_head))}{4 + len(rows)}"
     meta = wb.create_sheet(META)
     meta.append(["site", site])
     meta.append(["made", today])
     for i, (key, *_x) in enumerate(rows, 1):
         meta.append([i, key])
     meta.sheet_state = "hidden"
-    out_dir = Path(out_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
-    safe = re.sub(r'[\\/:*?"<>|\s]+', "_", name)
-    p = out_dir / f"材料の質問シート_{safe}_{today}.xlsx"
-    wb.save(p)
-    return p, len(rows)
+    return ws
 
 
 # ── 読む・登録する ────────────────────────────────────────────────────
@@ -241,6 +251,9 @@ PROMPT = """あなたは記事の一次情報の台帳の係です。お客様�
 - 補い（項目が「一次情報の補い」・質問に今の文がある答え）: 今の文に、答えの母数・期間・数え方を足した文に書き直し、
   facts の項目に "replaces": "その一次情報の id"（答えの番号の行の「補う id」）を付ける。今の文の数字は変えない。
   答えの数字が今の文と違うときだけ conflicts に入れる
+- 更新（項目が「一次情報の更新」・質問に前回値がある答え）: 今の文を、答えの新しい数字と時点で書き直し、facts の項目に
+  "replaces": "その一次情報の id"（答えの番号の行の「更新する id」）を付ける。前回値と数字が違っても conflicts にしない
+  （新しい時点の値として書く）。答えが「変わらず」なら今の文の数字のまま書く
 
 # 今の記録
 {existing}
@@ -256,15 +269,22 @@ PROMPT = """あなたは記事の一次情報の台帳の係です。お客様�
 
 
 def _nums(text):
-    return {n.replace(",", "") for n in NUM.findall(str(text or ""))}
+    # 「2023-04」の 04 と文の「4月」を同じ数字として見る（前の0で別の数字と数えると、正しい文を保留にする）
+    return {str(int(n)) if n.isdigit() else n for n in (x.replace(",", "") for x in NUM.findall(str(text or "")))}
 
 
 def invented(text, answer):
     """答え（答え・時期・件数の欄）に無い数字。補いの答えは、質問に載せた今の文の数字も使ってよい"""
     allowed = _nums(answer["answer"]) | _nums(answer["period"]) | _nums(answer["count"])
-    if str(answer.get("key", "")).startswith("fact:"):
+    if _refill(answer.get("key", "")):
         allowed |= _nums(answer["question"])
     return sorted(_nums(text) - allowed)
+
+
+def _refill(key):
+    """補い（fact:）と更新（upd:）の答えが書き換える一次情報の id。それ以外は空"""
+    kind, _, fid = str(key or "").partition(":")
+    return fid if kind in ("fact", "upd") else ""
 
 
 def _ask(prompt):
@@ -294,7 +314,9 @@ def plan(site, answers, ask=None):
     now = "\n".join([f"- {i}: {c}" for i, c in facts] + [f"- 体験: {t}" for t in exps]) or "（なし）"
     prompt = PROMPT.format(
         existing=now,
-        answers="\n\n".join(f"[{a['no']}] {a['item']}" + (f"（補う id: {a['key'][5:]}）" if a["key"].startswith("fact:") else "")
+        answers="\n\n".join(f"[{a['no']}] {a['item']}"
+                            + (f"（{'更新する' if a['key'].startswith('upd:') else '補う'} id: {_refill(a['key'])}）"
+                               if _refill(a["key"]) else "")
                             + f"\n質問: {a['question']}\n答え: {a['answer']}\n時期: {a['period']}\n件数: {a['count']}"
                             for a in use))
     got = _json((ask or _ask)(prompt))
@@ -313,8 +335,9 @@ def plan(site, answers, ask=None):
             if bad:
                 held.append((n, f"答えに無い数字が入ったので登録しません（{'・'.join(bad[:3])}）: {text[:60]}"))
                 continue
-            if kind == "fact" and a["key"].startswith("fact:"):
-                it = dict(it, replaces=a["key"][5:])     # 補いは元の一次情報を書き換える（同じ事実を2つ並べない）
+            if kind == "fact" and _refill(a["key"]):
+                # 補い・更新は元の一次情報を書き換える（同じ事実を2つ並べない）。更新は時点も新しくする
+                it = dict(it, replaces=_refill(a["key"]), updated=a["key"].startswith("upd:"))
             if kind == "exp" and str(it.get("key") or "") not in text:
                 held.append((n, f"体験の目印の語が文に無いので登録しません: {text[:60]}"))
                 continue
@@ -341,7 +364,9 @@ def write(site, facts, exps, today=None):
         old = byid.get(str(it.get("replaces") or ""))
         if old is not None:
             old["claim"] = str(it["claim"]).strip()
-            old["source"] = f"{old.get('source', '')}／補い（質問シート {today}）".lstrip("／")
+            old["source"] = f"{old.get('source', '')}／{'更新' if it.get('updated') else '補い'}（質問シート {today}）".lstrip("／")
+            if it.get("updated"):
+                old["as_of"] = today[:7]
             if it.get("period"):
                 old["period"] = str(it["period"])
             if isinstance(it.get("denominator"), (int, float)) and not isinstance(it.get("denominator"), bool):
@@ -581,6 +606,570 @@ def mail(out_dir, send=None):
     return len(files)
 
 
+# ── 一冊（今まで出した一次情報の台帳・図表にした数字・追加のヒアリング）──────────────────
+# 運用者「今まで出していたデータを反映させたスプシを社ごとに・過去に図表にした数字も・止まる要素が無いほど追加のヒアリングを」
+# （2026-10-31）。質問のタブは --make と同じ列と隠しタブなので、答えを書いて intake/ に置けば --apply がそのまま登録する。
+# 質問のタブの I 列から後（優先度・前回値…）と、ほかのタブは読むだけ（read は A〜H 列しか読まない）
+
+EXTRA = ["優先度（1が先）", "優先の根拠", "対象（記事・語のまとまり・一次情報）", "前回値", "前回の時点", "検索数（控え）"]
+TIER = {1: "材料待ちで止まっている記事", 2: "よく使う一次情報の更新", 3: "採点で何度も足りないと言われた点",
+        4: "在庫の語（これから書く記事）", 5: "一次情報の更新", 6: "決まった質問"}
+# 語のまとまりごとに聞くこと。price はお客様の社だけ（自社の答えは公開側の台帳に入り、当社の料金を公開側に書かない）
+KW_KINDS = [
+    ("num", "主題の数字", "{g}そのものについて、当社で数えた数字（全体で何件のうち何件か・いつからいつまでか）",
+     "例の書き方: ◯年◯月〜◯年◯月の◯件のうち◯件が◯◯だった（数えた人・台帳: ◯◯）", True),
+    ("case", "事例カード", "{g}の事例1件。業種・規模・始めた月・やったこと・前と後の数字・期間",
+     "例の書き方: ◯年◯月／◯◯業・従業員◯名／◯◯を◯本作った／◯◯が月◯件→月◯件（◯か月）", True),
+    ("fail", "失敗の件数と理由", "{g}で、うまくいかなかった・問題になった件数と理由（全体の何件のうち）",
+     "例の書き方: ◯件のうち◯件。理由: ◯◯が◯件・◯◯が◯件", True),
+    ("rule", "判断の基準の根拠", "{g}で読者に勧める判断の目安（「◯か月で見直す」など）と、その数字にした元の件数",
+     "例の書き方: ◯件のうち◯件が◯か月以内に◯◯だったので、◯か月を目安にした", False),
+    ("term", "期間の実例", "{g}で、始めてから結果が出るまで（または作業にかかった）期間の最短・最長・中央値と件数",
+     "例の書き方: ◯件で最短◯日・最長◯か月・中央値◯か月", False),
+    ("price", "費用の実例", "{g}の案件の金額の幅と中央値（いつからいつまでの何件か）",
+     "例の書き方: ◯年〜◯年の◯件で、◯万円〜◯万円・中央値◯万円", False),
+    ("check", "確認の一覧", "{g}で実際に使っている確認の一覧（聞く質問・確かめる項目・用意するもの）",
+     "社内で使っている文をそのまま貼ってください", False),
+    ("staff", "担当者", "{g}を担当した人の役割・資格・年数・担当した件数", "例の書き方: ◯◯の資格・◯年・担当◯件", False),
+    ("voice", "お客様の声", "{g}のお客様の声と前と後の数字（本人が書いたか、本人が内容を確かめて掲載を許可したものだけ）",
+     "声は機械では登録しません。実績の記入シート（jisseki_intake）で登録します", False),
+]
+# 一次性の採点の指摘の分類（1つの指摘が複数に入る）。質問はその分類を全体で潰すもの
+WEAK_CATS = [
+    ("base", "母数（何件のうちか）", r"母数|のうち|分母|小さな|少数|件数が(?:無|な|少)|\d+件だけ|\d+社だけ",
+     "記事で使う自社の数字の母数（全体で何社・何件を見たか）。数字ごとに「何件のうち」を",
+     "例の書き方: 「◯◯」の数字は、◯年◯月〜◯年◯月に担当した◯社のうち◯社"),
+    ("period", "期間・時点", r"期間|時期|時点|いつ|何か月|年月",
+     "自社の数字ごとの期間（いつからいつまで数えたか）と、数えた時点", "例の書き方: ◯年◯月〜◯年◯月（◯年◯月時点で集計）"),
+    ("method", "数え方・出どころ", r"数え方|集計|出典|出どころ|根拠|検証|確か|測り方|どう測|申告",
+     "自社の数字の数え方（誰が・何の台帳や道具で・どう数えたか）", "例の書き方: 担当者が◯◯の台帳を月末に集計／◯◯のツールの記録"),
+    ("result", "前と後の数字・結果", r"結果|前と後|前後|どう変わ|どれだけ|効果|成果|伸び|改善|その後",
+     "支援の前と後で変わった数字（何が・いくつから・いくつに・何か月で）", "例の書き方: ◯◯が月◯件→月◯件（◯か月・◯件のうち◯件）"),
+    ("case", "事例の具体（業種・規模・やったこと）", r"事例|業種|規模|具体|実例|案件|どんな会社",
+     "事例ごとの業種・規模・やったことの具体（何を何本・何を作ったか）", "例の書き方: ◯◯業・従業員◯名／◯◯を◯本／◯か月"),
+    ("rule", "判断の基準の根拠", r"判断|基準|目安|なぜ|理由",
+     "記事で勧める判断の基準の、元になった件数と結果", "例の書き方: ◯件のうち◯件が◯◯だったので、◯◯を基準にした"),
+    ("price", "費用・金額", r"費用|金額|料金|万円|単価|価格|コスト",
+     "費用・金額の実例（何件の幅と中央値・いつからいつまで）", "例の書き方: ◯件で◯万円〜◯万円・中央値◯万円"),
+    ("fail", "失敗・うまくいかなかった件数", r"失敗|うまくいかな|問題にな|トラブル|リスク|つまず",
+     "うまくいかなかった件数と理由（全体の何件のうち）", "例の書き方: ◯件のうち◯件。理由: ◯◯が◯件"),
+    ("staff", "担当者・監修・経歴", r"担当者|監修|経歴|資格|著者|誰が",
+     "担当者・監修者の資格・年数・担当した件数", "例の書き方: ◯◯の資格・◯年・担当◯件"),
+    ("own", "自社の数字が無い・一般論", r"一般論|一般的|どこでも|他社でも|教科書|汎用|自社の(?:数字|データ|経験)|一次情報|独自",
+     "その記事の主題について、当社で数えた数字か、当社でしか言えない実例（無ければ「無し」）", "例の書き方: ◯年◯月〜◯年◯月の◯件のうち◯件が◯◯"),
+]
+FIG_HEAD = ["slug", "記事の題", "種類", "図・表の名前（題）", "見出し・列", "項目", "数字", "単位", "注記・出典", "元データの置き場"]
+_NOTES = []      # 取れなかった置き場（集めた置き場のタブに書く）
+
+
+def _articles(site):
+    """{slug: (題, 本文, フロントマター)}。公開側の articles/ と、お客様の記事の非公開の置き場（private/articles）"""
+    import private_store as P
+    import sites as S
+    import yaml
+    out = {}
+    for base in (ROOT / "articles", P.base() / "articles"):
+        for p in sorted(base.glob("*.md")):
+            if p.stem in out:
+                continue
+            try:
+                m = re.match(r"^---\s*\n(.*?)\n---\s*\n?(.*)$", p.read_text(encoding="utf-8-sig"), re.S)
+                meta = (yaml.safe_load(m.group(1)) or {}) if m else {}
+                owner = S.find_category_owner(meta.get("category", ""))
+            except Exception:  # noqa: BLE001  読めない記事は台帳に入れない
+                continue
+            if owner == site:
+                out[p.stem] = (str(meta.get("title") or p.stem), m.group(2), meta)
+    return out
+
+
+def _used(text, arts):
+    """その文の数字（単位つき）を半分以上含む記事の slug"""
+    marks = set(UNIT.findall(str(text or "")))
+    if not marks:
+        key = re.sub(r"\s+", "", str(text or ""))[:14]
+        return [s for s, (_, b, _m) in arts.items() if len(key) >= 8 and key in b]
+    need = max(1, (len(marks) + 1) // 2)
+    return [s for s, (_, b, _m) in arts.items() if sum(1 for m in marks if m in b) >= need]
+
+
+def _slugs(slugs, arts, limit=40):
+    lines = [f"{s}：{arts[s][0]}" for s in slugs[:limit] if s in arts]
+    return "\n".join(lines) + (f"\n…ほか{len(slugs) - limit}本" if len(slugs) > limit else "")
+
+
+def _jl(p):
+    try:
+        return json.loads(Path(p).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+# ── 台帳のタブ ──
+
+def ledger_facts(site, arts):
+    import facts as F
+    import private_store as P
+    try:
+        _, fs = F.load_for(site)
+    except Exception as e:  # noqa: BLE001
+        _NOTES.append(("一次情報（facts.load_for）", f"読めませんでした（{type(e).__name__}）"))
+        fs = []
+    client = P.is_client(site)
+    kinds = (("own-", "自社サイトの実測（機械）"), ("q-", "検索の実績（機械）"), ("dataset-", "公開データのページ"))
+    rows = []
+    for f in fs or []:
+        fid, claim = str(f.get("id") or ""), str(f.get("claim") or "")
+        used = _used(claim, arts)
+        kind = next((k for p_, k in kinds if fid.startswith(p_)), "登録した一次情報")
+        ok = ("要確認（出典を示せない）" if f.get("verifiable") is False else
+              "お客様の記事だけ（社名は伏せる）" if client else "可")
+        rows.append([fid, kind, claim, "・".join(dict.fromkeys(UNIT.findall(claim))), f.get("denominator", ""),
+                     str(f.get("period") or ""), str(f.get("as_of") or ""), str(f.get("source") or ""),
+                     str(f.get("added") or f.get("as_of") or ""), len(used), _slugs(used, arts), ok])
+    if not client:
+        for x in (_jl(OWN_FACTS) or {}).get("pending") or []:
+            rows.append(["（保留）", "登録を待っている一次情報", str(x.get("note") or ""), "", "", "", "", str(x.get("owner") or ""),
+                         "", 0, "", "不可（集計できるまで書かない）"])
+    head = ["id", "種類", "文", "数字", "母数", "期間", "時点", "出典", "登録日", "使っている記事の数", "使っている記事（slug：題）", "公開可否"]
+    return head, rows, (18, 16, 60, 18, 8, 16, 9, 24, 10, 9, 50, 16)
+
+
+def ledger_exps(site, arts):
+    import originality
+    import private_store as P
+    rows = []
+    for r in originality.load_experiences(site):
+        key = str(r.get("key") or "")
+        used = [s for s, (_, b, _m) in arts.items() if key and key in b]
+        rows.append([str(r.get("id") or ""), "登録した体験", key, str(r.get("text") or ""), str(r.get("when") or ""),
+                     str(r.get("industry") or ""), str(r.get("kind") or ""), str(r.get("added") or ""), len(used),
+                     _slugs(used, arts), "可"])
+    if P.is_client(site):
+        brief = P.read_json(site, "brief.json", {}) or {}
+        for i, c in enumerate(brief.get("cases") or [], 1):
+            text = c if isinstance(c, str) else json.dumps(c, ensure_ascii=False)
+            used = _used(text, arts)
+            rows.append([f"brief-case-{i}", "ヒアリングシートの事例", "", text, "", "", "", "", len(used), _slugs(used, arts),
+                         "ヒアリングシートの掲載可否のとおり"])
+    head = ["id", "種類", "目印の語", "文", "時期", "業種", "分類", "登録日", "使っている記事の数", "使っている記事（slug：題）", "公開可否"]
+    return head, rows, (18, 16, 16, 70, 12, 12, 10, 10, 9, 50, 14)
+
+
+def ledger_voices(site, arts):
+    import private_store as P
+    rows = []
+    for v in _jl(ROOT / "data" / "voices.json") or []:
+        if site not in (v.get("sites") or []):
+            continue
+        n = v.get("number") or {}
+        used = _used(str(v.get("quote") or ""), arts)
+        rows.append(["お客様の声の台帳", str(v.get("who") or ""), str(v.get("industry") or ""), str(v.get("quote") or ""),
+                     str(n.get("metric") or ""), str(n.get("before") or ""), str(n.get("after") or ""), str(n.get("period") or ""),
+                     str(v.get("as_of") or ""), len(used), _slugs(used, arts), "可（掲載の許可を得て登録したもの）"])
+    if P.is_client(site):
+        for c in (P.read_json(site, "brief.json", {}) or {}).get("voices") or []:
+            text = c if isinstance(c, str) else json.dumps(c, ensure_ascii=False)
+            used = _used(text, arts)
+            rows.append(["ヒアリングシート", "", "", text, "", "", "", "", "", len(used), _slugs(used, arts), "ヒアリングシートの掲載可否のとおり"])
+    head = ["元", "誰", "業種", "声", "指標", "前", "後", "期間", "時点", "使っている記事の数", "使っている記事（slug：題）", "公開可否"]
+    return head, rows, (14, 18, 10, 70, 16, 10, 10, 10, 9, 9, 40, 18)
+
+
+def ledger_survey(site, arts):
+    import client_private as CP
+    rows = []
+    for slug, (title, body, _m) in sorted(arts.items()):
+        d = _jl(CP.site_file(site, f"data/own_survey/{slug}.json"))
+        if not d:
+            continue
+        used = "使っている" if any(str(c)[:20] in body for c in d.get("claims") or []) else "本文に見当たらない"
+        base = [slug, title, str(d.get("date") or ""), "・".join(d.get("engines") or []), d.get("answers", "")]
+        for t in d.get("topics") or []:
+            rows.append(base + ["論点", str(t.get("topic") or ""), "・".join(t.get("words") or []), t.get("hits", ""), t.get("of", ""), used])
+        for dim, n in (d.get("dims") or {}).items():
+            rows.append(base + ["答えに出た観点", dim, "", n, d.get("answers", ""), used])
+        for c in d.get("claims") or []:
+            rows.append(base + ["記事に書く文", str(c), "", "", "", used])
+        if d.get("questions"):
+            rows.append(base + ["AIに聞いた問い", "\n".join(d["questions"]), "", "", "", used])
+    head = ["slug", "記事の題", "調べた日", "聞いたAI", "答えの数", "行の種類", "問い・論点・文", "触れているか見た語", "触れた数", "母数", "記事で"]
+    return head, rows, (22, 30, 11, 16, 8, 14, 60, 18, 8, 8, 14)
+
+
+def ledger_citations(site):
+    import client_private as CP
+    rows = []
+    for name in CP.citation_months():
+        d = CP.load_citations(name) or {}
+        est = (d.get("sites") or {}).get(site) or {}
+        for it in est.get("items") or []:
+            rows.append([name[:7], f"推定（{d.get('method', '')}）", it.get("kw", ""), it.get("url", ""), it.get("pos", ""),
+                         it.get("imp", ""), it.get("clicks", ""), it.get("ctr", ""), it.get("expected_ctr", ""), it.get("ratio", ""), ""])
+        meas = ((d.get("measured") or {}).get("sites") or {}).get(site) or {}
+        for it in meas.get("items") or []:
+            eng = it.get("engines") or {}
+            cited = "・".join(e for e, v in eng.items() if (v or {}).get("cited")) or "無し"
+            rows.append([name[:7], f"AIに直接聞いた（{(d.get('measured') or {}).get('date', '')}）", it.get("kw", ""), "", "", "", "",
+                         "", "", "", f"引用したAI: {cited}（{len(eng)}つに聞いた）"])
+    head = ["月", "測り方", "語", "URL", "平均順位", "表示", "クリック", "CTR(%)", "期待CTR(%)", "期待との比", "AIの引用"]
+    return head, rows, (9, 26, 24, 40, 8, 8, 8, 8, 9, 9, 30)
+
+
+def ledger_rewrites(site, arts):
+    rows = []
+    for it in (_jl(ROOT / "data" / "rewrite_effect.json") or {}).get("items") or []:
+        if it.get("slug") in arts:
+            rows.append([it["slug"], arts[it["slug"]][0], str(it.get("at") or ""), KIND_WHAT.get(str(it.get("kind")), str(it.get("kind") or "")),
+                         str(it.get("status") or "")])
+    for key, state in (_jl(MEASURED) or {}).items():
+        slug, at, kind = (key.split("|") + ["", "", ""])[:3]
+        if slug in arts:
+            rows.append([slug, arts[slug][0], at, KIND_WHAT.get(kind, kind), f"前と後の測定: {state}"])
+    head = ["slug", "記事の題", "直した日", "やったこと", "状態・測定"]
+    return head, rows, (24, 40, 11, 36, 24)
+
+
+def _cells(line):
+    return [c.strip() for c in line.strip().strip("|").split("|")]
+
+
+def figures(site, arts):
+    """記事で図・表にした数字。図は記事の宣言（diagrams。make_diagram が描く元データ）、表は本文の表。
+    宣言の無い画像（元データが無い）は「取れなかった」と行に書く。公開データのページの表も載せる"""
+    rows = []
+    for slug, (title, body, meta) in sorted(arts.items()):
+        names = set()
+        for dg in meta.get("diagrams") or []:
+            if not isinstance(dg, dict):
+                continue
+            names.add(str(dg.get("name") or ""))
+            labels = dg.get("labels") or []
+            for i, item in enumerate(dg.get("items") or []):
+                if not NUM.search(str(item)):
+                    continue
+                parts = str(item).split("|")
+                nums = [p for p in parts[1:] if NUM.search(p)] or ([parts[0]] if NUM.search(parts[0]) else [])
+                for n in nums:
+                    rows.append([slug, title, f"図（{dg.get('type')}）", str(dg.get("title") or dg.get("name") or ""),
+                                 str(labels[i]) if i < len(labels) else str(dg.get("root") or ""), parts[0], n.strip(),
+                                 str(dg.get("unit") or ""), str(dg.get("note") or ""), "記事の宣言（diagrams）"])
+        lines = body.splitlines()
+        for i, ln in enumerate(lines):
+            if not re.match(r"^\|[-: |]+\|\s*$", ln) or i == 0:
+                continue
+            head = _cells(lines[i - 1])
+            for ln2 in lines[i + 1:]:
+                if not ln2.strip().startswith("|"):
+                    break
+                cells = _cells(ln2)
+                for j, c in enumerate(cells):
+                    if NUM.search(c):
+                        rows.append([slug, title, "表", " / ".join(head)[:80], head[j] if j < len(head) else "", cells[0], c, "", "",
+                                     "記事の本文の表"])
+        for src in re.findall(r'<img[^>]*src="([^"]+)"', body) + re.findall(r"!\[[^\]]*\]\(([^)\s]+)", body):
+            stem = src.rsplit("/", 1)[-1].rsplit(".", 1)[0]
+            if stem != "eyecatch" and stem not in names:
+                rows.append([slug, title, "画像", src.rsplit("/", 1)[-1], "", "", "", "", src,
+                             "取れなかった（記事に図の宣言が無く、画像だけ。数字の元データは見つからない）"])
+    import facts as F
+    try:
+        ids = {str(f.get("id")) for f in F.load_for(site)[1] or []}
+    except Exception:  # noqa: BLE001
+        ids = set()
+    for folder in ("datasets", "datasets_hidden"):
+        for p in sorted((ROOT / "data" / folder).glob("*.json")):
+            d = _jl(p) or {}
+            if f"dataset-{d.get('slug', p.stem)}" not in ids or not isinstance(d.get("rows"), list):
+                continue
+            for r in d["rows"]:
+                vals = list(r.values()) if isinstance(r, dict) else (r if isinstance(r, list) else [r])
+                keys = list(r.keys()) if isinstance(r, dict) else [""] * len(vals)
+                for k, v in zip(keys[1:], vals[1:]):
+                    if NUM.search(str(v)):
+                        rows.append([f"data/{d.get('slug', p.stem)}", str(d.get("title") or ""), "公開データのページ（グラフ）",
+                                     str(d.get("title") or ""), str(k), str(vals[0]), str(v), str(d.get("unit") or ""),
+                                     f"{d.get('period', '')} {d.get('method', '')}".strip()[:120], f"data/{folder}/{p.name}"])
+    return FIG_HEAD, rows, (22, 30, 14, 30, 18, 24, 12, 8, 30, 30)
+
+
+def report_tables(site):
+    """月次レポート（非公開の置き場）の表の数字。小さな折れ線（線だけで数字の無い図）は「取れなかった」と書く"""
+    import html as H
+    import private_store as P
+    import sites as S
+    rows = []
+    try:
+        primary = S.primary()
+    except Exception:  # noqa: BLE001
+        primary = ""
+    pat = (re.compile(r"^\d{4}-\d{2}$") if site == primary else
+           re.compile(r"^\d{4}-\d{2}-(?:%s|%s)$" % (re.escape(site), re.escape(str(S.public_id(site))))))
+    base = P.reports_dir()
+    strip = lambda s: H.unescape(re.sub(r"<[^>]+>", " ", s)).split()  # noqa: E731
+    for d in sorted(base.glob("*")) if base.is_dir() else []:
+        f = d / "report.html"
+        if not (d.is_dir() and pat.match(d.name) and f.is_file()):
+            continue
+        sec, nt = "", 0
+        for m in re.finditer(r"<h2[^>]*>(.*?)</h2>|<table.*?</table>|<svg.*?</svg>", f.read_text(encoding="utf-8"), re.S):
+            if m.group(1) is not None:
+                sec = " ".join(strip(m.group(1)))
+                continue
+            if m.group(0).startswith("<svg"):
+                text = " ".join(strip(m.group(0)))
+                rows.append([d.name[:7], sec, "図", "", "取れなかった（線だけの図。数字は同じ節の表を見る）" if not NUM.search(text) else text[:200]])
+                continue
+            nt += 1
+            for i, tr in enumerate(re.findall(r"<tr.*?</tr>", m.group(0), re.S), 1):
+                cells = [" ".join(strip(c)) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", tr, re.S)]
+                rows.append([d.name[:7], sec, f"表{nt}", i] + cells[:10])
+    head = ["月", "節", "表・図", "行"] + [f"列{i}" for i in range(1, 11)]
+    return head, rows, (9, 26, 7, 5) + (18,) * 10
+
+
+# ── 追加のヒアリング ──
+
+def weak_of(site):
+    """一次性の採点で足りないと言われた文 [(slug, 文)]。採点の記録と材料の依頼の両方から（同じ文は1つ）"""
+    import client_private as CP
+    out = []
+    for ln in CP.read_lines(ROOT / "data" / "quality_loop.jsonl"):
+        try:
+            r = json.loads(ln)
+        except ValueError:
+            continue
+        if r.get("site") == site:
+            out += [(str(r.get("slug") or ""), str(w)) for w in ((r.get("weak") or {}).get("originality") or [])]
+    for slug, r in requests_of(site).items():
+        out += [(slug, str(w)) for w in r.get("scorer") or []]
+    return list(dict.fromkeys(out))
+
+
+def classify(weak):
+    """{分類の key: [(slug, 文)]}。どれにも当たらない指摘は other"""
+    out = {}
+    for slug, w in weak:
+        hit = [k for k, _l, rx, _q, _h in WEAK_CATS if re.search(rx, w)] or ["other"]
+        for k in hit:
+            out.setdefault(k, []).append((slug, w))
+    return out
+
+
+def _stuck(site, arts, weak, reqs):
+    """採点で一次性が80点に届かず止まっている記事（材料の依頼が無いもの）。[(slug, 狙う語, 指摘, 見出し)]"""
+    import client_private as CP
+    last = {}
+    for ln in CP.read_lines(ROOT / "data" / "quality_loop.jsonl"):
+        try:
+            r = json.loads(ln)
+        except ValueError:
+            continue
+        if r.get("site") == site and r.get("slug"):
+            last[r["slug"]] = r
+    out = []
+    for slug, r in sorted(last.items()):
+        orig = (r.get("axes") or {}).get("originality")
+        if slug in reqs or slug not in arts or r.get("ok") or r.get("state") == "passed" or not isinstance(orig, (int, float)) or orig >= 80:
+            continue
+        title, body, meta = arts[slug]
+        heads = re.findall(r"^##\s+(.+)$", body, re.M)
+        out.append((slug, str(meta.get("keyword") or title), [w for s, w in weak if s == slug][-4:], heads))
+    return out
+
+
+def _todo(site):
+    """台帳の未着手の語（kw_plan.stock と同じく、新しく書けない語は除く）。台帳が読めなければ空"""
+    try:
+        import hub_client
+        import kw_fit
+        return [r for r in hub_client.all_kw(strict=True)
+                if r.get("site") == site and str(r.get("status", "")).strip() == "未着手" and r.get("keyword")
+                and kw_fit.judge_new(str(r["keyword"]), site)[0] < 2]
+    except Exception as e:  # noqa: BLE001
+        _NOTES.append(("KWの台帳（管制塔の未着手の語）", f"読めませんでした（{type(e).__name__}）。語のまとまりの質問は出していません"))
+        return []
+
+
+def _volumes():
+    raw = _jl(ROOT / "data" / "rakko_volume.json") or {}
+    return {re.sub(r"\s+", "", str(k).lower()): v.get("vol") for k, v in raw.items() if isinstance(v, dict) and v.get("vol") is not None}
+
+
+def kw_groups(rows, skip="", big=10):
+    """語のまとまり {名前: [語]}。2語以上に出る語（全体の4割未満。サービス名のように多くに出る語は外す）で束ね、残りは1語ずつ。
+    big 語を超えるまとまりは、束ねた語を除いてもう一段分ける（「経費精算」の数十語に1つの問いでは名指しにならない）"""
+    import material as M
+    kws = list(dict.fromkeys(str(r.get("keyword") or "") for r in rows if r.get("keyword")))
+    flat = {k: re.sub(r"\s+", "", k.lower()) for k in kws}
+    has = {t: {k for k in kws if t in flat[k]} for k in kws for t in M.tokens(k) if not (skip and (skip in t or t in skip))}
+    n = len(kws) or 1
+    cand = sorted((t for t, ks in has.items() if len(ks) >= 2 and (n < 5 or len(ks) / n < 0.4)),
+                  key=lambda t: (-len(has[t]), -len(t), t))
+    out, done = {}, set()
+    for t in cand:
+        ks = [k for k in kws if k in has[t] and k not in done]
+        if len(ks) >= 2:
+            out[t] = ks
+            done |= set(ks)
+    for k in kws:
+        if k not in done:
+            out[k] = [k]
+    if skip or not big:
+        return out
+    split = {}
+    for name, ks in out.items():
+        if len(ks) <= big:
+            split[name] = ks
+            continue
+        for sub, sks in kw_groups([{"keyword": k} for k in ks], skip=name).items():
+            split[f"{name}／{sub}" if len(sks) > 1 else sub] = sks
+    return split
+
+
+def hearing(site, arts):
+    """追加のヒアリングの行 [(key, 項目, 質問, 目安, 優先度, 根拠, 対象, 前回値, 前回の時点, 検索数)] を優先の高い順に。
+    答えの数字は作らない（例の書き方は ◯）"""
+    import facts as F
+    import material as M
+    import private_store as P
+    client = P.is_client(site)
+    reqs = requests_of(site)
+    weak = weak_of(site)
+    out = []          # (優先度, 並べる値, 行)
+
+    def add(tier, w, key, item, q, hint, why, target="", prev="", at="", vol=""):
+        out.append((tier, w, (key, item, q, hint, tier, f"{TIER[tier]}（{why}）" if why else TIER[tier], target, prev, at, vol)))
+
+    for n, (slug, r) in enumerate(sorted(reqs.items(), key=lambda x: str(x[1].get("since", "")))):
+        why = "／".join(str(w)[:110] for w in (r.get("scorer") or [])[:2])
+        for i, q in enumerate(r.get("questions") or []):
+            add(1, n, f"req:{slug}:{i}", f"記事「{r.get('keyword', slug)}」", q,
+                ("記事で足りないと言われている点: " + why) if (i == 0 and why) else "例の書き方: ◯年◯月〜◯年◯月の◯件のうち◯件",
+                f"材料の依頼 {r.get('since', '')}〜", f"{slug}：{arts.get(slug, (r.get('keyword', ''),))[0]}")
+    for n, (slug, kw, ws, heads) in enumerate(_stuck(site, arts, weak, reqs)):
+        for i, q in enumerate(M.questions(kw, ws, heads)):
+            add(1, 1000 + n, f"req:{slug}:{i}", f"記事「{kw}」", q,
+                ("記事で足りないと言われている点: " + "／".join(w[:110] for w in ws[:2])) if (i == 0 and ws) else
+                "例の書き方: ◯年◯月〜◯年◯月の◯件のうち◯件", "一次性が80点未満のまま", f"{slug}：{arts[slug][0]}")
+    try:
+        _, fs = F.load_for(site)
+    except Exception:  # noqa: BLE001
+        fs = []
+    for f in fs or []:
+        fid, claim = str(f.get("id") or ""), str(f.get("claim") or "")
+        marks = list(dict.fromkeys(UNIT.findall(claim)))
+        if not fid or not marks or fid.startswith(("own-", "q-", "dataset-")):
+            continue                 # 機械で作った一次情報と公開データのページは、それぞれの工程が更新する
+        used = _used(claim, arts)
+        miss = [name for name, rx in GAPS
+                if not rx.search(claim + (" " + str(f.get("period") or "") if name.startswith("期間") else ""))]
+        at = "・".join(x for x in (str(f.get("as_of") or ""), str(f.get("period") or "")) if x)
+        q = (f"次の一次情報を最新の数字に更新してください（前回値：{'・'.join(marks)}、時点：{at or '不明'}）。"
+             f"変わっていなければ「変わらず」と書いてください。" + (f"あわせて「{'・'.join(miss)}」も足してください。" if miss else "")
+             + f"今の文: 「{claim}」")
+        add(2 if len(used) >= 2 else 5, -len(used), f"upd:{fid}", f"一次情報の更新（記事{len(used)}本で使用）", q,
+            "例の書き方: ◯年◯月時点で◯社のうち◯社（◯年◯月〜◯年◯月・担当者が◯◯の台帳で集計）",
+            f"記事{len(used)}本で使用", fid, "・".join(marks), at)
+    groups = classify(weak)
+    for k, label, _rx, q, hint in WEAK_CATS:
+        hits = groups.get(k) or []
+        if hits:
+            add(3, -len(hits), f"gap:{k}", f"採点の指摘「{label}」", q + "（記事の題ごとに分けて書いてください）", hint,
+                f"{len(hits)}回・記事{len({s for s, _w in hits})}本", label)
+    todo = _todo(site)
+    vols = _volumes()
+    prio = {str(r.get("keyword")): str(r.get("priority") or "").strip() for r in todo}
+    grouped = kw_groups(todo)
+
+    def weight(ks):
+        vol = sum(vols.get(re.sub(r"\s+", "", k.lower())) or 0 for k in ks)
+        return (-sum(1 for k in ks if prio.get(k) == "A"), -vol, -len(ks)), vol
+    order = sorted(grouped.items(), key=lambda x: (weight(x[1])[0], x[0]))
+    for n, (name, ks) in enumerate(order):
+        w, vol = weight(ks)
+        g = f"「{name}」の語（{'・'.join(ks[:4])}{' ほか' + str(len(ks) - 4) + '語' if len(ks) > 4 else ''}）" if len(ks) > 1 else f"「{name}」"
+        for kind, label, q, hint, core in KW_KINDS:
+            if kind == "price" and not client:
+                continue
+            if len(ks) == 1 and not core:
+                continue          # 1語だけのまとまりは主題の数字・事例・失敗だけを聞く（同じ問いが何百行にもなる）
+            add(4, (n, [k[0] for k in KW_KINDS].index(kind)), f"kw:{n + 1}:{kind}", f"{label}（{name}）", q.format(g=g), hint,
+                f"在庫の語{len(ks)}本" + (f"・優先度Aが{-w[0]}本" if w[0] else ""), "・".join(ks), "", "", vol or "")
+    for k, lab, q, hint, only_client in TEMPLATE:
+        if client or not only_client:
+            add(6, 0, f"tpl:{k}", lab, q, hint, "")
+    out.sort(key=lambda x: (x[0], x[1]))
+    return [r for *_x, r in out], groups
+
+
+def _tab(wb, title, head, rows, widths):
+    from openpyxl.styles import Alignment, Font, PatternFill
+    ws = wb.create_sheet(title)
+    ws.append(head)
+    for c in ws[1]:
+        c.font = Font(name="Arial", bold=True, color="FFFFFF")
+        c.fill = PatternFill("solid", start_color="1F3A5F")
+        c.alignment = Alignment(vertical="center", wrap_text=True)
+    for r in rows:
+        ws.append([v if isinstance(v, (int, float)) or v is None else str(v)[:32000] for v in r])
+    for row in ws.iter_rows(min_row=2, max_row=1 + len(rows)):
+        for c in row:
+            c.font = Font(name="Arial", size=10)
+            c.alignment = Alignment(vertical="top", wrap_text=True)
+    from openpyxl.utils import get_column_letter
+    for i, w in enumerate(widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = w
+    ws.freeze_panes = "B2"
+    if rows:
+        ws.auto_filter.ref = f"A1:{get_column_letter(len(head))}{1 + len(rows)}"
+    return ws
+
+
+def book(site, out_dir, today=None):
+    """社ごとの1冊。(パス, {タブ: 行数})"""
+    from openpyxl import Workbook
+    today = today or date.today().isoformat()
+    del _NOTES[:]
+    name = display_name(site)
+    arts = _articles(site)
+    qrows, groups = hearing(site, arts)
+    wb = Workbook()
+    question_tab(wb, site, name, today, qrows, EXTRA)
+    counts = {TAB: len(qrows)}
+    no = {r[0]: i for i, r in enumerate(qrows, 1)}
+    labels = {k: label for k, label, *_x in WEAK_CATS}
+    cls = [[labels.get(k, "その他"), len(v), len({s for s, _w in v}), v[0][1][:300], v[1][1][:300] if len(v) > 1 else "",
+            no.get(f"gap:{k}", "")] for k, v in sorted(groups.items(), key=lambda x: -len(x[1]))]
+    tabs = [("採点の指摘の分類", (["分類", "指摘の数", "記事の数", "指摘の例1（採点者の言葉）", "指摘の例2", "この分類を潰す質問の No"],
+                           cls, (26, 9, 9, 70, 70, 12)))]
+    tabs += [("一次情報（事実・数字）", ledger_facts(site, arts)), ("体験・事例", ledger_exps(site, arts)),
+             ("台帳_お客様の声", ledger_voices(site, arts)), ("当社調べ（AIへの質問）", ledger_survey(site, arts)),
+             ("AI引用の実測", ledger_citations(site)), ("書き直しの前後", ledger_rewrites(site, arts)),
+             ("図表の数字", figures(site, arts)), ("月次レポートの数字", report_tables(site))]
+    for title, (head, rows, widths) in tabs:
+        _tab(wb, title, head, rows, widths)
+        counts[title] = len(rows)
+    srcs = [["記事（articles/ と非公開の private/articles）", len(arts), "使っている記事・図・表を探した本文"],
+            ["一次情報 facts.load_for（data/first_party_facts.json・お客様の facts.json・自社の実測）", counts["一次情報（事実・数字）"], ""],
+            ["体験 originality.load_experiences（data/experiences.json・お客様の experiences.json）＋ヒアリングシートの事例", counts["体験・事例"], ""],
+            ["お客様の声 data/voices.json ＋ヒアリングシートの声", counts["台帳_お客様の声"], ""],
+            ["当社調べ data/own_survey/<slug>.json（お客様の社は非公開の置き場）", counts["当社調べ（AIへの質問）"], "行は論点・観点・文・問いの数"],
+            ["AI引用 data/ai_citations/YYYY-MM.json（推定と、AIに直接聞いた記録）", counts["AI引用の実測"], ""],
+            ["書き直しの台帳 data/rewrite_effect.json・前と後の測定 data/measured_changes.json", counts["書き直しの前後"], ""],
+            ["図 記事の diagrams（make_diagram の元データ）・本文の表・data/datasets", counts["図表の数字"], "画像だけで元データの無い図は「取れなかった」の行"],
+            ["月次レポート（非公開の置き場 reports/）の表", counts["月次レポートの数字"], "小さな折れ線は数字が無いので「取れなかった」の行"],
+            ["採点の記録 data/quality_loop.jsonl・材料の依頼 material_requests.json", sum(len(v) for v in groups.values()), "分類ごとの指摘の延べ数"]]
+    srcs += [[a, "", b] for a, b in _NOTES]
+    _tab(wb, "集めた置き場", ["置き場", "行数", "メモ"], srcs, (70, 9, 60))
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    safe = re.sub(r'[\\/:*?"<>|\s]+', "_", name)
+    p = out_dir / f"一次情報の台帳と追加ヒアリング_{safe}_{today}.xlsx"
+    wb.save(p)
+    return p, counts
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--make", action="store_true")
@@ -592,7 +1181,17 @@ def main():
     ap.add_argument("--what", default="")
     ap.add_argument("--auto-measure", type=int, default=0, help="書き直しから31日たった自社の記事の前と後を N 本測る（週次）")
     ap.add_argument("--mail", action="store_true", help="依頼が変わった社の質問シートをメールで送る（週次・CI だけ）")
+    ap.add_argument("--book", action="store_true", help="社ごとの1冊（一次情報の台帳・図表の数字・追加のヒアリング）を作る")
     a = ap.parse_args()
+    if a.book:
+        if os.environ.get("GITHUB_ACTIONS"):
+            print("MATERIAL_BOOK=skip（CI では作らない。お客様の語が成果物とログに載る）")
+            return 0
+        import sites as S
+        for s in [x.strip() for x in a.site.split(",") if x.strip()] or list(S.load_all()):
+            p, counts = book(s, a.out)
+            print(f"  {p}: " + "・".join(f"{k} {v}" for k, v in counts.items()))
+        return 0
     if a.make:
         if os.environ.get("GITHUB_ACTIONS"):
             print("MATERIAL_SHEET=skip（CI では作らない。手元で作る）")
