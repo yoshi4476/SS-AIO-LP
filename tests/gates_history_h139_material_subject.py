@@ -46,8 +46,9 @@ def test_material_ask_names_the_subject():
     print("\n■ 材料の依頼は、主題の数字と見出しと採点者の指摘を名指しで聞く（汎用の質問だけにしない。事実は作らない）")
     with tempfile.TemporaryDirectory() as d:
         p = Path(d) / "material_requests.json"
-        weak = ["主題の値引きそのものに関する当社の実測がない。値引きの理由別の件数などの数字が無い。",
-                "仕訳例は公開情報の整理にとどまる。"]
+        weak = ["主題の値引きそのものに関する当社の実測がない。現場の具体例が薄い。",
+                "仕訳例は公開情報の整理にとどまる。",
+                "値引きの理由別の件数や、端数が占める割合などの数字が無い。"]
         M.ask("zz-site", "zz-a", "見積書 値引き", weak, path=p,
               heads=["値引きの理由と仕訳", "端数の切り捨てはどう扱うか", "まとめ"])
         import json

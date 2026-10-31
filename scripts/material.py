@@ -145,6 +145,7 @@ def questions(kw, weak=(), heads=()):
     聞くだけで、答えの数字は作らない"""
     qs = [f"「{kw}」そのものについて、当社で数えた数字（期間つき・全体で何件のうち何件か。社名は伏せます）"]
     said = [s.strip() for w in weak or [] for s in re.split(r"(?<=。)", str(w)) if MISSING.search(s)]
+    said.sort(key=lambda s: not re.search(r"件数|割合|何件|何社", s))   # 数えられる形で名指しした指摘を先に
     qs += [f"採点者の指摘「{s}」に答えられる、当社で数えた数字か実例（無ければ「無し」で構いません）" for s in said[:2]]
     hs = [h.strip() for h in heads or [] if h.strip() and not SKIP_HEAD.search(h)]
     qs += [f"見出し「{h}」の節に使える実例1件（時期つき。何が起き、どう判断し、どうなったか）" for h in hs[:2]]
