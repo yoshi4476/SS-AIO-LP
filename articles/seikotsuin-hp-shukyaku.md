@@ -51,6 +51,8 @@ diagrams:
 
 整骨院のホームページ集客とは、来院を決めかけた患者の背中を押し、予約まで一直線に導く役割を担う施策です。
 
+関連する内容は、[不動産の集客ホームページで外す4つのNG](/aio/fudousan-shukyaku-homepage/)で解説しています。
+
 
 関連して、[工務店のWeb集客とは？5つの施策と始める順番](/ai-marketing/koumuten-web-shukyaku/)もあわせてご確認ください。
 
