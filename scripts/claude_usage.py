@@ -16,6 +16,7 @@ CI で Claude を呼ぶ工程は18本あるのに、使った量をどこにも�
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from collections import defaultdict
@@ -25,6 +26,22 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 LOG = ROOT / "data" / "claude_usage"
 KEYS = ("input_tokens", "output_tokens", "cache_creation_input_tokens", "cache_read_input_tokens")
+# サブスクの上限に当たると claude は「You've hit your weekly limit · resets 8am (Asia/Tokyo)」の1行だけを返す。
+# 2026-10-27〜10-30 は全社の記事の枠がこれで止まり、工程は「記事が増えていません」を3回繰り返すだけで理由を残さなかった
+LIMIT_RE = re.compile(r"hit your (?:[\w-]+ )?limit|usage limit reached|limit will reset", re.I)
+
+
+def limit_hit(text):
+    """AI の出力が利用の上限の知らせなら、その1行（120字まで）。違えば空"""
+    for ln in (text or "").splitlines():
+        if LIMIT_RE.search(ln):
+            return ln.strip()[:120]
+    return ""
+
+
+def public_site(site):
+    """記録に書く社は公開の id だけ（sites/<公開の id>.json がある名前）。社の id を渡されたら伏せる"""
+    return site if not site or (ROOT / "sites" / f"{site}.json").is_file() else "?"
 
 
 def projects_dir():
@@ -106,7 +123,17 @@ def main():
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--days", type=int, default=7)
+    ap.add_argument("--limit-hit", metavar="FILE", help="AI の出力のファイルが利用の上限の知らせかを見る")
     a = ap.parse_args()
+    if a.limit_hit:
+        try:
+            line = limit_hit(Path(a.limit_hit).read_text(encoding="utf-8", errors="ignore"))
+        except OSError:
+            line = ""
+        print(f"AI_LIMIT={'yes' if line else 'no'}")
+        if line:
+            print(f"AI_LIMIT_LINE={line}")
+        return 0
     if a.report:
         report(a.days)
         return 0
@@ -116,7 +143,7 @@ def main():
     if a.write and t["turns"]:
         LOG.mkdir(parents=True, exist_ok=True)
         now = datetime.now(timezone.utc)
-        row = {"at": now.isoformat(timespec="seconds"), "job": a.job[:60], "site": a.site[:40], **t}
+        row = {"at": now.isoformat(timespec="seconds"), "job": a.job[:60], "site": public_site(a.site[:40]), **t}
         name = f"{now:%Y%m%d-%H%M%S}-{os.environ.get('GITHUB_RUN_ID', 'local')}-{os.environ.get('GITHUB_RUN_ATTEMPT', '1')}.json"
         (LOG / name).write_text(json.dumps(row, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     return 0

@@ -2176,7 +2176,10 @@ def _apply_one(item, edited, orig):
         revert_since(orig)
         return False, "直す記事は変わらず、ほかの記事だけが変わったため戻しました"
     if r.returncode and not p.read_text(encoding="utf-8-sig") != before[2]:
-        return False, f"claude が動きませんでした（{(r.stderr or '')[:60]}）"
+        # 上限の知らせは標準出力に出る。stderr だけを見て「（）」と理由の無い記録が残っていた（2026-10-29・30）
+        from claude_usage import limit_hit
+        why = limit_hit((r.stdout or "") + "\n" + (r.stderr or "")) or (r.stderr or "")[:60]
+        return False, f"claude が動きませんでした（{why}）"
 
     if p.read_text(encoding="utf-8-sig") == before[2]:
         return True, "変更なし（直す必要なしと判断）"

@@ -259,6 +259,9 @@ def main():
     site_id = os.environ.get("SITE_ID") or _sm.primary()
     if "--site" in sys.argv:
         site_id = sys.argv[sys.argv.index("--site") + 1]
+    # 週次は sites/*.json の名前（お客様の社は公開の id）で回す。社の id に直さないと設定を引けず
+    # KeyError で止まり、お客様の社の週次の補充が毎週失敗していた（2026-10-26 の週次で確認）
+    site_id = _sm.resolve(site_id)
     # お客様の社は、非公開のデータ（サイト設定の戦略の部分・キーワード計画）が読めなければ積まない。
     # CI のログは誰でも読めるので、お客様の社の語は一覧にせず件数だけ出す（2026-10-10 運用者の指示）
     import private_store
@@ -446,7 +449,7 @@ def main():
     print(f"KW_DISCOVER: GSC実証={len(proven)}件 / サジェスト発掘={len(discovered)}件"
           f"（うち開く理由の弱い語 {len(weak)}件）")
     if quiet:
-        print(f"  {site_id}: 語の一覧はログに出しません（お客様の社。表示実績あり{len(proven)}語・新規候補{len(discovered)}語）")
+        print(f"  {_sm.public_id(site_id)}: 語の一覧はログに出しません（お客様の社。表示実績あり{len(proven)}語・新規候補{len(discovered)}語）")
     elif proven:
         print("\n■ 表示実績あり・記事なし（最優先で執筆する）")
         for q in proven[:15]:
@@ -495,7 +498,7 @@ def main():
                 r = hub_client.add_kw(site_id, picks) or {}
                 if r.get("ok"):
                     print(f"管制塔の台帳へ {r.get('added', 0)}件を追加しました"
-                          f"（渡した{len(picks)}件・site={site_id}）")
+                          f"（渡した{len(picks)}件・site={_sm.public_id(site_id)}）")
                 else:
                     print(f"（管制塔が追加を受け付けませんでした: {r.get('error', '応答なし')}）")
             else:

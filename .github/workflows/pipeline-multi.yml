@@ -721,11 +721,23 @@ jobs:
               echo "AI の出力 $(wc -l < "$RUNNER_TEMP/claude_out_$try.txt") 行（お客様の社の回のため、ログには出しません）"
             else
               claude -p "$(cat automation/multi_site_prompt.txt)" \
-                $MODEL_ARG --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --strict-mcp-config --exclude-dynamic-system-prompt-sections --max-turns 160 || true
+                $MODEL_ARG --permission-mode dontAsk --allowedTools "Glob,Grep" --settings automation/agent_settings_article.json --strict-mcp-config --exclude-dynamic-system-prompt-sections --max-turns 160 \
+                2>&1 | tee "$RUNNER_TEMP/claude_out_$try.txt" || true
             fi
             after=$(ls articles/*.md 2>/dev/null | wc -l)
             if [ "$after" -gt "$before" ]; then
               echo "記事が増えました（$before → $after）。$try 回目で完了"
+              break
+            fi
+            # サブスクの利用の上限に当たった回は、やり直しても書けない。理由を残して知らせる
+            # （2026-10-27〜10-30 は全社の枠が上限で止まり、「記事が増えていません」だけが残って理由が見えなかった）
+            lim=$(python scripts/claude_usage.py --limit-hit "$RUNNER_TEMP/claude_out_$try.txt" 2>/dev/null || true)
+            if echo "$lim" | grep -q '^AI_LIMIT=yes'; then
+              line=$(echo "$lim" | sed -n 's/^AI_LIMIT_LINE=//p')
+              echo "::error::AI の利用の上限に達しています（$line）。この回の ${{ steps.site.outputs.pub }} の記事は書きません"
+              echo "要対応: AI（Claude のサブスク）の利用の上限で ${{ steps.site.outputs.pub }} の記事を書けませんでした（$line）。上限が続く間は全社の記事の枠と書き直しが止まります。ANTHROPIC_API_KEY（従量課金）の登録か、AI を使う工程の削減を決めてください" >> automation/logs/findings.txt
+              python scripts/hub_client.py error_log \
+                "${{ steps.site.outputs.id }}: AI の利用の上限で記事を書けませんでした（$line）" || true
               break
             fi
             echo "::warning::記事が増えていません。書き直します（$try/3）"
@@ -979,7 +991,8 @@ jobs:
       - name: Claude の使用量を記録する
         if: steps.site.outputs.skip != 'yes'
         env:
-          SITE_PUB: ${{ steps.site.outputs.id }}
+          # 記録は公開側に残る。社の id（outputs.id）を渡していたため、お客様の社の名前が記録に載っていた（2026-10-31）
+          SITE_PUB: ${{ steps.site.outputs.pub }}
         run: python scripts/claude_usage.py --job "記事の枠" --site "$SITE_PUB" --write || true
 
       - name: 自リポジトリの記事をコミット
