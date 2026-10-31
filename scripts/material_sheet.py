@@ -263,6 +263,8 @@ def read(src):
 NG_HEAD = re.compile(r"^(?:不可|×|✕|NG|要確認|未確認|仮置き|保留)")
 NG_ANY = re.compile(r"不可|未確認|要確認|確認後|未確定|仮置き")
 OK_HEAD = re.compile(r"^(可|○|〇|OK|お客様の記事だけ)(.*)$", re.S)
+# 「要確認事項は除外」は確認待ちの部分を外したうえでの可（2026-10-31 の記入で BPO 244行・AI集客ラボ 51行が保留に倒れていた）
+NG_EXCLUDED = re.compile(r"(?:要確認|未確認|未確定)(?:の)?(?:事項|部分|項目|点|数字)?(?:は|を)?(?:除外|除く|除いて)")
 
 
 def permission(ok, site):
@@ -276,7 +278,7 @@ def permission(ok, site):
     m = OK_HEAD.match(s)
     if not m:
         return False, "", f"不可：記事に出さない答え（「{s[:30]}」を可と読めない）"
-    if NG_ANY.search(s):
+    if NG_ANY.search(NG_EXCLUDED.sub("", s)):
         return False, "", f"条件が未確認：記事に出す条件に確認待ちがある（{s[:40]}）"
     if m.group(1) == "お客様の記事だけ":
         import private_store as P
