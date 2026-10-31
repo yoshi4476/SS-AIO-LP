@@ -1,0 +1,26 @@
+{
+ "keyword": "ものづくり補助金 給与支給総額 個人事業主",
+ "sources": [
+  "https://portal.monodukuri-hojo.jp/common/bunsho/ippan/qanda_20220524.pdf",
+  "https://planbase.co.jp/column/monodukuri-labor-costs/",
+  "https://j-support.jp/column/8116",
+  "https://innovales.jp/monohojo-kyuuyokeisan-kojin/",
+  "https://so-labo.co.jp/hojyokin/monodukuri/basic/141/",
+  "https://www.youtube.com/watch?v=AJ6J_VpILeY"
+ ],
+ "missing": [
+  "株式会社プランベース",
+  "共同印刷工業株式会社",
+  "プライムアカウント",
+  "事業場内最低賃金",
+  "補助金申請支援",
+  "地域別最低賃金",
+  "年平均成長率",
+  "助成金リスト",
+  "サイト内検索",
+  "付加価値額",
+  "交付決定後",
+  "申請事業者"
+ ],
+ "covered": 0.31
+}

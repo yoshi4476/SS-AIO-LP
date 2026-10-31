@@ -990,5 +990,11 @@
   "imp": 26,
   "band": "11〜20位",
   "site": "subsidy"
+ },
+ "monozukuri-hojokin-kyuyo-shikyu-sogaku": {
+  "at": "2026-10-31",
+  "pos": 7.6,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  }
 }
