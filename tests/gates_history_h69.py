@@ -77,6 +77,7 @@ def test_indexnow_uses_the_key_each_domain_serves():
     with mock.patch.object(NI, "load_env", return_value={"INDEXNOW_KEY": "c" * 32}), \
             mock.patch.object(NI, "key_ok", side_effect=lambda d, k: sent.append(("ok", k)) or True), \
             mock.patch.object(NI, "sitemap_urls", return_value=["https://x.example.jp/a/"]), \
+            mock.patch.object(NI, "load_state", return_value={}), mock.patch.object(NI, "save_state"), \
             mock.patch.object(NI, "notify", side_effect=lambda u, k, s: sent.append(("send", k)) or 200):
         NI.main([], cfgs)
     check("通知も確かめも、その社の鍵で行う", sent, [("ok", "k" * 32), ("send", "k" * 32)])

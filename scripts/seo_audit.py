@@ -91,6 +91,7 @@ def page_facts(h):
         "desc": _h.unescape(d.group(1)).strip() if d else None,
         "canonical": c.group(1) if c else None,
         "noindex": bool(re.search(r'<meta name="robots" content="[^"]*noindex', h)),
+        "article": bool(re.search(r'"@type"\s*:\s*"(?:BlogPosting|Article|NewsArticle|TechArticle)"', h)),
         "og_missing": [k for k in OG_NEED if f'property="{k}"' not in h],
         "h1": len(re.findall(r"<h1[\s>]", body)),
         "img_noalt": len([m for m in re.findall(r"<img\b[^>]*>", body) if not re.search(r'\balt="[^"]+"', m)]),
@@ -170,6 +171,15 @@ def check(pages, sitemap, redirects=(), inbound=None):
         if len(ps) > 1:
             out.append(("警告", "説明文が重複", ps[0], f"{len(ps)}ページ"))
     return out
+
+
+DESC_STOP = {"説明文が短すぎる", "説明文が長すぎる", "説明文が無い"}
+
+
+def desc_stops(rows, pages):
+    """門で止める説明文の外れ。記事は build.py の門（メタ記述字数NG）が見るので、ここは固定ページと自動で作るページだけ。
+    警告のままにしていたら、/faq/（76字）と /about/（161字）が本番に出て Ahrefs に指摘された（2026-10-31）"""
+    return [r for r in rows if r[1] in DESC_STOP and not (pages.get(r[2]) or {}).get("article")]
 
 
 def local():
@@ -343,8 +353,8 @@ def main():
     bad = 0
     if a.gate:
         # 警告では止めない（記事の公開まで止まる）。検索から外れる・壊れた表示が出るものだけ止める
-        rows, _ = local()
-        fatal = [r for r in rows if r[0] == "致命的"]
+        rows, pages = local()
+        fatal = [r for r in rows if r[0] == "致命的"] + desc_stops(rows, pages)
         conf = [str(p.relative_to(ROOT)) for p in list((ROOT / "articles").glob("*.md")) + list(SITE.rglob("*.html"))
                 if re.search(r"^(<<<<<<< |>>>>>>> )", p.read_text(encoding="utf-8", errors="replace"), re.M)]
         for r in fatal:

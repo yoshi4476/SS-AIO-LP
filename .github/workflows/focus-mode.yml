@@ -387,8 +387,23 @@ jobs:
           echo "::error::3回ともデプロイ失敗。次回のデプロイで反映される"
           exit 1
 
+      # IndexNow へ送った印（中身が変わったページだけを送る）。記事の枠と同じキャッシュで持ち越す
+      - name: IndexNow への送信記録を戻す
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: data/indexnow_sent.json
+          key: indexnow-sent-${{ github.run_id }}
+          restore-keys: indexnow-sent-
+
       - name: 更新URLをIndexNow通知
         run: python scripts/notify_indexnow.py || true
+
+      - name: IndexNow への送信記録を残す
+        if: always() && hashFiles('data/indexnow_sent.json') != ''
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: data/indexnow_sent.json
+          key: indexnow-sent-${{ github.run_id }}-focus
 
       - name: Google Indexing API即時登録（本日更新分）
         run: |

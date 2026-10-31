@@ -2,7 +2,8 @@
 """IndexNow即時通知（Phase 7 / 週次リライト後に実行）
 
 使い方: python scripts/notify_indexnow.py <URL> [<URL> ...]
-        引数なしの場合は sitemap.xml の全URLを通知
+        引数なしの場合は sitemap.xml のうち、前に送ってから中身が変わった・新しいURLだけを通知
+        （AI集客ラボは本文・題・説明文の印で比べる。手元に HTML の無いサイトは同じURLを1日1回まで）
         python scripts/notify_indexnow.py --site <id>   # その社の本日公開・更新の記事だけ（記事CIの公開直後）
 前提: .env に INDEXNOW_KEY を設定し、site/{KEY}.txt を配置していること
 
@@ -10,6 +11,7 @@
 `import notify_indexnow` した瞬間に外部へ送信が飛ぶ（実際、検査のために
 読み込んだだけで136件を送ってしまった）。
 """
+import hashlib
 import json
 import re
 import sys
@@ -98,6 +100,72 @@ def notify(urls, key, site_url):
         return res.status
 
 
+# 1回に1つの host へ送る上限（IndexNow の1回の上限は1万件。初回の全送りでも届く数にとどめる）
+MAX_PER_HOST = 2000
+# 送った印の記録（CI のキャッシュで持ち越す。.gitignore 済み）。鍵は URL の指紋で、お客様のドメインを書かない
+STATE = ROOT / "data" / "indexnow_sent.json"
+# 中身に数えないもの: 関連記事・前後の記事の並び（新しい記事が出るたびに全ページが変わる）、日付、CSS・JS の版の印
+_NOISE = re.compile(r'<(script|style|svg)\b.*?</\1>|<(header|footer|nav)\b.*?</\2>'
+                    r'|<section class="(?:related|cta)[^"]*".*?</section>|<aside\b.*?</aside>|<time\b.*?</time>', re.S | re.I)
+_DATE = re.compile(r"\d{4}\s*[-/.年]\s*\d{1,2}\s*[-/.月]\s*\d{1,2}\s*日?|\d{4}年\d{1,2}月")
+
+
+def page_sig(html):
+    """ページの中身の印（題・説明文・本文）。本文が同じで日付や版の印だけが動いたページは同じ印になる"""
+    t = re.search(r"<title>(.*?)</title>", html, re.S)
+    d = re.search(r'<meta name="description" content="([^"]*)"', html)
+    m = re.search(r"<main\b.*?</main>", html, re.S)
+    body = _NOISE.sub(" ", m.group(0) if m else html)
+    text = re.sub(r"\s+", " ", _DATE.sub("", re.sub(r"<[^>]+>", " ", body)))
+    raw = "\n".join((t.group(1) if t else "", d.group(1) if d else "", text.strip()))
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:20]
+
+
+def _key(url):
+    return hashlib.sha256(url.rstrip("/").encode("utf-8")).hexdigest()[:20]
+
+
+def local_sigs(site, base, urls):
+    """手元で作ったサイト（AI集客ラボ）の URL ごとの印。ファイルが無ければ空の印（新しいページとして送る）"""
+    out = {}
+    for u in urls:
+        rel = u[len(base):].lstrip("/") if u.startswith(base) else urllib.parse.urlsplit(u).path.lstrip("/")
+        f = site / rel / "index.html" if not rel.endswith(".html") else site / rel
+        out[u] = page_sig(f.read_text(encoding="utf-8", errors="replace")) if f.is_file() else ""
+    return out
+
+
+def fresh(sigs, state):
+    """前に送った印と違う（＝中身が変わった・新しい）URL だけ"""
+    return [u for u, s in sigs.items() if not s or state.get(_key(u)) != s]
+
+
+def remember(state, sigs, urls):
+    for u in urls:
+        if sigs.get(u):
+            state[_key(u)] = sigs[u]
+
+
+def load_state():
+    try:
+        return json.loads(STATE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def save_state(state):
+    STATE.parent.mkdir(parents=True, exist_ok=True)
+    STATE.write_text(json.dumps(state, ensure_ascii=False, sort_keys=True), encoding="utf-8")
+
+
+def day_sigs(urls):
+    """手元に HTML の無いサイト（コーポレート・補助金・お客様の社・WordPress）は中身を比べられない。
+    日付を印にして、同じ URL を送るのは1日1回までにする（前は記事の枠のたびに送っていた）"""
+    import datetime
+    day = "day:" + datetime.date.today().isoformat()
+    return {u: day for u in urls}
+
+
 def recent_urls(cfg):
     """本日公開・更新した記事のうち、本番の sitemap に載っているもの（記事CIの公開直後に1社分だけ送る）"""
     sys.path.insert(0, str(ROOT / "scripts"))
@@ -130,6 +198,9 @@ def main(argv=None, cfgs=None):
     sys.path.insert(0, str(ROOT / "scripts"))
     import sites as S
     sent, base_key = 0, key
+    # 前は自社の枠のたびに sitemap の全URLを送っていた（変わっていないページも1日に何度も）。
+    # 中身が変わった・新しいページだけを送る（2026-10-31）。記録が無い初回は全部を送って記録する
+    state = load_state()
     cfgs = S.load_all() if cfgs is None else cfgs
     for sid, cfg in cfgs.items():
         if only and sid != only:
@@ -146,11 +217,17 @@ def main(argv=None, cfgs=None):
             continue
         if only:
             urls = recent_urls(cfg)
-        elif wp:
-            import wp_bridge
-            urls = wp_bridge.site_urls(cfg)
+            sigs = {}
         else:
-            urls = sitemap_urls(None if sid == S.primary() else dom)
+            if wp:
+                import wp_bridge
+                sigs = day_sigs(wp_bridge.site_urls(cfg))
+            elif sid == S.primary():
+                sigs = local_sigs(ROOT / "site", f"https://{dom}", sitemap_urls(None))
+            else:
+                sigs = day_sigs(sitemap_urls(dom))
+            urls = fresh(sigs, state)[:MAX_PER_HOST]
+            print(f"  {sid}: sitemap {len(sigs)}件のうち、中身が変わった・新しいページ {len(urls)}件")
         if not urls:
             if only:
                 print(f"  {sid}: 通知対象なし（本日の記事が本番の sitemap にまだありません）")
@@ -160,8 +237,10 @@ def main(argv=None, cfgs=None):
         except Exception as e:
             print(f"  {sid}: 通知に失敗（{str(e)[:60]}）")
             continue
+        remember(state, sigs, urls)
         sent += len(urls)
         print(f"  {sid}: {len(urls)}件 → HTTP {status}")
+    save_state(state)
     print(f"IndexNow通知: 合計{sent}件")
     return 0
 

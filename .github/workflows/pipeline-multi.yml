@@ -1140,6 +1140,15 @@ jobs:
           key: bing-submit-${{ github.run_id }}
           restore-keys: bing-submit-
 
+      # IndexNow へ送った印。中身が変わったページだけを送るため、前の回の印を戻す（無ければ全部を送って記録する）
+      - name: IndexNow への送信記録を戻す
+        if: steps.site.outputs.skip != 'yes'
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: data/indexnow_sent.json
+          key: indexnow-sent-${{ github.run_id }}
+          restore-keys: indexnow-sent-
+
       - name: 新しいURLを検索エンジンへ通知
         if: steps.site.outputs.skip != 'yes'
         continue-on-error: true
@@ -1176,6 +1185,13 @@ jobs:
         with:
           path: data/bing_submit.json
           key: bing-submit-${{ github.run_id }}
+
+      - name: IndexNow への送信記録を残す
+        if: always() && steps.site.outputs.skip != 'yes' && hashFiles('data/indexnow_sent.json') != ''
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: data/indexnow_sent.json
+          key: indexnow-sent-${{ github.run_id }}
 
       # 品質ゲートはすべて原稿とビルド出力を見ている。公開後の実物を見る工程が
       # 無かったため、社内向けTODOコメント・生成時の作業タグ </content>・

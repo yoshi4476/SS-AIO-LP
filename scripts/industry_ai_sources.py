@@ -740,6 +740,32 @@ def live_inds():
     return out
 
 
+def sibling_html(ind, live, answers_url=""):
+    """調査ページの「近い業種の調査」。業種ハブの無い業種の調査は一覧（/research/）からしか張られず、
+    Ahrefs に「被リンクが1本だけ」と23ページ出た（2026-10-31）。同じまとまりの業種どうしで張り、
+    まとまりが小さいときは一覧の並びで隣の業種を足して3つにする"""
+    import html as H
+    ids = next((ids for _, _, ids in INDEX_GROUPS if ind in ids), ())
+    picks = [i for i in ids if i != ind and i in live]
+    if len(picks) < 3 and live:
+        k = live.index(ind) if ind in live else -1
+        for j in range(1, len(live)):
+            i = live[(k + j) % len(live)]
+            if len(picks) >= 3:
+                break
+            if i != ind and i not in picks:
+                picks.append(i)
+    hls = [h for h in (headline(i) for i in picks) if h]
+    if not hls:
+        return ""
+    lis = "".join(f'<li><a href="/research/{h["ind"]}-ai-sources/" data-cta="research_{ind}_sibling_{h["ind"]}">'
+                  f'{H.escape(h["name"])}の調査</a></li>' for h in hls)
+    more = (f'<p>記事の問いをそのままAIに聞いた<a href="{answers_url}" data-cta="research_{ind}_answers">別の調査</a>もあります。</p>'
+            if answers_url else "")
+    return (f'<section><h2>近い業種の調査</h2><ul>{lis}</ul>{more}'
+            f'<p><a href="/research/" data-cta="research_{ind}_index">全業種の調査の一覧</a></p></section>\n')
+
+
 def summary_html(hls, level="h2"):
     """全業種の結論（文・2つの数字・調べ方）。/research/ の一覧の最初と、トップの調査の区画が同じものを出す。
     level はページの中の見出しの深さ（トップでは区画の見出しの下なので h3）"""

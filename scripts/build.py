@@ -1722,6 +1722,7 @@ def build_research_pages(all_metas=()):
     """業種別の調査レポート（/research/<業種>-ai-sources/）。数字は data/research の集計ファイルからだけ作る"""
     import industry_ai_sources as IAS
     made = []
+    live = IAS.live_inds()
     for f in sorted((ROOT / "data" / "research").glob("*-summary.json")):
         ind = f.name[:-len("-summary.json")]
         if ind not in IAS.QUESTIONS or "per_answer" not in json.loads(f.read_text(encoding="utf-8")):
@@ -1746,6 +1747,10 @@ def build_research_pages(all_metas=()):
             body = body.replace('<section><h2>引用する場合</h2>', _QP.link_html(ind) + '<section><h2>引用する場合</h2>', 1)
         except Exception as e:
             print(f"WARN: 質問集へのリンクを入れられません（{str(e)[:50]}）")
+        # 近い業種の調査どうしで張る（一覧からの1本だけだった。2026-10-31 Ahrefs）
+        _ans = "/research/ai-answers/" if (SITE / "research" / "ai-answers" / "index.html").is_file() else ""
+        body = body.replace('<section><h2>引用する場合</h2>',
+                            IAS.sibling_html(ind, live, _ans) + '<section><h2>引用する場合</h2>', 1)
         out = SITE / "research" / f"{ind}-ai-sources" / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         page = BLOG_PAGE.format(items=body, **page_shell(title, desc))
