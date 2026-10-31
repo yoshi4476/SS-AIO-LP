@@ -110,7 +110,7 @@ jobs:
       # 枠の判定は1日80回近く動き、書くのはそのうち1割。判定に要らない大きな置き場（画像・動画・資料・写真の原本。
       # 334MB のうち 287MB）は取らない。取得に平均12秒かかっていた（2026-10-03〜09 の305回）。
       # 外すのは下の5つだけで、判定が読む scripts/・sites/・data/・articles/・.github/ はそのまま取る
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
           sparse-checkout-cone-mode: false
@@ -293,7 +293,7 @@ jobs:
       # 記事のグループ（article-pipeline）で並んで待った回は、起動した時の版のまま動くと、待つ間に入ったコミットと
       # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           ref: ${{ github.ref_name }}
@@ -348,7 +348,7 @@ jobs:
         if: steps.site.outputs.skip != 'yes'
 
       # 版を固定した claude の npm の取得を控えから戻す（版を変えると鍵が変わり、取り直して控える）
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         if: steps.site.outputs.skip != 'yes'
         with:
           path: ~/.npm/_cacache
@@ -1134,7 +1134,7 @@ jobs:
       # Bing への送信記録を前の回から戻す。戻さないと同じ日の2枠目が同じURLをもう一度送り、枠を食う
       - name: Bing への送信記録を戻す
         if: steps.site.outputs.skip != 'yes'
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/bing_submit.json
           key: bing-submit-${{ github.run_id }}
@@ -1143,7 +1143,7 @@ jobs:
       # IndexNow へ送った印。中身が変わったページだけを送るため、前の回の印を戻す（無ければ全部を送って記録する）
       - name: IndexNow への送信記録を戻す
         if: steps.site.outputs.skip != 'yes'
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/indexnow_sent.json
           key: indexnow-sent-${{ github.run_id }}
@@ -1181,14 +1181,14 @@ jobs:
 
       - name: Bing への送信記録を残す
         if: always() && steps.site.outputs.skip != 'yes' && hashFiles('data/bing_submit.json') != ''
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/bing_submit.json
           key: bing-submit-${{ github.run_id }}
 
       - name: IndexNow への送信記録を残す
         if: always() && steps.site.outputs.skip != 'yes' && hashFiles('data/indexnow_sent.json') != ''
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/indexnow_sent.json
           key: indexnow-sent-${{ github.run_id }}
