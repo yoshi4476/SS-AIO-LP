@@ -46,7 +46,7 @@ jobs:
     outputs:
       state: ${{ steps.st.outputs.state }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - id: st
@@ -84,12 +84,12 @@ jobs:
       # 記事のグループ（article-pipeline）で並んで待った回は、起動した時の版のまま動くと、待つ間に入ったコミットと
       # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           ref: ${{ github.ref_name }}
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
           cache: pip
@@ -147,7 +147,7 @@ jobs:
       # 記事のグループ（article-pipeline）で並んで待った回は、起動した時の版のまま動くと、待つ間に入ったコミットと
       # push で衝突する（2026-10-19 の週次は待つ間のコミットの親で動き、そのコミットの3ファイルで衝突した）。
       # 起動した時の版ではなく、checkout する時点の枝の最新を取る（2026-10-20）
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         # zizmor: ignore[artipacked] このジョブは正本へ push する（checkout の資格を使う）。AI の手順の前は agent_guard --lock が資格を外す
         with:
           ref: ${{ github.ref_name }}
@@ -158,13 +158,13 @@ jobs:
         with:
           token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
           cache: pip
 
       # 版を固定した claude の npm の取得を控えから戻す（版を変えると鍵が変わり、取り直して控える）
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.npm/_cacache
           key: npm-cli-v1-${{ runner.os }}-claude-code-2.1.302
@@ -389,7 +389,7 @@ jobs:
 
       # IndexNow へ送った印（中身が変わったページだけを送る）。記事の枠と同じキャッシュで持ち越す
       - name: IndexNow への送信記録を戻す
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/indexnow_sent.json
           key: indexnow-sent-${{ github.run_id }}
@@ -400,7 +400,7 @@ jobs:
 
       - name: IndexNow への送信記録を残す
         if: always() && hashFiles('data/indexnow_sent.json') != ''
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/indexnow_sent.json
           key: indexnow-sent-${{ github.run_id }}-focus
@@ -415,7 +415,7 @@ jobs:
 
       # 同じ日に同じURLを送らないための記録は、週次と同じキャッシュで持ち越す（コミットしない）
       - name: Bing への送信記録を戻す
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/bing_submit.json
           key: bing-submit-${{ github.run_id }}
@@ -435,7 +435,7 @@ jobs:
 
       - name: Bing への送信記録を残す
         if: always() && hashFiles('data/bing_submit.json') != ''
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: data/bing_submit.json
           key: bing-submit-${{ github.run_id }}-focus
