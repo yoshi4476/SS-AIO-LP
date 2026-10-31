@@ -1073,8 +1073,8 @@
   },
   "shigyou-hp-yokuaru-shitsumon": {
     "site": "ai-lab",
-    "date": "2026-10-30",
-    "sec": 132,
+    "date": "2026-10-31",
+    "sec": 262,
     "mp4": "automation/video/shigyou-hp-yokuaru-shitsumon.mp4",
     "nums": [
       "1",
@@ -1082,11 +1082,19 @@
       "4",
       "72.1"
     ],
-    "format": "slides",
-    "youtube": "Qgdg5grpsnE",
+    "format": "duo",
+    "youtube": "xpFVu_cOarc",
     "retired": [
       "arRyKQHEfAg",
-      "xpFVu_cOarc"
-    ]
+      "xpFVu_cOarc",
+      "Qgdg5grpsnE"
+    ],
+    "short": {
+      "date": "2026-10-31",
+      "sec": 47,
+      "title": "FAQの答えは、どこまで書いていい？",
+      "desc": "lead-long",
+      "youtube": "ez0B4szZs_k"
+    }
   }
 }
