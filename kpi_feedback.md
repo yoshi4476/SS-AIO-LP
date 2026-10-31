@@ -10,7 +10,7 @@
 | 直近7日の公開 | 13本 | 目標: 週14本（毎日2本） |
 | 品質スコア平均 | 93.5点 | 公開基準85点・目標90点 |
 | 平均文字数 | 5,695字 | 基準5,000字以上 |
-| 非公開（審査未達） | 2本 | clinic-keiri、getsuji-kessan-bunseki-houhou |
+| 非公開（審査未達） | 3本 | clinic-keiri、getsuji-kessan-bunseki-houhou、seikyusho-shiwake |
 | DR / KW数 / AI計測 | — | GA4・GSC・Ahrefs稼働後に自動反映 |
 
 ## 今日の主な動き
