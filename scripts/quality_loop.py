@@ -822,8 +822,10 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         # 材料のある直しをしても一次性が届かなければ、足りないのは書き方ではなく材料。何を教えてほしいかを残す
         try:
             import material
-            material.ask(site, slug, str(meta_of(read(slug)).get("keyword") or ""),
-                         (sc.get("weak") or {}).get("originality") or [], path=LOG.parent / material.REQUESTS)
+            text = read(slug)
+            material.ask(site, slug, str(meta_of(text).get("keyword") or ""),
+                         (sc.get("weak") or {}).get("originality") or [], path=LOG.parent / material.REQUESTS,
+                         heads=re.findall(r"^## (.+)$", text, re.M))
             need, asked = "materials", material.fingerprint(site)
         except Exception as e:  # noqa: BLE001
             print(f"  （材料の依頼を残せませんでした: {type(e).__name__}）")

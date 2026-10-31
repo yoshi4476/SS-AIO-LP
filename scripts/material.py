@@ -24,6 +24,17 @@ REQUESTS = "material_requests.json"
 # 語の半分近くに出る語（サービス名・業種名）は、材料に出ても「その題の材料」とは言えない。
 # 「システム開発 外注 デメリット」は経歴の「システム開発の事業を運営」に当たって材料ありと誤って数えた（2026-10-20）
 COMMON_SHARE = 0.3
+# 母数つきの数字（何社・何件・何名のうち）。一次性の80点は「自社の数字が2か所以上・うち1つは母数つき」
+BASE = re.compile(r"\d[\d,]*\s*(?:社|件|名|人|店|院|枚|棟|組|か所|カ所)|のうち|中\d")
+# 題の語どうしの距離（字）の上限。これより離れていれば同じ話とみなさない
+NEAR = 40
+# 探し方の語。材料の文には出てこないので、題の中身の語として求めない
+INTENT = re.compile(r"方法|やり方|とは|違い|比較|おすすめ|コツ|ポイント|事例|例|メリット|デメリット|無料|テンプレート|"
+                    r"書き方|選び方|費用|料金|相場|一覧|まとめ|活用|術|20\d\d")
+# 材料の依頼で実例を聞かない見出し
+SKIP_HEAD = re.compile(r"まとめ|よくある質問|faq|参考|出典|おわりに|関連|目次", re.I)
+# 採点者の指摘のうち、足りない数字・実例を名指しした文
+MISSING = re.compile(r"(?:件数|割合|数字|実測|実例|具体例|事例).{0,20}(?:無い|ない|ありません|少ない|薄い)")
 
 
 def lines(site):
@@ -82,10 +93,26 @@ def subject(kw, pool=()):
     return [t for t in rare if low / n < COMMON_SHARE] or rare
 
 
+def topic(kw, pool=()):
+    """題の中身の語。多くの題に出るサービス名・業種名と、探し方の語（方法・とは・無料…）を除く。除くと空なら残す"""
+    ts = tokens(kw)
+    seen, n = _freq(pool)
+    rare = [t for t in ts if n < 5 or seen.get(t, 0) / n < COMMON_SHARE] or ts
+    return [t for t in rare if not INTENT.fullmatch(t)] or rare
+
+
 def hits(kw, mats, pool=()):
-    """その題の材料の文の数（題を分ける語を含む文）"""
-    distinct = subject(kw, pool)
-    return sum(1 for m in mats if any(t in m.lower() for t in distinct))
+    """その題で一次性に使える材料の文の数。題の中身の語を全部、同じ文（。まで）に含み、母数つきの数字がある文だけを数える。
+    語のどれか1つで数えていたので、「請求書 仕訳」は「仕訳の誤りの直し約90件」「請求書の発行代行18社」の片方ずつに
+    当たって材料ありと数え、主題の数字が無いまま書いて一次性78点で止まった（2026-10-31）"""
+    words = topic(kw, pool)
+
+    def ok(s):
+        at = [s.find(t) for t in words]
+        # 語どうしが離れた文は、別々の話を並べただけ（「経理代行を担当した33社の内訳は…クリニック4社」は
+        # クリニックの経理の材料ではない。2026-10-23 一次性で止まった）
+        return min(at) >= 0 and max(at) - min(at) <= NEAR and bool(BASE.search(s))
+    return sum(1 for m in mats if any(ok(s) for s in re.split(r"(?<=。)", m.lower())))
 
 
 def _load_requests(site, path=None):
@@ -112,17 +139,28 @@ def _save_requests(site, data, path=None):
     path.write_text(json.dumps(allr, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
-def ask(site, slug, kw, weak=(), path=None):
+def questions(kw, weak=(), heads=()):
+    """材料の依頼の質問（5つまで）。主題そのものの数字、採点者が無いと言った数字、見出しごとの実例を名指しで聞く。
+    汎用の「実際にあったことを2〜3件」だけでは、周辺の話（仕訳の誤り全般など）が返って主題の数字が届かなかった（2026-10-31）。
+    聞くだけで、答えの数字は作らない"""
+    qs = [f"「{kw}」そのものについて、当社で数えた数字（期間つき・全体で何件のうち何件か。社名は伏せます）"]
+    said = [s.strip() for w in weak or [] for s in re.split(r"(?<=。)", str(w)) if MISSING.search(s)]
+    qs += [f"採点者の指摘「{s}」に答えられる、当社で数えた数字か実例（無ければ「無し」で構いません）" for s in said[:2]]
+    hs = [h.strip() for h in heads or [] if h.strip() and not SKIP_HEAD.search(h)]
+    qs += [f"見出し「{h}」の節に使える実例1件（時期つき。何が起き、どう判断し、どうなったか）" for h in hs[:2]]
+    if len(qs) < 3:
+        qs += ["そのうちの件数: 全体で何件あり、うまくいった・問題になったのが何件か（母数つきの数字になります）",
+               "1件の事例: 何が起き、どう判断し、どうなったか"]
+    return qs[:5]
+
+
+def ask(site, slug, kw, weak=(), path=None, heads=()):
     """材料の依頼を残す（記事ごとに1件。同じ記事は書き直す）。お客様の社は非公開の置き場にだけ書く"""
     data = _load_requests(site, path)
     data[slug] = {
         "keyword": kw,
         "since": (data.get(slug) or {}).get("since") or date.today().isoformat(),
-        "questions": [
-            f"「{kw}」について、実際にあったことを2〜3件（時期つき。社名は伏せます）",
-            "そのうちの件数: 全体で何件あり、うまくいった・問題になったのが何件か（母数つきの数字になります）",
-            "1件の事例: 何が起き、どう判断し、どうなったか",
-        ],
+        "questions": questions(kw, weak, heads),
         "scorer": [str(w) for w in (weak or [])][:4],
     }
     _save_requests(site, data, path)
