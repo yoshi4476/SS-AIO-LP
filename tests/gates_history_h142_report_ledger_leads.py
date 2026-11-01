@@ -64,8 +64,14 @@ def test_landing_judge_reads_cv_and_small_samples():
             {"path": "/zz-a", "sessions": 9, "engagement": 0.0, "cv": 0},
             {"path": "/zz-b", "sessions": 31, "engagement": 0.0, "cv": 0},
             {"path": "/zz-c", "sessions": 40, "engagement": 60.0, "cv": 0}]
-    check("悪い例は要改善のまま、計測外・問い合わせ・小さい母数を要改善にしない",
-          [M.landing_judge(x)[0] for x in rows], ["計測外", "良好", "母数不足", "要改善", "良好"])
+    check("悪い例は要改善のまま、計測外・問い合わせ・小さい母数・0%の機械を要改善にしない",
+          [M.landing_judge(x)[0] for x in rows], ["計測外", "良好", "母数不足", "機械の疑い", "良好"])
+    rows.append({"path": "/zz-d", "sessions": 40, "engagement": 10.0, "cv": 0})
+    fixes = M.fix_list({"landing": rows})
+    top = [f[1] for f in fixes if f[0] == "最優先"]
+    check("「最優先」の直帰には人の入口だけを挙げ、機械と計測外は確認の1行にまとめる",
+          (any("/zz-d" in t for t in top), any("/zz-b" in t or "(not set)" in t for t in top),
+           any("人でない訪問" in f[1] and "/zz-b" in f[1] for f in fixes)), (True, False, True))
 
 
 def test_client_report_drops_operator_name_queries():

@@ -408,7 +408,14 @@ def fix_list(d):
     ss = b.get("sessions", 0)
 
     # 直帰が極端に高い入口。サイト平均から大きく外れたページだけ挙げる
-    lands = [x for x in (d.get("landing") or []) if x["sessions"] >= 5]
+    # 計測外と機械の訪問は、ファーストビューの直しの対象にしない。2026-10 は深夜0〜2時に直接・同じ端末で
+    # 1ページだけ開く訪問31回（エンゲージ0%）を「最優先」にしていた
+    bots = [x for x in (d.get("landing") or []) if landing_judge(x)[0] in ("計測外", "機械の疑い")]
+    if bots:
+        out.append(("中", "人でない訪問の入口 " + "・".join(f'<code>{x["path"]}</code>' for x in bots),
+                    "エンゲージ0%の訪問がまとまって入っています。監視・巡回の機械の可能性が高く、"
+                    "ページの直しではなく、GA4 の内部トラフィックの除外で分けます"))
+    lands = [x for x in (d.get("landing") or []) if x["sessions"] >= 5 and x not in bots]
     if lands:
         avg = sum(x["engagement"] for x in lands) / len(lands)
         for x in lands:
@@ -525,6 +532,8 @@ def landing_judge(x):
         return "良好", "良好"
     if x["sessions"] < 10:                                          # 0.1節: 10未満は割合で判定しない
         return "母数不足", "立ち上げ中"
+    if x["engagement"] == 0:          # 10回以上来て1回も読まれないのは人の訪問ではまず無い（監視・巡回の機械）
+        return "機械の疑い", "立ち上げ中"
     j = "良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")
     return j, j
 
