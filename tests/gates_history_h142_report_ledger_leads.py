@@ -100,6 +100,17 @@ def test_client_report_drops_operator_name_queries():
     check("お客様名義では社名の語を外し、当社名義ではそのまま", (seen[False], len(seen[True])), (["zz 外注"], 2))
 
 
+def test_ga_tag_skips_automated_browsers():
+    import re
+    print("\n■ 5. GA4 のタグは、自動操作中のブラウザ（navigator.webdriver）では読まない")
+    # 2026-10 の補助金のトップは訪問227のうち176がアメリカ・エンゲージ0%で、「ファーストビューで離脱」と誤って結論した
+    srcs = {f: (ROOT / f).read_text(encoding="utf-8") for f in ("scripts/build.py", "scripts/subsidy/pages.py", "site/index.html")}
+    bad = [f for f, t in srcs.items()
+           for m in re.finditer(r"addEventListener\('load',function\(\)\{\{?(.{0,40})setTimeout", t)
+           if "navigator.webdriver" not in m.group(1)]
+    check("タグを読む箇所はどれも、先に自動操作中を外す", bad, [])
+
+
 def test_zero_detector_ignores_ten():
     import report_audit as RA
     print("\n■ 2. 「0件」の検出は「10件」「20件」を拾わない")

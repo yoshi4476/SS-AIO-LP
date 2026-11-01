@@ -473,7 +473,7 @@ def page(url_path, title, desc, h1, lead, cards, current_cat, crumb_leaf, hub_ht
 {SF.style_tag("subsidy")}
 <!-- GA4。日本語Webフォントと計測タグを先に読むと、スマホで一覧の表示に10秒以上かかっていた（ほかのページと同じく描画の後に読む） -->
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-MXQQM8DJTS');
-window.addEventListener('load',function(){{setTimeout(function(){{var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MXQQM8DJTS';document.head.appendChild(s);}},1200);}});</script>
+window.addEventListener('load',function(){{if(navigator.webdriver)return;setTimeout(function(){{var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MXQQM8DJTS';document.head.appendChild(s);}},1200);}});</script>
 {CHROME_CSS}
 </head>
 <body>
@@ -751,7 +751,7 @@ table{{border-collapse:collapse;width:100%;font-size:.92rem}}th,td{{border:1px s
 thead th{{background:#f6f8fb}}small{{color:#5b6474}}</style>
 {SF.style_tag("subsidy")}
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-MXQQM8DJTS');
-window.addEventListener('load',function(){{setTimeout(function(){{var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MXQQM8DJTS';document.head.appendChild(s);}},1200);}});</script>
+window.addEventListener('load',function(){{if(navigator.webdriver)return;setTimeout(function(){{var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MXQQM8DJTS';document.head.appendChild(s);}},1200);}});</script>
 {CHROME_CSS}
 </head>
 <body>
