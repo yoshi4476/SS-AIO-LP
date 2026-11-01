@@ -98,8 +98,27 @@ def add_table_css(html):
     return html.replace("</head>", TABLE_CSS + "\n</head>", 1)
 
 
+AI_TOPIC = re.compile(r"AI導入|IT導入|デジタル化")
+AI_LABEL = re.compile(r'(<a\b[^>]*href="(?:https://lp\.7senses\.co\.jp)?/#contact"[^>]*>)AI導入補助金の無料相談(?:はこちら)?</a>')
+INLINE_LABEL = re.compile(r'(<a\b[^>]*data-cta="article_inline_hojokin_quiz"[^>]*>)質問に答える</a>')
+SAME_TAB = re.compile(r'(<a\b[^>]*href="https://lp\.7senses\.co\.jp/#(?:contact|diagnosis)"[^>]*?) target="_blank" rel="noopener"')
+
+
+def fit_cta(html):
+    """記事の題に合わない相談の文言と、同じサイトの入口を新しいタブで開く指定を直す（何度当てても同じ）。
+    2026-10 の日本からの記事の表示143で、記事の入口の押下は1件だけだった。記事142本のうち79本は題が農業・ものづくり・
+    社会保険などAI導入補助金ではない制度の話なのに、そこにある相談のボタン175か所が「AI導入補助金の無料相談」で、読んでいる
+    制度の相談ができるように見えなかった。また207か所のボタンが同じサイトの入力欄・診断を新しいタブで開いていた"""
+    title = re.sub(r"<[^>]+>", "", (re.search(r"<h1[^>]*>(.*?)</h1>", html, re.S) or [None, ""])[1])
+    if title and not AI_TOPIC.search(title):
+        html = AI_LABEL.sub(r"\1補助金の無料相談</a>", html)
+    # 冒頭の診断の案内は、日本から100回見られて押されたのは1回（10月）。「質問に答える」では何が起きるか分からない
+    html = INLINE_LABEL.sub(r"\1無料の8問診断を始める</a>", html)
+    return SAME_TAB.sub(r"\1", html)
+
+
 def apply(html):
-    html = add_table_css(add_aicheck(html))
+    html = fit_cta(add_table_css(add_aicheck(html)))
     if MARK in html:
         return html
     title = re.sub(r"<[^>]+>", "", (re.search(r"<h1[^>]*>(.*?)</h1>", html, re.S) or [None, ""])[1])

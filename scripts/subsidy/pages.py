@@ -14,6 +14,7 @@ import footer_credit  # noqa: E402
 import social_footer as SF  # noqa: E402
 import noindex as NI  # noqa: E402
 import turnstile_block as TB  # noqa: E402  ロボットよけ（管制塔へ直接送るフォーム）
+import cta_track as CT  # noqa: E402  入口の押下・区画の到達の計測
 
 # 補助金サイトの作業コピー。管制塔の publish.py が SUBSIDY_ROOT で渡す
 # （2026-10-03 まで補助金サイト側の tools/ で CI が動かしていた。管制塔に一本化）
@@ -169,7 +170,9 @@ def nav_html(root, cta="/#contact"):
             lis = "".join(f'<li><a href="{h}">{l}</a></li>' for l, h in sub)
             items.append(f'<li class="gh-has"><a href="{href}">{label}</a><ul class="gh-sub">{lis}</ul></li>')
         elif _live(root, href):
-            items.append(f'<li><a href="{href}">{label}</a></li>')
+            # 入口（無料診断）だけ押下を数える。ほかのナビは移動なので数えない（押下率が水増しされる）
+            mark = ' data-cta="nav_diag"' if href == "/#diagnosis" else ""
+            items.append(f'<li><a href="{href}"{mark}>{label}</a></li>')
     items += [f'<li class="gh-ext"><a href="{h}" target="_blank" rel="noopener">{l}</a></li>' for l, h in NAV_EXT]
     return ('<header class="gh" id="gh">\n'
             '  <div class="gh-in">\n'
@@ -204,6 +207,8 @@ def chrome(text, root):
             u = re.sub(rx, lambda _: put(block), u, count=1, flags=re.S)
         elif anchor in u:
             u = u.replace(anchor, put(block) + nl + anchor, 1)
+    # 入口の押下と区画の到達の計測もどのページにも置く（会社概要・制度別・業種別などには押下の計測が無かった）
+    u = CT.apply(u)
     # 足元のアイコンは明るい足元の色に（暗い面用の白い輪郭のままだと地の色と 1.1:1 で見えなかった。色は social_footer に1か所）
     return SF.fix_style(u, "subsidy", nl)
 
@@ -216,6 +221,8 @@ def sync_chrome(root):
             continue
         t = p.read_bytes().decode("utf-8", "surrogateescape")
         u = TB.apply(chrome(t, root))
+        if p.parent.parent.name == "blog":   # 記事（blog/<slug>/index.html）だけ、案内・FAQ・監修者の欄に区画の印を付ける
+            u = CT.mark_areas(u)
         if u != t:
             p.write_bytes(u.encode("utf-8", "surrogateescape"))
             n += 1
