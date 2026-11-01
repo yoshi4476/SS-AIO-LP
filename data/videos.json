@@ -1096,5 +1096,68 @@
       "desc": "lead-long",
       "youtube": "ez0B4szZs_k"
     }
+  },
+  "fudousan-hp-tesuryo-setsumei": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-01",
+      "keyword": "不動産会社 ホームページ 手数料 説明",
+      "queries": [
+        "不動産会社 ホームページ 手数料 説明",
+        "ホームページ 手数料 説明",
+        "不動産会社 手数料 説明",
+        "不動産会社 ホームページ 説明",
+        "不動産会社 ホームページ 手数料"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "賃貸管理ソフト",
+        "賃貸仲介 開業",
+        "賃貸仲介 集客",
+        "賃貸契約書作成",
+        "不動産仲介業者",
+        "ホームページ運用",
+        "ホームページ 変更",
+        "ホームページ 相場",
+        "投資物件 探し方",
+        "中古 アパート 投資"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-11-01",
+      "sec": 50,
+      "title": "手数料の説明、上限だけ書けば足りる？",
+      "youtube": "RfFoTECtj7w"
+    }
+  },
+  "fudousan-baikyaku-shukyaku": {
+    "site": "ai-lab",
+    "date": "2026-11-01",
+    "sec": 257,
+    "mp4": "automation/video/fudousan-baikyaku-shukyaku.mp4",
+    "nums": [
+      "1",
+      "3",
+      "30",
+      "4",
+      "6"
+    ],
+    "format": "duo",
+    "long": {
+      "date": "2026-11-01",
+      "keyword": "不動産 売却 集客",
+      "queries": [
+        "不動産 売却 集客",
+        "売却 集客",
+        "不動産 集客",
+        "不動産 売却"
+      ],
+      "decision": "make",
+      "term": "不動産売買 集客",
+      "title": "不動産売買 集客は何から始める？｜査定依頼を自社サイトで受ける順番",
+      "reason": "YouTube のサジェストに「不動産売買 集客」が出ます"
+    },
+    "youtube": "uX7IYnUIqNU"
   }
 }
