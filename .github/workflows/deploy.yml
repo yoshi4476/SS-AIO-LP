@@ -140,7 +140,7 @@ jobs:
           done
           ok=""
           for i in 1 2 3; do
-            npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && { ok=1; break; }
+            python3 scripts/asset_version.py site && npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && { ok=1; break; }
             echo "Cloudflare APIが応答せず（$i/3）。40秒後に再試行"
             sleep 40
           done

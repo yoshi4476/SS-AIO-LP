@@ -1371,7 +1371,7 @@ jobs:
           # 公開前の門: sitemapの404/noindex・git の衝突マーカーがあれば公開しない（seo_audit --gate）
           python3 scripts/seo_audit.py --gate || { echo "::error::サイト監査の門で止めました（上の ::error:: を直す）"; exit 1; }
           for i in 1 2 3; do
-            npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && exit 0
+            python3 scripts/asset_version.py site && npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && exit 0
             echo "Cloudflare APIが応答せず（$i/3）。40秒後に再試行"
             sleep 40
           done
@@ -1547,7 +1547,7 @@ jobs:
             ok=0
             if python3 scripts/seo_audit.py --gate >/dev/null 2>&1; then
               for i in 1 2 3; do
-                npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && { ok=1; break; }
+                python3 scripts/asset_version.py site && npx --yes wrangler@4.121.0 pages deploy site --project-name=ss-aio-lp --branch=master --commit-dirty=true && { ok=1; break; }
                 sleep 40
               done
             fi

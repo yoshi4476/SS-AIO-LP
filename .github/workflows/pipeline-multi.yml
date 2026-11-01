@@ -1074,7 +1074,7 @@ jobs:
           python3 scripts/deploy_marker.py --write --salt wrangler@4.121.0 || rm -f site/deploy-hash.txt
           # Cloudflare APIは稀に522（一時的な接続タイムアウト）を返す。瞬断でrunを落とさないため再試行する
           for i in 1 2 3; do
-            npx --yes wrangler@4.121.0 pages deploy site --project-name="$proj" --branch="${GITHUB_REF_NAME}" --commit-dirty=true && exit 0
+            python3 scripts/asset_version.py site && npx --yes wrangler@4.121.0 pages deploy site --project-name="$proj" --branch="${GITHUB_REF_NAME}" --commit-dirty=true && exit 0
             echo "Cloudflare APIが応答せず（$i/3）。40秒後に再試行"
             sleep 40
           done
