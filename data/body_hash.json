@@ -448,7 +448,7 @@
 "modified": "2026-08-08"
 },
 "koumuten-ai-kensaku-shukyaku": {
-"hash": "c3c92cf38d114bdd5934dc8a51df7f37",
+"hash": "41eb2e78f1ccd85065aec52ae100413c",
 "modified": "2026-10-09"
 },
 "koumuten-aio-taisaku-taisei": {
@@ -456,8 +456,12 @@
 "modified": "2026-10-17"
 },
 "koumuten-chumon-jutaku-aio": {
-"hash": "5baca5ad52386e192426af56bf9cd5db",
+"hash": "b25dbedb370703cf765307acd9a9a8ed",
 "modified": "2026-09-25"
+},
+"koumuten-chumon-jutaku-llmo": {
+"hash": "8750d50713991d8e3eb3083436ad7764",
+"modified": "2026-11-01"
 },
 "koumuten-hp-shukyaku": {
 "hash": "af3334cb2db230f72c78d7ff24d18dad",
