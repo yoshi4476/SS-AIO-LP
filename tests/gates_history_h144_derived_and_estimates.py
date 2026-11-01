@@ -29,6 +29,10 @@ FACTS = [
      "claim": "給与計算を担当した6社のうち4社で締めの日数が減りました", "as_of": "2026-09"},
     {"id": "zz-hours", "sites": ["zz-own"], "topic": ["経費精算"], "period": "2025-10〜2026-03",
      "claim": "経費精算の作業時間は、担当した5社の合計で月40時間でした", "as_of": "2026-03"},
+    {"id": "zz-close", "sites": ["zz-own"], "topic": ["経理代行"], "period": "2023-04〜2026-09",
+     "claim": "経理代行を担当した9社では、月次の締めが平均で翌月20日から翌月8日に早まりました", "as_of": "2026-09"},
+    {"id": "zz-aio", "sites": ["zz-own"], "topic": ["AIO"], "period": "2026-05",
+     "claim": "2026年5月に運用を始めた10件のうち6件が、1か月以内に平均順位が上がりました", "as_of": "2026-06"},
     {"id": "zz-cite", "sites": ["zz-own"], "topic": ["AI検索"], "period": "2026-10",
      "claim": "4つのAIへ15の語を聞いたところ、出典に挙がったのは計3回でした", "as_of": "2026-10"},
     {"id": "zz-imp", "sites": ["zz-own"], "topic": ["検索"], "period": "2026-09〜2026-10",
@@ -56,7 +60,11 @@ def test_derived_facts_are_verified():
         "数えた物の違う数の割合（3回÷15の語）": {"inputs": ["zz-cite"], "expr": "3/15*100", "claim": "15の語のうち3回、約20%です"},
         "概数からの計算に小数（約93.8%）": {"inputs": ["zz-imp"], "expr": "(252-130)/130*100",
                                        "claim": "約130回から約252回で、約93.8%増えました"},
+        "対象9社の短縮率（割る数は日数20でも母数は9社）": {"inputs": ["zz-close"], "expr": "(20-8)/20*100",
+                                              "claim": "9社では締めが翌月20日から翌月8日に早まり、短縮率は約60%です"},
     }
+    aio = {"inputs": ["zz-aio"], "expr": "6/10*100", "claim": "10件のうち6件が1か月以内に上がり、割合は60%です"}
+    check("母数10件の割合（10件のうち6件＝60%）は通す", DF.verify(aio, FACTS)[1], None)
     for name, cand in bad.items():
         row, why = DF.verify(cand, FACTS)
         check(f"却下: {name}", (row is None, bool(why)), (True, True))

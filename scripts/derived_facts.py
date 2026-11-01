@@ -38,6 +38,7 @@ UNIT_CONST = {100.0: re.compile(r"%|％|パーセント"), 10.0: re.compile(r"\d
 # 「1社あたり」の1は単位で、数えた数ではない
 PER = re.compile(r"1\s*(?:社|件|人|名|か月|ヶ月|月|日|時間|本|回|年)\s*(?:あたり|当たり)")
 RATE = re.compile(r"\s*(?:%|％|パーセント|割)")       # 計算の結果の直後に置かれたとき、その結果は割合
+POP = re.compile(r"(\d+(?:,\d{3})*)\s*(?:社|件|店舗|店|院|名|人|サイト)")     # 対象の社数・件数
 UNIT_OF = re.compile(r"(\d+(?:,\d{3})*(?:\.\d+)?)\s*の?\s*(社|件|店舗|店|回|語|名|人|時間|か月|位|本|日|サイト|%)")
 NUM = re.compile(r"\d+(?:,\d{3})*(?:\.\d+)?")
 KANJI_NUM = re.compile(r"[一二三四五六七八九十百千]+(?:割|社|件|名|人|%|時間|か月|円)")
@@ -131,6 +132,12 @@ def verify(cand, facts):
     if rate:
         dens = [f.get("denominator") for f in inputs if isinstance(f.get("denominator"), (int, float))]
         if any(abs(d) < MIN_RATE for d in [c[1] for c in divs] + dens):
+            return None, "母数10未満を割合にしている"
+        # 変化率・短縮率も割合。「9社で翌月20日→翌月8日」を「短縮率約60%」にすると、割る数は日数でも母数は9社
+        # （2026-11-01 運用者の決定: 対象の社数・件数が10未満なら前と後だけ書き、%を付けない）
+        heads = [float(n.replace(",", "")) for f in inputs
+                 for n in POP.findall(str(f.get("claim") or "").translate(_ZEN))]
+        if heads and max(heads) < MIN_RATE:
             return None, "母数10未満を割合にしている"
         # 「3回」÷「15の語」のように数えた物の違う数の割合は、意味の無い%になる（2026-11-01 の試しで出た）
         unit_of = {}
