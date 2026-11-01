@@ -1366,7 +1366,11 @@ def analyze(d):
     # 本レポートはAI集客ラボ単体の報告。articles/ には3サイト分の原稿が入っているため、
     # 絞らないと他サイトの記事まで「当サイトの資産」として数えてしまう（38本と誤報していた）。
     import sites as _sites
-    for p in (ROOT / "articles").glob("*.md"):
+    import private_store as _ps
+    # お客様の社の原稿は非公開の置き場（private/articles/）にあり、公開側だけ数えて「20本公開・累計0本」と書いていた（2026-11-01）
+    _md = {p.name: p for p in (_ps.base() / "articles").glob("*.md")} if _sites.is_client(SITE_ID) else {}
+    _md.update({p.name: p for p in (ROOT / "articles").glob("*.md")})
+    for p in _md.values():
         t = p.read_text(encoding="utf-8-sig")
         m = _re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", t, _re.S)
         if not m:
