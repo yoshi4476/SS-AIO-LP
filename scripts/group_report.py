@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import hub_client  # noqa: E402
 import sites as sites_mod  # noqa: E402
 from cannibal_check import load_articles  # noqa: E402
-from monthly_report import ENV, _lead_by_landing, svg_line  # noqa: E402
+from monthly_report import ENV, _lead_by_landing, landing_judge, svg_line  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SA = ROOT / "indexing-service-account.json"
@@ -447,9 +447,13 @@ def analyze(sites, labels, arts, pipeline):
         if (c.get("pos") or 0) > 15:
             plan.append(("高", s["name"], f'平均順位 {c.get("pos")}位（2ページ目以降が中心）',
                          "表示回数の多い記事から順にリライト。H2を1本追加し内部リンクを2本増やす"))
-        if (c.get("ctr") or 0) < 2 and (c.get("impressions") or 0) > 500:
-            plan.append(("高", s["name"], f'CTR {c.get("ctr")}%（露出はあるが選ばれていない）',
-                         "タイトルに数字と年号を入れ、説明文を結論先出しに書き換える"))
+        # サイト全体の CTR は順位で決まる分が大きい（平均18位なら1%前後が普通）。順位の目安を下回るときだけ出す。
+        # 「年号を入れる」は毎年の書き換えと古い年の残りを生むので勧めない（2026-11-01）
+        import rank_up
+        exp = rank_up.expected_ctr(c.get("pos") or 0)
+        if (c.get("impressions") or 0) > 500 and (c.get("ctr") or 0) < exp * 0.7:
+            plan.append(("高", s["name"], f'CTR {c.get("ctr")}%（平均{c.get("pos")}位の目安 {exp:.1f}% を下回る）',
+                         "1ページ目で表示の多い記事から、タイトルと説明文の頭に検索語への答えを置く（週次の自動の書き換えが順に当てる）"))
         if arts["counts"].get(s["id"], 0) < 10:
             plan.append(("中", s["name"], f'記事{arts["counts"].get(s["id"], 0)}本（面が狭い）',
                          "このサイトの担当テーマで記事本数を優先配分し、10本以上の面を作る"))
@@ -1202,8 +1206,7 @@ def site_detail2(s, no):
         f'<tr><td style="word-break:break-all">{x["path"]}</td>'
         f'<td class="num">{x["sessions"]:,}</td><td class="num">{x["engagement"]}%</td>'
         f'<td class="num">{x["cv"]}</td>'
-        f'<td><span class="jd jd-{"良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")}">'
-        f'{"良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")}</span></td></tr>'
+        f'<td><span class="jd jd-{landing_judge(x)[1]}">{landing_judge(x)[0]}</span></td></tr>'
         for x in s.get("landing", [])[:6]) or '<tr><td colspan="5">GA4接続後に表示されます</td></tr>'
     rk = "".join(
         f'<tr><td><b>{k}</b></td><td class="num">{v}</td><td>{note}</td></tr>'

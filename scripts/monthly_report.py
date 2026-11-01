@@ -516,6 +516,19 @@ def month_end(label):
     return (nxt - timedelta(days=1)).isoformat()
 
 
+def landing_judge(x):
+    """入口ページの判定と CSS の印。2026-11 の月次で、ページの表示が記録されない (not set)・流入9件の0%・
+    問い合わせ5件の /contact まで、エンゲージメント率だけで「要改善」にしていた"""
+    if x["path"] in ("(not set)", "(other)"):
+        return "計測外", "立ち上げ中"
+    if x["cv"] and x["cv"] / max(x["sessions"], 1) >= 0.01:      # 改善プランの CV率の「良好」と同じ 1%
+        return "良好", "良好"
+    if x["sessions"] < 10:                                          # 0.1節: 10未満は割合で判定しない
+        return "母数不足", "立ち上げ中"
+    j = "良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")
+    return j, j
+
+
 def _lead_by_landing(ga, prop, date_ranges):
     """入口ページ別の lead_capture 件数。form_submit は同時に飛ぶので足さない"""
     from google.analytics.data_v1beta.types import (
@@ -1294,7 +1307,7 @@ def analyze(d):
     for q in low_ctr[:2]:
         fixes.append({"pri": "中", "area": f"記事「{q['q']}」",
                       "now": f"表示{q['imp']:,}に対しCTR {q['ctr']}%（順位{q['pos']}位の期待値未満）",
-                      "fix": "タイトルに数字と年号を追加（例:「◯◯の方法【2026年版・◯選】」）し、メタディスクを結論先出しに書き換え"})
+                      "fix": "タイトルと説明文の頭に、この検索語への答え（数・条件・結論）を置く。年号は内容を更新したときだけ入れる"})
     deep = [q for q in d.get("queries", []) if 11 <= q["pos"] <= 30]
     for q in deep[:2]:
         fixes.append({"pri": "中", "area": f"記事「{q['q']}」",
@@ -2436,8 +2449,7 @@ def render(d, a):
         f'<td class="num">{x["engagement"]}%</td>'
         f'<td class="num">{x["duration"]}秒</td>'
         f'<td class="num">{x["cv"]}</td>'
-        f'<td><span class="jd jd-{"良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")}">'
-        f'{"良好" if x["engagement"] >= 55 else ("標準" if x["engagement"] >= 45 else "要改善")}</span></td></tr>'
+        f'<td><span class="jd jd-{landing_judge(x)[1]}">{landing_judge(x)[0]}</span></td></tr>'
         for x in d.get("landing", [])[:10]) or '<tr><td colspan="6">GA4接続後に表示されます</td></tr>'
 
     # 週単位の推移と、次に狙う語。月の合計だけでは月中の動きが見えない

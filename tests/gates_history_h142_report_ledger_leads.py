@@ -56,6 +56,18 @@ def test_group_audit_uses_ledger_leads():
     check("悪い例: どのサイトも0件でないのに「リード 0件」と書けば止める", "「0件」と書かれています" in buf.getvalue(), True)
 
 
+def test_landing_judge_reads_cv_and_small_samples():
+    import monthly_report as M
+    print("\n■ 3. 入口ページの判定: (not set) は計測外／問い合わせのある入口は良好／流入10未満は割合で判定しない")
+    rows = [{"path": "(not set)", "sessions": 52, "engagement": 0.0, "cv": 0},
+            {"path": "/contact", "sessions": 36, "engagement": 27.8, "cv": 5},
+            {"path": "/zz-a", "sessions": 9, "engagement": 0.0, "cv": 0},
+            {"path": "/zz-b", "sessions": 31, "engagement": 0.0, "cv": 0},
+            {"path": "/zz-c", "sessions": 40, "engagement": 60.0, "cv": 0}]
+    check("悪い例は要改善のまま、計測外・問い合わせ・小さい母数を要改善にしない",
+          [M.landing_judge(x)[0] for x in rows], ["計測外", "良好", "母数不足", "要改善", "良好"])
+
+
 def test_zero_detector_ignores_ten():
     import report_audit as RA
     print("\n■ 2. 「0件」の検出は「10件」「20件」を拾わない")
