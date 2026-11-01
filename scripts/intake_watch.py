@@ -86,6 +86,9 @@ def kind(src):
     # 材料の質問シート（material_sheet.py が作る。隠しタブ「材料の質問」）は、答えを一次情報・体験として登録する
     if "材料の質問" in tabs:
         return "material"
+    # 案件台帳（case_ledger.py が作る。隠しタブ「案件台帳」）は、行を数えて一次情報・体験にする
+    if "案件台帳" in tabs:
+        return "case"
     # 実績・お客様の声の記入シートは会社の立ち上げではなく、一次情報と掲載の登録
     if tabs & {"経理BPOの効果", "継続率", "お客様の声"}:
         return "jisseki"
@@ -103,6 +106,12 @@ def one(src, write, k=None):
     if k == "material":
         import material_sheet as MS
         good, why = MS.apply(src, write)
+        if write and good:
+            move(src, DONE)
+        return good, why
+    if k == "case":
+        import case_ledger as CL
+        good, why = CL.apply(src, write)
         if write and good:
             move(src, DONE)
         return good, why

@@ -392,7 +392,10 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
         return None
     eng = eng if eng is not None else engines(cache_only, site=sid)
     usage = usage if usage is not None else load_usage()
-    cap, used = ai_cap(cfg), usage.get(ym, {}).get(sid, 0)
+    import sites as _S
+    # 回数の記録（data/compete/_usage.json）は public。お客様の社は公開の id で数える（社の id が載った。2026-11-01）
+    ukey = _S.public_id(sid)
+    cap, used = ai_cap(cfg), usage.get(ym, {}).get(ukey, usage.get(ym, {}).get(sid, 0))
     status, need, per_kw = "ok", 0, {}
     if not cache_only:
         need = need_calls(kws, list(eng), site=sid)
@@ -434,7 +437,9 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
                       "ai_answered": any(r.get("answered") for r in ai.values()),
                       "ai_ours": any(r.get("ours") for r in ai.values()), "ai_domains": doms})
     if status in ("ok", "partial") and not cache_only:
-        usage.setdefault(ym, {})[sid] = used + need
+        month = usage.setdefault(ym, {})
+        month.pop(sid, None)
+        month[ukey] = used + need
         save_usage(usage)
     rec = {"site": sid, "ym": ym, "measured": date.today().isoformat(),
            "mode": "cache" if cache_only or status == "over_cap" else "live", "status": status,
