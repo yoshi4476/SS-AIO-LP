@@ -2,8 +2,9 @@
  "site": "ai-lab",
  "ym": "2026-11",
  "measured": "2026-11-01",
- "mode": "cache",
- "status": "over_cap",
+ "mode": "live",
+ "status": "ok",
+ "cached_kws": 0,
  "gsc_window": "2026-09-30〜2026-10-28",
  "engines": [
   "ChatGPT",
@@ -14,46 +15,90 @@
  "summary": {
   "kw_n": 20,
   "ai": {
-   "answered_n": 1,
+   "answered_n": 20,
    "ours_n": 0,
-   "share": null
+   "share": 0.0
   },
   "search": {
    "ranked_n": 16,
    "top10_n": 4,
    "top10_rate": 0.25
   },
-  "competitors": [],
+  "competitors": [
+   {
+    "domain": "grill.co.jp",
+    "type": "peer",
+    "ai_n": 7,
+    "ai_share": 0.35,
+    "top10_rate": null
+   },
+   {
+    "domain": "trilia.co.jp",
+    "type": "peer",
+    "ai_n": 6,
+    "ai_share": 0.3,
+    "top10_rate": null
+   },
+   {
+    "domain": "atoz-design.jp",
+    "type": "peer",
+    "ai_n": 5,
+    "ai_share": 0.25,
+    "top10_rate": null
+   },
+   {
+    "domain": "adcal-inc.com",
+    "type": "peer",
+    "ai_n": 4,
+    "ai_share": 0.2,
+    "top10_rate": null
+   },
+   {
+    "domain": "ai-search.techsuite.co.jp",
+    "type": "peer",
+    "ai_n": 4,
+    "ai_share": 0.2,
+    "top10_rate": null
+   }
+  ],
   "other_types": {
-   "public": [
-    "aspicjapan.org"
+   "video": [
+    "medical-dx.com",
+    "note.com",
+    "youtube.com"
+   ],
+   "portal": [
+    "freelance-meikan.com",
+    "gyms.jp",
+    "ielove-cloud.jp",
+    "ieul.jp",
+    "lancers.jp",
+    "meetsmore.com",
+    "tokyo-doctors.com",
+    "zehitomo.com"
    ],
    "media": [
+    "atpress.ne.jp",
+    "gelatocms.com",
+    "gicp.co.jp",
     "giginc.co.jp",
+    "laboz.jp",
     "leadplus.co.jp",
-    "nexer.co.jp",
-    "prtimes.jp",
-    "shopowner-support.net"
-   ],
-   "video": [
-    "note.com"
+    "mieru-ca.com",
+    "nexer.co.jp"
    ]
   },
   "engines": {
    "ChatGPT": {
-    "answered": 1,
+    "answered": 7,
     "ours": 0
    },
    "Gemini": {
-    "answered": 1,
-    "ours": 0
-   },
-   "Perplexity": {
-    "answered": 1,
+    "answered": 12,
     "ours": 0
    },
    "Claude": {
-    "answered": 1,
+    "answered": 20,
     "ours": 0
    }
   },
@@ -66,10 +111,96 @@
    "imp": 99,
    "url": "https://ai.7senses.co.jp/industry/fudosan/",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "lany.co.jp",
+      "atoz-design.jp",
+      "note.com",
+      "bridge-world.jp",
+      "iimon.co.jp",
+      "trilia.co.jp"
+     ],
+     "urls": [
+      "https://www.lany.co.jp/blog/llmo-real-estate",
+      "https://atoz-design.jp/column/llmo-homebuilder-construction/",
+      "https://note.com/super_pansy3974/n/nd7e57f1c2b1f",
+      "https://www.bridge-world.jp/seo/column/about_llmo/",
+      "https://iimon.co.jp/column/real-estate-llmo-aio",
+      "https://trilia.co.jp/real-estate-llmo/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "digitalidentity.co.jp",
+      "n-works.link",
+      "lifunext.com",
+      "llmocheck.ai",
+      "vicme.jp",
+      "umi-design.net",
+      "tokikane.biz",
+      "adcal-inc.com",
+      "radineer.asia",
+      "iimon.co.jp",
+      "ielove-cloud.jp",
+      "akarumi.jp",
+      "lightdoor.jp",
+      "connectablue.com",
+      "llmocheki.com"
+     ],
+     "urls": [
+      "https://digitalidentity.co.jp/blog/llmo/real-estate-llmo.html",
+      "https://n-works.link/blog/llmo/real-estate-llmo",
+      "https://lifunext.com/blog/seo/seo-38/",
+      "https://llmocheck.ai/blog/real-estate-llmo",
+      "https://vicme.jp/media/llmo-real-estate/",
+      "https://umi-design.net/web-marketing/estate-llmo/",
+      "https://tokikane.biz/llmo-seo/llmo-real-estate/",
+      "https://www.adcal-inc.com/column/estate-llmo/",
+      "https://radineer.asia/media/guides/llmo-realestate",
+      "https://iimon.co.jp/column/real-estate-llmo-aio",
+      "https://ielove-cloud.jp/blog/entry-04829/",
+      "https://akarumi.jp/knowledge/real-estate-llmo/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "lany.co.jp": 1,
+    "atoz-design.jp": 1,
+    "note.com": 1,
+    "bridge-world.jp": 1,
+    "iimon.co.jp": 2,
+    "trilia.co.jp": 1,
+    "digitalidentity.co.jp": 1,
+    "n-works.link": 1,
+    "lifunext.com": 1,
+    "llmocheck.ai": 1,
+    "vicme.jp": 1,
+    "umi-design.net": 1,
+    "tokikane.biz": 1,
+    "adcal-inc.com": 1,
+    "radineer.asia": 1,
+    "ielove-cloud.jp": 1,
+    "akarumi.jp": 1,
+    "lightdoor.jp": 1,
+    "connectablue.com": 1,
+    "llmocheki.com": 1
+   }
   },
   {
    "kw": "クリニック seo コンサル",
@@ -77,10 +208,90 @@
    "imp": 43,
    "url": "https://ai.7senses.co.jp/seo/clinic-seo-consulting-erabikata/",
    "slug": "clinic-seo-consulting-erabikata",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "google.com"
+     ],
+     "urls": [
+      "https://www.google.com/maps/search/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEMedAsk%2C+%E6%9D%B1%E4%BA%AC%2C+%E6%97%A5%E6%9C%AC?utm_source=openai",
+      "https://www.google.com/maps/search/MyChoice%2C+%E6%9D%B1%E4%BA%AC%2C+%E6%97%A5%E6%9C%AC?utm_source=openai",
+      "https://www.google.com/maps/search/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8%2C+%E6%9D%B1%E4%BA%AC%2C+%E6%97%A5%E6%9C%AC?utm_source=openai",
+      "https://www.google.com/maps/search/%E3%83%88%E3%83%A9%E3%83%95%E3%82%A3%E3%83%83%E3%82%AF%E3%83%A9%E3%83%9C%2C+%E6%9D%B1%E4%BA%AC%2C+%E6%97%A5%E6%9C%AC?utm_source=openai",
+      "https://www.google.com/maps/search/%E3%83%8F%E3%83%BC%E3%83%90%E3%83%BC%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%2C+%E6%9D%B1%E4%BA%AC%2C+%E6%97%A5%E6%9C%AC?utm_source=openai",
+      "https://www.google.com/maps/search/TOC%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%BA%2C+%E6%9D%B1%E4%BA%AC%2C+%E6%97%A5%E6%9C%AC?utm_source=openai",
+      "https://www.google.com/maps/search/%E5%8C%BB%E7%99%82DX%E3%82%B3%E3%83%B3%E3%82%B5%E3%83%AB%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%2C+%E6%9D%B1%E4%BA%AC%2C+%E6%97%A5%E6%9C%AC?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "medical-link.co.jp",
+      "lany.co.jp",
+      "glcl.co.jp",
+      "paddle-ship.jp",
+      "m-p-h.jp",
+      "gmotech.jp"
+     ],
+     "urls": [
+      "https://medical-link.co.jp/marketing/12489/",
+      "https://www.lany.co.jp/blog/medical-care-article-production",
+      "https://glcl.co.jp/mikatamedia/column/medical-advertising-guidelines4/",
+      "https://paddle-ship.jp/buzz/estimated-cost/",
+      "https://m-p-h.jp/column/listing/",
+      "https://gmotech.jp/semlabo/seo/blog/seo-expence/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "lancers.jp",
+      "webanalytics.speee.jp",
+      "m-p-h.jp",
+      "grill.co.jp",
+      "axone.co.jp",
+      "medrock.co.jp",
+      "clinic-promotion.com",
+      "taga-tame.com"
+     ],
+     "urls": [
+      "https://www.lancers.jp/c/website/27432/",
+      "https://webanalytics.speee.jp/media/article/seo-casestudy-clinic/",
+      "https://m-p-h.jp/column/seo/9182/",
+      "https://grill.co.jp/marketing-log/5292/",
+      "https://axone.co.jp/digitalport/clinic-seo-measures-guide/",
+      "https://medrock.co.jp/navi/patient-acquisition/clinic-seo-companies/",
+      "https://medrock.co.jp/navi/clinic-seo-companies/",
+      "https://clinic-promotion.com/blog/homepage/prom130/",
+      "https://taga-tame.com/blog/medical-clinic-patient-attracting-marketing-company/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "google.com": 1,
+    "medical-link.co.jp": 1,
+    "lany.co.jp": 1,
+    "glcl.co.jp": 1,
+    "paddle-ship.jp": 1,
+    "m-p-h.jp": 2,
+    "gmotech.jp": 1,
+    "lancers.jp": 1,
+    "webanalytics.speee.jp": 1,
+    "grill.co.jp": 1,
+    "axone.co.jp": 1,
+    "medrock.co.jp": 1,
+    "clinic-promotion.com": 1,
+    "taga-tame.com": 1
+   }
   },
   {
    "kw": "クリニック llmo",
@@ -88,10 +299,106 @@
    "imp": 42,
    "url": "https://ai.7senses.co.jp/industry/clinic/",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "itreat.co.jp",
+      "signal.medicall.co.jp",
+      "lidodeck.co.jp",
+      "meditex.jp",
+      "prism.rocks"
+     ],
+     "urls": [
+      "https://itreat.co.jp/blog/clinic-llmo-measures?utm_source=openai",
+      "https://signal.medicall.co.jp/?utm_source=openai",
+      "https://www.lidodeck.co.jp/?utm_source=openai",
+      "https://meditex.jp/llmo-strategy/?utm_source=openai",
+      "https://www.prism.rocks/?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "medical-dx.com",
+      "medical-clinic.biz",
+      "dam.co.jp",
+      "ilabs.jp",
+      "trilia.co.jp"
+     ],
+     "urls": [
+      "https://medical-dx.com/service/llmo/",
+      "https://medical-clinic.biz/llmo%E5%AF%BE%E7%AD%96%E3%81%A8%E3%81%97%E3%81%A6%E3%82%AF%E3%83%AA%E3%83%8B%E3%83%83%E3%82%AF%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%A7%E3%81%99%E3%82%8B%E3%81%B9%E3%81%8D/",
+      "https://www.dam.co.jp/clinic_geo/",
+      "https://ilabs.jp/2025/07/llmo/",
+      "https://trilia.co.jp/clinic-llmo/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "grill.co.jp",
+      "iryoto.jp",
+      "clinic.s-suteki.co.jp",
+      "switchitmaker2.com",
+      "meocli.com",
+      "method-innovation.co.jp",
+      "ad-tomedical.co.jp",
+      "adcal-inc.com",
+      "bakuri.co.jp",
+      "meditex.jp",
+      "tufecompany.co.jp",
+      "kenkyo.ai",
+      "tokikane.biz"
+     ],
+     "urls": [
+      "https://grill.co.jp/marketing-log/16885/",
+      "https://www.iryoto.jp/llmo/",
+      "https://clinic.s-suteki.co.jp/blog/clinic-llmo-guide/",
+      "https://www.switchitmaker2.com/llmo/ophthalmology-clinic/",
+      "https://www.meocli.com/blog/llmo-ai-search-clinic-guide",
+      "https://www.method-innovation.co.jp/llmo/",
+      "https://ad-tomedical.co.jp/%E3%82%AF%E3%83%AA%E3%83%8B%E3%83%83%E3%82%AFllmo%E5%AF%BE%E7%AD%96%E3%81%A8%E3%81%AF%EF%BC%9Fai%E6%A4%9C%E7%B4%A2%E3%81%A7%E6%8C%87%E5%90%8D%E3%81%95%E3%82%8C%E3%82%8B%E5%8C%BB%E9%99%A2%E3%81%AB/",
+      "https://www.adcal-inc.com/column/llmo_seo_meo/clinic-llmo-5tips/",
+      "https://www.adcal-inc.com/column/clinic-llmo-5tips/",
+      "https://www.bakuri.co.jp/aio-lab/llmo-for-healthcare/",
+      "https://meditex.jp/llmo-strategy/",
+      "https://tufecompany.co.jp/industries/medical-clinic-llmo"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "itreat.co.jp": 1,
+    "signal.medicall.co.jp": 1,
+    "lidodeck.co.jp": 1,
+    "meditex.jp": 2,
+    "prism.rocks": 1,
+    "medical-dx.com": 1,
+    "medical-clinic.biz": 1,
+    "dam.co.jp": 1,
+    "ilabs.jp": 1,
+    "trilia.co.jp": 1,
+    "grill.co.jp": 1,
+    "iryoto.jp": 1,
+    "clinic.s-suteki.co.jp": 1,
+    "switchitmaker2.com": 1,
+    "meocli.com": 1,
+    "method-innovation.co.jp": 1,
+    "ad-tomedical.co.jp": 1,
+    "adcal-inc.com": 1,
+    "bakuri.co.jp": 1,
+    "tufecompany.co.jp": 1,
+    "kenkyo.ai": 1,
+    "tokikane.biz": 1
+   }
   },
   {
    "kw": "歯科医院 aio対策",
@@ -99,10 +406,105 @@
    "imp": 40,
    "url": "https://ai.7senses.co.jp/industry/shika/",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "visca-hp.jp",
+      "approach-conductor.com",
+      "aiomarketing.jp"
+     ],
+     "urls": [
+      "https://www.visca-hp.jp/web-marketing/aio/?utm_source=openai",
+      "https://approach-conductor.com/news/dental-clinic-aio-strategy-approach?utm_source=openai",
+      "https://aiomarketing.jp/dental-clinic-aio/?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "jinrai.co.jp",
+      "giginc.co.jp",
+      "medical-dx.com",
+      "prtimes.jp",
+      "seo-kk.jp",
+      "youtube.com"
+     ],
+     "urls": [
+      "https://jinrai.co.jp/en/blog/2026/05/20/clinic-medical-aio-optimization-strategy/",
+      "https://giginc.co.jp/blog/giglab/aio-llmo-geo",
+      "https://medical-dx.com/service/llmo/",
+      "https://prtimes.jp/main/html/rd/p/000000011.000012182.html",
+      "https://www.seo-kk.jp/consulting_dental.html",
+      "https://www.youtube.com/watch?v=PjQOPYthuFg"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "souki-inc.co.jp",
+      "aiomarketing.jp",
+      "adooffer.com",
+      "elephantbrain-clinic.com",
+      "switchitmaker2.com",
+      "hiidel.com",
+      "ai-search.techsuite.co.jp",
+      "bridge-world.jp",
+      "grill.co.jp",
+      "adcal-inc.com",
+      "assist-all.co.jp",
+      "media.meo-taisaku.com",
+      "trilia.co.jp",
+      "atoz-design.jp"
+     ],
+     "urls": [
+      "https://www.souki-inc.co.jp/blog/dental-aio/",
+      "https://aiomarketing.jp/blog/ai-optimization/dental-clinic-aio/",
+      "https://adooffer.com/archives/974",
+      "https://elephantbrain-clinic.com/dental-aio/",
+      "https://www.switchitmaker2.com/llmo/denteist-llmo/",
+      "https://hiidel.com/column/shika-llmo/",
+      "https://ai-search.techsuite.co.jp/11438/",
+      "https://www.bridge-world.jp/seo/column/llmo_dentalguide/",
+      "https://grill.co.jp/marketing-log/12652/",
+      "https://www.adcal-inc.com/column/llmo_seo_meo/dental-llmo-5tips/",
+      "https://assist-all.co.jp/note/llmo-ai-dental-marketing-strategy/",
+      "https://media.meo-taisaku.com/llmo/llmo_dental_clinic/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "visca-hp.jp": 1,
+    "approach-conductor.com": 1,
+    "aiomarketing.jp": 2,
+    "jinrai.co.jp": 1,
+    "giginc.co.jp": 1,
+    "medical-dx.com": 1,
+    "prtimes.jp": 1,
+    "seo-kk.jp": 1,
+    "youtube.com": 1,
+    "souki-inc.co.jp": 1,
+    "adooffer.com": 1,
+    "elephantbrain-clinic.com": 1,
+    "switchitmaker2.com": 1,
+    "hiidel.com": 1,
+    "ai-search.techsuite.co.jp": 1,
+    "bridge-world.jp": 1,
+    "grill.co.jp": 1,
+    "adcal-inc.com": 1,
+    "assist-all.co.jp": 1,
+    "media.meo-taisaku.com": 1,
+    "trilia.co.jp": 1,
+    "atoz-design.jp": 1
+   }
   },
   {
    "kw": "歯科 ai 集客",
@@ -110,10 +512,109 @@
    "imp": 33,
    "url": "https://ai.7senses.co.jp/industry/shika/",
    "slug": "shika-iin-shukyaku",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "towa-hi-sys.co.jp",
+      "haris.ne.jp",
+      "xexeq.jp",
+      "dentshift.jp",
+      "akabanedai-dental.com",
+      "recetta.jp",
+      "dentalbase.ai",
+      "habot.jp",
+      "atpress.ne.jp",
+      "dsh-ai.marta-ai.jp"
+     ],
+     "urls": [
+      "https://www.towa-hi-sys.co.jp/p-voice-dental-spirit?utm_source=openai",
+      "https://www.haris.ne.jp/?utm_source=openai",
+      "https://xexeq.jp/blogs/media/topics30436?utm_source=openai",
+      "https://dentshift.jp/about?utm_source=openai",
+      "https://www.akabanedai-dental.com/line.html?utm_source=openai",
+      "https://www.recetta.jp/?utm_source=openai",
+      "https://www.dentalbase.ai/blogs/marketing/washington-dental-practices-are-using-ai-to-automate-patient-calls?utm_source=openai",
+      "https://www.habot.jp/?utm_source=openai",
+      "https://www.atpress.ne.jp/news/408100?utm_source=openai",
+      "https://dsh-ai.marta-ai.jp/lp/?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "rush-up.co.jp",
+      "atoz-design.jp",
+      "souki-inc.co.jp",
+      "revimy.jp",
+      "wakudori.co.jp",
+      "protea-inc.co.jp",
+      "uravation.com",
+      "ami-h.com",
+      "dental-branding.jp",
+      "service.medical-net.com",
+      "prtimes.jp",
+      "grill.co.jp",
+      "bridge-world.jp",
+      "mesut.co.jp",
+      "elephantbrain-clinic.com"
+     ],
+     "urls": [
+      "https://rush-up.co.jp/blog/20251031-2324/",
+      "https://atoz-design.jp/column/llmo-dental-clinic/",
+      "https://www.souki-inc.co.jp/blog/dental-aio/",
+      "https://www.revimy.jp/columns/dental-aio",
+      "https://wakudori.co.jp/knowledge-blog/method-dental-clinic/",
+      "https://www.protea-inc.co.jp/sub-media/dentist-aio/",
+      "https://uravation.com/media/dental-clinic-ai-guide-2026/",
+      "https://ami-h.com/2025/05/02/dental-generative-ai-6-use-cases/",
+      "https://dental-branding.jp/2025/06/26/%E3%80%90%E6%AD%AF%E7%A7%91%E5%8C%BB%E9%99%A2xai%E3%80%91%E5%B0%8E%E5%85%A5%E3%81%A7%E4%BD%95%E3%81%8C%E5%A4%89%E3%82%8F%E3%82%8B%EF%BC%9F-%E6%AD%AF%E7%A7%91ai%E3%81%AE%E6%B4%BB%E7%94%A8/",
+      "https://service.medical-net.com/news/1218/",
+      "https://prtimes.jp/main/html/rd/p/000000011.000012182.html",
+      "https://grill.co.jp/marketing-log/12652/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "towa-hi-sys.co.jp": 1,
+    "haris.ne.jp": 1,
+    "xexeq.jp": 1,
+    "dentshift.jp": 1,
+    "akabanedai-dental.com": 1,
+    "recetta.jp": 1,
+    "dentalbase.ai": 1,
+    "habot.jp": 1,
+    "atpress.ne.jp": 1,
+    "dsh-ai.marta-ai.jp": 1,
+    "rush-up.co.jp": 1,
+    "atoz-design.jp": 1,
+    "souki-inc.co.jp": 1,
+    "revimy.jp": 1,
+    "wakudori.co.jp": 1,
+    "protea-inc.co.jp": 1,
+    "uravation.com": 1,
+    "ami-h.com": 1,
+    "dental-branding.jp": 1,
+    "service.medical-net.com": 1,
+    "prtimes.jp": 1,
+    "grill.co.jp": 1,
+    "bridge-world.jp": 1,
+    "mesut.co.jp": 1,
+    "elephantbrain-clinic.com": 1
+   }
   },
   {
    "kw": "注文住宅 seo対策",
@@ -121,10 +622,80 @@
    "imp": 32,
    "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
    "slug": "chumon-jutaku-seo-taisaku",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "archrise-works.com",
+      "media-growth.co.jp",
+      "wakudori.co.jp",
+      "mirai-style.net",
+      "shopowner-support.net",
+      "thinktion.net"
+     ],
+     "urls": [
+      "https://www.archrise-works.com/blog/webmarketing/%E5%B7%A5%E5%8B%99%E5%BA%97%E3%81%AEseo%E5%AF%BE%E7%AD%96%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E5%9C%B0%E5%9F%9F%E3%81%A7%E9%9B%86%E5%AE%A2%E3%82%92%E5%A2%97%E3%82%84%E3%81%99/",
+      "https://media-growth.co.jp/seo-engineering-firm/",
+      "https://wakudori.co.jp/knowledge-blog/method-custom-home/",
+      "https://mirai-style.net/column/39426/",
+      "https://www.shopowner-support.net/attracting_customers/construction/builders/seo/",
+      "https://thinktion.net/blog/home-builder-seo/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "nexer.co.jp",
+      "stock-sun.com",
+      "windom-kk.co.jp",
+      "mirai-style.net",
+      "luvicon.net",
+      "ai.media-labo.com",
+      "thinktion.net",
+      "bakuyasu.techsuite.co.jp",
+      "tsunagaru-nara.com"
+     ],
+     "urls": [
+      "https://nexer.co.jp/blog/chumon-jutaku-seo",
+      "https://stock-sun.com/column/custom-home-seo/",
+      "https://windom-kk.co.jp/marketing/archives/3806",
+      "https://mirai-style.net/column/39426/",
+      "https://luvicon.net/seo/24849/",
+      "https://ai.media-labo.com/blog/seo-homebuilder/",
+      "https://thinktion.net/blog/home-builder-seo/",
+      "http://bakuyasu.techsuite.co.jp/30634/",
+      "https://tsunagaru-nara.com/seo/home-builder-seo/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "archrise-works.com": 1,
+    "media-growth.co.jp": 1,
+    "wakudori.co.jp": 1,
+    "mirai-style.net": 2,
+    "shopowner-support.net": 1,
+    "thinktion.net": 2,
+    "nexer.co.jp": 1,
+    "stock-sun.com": 1,
+    "windom-kk.co.jp": 1,
+    "luvicon.net": 1,
+    "ai.media-labo.com": 1,
+    "bakuyasu.techsuite.co.jp": 1,
+    "tsunagaru-nara.com": 1
+   }
   },
   {
    "kw": "歯科 集客",
@@ -132,10 +703,62 @@
    "imp": 30,
    "url": "https://ai.7senses.co.jp/industry/shika/",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "tokyo-doctors.com",
+      "gmotech.jp",
+      "assist-all.co.jp",
+      "rush-up.co.jp",
+      "ntttp-dlead.com",
+      "asantech.co.jp",
+      "meo-times.com",
+      "zeromedical.tv",
+      "mkdesign-office.com"
+     ],
+     "urls": [
+      "https://tokyo-doctors.com/webdoctor/23147",
+      "https://gmotech.jp/semlabo/meo/blog/dentist-customer-attraction/",
+      "https://assist-all.co.jp/note/meo-dental-patients-reviews-reservation-guide/",
+      "https://rush-up.co.jp/blog/dental-meo-patient-attraction-reviews/",
+      "https://www.ntttp-dlead.com/homepage-sakusei-blog/web-syuukyaku/meo-taisaku-kiso-chisiki/dentist-meo.html",
+      "https://asantech.co.jp/blog/marketing/dental/",
+      "https://www.meo-times.com/meo/meo-for-dental-clinics/",
+      "https://zeromedical.tv/zeromedical-web/blog/meo-for-clinics/",
+      "https://mkdesign-office.com/archives/blog/dental-web-marketing"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "tokyo-doctors.com": 1,
+    "gmotech.jp": 1,
+    "assist-all.co.jp": 1,
+    "rush-up.co.jp": 1,
+    "ntttp-dlead.com": 1,
+    "asantech.co.jp": 1,
+    "meo-times.com": 1,
+    "zeromedical.tv": 1,
+    "mkdesign-office.com": 1
+   }
   },
   {
    "kw": "クリニック llmo対策",
@@ -143,10 +766,80 @@
    "imp": 27,
    "url": "https://ai.7senses.co.jp/industry/clinic/",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "medical-dx.com",
+      "ilabs.jp",
+      "lany.co.jp",
+      "iryoto.jp",
+      "medical-clinic.biz",
+      "trilia.co.jp"
+     ],
+     "urls": [
+      "https://medical-dx.com/service/llmo/",
+      "https://ilabs.jp/2025/07/llmo/",
+      "https://www.lany.co.jp/blog/llmo-clinic",
+      "https://www.iryoto.jp/llmo/",
+      "https://medical-clinic.biz/llmo%E5%AF%BE%E7%AD%96%E3%81%A8%E3%81%97%E3%81%A6%E3%82%AF%E3%83%AA%E3%83%8B%E3%83%83%E3%82%AF%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%A7%E3%81%99%E3%82%8B%E3%81%B9%E3%81%8D/",
+      "https://trilia.co.jp/clinic-llmo/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "tokyo-doctors.com",
+      "three-dots.co.jp",
+      "meditex.jp",
+      "meocli.com",
+      "luminage.co.jp",
+      "ad-tomedical.co.jp",
+      "adcal-inc.com",
+      "tokikane.biz"
+     ],
+     "urls": [
+      "https://tokyo-doctors.com/webdoctor/24474",
+      "https://three-dots.co.jp/llmo-clinic/",
+      "https://meditex.jp/llmo-strategy/",
+      "https://www.meocli.com/blog/llmo-ai-search-clinic-guide",
+      "https://luminage.co.jp/blog/9071/",
+      "https://ad-tomedical.co.jp/%E3%82%AF%E3%83%AA%E3%83%8B%E3%83%83%E3%82%AFllmo%E5%AF%BE%E7%AD%96%E3%81%A8%E3%81%AF%EF%BC%9Fai%E6%A4%9C%E7%B4%A2%E3%81%A7%E6%8C%87%E5%90%8D%E3%81%95%E3%82%8C%E3%82%8B%E5%8C%BB%E9%99%A2%E3%81%AB/",
+      "https://www.adcal-inc.com/column/clinic-llmo-5tips/",
+      "https://tokikane.biz/llmo-industry/medical-clinic-llmo/",
+      "https://www.adcal-inc.com/column/llmo_seo_meo/clinic-llmo-5tips/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "medical-dx.com": 1,
+    "ilabs.jp": 1,
+    "lany.co.jp": 1,
+    "iryoto.jp": 1,
+    "medical-clinic.biz": 1,
+    "trilia.co.jp": 1,
+    "tokyo-doctors.com": 1,
+    "three-dots.co.jp": 1,
+    "meditex.jp": 1,
+    "meocli.com": 1,
+    "luminage.co.jp": 1,
+    "ad-tomedical.co.jp": 1,
+    "adcal-inc.com": 1,
+    "tokikane.biz": 1
+   }
   },
   {
    "kw": "歯科 llmo対策",
@@ -154,10 +847,62 @@
    "imp": 25,
    "url": "https://ai.7senses.co.jp/industry/shika/",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "trilia.co.jp",
+      "atoz-design.jp",
+      "bridge-world.jp",
+      "grill.co.jp",
+      "uravation.com",
+      "zeromedical.tv",
+      "ai-search.techsuite.co.jp",
+      "note.com",
+      "switchitmaker2.com"
+     ],
+     "urls": [
+      "https://trilia.co.jp/dental-clinic-llmo/",
+      "https://atoz-design.jp/column/llmo-dental-clinic/",
+      "https://www.bridge-world.jp/seo/column/llmo_dentalguide/",
+      "https://grill.co.jp/marketing-log/12652/",
+      "https://uravation.com/llmo/shika-clinic-llmo-taisaku/",
+      "https://zeromedical.tv/zeromedical-web/blog/llmo-for-dental-clinics/",
+      "https://ai-search.techsuite.co.jp/11438/",
+      "https://note.com/shiramichi/n/ne1b8c1029ab4",
+      "https://www.switchitmaker2.com/llmo/denteist-llmo/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "trilia.co.jp": 1,
+    "atoz-design.jp": 1,
+    "bridge-world.jp": 1,
+    "grill.co.jp": 1,
+    "uravation.com": 1,
+    "zeromedical.tv": 1,
+    "ai-search.techsuite.co.jp": 1,
+    "note.com": 1,
+    "switchitmaker2.com": 1
+   }
   },
   {
    "kw": "llmo 店舗集客",
@@ -165,10 +910,85 @@
    "imp": 23,
    "url": "https://ai.7senses.co.jp/glossary/ec29cde02a/",
    "slug": "llmo-tenpo-shukyaku",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "trilia.co.jp",
+      "webridge.co.jp",
+      "note.com",
+      "atoz-design.jp",
+      "adv.tokyo-np.co.jp",
+      "youtube.com",
+      "media.meo-taisaku.com",
+      "mov.am"
+     ],
+     "urls": [
+      "https://trilia.co.jp/restaurant-llmo/",
+      "https://webridge.co.jp/llmo-agency/",
+      "https://note.com/yuki_hana_se/n/n93f910699195",
+      "https://atoz-design.jp/column/restaurant-llmo-guide/",
+      "https://adv.tokyo-np.co.jp/prtimes/article87177/",
+      "https://www.youtube.com/shorts/z6W_Ux2flwI",
+      "https://media.meo-taisaku.com/llmo/llmo_measures/",
+      "https://mov.am/news/post/vHf2J3bn",
+      "https://note.com/trinias/n/nd6c31a0c3f19"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "gyro-n.com",
+      "assist-all.co.jp",
+      "atoz-design.jp",
+      "switchitmaker2.com",
+      "knowledge-hd.co.jp",
+      "edgeconnect.co.jp",
+      "main-c.co.jp",
+      "media.meo-taisaku.com"
+     ],
+     "urls": [
+      "https://www.gyro-n.com/seo/hack/llmo_meo/",
+      "https://assist-all.co.jp/note/llmo-countermeasure-ai-era-cost-zero-customer-guide/",
+      "https://atoz-design.jp/column/restaurant-llmo-guide/",
+      "https://www.switchitmaker2.com/llmo/coffee-shop-llmo/",
+      "https://knowledge-hd.co.jp/llmo-googlemaps-store-marketing/",
+      "https://edgeconnect.co.jp/news/detail/20250918154308/",
+      "https://main-c.co.jp/college-web/llmo-taisaku-tenpo/",
+      "https://media.meo-taisaku.com/llmo/llmo_measures/",
+      "https://media.meo-taisaku.com/llmo/llmo_measures_estaurants/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "trilia.co.jp": 1,
+    "webridge.co.jp": 1,
+    "note.com": 1,
+    "atoz-design.jp": 2,
+    "adv.tokyo-np.co.jp": 1,
+    "youtube.com": 1,
+    "media.meo-taisaku.com": 2,
+    "mov.am": 1,
+    "gyro-n.com": 1,
+    "assist-all.co.jp": 1,
+    "switchitmaker2.com": 1,
+    "knowledge-hd.co.jp": 1,
+    "edgeconnect.co.jp": 1,
+    "main-c.co.jp": 1
+   }
   },
   {
    "kw": "集客 整骨院 コンサル",
@@ -176,10 +996,81 @@
    "imp": 18,
    "url": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-seminar/",
    "slug": "seikotsuin-shukyaku-seminar",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "google.com"
+     ],
+     "urls": [
+      "https://www.google.com/maps/search/%E3%83%94%E3%83%A5%E3%82%A2%E3%82%B0%E3%83%AD%E3%83%BC%E3%82%B9+%E3%83%98%E3%83%AB%E3%82%B9%E3%82%B1%E3%82%A2%E4%BA%8B%E6%A5%AD%E6%9C%AC%E9%83%A8%2C+%E6%97%A5%E6%9C%AC?utm_source=openai",
+      "https://www.google.com/maps/search/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E5%90%89%E7%94%B0%E4%BC%81%E7%94%BB%2C+%E6%97%A5%E6%9C%AC?utm_source=openai",
+      "https://www.google.com/maps/search/3dots%2C+%E6%97%A5%E6%9C%AC?utm_source=openai",
+      "https://www.google.com/maps/search/%E3%82%AB%E3%83%A9%E3%83%80%E3%81%AE%E3%82%B3%E3%83%B3%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3%E3%83%88+%E3%82%AB%E3%83%A9%E3%82%B3%E3%83%B3%E6%95%B4%E9%AA%A8%E9%99%A2%E3%83%BB%E6%95%B4%E4%BD%93%E9%99%A2%2C+%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%AB%98%E5%B4%8E%E5%B8%82?utm_source=openai",
+      "https://www.google.com/maps/search/%E3%83%8A%E3%83%81%E3%83%A5%E3%83%A9%E3%83%AB+%E3%82%B3%E3%83%B3%E3%83%87%E3%82%A3%E3%82%B7%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0+%E3%83%A9%E3%83%9C+%E3%81%84%E3%81%9A%E3%81%BF%E3%83%B6%E4%B8%98%E6%95%B4%E9%AA%A8%E9%99%A2%2C+%E7%A6%8F%E5%B2%A1%E7%9C%8C%E5%8C%97%E4%B9%9D%E5%B7%9E%E5%B8%82%E9%96%80%E5%8F%B8%E5%8C%BA?utm_source=openai",
+      "https://www.google.com/maps/search/%E9%9B%86%E6%B2%BB%E6%95%B4%E9%AA%A8%E9%99%A2%E3%83%BB%E6%95%B4%E4%BD%93%E9%99%A2%2C+%E5%B2%90%E9%98%9C%E7%9C%8C%E7%91%9E%E7%A9%82%E5%B8%82?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "funai-healthcare.funaisoken.co.jp",
+      "clius.jp",
+      "three-dots.co.jp",
+      "big-oasis.com",
+      "salon-seikotsuin-consulting.com",
+      "clinic-mkt.com",
+      "rehasaku.net",
+      "haru-inc.co.jp",
+      "pg-healthcare.jp",
+      "localbiz.jp",
+      "zenkoku-iryo.com",
+      "gyms.jp"
+     ],
+     "urls": [
+      "https://funai-healthcare.funaisoken.co.jp/blogs/column/column062",
+      "https://funai-healthcare.funaisoken.co.jp/blogs/column/column-6302",
+      "https://clius.jp/mag/2023/02/27/kn-how-to-attract-customers-taught-by-the-director-of-a-manipulative-clinic/",
+      "https://funai-healthcare.funaisoken.co.jp/mail_magazine/%E6%95%B4%E9%AA%A8%E9%99%A2%E9%9B%86%E5%AE%A2%E3%82%A2%E3%83%83%E3%83%97%EF%BC%9A%E6%88%90%E5%8A%9F%E3%81%99%E3%82%8B%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E4%BC%81%E7%94%BB%E3%81%A8%E9%81%8B%E5%96%B6/",
+      "https://three-dots.co.jp/orthopedic/",
+      "https://big-oasis.com/blog/syukyaku/web/",
+      "https://big-oasis.com/blog/consulting/about-the-consulting/",
+      "https://www.salon-seikotsuin-consulting.com/consul",
+      "https://clinic-mkt.com/column/seikotsu-consulting/",
+      "https://rehasaku.net/media/management/1482/",
+      "https://haru-inc.co.jp/media/osteopathicclinic-consulting/",
+      "https://pg-healthcare.jp/media/column-guide-consul"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "google.com": 1,
+    "funai-healthcare.funaisoken.co.jp": 1,
+    "clius.jp": 1,
+    "three-dots.co.jp": 1,
+    "big-oasis.com": 1,
+    "salon-seikotsuin-consulting.com": 1,
+    "clinic-mkt.com": 1,
+    "rehasaku.net": 1,
+    "haru-inc.co.jp": 1,
+    "pg-healthcare.jp": 1,
+    "localbiz.jp": 1,
+    "zenkoku-iryo.com": 1,
+    "gyms.jp": 1
+   }
   },
   {
    "kw": "クリニック 口コミ 返信 ai",
@@ -187,10 +1078,63 @@
    "imp": 17,
    "url": "https://ai.7senses.co.jp/tools/kuchikomi-henshin/",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "prtimes.jp",
+      "medrock.co.jp",
+      "pottech.co.jp",
+      "clinicdoctor.syukyaku-hp.jp",
+      "blog-clkaigyo.com",
+      "kuchikomi-ai-iota.vercel.app",
+      "kuchikomi-clinic.com",
+      "genai-ai.co.jp",
+      "yeschat.ai"
+     ],
+     "urls": [
+      "https://prtimes.jp/main/html/rd/p/000000006.000145023.html",
+      "https://medrock.co.jp/navi/dx/reviews-ai/",
+      "https://medrock.co.jp/navi/review-system/",
+      "https://www.pottech.co.jp/column/clinic-ai-tools-for-marketing",
+      "https://clinicdoctor.syukyaku-hp.jp/blog/googlekuchikomi-henshin-ai/",
+      "https://blog-clkaigyo.com/clinic-public-relations/utilization-of-clinic-review-response-ai",
+      "https://kuchikomi-ai-iota.vercel.app/",
+      "https://kuchikomi-clinic.com/",
+      "https://genai-ai.co.jp/ai-kanri/blog/cc-clinic-81/",
+      "https://www.yeschat.ai/gpts-ZxWzg2ML-%E3%82%AF%E3%83%AA%E3%83%8B%E3%83%83%E3%82%AF%E5%8F%A3%E3%82%B3%E3%83%9F%E8%BF%94%E4%BF%A1%E3%83%81%E3%83%A3%E3%83%83%E3%83%88%E3%83%9C%E3%83%83%E3%83%88"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "prtimes.jp": 1,
+    "medrock.co.jp": 1,
+    "pottech.co.jp": 1,
+    "clinicdoctor.syukyaku-hp.jp": 1,
+    "blog-clkaigyo.com": 1,
+    "kuchikomi-ai-iota.vercel.app": 1,
+    "kuchikomi-clinic.com": 1,
+    "genai-ai.co.jp": 1,
+    "yeschat.ai": 1
+   }
   },
   {
    "kw": "税理士 seo",
@@ -198,10 +1142,75 @@
    "imp": 17,
    "url": "https://ai.7senses.co.jp/lp/shigyou/",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "coomil.co.jp",
+      "stock-sun.com",
+      "wonderspace.co.jp",
+      "leadcreation.co.jp",
+      "altbase.co.jp",
+      "grill.co.jp",
+      "sider-pro.com",
+      "freelance-meikan.com",
+      "gelatocms.com",
+      "webma.xscore.co.jp",
+      "gicp.co.jp",
+      "akibare-zeirishi.jp",
+      "mrs-pro.com",
+      "seo-assist.jp"
+     ],
+     "urls": [
+      "https://coomil.co.jp/column/tax-accountant-office/",
+      "https://stock-sun.com/column/tax-accountant-attracting-customers/",
+      "https://wonderspace.co.jp/magazine/9275/",
+      "https://leadcreation.co.jp/blog/tax-accountant-web-lead",
+      "https://altbase.co.jp/topics/3145/",
+      "https://grill.co.jp/marketing-log/1506/",
+      "https://sider-pro.com/column/tax-attracting/",
+      "https://freelance-meikan.com/freelance/4456/blog/1397",
+      "https://gelatocms.com/blog/zeirishi-seo/",
+      "https://coomil.co.jp/column/tax-accountant-seo/",
+      "https://webma.xscore.co.jp/study/tax-accountant-seo/",
+      "https://gicp.co.jp/manegementnote/seo/accountancy-seo/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "coomil.co.jp": 1,
+    "stock-sun.com": 1,
+    "wonderspace.co.jp": 1,
+    "leadcreation.co.jp": 1,
+    "altbase.co.jp": 1,
+    "grill.co.jp": 1,
+    "sider-pro.com": 1,
+    "freelance-meikan.com": 1,
+    "gelatocms.com": 1,
+    "webma.xscore.co.jp": 1,
+    "gicp.co.jp": 1,
+    "akibare-zeirishi.jp": 1,
+    "mrs-pro.com": 1,
+    "seo-assist.jp": 1
+   }
   },
   {
    "kw": "集客 コンサル",
@@ -209,10 +1218,62 @@
    "imp": 17,
    "url": "https://ai.7senses.co.jp/glossary/9401d740f8/",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "seedinc.jp",
+      "mobinc.jp",
+      "funwork2020.com",
+      "mktg-support.co.jp",
+      "shicoo.co.jp",
+      "tms-partners.com",
+      "trave-inc.com",
+      "renoword.com",
+      "megumiya.biz"
+     ],
+     "urls": [
+      "https://www.seedinc.jp/column/marketing/customer-acquisition-consultant/",
+      "https://mobinc.jp/column/2026/02/12/web-consulting-costs-and-how-to-choose-a-company-success-stories-and-latest-trends",
+      "https://www.funwork2020.com/post/8",
+      "https://www.mktg-support.co.jp/shukyaku-consul/",
+      "https://shicoo.co.jp/media/web-marketing-consulting/",
+      "https://tms-partners.com/media/17605-2/",
+      "https://trave-inc.com/blog/sns-marketing/561",
+      "https://renoword.com/blog/shukyaku_consulting/",
+      "https://megumiya.biz/article/web-strategy/customer-attraction-support/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "seedinc.jp": 1,
+    "mobinc.jp": 1,
+    "funwork2020.com": 1,
+    "mktg-support.co.jp": 1,
+    "shicoo.co.jp": 1,
+    "tms-partners.com": 1,
+    "trave-inc.com": 1,
+    "renoword.com": 1,
+    "megumiya.biz": 1
+   }
   },
   {
    "kw": "aio対策 費用",
@@ -222,18 +1283,10 @@
    "slug": "aio-taisaku-donyu-hoho",
    "ai": {
     "ChatGPT": {
-     "answered": true,
+     "answered": false,
      "ours": false,
-     "domains": [
-      "ai-and-marketing.jp",
-      "mesut.co.jp",
-      "0120.co.jp"
-     ],
-     "urls": [
-      "https://ai-and-marketing.jp/blog-aio-cost.html?utm_source=openai",
-      "https://mesut.co.jp/aio-company/?utm_source=openai",
-      "https://0120.co.jp/blog/aio-37/?utm_source=openai"
-     ]
+     "domains": [],
+     "urls": []
     },
     "Gemini": {
      "answered": true,
@@ -241,106 +1294,64 @@
      "domains": [
       "jinrai.co.jp",
       "conmark.jp",
-      "aspicjapan.org",
       "seedinc.jp",
-      "gmotech.jp",
-      "prtimes.jp",
-      "atoz-design.jp",
-      "geo-code.co.jp",
-      "giginc.co.jp"
+      "geo-code.co.jp"
      ],
      "urls": [
       "https://jinrai.co.jp/en/blog/2026/03/24/aio-taisaku-osusume/",
-      "https://www.conmark.jp/column/cost-llmo-aio",
-      "https://www.aspicjapan.org/asu/article/73994",
-      "https://www.seedinc.jp/column/aio/aio-service-tool/",
-      "https://gmotech.jp/semlabo/seo/blog/seo-expence/",
-      "https://www.conmark.jp/service/llmo-geo-aiseo",
       "https://jinrai.co.jp/en/blog/2026/03/18/geo-taisaku-hiyou-souba/",
-      "https://prtimes.jp/main/html/rd/p/000000500.000031201.html",
-      "https://atoz-design.jp/column/ai-website-cost/",
-      "https://prtimes.jp/main/html/rd/p/000000178.000118298.html",
-      "https://www.geo-code.co.jp/seo/mag/llmo-support-companies-guide/",
-      "https://giginc.co.jp/blog/giglab/aio-llmo-geo"
+      "https://www.conmark.jp/column/cost-llmo-aio",
+      "https://www.seedinc.jp/column/aio/aio-service-tool/",
+      "https://www.geo-code.co.jp/seo/mag/aio-support-companies-2025/",
+      "https://jinrai.co.jp/en/blog/2026/03/24/geo-taisaku-osusume/"
      ]
     },
     "Perplexity": {
-     "answered": true,
-     "ours": false,
-     "domains": [
-      "similarweb.com",
-      "0120.co.jp",
-      "tatap.jp",
-      "ai-search.techsuite.co.jp",
-      "shopowner-support.net",
-      "note.com",
-      "nexer.co.jp",
-      "jinrai.co.jp",
-      "coomil.co.jp"
-     ],
-     "urls": [
-      "https://www.similarweb.com/blog/ja/marketing/geo/aio-pricing/",
-      "https://0120.co.jp/blog/aio-37/",
-      "https://tatap.jp/knowledge/geo-generative-engine-optimization/",
-      "https://ai-search.techsuite.co.jp/4460/",
-      "https://0120.co.jp/blog/aio-166/",
-      "https://www.shopowner-support.net/customer_attraction_information/online/seo/aio-cost/",
-      "https://note.com/tsumugi__ai/n/n9e021147937d",
-      "https://nexer.co.jp/blog/aio-cost",
-      "https://jinrai.co.jp/en/blog/2026/03/24/aio-taisaku-osusume/",
-      "https://coomil.co.jp/column/llmo-cost/"
-     ]
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
     },
     "Claude": {
      "answered": true,
      "ours": false,
      "domains": [
-      "nexer.co.jp",
-      "leadplus.co.jp",
-      "jinrai.co.jp",
+      "stellagent.ai",
       "0120.co.jp",
       "nex-t-planning.co.jp",
-      "aioj.jp",
-      "ai-search.techsuite.co.jp"
+      "axone.co.jp",
+      "exbk.jp",
+      "temanashi.co",
+      "ai-search.techsuite.co.jp",
+      "owned.co.jp",
+      "freelance-meikan.com"
      ],
      "urls": [
-      "https://nexer.co.jp/blog/aio-cost",
-      "https://www.leadplus.co.jp/blog/aio-cost",
-      "https://jinrai.co.jp/en/blog/2026/04/06/aio-taisaku-hiyou/",
+      "https://stellagent.ai/ja/ai-search-dock/blog/ai-search-cost",
       "https://0120.co.jp/blog/aio-37/",
       "https://nex-t-planning.co.jp/aio-cost-guide/",
-      "https://0120.co.jp/blog/aio-68/",
-      "https://0120.co.jp/blog/aio-59/",
-      "https://aioj.jp/aio%E5%AF%BE%E7%AD%96%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%A8%E9%81%B8%E3%81%B3%E6%96%B9%EF%BD%9C%E5%8D%98%E7%99%BA%E3%83%BB%E5%88%9D%E6%9C%9F%E6%A7%8B%E7%AF%89%E3%83%BB%E6%9C%88/",
-      "https://ai-search.techsuite.co.jp/4460/"
+      "https://axone.co.jp/digitalport/aio-countermeasures-cost-guide/",
+      "https://exbk.jp/insights/aio-cost-market-price",
+      "https://temanashi.co/blog/aio-taisaku-hiyou-souba/",
+      "https://ai-search.techsuite.co.jp/4460/",
+      "https://owned.co.jp/column/aio/aio-cost/",
+      "https://freelance-meikan.com/freelance/3186/blog/1661"
      ]
     }
    },
    "ai_answered": true,
    "ai_ours": false,
    "ai_domains": {
-    "ai-and-marketing.jp": 1,
-    "mesut.co.jp": 1,
-    "0120.co.jp": 3,
-    "jinrai.co.jp": 3,
+    "jinrai.co.jp": 1,
     "conmark.jp": 1,
-    "aspicjapan.org": 1,
     "seedinc.jp": 1,
-    "gmotech.jp": 1,
-    "prtimes.jp": 1,
-    "atoz-design.jp": 1,
     "geo-code.co.jp": 1,
-    "giginc.co.jp": 1,
-    "similarweb.com": 1,
-    "tatap.jp": 1,
-    "ai-search.techsuite.co.jp": 2,
-    "shopowner-support.net": 1,
-    "note.com": 1,
-    "nexer.co.jp": 2,
-    "coomil.co.jp": 1,
-    "leadplus.co.jp": 1,
+    "stellagent.ai": 1,
+    "0120.co.jp": 1,
     "nex-t-planning.co.jp": 1,
-    "aioj.jp": 1
+    "axone.co.jp": 1,
+    "exbk.jp": 1,
+    "temanashi.co": 1,
+    "ai-search.techsuite.co.jp": 1,
+    "owned.co.jp": 1,
+    "freelance-meikan.com": 1
    }
   },
   {
@@ -349,10 +1360,95 @@
    "imp": 0,
    "url": "",
    "slug": "aio-taisaku-souba",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "lnx.co.jp"
+     ],
+     "urls": [
+      "https://lnx.co.jp/column/seo/aio-llmo-cost/?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "jinrai.co.jp",
+      "ainformation.jp",
+      "bring-flower.com"
+     ],
+     "urls": [
+      "https://jinrai.co.jp/en/blog/2026/03/24/aio-taisaku-osusume/",
+      "https://jinrai.co.jp/en/blog/2026/04/06/aio-taisaku-hiyou/",
+      "https://jinrai.co.jp/en/blog/2026/03/18/geo-taisaku-hiyou-souba/",
+      "https://ainformation.jp/article/14713",
+      "https://www.bring-flower.com/blog/ai-overviews/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "aisearch.similarweb.com",
+      "ai-and-marketing.jp",
+      "0120.co.jp",
+      "queue-tech.jp",
+      "nex-t-planning.co.jp",
+      "exbk.jp",
+      "axone.co.jp",
+      "owned.co.jp",
+      "coomil.co.jp",
+      "nexer.co.jp",
+      "n-works.link",
+      "bakuri.co.jp",
+      "search-engine-pirates.co.jp",
+      "akarumi.jp",
+      "llmo-navi.com"
+     ],
+     "urls": [
+      "https://aisearch.similarweb.com/blog/aio-pricing/",
+      "https://ai-and-marketing.jp/blog-aio-cost.html",
+      "https://0120.co.jp/blog/aio-37/",
+      "https://queue-tech.jp/blog/ai-search-services-japan/aio-costs-pricing-comparison-selection",
+      "https://nex-t-planning.co.jp/aio-cost-guide/",
+      "https://0120.co.jp/blog/aio-59/",
+      "https://exbk.jp/insights/aio-cost-market-price",
+      "https://axone.co.jp/digitalport/aio-countermeasures-cost-guide/",
+      "https://owned.co.jp/column/aio/aio-cost/",
+      "https://coomil.co.jp/column/llmo-cost/",
+      "https://nexer.co.jp/blog/aio-consulting-osusume",
+      "https://n-works.link/blog/llmo/aio-strategy-company"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "lnx.co.jp": 1,
+    "jinrai.co.jp": 1,
+    "ainformation.jp": 1,
+    "bring-flower.com": 1,
+    "aisearch.similarweb.com": 1,
+    "ai-and-marketing.jp": 1,
+    "0120.co.jp": 1,
+    "queue-tech.jp": 1,
+    "nex-t-planning.co.jp": 1,
+    "exbk.jp": 1,
+    "axone.co.jp": 1,
+    "owned.co.jp": 1,
+    "coomil.co.jp": 1,
+    "nexer.co.jp": 1,
+    "n-works.link": 1,
+    "bakuri.co.jp": 1,
+    "search-engine-pirates.co.jp": 1,
+    "akarumi.jp": 1,
+    "llmo-navi.com": 1
+   }
   },
   {
    "kw": "リフォーム 集客 代行",
@@ -360,10 +1456,81 @@
    "imp": 5,
    "url": "https://ai.7senses.co.jp/aio/reform-shukyaku-daikou/",
    "slug": "reform-shukyaku-daikou",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "mirai-style.net",
+      "zehitomo.com",
+      "sub-cast.jp",
+      "socialmarketerslab.com",
+      "straylamb-agent.com",
+      "youtube.com",
+      "renovation-jyuku.com",
+      "meetsmore.com"
+     ],
+     "urls": [
+      "https://mirai-style.net/column/34323/",
+      "https://www.zehitomo.com/pro/column/archives/5085",
+      "https://sub-cast.jp/industry/reform/",
+      "https://www.socialmarketerslab.com/service/netzero",
+      "https://straylamb-agent.com/lp/reform-syuukyaku-daikou/",
+      "https://www.youtube.com/watch?v=FqoNt3tHvZU",
+      "https://renovation-jyuku.com/2026/07/16/%E3%83%AA%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E4%BC%9A%E7%A4%BE%E3%81%AE%E9%9B%86%E5%AE%A2%E6%96%B9%E6%B3%9515%E9%81%B8%E3%80%804000%E4%BB%B6%E3%81%AE%E3%83%AA%E3%83%8E%E3%83%99%E7%8F%BE%E5%A0%B4/",
+      "https://meetsmore.com/product-services/sales-agency/media/255816"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "sungrove.co.jp",
+      "meetsmore.com",
+      "shopowner-support.net",
+      "grill.co.jp",
+      "laboz.jp",
+      "gotta-ride.com",
+      "malnage.com"
+     ],
+     "urls": [
+      "https://www.sungrove.co.jp/reform_attract/",
+      "https://meetsmore.com/product-services/sales-agency/media/255816",
+      "https://www.shopowner-support.net/attracting_customers/construction/reform/renovation-listing-advertisement/",
+      "https://grill.co.jp/marketing-log/3954/",
+      "https://laboz.jp/reform-strategy",
+      "https://www.gotta-ride.com/blog/4503.html",
+      "https://malnage.com/reform-shukaku-seika-hoshu-d762e0/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "mirai-style.net": 1,
+    "zehitomo.com": 1,
+    "sub-cast.jp": 1,
+    "socialmarketerslab.com": 1,
+    "straylamb-agent.com": 1,
+    "youtube.com": 1,
+    "renovation-jyuku.com": 1,
+    "meetsmore.com": 2,
+    "sungrove.co.jp": 1,
+    "shopowner-support.net": 1,
+    "grill.co.jp": 1,
+    "laboz.jp": 1,
+    "gotta-ride.com": 1,
+    "malnage.com": 1
+   }
   },
   {
    "kw": "aio 導入事例",
@@ -371,10 +1538,102 @@
    "imp": 0,
    "url": "",
    "slug": "aio-donyu-jirei",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "0120.co.jp",
+      "xcc-dash.jp"
+     ],
+     "urls": [
+      "https://0120.co.jp/blog/aio-165/?service=aio&utm_source=openai",
+      "https://0120.co.jp/blog/aio-165/?utm_source=openai",
+      "https://xcc-dash.jp/2026/05/22/2026-05-20-2/?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "digital-marketing.jp",
+      "glcl.co.jp",
+      "seo-best.jp",
+      "lifunext.com",
+      "netbot.jp",
+      "prtimes.jp"
+     ],
+     "urls": [
+      "https://digital-marketing.jp/seo/what-is-aio/",
+      "https://glcl.co.jp/mikatamedia/column/aio/",
+      "https://seo-best.jp/topics/web/aio/aio/",
+      "https://lifunext.com/blog/seo/llmo-case/",
+      "https://www.netbot.jp/aiseo/",
+      "https://prtimes.jp/main/html/rd/p/000000074.000160615.html"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "persol-bd.co.jp",
+      "digital-marketing.jp",
+      "fsi.co.jp",
+      "note.com",
+      "loop-ac.jp",
+      "0120.co.jp",
+      "glcl.co.jp",
+      "xcc-dash.jp",
+      "saixaid.com",
+      "lany.co.jp",
+      "giginc.co.jp",
+      "mieru-ca.com",
+      "webanalytics.speee.jp",
+      "ageha.tv",
+      "sedesign.co.jp"
+     ],
+     "urls": [
+      "https://www.persol-bd.co.jp/service/salesmarketing/s-smkt/column/ai-agent/aio-case/",
+      "https://digital-marketing.jp/seo/what-is-aio/",
+      "https://www.fsi.co.jp/techtips/quick/1270/",
+      "https://note.com/gentle_ixora5914/n/n4c4f460310c1",
+      "https://loop-ac.jp/loop-strategy/ai-search-case-study-collection/",
+      "https://0120.co.jp/blog/aio-165/",
+      "https://glcl.co.jp/mikatamedia/column/aio/",
+      "https://xcc-dash.jp/2026-05-20-2/",
+      "https://www.saixaid.com/aio/article-15-aio-jirei.html",
+      "https://www.lany.co.jp/blog/aio-measures",
+      "https://giginc.co.jp/blog/giglab/aio-llmo-geo",
+      "https://mieru-ca.com/ai-seo/llmo-case/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "0120.co.jp": 2,
+    "xcc-dash.jp": 2,
+    "digital-marketing.jp": 2,
+    "glcl.co.jp": 2,
+    "seo-best.jp": 1,
+    "lifunext.com": 1,
+    "netbot.jp": 1,
+    "prtimes.jp": 1,
+    "persol-bd.co.jp": 1,
+    "fsi.co.jp": 1,
+    "note.com": 1,
+    "loop-ac.jp": 1,
+    "saixaid.com": 1,
+    "lany.co.jp": 1,
+    "giginc.co.jp": 1,
+    "mieru-ca.com": 1,
+    "webanalytics.speee.jp": 1,
+    "ageha.tv": 1,
+    "sedesign.co.jp": 1
+   }
   },
   {
    "kw": "aio対策 具体例",
@@ -382,10 +1641,85 @@
    "imp": 0,
    "url": "",
    "slug": "aio-taisaku-gutairei",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "sora-michi.co.jp",
+      "hasshin-lab.comtri.jp",
+      "geo-code.co.jp",
+      "digital-marketing.jp",
+      "uravation.com",
+      "leadplus.co.jp",
+      "shopowner-support.net",
+      "shinker.co.jp",
+      "note.com",
+      "white-link.com",
+      "giginc.co.jp",
+      "ai-search.techsuite.co.jp"
+     ],
+     "urls": [
+      "https://www.sora-michi.co.jp/blog/11461",
+      "https://hasshin-lab.comtri.jp/ai-search-seo-guide-geo-llmo-aeo/",
+      "https://www.geo-code.co.jp/seo/mag/aio/",
+      "https://digital-marketing.jp/seo/geo-llmo-aio-seo/",
+      "https://uravation.com/media/aio-ai-search-seo-guide/",
+      "https://www.leadplus.co.jp/blog/aio-optimization",
+      "https://www.shopowner-support.net/customer_attraction_information/online/seo/aio-examples/",
+      "https://shinker.co.jp/aio-geo-tetteihikaku/",
+      "https://note.com/akirakishi/n/n93ffafb7d447",
+      "https://white-link.com/sem-plus/aio/",
+      "https://giginc.co.jp/blog/giglab/aio-llmo-geo",
+      "https://ai-search.techsuite.co.jp/16076/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "start-link.jp",
+      "sego.jp",
+      "frank-pr.jp",
+      "uravation.com"
+     ],
+     "urls": [
+      "https://start-link.jp/hubspot-ai/btob-marketing/content-marketing-seo/aio-ai-overview-seo-strategy",
+      "https://sego.jp/blog/aio",
+      "https://www.frank-pr.jp/llmo/column/what-is-aio",
+      "https://uravation.com/llmo/aio-taisaku/",
+      "https://uravation.com/media/aio-ai-search-seo-guide/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "sora-michi.co.jp": 1,
+    "hasshin-lab.comtri.jp": 1,
+    "geo-code.co.jp": 1,
+    "digital-marketing.jp": 1,
+    "uravation.com": 2,
+    "leadplus.co.jp": 1,
+    "shopowner-support.net": 1,
+    "shinker.co.jp": 1,
+    "note.com": 1,
+    "white-link.com": 1,
+    "giginc.co.jp": 1,
+    "ai-search.techsuite.co.jp": 1,
+    "start-link.jp": 1,
+    "sego.jp": 1,
+    "frank-pr.jp": 1
+   }
   },
   {
    "kw": "不動産 集客 ホームページ",
@@ -393,10 +1727,56 @@
    "imp": 0,
    "url": "",
    "slug": "fudousan-shukyaku-homepage",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "ielove-cloud.jp",
+      "miraie-net.com",
+      "fc.housedo.co.jp",
+      "ieul.jp",
+      "gohp.jp",
+      "reblo.jp",
+      "property-force.jp"
+     ],
+     "urls": [
+      "https://ielove-cloud.jp/blog/entry-04250/",
+      "https://miraie-net.com/fudousan-column/homepage-customer-attraction/",
+      "https://fc.housedo.co.jp/media/010014/",
+      "https://ieul.jp/column/articles/95250/",
+      "https://www.gohp.jp/blog/website-operation/3869/",
+      "https://reblo.jp/media/reblo_more/260226-3/",
+      "https://property-force.jp/column/homepage-attracting/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "ielove-cloud.jp": 1,
+    "miraie-net.com": 1,
+    "fc.housedo.co.jp": 1,
+    "ieul.jp": 1,
+    "gohp.jp": 1,
+    "reblo.jp": 1,
+    "property-force.jp": 1
+   }
   }
  ]
 }

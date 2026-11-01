@@ -2,8 +2,9 @@
  "site": "subsidy",
  "ym": "2026-11",
  "measured": "2026-11-01",
- "mode": "cache",
- "status": "over_cap",
+ "mode": "live",
+ "status": "ok",
+ "cached_kws": 0,
  "gsc_window": "2026-09-30〜2026-10-28",
  "engines": [
   "ChatGPT",
@@ -14,9 +15,9 @@
  "summary": {
   "kw_n": 20,
   "ai": {
-   "answered_n": 7,
-   "ours_n": 2,
-   "share": null
+   "answered_n": 20,
+   "ours_n": 5,
+   "share": 0.25
   },
   "search": {
    "ranked_n": 15,
@@ -25,90 +26,96 @@
   },
   "competitors": [
    {
+    "domain": "hojokin-office.essencimo.co.jp",
+    "type": "peer",
+    "ai_n": 5,
+    "ai_share": 0.25,
+    "top10_rate": null
+   },
+   {
     "domain": "carearc.co.jp",
     "type": "peer",
-    "ai_n": 3,
-    "ai_share": null,
+    "ai_n": 4,
+    "ai_share": 0.2,
     "top10_rate": null
    },
    {
     "domain": "hojokin-agent.jp",
     "type": "peer",
-    "ai_n": 3,
-    "ai_share": null,
+    "ai_n": 4,
+    "ai_share": 0.2,
     "top10_rate": null
    },
    {
-    "domain": "hojokin-office.essencimo.co.jp",
+    "domain": "agrijob.jp",
     "type": "peer",
     "ai_n": 3,
-    "ai_share": null,
+    "ai_share": 0.15,
     "top10_rate": null
    },
    {
-    "domain": "so-labo.co.jp",
+    "domain": "cev-pc.or.jp",
     "type": "peer",
     "ai_n": 3,
-    "ai_share": null,
-    "top10_rate": null
-   },
-   {
-    "domain": "airregi.jp",
-    "type": "peer",
-    "ai_n": 2,
-    "ai_share": null,
+    "ai_share": 0.15,
     "top10_rate": null
    }
   ],
   "other_types": {
-   "portal": [
-    "it-trend.jp",
-    "itreview.jp",
-    "jobvr.co.jp",
-    "mono.ipros.com"
-   ],
    "media": [
     "catalog.monex.co.jp",
-    "financeinjapan.com",
-    "hojyokin-portal.jp",
-    "ichidokiri.co.jp",
-    "nippon-smes-project.com",
-    "rsvia.co.jp",
-    "shinnavi.jp",
-    "sogyotecho.jp"
-   ],
-   "video": [
-    "hojokin-dx.com",
-    "note.com",
-    "youtube.com"
+    "detail.chiebukuro.yahoo.co.jp",
+    "digi-mado.jp",
+    "digikar.m3.com",
+    "ezark-tax-accounting.com",
+    "hojokin-agent.hatenablog.com",
+    "hojyokin-concierge.com",
+    "hojyokin-portal.jp"
    ],
    "public": [
     "aspicjapan.org",
     "chusho.meti.go.jp",
-    "hkd.mlit.go.jp",
-    "it-shien.smrj.go.jp",
-    "maff.go.jp",
-    "meti.go.jp",
-    "mirasapo-plus.go.jp",
-    "portal.monodukuri-hojo.jp"
+    "city.akita.lg.jp",
+    "city.hamamatsu.shizuoka.jp",
+    "city.minato.tokyo.jp",
+    "city.munakata.lg.jp",
+    "city.saitama.lg.jp",
+    "city.utsunomiya.lg.jp"
+   ],
+   "video": [
+    "hojokin-dx.com",
+    "iryo-dx.com",
+    "keikamotsu-note.com",
+    "note.com",
+    "x.com",
+    "youtube.com"
+   ],
+   "portal": [
+    "corporate.ai-con.lawyer",
+    "doctokyo.jp",
+    "ev-charge-enechange.jp",
+    "evnion.com",
+    "it-trend.jp",
+    "itreview.jp",
+    "jobvr.co.jp"
    ]
   },
   "engines": {
    "ChatGPT": {
-    "answered": 4,
+    "answered": 13,
     "ours": 0
    },
    "Gemini": {
-    "answered": 6,
-    "ours": 0
-   },
-   "Perplexity": {
-    "answered": 6,
-    "ours": 1
+    "answered": 19,
+    "ours": 3
    },
    "Claude": {
-    "answered": 6,
+    "answered": 20,
     "ours": 2
+   },
+   "Perplexity": {
+    "answered": 1,
+    "ours": 0
    }
   },
   "search_note": "競合の検索順位は取得していません（SERPを課金APIで取らないため）。自社の順位は Search Console の実測です"
@@ -120,10 +127,88 @@
    "imp": 94,
    "url": "https://lp.7senses.co.jp/blog/nogyo-hojokin-hensai-fuyou/",
    "slug": "nogyo-hojokin-hensai-fuyou",
-   "ai": {},
-   "ai_answered": false,
-   "ai_ours": false,
-   "ai_domains": {}
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": true,
+     "domains": [
+      "fujino-gyosei.jp",
+      "hojyokin-portal.jp",
+      "hojokin-compass.jp",
+      "sangyo-rodo.metro.tokyo.lg.jp",
+      "note.com",
+      "ummkt.com",
+      "koyano-cpa.gr.jp",
+      "sanchi.jp",
+      "maff.go.jp"
+     ],
+     "urls": [
+      "https://fujino-gyosei.jp/nougyou-hojyokin2026/",
+      "https://hojyokin-portal.jp/columns/nogyo_hojyokin_guide",
+      "https://hojokin-compass.jp/articles/hojokin-nogyo-norin-suisan.html",
+      "https://www.sangyo-rodo.metro.tokyo.lg.jp/nourin/nougyou/shuunou/jisedai",
+      "https://note.com/agri_legal/n/n6dc5b92db396",
+      "https://note.com/akira7369/n/n82b3845342b2",
+      "https://ummkt.com/blog/181",
+      "https://koyano-cpa.gr.jp/nobiyo-kaikei/column/581/",
+      "https://sanchi.jp/tools/subsidy/agriculture/",
+      "https://www.maff.go.jp/j/new_farmer/n_kasituke/index2.html",
+      "https://sanchi.jp/agriculture/new-farmer-subsidy-challenges-20260619/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "agrijob.jp",
+      "ummkt.com",
+      "sogyotecho.jp",
+      "hojyokin-portal.jp",
+      "agripick.com",
+      "jimovege-works.jp",
+      "no1pac.com",
+      "fujino-gyosei.jp"
+     ],
+     "urls": [
+      "https://agrijob.jp/contents/myagri/assistance-payment",
+      "https://ummkt.com/blog/181",
+      "https://sogyotecho.jp/nougyou-hojyokin/",
+      "https://hojyokin-portal.jp/columns/syuno_jyunbi_shikin",
+      "https://agripick.com/1995",
+      "https://jimovege-works.jp/column/new-farming-subsidy/",
+      "https://no1pac.com/?p=1542",
+      "https://no1pac.com/?p=1557",
+      "https://fujino-gyosei.jp/hojyokin/2026/05/18/%E8%BE%B2%E6%A5%AD%E3%81%AE%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%83%BB%E8%9E%8D%E8%B3%87%E5%AE%8C%E5%85%A8%E4%B8%80%E8%A6%A7%E3%82%AC%E3%82%A4%E3%83%89/"
+     ]
+    }
+   },
+   "ai_answered": true,
+   "ai_ours": true,
+   "ai_domains": {
+    "fujino-gyosei.jp": 2,
+    "hojyokin-portal.jp": 2,
+    "hojokin-compass.jp": 1,
+    "sangyo-rodo.metro.tokyo.lg.jp": 1,
+    "note.com": 1,
+    "ummkt.com": 2,
+    "koyano-cpa.gr.jp": 1,
+    "sanchi.jp": 1,
+    "maff.go.jp": 1,
+    "agrijob.jp": 1,
+    "sogyotecho.jp": 1,
+    "agripick.com": 1,
+    "jimovege-works.jp": 1,
+    "no1pac.com": 1
+   }
   },
   {
    "kw": "個人事業主 車購入補助金",
@@ -131,10 +216,119 @@
    "imp": 63,
    "url": "https://lp.7senses.co.jp/blog/kojin-jigyonushi-kuruma-kounyu-hojokin/",
    "slug": "kojin-jigyonushi-kuruma-kounyu-hojokin",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "nextage.jp",
+      "freetip.jp",
+      "jcb.co.jp",
+      "tax-kinoshita.com"
+     ],
+     "urls": [
+      "https://www.nextage.jp/buy_guide/info/223230/?utm_source=openai",
+      "https://www.freetip.jp/article/expenses-car?utm_source=openai",
+      "https://www.jcb.co.jp/corporate/special/car_expenses.html?utm_source=openai",
+      "https://tax-kinoshita.com/sole-proprietor-car-tax-saving/?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "hojokin-agent.jp",
+      "hojokin-agent.hatenablog.com",
+      "corp.tanso-man.com",
+      "evdays.tepco.co.jp",
+      "221616.com",
+      "bank.82group.jp",
+      "nextage.jp",
+      "tokyo-co2down.jp",
+      "youtube.com",
+      "j-support.jp",
+      "cev-pc.or.jp"
+     ],
+     "urls": [
+      "https://hojokin-agent.jp/audience/sole-proprietor/vehicle",
+      "https://hojokin-agent.hatenablog.com/entry/2026/04/21/150332",
+      "https://corp.tanso-man.com/subsidy-blog/cev-subsidy-for-business/",
+      "https://evdays.tepco.co.jp/entry/2021/05/06/000009",
+      "https://221616.com/guide/subsidy/",
+      "https://bank.82group.jp/column-car/subsidy.html",
+      "https://www.nextage.jp/buy_guide/info/844922/",
+      "https://www.tokyo-co2down.jp/subsidy/ev/",
+      "https://www.youtube.com/watch?v=Ip0nsRERME0",
+      "https://j-support.jp/column/8369",
+      "https://www.cev-pc.or.jp/hojo/pdf/R4ho/R4ho_youryou_2-1.pdf",
+      "https://www.cev-pc.or.jp/hojo/pdf/R6ho/R6ho_youryou_2-1A.pdf"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "ev-charge-enechange.jp",
+      "hojyokin-portal.jp",
+      "x.com",
+      "hojokin-agent.hatenablog.com",
+      "hr-sr.com",
+      "eloan.co.jp",
+      "hojokin-agent.jp",
+      "carconnect.jp",
+      "suzuki.co.jp",
+      "cev-pc.or.jp",
+      "k-ledge.jp",
+      "evnion.com",
+      "keikamotsu-note.com"
+     ],
+     "urls": [
+      "https://ev-charge-enechange.jp/articles/070/",
+      "https://hojyokin-portal.jp/columns/cev-hojyo",
+      "https://x.com/isyokenmei/status/2061423930548875308",
+      "https://hojokin-agent.hatenablog.com/entry/2026/04/21/150332",
+      "https://hr-sr.com/blog_articles/2024kiki.html",
+      "https://www.eloan.co.jp/car/fp/1164/",
+      "https://hojokin-agent.jp/audience/sole-proprietor/vehicle",
+      "https://hojokin-agent.jp/purpose/vehicle",
+      "https://carconnect.jp/column/ev/ev-subsidy/",
+      "https://x.com/isyokenmei/status/2098319325715366096",
+      "https://www.suzuki.co.jp/car/ecocar_info/ev/",
+      "https://www.cev-pc.or.jp/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "nextage.jp": 2,
+    "freetip.jp": 1,
+    "jcb.co.jp": 1,
+    "tax-kinoshita.com": 1,
+    "hojokin-agent.jp": 2,
+    "hojokin-agent.hatenablog.com": 2,
+    "corp.tanso-man.com": 1,
+    "evdays.tepco.co.jp": 1,
+    "221616.com": 1,
+    "bank.82group.jp": 1,
+    "tokyo-co2down.jp": 1,
+    "youtube.com": 1,
+    "j-support.jp": 1,
+    "cev-pc.or.jp": 2,
+    "ev-charge-enechange.jp": 1,
+    "hojyokin-portal.jp": 1,
+    "x.com": 1,
+    "hr-sr.com": 1,
+    "eloan.co.jp": 1,
+    "carconnect.jp": 1,
+    "suzuki.co.jp": 1,
+    "k-ledge.jp": 1,
+    "evnion.com": 1,
+    "keikamotsu-note.com": 1
+   }
   },
   {
    "kw": "ベンダー登録とは",
@@ -156,72 +350,45 @@
      "urls": []
     },
     "Perplexity": {
-     "answered": true,
-     "ours": false,
-     "domains": [
-      "helpleft.com",
-      "listing-partners.com",
-      "hojyokin-migiude.info",
-      "b-top.co.jp",
-      "xeco.co.jp",
-      "crenlylaw.com",
-      "nozaki-gyousei-office.com",
-      "planbase.co.jp",
-      "ardent.jp"
-     ],
-     "urls": [
-      "https://www.helpleft.com/ja/business/what-is-vendor-registration.html",
-      "https://listing-partners.com/gbiz/gbiz_column/it-shien-vendor-registration/",
-      "https://www.hojyokin-migiude.info/nouhau/ithojyokin-20240621/",
-      "https://b-top.co.jp/media/grants/ithojokin018/",
-      "https://xeco.co.jp/ai-subsidy-practice-04-vendor-registration-2026/",
-      "https://www.crenlylaw.com/blog/subsidize20250325",
-      "https://nozaki-gyousei-office.com/syoryokuka-daikou/",
-      "https://planbase.co.jp/column/it-vendor/",
-      "https://planbase.co.jp/column/285/",
-      "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/itdounyuhojyokin-touroku/"
-     ]
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
     },
     "Claude": {
      "answered": true,
      "ours": false,
      "domains": [
       "planbase.co.jp",
+      "job-q.me",
       "ardent.jp",
       "bcompany.co.jp",
       "japan-finance.jp",
       "hojyokin-migiude.info",
-      "sakamoto316.tokyo",
-      "hojokin-office.essencimo.co.jp"
+      "hojokin-office.essencimo.co.jp",
+      "ja.helpleft.com"
      ],
      "urls": [
       "https://planbase.co.jp/column/285/",
       "https://planbase.co.jp/column/it-vendor/",
+      "https://job-q.me/articles/4110",
       "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/itdounyuhojyokin-touroku/",
       "https://bcompany.co.jp/service/b-top/column/grants/itdounyu-vender/",
       "https://japan-finance.jp/subsidy/120/",
       "https://www.hojyokin-migiude.info/nouhau/ithojyokin-20240621/",
-      "https://sakamoto316.tokyo/archives/3818",
-      "https://hojokin-office.essencimo.co.jp/column/it%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AE%E3%83%99%E3%83%B3%E3%83%80%E3%83%BC%E7%99%BB%E9%8C%B2%E3%81%A8%E3%81%AF%EF%BC%9F%E5%BD%B9%E5%89%B2%E3%82%84%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/"
+      "https://hojokin-office.essencimo.co.jp/column/it%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AE%E3%83%99%E3%83%B3%E3%83%80%E3%83%BC%E7%99%BB%E9%8C%B2%E3%81%A8%E3%81%AF%EF%BC%9F%E5%BD%B9%E5%89%B2%E3%82%84%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/",
+      "https://ja.helpleft.com/business/what-is-vendor-registration.html"
      ]
     }
    },
    "ai_answered": true,
    "ai_ours": false,
    "ai_domains": {
-    "helpleft.com": 1,
-    "listing-partners.com": 1,
-    "hojyokin-migiude.info": 2,
-    "b-top.co.jp": 1,
-    "xeco.co.jp": 1,
-    "crenlylaw.com": 1,
-    "nozaki-gyousei-office.com": 1,
-    "planbase.co.jp": 2,
-    "ardent.jp": 2,
+    "planbase.co.jp": 1,
+    "job-q.me": 1,
+    "ardent.jp": 1,
     "bcompany.co.jp": 1,
     "japan-finance.jp": 1,
-    "sakamoto316.tokyo": 1,
-    "hojokin-office.essencimo.co.jp": 1
+    "hojyokin-migiude.info": 1,
+    "hojokin-office.essencimo.co.jp": 1,
+    "ja.helpleft.com": 1
    }
   },
   {
@@ -230,10 +397,107 @@
    "imp": 44,
    "url": "https://lp.7senses.co.jp/blog/it-hojokin-denkaru-kyoyu-clinic/",
    "slug": "it-hojokin-denkaru-kyoyu-clinic",
-   "ai": {},
-   "ai_answered": false,
-   "ai_ours": false,
-   "ai_domains": {}
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "ai-front-trend.jp",
+      "iryoken.co.jp"
+     ],
+     "urls": [
+      "https://ai-front-trend.jp/electronic-medical-record-introduction-cost/?utm_source=openai",
+      "https://www.iryoken.co.jp/contents/new/detail---id-3189.html?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": true,
+     "domains": [
+      "yamanashi-med.or.jp",
+      "wiseman.co.jp",
+      "mhlw.go.jp",
+      "em-avalon.jp",
+      "hojyokin-portal.jp",
+      "apostro.co.jp",
+      "phchd.com"
+     ],
+     "urls": [
+      "https://www.yamanashi-med.or.jp/assets/files/medical/20251021sisutemuhojokin.pdf",
+      "https://www.wiseman.co.jp/column/welfare/31324/",
+      "https://www.mhlw.go.jp/stf/iryoudx.html",
+      "https://em-avalon.jp/column/detail?id=399",
+      "https://hojyokin-portal.jp/subsidies/39640",
+      "https://apostro.co.jp/medical-dx/electronic-medical-information-coordination-system-development-addition-2026/",
+      "https://www.phchd.com/jp/medicom/park/idea/medicalfees-medical-promotion-system"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "wiseman.co.jp",
+      "yuyama.co.jp",
+      "digikar.m3.com",
+      "gxo.co.jp",
+      "dm-rg.net",
+      "dealca.co.jp",
+      "sokuraku-doctor.com",
+      "carearc.co.jp",
+      "hojokin-dx.com",
+      "digi-mado.jp",
+      "clius.jp",
+      "clinics-cloud.com",
+      "digital-ai-hojokin.jp",
+      "hojyokin-concierge.com",
+      "hojokin-office.essencimo.co.jp"
+     ],
+     "urls": [
+      "https://www.wiseman.co.jp/column/welfare/31324/",
+      "https://www.yuyama.co.jp/column/medicalrecord/subsidy/",
+      "https://digikar.m3.com/articles/how-to-choice-emr/article59",
+      "https://gxo.co.jp/column/medical-dx-suishin-kasan-2026-it-subsidy-clinic-guide",
+      "https://dm-rg.net/contents/emr_mdx/5abb1e67-a990-4814-b13c-8d0ad92f6e8f",
+      "https://dealca.co.jp/blog/healthcare-subsidy-guide.html",
+      "https://www.sokuraku-doctor.com/post/iryo-dx-hojokin",
+      "https://carearc.co.jp/blog/4011/",
+      "https://hojokin-dx.com/articles/healthcare-nursing-dx-ai-subsidy-guide-2026/",
+      "https://digi-mado.jp/article/70450/",
+      "https://clius.jp/mag/2026/03/06/2026-clinic-itsubsidy/",
+      "https://gxo.co.jp/column/it-subsidy-medical-clinic-guide"
+     ]
+    }
+   },
+   "ai_answered": true,
+   "ai_ours": true,
+   "ai_domains": {
+    "ai-front-trend.jp": 1,
+    "iryoken.co.jp": 1,
+    "yamanashi-med.or.jp": 1,
+    "wiseman.co.jp": 2,
+    "mhlw.go.jp": 1,
+    "em-avalon.jp": 1,
+    "hojyokin-portal.jp": 1,
+    "apostro.co.jp": 1,
+    "phchd.com": 1,
+    "yuyama.co.jp": 1,
+    "digikar.m3.com": 1,
+    "gxo.co.jp": 1,
+    "dm-rg.net": 1,
+    "dealca.co.jp": 1,
+    "sokuraku-doctor.com": 1,
+    "carearc.co.jp": 1,
+    "hojokin-dx.com": 1,
+    "digi-mado.jp": 1,
+    "clius.jp": 1,
+    "clinics-cloud.com": 1,
+    "digital-ai-hojokin.jp": 1,
+    "hojyokin-concierge.com": 1,
+    "hojokin-office.essencimo.co.jp": 1
+   }
   },
   {
    "kw": "美容室 レジ 補助金",
@@ -372,124 +636,94 @@
      "answered": true,
      "ours": false,
      "domains": [
-      "app-logi.co.jp",
-      "portal.monodukuri-hojo.jp"
+      "ofsi.or.jp",
+      "labour-saving.smrj.go.jp"
      ],
      "urls": [
-      "https://app-logi.co.jp/column/subsidy/8376/?utm_source=openai",
-      "https://portal.monodukuri-hojo.jp//?utm_source=openai"
+      "https://www.ofsi.or.jp/logi-suisin/?utm_source=openai",
+      "https://labour-saving.smrj.go.jp/?utm_source=openai"
      ]
     },
     "Gemini": {
      "answered": true,
      "ours": false,
      "domains": [
-      "office-akasaki.com",
-      "hojokin-office.essencimo.co.jp",
-      "sougyouyushi-support.com",
-      "shinnavi.jp",
-      "core.co.jp",
-      "roboware.ai",
       "inu-llc.co.jp",
-      "mi-souken.com",
+      "core.co.jp",
+      "sougyouyushi-support.com",
+      "so-labo.co.jp",
+      "hojokin-office.essencimo.co.jp",
+      "mono-support.com",
+      "oogata-hojokin.jp",
       "ichidokiri.co.jp",
-      "55truck.com"
+      "leon-strategy.com",
+      "connect.tohknet.co.jp"
      ],
      "urls": [
-      "https://office-akasaki.com/blog/entry-272.html",
-      "https://hojokin-office.essencimo.co.jp/column/%E3%80%90%E9%81%8B%E9%80%81%E6%A5%AD%E8%80%85%E5%BF%85%E8%A6%8B%E3%80%91%E9%81%8B%E9%80%81%E6%A5%AD%E3%81%A7%E3%81%AE%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AE/",
-      "https://sougyouyushi-support.com/grant/monodukuri-transportation/",
-      "https://shinnavi.jp/column/250/",
+      "https://inu-llc.co.jp/monohojo-transportation/",
       "https://www.core.co.jp/service/industrial/iot/cagou-alc/column/007",
-      "https://roboware.ai/article/logistics_subsidy",
+      "https://sougyouyushi-support.com/grant/monodukuri-transportation/",
+      "https://so-labo.co.jp/hojyokin/monodukuri/basic/951/",
+      "https://hojokin-office.essencimo.co.jp/column/%E3%80%90%E9%81%8B%E9%80%81%E6%A5%AD%E8%80%85%E5%BF%85%E8%A6%8B%E3%80%91%E9%81%8B%E9%80%81%E6%A5%AD%E3%81%A7%E3%81%AE%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AE/",
+      "https://mono-support.com/shinshijo/shinzigyo-unsou/",
+      "https://oogata-hojokin.jp/syoryokuka/p1757",
       "https://inu-llc.co.jp/monohojo-truck/",
-      "https://mi-souken.com/hojokin-rashinban/info/%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E8%A3%9C%E5%8A%A9%E9%87%91/%E7%9D%80%E7%9B%AE%EF%BC%81%E4%BA%8B%E6%A5%AD%E5%86%8D%E6%A7%8B%E7%AF%89%E8%A3%9C%E5%8A%A9%E9%87%91%EF%BC%88%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E8%A3%9C%E5%8A%A9%E9%87%91%EF%BC%89%E3%81%AF",
-      "https://ichidokiri.co.jp/column/truck-purchase-subsidy/",
-      "https://www.55truck.com/journal/subsidies-available-for-used-trucks.html"
+      "https://ichidokiri.co.jp/column/transportation-subsidies/",
+      "https://leon-strategy.com/unso-jinzai-hojokin",
+      "https://connect.tohknet.co.jp/blog/detail?id=390"
      ]
     },
     "Perplexity": {
-     "answered": true,
-     "ours": false,
-     "domains": [
-      "core.co.jp",
-      "note.com",
-      "portal.monodukuri-hojo.jp",
-      "seisansei.smrj.go.jp",
-      "chusho.meti.go.jp",
-      "tohoku.meti.go.jp",
-      "smrj.go.jp",
-      "hkd.mlit.go.jp"
-     ],
-     "urls": [
-      "https://www.core.co.jp/service/industrial/iot/cagou-alc/column/007",
-      "https://note.com/tetsuya_cpa/n/n418d0f100900",
-      "https://portal.monodukuri-hojo.jp/",
-      "https://seisansei.smrj.go.jp/subsidy_info/manufacturing_subsidy.html",
-      "https://www.chusho.meti.go.jp/koukai/hojyokin/saitaku/2026/260123001.html",
-      "https://www.tohoku.meti.go.jp/koho/koshin/kobo/2025/k250731001.html",
-      "https://www.smrj.go.jp/news/2026/hkj3i80000004w9a.html",
-      "https://www.hkd.mlit.go.jp/ks/chiiki_renkei/c86hsb000000h690-att/c86hsb000000h6hi.pdf",
-      "https://www.chusho.meti.go.jp/keiei/sapoin/index.html",
-      "https://seisansei.smrj.go.jp/news/20260206.html"
-     ]
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
     },
     "Claude": {
      "answered": true,
      "ours": true,
      "domains": [
-      "samurai-law.com",
-      "so-labo.co.jp",
-      "app-logi.co.jp",
       "ichidokiri.co.jp",
-      "v-spirits.com",
-      "mirasapo.jp",
+      "hojokin-office.essencimo.co.jp",
       "inu-llc.co.jp",
+      "qasso.org",
       "hojyokin-portal.jp",
       "portal.monodukuri-hojo.jp",
-      "shiomi-gyosei.com"
+      "app-logi.co.jp",
+      "visum.jp",
+      "hojokin-dx.com"
      ],
      "urls": [
-      "https://samurai-law.com/hojokin/mono29/",
-      "https://so-labo.co.jp/hojyokin/monodukuri/basic/951/",
-      "https://app-logi.co.jp/column/subsidy/8376/",
       "https://ichidokiri.co.jp/column/transport-monodukuri-subsidy/",
-      "https://v-spirits.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91/transport-vehicle-management-warehouse-automation-subsidy",
-      "https://www.mirasapo.jp/subsidy/2417",
+      "https://hojokin-office.essencimo.co.jp/column/%E3%80%90%E9%81%8B%E9%80%81%E6%A5%AD%E8%80%85%E5%BF%85%E8%A6%8B%E3%80%91%E9%81%8B%E9%80%81%E6%A5%AD%E3%81%A7%E3%81%AE%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AE/",
       "https://inu-llc.co.jp/monohojo-truck/",
+      "https://qasso.org/expert-blog/subsidy-grant/2458/",
       "https://hojyokin-portal.jp/columns/mono2025_summary",
       "https://portal.monodukuri-hojo.jp/common/bunsho/ippan/23th/%E5%85%AC%E5%8B%9F%E8%A6%81%E9%A0%98_23%E6%AC%A1%E7%B7%A0%E5%88%87_20260206.pdf",
-      "https://shiomi-gyosei.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/manufac2026/"
+      "https://app-logi.co.jp/column/subsidy/8376/",
+      "https://visum.jp/blog/subsidy/contents/0005/",
+      "https://hojokin-dx.com/articles/shinjigyo-monodukuri-tougou-r8-changes-2026/"
      ]
     }
    },
    "ai_answered": true,
    "ai_ours": true,
    "ai_domains": {
-    "app-logi.co.jp": 2,
-    "portal.monodukuri-hojo.jp": 3,
-    "office-akasaki.com": 1,
-    "hojokin-office.essencimo.co.jp": 1,
-    "sougyouyushi-support.com": 1,
-    "shinnavi.jp": 1,
-    "core.co.jp": 2,
-    "roboware.ai": 1,
+    "ofsi.or.jp": 1,
+    "labour-saving.smrj.go.jp": 1,
     "inu-llc.co.jp": 2,
-    "mi-souken.com": 1,
-    "ichidokiri.co.jp": 2,
-    "55truck.com": 1,
-    "note.com": 1,
-    "seisansei.smrj.go.jp": 1,
-    "chusho.meti.go.jp": 1,
-    "tohoku.meti.go.jp": 1,
-    "smrj.go.jp": 1,
-    "hkd.mlit.go.jp": 1,
-    "samurai-law.com": 1,
+    "core.co.jp": 1,
+    "sougyouyushi-support.com": 1,
     "so-labo.co.jp": 1,
-    "v-spirits.com": 1,
-    "mirasapo.jp": 1,
+    "hojokin-office.essencimo.co.jp": 2,
+    "mono-support.com": 1,
+    "oogata-hojokin.jp": 1,
+    "ichidokiri.co.jp": 2,
+    "leon-strategy.com": 1,
+    "connect.tohknet.co.jp": 1,
+    "qasso.org": 1,
     "hojyokin-portal.jp": 1,
-    "shiomi-gyosei.com": 1
+    "portal.monodukuri-hojo.jp": 1,
+    "app-logi.co.jp": 1,
+    "visum.jp": 1,
+    "hojokin-dx.com": 1
    }
   },
   {
@@ -503,12 +737,14 @@
      "answered": true,
      "ours": false,
      "domains": [
-      "meti.go.jp",
+      "leon-strategy.com",
+      "shinnavi.jp",
       "ichidokiri.co.jp"
      ],
      "urls": [
-      "https://www.meti.go.jp/shingikai/mono_info_service/credit_card_api/pdf/20260327_2.pdf?utm_source=openai",
-      "https://ichidokiri.co.jp/column/transport-subsidy-adoption-cases/?utm_source=openai"
+      "https://leon-strategy.com/monodukuri-unso-tsukaimichi?utm_source=openai",
+      "https://shinnavi.jp/column/250/?utm_source=openai",
+      "https://ichidokiri.co.jp/column/transport-monodukuri-subsidy/?utm_source=openai"
      ]
     },
     "Gemini": {
@@ -516,111 +752,72 @@
      "ours": false,
      "domains": [
       "sougyouyushi-support.com",
-      "hojokin-office.essencimo.co.jp",
-      "ichidokiri.co.jp",
-      "core.co.jp",
-      "shinnavi.jp",
-      "sagawa-logi.com",
-      "hojokin-agent.jp",
-      "shinjigyou-monodukuri.smrj.go.jp"
+      "leon-strategy.com",
+      "mono-support.com",
+      "gekiyasuaikomon.jp",
+      "v-spirits.com"
      ],
      "urls": [
       "https://sougyouyushi-support.com/grant/monodukuri-transportation/",
-      "https://hojokin-office.essencimo.co.jp/column/%E3%80%90%E9%81%8B%E9%80%81%E6%A5%AD%E8%80%85%E5%BF%85%E8%A6%8B%E3%80%91%E9%81%8B%E9%80%81%E6%A5%AD%E3%81%A7%E3%81%AE%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AE/",
-      "https://ichidokiri.co.jp/column/transportation-subsidies/",
-      "https://www.core.co.jp/service/industrial/iot/cagou-alc/column/007",
-      "https://shinnavi.jp/column/250/",
-      "https://www.sagawa-logi.com/column/logistics-warehouse-subsidies/",
-      "https://hojokin-agent.jp/industry/transport",
-      "https://shinjigyou-monodukuri.smrj.go.jp/overview"
+      "https://leon-strategy.com/unso-shinjigyo-hojokin",
+      "https://mono-support.com/shinshijo/shinzigyo-unsou-zirei/",
+      "https://www.gekiyasuaikomon.jp/logistics/column/shinjigyo-monodukuri-subsidy",
+      "https://v-spirits.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91/transport-vehicle-management-warehouse-automation-subsidy",
+      "https://mono-support.com/shinshijo/shinzigyo-unsou/"
      ]
     },
     "Perplexity": {
-     "answered": true,
-     "ours": true,
-     "domains": [
-      "ichidokiri.co.jp",
-      "yamadakaikei-go.jp",
-      "hojokin-shindan.jp",
-      "hojokin-navi.co.jp",
-      "seisansei.smrj.go.jp",
-      "sougyouyushi-support.com",
-      "planbase.co.jp",
-      "hojyokin-limits.com"
-     ],
-     "urls": [
-      "https://ichidokiri.co.jp/column/transportation-subsidies/",
-      "https://www.yamadakaikei-go.jp/information/20260803090048/",
-      "https://hojokin-shindan.jp/articles/unsogyo-hojokin",
-      "https://hojokin-navi.co.jp/unsogyo-butsuryu-hojokin-2026/",
-      "https://seisansei.smrj.go.jp/subsidy_info/new_business_subsidy.html",
-      "https://sougyouyushi-support.com/grant/monodukuri-transportation/",
-      "https://planbase.co.jp/subsidy/industry/transportation/",
-      "https://hojyokin-limits.com/",
-      "https://planbase.co.jp/subsidy/industry/manufacturing/"
-     ]
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
     },
     "Claude": {
      "answered": true,
      "ours": true,
      "domains": [
-      "hojyokin-portal.jp",
-      "so-labo.co.jp",
       "v-spirits.com",
-      "ichidokiri.co.jp",
+      "sme-support.co.jp",
       "shinjigyo-hojokin.jp",
+      "ichidokiri.co.jp",
       "kojimachi-capital.com",
       "gyoseishoshi.work",
       "hojokin-office.essencimo.co.jp",
       "tokyo-kst.jp",
-      "mono-support.com",
-      "qasso.org",
-      "inu-llc.co.jp"
+      "inu-llc.co.jp",
+      "mi-souken.com"
      ],
      "urls": [
-      "https://hojyokin-portal.jp/columns/shinjigyo_monodukuri",
-      "https://so-labo.co.jp/hojyokin/monodukuri/basic/951/",
       "https://v-spirits.com/%E8%A3%9C%E5%8A%A9%E9%87%91%E3%83%BB%E5%8A%A9%E6%88%90%E9%87%91/transport-vehicle-management-warehouse-automation-subsidy",
-      "https://ichidokiri.co.jp/column/transport-monodukuri-subsidy/",
+      "https://www.sme-support.co.jp/column/p7146/",
       "https://shinjigyo-hojokin.jp/articles/unyu-shinjigyo-hojokin/",
+      "https://ichidokiri.co.jp/column/transport-monodukuri-subsidy/",
+      "https://kojimachi-capital.com/shinjigyou-second/",
       "https://kojimachi-capital.com/monodukuri-shinjigyo-shoryokuka-hikaku/",
       "https://gyoseishoshi.work/blog/shinjigyoshinsyutsuhojo/",
       "https://hojokin-office.essencimo.co.jp/column/%E3%80%90%E9%81%8B%E9%80%81%E6%A5%AD%E8%80%85%E5%BF%85%E8%A6%8B%E3%80%91%E9%81%8B%E9%80%81%E6%A5%AD%E3%81%A7%E3%81%AE%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AE/",
       "https://www.tokyo-kst.jp/repo905.html",
-      "https://ichidokiri.co.jp/column/transportation-subsidies/",
-      "https://mono-support.com/shinshijo/shinzigyo-unsou-zirei/",
-      "https://qasso.org/expert-blog/subsidy-grant/2458/"
+      "https://inu-llc.co.jp/monohojo-truck/",
+      "https://mi-souken.com/hojokin-rashinban/info/%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E8%A3%9C%E5%8A%A9%E9%87%91/%E7%9D%80%E7%9B%AE%EF%BC%81%E4%BA%8B%E6%A5%AD%E5%86%8D%E6%A7%8B%E7%AF%89%E8%A3%9C%E5%8A%A9%E9%87%91%EF%BC%88%E3%82%82%E3%81%AE%E3%81%A5%E3%81%8F%E3%82%8A%E8%A3%9C%E5%8A%A9%E9%87%91%EF%BC%89%E3%81%AF",
+      "https://ichidokiri.co.jp/column/transport-2024-problem-subsidy/"
      ]
     }
    },
    "ai_answered": true,
    "ai_ours": true,
    "ai_domains": {
-    "meti.go.jp": 1,
-    "ichidokiri.co.jp": 4,
-    "sougyouyushi-support.com": 2,
-    "hojokin-office.essencimo.co.jp": 2,
-    "core.co.jp": 1,
+    "leon-strategy.com": 2,
     "shinnavi.jp": 1,
-    "sagawa-logi.com": 1,
-    "hojokin-agent.jp": 1,
-    "shinjigyou-monodukuri.smrj.go.jp": 1,
-    "yamadakaikei-go.jp": 1,
-    "hojokin-shindan.jp": 1,
-    "hojokin-navi.co.jp": 1,
-    "seisansei.smrj.go.jp": 1,
-    "planbase.co.jp": 1,
-    "hojyokin-limits.com": 1,
-    "hojyokin-portal.jp": 1,
-    "so-labo.co.jp": 1,
-    "v-spirits.com": 1,
+    "ichidokiri.co.jp": 2,
+    "sougyouyushi-support.com": 1,
+    "mono-support.com": 1,
+    "gekiyasuaikomon.jp": 1,
+    "v-spirits.com": 2,
+    "sme-support.co.jp": 1,
     "shinjigyo-hojokin.jp": 1,
     "kojimachi-capital.com": 1,
     "gyoseishoshi.work": 1,
+    "hojokin-office.essencimo.co.jp": 1,
     "tokyo-kst.jp": 1,
-    "mono-support.com": 1,
-    "qasso.org": 1,
-    "inu-llc.co.jp": 1
+    "inu-llc.co.jp": 1,
+    "mi-souken.com": 1
    }
   },
   {
@@ -634,116 +831,92 @@
      "answered": true,
      "ours": false,
      "domains": [
-      "front.it-trend.jp",
+      "prtimes.jp",
       "it-trend.jp"
      ],
      "urls": [
-      "https://front.it-trend.jp/award/2026-firsthalf/sales_management?annual_ranking_type=2&page_type=scale&viewport=pc&utm_source=openai",
-      "https://it-trend.jp/award/2026-firsthalf/erp?annual_ranking_type=24&page_type=rising&r=no1_ranking&viewport=pc&utm_source=openai"
+      "https://prtimes.jp/main/html/rd/p/000000348.000042113.html?utm_source=openai",
+      "https://it-trend.jp/award/2026-firsthalf/erp?annual_ranking_type=23&page_type=new_face&r=award2026-firsthalf-tab&utm_source=openai",
+      "https://it-trend.jp/award/2026-firsthalf/purchasing?annual_ranking_type=2&page_type=scale&r=award2026-firsthalf-tab&viewport=pc&utm_source=openai"
      ]
     },
     "Gemini": {
      "answered": true,
      "ours": false,
      "domains": [
-      "note.com",
-      "jicoo.com",
       "ardent.jp",
-      "sogyotecho.jp",
+      "soichiro.co.jp",
+      "ailab.mugenkaitaku.com",
+      "hojokin-shinsei.co.jp",
+      "dxmonster.com",
       "upshift.jp",
       "itreview.jp",
-      "carearc.co.jp",
-      "it-shien.smrj.go.jp",
-      "youtube.com"
+      "hojyokin-portal.jp",
+      "it-shien.smrj.go.jp"
      ],
      "urls": [
-      "https://note.com/koichi_ueno_/n/nb45aefae8817",
-      "https://www.jicoo.com/magazine/blog/digital-ai-subsidy-recommended-it-tools",
       "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/it-dounyuhojyokin-soft/",
-      "https://sogyotecho.jp/smartregister-subsidy/",
-      "https://upshift.jp/2025/03/01/1648/",
+      "https://soichiro.co.jp/homepage-subsidy/it-hojo-saitaku-2024/",
+      "https://ailab.mugenkaitaku.com/a/it-subsidy-software-list",
+      "https://hojokin-shinsei.co.jp/meti-subsidy/it-subsidy/tool-pattern/",
+      "https://www.dxmonster.com/blog/digital-ai-subsidy-ai-tools-list",
+      "https://upshift.jp/2025/02/24/1608/",
       "https://www.itreview.jp/categories/it-implementation-support-provider",
-      "https://carearc.co.jp/blog/2955/",
-      "https://it-shien.smrj.go.jp/download/grantdecision_list/",
-      "https://www.youtube.com/watch?v=2hQ2Fu1sZF4"
+      "https://hojyokin-portal.jp/columns/it2025_saitaku",
+      "https://it-shien.smrj.go.jp/search/"
      ]
     },
     "Perplexity": {
-     "answered": true,
-     "ours": false,
-     "domains": [
-      "hojokin-agent.jp",
-      "chusho.meti.go.jp",
-      "mirasapo-plus.go.jp",
-      "kaminashi.jp",
-      "seisansei.smrj.go.jp"
-     ],
-     "urls": [
-      "https://hojokin-agent.jp/industry/it-telecom",
-      "https://www.chusho.meti.go.jp/koukai/yosan/r7/r6_it_summary.pdf",
-      "https://mirasapo-plus.go.jp/subsidy/",
-      "https://hojokin-agent.jp/purpose/equipment-it",
-      "https://mirasapo-plus.go.jp/subsidy/ithojo/",
-      "https://kaminashi.jp/media/subsidies-for-dx",
-      "https://www.chusho.meti.go.jp/koukai/yosan/r7/it2025.pdf",
-      "https://seisansei.smrj.go.jp/subsidy_info/it_subsidy.html",
-      "https://hojokin-agent.jp/guide/it-hojo/amount",
-      "https://hojokin-agent.jp/guide/it-hojo"
-     ]
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
     },
     "Claude": {
      "answered": true,
      "ours": false,
      "domains": [
       "hojyokin-portal.jp",
-      "it-trend.jp",
-      "mono.ipros.com",
-      "hojoguide.jp",
+      "atsoho.com",
+      "leadbrain.co.jp",
       "ardent.jp",
       "somurix.co.jp",
+      "ezark-tax-accounting.com",
+      "vasemgt.com",
       "nippon-smes-project.com",
-      "financeinjapan.com",
-      "it-seibishi.or.jp"
+      "inden-seminar.com"
      ],
      "urls": [
       "https://hojyokin-portal.jp/columns/itdonyu_soft_summary",
-      "https://it-trend.jp/category/it-hojo",
-      "https://mono.ipros.com/cg3/%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91/",
-      "https://hojoguide.jp/guides/it-hojo-eligible-tools",
+      "https://atsoho.com/blog/small-biz-it-subsidy-software-list",
+      "https://leadbrain.co.jp/contents/lb/8739/",
       "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/it-dounyuhojyokin-soft/",
       "https://somurix.co.jp/lp/subsidy-software/",
+      "https://ezark-tax-accounting.com/it-donyu-hojokin-2026-guide/",
+      "https://vasemgt.com/blog/it-subsidy-business-efficiency/",
       "https://nippon-smes-project.com/subsidy/2820/",
-      "https://financeinjapan.com/knowledge/2QWVob7j77UKcpvfzZjsD2",
-      "https://www.it-seibishi.or.jp/5810/"
+      "https://inden-seminar.com/blog/20260425-18-document/"
      ]
     }
    },
    "ai_answered": true,
    "ai_ours": false,
    "ai_domains": {
-    "front.it-trend.jp": 1,
-    "it-trend.jp": 2,
-    "note.com": 1,
-    "jicoo.com": 1,
+    "prtimes.jp": 1,
+    "it-trend.jp": 1,
     "ardent.jp": 2,
-    "sogyotecho.jp": 1,
+    "soichiro.co.jp": 1,
+    "ailab.mugenkaitaku.com": 1,
+    "hojokin-shinsei.co.jp": 1,
+    "dxmonster.com": 1,
     "upshift.jp": 1,
     "itreview.jp": 1,
-    "carearc.co.jp": 1,
+    "hojyokin-portal.jp": 2,
     "it-shien.smrj.go.jp": 1,
-    "youtube.com": 1,
-    "hojokin-agent.jp": 1,
-    "chusho.meti.go.jp": 1,
-    "mirasapo-plus.go.jp": 1,
-    "kaminashi.jp": 1,
-    "seisansei.smrj.go.jp": 1,
-    "hojyokin-portal.jp": 1,
-    "mono.ipros.com": 1,
-    "hojoguide.jp": 1,
+    "atsoho.com": 1,
+    "leadbrain.co.jp": 1,
     "somurix.co.jp": 1,
+    "ezark-tax-accounting.com": 1,
+    "vasemgt.com": 1,
     "nippon-smes-project.com": 1,
-    "financeinjapan.com": 1,
-    "it-seibishi.or.jp": 1
+    "inden-seminar.com": 1
    }
   },
   {
@@ -764,107 +937,67 @@
      "ours": false,
      "domains": [
       "hojokin-agent.jp",
-      "so-labo.co.jp",
-      "youtube.com",
+      "hojokin-navi.co.jp",
+      "mihata.jp",
       "it-shien.smrj.go.jp",
-      "somurix.co.jp",
+      "clears.jp",
       "digital-ai-hojokin.jp",
-      "grandit.jp",
-      "ds-b.jp",
-      "carearc.co.jp"
+      "obc.co.jp"
      ],
      "urls": [
       "https://hojokin-agent.jp/guide/it-hojo/vendor",
-      "https://so-labo.co.jp/hojyokin/it-hojyo/basic/221/",
-      "https://www.youtube.com/watch?v=OgDwd3iak_g",
-      "https://it-shien.smrj.go.jp/applicant/subsidy/normal/",
-      "https://somurix.co.jp/lp/subsidy-software/",
+      "https://hojokin-navi.co.jp/it-hojokin-wakubetsu-2026/",
+      "https://mihata.jp/column/it-subsidy-support-vendor-selection",
+      "https://it-shien.smrj.go.jp/search/",
+      "https://clears.jp/articles/t719/",
       "https://digital-ai-hojokin.jp/articles/it-donyu-hojokin-shien-jigyosha-ichiran-2026/",
-      "https://www.grandit.jp/erp/glossary/it_introduction_subsidy/",
-      "https://ds-b.jp/dsmagazine/it-shien/",
-      "https://carearc.co.jp/blog/2955/",
-      "https://www.youtube.com/watch?v=PV6Za8fsnmQ"
+      "https://it-shien.smrj.go.jp/itvendor/about/",
+      "https://www.obc.co.jp/360/list/post302"
      ]
     },
     "Perplexity": {
-     "answered": true,
-     "ours": false,
-     "domains": [
-      "mirasapo-plus.go.jp",
-      "chusho.meti.go.jp",
-      "canon.jp",
-      "seisansei.smrj.go.jp",
-      "post.japanpost.jp",
-      "airregi.jp",
-      "hojokin-agent.jp",
-      "biz.moneyforward.com",
-      "ds-b.jp",
-      "note.com"
-     ],
-     "urls": [
-      "https://mirasapo-plus.go.jp/hint/32651/",
-      "https://www.chusho.meti.go.jp/koukai/yosan/r7/r6_it_summary.pdf",
-      "https://canon.jp/biz/solution/smb/list/theme/subsidy/it-shien",
-      "https://seisansei.smrj.go.jp/subsidy_info/it_subsidy.html",
-      "https://www.post.japanpost.jp/bizpost/column/business/bank1/it-hojyokin/",
-      "https://airregi.jp/finance/art-0008/",
-      "https://hojokin-agent.jp/guide/it-hojo",
-      "https://biz.moneyforward.com/accounting/basic/58962/",
-      "https://ds-b.jp/dsmagazine/it-hojo/",
-      "https://note.com/light_rue6978/n/nc25f20d1e28f"
-     ]
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
     },
     "Claude": {
      "answered": true,
      "ours": false,
      "domains": [
-      "hojyokin-portal.jp",
-      "it-shien.smrj.go.jp",
+      "g1info.jp",
       "comtri.jp",
-      "evridge.co.jp",
+      "pull-net.jp",
+      "hojoguide.jp",
       "hojokin-agent.jp",
-      "spiral-corp.com",
-      "carearc.co.jp",
-      "hojokin-dx.com"
+      "hojokin-otaku.com",
+      "m-assets.com"
      ],
      "urls": [
-      "https://hojyokin-portal.jp/columns/it2025_tsujyo",
-      "https://it-shien.smrj.go.jp/pdf/it2025_koubo_invoice.pdf",
+      "https://g1info.jp/2024/03/05/it-hojokin-generalorinvoice/",
       "https://comtri.jp/it-dounyu-hojokin/",
-      "https://www.evridge.co.jp/post/h_0724",
+      "https://www.pull-net.jp/it-subsidy-2025/invoice/",
+      "https://hojoguide.jp/guides/it-dounyuu-hojokin-2026",
       "https://hojokin-agent.jp/guide/it-hojo/frame",
       "https://hojokin-agent.jp/guide/it-hojo/amount",
-      "https://spiral-corp.com/post-473/",
-      "https://carearc.co.jp/blog/5061/",
-      "https://hojokin-dx.com/articles/it-introduction-subsidy-2026-complete-guide/"
+      "https://hojokin-otaku.com/articles/digital-ai-hojokin-waku-erabikata/",
+      "https://m-assets.com/lp/subsidy/blog/it-subsidy-2026-guide"
      ]
     }
    },
    "ai_answered": true,
    "ai_ours": false,
    "ai_domains": {
-    "hojokin-agent.jp": 3,
-    "so-labo.co.jp": 1,
-    "youtube.com": 1,
-    "it-shien.smrj.go.jp": 2,
-    "somurix.co.jp": 1,
+    "hojokin-agent.jp": 2,
+    "hojokin-navi.co.jp": 1,
+    "mihata.jp": 1,
+    "it-shien.smrj.go.jp": 1,
+    "clears.jp": 1,
     "digital-ai-hojokin.jp": 1,
-    "grandit.jp": 1,
-    "ds-b.jp": 2,
-    "carearc.co.jp": 2,
-    "mirasapo-plus.go.jp": 1,
-    "chusho.meti.go.jp": 1,
-    "canon.jp": 1,
-    "seisansei.smrj.go.jp": 1,
-    "post.japanpost.jp": 1,
-    "airregi.jp": 1,
-    "biz.moneyforward.com": 1,
-    "note.com": 1,
-    "hojyokin-portal.jp": 1,
+    "obc.co.jp": 1,
+    "g1info.jp": 1,
     "comtri.jp": 1,
-    "evridge.co.jp": 1,
-    "spiral-corp.com": 1,
-    "hojokin-dx.com": 1
+    "pull-net.jp": 1,
+    "hojoguide.jp": 1,
+    "hojokin-otaku.com": 1,
+    "m-assets.com": 1
    }
   },
   {
@@ -873,10 +1006,99 @@
    "imp": 11,
    "url": "https://lp.7senses.co.jp/blog/nogyo-hojokin-50sai-ijo/",
    "slug": "nogyo-hojokin-50sai-ijo",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "noka-hojokin.com",
+      "youtube.com",
+      "hojyokin-portal.jp",
+      "mirasapo.jp",
+      "ksdtu.com",
+      "agrijob.jp",
+      "freesup.crowdworks.jp"
+     ],
+     "urls": [
+      "https://noka-hojokin.com/guide/kuni-hojokin-ochita-ken-seido",
+      "https://www.youtube.com/watch?v=oG5q1iAo1d4",
+      "https://hojyokin-portal.jp/columns/nogyo_hojyokin_guide",
+      "https://www.mirasapo.jp/subsidy/60645",
+      "https://ksdtu.com/agri/farming-grants-for-over-50s/",
+      "https://agrijob.jp/contents/myagri/assistance-payment",
+      "https://freesup.crowdworks.jp/skillup/515/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "hojyokin-portal.jp",
+      "city.akita.lg.jp",
+      "city.oshu.iwate.jp",
+      "smartagri-jp.com",
+      "pref.shimane.lg.jp",
+      "chibanian.info",
+      "farm-connect.org",
+      "nourinsui-start.oita.jp",
+      "kuma-farm.jp",
+      "city.fuji.shizuoka.jp",
+      "city.utsunomiya.lg.jp",
+      "pref.tokushima.lg.jp",
+      "pref.niigata.lg.jp",
+      "pref.hiroshima.lg.jp",
+      "shoei-world.com"
+     ],
+     "urls": [
+      "https://hojyokin-portal.jp/columns/nogyo_hojyokin_guide",
+      "https://www.city.akita.lg.jp/jigyosha/norinsuisangyo/1006812/1006953.html",
+      "https://www.city.oshu.iwate.jp/soshiki/7/1057/5/1/19219.html",
+      "https://smartagri-jp.com/news/1337",
+      "https://www.pref.shimane.lg.jp/industry/norin/nougyo/ninaite/shinkishuno/syuno.html",
+      "https://chibanian.info/50over_hojyokin/",
+      "https://farm-connect.org/to-become-a-farmer/subsidies-for-new-farmers/",
+      "https://nourinsui-start.oita.jp/support/nougyou_support/",
+      "https://www.kuma-farm.jp/support/support_list/",
+      "https://www.city.fuji.shizuoka.jp/1035200000/p004685.html",
+      "https://hojyokin-portal.jp/columns/syuno_jyunbi_shikin",
+      "https://www.city.utsunomiya.lg.jp/sangyo/nougyou/shuno/1029643.html"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "noka-hojokin.com": 1,
+    "youtube.com": 1,
+    "hojyokin-portal.jp": 2,
+    "mirasapo.jp": 1,
+    "ksdtu.com": 1,
+    "agrijob.jp": 1,
+    "freesup.crowdworks.jp": 1,
+    "city.akita.lg.jp": 1,
+    "city.oshu.iwate.jp": 1,
+    "smartagri-jp.com": 1,
+    "pref.shimane.lg.jp": 1,
+    "chibanian.info": 1,
+    "farm-connect.org": 1,
+    "nourinsui-start.oita.jp": 1,
+    "kuma-farm.jp": 1,
+    "city.fuji.shizuoka.jp": 1,
+    "city.utsunomiya.lg.jp": 1,
+    "pref.tokushima.lg.jp": 1,
+    "pref.niigata.lg.jp": 1,
+    "pref.hiroshima.lg.jp": 1,
+    "shoei-world.com": 1
+   }
   },
   {
    "kw": "個人事業主 車 補助金",
@@ -884,10 +1106,101 @@
    "imp": 11,
    "url": "https://lp.7senses.co.jp/blog/kojin-jigyonushi-kuruma-kounyu-hojokin/",
    "slug": "kojin-jigyonushi-kuruma-kounyu-hojokin",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "mlit.go.jp",
+      "smart-hojokin.jp",
+      "kotsu-dxgx-hojo.go.jp",
+      "hojokinmap.jp"
+     ],
+     "urls": [
+      "https://www.mlit.go.jp/jidosha/anzen/01asv/esc_06hosei.html?utm_source=openai",
+      "https://www.smart-hojokin.jp/subsidies/77021?utm_source=openai",
+      "https://www.kotsu-dxgx-hojo.go.jp/?utm_source=openai",
+      "https://hojokinmap.jp/articles/truck-subsidy?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "hojokin-agent.jp",
+      "hojyokin-portal.jp",
+      "221616.com",
+      "saikyoukaitori.jp",
+      "aba-j.or.jp",
+      "moneycanvas.bk.mufg.jp",
+      "cev-pc.or.jp",
+      "sbisonpo.co.jp",
+      "mlit.go.jp",
+      "youtube.com"
+     ],
+     "urls": [
+      "https://hojokin-agent.jp/audience/sole-proprietor/vehicle",
+      "https://hojyokin-portal.jp/columns/cev-hojyo",
+      "https://221616.com/guide/subsidy/",
+      "https://saikyoukaitori.jp/magazine/3124/",
+      "https://www.aba-j.or.jp/info/industry/25555/",
+      "https://moneycanvas.bk.mufg.jp/canvas/minna-unyo/nCSretg79p8rAVN/",
+      "https://www.cev-pc.or.jp/hojo/cev.html",
+      "https://www.sbisonpo.co.jp/car/column/column109.html",
+      "https://www.mlit.go.jp/jidosha/jidosha_tk1_000003.html",
+      "https://www.youtube.com/watch?v=BWlJIh5D-C4"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "hojokin-agent.hatenablog.com",
+      "hojokin-agent.jp",
+      "ev-charge-enechange.jp",
+      "hojyokin-portal.jp",
+      "hojyokin-concierge.com",
+      "x.com",
+      "sompo-direct.co.jp",
+      "cev-pc.or.jp"
+     ],
+     "urls": [
+      "https://hojokin-agent.hatenablog.com/entry/2026/04/21/150332",
+      "https://hojokin-agent.jp/audience/sole-proprietor/vehicle",
+      "https://ev-charge-enechange.jp/articles/070/",
+      "https://hojyokin-portal.jp/columns/cev-hojyo",
+      "https://hojyokin-concierge.com/media/2025/01/09/shoukibojigyousha_jizokukahojyokin_sharyo_kounyu",
+      "https://x.com/isyokenmei/status/2098319325715366096",
+      "https://www.sompo-direct.co.jp/otona/oshiete/car/new-car-subsidy.html",
+      "https://www.cev-pc.or.jp/hojo/r02hosei-cev.html"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "mlit.go.jp": 2,
+    "smart-hojokin.jp": 1,
+    "kotsu-dxgx-hojo.go.jp": 1,
+    "hojokinmap.jp": 1,
+    "hojokin-agent.jp": 2,
+    "hojyokin-portal.jp": 2,
+    "221616.com": 1,
+    "saikyoukaitori.jp": 1,
+    "aba-j.or.jp": 1,
+    "moneycanvas.bk.mufg.jp": 1,
+    "cev-pc.or.jp": 2,
+    "sbisonpo.co.jp": 1,
+    "youtube.com": 1,
+    "hojokin-agent.hatenablog.com": 1,
+    "ev-charge-enechange.jp": 1,
+    "hojyokin-concierge.com": 1,
+    "x.com": 1,
+    "sompo-direct.co.jp": 1
+   }
   },
   {
    "kw": "個人事業主 車代 補助金",
@@ -895,10 +1208,106 @@
    "imp": 11,
    "url": "https://lp.7senses.co.jp/blog/kojin-jigyonushi-kuruma-kounyu-hojokin/",
    "slug": "kojin-jigyonushi-kuruma-kounyu-hojokin",
-   "ai": {},
-   "ai_answered": false,
-   "ai_ours": false,
-   "ai_domains": {}
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "postation.jp"
+     ],
+     "urls": [
+      "https://www.postation.jp/jp-ev?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": true,
+     "domains": [
+      "hojokin-agent.jp",
+      "hojokin-agent.hatenablog.com",
+      "youtube.com",
+      "corp.tanso-man.com",
+      "hojyokin-portal.jp",
+      "ichidokiri.co.jp",
+      "tokyotacs.com",
+      "cev-pc.or.jp"
+     ],
+     "urls": [
+      "https://hojokin-agent.jp/audience/sole-proprietor/vehicle",
+      "https://hojokin-agent.hatenablog.com/entry/2026/04/21/150332",
+      "https://www.youtube.com/watch?v=Ip0nsRERME0",
+      "https://corp.tanso-man.com/subsidy-blog/cev-subsidy-for-business/",
+      "https://hojyokin-portal.jp/columns/cev-hojyo",
+      "https://ichidokiri.co.jp/column/light-cargo-subsidy/",
+      "https://www.youtube.com/watch?v=KnkFIwYR6Uc",
+      "https://tokyotacs.com/column/1163",
+      "https://www.cev-pc.or.jp/hojo/cev.html"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "x.com",
+      "tokyo-co2down.jp",
+      "suzuki.co.jp",
+      "meti.go.jp",
+      "hojyokin-portal.jp",
+      "ev-charge-enechange.jp",
+      "cev-pc.or.jp",
+      "hojokin-agent.jp",
+      "evnion.com",
+      "corporate.ai-con.lawyer",
+      "so-labo.co.jp",
+      "v-spirits.com",
+      "hojokin-alert.jp",
+      "hojyokin-concierge.com",
+      "gion-deliveryservice.co.jp"
+     ],
+     "urls": [
+      "https://x.com/isyokenmei/status/2091360504405254265",
+      "https://www.tokyo-co2down.jp/subsidy/ev/",
+      "https://www.suzuki.co.jp/car/ecocar_info/ev/",
+      "https://www.meti.go.jp/policy/mono_info_service/mono/automobile/cev/r4hosei_cev.html",
+      "https://hojyokin-portal.jp/columns/cev-hojyo",
+      "https://ev-charge-enechange.jp/articles/070/",
+      "https://www.cev-pc.or.jp/local_supports/",
+      "https://hojokin-agent.jp/audience/sole-proprietor/vehicle",
+      "https://evnion.com/subsidy/guide1",
+      "https://corporate.ai-con.lawyer/articles/subsidy/16",
+      "https://so-labo.co.jp/hojyokin/jizokuka/basic/718/",
+      "https://hojyokin-portal.jp/columns/jizokuka_faq"
+     ]
+    }
+   },
+   "ai_answered": true,
+   "ai_ours": true,
+   "ai_domains": {
+    "postation.jp": 1,
+    "hojokin-agent.jp": 2,
+    "hojokin-agent.hatenablog.com": 1,
+    "youtube.com": 1,
+    "corp.tanso-man.com": 1,
+    "hojyokin-portal.jp": 2,
+    "ichidokiri.co.jp": 1,
+    "tokyotacs.com": 1,
+    "cev-pc.or.jp": 2,
+    "x.com": 1,
+    "tokyo-co2down.jp": 1,
+    "suzuki.co.jp": 1,
+    "meti.go.jp": 1,
+    "ev-charge-enechange.jp": 1,
+    "evnion.com": 1,
+    "corporate.ai-con.lawyer": 1,
+    "so-labo.co.jp": 1,
+    "v-spirits.com": 1,
+    "hojokin-alert.jp": 1,
+    "hojyokin-concierge.com": 1,
+    "gion-deliveryservice.co.jp": 1
+   }
   },
   {
    "kw": "電子カルテ 導入 補助金",
@@ -906,10 +1315,100 @@
    "imp": 11,
    "url": "https://lp.7senses.co.jp/blog/it-hojokin-denkaru-kyoyu-clinic/",
    "slug": "it-hojokin-denkaru-kyoyu-clinic",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "ai-front-trend.jp",
+      "issoh.co.jp",
+      "medibase.cloud"
+     ],
+     "urls": [
+      "https://ai-front-trend.jp/electronic-medical-record-introduction-cost/?utm_source=openai",
+      "https://www.issoh.co.jp/column/details/18739/?utm_source=openai",
+      "https://medibase.cloud/blog/it_introduction_subsidy_electronic_medical_record/?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "yamanashi-med.or.jp",
+      "digikar.m3.com",
+      "sakigakelink.com",
+      "iryo-dx.com",
+      "houkan.kaipoke.biz",
+      "iryohokenjyoho.service-now.com",
+      "wiseman.co.jp",
+      "mhlw.go.jp",
+      "hokeniryo.metro.tokyo.lg.jp",
+      "phchd.com",
+      "youtube.com"
+     ],
+     "urls": [
+      "https://www.yamanashi-med.or.jp/assets/files/medical/20251021sisutemuhojokin.pdf",
+      "https://digikar.m3.com/articles/how-to-choice-emr/article59",
+      "https://www.sakigakelink.com/blog/iryo-dx-hojokin-2026",
+      "https://iryo-dx.com/articles/it-hojokin-clinic",
+      "https://houkan.kaipoke.biz/magazine/management/subsidy-e-karte.html",
+      "https://iryohokenjyoho.service-now.com/csm?id=kb_article_view&sysparm_article=KB0010765",
+      "https://iryohokenjyoho.service-now.com/csm?id=kb_article_view&sysparm_article=KB0012454",
+      "https://www.wiseman.co.jp/column/welfare/31324/",
+      "https://www.mhlw.go.jp/stf/iryoudx.html",
+      "https://www.hokeniryo.metro.tokyo.lg.jp/iryo/jigyo/ictkiban",
+      "https://www.phchd.com/jp/medicom/park/idea/opening-subsidy-introduction",
+      "https://www.youtube.com/watch?v=Wpjs3C17YEc"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "wiseman.co.jp",
+      "clius.jp",
+      "digikar.m3.com",
+      "phchd.com",
+      "ichidokiri.co.jp",
+      "rescho.co.jp",
+      "sokuraku-doctor.com"
+     ],
+     "urls": [
+      "https://www.wiseman.co.jp/column/welfare/31324/",
+      "https://clius.jp/mag/2026/03/06/2026-clinic-itsubsidy/",
+      "https://digikar.m3.com/articles/how-to-choice-emr/article59",
+      "https://www.phchd.com/jp/medicom/park/idea/opening-subsidy-introduction",
+      "https://ichidokiri.co.jp/column/electronic-medical-record-subsidy/",
+      "https://rescho.co.jp/information/1232/",
+      "https://www.sokuraku-doctor.com/post/iryo-dx-hojokin"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "ai-front-trend.jp": 1,
+    "issoh.co.jp": 1,
+    "medibase.cloud": 1,
+    "yamanashi-med.or.jp": 1,
+    "digikar.m3.com": 2,
+    "sakigakelink.com": 1,
+    "iryo-dx.com": 1,
+    "houkan.kaipoke.biz": 1,
+    "iryohokenjyoho.service-now.com": 1,
+    "wiseman.co.jp": 2,
+    "mhlw.go.jp": 1,
+    "hokeniryo.metro.tokyo.lg.jp": 1,
+    "phchd.com": 2,
+    "youtube.com": 1,
+    "clius.jp": 1,
+    "ichidokiri.co.jp": 1,
+    "rescho.co.jp": 1,
+    "sokuraku-doctor.com": 1
+   }
   },
   {
    "kw": "電子カルテ 補助金 2025",
@@ -917,10 +1416,110 @@
    "imp": 11,
    "url": "https://lp.7senses.co.jp/blog/it-hojokin-denkaru-kyoyu-clinic/",
    "slug": "it-hojokin-denkaru-kyoyu-clinic",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "yuyama.co.jp",
+      "phchd.com"
+     ],
+     "urls": [
+      "https://www.yuyama.co.jp/column/medicalrecord/implementation-cost/?utm_source=openai",
+      "https://www.phchd.com/jp/medicom/park/tech/ehr-cost?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "houkan.kaipoke.biz",
+      "yamanashi-med.or.jp",
+      "iryohokenjyoho.service-now.com",
+      "line-works.com",
+      "hojyokin-portal.jp",
+      "sakigakelink.com",
+      "mhlw.go.jp",
+      "note.com",
+      "clius.jp"
+     ],
+     "urls": [
+      "https://houkan.kaipoke.biz/magazine/management/subsidy-e-karte.html",
+      "https://www.yamanashi-med.or.jp/assets/files/medical/20251021sisutemuhojokin.pdf",
+      "https://iryohokenjyoho.service-now.com/csm?id=kb_article_view&sysparm_article=KB0012454",
+      "https://line-works.com/roger/column/medical-dx-guide/",
+      "https://hojyokin-portal.jp/subsidies/62218",
+      "https://www.sakigakelink.com/blog/iryo-dx-hojokin-2026",
+      "https://www.mhlw.go.jp/content/10808000/001748251.pdf",
+      "https://note.com/good_fairy858/n/n7dd0afba7328",
+      "https://clius.jp/mag/2026/01/07/clinic-subsidy-dx/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "wiseman.co.jp",
+      "digi-mado.jp",
+      "zaitakuiryo-c.com",
+      "digikar.m3.com",
+      "doctokyo.jp",
+      "note.com",
+      "yamanashi-med.or.jp",
+      "megtar.jp",
+      "carearc.co.jp",
+      "clius.jp",
+      "yuyama.co.jp",
+      "gemmed.ghc-j.com",
+      "webkarte.iryojoho.jp",
+      "biz.stayway.jp",
+      "hojokin-office.essencimo.co.jp"
+     ],
+     "urls": [
+      "https://www.wiseman.co.jp/column/welfare/31324/",
+      "https://digi-mado.jp/article/70450/",
+      "https://zaitakuiryo-c.com/useful/dx/16.html",
+      "https://digikar.m3.com/articles/how-to-choice-emr/article59",
+      "https://doctokyo.jp/topic/tokyo-clinic-dx-hojokin/",
+      "https://note.com/bright_zebra973/n/na74795bc8e65",
+      "https://www.yamanashi-med.or.jp/assets/files/medical/20251021sisutemuhojokin.pdf",
+      "https://www.megtar.jp/post/2025%E5%B9%B4%E5%BA%A6%E3%81%AB%E6%B4%BB%E7%94%A8%E3%81%A7%E3%81%8D%E3%82%8Bdx%E8%A3%9C%E5%8A%A9%E9%87%91%E3%80%81%E5%8C%BB%E7%99%82%E6%A9%9F%E9%96%A2%E7%B7%A8",
+      "https://carearc.co.jp/blog/4011/",
+      "https://clius.jp/mag/2025/09/01/clinic-2025-kyoyu/",
+      "https://www.yuyama.co.jp/column/medicalrecord/electronic-health-record/",
+      "https://gemmed.ghc-j.com/?p=61114"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "yuyama.co.jp": 2,
+    "phchd.com": 1,
+    "houkan.kaipoke.biz": 1,
+    "yamanashi-med.or.jp": 2,
+    "iryohokenjyoho.service-now.com": 1,
+    "line-works.com": 1,
+    "hojyokin-portal.jp": 1,
+    "sakigakelink.com": 1,
+    "mhlw.go.jp": 1,
+    "note.com": 2,
+    "clius.jp": 2,
+    "wiseman.co.jp": 1,
+    "digi-mado.jp": 1,
+    "zaitakuiryo-c.com": 1,
+    "digikar.m3.com": 1,
+    "doctokyo.jp": 1,
+    "megtar.jp": 1,
+    "carearc.co.jp": 1,
+    "gemmed.ghc-j.com": 1,
+    "webkarte.iryojoho.jp": 1,
+    "biz.stayway.jp": 1,
+    "hojokin-office.essencimo.co.jp": 1
+   }
   },
   {
    "kw": "ai導入補助金",
@@ -928,10 +1527,83 @@
    "imp": 10,
    "url": "https://lp.7senses.co.jp/youkou/",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "zen24.co.jp",
+      "youtube.com",
+      "liftbaseinc.com",
+      "mbp-japan.com",
+      "soumu.go.jp",
+      "it-shien.smrj.go.jp"
+     ],
+     "urls": [
+      "https://zen24.co.jp/lab/ai-dx-hojokin/",
+      "https://www.youtube.com/watch?v=QGy3Xg8y9QY",
+      "https://liftbaseinc.com/column/ai-subsidies-sme",
+      "https://mbp-japan.com/kanagawa/makeitwork01/column/5241493/",
+      "https://www.soumu.go.jp/main_content/001083318.pdf",
+      "https://it-shien.smrj.go.jp/applicant/subsidy/normal/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "chusho.meti.go.jp",
+      "hojyokin-portal.jp",
+      "zetlinker.com",
+      "nexa-corp.jp",
+      "ngraph.jp",
+      "with-ai.jp",
+      "uravation.com",
+      "btncon.com",
+      "hojokin-dx.com"
+     ],
+     "urls": [
+      "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260310001.html",
+      "https://hojyokin-portal.jp/columns/degital_ai_summary",
+      "https://zetlinker.com/column/digital-ai-subsidy-2026-application-guide",
+      "https://nexa-corp.jp/ai-implementation-subsidy-2026/",
+      "https://ngraph.jp/blog/20260724-ai-subsidy-2026",
+      "https://with-ai.jp/blog/ai-subsidy-2026-guide.html",
+      "https://uravation.com/media/ai-digital-subsidy-guide-2026/",
+      "https://www.btncon.com/blog/digital-ai-subsidy-2026",
+      "https://hojokin-dx.com/articles/it-hojokin-digital-ai-2026-complete-hub-guide/",
+      "https://hojokin-dx.com/articles/digital-ai-subsidy-2026-kobo-yoryo/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "zen24.co.jp": 1,
+    "youtube.com": 1,
+    "liftbaseinc.com": 1,
+    "mbp-japan.com": 1,
+    "soumu.go.jp": 1,
+    "it-shien.smrj.go.jp": 1,
+    "chusho.meti.go.jp": 1,
+    "hojyokin-portal.jp": 1,
+    "zetlinker.com": 1,
+    "nexa-corp.jp": 1,
+    "ngraph.jp": 1,
+    "with-ai.jp": 1,
+    "uravation.com": 1,
+    "btncon.com": 1,
+    "hojokin-dx.com": 1
+   }
   },
   {
    "kw": "農業 補助金 世界 比較",
@@ -939,10 +1611,85 @@
    "imp": 0,
    "url": "",
    "slug": "nougyou-hojokin-sekai-hikaku",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "rieti.go.jp",
+      "globalnote.jp",
+      "note.com",
+      "maff.go.jp",
+      "nochuri.co.jp",
+      "nohken.or.jp"
+     ],
+     "urls": [
+      "https://www.rieti.go.jp/jp/papers/contribution/yamashita/133.html",
+      "https://www.globalnote.jp/post-12915.html",
+      "https://note.com/jfd/n/nb3babd42b24c",
+      "https://www.maff.go.jp/j/council/seisaku/syokuryo/250131/attach/pdf/250131-144.pdf",
+      "https://www.nochuri.co.jp/report/pdf/n1012re1.pdf",
+      "https://www.rieti.go.jp/jp/papers/contribution/yamashita/03.html",
+      "http://www.nohken.or.jp/NOGYOKENKUYU/No.33-2020/kobetsuPDF/2020-3_tsubotakunio.pdf"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "nikkei.com",
+      "sangiin.go.jp",
+      "maff.go.jp",
+      "seikatsuclub.coop",
+      "oecd.org",
+      "note.com",
+      "agri-navi.com",
+      "rieti.go.jp",
+      "cigs.canon",
+      "detail.chiebukuro.yahoo.co.jp"
+     ],
+     "urls": [
+      "https://www.nikkei.com/article/DGXLASDF0400O_U4A900C1EE8000/",
+      "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2021pdf/20210708143.pdf",
+      "https://www.maff.go.jp/j/kokusai/kokusei/kaigai_nogyo/k_syokuryo/attach/pdf/itaku29-3.pdf",
+      "https://seikatsuclub.coop/news/detail.html?NTC=1000000384",
+      "https://www.oecd.org/tokyo/newsroom/government-policies-providing-more-than-usd-500-billion-to-farmers-every-year-distortmarkets-stifle-innovation-and-harm-the-environment-says-new-oecd-report-japanese-version.htm",
+      "https://note.com/mapio991/n/n9f71d9e0d18d",
+      "https://note.com/mapio991/n/ne55bf455f6cc",
+      "https://www.agri-navi.com/useful/39/3498",
+      "https://www.rieti.go.jp/jp/papers/contribution/yamashita/133.html",
+      "https://www.rieti.go.jp/jp/papers/contribution/yamashita/51.html",
+      "https://www.rieti.go.jp/jp/papers/contribution/yamashita/136.html",
+      "https://cigs.canon/article/20230118_7220.html"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "rieti.go.jp": 2,
+    "globalnote.jp": 1,
+    "note.com": 2,
+    "maff.go.jp": 2,
+    "nochuri.co.jp": 1,
+    "nohken.or.jp": 1,
+    "nikkei.com": 1,
+    "sangiin.go.jp": 1,
+    "seikatsuclub.coop": 1,
+    "oecd.org": 1,
+    "agri-navi.com": 1,
+    "cigs.canon": 1,
+    "detail.chiebukuro.yahoo.co.jp": 1
+   }
   },
   {
    "kw": "農業 初期 費用 補助金",
@@ -951,6 +1698,12 @@
    "url": "",
    "slug": "nougyou-shoki-hiyou-hojokin",
    "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
     "Gemini": {
      "answered": true,
      "ours": false,
@@ -970,6 +1723,35 @@
       "https://www.maff.go.jp/j/new_farmer/n_syunou/attach/pdf/roudou-152.pdf",
       "https://www.pref.mie.lg.jp/NKEIEI/HP/80163002019.htm"
      ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "city.hamamatsu.shizuoka.jp",
+      "city.saitama.lg.jp",
+      "maff.go.jp",
+      "agrijob.jp",
+      "pref.kanagawa.jp",
+      "pref.hokkaido.lg.jp",
+      "sogyotecho.jp",
+      "hojyokin-portal.jp",
+      "agri-ja.net"
+     ],
+     "urls": [
+      "https://www.city.hamamatsu.shizuoka.jp/noushin/portal/nougyou/syunokyuhu/index.html",
+      "https://www.city.saitama.lg.jp/005/002/002/p076282.html",
+      "https://www.maff.go.jp/j/new_farmer/n_syunou/roudou.html",
+      "https://agrijob.jp/contents/myagri/assistance-payment",
+      "http://www.pref.kanagawa.jp/docs/f6k/cnt/f420464/",
+      "https://www.pref.hokkaido.lg.jp/ns/gjf/seinen/syuunou/kyuhukin.html",
+      "https://sogyotecho.jp/nougyou-hojyokin/",
+      "https://hojyokin-portal.jp/columns/syuno_jyunbi_shikin",
+      "https://agri-ja.net/articles/new-farmer-startup-funds"
+     ]
     }
    },
    "ai_answered": true,
@@ -979,8 +1761,16 @@
     "seimitsu-nougyo.com": 1,
     "note.com": 1,
     "hojokin.loreos.jp": 1,
-    "maff.go.jp": 1,
-    "pref.mie.lg.jp": 1
+    "maff.go.jp": 2,
+    "pref.mie.lg.jp": 1,
+    "city.hamamatsu.shizuoka.jp": 1,
+    "city.saitama.lg.jp": 1,
+    "agrijob.jp": 1,
+    "pref.kanagawa.jp": 1,
+    "pref.hokkaido.lg.jp": 1,
+    "sogyotecho.jp": 1,
+    "hojyokin-portal.jp": 1,
+    "agri-ja.net": 1
    }
   },
   {
@@ -989,10 +1779,80 @@
    "imp": 0,
    "url": "",
    "slug": "chusho-shoryokuka-toshi-hojokin",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "shoryokuka.smrj.go.jp",
+      "seisansei.smrj.go.jp"
+     ],
+     "urls": [
+      "https://shoryokuka.smrj.go.jp/about/?utm_source=openai",
+      "https://seisansei.smrj.go.jp/subsidy_info/laborsaving_subsidy.html?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "mirasapo-plus.go.jp",
+      "shoryokuka.smrj.go.jp",
+      "listing-partners.com",
+      "j-support.jp",
+      "smart-hojokin.jp",
+      "seisansei.smrj.go.jp"
+     ],
+     "urls": [
+      "https://mirasapo-plus.go.jp/hint/33912/",
+      "https://shoryokuka.smrj.go.jp/ippan/about/",
+      "https://listing-partners.com/gbiz/gbiz_column/chushokigyoshoryokukatoshihojokin/",
+      "https://j-support.jp/column/8248",
+      "https://www.smart-hojokin.jp/shoryokuka",
+      "https://seisansei.smrj.go.jp/subsidy_info/laborsaving_subsidy.html",
+      "https://shoryokuka.smrj.go.jp/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "shoryokuka.smrj.go.jp",
+      "seisansei.smrj.go.jp",
+      "mirasapo-plus.go.jp",
+      "hojyokin-portal.jp",
+      "sogyotecho.jp",
+      "planbase.co.jp"
+     ],
+     "urls": [
+      "https://shoryokuka.smrj.go.jp/ippan/",
+      "https://shoryokuka.smrj.go.jp/catalog/",
+      "https://seisansei.smrj.go.jp/subsidy_info/laborsaving_subsidy.html",
+      "https://mirasapo-plus.go.jp/hint/27807/",
+      "https://mirasapo-plus.go.jp/subsidy/shoryokuka/",
+      "https://shoryokuka.smrj.go.jp/ippan/about/",
+      "https://hojyokin-portal.jp/columns/shoryokuka-toushi-hojokin",
+      "https://sogyotecho.jp/shouryokukahojyokin/",
+      "https://planbase.co.jp/column/shoryokuka-ippan/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "shoryokuka.smrj.go.jp": 3,
+    "seisansei.smrj.go.jp": 3,
+    "mirasapo-plus.go.jp": 2,
+    "listing-partners.com": 1,
+    "j-support.jp": 1,
+    "smart-hojokin.jp": 1,
+    "hojyokin-portal.jp": 1,
+    "sogyotecho.jp": 1,
+    "planbase.co.jp": 1
+   }
   },
   {
    "kw": "it導入補助金 2026 個人事業主",
@@ -1000,10 +1860,97 @@
    "imp": 0,
    "url": "",
    "slug": "it-hojokin-2026-kojinjigyonushi",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "it-shien.smrj.go.jp"
+     ],
+     "urls": [
+      "https://it-shien.smrj.go.jp/pdf/it2026_koubo_invoice.pdf?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "nocoderi.co.jp",
+      "genai-ai.co.jp",
+      "carearc.co.jp",
+      "leadbrain.co.jp",
+      "hojyokin-portal.jp",
+      "igunal.com"
+     ],
+     "urls": [
+      "https://nocoderi.co.jp/2026/07/20/it-subsidy-sole-proprietor/",
+      "https://genai-ai.co.jp/ai-kanri/blog/cc-digital-ai-hojokin/",
+      "https://carearc.co.jp/blog/3567/",
+      "https://leadbrain.co.jp/contents/lb/8737/",
+      "https://hojyokin-portal.jp/columns/itdonyu_kojinjigyonushi_summary",
+      "https://igunal.com/digital-ai-subsidy-r8-vendor-guide/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "hojyokin-portal.jp",
+      "note.com",
+      "leadbrain.co.jp",
+      "spreadoffice.com",
+      "carearc.co.jp",
+      "algentio.com",
+      "zyoseikin-navi.com",
+      "it-shien.smrj.go.jp",
+      "chusho.meti.go.jp",
+      "squareup.com",
+      "ntt.com",
+      "curumi.co.jp",
+      "japan-finance.jp",
+      "hojokin-alert.jp",
+      "genai-ai.co.jp"
+     ],
+     "urls": [
+      "https://hojyokin-portal.jp/columns/itdonyu_kojinjigyonushi_summary",
+      "https://note.com/carearc/n/n71c05c5159dc",
+      "https://leadbrain.co.jp/contents/lb/8737/",
+      "https://note.com/shinsei_mikata/n/n93a094e8d3d5",
+      "https://www.spreadoffice.com/subsidy/it2026/",
+      "https://carearc.co.jp/blog/745/",
+      "https://carearc.co.jp/blog/3567/",
+      "https://www.algentio.com/ai-guide/it-subsidy-guide-2026",
+      "https://zyoseikin-navi.com/it%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%912026%E5%B9%B4%E7%89%88%E5%AE%8C%E5%85%A8%E3%82%AC%E3%82%A4%E3%83%89%EF%BD%9C%E4%B8%AD%E5%B0%8F%E4%BC%81%E6%A5%AD%E3%81%8C%E4%BD%BF%E3%81%88%E3%82%8B/",
+      "https://it-shien.smrj.go.jp/pdf/it2026_koubo_tsujyo.pdf",
+      "https://www.chusho.meti.go.jp/koukai/yosan/r8/digital_ai_summary.pdf",
+      "https://squareup.com/jp/ja/townsquare/what-is-it-hojo"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "it-shien.smrj.go.jp": 2,
+    "nocoderi.co.jp": 1,
+    "genai-ai.co.jp": 2,
+    "carearc.co.jp": 2,
+    "leadbrain.co.jp": 2,
+    "hojyokin-portal.jp": 2,
+    "igunal.com": 1,
+    "note.com": 1,
+    "spreadoffice.com": 1,
+    "algentio.com": 1,
+    "zyoseikin-navi.com": 1,
+    "chusho.meti.go.jp": 1,
+    "squareup.com": 1,
+    "ntt.com": 1,
+    "curumi.co.jp": 1,
+    "japan-finance.jp": 1,
+    "hojokin-alert.jp": 1
+   }
   },
   {
    "kw": "創業支援等事業者 補助金 個人事業主",
@@ -1011,10 +1958,86 @@
    "imp": 0,
    "url": "",
    "slug": "sogyo-shien-hojokin-kojinjigyonushi",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "mirasapo-plus.go.jp",
+      "city.minato.tokyo.jp",
+      "city.munakata.lg.jp"
+     ],
+     "urls": [
+      "https://mirasapo-plus.go.jp/hint/33462/?utm_source=openai",
+      "https://www.city.minato.tokyo.jp/houdou/kuse/koho/press/202405/20240524_press01.html?utm_source=openai",
+      "https://www.city.munakata.lg.jp/kiji0034116/index.html?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "biz.moneyforward.com",
+      "youtube.com",
+      "squareup.com",
+      "hojyokin-portal.jp",
+      "portal.secure.freee.co.jp",
+      "hitodeki.com"
+     ],
+     "urls": [
+      "https://biz.moneyforward.com/establish/basic/79704/",
+      "https://www.youtube.com/watch?v=7ryRlYgk_-M",
+      "https://squareup.com/jp/ja/townsquare/jizokuka-hojokin",
+      "https://hojyokin-portal.jp/columns/jizokuka_sogyo",
+      "https://portal.secure.freee.co.jp/growth/all/164",
+      "https://www.hitodeki.com/column/estab/common/tokutei-sogyo-shien-merit.php",
+      "https://www.youtube.com/watch?v=uQStW3XMOQA"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "plus.vision-net.co.jp",
+      "biz.moneyforward.com",
+      "hojyokin-portal.jp",
+      "chusho.meti.go.jp",
+      "mirasapo-plus.go.jp",
+      "tokyo-kosha.or.jp",
+      "fcci.or.jp"
+     ],
+     "urls": [
+      "https://plus.vision-net.co.jp/knowledge/career/subsidy-business-subsidies-startup-support",
+      "https://biz.moneyforward.com/establish/basic/77683/",
+      "https://hojyokin-portal.jp/columns/tokutei_sogyo_shien",
+      "https://hojyokin-portal.jp/columns/jizokuka_sogyo",
+      "https://www.chusho.meti.go.jp/koukai/yosan/r8/jizoku_sougyo.pdf",
+      "https://mirasapo-plus.go.jp/hint/28890/",
+      "https://www.tokyo-kosha.or.jp/kosha/eblf96000000bj81-att/20250213_press_R7sougyoujosei.pdf",
+      "http://www.fcci.or.jp/fkaigyou/subsidy/subsidy-988/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "mirasapo-plus.go.jp": 2,
+    "city.minato.tokyo.jp": 1,
+    "city.munakata.lg.jp": 1,
+    "biz.moneyforward.com": 2,
+    "youtube.com": 1,
+    "squareup.com": 1,
+    "hojyokin-portal.jp": 2,
+    "portal.secure.freee.co.jp": 1,
+    "hitodeki.com": 1,
+    "plus.vision-net.co.jp": 1,
+    "chusho.meti.go.jp": 1,
+    "tokyo-kosha.or.jp": 1,
+    "fcci.or.jp": 1
+   }
   }
  ]
 }

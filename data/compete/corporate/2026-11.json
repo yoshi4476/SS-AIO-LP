@@ -2,8 +2,9 @@
  "site": "corporate",
  "ym": "2026-11",
  "measured": "2026-11-01",
- "mode": "cache",
- "status": "over_cap",
+ "mode": "live",
+ "status": "ok",
+ "cached_kws": 0,
  "gsc_window": "2026-09-30〜2026-10-28",
  "engines": [
   "ChatGPT",
@@ -14,39 +15,92 @@
  "summary": {
   "kw_n": 20,
   "ai": {
-   "answered_n": 1,
-   "ours_n": 0,
-   "share": null
+   "answered_n": 20,
+   "ours_n": 1,
+   "share": 0.05
   },
   "search": {
    "ranked_n": 15,
    "top10_n": 2,
    "top10_rate": 0.133
   },
-  "competitors": [],
+  "competitors": [
+   {
+    "domain": "freee.co.jp",
+    "type": "peer",
+    "ai_n": 6,
+    "ai_share": 0.3,
+    "top10_rate": null
+   },
+   {
+    "domain": "persol-bd.co.jp",
+    "type": "peer",
+    "ai_n": 6,
+    "ai_share": 0.3,
+    "top10_rate": null
+   },
+   {
+    "domain": "jmsc.co.jp",
+    "type": "peer",
+    "ai_n": 5,
+    "ai_share": 0.25,
+    "top10_rate": null
+   },
+   {
+    "domain": "bill-one.com",
+    "type": "peer",
+    "ai_n": 4,
+    "ai_share": 0.2,
+    "top10_rate": null
+   },
+   {
+    "domain": "help-you.me",
+    "type": "peer",
+    "ai_n": 4,
+    "ai_share": 0.2,
+    "top10_rate": null
+   }
+  ],
   "other_types": {
    "media": [
+    "backofficedb.com",
+    "bizneko.jp",
+    "catalog.monex.co.jp",
+    "cloud-erp-guide.com",
+    "content.step-base.jp",
+    "finfin.jp",
+    "kanbei.jp",
     "pasona.co.jp"
    ],
    "portal": [
-    "employment.en-japan.com"
+    "accounting.cast-er.com",
+    "all-senmonka.jp",
+    "bizcrew.jp",
+    "career-adv.jp",
+    "crowdworks.jp",
+    "go.taxita.com",
+    "it-trend.jp",
+    "itreview.jp"
+   ],
+   "video": [
+    "note.com",
+    "one-kdtax.com"
+   ],
+   "public": [
+    "nta.go.jp"
    ]
   },
   "engines": {
    "ChatGPT": {
-    "answered": 0,
+    "answered": 3,
     "ours": 0
    },
    "Gemini": {
-    "answered": 0,
-    "ours": 0
-   },
-   "Perplexity": {
-    "answered": 1,
-    "ours": 0
+    "answered": 6,
+    "ours": 1
    },
    "Claude": {
-    "answered": 1,
+    "answered": 20,
     "ours": 0
    }
   },
@@ -59,10 +113,47 @@
    "imp": 151,
    "url": "https://corp.7senses.co.jp/blog/keiri-bu-keiri-ka-chigai",
    "slug": "keiri-bu-keiri-ka-chigai",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "jmsc.co.jp",
+      "yayoi-kk.co.jp",
+      "type.jp",
+      "yoganbe.com"
+     ],
+     "urls": [
+      "https://www.jmsc.co.jp/knowhow/topics/12141.html",
+      "https://www.yayoi-kk.co.jp/kaikei/oyakudachi/accounting-basic-04/",
+      "https://type.jp/tensyoku-knowhow/ready/catalog/accounting/",
+      "https://yoganbe.com/archives/25964"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "jmsc.co.jp": 1,
+    "yayoi-kk.co.jp": 1,
+    "type.jp": 1,
+    "yoganbe.com": 1
+   }
   },
   {
    "kw": "バックオフィス bpo",
@@ -84,79 +175,32 @@
      "urls": []
     },
     "Perplexity": {
-     "answered": true,
-     "ours": false,
-     "domains": [
-      "pasona.co.jp",
-      "backofficeforce.jp",
-      "ntt.com",
-      "bewith.net",
-      "solution.bell24.co.jp",
-      "office-expo.jp",
-      "datt.co.jp",
-      "ntt-nexia.co.jp",
-      "persol-bd.co.jp",
-      "employment.en-japan.com"
-     ],
-     "urls": [
-      "https://www.pasona.co.jp/clients/service/column/bpo/back-office-bpo/",
-      "https://backofficeforce.jp/media/backoffice/bpo/",
-      "https://www.ntt.com/bizon/glossary/e-b/bpo.html",
-      "https://www.bewith.net/service/bpo-service/back-office/",
-      "https://www.solution.bell24.co.jp/ja/useful/column/00062_service/",
-      "https://www.office-expo.jp/hub/ja-jp/blog/article-40.html",
-      "https://www.datt.co.jp/back-office-bpo/",
-      "https://www.ntt-nexia.co.jp/column/0070.html",
-      "https://www.persol-bd.co.jp/service/bpo/s-bpo/column/bpo-selection/",
-      "https://employment.en-japan.com/desc_1386532/"
-     ]
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
     },
     "Claude": {
      "answered": true,
      "ours": false,
      "domains": [
       "pasona.co.jp",
-      "persol-bd.co.jp",
+      "solution.toppan.co.jp",
       "zeroin.co.jp",
-      "fujiko-san.com",
-      "solution.bell24.co.jp",
-      "pasona-ns.co.jp",
-      "kantec.ne.jp",
-      "bpo-pro.org",
-      "marunagekanri.com"
+      "kantec.ne.jp"
      ],
      "urls": [
       "https://www.pasona.co.jp/clients/service/column/bpo/back-office-bpo/",
-      "https://www.persol-bd.co.jp/service/bpo/s-stepbase/column/00012/",
+      "https://solution.toppan.co.jp/bpo/contents/BPO_Howto_backoffice.html",
       "https://www.zeroin.co.jp/soumuservice/blog/231006/",
-      "https://fujiko-san.com/blog/backoffice-bpo/",
-      "https://www.solution.bell24.co.jp/ja/useful/column/00062_service/",
-      "https://www.pasona-ns.co.jp/column_wp/detail/15057.html",
-      "https://kantec.ne.jp/blog/what-is-back-office-bpo/",
-      "https://bpo-pro.org/",
-      "https://marunagekanri.com/outsourcing/info_backoffice_1003/"
+      "https://kantec.ne.jp/blog/what-is-back-office-bpo/"
      ]
     }
    },
    "ai_answered": true,
    "ai_ours": false,
    "ai_domains": {
-    "pasona.co.jp": 2,
-    "backofficeforce.jp": 1,
-    "ntt.com": 1,
-    "bewith.net": 1,
-    "solution.bell24.co.jp": 2,
-    "office-expo.jp": 1,
-    "datt.co.jp": 1,
-    "ntt-nexia.co.jp": 1,
-    "persol-bd.co.jp": 2,
-    "employment.en-japan.com": 1,
+    "pasona.co.jp": 1,
+    "solution.toppan.co.jp": 1,
     "zeroin.co.jp": 1,
-    "fujiko-san.com": 1,
-    "pasona-ns.co.jp": 1,
-    "kantec.ne.jp": 1,
-    "bpo-pro.org": 1,
-    "marunagekanri.com": 1
+    "kantec.ne.jp": 1
    }
   },
   {
@@ -166,16 +210,49 @@
    "url": "https://corp.7senses.co.jp/blog/keiri-jimu-hojo-chigai",
    "slug": "keiri-jimu-hojo-chigai",
    "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
     "Gemini": {
      "answered": false,
      "ours": false,
      "domains": [],
      "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "career-reboot-lab.com",
+      "word-sharing.com",
+      "staff.jusnet.co.jp",
+      "chigai2.fromation.co.jp",
+      "jmsc.co.jp"
+     ],
+     "urls": [
+      "https://career-reboot-lab.com/accounting-assistant-no-experience/",
+      "http://word-sharing.com/keirihojo/",
+      "https://staff.jusnet.co.jp/column2/column_0137.php",
+      "https://chigai2.fromation.co.jp/archives/35858",
+      "https://www.jmsc.co.jp/knowhow/topics/10351.html"
+     ]
     }
    },
-   "ai_answered": false,
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "career-reboot-lab.com": 1,
+    "word-sharing.com": 1,
+    "staff.jusnet.co.jp": 1,
+    "chigai2.fromation.co.jp": 1,
+    "jmsc.co.jp": 1
+   }
   },
   {
    "kw": "経理アウトソーシング 相場",
@@ -183,10 +260,94 @@
    "imp": 48,
    "url": "https://corp.7senses.co.jp/blog/keiri-outsourcing-hiyou-souba",
    "slug": "keiri-outsourcing-hiyou-souba",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "grop.co.jp",
+      "persol-wsc.co.jp",
+      "cs-acctg.com",
+      "bcompany.co.jp",
+      "tanebi.fun"
+     ],
+     "urls": [
+      "https://www.grop.co.jp/outsourcingpro/accounting-outsourcing/?utm_source=openai",
+      "https://www.persol-wsc.co.jp/column/916/?utm_source=openai",
+      "https://www.cs-acctg.com/column/kaikei_keiri/54191.html?utm_source=openai",
+      "https://bcompany.co.jp/service/b-top/column/accounting/keiri-outsourcing/?utm_source=openai",
+      "https://tanebi.fun/keiri-outsourcing/?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "wheat-biz.com",
+      "iroae.jp",
+      "marugotoinc.jp",
+      "persol-bd.co.jp",
+      "rstandard.co.jp",
+      "go.taxita.com",
+      "gen-genki.com",
+      "score.or.jp"
+     ],
+     "urls": [
+      "https://wheat-biz.com/acc/keiri-daiko-monthly-cost/",
+      "https://iroae.jp/blog/keiri-outsource/",
+      "https://marugotoinc.jp/blog/keiri_os/",
+      "https://www.persol-bd.co.jp/service/bpo/s-bpo/column/accounting-agency-price/",
+      "https://rstandard.co.jp/ac-bpo-contents/price.html",
+      "https://go.taxita.com/column/accounting128/",
+      "https://gen-genki.com/accounting-outsourcing/pricing-guide/",
+      "https://score.or.jp/column/column02"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "marugotoinc.jp",
+      "saas.imitsu.jp",
+      "ntt-finance.co.jp",
+      "go.taxita.com",
+      "remoba.biz",
+      "crex-consulting.com"
+     ],
+     "urls": [
+      "https://marugotoinc.jp/blog/keiri_os/",
+      "https://saas.imitsu.jp/cate-accounting-outsourcing/article/h-2524",
+      "https://www.ntt-finance.co.jp/billing/biz/column/20230725_5",
+      "https://go.taxita.com/column/accounting128/",
+      "https://remoba.biz/articles/mpvhytlth",
+      "https://crex-consulting.com/column/bpo/accounting-outsourcing-cost-guide/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "grop.co.jp": 1,
+    "persol-wsc.co.jp": 1,
+    "cs-acctg.com": 1,
+    "bcompany.co.jp": 1,
+    "tanebi.fun": 1,
+    "wheat-biz.com": 1,
+    "iroae.jp": 1,
+    "marugotoinc.jp": 2,
+    "persol-bd.co.jp": 1,
+    "rstandard.co.jp": 1,
+    "go.taxita.com": 2,
+    "gen-genki.com": 1,
+    "score.or.jp": 1,
+    "saas.imitsu.jp": 1,
+    "ntt-finance.co.jp": 1,
+    "remoba.biz": 1,
+    "crex-consulting.com": 1
+   }
   },
   {
    "kw": "経理 会計 違い",
@@ -194,10 +355,59 @@
    "imp": 45,
    "url": "https://corp.7senses.co.jp/blog/kaikei-keiri-chigai",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "sogyotecho.jp",
+      "business.ntt-east.co.jp",
+      "kaikeizeimu.jp",
+      "jmsc.co.jp",
+      "ac.jobcan.ne.jp",
+      "ma-la.co.jp",
+      "career-adv.jp",
+      "chigai-labo.com"
+     ],
+     "urls": [
+      "https://sogyotecho.jp/kaikei-keiri-tigai/",
+      "https://business.ntt-east.co.jp/column/service/ohs/accounting-total-difference.html",
+      "https://kaikeizeimu.jp/blog/detail.html&id=462",
+      "https://www.jmsc.co.jp/knowhow/topics/11583.html",
+      "https://ac.jobcan.ne.jp/knowledge/19607/",
+      "https://ma-la.co.jp/m-and-a/accounting-basics/",
+      "https://www.career-adv.jp/recruit_info/career/480/",
+      "https://chigai-labo.com/words/kaikei-keiri/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "sogyotecho.jp": 1,
+    "business.ntt-east.co.jp": 1,
+    "kaikeizeimu.jp": 1,
+    "jmsc.co.jp": 1,
+    "ac.jobcan.ne.jp": 1,
+    "ma-la.co.jp": 1,
+    "career-adv.jp": 1,
+    "chigai-labo.com": 1
+   }
   },
   {
    "kw": "経理アウトソーシング 費用",
@@ -205,10 +415,70 @@
    "imp": 42,
    "url": "https://corp.7senses.co.jp/blog/keiri-outsourcing-hiyou-souba",
    "slug": "keiri-outsourcing-hiyou-souba",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "ascendajapan.com",
+      "rstandard.co.jp",
+      "012cloud.jp",
+      "kanbei.jp"
+     ],
+     "urls": [
+      "https://ascendajapan.com/price/?utm_source=openai",
+      "https://rstandard.co.jp/ac-bpo-contents/Merits_and_Demerits_of_Accounting_Outsourcing.html?utm_source=openai",
+      "https://012cloud.jp/article/accounting-outsourcing?utm_source=openai",
+      "https://kanbei.jp/articles/kanbei-outsourcing?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "marugotoinc.jp",
+      "saas.imitsu.jp",
+      "yayoi-kk.co.jp",
+      "bizcrew.jp",
+      "go.taxita.com",
+      "remoba.biz",
+      "bizfocus.jp"
+     ],
+     "urls": [
+      "https://marugotoinc.jp/blog/keiri_os/",
+      "https://saas.imitsu.jp/cate-accounting-outsourcing/article/h-2524",
+      "https://www.yayoi-kk.co.jp/zeirishi/oyakudachi/outsourcing_request/",
+      "https://www.bizcrew.jp/article/11260030",
+      "https://go.taxita.com/column/accounting128/",
+      "https://remoba.biz/articles/mpvhytlth",
+      "https://bizfocus.jp/blog/outsourcing-6"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "ascendajapan.com": 1,
+    "rstandard.co.jp": 1,
+    "012cloud.jp": 1,
+    "kanbei.jp": 1,
+    "marugotoinc.jp": 1,
+    "saas.imitsu.jp": 1,
+    "yayoi-kk.co.jp": 1,
+    "bizcrew.jp": 1,
+    "go.taxita.com": 1,
+    "remoba.biz": 1,
+    "bizfocus.jp": 1
+   }
   },
   {
    "kw": "請求書の 書き方 個人",
@@ -216,10 +486,47 @@
    "imp": 36,
    "url": "https://corp.7senses.co.jp/blog/seikyusho-kakikata-kojin",
    "slug": "seikyusho-kakikata-kojin",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "freee.co.jp",
+      "finfin.jp",
+      "aixcel.jp",
+      "spreadoffice.com"
+     ],
+     "urls": [
+      "https://www.freee.co.jp/kb/kb-invoice/invoice-freelance/",
+      "https://www.finfin.jp/information/freelance-invoice-guide",
+      "https://aixcel.jp/blog/article15_seikyusho_kakikata_template.html",
+      "https://www.spreadoffice.com/blog/invoice-individual/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "freee.co.jp": 1,
+    "finfin.jp": 1,
+    "aixcel.jp": 1,
+    "spreadoffice.com": 1
+   }
   },
   {
    "kw": "経理代行 相場",
@@ -227,10 +534,70 @@
    "imp": 36,
    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-kojin-jigyonushi",
    "slug": "keiri-daiko-kojin-jigyonushi",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "persol-bd.co.jp",
+      "all-senmonka.jp",
+      "wheat-biz.com"
+     ],
+     "urls": [
+      "https://www.persol-bd.co.jp/service/bpo/s-bpo/column/accounting-agency-price/?utm_source=openai",
+      "https://www.all-senmonka.jp/guide/4473/?utm_source=openai",
+      "https://wheat-biz.com/acc/keiri-daiko-monthly-cost/?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "meetsmore.com",
+      "crowdworks.jp",
+      "jp.help-you.me",
+      "leapal.jp",
+      "agatsuma-tax.jp",
+      "content.step-base.jp",
+      "kanri-pro.com",
+      "wheat-biz.com"
+     ],
+     "urls": [
+      "https://meetsmore.com/product-services/accounting-outsourcing/media/206225",
+      "https://crowdworks.jp/times/know-how/26891/",
+      "https://jp.help-you.me/help-you-blog/blog/accounting_market",
+      "https://leapal.jp/blog/it-cloud/accounting-outsourcing-cost/",
+      "https://agatsuma-tax.jp/blog/1616/",
+      "https://content.step-base.jp/blog/keiri-hikaku",
+      "https://www.kanri-pro.com/blog/accounting-outsourcing-price",
+      "https://wheat-biz.com/acc/keiri-daiko-cost-guide/",
+      "https://wheat-biz.com/acc/keiri-daiko-monthly-cost/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "persol-bd.co.jp": 1,
+    "all-senmonka.jp": 1,
+    "wheat-biz.com": 2,
+    "meetsmore.com": 1,
+    "crowdworks.jp": 1,
+    "jp.help-you.me": 1,
+    "leapal.jp": 1,
+    "agatsuma-tax.jp": 1,
+    "content.step-base.jp": 1,
+    "kanri-pro.com": 1
+   }
   },
   {
    "kw": "経理 会計",
@@ -238,10 +605,62 @@
    "imp": 33,
    "url": "https://corp.7senses.co.jp/blog/kaikei-keiri-chigai",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "sogyotecho.jp",
+      "business.ntt-east.co.jp",
+      "kaikeizeimu.jp",
+      "pasonacareer.jp",
+      "jmsc.co.jp",
+      "ac.jobcan.ne.jp",
+      "career-adv.jp",
+      "ma-la.co.jp",
+      "chigai-labo.com"
+     ],
+     "urls": [
+      "https://sogyotecho.jp/kaikei-keiri-tigai/",
+      "https://business.ntt-east.co.jp/column/service/ohs/accounting-total-difference.html",
+      "https://kaikeizeimu.jp/blog/detail.html&id=462",
+      "https://www.pasonacareer.jp/jb200/article/210309/",
+      "https://www.jmsc.co.jp/knowhow/topics/11583.html",
+      "https://ac.jobcan.ne.jp/knowledge/19607/",
+      "https://www.career-adv.jp/recruit_info/career/480/",
+      "https://ma-la.co.jp/m-and-a/accounting-basics/",
+      "https://chigai-labo.com/words/kaikei-keiri/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "sogyotecho.jp": 1,
+    "business.ntt-east.co.jp": 1,
+    "kaikeizeimu.jp": 1,
+    "pasonacareer.jp": 1,
+    "jmsc.co.jp": 1,
+    "ac.jobcan.ne.jp": 1,
+    "career-adv.jp": 1,
+    "ma-la.co.jp": 1,
+    "chigai-labo.com": 1
+   }
   },
   {
    "kw": "経理 財務 違い",
@@ -249,10 +668,62 @@
    "imp": 33,
    "url": "https://corp.7senses.co.jp/blog/keiri-zaimu-chigai",
    "slug": "keiri-zaimu-chigai",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "saisoncard.co.jp",
+      "it-trend.jp",
+      "bill-one.com",
+      "keihi.com",
+      "noc-net.co.jp",
+      "all-different.co.jp",
+      "jmsc.co.jp",
+      "kyriba.com",
+      "remoba.biz"
+     ],
+     "urls": [
+      "https://www.saisoncard.co.jp/credictionary/bussinesscard/article200.html",
+      "https://it-trend.jp/accounting_outsourcing/article/654-0022",
+      "https://bill-one.com/knowledge/financial-accounting/",
+      "https://www.keihi.com/column/2625/",
+      "https://www.noc-net.co.jp/blog/2025/02/column_564/",
+      "https://www.all-different.co.jp/column_report/column/finance/hrd_column_164.html",
+      "https://www.jmsc.co.jp/knowhow/topics/11583.html",
+      "https://www.kyriba.com/jp/blog/accounting-and-finance/",
+      "https://remoba.biz/articles/387bac8ff92524dc"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "saisoncard.co.jp": 1,
+    "it-trend.jp": 1,
+    "bill-one.com": 1,
+    "keihi.com": 1,
+    "noc-net.co.jp": 1,
+    "all-different.co.jp": 1,
+    "jmsc.co.jp": 1,
+    "kyriba.com": 1,
+    "remoba.biz": 1
+   }
   },
   {
    "kw": "bpo バックオフィス",
@@ -260,10 +731,62 @@
    "imp": 31,
    "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha",
    "slug": "backoffice-bpo-toha",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "pasona.co.jp",
+      "solution.toppan.co.jp",
+      "help-you.me",
+      "zeroin.co.jp",
+      "fujiko-san.com",
+      "solution.bell24.co.jp",
+      "marunagekanri.com",
+      "pasona-ns.co.jp",
+      "kantec.ne.jp"
+     ],
+     "urls": [
+      "https://www.pasona.co.jp/clients/service/column/bpo/back-office-bpo/",
+      "https://solution.toppan.co.jp/bpo/contents/BPO_Howto_backoffice.html",
+      "https://help-you.me/blog/backoffice-bpo/",
+      "https://www.zeroin.co.jp/soumuservice/blog/231006/",
+      "https://fujiko-san.com/blog/backoffice-bpo/",
+      "https://www.solution.bell24.co.jp/ja/useful/column/00062_service/",
+      "https://marunagekanri.com/outsourcing/info_backoffice_1003/",
+      "https://www.pasona-ns.co.jp/column_wp/detail/15057.html",
+      "https://kantec.ne.jp/blog/what-is-back-office-bpo/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "pasona.co.jp": 1,
+    "solution.toppan.co.jp": 1,
+    "help-you.me": 1,
+    "zeroin.co.jp": 1,
+    "fujiko-san.com": 1,
+    "solution.bell24.co.jp": 1,
+    "marunagekanri.com": 1,
+    "pasona-ns.co.jp": 1,
+    "kantec.ne.jp": 1
+   }
   },
   {
    "kw": "経理代行 料金表",
@@ -271,10 +794,66 @@
    "imp": 29,
    "url": "https://corp.7senses.co.jp/blog/kichodaiko-ryokinhyo-zeirishi",
    "slug": "kichodaiko-ryokinhyo-zeirishi",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "help-you.me",
+      "cloudsolution.co.jp",
+      "cyber-crew.jp",
+      "go.chatwork.com",
+      "osakacpa.com",
+      "anshin-keiri.eiwa-gr.jp",
+      "persol-bd.co.jp"
+     ],
+     "urls": [
+      "https://help-you.me/blog/accounting_market/",
+      "https://www.cloudsolution.co.jp/blog/accounting-representation/accounting-outsourcing-cost/",
+      "https://cyber-crew.jp/page-521/",
+      "https://go.chatwork.com/ja/column/accounting/accounting010.html",
+      "https://osakacpa.com/keiri-soba/",
+      "https://anshin-keiri.eiwa-gr.jp/column/277",
+      "https://www.persol-bd.co.jp/service/bpo/s-bpo/column/accounting-agency-price/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "persol-bd.co.jp",
+      "wheat-biz.com",
+      "4649.ai"
+     ],
+     "urls": [
+      "https://www.persol-bd.co.jp/service/bpo/s-bpo/column/accounting-agency-price/",
+      "https://wheat-biz.com/acc/keiri-daiko-monthly-cost/",
+      "https://4649.ai/blog/keiri-daiko-hiyo-souba"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "help-you.me": 1,
+    "cloudsolution.co.jp": 1,
+    "cyber-crew.jp": 1,
+    "go.chatwork.com": 1,
+    "osakacpa.com": 1,
+    "anshin-keiri.eiwa-gr.jp": 1,
+    "persol-bd.co.jp": 2,
+    "wheat-biz.com": 1,
+    "4649.ai": 1
+   }
   },
   {
    "kw": "個人 事業 主 経理 代行",
@@ -282,10 +861,83 @@
    "imp": 25,
    "url": "https://corp.7senses.co.jp/blog/keiri-daiko-kojin-jigyonushi",
    "slug": "keiri-daiko-kojin-jigyonushi",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "freee.co.jp",
+      "keiri-marugoto.com",
+      "persol-bd.co.jp",
+      "one-kdtax.com",
+      "help-you.me",
+      "kanbei.jp",
+      "osakacpa.com"
+     ],
+     "urls": [
+      "https://www.freee.co.jp/kb/kb-accounting/accounting-agency-service/",
+      "https://www.keiri-marugoto.com/600-2/",
+      "https://www.persol-bd.co.jp/service/bpo/s-bpo/column/accounting-agency-price/",
+      "https://one-kdtax.com/column/keiridaiko/",
+      "https://help-you.me/blog/accounting_market/",
+      "https://kanbei.jp/articles/keiri_cost",
+      "https://osakacpa.com/keiri-soba/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "cone-c-slide.com",
+      "fujiko-san.com",
+      "meetsmore.com",
+      "help-you.me",
+      "i-staff.jp",
+      "leapal.jp",
+      "timers-inc.com",
+      "kanbei.jp",
+      "go.taxita.com"
+     ],
+     "urls": [
+      "https://cone-c-slide.com/liblog/accounting/",
+      "https://fujiko-san.com/blog/freelance-bookkeeping-services/",
+      "https://meetsmore.com/product-services/accounting-outsourcing/media/246777",
+      "https://help-you.me/blog/keiri/",
+      "https://i-staff.jp/blog/accounting-agency-freelance/",
+      "https://leapal.jp/blog/it-cloud/accounting-outsourcing-cost/",
+      "https://timers-inc.com/blog/keiri_daiko_ryoukin",
+      "https://kanbei.jp/articles/accounting_agency_service",
+      "https://go.taxita.com/column/accounting012/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "freee.co.jp": 1,
+    "keiri-marugoto.com": 1,
+    "persol-bd.co.jp": 1,
+    "one-kdtax.com": 1,
+    "help-you.me": 2,
+    "kanbei.jp": 2,
+    "osakacpa.com": 1,
+    "cone-c-slide.com": 1,
+    "fujiko-san.com": 1,
+    "meetsmore.com": 1,
+    "i-staff.jp": 1,
+    "leapal.jp": 1,
+    "timers-inc.com": 1,
+    "go.taxita.com": 1
+   }
   },
   {
    "kw": "経理 bpo",
@@ -293,10 +945,53 @@
    "imp": 23,
    "url": "https://corp.7senses.co.jp/topics/bpo",
    "slug": "",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "proactive.jp",
+      "bill-one.com",
+      "accounting.cast-er.com",
+      "pandora-climber.jp",
+      "persol-wsc.co.jp",
+      "backofficedb.com"
+     ],
+     "urls": [
+      "https://proactive.jp/resources/columns/accounting-bpo-basic/",
+      "https://bill-one.com/knowledge/accounting-bpo/",
+      "https://accounting.cast-er.com/tips/what-is-accounting-bpo/",
+      "https://pandora-climber.jp/article/category_management/management_bpo.html",
+      "https://www.persol-wsc.co.jp/column/918/",
+      "https://backofficedb.com/article/387/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "proactive.jp": 1,
+    "bill-one.com": 1,
+    "accounting.cast-er.com": 1,
+    "pandora-climber.jp": 1,
+    "persol-wsc.co.jp": 1,
+    "backofficedb.com": 1
+   }
   },
   {
    "kw": "経理 人手不足",
@@ -304,10 +999,95 @@
    "imp": 23,
    "url": "https://corp.7senses.co.jp/blog/keiri-hitode-busoku-taisaku",
    "slug": "keiri-hitode-busoku-taisaku",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "go.taxita.com",
+      "ntt-finance.co.jp",
+      "concur.co.jp",
+      "catalog.monex.co.jp",
+      "keihi.com",
+      "backofficeforce.jp",
+      "bi.nttdata-with.com"
+     ],
+     "urls": [
+      "https://go.taxita.com/column/accounting043/",
+      "https://www.ntt-finance.co.jp/billing/biz/column/20230823_3",
+      "https://www.concur.co.jp/blog/article/accounting-talent-shortage",
+      "https://catalog.monex.co.jp/article/?p=65343",
+      "https://www.keihi.com/column/59254/",
+      "https://backofficeforce.jp/media/accounting/jinzai-busoku/",
+      "https://bi.nttdata-with.com/column/accounting_resources_shortage"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "koyano-cpa.gr.jp",
+      "freee.co.jp",
+      "persol-bd.co.jp",
+      "help-you.me",
+      "backofficeforce.jp",
+      "bizneko.jp",
+      "cloud-erp-guide.com",
+      "backofficedb.com",
+      "tdb.co.jp",
+      "prtimes.jp",
+      "roberthalf.com",
+      "bill-one.com",
+      "wheat-biz.com"
+     ],
+     "urls": [
+      "https://koyano-cpa.gr.jp/nobiyo-kaikei/column/6099/",
+      "https://www.freee.co.jp/kb/kb-accounting/accounting-understaffed/",
+      "https://www.persol-bd.co.jp/service/bpo/s-bpo/column/accounting-labor-shortage/",
+      "https://help-you.me/blog/keiri_resource_2310/",
+      "https://backofficeforce.jp/media/accounting/personalization-hitode-fusoku/",
+      "https://backofficeforce.jp/media/accounting/jinzai-busoku/",
+      "https://bizneko.jp/column/accounting-staff-shortage/",
+      "https://www.cloud-erp-guide.com/blog/accounting-staff-shortage",
+      "https://backofficedb.com/article/344/",
+      "https://www.tdb.co.jp/report/economic/20260519-laborshortage202604/",
+      "https://prtimes.jp/main/html/rd/p/000000185.000113945.html",
+      "https://www.roberthalf.com/jp/ja/insights/hiring-help/labor-shortage-accounting"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "go.taxita.com": 1,
+    "ntt-finance.co.jp": 1,
+    "concur.co.jp": 1,
+    "catalog.monex.co.jp": 1,
+    "keihi.com": 1,
+    "backofficeforce.jp": 2,
+    "bi.nttdata-with.com": 1,
+    "koyano-cpa.gr.jp": 1,
+    "freee.co.jp": 1,
+    "persol-bd.co.jp": 1,
+    "help-you.me": 1,
+    "bizneko.jp": 1,
+    "cloud-erp-guide.com": 1,
+    "backofficedb.com": 1,
+    "tdb.co.jp": 1,
+    "prtimes.jp": 1,
+    "roberthalf.com": 1,
+    "bill-one.com": 1,
+    "wheat-biz.com": 1
+   }
   },
   {
    "kw": "請求書の作り方",
@@ -315,10 +1095,50 @@
    "imp": 0,
    "url": "",
    "slug": "seikyusho-tsukurikata",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "biz.moneyforward.com",
+      "go.invoy.jp",
+      "concur.co.jp",
+      "adobe.com",
+      "keihi.com"
+     ],
+     "urls": [
+      "https://biz.moneyforward.com/invoice/basic/48317/",
+      "https://go.invoy.jp/how-to-invoice/%E8%AB%8B%E6%B1%82%E6%9B%B8%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9%E3%80%81%E4%BD%9C%E3%82%8A%E6%96%B9%E3%82%92%E8%A7%A3%E8%AA%AC%EF%BD%9C%E8%A8%98%E8%BC%89%E4%BA%8B%E9%A0%85%E3%81%A8%E6%B3%A8%E6%84%8F/",
+      "https://www.concur.co.jp/blog/article/how-to-write-an-invoice",
+      "https://www.adobe.com/jp/acrobat/roc/blog/how-to-write-invoice.html",
+      "https://www.keihi.com/column/21726/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "biz.moneyforward.com": 1,
+    "go.invoy.jp": 1,
+    "concur.co.jp": 1,
+    "adobe.com": 1,
+    "keihi.com": 1
+   }
   },
   {
    "kw": "適格 請求書 要件",
@@ -326,10 +1146,40 @@
    "imp": 0,
    "url": "",
    "slug": "tekikaku-seikyusho-youken",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "nta.go.jp"
+     ],
+     "urls": [
+      "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6625.htm",
+      "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/pdf/qa/54.pdf",
+      "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/pdf/0022009-090.pdf"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "nta.go.jp": 1
+   }
   },
   {
    "kw": "請求書 テンプレ 無料",
@@ -337,10 +1187,72 @@
    "imp": 0,
    "url": "",
    "slug": "seikyusho-template-muryou",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "yayoi-kk.co.jp",
+      "biz.moneyforward.com",
+      "freee.co.jp",
+      "template.the-board.jp",
+      "makeleaps.com"
+     ],
+     "urls": [
+      "https://www.yayoi-kk.co.jp/seikyusho/template/invoice/",
+      "https://biz.moneyforward.com/invoice/templates/invoice-sole-proprietorship/",
+      "https://www.freee.co.jp/kb/template/invoice/template-1/",
+      "https://template.the-board.jp/tags/1/%E3%82%BF%E3%83%86%E5%9E%8B/",
+      "https://www.makeleaps.com/resources/templates/excel-templates-invoice/"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "template.the-board.jp",
+      "biztemplatelab.com",
+      "inv24.jp",
+      "aippearnet.com",
+      "seikyuu-pippa.jp",
+      "makeleaps.com",
+      "templates-navi.com"
+     ],
+     "urls": [
+      "https://template.the-board.jp/invoice_templates/",
+      "https://biztemplatelab.com/template/seikyuu/",
+      "https://www.inv24.jp/jp/tpl/",
+      "https://aippearnet.com/column/document/template-invoice/",
+      "https://seikyuu-pippa.jp/invoice-template/",
+      "https://seikyuu-pippa.jp/single-master-bill-template/",
+      "https://www.makeleaps.com/resources/templates/excel-templates-invoice/",
+      "https://templates-navi.com/category/business/seikyusho"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "yayoi-kk.co.jp": 1,
+    "biz.moneyforward.com": 1,
+    "freee.co.jp": 1,
+    "template.the-board.jp": 2,
+    "makeleaps.com": 2,
+    "biztemplatelab.com": 1,
+    "inv24.jp": 1,
+    "aippearnet.com": 1,
+    "seikyuu-pippa.jp": 1,
+    "templates-navi.com": 1
+   }
   },
   {
    "kw": "sweeep 請求書",
@@ -348,10 +1260,79 @@
    "imp": 0,
    "url": "",
    "slug": "sweeep-seikyusho",
-   "ai": {},
-   "ai_answered": false,
-   "ai_ours": false,
-   "ai_domains": {}
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": true,
+     "domains": [
+      "invox.jp",
+      "ms-rpa.jp",
+      "itreview.jp",
+      "freee.co.jp",
+      "onamae.com",
+      "kigyolog.com"
+     ],
+     "urls": [
+      "https://invox.jp/sweeep",
+      "https://ms-rpa.jp/tips/sweeep/",
+      "https://www.itreview.jp/products/sweeep/profile",
+      "https://www.freee.co.jp/invoice-receipt/",
+      "https://www.onamae.com/business/product/25011/",
+      "https://kigyolog.com/tool.php?id=1934"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "kigyolog.com",
+      "itreview.jp",
+      "rpahack.com",
+      "note.com",
+      "prtimes.jp",
+      "ms-rpa.jp",
+      "marketers-store.com",
+      "818shiki.com",
+      "sheepdog.co.jp"
+     ],
+     "urls": [
+      "https://kigyolog.com/tool.php?id=1934",
+      "https://www.itreview.jp/products/sweeep/profile",
+      "https://rpahack.com/sweeep-2",
+      "https://note.com/sonosaki_2_as/n/n7ccb278565db",
+      "https://prtimes.jp/main/html/rd/p/000000056.000040079.html",
+      "https://ms-rpa.jp/tips/sweeep/",
+      "https://marketers-store.com/solutions/1326",
+      "https://818shiki.com/sweeep/",
+      "https://sheepdog.co.jp/seikyukanri/sweeep/"
+     ]
+    }
+   },
+   "ai_answered": true,
+   "ai_ours": true,
+   "ai_domains": {
+    "invox.jp": 1,
+    "ms-rpa.jp": 2,
+    "itreview.jp": 2,
+    "freee.co.jp": 1,
+    "onamae.com": 1,
+    "kigyolog.com": 2,
+    "rpahack.com": 1,
+    "note.com": 1,
+    "prtimes.jp": 1,
+    "marketers-store.com": 1,
+    "818shiki.com": 1,
+    "sheepdog.co.jp": 1
+   }
   },
   {
    "kw": "経理業務委託",
@@ -359,10 +1340,71 @@
    "imp": 0,
    "url": "",
    "slug": "keiri-gyomu-itaku",
-   "ai": {},
-   "ai_answered": false,
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "yayoi-kk.co.jp",
+      "keihi.com",
+      "freee.co.jp",
+      "accounting.cast-er.com",
+      "bizcrew.jp",
+      "crowdworks.jp",
+      "bill-one.com",
+      "b-pos.jp",
+      "catalog.monex.co.jp",
+      "persol-bd.co.jp",
+      "pasona.co.jp",
+      "backofficeforce.jp"
+     ],
+     "urls": [
+      "https://www.yayoi-kk.co.jp/zeirishi/oyakudachi/outsourcing_request/",
+      "https://www.keihi.com/column/46260/",
+      "https://www.freee.co.jp/kb/kb-accounting/accounting-agency-service/",
+      "https://accounting.cast-er.com/tips/accounting-outsourcing-costs/",
+      "https://www.bizcrew.jp/article/11260030",
+      "https://crowdworks.jp/times/efficiency/5475/",
+      "https://bill-one.com/knowledge/accounting-tasks-outsourcing/",
+      "https://b-pos.jp/j009/",
+      "https://catalog.monex.co.jp/article/?p=26397",
+      "https://www.persol-bd.co.jp/service/bpo/s-bpo/column/accounting-scope/",
+      "https://www.pasona.co.jp/clients/service/column/bpo/accounting_outsourcing/",
+      "https://backofficeforce.jp/media/accounting/outsourcing-dokomade/"
+     ]
+    }
+   },
+   "ai_answered": true,
    "ai_ours": false,
-   "ai_domains": {}
+   "ai_domains": {
+    "yayoi-kk.co.jp": 1,
+    "keihi.com": 1,
+    "freee.co.jp": 1,
+    "accounting.cast-er.com": 1,
+    "bizcrew.jp": 1,
+    "crowdworks.jp": 1,
+    "bill-one.com": 1,
+    "b-pos.jp": 1,
+    "catalog.monex.co.jp": 1,
+    "persol-bd.co.jp": 1,
+    "pasona.co.jp": 1,
+    "backofficeforce.jp": 1
+   }
   }
  ]
 }

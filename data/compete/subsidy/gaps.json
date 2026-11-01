@@ -2,51 +2,51 @@
  "site": "subsidy",
  "ym": "2026-11",
  "generated": "2026-11-01",
- "read": 5,
+ "read": 12,
  "robots_blocked": 0,
  "items": [
   {
-   "kw": "it導入補助金 選び方",
-   "slug": "it-hojokin-osusume",
-   "imp": 13,
-   "pos": 20.6,
+   "kw": "個人事業主 車購入補助金",
+   "slug": "kojin-jigyonushi-kuruma-kounyu-hojokin",
+   "imp": 63,
+   "pos": 7.5,
    "competitors": [
-    "airregi.jp",
-    "biz.moneyforward.com",
-    "canon.jp",
-    "carearc.co.jp",
-    "comtri.jp"
+    "221616.com",
+    "bank.82group.jp",
+    "carconnect.jp",
+    "cev-pc.or.jp",
+    "corp.tanso-man.com"
    ],
    "their_pages": [
     {
-     "url": "https://hojokin-agent.jp/guide/it-hojo/vendor",
+     "url": "https://hojokin-agent.jp/audience/sole-proprietor/vehicle",
      "domain": "hojokin-agent.jp",
      "heads": [
-      "ベンダー選びを間違えると、補助金申請そのものが失敗します",
-      "IT導入支援事業者とは",
-      "IT導入支援事業者の役割",
-      "IT導入支援事業者の探し方",
-      "方法1: 公式サイトで検索",
-      "方法2: 取引先・知人の紹介",
-      "方法3: ITツールベンダーに確認",
-      "選定の5つのポイント",
-      "ポイント1: 業種・業態への対応実績",
-      "ポイント2: 採択率の実績",
-      "ポイント3: サポート体制",
-      "ポイント4: 手数料の透明性",
-      "ポイント5: 登録取消リストの確認",
-      "悪質な事業者の見分け方",
-      "複数社比較のすすめ",
-      "契約時の注意点",
-      "契約書で確認すべき7項目",
-      "IT導入支援事業者との付き合い方",
-      "よくあるトラブル事例と対策",
-      "関連ページ"
+      "個人事業主×車両の補助金を診断",
+      "個人事業主×車両の補助金を調べてわかったこと",
+      "個人事業主が車両購入で使える補助金の全体像",
+      "久留米市のキッチンカー導入補助金",
+      "福井県の次世代自動車普及促進補助金と充電インフラ整備",
+      "その他、車両購入に活用できる制度",
+      "まとめと注意点",
+      "参考資料",
+      "代表的な個人事業主×車両の補助金",
+      "【福井県】電気自動車用充電インフラ整備促進事業補助金",
+      "令和７年度（補正） 商用車等の電動化促進事業（建設機械）",
+      "代表的な補助金の比較",
+      "締切が近い補助金",
+      "【福井県】電気自動車用充電インフラ整備促進事業補助金",
+      "令和７年度（補正） 商用車等の電動化促進事業（建設機械）",
+      "東京都民間事業者に係る低公害・低燃費車導入促進補助金（補助金申請）",
+      "補助金の相談窓口",
+      "CEV補助金（クリーンエネルギー自動車）公式",
+      "小規模事業者持続化補助金（日本商工会議所）",
+      "商用電動車等の電動化促進事業（国土交通省）"
      ],
-     "tables": 6,
-     "modified": "2026-03-29",
+     "tables": 2,
+     "modified": "",
      "primary": "",
-     "chars": 3585
+     "chars": 7075
     }
    ],
    "action": "rewrite",
@@ -54,15 +54,180 @@
     {
      "type": "questions",
      "detail": [
-      "方法2: 取引先・知人の紹介",
-      "方法3: ITツールベンダーに確認",
-      "契約時の注意点"
+      "まとめと注意点"
+     ]
+    }
+   ],
+   "facts": []
+  },
+  {
+   "kw": "個人事業主 車 補助金",
+   "slug": "kojin-jigyonushi-kuruma-kounyu-hojokin",
+   "imp": 11,
+   "pos": 8.4,
+   "competitors": [
+    "221616.com",
+    "aba-j.or.jp",
+    "cev-pc.or.jp",
+    "hojokin-agent.jp",
+    "hojokinmap.jp"
+   ],
+   "their_pages": [
+    {
+     "url": "https://hojokin-agent.jp/audience/sole-proprietor/vehicle",
+     "domain": "hojokin-agent.jp",
+     "heads": [
+      "個人事業主×車両の補助金を診断",
+      "個人事業主×車両の補助金を調べてわかったこと",
+      "個人事業主が車両購入で使える補助金の全体像",
+      "久留米市のキッチンカー導入補助金",
+      "福井県の次世代自動車普及促進補助金と充電インフラ整備",
+      "その他、車両購入に活用できる制度",
+      "まとめと注意点",
+      "参考資料",
+      "代表的な個人事業主×車両の補助金",
+      "【福井県】電気自動車用充電インフラ整備促進事業補助金",
+      "令和７年度（補正） 商用車等の電動化促進事業（建設機械）",
+      "代表的な補助金の比較",
+      "締切が近い補助金",
+      "【福井県】電気自動車用充電インフラ整備促進事業補助金",
+      "令和７年度（補正） 商用車等の電動化促進事業（建設機械）",
+      "東京都民間事業者に係る低公害・低燃費車導入促進補助金（補助金申請）",
+      "補助金の相談窓口",
+      "CEV補助金（クリーンエネルギー自動車）公式",
+      "小規模事業者持続化補助金（日本商工会議所）",
+      "商用電動車等の電動化促進事業（国土交通省）"
+     ],
+     "tables": 2,
+     "modified": "",
+     "primary": "",
+     "chars": 7075
+    }
+   ],
+   "action": "rewrite",
+   "diffs": [
+    {
+     "type": "questions",
+     "detail": [
+      "まとめと注意点"
      ]
     }
    ],
    "facts": [
     "当社はAI導入補助金の登録支援事業者として、対象ツールの選定から、申請に向けた相談・助言、採択後の実績報告まで一貫して支援しています（申請書類はお客様が作成し、当社は内容の確認と助言を行います）"
    ]
+  },
+  {
+   "kw": "電子カルテ 補助金 2025",
+   "slug": "it-hojokin-denkaru-kyoyu-clinic",
+   "imp": 11,
+   "pos": 31.5,
+   "competitors": [
+    "carearc.co.jp",
+    "clius.jp",
+    "gemmed.ghc-j.com",
+    "houkan.kaipoke.biz",
+    "line-works.com"
+   ],
+   "their_pages": [
+    {
+     "url": "https://carearc.co.jp/blog/4011/",
+     "domain": "carearc.co.jp",
+     "heads": [
+      "医療法人やクリニックにおけるDXの課題や現状は？",
+      "医療法人やクリニックでデジタル化・AI導入補助金（IT導入補助金）の対象となるI",
+      "電子カルテ",
+      "レセコン（レセプトコンピュータ）",
+      "予約・受付システム",
+      "オンライン診療システム",
+      "在庫管理・物品発注システム",
+      "勤怠管理システム",
+      "デジタル化・AI導入補助金（IT導入補助金）が活用できる医療法人やクリニックの対",
+      "医療法人やクリニックのデジタル化・AI導入補助金（IT導入補助金）の申請枠！補助",
+      "通常枠：医療法人に特化したITツール申請",
+      "インボイス対応類型：医療法人で会計や受発注ソフトを申請",
+      "医療法人やクリニックなどでデジタル化・AI導入補助金（IT導入補助金）を活用した",
+      "①医療法人のシミュレーション",
+      "②クリニックのシミュレーション",
+      "③病院のシミュレーション",
+      "④薬局のシミュレーション",
+      "医療法人やクリニックでデジタル化・AI導入補助金（IT導入補助金）を申請する手順",
+      "デジタル化・AI導入補助金（IT導入補助金）を活用して医療法人やクリニックでIT",
+      "この記事を書いた人"
+     ],
+     "tables": 7,
+     "modified": "2026-09-30",
+     "primary": "",
+     "chars": 11012
+    }
+   ],
+   "action": "rewrite",
+   "diffs": [
+    {
+     "type": "questions",
+     "detail": [
+      "医療法人やクリニックにおけるDXの課題や現状は？"
+     ]
+    },
+    {
+     "type": "length",
+     "detail": "競合 11,012字 ／ 自社 5,893字（長さは成果を分けないため参考）"
+    }
+   ],
+   "facts": [
+    "当社はAI導入補助金の登録支援事業者として、対象ツールの選定から、申請に向けた相談・助言、採択後の実績報告まで一貫して支援しています（申請書類はお客様が作成し、当社は内容の確認と助言を行います）"
+   ]
+  },
+  {
+   "kw": "ベンダー登録とは",
+   "slug": "vendor-touroku-toha",
+   "imp": 45,
+   "pos": 5.1,
+   "competitors": [
+    "ardent.jp",
+    "bcompany.co.jp",
+    "hojokin-office.essencimo.co.jp",
+    "hojyokin-migiude.info",
+    "ja.helpleft.com"
+   ],
+   "their_pages": [
+    {
+     "url": "https://hojokin-office.essencimo.co.jp/column/it%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AE%E3%83%99%E3%83%B3%E3%83%80%E3%83%BC%E7%99%BB%E9%8C%B2%E3%81%A8%E3%81%AF%EF%BC%9F%E5%BD%B9%E5%89%B2%E3%82%84%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/",
+     "domain": "hojokin-office.essencimo.co.jp",
+     "heads": [
+      "デジタル化・AI導入補助金（旧IT導入補助金）の概要",
+      "デジタル化・AI導入補助金のベンダー登録とは？",
+      "デジタル化・AI導入補助金におけるベンダーの役割とは？",
+      "ベンダーの登録形態とは",
+      "デジタル化・AI導入補助金に登録できるITツールは？",
+      "デジタル化・AI導入補助金のベンダー登録をするメリットとは？",
+      "売上アップにつながる",
+      "顧客満足度がアップする",
+      "デジタル化・AI導入補助金のベンダー登録の流れ",
+      "①IT導入支援事業者としての要件を確認する",
+      "②ベンダー登録する",
+      "③ITツールの登録",
+      "カテゴリから記事を探す",
+      "人気記事",
+      "人気記事"
+     ],
+     "tables": 0,
+     "modified": "2026-10-19",
+     "primary": "",
+     "chars": 6611
+    }
+   ],
+   "action": "rewrite",
+   "diffs": [
+    {
+     "type": "questions",
+     "detail": [
+      "ベンダーの登録形態とは",
+      "デジタル化・AI導入補助金のベンダー登録をするメリットとは？"
+     ]
+    }
+   ],
+   "facts": []
   },
   {
    "kw": "美容室 レジ 補助金",
@@ -124,44 +289,39 @@
    ]
   },
   {
-   "kw": "it導入補助金 ランキング",
+   "kw": "it導入補助金 選び方",
    "slug": "it-hojokin-osusume",
    "imp": 13,
-   "pos": 14.2,
+   "pos": 20.6,
    "competitors": [
-    "ardent.jp",
-    "carearc.co.jp",
-    "front.it-trend.jp",
-    "hojoguide.jp",
-    "hojokin-agent.jp"
+    "clears.jp",
+    "comtri.jp",
+    "digital-ai-hojokin.jp",
+    "g1info.jp",
+    "hojoguide.jp"
    ],
    "their_pages": [
     {
-     "url": "https://carearc.co.jp/blog/2955/",
-     "domain": "carearc.co.jp",
+     "url": "https://hojokin-navi.co.jp/it-hojokin-wakubetsu-2026/",
+     "domain": "hojokin-navi.co.jp",
      "heads": [
-      "デジタル化・AI導入補助金（旧：IT導入補助金）の支援事業者（ベンダー）とは？",
-      "IT導入支援事業者（ベンダー）の種類",
-      "支援事業者の種類①自社開発している企業",
-      "支援事業者の種類②複数のITツールを取り扱う販売代理店",
-      "デジタル化・AI導入補助金（旧：IT導入補助金）の支援事業者（ベンダー）の選び方",
-      "選び方①導入したいITツールを取り扱っている",
-      "選び方②専門知識があり最新情報をキャッチアップしている",
-      "選び方③IT導入補助金の申請実績が豊富",
-      "選び方④対応が丁寧かつ迅速でサポート体制が整っている",
-      "選び方⑤申請サポートの費用",
-      "IT導入支援事業者の探し方。おすすめのベンダーは？",
-      "探し方①公式サイトで検索する。ITツールと支援事業者検索の2パターン",
-      "探し方②WEB検索で実績のある支援事業者を探す",
-      "探し方③導入したいITツールの開発元が支援事業者かどうかを確認する",
-      "ちなみに！ベンダー向けIT導入支援事業者の登録方法",
-      "IT導入支援事業者をお探しの方はCAREARCへ！",
-      "この記事を書いた人"
+      "💻デジタル化・AI導入補助金2026とは：2026年の全体像",
+      "🗂️4つの申請枠の違いと特徴",
+      "️⃣通常枠：業務効率化・売上向上の王道",
+      "️⃣インボイス枠：会計・受発注・決済のインボイス対応に手厚い",
+      "️⃣セキュリティ対策推進枠：サイバー対策の入口",
+      "️⃣複数社連携IT導入枠：商店街・サプライチェーンで一括導入",
+      "🔀どの枠で申請すべきか：選び方フロー",
+      "🤝IT導入支援事業者（ベンダー）選びが成否を分ける",
+      "❌デジタル化・AI導入補助金2026でやりがちなNG3つ",
+      "⚖️2026年行政書士法改正とデジタル化・AI導入補助金2026",
+      "🔀4つの枠を判断軸で比べる",
+      "❓よくある質問"
      ],
-     "tables": 0,
-     "modified": "2026-09-30",
+     "tables": 2,
+     "modified": "2026-08-15",
      "primary": "",
-     "chars": 7868
+     "chars": 5719
     }
    ],
    "action": "rewrite",
@@ -169,11 +329,9 @@
     {
      "type": "questions",
      "detail": [
-      "選び方②専門知識があり最新情報をキャッチアップしている",
-      "選び方③IT導入補助金の申請実績が豊富",
-      "選び方④対応が丁寧かつ迅速でサポート体制が整っている",
-      "選び方⑤申請サポートの費用",
-      "ちなみに！ベンダー向けIT導入支援事業者の登録方法"
+      "💻デジタル化・AI導入補助金2026とは：2026年の全体像",
+      "🗂️4つの申請枠の違いと特徴",
+      "🔀どの枠で申請すべきか：選び方フロー"
      ]
     }
    ],
@@ -182,42 +340,47 @@
    ]
   },
   {
-   "kw": "ベンダー登録とは",
-   "slug": "vendor-touroku-toha",
-   "imp": 45,
-   "pos": 5.1,
+   "kw": "農業補助金 50歳以上",
+   "slug": "nogyo-hojokin-50sai-ijo",
+   "imp": 11,
+   "pos": 5.5,
    "competitors": [
-    "ardent.jp",
-    "b-top.co.jp",
-    "bcompany.co.jp",
-    "crenlylaw.com",
-    "helpleft.com"
+    "agrijob.jp",
+    "chibanian.info",
+    "city.fuji.shizuoka.jp",
+    "city.oshu.iwate.jp",
+    "farm-connect.org"
    ],
    "their_pages": [
     {
-     "url": "https://hojokin-office.essencimo.co.jp/column/it%E5%B0%8E%E5%85%A5%E8%A3%9C%E5%8A%A9%E9%87%91%E3%81%AE%E3%83%99%E3%83%B3%E3%83%80%E3%83%BC%E7%99%BB%E9%8C%B2%E3%81%A8%E3%81%AF%EF%BC%9F%E5%BD%B9%E5%89%B2%E3%82%84%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/",
-     "domain": "hojokin-office.essencimo.co.jp",
+     "url": "https://agrijob.jp/contents/myagri/assistance-payment",
+     "domain": "agrijob.jp",
      "heads": [
-      "デジタル化・AI導入補助金（旧IT導入補助金）の概要",
-      "デジタル化・AI導入補助金のベンダー登録とは？",
-      "デジタル化・AI導入補助金におけるベンダーの役割とは？",
-      "ベンダーの登録形態とは",
-      "デジタル化・AI導入補助金に登録できるITツールは？",
-      "デジタル化・AI導入補助金のベンダー登録をするメリットとは？",
-      "売上アップにつながる",
-      "顧客満足度がアップする",
-      "デジタル化・AI導入補助金のベンダー登録の流れ",
-      "①IT導入支援事業者としての要件を確認する",
-      "②ベンダー登録する",
-      "③ITツールの登録",
-      "カテゴリから記事を探す",
-      "人気記事",
-      "人気記事"
+      "農業を始めるのにいくらかかる？",
+      "補助金の申請をあきらめてはいませんか？",
+      "補助金を受け取るメリット",
+      "【オンラインでも申請可！】補助金の申請方法",
+      "受給のハードルは意外と低い！？",
+      "就農に向けた補助金新規一覧",
+      "就農を考えている人におすすめの補助金",
+      "独立営農を目指す人におすすめの補助金",
+      "人材の育成におすすめの支援金",
+      "設備投資におすすめの補助金",
+      "農業求人で就職・転職を支援！農業するなら農業ジョブ",
+      "勤務地から探す",
+      "北海道",
+      "東北",
+      "関東",
+      "北陸･甲信",
+      "東海",
+      "関西",
+      "中国",
+      "四国"
      ],
-     "tables": 0,
-     "modified": "2026-10-19",
+     "tables": 1,
+     "modified": "2026-02-20",
      "primary": "",
-     "chars": 6611
+     "chars": 9120
     }
    ],
    "action": "rewrite",
@@ -225,9 +388,13 @@
     {
      "type": "questions",
      "detail": [
-      "ベンダーの登録形態とは",
-      "デジタル化・AI導入補助金のベンダー登録をするメリットとは？"
+      "【オンラインでも申請可！】補助金の申請方法",
+      "受給のハードルは意外と低い！？"
      ]
+    },
+    {
+     "type": "length",
+     "detail": "競合 9,120字 ／ 自社 4,803字（長さは成果を分けないため参考）"
     }
    ],
    "facts": []
@@ -238,29 +405,334 @@
    "imp": 0,
    "pos": null,
    "competitors": [
+    "agri-ja.net",
+    "agrijob.jp",
     "be-farmer.jp",
     "hojokin.loreos.jp",
     "seimitsu-nougyo.com"
    ],
    "their_pages": [
     {
-     "url": "https://www.be-farmer.jp/support/subsidy/",
-     "domain": "be-farmer.jp",
+     "url": "https://agrijob.jp/contents/myagri/assistance-payment",
+     "domain": "agrijob.jp",
      "heads": [
-      "支援情報",
-      "国の新規就農支援施策"
+      "農業を始めるのにいくらかかる？",
+      "補助金の申請をあきらめてはいませんか？",
+      "補助金を受け取るメリット",
+      "【オンラインでも申請可！】補助金の申請方法",
+      "受給のハードルは意外と低い！？",
+      "就農に向けた補助金新規一覧",
+      "就農を考えている人におすすめの補助金",
+      "独立営農を目指す人におすすめの補助金",
+      "人材の育成におすすめの支援金",
+      "設備投資におすすめの補助金",
+      "農業求人で就職・転職を支援！農業するなら農業ジョブ",
+      "勤務地から探す",
+      "北海道",
+      "東北",
+      "関東",
+      "北陸･甲信",
+      "東海",
+      "関西",
+      "中国",
+      "四国"
      ],
-     "tables": 3,
-     "modified": "",
+     "tables": 1,
+     "modified": "2026-02-20",
      "primary": "",
-     "chars": 2168
+     "chars": 9111
     }
    ],
-   "action": "none",
-   "diffs": [],
+   "action": "rewrite",
+   "diffs": [
+    {
+     "type": "questions",
+     "detail": [
+      "【オンラインでも申請可！】補助金の申請方法",
+      "受給のハードルは意外と低い！？"
+     ]
+    },
+    {
+     "type": "length",
+     "detail": "競合 9,111字 ／ 自社 5,521字（長さは成果を分けないため参考）"
+    }
+   ],
    "facts": [
     "当社はAI導入補助金の登録支援事業者として、対象ツールの選定から、申請に向けた相談・助言、採択後の実績報告まで一貫して支援しています（申請書類はお客様が作成し、当社は内容の確認と助言を行います）"
    ]
+  },
+  {
+   "kw": "it導入補助金 2026 個人事業主",
+   "slug": "it-hojokin-2026-kojinjigyonushi",
+   "imp": 0,
+   "pos": null,
+   "competitors": [
+    "algentio.com",
+    "carearc.co.jp",
+    "genai-ai.co.jp",
+    "igunal.com",
+    "leadbrain.co.jp"
+   ],
+   "their_pages": [
+    {
+     "url": "https://genai-ai.co.jp/ai-kanri/blog/cc-digital-ai-hojokin/",
+     "domain": "genai-ai.co.jp",
+     "heads": [
+      "OVERVIEW デジタル化・AI導入補助金とは 旧IT導入補助金から刷新",
+      "ELIGIBILITY 個人事業主は申請できる？対象要件 結論：申請できる",
+      "EXPENSES & RATES 補助対象経費と補助率・補助額 枠によって",
+      "補助対象経費",
+      "通常枠の補助率・補助額の目安",
+      "インボイス枠の補助率・補助額の目安",
+      "APPLICATION FLOW 申請の流れ（gBizID・SECURIT",
+      "CAUTIONS 個人事業主が申請する際の注意点 法人との違い・見落としや",
+      "LIMITATIONS 手作業での申請書類作成の限界 制度を理解していても",
+      "AUTOMATE WITH AI 【核心】Claude Code／Code",
+      "「AIに聞く」と「AIが一緒にやる」は別物",
+      "Claude Code／Codexに任せられる申請準備の作業",
+      "導入は3ステップ（プログラミング不要）",
+      "AI鬼管理（株式会社GENAI）での実践例",
+      "THE 3 WALLS ただし独学には「3つの壁」がある——最短で越える方",
+      "壁1：自社（自身）の状況を「正確に言語化」できない",
+      "壁2：検証のやり方を知らないまま「AIを信じてしまう」",
+      "壁3：作った本人しか把握していない「第二の属人化」",
+      "「AI鬼管理」とは——3〜6ヶ月で自動化を叩き込む伴走型トレーニング",
+      "COMPARISON & SUMMARY 自力申請 vs 士業への丸投げ "
+     ],
+     "tables": 5,
+     "modified": "2026-09-01",
+     "primary": "",
+     "chars": 18824
+    }
+   ],
+   "action": "rewrite",
+   "diffs": [
+    {
+     "type": "questions",
+     "detail": [
+      "OVERVIEW デジタル化・AI導入補助金とは 旧IT導入補助金から刷新",
+      "ELIGIBILITY 個人事業主は申請できる？対象要件 結論：申請できる",
+      "CAUTIONS 個人事業主が申請する際の注意点 法人との違い・見落としや",
+      "「AI鬼管理」とは——3〜6ヶ月で自動化を叩き込む伴走型トレーニング"
+     ]
+    },
+    {
+     "type": "length",
+     "detail": "競合 18,824字 ／ 自社 6,156字（長さは成果を分けないため参考）"
+    }
+   ],
+   "facts": [
+    "当社はAI導入補助金の登録支援事業者として、対象ツールの選定から、申請に向けた相談・助言、採択後の実績報告まで一貫して支援しています（申請書類はお客様が作成し、当社は内容の確認と助言を行います）"
+   ]
+  },
+  {
+   "kw": "it導入補助金 ランキング",
+   "slug": "it-hojokin-osusume",
+   "imp": 13,
+   "pos": 14.2,
+   "competitors": [
+    "ailab.mugenkaitaku.com",
+    "ardent.jp",
+    "atsoho.com",
+    "dxmonster.com",
+    "hojokin-shinsei.co.jp"
+   ],
+   "their_pages": [
+    {
+     "url": "https://ardent.jp/rentoffice-consultation-center/news/jyoseikin-hojyokin/it-dounyuhojyokin-soft/",
+     "domain": "ardent.jp",
+     "heads": [
+      "デジタル化・AI導入補助金の対象ソフト一覧について",
+      "おすすめのデジタル化・AI導入補助金の対象ソフト27選",
+      "オフィスソフト・グループウェア",
+      "Google Workspace",
+      "Microsoft 365",
+      "サイボウズオフィス",
+      "desk nets NEO",
+      "ノーコードツール",
+      "楽楽販売",
+      "kintone",
+      "Zoho One、ZohoCRM",
+      "バックオフィス系ソフト",
+      "マネーフォワードクラウド",
+      "会計freee 法人向け",
+      "楽楽精算",
+      "楽楽明細",
+      "invox受取請求書",
+      "invox電子帳簿保存",
+      "バクラク申請 (経費精算)",
+      "クラウド勤怠管理勤革時（KING OF TIME OEM製品）"
+     ],
+     "tables": 2,
+     "modified": "2026-09-21",
+     "primary": "",
+     "chars": 11213
+    }
+   ],
+   "action": "none",
+   "diffs": [
+    {
+     "type": "length",
+     "detail": "競合 11,213字 ／ 自社 5,654字（長さは成果を分けないため参考）"
+    }
+   ],
+   "facts": [
+    "当社はAI導入補助金の登録支援事業者として、対象ツールの選定から、申請に向けた相談・助言、採択後の実績報告まで一貫して支援しています（申請書類はお客様が作成し、当社は内容の確認と助言を行います）"
+   ]
+  },
+  {
+   "kw": "電子カルテ 導入 補助金",
+   "slug": "it-hojokin-denkaru-kyoyu-clinic",
+   "imp": 11,
+   "pos": 29.7,
+   "competitors": [
+    "ai-front-trend.jp",
+    "clius.jp",
+    "houkan.kaipoke.biz",
+    "issoh.co.jp",
+    "medibase.cloud"
+   ],
+   "their_pages": [
+    {
+     "url": "https://ai-front-trend.jp/electronic-medical-record-introduction-cost/?utm_source=openai",
+     "domain": "ai-front-trend.jp",
+     "heads": [
+      "電子カルテ導入費用の基本",
+      "導入費用の相場",
+      "クラウド型とオンプレミス型の費用比較",
+      "初期費用の内訳",
+      "月額費用・運用コストの詳細",
+      "医療機関別の電子カルテ導入費用",
+      "クリニック向け導入費用",
+      "病院向け導入費用",
+      "診療科別の費用相場",
+      "規模別の費用比較表",
+      "電子カルテの種類と特徴",
+      "クラウド型電子カルテの特徴",
+      "オンプレミス型電子カルテの特徴",
+      "レセプトコンピューターとの連携",
+      "各システムのメリット・デメリット",
+      "電子カルテの導入費用を抑えるポイント",
+      "補助金制度の活用方法",
+      "年の補助金情報",
+      "無料・低コストで始める方法",
+      "コスト削減のための選定ポイント"
+     ],
+     "tables": 5,
+     "modified": "2024-12-23",
+     "primary": "",
+     "chars": 8440
+    }
+   ],
+   "action": "rewrite",
+   "diffs": [
+    {
+     "type": "questions",
+     "detail": [
+      "電子カルテ導入費用の基本",
+      "導入費用の相場",
+      "クラウド型とオンプレミス型の費用比較",
+      "初期費用の内訳",
+      "月額費用・運用コストの詳細"
+     ]
+    }
+   ],
+   "facts": [
+    "当社はAI導入補助金の登録支援事業者として、対象ツールの選定から、申請に向けた相談・助言、採択後の実績報告まで一貫して支援しています（申請書類はお客様が作成し、当社は内容の確認と助言を行います）"
+   ]
+  },
+  {
+   "kw": "ai導入補助金",
+   "slug": "",
+   "imp": 10,
+   "pos": 38.7,
+   "competitors": [
+    "btncon.com",
+    "liftbaseinc.com",
+    "ngraph.jp",
+    "uravation.com",
+    "with-ai.jp"
+   ],
+   "their_pages": [
+    {
+     "url": "https://zen24.co.jp/lab/ai-dx-hojokin/",
+     "domain": "zen24.co.jp",
+     "heads": [
+      "助成金と補助金の違い",
+      "DX・AI活用に使える主な制度の早見表",
+      "研修とツール導入で使う制度が違う",
+      "申請までの流れ（共通）",
+      "申請の前に社内で準備しておくこと",
+      "よくある失敗",
+      "ゼンシンの支援",
+      "あわせて読みたい",
+      "参考資料・出典",
+      "AI活用のご相談（無料）",
+      "株式会社善 / 善のAX研究所",
+      "Related関連記事",
+      "生成AI研修に使える助成金｜人材開発支援助成金の条件と申請の流れ【2026年版】",
+      "生成AIの費用はいくら？ChatGPT・Gemini・Claudeの法人プランの",
+      "業務の見える化とは？やり方5ステップと書き出し項目"
+     ],
+     "tables": 2,
+     "modified": "2026-10-19",
+     "primary": "",
+     "chars": 5390
+    }
+   ],
+   "action": "new_article",
+   "diffs": [],
+   "why": "この語に答える自社の記事がありません（台帳へ積むかは kw_guard で決める）"
+  },
+  {
+   "kw": "農業 補助金 世界 比較",
+   "slug": "nougyou-hojokin-sekai-hikaku",
+   "imp": 0,
+   "pos": null,
+   "competitors": [
+    "agri-navi.com",
+    "cigs.canon",
+    "globalnote.jp",
+    "nochuri.co.jp",
+    "nohken.or.jp"
+   ],
+   "their_pages": [],
+   "action": "unread",
+   "diffs": [],
+   "why": "競合のページを読めませんでした（robots・上限・通信）"
+  },
+  {
+   "kw": "中小企業 省力化 投資 補助金",
+   "slug": "chusho-shoryokuka-toshi-hojokin",
+   "imp": 0,
+   "pos": null,
+   "competitors": [
+    "j-support.jp",
+    "listing-partners.com",
+    "planbase.co.jp",
+    "smart-hojokin.jp"
+   ],
+   "their_pages": [],
+   "action": "unread",
+   "diffs": [],
+   "why": "競合のページを読めませんでした（robots・上限・通信）"
+  },
+  {
+   "kw": "創業支援等事業者 補助金 個人事業主",
+   "slug": "sogyo-shien-hojokin-kojinjigyonushi",
+   "imp": 0,
+   "pos": null,
+   "competitors": [
+    "biz.moneyforward.com",
+    "fcci.or.jp",
+    "hitodeki.com",
+    "plus.vision-net.co.jp",
+    "portal.secure.freee.co.jp"
+   ],
+   "their_pages": [],
+   "action": "unread",
+   "diffs": [],
+   "why": "競合のページを読めませんでした（robots・上限・通信）"
   }
  ]
 }

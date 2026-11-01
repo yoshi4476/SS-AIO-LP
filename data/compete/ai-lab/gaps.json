@@ -2,51 +2,243 @@
  "site": "ai-lab",
  "ym": "2026-11",
  "generated": "2026-11-01",
- "read": 1,
- "robots_blocked": 0,
+ "read": 12,
+ "robots_blocked": 10,
  "items": [
   {
-   "kw": "aio対策 費用",
-   "slug": "aio-taisaku-donyu-hoho",
-   "imp": 16,
-   "pos": 6,
+   "kw": "歯科医院 aio対策",
+   "slug": "",
+   "imp": 40,
+   "pos": 19.6,
    "competitors": [
-    "0120.co.jp",
-    "ai-and-marketing.jp",
+    "adcal-inc.com",
+    "adooffer.com",
     "ai-search.techsuite.co.jp",
-    "aioj.jp",
-    "atoz-design.jp"
+    "aiomarketing.jp",
+    "approach-conductor.com"
    ],
    "their_pages": [
     {
-     "url": "https://ai-and-marketing.jp/blog-aio-cost.html?utm_source=openai",
-     "domain": "ai-and-marketing.jp",
+     "url": "https://ai-search.techsuite.co.jp/11438/",
+     "domain": "ai-search.techsuite.co.jp",
      "heads": [
-      "AIO対策の費用相場｜まず全体像を確認",
-      "公開料金を独自比較｜AIO対策会社はいくらから？",
-      "公式ページで確認できた料金一覧",
-      "料金は3か月で変わる",
-      "公開料金は同じ条件にそろえて読む",
-      "AIO対策の4つの料金体系",
-      "単発診断・現状分析型",
-      "記事制作・既存ページ修正型",
-      "月額コンサルティング・伴走型",
-      "計測ツール・実装込み支援型",
-      "AIO対策の料金が会社によって違う4つの理由",
-      "対象AIと質問数で調査量が変わる",
-      "ページ数とコンテンツ制作量で変わる",
-      "提案だけか実装まで含むかで変わる",
-      "サイトの外の対策まで含むかで変わる",
-      "予算別｜AIO対策でどこまでできる？",
-      "月5万円以下｜重要な質問とページに絞る",
-      "月10万〜30万円｜診断と制作を組み合わせる",
-      "月30万〜50万円｜複数AIを継続調査する",
-      "月50万〜100万円以上｜戦略から実装まで任せる"
+      "歯科医院のLLMO対策とは？SEO・MEOとの違いをまず理解する",
+      "LLMO（Large Language Model Optimization）の",
+      "SEO・MEOとの違いとは",
+      "LLMOとSEO・MEOは対立でなく補完関係",
+      "なぜ今、歯科医院にLLMO対策が必要なのか",
+      "患者の検索行動データに見るAIシフト",
+      "AI Overviewsとゼロクリック検索の増加",
+      "ポータル効果の低下と早期対応の希少性",
+      "歯科医院のLLMO対策12施策",
+      "情報基盤を固める4施策（①〜④）",
+      "専門性と技術で差をつける4施策（⑤〜⑧）",
+      "信頼と運用を固める4施策（⑨〜⑫）",
+      "診療メニュー別｜LLMO対策の優先度と広告ガイドラインの注意点",
+      "診療メニュー別のLLMO優先度マップ",
+      "症例写真掲載の限定解除要件",
+      "医療広告ガイドラインのNG表現",
+      "避けるべき旧来型SEOのNGパターン",
+      "歯科医院のLLMO対策にかかる費用相場と会社選び",
+      "院内対応と外注の費用相場",
+      "自院で完結できる30日実行プラン"
      ],
-     "tables": 4,
-     "modified": "2026-10-22",
+     "tables": 5,
+     "modified": "2026-10-15",
      "primary": "",
-     "chars": 19243
+     "chars": 8759
+    }
+   ],
+   "action": "new_article",
+   "diffs": [],
+   "why": "この語に答える自社の記事がありません（台帳へ積むかは kw_guard で決める）"
+  },
+  {
+   "kw": "歯科 llmo対策",
+   "slug": "",
+   "imp": 25,
+   "pos": 15.0,
+   "competitors": [
+    "ai-search.techsuite.co.jp",
+    "atoz-design.jp",
+    "bridge-world.jp",
+    "grill.co.jp",
+    "switchitmaker2.com"
+   ],
+   "their_pages": [
+    {
+     "url": "https://trilia.co.jp/dental-clinic-llmo/",
+     "domain": "trilia.co.jp",
+     "heads": [
+      "LLMOとは",
+      "LLMOとSEOの違い",
+      "歯科医院にLLMOが重要な理由",
+      "AI検索を使う患者が増えているから",
+      "AIの要約や回答が検索結果に出やすくなったから",
+      "歯科業界でLLMOの導入がまだ少ないから",
+      "AIがポータルサイトや口コミサイトも参照して回答するから",
+      "歯科医院のためのLLMO施策8選",
+      "専門分野ごとの症例と根拠を公開する",
+      "患者の質問に答えるFAQを整備する",
+      "歯科用語や保険制度の解説ページを作る",
+      "初診前のチェックリストと受診手順を用意する",
+      "診療ガイドラインや制度改正の最新情報を更新する",
+      "地域や診療領域に特化した情報発信を継続する",
+      "AIに読み取られやすい構造化データを実装する",
+      "Googleビジネスプロフィールとポータルサイトの医院情報を統一する",
+      "歯科医院のLLMO対策の効果を測定する方法",
+      "AIに実際に質問して回答を定点観測する",
+      "アクセス解析でAI経由の流入を確認する",
+      "LLMO計測ツールを活用する"
+     ],
+     "tables": 0,
+     "modified": "2026-09-23",
+     "primary": "",
+     "chars": 10946
+    }
+   ],
+   "action": "new_article",
+   "diffs": [],
+   "why": "この語に答える自社の記事がありません（台帳へ積むかは kw_guard で決める）"
+  },
+  {
+   "kw": "不動産 llmo",
+   "slug": "",
+   "imp": 99,
+   "pos": 39.8,
+   "competitors": [
+    "adcal-inc.com",
+    "akarumi.jp",
+    "atoz-design.jp",
+    "bridge-world.jp",
+    "digitalidentity.co.jp"
+   ],
+   "their_pages": [
+    {
+     "url": "https://atoz-design.jp/column/llmo-homebuilder-construction/",
+     "domain": "atoz-design.jp",
+     "heads": [
+      "LLMO対策とは何か｜SEO・MEOとの違いを理解する",
+      "LLMO＝Large Language Model Optimization（A",
+      "SEO・MEOとの違い：「順位」ではなく「引用」されるための施策",
+      "住宅業界におけるLLMO対策の重要性と適合性",
+      "工務店・ハウスメーカーがAI検索に載らない7つの原因",
+      "工務店・ハウスメーカーのLLMO対策に強いサイトマップ構成とは",
+      "トップ階層（会社・サービス構造をAIに伝える）",
+      "中階層（性能・工法・素材・設計カテゴリ）",
+      "下層階層（体験・口コミ・FAQ・イベント情報）",
+      "クロスリンク設計（構造×体験×専門性の連携）",
+      "工務店・ハウスメーカーが取り組むべきLLMO対策10の施策",
+      "① 会社・施工エリア・建築種別の構造化",
+      "② 施工事例をカテゴリ化（平屋／二世帯／狭小地など）",
+      "③ Before／Afterとalt補足でAIに文脈を伝える",
+      "④ FAQページに「費用」「工期」「ZEH」などを明示",
+      "⑤ 建築士・デザイナー・現場監督のプロフィール整備",
+      "⑥ Googleビジネスプロフィールを“住宅商品”として最適化",
+      "⑦ 定期的なブログ更新（構造・補助金・素材トレンド）",
+      "⑧ 見学会・構造説明動画を30秒に最適化",
+      "⑨ 「家づくり 何から始める」など悩み系キーワードをページ化"
+     ],
+     "tables": 8,
+     "modified": "2026-04-12",
+     "primary": "",
+     "chars": 20403
+    }
+   ],
+   "action": "new_article",
+   "diffs": [],
+   "why": "この語に答える自社の記事がありません（台帳へ積むかは kw_guard で決める）"
+  },
+  {
+   "kw": "クリニック llmo",
+   "slug": "",
+   "imp": 42,
+   "pos": 44.5,
+   "competitors": [
+    "ad-tomedical.co.jp",
+    "adcal-inc.com",
+    "bakuri.co.jp",
+    "clinic.s-suteki.co.jp",
+    "dam.co.jp"
+   ],
+   "their_pages": [
+    {
+     "url": "https://trilia.co.jp/clinic-llmo/",
+     "domain": "trilia.co.jp",
+     "heads": [
+      "クリニックのLLMOとは",
+      "LLMOとSEOの違い",
+      "クリニックにLLMOが重要な理由",
+      "AI回答が検索画面の上部に表示されやすいから",
+      "患者と家族がAIに相談する機会が増えているから",
+      "医療分野でE-E-A-Tの評価が強まっているから",
+      "クリニックのLLMO施策",
+      "診療科ごとの症状と治療のFAQを作る",
+      "医師の経歴と資格を明確に掲載する",
+      "症例や治療実績をガイドラインに沿って記載する",
+      "費用と保険適用の範囲をわかりやすく示す",
+      "受診の流れと予約方法を公開する",
+      "Googleビジネスプロフィールを最新化する",
+      "構造化データを実装する",
+      "llms.txtの導入を検討する",
+      "医療コラムで一次情報を引用して解説する",
+      "口コミへの返信方針を整える",
+      "クリニックのLLMOの効果測定",
+      "AI回答での露出を実際に確認する",
+      "AI検索ツールで引用を確認する"
+     ],
+     "tables": 0,
+     "modified": "2026-04-28",
+     "primary": "アンケート",
+     "chars": 9788
+    }
+   ],
+   "action": "new_article",
+   "diffs": [],
+   "why": "この語に答える自社の記事がありません（台帳へ積むかは kw_guard で決める）"
+  },
+  {
+   "kw": "歯科 ai 集客",
+   "slug": "shika-iin-shukyaku",
+   "imp": 33,
+   "pos": 8.5,
+   "competitors": [
+    "akabanedai-dental.com",
+    "ami-h.com",
+    "atoz-design.jp",
+    "dental-branding.jp",
+    "dentalbase.ai"
+   ],
+   "their_pages": [
+    {
+     "url": "https://atoz-design.jp/column/llmo-dental-clinic/",
+     "domain": "atoz-design.jp",
+     "heads": [
+      "歯科・歯医者 LLMO対策がAI検索で新しい集客の勝ちパターン",
+      "「検索→比較」から「AIに聞く→信頼して決める」へ",
+      "ChatGPT・Perplexity・GeminiなどのAI検索の影響とは",
+      "歯科医院がAIで“紹介されるか否か”が新たな集客分岐に",
+      "歯科・歯医者 LLMO対策とは？SEOやMEOとの違いと導入の意義",
+      "LLMO＝Large Language Model Optimization（A",
+      "SEO・MEOとの違い：「順位」ではなく「引用」される対策",
+      "歯科医院がAIに相性の良い3つの理由（施術の明確さ・悩みの言語化・専門性の表現）",
+      "歯科・歯医者がAIに載らない7つの原因とLLMO未対応の課題",
+      "歯科・歯医者が取り組むべきLLMO対策10選",
+      "歯科医院のLLMO対策におけるキーワード設計",
+      "【症状別キーワード】「歯が痛い」「親知らず 抜歯」「歯茎が腫れている」",
+      "【施術別キーワード】「ホワイトニング」「インプラント」「矯正治療」",
+      "【対象別キーワード】「小児歯科」「シニア向け 歯医者」「妊婦 歯科検診」",
+      "【地域＋ジャンル】「岡山 ホワイトニング」「駅名＋夜間診療」",
+      "【不安・悩み系】「歯医者 怖い」「治療 痛くない 歯医者」",
+      "歯科・歯医者 LLMO対策で実現するホームページ構造設計",
+      "Dentist/Service/FAQPage/Reviewなどのスキーマ実装",
+      "患者導線に合わせたサイトマップと構造ブロック設計",
+      "症状別・目的別・年代別ページの構成と文脈リンク設計"
+     ],
+     "tables": 6,
+     "modified": "2026-04-12",
+     "primary": "",
+     "chars": 13737
     }
    ],
    "action": "rewrite",
@@ -54,14 +246,262 @@
     {
      "type": "questions",
      "detail": [
-      "AIO対策の費用相場｜まず全体像を確認",
-      "公開料金を独自比較｜AIO対策会社はいくらから？",
-      "予算別｜AIO対策でどこまでできる？"
+      "ChatGPT・Perplexity・GeminiなどのAI検索の影響とは",
+      "歯科・歯医者 LLMO対策とは？SEOやMEOとの違いと導入の意義"
      ]
     },
     {
      "type": "length",
-     "detail": "競合 19,243字 ／ 自社 10,126字（長さは成果を分けないため参考）"
+     "detail": "競合 13,737字 ／ 自社 5,594字（長さは成果を分けないため参考）"
+    }
+   ],
+   "facts": [
+    "2020年から2026年10月までの集客支援は、AIO・SEO・MEOを合わせて累計3,200件以上で、そのうちMEOの運用が2,000件以上です",
+    "2020年3月創業、大阪市東成区を拠点に店舗集客とAI活用を支援しています",
+    "支援先の新しい会社は、ドメインの評価も既存のサイトも集客の土台も無い状態から3つのサイトを立ち上げました。2026年8月から10月16日までの約2か月半で、検索の平均順位は3サイトそれぞれ36.1位→18.2位、23.8位→10.4位、31.0位→14.3位に上がりました"
+   ]
+  },
+  {
+   "kw": "クリニック llmo対策",
+   "slug": "",
+   "imp": 27,
+   "pos": 50.0,
+   "competitors": [
+    "ad-tomedical.co.jp",
+    "adcal-inc.com",
+    "ilabs.jp",
+    "iryoto.jp",
+    "lany.co.jp"
+   ],
+   "their_pages": [
+    {
+     "url": "https://www.adcal-inc.com/column/clinic-llmo-5tips/",
+     "domain": "adcal-inc.com",
+     "heads": [
+      "クリニックのLLMO対策とは？AI時代に求められる新しい集患戦略",
+      "LLMOの定義とAIがクリニックを推奨する仕組み",
+      "SEO・MEOとの違いと補完関係",
+      "AI Overviewsの普及でクリニックの集患導線はどう変わるか",
+      "クリニックにLLMO対策が必要な理由",
+      "患者の情報収集行動がAIへシフトしている",
+      "医療分野はE-E-A-Tの評価が厳格に適用される",
+      "早期の取り組みが競合との差別化につながる",
+      "クリニックを探す患者はAIにどんな質問をするのか",
+      "症状・受診判断に関する質問",
+      "地域・アクセスに関する質問",
+      "費用・保険適用に関する質問",
+      "専門医・実績・口コミに関する質問",
+      "クリニックのLLMO対策は診療科によって優先施策が変わる",
+      "診療科別ページと症状別ページを分けて整備する",
+      "診療科ごとに「AIに聞かれる質問」を想定する",
+      "医療広告ガイドラインに配慮して情報を出す",
+      "クリニックのLLMO対策で実践すべき7つの施策【優先順位付き】",
+      "施策①：自院の基本情報をデジタル空間に漏れなく整備する",
+      "施策②：医師の経歴・資格・監修体制を明示する"
+     ],
+     "tables": 3,
+     "modified": "2026-06-03",
+     "primary": "",
+     "chars": 14812
+    }
+   ],
+   "action": "new_article",
+   "diffs": [],
+   "why": "この語に答える自社の記事がありません（台帳へ積むかは kw_guard で決める）"
+  },
+  {
+   "kw": "llmo 店舗集客",
+   "slug": "llmo-tenpo-shukyaku",
+   "imp": 23,
+   "pos": 3.4,
+   "competitors": [
+    "adv.tokyo-np.co.jp",
+    "assist-all.co.jp",
+    "atoz-design.jp",
+    "edgeconnect.co.jp",
+    "gyro-n.com"
+   ],
+   "their_pages": [
+    {
+     "url": "https://webridge.co.jp/llmo-agency/",
+     "domain": "webridge.co.jp",
+     "heads": [
+      "LLMO対策の代理店・パートナーを募集",
+      "LLMO対策の代理店をお考えの方へ",
+      "LLMO対策の代理店を募集中",
+      "取次契約と代理店契約を選択可能",
+      "当社のLLMO対策が 代理店様に選ばれる理由",
+      "代理店様の事例紹介",
+      "LLMO対策の代理店締結までの流れ",
+      "代理店契約に関するよくある質問",
+      "株式会社WeBridge"
+     ],
+     "tables": 1,
+     "modified": "2026-02-17",
+     "primary": "",
+     "chars": 3146
+    }
+   ],
+   "action": "none",
+   "diffs": [],
+   "facts": [
+    "2020年3月創業、大阪市東成区を拠点に店舗集客とAI活用を支援しています"
+   ]
+  },
+  {
+   "kw": "クリニック seo コンサル",
+   "slug": "clinic-seo-consulting-erabikata",
+   "imp": 43,
+   "pos": 25.0,
+   "competitors": [
+    "axone.co.jp",
+    "clinic-promotion.com",
+    "glcl.co.jp",
+    "gmotech.jp",
+    "google.com"
+   ],
+   "their_pages": [
+    {
+     "url": "https://medical-link.co.jp/marketing/12489/",
+     "domain": "medical-link.co.jp",
+     "heads": [
+      "そもそもSEO対策とは",
+      "クリニックに必要なSEO対策とは",
+      "コンテンツSEO",
+      "内部対策",
+      "外部対策",
+      "MEO対策",
+      "SEO対策のメリット",
+      "集患数の増加",
+      "採用・ブランディング",
+      "広告費の削減",
+      "SEO対策の3つのポイント",
+      "患者にとって有益なコンテンツを作成する",
+      "専門性を高める",
+      "医療広告ガイドラインを必ず遵守する",
+      "クリニックのSEO対策でおすすめの会社5選",
+      "ナイル株式会社",
+      "株式会社LANY",
+      "株式会社ParaWorks",
+      "平和医療合同会社",
+      "サクフリ株式会社"
+     ],
+     "tables": 6,
+     "modified": "2025-06-20",
+     "primary": "",
+     "chars": 8089
+    }
+   ],
+   "action": "none",
+   "diffs": [],
+   "facts": [
+    "2020年から2026年10月までにSEO対策の運用を37件、2026年2月からAIO対策の運用を22件支援しています（コンサルティングのみはSEOが113件、AIOが43件）",
+    "2026年10月までに、AIOの運用を全て任された不動産会社は4社、AIOのコンサルティングのみの不動産会社は12社です"
+   ]
+  },
+  {
+   "kw": "税理士 seo",
+   "slug": "",
+   "imp": 17,
+   "pos": 39.8,
+   "competitors": [
+    "altbase.co.jp",
+    "coomil.co.jp",
+    "grill.co.jp",
+    "leadcreation.co.jp",
+    "sider-pro.com"
+   ],
+   "their_pages": [
+    {
+     "url": "https://coomil.co.jp/column/tax-accountant-office/",
+     "domain": "coomil.co.jp",
+     "heads": [
+      "税理士の集客が難しくなっている背景と課題",
+      "税理士の競争環境が変化している",
+      "会計ソフト・クラウドの普及で「簡単な仕事」が減っている",
+      "紹介頼み・相見積もりサイト頼みの限界",
+      "集客ができない税理士事務所の特徴",
+      "税理士が集客方法を選ぶ前に整理すべき3つの軸",
+      "どんな顧客に来てほしいか（ターゲットの明確化）",
+      "何を強みにするか（専門分野・業界特化の設計）",
+      "ビジネスモデル・単価設計",
+      "開業後の税理士事務所に効果的な集客方法10選",
+      "ホームページ",
+      "ブログ/コラム記事",
+      "SNS（YouTube）",
+      "ビジネスプロフィールを登録し、MEO対策を行う",
+      "紹介",
+      "ポータルサイト・マッチングサイトへの掲載",
+      "リスティング広告などWeb広告",
+      "セミナー",
+      "DM（ダイレクトメール）",
+      "その他の集客方法について"
+     ],
+     "tables": 5,
+     "modified": "2026-06-18",
+     "primary": "アンケート",
+     "chars": 16011
+    }
+   ],
+   "action": "new_article",
+   "diffs": [],
+   "why": "この語に答える自社の記事がありません（台帳へ積むかは kw_guard で決める）"
+  },
+  {
+   "kw": "aio対策 費用",
+   "slug": "aio-taisaku-donyu-hoho",
+   "imp": 16,
+   "pos": 6,
+   "competitors": [
+    "0120.co.jp",
+    "ai-search.techsuite.co.jp",
+    "axone.co.jp",
+    "conmark.jp",
+    "exbk.jp"
+   ],
+   "their_pages": [
+    {
+     "url": "https://ai-search.techsuite.co.jp/4460/",
+     "domain": "ai-search.techsuite.co.jp",
+     "heads": [
+      "AIO対策の費用相場はいくら？結論の早見表",
+      "月額別でできることの早見表とは？",
+      "初期費用は何に使われるのか？",
+      "自社実施の費用はどのくらいか？",
+      "そもそもAIO対策とは？LLMOやGEOと費用は共通か",
+      "つの用語の関係をどう整理する？",
+      "呼び方が違っても費用が共通なのはなぜ？",
+      "なぜAIO対策の費用は相場一発で言えないのか",
+      "相場が固まらない理由とは？",
+      "同じ月額でも中身が違うのはなぜ？",
+      "施策別のAIO対策費用の内訳と目安は？",
+      "現状診断や分析にかかる費用は？",
+      "ページ最適化や記事制作の相場は？",
+      "技術実装や観測ツールの費用は？",
+      "契約形態別の料金体系はどれが合う？",
+      "単発と月額固定はどう使い分ける？",
+      "実装パートナー型と成果報酬型の違いは？",
+      "AIO対策の費用を左右する5つの要因とは？",
+      "費用が跳ねる条件はどこにある？",
+      "狙う媒体で費用が変わるのはなぜ？"
+     ],
+     "tables": 6,
+     "modified": "2026-10-13",
+     "primary": "",
+     "chars": 10798
+    }
+   ],
+   "action": "rewrite",
+   "diffs": [
+    {
+     "type": "questions",
+     "detail": [
+      "AIO対策の費用相場はいくら？結論の早見表",
+      "月額別でできることの早見表とは？",
+      "自社実施の費用はどのくらいか？",
+      "そもそもAIO対策とは？LLMOやGEOと費用は共通か",
+      "つの用語の関係をどう整理する？"
+     ]
     }
    ],
    "facts": [
@@ -69,6 +509,256 @@
     "当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています",
     "2020年から2026年10月までにSEO対策の運用を37件、2026年2月からAIO対策の運用を22件支援しています（コンサルティングのみはSEOが113件、AIOが43件）"
    ]
+  },
+  {
+   "kw": "リフォーム 集客 代行",
+   "slug": "reform-shukyaku-daikou",
+   "imp": 5,
+   "pos": 6.6,
+   "competitors": [
+    "gotta-ride.com",
+    "grill.co.jp",
+    "malnage.com",
+    "mirai-style.net",
+    "renovation-jyuku.com"
+   ],
+   "their_pages": [
+    {
+     "url": "https://mirai-style.net/column/34323/",
+     "domain": "mirai-style.net",
+     "heads": [
+      "リフォーム集客代行サービスとは",
+      "リフォーム集客代行サービスで依頼できる集客施策",
+      "SEO対策",
+      "リスティング広告運用",
+      "ランディングページ制作",
+      "SNSマーケティング",
+      "YouTube動画制作",
+      "リフォーム集客代行サービスのメリット",
+      "専門的な集客ノウハウを活用できる",
+      "時間とリソースを有効活用できる",
+      "データに基づき戦略を最適化できる",
+      "リフォーム集客代行サービスの注意点",
+      "コストが高額となる場合がある",
+      "代行サービスに依存してしまうリスクがある",
+      "リフォーム会社の集客を成功させるポイント",
+      "オンラインとオフラインのどちらも活用する",
+      "実績をアピールし信頼を構築する",
+      "SEO対策を欠かさない",
+      "${prefName}"
+     ],
+     "tables": 0,
+     "modified": "2026-10-21",
+     "primary": "",
+     "chars": 8610
+    }
+   ],
+   "action": "rewrite",
+   "diffs": [
+    {
+     "type": "questions",
+     "detail": [
+      "リフォーム集客代行サービスとは",
+      "リフォーム集客代行サービスの注意点"
+     ]
+    }
+   ],
+   "facts": [
+    "2020年から2026年10月までの集客支援は、AIO・SEO・MEOを合わせて累計3,200件以上で、そのうちMEOの運用が2,000件以上です",
+    "2020年3月創業、大阪市東成区を拠点に店舗集客とAI活用を支援しています",
+    "2023年4月から2026年9月までに経理代行を担当した9社では、月次の締めが平均で翌月20日から翌月8日に、約12日早まりました（最も早い会社は翌月5日）",
+    "支援先の新しい会社は、ドメインの評価も既存のサイトも集客の土台も無い状態から3つのサイトを立ち上げました。2026年8月から10月16日までの約2か月半で、検索の平均順位は3サイトそれぞれ36.1位→18.2位、23.8位→10.4位、31.0位→14.3位に上がりました"
+   ]
+  },
+  {
+   "kw": "aio対策 具体例",
+   "slug": "aio-taisaku-gutairei",
+   "imp": 0,
+   "pos": null,
+   "competitors": [
+    "ai-search.techsuite.co.jp",
+    "digital-marketing.jp",
+    "frank-pr.jp",
+    "geo-code.co.jp",
+    "hasshin-lab.comtri.jp"
+   ],
+   "their_pages": [
+    {
+     "url": "https://www.sora-michi.co.jp/blog/11461",
+     "domain": "sora-michi.co.jp",
+     "heads": [
+      "AIO（AI検索最適化）とは？従来のSEOとの違いと必要性",
+      "LLMO・GEOとは？AIOとの関係性を理解する",
+      "自社サイトでできるAIO対策の全体像【3ステップ】",
+      "AIOに強いコンテンツ構造とSEO設計のポイント",
+      "AIO施策の実行フローとおすすめツール・分析手法",
+      "AIO（AI検索最適化）の今すぐ始められるアクション",
+      "AIO/LLMO対策でお悩みの方へ",
+      "検討フェーズに合わせてご相談ください",
+      "分無料相談",
+      "資料請求・提案依頼"
+     ],
+     "tables": 2,
+     "modified": "2026-08-17",
+     "primary": "独自調査",
+     "chars": 8109
+    }
+   ],
+   "action": "rewrite",
+   "diffs": [
+    {
+     "type": "questions",
+     "detail": [
+      "AIO（AI検索最適化）とは？従来のSEOとの違いと必要性",
+      "LLMO・GEOとは？AIOとの関係性を理解する"
+     ]
+    },
+    {
+     "type": "primary",
+     "detail": "競合は自社集計の数字を出している（独自調査）"
+    }
+   ],
+   "facts": [
+    "当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装して計測しています",
+    "当社は自社サイトをAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています",
+    "2020年から2026年10月までにSEO対策の運用を37件、2026年2月からAIO対策の運用を22件支援しています（コンサルティングのみはSEOが113件、AIOが43件）"
+   ]
+  },
+  {
+   "kw": "注文住宅 seo対策",
+   "slug": "chumon-jutaku-seo-taisaku",
+   "imp": 32,
+   "pos": 19.4,
+   "competitors": [
+    "ai.media-labo.com",
+    "archrise-works.com",
+    "bakuyasu.techsuite.co.jp",
+    "luvicon.net",
+    "media-growth.co.jp"
+   ],
+   "their_pages": [],
+   "action": "unread",
+   "diffs": [],
+   "why": "競合のページを読めませんでした（robots・上限・通信）"
+  },
+  {
+   "kw": "歯科 集客",
+   "slug": "",
+   "imp": 30,
+   "pos": 30.2,
+   "competitors": [
+    "asantech.co.jp",
+    "assist-all.co.jp",
+    "gmotech.jp",
+    "meo-times.com",
+    "mkdesign-office.com"
+   ],
+   "their_pages": [],
+   "action": "new_article",
+   "diffs": [],
+   "why": "この語に答える自社の記事がありません（台帳へ積むかは kw_guard で決める）"
+  },
+  {
+   "kw": "集客 整骨院 コンサル",
+   "slug": "seikotsuin-shukyaku-seminar",
+   "imp": 18,
+   "pos": 44.2,
+   "competitors": [
+    "big-oasis.com",
+    "clinic-mkt.com",
+    "clius.jp",
+    "funai-healthcare.funaisoken.co.jp",
+    "google.com"
+   ],
+   "their_pages": [],
+   "action": "unread",
+   "diffs": [],
+   "why": "競合のページを読めませんでした（robots・上限・通信）"
+  },
+  {
+   "kw": "クリニック 口コミ 返信 ai",
+   "slug": "",
+   "imp": 17,
+   "pos": 24.8,
+   "competitors": [
+    "blog-clkaigyo.com",
+    "clinicdoctor.syukyaku-hp.jp",
+    "genai-ai.co.jp",
+    "kuchikomi-ai-iota.vercel.app",
+    "kuchikomi-clinic.com"
+   ],
+   "their_pages": [],
+   "action": "new_article",
+   "diffs": [],
+   "why": "この語に答える自社の記事がありません（台帳へ積むかは kw_guard で決める）"
+  },
+  {
+   "kw": "集客 コンサル",
+   "slug": "",
+   "imp": 17,
+   "pos": 22.6,
+   "competitors": [
+    "funwork2020.com",
+    "megumiya.biz",
+    "mktg-support.co.jp",
+    "mobinc.jp",
+    "renoword.com"
+   ],
+   "their_pages": [],
+   "action": "new_article",
+   "diffs": [],
+   "why": "この語に答える自社の記事がありません（台帳へ積むかは kw_guard で決める）"
+  },
+  {
+   "kw": "aio対策 相場",
+   "slug": "aio-taisaku-souba",
+   "imp": 0,
+   "pos": null,
+   "competitors": [
+    "0120.co.jp",
+    "ai-and-marketing.jp",
+    "ainformation.jp",
+    "aisearch.similarweb.com",
+    "axone.co.jp"
+   ],
+   "their_pages": [],
+   "action": "unread",
+   "diffs": [],
+   "why": "競合のページを読めませんでした（robots・上限・通信）"
+  },
+  {
+   "kw": "aio 導入事例",
+   "slug": "aio-donyu-jirei",
+   "imp": 0,
+   "pos": null,
+   "competitors": [
+    "0120.co.jp",
+    "digital-marketing.jp",
+    "fsi.co.jp",
+    "glcl.co.jp",
+    "lany.co.jp"
+   ],
+   "their_pages": [],
+   "action": "unread",
+   "diffs": [],
+   "why": "競合のページを読めませんでした（robots・上限・通信）"
+  },
+  {
+   "kw": "不動産 集客 ホームページ",
+   "slug": "fudousan-shukyaku-homepage",
+   "imp": 0,
+   "pos": null,
+   "competitors": [
+    "fc.housedo.co.jp",
+    "gohp.jp",
+    "miraie-net.com",
+    "property-force.jp",
+    "reblo.jp"
+   ],
+   "their_pages": [],
+   "action": "unread",
+   "diffs": [],
+   "why": "競合のページを読めませんでした（robots・上限・通信）"
   }
  ]
 }
