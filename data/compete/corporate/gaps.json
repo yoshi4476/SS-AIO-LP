@@ -1,0 +1,57 @@
+{
+ "site": "corporate",
+ "ym": "2026-11",
+ "generated": "2026-11-01",
+ "read": 1,
+ "robots_blocked": 0,
+ "items": [
+  {
+   "kw": "バックオフィス bpo",
+   "slug": "backoffice-bpo-toha",
+   "imp": 103,
+   "pos": 19.0,
+   "competitors": [
+    "backofficeforce.jp",
+    "bewith.net",
+    "bpo-pro.org",
+    "datt.co.jp",
+    "fujiko-san.com"
+   ],
+   "their_pages": [
+    {
+     "url": "https://backofficeforce.jp/media/backoffice/bpo/",
+     "domain": "backofficeforce.jp",
+     "heads": [
+      "バックオフィスBPOとは",
+      "BPOできるバックオフィス業務の一覧",
+      "経理",
+      "人事・労務",
+      "総務",
+      "法務",
+      "庶務",
+      "バックオフィスBPOのメリット・デメリット",
+      "バックオフィスBPOのメリット",
+      "バックオフィスBPOのデメリット",
+      "バックオフィスBPOを活用する流れ",
+      "①導入目的と対象業務を明確にする",
+      "②BPO事業会社を選定する",
+      "③移行手順を整理する",
+      "④運用しながらモニタリング・改善する",
+      "バックオフィスBPO事業会社を選ぶポイント",
+      "会社の方針とマッチしているか",
+      "業務範囲の広さと対応力はどのくらいか",
+      "セキュリティ対策は適切か",
+      "実績は豊富か"
+     ],
+     "tables": 0,
+     "modified": "2026-03-17",
+     "primary": "",
+     "chars": 7075
+    }
+   ],
+   "action": "none",
+   "diffs": [],
+   "facts": []
+  }
+ ]
+}

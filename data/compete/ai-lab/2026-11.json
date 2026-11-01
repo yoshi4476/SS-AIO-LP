@@ -1,0 +1,402 @@
+{
+ "site": "ai-lab",
+ "ym": "2026-11",
+ "measured": "2026-11-01",
+ "mode": "cache",
+ "status": "over_cap",
+ "gsc_window": "2026-09-30〜2026-10-28",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "summary": {
+  "kw_n": 20,
+  "ai": {
+   "answered_n": 1,
+   "ours_n": 0,
+   "share": null
+  },
+  "search": {
+   "ranked_n": 16,
+   "top10_n": 4,
+   "top10_rate": 0.25
+  },
+  "competitors": [],
+  "other_types": {
+   "public": [
+    "aspicjapan.org"
+   ],
+   "media": [
+    "giginc.co.jp",
+    "leadplus.co.jp",
+    "nexer.co.jp",
+    "prtimes.jp",
+    "shopowner-support.net"
+   ],
+   "video": [
+    "note.com"
+   ]
+  },
+  "engines": {
+   "ChatGPT": {
+    "answered": 1,
+    "ours": 0
+   },
+   "Gemini": {
+    "answered": 1,
+    "ours": 0
+   },
+   "Perplexity": {
+    "answered": 1,
+    "ours": 0
+   },
+   "Claude": {
+    "answered": 1,
+    "ours": 0
+   }
+  },
+  "search_note": "競合の検索順位は取得していません（SERPを課金APIで取らないため）。自社の順位は Search Console の実測です"
+ },
+ "items": [
+  {
+   "kw": "不動産 llmo",
+   "pos": 39.8,
+   "imp": 99,
+   "url": "https://ai.7senses.co.jp/industry/fudosan/",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "クリニック seo コンサル",
+   "pos": 25.0,
+   "imp": 43,
+   "url": "https://ai.7senses.co.jp/seo/clinic-seo-consulting-erabikata/",
+   "slug": "clinic-seo-consulting-erabikata",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "クリニック llmo",
+   "pos": 44.5,
+   "imp": 42,
+   "url": "https://ai.7senses.co.jp/industry/clinic/",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "歯科医院 aio対策",
+   "pos": 19.6,
+   "imp": 40,
+   "url": "https://ai.7senses.co.jp/industry/shika/",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "歯科 ai 集客",
+   "pos": 8.5,
+   "imp": 33,
+   "url": "https://ai.7senses.co.jp/industry/shika/",
+   "slug": "shika-iin-shukyaku",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "注文住宅 seo対策",
+   "pos": 19.4,
+   "imp": 32,
+   "url": "https://ai.7senses.co.jp/seo/chumon-jutaku-seo-taisaku/",
+   "slug": "chumon-jutaku-seo-taisaku",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "歯科 集客",
+   "pos": 30.2,
+   "imp": 30,
+   "url": "https://ai.7senses.co.jp/industry/shika/",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "クリニック llmo対策",
+   "pos": 50.0,
+   "imp": 27,
+   "url": "https://ai.7senses.co.jp/industry/clinic/",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "歯科 llmo対策",
+   "pos": 15.0,
+   "imp": 25,
+   "url": "https://ai.7senses.co.jp/industry/shika/",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "llmo 店舗集客",
+   "pos": 3.4,
+   "imp": 23,
+   "url": "https://ai.7senses.co.jp/glossary/ec29cde02a/",
+   "slug": "llmo-tenpo-shukyaku",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "集客 整骨院 コンサル",
+   "pos": 44.2,
+   "imp": 18,
+   "url": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-seminar/",
+   "slug": "seikotsuin-shukyaku-seminar",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "クリニック 口コミ 返信 ai",
+   "pos": 24.8,
+   "imp": 17,
+   "url": "https://ai.7senses.co.jp/tools/kuchikomi-henshin/",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "税理士 seo",
+   "pos": 39.8,
+   "imp": 17,
+   "url": "https://ai.7senses.co.jp/lp/shigyou/",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "集客 コンサル",
+   "pos": 22.6,
+   "imp": 17,
+   "url": "https://ai.7senses.co.jp/glossary/9401d740f8/",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "aio対策 費用",
+   "pos": 6,
+   "imp": 16,
+   "url": "https://ai.7senses.co.jp/aio/aio-taisaku-donyu-hoho/",
+   "slug": "aio-taisaku-donyu-hoho",
+   "ai": {
+    "ChatGPT": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "ai-and-marketing.jp",
+      "mesut.co.jp",
+      "0120.co.jp"
+     ],
+     "urls": [
+      "https://ai-and-marketing.jp/blog-aio-cost.html?utm_source=openai",
+      "https://mesut.co.jp/aio-company/?utm_source=openai",
+      "https://0120.co.jp/blog/aio-37/?utm_source=openai"
+     ]
+    },
+    "Gemini": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "jinrai.co.jp",
+      "conmark.jp",
+      "aspicjapan.org",
+      "seedinc.jp",
+      "gmotech.jp",
+      "prtimes.jp",
+      "atoz-design.jp",
+      "geo-code.co.jp",
+      "giginc.co.jp"
+     ],
+     "urls": [
+      "https://jinrai.co.jp/en/blog/2026/03/24/aio-taisaku-osusume/",
+      "https://www.conmark.jp/column/cost-llmo-aio",
+      "https://www.aspicjapan.org/asu/article/73994",
+      "https://www.seedinc.jp/column/aio/aio-service-tool/",
+      "https://gmotech.jp/semlabo/seo/blog/seo-expence/",
+      "https://www.conmark.jp/service/llmo-geo-aiseo",
+      "https://jinrai.co.jp/en/blog/2026/03/18/geo-taisaku-hiyou-souba/",
+      "https://prtimes.jp/main/html/rd/p/000000500.000031201.html",
+      "https://atoz-design.jp/column/ai-website-cost/",
+      "https://prtimes.jp/main/html/rd/p/000000178.000118298.html",
+      "https://www.geo-code.co.jp/seo/mag/llmo-support-companies-guide/",
+      "https://giginc.co.jp/blog/giglab/aio-llmo-geo"
+     ]
+    },
+    "Perplexity": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "similarweb.com",
+      "0120.co.jp",
+      "tatap.jp",
+      "ai-search.techsuite.co.jp",
+      "shopowner-support.net",
+      "note.com",
+      "nexer.co.jp",
+      "jinrai.co.jp",
+      "coomil.co.jp"
+     ],
+     "urls": [
+      "https://www.similarweb.com/blog/ja/marketing/geo/aio-pricing/",
+      "https://0120.co.jp/blog/aio-37/",
+      "https://tatap.jp/knowledge/geo-generative-engine-optimization/",
+      "https://ai-search.techsuite.co.jp/4460/",
+      "https://0120.co.jp/blog/aio-166/",
+      "https://www.shopowner-support.net/customer_attraction_information/online/seo/aio-cost/",
+      "https://note.com/tsumugi__ai/n/n9e021147937d",
+      "https://nexer.co.jp/blog/aio-cost",
+      "https://jinrai.co.jp/en/blog/2026/03/24/aio-taisaku-osusume/",
+      "https://coomil.co.jp/column/llmo-cost/"
+     ]
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "nexer.co.jp",
+      "leadplus.co.jp",
+      "jinrai.co.jp",
+      "0120.co.jp",
+      "nex-t-planning.co.jp",
+      "aioj.jp",
+      "ai-search.techsuite.co.jp"
+     ],
+     "urls": [
+      "https://nexer.co.jp/blog/aio-cost",
+      "https://www.leadplus.co.jp/blog/aio-cost",
+      "https://jinrai.co.jp/en/blog/2026/04/06/aio-taisaku-hiyou/",
+      "https://0120.co.jp/blog/aio-37/",
+      "https://nex-t-planning.co.jp/aio-cost-guide/",
+      "https://0120.co.jp/blog/aio-68/",
+      "https://0120.co.jp/blog/aio-59/",
+      "https://aioj.jp/aio%E5%AF%BE%E7%AD%96%E3%81%AE%E8%B2%BB%E7%94%A8%E7%9B%B8%E5%A0%B4%E3%81%A8%E9%81%B8%E3%81%B3%E6%96%B9%EF%BD%9C%E5%8D%98%E7%99%BA%E3%83%BB%E5%88%9D%E6%9C%9F%E6%A7%8B%E7%AF%89%E3%83%BB%E6%9C%88/",
+      "https://ai-search.techsuite.co.jp/4460/"
+     ]
+    }
+   },
+   "ai_answered": true,
+   "ai_ours": false,
+   "ai_domains": {
+    "ai-and-marketing.jp": 1,
+    "mesut.co.jp": 1,
+    "0120.co.jp": 3,
+    "jinrai.co.jp": 3,
+    "conmark.jp": 1,
+    "aspicjapan.org": 1,
+    "seedinc.jp": 1,
+    "gmotech.jp": 1,
+    "prtimes.jp": 1,
+    "atoz-design.jp": 1,
+    "geo-code.co.jp": 1,
+    "giginc.co.jp": 1,
+    "similarweb.com": 1,
+    "tatap.jp": 1,
+    "ai-search.techsuite.co.jp": 2,
+    "shopowner-support.net": 1,
+    "note.com": 1,
+    "nexer.co.jp": 2,
+    "coomil.co.jp": 1,
+    "leadplus.co.jp": 1,
+    "nex-t-planning.co.jp": 1,
+    "aioj.jp": 1
+   }
+  },
+  {
+   "kw": "aio対策 相場",
+   "pos": null,
+   "imp": 0,
+   "url": "",
+   "slug": "aio-taisaku-souba",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "リフォーム 集客 代行",
+   "pos": 6.6,
+   "imp": 5,
+   "url": "https://ai.7senses.co.jp/aio/reform-shukyaku-daikou/",
+   "slug": "reform-shukyaku-daikou",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "aio 導入事例",
+   "pos": null,
+   "imp": 0,
+   "url": "",
+   "slug": "aio-donyu-jirei",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "aio対策 具体例",
+   "pos": null,
+   "imp": 0,
+   "url": "",
+   "slug": "aio-taisaku-gutairei",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "不動産 集客 ホームページ",
+   "pos": null,
+   "imp": 0,
+   "url": "",
+   "slug": "fudousan-shukyaku-homepage",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  }
+ ]
+}

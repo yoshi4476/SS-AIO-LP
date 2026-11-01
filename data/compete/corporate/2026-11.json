@@ -1,0 +1,368 @@
+{
+ "site": "corporate",
+ "ym": "2026-11",
+ "measured": "2026-11-01",
+ "mode": "cache",
+ "status": "over_cap",
+ "gsc_window": "2026-09-30〜2026-10-28",
+ "engines": [
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Perplexity"
+ ],
+ "summary": {
+  "kw_n": 20,
+  "ai": {
+   "answered_n": 1,
+   "ours_n": 0,
+   "share": null
+  },
+  "search": {
+   "ranked_n": 15,
+   "top10_n": 2,
+   "top10_rate": 0.133
+  },
+  "competitors": [],
+  "other_types": {
+   "media": [
+    "pasona.co.jp"
+   ],
+   "portal": [
+    "employment.en-japan.com"
+   ]
+  },
+  "engines": {
+   "ChatGPT": {
+    "answered": 0,
+    "ours": 0
+   },
+   "Gemini": {
+    "answered": 0,
+    "ours": 0
+   },
+   "Perplexity": {
+    "answered": 1,
+    "ours": 0
+   },
+   "Claude": {
+    "answered": 1,
+    "ours": 0
+   }
+  },
+  "search_note": "競合の検索順位は取得していません（SERPを課金APIで取らないため）。自社の順位は Search Console の実測です"
+ },
+ "items": [
+  {
+   "kw": "経理課",
+   "pos": 6.1,
+   "imp": 151,
+   "url": "https://corp.7senses.co.jp/blog/keiri-bu-keiri-ka-chigai",
+   "slug": "keiri-bu-keiri-ka-chigai",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "バックオフィス bpo",
+   "pos": 19.0,
+   "imp": 103,
+   "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha",
+   "slug": "backoffice-bpo-toha",
+   "ai": {
+    "ChatGPT": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    },
+    "Perplexity": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "pasona.co.jp",
+      "backofficeforce.jp",
+      "ntt.com",
+      "bewith.net",
+      "solution.bell24.co.jp",
+      "office-expo.jp",
+      "datt.co.jp",
+      "ntt-nexia.co.jp",
+      "persol-bd.co.jp",
+      "employment.en-japan.com"
+     ],
+     "urls": [
+      "https://www.pasona.co.jp/clients/service/column/bpo/back-office-bpo/",
+      "https://backofficeforce.jp/media/backoffice/bpo/",
+      "https://www.ntt.com/bizon/glossary/e-b/bpo.html",
+      "https://www.bewith.net/service/bpo-service/back-office/",
+      "https://www.solution.bell24.co.jp/ja/useful/column/00062_service/",
+      "https://www.office-expo.jp/hub/ja-jp/blog/article-40.html",
+      "https://www.datt.co.jp/back-office-bpo/",
+      "https://www.ntt-nexia.co.jp/column/0070.html",
+      "https://www.persol-bd.co.jp/service/bpo/s-bpo/column/bpo-selection/",
+      "https://employment.en-japan.com/desc_1386532/"
+     ]
+    },
+    "Claude": {
+     "answered": true,
+     "ours": false,
+     "domains": [
+      "pasona.co.jp",
+      "persol-bd.co.jp",
+      "zeroin.co.jp",
+      "fujiko-san.com",
+      "solution.bell24.co.jp",
+      "pasona-ns.co.jp",
+      "kantec.ne.jp",
+      "bpo-pro.org",
+      "marunagekanri.com"
+     ],
+     "urls": [
+      "https://www.pasona.co.jp/clients/service/column/bpo/back-office-bpo/",
+      "https://www.persol-bd.co.jp/service/bpo/s-stepbase/column/00012/",
+      "https://www.zeroin.co.jp/soumuservice/blog/231006/",
+      "https://fujiko-san.com/blog/backoffice-bpo/",
+      "https://www.solution.bell24.co.jp/ja/useful/column/00062_service/",
+      "https://www.pasona-ns.co.jp/column_wp/detail/15057.html",
+      "https://kantec.ne.jp/blog/what-is-back-office-bpo/",
+      "https://bpo-pro.org/",
+      "https://marunagekanri.com/outsourcing/info_backoffice_1003/"
+     ]
+    }
+   },
+   "ai_answered": true,
+   "ai_ours": false,
+   "ai_domains": {
+    "pasona.co.jp": 2,
+    "backofficeforce.jp": 1,
+    "ntt.com": 1,
+    "bewith.net": 1,
+    "solution.bell24.co.jp": 2,
+    "office-expo.jp": 1,
+    "datt.co.jp": 1,
+    "ntt-nexia.co.jp": 1,
+    "persol-bd.co.jp": 2,
+    "employment.en-japan.com": 1,
+    "zeroin.co.jp": 1,
+    "fujiko-san.com": 1,
+    "pasona-ns.co.jp": 1,
+    "kantec.ne.jp": 1,
+    "bpo-pro.org": 1,
+    "marunagekanri.com": 1
+   }
+  },
+  {
+   "kw": "経理補助とは",
+   "pos": 6.3,
+   "imp": 48,
+   "url": "https://corp.7senses.co.jp/blog/keiri-jimu-hojo-chigai",
+   "slug": "keiri-jimu-hojo-chigai",
+   "ai": {
+    "Gemini": {
+     "answered": false,
+     "ours": false,
+     "domains": [],
+     "urls": []
+    }
+   },
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "経理アウトソーシング 相場",
+   "pos": 21.4,
+   "imp": 48,
+   "url": "https://corp.7senses.co.jp/blog/keiri-outsourcing-hiyou-souba",
+   "slug": "keiri-outsourcing-hiyou-souba",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "経理 会計 違い",
+   "pos": 29.0,
+   "imp": 45,
+   "url": "https://corp.7senses.co.jp/blog/kaikei-keiri-chigai",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "経理アウトソーシング 費用",
+   "pos": 18.8,
+   "imp": 42,
+   "url": "https://corp.7senses.co.jp/blog/keiri-outsourcing-hiyou-souba",
+   "slug": "keiri-outsourcing-hiyou-souba",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "請求書の 書き方 個人",
+   "pos": 10.2,
+   "imp": 36,
+   "url": "https://corp.7senses.co.jp/blog/seikyusho-kakikata-kojin",
+   "slug": "seikyusho-kakikata-kojin",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "経理代行 相場",
+   "pos": 24.7,
+   "imp": 36,
+   "url": "https://corp.7senses.co.jp/blog/keiri-daiko-kojin-jigyonushi",
+   "slug": "keiri-daiko-kojin-jigyonushi",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "経理 会計",
+   "pos": 16.9,
+   "imp": 33,
+   "url": "https://corp.7senses.co.jp/blog/kaikei-keiri-chigai",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "経理 財務 違い",
+   "pos": 43.2,
+   "imp": 33,
+   "url": "https://corp.7senses.co.jp/blog/keiri-zaimu-chigai",
+   "slug": "keiri-zaimu-chigai",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "bpo バックオフィス",
+   "pos": 25.0,
+   "imp": 31,
+   "url": "https://corp.7senses.co.jp/blog/backoffice-bpo-toha",
+   "slug": "backoffice-bpo-toha",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "経理代行 料金表",
+   "pos": 17.8,
+   "imp": 29,
+   "url": "https://corp.7senses.co.jp/blog/kichodaiko-ryokinhyo-zeirishi",
+   "slug": "kichodaiko-ryokinhyo-zeirishi",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "個人 事業 主 経理 代行",
+   "pos": 26.0,
+   "imp": 25,
+   "url": "https://corp.7senses.co.jp/blog/keiri-daiko-kojin-jigyonushi",
+   "slug": "keiri-daiko-kojin-jigyonushi",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "経理 bpo",
+   "pos": 71.8,
+   "imp": 23,
+   "url": "https://corp.7senses.co.jp/topics/bpo",
+   "slug": "",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "経理 人手不足",
+   "pos": 21.6,
+   "imp": 23,
+   "url": "https://corp.7senses.co.jp/blog/keiri-hitode-busoku-taisaku",
+   "slug": "keiri-hitode-busoku-taisaku",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "請求書の作り方",
+   "pos": null,
+   "imp": 0,
+   "url": "",
+   "slug": "seikyusho-tsukurikata",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "適格 請求書 要件",
+   "pos": null,
+   "imp": 0,
+   "url": "",
+   "slug": "tekikaku-seikyusho-youken",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "請求書 テンプレ 無料",
+   "pos": null,
+   "imp": 0,
+   "url": "",
+   "slug": "seikyusho-template-muryou",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "sweeep 請求書",
+   "pos": null,
+   "imp": 0,
+   "url": "",
+   "slug": "sweeep-seikyusho",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  },
+  {
+   "kw": "経理業務委託",
+   "pos": null,
+   "imp": 0,
+   "url": "",
+   "slug": "keiri-gyomu-itaku",
+   "ai": {},
+   "ai_answered": false,
+   "ai_ours": false,
+   "ai_domains": {}
+  }
+ ]
+}
