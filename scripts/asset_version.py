@@ -14,7 +14,10 @@ from pathlib import Path
 
 EXT = ("webp", "jpg", "jpeg", "png", "avif")
 # 引用符・括弧・カンマ・空白の後ろから始まる、写真の拡張子で終わる場所（外のサイトの URL は対象にしない）
-URL = re.compile(r"(?<=[\"'(,\s])(?!https?:|//|data:)([\w./%-]+\.(?:" + "|".join(EXT) + r"))(\?v=[0-9a-f]{8})?(?=[\"')\s,])")
+# Next.js の書き出しは、ページの中のデータに \"/images/a.webp\" の形でも持つので、後ろの \ も区切りとして扱う
+URL = re.compile(r"(?<=[\"'(,\s])(?!https?:|//|data:)([\w./%-]+\.(?:" + "|".join(EXT) + r"))(\?v=[0-9a-f]{8})?(?=[\"')\s,\\])")
+# ページ・CSS と、Next.js がページ移動のときに読むデータ（.txt）
+SUFFIXES = (".html", ".css", ".txt")
 
 
 def fingerprint(path, memo):
@@ -42,7 +45,7 @@ def run(root):
     root = Path(root).resolve()
     memo, changed = {}, 0
     for page in root.rglob("*"):
-        if page.suffix not in (".html", ".css") or not page.is_file():
+        if page.suffix not in SUFFIXES or not page.is_file():
             continue
         text = page.read_text(encoding="utf-8", errors="surrogateescape")
         new = version_text(text, page, root, memo)

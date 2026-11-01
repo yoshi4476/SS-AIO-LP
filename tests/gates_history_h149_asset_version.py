@@ -18,7 +18,8 @@ def test_asset_version_marks_local_photos_only():
         (root / "blog").mkdir()
         html = ('<img src="/images/a.webp" srcset="/images/a.webp 1x, ../images/a.webp 2x">'
                 '<img src="https://zz.example/images/a.webp"><img src="/images/none.webp"><a href="/images/">x</a>'
-                '<div style="background:url(/images/a.webp)"></div>')
+                '<div style="background:url(/images/a.webp)"></div>'
+                '<script>self.__next_f.push([1,"{\\"src\\":\\"/images/a.webp\\"}"])</script>')
         (root / "blog" / "p.html").write_text(html, encoding="utf-8")
         AV.run(root)
         once = (root / "blog" / "p.html").read_text(encoding="utf-8")
@@ -28,8 +29,8 @@ def test_asset_version_marks_local_photos_only():
         AV.run(root)
         changed = (root / "blog" / "p.html").read_text(encoding="utf-8")
     marks = re.findall(r"a\.webp\?v=([0-9a-f]{8})", once)
-    check("自分の写真4か所（src・srcset 2つ・url()）に付き、外のサイトと無いファイルには付かない",
-          (len(marks), "zz.example/images/a.webp\"" in once, "none.webp\"" in once), (4, True, True))
+    check("自分の写真5か所（src・srcset 2つ・url()・Next.js のデータ）に付き、外のサイトと無いファイルには付かない",
+          (len(marks), "zz.example/images/a.webp\"" in once, "none.webp\"" in once), (5, True, True))
     check("何度かけても同じ・中身が変わると印が変わる", (once == twice, set(re.findall(r"\?v=([0-9a-f]{8})", changed)) != set(marks)),
           (True, True))
     for wf in ("deploy.yml", "pipeline.yml", "focus-mode.yml", "weekly-optimize.yml", "pipeline-multi.yml"):
