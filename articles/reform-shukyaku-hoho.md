@@ -78,6 +78,8 @@ faq:
 
 反響を増やす集客方法は、ポータルサイト・自社サイトのSEO・MEO・SNS・紹介・チラシ・Web広告の6つに整理できます。
 
+関連する内容は、[リフォーム・外壁塗装のLLMO](/aio/reform-gaiheki-tosou-llmo/)で解説しています。
+
 <figure><img src="/images/reform-shukyaku-hoho/houhou.png" alt="リフォームの集客方法6つ: ポータルサイトへの掲載、自社サイトのSEO・MEO対策、SNSでの施工事例発信、OB客・紹介の仕組み化、チラシ・折込広告、Web広告の活用" loading="lazy"><figcaption>リフォームの集客方法6つ</figcaption></figure>
 
 ### 方法1: ポータルサイトへの掲載

@@ -460,7 +460,7 @@
 "modified": "2026-09-25"
 },
 "koumuten-chumon-jutaku-llmo": {
-"hash": "8750d50713991d8e3eb3083436ad7764",
+"hash": "82e47f7552507509410126685aa96cd9",
 "modified": "2026-11-01"
 },
 "koumuten-hp-shukyaku": {
@@ -508,7 +508,7 @@
 "modified": "2026-09-04"
 },
 "llmo-taisaku-hoho": {
-"hash": "6ce0b8eb8b6d1fe6921dcf1a521bf8b1",
+"hash": "001af1a8da3bc13013a92d6baa6a391b",
 "modified": "2026-08-31"
 },
 "llmo-tenpo-shukyaku": {
@@ -543,6 +543,10 @@
 "hash": "28682268e33cd0c76452e0504285c60b",
 "modified": "2026-09-22"
 },
+"reform-gaiheki-tosou-llmo": {
+"hash": "ec4c662b1afee2147c0da84b7f0a756d",
+"modified": "2026-11-02"
+},
 "reform-hp-shukyaku": {
 "hash": "a23724749195e8265d61cbe4ec8c0450",
 "modified": "2026-08-31"
@@ -564,7 +568,7 @@
 "modified": "2026-10-08"
 },
 "reform-shukyaku-hoho": {
-"hash": "dec38950e6730a805c36af487f54bfb8",
+"hash": "4743ed29abb338f8359160853902aca1",
 "modified": "2026-08-06"
 },
 "saas-hikaku-kiji-taisaku": {

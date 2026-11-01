@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-01T00:00:00+09:00</updated>
+  <updated>2026-11-02T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>リフォーム・外壁塗装のLLMO｜AIの業者確認で外される4つの落とし穴</title>
+    <link href="https://ai.7senses.co.jp/aio/reform-gaiheki-tosou-llmo/"/>
+    <id>https://ai.7senses.co.jp/aio/reform-gaiheki-tosou-llmo/</id>
+    <updated>2026-11-02T00:00:00+09:00</updated>
+    <summary>リフォーム・外壁塗装のLLMOは、施主がAIに業者を探す・費用を調べる・業者を確かめる3つの場面に、自社の事実で答えられるよう整えることです。4つのAIの出典2,662件の調査では、探す質問の出典の54.5%が比較サイトでした。外される落とし穴と始め方を解説します。</summary>
+  </entry>
   <entry>
     <title>不動産会社ホームページの手数料説明で外す3つのNGと書く4項目</title>
     <link href="https://ai.7senses.co.jp/aio/fudousan-hp-tesuryo-setsumei/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/shigyou-portal-ai-kensaku/</id>
     <updated>2026-10-21T00:00:00+09:00</updated>
     <summary>士業のポータルサイトは、AIが地域で事務所を紹介するときの主な出典です。当社の100問の調査では探す質問の出典の63.1%が比較・紹介サイトでした。費用の質問では回答の97.4%が事務所の公式サイトを出典にしており、役割の分け方を整理します。</summary>
-  </entry>
-  <entry>
-    <title>AI検索対策を代理店に頼んだら何を準備する？最初の90日の進み方</title>
-    <link href="https://ai.7senses.co.jp/aio/ai-kensaku-taisaku-dairiten-junbi/"/>
-    <id>https://ai.7senses.co.jp/aio/ai-kensaku-taisaku-dairiten-junbi/</id>
-    <updated>2026-10-19T00:00:00+09:00</updated>
-    <summary>AI検索対策を代理店に頼んだら、計測の権限・開始時の数字・自社だけの話・判断する人の4つを先に用意します。当社のAIO運用10件では3か月以内に全件の平均順位が上がりました。最初の90日の進み方と数字の読み方、頼むのを待つ場合を整理します。</summary>
   </entry>
 </feed>
