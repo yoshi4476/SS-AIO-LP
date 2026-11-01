@@ -60,30 +60,78 @@ def area_map():
     return out
 
 
-def heat_html(sections, muted="#6b7a8d"):
+ARTICLES = "記事（全記事の合計）"
+MAX_PAGES = 6
+
+
+def page_key(page, article_prefix=None):
+    """区画を数えるページの名前。記事（article_prefix の下。コーポレートは /blog）は1つにまとめる。
+
+    記事の区画（冒頭・見出し・本文の途中の案内）はどの記事も同じ名前なので、合計して読める。
+    記事ごとに分けると、月次のヒートマップの紙と「CTAが下すぎる」の指摘が記事の数だけ増える
+    （コーポレートは記事170本超。2026-11 から記事にも区画を置いた）
+    """
+    pre = (article_prefix or "").rstrip("/")
+    if pre and page.startswith(pre + "/") and page.rstrip("/") != pre:
+        return ARTICLES
+    return page
+
+
+def sections_from_rows(rows, article_prefix=None):
+    """GA4 の (出来事, ページ, 件数) から、ページごとの区画の到達 [{name, page, n, pct}, …] を作る。
+
+    区画はページごとに数える。全ページを合算すると、訪問の多いページの区画が分母になり、
+    他ページの区画が一律「離脱大」に見える（LPの区画が到達41%あるのに15%と報告されていた）。
+    """
+    per_page = {}
+    for name, page, n in rows:
+        if not name.startswith("section_view_"):
+            continue
+        d = per_page.setdefault(page_key(page, article_prefix), {})
+        key = name[len("section_view_"):]
+        d[key] = d.get(key, 0) + n
+    secs = []
+    for page, d in sorted(per_page.items(), key=lambda kv: -sum(kv[1].values())):
+        base = max(d.values())
+        for k, v in sorted(d.items(), key=lambda kv: -kv[1]):
+            secs.append({"name": k, "page": page, "n": v, "pct": round(v / base * 100) if base else 0})
+    return secs
+
+
+def heat_html(sections, muted="#6b7a8d", own_html=True):
     """到達のヒートマップ。**ページ上の順に並べ、落ち幅の大きい所を名指しする。**
 
-    sections: monthly_report が GA4 から作る [{name, page, n, pct}, …]
+    sections: monthly_report が GA4 から作る [{name, page, n, pct}, …]（記事は page_key でまとめ済み）
+    own_html: 区画の並びを site/ の HTML から読むか。HTML が管制塔に無いサイト（コーポレートは Next.js の
+      別リポジトリ）は False。True のままだと、AI集客ラボの「/」の並びをコーポレートの「/」に当て、
+      全区画に「現在このページに無い区画」と付いていた
     """
     if not sections:
         return ('<p class="note">区画ごとの到達が計測されていません。'
                 '各区画に <code>data-area</code> を設置すると、翌月から'
                 '離脱位置が特定できます。</p>')
 
-    amap = area_map()
+    amap = area_map() if own_html else {}
     by_page = {}
     for s in sections:
         by_page.setdefault(s.get("page") or "/", {})[s["name"]] = s["n"]
 
     blocks = []
-    for page, counts in sorted(by_page.items(), key=lambda kv: -sum(kv[1].values())):
+    ranked = sorted(by_page.items(), key=lambda kv: -sum(kv[1].values()))
+    # 載せるページの数を絞るのは HTML が管制塔に無いサイトだけ（AI集客ラボの月次は前と同じ）
+    cap = len(ranked) if own_html else MAX_PAGES
+    for page, counts in ranked[:cap]:
         order = amap.get(page) or amap.get(page.rstrip("/") + "/") or []
         # HTMLに無い区画（消した区画など）は後ろにまとめる
         known = [(s, lab) for s, lab in order if s in counts]
-        # いまのHTMLに無い区画（消した区画・別ページの区画）。
-        # 内部名のままだと読む人が迷うので、そうと分かるよう添える
-        extra = [(s, f'{s}<span style="color:#9aa7b8">（現在このページに無い区画）</span>')
-                 for s in counts if s not in {k for k, _ in order}]
+        if order:
+            # いまのHTMLに無い区画（消した区画・別ページの区画）。
+            # 内部名のままだと読む人が迷うので、そうと分かるよう添える
+            extra = [(s, f'{s}<span style="color:#9aa7b8">（現在このページに無い区画）</span>')
+                     for s in counts if s not in {k for k, _ in order}]
+        else:
+            # 並びが分からない（HTML が管制塔に無い・記事の合計）。上の区画ほど到達が多いので、多い順に並べる
+            extra = [(s, s) for s, _ in sorted(counts.items(), key=lambda kv: -kv[1])]
         rows_src = known + extra
         if not rows_src:
             continue
@@ -110,19 +158,23 @@ def heat_html(sections, muted="#6b7a8d"):
                 f'<td>{note}</td></tr>')
             prev = pct
 
-        lead = (f'この順はページの上から下です。'
-                f'最も大きく落ちるのは<b>「{worst[1]}」の手前で −{worst[0]}pt</b>。'
-                if worst[0] else "この順はページの上から下です。")
+        head = "この順はページの上から下です。" if order else "この順は到達の多い順です（ページ上の並びは読めません）。"
+        lead = (f'{head}最も大きく落ちるのは<b>「{worst[1]}」の手前で −{worst[0]}pt</b>。'
+                if worst[0] else head)
+        title = page if page == ARTICLES else f"<code>{page}</code>"
         blocks.append(
             f'<p style="font-size:9pt;margin:6px 0 4px">'
-            f'<b>ページ: <code>{page}</code></b>　{lead}</p>'
-            f'<table><thead><tr><th>区画（上から順）</th><th>到達</th>'
+            f'<b>ページ: {title}</b>　{lead}</p>'
+            f'<table><thead><tr><th>{"区画（上から順）" if order else "区画（到達の多い順）"}</th><th>到達</th>'
             f'<th>到達率</th><th style="width:38%">到達率の帯</th>'
             f'<th>前の区画からの落ち</th></tr></thead>'
             f'<tbody>{"".join(rows)}</tbody></table>')
 
     if not blocks:
         return '<p class="note">区画の並びをサイトから読み取れませんでした。</p>'
+    if len(ranked) > cap:
+        blocks[-1] += (f'<p class="note">ほかに区画を計測しているページが{len(ranked) - cap}件あります'
+                       f'（到達の多い{cap}件だけを載せています）。</p>')
     # **1ページに詰めない。** ページごとに紙を分ける。
     # 区画が15ある /lp/ と6ある / を1枚に載せると、必ず溢れる
     out = [blocks[0]]

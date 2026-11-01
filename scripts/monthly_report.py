@@ -868,27 +868,21 @@ def fetch_real():
         # 区画はページごとに数える。全ページを合算すると、訪問の多いページの
         # 区画が分母になり、他ページの区画が一律「離脱大」に見える。
         # 実際それで、LPの区画が到達41%あるのに15%と報告されていた。
+        # 区画とスクロールの出来事だけを取る。出来事×ページの全部を400行で取っていたため、ページの多いサイト
+        # （コーポレートは記事170本超・2026-11 から記事にも区画）では、page_view などの行に押されて区画の行が欠けた
+        from google.analytics.data_v1beta.types import Filter, FilterExpression, FilterExpressionList
+        heat_filter = FilterExpression(or_group=FilterExpressionList(expressions=[
+            FilterExpression(filter=Filter(field_name="eventName", string_filter=Filter.StringFilter(
+                value=p, match_type=Filter.StringFilter.MatchType.BEGINS_WITH)))
+            for p in ("section_view_", "scroll_depth")]))
         rep2 = ga.run_report(RunReportRequest(
             property=prop, date_ranges=cur_range,
             dimensions=[Dimension(name="eventName"), Dimension(name="pagePath")],
-            metrics=[Metric(name="eventCount")], limit=400))
-        per_page = {}
-        for r in rep2.rows:
-            name = r.dimension_values[0].value
-            if not name.startswith("section_view_"):
-                continue
-            page = r.dimension_values[1].value
-            per_page.setdefault(page, {})
-            key = name.replace("section_view_", "")
-            per_page[page][key] = per_page[page].get(key, 0) + int(r.metric_values[0].value)
-
-        secs = []
-        for page, d in sorted(per_page.items(), key=lambda kv: -sum(kv[1].values())):
-            base = max(d.values())
-            for k, v in sorted(d.items(), key=lambda kv: -kv[1]):
-                secs.append({"name": k, "page": page, "n": v,
-                             "pct": round(v / base * 100) if base else 0})
-        data["sections"] = secs
+            metrics=[Metric(name="eventCount")], dimension_filter=heat_filter, limit=20000))
+        import report_heat as RH
+        data["sections"] = RH.sections_from_rows(
+            [(r.dimension_values[0].value, r.dimension_values[1].value, int(r.metric_values[0].value))
+             for r in rep2.rows], site_cfg().get("url_prefix"))
 
         # スクロール到達（25/50/75/90%）。区画を置いていないページでも、
         # どこまで読まれたかが分かる。site.js が scroll_depth として送っている
@@ -3016,7 +3010,7 @@ ol.head3 li::before {{ content: counter(h); position: absolute; left: 0; top: 10
 <p style="font-size:9.5pt">滞在時間の合計では、<span class="mark">どこで読むのをやめたか</span>が分かりません。
 セクションごとの到達数を先頭比で見ると、落ちる位置が特定できます。</p>
 <h3>セクション到達（ヒートマップ）</h3>
-{__import__('report_heat').heat_html(d.get('sections', []), MUTED)}{__import__('report_heat').depth_html(d.get('depths', {}))}
+{__import__('report_heat').heat_html(d.get('sections', []), MUTED, own_html=SITE_ID == _sites_mod.primary())}{__import__('report_heat').depth_html(d.get('depths', {}))}
 <h3 style="margin-top:14px">行動の内訳</h3>
 <table><tr><th style="width:28%">指標</th><th style="width:16%">件数</th><th>読み方</th></tr>
 <tr><td>セッション</td><td class="num">{(d.get("behavior") or {}).get("sessions", 0)}</td><td>訪問の総数</td></tr>
