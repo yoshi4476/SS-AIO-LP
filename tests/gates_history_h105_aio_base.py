@@ -72,6 +72,10 @@ def test_aio_check_hides_client_names_and_reports_by_mark():
 def test_diagram_wrap_keeps_latin_words_whole():
     print("\n■ 図の折り返し: 英数字の語を途中で割らない（小さい文字なら収まるときは小さくする）")
     import make_diagram as MD
+    # フォントの無い工程（研究の更新・月次）で font() が SystemExit を出し、門の全体が止まっていた（2026-11-01）
+    if not MD._font_path("bold"):
+        print("  WARN  日本語フォントが無いため、図の折り返しは確かめられません")
+        return
     d = MD.Pen()
     width = (MD.W - 2 * MD.M) / 5 - 40       # 手順の図（5つ横並び）の箱の中の幅
     lines, f, ok = MD.fit_block(d, "Google-Extendedを確かめる", width, 3, 24, 16)
