@@ -554,6 +554,24 @@ STICKY_AB = {
 }
 
 
+# 本文の相談の箱（原稿の <a class="cta-button" href="/lp/">AI検索対策の無料相談…</a>）の行き先と文言。
+# 2026-09〜10 の日本の訪問で、箱の表示は A案228・B案171、押下は両方0だった。同じ時期に記事の最初の章の
+# URL の入力欄は表示98に対し送信6で、サイトで一番押されたのも URL診断の実行。相談を決めた人向けの重い誘いを、
+# その場で現在地が分かる URL診断への入口に替え、文言は半々で出し分けて数える（ab_result.py が試験名で読む）。
+# 記事の入力欄の段（inline_tool_*）に混ぜないよう from は付けない。原稿は書き換えない（2026-11）
+BODY_SCAN = {"href": "/tools/url-check/", "cta": "article_body_url_check", "key": "body_scan",
+             "a": "御社のサイトを30秒で無料診断する", "b": "AIと検索に読まれているか無料で調べる"}
+
+
+def body_scan_cta(content):
+    """当サイトの LP（/lp/・/lp/<業種>/）へ向かう本文の相談ボタンだけを URL診断の入口にする。
+    外のサイト（経理・補助金）へのボタンと、印の付いたボタンはそのまま"""
+    t = BODY_SCAN
+    return re.sub(r'<a\s+class="cta-button"\s+href="/lp/(?:[a-z-]+/)?">[^<]*無料相談[^<]*</a>',
+                  f'<a class="cta-button" href="{t["href"]}" data-cta="{t["cta"]}" data-ab="{t["key"]}"'
+                  f' data-ab-b="{t["b"]}">{t["a"]}</a>', content)
+
+
 def sticky_ab(meta):
     key = STICKY_AB.get(sticky(meta)[1])
     return f' data-ab="{key[0]}" data-ab-b="{key[1]}"' if key else ""
@@ -911,6 +929,7 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     # 記事を見た544件に対しCTAのクリックは38件で、3サイトとも同じ段階で落ちている。
     # どの文言なら押されるかは推測では決まらないため、半々で出し分けて実測する。
     # 文言は記事ごとに書かず、ここで一括して当てる（350箇所を手で直さないため）。
+    content = body_scan_cta(content)
     content = re.sub(
         r'(<a\s+class="cta-button"(?![^>]*data-ab))',
         r'\1 data-ab="article_cta" data-ab-b="自社サイトの現状分析を無料でもらう"',

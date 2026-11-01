@@ -65,6 +65,8 @@ def tests():
     t = [("記事CTA", "ab_impression_", "cta_click_")]
     for key, _b in sorted(set(B.STICKY_AB.values())):
         t.append((f"固定ボタン {key}", f"ab_impression_{key}_", f"cta_click_{key}_"))
+    k = B.BODY_SCAN["key"]
+    t.append((f"本文の診断の入口 {k}", f"ab_impression_{k}_", f"cta_click_{k}_"))
     return t
 
 

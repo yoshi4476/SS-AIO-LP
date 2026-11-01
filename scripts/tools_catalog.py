@@ -106,7 +106,9 @@ def others_html(t):
         if items:
             rows.append(f'<div class="tools-grp"><h3>{E(gname)}</h3><div class="tools-sub">'
                         + "".join(_card(x, "tools_other") for x in items) + "</div></div>")
-    return ('<!-- tools:others -->\n<section class="tools-more tools-others" aria-label="ほかの無料ツール">\n'
+    # 区画の印（data-area）が無いと、ツールのページでどこまで読まれたかが数えられなかった（2026-11）
+    return ('<!-- tools:others -->\n<section class="tools-more tools-others" aria-label="ほかの無料ツール"'
+            ' data-area="ほかの無料ツール" data-area-id="others">\n'
             '  <h2>ほかの無料ツール</h2>\n  ' + "\n  ".join(rows)
             + '\n  <p class="tools-consult"><a href="/tools/" data-cta="tools_other_all">無料ツールの一覧へ</a>'
             ' ／ 結果の読み方や、何から直すかのご相談は <a href="/lp/#form" data-cta="tools_other_consult">無料相談</a></p>\n'

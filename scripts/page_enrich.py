@@ -194,13 +194,25 @@ def _e(s):
     return _h.escape(s, quote=True)
 
 
-def _parts(d, more):
+ENTRY = re.compile(r"^/(?:lp|contact|download|tools)(?:/|$)")
+
+
+def guide_cta(cta, u):
+    """「あわせて読む・使う」の入口リンクの印（例: url_check_guide_lp）。印が無いと site.js が並び順の番号つきの名前を
+    付け、塊を作り直すたびに名前が変わりえた（2026-11）。入口でない記事へのリンクは押下に数えないので付けない"""
+    if not cta or not ENTRY.match(u):
+        return ""
+    d = {"/lp/": "lp", "/lp/#form": "consult"}.get(u) or re.sub(r"\W+", "_", u.strip("/").split("/")[-1]) or "here"
+    return f' data-cta="{cta}_guide_{d}"'
+
+
+def _parts(d, more, cta=""):
     """区画ごとの HTML（使い方・わかること・向いている方・よくある質問・次に読む）"""
     steps = "".join(f"<li><b>{_e(a)}</b><span>{_e(b)}</span></li>" for a, b in d["steps"])
     learn = "".join(f"<div><dt>{_e(a)}</dt><dd>{_e(b)}</dd></div>" for a, b in d["learn"])
     who = "".join(f"<li>{_e(x)}</li>" for x in d["who"])
     faq = "".join(f"<details><summary>{_e(q)}</summary><p>{_e(a)}</p></details>" for q, a in d["faq"])
-    links = "".join(f'<a href="{u}">{_e(t)}</a>' for u, t in more)
+    links = "".join(f'<a href="{u}"{guide_cta(cta, u)}>{_e(t)}</a>' for u, t in more)
     src, alt = d["side"]
     return {
         "steps": f'<div class="enrich-block"><span class="en">How to use</span><h2>使い方は3ステップ</h2><ol class="enrich-steps">{steps}</ol></div>',
@@ -214,8 +226,8 @@ def _parts(d, more):
     }
 
 
-def _blocks(d, more, only=("steps", "learn", "who", "faq", "more")):
-    p = _parts(d, more)
+def _blocks(d, more, only=("steps", "learn", "who", "faq", "more"), cta=""):
+    p = _parts(d, more, cta)
     return '<div class="enrich">' + "".join(p[k] for k in only) + '</div>'
 
 
@@ -271,7 +283,7 @@ def apply(site: Path):
             s = re.sub(r'(<section class="hero"[^>]*>)',
                        lambda m: m.group(1) + f'<div class="tool-hero-ph" aria-hidden="true"><img src="{d["hero"]}" alt="{d.get('hero_alt', '利用場面')}のイメージ" decoding="async"></div>', s, count=1)
         more = _about_links(s) + d.get("more", [])
-        block = _blocks(d, more)
+        block = _blocks(d, more, cta=key.replace("-", "_"))
         # 説明の区画（このチェックについて 等）の直前に入れる
         s = _put(s, block, r'<section class="section"[^>]*>\s*<div class="section-head">\s*<span class="en">About</span>|<section class="section"[^>]*>\s*(?:<div[^>]*>\s*)?<h2>(?:このチェックについて|このツールについて|この診断について|このチェックでわかること)</h2>')
         if s != s0:

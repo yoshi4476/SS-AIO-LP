@@ -1595,6 +1595,13 @@ main.article .article-body .inline-tool .it-sub { margin: 0 0 .75rem; font-size:
 .inline-tool .it-form input[type=url]:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, .15); }
 .inline-tool .it-form .btn { flex: 0 0 auto; white-space: nowrap; }
 @media (max-width: 480px) { .inline-tool .it-form .btn { flex: 1 1 100%; } }
+/* 本文の箱（原稿の cta-box と cta-button）。見た目の定義が無く、箱もボタンも本文の下線リンクと同じに見えていた
+   （2026-09〜10 の表示 A228・B171 に対し押下0）。入力欄と同じ淡い箱と、.btn-primary と同じボタンにする */
+main.article .article-body .cta-box { margin: 1.8rem 0; padding: 1.1rem 1.25rem 1.2rem; border: 1px solid var(--sky-2); border-left: 4px solid var(--blue); border-radius: 14px; background: var(--sky); }
+main.article .article-body .cta-box p { margin: 0 0 .75rem; font-weight: 700; line-height: 1.65; color: var(--navy); }
+main.article .article-body a.cta-button { display: inline-flex; align-items: center; justify-content: center; padding: .8em 1.6em; border-radius: 12px; background: var(--blue); color: #fff; font-weight: 700; line-height: 1.5; text-decoration: none; box-shadow: 0 10px 28px -10px rgba(37,99,235,.65); transition: transform .25s var(--ease-out), background .2s; }
+main.article .article-body a.cta-button:hover { background: var(--blue-deep); transform: translateY(-2px); }
+@media (max-width: 480px) { main.article .article-body a.cta-button { display: flex; width: 100%; } }
 .scan-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; padding: .5rem .8rem calc(.5rem + env(safe-area-inset-bottom, 0px)); background: rgba(255, 255, 255, .96); box-shadow: 0 -8px 24px -12px rgba(7, 26, 56, .35); transform: translateY(110%); transition: transform .3s ease; }
 .scan-sticky.is-on { transform: none; }
 /* 帯の高さは 64px 以内（83px あり、上の固定ヘッダーと合わせて画面の約1/4を覆っていた） */
