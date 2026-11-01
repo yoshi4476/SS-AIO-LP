@@ -143,6 +143,32 @@ POINT_ANY = re.compile(r"前者|後者|[0-9０-９一二三四五六]つ目の(?
 # 採点の観点の検査（score_check では警告。auto_rewrite・agent_guard・publish_flow もこの一覧で止めない）
 SOFT = ("前の文を読まないと分からない文が無い", "仮の計算例がある", "決定支援:", "抽出の単位", "H2直下の1文が単体で通じる")
 HYPO = re.compile(r"(?:仮に|例えば|たとえば)[^。\n]{0,80}?\d")
+# 試算（仮の計算例）は実績と取り違えない書き方にする（2026-11-01。一次性の数字を増やすのに AI へ仮の実績を作らせず、
+# 前提つきの試算として書く運用にした。試算を結果・実績の言い方で書くと、作った数字を実績に見せる＝優良誤認になる）
+# 「試算表」（会計の帳票）と「試算します」「試算する方法」（読者への手順）は試算そのものではない
+ESTIMATE = re.compile(r"仮に|試算(?!表|し|する(?!と)|でき|ツール)")
+EST_NUM = re.compile(r"\d[\d,.]*\s*(?:万円|円|時間|分|件|枚|社|人|名|%|％|日|か月|ヶ月|本|回|割|倍)")
+AS_RESULT = re.compile(r"実績|当社調べ|弊社調べ|自社調べ|当社では|弊社では|お客様の|になりました|削減できました|減りました|"
+                       r"増えました|できました|達成しました|改善しました|削減されました|短縮されました")
+ASSUME = re.compile(r"仮に|すると|場合|と仮定|なら|前提|として|とき")
+
+
+def estimate_issues(body):
+    """(結果・実績の言い方をした試算, 前提の無い試算)。数字のある「試算」「仮に」の文だけを見る"""
+    text = re.sub(r"<[^>]+>", "", re.sub(r"```.*?```", "", body, flags=re.S))
+    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)     # リンク先の数字は見ない
+    as_result, no_assume = [], []
+    for line in text.splitlines():
+        if line.lstrip().startswith("#"):
+            continue
+        for s in (x.strip() for x in re.split(r"(?<=[。！？])", line)):
+            if not (ESTIMATE.search(s) and EST_NUM.search(s)):
+                continue
+            if AS_RESULT.search(s):
+                as_result.append(s[:50])
+            elif not ASSUME.search(s) and not line.lstrip().startswith("|"):    # 表の行は前提を別の列・前の文に書ける
+                no_assume.append(s[:50])
+    return as_result, no_assume
 
 
 def pointing_sentences(body, limit=6):
@@ -312,6 +338,11 @@ def run(slug, path=None):
     add("［警告］FAQ の答えの数字に、本文と同じ条件（母数・期間・含むもの）を書く", not scope, "、".join(scope[:2]), warn=True)
     add("仮の計算例がある（「仮に◯◯なら」で読者が自分の数字を当てはめられる）",
         bool(HYPO.search(re.sub(r"<[^>]+>", "", body_nc))), "")
+    est_result, est_bare = estimate_issues(body_nc)
+    add("試算・仮の数字を結果や実績の言い方で書かない（「になりました」「実績」「当社調べ」と同じ文に置かない）", not est_result,
+        "、".join(f"「{s}」" for s in est_result[:2]))
+    add("［警告］試算に前提を書く（「仮に◯◯とすると」「◯◯の場合」）", not est_bare,
+        "、".join(f"「{s}」" for s in est_bare[:2]), warn=True)
 
     # --- タイトル ---
     # 飾りの年号（【2026年最新】【2026年】）は自社GSCの実測でクリック率が負けた型（title_patterns）。
