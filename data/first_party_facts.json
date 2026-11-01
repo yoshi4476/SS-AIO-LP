@@ -659,6 +659,307 @@
       "as_of": "2026-10",
       "period": "〜2026-10",
       "verifiable": true
+    },
+    {
+      "id": "ai-lab-calc-d7e92c3404",
+      "sites": [
+        "ai-lab"
+      ],
+      "topic": [
+        "AIO・LLMO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "2026年5月に運用開始した10件のうち6件が1か月以内に主要クエリの平均順位が上がり、割合は60%です",
+      "source": "計算（元: dataset-aio-junni-madeno-tsukisuu）",
+      "as_of": "2026-09",
+      "verifiable": true,
+      "derived_from": [
+        "dataset-aio-junni-madeno-tsukisuu"
+      ],
+      "expr": "6/10*100",
+      "period": "2026-05〜2026-08",
+      "denominator": 10
+    },
+    {
+      "id": "ai-lab-calc-04ec982d3f",
+      "sites": [
+        "ai-lab"
+      ],
+      "topic": [
+        "AIO・LLMO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "2026年5月に運用開始した10件のうち8件が2か月以内に主要クエリの平均順位が上がり、割合は80%です",
+      "source": "計算（元: dataset-aio-junni-madeno-tsukisuu）",
+      "as_of": "2026-09",
+      "verifiable": true,
+      "derived_from": [
+        "dataset-aio-junni-madeno-tsukisuu"
+      ],
+      "expr": "8/10*100",
+      "period": "2026-05〜2026-08",
+      "denominator": 10
+    },
+    {
+      "id": "ai-lab-calc-ee85c2898e",
+      "sites": [
+        "ai-lab"
+      ],
+      "topic": [
+        "AIO・LLMO運用",
+        "SEO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "検索順位1〜3位の実測クリック率6.28%は、4〜10位の1.02%の約6.2倍です",
+      "source": "計算（元: dataset-kensaku-juni-ctr）",
+      "as_of": "2026-09",
+      "verifiable": true,
+      "derived_from": [
+        "dataset-kensaku-juni-ctr"
+      ],
+      "expr": "6.28/1.02",
+      "period": "2026-06-23〜2026-09-20",
+      "denominator": 7015
+    },
+    {
+      "id": "ai-lab-calc-f836f9b645",
+      "sites": [
+        "ai-lab"
+      ],
+      "topic": [
+        "MEO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "G-ranで12か月以上運用した800店舗のうち、12か月以内に順位が上がった割合53.3%と6か月以内の47.1%の差は6.2ポイントで、6か月超〜12か月の間に新たに順位が上がった店舗の割合にあたります",
+      "source": "計算（元: dataset-meo-kouka-madeno-tsukisuu）",
+      "as_of": "2026-09",
+      "verifiable": true,
+      "derived_from": [
+        "dataset-meo-kouka-madeno-tsukisuu"
+      ],
+      "expr": "53.3-47.1",
+      "period": "2023-10〜2026-08",
+      "denominator": 800
+    },
+    {
+      "id": "ai-lab-calc-60859c31d0",
+      "sites": [
+        "ai-lab"
+      ],
+      "topic": [
+        "MEO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "G-ranで運用開始から6か月の口コミ増加数は、飲食店135件に対し美容室105件で、飲食店は美容室の約1.3倍です",
+      "source": "計算（元: dataset-meo-kuchikomi-zouka-gyoushu）",
+      "as_of": "2026-09",
+      "verifiable": true,
+      "derived_from": [
+        "dataset-meo-kuchikomi-zouka-gyoushu"
+      ],
+      "expr": "135/105",
+      "period": "2023-10〜2026-08",
+      "denominator": 1000
+    },
+    {
+      "id": "ai-lab-calc-68ae724c8f",
+      "sites": [
+        "ai-lab"
+      ],
+      "topic": [
+        "不動産",
+        "AIO",
+        "順位",
+        "問い合わせ",
+        "名古屋"
+      ],
+      "claim": "不動産会社の支援で、名古屋の地域語での問い合わせは月6件から月12件に増え、2倍になりました（2026年4月ごろ〜10月の約6か月）",
+      "source": "計算（元: ailab-fudousan-nagoya）",
+      "as_of": "2026-10",
+      "verifiable": true,
+      "derived_from": [
+        "ailab-fudousan-nagoya"
+      ],
+      "expr": "12/6",
+      "period": "2026-04ごろ〜2026-10"
+    },
+    {
+      "id": "corporate-calc-6e364d017d",
+      "sites": [
+        "corporate"
+      ],
+      "topic": [
+        "経理BPO",
+        "バックオフィス",
+        "経理代行",
+        "業務効率化"
+      ],
+      "claim": "2023年4月〜2026年9月に経理代行・記帳代行を担当した48社のうち31社が継続中で、継続率は約64.6%です",
+      "source": "計算（元: keiri-bpo-10）",
+      "as_of": "2026-10",
+      "verifiable": true,
+      "derived_from": [
+        "keiri-bpo-10"
+      ],
+      "expr": "31/48*100",
+      "period": "2023-04〜2026-09",
+      "denominator": 48
+    },
+    {
+      "id": "corporate-calc-80aa9a5822",
+      "sites": [
+        "corporate"
+      ],
+      "topic": [
+        "自動化",
+        "効率化",
+        "会計ソフト",
+        "エクセル",
+        "銀行連携"
+      ],
+      "claim": "2023年4月〜2026年9月に銀行・カード連携へ切り替えた15社では入力作業が月平均20時間から6時間になり、約70%減少しました",
+      "source": "計算（元: corp-jidouka）",
+      "as_of": "2026-10",
+      "verifiable": true,
+      "derived_from": [
+        "corp-jidouka"
+      ],
+      "expr": "(20-6)/20*100",
+      "period": "2023-04〜2026-09",
+      "denominator": 20
+    },
+    {
+      "id": "corporate-calc-61f748b21d",
+      "sites": [
+        "corporate"
+      ],
+      "topic": [
+        "インボイス制度",
+        "請求書",
+        "免税事業者",
+        "外注"
+      ],
+      "claim": "2023年4月〜2026年9月にインボイス制度に対応した22社のうち、免税事業者の外注先への対応を相談したのは8社で、割合は約36.4%です",
+      "source": "計算（元: corp-invoice）",
+      "as_of": "2026-10",
+      "verifiable": true,
+      "derived_from": [
+        "corp-invoice"
+      ],
+      "expr": "(8/22)*100",
+      "period": "2023-04〜2026-09",
+      "denominator": 22
+    },
+    {
+      "id": "corporate-calc-fe01346bf5",
+      "sites": [
+        "corporate"
+      ],
+      "topic": [
+        "AIO・LLMO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "2026年5月にAIO運用を開始した10件のうち、1か月以内に主要クエリの平均順位が上がったのは6件で、割合は約60%です",
+      "source": "計算（元: dataset-aio-junni-madeno-tsukisuu）",
+      "as_of": "2026-09",
+      "verifiable": true,
+      "derived_from": [
+        "dataset-aio-junni-madeno-tsukisuu"
+      ],
+      "expr": "(6/10)*100",
+      "period": "2026-05〜2026-08",
+      "denominator": 10
+    },
+    {
+      "id": "corporate-calc-d32bbbbe72",
+      "sites": [
+        "corporate"
+      ],
+      "topic": [
+        "AIO・LLMO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "2026年5月にAIO運用を開始した10件のうち、2か月以内に主要クエリの平均順位が上がったのは8件で、割合は約80%です",
+      "source": "計算（元: dataset-aio-junni-madeno-tsukisuu）",
+      "as_of": "2026-09",
+      "verifiable": true,
+      "derived_from": [
+        "dataset-aio-junni-madeno-tsukisuu"
+      ],
+      "expr": "(8/10)*100",
+      "period": "2026-05〜2026-08",
+      "denominator": 10
+    },
+    {
+      "id": "corporate-calc-f836f9b645",
+      "sites": [
+        "corporate"
+      ],
+      "topic": [
+        "MEO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "G-ranで12か月以上運用した800店舗では、6か月以内に順位が上がった割合47.1%と12か月以内の53.3%の差は約6.2ポイントです",
+      "source": "計算（元: dataset-meo-kouka-madeno-tsukisuu）",
+      "as_of": "2026-09",
+      "verifiable": true,
+      "derived_from": [
+        "dataset-meo-kouka-madeno-tsukisuu"
+      ],
+      "expr": "53.3-47.1",
+      "period": "2023-10〜2026-08",
+      "denominator": 800
+    },
+    {
+      "id": "corporate-calc-60859c31d0",
+      "sites": [
+        "corporate"
+      ],
+      "topic": [
+        "MEO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "G-ranで運用を始めた店舗の6か月後の口コミ増加数は飲食店平均135件、美容室平均105件で、飲食店は美容室の約1.3倍です",
+      "source": "計算（元: dataset-meo-kuchikomi-zouka-gyoushu）",
+      "as_of": "2026-09",
+      "verifiable": true,
+      "derived_from": [
+        "dataset-meo-kuchikomi-zouka-gyoushu"
+      ],
+      "expr": "135/105",
+      "period": "2023-10〜2026-08",
+      "denominator": 1000
+    },
+    {
+      "id": "corporate-calc-ee85c2898e",
+      "sites": [
+        "corporate"
+      ],
+      "topic": [
+        "AIO・LLMO運用",
+        "SEO運用",
+        "一次データ",
+        "実測"
+      ],
+      "claim": "セブンセンシズが2026-06-23〜2026-09-20に計測した実測クリック率は1〜3位6.28%、4〜10位1.02%で、1〜3位は4〜10位の約6.2倍です",
+      "source": "計算（元: dataset-kensaku-juni-ctr）",
+      "as_of": "2026-09",
+      "verifiable": true,
+      "derived_from": [
+        "dataset-kensaku-juni-ctr"
+      ],
+      "expr": "6.28/1.02",
+      "period": "2026-06-23〜2026-09-20",
+      "denominator": 7015
     }
   ],
   "pending": [
