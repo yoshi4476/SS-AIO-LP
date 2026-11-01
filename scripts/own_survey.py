@@ -230,6 +230,15 @@ def claims(res):
     return out
 
 
+FULL = MAX_ENGINES * MAX_QUESTIONS   # 答えがこれに満たない結果は、同じ月でも次の日に測り直す
+
+
+def thin(res, today):
+    """1つの AI にしか聞けず答えが少なかった結果か（前の日の分だけ。同じ日に何度も聞かない）。
+    2026-11-01 は ChatGPT が答えず Gemini の5件だけになり、採点で「母数が小さい」と一次性を79点に止められた"""
+    return res.get("answers", 0) < FULL and res.get("date", "") < today
+
+
 def run(slug, force=False):
     """測って残す。同じ月に測った結果があれば使い回す（AI に聞き直さない）"""
     import quality_loop as Q
@@ -239,11 +248,14 @@ def run(slug, force=False):
     if not kw:
         return {}
     old = load(site, slug)          # 前の形の結果は load が空を返すので、同じ月でも測り直す
-    if old.get("ok") and not force and old.get("date", "")[:7] == date.today().isoformat()[:7]:
+    today = date.today().isoformat()
+    if old.get("ok") and not force and old.get("date", "")[:7] == today[:7] and not thin(old, today):
         return old
     res = measure(site, slug, text, kw)
     if not res.get("ok") and old.get("ok"):
         return old            # 聞けなかった回は、前に測った結果を消さない
+    if old.get("date", "")[:7] == today[:7] and res.get("answers", 0) <= old.get("answers", 0):
+        return old            # 同じ月の測り直しで答えが増えなかった回も、前の結果を残す（測った日を進めない）
     res["claims"] = claims(res)
     p = _path(site, slug)
     p.parent.mkdir(parents=True, exist_ok=True)

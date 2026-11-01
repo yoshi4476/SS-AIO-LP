@@ -716,11 +716,26 @@ def waiting_materials(slug, site, path=None):
         # 機械で作った材料（当社調べ・業種調査・自社の実測）や登録済みの声・相場を記事がまだ使っていなければ、待たずに直す
         # （運用者「材料の無い記事でも届くように」2026-10-21。依頼した材料が届くまで止めていたので、届かない記事が残った）
         return False
+    n, day = survey_of(slug, site)
+    if n > last[-1]["survey"] if "survey" in last[-1] else day > str(last[-1].get("at", ""))[:10]:
+        # 当社調べを測り直して答えが増えたら、それを材料に直す（止めた回は「母数が小さい」で一次性が届かなかった。
+        # 件数を残す前の止めた行は、止めた日より後に測り直したかで見る）
+        return False
     try:
         import material
         return material.fingerprint(site) == last[-1].get("materials")
     except Exception:  # noqa: BLE001  材料が読めなければ直しを止めない
         return False
+
+
+def survey_of(slug, site):
+    """当社調べで集めた答えの件数と測った日（測っていなければ 0 と空）"""
+    try:
+        import own_survey
+        res = own_survey.load(site, slug)
+        return int(res.get("answers") or 0), str(res.get("date") or "")
+    except Exception:  # noqa: BLE001
+        return 0, ""
 
 
 def tries_before(slug, path=None):
@@ -739,7 +754,8 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
     else:
         since = ""
     base = {"site": site, "slug": slug, "mode": mode}
-    if mode != "new" and waiting_materials(slug, site):
+    if mode != "new" and waiting_materials(slug, site) and (survey(slug, budget, base) or waiting_materials(slug, site)):
+        # 待つ前に、薄い当社調べ（1つの AI の数件だけ）は測り直す。同じ月の十分な結果は使い回し、AI に聞き直さない。
         # 材料が足りず一次性が届かなかった記事は、材料が増えるまで Claude で直さない（何度直しても事実を作らない限り上がらず、
         # 利用枠だけを使う。2026-10-20）。依頼は material_requests.json に残してある
         print(f"  … {name}: 材料（一次情報・体験・事例）の追加を待っています（改善中のまま。材料が増えた回に直します）")
@@ -830,7 +846,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         except Exception as e:  # noqa: BLE001
             print(f"  （材料の依頼を残せませんでした: {type(e).__name__}）")
     record({**base, "action": "hold", "state": state, "total": sc["total"], "rounds": prior + done, "since": since,
-            "axes": sc["axes"], "need": need, "materials": asked})
+            "axes": sc["axes"], "need": need, "materials": asked, "survey": survey_of(slug, site)[0]})
     if need and not published and shelve(slug):
         # 機械で作れる材料（当社調べ・業種調査・自社の実測）まで当てても一次性が届かない題は、材料が届くまでしまい、
         # 次の枠は材料のある題を書く（2026-10-22 運用者「シートがなくても基準点に行くように」。届かない下書きを
