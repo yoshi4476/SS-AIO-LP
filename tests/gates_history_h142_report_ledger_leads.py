@@ -68,6 +68,32 @@ def test_landing_judge_reads_cv_and_small_samples():
           [M.landing_judge(x)[0] for x in rows], ["計測外", "良好", "母数不足", "要改善", "良好"])
 
 
+def test_client_report_drops_operator_name_queries():
+    import monthly_report as M
+    import sites as S
+    print("\n■ 4. お客様名義の月次: お客様のサイトが当社の社名で出た検索語は表に出さない（社名が残って発行されなかった）")
+    seen = {}
+    mark = S.OPERATOR_MARKS[0]
+
+    def stop(d):
+        seen["q"] = [q["q"] for q in d["queries"]]
+        raise SystemExit(0)
+    old = (M.fetch_real, M.fetch_demo, M.analyze, M.issuer)
+    M.fetch_real = M.fetch_demo = lambda: {"queries": [{"q": f"{mark}株式会社"}, {"q": "zz 外注"}]}
+    M.analyze = stop
+    try:
+        for op in (False, True):
+            M.issuer = lambda op=op: {"operator": op}
+            try:
+                M._main()
+            except SystemExit:
+                pass
+            seen[op] = seen.pop("q")
+    finally:
+        M.fetch_real, M.fetch_demo, M.analyze, M.issuer = old
+    check("お客様名義では社名の語を外し、当社名義ではそのまま", (seen[False], len(seen[True])), (["zz 外注"], 2))
+
+
 def test_zero_detector_ignores_ten():
     import report_audit as RA
     print("\n■ 2. 「0件」の検出は「10件」「20件」を拾わない")

@@ -349,7 +349,10 @@ jobs:
           HUB_URL: ${{ secrets.HUB_URL }}
           HUB_SECRET: ""
         run: |
+          # 検算の門は図を描く（日本語フォントが要る）。無いと門が途中で止まり、改善の回が毎月捨てられていた（2026-11-01）
+          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1 & apt=$!
           npm install -g @anthropic-ai/claude-code@2.1.302 || true
+          wait $apt || echo "::warning::日本語フォントを入れられませんでした（改善の検算が止まります）"
           if ! python scripts/agent_guard.py --verify; then
             echo "::warning::改善の実行の作業場に鍵が残っていたため、AI を動かしませんでした"
             mkdir -p automation/logs

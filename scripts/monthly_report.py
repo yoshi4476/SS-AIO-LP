@@ -3540,6 +3540,11 @@ def main():
 
 def _main():
     d = fetch_demo() if DEMO else fetch_real()
+    if not issuer()["operator"]:
+        # お客様のサイトが当社の社名の検索で出た語は、お客様の検索需要ではない。表と「勝ちクエリ」に社名が残り、
+        # 月次が発行されなかった（2026-11-01）
+        d["queries"] = [q for q in d.get("queries") or []
+                        if not any(m in str(q.get("q", "")) for m in _sites_mod.OPERATOR_MARKS)]
     a = analyze(d)
     html = render(d, a)
     leak = issuer_leaks(html)
