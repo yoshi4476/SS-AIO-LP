@@ -393,7 +393,7 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
     eng = eng if eng is not None else engines(cache_only, site=sid)
     usage = usage if usage is not None else load_usage()
     cap, used = ai_cap(cfg), usage.get(ym, {}).get(sid, 0)
-    status, need = "ok", 0
+    status, need, per_kw = "ok", 0, {}
     if not cache_only:
         need = need_calls(kws, list(eng), site=sid)
         print(f"   {sid}: {len(kws)}語 × AI {len(eng)}つ（{', '.join(eng) or 'なし'}）。新しく聞く {need}回"
@@ -402,10 +402,21 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
             print(f"COMPETE_EST={sid}:{need}")
             return None
         if used + need > cap:
-            print(f"要対応: {cfg['name']} の競合比較は月の上限（AIに新しく聞く {cap}回）を超えるため、"
-                  f"AIには聞きませんでした（必要 {need}回・残り {max(cap - used, 0)}回）。"
-                  f"キャッシュにある答えだけで出します。上限は sites/{sid}.json の compete.ai_cap")
-            eng, status = engines(True, site=sid), "over_cap"
+            # 20語×4つ＝80回が上限60回を毎月超え、1回も聞かずに全部をキャッシュで出していた（2026-11-01）。
+            # 上限の残りに収まる語（順位の高い順）だけ聞き、残りの語はキャッシュで出す
+            left, cached = max(cap - used, 0), engines(True, site=sid)
+            for kw in kws:
+                n = need_calls([kw], list(eng), site=sid)
+                if n > left:
+                    per_kw[kw] = cached
+                else:
+                    left -= n
+            need = max(cap - used, 0) - left
+            status = "partial" if need else "over_cap"
+            print(f"   {sid}: 月の上限（新しく聞く {cap}回）の残りで {len(kws) - len(per_kw)}語を聞き、"
+                  f"{len(per_kw)}語はキャッシュで出します（上限は sites/{sid}.json の compete.ai_cap）")
+            if status == "over_cap":
+                eng = cached
     elif dry:
         return None
     if not eng and status == "ok":
@@ -413,7 +424,8 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
     items = []
     for kw in kws:
         pos, imp, url = rank_of(kw, by)
-        ai = ask(kw, eng, mine, operator) if eng else {}
+        e = per_kw.get(kw, eng)
+        ai = ask(kw, e, mine, operator) if e else {}
         doms = {}
         for r in ai.values():
             for d in r.get("domains") or []:
@@ -421,11 +433,12 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
         items.append({"kw": kw, "pos": pos, "imp": imp, "url": url, "slug": slug_for_kw(kw, url), "ai": ai,
                       "ai_answered": any(r.get("answered") for r in ai.values()),
                       "ai_ours": any(r.get("ours") for r in ai.values()), "ai_domains": doms})
-    if status == "ok" and not cache_only:
+    if status in ("ok", "partial") and not cache_only:
         usage.setdefault(ym, {})[sid] = used + need
         save_usage(usage)
     rec = {"site": sid, "ym": ym, "measured": date.today().isoformat(),
            "mode": "cache" if cache_only or status == "over_cap" else "live", "status": status,
+           "cached_kws": len(per_kw),
            "gsc_window": window, "engines": sorted(eng), "summary": summarize(items, mine, operator, declared_rivals(cfg)),
            "items": items}
     if prev:

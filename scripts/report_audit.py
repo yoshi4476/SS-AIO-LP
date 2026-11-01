@@ -18,6 +18,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+# 「リード 10件」の「0件」を拾わないよう、0 の前に数字が無いことを見る
+ZERO_LEADS = re.compile(r"(?:CV|リード)[^。]{0,8}(?<![0-9０-９,，])[0０]\s*件")
 
 
 def pdf_text(path):
@@ -72,7 +74,7 @@ def audit(pdf, month, through=None):
             bad.append(f"{key}（{v:,}）が本文に見当たりません")
 
     # ── 2. 「CV 0件」「0件」と書いていないか ───────────
-    if 真["リード"] and re.search(r"(CV|リード)[^。]{0,8}0\s*件", text):
+    if 真["リード"] and ZERO_LEADS.search(text):
         bad.append(f"リードは{真['リード']}件あるのに「0件」と書かれています")
     print(f"   「0件」の誤記 … {'★あり' if bad and '0件' in bad[-1] else 'なし'}")
 
@@ -129,6 +131,7 @@ def audit_group(pdf, month, through=None):
     end = through or M.month_end(month)
     tot = {"表示回数": 0, "クリック": 0, "リード": 0}
     per = []
+    zero_site = False
     # 合算レポートは自社のグループだけを足す（group_report.own_cfgs と同じ範囲）。全社で取り直すと、
     # お客様の数字が合計に入って照合が毎回食い違い、お客様の社の id と数字がログに出ていた（2026-10-20）
     import group_report as GR
@@ -143,13 +146,15 @@ def audit_group(pdf, month, through=None):
             ev = RV._ga_events(cfg["ga4_property_id"], start, end)
             lead = ev.get("lead_capture", 0)
             parts = sum(ev.get(k, 0) for k in RV.LEAD_PARTS)
-            if parts != lead:
-                per.append((cfg["id"], f"リードの傘{lead}と内訳{parts}が不一致"))
             # レポートの CV と同じ数え方（台帳の相談の数。台帳に無い社・期間は GA4 の送信）
             import lead_reconcile as LR
             from datetime import date as _d
             _lead = LR.leads(cfg["id"], _d.fromisoformat(start), _d.fromisoformat(end), ga4_n=lead)
+            # 載せる数が台帳の相談なら、GA4 の印のずれは載せる数字を誤らせない（止めて1通も出なかった。2026-11-01）
+            if parts != lead and _lead["source"] != "ledger":
+                per.append((cfg["id"], f"リードの傘{lead}と内訳{parts}が不一致"))
             lead = _lead["n"] if _lead["n"] is not None else lead
+        zero_site = zero_site or lead == 0
         tot["表示回数"] += imp
         tot["クリック"] += clk
         tot["リード"] += lead
@@ -162,7 +167,8 @@ def audit_group(pdf, month, through=None):
         print(f"   {key:<8} 合計 {v:>8,}  … 本文に {'OK' if found else '★見つからない'}")
         if not found and v:
             bad.append(f"合算の{key}（{v:,}）が本文に見当たりません")
-    if tot["リード"] and re.search(r"(CV|リード)[^。]{0,8}0\s*件", text):
+    # 合算はサイトごとの数も並ぶので、本当に0件のサイトがあれば「リード 0件」は正しい記載
+    if tot["リード"] and not zero_site and ZERO_LEADS.search(text):
         bad.append(f"リードは合計{tot['リード']}件あるのに「0件」と書かれています")
     if through and "途中経過です" not in text:
         bad.append("途中経過であることが書かれていません")

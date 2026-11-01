@@ -108,7 +108,7 @@ def test_ai_budget_stops_before_calling():
     import ai_cite_check as AC
     import compete as C
     import sites as S
-    print("\n■ 競合比較: 月の上限を超えたらAIを呼ばずに知らせる")
+    print("\n■ 競合比較: 月の上限の残りに収まる語だけAIに聞き、残りはキャッシュで出す")
     calls = []
 
     def fake(q):
@@ -131,10 +131,16 @@ def test_ai_budget_stops_before_calling():
             check("dry-run は聞かない・何も書かない", (calls, (C.OUT / sid).exists()), ([], False))
             with redirect_stdout(out):
                 rec = C.measure_site(sid, cfg, eng={"Fake": fake}, usage={})
-            check("上限（3回）を超える見込みなら1回も聞かない", calls, [])
-            check("記録には上限で止めたことを残し、要対応を出す",
-                  (rec["status"], "要対応:" in out.getvalue(), json.loads(C.USAGE.read_text()) if C.USAGE.exists() else {}),
-                  ("over_cap", True, {}))
+            # 2026-11-01: 超える見込みで1回も聞かないと、20語×4つ＝80回が上限60回を毎月超えて一度も測れなかった
+            check("上限（3回）を超える見込みなら、残りに収まる3語だけ聞き、残りの語はキャッシュで出す", len(calls), 3)
+            check("記録には一部だけ聞いたことと使った回数を残し、要対応は出さない",
+                  (rec["status"], rec["cached_kws"] == rec["summary"]["kw_n"] - 3, "要対応:" in out.getvalue(),
+                   json.loads(C.USAGE.read_text()).get(rec["ym"], {}).get(sid)),
+                  ("partial", True, False, 3))
+            calls.clear()
+            with redirect_stdout(io.StringIO()):
+                rec = C.measure_site(sid, cfg, eng={"Fake": fake}, usage={rec["ym"]: {sid: 3}})
+            check("上限を使い切った月は1回も聞かない", (calls, rec["status"]), ([], "over_cap"))
             cfg["compete"] = {"ai_cap": 1000}
             with redirect_stdout(io.StringIO()):
                 rec = C.measure_site(sid, cfg, eng={"Fake": fake}, usage={})

@@ -262,6 +262,8 @@ def gate(tree):
         rc, out = run(cmd)
         if rc != 0:
             restored = bool(tree) and restore(tree)
+            # 台帳はコミットされず、どの門が落ちたかが実行ログにも残らなかった（2026-11-01）
+            print("\n".join(f"     | {x}" for x in out.strip().splitlines()[-8:]))
             _log(step="gate", ok=False, cmd=cmd[0], restored=restored, tail=out.strip().splitlines()[-5:])
             return False, cmd[0] + ("" if restored else "（戻せませんでした）")
     _log(step="gate", ok=True)
