@@ -78,8 +78,12 @@ TOPICS = [
     ("office", r"", "A calm modern Japanese office with staff working at desks, natural light"),
 ]
 ALL = INDUSTRIES + TOPICS
-STYLE = ("Documentary realism, shot on a 35mm lens, believable everyday Japanese scene, natural light, "
-         "not staged stock-photo smiles. Absolutely no text, letters, numbers, logos or watermarks; "
+# 2026-11-02 に棚を「AI に聞かれ、選ばれ、来てもらう」連作（地方都市の小さな事業所・暖かい光・紺と生成りの色調）に
+# 作り直した。後から足す写真も同じ見た目にそろえる（ずれると一覧で浮く）。正面の顔は AI らしさが出やすいので避ける
+STYLE = ("Documentary realism, one frame of a cohesive photo series about small local businesses in a regional Japanese town "
+         "being found and visited by customers. Shot on a full-frame camera with a 35mm lens, natural light only, warm late-day "
+         "light, muted navy and ivory tones, real places with ordinary wear, candid moments, no frontal faces, "
+         "not staged stock-photo smiles, no glow or holograms. Absolutely no text, letters, numbers, logos or watermarks; "
          "screens and papers show only abstract shapes or are out of focus.")
 # 同じ鍵の2枚目・3枚目は撮り方を変える（同じ絵の色違いにしない）
 VARIANT = ["Wide establishing shot.", "Medium shot focusing on the people and their hands.", "Different angle and time of day, close detail.",
