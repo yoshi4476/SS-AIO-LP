@@ -87,7 +87,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2400",
+     "evidence": "scripts/build.py:2424",
      "note": "基準に届かない記事は site/ に生成されない",
      "anchor": "weak = rubric.weak_axes(meta)"
     },
@@ -135,7 +135,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:985",
+     "evidence": "scripts/build.py:1004",
      "note": "生成漏れ・型ごとの項目数・bars の数字が本文に無い図は、build.py が make_diagram.article_problems で検出して公開前の記事を止める",
      "anchor": "# 画像実在チェック（生成漏れ・パスtypoの検出。生成: python scripts/make_images.py <slug>）"
     },
@@ -199,7 +199,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1036",
+     "evidence": "scripts/build.py:1055",
      "note": "build.py が記事の本文に挿す。変換の最後に、表の数字を同じ数字の横棒グラフ（インラインの SVG）にして表の直後に挿す（1記事2つまで・SVG を読み戻して表と同じときだけ）",
      "anchor": "\"{{CONTENT}}\": table_charts.add_to_html("
     },
@@ -409,7 +409,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:887",
+     "evidence": "scripts/build.py:905",
      "note": "build.py が毎回全記事を描く",
      "anchor": "def build_article(path: Path, template: str, related: str = \"\", unpublished_urls=None, prevnext: str = \"\","
     },
@@ -514,7 +514,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1406",
+     "evidence": "scripts/build.py:1425",
      "anchor": "def build_sitemap(article_entries):"
     },
     "external-md": {
@@ -568,7 +568,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1387",
+     "evidence": "scripts/build.py:1406",
      "anchor": "llms = SITE / \"llms.txt\""
     },
     "external-md": {
@@ -672,36 +672,36 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1138",
+     "evidence": ".github/workflows/pipeline-multi.yml:1187",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "external-md": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1138",
+     "evidence": ".github/workflows/pipeline-multi.yml:1187",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "external-html": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1138",
+     "evidence": ".github/workflows/pipeline-multi.yml:1187",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1138",
+     "evidence": ".github/workflows/pipeline-multi.yml:1187",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1138",
+     "evidence": ".github/workflows/pipeline-multi.yml:1187",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
     "ftp": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1138",
+     "evidence": ".github/workflows/pipeline-multi.yml:1187",
      "note": "記事の枠の公開直後に、その社の本日の記事を送る（本番の sitemap に載ったURLだけ）。最初の接続: 先方が Search Console に当社のサービスアカウントをオーナーで追加する（されていなければ送らず要対応を出す: scripts/notify_indexing.py:160。追加されれば設定を直さなくても送り始める）",
      "anchor": "python scripts/notify_indexing.py --site \"$id\" || true"
     },
@@ -723,7 +723,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/notify_indexnow.py:71",
+     "evidence": "scripts/notify_indexnow.py:73",
      "anchor": "def key_ok(domain, key):"
     },
     "external-md": {
@@ -746,7 +746,7 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/notify_indexnow.py:139",
+     "evidence": "scripts/notify_indexnow.py:210",
      "note": "onboard_check で確かめる（IndexNow の鍵ファイルが直下で返る）",
      "need": "投稿者の権限の鍵では鍵ファイルを直下に置けない。先方に <鍵>.txt を置いてもらうまで通知は拒否される",
      "anchor": "wp = cfg.get(\"type\") == \"wordpress\""
@@ -775,7 +775,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": ".github/workflows/pipeline-multi.yml:1135",
+     "evidence": ".github/workflows/pipeline-multi.yml:1184",
      "anchor": "python scripts/bing_webmaster.py --site \"$id\" || true"
     },
     "external-md": {
@@ -1023,7 +1023,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2570",
+     "evidence": "scripts/build.py:2594",
      "anchor": "n = search_preview.apply_dir(SITE)  # 画像・動画・抜粋を検索結果で大きく出してよいと伝える（noindex は触らない）"
     },
     "external-md": {
@@ -1131,7 +1131,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:680",
+     "evidence": "scripts/build.py:698",
      "anchor": "def insert_inline_tool(content, meta):"
     },
     "external-md": {
@@ -1182,7 +1182,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1895",
+     "evidence": "scripts/build.py:1919",
      "anchor": "def build_industry_hubs(all_metas):"
     },
     "external-md": {
@@ -1235,7 +1235,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2042",
+     "evidence": "scripts/build.py:2066",
      "anchor": "terms = GL.collect(sid, only)"
     },
     "external-md": {
@@ -1286,7 +1286,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2058",
+     "evidence": "scripts/build.py:2082",
      "anchor": "cats = CP.collect(sid, only)"
     },
     "external-md": {
@@ -1337,7 +1337,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2087",
+     "evidence": "scripts/build.py:2111",
      "anchor": "groups = TP.build(sid, all_metas)"
     },
     "external-md": {
@@ -1388,7 +1388,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2108",
+     "evidence": "scripts/build.py:2132",
      "anchor": "area_pairs, area_g = AH.live(all_metas)"
     },
     "external-md": {
@@ -1440,7 +1440,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2557",
+     "evidence": "scripts/build.py:2581",
      "anchor": "season_feature.apply(SITE)  # 業種ごとの「今の時期の特集」（暦は data/season_calendar.json）"
     },
     "external-md": {
@@ -1490,42 +1490,42 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1687",
+     "evidence": "scripts/build.py:1706",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1687",
+     "evidence": "scripts/build.py:1706",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1687",
+     "evidence": "scripts/build.py:1706",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1687",
+     "evidence": "scripts/build.py:1706",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1687",
+     "evidence": "scripts/build.py:1706",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1687",
+     "evidence": "scripts/build.py:1706",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1687",
+     "evidence": "scripts/build.py:1706",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_industry_lps(IH, pairs, g):"
     }
@@ -1544,18 +1544,18 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:1721",
+     "evidence": "scripts/build.py:1740",
      "anchor": "def build_research_pages(all_metas=()):"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1721",
+     "evidence": "scripts/build.py:1740",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_research_pages(all_metas=()):"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1721",
+     "evidence": "scripts/build.py:1740",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_research_pages(all_metas=()):"
     },
@@ -1567,19 +1567,19 @@
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1721",
+     "evidence": "scripts/build.py:1740",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_research_pages(all_metas=()):"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1721",
+     "evidence": "scripts/build.py:1740",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_research_pages(all_metas=()):"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/build.py:1721",
+     "evidence": "scripts/build.py:1740",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "def build_research_pages(all_metas=()):"
     }
@@ -1594,42 +1594,42 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2553",
+     "evidence": "scripts/build.py:2577",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2553",
+     "evidence": "scripts/build.py:2577",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2553",
+     "evidence": "scripts/build.py:2577",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2553",
+     "evidence": "scripts/build.py:2577",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2553",
+     "evidence": "scripts/build.py:2577",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2553",
+     "evidence": "scripts/build.py:2577",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/build.py:2553",
+     "evidence": "scripts/build.py:2577",
      "note": "運用会社自身のページ（営業・調査・無料ツール）。お客様のサイトには置かない",
      "anchor": "tools_catalog.apply(SITE)  # 無料ツールのパンくず・構造化データ・相互リンクを一覧から"
     }
@@ -1743,7 +1743,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:776",
+     "evidence": "scripts/build.py:794",
      "anchor": "content = video_embed.prepend(content, meta)"
     },
     "external-md": {
@@ -1896,7 +1896,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "tests/test_gates.py:2137",
+     "evidence": "tests/test_gates.py:2144",
      "note": "門が site/ に重い読み方が戻るのを止める",
      "anchor": "def test_speed_fix_keeps_pages_light():"
     },
@@ -1948,43 +1948,43 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:340",
+     "evidence": "scripts/seo_audit.py:350",
      "note": "公開前の門",
      "anchor": "ap.add_argument(\"--gate\", action=\"store_true\","
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:369",
+     "evidence": "scripts/seo_audit.py:379",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:369",
+     "evidence": "scripts/seo_audit.py:379",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:369",
+     "evidence": "scripts/seo_audit.py:379",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:273",
+     "evidence": "scripts/seo_audit.py:283",
      "note": "WordPress 本体の REST の公開URLの一覧で本番を巡回して知らせる（findings の週次）",
      "anchor": "if cfg and cfg.get(\"type\") == \"wordpress\":"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:369",
+     "evidence": "scripts/seo_audit.py:379",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:369",
+     "evidence": "scripts/seo_audit.py:379",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     }
@@ -1998,7 +1998,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2594",
+     "evidence": "scripts/build.py:2618",
      "anchor": "render_warns = render_check.scan(sorted((ROOT / \"site\").rglob(\"index.html\")))"
     },
     "external-md": {
@@ -2101,31 +2101,31 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:680",
+     "evidence": ".github/workflows/weekly-optimize.yml:691",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "external-html": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:680",
+     "evidence": ".github/workflows/weekly-optimize.yml:691",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:680",
+     "evidence": ".github/workflows/weekly-optimize.yml:691",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:680",
+     "evidence": ".github/workflows/weekly-optimize.yml:691",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
     "ftp": {
      "status": "ok",
-     "evidence": ".github/workflows/weekly-optimize.yml:680",
+     "evidence": ".github/workflows/weekly-optimize.yml:691",
      "note": "記事の公開直後に1回（記事CI の link_boost --only）、週次は全社（sites.py --ids）で補充・押し上げ。直した原稿は同じ週次の publish_changed --all が方式ごとの配信で届ける（集中モードは運用者が選んだ社だけ）",
      "anchor": "python scripts/link_boost.py \"$s\" --write || true"
     },
@@ -2145,43 +2145,43 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2089",
+     "evidence": "scripts/monthly_report.py:2109",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2089",
+     "evidence": "scripts/monthly_report.py:2109",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2089",
+     "evidence": "scripts/monthly_report.py:2109",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2089",
+     "evidence": "scripts/monthly_report.py:2109",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2089",
+     "evidence": "scripts/monthly_report.py:2109",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2089",
+     "evidence": "scripts/monthly_report.py:2109",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2089",
+     "evidence": "scripts/monthly_report.py:2109",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     }
@@ -2195,37 +2195,37 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/compete.py:810",
+     "evidence": "scripts/compete.py:828",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/compete.py:810",
+     "evidence": "scripts/compete.py:828",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/compete.py:810",
+     "evidence": "scripts/compete.py:828",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/compete.py:810",
+     "evidence": "scripts/compete.py:828",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/compete.py:810",
+     "evidence": "scripts/compete.py:828",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/compete.py:810",
+     "evidence": "scripts/compete.py:828",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/compete.py:810",
+     "evidence": "scripts/compete.py:828",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     }
    }
@@ -2391,7 +2391,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/build.py:2440",
+     "evidence": "scripts/build.py:2464",
      "anchor": "hidden_metas = [m for m in all_metas if noindex.on(m)]",
      "note": "ページは描いて URL を残し、head を noindex,follow に。一覧・関連・前後・テーマ・業種ハブ・用語集・比較表・sitemap・llms.txt・feed から外す。他の記事のリンクは描くときに外す"
     },

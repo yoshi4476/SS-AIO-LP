@@ -799,6 +799,21 @@ jobs:
           r=$(sed -n 's/^QUALITY_LOOP=//p' "$RUNNER_TEMP/quality_new.txt" | tail -1)
           echo "公開前の品質ループ（${{ steps.site.outputs.pub }}）: ${r:-結果の印がありません}" >> "$GITHUB_STEP_SUMMARY"
 
+      # 2人目の採点（cross_score）: この回に採点を終えた記事のうち点が境目のものを、別の AI（契約の Codex）が採点し直し、
+      # 2つの AI の点を軸ごとに平均して合否を決め直す（同じ AI の読み直しは独立した確かめにならない。一次性は採点ごとに2〜5点動いた。
+      # 2026-11-02）。基準の数字は変えない。届けば合格、届かなければ改善中に戻す。鍵のある機械の手順で動かし、ログには件数だけ
+      - name: 2人目の採点（境目の記事・鍵のある機械の手順）
+        if: always() && steps.lock.outcome == 'success' && steps.site.outputs.skip != 'yes' && steps.site.outputs.mode != 'rewrite'
+        timeout-minutes: 25
+        uses: ./.github/actions/own-survey
+        with:
+          script: cross_score
+          args: ""
+          sites: "${{ steps.site.outputs.id }}"
+          claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
+          gh_token: ${{ secrets.GH_SECRET_TOKEN }}
+
       # 点の低い公開済みの記事を、残った時間で1本直す（運用者「これで90点以上であれば評価が低い記事を修正していって」2026-10-20）。
       # 公開前の採点で合格が出てから（直近14日で合格3本以上・50%以上）。社ごとに7日で12本まで。よく読まれている記事
       # （10位以内でクリックあり）は後回し、対照群（月ごとに5本に1本）は触らない。届かなければ公開のまま直す（取り下げない）

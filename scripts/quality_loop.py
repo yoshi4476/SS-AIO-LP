@@ -375,6 +375,10 @@ def weak_text(sc):
     if sc.get("machine"):
         # score_check の抽出性・決定支援の検出（決まった形で直せる所）
         out.append("■ 機械が見つけた抽出性・決定支援の足りない所:\n" + sc["machine"])
+    if sc.get("repeated"):
+        # 同じ理由で2回以上戻された直し方は効いていない。足し続けず、その原因の所を変えない別の直し方にする
+        out.append("■ これまでの直しが同じ理由で2回以上戻されました（同じ直し方は効きません。原因の所には触れず、別の節・別の手で直す）:\n"
+                   + "\n".join(f"  - {w}" for w in sc["repeated"]))
     if sc.get("retry_note"):
         # 前の直しが検算で戻された理由。同じ直し方を繰り返させない（2026-10-20 の実地の試しで、2回とも「3点」「1か月近く」を
         # 足して数字の検算で戻された）
@@ -778,6 +782,19 @@ def survey_of(slug, site):
         return 0, ""
 
 
+def repeated_failures(slug, path=None, last=6):
+    """これまでの直しで、同じ理由で2回以上戻された理由（数字をならして数える）。
+    戻された理由は同じ回の中でしか直しに渡しておらず、回をまたいで「FAQ の警告が増えた」で6回戻された記事があった（2026-11-02）"""
+    whys = [str(r.get("why") or "") for r in rows(path)
+            if r.get("slug") == slug and r.get("action") in ("improve", "preimprove") and not r.get("ok")][-last:]
+    seen = {}
+    for w in whys:
+        k = re.sub(r"\d+", "#", w)[:40]
+        if k.strip() and not k.startswith("変更なし"):
+            seen.setdefault(k, [0, w])[0] += 1
+    return [w[:120] for n, w in seen.values() if n >= 2]
+
+
 def tries_before(slug, path=None):
     """これまでの実行で直した回数（台帳の improve の行）"""
     return sum(1 for r in rows(path) if r.get("slug") == slug and r.get("action") == "improve")
@@ -832,6 +849,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
             ctx["blocked"] = blocked_lines()
         sc["ai_writing"] = aiwriting_note(slug)
         sc["machine"] = machine_note(slug)
+        sc["repeated"] = repeated_failures(slug)
         good, why = IMPROVE(slug, sc, ctx["blocked"])
         record({**base, "action": "improve", "round": prior + done, "ok": good, "why": str(why)[:200]})
         print(f"     直し{done}回目: {'直しました' if good else '戻しました・変更なし'}（"

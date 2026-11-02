@@ -157,7 +157,10 @@ def test_still_failing_after_two_rounds_stays_unpublished():
         check("直しは2回まで", (res, e.calls["improve"]), ({"improving": 1}, 2))
         check("改善中の印・点数なし", (m.get("quality_state"), m.get("score")), ("improving", None))
         check("記事は消さない", (e.root / "articles" / "zz-aio.md").is_file(), True)
-        check("要対応で知らせる", "要対応:" in out, True)
+        # 一次性が届かないだけでは知らせず、翌日に直し直す（運用者「毎回一次情報で止まるのは勘弁」2026-11-02。
+        # 改善中が3日を超えた記事は report が要対応で知らせる）
+        check("一次性が届かないだけでは要対応にせず、翌日に直し直すと書く",
+              ("要対応:" in out, "翌日に直して採点し直します" in out), (False, True))
         check("公開の門が止める", bool(R.gate_why(m)) and not R.gate_ok(m), True)
         # 点数が書かれていても、改善中の印がある間は止める
         check("点数があっても改善中なら止める", R.gate_ok({"score": 95, "quality_state": "improving"}), False)

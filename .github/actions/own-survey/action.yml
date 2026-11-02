@@ -7,6 +7,11 @@ description: >-
   Codex がログイン情報を更新したら、AI を動かさない手順で Secrets に書き戻す（書き戻さないと業種調査の Codex も止まる）。
 
 inputs:
+  script:
+    description: >-
+      動かすスクリプト（own_survey＝当社調べ／cross_score＝境目の記事を Codex が2人目として採点し、2つの AI の平均で合否を決める）。
+      どちらも Codex のログイン情報をこの部品の中だけに置く
+    default: own_survey
   args:
     description: own_survey.py に渡す選び方（--targets＝直している記事と新しい記事／--rescore-auto N＝点の低い公開済みの記事）
     default: --targets
@@ -55,6 +60,7 @@ runs:
         GEMINI_API_KEY: ${{ inputs.gemini_key }}
         SITES: ${{ inputs.sites }}
         ARGS: ${{ inputs.args }}
+        SCRIPT: ${{ inputs.script }}
       run: |
         if [ -f "$RUNNER_TEMP/gemini_usage.json" ]; then
           export GEMINI_USAGE_FILE="$RUNNER_TEMP/gemini_usage.json" GEMINI_LOG_FILE="$RUNNER_TEMP/gemini_log.txt"
@@ -84,9 +90,11 @@ runs:
           echo "::warning::CODEX_AUTH_JSON 未登録（当社調べは ChatGPT に聞かずに進む）"
         fi
         unset CODEX_AUTH_JSON
+        case "$SCRIPT" in own_survey|cross_score) ;; *) echo "::error::動かせないスクリプトです"; exit 1 ;; esac
         # shellcheck disable=SC2086
-        python scripts/own_survey.py --engines || true
-        python scripts/own_survey.py $ARGS $SITES 2>&1 | grep -E '^OWN_SURVEY' || true
+        [ "$SCRIPT" = own_survey ] && { python scripts/own_survey.py --engines || true; }
+        # shellcheck disable=SC2086
+        python "scripts/$SCRIPT.py" $ARGS $SITES 2>&1 | grep -E '^(OWN_SURVEY|CROSS_SCORE)' || true
 
     # 当社調べで Gemini が行った検索の回数を、AI を動かさない手順で台帳へ送る（AI 診断と合わせて月の上限を数える）
     - shell: bash

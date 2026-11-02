@@ -54,7 +54,8 @@ def test_claude_md_is_slimmed_for_ci_agents_and_restored():
     must += [m.group(0) for m in (re.search(r"(?ms)^0\. \*\*食い合い審査.*?(?=^1\. \*\*)", ph),
                                   re.search(r"(?ms)^4\.5\. \*\*.*?(?=^6\. \*\*)", ph)) if m]
     must += [m.group(0) for m in [re.search(r"(?m)^\*\*受託運用での分離\*\*.*$", full)] if m]
-    check("必ず残す決まりの数（0.1・0.3・6章の頭と節9・Phase 2〜5・Phase 1 の2項目・受託運用での分離）", len(must), 19)
+    # 6章の節は 2026-11-01 に「試算と、計算で作る一次情報」が加わって10
+    check("必ず残す決まりの数（0.1・0.3・6章の頭と節10・Phase 2〜5・Phase 1 の2項目・受託運用での分離）", len(must), 20)
     check("writer: 必ず残す決まりが docs/pipeline/ と1字も違わない", [i for i, b in enumerate(must) if b not in w], [])
     check("weekly: 必ず残す決まりが docs/pipeline/ と1字も違わない", [i for i, b in enumerate(must) if b not in wk], [])
     check("writer: 導入・納品・守秘の置き場・週次・Phase 6・7・在庫の作り方は載せない",
