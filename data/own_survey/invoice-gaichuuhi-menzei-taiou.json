@@ -1,0 +1,123 @@
+{
+ "v": 2,
+ "slug": "invoice-gaichuuhi-menzei-taiou",
+ "ok": true,
+ "date": "2026-11-02",
+ "questions": [
+  "インボイス制度 外注費について教えてください",
+  "インボイス制度 外注費について、「インボイス制度で外注費の消費税の扱いはどう変わった？」を教えてください",
+  "インボイス制度 外注費について、「免税の外注先に払う外注費は、どれだけ控除できなくなる？」を教えてください",
+  "インボイス制度 外注費について、「自社の消費税の計算方法で、影響の有無が分かれる」を教えてください",
+  "インボイス制度 外注費について、「免税の外注先への対応は3つ。どれを選ぶか」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "インボイス制度で外注費の消費税の扱いはどう変わった？",
+   "words": [
+    "消費税"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "免税の外注先に払う外注費は、どれだけ控除できなくなる？",
+   "words": [
+    "外注先",
+    "免税",
+    "控除"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "自社の消費税の計算方法で、影響の有無が分かれる",
+   "words": [
+    "計算方法",
+    "消費税",
+    "影響",
+    "有無"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "免税の外注先への対応は3つ。どれを選ぶか",
+   "words": [
+    "外注先",
+    "免税",
+    "対応"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "免税の外注先に一方的に値下げを通告するのはNG",
+   "words": [
+    "外注先",
+    "一方的",
+    "免税",
+    "NG"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "外注費のインボイス対応で起きる誤り3つ",
+   "words": [
+    "インボイス対応"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "ameblo.jp": "video",
+  "biz.moneyforward.com": "peer",
+  "contents.cross-link.tax": "peer",
+  "freee.co.jp": "peer",
+  "gov-online.go.jp": "public",
+  "ht-tax.or.jp": "peer",
+  "jftc.go.jp": "public",
+  "keihi.com": "peer",
+  "kensetsu.hirakawa-tax.com": "video",
+  "kiyosumi-tax.jp": "peer",
+  "mof.go.jp": "public",
+  "nichizeiren.or.jp": "public",
+  "nta.go.jp": "public",
+  "office-plus-s.jp": "peer",
+  "officem.jp": "peer",
+  "oonumata.or.jp": "peer",
+  "rstandard.co.jp": "peer",
+  "sapporo-zeirishi.com": "peer",
+  "sasaki-a.jp": "peer",
+  "shinnihon-keiei.com": "peer",
+  "sogyotecho.jp": "media",
+  "sorimachi.co.jp": "peer",
+  "stripe.com": "peer",
+  "suehirotax.jp": "peer",
+  "tips.rectelework.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yayoi-kk.co.jp": "peer",
+  "yodogawa-partners.or.jp": "peer",
+  "zeiken.co.jp": "media"
+ },
+ "dims": {
+  "費用の金額（◯円）": 7,
+  "期間（◯か月・◯日など）": 10,
+  "注意点・失敗・リスク": 7,
+  "進め方の手順": 0,
+  "専門家への相談": 0
+ },
+ "chars": 17550,
+ "claims": [
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『インボイス対応』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは進め方の手順は0件、専門家への相談は0件、費用の金額（◯円）は7件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは29件で、公的機関・学会・業界団体が5件、ニュース・メディア・まとめが2件、動画・SNS・ブログが2件でした。"
+ ]
+}
