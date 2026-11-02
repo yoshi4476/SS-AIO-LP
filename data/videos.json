@@ -1159,5 +1159,68 @@
       "reason": "YouTube のサジェストに「不動産売買 集客」が出ます"
     },
     "youtube": "uX7IYnUIqNU"
+  },
+  "reform-gaiheki-tosou-llmo": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-02",
+      "keyword": "リフォーム・外壁塗装 LLMO",
+      "queries": [
+        "リフォーム 外壁塗装 llmo",
+        "外壁塗装 llmo",
+        "リフォーム llmo",
+        "リフォーム 外壁塗装"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "リフォーム 外壁塗装",
+        "リフォーム 外壁",
+        "リフォーム 外壁張替え",
+        "外壁塗装の仕方",
+        "#外壁塗装",
+        "家 外壁 塗装 diy"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-11-02",
+      "sec": 47,
+      "title": "AIに業者を調べられたら何を見られる？",
+      "youtube": "gOjUzPqI5V0"
+    }
+  },
+  "koumuten-chumon-jutaku-llmo": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-02",
+      "keyword": "工務店・注文住宅 LLMO",
+      "queries": [
+        "工務店 注文住宅 llmo",
+        "注文住宅 llmo",
+        "工務店 llmo",
+        "工務店 注文住宅"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "工務店の選び方",
+        "工務店 注文住宅",
+        "工務店 ハウスメーカー",
+        "工務店とは",
+        "工務店 費用",
+        "注文住宅 工務店 ハウスメーカー",
+        "#工務店"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
+  },
+  "research-esthe": {
+    "site": "ai-lab",
+    "kind": "research",
+    "date": "2026-11-02",
+    "sec": 230,
+    "mp4": "automation/video/research-esthe.mp4",
+    "format": "duo",
+    "url": "https://ai.7senses.co.jp/research/esthe-ai-sources/",
+    "youtube": "2i17RAbD9qI"
   }
 }
