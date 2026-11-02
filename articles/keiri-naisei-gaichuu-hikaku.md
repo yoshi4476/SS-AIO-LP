@@ -45,13 +45,11 @@ faq:
 
 **経理の内製と外注の違いは、コスト・速さ・専門性・属人化リスク・繁忙期対応・セキュリティという6軸で整理すると明確になります。**
 
+あわせて[経理部と経理課の違いは？](/blog/keiri-bu-keiri-ka-chigai/)もご覧ください。
+
 あわせて[経理外注の費用相場｜依頼先4タイプの料金](/blog/keiri-gaichuu-hiyou-souba/)もご覧ください。
 
 関連する内容として[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)も公開しています。
-
-あわせて[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)もご覧ください。
-
-関連する内容として[外注費の請求書の書き方](/blog/gaichuuhi-seikyuusho-kakikata/)も公開しています。
 
 <div class="definition-box"><span class="term">内製</span>は自社の正社員やパート社員が経理業務を担う体制、<span class="term">外注</span>は経理BPOなど外部の専門会社に業務を委託する体制を指します。==どちらか一方に絞る必要はなく、業務を切り分けて両方を組み合わせる会社も増えています。==</div>
 

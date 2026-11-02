@@ -44,6 +44,8 @@ diagrams:
 
 **クリニックのAIO対策とは、生成AIの受診先紹介で自院が引用・言及される状態をつくる取り組みです。**AIO（AI Overview Optimization）・AI検索対策・LLMO はいずれもほぼ同じ取り組みを指し、呼び方が違うだけと考えて構いません。
 
+関連する内容は、[AI検索対策を代理店に頼んだら何を準備する？](/aio/ai-kensaku-taisaku-dairiten-junbi/)で解説しています。
+
 実測の参考として、当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています（出典: 自社サイトの実装）。
 
 近い論点を[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)で扱っています。
@@ -99,8 +101,6 @@ AI検索エンジンは、検索上位のページとマップ情報を突き合
 ## クリニックのAIO対策5つの手順
 
 AI検索対応の手順は、情報の具体化・表記統一・実名開示・規制準拠・計測という5段階で進めます。
-
-前提となる考え方は[AIO SEO対策とは？](/aio/aio-seo-taisaku/)でも扱っています。
 
 <figure><img src="/images/clinic-ai-kensaku-taisaku/steps.png" alt="クリニックがAI検索に対応する5つの手順: 診療科目を具体語で書く、HPとGBPの表記を統一する、医師の経歴を実名で明記する、医療広告ガイドラインに準拠する、AI経由の流入を計測する" loading="lazy"><figcaption>クリニックがAI検索に対応する5つの手順</figcaption></figure>
 

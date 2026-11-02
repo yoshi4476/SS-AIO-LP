@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AIOのログ分析ツールはどれ？4種の比較と選び方</title>
-<meta name="description" content="AIOのログ分析ツールは、CDNの管理画面・ログ専用ツール・生ログ集計・GA4の4種に分かれ、何を数えたいかで選びます。AIクローラーの訪問はGA4に出ないため、ログ側で403や429の有無まで確かめる手順と、条件別の選び方を解説します。">
+<title>GA4では見えないAIクローラー｜AIOログ分析ツール比較と落とし穴</title>
+<meta name="description" content="robots.txtで許可していても、CDNやWAFが403・429で止めることがあります。AIOのログ分析ツール4種の料金の目安と環境別の選び方、ログで最初に見る3つの数字、GA4だけで判断する失敗を整理しました。">
 <link rel="canonical" href="https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/">
 <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#071a38">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="AIOのログ分析ツールはどれ？4種の比較と選び方">
-<meta property="og:description" content="AIOのログ分析ツールは、CDNの管理画面・ログ専用ツール・生ログ集計・GA4の4種に分かれ、何を数えたいかで選びます。AIクローラーの訪問はGA4に出ないため、ログ側で403や429の有無まで確かめる手順と、条件別の選び方を解説します。">
+<meta property="og:title" content="GA4では見えないAIクローラー｜AIOログ分析ツール比較と落とし穴">
+<meta property="og:description" content="robots.txtで許可していても、CDNやWAFが403・429で止めることがあります。AIOのログ分析ツール4種の料金の目安と環境別の選び方、ログで最初に見る3つの数字、GA4だけで判断する失敗を整理しました。">
 <meta property="og:url" content="https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/">
 <meta property="og:image" content="https://ai.7senses.co.jp/images/shelf/automation-5.jpg">
 <meta property="og:site_name" content="AI集客ラボ">
@@ -32,8 +32,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
  "@graph": [
   {
    "@type": "BlogPosting",
-   "headline": "AIOのログ分析ツールはどれ？4種の比較と選び方",
-   "description": "AIOのログ分析ツールは、CDNの管理画面・ログ専用ツール・生ログ集計・GA4の4種に分かれ、何を数えたいかで選びます。AIクローラーの訪問はGA4に出ないため、ログ側で403や429の有無まで確かめる手順と、条件別の選び方を解説します。",
+   "headline": "GA4では見えないAIクローラー｜AIOログ分析ツール比較と落とし穴",
+   "description": "robots.txtで許可していても、CDNやWAFが403・429で止めることがあります。AIOのログ分析ツール4種の料金の目安と環境別の選び方、ログで最初に見る3つの数字、GA4だけで判断する失敗を整理しました。",
    "mainEntityOfPage": "https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/",
    "image": "https://ai.7senses.co.jp/images/shelf/automation-5.jpg",
    "datePublished": "2026-10-05",
@@ -205,7 +205,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     {
      "@type": "ListItem",
      "position": 3,
-     "name": "AIOのログ分析ツールはどれ？4種の比較と選び方",
+     "name": "GA4では見えないAIクローラー｜AIOログ分析ツール比較と落とし穴",
      "item": "https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/"
     }
    ]
@@ -297,26 +297,26 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <ol>
     <li><a href="/">ホーム</a></li>
     <li><a href="/aio/">AIO・LLMO運用</a></li>
-    <li aria-current="page">AIOのログ分析ツールはどれ？4種の比較と選</li>
+    <li aria-current="page">GA4では見えないAIクローラー｜AIOログ</li>
   </ol>
 </nav>
 
 <main class="article cat-aio">
   <header class="article-header">
     <span class="cat-badge">AIO・LLMO運用</span>
-    <h1>AIOのログ分析ツールはどれ？4種の比較と選び方</h1>
+    <h1>GA4では見えないAIクローラー｜AIOログ分析ツール比較と落とし穴</h1>
     <div class="article-meta">
       <span>公開: <time datetime="2026-10-05">2026年10月5日</time></span>
       <span>更新: <time datetime="2026-10-05">2026年10月5日</time></span>
       <span>執筆: 原口 優</span>
       <span class="share-row">
-        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=AIO%E3%81%AE%E3%83%AD%E3%82%B0%E5%88%86%E6%9E%90%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AF%E3%81%A9%E3%82%8C%EF%BC%9F4%E7%A8%AE%E3%81%AE%E6%AF%94%E8%BC%83%E3%81%A8%E9%81%B8%E3%81%B3%E6%96%B9&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Faio-log-bunseki-tool-hikaku%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
+        <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=GA4%E3%81%A7%E3%81%AF%E8%A6%8B%E3%81%88%E3%81%AA%E3%81%84AI%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%EF%BD%9CAIO%E3%83%AD%E3%82%B0%E5%88%86%E6%9E%90%E3%83%84%E3%83%BC%E3%83%AB%E6%AF%94%E8%BC%83%E3%81%A8%E8%90%BD%E3%81%A8%E3%81%97%E7%A9%B4&url=https%3A%2F%2Fai.7senses.co.jp%2Faio%2Faio-log-bunseki-tool-hikaku%2F" target="_blank" rel="noopener" aria-label="Xでシェア">𝕏 ポスト</a>
         <a class="share-btn share-hatena" href="https://b.hatena.ne.jp/entry/https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/" target="_blank" rel="noopener" aria-label="はてなブックマークに追加">B! はてブ</a>
         <button type="button" class="share-btn copy-url" data-url="https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/" aria-label="この記事のURLをコピー">🔗 URLコピー</button>
         <button type="button" class="share-btn listen-btn" aria-label="この記事を音声で聴く">🎧 聴く</button>
       </span>
     </div>
-    <figure class="article-eyecatch"><img src="/images/shelf/automation-5.webp" alt="AIOのログ分析ツールはどれ？4種の比較と選び方" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
+    <figure class="article-eyecatch"><img src="/images/shelf/automation-5.webp" alt="GA4では見えないAIクローラー｜AIOログ分析ツール比較と落とし穴" width="1200" height="675" fetchpriority="high" decoding="async"></figure>
   </header>
 
   <div class="article-layout">
@@ -336,7 +336,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       </div>
     </aside>
     <div class="article-body">
-      <p><strong>AIOのログ分析ツールは、CDNの管理画面・ログ専用ツール・サーバーの生ログ集計・GA4の4種類に分かれます。</strong>選ぶ基準は機能の多さではなく「誰の訪問を数えたいか」です。AIクローラーの訪問はGA4には記録されないため、ログ側で数えないと「AIが読みに来ているか」は分かりません。当社は自社サイトで主要AIクローラー20種を許可し、robots.txtと実際のアクセスの両方で到達を毎日確かめています。その運用から、ツールの違いと条件別の選び方を整理します。</p>
+      <p><strong>GA4だけでは、AIクローラーが読みに来たか、途中で弾かれていないかは分かりません。</strong>AIOのログ分析ツールは、CDNの管理画面・ログ専用ツール・サーバーの生ログ集計・GA4の4種類に分かれます。選ぶ基準は機能の多さではなく「誰の訪問を数えたいか」です。当社は自社サイトで主要AIクローラー20種を許可し、robots.txtと実際のアクセスの両方で到達を毎日確かめています。その運用から、ツールの違いと条件別の選び方を整理します。</p>
 <div class="target-reader">この記事は、自社サイトにAIのクローラーが来ているかを確かめたい中小企業の経営者・Web担当者向けです。</div>
 
 <p class="freshness">※ 2026年10月時点の情報です。ツールの料金・提供範囲は各社の公式ページで確認した時点のものです。</p>

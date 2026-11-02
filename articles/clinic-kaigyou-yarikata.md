@@ -47,6 +47,8 @@ faq:
 
 クリニック開業のやり方とは、コンセプト設計から集患準備までを6ステップで順に進める一連の流れを指します。
 
+費用の目安については、[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)にまとめています。
+
 選ぶときの基準を先に押さえるなら、[クリニックの集客集患サポートとは？3つの型と選び方](/ai-marketing/clinic-shukyaku-shukan-support/)が参考になります。
 
 <div class="definition-box"><span class="term">クリニック開業とは</span>、診療科・立地・資金計画を決めたうえで物件を確保し、内装工事と医療機器の導入、スタッフ採用、行政手続きを経て開院日を迎えるまでの一連のプロセスを指します。手続きの完了と、患者に見つけてもらえる状態を整えることは別物です。</div>
@@ -168,10 +170,7 @@ faq:
 
 具体的な運用の始め方は[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)、電話での予約対応は[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)でそれぞれ解説しています。
 
-歯科医院で開業費用まで含めて検討したい場合は[歯科医院の開業費用は5000万円？内訳と抑え方](/meo/shika-kaigyou-hiyou/)もあわせてご確認ください。
-
 <div class="cta-box"><p>自院の開業スケジュールと集患準備を、AIO・SEO・MEOの視点で無料診断しませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
-
 
 AIに尋ねたとき自社が候補に挙がる状態かは、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で確かめられます。登録なしで、その場で点数が表示されます。
 

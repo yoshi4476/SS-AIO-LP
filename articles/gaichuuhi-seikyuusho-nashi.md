@@ -47,6 +47,8 @@ faq:
 
 **外注費は請求書がなくても、支払いの事実を示す証憑があれば経費計上できます。**法人税・所得税の計算上、請求書の保存は経費計上の絶対条件ではありません。
 
+近い論点を[個人事業主の外注費の請求書で見落とす3点](/blog/kojinjigyonushi-gaichuuhi-seikyusho/)で扱っています。
+
 近い論点を[請求書テンプレ無料の選び方](/blog/seikyusho-template-muryou/)で扱っています。
 
 あわせて[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)もご覧ください。
@@ -54,8 +56,6 @@ faq:
 あわせて[経理外注は個人（フリーランス）でも可能？](/blog/keiri-gaichuu-kojin/)もご覧ください。
 
 関連する内容として[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)も公開しています。
-
-請求書が届いた場合の外注費の仕訳は、[外注費の請求書の仕訳で起きる誤り4つ](/blog/gaichuuhi-seikyuusho-shiwake/)で、源泉の預り金と7割控除の例とあわせて扱っています。
 
 <div class="definition-box"><span class="term">経費計上に必要な証憑とは</span>、支払日・支払先・金額・内容が確認できる書類全般のことです。==請求書はその代表例にすぎず、振込明細書や出金伝票でも同じ役割を果たせます。==</div>
 

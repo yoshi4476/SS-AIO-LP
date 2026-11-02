@@ -70,9 +70,9 @@ faq:
 
 **中小企業が使える公的資金は、国の補助金・国の助成金・自治体の補助金や助成金という3つに分類できます。**どこが窓口かによって、探し方も申請の進め方も変わります。
 
-近い論点を[ネイルサロンの補助金](/blog/nail-salon-hojokin-hikaku/)で扱っています。
+関連する内容として[AIシステム開発の費用は補助対象経費になる？](/blog/ai-system-kaihatsu-hojo-taisho-keihi/)も公開しています。
 
-あわせて[ものづくり補助金 美容室で対象外になる内装・椅子と対象の投資](/blog/monozukuri-hojokin-biyoushitsu/)もご覧ください。
+近い論点を[外国人雇用の助成金は個人事業主も対象](/blog/gaikokujin-koyou-joseikin-kojinjigyonushi/)で扱っています。
 
 <figure><img src="/images/chusho-kigyo-joseikin/bunrui3.png" alt="中小企業が使える助成金・補助金の3分類: 国の補助金は経済産業省系で審査により採択、国の助成金は厚生労働省系で要件を満たせば受給、自治体の補助金・助成金は地域限定で内容も多様"><figcaption>中小企業が使える助成金・補助金の3分類</figcaption></figure>
 

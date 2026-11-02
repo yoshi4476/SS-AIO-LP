@@ -131,7 +131,7 @@ Googleの<a href="https://developers.google.com/search/docs/fundamentals/creatin
 
 売却の質問ページは、担当者が受けた質問を1ページ1問に絞り、条件つきの答えと自社の進め方、担当エリアの実情を書いて作ります。
 
-近い論点を[不動産会社ホームページのよくある質問](/aio/fudousan-hp-yokuaru-shitsumon/)で扱っています。
+関連する内容は[不動産会社ホームページのよくある質問](/aio/fudousan-hp-yokuaru-shitsumon/)でも扱っています。
 
 質問の選び方は、検索ツールより先に、**自社の担当者が受けた質問から始めます**。電話や来店で「査定の前に聞かれたこと」を書き出してください。
 

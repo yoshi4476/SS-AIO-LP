@@ -68,13 +68,13 @@ faq:
 
 **AIO対策の無料ツールとは、AI検索での引用状況と構造化データのエラーを、費用ゼロで確認できる計測・診断ツールのことです。**
 
+近い論点を[AIO対策を代理店に任せる前に](/aio/aio-taisaku-dairiten/)で扱っています。
+
+あわせて[工務店・注文住宅のAIO対策](/aio/koumuten-chumon-jutaku-aio/)もご覧ください。
+
+あわせて[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)もご覧ください。
+
 関連する内容として[AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説](/aio/aio-towa/)も公開しています。
-
-関連する内容として[飲食店のSEO対策｜自社予約を増やす5手順とAI検索対応](/seo/inshokuten-seo-taisaku/)も公開しています。
-
-あわせて[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)もご覧ください。
-
-近い論点を[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)で扱っています。
 
 実測の参考として、当サイト自体をAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装して計測しています（出典: 自社サイトの実装）。
 

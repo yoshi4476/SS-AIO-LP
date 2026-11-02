@@ -1,4 +1,6 @@
 ---
+merged_into: corporate-backoffice-chigai
+merged_at: 2026-11-02
 title: ミドルオフィスとバックオフィスの違い｜外注9社で締めが12日早まった例
 description: 判断まで外に出すと承認待ちで止まります。ミドルは判断と管理、バックは決まった処理の担当です。中小企業の経理に当てはめ、外部委託できる業務と社内に残す判断の線引きを、取り違えた失敗例つきで整理しました。
 slug: middle-office-backoffice-chigai

@@ -140,7 +140,7 @@ GPTBotやClaudeBotをrobots.txtで誤ってブロックしていると、症状�
 
 **確認は、広告表現→口コミ・指名検索→クローラー→説明文の重複の順で行います。**
 
-あわせて[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)もご覧ください。
+近い論点を[AIO対策を代理店に任せる前に](/aio/aio-taisaku-dairiten/)で扱っています。
 
 <figure><img src="/images/seikotsuin-aio-taisaku-shippai/check-flow.png" alt="整骨院がAIO対策の失敗に気づく4つの確認ポイント" width="1200" height="400" loading="lazy"><figcaption>整骨院がAIO対策の失敗に気づく4つの確認ポイント（当メディア作成）</figcaption></figure>
 

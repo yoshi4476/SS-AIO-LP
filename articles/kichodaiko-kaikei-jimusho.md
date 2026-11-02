@@ -50,7 +50,11 @@ quality_attempts: 3
 
 会計事務所が顧問先の仕訳入力を外部に分担することは、税理士法上も認められる働き方です。
 
-関連する内容として[記帳代行を税理士以外に頼む落とし穴](/blog/kichodaiko-zeirishi-igai/)も公開しています。
+関連する内容として[不動産の記帳代行はどこまで頼める？](/blog/fudousan-kichodaiko/)も公開しています。
+
+関連する内容として[青色申告会で記帳代行は頼める？](/blog/aoiro-shinkokukai-kichodaiko/)も公開しています。
+
+近い論点を[記帳代行を税理士以外に頼む落とし穴](/blog/kichodaiko-zeirishi-igai/)で扱っています。
 
 つまずきやすい点は、[記帳代行を税理士以外に頼む落とし穴](/blog/kichodaiko-zeirishi-igai)で解説しています。
 

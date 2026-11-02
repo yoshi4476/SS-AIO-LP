@@ -67,6 +67,8 @@ faq:
 
 **歯科医院の主な対象は、デンタルレセコン・電子カルテ・予約システム・会計ソフトの4つです。**いずれもIT導入支援事業者が登録したツールであることが条件になります。
 
+つまずきやすい点については、[歯科医院の助成金、対象外になる5つの失敗](/blog/shika-iin-joseikin-taisho/)にまとめています。
+
 <figure><img src="/images/it-hojokin-shika-iin/target-tools.png" alt="歯科医院のIT導入補助金で対象になる4つのツール: デンタルレセコン、歯科用電子カルテ、予約システム、会計・経営ソフト" loading="lazy"><figcaption>歯科医院のIT導入補助金で対象になる4つのツール</figcaption></figure>
 
 <a href="https://www.rece-raku.com/basic/dental-it.html" target="_blank" rel="noopener">レセコンの基礎知識を紹介する記事</a>では、歯科レセコンが窓口業務や患者情報管理の課題を効率化するツールとして通常枠の対象になると説明されています。
@@ -135,8 +137,6 @@ faq:
 
 **申請は要件準備、ツール選定、交付申請、実績報告という4ステップで入金まで進みます。**採択されただけでは入金されず、実績報告を終えて初めて交付額が確定します。
 
-近い論点を[小規模事業者持続化補助金｜美容室の書き方4ステップ](/blog/jizokuka-hojokin-biyoushitsu-kakikata/)で扱っています。
-
 <figure><img src="/images/it-hojokin-shika-iin/flow-steps.png" alt="歯科医院がIT導入補助金を使うまでの4ステップ: GビズID・SECURITY ACTIONを準備、IT導入支援事業者とデンタル系ツールを選定、交付申請から契約・導入、実績報告を提出し交付額が確定" loading="lazy"><figcaption>歯科医院がIT導入補助金を使うまでの4ステップ</figcaption></figure>
 
 個人経営の歯科医院も医療法人と同じ要件で申請できます。GビズIDプライムアカウントの取得とSECURITY ACTIONの宣言は、申請前に済ませておく必要があります。GビズIDプライムは発行までに2〜3週間ほどかかることがあるため、ツール選定と並行して先に手続きを始めておくと、後工程で慌てずに済みます。
@@ -176,7 +176,6 @@ faq:
 <details><summary>個人経営の歯科医院でも申請できますか？</summary><p class="faq-a">できます。GビズIDとSECURITY ACTIONの宣言があれば法人形態を問いません。</p></details>
 <details><summary>交付決定前にレセコンを発注してもよいですか？</summary><p class="faq-a">できません。交付決定前に発注・契約すると、その経費は補助対象から外れてしまいます。</p></details>
 </div>
-
 
 申請の要件に自社が当てはまるかは、[3分の適性診断（無料・8問）](/#diagnosis)で確かめられます。登録なしで、その場で点数が表示されます。
 

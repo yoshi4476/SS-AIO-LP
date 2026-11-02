@@ -43,6 +43,8 @@ faq:
 
 AI検索は生成AIが答える検索全般を指し、AIO対策はその回答に引用されるための最適化を意味します。
 
+関連する内容は、[AI検索対策を代理店に頼んだら何を準備する？](/aio/ai-kensaku-taisaku-dairiten-junbi/)で解説しています。
+
 実測の参考として、当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています（出典: 自社サイトの実装）。
 
 近い論点を[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)で扱っています。
@@ -50,8 +52,6 @@ AI検索は生成AIが答える検索全般を指し、AIO対策はその回答�
 関連する内容として[LLMO店舗集客とは？](/aio/llmo-tenpo-shukyaku/)も公開しています。
 
 関連する内容については、[AIに選ばれる記事の書き方｜5つのコツとNG例](/aio/aio-erabareru-kiji-kakikata/)にまとめています。
-
-関連する内容は[AIO対策でAIに引用されるには？5つの実践ポイント](/aio/aio-taisaku-ai-inyou-sareru/)でも扱っています。
 
 <div class="definition-box"><span class="term">AI検索とは</span>、Google AI OverviewやAIモード、ChatGPT検索、Perplexity、Geminiなど、生成AIが検索の場で直接回答を返す検索行動全般を指す総称です。</div>
 

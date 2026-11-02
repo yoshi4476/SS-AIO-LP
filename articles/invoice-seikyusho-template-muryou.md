@@ -112,6 +112,10 @@ quality_attempts: 3
 
 **免税事業者の外注先には、登録番号の欄を消した請求書の型を使ってもらうのが安全です。**無料の型の多くは、番号の欄が最初から入っています。
 
+あわせて[個人事業主の外注費の請求書で見落とす3点](/blog/kojinjigyonushi-gaichuuhi-seikyusho/)もご覧ください。
+
+あわせて[AI OCRの請求書読み取りで防げない誤り4つ](/blog/ai-ocr-seikyusho/)もご覧ください。
+
 国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6498.htm" target="_blank" rel="noopener">タックスアンサーNo.6498</a>は、適格請求書を出せるのは登録を受けた事業者だけとしています。
 
 <div class="caution-box"><span class="box-title">登録していない外注先に、番号欄つきの型を渡すのは避けてください</span><br>登録していない人が、適格請求書と誤認されるおそれのある書類を出すことは<strong>消費税法で禁じられ、罰則もあります</strong>。根拠は国税庁税務大学校の<a href="https://www.nta.go.jp/about/organization/ntc/kenkyu/ronsou/103/02/index.htm" target="_blank" rel="noopener">論叢</a>にまとめられています。</div>
@@ -136,6 +140,8 @@ quality_attempts: 3
 ## 無料テンプレートを直して使う会社・切り替える会社
 
 **無料テンプレートを直して使うか替えるかは、3場面（返品・値引き、税率の混在、免税事業者の外注先）の有無と、月の発行枚数で決めてください。**型の良し悪しより、作る量と人数で分かれます。
+
+関連する内容として[請求書の記帳で間違えやすい計上日](/blog/kicho-seikyusho/)も公開しています。
 
 2023年4月から2026年9月までに、当社は請求書の発行代行を18社、受け取り・支払処理の代行を25社で担当しました。1社あたり月20〜150枚、全体で月約1,800枚を扱っています（当社の支援実績、2026年10月時点）。
 

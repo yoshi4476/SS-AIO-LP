@@ -57,7 +57,7 @@ quality_attempts: 3
 
 **工務店・注文住宅のLLMOとは、生成AIが家づくりの質問に答えるとき、自社の情報が出典や候補に使われる状態をつくることです。**
 
-あわせて[リフォーム・外壁塗装のLLMO](/aio/reform-gaiheki-tosou-llmo/)もご覧ください。
+関連する内容を先に押さえるなら、[リフォーム・外壁塗装のLLMO](/aio/reform-gaiheki-tosou-llmo/)が参考になります。
 
 <div class="definition-box"><span class="term">LLMO（Large Language Model Optimization）とは</span>、ChatGPT・Gemini・Claude・Perplexityなどの生成AIが回答を作るときに、自社の情報が正しく使われるよう整える取り組みです。</div>
 

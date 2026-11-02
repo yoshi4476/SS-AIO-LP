@@ -47,6 +47,8 @@ faq:
 
 クリニックのインスタ集客とは、院内の様子や医師・スタッフの人柄を発信し、来院前の不安を減らして予約につなげる取り組みです。
 
+近い論点を[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)で扱っています。
+
 関連する内容として[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)も公開しています。
 
 あわせて[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)もご覧ください。
@@ -69,8 +71,6 @@ faq:
 ## クリニックがインスタ発信を後回しにできない事情
 
 クリニックにインスタ集客が必要な理由は、無料で始められ、通院前の不安を減らせるからです。
-
-関連する内容として[歯科医院のリフォーム費用とは？](/meo/shika-reform-hiyou/)も公開しています。
 
 <figure><img src="/images/clinic-instagram-yarikata/riyu.png" alt="クリニックにインスタ集客が必要な3つの理由: 無料で始められる、通院前の不安を減らせる、スタッフの人柄が伝わる" loading="lazy"><figcaption>クリニックにインスタ集客が必要な3つの理由</figcaption></figure>
 

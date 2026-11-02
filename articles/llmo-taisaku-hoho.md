@@ -38,8 +38,6 @@ LLMO対策とは、AIチャットの回答内で自社が引用元・推奨先�
 
 実測の参考として、当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています（出典: 自社サイトの実装）。
 
-前提となる考え方は、[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)で解説しています。
-
 関連する内容として[不動産の個人集客とは？会社に頼らず伸ばす5つの施策](/ai-marketing/fudousan-kojin-shukyaku/)も公開しています。
 
 <div class="definition-box"><span class="term">LLMO（Large Language Model Optimization）とは</span>、ChatGPTやPerplexityなどの大規模言語モデルが回答を作るときに、自社の情報を参照・引用してもらうための最適化のことです。</div>

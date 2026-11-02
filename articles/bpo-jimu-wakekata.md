@@ -55,6 +55,8 @@ quality_attempts: 3
 
 **BPO事務は、事務の手順と仕上がりの責任まで外部の会社に任せる委託で、指示を出して働いてもらう派遣とは違います。**
 
+あわせて[コーポレートとバックオフィスの違いは？](/blog/corporate-backoffice-chigai/)もご覧ください。
+
 <div class="definition-box"><span class="term">BPO事務とは</span>、BPO（ビジネス・プロセス・アウトソーシング）のうち、請求書・経費精算・記帳・給与の集計などの事務を、手順ごと外部の会社に任せる形を指します。</div>
 
 BPOという言葉の意味や種類は、[BPOとは？意味と業務の種類5つ](/blog/bpo-toha/)で整理しています。この記事では、事務のどこを任せるかに絞ります。
@@ -67,9 +69,7 @@ BPOという言葉の意味や種類は、[BPOとは？意味と業務の種類5
 
 **BPOに任せやすいのは、毎月の件数が多く、誰がやっても同じ手順で終わる事務です。**
 
-近い論点を[経費精算の領収書を紛失したら？](/blog/keihi-seisan-ryoshusho-funshitsu/)で扱っています。
-
-関連する内容として[建設業の記帳代行が合わない3つの状況](/blog/kensetsugyou-kichodaiko/)も公開しています。
+関連する内容として[経費精算がめんどくさい会社の落とし穴](/blog/keihi-seisan-mendokusai/)も公開しています。
 
 <figure><img src="/images/bpo-jimu-wakekata/wakekata.png" alt="会社の事務を、BPOに任せる事務・社内に残す事務・社内でそろえる書類の3つに分けた図" loading="lazy"><figcaption>BPOに出す事務と社内に残す事務</figcaption></figure>
 

@@ -69,6 +69,8 @@ Googleは<a href="https://developers.google.com/search/docs/fundamentals/creatin
 
 「税理士 選び方」「社労士 選び方」のような選び方の質問では、AIの出典の45.5%が士業事務所の公式サイトでした。
 
+近い論点を[MEO会社の選び方｜LLMO対応の見極め3基準](/aio/meo-kaisha-llmo-taiou/)で扱っています。
+
 当社は、ChatGPT・Gemini・Claude・Perplexityの4つに同じ100問を聞き、答えの出典2,343件を種類ごとに数えました。質問は「地域で探す」「費用」「選び方」「手続き・悩み」「制度・ルール」の5種類で、各20問です。
 
 選び方の20問の出典の種類は、次のとおりでした。
@@ -101,7 +103,7 @@ Googleは<a href="https://developers.google.com/search/docs/fundamentals/creatin
 
 士業事務所のホームページに載せる判断材料は、受ける依頼と受けない依頼・担当者・流れと期間・選ぶときの見方の4つです。
 
-関連する内容として[不動産会社の集客方法](/aio/fudousan-kaisha-shukyaku-houhou/)も公開しています。
+あわせて[AIO外注の丸投げで失敗する4つの判断｜渡すもの一覧](/aio/aio-gaichuu/)もご覧ください。
 
 <figure><img src="/images/shigyou-erabareru-homepage/zairyou.png" alt="受ける依頼と受けない依頼、担当する人の名前と資格、相談から依頼までの流れと期間、依頼先を決めるときの見方の4つを並べたチェックリスト"></figure>
 
@@ -180,8 +182,6 @@ Googleは<a href="https://developers.google.com/search/docs/fundamentals/creatin
 ## 士業事務所の状況ごとに、どのページから直すか
 
 士業事務所のホームページは、分野の絞り方・所員の数・断る相談の多さで、先に直すページが変わります。
-
-関連する内容として[AIOサービス比較で外す5つの落とし穴](/aio/aio-service-hikaku/)も公開しています。
 
 <figure><img src="/images/shigyou-erabareru-homepage/junban.png" alt="分野を絞っている事務所・所員が複数いる事務所・相談後に断られる人が多い事務所ごとに、先に直すページと後回しでよいものを比べた表"></figure>
 

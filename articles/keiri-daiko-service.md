@@ -49,13 +49,13 @@ faq:
 
 **経理代行サービスとは、記帳・請求書発行・支払代行など経理実務の一部を、業務委託契約で外部に任せるサービスです。**
 
-あわせて[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)もご覧ください。
+あわせて[経理と会計士の違い｜中小企業が頼み先を誤る3つの落とし穴](/blog/keiri-kaikeishi-chigai/)もご覧ください。
 
-関連する内容として[会計と経理の違い｜税理士に任せても社内に残る経理の作業](/blog/keiri-zaimu-chigai/)も公開しています。
+関連する内容として[記帳代行を札幌で頼むなら](/blog/kichodaiko-sapporo/)も公開しています。
 
-近い論点を[経理外注の費用相場｜依頼先4タイプの料金](/blog/keiri-gaichuu-hiyou-souba/)で扱っています。
+関連する内容として[記帳代行料金表は税理士事務所でどう読む？](/blog/kichodaiko-ryokinhyo-zeirishi/)も公開しています。
 
-あわせて[経理の時給相場1,281円](/blog/keiri-jikyu-souba/)もご覧ください。
+あわせて[経理部と経理課の違いは？](/blog/keiri-bu-keiri-ka-chigai/)もご覧ください。
 
 <div class="definition-box"><span class="term">経理代行サービスとは</span>、仕訳入力に加えて請求書発行・振込データ作成・入出金管理などの日常的な経理実務を代行するサービスのことです。==帳簿入力だけの「記帳代行」より対応範囲が広く、業務フローの見直しまで担う「経理BPO」より対象は限定的です。==</div>
 

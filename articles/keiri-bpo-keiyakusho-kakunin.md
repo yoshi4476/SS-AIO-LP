@@ -77,6 +77,8 @@ faq:
 
 秘密保持条項では、委託先の情報管理措置と、情報漏えいが起きた場合の報告義務が明記されているかを確認します。
 
+関連する内容として[請求書テンプレ無料で起きやすい失敗](/blog/seikyusho-template-muryou/)も公開しています。
+
 関連する内容として[記帳代行費用の相場は法人でいくら？](/blog/kichodaiko-houjin-hiyou-souba/)も公開しています。
 
 個人情報保護法25条は、委託元に対して**委託先の安全管理措置を監督する義務**を課しています。個人情報保護委員会の<a href="https://www.ppc.go.jp/personalinfo/legal/guidelines_tsusoku/" target="_blank" rel="noopener">ガイドライン（通則編）</a>では、委託先の取扱状況を把握することが求められています。契約書に条項がなければ監督の実効性を示しにくくなります。

@@ -73,11 +73,11 @@ quality_attempts: 3
 
 **帳簿を自分で付けるなら青色申告会、入力を任せるなら記帳代行会社、申告書まで任せるなら税理士が合います。**
 
-関連する内容として[記帳代行を札幌で頼むなら](/blog/kichodaiko-sapporo/)も公開しています。
+関連する内容として[飲食店の記帳代行｜任せる範囲と選び方・失敗しない5つの確認点](/blog/inshokuten-kicho-daiko/)も公開しています。
 
-あわせて[記帳代行費用の相場は法人でいくら？](/blog/kichodaiko-houjin-hiyou-souba/)もご覧ください。
+関連する内容として[平均12万円台は落とし穴](/blog/gyoseishoshi-kichodaiko-souba/)も公開しています。
 
-あわせて[不動産の記帳代行はどこまで頼める？](/blog/fudousan-kichodaiko/)もご覧ください。
+近い論点を[記帳代行のアウトソーシング活用](/blog/kichodaiko-outsourcing/)で扱っています。
 
 <figure><img src="/images/aoiro-shinkokukai-kichodaiko/yakuwari.png" alt="青色申告会・記帳代行会社・税理士の3つで、入力や申告書の作成を誰が行うかを比べた表"></figure>
 

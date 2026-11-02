@@ -86,6 +86,8 @@ BtoB購買担当者は既に生成AI検索を発注先探しの手段として�
 
 BtoB企業がAI検索対策でつまずく典型パターンは、構造未整備・検索経路の見誤り・計測不在の3つです。
 
+関連する内容は[AI検索対策を代理店に頼んだら何を準備する？](/aio/ai-kensaku-taisaku-dairiten-junbi/)で整理しています。
+
 <figure><img src="/images/btob-llmo-taisaku/mistakes.png" alt="BtoB AI検索対策（LLMO）でよくある3つの失敗: 自社サイトが従来SEOのままでAI検索向けの構造がない、発注先探しの主導線をGoogle検索だけで捉えている、AI回答内の言及を計測せず対策の効果を追えていない" loading="lazy"><figcaption>BtoB AI検索対策（LLMO）でよくある3つの失敗</figcaption></figure>
 
 **失敗1: 自社サイトが従来SEOのままでAI検索向けの構造がない。**キーワードを詰め込んだ長文はあっても、AIが1文で抜き出せる結論や比較表がなく、引用元として選ばれません。
@@ -143,8 +145,6 @@ chatgpt.com・perplexity.ai・gemini.google.com等からのセッションをGA4
 ## BtoB SEOとLLMOの違い｜BtoB SEO LLMOをどう両立させるか
 
 BtoB SEOとLLMOの違いは狙う場所です。SEOは検索結果の順位、LLMOはAIの回答文そのものを狙います。対立せず、SEOの上位表示がLLMOの前提になります。
-
-近い論点を[相場記事の作り方｜不動産・住宅会社が信頼される6つの要素](/ai-marketing/souba-kiji-tsukurikata/)で扱っています。
 
 | 比較項目 | BtoB SEO | BtoBのLLMO |
 |:--|:--|:--|

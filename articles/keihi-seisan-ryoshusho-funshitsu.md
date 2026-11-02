@@ -145,7 +145,7 @@ No.6496は、買手が作って相手の確認を受けた仕入明細書等も�
 
 紛失が月に何件も出るなら、社員への注意より、受け取った日に記録が残る仕組みに変えるほうが効きます。
 
-あわせて[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)もご覧ください。
+近い論点を[経費精算がめんどくさい会社の落とし穴](/blog/keihi-seisan-mendokusai/)で扱っています。
 
 <figure><img src="/images/keihi-seisan-ryoshusho-funshitsu/yobou.png" alt="紛失を減らすための確認4点: 受け取った日に撮影する、提出期限を決めておく、紛失時の届けの書式を決める、不足分を毎週催促する" loading="lazy"><figcaption>紛失を減らすための確認4点</figcaption></figure>
 
