@@ -160,6 +160,8 @@ GoogleのAIの答えは、通常の検索と同じ土台で作られます。Goo
 
 **多い失敗は、設定作業だけで終えること、塗料の宣伝ページだけを増やすこと、AI経由の依頼を数えていないことの3つです。**
 
+関連する内容は[インバウンド飲食店のAI検索](/aio/inbound-inshokuten-ai-kensaku/)でも扱っています。
+
 ### 失敗1: llms.txtや構造化データの設定だけで終える
 
 起きること: 設定を済ませても、AIの答えに社名が出ないままになります。原因は、設定が引用の決め手ではない点です。<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">GoogleのAI最適化ガイド</a>は、llms.txtを使わないと明記しています。避けるには、設定より先に施工事例と会社情報の事実を書きます。

@@ -1,0 +1,131 @@
+{
+ "v": 2,
+ "slug": "inbound-inshokuten-ai-kensaku",
+ "ok": true,
+ "date": "2026-11-03",
+ "questions": [
+  "インバウンド飲食店 AI検索について教えてください",
+  "インバウンド飲食店 AI検索について、「訪日客のAI検索とは？Googleの検索結果に出るAIの答え」を教えてください",
+  "インバウンド飲食店 AI検索について、「飲食店を調べる質問でAIが公式サイトを出典にした割合は60.0%」を教えてください",
+  "インバウンド飲食店 AI検索について、「Google検索のAIに店のページが使われる3つの条件」を教えてください",
+  "インバウンド飲食店 AI検索について、「訪日客の検索で店が外れる4つの設定ミスと失敗例」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "訪日客のAI検索とは？Googleの検索結果に出るAIの答え",
+   "words": [
+    "Google",
+    "検索結果",
+    "訪日客"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "飲食店を調べる質問でAIが公式サイトを出典にした割合は60.0%",
+   "words": [
+    "公式サイト",
+    "飲食店",
+    "質問",
+    "AI"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "Google検索のAIに店のページが使われる3つの条件",
+   "words": [
+    "Google検索",
+    "ページ",
+    "AI",
+    "条件"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "訪日客の検索で店が外れる4つの設定ミスと失敗例",
+   "words": [
+    "設定ミス",
+    "訪日客",
+    "失敗例",
+    "検索"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "新しい英語ページが検索に出るまでの日数の目安",
+   "words": [
+    "英語ページ",
+    "検索",
+    "日数"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "訪日客の予約の実績で決める、英語ページに手を付ける店と待つ店",
+   "words": [
+    "英語ページ",
+    "訪日客",
+    "予約",
+    "実績"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "Search Consoleの国別の数字で効果を測る方法",
+   "words": [
+    "Console",
+    "Search",
+    "国別",
+    "数字"
+   ],
+   "hits": 5,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "ai.7senses.co.jp": "self",
+  "atoz-design.jp": "peer",
+  "blog.google": "peer",
+  "corp.7senses.co.jp": "operator",
+  "developers.google.com": "peer",
+  "go-local.jp": "peer",
+  "hebiwork.com": "peer",
+  "honichi.com": "peer",
+  "inbound-marketing-japan.com": "peer",
+  "inboundglobal.jp": "peer",
+  "inboundplus.jp": "peer",
+  "inshokuai.jp": "peer",
+  "japanticket.com": "peer",
+  "lifunext.com": "peer",
+  "llmo-ai-knowledgeholdings.hatenablog.com": "media",
+  "mov.am": "peer",
+  "note.com": "video",
+  "prtimes.jp": "media",
+  "support.google.com": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 1,
+  "専門家への相談": 0
+ },
+ "chars": 18697,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え10件のうち、『Console』に触れたものは5件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは専門家への相談は0件、期間（◯か月・◯日など）は1件、進め方の手順は1件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは20件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが2件、動画・SNS・ブログが2件でした。"
+ ]
+}
