@@ -79,8 +79,10 @@ def test_legal_claims_detector_and_all_public_pages():
           "legal_claims.find(" in (ROOT / "scripts" / "build.py").read_text(encoding="utf-8"), True)
 
     facts = json.loads((ROOT / "data" / "first_party_facts.json").read_text(encoding="utf-8"))
-    claims = " ".join(f.get("claim", "") for f in facts["facts"])
-    check("材料: 一次情報に当社の作成代行・支援社数の主張が無い", LC.find(claims), [])
+    # 1件ずつ見る。全部を1本につなぐと、ある事実の「差し戻された例」と別の事実の「割合は約60%」が
+    # つながって採択率の主張に見えた（2026-11-02。計算の事実を登録してからの誤検知）
+    check("材料: 一次情報に当社の作成代行・支援社数の主張が無い",
+          [(f.get("id"), LC.find(f.get("claim", ""))) for f in facts["facts"] if LC.find(f.get("claim", ""))], [])
     sub = json.loads((ROOT / "sites" / "subsidy.json").read_text(encoding="utf-8"))
     check("材料: 補助金サイトの記事下の案内が作成代行と読めない",
           (LC.find(sub["cta_desc"]), "申請書類の準備まで" in sub["cta_desc"]), ([], False))
