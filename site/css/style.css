@@ -1151,6 +1151,12 @@ body:not(.lp-doc) .pillar:hover::before {
   display: block; margin-top: .7rem; font-family: var(--sans); font-weight: 500;
   font-size: .8em; color: rgba(255,255,255,.82); line-height: 1.9;
 }
+/* 写真そのものを見せる帯（data-tone="light"。連作「AIに聞かれ、選ばれ、来てもらう」の場面）。紺は下だけにかけ、言葉は下に寄せる。
+   濃い紺を全面にかけると写真が見えず、ページを替えても見た目が変わらなかった（2026-11-02） */
+/* 区画を読む門（h59）が class="photo-band" の並びを前提にするので、見せ方は data-tone で切り替える */
+.photo-band[data-tone="light"] { place-items: end center; }
+.photo-band[data-tone="light"]::after { background: linear-gradient(180deg, rgba(11,36,71,0) 45%, rgba(11,36,71,.62)); }
+.photo-band[data-tone="light"] p { font-size: clamp(1rem, 1.9vw, 1.4rem); padding-bottom: 1.2rem; }
 
 /* 記事一覧のカテゴリ区切り。日付順に全部並べるだけだと読者が目的の領域に辿り着けない */
 .latest-block { margin-bottom: clamp(2.6rem, 5vw, 4rem); }

@@ -252,6 +252,7 @@ def body(key, metas, faq_pairs, post_tile, site_url):
     out = [STYLE, '<div class="ilp">',
            f'<section class="ilp-pain"><span class="ilp-eb">課題</span><h2>{_e(c["name"])}によくあるお悩み</h2><div class="ilp-cards">{pains}</div></section>',
            data_section(key, c),
+           visit_band(key),
            f'<section class="ilp-fix"><span class="ilp-eb">支援内容</span><h2>セブンセンシズが行うこと</h2><div class="ilp-cards">{fixes}</div>'
            '<p class="ilp-proof" style="margin-top:1rem">集客支援の実務: AIO・SEO・MEOで累計3,200件以上（うちMEO「G-ran」で2,000件以上）の支援に携わってきました（2026年10月時点）。'
            'ここに挙げた業種のほかにも対応しています。</p></section>',
@@ -271,6 +272,26 @@ def body(key, metas, faq_pairs, post_tile, site_url):
                    f'</figure></div></section>')
     out.append('</div>')
     return "\n".join(out)
+
+
+# 調査の数字と支援内容のあいだに、その業種でお客様が来てくれる場面の写真の帯を挟む（文字と表が続いて読み疲れるため。
+# 連作「AIに聞かれ、選ばれ、来てもらう」の1枚。写真が無い業種では何も出さない）
+VISIT_ALT = {
+    "clinic": "午後のクリニックの待合室で、受付を済ませる患者の後ろ姿",
+    "koumuten": "完成見学会で、工務店の担当者と一緒に新しい木の家を見て回る家族",
+    "shigyou": "書類を手に、事務所のある古いビルの階段を上る相談者の後ろ姿",
+    "fudosan": "不動産会社の店内で、担当者と物件の資料を見る夫婦の後ろ姿",
+}
+VISIT_OF = {"medical": "clinic", "reform": "koumuten"}   # 業種LPの名前 → 写真の鍵（industry_thumbs.SCENE_OF と同じ）
+SCENES = Path(__file__).resolve().parent.parent / "site" / "images" / "scenes"
+
+
+def visit_band(key):
+    k = VISIT_OF.get(key, key)
+    if k not in VISIT_ALT or not (SCENES / f"{k}-visit.webp").is_file():
+        return ""
+    return (f'<div class="photo-band" data-tone="light"><img src="/images/scenes/{k}-visit.webp" alt="{_e(VISIT_ALT[k])}" '
+            'width="1600" height="900" loading="lazy" decoding="async"></div>')
 
 
 def json_ld(key, faq_pairs, site_url, org):
