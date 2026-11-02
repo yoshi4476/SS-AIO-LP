@@ -51,6 +51,37 @@ DIMS = [
 ]
 
 
+# 記事が公的資料を引いた文の見分け（リンク先か機関の名）と、その文にある制度・法令の名前
+OFFICIAL_ORG = re.compile(r"国税庁|公正取引委員会|厚生労働省|経済産業省|中小企業庁|総務省|金融庁|国土交通省|消費者庁|"
+                          r"デジタル庁|法務省|日本年金機構|個人情報保護委員会|中小企業基盤整備機構")
+OFFICIAL_URL = re.compile(r"https?://[^)\s]*\.(?:go|lg)\.jp")
+NAMED = re.compile(r"[一-龥ァ-ヴーA-Za-z]{2,}(?:法|制度|特例|補助金|助成金|控除|方式|ガイドライン|規則)")
+GENERIC = re.compile(r"各種.*|[一-龥]{1,2}(?:制度|補助金|助成金|控除)")
+
+
+def official_terms(body, kw):
+    """記事が公的資料から引いた制度・法令の名前（3つまで）と、引いた機関の名。
+    「答えに論点の語が出たか」は採点で「判断に使えない」と22件中の多くで減点された（2026-11-02）。
+    記事の拠り所の公的な点に AI の答えが触れたかなら、読者が AI の答えをそのまま使えるかの実測になる"""
+    kws = [t for t in re.split(r"[\s　]+", kw) if len(t) >= 2]
+    out = {}
+    for s in re.split(r"(?<=[。\n])", body):
+        if not (OFFICIAL_URL.search(s) or OFFICIAL_ORG.search(s)):
+            continue
+        org = OFFICIAL_ORG.search(s)
+        plain = re.sub(r"\]\([^)]*\)", "]", s)
+        for m in NAMED.finditer(plain):
+            t = m.group(0)
+            # 「独立行政法人」「現在法令」の「法」、「各種融資制度」「補助制度」のような名前でない語は数えない
+            if plain[m.end():m.end() + 1] in ("人", "令") or GENERIC.fullmatch(t):
+                continue
+            if len(t) >= 3 and not any(k in t or t in k for k in kws) and t not in out:
+                out[t] = org.group(0) if org else "公的機関"
+        if len(out) >= 3:
+            break
+    return list(out.items())[:3]
+
+
 def _path(site, slug):
     import client_private as CP
     if site and CP.is_private(site):
@@ -184,12 +215,19 @@ def measure(site, slug, body, kw, ask_fn=None):
         pool = [k for k in ans if k[1] != own]
         hit = sum(1 for k in pool if any(w.lower() in ans[k]["text"].lower() for w in words))
         rows.append({"topic": h, "words": words, "hits": hit, "of": len(pool)})
+    official = []
+    for term, org in official_terms(body, kw):
+        # 問いにその名前が入っていた答えは数えない（問いの語が答えに出るのは当たり前）
+        pool = [k for k in ans if term not in qs[k[1]]]
+        if pool:
+            official.append({"term": term, "org": org, "of": len(pool),
+                             "hits": sum(1 for k in pool if term in ans[k]["text"])})
     doms = sorted({d for v in ans.values() for d in v["domains"]})
     kd = kinds(doms, site)
     dims = {label: sum(1 for v in ans.values() if re.search(rx, v["text"])) for label, rx in DIMS}
     return {"v": VERSION, "slug": slug, "ok": True, "date": date.today().isoformat(), "questions": qs, "engines": names,
-            "answers": len(ans), "topics": rows, "sources": {d: kd.get(d, "") for d in doms}, "dims": dims,
-            "chars": sum(len(v["text"]) for v in ans.values())}
+            "answers": len(ans), "topics": rows, "official": official, "sources": {d: kd.get(d, "") for d in doms},
+            "dims": dims, "chars": sum(len(v["text"]) for v in ans.values())}
 
 
 def claims(res):
@@ -211,8 +249,12 @@ def claims(res):
             f"{y}年{m}月に当社が{ne}つのAI（{who}）に本記事の論点{nq}問を聞き、{n}件の答えを集めました。",
             f"当社調べでは{y}年{m}月に、{ne}つのAI（{who}）へ本記事の論点{nq}問を質問し、答え{n}件を得ました。")[k]
     out = []
+    # 公的資料の点に触れた答えの数を先に置く（記事の主題に直結し、AI の答えをそのまま使えるかの判断になる）
+    for r in sorted(res.get("official") or [], key=lambda r: r["hits"] / r["of"])[:2]:
+        out.append(f"{head}{r['of']}件の答えのうち、{r['org']}の資料にある「{r['term']}」に触れたものは{r['hits']}件でした。")
     rows = [r for r in res["topics"] if r["words"] and r.get("of")]
-    if rows:
+    if rows and not out:
+        # 論点の語が答えに出たかは、公的資料の点が無い記事でだけ書く（採点で「判断に使えない」と減点されていた）
         # ほかの論点を問うた答えに出なかった論点は、AI の答えが拾っていない所（記事が補う所）として一次情報になる
         none = [r for r in rows if not r["hits"]]
         part = sorted([r for r in rows if 0 < r["hits"] < r["of"]], key=lambda r: r["hits"] / r["of"])
@@ -257,12 +299,14 @@ def run(slug, force=False):
         return {}
     old = load(site, slug)          # 前の形の結果は load が空を返すので、同じ月でも測り直す
     today = date.today().isoformat()
-    if old.get("ok") and not force and old.get("date", "")[:7] == today[:7] and not thin(old, today):
+    # 公的資料の点を数える前の結果は数え直す（AI の答えは ai_cite_check が30日控えているので、聞き直しはほぼ起きない）
+    counted = "official" in old or not official_terms(text, kw)
+    if old.get("ok") and not force and old.get("date", "")[:7] == today[:7] and not thin(old, today) and counted:
         return old
     res = measure(site, slug, text, kw)
     if not res.get("ok") and old.get("ok"):
         return old            # 聞けなかった回は、前に測った結果を消さない
-    if old.get("date", "")[:7] == today[:7] and res.get("answers", 0) <= old.get("answers", 0):
+    if old.get("date", "")[:7] == today[:7] and res.get("answers", 0) <= old.get("answers", 0) and counted:
         return old            # 同じ月の測り直しで答えが増えなかった回も、前の結果を残す（測った日を進めない）
     res["claims"] = claims(res)
     p = _path(site, slug)
