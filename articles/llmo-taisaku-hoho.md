@@ -30,6 +30,8 @@ faq:
 
 LLMO対策とは、AIチャットの回答内で自社が引用元・推奨先として選ばれるための最適化施策です。
 
+関連する内容については、[インバウンド飲食店のLLMO](/aio/inbound-inshokuten-llmo/)にまとめています。
+
 関連する内容については、[リフォーム・外壁塗装のLLMO](/aio/reform-gaiheki-tosou-llmo/)にまとめています。
 
 実際の進め方については、[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)にまとめています。

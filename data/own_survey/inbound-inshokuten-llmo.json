@@ -1,0 +1,129 @@
+{
+ "v": 2,
+ "slug": "inbound-inshokuten-llmo",
+ "ok": true,
+ "date": "2026-11-02",
+ "questions": [
+  "インバウンド飲食店 LLMOについて教えてください",
+  "インバウンド飲食店 LLMOについて、「訪日客がAIに店を相談する場面とLLMOの役割」を教えてください",
+  "インバウンド飲食店 LLMOについて、「飲食店の質問でAIが出典に使うのはグルメサイトと公式サイト」を教えてください",
+  "インバウンド飲食店 LLMOについて、「外国語のページに先に書く3種類の事実」を教えてください",
+  "インバウンド飲食店 LLMOについて、「翻訳ボタンや画像の献立など英語対応でつまずく4つのNG」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "訪日客がAIに店を相談する場面とLLMOの役割",
+   "words": [
+    "訪日客",
+    "AI",
+    "場面"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "飲食店の質問でAIが出典に使うのはグルメサイトと公式サイト",
+   "words": [
+    "グルメサイト",
+    "公式サイト",
+    "飲食店",
+    "質問"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "外国語のページに先に書く3種類の事実",
+   "words": [
+    "外国語",
+    "ページ",
+    "事実"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "翻訳ボタンや画像の献立など英語対応でつまずく4つのNG",
+   "words": [
+    "翻訳ボタン",
+    "英語対応",
+    "画像",
+    "NG"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "訪日客の来店実績で決める、手を付けるお店と待つお店",
+   "words": [
+    "来店実績",
+    "訪日客"
+   ],
+   "hits": 6,
+   "of": 10
+  },
+  {
+   "topic": "英語の質問を毎月AIに聞いて効果を測る方法",
+   "words": [
+    "毎月AI",
+    "英語",
+    "質問"
+   ],
+   "hits": 10,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "atoz-design.jp": "peer",
+  "blog.google": "peer",
+  "byter.com": "peer",
+  "corporate.gnavi.co.jp": "peer",
+  "corporate.kakaku.com": "portal",
+  "developers.google.com": "peer",
+  "ebica.jp": "peer",
+  "executive-marketing-japan.co.jp": "peer",
+  "grino.life": "peer",
+  "gyro-n.com": "peer",
+  "hiidel.com": "peer",
+  "inboundplus.jp": "peer",
+  "investors.yext.com": "peer",
+  "kenkyo.ai": "peer",
+  "knowledge-hd.co.jp": "peer",
+  "levell.co.jp": "peer",
+  "lifunext.com": "peer",
+  "llmo-ai-knowledgeholdings.hatenablog.com": "media",
+  "llmocheki.com": "peer",
+  "localgoat.net": "peer",
+  "miloku.co.jp": "peer",
+  "note.com": "video",
+  "obot-ai.com": "peer",
+  "owner-support.tabelog.com": "review",
+  "prtimes.jp": "media",
+  "retra.jp": "peer",
+  "storepad.jp": "media",
+  "support.google.com": "peer",
+  "tokyotourism-onestop.jp": "peer",
+  "trilia.co.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "wreath-ent.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 2,
+  "専門家への相談": 0
+ },
+ "chars": 18546,
+ "claims": [
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『来店実績』に触れたものは6件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは専門家への相談は0件、期間（◯か月・◯日など）は1件、進め方の手順は2件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは32件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが3件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
+}

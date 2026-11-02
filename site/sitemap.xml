@@ -551,6 +551,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/googlemap-kuchikomi-henshin/flow.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/googlemap-kuchikomi-henshin/elements.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/inbound-inshokuten-llmo/</loc><lastmod>2026-11-02</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/inbound-inshokuten-llmo/shutten-kaitou.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/inbound-inshokuten-llmo/kaku-jijitsu.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/inbound-inshokuten-llmo/maitsuki.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/meo/inshokuten-meo-taisaku/</loc><lastmod>2026-09-01</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-meo-taisaku/kiso.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/inshokuten-meo-taisaku/ng-good.png</image:loc></image:image>

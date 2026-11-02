@@ -411,6 +411,10 @@
 "hash": "e3935fad896b51c854407d4a8dd7c08d",
 "modified": "2026-09-26"
 },
+"inbound-inshokuten-llmo": {
+"hash": "9f54f066d385e6d84926a02d2a52e821",
+"modified": "2026-11-02"
+},
 "inshokuten-meo-taisaku": {
 "hash": "7030e224f3065b2b71f52ed1988684f3",
 "modified": "2026-09-01"
@@ -500,7 +504,7 @@
 "modified": "2026-08-31"
 },
 "llmo-dairiten-boshu": {
-"hash": "56c8fc0b2f2f4019cd55ca2cdb95cee3",
+"hash": "2024c0c6e3eff954a382af5af8d3537a",
 "modified": "2026-10-07"
 },
 "llmo-shukyaku": {
@@ -508,7 +512,7 @@
 "modified": "2026-09-04"
 },
 "llmo-taisaku-hoho": {
-"hash": "696825e07e342516a563ca63c51fe238",
+"hash": "f7592e8b78b83e9e519b82c0ac82e089",
 "modified": "2026-08-31"
 },
 "llmo-tenpo-shukyaku": {
