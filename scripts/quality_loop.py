@@ -29,6 +29,7 @@ FAIL の悪化・その1本だけを一時フォルダで書く権限）は直�
   python scripts/quality_loop.py --report                                     # 直近28日の通過率（週次の findings が読む）
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -716,6 +717,10 @@ def waiting_materials(slug, site, path=None):
         # 機械で作った材料（当社調べ・業種調査・自社の実測）や登録済みの声・相場を記事がまだ使っていなければ、待たずに直す
         # （運用者「材料の無い記事でも届くように」2026-10-21。依頼した材料が届くまで止めていたので、届かない記事が残った）
         return False
+    # 止めた後に本文を直していれば採点し直す（2026-11-02 に人が判断の表・公的資料を足しても、材料待ちのまま採点されなかった）。
+    # 本文の指紋を残す前の止めた行は、止めた後に記事が更新されたかで見る
+    if body_of(slug) != last[-1]["body"] if "body" in last[-1] else edited_after(slug, str(last[-1].get("at", ""))):
+        return False
     n, day = survey_of(slug, site)
     if n > last[-1]["survey"] if "survey" in last[-1] else day > str(last[-1].get("at", ""))[:10]:
         # 当社調べを測り直して答えが増えたら、それを材料に直す（止めた回は「母数が小さい」で一次性が届かなかった。
@@ -726,6 +731,25 @@ def waiting_materials(slug, site, path=None):
         return material.fingerprint(site) == last[-1].get("materials")
     except Exception:  # noqa: BLE001  材料が読めなければ直しを止めない
         return False
+
+
+def body_of(slug):
+    """本文の指紋（止めた後に直したかを見る）。読めなければ空"""
+    try:
+        return hashlib.sha1(_split(read(slug))[3].encode("utf-8")).hexdigest()[:12]
+    except Exception:  # noqa: BLE001
+        return ""
+
+
+def edited_after(slug, at):
+    """記事の最後の更新が at（YYYY-MM-DD HH:MM）より後か。git で分からなければ False（待ちを解かない）"""
+    import subprocess
+    try:
+        r = subprocess.run(["git", "log", "-1", "--format=%cd", "--date=format:%Y-%m-%d %H:%M", "--",
+                            f"articles/{slug}.md"], cwd=ROOT, capture_output=True, text=True, timeout=30)
+    except Exception:  # noqa: BLE001
+        return False
+    return bool(at) and r.stdout.strip() > at[:16]
 
 
 def survey_of(slug, site):
@@ -846,7 +870,8 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         except Exception as e:  # noqa: BLE001
             print(f"  （材料の依頼を残せませんでした: {type(e).__name__}）")
     record({**base, "action": "hold", "state": state, "total": sc["total"], "rounds": prior + done, "since": since,
-            "axes": sc["axes"], "need": need, "materials": asked, "survey": survey_of(slug, site)[0]})
+            "axes": sc["axes"], "need": need, "materials": asked, "survey": survey_of(slug, site)[0],
+            "body": body_of(slug)})
     if need and not published and shelve(slug):
         # 機械で作れる材料（当社調べ・業種調査・自社の実測）まで当てても一次性が届かない題は、材料が届くまでしまい、
         # 次の枠は材料のある題を書く（2026-10-22 運用者「シートがなくても基準点に行くように」。届かない下書きを

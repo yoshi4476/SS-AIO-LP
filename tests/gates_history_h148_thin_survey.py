@@ -21,7 +21,9 @@ def test_thin_survey_is_remeasured_and_releases_the_wait():
           'old.get("date", "")[:7] == today[:7] and res.get("answers", 0) <= old.get("answers", 0)' in src, True)
 
     import material as M
-    fp, load = M.fingerprint, O.load
+    fp, load, body, edited = M.fingerprint, O.load, Q.body_of, Q.edited_after
+    Q.body_of = lambda slug: "b1"
+    Q.edited_after = lambda slug, at: False
     M.fingerprint = lambda site: "aaa"
     got = {}
     try:
@@ -36,10 +38,18 @@ def test_thin_survey_is_remeasured_and_releases_the_wait():
                 log.write_text(json.dumps(row) + "\n", encoding="utf-8")
                 O.load = lambda site, slug, res=res: res
                 got[name] = Q.waiting_materials("zz-a", "client-zz", path=log)
+            O.load = lambda site, slug: {"answers": 5, "date": "2026-11-01"}
+            for name, row, edit in (("本文が同じ", {**hold, "survey": 5, "body": "b1"}, False),
+                                    ("本文を直した", {**hold, "survey": 5, "body": "b0"}, False),
+                                    ("指紋の無い行・後で更新", {**hold, "survey": 5}, True)):
+                log.write_text(json.dumps(row) + "\n", encoding="utf-8")
+                Q.edited_after = lambda slug, at, edit=edit: edit
+                got[name] = Q.waiting_materials("zz-a", "client-zz", path=log)
     finally:
-        M.fingerprint, O.load = fp, load
-    check("待つか（答えが増えた・止めた日より後に測り直したら直す）", got,
-          {"同じ件数": True, "増えた": False, "件数の無い行・同じ日": True, "件数の無い行・後の日": False})
+        M.fingerprint, O.load, Q.body_of, Q.edited_after = fp, load, body, edited
+    check("待つか（答えが増えた・止めた日より後に測り直した・本文を直したら直す）", got,
+          {"同じ件数": True, "増えた": False, "件数の無い行・同じ日": True, "件数の無い行・後の日": False,
+           "本文が同じ": True, "本文を直した": False, "指紋の無い行・後で更新": False})
     q = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
     check("待つ前に当社調べを測り直し、止めた行に件数を残す",
           ("waiting_materials(slug, site) and (survey(slug, budget, base) or waiting_materials(slug, site))" in q,
