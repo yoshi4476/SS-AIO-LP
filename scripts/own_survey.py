@@ -120,6 +120,9 @@ def questions(kw, body):
     return qs
 
 
+AUTH_FAIL = re.compile(r"refresh token|log out and sign in|Failed to refresh|not logged in|401 Unauthorized", re.I)
+
+
 def ask(site, qs):
     """{(AI, 何問目): {本文, 出典のドメイン}}。答えられなかった問いは入れない。使えない AI はそこで聞くのをやめる"""
     import ai_cite_check as AC
@@ -133,6 +136,11 @@ def ask(site, qs):
                     urls = fn(q)
                 except Exception as e:  # noqa: BLE001  1つの問いが落ちても他で数える
                     print(f"OWN_SURVEY_ENGINE={name} 失敗: {type(e).__name__}: {str(e)[:120]}", file=sys.stderr)
+                    if AUTH_FAIL.search(str(e)):
+                        # ログインが切れていれば、残りの問いも同じく落ちる。聞き続けると部品の時間切れ（15分）で
+                        # 当社調べ全体が止まった（2026-11-02。手元と CI で同じ鍵を使い、手元の更新で CI の鍵が使用済みになった）
+                        print(f"OWN_SURVEY_ENGINE={name} ログインが切れています。この AI には聞きません", file=sys.stderr)
+                        break
                     continue
                 if urls is None:
                     print(f"OWN_SURVEY_ENGINE={name} 使えません（道具が無いか、ログインしていないか、無料の枠の残りが無い）",
