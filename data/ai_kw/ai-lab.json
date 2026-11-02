@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-26",
+  "date": "2026-11-02",
   "asked": 4,
   "items": [
     {
@@ -12,24 +12,24 @@
         "answered": true,
         "ours": false,
         "sources": [
+          "ainformation.jp",
           "atoz-design.jp",
-          "conmark.jp",
+          "geo-code.co.jp",
+          "glcl.co.jp",
           "jinrai.co.jp",
-          "malna.co.jp",
-          "media-growth.co.jp",
-          "wreath-ent.co.jp"
+          "media-growth.co.jp"
         ],
         "engines": {
           "Gemini": {
             "answered": true,
             "ours": false,
             "sources": [
+              "ainformation.jp",
               "atoz-design.jp",
-              "conmark.jp",
+              "geo-code.co.jp",
+              "glcl.co.jp",
               "jinrai.co.jp",
-              "malna.co.jp",
-              "media-growth.co.jp",
-              "wreath-ent.co.jp"
+              "media-growth.co.jp"
             ]
           }
         }
@@ -38,8 +38,8 @@
     },
     {
       "kw": "aio 外注 依頼 注意点",
-      "imp": 19,
-      "pos": 22.9,
+      "imp": 29,
+      "pos": 21.9,
       "src": "gsc",
       "written": true,
       "ai": {
@@ -73,12 +73,12 @@
           }
         }
       },
-      "score": 10.3
+      "score": 10.5
     },
     {
       "kw": "aio対策 クリニック",
-      "imp": 52,
-      "pos": 18.5,
+      "imp": 53,
+      "pos": 18.6,
       "src": "gsc",
       "written": true,
       "ai": {

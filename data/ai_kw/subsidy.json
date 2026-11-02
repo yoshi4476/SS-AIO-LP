@@ -1,46 +1,42 @@
 {
-  "date": "2026-10-26",
-  "asked": 4,
+  "date": "2026-11-02",
+  "asked": 5,
   "items": [
     {
       "kw": "it導入補助金 選び方",
-      "imp": 33,
-      "pos": 30.1,
+      "imp": 32,
+      "pos": 29.8,
       "src": "gsc",
       "written": false,
       "ai": {
         "answered": true,
         "ours": false,
         "sources": [
-          "carearc.co.jp",
+          "clears.jp",
           "digital-ai-hojokin.jp",
-          "ds-b.jp",
-          "grandit.jp",
           "hojokin-agent.jp",
+          "hojokin-navi.co.jp",
           "it-shien.smrj.go.jp",
-          "so-labo.co.jp",
-          "somurix.co.jp",
-          "vertexaisearch.cloud.google.com",
-          "youtube.com"
+          "mihata.jp",
+          "obc.co.jp"
         ],
         "engines": {
           "Gemini": {
             "answered": true,
             "ours": false,
             "sources": [
-              "carearc.co.jp",
+              "clears.jp",
               "digital-ai-hojokin.jp",
-              "ds-b.jp",
-              "grandit.jp",
               "hojokin-agent.jp",
+              "hojokin-navi.co.jp",
               "it-shien.smrj.go.jp",
-              "so-labo.co.jp",
-              "somurix.co.jp"
+              "mihata.jp",
+              "obc.co.jp"
             ]
           }
         }
       },
-      "score": 8.5
+      "score": 9.5
     },
     {
       "kw": "it導入支援事業者 選び方",
@@ -64,8 +60,8 @@
     },
     {
       "kw": "デジタル化 ai導入補助金 選び方",
-      "imp": 10,
-      "pos": 32.1,
+      "imp": 8,
+      "pos": 23.5,
       "src": "gsc",
       "written": false,
       "ai": {
@@ -80,7 +76,7 @@
           }
         }
       },
-      "score": 6.0
+      "score": 7.0
     },
     {
       "kw": "ベンダー登録とは",
@@ -101,6 +97,26 @@
         }
       },
       "score": 2.8
+    },
+    {
+      "kw": "個人事業主 補助金 とは",
+      "imp": 0,
+      "pos": null,
+      "src": "suggest",
+      "written": true,
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
+      "score": 1.3
     }
   ]
 }
