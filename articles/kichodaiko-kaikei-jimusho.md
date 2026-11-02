@@ -50,6 +50,10 @@ quality_attempts: 3
 
 会計事務所が顧問先の仕訳入力を外部に分担することは、税理士法上も認められる働き方です。
 
+関連する内容として[記帳代行を税理士以外に頼む落とし穴](/blog/kichodaiko-zeirishi-igai/)も公開しています。
+
+つまずきやすい点は、[記帳代行を税理士以外に頼む落とし穴](/blog/kichodaiko-zeirishi-igai)で解説しています。
+
 国税庁の<a href="https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/02.htm" target="_blank" rel="noopener">「税理士業務とは」</a>は、*税理士業務*を税務代理・税務書類の作成・税務相談の3つに分けています。仕訳の入力と帳簿の作成は、この3つに入りません。
 
 <div class="definition-box"><span class="term">記帳代行の外部分担とは</span>、会計事務所が顧問先から預かった証憑の入力を外部の会社に任せ、税務の判断と申告は事務所に残す働き方です。==申告書を作る人は変わりません。==</div>

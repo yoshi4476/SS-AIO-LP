@@ -1,0 +1,100 @@
+{
+ "v": 2,
+ "slug": "kichodaiko-zeirishi-igai",
+ "ok": true,
+ "date": "2026-11-02",
+ "questions": [
+  "記帳代行 税理士以外について教えてください",
+  "記帳代行 税理士以外について、「記帳代行は税理士以外に頼めるのか？」を教えてください",
+  "記帳代行 税理士以外について、「税理士以外の依頼先で任せられる範囲」を教えてください",
+  "記帳代行 税理士以外について、「申告の受け渡しで決める4つのこと」を教えてください",
+  "記帳代行 税理士以外について、「税理士以外の記帳で直した仕訳の誤り約90件の内訳」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "税理士以外の依頼先で任せられる範囲",
+   "words": [
+    "依頼先",
+    "範囲"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "申告の受け渡しで決める4つのこと",
+   "words": [
+    "申告"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "税理士以外の記帳で直した仕訳の誤り約90件の内訳",
+   "words": [
+    "記帳",
+    "仕訳",
+    "内訳"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "税理士以外に記帳を頼んでよい会社・税理士に任せたい会社",
+   "words": [
+    "税理士",
+    "記帳"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "今日やること：記帳と申告の担当表を1枚作る",
+   "words": [
+    "担当表",
+    "記帳",
+    "申告"
+   ],
+   "hits": 5,
+   "of": 5
+  }
+ ],
+ "sources": {
+  "all-senmonka.jp": "portal",
+  "anshin-keiri.eiwa-gr.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "bizneko.jp": "media",
+  "bookkeeping-agency.com": "peer",
+  "bricks-outsourcing.com": "peer",
+  "corp.7senses.co.jp": "self",
+  "cyber-crew.jp": "peer",
+  "detail.chiebukuro.yahoo.co.jp": "media",
+  "dontaku.jp": "peer",
+  "hupro-job.com": "portal",
+  "icb-k.co.jp": "peer",
+  "iroae.jp": "peer",
+  "kanbei.jp": "media",
+  "kanzawa-zeirishi.com": "peer",
+  "kato-kaikei.com": "peer",
+  "leapal.jp": "peer",
+  "marugotoinc.jp": "peer",
+  "studying.jp": "peer",
+  "yayoi-kk.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 1,
+  "専門家への相談": 5
+ },
+ "chars": 7193,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え4件のうち、『依頼先』に触れたものは3件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは費用の金額（◯円）は1件、期間（◯か月・◯日など）は1件、進め方の手順は1件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは20件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが3件、ポータル・比較サイトが2件でした。"
+ ]
+}
