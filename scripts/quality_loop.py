@@ -708,8 +708,8 @@ def pre_improve(slug, budget, ctx, base):
     print(f"     採点の前の直し: {'直しました' if good else '戻しました・変更なし'}")
 
 
-def waiting_materials(slug, site, path=None):
-    """前の回が「材料が足りない」で止めた記事で、材料がまだ増えていないか"""
+def waiting_materials(slug, site, path=None, today=None):
+    """前の回が「材料が足りない」で止めた記事で、材料がまだ増えていないか（同じ日のうちだけ待つ）"""
     last = [r for r in rows(path) if r.get("slug") == slug and r.get("action") == "hold"]
     if not last or last[-1].get("need") != "materials":
         return False
@@ -720,6 +720,10 @@ def waiting_materials(slug, site, path=None):
     # 止めた後に本文を直していれば採点し直す（2026-11-02 に人が判断の表・公的資料を足しても、材料待ちのまま採点されなかった）。
     # 本文の指紋を残す前の止めた行は、止めた後に記事が更新されたかで見る
     if body_of(slug) != last[-1]["body"] if "body" in last[-1] else edited_after(slug, str(last[-1].get("at", ""))):
+        return False
+    if str(last[-1].get("at", ""))[:10] and str(last[-1]["at"])[:10] < (today or date.today().isoformat()):
+        # 待つのは止めた日のうちだけ。止めた8本のうち合格した6本は、人の材料ではなく日を改めた直しと採点で届いた
+        # （一次性は採点ごとに2〜5点動き、77〜79点の記事が多い）。待ちは長いもので25回続き、合格を遅らせただけだった（2026-11-02）
         return False
     n, day = survey_of(slug, site)
     if n > last[-1]["survey"] if "survey" in last[-1] else day > str(last[-1].get("at", ""))[:10]:
@@ -876,13 +880,13 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         # 機械で作れる材料（当社調べ・業種調査・自社の実測）まで当てても一次性が届かない題は、材料が届くまでしまい、
         # 次の枠は材料のある題を書く（2026-10-22 運用者「シートがなくても基準点に行くように」。届かない下書きを
         # 毎回直して止まり続けていた）。題は質問シートに残り、答えが登録されたら material_sheet.apply が戻す
-        print(f"  {name}: 材料が届くまで下書きをしまいました（{SHELF}/。質問シートの答えが登録されたら自動で戻ります）")
+        print(f"  {name}: 下書きをしまいました（{SHELF}/。{SHELF_RETRY_DAYS}日後か、質問シートの答えが登録されたら自動で戻ります）")
         return "shelved"
     if need:
-        print(f"要対応: {name} は一次性が{sc['axes']['originality']}点で、登録された材料では{R.floor('originality')}点に届きません。"
-              "何を教えてほしいかを material_requests.json に残しました（python scripts/material.py --requests）。"
-              "材料が増えるまで直しを待ちます")
-    if published:
+        # 一次性が届かないだけでは知らせない（運用者「毎回一次情報で止まるのは勘弁してほしい」2026-11-02）。翌日に直し直す
+        print(f"  {name}: 一次性が{sc['axes']['originality']}点で{R.floor('originality')}点に届きませんでした。"
+              "翌日に直して採点し直します（材料の依頼は material_requests.json。答えがあれば使います）")
+    elif published:
         print(f"要対応: 公開済みの {name} が基準に届きません（総合{sc['total']}・{sc['why']}）。公開は続け、来週も直します")
     else:
         print(f"要対応: {name} は直しても基準に届きません（総合{sc['total']}・{sc['why']}）。改善中のまま公開せず、"
@@ -894,6 +898,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
 
 SHELF = "_held"            # articles/_held/。build・本数・採点の対象（articles/*.md）に入らない
 SHELVE_AFTER = 2           # 材料が足りないで止めた回数がこれに達したらしまう（1回目は当社調べ・業種調査の測り直しを待つ）
+SHELF_RETRY_DAYS = 7       # しまってこの日数たった下書きは戻して直し直す（材料の答えを待ち続けない。2026-11-02）
 
 
 def shelve(slug, path=None):
@@ -916,6 +921,20 @@ def unshelve(slug):
         return False
     src.replace(ARTICLES / f"{slug}.md")
     return True
+
+
+def retry_shelved(path=None, today=None):
+    """しまって SHELF_RETRY_DAYS 日たった下書きを戻す（次の --pending が直し直す。また届かなければ2回目の止めでしまい直す）"""
+    day = date.fromisoformat(today or date.today().isoformat())
+    last = {}
+    for r in rows(path):
+        if r.get("action") == "shelve" and str(r.get("at", ""))[:10]:
+            last[r.get("slug")] = str(r["at"])[:10]
+    back = [s for s, at in last.items()
+            if (day - date.fromisoformat(at)).days >= SHELF_RETRY_DAYS and unshelve(s)]
+    for s in back:
+        record({"site": site_of(s), "slug": s, "action": "unshelve", "state": "improving"})
+    return back
 
 
 # ── 対象を選ぶ ───────────────────────────────────────────────────────
@@ -1211,6 +1230,9 @@ def main(argv=None):
             total[k] = total.get(k, 0) + v
 
     if a.pending:
+        back = retry_shelved()
+        if back:
+            print(f"  しまって{SHELF_RETRY_DAYS}日たった下書き {len(back)}本を戻しました（直し直します）")
         todo = [s for s in pending(sites) if (not want or s in want) and not (a.new and s in fresh)]
         print(f"■ 直している途中の記事: {len(todo)}本（新しい記事より先に直す）")
         add(run(todo, "pending", budget, a.rounds))
