@@ -1,0 +1,168 @@
+{
+ "v": 2,
+ "slug": "keihi-seisan-fusei-jirei",
+ "ok": true,
+ "date": "2026-11-03",
+ "questions": [
+  "経費精算不正事例について教えてください",
+  "経費精算不正事例について、「経費精算の不正事例は6つの手口に分かれる」を教えてください",
+  "経費精算不正事例について、「経費精算の不正はどのくらい起きている？調査の数字」を教えてください",
+  "経費精算不正事例について、「不正を疑う前に、仕訳の誤りと分ける」を教えてください",
+  "経費精算不正事例について、「経費精算の不正を見落とす会社の3つの共通点」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "経費精算の不正事例は6つの手口に分かれる",
+   "words": [
+    "経費精算",
+    "不正事例",
+    "手口"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "経費精算の不正はどのくらい起きている？調査の数字",
+   "words": [
+    "経費精算",
+    "不正",
+    "調査",
+    "数字"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "不正を疑う前に、仕訳の誤りと分ける",
+   "words": [
+    "不正",
+    "仕訳"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "経費精算の不正を見落とす会社の3つの共通点",
+   "words": [
+    "経費精算",
+    "共通点",
+    "不正",
+    "見落"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "不正が見つかったときの対応の順番",
+   "words": [
+    "不正",
+    "対応",
+    "順番"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "経費精算の不正対応でよくある失敗と避け方",
+   "words": [
+    "経費精算",
+    "不正対応"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "経費精算の不正を防ぐ仕組みと、防げる手口",
+   "words": [
+    "経費精算",
+    "不正",
+    "手口"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "社内で確かめるか、外の目を入れるかの分かれ道",
+   "words": [
+    "社内"
+   ],
+   "hits": 5,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "労働契約法",
+   "org": "公的機関",
+   "of": 10,
+   "hits": 0
+  },
+  {
+   "term": "電子帳簿保存法",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 1
+  }
+ ],
+ "sources": {
+  "accounting.cast-er.com": "portal",
+  "acfe.jp": "peer",
+  "bakuraku.jp": "peer",
+  "bill-one.com": "peer",
+  "biz.moneyforward.com": "peer",
+  "boostx-inc.com": "peer",
+  "bricks-outsourcing.com": "peer",
+  "btm.pikapaka.co.jp": "peer",
+  "bts.jtbbwt.com": "peer",
+  "catalog.monex.co.jp": "media",
+  "cc-bizmate.jp": "peer",
+  "chillstack.com": "peer",
+  "concur.co.jp": "peer",
+  "dxpo.jp": "media",
+  "embezzlement.jp": "peer",
+  "espresso-intel.com": "peer",
+  "fsi.co.jp": "peer",
+  "gladiator.jp": "peer",
+  "hitachi-systems.com": "peer",
+  "iiajapan.com": "peer",
+  "jicpa.or.jp": "public",
+  "jp.corp-sansan.com": "peer",
+  "kawakami-cpta.com": "peer",
+  "kb2.sbi-bs.co.jp": "peer",
+  "keihi.com": "peer",
+  "keiriplus.jp": "peer",
+  "koyano-cpa.gr.jp": "peer",
+  "lawmirai.jp": "peer",
+  "manage.coel-inc.jp": "media",
+  "maro-kaikei.co.jp": "peer",
+  "meti.go.jp": "public",
+  "mext.go.jp": "public",
+  "prtimes.jp": "media",
+  "rakus.co.jp": "peer",
+  "report.jbaudit.go.jp": "public",
+  "sapphire.miletos.tech": "peer",
+  "tsumitoru.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "wheat-biz.com": "peer",
+  "www2.jpx.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 1,
+  "専門家への相談": 1
+ },
+ "chars": 14737,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、公的機関の資料にある「労働契約法」に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、国税庁の資料にある「電子帳簿保存法」に触れたものは1件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは進め方の手順は1件、専門家への相談は1件、期間（◯か月・◯日など）は3件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは40件で、公的機関・学会・業界団体が4件、ニュース・メディア・まとめが4件、ポータル・比較サイトが1件でした。"
+ ]
+}
