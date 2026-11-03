@@ -113,6 +113,11 @@ def issuer_leaks(page):
     """お客様名義のレポートに残った当社の名前・URL（出たら PDF を作らない）"""
     if issuer()["operator"]:
         return []
+    # 運用者がその社にだけ許した当社の表記（operator_ok）は記事と同じく外して見る（sites.operator_leaks と同じ決まり）。
+    # 記事に載せてよい「セブンセンシズ株式会社」が記事の一覧に出て、お客様の社の月次が発行されなかった（2026-11-01）
+    for ok in site_cfg().get("operator_ok") or []:
+        if ok:
+            page = page.replace(ok, "")
     return [m for m in _sites_mod.OPERATOR_MARKS if m in page]
 
 
