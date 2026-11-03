@@ -571,3 +571,4 @@
 {"at": "2026-11-03 10:32", "run": "41557965857", "site": "corporate", "slug": "seikyusho-shiwake", "mode": "rescore", "action": "improve", "round": 10, "ok": true, "why": "直しました（請求書の仕訳で金額が合わない5つの場面｜手数料・… → 請求書の仕訳で金額が合わない5つの場面｜手数料・…）"}
 {"at": "2026-11-03 10:33", "run": "41557965857", "site": "corporate", "slug": "seikyusho-shiwake", "mode": "rescore", "action": "revert", "round": 10, "total": 85, "kept": 87}
 {"at": "2026-11-03 10:33", "run": "41557965857", "site": "corporate", "slug": "seikyusho-shiwake", "mode": "rescore", "action": "pass", "state": "passed", "total": 87, "axes": {"originality": 80, "extractability": 90, "decision": 90}, "rounds": 10, "since": ""}
+{"at": "2026-11-03 15:16", "run": "41588176876", "site": "", "slug": "ai-agent-case-studies", "action": "shelve", "state": "shelved"}
