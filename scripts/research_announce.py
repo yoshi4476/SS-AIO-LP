@@ -23,6 +23,10 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 OUT = ROOT / "docs" / "announcements"
 PREFIX = "announce-ranking-"
+# 外に出す文面には法人番号と会社概要の URL を必ず入れる。同じ名前の別の法人（東京）がいて、名前だけでは機械が区別できない
+# （デスクトップの SSコーポレートサイト/EXTERNAL-MENTIONS.md。旧サイト www は事業が違うので使わない）。値は build.ORG_NUMBER と同じ
+ORG_NUMBER = "3120001227825"
+CORP_URL = "https://corp.7senses.co.jp/company"
 
 
 def _names(cur):
@@ -96,7 +100,8 @@ def compose(cur, prev):
           "## 調査の方法", ""] + [f"- {x}" for x in method] + [
           "", "## 引用の条件", "", RC.TERMS, "", "出典の書き方（そのまま貼れます）:", "", line, "",
           "## 会社概要・お問い合わせ", "",
-          f"- {org}", f"- 調査ページ: {AR.PAGE_URL}", f"- サイト: {RC.LAB_URL}/", f"- お問い合わせ: {RC.CONTACT_URL}", ""]
+          f"- {org}", f"- 法人番号: {ORG_NUMBER}", f"- 会社概要: {CORP_URL}",
+          f"- 調査ページ: {AR.PAGE_URL}", f"- サイト: {RC.LAB_URL}/", f"- お問い合わせ: {RC.CONTACT_URL}", ""]
     ex = firsts[0] if firsts else ""
     x = (f"{page_title}を公開しました。地域の事業者を探す質問で、AIが出典にしたサイトを業種ごとに数えています。"
          f"{ex}。\n{AR.PAGE_URL}")
@@ -118,7 +123,7 @@ def problems(text, cur, prev, wh):
     import research_cite as RC
     import research_promo as RP
     have = RP._nums(json.dumps(cur, ensure_ascii=False) + json.dumps(prev or {}, ensure_ascii=False)
-                    + AR.PAGE_URL + RC.LAB_URL + RC.CONTACT_URL + f" {wh[0]} {wh[1]} 1〜3")
+                    + AR.PAGE_URL + RC.LAB_URL + RC.CONTACT_URL + f" {ORG_NUMBER} {CORP_URL} {wh[0]} {wh[1]} 1〜3")
     ng = [f"集計に無い数字「{n}」" for n in sorted(RP._nums(text) - have)]
     ng += [f"一律の言い方「{m.group(0)}」" for m in RP.ALWAYS_NG.finditer(text)]
     return ng

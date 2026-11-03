@@ -26,3 +26,13 @@ def test_issuer_leaks_honours_operator_ok():
             S.OPERATOR_MARKS = marks
     finally:
         M.issuer, M.site_cfg = iss, cfg
+
+
+def test_announcement_carries_corporate_number():
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import build
+    import research_announce as RA
+    print("\n■ 発表の下書きには法人番号と会社概要の URL を入れる（同じ名前の別の法人と見分けるため）")
+    check("法人番号はサイトの構造化データと同じ", RA.ORG_NUMBER, build.ORG_NUMBER)
+    src = (ROOT / "scripts" / "research_announce.py").read_text(encoding="utf-8")
+    check("会社概要の欄に法人番号とコーポレートの URL", ('f"- 法人番号: {ORG_NUMBER}"' in src, RA.CORP_URL.startswith("https://corp.")), (True, True))
