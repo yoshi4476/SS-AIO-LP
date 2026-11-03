@@ -234,7 +234,10 @@ def test_lead_counts_exclude_sales_and_tests():
         ]
         c = LR.ledger_counts(LR.ledger_rows(), sid="ai-lab", start=date(2026, 10, 1), end=date(2026, 10, 31))
         check("相談・売り込み・テストを分けて数える", (c["consult"], c["sales"], c["test"]), (2, 1, 1))
-        check("レポートに出す1行", LR.consult_text(c), "相談 2件（ほかに売り込み 1件・テスト 1件を除いた）")
+        # 合計を「相談」と書くと、無料診断しか無い社を「相談あり」と報告する（2026-11-03 運用者「送信1件もきていない」）
+        check("相談のフォームと申し込みを分ける", (c["form"], c["apply"]), (0, 2))
+        check("レポートに出す1行",
+              LR.consult_text(c), "問い合わせ 2件（相談のフォーム 0件・無料診断などの申し込み 2件。ほかに売り込み 1件・テスト 1件を除いた）")
         r = LR.leads("ai-lab", date(2026, 10, 1), date(2026, 10, 31), ga4_n=9)
         check("台帳に行のある社は台帳の相談の数（GA4 の送信9件は使わない）", (r["n"], r["source"]), (2, "ledger"))
         r = LR.leads("ai-lab", date(2026, 8, 1), date(2026, 8, 31), ga4_n=4)
@@ -247,9 +250,9 @@ def test_lead_counts_exclude_sales_and_tests():
               (2, 9, "ledger", 1))
         import monthly_report as M
         html = M.cv_breakdown({"months": [dict(f, cv_parts={"フォーム": 9})]})
-        check("月次レポートの内訳: 相談の数・除いた売り込み・テストを出し、GA4 は照合だけと書く",
-              all(w in html for w in ("相談 2件（ほかに売り込み 1件・テスト 1件を除いた）", "除いた売り込み", "除いたテスト",
-                                      "照合にだけ使います")), True)
+        check("月次レポートの内訳: 相談のフォームと申し込みを分け、除いた売り込み・テストを出し、GA4 は照合だけと書く",
+              all(w in html for w in ("問い合わせ 2件（相談のフォーム 0件・無料診断などの申し込み 2件。", "うち相談のフォーム",
+                                      "除いた売り込み", "除いたテスト", "照合にだけ使います")), True)
     finally:
         LR._LEDGER.clear()
         LR._LEDGER.update(saved)

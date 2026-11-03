@@ -188,6 +188,12 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
         import external_articles
         arts += external_articles.load(site_id)
     reasons, level = [], 0
+    # 一覧が無いのを「ぶつかる記事が無い」と扱わない（新しく受けた社の、初めての配信の前の記事）
+    if site_id and external_articles.missing(site_id):
+        level = 1
+        reasons.append(("要確認", "お客様の側で書かれた記事の一覧がまだありません（初めての配信の前）",
+                        "お客様の既存の記事との食い合いを照合できていません。照合できないことは、ぶつからないことではありません。"
+                        "python scripts/external_articles.py <社の id> <配信先のリポジトリ> で取ってから審査し直してください"))
 
     # ⓪ 担当領域の外（kw_fit）。食い合わなくても、そのサイトの読者の検索でなければ書かない
     #    （「記帳 やり方 ゆうちょ」がコーポレートの表示の4割になった。2026-10-08）。

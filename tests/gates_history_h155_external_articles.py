@@ -33,6 +33,16 @@ def test_client_written_articles_block_same_keyword():
         code_other = G.judge("架空 まったく別の題材", "client-zz", use_gsc=False)[0]
         check("同じ語は着手禁止・範囲が重なる語は要差別化・別の語は通す", (code_same, code_part, code_other), (2, 1, 0))
         check("自社のサイトには足さない", EA.load("ai-lab"), [])
+        # 新しく受けた社の初めての配信の前は一覧が無い。無いのを「ぶつからない」と扱わない
+        private_store.read_json = lambda sid, name, default=None, root=None: default
+        load_all = S.load_all
+        S.load_all = lambda *a, **k: {"client-zz": {"id": "client-zz", "content_dir": "content/journal", "repo": "zz/site"}}
+        try:
+            check("一覧がまだ無い社は「要確認」（照合できていない）", (EA.missing("client-zz"),
+                  G.judge("架空 まったく別の題材", "client-zz", use_gsc=False)[0]), (True, 1))
+        finally:
+            S.load_all = load_all
+        check("設定の無い社では止めない", EA.missing("client-unknown"), False)
     finally:
         private_store.read_json, S.is_client = rj, is_client
     src = (ROOT / "scripts" / "publish.py").read_text(encoding="utf-8")

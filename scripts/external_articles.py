@@ -56,6 +56,19 @@ def refresh(cfg, dest):
     return len(rows)
 
 
+def missing(site_id):
+    """お客様の記事の置き場がある社で、まだ一度も取り直していない（初めての配信の前）か。
+    一覧が無いのを「ぶつかる記事が無い」と扱わない（新しく受けた社の最初の記事。2026-11-03）"""
+    import private_store
+    import sites as S
+    if not site_id or not S.is_client(site_id):
+        return False
+    cfg = S.load_all().get(site_id)       # S.load は設定の無い社で SystemExit を出す
+    if not cfg or not cfg.get("content_dir") or not cfg.get("repo"):
+        return False
+    return private_store.read_json(site_id, NAME, None) is None
+
+
 def load(site_id):
     """食い合いの検査に足す記事（load_articles と同じ形。slug はお客様の記事と分かる印をつける）"""
     import private_store

@@ -2146,43 +2146,43 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2114",
+     "evidence": "scripts/monthly_report.py:2116",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2114",
+     "evidence": "scripts/monthly_report.py:2116",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2114",
+     "evidence": "scripts/monthly_report.py:2116",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2114",
+     "evidence": "scripts/monthly_report.py:2116",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2114",
+     "evidence": "scripts/monthly_report.py:2116",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2114",
+     "evidence": "scripts/monthly_report.py:2116",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/monthly_report.py:2114",
+     "evidence": "scripts/monthly_report.py:2116",
      "note": "GSC・GA4 の権限（初回接続）があれば方式に関係なく作る",
      "anchor": "client = _sites_mod.is_client(SITE_ID)"
     }

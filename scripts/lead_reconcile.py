@@ -210,7 +210,7 @@ def ledger_counts(rows, sid=None, start=None, end=None):
     """相談（売り込み・テスト以外）・売り込み・テストの件数と、相談の種別ごとの内訳"""
     s = start.isoformat() if start else ""
     e = end.isoformat() if end else "9999"
-    c = {"consult": 0, "sales": 0, "test": 0, "by_type": collections.Counter()}
+    c = {"consult": 0, "form": 0, "apply": 0, "sales": 0, "test": 0, "by_type": collections.Counter()}
     for x in rows:
         if (sid and x["sid"] != sid) or not (s <= x["day"] <= e):
             continue
@@ -219,13 +219,20 @@ def ledger_counts(rows, sid=None, start=None, end=None):
             c[k] += 1
         else:
             c["consult"] += 1
+            c["form" if x["type"] in FORM_TYPES else "apply"] += 1
             c["by_type"][x["type"] or "（種別なし）"] += 1
     return c
 
 
+# 相談のフォームから来た種類。無料診断・資料ダウンロード・AIチェックは連絡先をもらった申し込みで、相談ではない。
+# 合計だけを「相談」と書いていたため、無料診断1件しか無いお客様の社を「相談1件」と報告した（2026-11-03 運用者「送信1件もきていない」）
+FORM_TYPES = ("無料相談",)
+
+
 def consult_text(c):
-    """レポート・検査に出す1行。「相談 N件（ほかに売り込み x件・テスト y件を除いた）」"""
-    return f"相談 {c['consult']}件（ほかに売り込み {c['sales']}件・テスト {c['test']}件を除いた）"
+    """レポート・検査に出す1行。合計は「問い合わせ」と呼び、相談のフォームと申し込みを必ず分ける"""
+    return (f"問い合わせ {c['consult']}件（相談のフォーム {c.get('form', 0)}件・無料診断などの申し込み {c.get('apply', 0)}件。"
+            f"ほかに売り込み {c['sales']}件・テスト {c['test']}件を除いた）")
 
 
 def leads(sid, start, end, prop=None, ga4_n=None):
@@ -263,7 +270,8 @@ def month_fields(sid, start, end, ga4_n):
            "cv_ga4": ga4_n}
     if r["counts"]:
         c = r["counts"]
-        out["cv_counts"] = {"consult": c["consult"], "sales": c["sales"], "test": c["test"], "by_type": dict(c["by_type"])}
+        out["cv_counts"] = {"consult": c["consult"], "form": c["form"], "apply": c["apply"], "sales": c["sales"],
+                            "test": c["test"], "by_type": dict(c["by_type"])}
     return out
 
 

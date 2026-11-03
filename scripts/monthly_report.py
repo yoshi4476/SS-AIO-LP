@@ -1820,7 +1820,9 @@ def cv_breakdown(d):
         ga = cur.get("cv_ga4")
         return (f'<h3>問い合わせの内訳（{html.escape(cur.get("cv_text", ""))}）</h3>'
                 f'<table><thead><tr><th>種別</th><th>件数</th></tr></thead><tbody>{rows}'
-                f'<tr><td><b>相談の合計</b></td><td class="num"><b>{c["consult"]}</b></td></tr>'
+                f'<tr><td><b>問い合わせの合計</b></td><td class="num"><b>{c["consult"]}</b></td></tr>'
+                f'<tr><td>うち相談のフォーム</td><td class="num">{c.get("form", "—")}</td></tr>'
+                f'<tr><td>うち無料診断などの申し込み</td><td class="num">{c.get("apply", "—")}</td></tr>'
                 f'<tr><td>除いた売り込み</td><td class="num">{c["sales"]}</td></tr>'
                 f'<tr><td>除いたテスト（社内の試し送信）</td><td class="num">{c["test"]}</td></tr>'
                 f'</tbody></table>'
