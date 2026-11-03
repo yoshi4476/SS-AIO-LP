@@ -1,0 +1,128 @@
+{
+ "v": 2,
+ "slug": "clinic-llmo-taisaku",
+ "ok": true,
+ "date": "2026-11-03",
+ "questions": [
+  "クリニック llmoについて教えてください",
+  "クリニック llmoについて、「クリニックのLLMOとは？AIチャットの答えに自院が載るための整備」を教えてください",
+  "クリニック llmoについて、「患者がAIに聞くことは「探す」と「調べる」の2種類に分かれる」を教えてください",
+  "クリニック llmoについて、「地域名で探す質問の答えは予約・比較ポータルの情報で作られる」を教えてください",
+  "クリニック llmoについて、「症状・費用・受診の質問には自院の解説ページで答える」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "クリニックのLLMOとは？AIチャットの答えに自院が載るための整備",
+   "words": [
+    "AIチャット",
+    "自院"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "患者がAIに聞くことは「探す」と「調べる」の2種類に分かれる",
+   "words": [
+    "患者",
+    "AI"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "地域名で探す質問の答えは予約・比較ポータルの情報で作られる",
+   "words": [
+    "比較ポータル",
+    "地域名",
+    "質問",
+    "予約"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "症状・費用・受診の質問には自院の解説ページで答える",
+   "words": [
+    "解説ページ",
+    "症状",
+    "受診",
+    "質問"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "検索で圏外のページはAIの根拠にも届きにくい",
+   "words": [
+    "ページ",
+    "検索",
+    "圏外",
+    "AI"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "LLMOでつまずくクリニックの共通点と避け方",
+   "words": [
+    "共通点"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "自院で進める・任せる・まだ始めない医院の条件",
+   "words": [
+    "自院",
+    "医院",
+    "条件"
+   ],
+   "hits": 10,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "atoz-design.jp": "peer",
+  "corp.sai-labs.co.jp": "media",
+  "dam.co.jp": "peer",
+  "developers.google.com": "peer",
+  "funbox.co.jp": "peer",
+  "ilabs.jp": "peer",
+  "iryoto.jp": "peer",
+  "j-cast.com": "media",
+  "jinrai.co.jp": "peer",
+  "lany.co.jp": "peer",
+  "lidodeck.co.jp": "peer",
+  "mediareach.co.jp": "peer",
+  "medical-clinic.biz": "peer",
+  "medical-dx.com": "video",
+  "mhlw.go.jp": "public",
+  "note.com": "video",
+  "prtimes.jp": "media",
+  "signal.medicall.co.jp": "peer",
+  "support.google.com": "peer",
+  "switchitmaker2.com": "peer",
+  "trilia.co.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 8,
+  "進め方の手順": 3,
+  "専門家への相談": 2
+ },
+ "chars": 17158,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え10件のうち、『共通点』に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は1件、専門家への相談は2件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは23件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが3件、動画・SNS・ブログが3件でした。"
+ ]
+}

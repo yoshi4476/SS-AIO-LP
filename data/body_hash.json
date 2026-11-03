@@ -144,7 +144,7 @@
 "modified": "2026-08-13"
 },
 "aio-taisaku-jibunde": {
-"hash": "f2df4b9cdc4bd421e07c3091d686680b",
+"hash": "e9ee205d353a59d16560b4508d5e9bb3",
 "modified": "2026-08-14"
 },
 "aio-taisaku-keisoku-houhou": {
@@ -236,7 +236,7 @@
 "modified": "2026-09-11"
 },
 "clinic-ai-kensaku-taisaku": {
-"hash": "6681f60d26a6b5a196ed556c845eb23d",
+"hash": "5069747fca43512ac2f9b6a0f0360028",
 "modified": "2026-09-01"
 },
 "clinic-cyber-jirei": {
@@ -275,12 +275,16 @@
 "hash": "2a2bf62809b3d3e7c2f494e308157f61",
 "modified": "2026-09-14"
 },
+"clinic-llmo-taisaku": {
+"hash": "10f855141ba5053660e1731c95883299",
+"modified": "2026-11-03"
+},
 "clinic-ma-shukyaku-jirei": {
 "hash": "f49d82738224c5aa123b3ff1774fed35",
 "modified": "2026-09-07"
 },
 "clinic-meo-taisaku": {
-"hash": "321a05eb3dc39c46412404da137f2b8f",
+"hash": "6b8c05efc6f5542d5ecafe581df41ce3",
 "modified": "2026-08-31"
 },
 "clinic-seo-consulting-erabikata": {

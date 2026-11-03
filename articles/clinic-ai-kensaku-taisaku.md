@@ -88,6 +88,8 @@ AI検索エンジンは、検索上位のページとマップ情報を突き合
 
 なお、Googleのローカル検索順位は<a href="https://support.google.com/business/answer/7091?hl=ja" target="_blank" rel="noopener">公式ヘルプ「Googleのローカル検索結果のランキングを改善する」</a>によると「関連性・距離・知名度」で決まるとされ、AIの回答もこの評価の土台の上に成り立ちます。
 
+ChatGPTなどのAIチャットでは、地域で探す質問の出典に予約・比較ポータルが多く選ばれます。質問の種類ごとに直す場所を分ける考え方は、[クリニックのLLMOは公式サイトだけでは足りない](/aio/clinic-llmo-taisaku/)で解説しています。
+
 見られているポイントは3つです。第一に、診療科目や対応疾患が抽象語ではなく具体語で書かれていること。第二に、ホームページとビジネスプロフィールの基本情報が完全に一致していること。第三に、医師の経歴や実績が実名で確認できることです。
 
 <figure><img src="/images/clinic-ai-kensaku-taisaku/mondai.png" alt="AI検索対策をしないクリニックに起こる3つの機会損失: AIの受診先候補に挙がらない、情報の矛盾で信頼を落とす、自由診療の患者を競合に奪われる" loading="lazy"><figcaption>AI検索対策を怠ると起こる3つの機会損失</figcaption></figure>

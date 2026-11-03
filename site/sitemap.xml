@@ -391,6 +391,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kanja-shukyaku/kyaku-funnel.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kanja-shukyaku/kaizen-cycle.png</image:loc></image:image>
   </url>
+  <url><loc>https://ai.7senses.co.jp/aio/clinic-llmo-taisaku/</loc><lastmod>2026-11-03</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-llmo-taisaku/shitsumon.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-llmo-taisaku/ctr.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-llmo-taisaku/tejun.png</image:loc></image:image>
+  </url>
   <url><loc>https://ai.7senses.co.jp/meo/clinic-meo-taisaku/</loc><lastmod>2026-08-31</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-meo-taisaku/steps.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-meo-taisaku/ng-ok.png</image:loc></image:image>
