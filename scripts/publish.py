@@ -236,6 +236,12 @@ def ensure_clone(cfg, token):
                                  f"要らなければ git -C \"{dest}\" checkout -- . で戻してから配信してください:\n{dirty[:600]}")
         run(["git", "fetch", "--depth", "1", auth_url, cfg["branch"]], cwd=dest, env=env)
         run(["git", "reset", "--hard", "FETCH_HEAD"], cwd=dest)
+    # お客様の側で書かれた記事を、食い合いの検査の相手に残す（題・語は非公開の置き場へ。ログは出さない）
+    try:
+        import external_articles
+        external_articles.refresh(cfg, dest)
+    except Exception as e:  # noqa: BLE001  配信は止めない
+        print(f"  [警告] お客様の既存の記事を読めませんでした（{type(e).__name__}）")
     return dest
 
 

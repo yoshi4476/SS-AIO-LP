@@ -184,6 +184,9 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
             arts = [a for a in arts if S.find_category_owner(a["cat"]) == site_id]
         except Exception:
             pass
+        # お客様の側で書かれた記事も相手に数える（当社の原稿に無いので、足さないと同じ語でも通っていた。2026-11-03）
+        import external_articles
+        arts += external_articles.load(site_id)
     reasons, level = [], 0
 
     # ⓪ 担当領域の外（kw_fit）。食い合わなくても、そのサイトの読者の検索でなければ書かない
