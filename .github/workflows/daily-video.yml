@@ -111,6 +111,11 @@ jobs:
             echo "要対応: 原稿からページを作れませんでした（$GITHUB_WORKFLOW）" >> automation/logs/findings.txt
           }
 
+      # お客様の社の順位の記録（毎晩の救済が CI のキャッシュに残す）を読むだけ戻す。伸びている記事を動画の候補に
+      # 入れる判定（article_health）が、無いと自社3サイトだけになる（2026-11-03）。書かないので残す（save）はしない
+      - uses: ./.github/actions/client-private
+        with: {mode: restore, kinds: ranks}
+
       - name: 動画を作って上げる
         env:
           YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}

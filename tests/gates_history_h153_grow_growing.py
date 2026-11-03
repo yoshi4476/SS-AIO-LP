@@ -45,3 +45,10 @@ def test_videos_include_growing_articles():
         check("伸びている記事は候補にする", V._growing("zz-a", "zz"), True)
     finally:
         AH.of = of
+
+
+def test_daily_video_reads_client_ranks():
+    print("\n■ 毎日の動画の工程も、お客様の社の順位の記録を戻してから伸びている記事を選ぶ（読むだけ・残さない）")
+    wf = (ROOT / ".github" / "workflows" / "daily-video.yml").read_text(encoding="utf-8")
+    at, made = wf.find("with: {mode: restore, kinds: ranks}"), wf.find("python scripts/article_videos.py --write")
+    check("動画を作る前に順位の記録を戻す", 0 <= at < made, True)
