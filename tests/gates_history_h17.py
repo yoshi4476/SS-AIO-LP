@@ -155,7 +155,10 @@ def test_inline_is_focus_mode_only_and_reviewed():
     src = (ROOT / "scripts" / "link_boost.py").read_text(encoding="utf-8")
     main = src[src.index("def main():"):]
     check("run_inline は --inline のときだけ呼ばれる", re.findall(r"\n(\s*)if inline:\n\s*done = run_inline\(", main) != [], True)
-    check("main から run_inline を呼ぶのは1か所", main.count("run_inline("), 1)
+    # 2か所目は --growing で段落の方式が0本だった送り先だけ（h153。2026-11-03）
+    check("main から run_inline を呼ぶのは --inline と、--growing の取りこぼし（missed）の2か所だけ",
+          (main.count("run_inline("), "if missed:\n" in main and "missed.append(tgt)" in main
+           and "if growing and not added:" in main), (2, True))
     with tempfile.TemporaryDirectory() as d:
         log = Path(d) / "a.jsonl"
         LB.note("t", "s", "link_band", log=log)

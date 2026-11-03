@@ -309,6 +309,7 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | 業種×手法の面 | `structure_plan` → `report_actions`（空きマスを台帳へ）／業種ハブ（AI集客ラボ・補助金） | 自動 |
 | 一次データの公開 | `data_auto`（週次） | 自動 |
 | 1ページ目手前の押し上げ | `rank_up` / `rank_rescue` / `link_boost`（週次） | 自動 |
+| 伸びている記事を外から伸ばす（本文は変えない） | `link_boost --growing`（週次。話題の合う記事から送る・送り元にも伸びている記事を使わない）／`article_videos`（古くても伸びている記事を毎日の候補の半分まで） | 自動 |
 | 軽い入口のCTA | サイト設定 `cta_mid`（中ほどは診断へ） | 自動（文言の判断は人） |
 | リンクの無いWeb言及 | `mentions --check`（消えていないかの監視） | **人**（相手がある） |
 | フォームの離脱 | `funnel`（計測） | **人**（項目の見直し） |

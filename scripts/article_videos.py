@@ -115,8 +115,17 @@ def published(slug, score):
     return ER.reviewed(slug, _REVIEWS)
 
 
+def _growing(slug, site):
+    try:
+        import article_health as AH
+        return AH.of(slug, site) == "growing"
+    except Exception:  # noqa: BLE001  順位の記録が読めなければ古い記事は候補にしない（今までどおり）
+        return False
+
+
 def candidates(days, limit):
-    """直近 days 日に公開した記事（score>=85・監修の記録あり）で、まだ動画にしていないもの（新しい順）"""
+    """直近 days 日に公開した記事と、それより古い伸びている記事（score>=85・監修の記録あり）で、
+    まだ動画にしていないもの。伸びている記事を limit の半分まで先に、残りは新しい順"""
     import sites as S
     import youtube_upload as YT
     have = load()
@@ -132,7 +141,7 @@ def candidates(days, limit):
         def g(k):
             x = re.search(rf"^{k}:\s*(.+)$", fm, re.M)
             return x.group(1).strip().strip('"') if x else ""
-        if p.stem in have or not published(p.stem, g("score")) or g("date") < since:
+        if p.stem in have or not published(p.stem, g("score")):
             continue
         import noindex
         if noindex.hidden_fm(fm):           # 検索から外した記事（noindex）は動画にしない
@@ -140,19 +149,27 @@ def candidates(days, limit):
         sid = S.find_category_owner(g("category")) or ""
         if not sid:
             continue
+        # 古い記事は、伸びている記事（article_health の growing）だけ動画にする。本文を変えずに言及を足して伸ばす
+        # （2026-11-03 運用者「伸びている記事は伸ばして」。伸びている記事の本文は変えない決まり＝2026-10-22）
+        grow = g("date") < since
+        if grow and not _growing(p.stem, sid):
+            continue
         # チャンネル未接続のクライアントは、本数で切る前に外す。切った後で外すと、
         # その社の記事が新しい順の先頭にあった日は1日の枠（1本）がまるごと空になる
         if S.is_client(sid) and not YT.token_path(sid).is_file():
             continue
-        row = {"slug": p.stem, "site": sid, "title": g("title"), "date": g("date"), "category": g("category")}
+        row = {"slug": p.stem, "site": sid, "title": g("title"), "date": g("date"), "category": g("category"),
+               "growing": grow}
         if focus(row) is None:
             continue
         rows.append(row)
     # 打ち出しの業種・主力の分野を先に（見られて社名が出る動画を優先する）。同じなら新しい順
     rows.sort(key=lambda r: (focus(r), r["date"]), reverse=True)
+    # 伸びている記事は枠の半分まで先に（残りは新しい記事。伸びている記事だけで毎日の枠を埋めない）
+    out = [r for r in rows if r["growing"]][:limit // 2]
     # サイトを回して選ぶ（1サイトに偏らせない）
-    out, by = [], {}
-    for r in rows:
+    by = {}
+    for r in (r for r in rows if not r["growing"]):
         by.setdefault(r["site"], []).append(r)
     while len(out) < limit and any(by.values()):
         for sid in sorted(by):

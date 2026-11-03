@@ -16,6 +16,7 @@ AI検索にも文脈ごと読まれる。
     python scripts/link_boost.py <site_id> --write    # 実際に足す
     python scripts/link_boost.py <site_id> --band=4-20 --inline   # 文中リンク（集中モードだけが使う）
     python scripts/link_boost.py <site_id> --unindexed   # URL検査で未登録のままの記事へ、検索1ページ目の記事から
+    python scripts/link_boost.py <site_id> --growing --write   # 伸びている記事へ（その記事の本文は変えない）
 
 --inline は段落を足さない。送り元の本文に既にある語句（送り先の狙う語・題の主要な語句）を
 [語](/url/) で囲むだけで、文字は1文字も変えない。リンクだけの段落は上限（4本）に
@@ -180,6 +181,21 @@ def rescue_targets(site, arts, cnt):
         out.append((r["slug"], r["pos"], r["imp"], cnt.get(r["slug"], 0)))
     out.sort(key=lambda x: -(x[2] * max(0.0, 31 - x[1])))
     return out
+
+
+GROWING_MAX = 6   # --growing: 1回に送る先の記事の上限（社ごと）
+
+
+def growing_targets(site, arts, cnt, of=None):
+    """伸びている記事（article_health の growing）で、被リンクが下限に届いていない記事を被リンクの少ない順に。
+    伸びている記事の本文は変えない（2026-10-22 運用者「伸びているものは変えるとまずい」）。他の記事から送って
+    伸ばす（2026-11-03 運用者「伸びている記事は伸ばして」）"""
+    if of is None:
+        import article_health as AH
+        of = lambda s: AH.of(s, site)
+    out = [s for s in arts if cnt.get(s, 0) < RESCUE_FLOOR and of(s) == "growing"]
+    out.sort(key=lambda s: cnt.get(s, 0))
+    return out[:GROWING_MAX]
 
 
 def peak_drop(day, published, end):
@@ -558,7 +574,7 @@ def phrases_for(site, tgt, arts):
     return ph
 
 
-def run_inline(site, arts, poor, cnt, ranks, pre, write, log=None, use=None, kind="link_inline", max_tgt=None):
+def run_inline(site, arts, poor, cnt, ranks, pre, write, log=None, use=None, kind="link_inline", max_tgt=None, skip_src=()):
     """送り先ごとに、上位の近い記事の本文にある語句を文中リンクにする。足した本数を返す。
 
     上限: 送り先1本につき ADD_PER、送り元1本につき INLINE_PER_SRC、同じ送り先へは1記事1本、
@@ -581,7 +597,7 @@ def run_inline(site, arts, poor, cnt, ranks, pre, write, log=None, use=None, kin
             if added >= ADD_PER:
                 break
             b = arts[src]
-            if per_src[src] >= INLINE_PER_SRC or f"/{tgt}/" in b["body"]:
+            if src in skip_src or per_src[src] >= INLINE_PER_SRC or f"/{tgt}/" in b["body"]:
                 continue
             if (len(ar.link_slugs(b["body"])) >= ar.MAX_INTERNAL_LINKS
                     or len(ar.scan(b["path"])[2]) > ar.MAX_LINK_PARA):
@@ -614,6 +630,7 @@ def main():
     write = "--write" in sys.argv
     rescue = "--rescue" in sys.argv
     unindexed = "--unindexed" in sys.argv
+    growing = "--growing" in sys.argv
     band = parse_band(sys.argv)
     # 文中リンクは集中モードの対象（4〜20位）へ、上位の記事からだけ送る
     inline = "--inline" in sys.argv
@@ -675,6 +692,12 @@ def main():
         print(f"■ {site}: 公開後の山の週から直近の週が1/4以下に落ち、被リンクが{RESCUE_FLOOR}本未満 {len(dt)}記事")
         for s, peak, last, n in dt:
             print(f"     山の週 表示{peak:>4} → 直近の週{last:>4}  被リンク{n:>3}本  {arts[s]['title'][:34]}")
+    elif growing:
+        import article_health as AH
+        health = {}
+        grown = lambda s: health.setdefault(s, AH.of(s, site))
+        poor = [s for s in growing_targets(site, arts, cnt, grown) if linkable(s, arts)]
+        print(f"■ {site}: 伸びている記事で被リンクが{RESCUE_FLOOR}本未満 {len(poor)}記事（本文は変えず、他の記事から送る）")
     else:
         import editorial_review
         _recs = editorial_review.load()
@@ -684,6 +707,7 @@ def main():
     import sites as S
     pre = S.load(site).get("url_prefix")
     done = 0
+    missed = []
     if unindexed:
         # 送り元は検索1ページ目の記事だけ（評価の無い記事から送っても、Google が辿りに来るきっかけにならない）。
         # 段落のリンクではなく文中リンクにするのは、1ページ目の記事はリンクだけの段落が上限（4本）に
@@ -709,6 +733,9 @@ def main():
             if added >= cap:
                 break
             b = arts[src]
+            # 伸びている記事は送り元にもしない（段落を1つ足すだけでも、伸びている記事の本文が変わる）
+            if growing and grown(src) == "growing":
+                continue
             # 送り元がすでにリンクだけの段落を上限（auto_review.MAX_LINK_PARA）まで持っていれば足さない。
             # 足すと見直しがすぐ外し、足しては消すを繰り返す（2026-09-28: 1記事16本まで積み上がった）
             if len(ar.scan(b["path"])[2]) >= ar.MAX_LINK_PARA:
@@ -743,9 +770,18 @@ def main():
                 # 候補を見るだけの実行で台帳に書くと、effect_ab が当てていない記事を介入群に数える
                 # 山から落ちた記事は種類を分ける（effect_ab が11〜30位の経路と混ぜずに効きを測れる）
                 kind = "link_decay" if tgt in decayed else "link_rescue" if rescue else "link"
+                if growing:
+                    kind = "link_growing"
                 note(tgt, src, "link_band" if band else kind)
             added += 1
             done += 1
+        if growing and not added:
+            missed.append(tgt)
+    if missed:
+        # 話題の近い記事はリンクだけの段落が上限（auto_review.MAX_LINK_PARA）に当たりやすい。
+        # 送り元の本文にある語句を文中リンクにする（文字は変えない）
+        done += run_inline(site, arts, missed, cnt, {}, pre, write, kind="link_growing",
+                           skip_src={s for s in arts if grown(s) == "growing"})
     print(f"\n   {'追加しました' if write else '候補'}: {done}本")
     if not write:
         print("   実行するには --write を付けてください")

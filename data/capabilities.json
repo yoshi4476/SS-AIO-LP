@@ -2096,7 +2096,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/link_boost.py:239",
+     "evidence": "scripts/link_boost.py:255",
      "anchor": "u = S.article_url(cfg, {\"slug\": s, \"category\": a[\"cat\"]}).rstrip(\"/\")"
     },
     "external-md": {

@@ -710,6 +710,9 @@ jobs:
             # URL検査で未登録のまま公開3週を過ぎた記事へ、検索1ページ目の記事から文中リンク（1回5記事まで）。
             # 再通知（reindex --from-cache）だけでは登録まで届かなかった（コーポレートの 8/30〜9/9 公開分）
             python scripts/link_boost.py "$s" --unindexed --write || true
+            # 伸びている記事へ、その記事の本文は変えずに話題の合う記事から送る（2026-11-03 運用者「伸びている記事は伸ばして」）。
+            # 送り先・送り元の slug はログに出さない（件数の1行だけ）
+            python scripts/link_boost.py "$s" --growing --write 2>&1 | tail -1 || true
           done
 
       - name: 無料診断への導線を新しい記事にも入れる
