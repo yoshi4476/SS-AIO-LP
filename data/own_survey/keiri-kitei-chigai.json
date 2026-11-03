@@ -1,0 +1,98 @@
+{
+ "v": 2,
+ "slug": "keiri-kitei-chigai",
+ "ok": true,
+ "date": "2026-11-03",
+ "questions": [
+  "経理 規程 経理 規定 違いについて教えてください",
+  "経理 規程 経理 規定 違いについて、「経理規程は文書のまとまり、規定は1つの条文」を教えてください",
+  "経理 規程 経理 規定 違いについて、「経理規程と経理規定を5項目で比べる」を教えてください",
+  "経理 規程 経理 規定 違いについて、「経理規程に書く4つの分野」を教えてください",
+  "経理 規程 経理 規定 違いについて、「決めないと仕訳がぶれる3つの区分」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "経理規程は文書のまとまり、規定は1つの条文",
+   "words": [
+    "文書",
+    "条文"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "経理規程に書く4つの分野",
+   "words": [
+    "分野"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "決めないと仕訳がぶれる3つの区分",
+   "words": [
+    "仕訳",
+    "区分"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "電子帳簿保存法の事務処理規程は経理規程と別に要る？",
+   "words": [
+    "電子帳簿保存法"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "4649.ai": "peer",
+  "ajconsult.jp": "peer",
+  "career.jusnet.co.jp": "peer",
+  "chuokai-toyama.or.jp": "peer",
+  "crd.ndl.go.jp": "public",
+  "flat-sr.com": "peer",
+  "forbesjapan.com": "media",
+  "isss.jp.net": "peer",
+  "itoh.fullstage.biz": "peer",
+  "jssst.or.jp": "peer",
+  "kaikeijin-course.jp": "peer",
+  "kohokyo.or.jp": "peer",
+  "kpmg.com": "peer",
+  "leyser.jp": "peer",
+  "manegy.com": "media",
+  "mhlw.go.jp": "public",
+  "michibiku.co.jp": "peer",
+  "news.mynavi.jp": "media",
+  "npo-jinzai.or.jp": "peer",
+  "online.koueki.jp": "peer",
+  "oro.com": "media",
+  "rcf311.com": "peer",
+  "saisoncard.co.jp": "peer",
+  "sr-iplus.co.jp": "peer",
+  "tax-mfm.com": "peer",
+  "tisi.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yayoi-kk.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 1,
+  "進め方の手順": 1,
+  "専門家への相談": 5
+ },
+ "chars": 11412,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え8件のうち、『分野』に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは期間（◯か月・◯日など）は0件、費用の金額（◯円）は1件、注意点・失敗・リスクは1件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは28件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが4件でした。"
+ ]
+}
