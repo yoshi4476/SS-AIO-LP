@@ -1,0 +1,111 @@
+{
+ "v": 2,
+ "slug": "clinic-erabareru-homepage",
+ "ok": true,
+ "date": "2026-11-04",
+ "questions": [
+  "クリニック 選ばれる ホームページについて教えてください",
+  "クリニック 選ばれる ホームページについて、「クリニックの選ばれるホームページとは？候補を比べる患者の確認先」を教えてください",
+  "クリニック 選ばれる ホームページについて、「患者はポータルとAIで候補を絞ってから公式サイトを開く」を教えてください",
+  "クリニック 選ばれる ホームページについて、「ポータルに載らない5つの情報を公式サイトに置く」を教えてください",
+  "クリニック 選ばれる ホームページについて、「比べられて負けるクリニックのホームページ5つの落とし穴」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "クリニックの選ばれるホームページとは？候補を比べる患者の確認先",
+   "words": [
+    "確認先",
+    "候補"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "患者はポータルとAIで候補を絞ってから公式サイトを開く",
+   "words": [
+    "公式サイト",
+    "ポータル",
+    "患者",
+    "AI"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "ポータルに載らない5つの情報を公式サイトに置く",
+   "words": [
+    "公式サイト",
+    "ポータル",
+    "情報"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "選ばれるホームページへ直す順番は確かめ方から決める",
+   "words": [
+    "順番"
+   ],
+   "hits": 1,
+   "of": 10
+  },
+  {
+   "topic": "院内で直す・任せる・まだ直さない医院の条件",
+   "words": [
+    "院内",
+    "医院",
+    "条件"
+   ],
+   "hits": 9,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "ale-clinic.com": "peer",
+  "areadrive.jp": "media",
+  "cl-mirai-lab.doctorsfile.jp": "portal",
+  "clinic-kaizen.findcare.jp": "peer",
+  "clinic.z-it.jp": "peer",
+  "clinichp.nobu-n.co.jp": "peer",
+  "clius.jp": "peer",
+  "credo-m.co.jp": "peer",
+  "daida-seikei.jp": "peer",
+  "feeee.link": "peer",
+  "flagshipworks.co.jp": "peer",
+  "gmo-rakurakuhp.jp": "peer",
+  "gyro-n.com": "peer",
+  "hifuka-eigo.com": "portal",
+  "iryoukoukoku-patrol.mhlw.go.jp": "public",
+  "itreat.co.jp": "peer",
+  "kakarikata.mhlw.go.jp": "public",
+  "medi.nichiigakkan.co.jp": "peer",
+  "medical-grits.jp": "peer",
+  "medical-link.co.jp": "peer",
+  "medrock.co.jp": "peer",
+  "mekiki-inosuke.com": "media",
+  "mhlw.go.jp": "public",
+  "rater8.com": "peer",
+  "souki-inc.co.jp": "peer",
+  "web-kanji.com": "media",
+  "web.2ndlabo.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 7,
+  "進め方の手順": 5,
+  "専門家への相談": 0
+ },
+ "chars": 18798,
+ "claims": [
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『順番』に触れたものは1件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は0件、期間（◯か月・◯日など）は2件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは27件で、公的機関・学会・業界団体が3件、ニュース・メディア・まとめが3件、ポータル・比較サイトが2件でした。"
+ ]
+}

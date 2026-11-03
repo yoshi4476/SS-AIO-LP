@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-03T00:00:00+09:00</updated>
+  <updated>2026-11-04T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>クリニックの選ばれるホームページ｜比べられて負ける5つの落とし穴</title>
+    <link href="https://ai.7senses.co.jp/aio/clinic-erabareru-homepage/"/>
+    <id>https://ai.7senses.co.jp/aio/clinic-erabareru-homepage/</id>
+    <updated>2026-11-04T00:00:00+09:00</updated>
+    <summary>クリニックの選ばれるホームページとは、ポータルやAIで候補を絞った患者が受診を決められる公式サイトです。当社が4つのAIの出典2,362件を数えた調査では、費用や症状を調べる質問の回答の77.4%が公式サイトを出典にしていました。負ける5つの落とし穴と直す順番を解説します。</summary>
+  </entry>
   <entry>
     <title>クリニックのLLMOは公式サイトだけでは足りない｜AI出典2,362件の調査</title>
     <link href="https://ai.7senses.co.jp/aio/clinic-llmo-taisaku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/fudousan-web-shukyaku/</id>
     <updated>2026-10-21T00:00:00+09:00</updated>
     <summary>不動産のWeb集客は、物件を増やすより先に、査定ページ・エリアページ・会社情報ページの3つを自社サイトに整えることから始めます。当社の不動産会社の支援で効かなかった2つの更新と、地域の語で23位から3位に上がるまでの期間を整理します。</summary>
-  </entry>
-  <entry>
-    <title>飲食店の集客コンサルの落とし穴｜依頼前に数える3つの数字</title>
-    <link href="https://ai.7senses.co.jp/aio/inshokuten-shukyaku-consul/"/>
-    <id>https://ai.7senses.co.jp/aio/inshokuten-shukyaku-consul/</id>
-    <updated>2026-10-21T00:00:00+09:00</updated>
-    <summary>飲食店の集客コンサルは、頼める仕事が4つの型に分かれ、店の状況で選ぶ相手が変わります。依頼前に予約の経路・新規客の割合・検索の順位の3つを数えてください。当社の実測クリック率（1〜3位6.28%、4〜10位1.02%）をもとに、頼む店と見送る店の分かれ目を解説します。</summary>
   </entry>
 </feed>

@@ -56,6 +56,8 @@ quality_attempts: 2
 
 **クリニックのLLMOとは、患者がAIチャットに受診先を聞いたとき、自院が正しい内容で答えに入るよう整えることです。**狙う場所はGoogle検索の順位ではなく、ChatGPT・Perplexity・Gemini・Claudeの答えです。
 
+近い論点を[クリニックの選ばれるホームページ](/aio/clinic-erabareru-homepage/)で扱っています。
+
 <div class="definition-box"><span class="term">クリニックのLLMO（Large Language Model Optimization）とは</span>、患者がAIチャットに医院探しや症状の相談をしたとき、自院の名前・診療科・診療時間・費用の説明が正しく答えに含まれるよう、自院サイトと掲載先の情報を整える取り組みです。</div>
 
 Google検索の「AIによる概要」で選ばれることを狙う施策は、AIOと呼ばれます。2つの違いを表にまとめました。
