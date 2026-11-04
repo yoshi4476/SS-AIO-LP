@@ -57,6 +57,8 @@ quality_attempts: 3
 
 **インバウンド飲食店のLLMOは、外国語で相談するAIの答えに自店の事実を使わせる取り組みです。**
 
+関連する内容として[歯科医院の地域名検索で上位に出る方法](/seo/shika-chiikimei-kensaku-joui/)も公開しています。
+
 <div class="definition-box"><span class="term">LLMO（Large Language Model Optimization）とは</span>、ChatGPT・Gemini・Claude・Perplexityなどの生成AIが答えを作るとき、自社の情報が正しく出典や候補に使われるよう整えることです。</div>
 
 日本語が読めない訪日客は、母国語や英語でAIに「近くで子ども連れでも入れる焼肉店は？」のように相談します。
