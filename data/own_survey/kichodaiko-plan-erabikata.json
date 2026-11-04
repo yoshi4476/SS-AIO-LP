@@ -1,0 +1,93 @@
+{
+ "v": 2,
+ "slug": "kichodaiko-plan-erabikata",
+ "ok": true,
+ "date": "2026-11-04",
+ "questions": [
+  "記帳代行プランについて教えてください",
+  "記帳代行プランについて、「記帳代行プランは何で区切られているか」を教えてください",
+  "記帳代行プランについて、「記帳代行プランを決める4つの条件」を教えてください",
+  "記帳代行プランについて、「仕訳数だけでプランを選ぶと起きる3つの失敗」を教えてください",
+  "記帳代行プランについて、「記帳だけのプランか、経理代行まで含むプランか」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "記帳代行プランを決める4つの条件",
+   "words": [
+    "条件"
+   ],
+   "hits": 1,
+   "of": 8
+  },
+  {
+   "topic": "仕訳数だけでプランを選ぶと起きる3つの失敗",
+   "words": [
+    "プラン"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "記帳だけのプランか、経理代行まで含むプランか",
+   "words": [
+    "プラン",
+    "プラン"
+   ],
+   "hits": 8,
+   "of": 8
+  }
+ ],
+ "official": [
+  {
+   "term": "税理士法",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 3
+  }
+ ],
+ "sources": {
+  "adv.freee.co.jp": "peer",
+  "ascendajapan.com": "peer",
+  "b-pos.jp": "peer",
+  "backoffice-caddy.com": "peer",
+  "bakuraku.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "bizneko.jp": "media",
+  "cfone.jp": "peer",
+  "charis-tax.jp": "peer",
+  "cri-shiga.com": "peer",
+  "crowd-moove.jp": "peer",
+  "crowdworks.jp": "portal",
+  "go.invoy.jp": "peer",
+  "kanbei.jp": "media",
+  "kanri-pro.com": "peer",
+  "keihi.com": "peer",
+  "keiri-daiko.net": "peer",
+  "keiri-marugoto.com": "peer",
+  "keiri.handstax.com": "video",
+  "marunagekanri.com": "peer",
+  "move-for-people.com": "peer",
+  "persol-bd.co.jp": "peer",
+  "tanebi.fun": "peer",
+  "yayoi-kk.co.jp": "peer",
+  "zeimu-service.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 4,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 0,
+  "専門家への相談": 7
+ },
+ "chars": 9893,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、国税庁の資料にある「税理士法」に触れたものは3件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは進め方の手順は0件、注意点・失敗・リスクは2件、期間（◯か月・◯日など）は4件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは25件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが2件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
+}
