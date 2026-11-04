@@ -1,0 +1,106 @@
+{
+ "v": 2,
+ "slug": "invoice-keiri-system",
+ "ok": true,
+ "date": "2026-11-04",
+ "questions": [
+  "インボイス制度 経理システムについて教えてください",
+  "インボイス制度 経理システムについて、「インボイス制度に対応した経理システムとは？」を教えてください",
+  "インボイス制度 経理システムについて、「2026年10月の改正で経理システムに要る対応は？」を教えてください",
+  "インボイス制度 経理システムについて、「22社のインボイス対応で起きた3つの問題とシステムで防げる範囲」を教えてください",
+  "インボイス制度 経理システムについて、「経理システムで先に確かめる4つの機能」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "2026年10月の改正で経理システムに要る対応は？",
+   "words": [
+    "改正",
+    "対応"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "22社のインボイス対応で起きた3つの問題とシステムで防げる範囲",
+   "words": [
+    "インボイス対応",
+    "システム",
+    "問題",
+    "範囲"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "経理システムで先に確かめる4つの機能",
+   "words": [
+    "機能"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "自社で運用するか、経理BPOに任せるかの分かれ目",
+   "words": [
+    "経理BPO"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "経理システムの切り替えで起きやすいNGと避け方",
+   "words": [
+    "NG"
+   ],
+   "hits": 1,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "aspicjapan.org": "public",
+  "bizkeiri.net": "peer",
+  "catalog.monex.co.jp": "media",
+  "corp.7senses.co.jp": "self",
+  "digiwith.smrj.go.jp": "public",
+  "freee.co.jp": "peer",
+  "go.invoy.jp": "peer",
+  "gov-online.go.jp": "public",
+  "invox.jp": "peer",
+  "katsuko-office.jp": "peer",
+  "keihi.com": "peer",
+  "kk-osk.co.jp": "peer",
+  "lassic.co.jp": "media",
+  "media.invoice.ne.jp": "peer",
+  "nta.go.jp": "public",
+  "ntt-finance.co.jp": "peer",
+  "officem.jp": "peer",
+  "onamae.com": "peer",
+  "squareup.com": "peer",
+  "support.freee.co.jp": "peer",
+  "toolerabi.jp": "peer",
+  "uchida-it.co.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "wingarc.com": "peer",
+  "yayoi-kk.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 7,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 2,
+  "専門家への相談": 2
+ },
+ "chars": 16698,
+ "claims": [
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『経理BPO』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『NG』に触れたものは1件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは費用の金額（◯円）は1件、進め方の手順は2件、専門家への相談は2件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは25件で、公的機関・学会・業界団体が4件、ニュース・メディア・まとめが2件でした。"
+ ]
+}
