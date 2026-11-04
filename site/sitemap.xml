@@ -91,6 +91,7 @@
   <url><loc>https://ai.7senses.co.jp/compare/seo/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/topics/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/topics/107cc2af/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ai.7senses.co.jp/topics/1c0f3e68/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/topics/40d4ace7/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/topics/5cb002c4/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://ai.7senses.co.jp/topics/8535fe65/</loc><lastmod>2026-11-04</lastmod></url>
@@ -386,6 +387,11 @@
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-instagram-yarikata/riyu.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-instagram-yarikata/steps.png</image:loc></image:image>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-instagram-yarikata/ngok.png</image:loc></image:image>
+  </url>
+  <url><loc>https://ai.7senses.co.jp/aio/clinic-kaigyou-shukyaku-junbi/</loc><lastmod>2026-11-04</lastmod>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kaigyou-shukyaku-junbi/nissuu.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kaigyou-shukyaku-junbi/junban.png</image:loc></image:image>
+    <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kaigyou-shukyaku-junbi/ng.png</image:loc></image:image>
   </url>
   <url><loc>https://ai.7senses.co.jp/ai-marketing/clinic-kaigyou-yarikata/</loc><lastmod>2026-09-13</lastmod>
     <image:image><image:loc>https://ai.7senses.co.jp/images/clinic-kaigyou-yarikata/steps.png</image:loc></image:image>
