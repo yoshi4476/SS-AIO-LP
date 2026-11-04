@@ -1292,5 +1292,82 @@
       "reason": "YouTube のサジェストに「不動産 ホームページ」が出ます"
     },
     "youtube": "qwl3WXriEMM"
+  },
+  "aio-taisaku-gutairei": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-04",
+      "keyword": "aio対策 具体例",
+      "queries": [
+        "aio対策 具体例"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "情報 補数表現",
+        "情報 補数",
+        "情報 2の補数表現"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
+  },
+  "llmo-dairiten-boshu": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-04",
+      "keyword": "LLMO 代理店 募集",
+      "queries": [
+        "llmo 代理店 募集",
+        "代理店 募集",
+        "llmo 募集",
+        "llmo 代理店"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "代理店募集",
+        "代理店ビジネス",
+        "代理店",
+        "ライン募集",
+        "代理店とは",
+        "代理店営業"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
+  },
+  "clinic-erabareru-homepage": {
+    "site": "ai-lab",
+    "date": "2026-11-04",
+    "sec": 335,
+    "mp4": "automation/video/clinic-erabareru-homepage.mp4",
+    "nums": [
+      "2",
+      "2,362",
+      "3",
+      "4",
+      "5",
+      "77.4"
+    ],
+    "format": "duo",
+    "long": {
+      "date": "2026-11-04",
+      "keyword": "クリニック 選ばれる ホームページ",
+      "queries": [
+        "クリニック 選ばれる ホームページ",
+        "選ばれる ホームページ",
+        "クリニック ホームページ",
+        "クリニック 選ばれる"
+      ],
+      "decision": "make",
+      "term": "クリニック ホームページ",
+      "title": "クリニック ホームページは何から始める？｜比べられて負ける5つの落とし穴",
+      "reason": "YouTube のサジェストに「クリニック ホームページ」が出ます"
+    },
+    "youtube": "AMG4EFeMJDk",
+    "short": {
+      "date": "2026-11-04",
+      "sec": 48,
+      "title": "クリニックのHP、比べられて負けてない？",
+      "desc": "lead-long",
+      "youtube": "ALNp_h8wyDA"
+    }
   }
 }
