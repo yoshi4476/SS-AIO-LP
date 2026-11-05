@@ -55,6 +55,8 @@ quality_attempts: 3
 
 **記帳代行プランは、仕訳数・資料の渡し方・記帳の頻度・任せる範囲の4つの軸で区切られています。**料金表で目に入りやすいのは仕訳数ですが、残りの3つで中身が大きく変わります。
 
+関連する内容として[請求書の郵送のやり方は5手順](/blog/seikyusho-yuso-yarikata/)も公開しています。
+
 <figure><img src="/images/kichodaiko-plan-erabikata/kugiri.png" alt="記帳代行プランを仕訳数・資料の渡し方・記帳の頻度・任せる範囲の4つの軸に分けた図"></figure>
 
 <div class="definition-box"><span class="term">記帳代行プランとは</span>、記帳代行を引き受ける会社が、仕訳の件数や作業の範囲ごとに分けて用意した契約の型です。==プランの名前が同じでも、含まれる作業は会社ごとに違います。==</div>

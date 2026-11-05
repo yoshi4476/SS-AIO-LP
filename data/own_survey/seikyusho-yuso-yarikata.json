@@ -1,0 +1,82 @@
+{
+ "v": 2,
+ "slug": "seikyusho-yuso-yarikata",
+ "ok": true,
+ "date": "2026-11-05",
+ "questions": [
+  "請求書 郵送 やり方について教えてください",
+  "請求書 郵送 やり方について、「請求書を郵送する5つの手順」を教えてください",
+  "請求書 郵送 やり方について、「請求書をクリックポストやゆうメールで送れない理由」を教えてください",
+  "請求書 郵送 やり方について、「請求書を送る郵便の種類と料金の比較」を教えてください",
+  "請求書 郵送 やり方について、「請求書が着く日から逆算して出す日を決める」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "請求書をクリックポストやゆうメールで送れない理由",
+   "words": [
+    "クリックポスト",
+    "メール"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "請求書を送る郵便の種類と料金の比較",
+   "words": [
+    "郵便"
+   ],
+   "hits": 8,
+   "of": 8
+  }
+ ],
+ "official": [],
+ "sources": {
+  "biz.moneyforward.com": "peer",
+  "busifro-search.jp": "peer",
+  "catalog.monex.co.jp": "media",
+  "dm-osaka.com": "peer",
+  "dm-respo.jp": "peer",
+  "dm.nexway.co.jp": "peer",
+  "freee.co.jp": "peer",
+  "futo-tatujin.com": "peer",
+  "generalasahi.co.jp": "peer",
+  "hansoku-create.jp": "peer",
+  "heart-group.co.jp": "peer",
+  "infomart.co.jp": "peer",
+  "insatsu-ichiba.co.jp": "peer",
+  "japanmail.co.jp": "peer",
+  "keihi.com": "peer",
+  "macaro-ni.jp": "media",
+  "makeleaps.com": "peer",
+  "media.wwg.co.jp": "peer",
+  "merrybiz.jp": "media",
+  "nice-system.co.jp": "peer",
+  "note.com": "video",
+  "ohashi-planning.com": "peer",
+  "onamae.com": "peer",
+  "orico.co.jp": "peer",
+  "pca.jp": "peer",
+  "post.japanpost.jp": "peer",
+  "rakus.co.jp": "peer",
+  "sellmarke.jp": "media",
+  "yayoi-kk.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 4,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 7,
+  "進め方の手順": 4,
+  "専門家への相談": 0
+ },
+ "chars": 14594,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え8件のうち、『クリックポスト』に触れたものは6件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは専門家への相談は0件、期間（◯か月・◯日など）は2件、費用の金額（◯円）は4件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは29件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが4件、動画・SNS・ブログが1件でした。"
+ ]
+}
