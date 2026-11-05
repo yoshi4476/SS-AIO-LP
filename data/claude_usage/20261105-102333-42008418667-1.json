@@ -1,0 +1,1 @@
+{"at": "2026-11-05T10:23:33+00:00", "job": "記事の枠", "site": "corporate", "turns": 72, "sessions": 2, "input_tokens": 144, "output_tokens": 36503, "cache_creation_input_tokens": 192176, "cache_read_input_tokens": 6443888, "models": {"claude-opus-5-5": {"input_tokens": 144, "output_tokens": 36503, "cache_creation_input_tokens": 192176, "cache_read_input_tokens": 6443888}}}
