@@ -452,7 +452,7 @@
 "modified": "2026-09-04"
 },
 "inshokuten-shukyaku-service": {
-"hash": "99aec8c67a464d93d1259b0963b0cb7d",
+"hash": "a5222f6bd8588822e91e47913e4b455a",
 "modified": "2026-10-21"
 },
 "iryou-koukoku-guideline-web": {
@@ -466,6 +466,10 @@
 "jutaku-instagram-renkei": {
 "hash": "9d067f62f394953cf1e82950ab953200",
 "modified": "2026-08-07"
+},
+"kaitoriten-shukyaku": {
+"hash": "f3e063c6d582944365f7b987f5d364a3",
+"modified": "2026-11-06"
 },
 "kengakukai-shukyaku-hoho": {
 "hash": "a9b758cad7943bb4be5de87366cccd07",
@@ -508,7 +512,7 @@
 "modified": "2026-08-05"
 },
 "koumuten-shukyaku-seminar": {
-"hash": "e49f04da7ec800b718aab632d741d8ef",
+"hash": "f78329b508fcf2289af634f015ca710b",
 "modified": "2026-08-28"
 },
 "koumuten-sns-shukyaku": {

@@ -1,0 +1,138 @@
+{
+ "v": 2,
+ "slug": "kaitoriten-shukyaku",
+ "ok": true,
+ "date": "2026-11-06",
+ "questions": [
+  "買取店 集客について教えてください",
+  "買取店 集客について、「買取店の集客とは？売り手は「品目と地域」で店を探す」を教えてください",
+  "買取店 集客について、「買取店の集客で失敗する3つの原因と避け方」を教えてください",
+  "買取店 集客について、「店頭・出張・宅配で集客の打ち手はどう変わるか」を教えてください",
+  "買取店 集客について、「AI検索に買取店が選ばれるための4つの土台」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "買取店の集客とは？売り手は「品目と地域」で店を探す",
+   "words": [
+    "品目",
+    "地域"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "買取店の集客で失敗する3つの原因と避け方",
+   "words": [
+    "原因"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "店頭・出張・宅配で集客の打ち手はどう変わるか",
+   "words": [
+    "店頭",
+    "出張",
+    "宅配"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "AI検索に買取店が選ばれるための4つの土台",
+   "words": [
+    "AI検索",
+    "土台"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "検索順位で買取店への問い合わせはどれだけ変わるか",
+   "words": [
+    "検索順位"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "買取店の集客で成果が見えるまでの期間の目安",
+   "words": [
+    "成果",
+    "期間"
+   ],
+   "hits": 4,
+   "of": 10
+  },
+  {
+   "topic": "自店で進める・任せる・まだ始めない買取店の条件",
+   "words": [
+    "自店",
+    "条件"
+   ],
+   "hits": 8,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "古物営業法",
+   "org": "公的機関",
+   "of": 10,
+   "hits": 1
+  },
+  {
+   "term": "特定商取引法",
+   "org": "消費者庁",
+   "of": 10,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "2ndstreet.jp": "peer",
+  "ad.sbbit.jp": "peer",
+  "bakuyasu.techsuite.co.jp": "peer",
+  "brandoff.co.jp": "peer",
+  "call.omnidatabank.jp": "peer",
+  "developers.google.com": "peer",
+  "dreamnews.jp": "media",
+  "freelance-meikan.com": "portal",
+  "fun-create.co.jp": "peer",
+  "japan.zdnet.com": "peer",
+  "kaitori-daikichi.jp": "peer",
+  "kaitori-koji.jp": "peer",
+  "kaitorimakxas.com": "peer",
+  "komehyo.jp": "peer",
+  "lunalink.jp": "peer",
+  "lycbiz.com": "peer",
+  "main-c.co.jp": "peer",
+  "no-trouble.caa.go.jp": "public",
+  "oikura.jp": "media",
+  "reuse-success-story.com": "peer",
+  "riseagency.co.jp": "peer",
+  "shopowner-support.net": "media",
+  "support-online.bookoff.co.jp": "peer",
+  "support.google.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "wakaba-fc.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 4,
+  "専門家への相談": 1
+ },
+ "chars": 19888,
+ "claims": [
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、消費者庁の資料にある「特定商取引法」に触れたものは0件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、公的機関の資料にある「古物営業法」に触れたものは1件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは費用の金額（◯円）は1件、期間（◯か月・◯日など）は1件、専門家への相談は1件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは26件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが3件、ポータル・比較サイトが1件でした。"
+ ]
+}

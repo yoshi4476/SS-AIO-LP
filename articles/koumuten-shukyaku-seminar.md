@@ -49,6 +49,8 @@ diagrams:
 
 **工務店の集客セミナーとは、契約棟数を増やす知識を体系的に学べる、経営者向けの学びの場です。**
 
+関連する内容として[買取店の集客で失敗する3つの原因](/aio/kaitoriten-shukyaku/)も公開しています。
+
 セミナーで聞いたAI検索の話を自社で確かめる手順は、[工務店のAI検索集客](/aio/koumuten-ai-kensaku-shukyaku/)にまとめています。
 
 あわせて[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)もご覧ください。

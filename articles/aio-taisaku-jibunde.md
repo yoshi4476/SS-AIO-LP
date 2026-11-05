@@ -29,8 +29,8 @@ faq:
   - q: 自分で対策しても順位が変わらない場合はどうすればよいですか？
     a: 構造だけでなく検索順位そのものに問題がないか、通常のSEO観点で見直してください。
 score: 89
-score_breakdown: {originality: 88, extractability: 86, decision: 92}
-quality_attempts: 29
+score_breakdown: {originality: 86, extractability: 90, decision: 91}
+quality_attempts: 31
 ---
 **AIO対策は自分でできます。**現状診断・冒頭の断言型への書き換え・H2直下の1文結論・FAQ作成の4つは、無料ツールで対応できます。当社はこの4つを、自分でできる「基礎の8割」と呼んでいます。5つ目の手順は月1回の計測です。ただし一次情報の収集や計測結果の分析には限界があり、成果が伸び悩む段階でプロへの相談が必要になります。
 
