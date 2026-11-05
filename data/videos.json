@@ -1369,5 +1369,53 @@
       "desc": "lead-long",
       "youtube": "ALNp_h8wyDA"
     }
+  },
+  "aio-taisaku-muryou-tool": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-05",
+      "keyword": "aio対策 無料ツール",
+      "queries": [
+        "aio対策 無料ツール"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "aws 無料枠",
+        "ai音声 作成"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
+  },
+  "clinic-kaigyou-shukyaku-junbi": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-05",
+      "keyword": "クリニック 開業 集客 準備",
+      "queries": [
+        "クリニック 開業 集客 準備",
+        "開業 集客 準備",
+        "クリニック 集客 準備",
+        "クリニック 開業 準備",
+        "クリニック 開業 集客"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "クリニック 開業",
+        "クリニック 集客",
+        "クリニック経営",
+        "開業 集客",
+        "開業準備",
+        "開業",
+        "クリニック 受付",
+        "クリニック マーケティング"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-11-05",
+      "sec": 47,
+      "title": "クリニックのHP、開業何週間前に公開？",
+      "youtube": "MTnesMNfKmg"
+    }
   }
 }
