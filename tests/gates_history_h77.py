@@ -410,7 +410,7 @@ def test_jobs_save_client_files_at_the_end():
     ps = (ROOT / "scripts" / "private_store.py").read_text(encoding="utf-8")
     check("取得の後に重ねて置き、見張りを入れる。送る前に作業場所の分を戻す",
           ("overlay_in()" in ps.split("def _after_fetch")[1][:400], "install_hook()" in ps.split("def _after_fetch")[1][:400],
-           "overlay_out(unstage=False)" in ps.split("def push")[1][:600]), (True, True, True))
+           "overlay_out(unstage=False)" in ps.split("def push")[1][:900]), (True, True, True))
 
 
 def test_private_push_fails_loudly_when_it_cannot_write():

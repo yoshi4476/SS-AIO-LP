@@ -743,6 +743,9 @@ jobs:
             echo "::warning::記事が増えていません。書き直します（$try/3）"
             # 書き直しの回は台帳が変わっている（1回目が語を「執筆中」にした等）。先に作ったブリーフは使わせない
             rm -f automation/logs/brief.txt
+            # 消したままにすると、AI は対象のサイトを知る手段が無い（$SITE_ID を含む Bash は拒否される）。
+            # 2026-11-05 のコーポレートの枠で別のサイトの記事を書き、機械が取り消して0本になった。ログには出さない
+            python scripts/site_brief.py "$SITE_ID" > automation/logs/brief.txt 2>&1 || true
             if [ "$try" = "3" ]; then
               echo "::error::3回試しても記事が増えませんでした"
               python scripts/hub_client.py error_log write \
@@ -1115,8 +1118,14 @@ jobs:
           done
           echo "$out"
           if echo "$out" | grep -q "DEPLOY_OK=no"; then
-            echo "::warning::本番が手元より古い状態です。次のデプロイまで反映されません"
-            echo "要対応: 本番が手元より古い（次のデプロイまで反映されません）" >> automation/logs/findings.txt
+            if [ "${{ steps.site.outputs.own }}" = "True" ]; then
+              echo "::warning::本番が手元より古い状態です。次のデプロイまで反映されません"
+              echo "要対応: 本番が手元より古い（次のデプロイまで反映されません）" >> automation/logs/findings.txt
+            else
+              # 自前でビルドしない枠は、この回の push で動く deploy.yml がこの後に配る。ここで見ると必ず差があり、
+              # 数分後に埋まる差を要対応と知らせていた（2026-11-06）。本当に残れば日次の監査（check_deploy）が知らせる
+              echo "この枠の変更は、この後の deploy.yml が本番へ配ります"
+            fi
           fi
           # 浮いた枠で書き直す記事が無かった回（原稿が1本も変わっていない）は、配信先へ何も送っていないので
           # 届いたかを確かめる記事が無い。確かめに行くと来ないビルドを最長3分待っていた（2026-10-10 補助金の枠 6）

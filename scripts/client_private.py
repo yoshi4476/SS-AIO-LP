@@ -143,6 +143,8 @@ def owner_of_url(url):
 
 def owner_of_slug(slug):
     p = ROOT / "articles" / f"{slug}.md"
+    if not p.is_file():
+        p = ROOT / "articles" / "_held" / f"{slug}.md"
     try:
         m = re.search(r"^category:\s*[\"']?([^\"'\n]+?)[\"']?\s*$", p.read_text(encoding="utf-8-sig"), re.M)
     except OSError:

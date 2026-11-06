@@ -532,6 +532,13 @@ def main():
     elif cmd == "all":
         for k in all_kw():
             print(f"{k['site']:10s} {k['status']:6s} {k['keyword']}")
+    elif cmd == "retire":
+        # 使い方: hub_client.py retire <site> <語> <理由...>（他社の名前を探す語など、記事が答えにならない語を飛ばす。
+        # 飛ばす道具が無く、書けない語で枠が空になり、次の回も同じ語が出た。2026-11-05）
+        if len(sys.argv) < 5:
+            raise SystemExit("使い方: python scripts/hub_client.py retire <site> <語> <理由>")
+        r = retire_kw(site, [sys.argv[3]], " ".join(sys.argv[4:]))
+        print(f"KW_RETIRE={'ok' if r and r.get('ok') else 'no'} {(r or {}).get('retired', 0)}語")
     elif cmd == "error_sync":
         # 使い方: hub_client.py error_sync <phase> <TODOを1行ずつ書いたファイル>
         from pathlib import Path as _P
@@ -550,6 +557,7 @@ def main():
     else:
         raise SystemExit(
             "使い方: python scripts/hub_client.py [status|next|all] [site]\n"
+            "        python scripts/hub_client.py retire <site> <語> <理由>\n"
             "        python scripts/hub_client.py error_log <phase> <message>")
 
 

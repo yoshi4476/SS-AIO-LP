@@ -937,10 +937,12 @@ def shelve(slug, path=None):
     src = ARTICLES / f"{slug}.md"
     if holds < SHELVE_AFTER or not src.is_file() or unused_materials(slug):
         return False
+    # 社は移す前に決める。移した後は原稿から読めず、社が空の行としてお客様の slug が公開側の記録に載った（2026-11-03 の2行）
+    site = site_of(slug)
     dst = ARTICLES / SHELF / f"{slug}.md"
     dst.parent.mkdir(parents=True, exist_ok=True)
     src.replace(dst)
-    record({"site": site_of(slug), "slug": slug, "action": "shelve", "state": "shelved"})
+    record({"site": site, "slug": slug, "action": "shelve", "state": "shelved"})
     return True
 
 

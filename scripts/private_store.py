@@ -306,7 +306,10 @@ def push(message, tries=3):
     tok = _token()
     if tok:
         _git("config", "--local", "http.https://github.com/.extraheader", _header(tok))
-    overlay_out(unstage=False)         # 作業場所で書いた・直したお客様の社の記事・画像・台本も残す
+    # 作業場所で書いた・直したお客様の社の記事・画像・台本も残す。手元の作業場所の写しは古いことがあるので CI でだけ行う
+    # （2026-11-06 手元の --push が古い原稿14本で置き場を上書きし、1分後に戻した）
+    if os.environ.get("GITHUB_ACTIONS"):
+        overlay_out(unstage=False)
     _git("add", "-A")
     if _git("diff", "--cached", "--quiet").returncode == 0:
         # 書くものが無い回も、書けるかだけは確かめる。書けないまま原稿を書いた回は、その原稿がランナーと一緒に消える。
