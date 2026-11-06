@@ -56,6 +56,8 @@ quality_attempts: 3
 
 **買取店の集客とは、売りたい品を持つ人に、自店を査定先の候補に入れてもらう取り組みです。**売り手は「金 買取 地域名」のように、品目と地域を組み合わせて探します。
 
+関連する内容として[不動産の集客アイデア9つ](/aio/fudousan-shukyaku-idea/)も公開しています。
+
 <figure><img src="/images/kaitoriten-shukyaku/keiro.png" alt="買取の受け方ごとの探され方: 店頭買取は品目と地域名、出張買取は品目と出張と地域名、宅配買取は品目と宅配で全国から探す" loading="lazy"><figcaption>買取の受け方ごとの探され方</figcaption></figure>
 
 <div class="definition-box"><span class="term">買取店の集客とは</span>、売りたい品を持つ人が検索やAIで店を探したとき、自店の品目ページや店舗情報が候補として表示されるように整え、査定の依頼につなげることです。</div>

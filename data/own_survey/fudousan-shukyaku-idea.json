@@ -1,0 +1,107 @@
+{
+ "v": 2,
+ "slug": "fudousan-shukyaku-idea",
+ "ok": true,
+ "date": "2026-11-06",
+ "questions": [
+  "不動産 集客 アイデアについて教えてください",
+  "不動産 集客 アイデアについて、「不動産の集客アイデアは「調べる質問」と「探す質問」で分ける」を教えてください",
+  "不動産 集客 アイデアについて、「調べる質問に答える4つのアイデア」を教えてください",
+  "不動産 集客 アイデアについて、「探す質問で選ばれる3つのアイデア」を教えてください",
+  "不動産 集客 アイデアについて、「続けて回す2つのアイデア」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "不動産の集客アイデアは「調べる質問」と「探す質問」で分ける",
+   "words": [
+    "質問",
+    "質問"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "調べる質問に答える4つのアイデア",
+   "words": [
+    "質問"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "探す質問で選ばれる3つのアイデア",
+   "words": [
+    "質問"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "どのアイデアから始めるかは業態と検索順位で決める",
+   "words": [
+    "検索順位",
+    "業態"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "集客アイデアの効果が見えるまでの期間",
+   "words": [
+    "期間"
+   ],
+   "hits": 1,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "ai.7senses.co.jp": "self",
+  "asok-inc.co.jp": "peer",
+  "athome.co.jp": "portal",
+  "biz.homes.jp": "portal",
+  "biz.service.ntt-east.co.jp": "peer",
+  "digital-marketing.jp": "peer",
+  "es-service.net": "peer",
+  "facilo.jp": "peer",
+  "grannet.co.jp": "peer",
+  "hankyo.mugenkaitaku.com": "peer",
+  "ipeinc.jp": "peer",
+  "kamei-yes1.com": "peer",
+  "knowledge-hd.co.jp": "peer",
+  "leadcreation.co.jp": "peer",
+  "mirai-style.net": "peer",
+  "n-create.co.jp": "peer",
+  "property-force.jp": "peer",
+  "rengotai.rals.co.jp": "peer",
+  "room.goodstyle.co.jp": "peer",
+  "showtime24.co.jp": "peer",
+  "simplique.jp": "peer",
+  "solution.chintai.net": "peer",
+  "support.google.com": "peer",
+  "tcd-theme.com": "peer",
+  "tms-partners.com": "media",
+  "vertexaisearch.cloud.google.com": "peer",
+  "youtube.com": "video",
+  "zennichi.or.jp": "public"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 6,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 6,
+  "専門家への相談": 3
+ },
+ "chars": 15865,
+ "claims": [
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『検索順位』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『期間』に触れたものは1件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは費用の金額（◯円）は2件、注意点・失敗・リスクは3件、専門家への相談は3件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは28件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが1件、ポータル・比較サイトが2件、動画・SNS・ブログが1件でした。"
+ ]
+}

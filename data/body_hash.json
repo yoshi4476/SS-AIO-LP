@@ -144,7 +144,7 @@
 "modified": "2026-08-13"
 },
 "aio-taisaku-jibunde": {
-"hash": "e9d1850be8372661f248c7bf4ea52452",
+"hash": "7d609fa991ca86df045425ed5e3662fe",
 "modified": "2026-08-14"
 },
 "aio-taisaku-keisoku-houhou": {
@@ -200,7 +200,7 @@
 "modified": "2026-08-13"
 },
 "biyoushitsu-shukyaku-idea": {
-"hash": "75df0855aa407f37da043c41cfb5f4c2",
+"hash": "9f5659c1b771fd1569ca923a9019fc03",
 "modified": "2026-09-01"
 },
 "btob-aio-taisaku-kaisha": {
@@ -404,8 +404,12 @@
 "modified": "2026-10-31"
 },
 "fudousan-shukyaku-houhou": {
-"hash": "e0cfd56e10477b245c0284989e5b7028",
+"hash": "b1c46ef3c23d9b51157aeb30884828f7",
 "modified": "2026-09-12"
+},
+"fudousan-shukyaku-idea": {
+"hash": "fe78d81b4267fafea69c47eb4a678e47",
+"modified": "2026-11-06"
 },
 "fudousan-web-shukyaku": {
 "hash": "61e285d24678c3572bb15f169ce86a6b",
@@ -468,7 +472,7 @@
 "modified": "2026-08-07"
 },
 "kaitoriten-shukyaku": {
-"hash": "f3e063c6d582944365f7b987f5d364a3",
+"hash": "fe5b1a9dc518dcf308c986645d75b524",
 "modified": "2026-11-06"
 },
 "kengakukai-shukyaku-hoho": {
