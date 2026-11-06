@@ -28,7 +28,7 @@ STOP = {"aio", "llmo", "seo", "meo", "geo", "ai", "対策", "方法", "やり方
         "最新", "完全", "解説", "初心者", "向け", "できる", "する", "ない", "無料", "ツール",
         # 題名に入りやすい一般語（施策・ステップ・原因…）は主題ではない。kw+title で試すと
         # 「施策:24本」のような意味の無い束ができた（実測）
-        "検索", "施策", "ステップ", "基準", "原因", "要素", "視点", "反響", "google", "ng", "対応", "手法", "効果"}
+        "検索", "施策", "ステップ", "基準", "原因", "要素", "視点", "反響", "google", "ng", "対応", "手法", "効果", "上位"}
 
 
 def _industry_words():
@@ -80,12 +80,13 @@ def build(site_id, metas):
     """metas: build.py の all_metas（title, slug, keyword, category, date, chars?）"""
     by = {}
     for m in metas:
-        for t in set(_terms(m.get("keyword") or m.get("title", ""))):
+        # set の順は実行ごとに変わる。本数が同じ主題の勝ち負けが入れ替わり、ページの URL が工程ごとに行き来した（2026-11-06）
+        for t in dict.fromkeys(_terms(m.get("keyword") or m.get("title", ""))):
             by.setdefault(t, []).append(m)
     imp = _imp(site_id)
     groups = []
     used = set()
-    for t, ms in sorted(by.items(), key=lambda kv: -len(kv[1])):
+    for t, ms in sorted(by.items(), key=lambda kv: (-len(kv[1]), kv[0])):
         ms = [m for m in ms if m["slug"] not in used]
         if len(ms) < MIN:
             continue

@@ -114,3 +114,35 @@ def test_local_push_does_not_send_stale_articles():
             PS.os.environ.pop("GITHUB_ACTIONS", None)
             if env is not None:
                 PS.os.environ["GITHUB_ACTIONS"] = env
+
+
+def test_topic_pages_do_not_flip_between_runs():
+    import subprocess
+    print("\n■ 話題のページ: 本数が同じ主題でも、実行ごとに名前と URL が入れ替わらない")
+    code = ("import sys, json; sys.path.insert(0, 'scripts'); import topics as T;"
+            "ms=[{'slug':f's{i}','title':'t','keyword':'甲乙丙 丁戊己 庚辛壬','date':'2026-11-01'} for i in range(3)];"
+            "print(json.dumps([g['name'] for g in T.build('none', ms)], ensure_ascii=False))")
+    got = set()
+    for seed in ("1", "2", "3", "4", "5", "6"):
+        r = subprocess.run([sys.executable, "-c", code], cwd=ROOT, capture_output=True, encoding="utf-8",
+                           env={**__import__("os").environ, "PYTHONHASHSEED": seed, "PYTHONIOENCODING": "utf-8"})
+        got.add(r.stdout.strip())
+    check("6つの種で同じ結果", sorted(got), ['["丁戊己"]'])
+
+
+def test_publish_is_decided_by_the_live_page():
+    import verify_publish as V
+    print("\n■ 公開の確認: ビルドの確認が落ちても、本番に記事が出ていれば公開として記録する")
+    saved = V.sites_mod.load, V.sites_mod.article_url, V.wait_build, V.wait_live, V._front
+    try:
+        V.sites_mod.load = lambda s: {"type": "external-md", "repo": "o/zz", "branch": "main"}
+        V.sites_mod.article_url = lambda c, m: "https://zz.example/a"
+        V._front = lambda slug, key: ""
+        V.wait_build = lambda *a, **k: (False, "ビルド失敗")
+        V.wait_live = lambda *a, **k: (True, "公開を確認")
+        ok, msgs = V.verify("zz", "a")
+        check("ビルド失敗・記事あり → 公開（失敗も文に残す）", (ok, msgs), (True, ["ビルド失敗", "公開を確認"]))
+        V.wait_live = lambda *a, **k: (False, "公開が確認できません")
+        check("ビルド失敗・記事なし → 未公開", V.verify("zz", "a")[0], False)
+    finally:
+        V.sites_mod.load, V.sites_mod.article_url, V.wait_build, V.wait_live, V._front = saved

@@ -140,8 +140,8 @@ def verify(site_id, slug, since_iso=None, build_timeout=BUILD_TIMEOUT, live_time
     if cfg["type"] not in ("self-static", "ftp") and cfg.get("repo"):
         ok, m = wait_build(cfg["repo"], cfg.get("branch", "main"), since, build_timeout)
         msgs.append(m)
-        if not ok:
-            return False, msgs
+        # ビルドの確認が落ちても（通信の時間切れ・次の push での取り消し）記事が本番に出ていることがある。
+        # ここで止めると台帳が「未着手」のまま残り、内部リンクも送られなかった（2026-11-06）。公開かどうかは本番の記事で決める
     ok, m = wait_live(url, live_timeout, _front(slug, 'title'))
     msgs.append(m)
     return ok, msgs
