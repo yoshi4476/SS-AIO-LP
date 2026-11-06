@@ -1,0 +1,111 @@
+{
+ "v": 2,
+ "slug": "inshokuten-shukyaku-daikou",
+ "ok": true,
+ "date": "2026-11-07",
+ "questions": [
+  "飲食店 集客代行について教えてください",
+  "飲食店 集客代行について、「飲食店の集客代行とは？運用を任せられる作業の範囲」を教えてください",
+  "飲食店 集客代行について、「AIは飲食店の質問に何を出典に答えるか」を教えてください",
+  "飲食店 集客代行について、「集客代行に任せる作業と店が手放さない3つの作業」を教えてください",
+  "飲食店 集客代行について、「集客代行の効果が検索結果と順位に出るまでの期間」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "飲食店の集客代行とは？運用を任せられる作業の範囲",
+   "words": [
+    "運用",
+    "作業"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "AIは飲食店の質問に何を出典に答えるか",
+   "words": [
+    "AI",
+    "質問",
+    "出典"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "集客代行に任せる作業と店が手放さない3つの作業",
+   "words": [
+    "作業",
+    "作業"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "集客代行の効果が検索結果と順位に出るまでの期間",
+   "words": [
+    "検索結果",
+    "順位",
+    "期間"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "代行会社に依頼する前に店で今日やること",
+   "words": [
+    "代行会社"
+   ],
+   "hits": 5,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "4byss.co.jp": "peer",
+  "atoz-design.jp": "peer",
+  "colet-lab.jp": "peer",
+  "coosy.co.jp": "peer",
+  "developers.google.com": "peer",
+  "gmo-app.jp": "media",
+  "gmotech.jp": "peer",
+  "haemorikikaku.com": "peer",
+  "helentech.jp": "peer",
+  "help.openai.com": "peer",
+  "kigyolog.com": "portal",
+  "liberalhearts.co.jp": "peer",
+  "lp.merise-corp.com": "peer",
+  "matoka.co.jp": "peer",
+  "meetsmore.com": "portal",
+  "note.com": "video",
+  "ntttp-dlead.com": "peer",
+  "onamae.com": "peer",
+  "ppr-do.co.jp": "peer",
+  "pro-marketing.jp": "media",
+  "prtimes.jp": "media",
+  "rakubo.co.jp": "peer",
+  "shopowner-support.net": "media",
+  "stabble.biz": "peer",
+  "storepad.jp": "media",
+  "support.google.com": "peer",
+  "tw-dx.com": "video",
+  "vertexaisearch.cloud.google.com": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 2,
+  "専門家への相談": 0
+ },
+ "chars": 17932,
+ "claims": [
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え8件のうち、『AI』に触れたものは2件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは専門家への相談は0件、費用の金額（◯円）は2件、進め方の手順は2件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは29件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが5件、ポータル・比較サイトが2件、動画・SNS・ブログが3件でした。"
+ ]
+}

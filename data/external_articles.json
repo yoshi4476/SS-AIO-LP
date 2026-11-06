@@ -1,5 +1,5 @@
 {
-  "fetched": "2026-10-30",
+  "fetched": "2026-11-07",
   "sites": {
     "corporate": [
       {
@@ -41,6 +41,76 @@
         "url": "https://corp.7senses.co.jp/blog/theme/kojin",
         "slug": "kojin",
         "title": "個人事業主・小規模事業者"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/gyomu-itaku-keihi-seisan",
+        "slug": "gyomu-itaku-keihi-seisan",
+        "title": "経費精算は業務委託先にどう払う？源泉漏れを防ぐ3つの分かれ目"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/digital-bpo-gaichuu",
+        "slug": "digital-bpo-gaichuu",
+        "title": "デジタルBPOの外注で失敗する3つの準備不足｜渡すデータと権限"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/seikyusho-yuso-yarikata",
+        "slug": "seikyusho-yuso-yarikata",
+        "title": "請求書の郵送のやり方は5手順｜クリックポストNGと金曜投函の落とし穴"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kichodaiko-plan-erabikata",
+        "slug": "kichodaiko-plan-erabikata",
+        "title": "記帳代行プランを仕訳数だけで選ぶのはNG｜合うプランを決める4つの条件"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/invoice-keiri-system",
+        "slug": "invoice-keiri-system",
+        "title": "インボイス制度の経理システムで残る3つの問題｜70%控除への切替と選び方"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-kitei-chigai",
+        "slug": "keiri-kitei-chigai",
+        "title": "経理規程と経理規定の違いは？決めないと仕訳がぶれる3つの区分"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keihi-seisan-fusei-jirei",
+        "slug": "keihi-seisan-fusei-jirei",
+        "title": "経費精算の不正事例6つ｜見落とす会社の共通点と見つけた後の順番"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kichodaiko-zeirishi-igai",
+        "slug": "kichodaiko-zeirishi-igai",
+        "title": "記帳代行を税理士以外に頼む落とし穴｜申告の受け渡しで決める4つのこと"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/invoice-gaichuuhi-menzei-taiou",
+        "slug": "invoice-gaichuuhi-menzei-taiou",
+        "title": "インボイス制度の外注費｜免税の外注先に一方的な値下げはNG・対応3つ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/seikyusho-shiwake",
+        "slug": "seikyusho-shiwake",
+        "title": "請求書の仕訳で金額が合わない5つの場面｜手数料・値引き・相殺の処理"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kichodaiko-kaikei-jimusho",
+        "slug": "kichodaiko-kaikei-jimusho",
+        "title": "記帳代行を会計事務所が外に出す落とし穴｜守秘と監督で確かめる5点"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/getsuji-kessan-bunseki-houhou",
+        "slug": "getsuji-kessan-bunseki-houhou",
+        "title": "月次決算の分析方法｜3つの比較と締め前の数字で判断するNG"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/bpo-keihi-sakugen",
+        "slug": "bpo-keihi-sakugen",
+        "title": "BPOの経費削減が外れる3つの条件｜減る費目と試算のしかた"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/invoice-seikyusho-template-muryou",
+        "slug": "invoice-seikyusho-template-muryou",
+        "title": "インボイス制度の請求書テンプレート無料版で漏れる3場面｜返品・8%混在・免税"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/kicho-seikyusho",
@@ -216,11 +286,6 @@
         "url": "https://corp.7senses.co.jp/blog/getsuji-nenji-kessan-chigai",
         "slug": "getsuji-nenji-kessan-chigai",
         "title": "月次決算と年次決算の違いは？年次にだけ残る5つの作業"
-      },
-      {
-        "url": "https://corp.7senses.co.jp/blog/middle-office-backoffice-chigai",
-        "slug": "middle-office-backoffice-chigai",
-        "title": "ミドルオフィスとバックオフィスの違い｜外注9社で締めが12日早まった例"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/getsuji-shihanki-kessan-chigai",
@@ -545,7 +610,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-kanjoukamoku",
         "slug": "kichodaiko-hiyou-kanjoukamoku",
-        "title": "記帳代行費用の勘定科目｜外注費と支払手数料の使い分け【2026年】"
+        "title": "登録番号未確認の全額控除はNG｜記帳代行費用の勘定科目"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/keihi-seisan-bpo",
@@ -555,7 +620,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata",
         "slug": "gaichuuhi-seikyuusho-kakikata",
-        "title": "外注費の請求書の書き方｜記載項目6つと2026年の変更点"
+        "title": "外注費の請求書の書き方｜源泉徴収漏れなどNG例と必須6項目"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-yarikata-shoshinsha",

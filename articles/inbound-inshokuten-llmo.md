@@ -57,6 +57,8 @@ quality_attempts: 3
 
 **インバウンド飲食店のLLMOは、外国語で相談するAIの答えに自店の事実を使わせる取り組みです。**
 
+関連する内容として[飲食店の集客代行で丸投げはNG](/aio/inshokuten-shukyaku-daikou/)も公開しています。
+
 関連する内容として[クリニックの地域名検索で上位に出ない5つの原因と直す順番](/aio/clinic-chiikimei-kensaku-joui/)も公開しています。
 
 関連する内容として[歯科医院の地域名検索で上位に出る方法](/seo/shika-chiikimei-kensaku-joui/)も公開しています。

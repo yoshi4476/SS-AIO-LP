@@ -56,6 +56,8 @@ quality_attempts: 3
 
 **訪日客のAI検索とは、訪日客がGoogleで店を調べたとき、検索結果の上に出るAIの要約と、AIと対話するAIモードのことです。**
 
+関連する内容として[飲食店の集客代行で丸投げはNG](/aio/inshokuten-shukyaku-daikou/)も公開しています。
+
 <div class="definition-box"><span class="term">AI Overview（AIによる概要）とは</span>、Google検索の結果の上に、AIが複数のページをもとに作った答えと、その出典のリンクを表示する機能です。</div>
 
 訪日客は、旅先で「yakiniku near Namba」のような英語の語をGoogleに入れます。その答えの出典に自店の英語ページが入れば、店名とリンクが訪日客の目に入ります。
