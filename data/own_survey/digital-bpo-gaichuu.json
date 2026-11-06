@@ -1,0 +1,119 @@
+{
+ "v": 2,
+ "slug": "digital-bpo-gaichuu",
+ "ok": true,
+ "date": "2026-11-06",
+ "questions": [
+  "デジタルbpo 外注について教えてください",
+  "デジタルbpo 外注について、「デジタルBPOとは？紙を送る外注との違い」を教えてください",
+  "デジタルbpo 外注について、「デジタルBPOに切り替えた会社で作業時間はどう変わったか」を教えてください",
+  "デジタルbpo 外注について、「外注の前にそろえる3つのデータと権限」を教えてください",
+  "デジタルbpo 外注について、「デジタルBPOの外注で失敗する3つの準備不足」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "デジタルBPOに切り替えた会社で作業時間はどう変わったか",
+   "words": [
+    "作業時間"
+   ],
+   "hits": 3,
+   "of": 8
+  },
+  {
+   "topic": "外注の前にそろえる3つのデータと権限",
+   "words": [
+    "データ",
+    "権限"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "デジタルBPOの外注で失敗する3つの準備不足",
+   "words": [
+    "準備不足"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "外注した後、毎月社内に残る仕事",
+   "words": [
+    "毎月社内",
+    "仕事"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "税理士法",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "4stella.co.jp": "peer",
+  "adecco.com": "peer",
+  "akin-ai.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "biz.mxmobiling.co.jp": "peer",
+  "canon.jp": "peer",
+  "career-innovation.com": "peer",
+  "cloudbuddy.biz": "peer",
+  "dx.worksid.co.jp": "peer",
+  "fastaccounting.jp": "peer",
+  "goonextion.co.jp": "peer",
+  "grop.co.jp": "peer",
+  "hitori-dx.com": "video",
+  "infinicore.jp": "peer",
+  "iri-group.jp": "peer",
+  "issoh.co.jp": "peer",
+  "it-seibishi.or.jp": "peer",
+  "kanri-pro.com": "peer",
+  "kantec.ne.jp": "peer",
+  "keihi.com": "peer",
+  "koushin.co.jp": "peer",
+  "kpmg.com": "peer",
+  "lp.eas.work": "peer",
+  "lp.pal-style.co.jp": "peer",
+  "mama-sun.com": "peer",
+  "members.co.jp": "peer",
+  "note.com": "video",
+  "ntt.com": "peer",
+  "nttdata-kansai.co.jp": "peer",
+  "onamae.com": "peer",
+  "persol-bd.co.jp": "peer",
+  "ppc.go.jp": "public",
+  "recoup-x.jp": "peer",
+  "service.icd.co.jp": "peer",
+  "sigmasoft.co.jp": "peer",
+  "solution.bell24.co.jp": "peer",
+  "tmj.jp": "peer",
+  "toukei.co.jp": "peer",
+  "trans-cosmos.co.jp": "peer",
+  "transcosmos.com": "peer",
+  "uptech.vn": "peer",
+  "vertexaisearch.cloud.google.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 6,
+  "専門家への相談": 0
+ },
+ "chars": 15373,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、国税庁の資料にある「税理士法」に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は0件、期間（◯か月・◯日など）は2件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは42件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが0件、動画・SNS・ブログが2件でした。"
+ ]
+}
