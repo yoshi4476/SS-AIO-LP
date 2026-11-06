@@ -52,6 +52,8 @@ quality_attempts: 3
 
 経費精算の不正は、金額を盛る・無いものを申請する・私的な支出を混ぜるの3系統に、手口が2つずつあります。
 
+近い論点を[経費精算は業務委託先にどう払う？](/blog/gyomu-itaku-keihi-seisan/)で扱っています。
+
 <figure><img src="/images/keihi-seisan-fusei-jirei/teguchi.png" alt="経費精算の不正6つの手口: 金額を盛る（交通費の水増し・領収書の書き換え）、無いものを申請する（カラ出張・架空の申請・同じ領収書の二重申請）、私的な支出を混ぜる（私的な飲食を交際費に・業務外の備品の購入）" loading="lazy"><figcaption>経費精算の不正6つの手口</figcaption></figure>
 
 <div class="definition-box"><span class="term">経費精算の不正とは</span>、社員が業務に使っていない支出や、実際より多い金額を、立替経費として会社に払い戻させる行為です。うっかりの誤りとは、同じ型をくり返すか、隠す手を加えているかで分かれます。</div>

@@ -1,0 +1,115 @@
+{
+ "v": 2,
+ "slug": "gyomu-itaku-keihi-seisan",
+ "ok": true,
+ "date": "2026-11-06",
+ "questions": [
+  "経費精算 業務委託について教えてください",
+  "経費精算 業務委託について、「業務委託先の経費精算は、社員の立替精算と何が違う？」を教えてください",
+  "経費精算 業務委託について、「委託先の経費を負担する型は、どう選ぶ？」を教えてください",
+  "経費精算 業務委託について、「交通費・宿泊費が源泉徴収の対象になる分かれ目はどこ？」を教えてください",
+  "経費精算 業務委託について、「立替金として精算するとき、インボイスはどう扱う？」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "業務委託先の経費精算は、社員の立替精算と何が違う？",
+   "words": [
+    "立替精算",
+    "社員"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "委託先の経費を負担する型は、どう選ぶ？",
+   "words": [
+    "委託先",
+    "経費"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "交通費・宿泊費が源泉徴収の対象になる分かれ目はどこ？",
+   "words": [
+    "源泉徴収",
+    "交通費",
+    "宿泊費",
+    "対象"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "立替金として精算するとき、インボイスはどう扱う？",
+   "words": [
+    "インボイス",
+    "立替金"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "自社で精算するか、経理代行に任せるか",
+   "words": [
+    "経理代行"
+   ],
+   "hits": 1,
+   "of": 10
+  },
+  {
+   "topic": "今日やること：契約書の経費の条項を確かめる",
+   "words": [
+    "契約書",
+    "経費",
+    "条項"
+   ],
+   "hits": 8,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "anamachigroup.com": "peer",
+  "backsimp.com": "peer",
+  "bunka.go.jp": "public",
+  "catalog.monex.co.jp": "media",
+  "crex-consulting.com": "peer",
+  "freee.co.jp": "peer",
+  "gyoumuitakukeiyakusho.com": "peer",
+  "jftc.go.jp": "public",
+  "kannaikaikei.jp": "peer",
+  "kb2.sbi-bs.co.jp": "peer",
+  "komondan.com": "peer",
+  "liginc.co.jp": "media",
+  "magazine.sokudan.work": "peer",
+  "nta.go.jp": "public",
+  "patpost.jp": "peer",
+  "persol-bd.co.jp": "peer",
+  "professional.mynavi.jp": "peer",
+  "remogu.jp": "peer",
+  "sanotax.info": "peer",
+  "search-advisors.freee.co.jp": "portal",
+  "takedacpta.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yokota-profession.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 2,
+  "専門家への相談": 1
+ },
+ "chars": 17120,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え10件のうち、『経理代行』に触れたものは1件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは期間（◯か月・◯日など）は0件、専門家への相談は1件、費用の金額（◯円）は2件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは23件で、公的機関・学会・業界団体が3件、ニュース・メディア・まとめが2件、ポータル・比較サイトが1件でした。"
+ ]
+}
