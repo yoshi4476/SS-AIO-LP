@@ -1417,5 +1417,55 @@
       "title": "クリニックのHP、開業何週間前に公開？",
       "youtube": "MTnesMNfKmg"
     }
+  },
+  "btob-aio-taisaku-kaisha": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-06",
+      "keyword": "btob向けaio対策のおすすめ会社は？",
+      "queries": [
+        "btob向けaio対策のおすすめ会社は？"
+      ],
+      "decision": "skip",
+      "suggestions": [],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
+  },
+  "kaitoriten-shukyaku": {
+    "site": "ai-lab",
+    "date": "2026-11-06",
+    "sec": 278,
+    "mp4": "automation/video/kaitoriten-shukyaku.mp4",
+    "nums": [
+      "1",
+      "10",
+      "2",
+      "28",
+      "3",
+      "4",
+      "41",
+      "6",
+      "96.2"
+    ],
+    "format": "duo",
+    "long": {
+      "date": "2026-11-06",
+      "keyword": "買取店 集客",
+      "queries": [
+        "買取店 集客"
+      ],
+      "decision": "make",
+      "term": "買取店 集客",
+      "title": "買取店 集客は何から始める？｜AI検索に選ばれる店の条件",
+      "reason": "YouTube のサジェストに「買取店 集客」が出ます"
+    },
+    "youtube": "3TDURXhbkWE",
+    "short": {
+      "date": "2026-11-06",
+      "sec": 43,
+      "title": "買取店の集客、なぜ失敗するの？",
+      "desc": "lead-long",
+      "youtube": "1W07C_rt-lg"
+    }
   }
 }
