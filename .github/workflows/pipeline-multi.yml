@@ -485,8 +485,17 @@ jobs:
           echo "BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
           # 道具の中から呼ぶ AI も、その社の分だけを置いて動かす（ほかのお客様の原稿・順位を読ませない）
           python scripts/private_store.py --scope "${{ steps.site.outputs.pub }}"
-          out=$(python scripts/auto_rewrite.py --write --kind spare --main-only --sites "${{ steps.site.outputs.id }}" \
-            --limit 1 --skip-recent 28 --tag spare-slot 2>&1) || true
+          if python scripts/quality_loop.py --low-scope "${{ steps.site.outputs.id }}"; then
+            # 表示の少ない記事から、公開前と同じ別工程の3観点で採点し、届かなければ直す（spare_scope: low_impression）
+            out=$(python scripts/quality_loop.py --rescore-auto 2 --sites "${{ steps.site.outputs.id }}" --budget-min 40 2>&1) || true
+            mkdir -p automation/logs
+            echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+            out="$out
+          SPARE_SLOT=quality-loop"
+          else
+            out=$(python scripts/auto_rewrite.py --write --kind spare --main-only --sites "${{ steps.site.outputs.id }}" \
+              --limit 1 --skip-recent 28 --tag spare-slot 2>&1) || true
+          fi
           python scripts/private_store.py --scope all
           echo "$out"
           r=$(echo "$out" | sed -n 's/^SPARE_SLOT=//p')

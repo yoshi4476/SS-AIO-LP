@@ -421,13 +421,57 @@ def test_published_articles_are_improved_in_place_never_unpublished():
         e.put("zz-pub2", _art("score: 92\n").replace("date: 2026-10-20", "date: 2026-01-01"))
         last_week = (QL.date.today() - QL.timedelta(days=QL.RESCORE_COOLDOWN_DAYS)).isoformat() + " 10:00"
         old_rows = [{**r, "at": last_week} for r in rows]
-        with patched(*e.patches(QL, [_answer()]), (QL, "rows", lambda path=None: old_rows)):
+        with patched(*e.patches(QL, [_answer()]), (QL, "rows", lambda path=None: old_rows), (QL, "_low_scope", lambda sid: False)):
             got = QL.rescore_targets(1)
         check("前に届かなかった記事が先", got, ["zz-pub"])
         # 2026-11-08: 分類が1本だけ違う記事が毎回先頭に来て、1週間に14回直され続けた。ほかの記事に順が回らなかった
-        with patched(*e.patches(QL, [_answer()]), (QL, "rows", lambda path=None: rows)):
+        with patched(*e.patches(QL, [_answer()]), (QL, "rows", lambda path=None: rows), (QL, "_low_scope", lambda sid: False)):
             got = QL.rescore_targets(1)
         check("直近に採点し直した記事は間を空け、次の記事へ回す", got, ["zz-pub2"])
+
+
+def test_low_impression_scope_rewrites_dormant_articles_first():
+    import article_health as AH
+    import auto_rewrite as AR
+    import pace
+    import quality_loop as QL
+    import sites as S
+    print("\n■ 表示の少ない記事から直す社（2026-11-08 運用者「直近リライトしたものを除き記事の精度を上げて」「本数を少なくした分リライトの数を増やして」）")
+    cfg = {"id": "ai-lab", "spare_slot": "rewrite_main", "spare_scope": QL.LOW_SCOPE, "rescore_week_cap": 21}
+    health = {"zz-low": "dormant", "zz-fall": "falling", "zz-weak": "weak", "zz-grow": "growing",
+              "zz-new": "young", "zz-done": "dormant", "zz-qual": "dormant"}
+    with tempfile.TemporaryDirectory() as d:
+        e = Env(d)
+        for s in health:
+            e.put(s, _art("score: 92\n"))
+        old = (QL.date.today() - QL.timedelta(days=QL.LOW_SKIP_RECENT_DAYS)).isoformat() + " 10:00"
+        near = (QL.date.today() - QL.timedelta(days=QL.LOW_SKIP_RECENT_DAYS - 1)).isoformat() + " 10:00"
+        rows = [{"at": old, "site": "ai-lab", "slug": "zz-new", "mode": "new", "action": "pass", "state": "passed", "total": 86},
+                {"at": near, "site": "ai-lab", "slug": "zz-qual", "mode": "rescore", "action": "score", "total": 86}]
+        low = patched(*e.patches(QL, [_answer()]), (QL, "rows", lambda path=None: rows), (S, "load", lambda sid: cfg),
+                      (QL, "control", lambda s, month=None: False),
+                      (AH, "of", lambda s, sid=None, m=None: health[s]),
+                      (AH, "protected", lambda s, kind=None, site=None: health[s] == "growing"),
+                      (AR, "recently_touched", lambda days, log=None, today=None: {"zz-done"} if days == QL.LOW_SKIP_RECENT_DAYS else set()))
+        with low:
+            got = QL.rescore_targets(5)
+            cap = QL.week_cap("ai-lab")
+        check("表示の少ない記事 → 落ちている → 弱い の順。直近28日に直した記事と伸びている記事は外す",
+              got, ["zz-low", "zz-fall", "zz-weak", "zz-new"])
+        check("週の上限は社ごとに変えられる", cap, 21)
+    with patched((pace, "_site", lambda sid: cfg), (pace, "signal_quota", lambda sid: 2), (pace, "setting", lambda sid: 1)):
+        check("浮いた枠の理由の文", "表示の少ない記事" in pace.slot("ai-lab", 1)[1], True)
+    for sid in ("ai-lab", "corporate"):
+        c = json.loads((ROOT / "sites" / f"{sid}.json").read_text(encoding="utf-8"))
+        check(f"{sid}: 新しい記事1本・浮いた枠は表示の少ない記事の精度を上げる・週21本まで",
+              (c.get("daily_articles"), c.get("spare_slot"), c.get("spare_scope"), c.get("rescore_week_cap")),
+              (1, "rewrite_main", QL.LOW_SCOPE, 21))
+    wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    a = wf.index("- name: 浮いた枠：主力の記事を1本書き直す")
+    b = wf.index("- name: 浮いた枠：触ってはいけない場所を戻す")
+    step = wf[a:b]
+    check("浮いた枠: 表示の少ない記事の社は別工程の採点で直す（ほかの社は今までどおり）",
+          ("--low-scope" in step, "quality_loop.py --rescore-auto 2" in step, "auto_rewrite.py --write --kind spare" in step), (True, True, True))
 
 
 def test_client_slugs_are_masked_and_rows_go_private():

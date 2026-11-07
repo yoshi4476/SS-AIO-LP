@@ -55,6 +55,9 @@ NEAR_AXIS = (R.PASS_EACH - 2, R.floor("originality") + 4)        # 1軸がこの
 STALE_DAYS = 3              # 改善中がこれより長い記事は要対応
 PASS_SHARE = 0.9            # 直近28日で「2回以内の直しで通った」割合の下限
 RESCORE_PER_SITE = 4        # 週次の採点し直し（社ごと。sites/<id>.json の quality_rescore で変えられる）
+LOW_SCOPE = "low_impression"   # sites/<id>.json の spare_scope。表示の少ない記事から精度を上げる（2026-11-08 運用者の決定）
+LOW_FIRST = {"dormant": 0, "falling": 1, "weak": 2}   # article_health の分類ごとの順。それ以外は後
+LOW_SKIP_RECENT_DAYS = 28   # effect_ab・rewrite_rollback が前後28日で比べるので、その間は重ねて直さない
 RESCORE_COOLDOWN_DAYS = 7   # 採点し直した記事に次の順が回るまでの日数（間を空けないと、優先の高い1本を毎回直し続ける）
 # 機械だけが書く項目。採点に渡す写しからは外す（書かれた点数に採点が引きずられない）
 MACHINE_KEYS = ("score", "score_breakdown", "quality_state", "quality_since", "quality_attempts")
@@ -1057,16 +1060,28 @@ def control(slug, month=None):
     return int(hashlib.md5(f"{slug}@{month}".encode("utf-8")).hexdigest(), 16) % 5 == 0
 
 
+def _low_scope(sid):
+    import sites as S
+    try:
+        return (S.load(sid) or {}).get("spare_scope") == LOW_SCOPE
+    except Exception:  # noqa: BLE001  読めなければ今までの順
+        return False
+
+
 def rescore_targets(per_site=None, sites=(), path=None):
     """公開済みの記事の採点し直し: 社ごとに per_site 本。前に届かなかった記事を点の低い順に、次に一度も採点していない
     記事を、公開後の抜き取り採点の点が低い順（点が無ければ公開の古い順）に。よく読まれている記事（10位以内でクリックあり）は
     後回しにし、対照群（月ごとに5本に1本）は触らない（一気に直したときの順位の揺れと、効果を比べられなくなることを防ぐ）"""
     import sites as S
-    seen, last_total, recent = {}, {}, set()
+    seen, last_total, recent, recent_low = {}, {}, set(), set()
     since = (date.today() - timedelta(days=RESCORE_COOLDOWN_DAYS)).isoformat()
+    since_low = (date.today() - timedelta(days=LOW_SKIP_RECENT_DAYS)).isoformat()
     for r in rows(path):
-        if r.get("mode") == "rescore" and r.get("action") == "score" and str(r.get("at", ""))[:10] > since:
-            recent.add(r.get("slug"))
+        if r.get("mode") == "rescore" and r.get("action") == "score":
+            if str(r.get("at", ""))[:10] > since:
+                recent.add(r.get("slug"))
+            if str(r.get("at", ""))[:10] > since_low:
+                recent_low.add(r.get("slug"))
         if r.get("slug") and r.get("state") in ("passed", "improving") and r.get("action") in ("pass", "hold"):
             # 85〜89点で合格した記事は、目標の90点まで直す対象に残す（PDCA。2026-10-21）
             low = r["state"] == "passed" and (r.get("total") or 0) < R.TARGET
@@ -1076,12 +1091,20 @@ def rescore_targets(per_site=None, sites=(), path=None):
     audit = _audit_scores()
     read_well = {}
     by_site = {}
+    low_sites = {}
     for s in _articles():
         m = meta_of(read(s))
         if s in recent or not R.gate_ok(m) or m.get("noindex"):
             continue
         sid = site_of(s)
         if sites and sid not in sites:
+            continue
+        if sid not in low_sites:
+            low_sites[sid] = _low_scope(sid)
+            if low_sites[sid]:
+                import auto_rewrite as AR
+                recent_low |= AR.recently_touched(LOW_SKIP_RECENT_DAYS)
+        if low_sites[sid] and s in recent_low:
             continue
         rank = 0 if seen.get(s) == "improving" else 1 if s not in seen else 2
         if rank == 2 or (rank == 1 and control(s)):
@@ -1096,7 +1119,8 @@ def rescore_targets(per_site=None, sites=(), path=None):
             continue
         busy = any(u.endswith(f"/{s}") for u in read_well[sid])
         score = last_total.get(s, 100) if rank == 0 else audit.get(s, 100)
-        by_site.setdefault(sid, []).append((rank, busy, AH.ORDER.get(health, 2), score, str(m.get("date") or ""), s))
+        first = LOW_FIRST.get(health, len(LOW_FIRST)) if low_sites[sid] else rank
+        by_site.setdefault(sid, []).append((first, busy, AH.ORDER.get(health, 2), score, str(m.get("date") or ""), s))
     out = []
     for sid, items in sorted(by_site.items()):
         n = RESCORE_PER_SITE if per_site is None else per_site
@@ -1129,6 +1153,14 @@ def auto_ready(path=None, today=None, days=14):
     return ok, len(passed), len(scored)
 
 
+def week_cap(sid):
+    import sites as S
+    try:
+        return int((S.load(sid) or {}).get("rescore_week_cap", RESCORE_WEEK_CAP))
+    except Exception:  # noqa: BLE001
+        return RESCORE_WEEK_CAP
+
+
 def week_done(sid, path=None, today=None):
     """この7日に公開済みの記事として採点し直した本数（社ごと）"""
     today = today or date.today()
@@ -1144,7 +1176,7 @@ def auto_targets(n, sites=(), path=None):
         return []
     out = []
     for s in rescore_targets(n, sites, path):
-        if week_done(site_of(s), path) < RESCORE_WEEK_CAP:
+        if week_done(site_of(s), path) < week_cap(site_of(s)):
             out.append(s)
     return out
 
@@ -1236,7 +1268,10 @@ def main(argv=None):
                     help="この分数を超えたら次の採点・直しを始めない（省略=無制限。0以下=採点せず印だけ付ける）")
     ap.add_argument("--scope", default="", help="範囲（own・社の公開の id）。その範囲の社の記事だけ（救済の範囲ごとの回）")
     ap.add_argument("--rounds", type=int, default=ROUNDS, help="1本あたり1回の実行で直す回数")
+    ap.add_argument("--low-scope", default="", metavar="SITE", help="その社が表示の少ない記事から直す設定なら終了コード0（浮いた枠が呼ぶ）")
     a = ap.parse_args(argv)
+    if a.low_scope:
+        return 0 if _low_scope(a.low_scope) else 1
     if a.report:
         return report()
     sites = parse_sites(a.sites)

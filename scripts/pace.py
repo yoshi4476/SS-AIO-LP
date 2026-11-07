@@ -139,7 +139,8 @@ def slot(sid, rank):
         why = "手動による対策" if (_manual().get(sid) or {}).get("quota") is not None else "量産の兆候"
         return "skip", f"今週1日{sig}本（{why}。python scripts/pace.py で理由を確認）"
     if _site(sid).get("spare_slot") == SPARE_REWRITE:
-        what = "表示が出始めた記事" if _site(sid).get("spare_scope") == "emerging" else "主力の記事"
+        scope = _site(sid).get("spare_scope")
+        what = {"emerging": "表示が出始めた記事", "low_impression": "表示の少ない記事"}.get(scope, "主力の記事")
         return "rewrite", f"新しい記事は1日{mine}本（運用者の設定）。浮いた枠で{what}を書き直す"
     return "skip", f"新しい記事は1日{mine}本（運用者の設定）"
 
