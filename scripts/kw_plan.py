@@ -1373,6 +1373,23 @@ def todo_count(site_id):
         return None
 
 
+def stock_for_plan(site_id):
+    """積み足すかを決める在庫 (本数, 呼び名)。買い手の語を先に書く社は買い手の語だけで数える。
+    全体の本数だけ見ると、買い手の語が尽きても1か月分あるように見えて積み足さない"""
+    n = todo_count(site_id)
+    if n is None:
+        return None, "未着手"
+    import hub_client
+    if not hub_client._buyer_first(site_id):
+        return n, "未着手"
+    try:
+        rows = hub_client.all_kw()
+    except Exception:  # noqa: BLE001  読めなければ課金しない（在庫不明として扱う）
+        return None, "買い手の語の未着手"
+    return (sum(1 for r in rows or [] if r.get("site") == site_id and str(r.get("status", "")).strip() == "未着手"
+                and kw_intent.is_buyer(r.get("keyword", ""))), "買い手の語の未着手")
+
+
 def _drop_rejects(cands, S, sheet_fate):
     """外部に問い合わせずに落とせる語を消す。{理由: 件数}"""
     pre = defaultdict(int)
@@ -1408,18 +1425,18 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
     print(f"\n■ {_S.public_id(site_id)}" if _S.is_client(site_id) else f"\n■ {site_id}（{S['cfg']['name']}）")
     month = rakko.this_month()
     if if_needed:
-        n = todo_count(site_id)
+        n, stock = stock_for_plan(site_id)
         if n is None:
             print("   在庫を確認できないため組み直しません（管制塔の状態が取れない。課金しない）")
             return
         need = month_need(site_id)
         if n >= need:
-            print(f"   未着手が {n} 本あるので、今回は組み直しません（1か月分 {need}本を切ったら組み直す）")
+            print(f"   {stock}が {n} 本あるので、今回は組み直しません（1か月分 {need}本を切ったら組み直す）")
             return
         if runs_done(site_id) == month:
-            print(f"   未着手 {n} 本は1か月分 {need}本に足りませんが、今月（{month}）はもう組みました（1社1か月1回）")
+            print(f"   {stock} {n} 本は1か月分 {need}本に足りませんが、今月（{month}）はもう組みました（1社1か月1回）")
             return
-        print(f"   未着手 {n} 本は1か月分 {need}本に足りないので組みます")
+        print(f"   {stock} {n} 本は1か月分 {need}本に足りないので組みます")
     rakko.BUDGET = rakko.spent() + CREDIT_CAP      # このサイトの分だけ上限をかける
     S["sheet"], S["sheet_ng"] = sheet_terms(site_id)
     if S["sheet"] or S["sheet_ng"]:

@@ -55,6 +55,7 @@ NEAR_AXIS = (R.PASS_EACH - 2, R.floor("originality") + 4)        # 1軸がこの
 STALE_DAYS = 3              # 改善中がこれより長い記事は要対応
 PASS_SHARE = 0.9            # 直近28日で「2回以内の直しで通った」割合の下限
 RESCORE_PER_SITE = 4        # 週次の採点し直し（社ごと。sites/<id>.json の quality_rescore で変えられる）
+LOW_TAG = "low-show"        # 台帳の印。effect_ab がほかの直しと分けて測る
 LOW_SCOPE = "low_impression"   # sites/<id>.json の spare_scope。表示の少ない記事から精度を上げる（2026-11-08 運用者の決定）
 LOW_FIRST = {"dormant": 0, "falling": 1, "weak": 2}   # article_health の分類ごとの順。それ以外は後
 LOW_SKIP_RECENT_DAYS = 28   # effect_ab・rewrite_rollback が前後28日で比べるので、その間は重ねて直さない
@@ -527,11 +528,15 @@ def _improve(slug, sc, blocked):
             "why": f"公開前の別工程の採点で基準に届きませんでした（{sc['why']}）",
             "weak": weak_text(sc), "blocked_ok": blocked}
     ok, why = A.run_one(item, True)
+    keep = A.TAG
+    A.TAG = _IMPROVE_TAG or keep
     A.note(slug, "quality_loop", ok, why)
+    A.TAG = keep
     return ok and why.startswith("直しました"), why
 
 
 IMPROVE = _improve
+_IMPROVE_TAG = ""           # この1本の直しに付ける台帳の印（process が決める）
 
 
 # ── AI っぽい言い回し（textlint。2026-10-20 運用者「AIぽい言い回しは自動で直すこと」） ──────────
@@ -810,6 +815,8 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
     site = site_of(slug)
     name = shown(slug)
     published = mode == "rescore"
+    global _IMPROVE_TAG
+    _IMPROVE_TAG = LOW_TAG if published and _low_scope(site) else ""
     if not published:
         since = mark_improving(slug)
     else:

@@ -502,6 +502,29 @@ def test_buyer_keywords_are_written_first():
         check(f"{sid}: 買い手の語を先に書く設定", c.get("kw_buyer_first"), True)
 
 
+def test_weekly_goes_on_when_the_survey_times_out():
+    print("\n■ 週次: 当社調べが時間切れでも後の工程を止めない（2026-10-26・11-02 に15分で切れ、再採点・配信・索引の再通知など30工程が飛んだ）")
+    wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
+    a = wf.index("- name: 当社調べ（採点し直す公開済みの記事・鍵のある機械の手順）")
+    b = wf.index("- name: 公開済みの記事を公開前と同じ基準で採点し直す")
+    check("当社調べの失敗で週次を止めない", "continue-on-error: true" in wf[a:b], True)
+
+
+def test_low_impression_rewrites_are_measured_apart_and_buyer_stock_is_counted():
+    import effect_ab as E
+    import hub_client as H
+    import kw_plan as KP
+    import quality_loop as QL
+    print("\n■ 表示の少ない記事の書き直しを分けて測る・買い手の語の在庫を数える")
+    check("書き直しの効きを分けて出す", E._label({"tag": QL.LOW_TAG}, "quality_loop"), "quality_loop（表示の少ない記事）")
+    rows = [{"site": "zz", "status": "未着手", "keyword": k} for k in ("経理代行 費用", "AIO 外注", "請求書 郵送 やり方")]
+    rows.append({"site": "zz", "status": "公開済み", "keyword": "記帳代行 比較"})
+    with patched((H, "all_kw", lambda strict=False: rows), (KP, "todo_count", lambda s: 3), (H, "_buyer_first", lambda s: True)):
+        check("買い手の語を先に書く社の在庫は、買い手の語だけで数える", KP.stock_for_plan("zz"), (2, "買い手の語の未着手"))
+    with patched((H, "all_kw", lambda strict=False: rows), (KP, "todo_count", lambda s: 3), (H, "_buyer_first", lambda s: False)):
+        check("ほかの社は今までどおり全部で数える", KP.stock_for_plan("zz"), (3, "未着手"))
+
+
 def test_client_slugs_are_masked_and_rows_go_private():
     import quality_loop as QL
     import client_private as CP

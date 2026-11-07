@@ -77,7 +77,7 @@ def cohort(daily, slug, at, pubs, acts, days):
 
 # 週次の直しと分けて効きを数える印（auto_rewrite --tag）。浮いた枠（運用者の設定で新しい記事を減らした枠）の
 # 書き直しは、同じ種類でも週次の直しと混ぜると「枠を書き直しに回した効き」が見えない（2026-10-09）
-APART = {"spare-slot": "浮き枠"}
+APART = {"spare-slot": "浮き枠", "low-show": "表示の少ない記事"}
 
 
 def _label(d, kind):
