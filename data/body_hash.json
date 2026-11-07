@@ -432,7 +432,7 @@
 "modified": "2026-09-26"
 },
 "inbound-inshokuten-ai-kensaku": {
-"hash": "8ebc5b6cb7b0756a66bc4ecd8a79c74e",
+"hash": "28609ec847a9a5e929fb3cefca20c2f4",
 "modified": "2026-11-03"
 },
 "inbound-inshokuten-llmo": {
@@ -452,16 +452,20 @@
 "modified": "2026-10-21"
 },
 "inshokuten-shukyaku-daikou": {
-"hash": "423511266c74f99911b07754dd3657d0",
+"hash": "757affaa729d6c2ff9b338a4d68614a1",
 "modified": "2026-11-07"
 },
 "inshokuten-shukyaku-hoho": {
-"hash": "ad4ce4d89fcb228005ba939fd21dd69b",
+"hash": "0b4af3d5004e90e9020c63bc98a56474",
 "modified": "2026-09-04"
 },
 "inshokuten-shukyaku-service": {
 "hash": "fdcc84ca6c8228b02a094fba4ab52aef",
 "modified": "2026-10-21"
+},
+"inshokuten-shukyaku-shien": {
+"hash": "eb55891ba6f52258d8160c16e1ed21ec",
+"modified": "2026-11-07"
 },
 "iryou-koukoku-guideline-web": {
 "hash": "1676d6c8f9569bf361da6e0ebf66d232",

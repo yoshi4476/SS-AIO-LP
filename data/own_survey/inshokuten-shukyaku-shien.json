@@ -1,0 +1,117 @@
+{
+ "v": 2,
+ "slug": "inshokuten-shukyaku-shien",
+ "ok": true,
+ "date": "2026-11-07",
+ "questions": [
+  "飲食店 集客支援について教えてください",
+  "飲食店 集客支援について、「飲食店の集客支援とは？AIと検索の質問に答える入口づくり」を教えてください",
+  "飲食店 集客支援について、「AIは飲食店の質問に何を出典に答えるか」を教えてください",
+  "飲食店 集客支援について、「質問の種類ごとに集客支援で作る5つのページ」を教えてください",
+  "飲食店 集客支援について、「集客支援の形の違い（公的な無料相談・部分支援・一括）」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "飲食店の集客支援とは？AIと検索の質問に答える入口づくり",
+   "words": [
+    "AI",
+    "検索"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "AIは飲食店の質問に何を出典に答えるか",
+   "words": [
+    "AI",
+    "質問",
+    "出典"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "質問の種類ごとに集客支援で作る5つのページ",
+   "words": [
+    "ページ",
+    "質問"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "集客支援の形の違い（公的な無料相談・部分支援・一括）",
+   "words": [
+    "無料相談",
+    "部分支援",
+    "一括"
+   ],
+   "hits": 0,
+   "of": 8
+  }
+ ],
+ "official": [],
+ "sources": {
+  "0120.co.jp": "peer",
+  "areadrive.jp": "media",
+  "ascentweb.co.jp": "peer",
+  "atoz-design.jp": "peer",
+  "bizcan.jp": "peer",
+  "blog.google": "peer",
+  "business.google.com": "peer",
+  "cell-inc.co.jp": "peer",
+  "deech.co.jp": "peer",
+  "developers.google.com": "peer",
+  "developers.openai.com": "peer",
+  "ebica.jp": "peer",
+  "forbesjapan.com": "media",
+  "giftls.co.jp": "peer",
+  "haemorikikaku.com": "peer",
+  "hataraxia.net": "peer",
+  "jfc.go.jp": "public",
+  "jimdo.com": "peer",
+  "knowledge-hd.co.jp": "peer",
+  "kyushu.meti.go.jp": "public",
+  "lazorico.com": "peer",
+  "llmo-ai-knowledgeholdings.hatenablog.com": "media",
+  "lycbiz.com": "peer",
+  "nakanishi-food.com": "peer",
+  "note.com": "video",
+  "ppr-do.co.jp": "peer",
+  "prtimes.jp": "media",
+  "qiita.com": "media",
+  "rankup-stage.com": "peer",
+  "redish.jp": "peer",
+  "relight-consulting.com": "peer",
+  "revimy.jp": "peer",
+  "rockhill.jp": "peer",
+  "saisoncard.co.jp": "peer",
+  "sales-dx.jp": "peer",
+  "smrj.go.jp": "public",
+  "squareup.com": "peer",
+  "support.google.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "waraukado-kondo.com": "peer",
+  "xserver.ne.jp": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 4,
+  "専門家への相談": 2
+ },
+ "chars": 17984,
+ "claims": [
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え8件のうち、『無料相談』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え8件のうち、『AI』に触れたものは4件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは期間（◯か月・◯日など）は0件、注意点・失敗・リスクは2件、専門家への相談は2件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは42件で、公的機関・学会・業界団体が3件、ニュース・メディア・まとめが5件、動画・SNS・ブログが2件でした。"
+ ]
+}

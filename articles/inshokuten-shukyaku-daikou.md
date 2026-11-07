@@ -243,6 +243,8 @@ AIの回答に自社サイトが載る準備ができているかは、[AI検索
 
 施策全体の地図は[飲食店の集客方法とグルメサイト依存の抜け方](/ai-marketing/inshokuten-shukyaku-hoho/)に、自社サイトの手順は[飲食店のSEO対策と自社予約の増やし方](/seo/inshokuten-seo-taisaku/)にまとめています。
 
+代行に何のページを作らせるかは、[飲食店の集客支援で作る5つのページ](/aio/inshokuten-shukyaku-shien/)で質問の種類ごとに分けています。
+
 解約後に店へ残る資産は、[飲食店の集客サービスの注意点](/aio/inshokuten-shukyaku-service/)で確かめられます。訪日客向けの設定は[インバウンド飲食店のAI検索の設定ミス](/aio/inbound-inshokuten-ai-kensaku/)をご覧ください。
 
 <div class="cta-box"><p>予約の経路と店の情報をもとに、代行に任せる範囲を無料で一緒に整理しませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>

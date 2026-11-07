@@ -29,8 +29,8 @@ faq:
   - q: 自分で対策しても順位が変わらない場合はどうすればよいですか？
     a: まず対象記事の検索順位を確認し、圏外なら通常のSEOで見直します。事実が足りなければ自社の事実を足します。
 score: 87
-score_breakdown: {originality: 85, extractability: 85, decision: 90}
-quality_attempts: 35
+score_breakdown: {originality: 80, extractability: 88, decision: 92}
+quality_attempts: 37
 ---
 **AIO対策は自分でできます。**現状診断・冒頭の断言型への書き換え・H2直下の1文結論・FAQ作成の4つは、無料ツールで対応できます。当社はこの4つを、自分でできる「基礎の8割」と呼んでいます。5つ目の手順の月1回の計測は、基礎の8割に含みません。ただし一次情報の収集や計測結果の分析には限界があり、成果が伸び悩む段階でプロへの相談が必要になります。
 
