@@ -55,6 +55,7 @@ NEAR_AXIS = (R.PASS_EACH - 2, R.floor("originality") + 4)        # 1軸がこの
 STALE_DAYS = 3              # 改善中がこれより長い記事は要対応
 PASS_SHARE = 0.9            # 直近28日で「2回以内の直しで通った」割合の下限
 RESCORE_PER_SITE = 4        # 週次の採点し直し（社ごと。sites/<id>.json の quality_rescore で変えられる）
+RESCORE_COOLDOWN_DAYS = 7   # 採点し直した記事に次の順が回るまでの日数（間を空けないと、優先の高い1本を毎回直し続ける）
 # 機械だけが書く項目。採点に渡す写しからは外す（書かれた点数に採点が引きずられない）
 MACHINE_KEYS = ("score", "score_breakdown", "quality_state", "quality_since", "quality_attempts")
 AXIS_KEYS = [a["key"] for a in R.AXES]
@@ -1061,8 +1062,11 @@ def rescore_targets(per_site=None, sites=(), path=None):
     記事を、公開後の抜き取り採点の点が低い順（点が無ければ公開の古い順）に。よく読まれている記事（10位以内でクリックあり）は
     後回しにし、対照群（月ごとに5本に1本）は触らない（一気に直したときの順位の揺れと、効果を比べられなくなることを防ぐ）"""
     import sites as S
-    seen, last_total = {}, {}
+    seen, last_total, recent = {}, {}, set()
+    since = (date.today() - timedelta(days=RESCORE_COOLDOWN_DAYS)).isoformat()
     for r in rows(path):
+        if r.get("mode") == "rescore" and r.get("action") == "score" and str(r.get("at", ""))[:10] > since:
+            recent.add(r.get("slug"))
         if r.get("slug") and r.get("state") in ("passed", "improving") and r.get("action") in ("pass", "hold"):
             # 85〜89点で合格した記事は、目標の90点まで直す対象に残す（PDCA。2026-10-21）
             low = r["state"] == "passed" and (r.get("total") or 0) < R.TARGET
@@ -1074,7 +1078,7 @@ def rescore_targets(per_site=None, sites=(), path=None):
     by_site = {}
     for s in _articles():
         m = meta_of(read(s))
-        if not R.gate_ok(m) or m.get("noindex"):
+        if s in recent or not R.gate_ok(m) or m.get("noindex"):
             continue
         sid = site_of(s)
         if sites and sid not in sites:

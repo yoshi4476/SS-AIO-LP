@@ -419,9 +419,15 @@ def test_published_articles_are_improved_in_place_never_unpublished():
         check("台帳では改善中", rows[-1].get("state"), "improving")
         # 次の週は前に届かなかった記事を先に採点し直す
         e.put("zz-pub2", _art("score: 92\n").replace("date: 2026-10-20", "date: 2026-01-01"))
-        with patched(*e.patches(QL, [_answer()]), (QL, "rows", lambda path=None: rows)):
+        last_week = (QL.date.today() - QL.timedelta(days=QL.RESCORE_COOLDOWN_DAYS)).isoformat() + " 10:00"
+        old_rows = [{**r, "at": last_week} for r in rows]
+        with patched(*e.patches(QL, [_answer()]), (QL, "rows", lambda path=None: old_rows)):
             got = QL.rescore_targets(1)
         check("前に届かなかった記事が先", got, ["zz-pub"])
+        # 2026-11-08: 分類が1本だけ違う記事が毎回先頭に来て、1週間に14回直され続けた。ほかの記事に順が回らなかった
+        with patched(*e.patches(QL, [_answer()]), (QL, "rows", lambda path=None: rows)):
+            got = QL.rescore_targets(1)
+        check("直近に採点し直した記事は間を空け、次の記事へ回す", got, ["zz-pub2"])
 
 
 def test_client_slugs_are_masked_and_rows_go_private():
