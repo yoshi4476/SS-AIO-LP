@@ -1467,5 +1467,38 @@
       "desc": "lead-long",
       "youtube": "1W07C_rt-lg"
     }
+  },
+  "fudousan-shukyaku-idea": {
+    "site": "ai-lab",
+    "date": "2026-11-07",
+    "sec": 267,
+    "mp4": "automation/video/fudousan-shukyaku-idea.mp4",
+    "nums": [
+      "1",
+      "10",
+      "2",
+      "2,465",
+      "3",
+      "4",
+      "6",
+      "80.5",
+      "9"
+    ],
+    "format": "duo",
+    "long": {
+      "date": "2026-11-07",
+      "keyword": "不動産 集客 アイデア",
+      "queries": [
+        "不動産 集客 アイデア",
+        "集客 アイデア",
+        "不動産 アイデア",
+        "不動産 集客"
+      ],
+      "decision": "make",
+      "term": "不動産 集客",
+      "title": "不動産 集客は何から始める？｜AIに外される3つの落とし穴と始める順番",
+      "reason": "YouTube のサジェストに「不動産 集客」が出ます"
+    },
+    "youtube": "tc03u3NkzPs"
   }
 }
