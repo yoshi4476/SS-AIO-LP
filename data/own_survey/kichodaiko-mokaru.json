@@ -1,0 +1,128 @@
+{
+ "v": 2,
+ "slug": "kichodaiko-mokaru",
+ "ok": true,
+ "date": "2026-11-07",
+ "questions": [
+  "記帳代行 儲かるについて教えてください",
+  "記帳代行 儲かるについて、「記帳代行は儲かるのか？利益を決める3つの数字」を教えてください",
+  "記帳代行 儲かるについて、「記帳代行の手間を試算で分けると何時間か」を教えてください",
+  "記帳代行 儲かるについて、「入力だけの記帳代行が儲かりにくくなった理由」を教えてください",
+  "記帳代行 儲かるについて、「利益が残らない依頼の3つの型」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "記帳代行は儲かるのか？利益を決める3つの数字",
+   "words": [
+    "利益",
+    "数字"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "記帳代行の手間を試算で分けると何時間か",
+   "words": [
+    "手間",
+    "試算"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "利益が残らない依頼の3つの型",
+   "words": [
+    "利益",
+    "依頼"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "記帳代行で受けてはいけない仕事の線引き",
+   "words": [
+    "仕事"
+   ],
+   "hits": 2,
+   "of": 10
+  },
+  {
+   "topic": "継続する顧客と提携が記帳代行の利益を作る",
+   "words": [
+    "顧客",
+    "提携",
+    "利益"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "依頼する会社は記帳代行の採算をどう見ればよいか",
+   "words": [
+    "採算"
+   ],
+   "hits": 5,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "税理士法",
+   "org": "公的機関",
+   "of": 10,
+   "hits": 2
+  }
+ ],
+ "sources": {
+  "1021-keiri.com": "peer",
+  "adv.freee.co.jp": "peer",
+  "all-senmonka.jp": "portal",
+  "arakawaboueki.com": "peer",
+  "asagi-tax.com": "video",
+  "biz.moneyforward.com": "peer",
+  "bricks-outsourcing.com": "peer",
+  "cpa-hadano.net": "peer",
+  "craudia-assistant.com": "peer",
+  "crowdworks.jp": "portal",
+  "kaikeizeimu.jp": "peer",
+  "kanbei.jp": "media",
+  "keiri-outsourcing.com": "peer",
+  "l-c-style.co.jp": "peer",
+  "marunagekanri.com": "peer",
+  "note.com": "video",
+  "nta.go.jp": "public",
+  "okurudake.jp": "peer",
+  "persol-bd.co.jp": "peer",
+  "prust.jp": "peer",
+  "shikaku-jimu.jp": "peer",
+  "shinnihon-keiei.com": "peer",
+  "staff.jusnet.co.jp": "peer",
+  "starkpartners.jp": "peer",
+  "stg-partners.com": "peer",
+  "support.freee.co.jp": "peer",
+  "umegawa.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "vws-biz.com": "peer",
+  "yamada-accounting.com": "peer",
+  "yayoi-kk.co.jp": "peer",
+  "zeirishibest.com": "portal"
+ },
+ "dims": {
+  "費用の金額（◯円）": 8,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 1,
+  "専門家への相談": 4
+ },
+ "chars": 15357,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、公的機関の資料にある「税理士法」に触れたものは2件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは進め方の手順は1件、期間（◯か月・◯日など）は2件、注意点・失敗・リスクは2件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは32件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが1件、ポータル・比較サイトが3件、動画・SNS・ブログが2件でした。"
+ ]
+}

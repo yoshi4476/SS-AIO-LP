@@ -55,6 +55,8 @@ quality_attempts: 3
 
 **記帳代行プランは、仕訳数・資料の渡し方・記帳の頻度・任せる範囲の4つの軸で区切られています。**料金表で目に入りやすいのは仕訳数ですが、残りの3つで中身が大きく変わります。
 
+近い論点を[記帳代行は儲かる？利益が残らない3つの落とし穴と受ける条件](/blog/kichodaiko-mokaru/)で扱っています。
+
 関連する内容として[請求書の郵送のやり方は5手順](/blog/seikyusho-yuso-yarikata/)も公開しています。
 
 <figure><img src="/images/kichodaiko-plan-erabikata/kugiri.png" alt="記帳代行プランを仕訳数・資料の渡し方・記帳の頻度・任せる範囲の4つの軸に分けた図"></figure>

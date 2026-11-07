@@ -73,6 +73,8 @@ quality_attempts: 5
 
 **帳簿を自分で付けるなら青色申告会、入力を任せるなら記帳代行会社、申告書まで任せるなら税理士が合います。**
 
+近い論点を[記帳代行は儲かる？利益が残らない3つの落とし穴と受ける条件](/blog/kichodaiko-mokaru/)で扱っています。
+
 <figure><img src="/images/aoiro-shinkokukai-kichodaiko/yakuwari.png" alt="青色申告会・記帳代行会社・税理士の3つで、入力や申告書の作成を誰が行うかを比べた表"></figure>
 
 3つの頼み先は、競合ではなく作業の受け持ちが違います。同じ表で並べると、次のとおりです。
