@@ -1,0 +1,117 @@
+{
+ "v": 2,
+ "slug": "bpo-ryouiki-kyoukai",
+ "ok": true,
+ "date": "2026-11-07",
+ "questions": [
+  "bpo 領域について教えてください",
+  "bpo 領域について、「BPOの領域とは？手順ごと外へ出せる業務の範囲」を教えてください",
+  "bpo 領域について、「BPOの主な領域5つと領域ごとに残る士業の業務」を教えてください",
+  "bpo 領域について、「税理士・社労士にしか頼めない業務はどこからか」を教えてください",
+  "bpo 領域について、「経理の領域で当社が担当した範囲と数字」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "BPOの領域とは？手順ごと外へ出せる業務の範囲",
+   "words": [
+    "業務",
+    "範囲"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "BPOの主な領域5つと領域ごとに残る士業の業務",
+   "words": [
+    "士業",
+    "業務"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "税理士・社労士にしか頼めない業務はどこからか",
+   "words": [
+    "税理士",
+    "社労士",
+    "業務"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "経理の領域で当社が担当した範囲と数字",
+   "words": [
+    "経理",
+    "範囲",
+    "数字"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "今日やること：自社の業務を5つの領域に振り分ける",
+   "words": [
+    "業務"
+   ],
+   "hits": 10,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "税理士制度",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 0
+  },
+  {
+   "term": "税理士法",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 3
+  }
+ ],
+ "sources": {
+  "adecco.com": "peer",
+  "bbs.co.jp": "peer",
+  "business.ntt-west.co.jp": "peer",
+  "dd-ax.com": "video",
+  "jms-united.co.jp": "peer",
+  "laws.e-gov.go.jp": "public",
+  "manegy.com": "media",
+  "nichizeiren.or.jp": "public",
+  "nta.go.jp": "public",
+  "nttdata-with.com": "peer",
+  "nttdata.com": "peer",
+  "office-expo.jp": "peer",
+  "onamae.com": "peer",
+  "persol-group.co.jp": "media",
+  "pref.kagawa.lg.jp": "public",
+  "sakura-is.co.jp": "peer",
+  "shakaihokenroumushi.jp": "public",
+  "shiho-shoshi.or.jp": "public",
+  "toben.or.jp": "public",
+  "toyo-s.co.jp": "peer",
+  "yasuda-cpa-office.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 3,
+  "専門家への相談": 5
+ },
+ "chars": 19015,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、国税庁の資料にある「税理士制度」に触れたものは0件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、国税庁の資料にある「税理士法」に触れたものは3件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は1件、進め方の手順は3件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは21件で、公的機関・学会・業界団体が7件、ニュース・メディア・まとめが2件、動画・SNS・ブログが1件でした。"
+ ]
+}

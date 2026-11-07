@@ -49,6 +49,8 @@ faq:
 
 BPOとは、特定の業務プロセスを、外部の専門会社に継続的に任せる委託形態のことです。
 
+関連する内容は、[BPOの領域5つと士業の境目](/blog/bpo-ryouiki-kyoukai)で解説しています。
+
 関連して、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](/blog/keiri-bpo-toha/)もあわせてご確認ください。
 
 <div class="definition-box"><span class="term">BPOとは</span>、Business Process Outsourcingの略で、業務の一部または全体を、プロセスの設計・運用まで含めて外部の専門会社に委託する仕組みを指します。==単なる作業代行ではなく、業務の進め方ごと任せる==点が、一般的な「外注」との違いです。</div>
