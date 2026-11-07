@@ -1,0 +1,147 @@
+{
+ "v": 2,
+ "slug": "aio-taisaku-guide",
+ "ok": true,
+ "date": "2026-11-08",
+ "questions": [
+  "aioコンサルティングについて教えてください",
+  "aioコンサルティングについて、「AIOコンサルティングとは？AIOコンサルに何を任せる仕事か」を教えてください",
+  "aioコンサルティングについて、「自社でやる場合と、外部に頼む場合の違い」を教えてください",
+  "aioコンサルティングについて、「頼むべきか自社でやるべきかを分ける5つの判断基準」を教えてください",
+  "aioコンサルティングについて、「AIOコンサルティングの費用の目安」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "AIOコンサルティングとは？AIOコンサルに何を任せる仕事か",
+   "words": [
+    "AIOコンサル",
+    "仕事"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "自社でやる場合と、外部に頼む場合の違い",
+   "words": [
+    "外部"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "頼むべきか自社でやるべきかを分ける5つの判断基準",
+   "words": [
+    "判断基準"
+   ],
+   "hits": 1,
+   "of": 8
+  },
+  {
+   "topic": "依頼先を選ぶときに確認する7項目",
+   "words": [
+    "依頼先"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "契約前に必ず聞いておく質問",
+   "words": [
+    "契約前",
+    "質問"
+   ],
+   "hits": 6,
+   "of": 10
+  },
+  {
+   "topic": "失敗例：こういう頼み方はうまくいかない",
+   "words": [
+    "失敗例"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "依頼してから成果が出るまでの期間",
+   "words": [
+    "成果",
+    "期間"
+   ],
+   "hits": 4,
+   "of": 10
+  },
+  {
+   "topic": "自社でやるなら、この順番で進めてください",
+   "words": [
+    "順番"
+   ],
+   "hits": 1,
+   "of": 10
+  },
+  {
+   "topic": "契約が決まったら、社内で先に用意しておくもの",
+   "words": [
+    "契約",
+    "社内"
+   ],
+   "hits": 6,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "ai-hack.co.jp": "peer",
+  "ai.7senses.co.jp": "self",
+  "aioj.jp": "peer",
+  "aspicjapan.org": "public",
+  "auncon.co.jp": "peer",
+  "cinc-j.co.jp": "peer",
+  "conmark.jp": "peer",
+  "consult.nikkeibp.co.jp": "media",
+  "coosy.co.jp": "peer",
+  "corp-bromo.com": "peer",
+  "developers.google.com": "peer",
+  "dgtrends.com": "peer",
+  "geo-code.co.jp": "peer",
+  "gmg.cloudcircus.jp": "peer",
+  "hakuhodody-one.co.jp": "peer",
+  "kiyono-co.jp": "peer",
+  "market-with.site": "peer",
+  "mercart.jp": "peer",
+  "mieru-ca.com": "media",
+  "nake.co.jp": "peer",
+  "nexer.co.jp": "media",
+  "note.com": "video",
+  "ok-design.co.jp": "peer",
+  "oproduct.ai": "peer",
+  "piftee.co.jp": "peer",
+  "prap.co.jp": "peer",
+  "prtimes.jp": "media",
+  "seo-best.jp": "peer",
+  "sora-michi.co.jp": "peer",
+  "sunsee.jp": "peer",
+  "switchitmaker2.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "vicme.jp": "peer",
+  "web-planners.net": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 3,
+  "専門家への相談": 3
+ },
+ "chars": 17913,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え10件のうち、『依頼先』に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え10件のうち、『順番』に触れたものは1件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは期間（◯か月・◯日など）は0件、費用の金額（◯円）は3件、注意点・失敗・リスクは3件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは34件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが4件、動画・SNS・ブログが1件でした。"
+ ]
+}

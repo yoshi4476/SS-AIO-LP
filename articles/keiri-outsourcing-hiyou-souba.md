@@ -60,7 +60,7 @@ eyecatch: /images/keiri-outsourcing-hiyou-souba/eyecatch.png
 
 詳しい定義や記帳代行との違いは、[経理BPOとは？メリット3つと費用相場をわかりやすく解説](https://corp.7senses.co.jp/blog/keiri-bpo-toha/)でも整理しています。
 
-<a href="https://accounting.cast-er.com/tips/bookkeeping-service-market-rates-and-fee-structure/" target="_blank" rel="noopener">CASTER BIZ accountingの「記帳代行の相場と料金体系」</a>では、記帳代行の料金目安（税込）を**月50件までの仕訳で5,000円〜1万円、200件まで1万5,000円〜3万円、500件以上で4万円〜**としています。仕訳数が増えるほど費用も上がる料金体系です。
+<a href="https://accounting.cast-er.com/tips/bookkeeping-service-market-rates-and-fee-structure/" target="_blank" rel="noopener">CASTER BIZ accountingの「記帳代行の相場と料金体系」</a>では、記帳代行の料金目安（税込）を<strong>月50件までの仕訳で5,000円〜1万円、200件まで1万5,000円〜3万円、500件以上で4万円〜</strong>としています。仕訳数が増えるほど費用も上がる料金体系です。
 
 | 委託範囲 | 月額費用の目安 | 対象規模の目安 |
 |:--|:--|:--|

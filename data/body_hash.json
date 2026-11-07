@@ -128,7 +128,7 @@
 "modified": "2026-09-08"
 },
 "aio-taisaku-guide": {
-"hash": "7af69f5805843f731c960320773a7826",
+"hash": "0a4affb63577584928234a2fe518649a",
 "modified": "2026-09-01"
 },
 "aio-taisaku-gutairei": {
@@ -196,12 +196,16 @@
 "modified": "2026-09-03"
 },
 "biyoushitsu-shukyaku-houhou": {
-"hash": "5dd0b4048a3ef39cdab6a2d7cd7be650",
+"hash": "8b4e6e642fb6eedfe60706495b07ba4c",
 "modified": "2026-08-13"
 },
 "biyoushitsu-shukyaku-idea": {
-"hash": "9f5659c1b771fd1569ca923a9019fc03",
+"hash": "53a875787b90c301d0da22018adc2de8",
 "modified": "2026-09-01"
+},
+"biyoushitsu-shukyaku-shien": {
+"hash": "5f6846a44ffb15e1e2bbee9d5d02038b",
+"modified": "2026-11-08"
 },
 "btob-aio-taisaku-kaisha": {
 "hash": "7e9c45dd73d79fab58922f83056d39db",

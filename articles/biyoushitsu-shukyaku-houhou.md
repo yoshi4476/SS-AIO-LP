@@ -55,6 +55,8 @@ faq:
 
 今日から着手できる具体的な[美容室の集客アイデア](/ai-marketing/biyoushitsu-shukyaku-idea/)を無料施策から順に12個まとめているので、あわせてご覧ください。
 
+自店で回しきれない部分を外部に頼むときは、[美容室の集客支援で頼める範囲と](/aio/biyoushitsu-shukyaku-shien/)を先に確かめてください。
+
 <div class="definition-box"><span class="term">美容室の集客方法とは</span>、Googleマップでの表示・口コミ対応・Instagram発信・指名検索の導線づくり・リピート化の仕組み・広告表示のルール順守という6つの施策を通じて、新規来店とリピート来店の両方を安定させる一連の取り組みを指します。新規獲得だけに偏ると、集客をやめた瞬間に客数が落ち込みます。</div>
 
 厚生労働省の<a href="https://www.mhlw.go.jp/toukei/saikin/hw/eisei_houkoku/24/index.html" target="_blank" rel="noopener">令和5年度衛生行政報告例</a>によると、**全国の美容所数は27万4,070件（前年比+1.5%）**で過去最多を更新しました。競合が増え続ける市場だからこそ、==新規とリピートの両輪で選ばれる理由を作る==ことが欠かせません。

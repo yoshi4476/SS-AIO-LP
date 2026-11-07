@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-07T00:00:00+09:00</updated>
+  <updated>2026-11-08T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>美容室の集客支援で予約サイト頼みはNG｜AI出典767件の調査</title>
+    <link href="https://ai.7senses.co.jp/aio/biyoushitsu-shukyaku-shien/"/>
+    <id>https://ai.7senses.co.jp/aio/biyoushitsu-shukyaku-shien/</id>
+    <updated>2026-11-08T00:00:00+09:00</updated>
+    <summary>美容室の集客支援は、予約サイトの運用だけでなく、公式サイトの料金や悩みの解説まで頼めるかで選びます。3つのAIの出典767件の調査では、料金や悩みを調べる質問の回答の87.5%が美容室の公式サイトを出典にしていました。頼むべき店と見送る店も整理します。</summary>
+  </entry>
   <entry>
     <title>飲食店の集客代行で丸投げはNG｜店が手放さない3つの作業</title>
     <link href="https://ai.7senses.co.jp/aio/inshokuten-shukyaku-daikou/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/shigyou-erabareru-homepage/</id>
     <updated>2026-10-25T00:00:00+09:00</updated>
     <summary>士業事務所が選ばれるホームページは、相談者が依頼先を決めるための判断材料を載せたサイトです。当社の100問の調査では、選び方の質問の回答の68.8%が士業事務所の公式サイトを出典にしていました。載せる4つの材料と、直す順番の分かれ目を解説します。</summary>
-  </entry>
-  <entry>
-    <title>士業の制度解説記事で集客するには？AIの出典で見る3つのNG</title>
-    <link href="https://ai.7senses.co.jp/aio/shigyou-seido-kaisetsu-kiji/"/>
-    <id>https://ai.7senses.co.jp/aio/shigyou-seido-kaisetsu-kiji/</id>
-    <updated>2026-10-25T00:00:00+09:00</updated>
-    <summary>士業の制度解説記事は、制度の説明だけでは集客につながりにくい記事です。当社の100問の調査では、制度の質問で事務所の公式サイトの出典は26.4%で、公的機関とほぼ並びました。費用と手続きへつなぐ書き方と、3つのNGを解説します。</summary>
   </entry>
 </feed>

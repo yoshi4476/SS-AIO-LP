@@ -1,0 +1,103 @@
+{
+ "v": 2,
+ "slug": "biyoushitsu-shukyaku-shien",
+ "ok": true,
+ "date": "2026-11-08",
+ "questions": [
+  "美容室 集客支援について教えてください",
+  "美容室 集客支援について、「美容室の集客支援とは？探される場面と調べられる場面がある」を教えてください",
+  "美容室 集客支援について、「AIは美容室をどこから紹介するか（出典767件の調査）」を教えてください",
+  "美容室 集客支援について、「美容室の集客支援で頼める範囲と費用の相場」を教えてください",
+  "美容室 集客支援について、「集客支援を頼むべき美容室・見送るべき美容室」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "美容室の集客支援とは？探される場面と調べられる場面がある",
+   "words": [
+    "場面",
+    "場面"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "AIは美容室をどこから紹介するか（出典767件の調査）",
+   "words": [
+    "AI",
+    "調査"
+   ],
+   "hits": 3,
+   "of": 8
+  },
+  {
+   "topic": "美容室の集客支援で頼める範囲と費用の相場",
+   "words": [
+    "範囲"
+   ],
+   "hits": 1,
+   "of": 8
+  },
+  {
+   "topic": "支援を始めてから変化が見えるまでの期間",
+   "words": [
+    "支援",
+    "変化",
+    "期間"
+   ],
+   "hits": 10,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "atoz-design.jp": "peer",
+  "beauty-web.jp.net": "peer",
+  "beauty.hotpepper.jp": "portal",
+  "beauty.rakuten.co.jp": "portal",
+  "chusho.meti.go.jp": "public",
+  "freee.co.jp": "peer",
+  "holytech.jp": "peer",
+  "iii-info.jp": "peer",
+  "jcb.co.jp": "peer",
+  "jfc.go.jp": "public",
+  "kaigyo.beautygarage.jp": "peer",
+  "kaigyou.tb-net.jp": "peer",
+  "koshikiad.com": "peer",
+  "kuroco.team": "peer",
+  "lycbiz.com": "peer",
+  "mhlw.go.jp": "public",
+  "note.com": "video",
+  "on-the-edge.co.jp": "peer",
+  "propagateinc.com": "peer",
+  "prtimes.com": "media",
+  "relax-job.com": "portal",
+  "revimy.jp": "peer",
+  "spot-one-jp.com": "peer",
+  "stock-sun.com": "media",
+  "support.google.com": "peer",
+  "u-and-web.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "whitch.jp": "peer",
+  "will-next1.github.io": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 2,
+  "専門家への相談": 0
+ },
+ "chars": 19687,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え8件のうち、『場面』に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え8件のうち、『範囲』に触れたものは1件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは専門家への相談は0件、費用の金額（◯円）は2件、進め方の手順は2件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは30件で、公的機関・学会・業界団体が3件、ニュース・メディア・まとめが2件、ポータル・比較サイトが3件、動画・SNS・ブログが2件でした。"
+ ]
+}
