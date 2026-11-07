@@ -1120,7 +1120,10 @@ def rescore_targets(per_site=None, sites=(), path=None):
         busy = any(u.endswith(f"/{s}") for u in read_well[sid])
         score = last_total.get(s, 100) if rank == 0 else audit.get(s, 100)
         first = LOW_FIRST.get(health, len(LOW_FIRST)) if low_sites[sid] else rank
-        by_site.setdefault(sid, []).append((first, busy, AH.ORDER.get(health, 2), score, str(m.get("date") or ""), s))
+        import kw_intent as KI
+        # 同じ分類の中では、買い手の語の記事から直す（問い合わせに近い）
+        seller = 0 if not low_sites[sid] or KI.is_buyer(m.get("keyword") or "") else 1
+        by_site.setdefault(sid, []).append((first, seller, busy, AH.ORDER.get(health, 2), score, str(m.get("date") or ""), s))
     out = []
     for sid, items in sorted(by_site.items()):
         n = RESCORE_PER_SITE if per_site is None else per_site

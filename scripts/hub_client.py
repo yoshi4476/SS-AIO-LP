@@ -197,7 +197,10 @@ def next_kw(site):
     unfit = _unfit(site)
     dropped = lambda k: bool(drop and re.search(drop, k.lower()))
     bad = lambda k: dropped(k) or unfit(k)
-    if _norm(kw0) in aiq and (not pat or re.search(pat, kw0.lower())) and not bad(kw0):
+    buyer_first = _buyer_first(site)
+    import kw_intent as KI
+    if _norm(kw0) in aiq and (not pat or re.search(pat, kw0.lower())) and not bad(kw0) \
+            and (not buyer_first or KI.is_buyer(kw0)):
         return got
     try:
         rows = all_kw()
@@ -215,6 +218,20 @@ def next_kw(site):
         got.update({"keyword": str(r0["keyword"]), "aim": r0.get("aim", ""), "category": r0.get("category", ""),
                     "picked_by": "打ち出し外の語を飛ばした" if dropped(kw0) else "担当領域の外の語を飛ばした"})
         kw0 = got["keyword"]
+
+    # 買い手の語を先に書く社（sites/<id>.json の kw_buyer_first。2026-11-08 運用者の決定）は、候補を買い手の語に絞る。
+    # 尽きたら絞らずに書く（書かない選択はしない）。材料・AI回答・実証済みの順はこの中で効く
+    if buyer_first:
+        buyers = [r for r in todo if KI.is_buyer(str(r["keyword"]))]
+        if buyers:
+            todo = buyers
+            if not KI.is_buyer(kw0):
+                got = dict(got)
+                got.update({"keyword": str(buyers[0]["keyword"]), "aim": buyers[0].get("aim", ""),
+                            "category": buyers[0].get("category", ""), "picked_by": "買い手の語を先に"})
+                kw0 = got["keyword"]
+        else:
+            print(f"要対応: {site} の未着手に買い手の語がありません（kw_plan で積むまで、ほかの語を書きます）")
 
     # お客様の社は、材料（一次情報・体験・事例）のある題を先に書く。材料の無い題は一次性が40点前後で止まり、
     # 事実を作らない限り何度直しても公開できない（2026-10-20）。ある題が尽きたら無い題も書く（書かない選択はしない）
@@ -279,6 +296,14 @@ def next_kw(site):
         if hit:
             return hit
     return got                           # 主力の語が尽きていれば、あるものを書く
+
+
+def _buyer_first(site):
+    import sites as S
+    try:
+        return (S.load(site) or {}).get("kw_buyer_first") is True
+    except Exception:  # noqa: BLE001  読めなければ今までの順
+        return False
 
 
 def _with_material(site, got, kw0, todo):

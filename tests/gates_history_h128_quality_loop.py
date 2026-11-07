@@ -474,6 +474,34 @@ def test_low_impression_scope_rewrites_dormant_articles_first():
           ("--low-scope" in step, "quality_loop.py --rescore-auto 2" in step, "auto_rewrite.py --write --kind spare" in step), (True, True, True))
 
 
+def test_buyer_keywords_are_written_first():
+    import hub_client as H
+    import kw_intent as KI
+    print("\n■ 買い手の語を先に書く社（2026-11-08 運用者「買い手を意識してキーワードを選定して問い合わせにつなげて」）")
+    check("買い手の語: 依頼先を探す語は当たり、調べ物と見込み客でない語は当たらない",
+          [KI.is_buyer(k) for k in ("経理代行 費用", "AIO 外注", "aioコンサルティング", "記帳代行 儲かる", "請求書 郵送 やり方", "不動産会社 ホームページ 手数料 説明", "導入事例 書き方", "SaaS 比較記事 対策", "住宅会社 Instagram 連携")],
+          [True, True, True, False, False, False, False, False, False])
+    rows = [{"site": "zz", "status": "未着手", "keyword": k, "category": "c", "aim": ""}
+            for k in ("請求書 郵送 やり方", "記帳代行 儲かる", "経理代行 費用")]
+
+    def run(first):
+        ps = [(H, "enabled", lambda: True), (H, "_get", lambda q: {"keyword": "請求書 郵送 やり方"}),
+              (H, "all_kw", lambda strict=False: rows), (H, "_main_offer_pattern", lambda s: ""),
+              (H, "_ai_targets", lambda s: set()), (H, "_drop_pattern", lambda s: ""),
+              (H, "_unfit", lambda s: (lambda k: False)), (H, "_with_material", lambda *a: None),
+              (H, "_proven_targets", lambda s: set()), (H, "_buyer_first", lambda s: first)]
+        with patched(*ps):
+            return H.next_kw("zz")["keyword"]
+    check("設定した社は買い手の語を先に選ぶ", run(True), "経理代行 費用")
+    check("買い手の語を見つけても、儲かる系は選ばない", run(True) != "記帳代行 儲かる", True)
+    rows_none = [r for r in rows if r["keyword"] == "請求書 郵送 やり方"]
+    rows[:] = rows_none
+    check("買い手の語が尽きたら止めずに書く", run(True), "請求書 郵送 やり方")
+    for sid in ("ai-lab", "corporate"):
+        c = json.loads((ROOT / "sites" / f"{sid}.json").read_text(encoding="utf-8"))
+        check(f"{sid}: 買い手の語を先に書く設定", c.get("kw_buyer_first"), True)
+
+
 def test_client_slugs_are_masked_and_rows_go_private():
     import quality_loop as QL
     import client_private as CP
