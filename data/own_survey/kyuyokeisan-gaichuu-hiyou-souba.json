@@ -1,0 +1,113 @@
+{
+ "v": 2,
+ "slug": "kyuyokeisan-gaichuu-hiyou-souba",
+ "ok": true,
+ "date": "2026-11-08",
+ "questions": [
+  "給与計算 外注 費用について教えてください",
+  "給与計算 外注 費用について、「給与計算の外注費用はいくら？従業員規模別シミュレーション」を教えてください",
+  "給与計算 外注 費用について、「なぜ「基本料金＋1人あたり単価」で決まるのか」を教えてください",
+  "給与計算 外注 費用について、「依頼先で変わる費用感：社労士と給与計算代行会社の違い」を教えてください",
+  "給与計算 外注 費用について、「自社で担当者を雇う場合との損益分岐点」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "給与計算の外注費用はいくら？従業員規模別シミュレーション",
+   "words": [
+    "従業員規模別シミュレーション"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "なぜ「基本料金＋1人あたり単価」で決まるのか",
+   "words": [
+    "基本料金",
+    "単価"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "依頼先で変わる費用感：社労士と給与計算代行会社の違い",
+   "words": [
+    "依頼先",
+    "社労士"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "自社で担当者を雇う場合との損益分岐点",
+   "words": [
+    "損益分岐点",
+    "担当者"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "年末調整・賞与計算にかかるスポット費用の実額",
+   "words": [
+    "年末調整",
+    "賞与計算",
+    "実額"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "外注先を決める前に確認したい5つのチェックポイント",
+   "words": [
+    "チェックポイント"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "all-senmonka.jp": "portal",
+  "ashita-team.com": "peer",
+  "b-pos.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "bod-grp.com": "peer",
+  "bsp-sr.or.jp": "peer",
+  "cast-er.com": "peer",
+  "comit-hr.jp": "peer",
+  "crowdlog.jp": "peer",
+  "help-you.me": "peer",
+  "it-trend.jp": "portal",
+  "kigyolog.com": "portal",
+  "kyuuyokeisan-outsourcing.info": "peer",
+  "kyuyo-pro.com": "peer",
+  "marugotoinc.jp": "peer",
+  "noc-net.co.jp": "peer",
+  "note.com": "video",
+  "onamae.com": "peer",
+  "romu-kanri.com": "peer",
+  "sakae-office.com": "peer",
+  "sokei-sr.jp": "peer",
+  "tokyo-chuo-sr.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yfpcrea.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 0,
+  "専門家への相談": 4
+ },
+ "chars": 11281,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え4件のうち、『従業員規模別シミュレーション』に触れたものは0件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え4件のうち、『損益分岐点』に触れたものは1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは進め方の手順は0件、期間（◯か月・◯日など）は3件、専門家への相談は4件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは24件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが0件、ポータル・比較サイトが3件、動画・SNS・ブログが1件でした。"
+ ]
+}
