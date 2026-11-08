@@ -1,0 +1,104 @@
+{
+ "v": 2,
+ "slug": "full-remote-kichodaiko",
+ "ok": true,
+ "date": "2026-11-08",
+ "questions": [
+  "フルリモート 記帳代行について教えてください",
+  "フルリモート 記帳代行について、「フルリモートの記帳代行とは？来社も郵送もしない頼み方」を教えてください",
+  "フルリモート 記帳代行について、「フルリモートで回る会社・回らない会社の分かれ目」を教えてください",
+  "フルリモート 記帳代行について、「紙の領収書と電子の請求書はどう渡す？保存のきまり」を教えてください",
+  "フルリモート 記帳代行について、「フルリモートの記帳代行で失敗する3つの原因」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "フルリモートの記帳代行とは？来社も郵送もしない頼み方",
+   "words": [
+    "来社",
+    "郵送"
+   ],
+   "hits": 3,
+   "of": 8
+  },
+  {
+   "topic": "紙の領収書と電子の請求書はどう渡す？保存のきまり",
+   "words": [
+    "領収書",
+    "請求書",
+    "電子",
+    "保存"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "フルリモートの記帳代行で失敗する3つの原因",
+   "words": [
+    "原因"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "頼む前に、自社の入力時間を試算する",
+   "words": [
+    "入力時間"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "accly.jp": "peer",
+  "adv.freee.co.jp": "peer",
+  "aspicjapan.org": "public",
+  "bricks-outsourcing.com": "peer",
+  "cashmo.jp": "peer",
+  "catalog.monex.co.jp": "media",
+  "en-gage.net": "portal",
+  "fukuoka-keiridaiko.info": "peer",
+  "go.taxita.com": "portal",
+  "hrtzei.com": "peer",
+  "ipa.go.jp": "public",
+  "keiri.cwm.co.jp": "peer",
+  "kicho-daikou.com": "peer",
+  "libe-accountingsupport.com": "peer",
+  "mamaworks.jp": "peer",
+  "mof.go.jp": "public",
+  "mori-zeirishi.net": "peer",
+  "note.com": "video",
+  "nta.go.jp": "public",
+  "ntt-finance.co.jp": "peer",
+  "obc.co.jp": "peer",
+  "pfu.ricoh.com": "peer",
+  "remoba.biz": "portal",
+  "ss-group.co.jp": "peer",
+  "tax.hatenabase.jp": "peer",
+  "tokyo-keiri.com": "peer",
+  "tryarch.jp": "peer",
+  "wheat-biz.com": "peer",
+  "worklifesupport.online": "peer",
+  "yamakawatax.com": "video",
+  "zai-me.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 4,
+  "注意点・失敗・リスク": 6,
+  "進め方の手順": 4,
+  "専門家への相談": 6
+ },
+ "chars": 18762,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え8件のうち、『原因』に触れたものは0件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え8件のうち、『来社』に触れたものは3件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは費用の金額（◯円）は3件、期間（◯か月・◯日など）は4件、進め方の手順は4件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは31件で、公的機関・学会・業界団体が4件、ニュース・メディア・まとめが1件、ポータル・比較サイトが3件、動画・SNS・ブログが2件でした。"
+ ]
+}
