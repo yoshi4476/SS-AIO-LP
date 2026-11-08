@@ -195,16 +195,20 @@
 "hash": "2a723196ca56cf0312e5e6d193df0332",
 "modified": "2026-09-03"
 },
+"biyoushitsu-shukyaku-daikou": {
+"hash": "93385269fb0387e27b07d6885c6756c8",
+"modified": "2026-11-09"
+},
 "biyoushitsu-shukyaku-houhou": {
 "hash": "8b4e6e642fb6eedfe60706495b07ba4c",
 "modified": "2026-08-13"
 },
 "biyoushitsu-shukyaku-idea": {
-"hash": "53a875787b90c301d0da22018adc2de8",
+"hash": "0a4a97b727250910be01786cb65ecabc",
 "modified": "2026-09-01"
 },
 "biyoushitsu-shukyaku-shien": {
-"hash": "5f6846a44ffb15e1e2bbee9d5d02038b",
+"hash": "69cc6849045ee0f14cbd2341fe1ec14b",
 "modified": "2026-11-08"
 },
 "btob-aio-taisaku-kaisha": {
@@ -732,7 +736,7 @@
 "modified": "2026-08-31"
 },
 "shika-kaigyou-hiyou": {
-"hash": "98283e151ed9f335681ca583e3093358",
+"hash": "0bcf360d89caefab4802dabf215c852c",
 "modified": "2026-09-09"
 },
 "shika-llmo-taisaku": {

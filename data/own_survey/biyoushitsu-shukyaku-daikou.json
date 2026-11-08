@@ -1,0 +1,112 @@
+{
+ "v": 2,
+ "slug": "biyoushitsu-shukyaku-daikou",
+ "ok": true,
+ "date": "2026-11-09",
+ "questions": [
+  "美容室 集客代行について教えてください",
+  "美容室 集客代行について、「美容室の集客代行は任せる経路で業者が4種類に分かれる」を教えてください",
+  "美容室 集客代行について、「AIの答えに美容室が出るときの出典と、代行が効く質問」を教えてください",
+  "美容室 集客代行について、「美容室の集客代行の料金の形と費用の相場」を教えてください",
+  "美容室 集客代行について、「集客代行の契約書で確かめる4つの条項」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "美容室の集客代行は任せる経路で業者が4種類に分かれる",
+   "words": [
+    "経路"
+   ],
+   "hits": 1,
+   "of": 8
+  },
+  {
+   "topic": "AIの答えに美容室が出るときの出典と、代行が効く質問",
+   "words": [
+    "AI",
+    "出典",
+    "代行"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "集客代行の契約書で確かめる4つの条項",
+   "words": [
+    "契約書",
+    "条項"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "代行の成果を判断する時期と見る数字",
+   "words": [
+    "代行",
+    "成果",
+    "数字"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "店の状況ごとに選ぶ代行の種類",
+   "words": [
+    "代行"
+   ],
+   "hits": 10,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "aiony.jp": "peer",
+  "atsoho.com": "peer",
+  "ceeev.co.jp": "peer",
+  "colet-lab.jp": "peer",
+  "coomil.co.jp": "peer",
+  "cyberhorn.co.jp": "peer",
+  "developers.google.com": "peer",
+  "digima.cocoo.co.jp": "peer",
+  "e-pace.co.jp": "peer",
+  "freee.co.jp": "peer",
+  "haward-joyman.com": "peer",
+  "hba.beauty.hotpepper.jp": "portal",
+  "holytech.jp": "peer",
+  "junkuwabara.com": "peer",
+  "koshikiad.com": "peer",
+  "kuroco.team": "peer",
+  "liberalhearts.co.jp": "peer",
+  "media.meo-taisaku.com": "peer",
+  "muselink24.com": "peer",
+  "note.com": "video",
+  "propagateinc.com": "peer",
+  "rei-yokohama.co.jp": "peer",
+  "salon-plus-gpj.com": "peer",
+  "salon-syukyaku.jp": "peer",
+  "self-plus.co.jp": "peer",
+  "shukyaku-cloud.com": "peer",
+  "sinthia.co.jp": "peer",
+  "sub-cast.jp": "peer",
+  "support.google.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 2,
+  "専門家への相談": 0
+ },
+ "chars": 21101,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え8件のうち、『契約書』に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え8件のうち、『経路』に触れたものは1件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは専門家への相談は0件、進め方の手順は2件、期間（◯か月・◯日など）は3件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは30件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが0件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
+}

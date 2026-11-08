@@ -49,6 +49,8 @@ faq:
 
 美容室の集客アイデアは、無料でできることから着手し、1つずつ根づかせる順番が成功の条件です。
 
+関連する内容は、[美容室の集客代行は契約でつまずく｜確かめる4つの条項](/aio/biyoushitsu-shukyaku-daikou/)で解説しています。
+
 あわせて[美容室のMEO対策とは？](/meo/biyoushitsu-meo-taisaku/)もご覧ください。
 
 <div class="definition-box"><span class="term">美容室の集客アイデアとは</span>、Googleマップ・口コミ・SNS・季節施策・予算施策という5つの引き出しから、店の状況に合わせて選ぶ具体的な打ち手を指します。<strong>思いつきで手を広げるほど、どれも中途半端に終わり効果が見えなくなります。</strong></div>

@@ -1,0 +1,97 @@
+{
+ "v": 2,
+ "slug": "shika-kaigyou-hiyou",
+ "ok": true,
+ "date": "2026-11-09",
+ "questions": [
+  "歯科医院 開業 費用について教えてください",
+  "歯科医院 開業 費用について、「歯科医院の開業費用とは？総額の目安」を教えてください",
+  "歯科医院 開業 費用について、「歯科医院の開業費用の内訳と相場」を教えてください",
+  "歯科医院 開業 費用について、「歯科医院の開業費用を抑える3つの方法」を教えてください",
+  "歯科医院 開業 費用について、「開業後にかかるランニングコストと資金繰り」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "歯科医院の開業費用とは？総額の目安",
+   "words": [
+    "総額"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "歯科医院の開業費用の内訳と相場",
+   "words": [
+    "内訳"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "開業後にかかるランニングコストと資金繰り",
+   "words": [
+    "ランニングコスト"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "見落としがちな集客・MEO予算",
+   "words": [
+    "MEO予算",
+    "見落",
+    "集客"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "121.dental-plaza.com": "peer",
+  "apotool.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "cloudbuddy-dental.biz": "peer",
+  "dentis-cloud.com": "peer",
+  "e-dentist.co.jp": "peer",
+  "emdi.co.jp": "peer",
+  "hpdx.or.jp": "peer",
+  "j-net21.smrj.go.jp": "public",
+  "jfc.go.jp": "public",
+  "m-assets.com": "peer",
+  "medical-attend.com": "peer",
+  "medicallives.com": "peer",
+  "mic.jp": "peer",
+  "mshimada-blog.com": "peer",
+  "nkgr.co.jp": "peer",
+  "prog-tax.com": "video",
+  "service.yoshida-dental.co.jp": "peer",
+  "sokuraku-doctor.com": "peer",
+  "sougyou.lib-zeirishi.jp": "peer",
+  "stores.fun": "peer",
+  "takara-dental.jp": "peer",
+  "tokyo-consulting.com": "peer",
+  "v-spirits.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yamaji-dental.net": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 9,
+  "期間（◯か月・◯日など）": 8,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 0,
+  "専門家への相談": 7
+ },
+ "chars": 16410,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え8件のうち、『ランニングコスト』に触れたものは0件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え8件のうち、『総額』に触れたものは4件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは進め方の手順は0件、注意点・失敗・リスクは3件、専門家への相談は7件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは26件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが0件、動画・SNS・ブログが1件でした。"
+ ]
+}
