@@ -1500,5 +1500,69 @@
       "reason": "YouTube のサジェストに「不動産 集客」が出ます"
     },
     "youtube": "tc03u3NkzPs"
+  },
+  "clinic-chiikimei-kensaku-joui": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-08",
+      "keyword": "クリニック 地域名 検索 上位",
+      "queries": [
+        "クリニック 地域名 検索 上位",
+        "地域名 検索 上位",
+        "クリニック 検索 上位",
+        "クリニック 地域名 上位",
+        "クリニック 地域名 検索"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "エクセル キーワード検索",
+        "医療広告ガイドライン",
+        "引用とは",
+        "地域調査の手法",
+        "人事データ分析",
+        "クリニック 予約システム",
+        "認定医療法人制度",
+        "開発許可 実務",
+        "リスト内包表記",
+        "クリティカルパス 医療"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-11-08",
+      "sec": 43,
+      "title": "駅名＋診療科で、なぜ自院が出ないの？",
+      "youtube": "NJMm4foovWQ"
+    }
+  },
+  "clinic-llmo-taisaku": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-08",
+      "keyword": "クリニック llmo",
+      "queries": [
+        "クリニック llmo"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "クリニック"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
+  },
+  "biyoushitsu-shukyaku-shien": {
+    "site": "ai-lab",
+    "long": {
+      "date": "2026-11-08",
+      "keyword": "美容室 集客支援",
+      "queries": [
+        "美容室 集客支援"
+      ],
+      "decision": "skip",
+      "suggestions": [
+        "美容室 集客"
+      ],
+      "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    }
   }
 }
