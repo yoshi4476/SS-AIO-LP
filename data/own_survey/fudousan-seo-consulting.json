@@ -1,0 +1,119 @@
+{
+ "v": 2,
+ "slug": "fudousan-seo-consulting",
+ "ok": true,
+ "date": "2026-11-08",
+ "questions": [
+  "seo 不動産 コンサルティングについて教えてください",
+  "seo 不動産 コンサルティングについて、「不動産SEOコンサルティングとは？外注との違い」を教えてください",
+  "seo 不動産 コンサルティングについて、「不動産会社がコンサルティングを検討すべき3つの場面」を教えてください",
+  "seo 不動産 コンサルティングについて、「コンサルティングで受けられる4つの支援内容」を教えてください",
+  "seo 不動産 コンサルティングについて、「良いコンサルタントを見極める5つの基準」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "不動産SEOコンサルティングとは？外注との違い",
+   "words": [
+    "外注"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "不動産会社がコンサルティングを検討すべき3つの場面",
+   "words": [
+    "場面"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "コンサルティングで受けられる4つの支援内容",
+   "words": [
+    "支援内容"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "良いコンサルタントを見極める5つの基準",
+   "words": [
+    "コンサルタント"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "不動産SEOコンサルティングの費用相場と契約形態",
+   "words": [
+    "費用相場",
+    "契約形態"
+   ],
+   "hits": 2,
+   "of": 5
+  },
+  {
+   "topic": "導入から成果が出るまでの流れ",
+   "words": [
+    "導入",
+    "成果"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "AI検索時代に不動産SEOコンサルに求められる視点",
+   "words": [
+    "AI検索時代",
+    "視点"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "ad-market.jp": "peer",
+  "ai.7senses.co.jp": "self",
+  "atsumel.jp": "peer",
+  "centered.co.jp": "peer",
+  "cinc-j.co.jp": "peer",
+  "curiver.com": "peer",
+  "freelance-meikan.com": "portal",
+  "gyro-n.com": "peer",
+  "ipeinc.jp": "peer",
+  "j-s-p.com": "peer",
+  "lany.co.jp": "peer",
+  "leadcreation.co.jp": "peer",
+  "lucy.ne.jp": "peer",
+  "mieru-ca.com": "media",
+  "n-create.co.jp": "peer",
+  "n-works.link": "peer",
+  "piftee.co.jp": "peer",
+  "plan-b.co.jp": "peer",
+  "property-force.jp": "peer",
+  "switchitmaker2.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "webma.xscore.co.jp": "peer",
+  "willgate.co.jp": "peer",
+  "windom-kk.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 1,
+  "専門家への相談": 0
+ },
+ "chars": 10755,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え4件のうち、『場面』に触れたものは0件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え4件のうち、『外注』に触れたものは1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは期間（◯か月・◯日など）は0件、専門家への相談は0件、進め方の手順は1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは24件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件、ポータル・比較サイトが1件でした。"
+ ]
+}
