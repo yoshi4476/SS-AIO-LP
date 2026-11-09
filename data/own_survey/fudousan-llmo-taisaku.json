@@ -1,0 +1,119 @@
+{
+ "v": 2,
+ "slug": "fudousan-llmo-taisaku",
+ "ok": true,
+ "date": "2026-11-10",
+ "questions": [
+  "LLMO 不動産について教えてください",
+  "LLMO 不動産について、「不動産業のLLMOとは？物件探しでAIに聞かれたときの話」を教えてください",
+  "LLMO 不動産について、「不動産の物件探しで生成AIに直接聞くユーザーが増えている」を教えてください",
+  "LLMO 不動産について、「ChatGPT・Perplexity・Geminiが不動産会社の紹介先を選ぶ基準」を教えてください",
+  "LLMO 不動産について、「不動産会社が今日から始められるLLMO対策5選」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "不動産業のLLMOとは？物件探しでAIに聞かれたときの話",
+   "words": [
+    "AI"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "不動産の物件探しで生成AIに直接聞くユーザーが増えている",
+   "words": [
+    "生成AI",
+    "ユーザー"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "ChatGPT・Perplexity・Geminiが不動産会社の紹介先を選ぶ基準",
+   "words": [
+    "Perplexity",
+    "ChatGPT",
+    "Gemini"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "「対策したのに引用されない」でよくある3つの原因",
+   "words": [
+    "原因"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "不動産会社はLLMOとAIO、どちらを先に手掛けるべきか",
+   "words": [
+    "AIO"
+   ],
+   "hits": 3,
+   "of": 10
+  },
+  {
+   "topic": "引用実績をGA4で計測する方法",
+   "words": [
+    "引用実績"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "adcal-inc.com": "peer",
+  "agent-signal.ai": "peer",
+  "ageo-scope.com": "peer",
+  "ai-search.techsuite.co.jp": "peer",
+  "ai.7senses.co.jp": "self",
+  "atoz-design.jp": "peer",
+  "coomil.co.jp": "peer",
+  "coosy.co.jp": "peer",
+  "developers.google.com": "peer",
+  "developers.openai.com": "peer",
+  "digital-marketing.jp": "peer",
+  "digitalidentity.co.jp": "peer",
+  "docs.perplexity.ai": "peer",
+  "giginc.co.jp": "media",
+  "gmotech.jp": "peer",
+  "iimon.co.jp": "peer",
+  "lany.co.jp": "peer",
+  "lifunext.com": "peer",
+  "lightdoor.jp": "peer",
+  "llmo-navi.com": "peer",
+  "mieru-ca.com": "media",
+  "my-agent.work": "peer",
+  "note.com": "video",
+  "openai.com": "peer",
+  "perplexity.ai": "peer",
+  "prtimes.jp": "media",
+  "science.co.jp": "peer",
+  "support.google.com": "peer",
+  "trilia.co.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 4,
+  "注意点・失敗・リスク": 1,
+  "進め方の手順": 2,
+  "専門家への相談": 1
+ },
+ "chars": 19591,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え10件のうち、『原因』に触れたものは0件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え10件のうち、『AIO』に触れたものは3件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは注意点・失敗・リスクは1件、専門家への相談は1件、進め方の手順は2件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは31件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが3件、動画・SNS・ブログが2件でした。"
+ ]
+}

@@ -380,7 +380,7 @@
 "modified": "2026-08-30"
 },
 "fudousan-llmo-taisaku": {
-"hash": "1c81bbd124cf86d29f5b2141b15a3dbd",
+"hash": "f387b978e08e45bb0f07df332633b210",
 "modified": "2026-09-16"
 },
 "fudousan-meo-taisaku": {
@@ -704,7 +704,7 @@
 "modified": "2026-10-23"
 },
 "shigyou-shukyaku-daikou": {
-"hash": "56b6873469b8f6142df111c3cf8619e3",
+"hash": "68ebe5639ae5358b1992d629d32f569c",
 "modified": "2026-10-22"
 },
 "shika-ai-kensaku-denai-genin": {
@@ -792,7 +792,7 @@
 "modified": "2026-08-23"
 },
 "zeirishi-homepage-shukyaku": {
-"hash": "0a1a9fabe4201017d60878b596bf1e02",
+"hash": "23dc8010dc3d9caa42eb29408ab8d64d",
 "modified": "2026-08-31"
 },
 "zeirishi-houjin-aio": {
@@ -804,8 +804,12 @@
 "modified": "2026-10-17"
 },
 "zeirishi-shukyaku-channel": {
-"hash": "b9368ef428c3962ac4bdccabcb56a8ad",
+"hash": "9f33ed788dd7ee78eed51c27c0836b71",
 "modified": "2026-09-26"
+},
+"zeirishi-shukyaku-consul": {
+"hash": "90c9060b257fbde4a20b39c25ca6cffe",
+"modified": "2026-11-10"
 },
 "zeirishi-shukyaku-dekinai": {
 "hash": "477edbfc3e915e26f931babec58da512",
