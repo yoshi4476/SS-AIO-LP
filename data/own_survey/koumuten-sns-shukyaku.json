@@ -1,0 +1,114 @@
+{
+ "v": 2,
+ "slug": "koumuten-sns-shukyaku",
+ "ok": true,
+ "date": "2026-11-09",
+ "questions": [
+  "工務店 sns 集客について教えてください",
+  "工務店 sns 集客について、「工務店のSNS集客とは」を教えてください",
+  "工務店 sns 集客について、「工務店のSNS集客で使われる主要5媒体の特徴」を教えてください",
+  "工務店 sns 集客について、「自社に合うSNSの選び方｜3つの判断基準」を教えてください",
+  "工務店 sns 集客について、「Instagram集客の要点｜詳しい施策は個別記事へ」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "工務店のSNS集客で使われる主要5媒体の特徴",
+   "words": [
+    "特徴"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "自社に合うSNSの選び方｜3つの判断基準",
+   "words": [
+    "判断基準"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "Instagram集客の要点｜詳しい施策は個別記事へ",
+   "words": [
+    "個別記事",
+    "要点",
+    "施策"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "LINE公式アカウントで見込み客をフォローする方法",
+   "words": [
+    "LINE公式アカウント"
+   ],
+   "hits": 4,
+   "of": 5
+  },
+  {
+   "topic": "複数媒体を無理なく運用する3ステップ",
+   "words": [
+    "複数媒体"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "SNS集客が伸びない工務店に共通する失敗パターン",
+   "words": [
+    "失敗パターン"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "SNS集客の効果を検索・AI検索につなげる方法",
+   "words": [
+    "AI検索",
+    "検索"
+   ],
+   "hits": 5,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "b-step.net": "peer",
+  "blog.nb-a.jp": "peer",
+  "genji-group.com": "peer",
+  "holytech.jp": "peer",
+  "housing-labo.com": "peer",
+  "kenchiku-senmon.com": "peer",
+  "koumuten.marketing": "peer",
+  "lifequartet.jp": "peer",
+  "madori-labo.com": "peer",
+  "makehouse.co.jp": "peer",
+  "mirai-style.net": "peer",
+  "miraie-c.jp": "peer",
+  "note.com": "video",
+  "shiyou.iepro.jp": "peer",
+  "trust-lead.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "wakudori.co.jp": "peer",
+  "withmo.co.jp": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 1,
+  "専門家への相談": 0
+ },
+ "chars": 10740,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え4件のうち、『判断基準』に触れたものは0件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え4件のうち、『個別記事』に触れたものは1件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは専門家への相談は0件、費用の金額（◯円）は1件、期間（◯か月・◯日など）は1件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは19件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが0件、動画・SNS・ブログが2件でした。"
+ ]
+}
