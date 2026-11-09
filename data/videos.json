@@ -1548,6 +1548,12 @@
         "クリニック"
       ],
       "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-11-09",
+      "sec": 46,
+      "title": "AIは何を見て医院を紹介する？",
+      "youtube": "NxywDItozBc"
     }
   },
   "biyoushitsu-shukyaku-shien": {
@@ -1564,5 +1570,15 @@
       ],
       "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
     }
+  },
+  "research-fitness": {
+    "site": "ai-lab",
+    "kind": "research",
+    "date": "2026-11-09",
+    "sec": 183,
+    "mp4": "automation/video/research-fitness.mp4",
+    "format": "duo",
+    "url": "https://ai.7senses.co.jp/research/fitness-ai-sources/",
+    "youtube": "sZQVtp7CH2w"
   }
 }
