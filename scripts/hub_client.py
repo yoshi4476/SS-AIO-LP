@@ -301,7 +301,8 @@ def next_kw(site):
 def _buyer_first(site):
     import sites as S
     try:
-        return (S.load(site) or {}).get("kw_buyer_first") is True
+        # S.load は設定の無い社で SystemExit を投げ、except Exception をすり抜けて工程ごと止まる。load_all から引く
+        return (S.load_all().get(site) or {}).get("kw_buyer_first") is True
     except Exception:  # noqa: BLE001  読めなければ今までの順
         return False
 
