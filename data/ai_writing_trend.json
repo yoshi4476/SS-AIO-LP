@@ -1,0 +1,24 @@
+{
+ "2026-W46": {
+  "cc335c6c4": {
+   "articles": 34,
+   "hits": 0,
+   "failed": 0
+  },
+  "subsidy": {
+   "articles": 133,
+   "hits": 62,
+   "failed": 0
+  },
+  "ai-lab": {
+   "articles": 196,
+   "hits": 137,
+   "failed": 0
+  },
+  "corporate": {
+   "articles": 169,
+   "hits": 229,
+   "failed": 0
+  }
+ }
+}

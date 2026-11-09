@@ -43,6 +43,82 @@
 "2026-10-17": {
 "imp": 62,
 "clicks": 2
+},
+"2026-10-18": {
+"imp": 319,
+"clicks": 9
+},
+"2026-10-19": {
+"imp": 517,
+"clicks": 7
+},
+"2026-10-20": {
+"imp": 575,
+"clicks": 9
+},
+"2026-10-21": {
+"imp": 555,
+"clicks": 14
+},
+"2026-10-22": {
+"imp": 503,
+"clicks": 10
+},
+"2026-10-23": {
+"imp": 180,
+"clicks": 1
+},
+"2026-10-24": {
+"imp": 54,
+"clicks": 1
+},
+"2026-10-25": {
+"imp": 480,
+"clicks": 7
+},
+"2026-10-26": {
+"imp": 495,
+"clicks": 14
+},
+"2026-10-27": {
+"imp": 384,
+"clicks": 15
+},
+"2026-10-28": {
+"imp": 352,
+"clicks": 13
+},
+"2026-10-29": {
+"imp": 306,
+"clicks": 15
+},
+"2026-10-30": {
+"imp": 112,
+"clicks": 3
+},
+"2026-10-31": {
+"imp": 42,
+"clicks": 0
+},
+"2026-11-01": {
+"imp": 281,
+"clicks": 11
+},
+"2026-11-02": {
+"imp": 117,
+"clicks": 4
+},
+"2026-11-03": {
+"imp": 271,
+"clicks": 5
+},
+"2026-11-04": {
+"imp": 339,
+"clicks": 7
+},
+"2026-11-05": {
+"imp": 349,
+"clicks": 10
 }
 },
 "weeks": {
@@ -513,9 +589,980 @@
 "pos": 1
 }
 ]
+},
+"2026-10-23": {
+"queries": [
+{
+"key": "bpoとは",
+"imp": 877,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "セブンセンシズ",
+"imp": 15,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "bpo業務とは",
+"imp": 12,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "会計処理 フローチャート",
+"imp": 12,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "適格請求書 要件",
+"imp": 12,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "建設業経理",
+"imp": 11,
+"clicks": 1,
+"pos": 9
+},
+{
+"key": "適格請求書の要件とは",
+"imp": 11,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "セブンセンシズ株式会社",
+"imp": 10,
+"clicks": 2,
+"pos": 3
+},
+{
+"key": "適格請求書　要件",
+"imp": 6,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "月次試算表 サンプルダウンロード",
+"imp": 5,
+"clicks": 1,
+"pos": 111
+},
+{
+"key": "請求書払い銀行振込方法",
+"imp": 5,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "会計フローチャートexcel",
+"imp": 3,
+"clicks": 3,
+"pos": 4
+},
+{
+"key": "株式会社セブンセンシズ",
+"imp": 2,
+"clicks": 2,
+"pos": 4
+},
+{
+"key": "セブンセンシズ株式会社 / 株式会社planet",
+"imp": 2,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "振込入金はどこに記帳する",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "支払　出納　フローチャート",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "経費決裁規程",
+"imp": 2,
+"clicks": 1,
+"pos": 9
+},
+{
+"key": "通帳記帳 送金と振込",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "銀行 記帳 やり方　さいしん",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "月次決算 年次決算",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "請求書の作り方",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "業務フロー　経理事務　例",
+"imp": 1,
+"clicks": 2,
+"pos": 1
+},
+{
+"key": "個人事業主　請求書発行手数料",
+"imp": 1,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "請求書を銀行で支払う書類",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "通帳記帳 摘要欄",
+"imp": 1,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "銀行記帳",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "銀行記帳の仕方",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "ｆine 支出事務の業務別事務フロー",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "bpo　とは",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "bpo業務 種類",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "smbc経理業務が入れると、high rangeを届けられます。言い方はどう",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "ゆうちょ 記帳方法",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "人手による照合",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "北京时间",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "変更届 勘定科目",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "杉田社長お疲れ様です。2026年8月分の月次決算について、ご報告いたします。今年度の税務申告書の提出および年度財務諸表の監査も無事に完了しましたので、今年度の財務諸表を併せて送付いたします。パスワードはいつもの通りです。meitoku2026詳細につきましては、添付ファイルをご確認いただけますと幸いです。どうぞ宜しくお願いいたします。リン",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "経理bpo 訪問あり 訪問なし 違い",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "請求代行手数料の料率はいくらくらい？",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "請求代行時　手数料乗せる場合に必要な点？",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+}
+],
+"pages": [
+{
+"key": "https://corp.7senses.co.jp/blog/bpo-toha",
+"imp": 978,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/ginko-kicho-yarikata",
+"imp": 276,
+"clicks": 8,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tekikaku-seikyusho-youken",
+"imp": 182,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata",
+"imp": 169,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-mitsuori-yarikata",
+"imp": 100,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template",
+"imp": 82,
+"clicks": 8,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kensetsugyou-keiri-yarikata",
+"imp": 80,
+"clicks": 3,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-ginko-furikomi-yarikata",
+"imp": 43,
+"clicks": 3,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/rakurakuseisan-keihi-seisan-yarikata",
+"imp": 39,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/company",
+"imp": 20,
+"clicks": 7,
+"pos": 3
+},
+{
+"key": "https://corp.7senses.co.jp/blog/yucho-kicho-yarikata",
+"imp": 19,
+"clicks": 3,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gyomu-flowchart-kakikata",
+"imp": 14,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-fuutou-kakikata",
+"imp": 12,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-hakko-tesuryo-souba",
+"imp": 10,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-kanjoukamoku",
+"imp": 8,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/getsuji-kessan-houkokusho-kakikata",
+"imp": 5,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-tsukurikata",
+"imp": 5,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka",
+"imp": 4,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/getsuji-nenji-kessan-chigai",
+"imp": 3,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keihi-seisan-kichodaiko-bpo-chigai",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/smbc-keiri-jidouka",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+}
+]
+},
+"2026-10-30": {
+"queries": [
+{
+"key": "bpoとは",
+"imp": 566,
+"clicks": 1,
+"pos": 9
+},
+{
+"key": "セブンセンシズ",
+"imp": 23,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "株式会社セブンセンシズ",
+"imp": 12,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "適格請求書 要件",
+"imp": 8,
+"clicks": 1,
+"pos": 10
+},
+{
+"key": "経理図",
+"imp": 6,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "仕訳までの業務フロー",
+"imp": 2,
+"clicks": 2,
+"pos": 6
+},
+{
+"key": "建設業 経理の流れ",
+"imp": 2,
+"clicks": 2,
+"pos": 3
+},
+{
+"key": "セブンセンシズ株式会社",
+"imp": 2,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "会計処理 フローチャート",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "個人事業主 外注費と給与　請求書き方",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "税理士事務所と記帳代行会社兼務　問題点",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "経理　処理の流れ　フローチャート",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "請求書 振込 やり方",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "銀行記帳とは",
+"imp": 2,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "meo運用代行",
+"imp": 2,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "銀行口座に記帳されている with reference tax 意味",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "銀行記帳",
+"imp": 2,
+"clicks": 0,
+"pos": 29
+},
+{
+"key": "青色申告 65 万円控除条件帳簿",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "excel インボイス 社内記録",
+"imp": 1,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "お引き取り口座　科目",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "建設経理項目",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "楽楽精算 領収書 複数",
+"imp": 1,
+"clicks": 1,
+"pos": 10
+},
+{
+"key": "請求書 個人から企業",
+"imp": 1,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "notion 記帳 自動化 截圖 批量導入 csv",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "その場合は記帳費用がかからないだけでしょうか？？",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "ひよこでもできるタイピング練習",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "口座 記帳 cd 訳",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "自動照合",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "請求代行時　手数料乗せるのは問題ない？",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "請求代行時　手数料乗せる場合に必要な点？",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "請求書を支払う",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "通帳 記帳記録",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "通帳の記帳の仕方",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "通帳記帳 やり方",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "適格請求書　要件の税率",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+}
+],
+"pages": [
+{
+"key": "https://corp.7senses.co.jp/blog/bpo-toha",
+"imp": 638,
+"clicks": 1,
+"pos": 9
+},
+{
+"key": "https://corp.7senses.co.jp/blog/ginko-kicho-yarikata",
+"imp": 300,
+"clicks": 13,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tekikaku-seikyusho-youken",
+"imp": 170,
+"clicks": 2,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata",
+"imp": 144,
+"clicks": 2,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-mitsuori-yarikata",
+"imp": 74,
+"clicks": 3,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template",
+"imp": 55,
+"clicks": 4,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/rakurakuseisan-keihi-seisan-yarikata",
+"imp": 49,
+"clicks": 3,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kensetsugyou-keiri-yarikata",
+"imp": 41,
+"clicks": 3,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/company",
+"imp": 24,
+"clicks": 2,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/",
+"imp": 14,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-kanjoukamoku",
+"imp": 13,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gyomu-flowchart-kakikata",
+"imp": 10,
+"clicks": 3,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata",
+"imp": 9,
+"clicks": 2,
+"pos": 3
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-ginko-furikomi-yarikata",
+"imp": 5,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-hakko-tesuryo-souba",
+"imp": 3,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/services/meo",
+"imp": 3,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/getsuji-kessan-houkokusho-kakikata",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-shougou-jidoka",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-excel-jidoka",
+"imp": 1,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/notion-kicho-jidoka",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+}
+]
+},
+"2026-11-06": {
+"queries": [
+{
+"key": "bpo業務とは",
+"imp": 11,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "適格請求書 要件",
+"imp": 11,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "工事　請求書　銀行に振り込む方法",
+"imp": 4,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "セブンセンシズ",
+"imp": 4,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "外注請求書",
+"imp": 3,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "システム障害 経理業務フローチャート",
+"imp": 2,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "三つ折り　やり方　名前にかぶせておる",
+"imp": 2,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "個人事業主　青色申告６５万円控除　期中現金主義・期末発生主義　記帳例",
+"imp": 2,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "外注の請求書の書き方",
+"imp": 2,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "月次報告書とは",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "bpoとは",
+"imp": 2,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "横向き請求書 折り方",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "経理 銀行残高",
+"imp": 2,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "経費精算 bpo　とは",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "通帳記帳 やり方",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "経理　派遣　どのくらいできるといいか",
+"imp": 1,
+"clicks": 2,
+"pos": 5
+},
+{
+"key": "会計決算報告書の書き方見本 月ごと",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "営業会計 経理課以外",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "営業経理受け渡し",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "売掛金　管理　必要書類",
+"imp": 1,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "外注費　請求書",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "届いた請求書のチェック　強化　取り組み",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "建設業経理　汎用",
+"imp": 1,
+"clicks": 1,
+"pos": 9
+},
+{
+"key": "振込 請求書",
+"imp": 1,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "経理課 経理部",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "行政書士　報酬　記帳",
+"imp": 1,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "銀行口座のカード記帳は、お金が掛かる",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "atm記帳の仕方",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "ginnkou 発行時の仕訳",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "❾調整金額（外注費反映なし）",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "フランス経理規程送る",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "個人事業主 bookkeeper 費用",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "毎月の月次レポートでは、期首予算は期中予算に変更されます",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "経理部経理",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "複式簿記 控除額",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "記帳 やり方 銀行",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "請求書チェック",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "通帳 コッコキン 仕訳",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "通帳 記帳 当日分 記帳した時点 取引",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "通帳 記帳しまくるお",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "通帳　印字ばらつき",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "通帳　摘要欄　配当金とは",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "通帳の記載内容はじめから",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "通帳記帳　名称",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+}
+],
+"pages": []
 }
 },
-"updated": "2026-10-19",
+"updated": "2026-11-09",
 "site": "corporate",
 "domain": "corp.7senses.co.jp"
 }

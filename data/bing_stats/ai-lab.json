@@ -323,6 +323,82 @@
 "2026-10-17": {
 "imp": 5,
 "clicks": 1
+},
+"2026-10-18": {
+"imp": 22,
+"clicks": 2
+},
+"2026-10-19": {
+"imp": 18,
+"clicks": 0
+},
+"2026-10-20": {
+"imp": 29,
+"clicks": 2
+},
+"2026-10-21": {
+"imp": 17,
+"clicks": 1
+},
+"2026-10-22": {
+"imp": 20,
+"clicks": 2
+},
+"2026-10-23": {
+"imp": 5,
+"clicks": 0
+},
+"2026-10-24": {
+"imp": 7,
+"clicks": 0
+},
+"2026-10-25": {
+"imp": 19,
+"clicks": 0
+},
+"2026-10-26": {
+"imp": 19,
+"clicks": 1
+},
+"2026-10-27": {
+"imp": 15,
+"clicks": 0
+},
+"2026-10-28": {
+"imp": 24,
+"clicks": 1
+},
+"2026-10-29": {
+"imp": 16,
+"clicks": 2
+},
+"2026-10-30": {
+"imp": 13,
+"clicks": 0
+},
+"2026-10-31": {
+"imp": 7,
+"clicks": 0
+},
+"2026-11-01": {
+"imp": 22,
+"clicks": 0
+},
+"2026-11-02": {
+"imp": 9,
+"clicks": 1
+},
+"2026-11-03": {
+"imp": 16,
+"clicks": 0
+},
+"2026-11-04": {
+"imp": 16,
+"clicks": 0
+},
+"2026-11-05": {
+"imp": 9,
+"clicks": 0
 }
 },
 "weeks": {
@@ -1373,16 +1449,16 @@
 "pos": 3
 },
 {
-"key": "aio コンサルティング",
-"imp": 1,
-"clicks": 0,
-"pos": 6
-},
-{
 "key": "aio 対策 無料ツール",
 "imp": 1,
 "clicks": 0,
 "pos": 3
+},
+{
+"key": "aioコンサルティング",
+"imp": 1,
+"clicks": 0,
+"pos": 6
 },
 {
 "key": "aio対策ツール 導入 効果 事例 日本語",
@@ -2179,9 +2255,650 @@
 "pos": 4
 }
 ]
+},
+"2026-10-23": {
+"queries": [
+{
+"key": "url 描画診断",
+"imp": 4,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "chatgpt 集客 おすすめ",
+"imp": 3,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "meo対策　医療",
+"imp": 3,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "aioコンサルティング",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "ai集客ラボ",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "url技術診断",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "aio 診断",
+"imp": 2,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "aio診断 トランスコスモス",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "web集客ラボ ai検索からの",
+"imp": 2,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "aiに選ばれる投稿",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "btobセミナー　申込者　平均",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "不動産反響が落ちている",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "施工事例 コメント 書き方",
+"imp": 1,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "施工事例・導入実績を見ても反響が出ない理由！成約率を跳ね上げる事例ページの書き方",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "aio　露出チェック　ツール　無料",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "aio改善",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "seo、meo、aio",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "実際の導入方法",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "整骨院イベント一般",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "整骨院一般イベント",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "歯科医院閉院手続き金額",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "ａｉｏ ｍｅｏ",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+}
+],
+"pages": [
+{
+"key": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+"imp": 8,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/",
+"imp": 6,
+"clicks": 2,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-erabareru-kiji-kakikata/",
+"imp": 6,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-event/",
+"imp": 5,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://ai.7senses.co.jp/tools/url-check/",
+"imp": 4,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-chirashi/",
+"imp": 4,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-seo-meo-chigai/",
+"imp": 4,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/",
+"imp": 3,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/fudousan-hankyou-konai/",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/webinar-shukyaku-hoho/",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-guide/",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "https://ai.7senses.co.jp/site-audit/",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/tools/",
+"imp": 2,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://ai.7senses.co.jp/",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/obkyaku-shoukai-shikumi/",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-jibunde/",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+}
+]
+},
+"2026-10-30": {
+"queries": [
+{
+"key": "リフォーム インスタグラム 自己紹介投稿",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "aio free",
+"imp": 2,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "aio 診断",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "aio無料診断",
+"imp": 2,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "aio計測方法",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "googleビジネスプロフィールの診断結果 rannku",
+"imp": 2,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "meo対策　医療",
+"imp": 2,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "web集客ラボ ai検索からの",
+"imp": 2,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "検索　対応",
+"imp": 2,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "税理士 ブログ 集客",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "診断 url",
+"imp": 2,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "通信 aio コンサルティング",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "aio対策　faq",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "クリニック meo対策",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "接骨院　集客セミナー",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "chatgpt 集客 おすすめ",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "google map reviewを増やす方法",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "googleまっぷで不動産会社を検索するときの期wordおススメ",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "meo 投稿　手順",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "予約導線とは",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "士業 seo",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "導入事例 書き方",
+"imp": 1,
+"clicks": 0,
+"pos": 21
+},
+{
+"key": "整体院のチラシの反応率は？",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "美容サロン 値引きしない 集客 付加価値 リピート予約",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+}
+],
+"pages": [
+{
+"key": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+"imp": 7,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-seo-meo-chigai/",
+"imp": 4,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-guide/",
+"imp": 4,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-jibunde/",
+"imp": 4,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "https://ai.7senses.co.jp/tools/meo-check/",
+"imp": 4,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://ai.7senses.co.jp/meo/clinic-meo-taisaku/",
+"imp": 3,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/reform-instagram-shukyaku/",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-faq/",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/aio/clinic-ai-kensaku-taisaku/",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/seikotsuin-shukyaku-seminar/",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/biyoushitsu-shukyaku-houhou/",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/shiko-jirei-kakikata/",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://ai.7senses.co.jp/meo/fudousan-meo-taisaku/",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://ai.7senses.co.jp/meo/kuchikomi-fuyasu-hoho/",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/seo/yoyaku-tsunagaru-dosen-sekkei/",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+}
+]
+},
+"2026-11-06": {
+"queries": [
+{
+"key": "aio seo",
+"imp": 3,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "aio free",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "aio 対応 簡易チェック",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "aio 診断",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "meo　googleアカウント",
+"imp": 2,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "meo設定",
+"imp": 2,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "url 無料診断",
+"imp": 2,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "建設業界 aio コンサルティング",
+"imp": 2,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "aio対策 faq aを載せないと不利？",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "aioっていつから搭載された？",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "google-extended gemini 引用",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "googleマップの整備",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "logoaiアシスタント　文字数制限　5000文字",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "meoの設定",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "meo設定　とは",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "snsのai時代だからこそseo集客",
+"imp": 1,
+"clicks": 0,
+"pos": 39
+},
+{
+"key": "webサイトプライバシー配慮度 無料ai診断",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "ハウスメーカー反響が急に来なくなった理由",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "・導線最適化・ia（情報設計） の見直し、登録までのユーザーフローの見直しで離脱を防ぐ",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "予約線　導線",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "歯科医院 閉院 手続き",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "歯科医院　治療説明　写真",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "飲食店ai　出典がある図",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+}
+],
+"pages": []
 }
 },
-"updated": "2026-10-19",
+"updated": "2026-11-09",
 "site": "ai-lab",
 "domain": "ai.7senses.co.jp"
 }

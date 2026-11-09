@@ -43,6 +43,82 @@
 "2026-10-17": {
 "imp": 5,
 "clicks": 0
+},
+"2026-10-18": {
+"imp": 29,
+"clicks": 1
+},
+"2026-10-19": {
+"imp": 56,
+"clicks": 2
+},
+"2026-10-20": {
+"imp": 39,
+"clicks": 5
+},
+"2026-10-21": {
+"imp": 27,
+"clicks": 1
+},
+"2026-10-22": {
+"imp": 30,
+"clicks": 1
+},
+"2026-10-23": {
+"imp": 9,
+"clicks": 1
+},
+"2026-10-24": {
+"imp": 1,
+"clicks": 0
+},
+"2026-10-25": {
+"imp": 26,
+"clicks": 2
+},
+"2026-10-26": {
+"imp": 48,
+"clicks": 0
+},
+"2026-10-27": {
+"imp": 32,
+"clicks": 1
+},
+"2026-10-28": {
+"imp": 42,
+"clicks": 0
+},
+"2026-10-29": {
+"imp": 56,
+"clicks": 1
+},
+"2026-10-30": {
+"imp": 19,
+"clicks": 0
+},
+"2026-10-31": {
+"imp": 4,
+"clicks": 0
+},
+"2026-11-01": {
+"imp": 55,
+"clicks": 3
+},
+"2026-11-02": {
+"imp": 20,
+"clicks": 0
+},
+"2026-11-03": {
+"imp": 63,
+"clicks": 1
+},
+"2026-11-04": {
+"imp": 76,
+"clicks": 0
+},
+"2026-11-05": {
+"imp": 68,
+"clicks": 4
 }
 },
 "weeks": {
@@ -387,9 +463,566 @@
 "pos": 6
 }
 ]
+},
+"2026-10-23": {
+"queries": [
+{
+"key": "ベンダー登録とは",
+"imp": 8,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "セブンセンシズ",
+"imp": 5,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "社会保険 電子化 義務化 中小企業",
+"imp": 3,
+"clicks": 2,
+"pos": 4
+},
+{
+"key": "ベンダー登録",
+"imp": 3,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "ものづくり補助金　農業用倉庫",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "gビズidプライム　最短",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "it 導入補助金 2026 納税証明書",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "セブンセンシズ株式会社",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "名古屋 ai導入支援",
+"imp": 2,
+"clicks": 0,
+"pos": 24
+},
+{
+"key": "社会保険電子申請義務化中小企業",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "it 導入補助金応募要項",
+"imp": 1,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "スマート農業 初期費用 平均",
+"imp": 1,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "世界と日本の農業補助の違い",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "社会保険 電子申請 義務化 対象範囲",
+"imp": 1,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "補助金　助成金の申請　電子　義務化？",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "電子申請 義務化 中小企業 いつから",
+"imp": 1,
+"clicks": 1,
+"pos": 10
+},
+{
+"key": "ai補助金　実績報告　マニュアル",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "it導入補助金において運輸業，郵便業で従業員数１９人の場合小規模事業者扱いになる？",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "※新規生徒様は対象外、継続生徒様専用です。 意思",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "ものづくり補助金 パソコン",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "中小企業省力化補助金とは",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "事業再生補助金　建設業",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "名古屋市 ai導入支援",
+"imp": 1,
+"clicks": 0,
+"pos": 45
+}
+],
+"pages": [
+{
+"key": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/",
+"imp": 21,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "https://lp.7senses.co.jp/blog/shakaihoken-denshishinsei-gimuka-chusho/",
+"imp": 11,
+"clicks": 4,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/about/",
+"imp": 11,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/youkou/",
+"imp": 5,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/it-hojokin-nagoya/",
+"imp": 5,
+"clicks": 0,
+"pos": 22
+},
+{
+"key": "https://lp.7senses.co.jp/blog/nougyou-shoki-hiyou-hojokin/",
+"imp": 4,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "https://lp.7senses.co.jp/blog/gbizid-shutoku/",
+"imp": 4,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/blog/hojokin-denshishinsei-gimuka-itsukara/",
+"imp": 3,
+"clicks": 2,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/",
+"imp": 3,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-souko/",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "https://lp.7senses.co.jp/blog/nougyou-hojokin-sekai-hikaku/",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-pc/",
+"imp": 2,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://lp.7senses.co.jp/blog/chusho-shoryokuka-toshi-hojokin/",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/it-hojokin-chusho-teigi/",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "https://lp.7senses.co.jp/blog/it-hojokin-gakushujuku/",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "https://lp.7senses.co.jp/blog/kojinjigyonushi-pc-hojokin-hikaku/",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+}
+]
+},
+"2026-10-30": {
+"queries": [
+{
+"key": "ai導入補助金",
+"imp": 21,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "ベンダー登録とは",
+"imp": 6,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "ベンダー登録",
+"imp": 5,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "セブンセンシズ",
+"imp": 4,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "ai導入補助金　必要条件",
+"imp": 3,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "株式会社セブンセンシズ",
+"imp": 3,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "ａｉ導入補助金",
+"imp": 3,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "vendor登録はありませんでした。",
+"imp": 2,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "よろず支援拠点 福岡 aiの導入",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "法人税の納税証明書 　カタログ型補助金",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "ものづくり補助金 給与支給総額の算出根拠　控除前所得を加算する理由",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "デジタル化ai導入補助金申請 納税証明書その１",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "ベンダー登録とは注意点",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "ベンダー確認済とは",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "事業再構築補助金 事業化状況報告　例外",
+"imp": 1,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "ものづくり補助金 給与支給総額　判定",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "ものづくり補助金 給与支給総額　判定時期",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "ものづくり補助金 行政事業レビュー エステ 脱毛 採択",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "パソコン購入補助 個人事業主",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "ベンダーとは 補助金",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "補助金対象経費　個人事業主の給与は対象になる",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+}
+],
+"pages": [
+{
+"key": "https://lp.7senses.co.jp/youkou/",
+"imp": 56,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/",
+"imp": 28,
+"clicks": 2,
+"pos": 4
+},
+{
+"key": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/",
+"imp": 7,
+"clicks": 1,
+"pos": 12
+},
+{
+"key": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-kyuyo-shikyu-sogaku/",
+"imp": 7,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-nozeishomeisho-dore/",
+"imp": 6,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "https://lp.7senses.co.jp/about/",
+"imp": 6,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://lp.7senses.co.jp/blog/shakaihoken-denshishinsei-gimuka-chusho/",
+"imp": 5,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-jidousha-seibi/",
+"imp": 3,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/blog/kojinjigyonushi-pc-hojokin-hikaku/",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-esute/",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+}
+]
+},
+"2026-11-06": {
+"queries": [
+{
+"key": "ai導入補助金",
+"imp": 130,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "ベンダー登録",
+"imp": 6,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "ai導入補助金　実績報告　必要書類",
+"imp": 2,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "it導入補助金 2026　運送業",
+"imp": 2,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "sツール：単純利用は対象外ですが、saas上で自社構築したシステムがある場合は対象",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "it導入補助金 2024の通常枠１５０万円未満で賃上げ未達成の場合どうなるか",
+"imp": 1,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "みらデジ経営チェック",
+"imp": 1,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "ソフトウェア　補助金　賃上げ要件",
+"imp": 1,
+"clicks": 1,
+"pos": 9
+},
+{
+"key": "事業再構築補助金 何年間",
+"imp": 1,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "事業再構築補助金　法人成り",
+"imp": 1,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "農業参入　初期費用　農水省",
+"imp": 1,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "農業用機械　補助金　２回補助できない理由は",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "ai導入補助金　いくらもらえる",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "it導入補助金　　未達の場合",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "みらデジ経営診断",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "ものづくり補助金 報告書　給与支給総額　青色申告書　見方",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "事業再構築補助金 後年報告",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "省力化投資補助金の従業員数は？",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "省力化補助金 従業員数",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+}
+],
+"pages": []
 }
 },
-"updated": "2026-10-19",
+"updated": "2026-11-09",
 "site": "subsidy",
 "domain": "lp.7senses.co.jp"
 }

@@ -1,20 +1,22 @@
 {
  "ai-lab": {
-  "flagged": false,
-  "date": "2026-10-19",
-  "reasons": [],
-  "cohort": "unknown"
+  "flagged": true,
+  "date": "2026-11-09",
+  "reasons": [
+   "AI集客ラボ — 公開5〜8週目の1本あたり週表示が 4.8→3.2回（-33%。2026-07-19〜2026-08-15公開の48本 → 2026-08-16〜2026-09-12公開の63本）。同じ年齢の記事で比べても落ちています。新しい記事が既存の表示を置き換えているか、評価が薄まっています（週次の統合を4組に増やします）"
+  ],
+  "cohort": "drop"
  },
  "corporate": {
   "flagged": false,
-  "date": "2026-10-19",
+  "date": "2026-11-09",
   "reasons": [],
-  "cohort": "unknown"
+  "cohort": "ok"
  },
  "subsidy": {
   "flagged": false,
-  "date": "2026-10-19",
+  "date": "2026-11-09",
   "reasons": [],
-  "cohort": "unknown"
+  "cohort": "ok"
  }
 }
