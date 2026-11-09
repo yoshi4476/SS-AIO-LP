@@ -873,6 +873,16 @@ def journal_prepare(cfg, meta, body, vb=""):
     return fm, body, html, journal_problems(fm, body, journal)
 
 
+def drop_link_slash(cfg, body):
+    """末尾の / が無い形が正の社（trailing_slash: false）で、自サイトへのリンクの末尾の / を外す。
+    先方の変換は原稿のリンクをそのまま出すため、/journal/x/ が毎回308の転送を挟み、
+    Search Console の「ページにリダイレクトがあります」に積もっていた（30本・93本のリンク。2026-11-09）"""
+    if cfg.get("trailing_slash", True):
+        return body
+    dom = re.escape(cfg["domain"])
+    return re.sub(rf'((?:\]\(|href=")(?:https://{dom})?/[^\s)"#?]*[^\s)"#?/])/(?=[)"#?])', r"\1", body)
+
+
 def write_external_md(cfg, dest: Path, meta, body, src: Path):
     """別リポジトリの静的サイト用: Markdown を置き、記事1本分の届け物を揃える。
 
@@ -892,7 +902,7 @@ def write_external_md(cfg, dest: Path, meta, body, src: Path):
     images_dir = cfg.get("images_dir") or "images"
     prefix = image_prefix({**cfg, "images_dir": images_dir})
     journal = md_dialect(cfg)
-    fm, body = dict(meta), md2html.markdown_links(body)  # 地図・動画の記号は普通のリンクに（先方の変換が iframe を通すか分からない）
+    fm, body = dict(meta), drop_link_slash(cfg, md2html.markdown_links(body))  # 地図・動画の記号は普通のリンクに（先方の変換が iframe を通すか分からない）
     src_path, dst_path = f"/images/{slug}/", f"{prefix}/{slug}/"
     if src_path != dst_path:
         body = body.replace(src_path, dst_path)

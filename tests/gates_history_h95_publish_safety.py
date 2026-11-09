@@ -96,6 +96,19 @@ def test_html_safety_finds_dangerous_html_and_leaves_normal_html():
     check(f"いまの原稿（{len(files)}本）に当てはまる記事は無い（誤検出しない）", flagged, 0)
 
 
+def test_links_drop_slash_where_the_site_has_none():
+    import publish as P
+    print("\n■ 配信: 末尾の / が無い形が正の社では、自サイトへのリンクの / を外す（2026-11-09 に30本のリンクが308を挟んでいた）")
+    cfg = {"domain": "zz.example", "trailing_slash": False}
+    body = ("[a](/journal/x/) [b](https://zz.example/journal/y/#h) <a href=\"/journal/z/\">c</a> "
+            "[top](/) [外](https://other.example/p/) [画像](/images/x/a.png)")
+    out = P.drop_link_slash(cfg, body)
+    check("相対・絶対・HTML の3つとも / を外す",
+          ["/journal/x)" in out, "zz.example/journal/y#h" in out, 'href="/journal/z"' in out], [True] * 3)
+    check("トップ・他サイト・画像はそのまま", ["(/)" in out, "other.example/p/" in out, "/images/x/a.png" in out], [True] * 3)
+    check("/ が正の社は触らない", P.drop_link_slash({"domain": "zz.example"}, body), body)
+
+
 def test_redirects_must_stay_inside_own_sites():
     print("\n■ site/_redirects の転送先は、サイトの中（/ で始まる）か自社のドメインだけ")
     import html_safety as HS
