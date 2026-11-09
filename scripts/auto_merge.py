@@ -397,11 +397,14 @@ def relink(site, from_url, to_url, survivor):
     import sites as S
     dom = S.load(site)["domain"]
     n = 0
+    # 末尾の / が無いリンク（/blog/x）も付け替える。/ 付きだけを見ていた間、2本が統合元の301を指したまま残った（2026-11-09）
+    # 後ろが区切りの字のときだけ当てる（/blog/x-y を /blog/x と取り違えない）
+    old = re.compile(rf"(https://{re.escape(dom)})?{re.escape(from_url.rstrip('/'))}/?(?=[)\"'#?\s<]|$)", re.M)
     for p in ARTICLES.glob("*.md"):
         t = p.read_text(encoding="utf-8-sig")
         # 絶対URLは絶対URLのまま付け替える。相対にすると、他サイトの記事から張った
         # https://corp…/blog/x/ が /blog/y/ になり、そのサイトのドメインで404になる
-        u = t.replace(f"https://{dom}{from_url}", f"https://{dom}{to_url}").replace(from_url, to_url)
+        u = old.sub(lambda m: (m.group(1) or "") + to_url, t)
         if p.stem == survivor:
             u = re.sub(rf'<a href="(?:https://{re.escape(dom)})?{re.escape(to_url)}"[^>]*>(.*?)</a>', r"\1", u)
             u = re.sub(rf"\[([^\]]+)\]\((?:https://{re.escape(dom)})?{re.escape(to_url)}\)", r"\1", u)

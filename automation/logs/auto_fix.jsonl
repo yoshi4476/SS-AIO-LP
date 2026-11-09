@@ -2817,3 +2817,4 @@
 {"at": "2026-11-09 12:09", "by": "auto_rewrite", "slug": "zeirishi-homepage-shukyaku", "kind": "quality_loop", "ok": false, "note": "別の記事まで変わっています（AI の作業場所の外が変わったため全部戻しました）: 記事の外 2件", "tag": "low-show"}
 {"at": "2026-11-09 12:11", "by": "auto_rewrite", "slug": "zeirishi-shukyaku-site", "kind": "quality_loop", "ok": false, "note": "別の記事まで変わっています（AI の作業場所の外が変わったため全部戻しました）: 記事の外 6件", "tag": "low-show"}
 {"at": "2026-11-09 12:14", "by": "auto_rewrite", "slug": "zeirishi-shukyaku-site", "kind": "quality_loop", "ok": false, "note": "別の記事まで変わっています（AI の作業場所の外が変わったため全部戻しました）: 記事の外 2件", "tag": "low-show"}
+{"when": "2026-11-09T13:55:02.815865", "by": "auto_review", "slug": "(1記事)", "what": "言い回し1件を振り直し・0件を削除"}

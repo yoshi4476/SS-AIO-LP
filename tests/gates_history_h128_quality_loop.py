@@ -502,6 +502,28 @@ def test_buyer_keywords_are_written_first():
         check(f"{sid}: 買い手の語を先に書く設定", c.get("kw_buyer_first"), True)
 
 
+def test_merge_relinks_links_without_trailing_slash():
+    import auto_merge as AM
+    import sites as S
+    print("\n■ 統合: 末尾の / が無いリンクも統合先へ付け替える（2026-11-09 に2本が統合元の301を指したまま残った）")
+    dom = S.load("corporate")["domain"]
+    with tempfile.TemporaryDirectory() as d:
+        a = Path(d)
+        (a / "p.md").write_text("[旧](/blog/old-x)と[旧2](/blog/old-x/)と[絶対](https://%s/blog/old-x)。"
+                                "[別](/blog/old-x-y/)は残す。\n" % dom, encoding="utf-8")
+        keep = AM.ARTICLES
+        AM.ARTICLES = a
+        try:
+            n = AM.relink("corporate", "/blog/old-x/", "/blog/new-y/", "new-y")
+        finally:
+            AM.ARTICLES = keep
+        t = (a / "p.md").read_text(encoding="utf-8")
+    check("付け替えた記事の数", n, 1)
+    check("/ なし・/ あり・絶対URLの3つとも付け替える", t.count("/blog/new-y/"), 3)
+    check("絶対URLは絶対URLのまま", "https://%s/blog/new-y/" % dom in t, True)
+    check("名前の似た別の記事は付け替えない", "/blog/old-x-y/" in t, True)
+
+
 def test_weekly_goes_on_when_the_survey_times_out():
     print("\n■ 週次: 当社調べが時間切れでも後の工程を止めない（2026-10-26・11-02 に15分で切れ、再採点・配信・索引の再通知など30工程が飛んだ）")
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
