@@ -1,0 +1,150 @@
+{
+ "v": 2,
+ "slug": "clinic-kichodaiko",
+ "ok": true,
+ "date": "2026-11-09",
+ "questions": [
+  "クリニック・医療機関 記帳代行について教えてください",
+  "クリニック・医療機関 記帳代行について、「クリニックの記帳代行では何を任せられるのか？」を教えてください",
+  "クリニック・医療機関 記帳代行について、「保険診療と自由診療は帳簿でどう分けるのか？」を教えてください",
+  "クリニック・医療機関 記帳代行について、「診療報酬の入金のずれは帳簿でどう扱うのか？」を教えてください",
+  "クリニック・医療機関 記帳代行について、「個人開業と医療法人で、依頼先と任せる範囲はどう変わるのか？」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "クリニックの記帳代行では何を任せられるのか？",
+   "words": [
+    "クリニック"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "保険診療と自由診療は帳簿でどう分けるのか？",
+   "words": [
+    "保険診療",
+    "自由診療",
+    "帳簿"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "診療報酬の入金のずれは帳簿でどう扱うのか？",
+   "words": [
+    "診療報酬",
+    "入金",
+    "帳簿"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "個人開業と医療法人で、依頼先と任せる範囲はどう変わるのか？",
+   "words": [
+    "個人開業",
+    "医療法人",
+    "依頼先",
+    "範囲"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "クリニックの記帳代行で多い3つの落とし穴と、失敗を避ける方法は？",
+   "words": [
+    "クリニック"
+   ],
+   "hits": 8,
+   "of": 10
+  },
+  {
+   "topic": "記帳代行に向くクリニック・向かないクリニックは？",
+   "words": [
+    "クリニック",
+    "クリニック"
+   ],
+   "hits": 8,
+   "of": 10
+  },
+  {
+   "topic": "頼む前にそろえる資料と、今日やることは？",
+   "words": [
+    "資料"
+   ],
+   "hits": 6,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "税理士制度",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 0
+  },
+  {
+   "term": "健康保険法",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 0
+  },
+  {
+   "term": "国民健康保険法",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "bizup.co.jp": "peer",
+  "detail.chiebukuro.yahoo.co.jp": "media",
+  "fp-soken.or.jp": "public",
+  "healthcare.hirano-htc.jp": "peer",
+  "hidaki-kaikei.com": "peer",
+  "hitomi-tax.jp": "peer",
+  "hokeniryo.metro.tokyo.lg.jp": "public",
+  "kfs.go.jp": "public",
+  "kyodo-cpa.com": "peer",
+  "m-assets.com": "peer",
+  "med-kaikei.com": "peer",
+  "mhlw.go.jp": "public",
+  "mido-suji.jp": "peer",
+  "n-kyusyu.jicpa.or.jp": "peer",
+  "nexillpartners.jp": "peer",
+  "nta.go.jp": "public",
+  "okatax-kobe.com": "peer",
+  "pca.jp": "peer",
+  "prog-tax.com": "video",
+  "sakuraikaikei.jp": "peer",
+  "subarukaikei.or.jp": "peer",
+  "sun-tax.or.jp": "peer",
+  "syachi9.black": "peer",
+  "takeoff.link": "peer",
+  "tax-miyajima.com": "peer",
+  "tsuruda-tax.com": "video",
+  "vertexaisearch.cloud.google.com": "peer",
+  "wam.go.jp": "public",
+  "xn--1lq0e914a9zoh0o78mjfsllz.com": "peer",
+  "yoshikawa-tax.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 6,
+  "期間（◯か月・◯日など）": 6,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 1,
+  "専門家への相談": 8
+ },
+ "chars": 19333,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、国税庁の資料にある「税理士制度」に触れたものは0件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、国税庁の資料にある「健康保険法」に触れたものは0件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは進め方の手順は1件、注意点・失敗・リスクは3件、費用の金額（◯円）は6件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは30件で、公的機関・学会・業界団体が6件、ニュース・メディア・まとめが1件、動画・SNS・ブログが2件でした。"
+ ]
+}
