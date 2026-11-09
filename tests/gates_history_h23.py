@@ -59,6 +59,8 @@ def test_next_kw_takes_reachable_words_first():
     saved = {k: getattr(HC, k) for k in ("enabled", "_get", "all_kw", "_ai_targets", "_main_offer_pattern", "_drop_pattern")}
     saved_held = R.held_queries
     led = []
+    # 設定の無い社でも SystemExit で工程ごと止めない（S.load は SystemExit を投げ、except Exception をすり抜ける）
+    check("設定の無い社は買い手の語を先にしない（止まらない）", HC._buyer_first("no-such-site-zz"), False)
     row = lambda k: {"site": "s", "status": "未着手", "keyword": k, "priority": "B"}
     try:
         HC.enabled = lambda: True
