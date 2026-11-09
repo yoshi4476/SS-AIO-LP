@@ -1,0 +1,114 @@
+{
+ "v": 2,
+ "slug": "kanri-kaikei-jikyu-souba",
+ "ok": true,
+ "date": "2026-11-09",
+ "questions": [
+  "経理BPO 管理会計 料金について教えてください",
+  "経理BPO 管理会計 料金について、「管理会計まで頼むと経理BPOの料金はいくらか」を教えてください",
+  "経理BPO 管理会計 料金について、「管理会計とは？記帳・月次決算との違い」を教えてください",
+  "経理BPO 管理会計 料金について、「管理会計を足すと料金が上がる3つの理由」を教えてください",
+  "経理BPO 管理会計 料金について、「内製と委託、コストが分かれる境目」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "管理会計とは？記帳・月次決算との違い",
+   "words": [
+    "月次決算",
+    "記帳"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "内製と委託、コストが分かれる境目",
+   "words": [
+    "コスト",
+    "内製",
+    "委託",
+    "境目"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "委託範囲をどこで止めるかの決め方",
+   "words": [
+    "委託範囲"
+   ],
+   "hits": 2,
+   "of": 5
+  },
+  {
+   "topic": "管理会計を委託しても社内に残すべきもの",
+   "words": [
+    "社内"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "見積もりで確認すべき4点",
+   "words": [
+    "見積"
+   ],
+   "hits": 3,
+   "of": 5
+  },
+  {
+   "topic": "管理会計まで委託範囲を広げる3ステップ",
+   "words": [
+    "委託範囲"
+   ],
+   "hits": 2,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "accounting.cast-er.com": "portal",
+  "aspicjapan.org": "public",
+  "biz.moneyforward.com": "peer",
+  "bizfocus.jp": "peer",
+  "bricks-outsourcing.com": "peer",
+  "catalog.monex.co.jp": "media",
+  "corp.7senses.co.jp": "self",
+  "crex-consulting.com": "peer",
+  "grop.co.jp": "peer",
+  "h2r-accountingoutsourcing.com": "peer",
+  "it-trend.jp": "portal",
+  "keiribu.com": "peer",
+  "keiric.com": "peer",
+  "leapal.jp": "peer",
+  "manegy.com": "media",
+  "marugotoinc.jp": "peer",
+  "mfloow.com": "peer",
+  "noc-net.co.jp": "peer",
+  "note.com": "video",
+  "ntt-nexia.co.jp": "peer",
+  "onamae.com": "peer",
+  "persol-bd.co.jp": "peer",
+  "persol-wsc.co.jp": "peer",
+  "prust.jp": "peer",
+  "rstandard.co.jp": "peer",
+  "saas.imitsu.jp": "portal",
+  "vertexaisearch.cloud.google.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 2,
+  "専門家への相談": 3
+ },
+ "chars": 10244,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え5件のうち、『委託範囲』に触れたものは2件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは期間（◯か月・◯日など）は2件、注意点・失敗・リスクは2件、進め方の手順は2件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは27件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが2件、ポータル・比較サイトが3件、動画・SNS・ブログが1件でした。"
+ ]
+}
