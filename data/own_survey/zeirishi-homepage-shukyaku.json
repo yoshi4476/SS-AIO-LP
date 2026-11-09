@@ -1,0 +1,90 @@
+{
+ "v": 2,
+ "slug": "zeirishi-homepage-shukyaku",
+ "ok": true,
+ "date": "2026-11-09",
+ "questions": [
+  "税理士 集客 ホームページについて教えてください",
+  "税理士 集客 ホームページについて、「税理士のホームページ集客とは」を教えてください",
+  "税理士 集客 ホームページについて、「なぜ今、税理士事務所にホームページ集客が必要なのか」を教えてください",
+  "税理士 集客 ホームページについて、「税理士のホームページ集客で失敗しやすい5つの原因」を教えてください",
+  "税理士 集客 ホームページについて、「税理士のホームページ集客を成功させる5つの施策」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "税理士のホームページ集客で失敗しやすい5つの原因",
+   "words": [
+    "原因"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "税理士のホームページ集客を成功させる5つの施策",
+   "words": [
+    "施策"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "SEO・MEO・AIOの優先順位の決め方",
+   "words": [
+    "優先順位",
+    "SEO",
+    "MEO",
+    "AIO"
+   ],
+   "hits": 7,
+   "of": 10
+  },
+  {
+   "topic": "AI検索時代の税理士選びで見られるポイント",
+   "words": [
+    "AI検索時代"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "adv.freee.co.jp": "peer",
+  "ai.7senses.co.jp": "self",
+  "aisync.biz": "peer",
+  "biz.moneyforward.com": "peer",
+  "blue-aegis.co.jp": "peer",
+  "chiyodaku-taxaccountant.com": "peer",
+  "colet-lab.jp": "peer",
+  "developers.google.com": "peer",
+  "houjin-consul.com": "peer",
+  "ht-tax.or.jp": "peer",
+  "jinrai.co.jp": "peer",
+  "nichizeiren.or.jp": "public",
+  "note.com": "video",
+  "prtimes.jp": "media",
+  "re-v.co.jp": "peer",
+  "sigyou-school.biz": "peer",
+  "support.google.com": "peer",
+  "viscas.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 6,
+  "進め方の手順": 4,
+  "専門家への相談": 10
+ },
+ "chars": 17512,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え10件のうち、『AI検索時代』に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え8件のうち、『原因』に触れたものは2件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は3件、進め方の手順は4件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは18件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが1件、動画・SNS・ブログが1件でした。"
+ ]
+}

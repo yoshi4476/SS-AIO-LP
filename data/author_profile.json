@@ -1,5 +1,5 @@
 {
- "date": "2026-10-19",
+ "date": "2026-11-09",
  "same_as": [
   "https://www.linkedin.com/in/yu-haraguchi",
   "https://note.com/yu_haraguchi",
@@ -8,42 +8,6 @@
  ],
  "mentions": [],
  "works": [
-  {
-   "kind": "動画",
-   "title": "工務店・注文住宅のAIO対策｜AIに候補として挙がる4つの書き方",
-   "url": "https://www.youtube.com/watch?v=iAEBBf0WoxY",
-   "date": "2026-10-03"
-  },
-  {
-   "kind": "動画",
-   "title": "税理士法人のAIO対策とは？AI検索に引用される5つの準備",
-   "url": "https://www.youtube.com/watch?v=OlH4PQHc4F4",
-   "date": "2026-10-03"
-  },
-  {
-   "kind": "動画",
-   "title": "AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説",
-   "url": "https://www.youtube.com/watch?v=nSRNr6klTZM",
-   "date": "2026-10-03"
-  },
-  {
-   "kind": "動画",
-   "title": "AIOチェッカーとは？表示と引用を見分ける使い方",
-   "url": "https://www.youtube.com/watch?v=4_wtV9p1d7Y",
-   "date": "2026-10-03"
-  },
-  {
-   "kind": "動画",
-   "title": "請求書テンプレ無料で起きやすい失敗｜登録番号なしの旧版と確認6点",
-   "url": "https://www.youtube.com/watch?v=oV87orjtRXY",
-   "date": "2026-10-03"
-  },
-  {
-   "kind": "動画",
-   "title": "農業の初期費用は平均755万円｜費目別に使える補助金4つ",
-   "url": "https://www.youtube.com/watch?v=XR42uoRLpOs",
-   "date": "2026-10-03"
-  },
   {
    "kind": "動画",
    "title": "research-biyou",
@@ -79,6 +43,90 @@
    "title": "research-dental",
    "url": "https://www.youtube.com/watch?v=xG1QVgQrf-E",
    "date": "2026-10-19"
+  },
+  {
+   "kind": "動画",
+   "title": "飲食店の集客コンサルの落とし穴｜依頼前に数える3つの数字",
+   "url": "https://www.youtube.com/watch?v=Rf1-vUGjFfc",
+   "date": "2026-10-21"
+  },
+  {
+   "kind": "動画",
+   "title": "士業の集客代行で失敗する3つの落とし穴と依頼先の見分け方",
+   "url": "https://www.youtube.com/watch?v=BuzWevdyDBs",
+   "date": "2026-10-23"
+  },
+  {
+   "kind": "動画",
+   "title": "士業のポータルサイト頼みはNG？AIの出典2,343件で見る使い分け",
+   "url": "https://www.youtube.com/watch?v=1my8sWPTZds",
+   "date": "2026-10-24"
+  },
+  {
+   "kind": "動画",
+   "title": "飲食店の集客サービスの注意点｜解約後に残る資産を5つで確かめる",
+   "url": "https://www.youtube.com/watch?v=QJ9jbc7oaVQ",
+   "date": "2026-10-25"
+  },
+  {
+   "kind": "動画",
+   "title": "research-ec",
+   "url": "https://www.youtube.com/watch?v=WxNUqXcg0gY",
+   "date": "2026-10-26"
+  },
+  {
+   "kind": "動画",
+   "title": "AIOとは？AI Overviewの仕組みとGoogleが否定した5つの通説",
+   "url": "https://www.youtube.com/watch?v=wW5HjxLYcIU",
+   "date": "2026-10-27"
+  },
+  {
+   "kind": "動画",
+   "title": "士業ホームページのよくある質問で避けたい3つのNGと答えの線引き",
+   "url": "https://www.youtube.com/watch?v=xpFVu_cOarc",
+   "date": "2026-10-31"
+  },
+  {
+   "kind": "動画",
+   "title": "不動産の売却集客で外す3つのNG｜査定依頼を自社サイトで受ける順番",
+   "url": "https://www.youtube.com/watch?v=uX7IYnUIqNU",
+   "date": "2026-11-01"
+  },
+  {
+   "kind": "動画",
+   "title": "research-esthe",
+   "url": "https://www.youtube.com/watch?v=2i17RAbD9qI",
+   "date": "2026-11-02"
+  },
+  {
+   "kind": "動画",
+   "title": "不動産の集客ホームページで外す4つのNG｜作り直す前の点検表",
+   "url": "https://www.youtube.com/watch?v=qwl3WXriEMM",
+   "date": "2026-11-03"
+  },
+  {
+   "kind": "動画",
+   "title": "クリニックの選ばれるホームページ｜比べられて負ける5つの落とし穴",
+   "url": "https://www.youtube.com/watch?v=AMG4EFeMJDk",
+   "date": "2026-11-04"
+  },
+  {
+   "kind": "動画",
+   "title": "買取店の集客で失敗する3つの原因｜AI検索に選ばれる店の条件",
+   "url": "https://www.youtube.com/watch?v=3TDURXhbkWE",
+   "date": "2026-11-06"
+  },
+  {
+   "kind": "動画",
+   "title": "不動産の集客アイデア9つ｜AIに外される3つの落とし穴と始める順番",
+   "url": "https://www.youtube.com/watch?v=tc03u3NkzPs",
+   "date": "2026-11-07"
+  },
+  {
+   "kind": "動画",
+   "title": "research-fitness",
+   "url": "https://www.youtube.com/watch?v=sZQVtp7CH2w",
+   "date": "2026-11-09"
   }
  ],
  "credentials": [],
@@ -148,6 +196,10 @@
    "url": "/research/kaji-ai-sources/"
   },
   {
+   "title": "経理代行・記帳代行の質問にAIは何を出典に答えるか",
+   "url": "/research/keiri-ai-sources/"
+  },
+  {
    "title": "建設・設備工事の質問にAIは何を出典に答えるか",
    "url": "/research/kensetsu-ai-sources/"
   },
@@ -184,6 +236,10 @@
    "url": "/research/sougi-ai-sources/"
   },
   {
+   "title": "システム開発（受託開発）の質問にAIは何を出典に答えるか",
+   "url": "/research/sysdev-ai-sources/"
+  },
+  {
    "title": "運送・物流の質問にAIは何を出典に答えるか",
    "url": "/research/unso-ai-sources/"
   },
@@ -201,9 +257,9 @@
   }
  ],
  "counts": {
-  "articles": 477,
-  "datasets": 12,
-  "videos": 12,
-  "research": 29
+  "articles": 460,
+  "datasets": 13,
+  "videos": 25,
+  "research": 31
  }
 }

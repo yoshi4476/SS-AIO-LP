@@ -1,0 +1,131 @@
+{
+ "v": 2,
+ "slug": "meo-taisaku-yarikata",
+ "ok": true,
+ "date": "2026-11-09",
+ "questions": [
+  "meo 上げ 方について教えてください",
+  "meo 上げ 方について、「MEO対策とは」を教えてください",
+  "meo 上げ 方について、「マップ上位表示を決める3つの要素」を教えてください",
+  "meo 上げ 方について、「データで見るローカル検索と口コミの影響力」を教えてください",
+  "meo 上げ 方について、「MEO対策のやり方7ステップ」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "マップ上位表示を決める3つの要素",
+   "words": [
+    "マップ上位表示",
+    "要素"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "データで見るローカル検索と口コミの影響力",
+   "words": [
+    "ローカル検索",
+    "データ",
+    "口コミ",
+    "影響力"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "写真の撮り方・選び方5つのコツ",
+   "words": [
+    "写真",
+    "コツ"
+   ],
+   "hits": 8,
+   "of": 10
+  },
+  {
+   "topic": "カテゴリ設定の具体例",
+   "words": [
+    "カテゴリ設定",
+    "具体例"
+   ],
+   "hits": 1,
+   "of": 10
+  },
+  {
+   "topic": "投稿ネタの年間カレンダー",
+   "words": [
+    "年間カレンダー",
+    "投稿ネタ"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "自社でやるMEOと、プロに任せるMEOの違い",
+   "words": [
+    "プロ"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "よくある失敗と対処法",
+   "words": [
+    "対処法"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "AI検索時代のMEO: マップ情報はAIの回答素材になる",
+   "words": [
+    "AI検索時代",
+    "マップ情報",
+    "回答素材"
+   ],
+   "hits": 1,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "0120.co.jp": "peer",
+  "ai.7senses.co.jp": "self",
+  "article-pro.com": "peer",
+  "brightlocal.com": "peer",
+  "co-reception.com": "peer",
+  "geoboost.dmm.com": "peer",
+  "manamina.valuesccg.com": "peer",
+  "note.com": "video",
+  "omniweb.jp": "peer",
+  "pharos-works.co.jp": "peer",
+  "protea-inc.co.jp": "peer",
+  "prtimes.jp": "media",
+  "seedinc.jp": "peer",
+  "selfachieve.jp": "peer",
+  "shopowner-support.net": "media",
+  "storepad.jp": "media",
+  "support.google.com": "peer",
+  "thinkwithgoogle.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "waigaya.jp": "peer",
+  "webries.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 3,
+  "専門家への相談": 0
+ },
+ "chars": 15757,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え10件のうち、『年間カレンダー』に触れたものは0件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え10件のうち、『カテゴリ設定』に触れたものは1件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は0件、期間（◯か月・◯日など）は1件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは21件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが3件、動画・SNS・ブログが1件でした。"
+ ]
+}

@@ -10,5 +10,149 @@
     "control": 1.61,
     "pos_gain": 2.43768115942029,
     "rolled_back": false
+  },
+  "seikyusho-shougou-jidoka@2026-09-25": {
+    "ratio": 0.57,
+    "control": 0.4,
+    "pos_gain": -1.362433103975535,
+    "rolled_back": false,
+    "control_n": 39,
+    "kind": "title"
+  },
+  "monozukuri-hojokin-unsougyou@2026-09-26": {
+    "ratio": 2.19,
+    "control": 0.5,
+    "pos_gain": 0.6133776091081593,
+    "rolled_back": false,
+    "control_n": 33,
+    "kind": "title"
+  },
+  "kensetsugyou-denshishinsei-etsuran@2026-09-27": {
+    "ratio": 1.18,
+    "control": 0.42,
+    "pos_gain": 2.428219563687544,
+    "rolled_back": false,
+    "control_n": 51,
+    "kind": "title"
+  },
+  "it-hojokin-kojinjigyonushi-kaikeisoft@2026-09-28": {
+    "ratio": 0.0,
+    "control": 0.52,
+    "pos_gain": null,
+    "rolled_back": true,
+    "control_n": 27,
+    "kind": "title"
+  },
+  "tsucho-kicho-yarikata@2026-09-28": {
+    "ratio": 0.18,
+    "control": 0.4,
+    "pos_gain": 1.9078947368421053,
+    "rolled_back": false,
+    "control_n": 47,
+    "kind": "title"
+  },
+  "gaichuuhi-seikyuusho-nashi@2026-09-28": {
+    "ratio": 0.56,
+    "control": 0.28,
+    "pos_gain": -1.3363728470111447,
+    "rolled_back": false,
+    "control_n": 45,
+    "kind": "title"
+  },
+  "nougyou-shoki-hiyou@2026-10-05": {
+    "ratio": 0.0,
+    "control": 0.33,
+    "pos_gain": null,
+    "rolled_back": true,
+    "control_n": 52,
+    "kind": "title"
+  },
+  "jizokuka-hojokin-jidousha-seibi@2026-10-05": {
+    "ratio": 0.3,
+    "control": 0.42,
+    "pos_gain": 2.106666666666667,
+    "rolled_back": false,
+    "control_n": 49,
+    "kind": "title"
+  },
+  "keiri-marunage-dekiru-hani@2026-10-05": {
+    "ratio": 0.19,
+    "control": 0.47,
+    "pos_gain": 3.0892857142857135,
+    "rolled_back": false,
+    "control_n": 29,
+    "kind": "title"
+  },
+  "keiri-haken-jikyu-souba@2026-10-05": {
+    "ratio": 2.16,
+    "control": 0.67,
+    "pos_gain": -0.24962962962962987,
+    "rolled_back": false,
+    "control_n": 25,
+    "kind": "title"
+  },
+  "it-hojokin-gakushujuku@2026-10-05": {
+    "ratio": 0.92,
+    "control": 0.67,
+    "pos_gain": 0.5320512820512819,
+    "rolled_back": false,
+    "control_n": 35,
+    "kind": "title"
+  },
+  "ai-hojokin-clinic-2026-schedule@2026-10-05": {
+    "ratio": 0.95,
+    "control": 0.5,
+    "pos_gain": -16.36842105263158,
+    "rolled_back": false,
+    "control_n": 24,
+    "kind": "title"
+  },
+  "kojinjigyonushi-kaigyoutodoke-denshishinsei@2026-10-06": {
+    "ratio": 0.69,
+    "control": 0.5,
+    "pos_gain": 4.929903668784586,
+    "rolled_back": false,
+    "control_n": 43,
+    "kind": "title"
+  },
+  "seikyusho-fuutou-kakikata@2026-10-06": {
+    "ratio": 0.26,
+    "control": 0.43,
+    "pos_gain": 2.310649984742142,
+    "rolled_back": false,
+    "control_n": 26,
+    "kind": "title"
+  },
+  "seikyusho-jidoka-ai@2026-10-06": {
+    "ratio": 0.04,
+    "control": 0.23,
+    "pos_gain": 15.991228070175438,
+    "rolled_back": false,
+    "control_n": 49,
+    "kind": "title"
+  },
+  "ai-hojokin-jissekihoukoku-kakikata@2026-10-09": {
+    "ratio": 0.14,
+    "control": 0.29,
+    "pos_gain": 1.333333333333334,
+    "rolled_back": false,
+    "control_n": 17,
+    "kind": "title"
+  },
+  "it-hojokin-osusume@2026-10-09": {
+    "ratio": 0.18,
+    "control": 0.28,
+    "pos_gain": -5.15909090909091,
+    "rolled_back": true,
+    "control_n": 52,
+    "kind": "title"
+  },
+  "nougyou-kikai-hojokin@2026-10-09": {
+    "ratio": 0.3,
+    "control": 0.3,
+    "pos_gain": 1.8640429338103761,
+    "rolled_back": false,
+    "control_n": 49,
+    "kind": "title"
   }
 }

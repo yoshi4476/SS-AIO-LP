@@ -53,6 +53,8 @@ quality_attempts: 3
 
 **不動産会社のよくある質問ページは、来店前の不安を減らし、AIが不動産の質問に答える材料にもなるページです。**
 
+実測の参考として、不動産会社の支援で、ホームページの土台（質の高いよくある質問・質の高い記事の投稿・権威性の表示）を整え、3か月で問い合わせが2件から5件に増えました（2026年10月まで）（出典: 自社の支援実績（運用者の申告 2026-10-21））。
+
 <div class="definition-box"><span class="term">よくある質問（FAQ）ページとは</span>、問い合わせの前に知りたいことを、質問と答えの組で並べたページです。不動産会社では、手数料・査定・引き渡しまでの流れが中心です。</div>
 
 以前は、FAQの構造化データを入れると検索結果に質問が並びました。<a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage" target="_blank" rel="noopener">Googleの公式文書</a>によると、<strong>この表示は2026年5月7日から出なくなりました。</strong>

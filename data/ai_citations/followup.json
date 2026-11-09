@@ -1273,10 +1273,350 @@
     }
    },
    "cited": false
+  },
+  "gaiheki-tosou-aio-taisaku": {
+   "checked": "2026-11-09",
+   "site": "ai-lab",
+   "kw": "外壁塗装 aio対策",
+   "published": "2026-10-03",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "atoz-design.jp",
+      "brandconsulting.co.jp",
+      "jacof.co.jp",
+      "shipinc.co.jp",
+      "switchitmaker2.com",
+      "toshibun-works.com",
+      "trail-inc.co.jp",
+      "youtube.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "adcal-inc.com",
+      "akarumi.jp",
+      "assist-all.co.jp",
+      "atoz-design.jp",
+      "grill.co.jp",
+      "hiidel.com",
+      "leadcreation.co.jp",
+      "rebranding.co.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "inshokuten-hojokin-ikura": {
+   "checked": "2026-11-09",
+   "site": "subsidy",
+   "kw": "飲食店 補助金 いくら",
+   "published": "2026-10-03",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "order.tabelog.com",
+      "straightpress.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "biz.service.ntt-east.co.jp",
+      "e-bright.jp",
+      "jpn.nec.com",
+      "maido-system.net",
+      "shop-reform.com",
+      "trise-c.jp",
+      "vertexaisearch.cloud.google.com",
+      "webjapan.co.jp"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "cc-corp.co.jp",
+      "hojoguide.jp",
+      "local-mp.co.jp",
+      "maido-system.net",
+      "mono-support.com",
+      "sma-in.com",
+      "tenpo-okite.com",
+      "unagi-fc.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "inshokuten-joseikin-jouken": {
+   "checked": "2026-11-09",
+   "site": "subsidy",
+   "kw": "飲食店 助成金 条件",
+   "published": "2026-10-03",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "hojokinmap.jp",
+      "jpcpg.co.jp",
+      "mise-hojokin.com"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "baie-amalfi.com",
+      "biz.service.ntt-east.co.jp",
+      "hojyokin-portal.jp",
+      "jpn.nec.com",
+      "k-tenpo.com",
+      "maido-system.net",
+      "toreta.in",
+      "vertexaisearch.cloud.google.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "financeinjapan.com",
+      "hojoguide.jp",
+      "kigyo-startbook.com",
+      "koyano-cpa.gr.jp",
+      "local-mp.co.jp",
+      "pro.gnavi.co.jp",
+      "res-star.com",
+      "sharedine.me"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "keiri-kaikeishi-chigai": {
+   "checked": "2026-11-09",
+   "site": "corporate",
+   "kw": "経理 会計士 違い",
+   "published": "2026-10-03",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "bricks-outsourcing.com",
+      "career-adv.jp",
+      "cpa.mynavi.jp",
+      "hupro-job.com",
+      "kaikeiplus.jp",
+      "kotora.jp",
+      "liberty-works.jp",
+      "vrp-p.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "keiri-zaimu-chigai": {
+   "checked": "2026-11-09",
+   "site": "corporate",
+   "kw": "経理と財務 違い",
+   "published": "2026-10-03",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "beet-agent.com",
+      "bill-one.com",
+      "business.ntt-east.co.jp",
+      "freee.co.jp",
+      "it-trend.jp",
+      "keihi.com",
+      "kyriba.com",
+      "noc-net.co.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "aio-dairiten-erabikata": {
+   "checked": "2026-11-09",
+   "site": "ai-lab",
+   "kw": "aio 代理店 選び方 ポイント",
+   "published": "2026-10-04",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "aikoukoku-hikaku.jp",
+      "andmedia.co.jp",
+      "conmark.jp",
+      "digitalidentity.co.jp",
+      "dreamteller.biz",
+      "geo-code.co.jp",
+      "lifunext.com",
+      "mediareach.co.jp"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "abin.co.jp",
+      "bakuri.co.jp",
+      "boxil.jp",
+      "conmark.jp",
+      "lab.llmo-optimization.com",
+      "loop-ac.jp",
+      "nexer.co.jp",
+      "one-produce.co.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "aio-service-hikaku": {
+   "checked": "2026-11-09",
+   "site": "ai-lab",
+   "kw": "aio サービス 比較",
+   "published": "2026-10-04",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "queue-tech.jp",
+      "trendpackage.lillyholdings.co.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "aspicjapan.org",
+      "geo-code.co.jp",
+      "nexer.co.jp",
+      "prtimes.jp",
+      "seedinc.jp",
+      "seojapan.com",
+      "vertexaisearch.cloud.google.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "abin.co.jp",
+      "ai-and-marketing.jp",
+      "ai-search.techsuite.co.jp",
+      "bakuri.co.jp",
+      "boxil.jp",
+      "brand-up.net",
+      "cone-c-slide.com",
+      "geo-code.co.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "it-donyu-shienjigyosha-erabikata": {
+   "checked": "2026-11-09",
+   "site": "subsidy",
+   "kw": "it導入支援事業者 選び方",
+   "published": "2026-10-04",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "ardent.jp",
+      "devotion-co.jp",
+      "digital-ai-hojokin.jp",
+      "ichidokiri.co.jp",
+      "pull-net.jp",
+      "so-labo.co.jp"
+     ]
+    }
+   },
+   "cited": false
   }
  },
  "last_run": {
-  "date": "2026-10-19",
+  "date": "2026-11-09",
   "state": "ok",
   "checked": 8,
   "failed": 0,

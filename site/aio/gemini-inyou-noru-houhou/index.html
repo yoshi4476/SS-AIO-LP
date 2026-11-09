@@ -272,6 +272,14 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       "@type": "Answer",
       "text": "必須ではありません。GoogleはAI検索向けに特別な構造化データは要らないと公表しています。"
      }
+    },
+    {
+     "@type": "Question",
+     "name": "geminiの回答には引用リンクが出ることがあるけど、あれはどういう基準で選ばれているの?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Google検索の索引にあるページから、聞かれた語1つに絞ったページが選ばれやすいです。当サイトの実測では3語ともそうでした。"
+     }
     }
    ]
   }
@@ -334,7 +342,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <div class="article-layout">
     <aside class="article-side">
       <div class="side-sticky">
-        <nav class="toc" aria-label="目次"><details><summary class="toc-title">目次<span class="toc-n">8項目</span></summary><ol><li><a href="#gemini">Geminiの引用に載るとはどういうことか</a></li><li><a href="#geminigoogle-extended">GeminiだけにかかるGoogle-Extendedの設定とは</a></li><li><a href="#gemini18">当サイトがGeminiに18語を聞いて分かったこと</a></li><li><a href="#gemini5">Geminiの引用に載るための5つの手順</a></li><li><a href="#gemini_1">Geminiの引用でよくある失敗と避け方</a></li><li><a href="#gemini_2">Geminiを狙うべき会社と、待つべき会社</a></li><li><a href="#_1">よくある質問</a></li><li><a href="#gemini_3">まとめ: Geminiは「その質問に答えるページ」を選ぶ</a></li></ol></details></nav><script>if(matchMedia("(min-width: 1100px)").matches)document.currentScript.previousElementSibling.querySelector("details").open=true</script>
+        <nav class="toc" aria-label="目次"><details><summary class="toc-title">目次<span class="toc-n">8項目</span></summary><ol><li><a href="#gemini">Geminiの回答には引用リンクが出ることがあるけど、あれはどういう基準で選ばれているの?</a></li><li><a href="#geminigoogle-extended">GeminiだけにかかるGoogle-Extendedの設定とは</a></li><li><a href="#gemini18">当サイトがGeminiに18語を聞いて分かったこと</a></li><li><a href="#gemini5">Geminiの引用に載るための5つの手順</a></li><li><a href="#gemini_1">Geminiの引用でよくある失敗と避け方</a></li><li><a href="#gemini_2">Geminiを狙うべき会社と、待つべき会社</a></li><li><a href="#_1">よくある質問</a></li><li><a href="#gemini_3">まとめ: Geminiは「その質問に答えるページ」を選ぶ</a></li></ol></details></nav><script>if(matchMedia("(min-width: 1100px)").matches)document.currentScript.previousElementSibling.querySelector("details").open=true</script>
         <div class="side-cta">
           <div class="t">AI検索時代の集客、<br>無料で現状分析します</div>
           <a class="btn btn-primary" href="/lp/" data-cta="article_side_lp">無料相談を見てみる</a>
@@ -355,7 +363,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>GeminiとAI Overviewで、引用のされ方がどう違うか</li><li>当サイトがGeminiに18語を聞いて分かったこと</li><li>Geminiの引用に載るための5つの手順と、狙わない判断</li></ul></div>
 
-<h2 id="gemini">Geminiの引用に載るとはどういうことか</h2>
+<h2 id="gemini">Geminiの回答には引用リンクが出ることがあるけど、あれはどういう基準で選ばれているの?</h2>
 <p><strong>Geminiの引用に載るとは、Geminiが回答の根拠として自社のページを選び、出典として示すことです。</strong></p>
 <aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="url_check"><p class="it-head">御社のサイト、ChatGPTやGoogleのAIに読まれていますか？</p><p class="it-sub">URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）</p><form class="it-form" action="/tools/url-check/" method="get"><input type="hidden" name="src" value="article_inline"><input type="hidden" name="from" value="/aio/gemini-inyou-noru-houhou/"><input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_inline_url_check">確かめる</button></form></aside>
 <div class="definition-box"><span class="term">Geminiの引用とは</span>、GoogleのAI「Gemini」がGoogle検索で調べた結果をもとに回答を作り、その根拠にしたWebページを回答の中や下に出典として示すことです。</div>
@@ -503,6 +511,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <details><summary>Geminiの引用を狙わないほうがよい場合はありますか？</summary><p class="faq-a">記事をAIの学習に使われたくない場合です。Google-Extendedを拒否し、Geminiの引用は諦めます。</p></details>
 
 <details><summary>構造化データを入れないとGeminiに引用されませんか？</summary><p class="faq-a">必須ではありません。GoogleはAI検索向けに特別な構造化データは要らないと公表しています。</p></details>
+
+<details><summary>geminiの回答には引用リンクが出ることがあるけど、あれはどういう基準で選ばれているの?</summary><p class="faq-a">Google検索の索引にあるページから、聞かれた語1つに絞ったページが選ばれやすいです。当サイトの実測では3語ともそうでした。</p></details>
 
 <h2 id="gemini_3">まとめ: Geminiは「その質問に答えるページ」を選ぶ</h2>
 <p>Geminiの引用に載る土台は、Google検索の索引と、Google-Extendedを拒否していないことです。そのうえで、<strong>狙う質問1つに1ページで答え、その記事にしか無い数字を置いてください。</strong>AI Overviewの全般的な対策は、<a href="/aio/aio-taisaku-ai-inyou-sareru/">AIO対策でAIに引用されるには？</a>で解説しています。</p>

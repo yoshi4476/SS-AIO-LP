@@ -1,0 +1,119 @@
+{
+ "v": 2,
+ "slug": "zeirishi-houshu-kichodaiko-souba",
+ "ok": true,
+ "date": "2026-11-09",
+ "questions": [
+  "税理士 報酬 相場 記帳 代行について教えてください",
+  "税理士 報酬 相場 記帳 代行について、「税理士の記帳代行報酬相場はいくらか」を教えてください",
+  "税理士 報酬 相場 記帳 代行について、「記帳代行だけの依頼はできるか」を教えてください",
+  "税理士 報酬 相場 記帳 代行について、「税理士事務所と経理BPO専門会社の料金比較」を教えてください",
+  "税理士 報酬 相場 記帳 代行について、「顧問料・決算料を含めた年間費用の目安」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "記帳代行だけの依頼はできるか",
+   "words": [
+    "依頼"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "税理士事務所と経理BPO専門会社の料金比較",
+   "words": [
+    "経理BPO専門会社",
+    "料金比較"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "顧問料・決算料を含めた年間費用の目安",
+   "words": [
+    "年間費用",
+    "顧問料",
+    "決算料"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "報酬額を左右する4つの要因",
+   "words": [
+    "要因"
+   ],
+   "hits": 2,
+   "of": 5
+  },
+  {
+   "topic": "依頼先を比較する3ステップ",
+   "words": [
+    "依頼先"
+   ],
+   "hits": 3,
+   "of": 5
+  },
+  {
+   "topic": "報酬確認でやってはいけないNG対応",
+   "words": [
+    "NG対応"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "all-senmonka.jp": "portal",
+  "aspicjapan.org": "public",
+  "backofficeforce.jp": "peer",
+  "bcompany.co.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "ezei.jp": "peer",
+  "fujiko-san.com": "peer",
+  "ht-tax.or.jp": "peer",
+  "ish-zeirishi.com": "peer",
+  "it-trend.jp": "portal",
+  "kigyolog.com": "portal",
+  "marugotoinc.jp": "peer",
+  "masakioffice.com": "peer",
+  "matsuzei.com": "peer",
+  "osakacpa.com": "peer",
+  "persol-bd.co.jp": "peer",
+  "progo-tax.com": "video",
+  "remoba.biz": "portal",
+  "rstandard.co.jp": "peer",
+  "sakura-z.jp": "peer",
+  "shibuya-zei.jp": "peer",
+  "stg-partners.com": "peer",
+  "strada-group.jp": "peer",
+  "suzuki-tax.net": "peer",
+  "tax-aoyama.jp": "peer",
+  "taxsano.com": "peer",
+  "tsujitax.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "vws-biz.com": "peer",
+  "yayoi-kk.co.jp": "peer",
+  "ytk-tax.com": "video",
+  "z-niconicodo.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 0,
+  "専門家への相談": 5
+ },
+ "chars": 9660,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え4件のうち、『経理BPO専門会社』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え5件のうち、『要因』に触れたものは2件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは進め方の手順は0件、注意点・失敗・リスクは2件、期間（◯か月・◯日など）は3件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは32件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが0件、ポータル・比較サイトが4件、動画・SNS・ブログが2件でした。"
+ ]
+}
