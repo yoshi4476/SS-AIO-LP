@@ -1383,7 +1383,7 @@ def stock_for_plan(site_id):
     if not hub_client._buyer_first(site_id):
         return n, "未着手"
     try:
-        rows = hub_client.all_kw()
+        rows = hub_client.all_kw(strict=True)
     except Exception:  # noqa: BLE001  読めなければ課金しない（在庫不明として扱う）
         return None, "買い手の語の未着手"
     return (sum(1 for r in rows or [] if r.get("site") == site_id and str(r.get("status", "")).strip() == "未着手"

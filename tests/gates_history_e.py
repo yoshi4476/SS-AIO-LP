@@ -45,7 +45,8 @@ PER = re.compile(r"文字単価|字の|1記事|1本|記事単価|あたり|1回|
 INH = re.compile(r"内製|自社対応|自社で|自分で|社内|ツール|無料")
 SVC = re.compile(r"AIO|SEO|LLMO|GEO|AI検索|AI Overview|AIモード|記事制作|コンテンツ", re.I)
 # 別の商材・別の単位の金額（MEO・反響対応・HP制作・セミナー・広告費・ツールのドル建て・初期費用・記事単価）
-OTHER = re.compile(r"MEO|G-ran|Googleビジネスプロフィール|反響|追客|ホームページ制作|HP制作|サイト制作|セミナー|広告費|リスティング|ドル|初期|1記事|1本|記事単価|あたり|単発|スポット")
+# 記事作成ツールは data/price_ranges.json の article_tool（月4〜5万円前後）。外部委託の額ではない
+OTHER = re.compile(r"記事作成ツール|MEO|G-ran|Googleビジネスプロフィール|反響|追客|ホームページ制作|HP制作|サイト制作|セミナー|広告費|リスティング|ドル|初期|1記事|1本|記事単価|あたり|単発|スポット")
 AMT = re.compile(r"十数万|数千円|数万|[0-9][0-9,.]*\s*万|[0-9][0-9,]{3,}\s*円"
                  r"|(?<![0-9,.])[0-9][0-9,.]*(?=\s*[〜~～\-－]\s*[0-9][0-9,.]*\s*万)")
 OWN = re.compile(r"当社|弊社|私たち|AI集客ラボ|セブンセンス|Seven Senses", re.I)
@@ -110,6 +111,10 @@ def low_claims(text):
                 # 単価の語は、この金額より前と同じ節だけで見る（後ろの「スポット型は…」で前の月額を見逃さない）
                 if PER.search(clause if is_row else pre + clause):
                     continue
+                # 金額のすぐ後ろが内製・ツールなら、その額は内製の額（「月数万円台なら内製＋ツールで」）
+                after = re.split(r"[、，。]", u[m.end():])[0]
+                if not is_row and INH.search(after) and not OUT_AFTER.search(after):
+                    continue
                 lo = max([x.end() for x in OUT.finditer(pre)] or [-1])
                 li = max([x.end() for x in INH.finditer(pre)] or [-1])
                 if lo < 0 and li < 0 and not is_row and OUT_AFTER.search(re.split(r"[、，。]", u[m.end():])[0]):
@@ -169,7 +174,11 @@ def test_hist_price_ranges_consistent():
             "SEOの競合は宅地建物取引業者13万2,291業者です。",
             "SEOを自社対応中心で進めると月1〜5万円です。",
             "月30,000円は6か月契約時の価格で、12か月契約なら月27,000円に下がります。",
-            "SEO記事の外注は、3,000字の記事であれば1,500〜6,000円です。"]
+            "SEO記事の外注は、3,000字の記事であれば1,500〜6,000円です。",
+            # 2026-11-09 に門が拾った、相場表どおりの書き方（記事作成ツール・内製の額）
+            "記事作成ツールの相場は月4〜5万円前後です。",
+            "予算の目安は、体制が無いなら月数万〜数十万円の内製＋有料ツール、体制と予算があるなら月20万円以上の一括委託です。",
+            "月数万円台なら内製＋ツールで、担当者の時間を確保してください。"]
     for s in bad:
         check(f"相場: 悪い例を拾う「{s[:24]}」", bool(low_claims("## AIO対策の費用\n" + s)), True)
     for s in good:
