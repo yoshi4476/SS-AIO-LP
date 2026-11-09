@@ -1,9 +1,9 @@
 {
  "corporate": {
-  "at": "2026-10-12",
-  "fp": "52d32967eb5d",
+  "at": "2026-11-09",
+  "fp": "02bed726b984",
   "parts": {
-   "sites": "33f67374e267",
+   "sites": "2954ced9cdce",
    "templates/nextjs_aggregate_index.tsx": "73375c85a45b",
    "templates/nextjs_aggregate_page.tsx": "95b21201bd8f",
    "templates/nextjs_aggregate_slug.tsx": "d7501c381de0",
@@ -11,11 +11,11 @@
   }
  },
  "subsidy": {
-  "at": "2026-10-19",
-  "fp": "eb57d7fd97c4",
+  "at": "2026-11-09",
+  "fp": "8a3692516376",
   "parts": {
-   "dest/template": "42ff73367826",
-   "sites": "489900d9abbd"
+   "dest/template": "94ea8dda62cd",
+   "sites": "4ac07bb6d4ed"
   }
  }
 }
