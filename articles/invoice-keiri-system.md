@@ -150,6 +150,8 @@ quality_attempts: 3
 
 **経理システムを自社で運用するか経理BPOに任せるかは、システムを毎月回す担当者がいるかで決まります。**システムは入れただけでは動かず、差し戻しと区分の確認を毎月続ける人が要ります。
 
+あわせて[登録番号未確認の全額控除はNG](/blog/kichodaiko-hiyou-kanjoukamoku/)もご覧ください。
+
 <figure><img src="/images/invoice-keiri-system/buntan-hikaku.png" alt="自社で運用する場合と経理BPOに任せる場合で、インボイス対応の作業を誰が受け持つかを比べた表の図"></figure>
 
 <span class="txt-blue">条件ごとの選び方は次のとおりです。</span>

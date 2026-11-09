@@ -53,7 +53,7 @@ faq:
 
 近い論点を[電子カルテ情報共有サービスの補助金はクリニック対象外？](/blog/it-hojokin-denkaru-kyoyu-clinic/)で扱っています。
 
-近い論点を[クリニックのIT導入補助金](/blog/it-hojokin-clinic/)で扱っています。
+あわせて[クリニックのIT導入補助金](/blog/it-hojokin-clinic/)もご覧ください。
 
 あわせて[農業機械補助金は4制度](/blog/nougyou-kikai-hojokin/)もご覧ください。
 

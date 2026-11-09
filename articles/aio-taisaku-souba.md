@@ -78,6 +78,8 @@ AIO対策を外部に任せる場合の相場は、部分支援で月数十万�
 
 相場は、記事本数・依頼範囲・業種・依頼先の規模の4つで大きく変わります。
 
+関連する内容として[AIOサービス比較で外す5つの落とし穴](/aio/aio-service-hikaku/)も公開しています。
+
 近い論点を[AIO外注の丸投げで失敗する4つの判断｜渡すもの一覧](/aio/aio-gaichuu/)で扱っています。
 
 <figure><img src="/images/aio-taisaku-souba/factors.png" alt="相場を決める4つの要因: 記事本数、依頼範囲(診断のみか運用までか)、業種、依頼先の規模" loading="lazy"><figcaption>相場を決める4つの要因</figcaption></figure>
@@ -93,8 +95,6 @@ AIO対策を外部に任せる場合の相場は、部分支援で月数十万�
 ## 任せる範囲別にできることの違い
 
 任せる範囲が広がるほど、診断だけでなく一次情報の整備や月次運用まで外部の手で回せます。
-
-あわせて[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)もご覧ください。
 
 <figure><img src="/images/aio-taisaku-souba/hanni-souba.png" alt="任せる範囲別の月額の目安: 内製(無料ツール)はツール代0円+人件費、内製+有料ツールは数万〜数十万円+人件費、外部委託の部分支援は数十万円〜、運用まで一括は数十万〜数百万円" loading="lazy"><figcaption>任せる範囲別の月額の目安（2026年10月時点の当社の見立て）</figcaption></figure>
 

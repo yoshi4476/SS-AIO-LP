@@ -51,13 +51,13 @@ diagrams:
 
 **LLMO集客とは、AIチャットの引用を「認知」で終わらせず、指名検索や問い合わせまでの導線を設計してつなげる考え方です。**LLMO対策そのものとは目的が異なります。
 
+あわせて[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)もご覧ください。
+
+関連する内容として[クリニックのLLMOは公式サイトだけでは足りない](/aio/clinic-llmo-taisaku/)も公開しています。
+
 近い論点を[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)で扱っています。
 
 あわせて[MEO会社の選び方｜LLMO対応の見極め3基準](/aio/meo-kaisha-llmo-taiou/)もご覧ください。
-
-近い論点を[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)で扱っています。
-
-あわせて[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)もご覧ください。
 
 <div class="definition-box"><span class="term">LLMO集客とは</span>、ChatGPTやPerplexityなどのAIチャットに引用・言及されたあと、その認知を指名検索・問い合わせという次の行動に接続する一連の設計を指します。引用の獲得そのものはゴールではなく、通過点という位置づけです。</div>
 

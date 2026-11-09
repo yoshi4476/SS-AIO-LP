@@ -118,9 +118,9 @@ faq:
 
 **申請はGビズIDの取得から始まり、交付決定後の実績報告までの5つの手順で進みます。**順番を飛ばすと、支払った費用が対象外になることがあります。
 
-<figure><img src="/images/roudouhoken-nendokoshin-denshishinsei/flow5.png" alt="社労士事務所がAI導入補助金を申請する5つの手順: GビズID取得、支援事業者とツール選定、業務プロセスの洗い出し、交付申請、交付決定後の契約と実績報告"><figcaption>社労士事務所がAI導入補助金を申請する5つの手順</figcaption></figure>
+つまずきやすい点は[AI導入補助金2026 クリニックの落とし穴](/blog/ai-hojokin-clinic-2026-schedule/)でも扱っています。
 
-最初にGビズIDプライムを取得します。発行までに数日かかるため、公募の締切が見えてから動くと間に合いません。取得の流れは[AI導入補助金のGビズID取得方法](/blog/ai-hojokin-gbizid-shutoku/)で解説しています。
+<figure><img src="/images/roudouhoken-nendokoshin-denshishinsei/flow5.png" alt="社労士事務所がAI導入補助金を申請する5つの手順: GビズID取得、支援事業者とツール選定、業務プロセスの洗い出し、交付申請、交付決定後の契約と実績報告"><figcaption>社労士事務所がAI導入補助金を申請する5つの手順</figcaption></figure>
 
 次に登録支援事業者を決め、導入するツールを選びます。そのうえで自事務所の業務プロセスを洗い出し、どの工程をソフトに置き換えるのかを整理します。ここまで固まったら申請マイページで交付申請を行い、交付決定を待ちます。
 

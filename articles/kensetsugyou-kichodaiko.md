@@ -55,13 +55,13 @@ quality_attempts: 3
 
 **建設業の記帳代行に任せられるのは、記帳・工事別の原価の集計・月次の試算表で、工事番号の付与と書類集めは社内に残ります。**
 
+関連する内容として[不動産の記帳代行はどこまで頼める？](/blog/fudousan-kichodaiko/)も公開しています。
+
+関連する内容として[記帳代行をココナラで頼む落とし穴](/blog/kicho-daiko-coconala/)も公開しています。
+
+あわせて[記帳代行を税理士以外に頼む落とし穴](/blog/kichodaiko-zeirishi-igai/)もご覧ください。
+
 あわせて[飲食店の記帳代行｜任せる範囲と選び方・失敗しない5つの確認点](/blog/inshokuten-kicho-daiko/)もご覧ください。
-
-関連する内容として[平均12万円台は落とし穴](/blog/gyoseishoshi-kichodaiko-souba/)も公開しています。
-
-近い論点を[記帳代行のアウトソーシング活用](/blog/kichodaiko-outsourcing/)で扱っています。
-
-関連する内容として[記帳代行を札幌で頼むなら](/blog/kichodaiko-sapporo/)も公開しています。
 
 <figure><img src="/images/kensetsugyou-kichodaiko/wakekata.png" alt="建設業の経理を、記帳代行に任せる作業・社内に残す作業・専門家に頼む作業の3つに分けた図"></figure>
 

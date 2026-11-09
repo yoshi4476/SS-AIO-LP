@@ -55,6 +55,8 @@ quality_attempts: 3
 
 **クリニックの地域名検索は、「地域名＋診療科」「地域名＋症状」「AIへの質問」の3つの形に分かれます。**形ごとに、上位に出すページが変わります。
 
+関連する内容は[クリニックの患者集客は5つの入口で考える](/ai-marketing/clinic-kanja-shukyaku/)で整理しています。
+
 <figure><img src="/images/clinic-chiikimei-kensaku-joui/shurui.png" alt="地域名でクリニックを探す検索の3つの形: 地域名＋診療科、地域名＋症状、AIへの質問" loading="lazy"><figcaption>地域名でクリニックを探す検索の3つの形</figcaption></figure>
 
 <div class="definition-box"><span class="term">クリニックの地域名検索とは</span>、患者が駅名・町名・区名を付けて医院を探す検索です。「天王寺 皮膚科」のように診療科を付ける形と、「天王寺 じんましん」のように症状を付ける形があります。</div>
@@ -90,6 +92,8 @@ quality_attempts: 3
 ## 地域名で探す患者はポータルとAIの答えで候補を知る
 
 **クリニックを地域名で探す質問では、AIの回答の75.0%が予約・比較ポータルを出典にしていました。**公式サイトの順位と並べて、ポータルの掲載も整える必要があります。
+
+近い論点を[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)で扱っています。
 
 <figure><img src="/images/clinic-chiikimei-kensaku-joui/shutten.png" alt="クリニックの質問でAIが出典にした回答の割合: 探す質問・ポータル75.0%、探す質問・公式サイト51.2%、調べる質問・公式サイト77.4%" loading="lazy"><figcaption>クリニックの質問でAIが出典にした回答の割合（当社の業種調査）</figcaption></figure>
 

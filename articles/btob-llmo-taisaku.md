@@ -49,11 +49,13 @@ faq:
 
 BtoBのLLMO対策とは、生成AIが発注先候補を答えるときに自社が挙がるよう、情報構造と一次情報を整える施策です。BtoB SEOが検索順位を取る施策なのに対し、LLMOはAIの回答文そのものに載ることを狙います。
 
+あわせて[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)もご覧ください。
+
+関連する内容として[クリニックのLLMOは公式サイトだけでは足りない](/aio/clinic-llmo-taisaku/)も公開しています。
+
 選ぶときの基準は[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)で整理しています。
 
 関連する内容として[MEO会社の選び方｜LLMO対応の見極め3基準](/aio/meo-kaisha-llmo-taiou/)も公開しています。
-
-前提となる考え方は[LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](/aio/llmo-shukyaku/)でも扱っています。
 
 <div class="definition-box"><span class="term">BtoB AI検索対策（LLMO）とは</span>、ChatGPT・Gemini・Perplexity・Microsoft Copilotなどの生成AI検索サービスが「BtoBの発注先候補」を回答する際に、自社の社名やサービスが候補として挙げられるように、比較表・FAQ・数値ファクトなどAIが抽出しやすい形で情報を整備する施策のことです。個人の即決購買が中心のBtoCと異なり、BtoBは複数人が段階的に比較検討を進めるため、検討の初期段階でAIに拾われるかどうかが、その後の商談機会そのものを左右します。</div>
 
@@ -85,8 +87,6 @@ BtoB購買担当者は既に生成AI検索を発注先探しの手段として�
 ## BtoB AI検索対策（LLMO）でよくある3つの失敗
 
 BtoB企業がAI検索対策でつまずく典型パターンは、構造未整備・検索経路の見誤り・計測不在の3つです。
-
-関連する内容は[AI検索対策を代理店に頼んだら何を準備する？](/aio/ai-kensaku-taisaku-dairiten-junbi/)で整理しています。
 
 <figure><img src="/images/btob-llmo-taisaku/mistakes.png" alt="BtoB AI検索対策（LLMO）でよくある3つの失敗: 自社サイトが従来SEOのままでAI検索向けの構造がない、発注先探しの主導線をGoogle検索だけで捉えている、AI回答内の言及を計測せず対策の効果を追えていない" loading="lazy"><figcaption>BtoB AI検索対策（LLMO）でよくある3つの失敗</figcaption></figure>
 

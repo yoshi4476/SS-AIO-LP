@@ -47,6 +47,8 @@ faq:
 
 税理士が集客できないとは、紹介以外の経路から新規の問い合わせがほとんど発生しない状態を指します。
 
+近い論点を[税理士のSEOキーワードはどう選ぶ？](/seo/zeirishi-seo-keyword/)で扱っています。
+
 近い論点を[MEO会社の選び方｜LLMO対応の見極め3基準](/aio/meo-kaisha-llmo-taiou/)で扱っています。
 
 あわせて[LLMO集客とは？AI引用を問い合わせに変える5つの導線設計](/aio/llmo-shukyaku/)もご覧ください。
@@ -64,8 +66,6 @@ faq:
 ## 税理士事務所が陥る集客不振の5つのサイン
 
 集客不振の事務所には、紹介依存・強み不明・情報未更新など共通する5つのサインがあります。
-
-選ぶときの基準は[税理士事務所の集客とは？6つのチャネルの選び方](/ai-marketing/zeirishi-shukyaku-channel/)でも扱っています。
 
 <figure><img src="/images/zeirishi-shukyaku-dekinai/signs.png" alt="税理士事務所が陥る集客不振の5つのサイン: 紹介だけに依存、強みが不明瞭、更新が止まった、料金が不明、導線が分かりにくい" loading="lazy"><figcaption>税理士事務所が陥る集客不振の5つのサイン</figcaption></figure>
 

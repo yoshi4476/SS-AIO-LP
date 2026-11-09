@@ -83,8 +83,6 @@ faq:
 
 関連する内容として[飲食店の集客方法とは？](/ai-marketing/inshokuten-shukyaku-hoho/)も公開しています。
 
-あわせて[整骨院の集客成功事例5選](/ai-marketing/seikotsuin-shukyaku-jirei/)もご覧ください。
-
 <figure><img src="/images/biyoushitsu-shukyaku-houhou/houhou.png" alt="集客導線を整える6つの取り組み: マップ表示を整える、Instagram発信、口コミに全件返信、指名検索の導線、来店後の声かけ、値引き表示を守る" loading="lazy"><figcaption>集客導線を整える6つの取り組み</figcaption></figure>
 
 ### 施策1: Googleマップの表示を整える

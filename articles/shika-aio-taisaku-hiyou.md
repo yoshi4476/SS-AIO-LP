@@ -47,13 +47,13 @@ faq:
 
 **歯科医院のAIO対策費用は、外部委託なら任せる範囲に応じて月数十万〜数百万円まで幅があります。**
 
+費用の目安は[歯科医院のリフォーム費用とは？](/meo/shika-reform-hiyou/)でも扱っています。
+
 あわせて[AIO対策を代理店に任せる前に](/aio/aio-taisaku-dairiten/)もご覧ください。
 
 関連する内容として[AIO対策の具体例｜構造別6パターンとNG集](/aio/aio-taisaku-gutairei/)も公開しています。
 
 関連する内容として[AIO対策の相場は月数十万〜数百万円](/aio/aio-taisaku-souba/)も公開しています。
-
-費用の目安は[歯科医院の閉院費用とは？](/meo/shika-heiin-hiyou/)でも扱っています。
 
 <div class="definition-box"><span class="term">AIO対策（AI Overview Optimization）とは</span>、ChatGPTやGoogleのAI Overviewなど、生成AIの回答内で自院の情報が引用されやすい状態をつくる取り組みです。自院にしか無い一次情報の整備や、回答として抜き出しやすい文章構成への改善が中心になります。</div>
 

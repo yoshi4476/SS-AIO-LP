@@ -90,9 +90,9 @@ faq:
 
 請求書の発行は、記載項目を確認する・請求書を作成する・取引先へ送付する・控えを保存する、という4ステップで進めます。
 
-あわせて[個人事業主の外注費の請求書で見落とす3点](/blog/kojinjigyonushi-gaichuuhi-seikyusho/)もご覧ください。
+あわせて[sweeepの請求書は旧資料のまま決めるとNG](/blog/sweeep-seikyusho/)もご覧ください。
 
-前提となる考え方を先に押さえるなら、[請求書照合の自動化とは？](/blog/seikyusho-shougou-jidoka/)が参考になります。
+あわせて[個人事業主の外注費の請求書で見落とす3点](/blog/kojinjigyonushi-gaichuuhi-seikyusho/)もご覧ください。
 
 <figure><img src="/images/seikyusho-hakko-yarikata/step.png" alt="請求書発行の基本4ステップ: 記載項目を確認する、請求書を作成する、取引先へ送付する、控えを保存する" loading="lazy"><figcaption>請求書発行の基本4ステップ</figcaption></figure>
 

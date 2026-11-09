@@ -48,17 +48,19 @@ faq:
 
 経理BPOとは、記帳から月次試算表の作成まで、経理業務のプロセス全体を外部の専門会社に任せる委託形態のことです。
 
+近い論点を[経理と会計士の違い｜中小企業が頼み先を誤る3つの落とし穴](/blog/keiri-kaikeishi-chigai/)で扱っています。
+
+近い論点を[小規模事業者の経理体制の作り方](/blog/shokibo-jigyousha-keiri-taisei/)で扱っています。
+
+あわせて[経理事務と経理補助の違いは？](/blog/keiri-jimu-hojo-chigai/)もご覧ください。
+
+近い論点を[経理の時給相場1,281円](/blog/keiri-jikyu-souba/)で扱っています。
+
 関連する内容については、[BPOの領域5つと士業の境目](/blog/bpo-ryouiki-kyoukai)にまとめています。
 
 つまずきやすい点を先に押さえるなら、[デジタルBPOの外注で失敗する3つの準備不足](/blog/digital-bpo-gaichuu)が参考になります。
 
 選ぶときの基準は[経理規程と経理規定の違いは？](/blog/keiri-kitei-chigai)で整理しています。
-
-実際の進め方は[経理BPO導入の流れ｜6ステップと期間の目安](/blog/keiri-bpo-donyu-nagare/)で整理しています。
-
-近い論点を[経理部と経理課の違いは？](/blog/keiri-bu-keiri-ka-chigai/)で扱っています。
-
-関連する内容として[経理と財務の違い｜兼任の社長が資金繰りで詰まる3つの落とし穴](/blog/keiri-zaimu-chigai/)も公開しています。
 
 関連する内容については、計理と経理の違いと書類での使い分けにまとめています。
 
@@ -88,8 +90,6 @@ faq:
 ## 経理BPOに任せられる業務範囲
 
 経理BPOでは、記帳・仕訳入力から請求書処理、給与計算、月次試算表の作成まで、経理業務の大部分を任せられます。
-
-関連する内容は[経理の業務委託は準委任か請負か](/blog/keiri-gyomu-itaku/)でも扱っています。
 
 <figure><img src="/images/keiri-bpo-toha/hani.png" alt="経理BPOに任せられる業務範囲: 記帳・仕訳入力、請求書発行・支払処理、経費精算のチェック、給与計算・年末調整、月次試算表の作成" loading="lazy"><figcaption>経理BPOに任せられる業務範囲</figcaption></figure>
 

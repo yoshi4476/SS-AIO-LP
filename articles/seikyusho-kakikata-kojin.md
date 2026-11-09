@@ -51,13 +51,13 @@ faq:
 
 **個人が書く請求書に最低限必要なのは、発行日・請求書番号・発行者情報・取引先名・取引内容と金額・振込先の6項目です。**会社員が副業で仕事を受けた場合も、個人事業主として開業届を出している場合も、書くべき中身は変わりません。
 
+関連する内容として[sweeepの請求書は旧資料のまま決めるとNG](/blog/sweeep-seikyusho/)も公開しています。
+
 あわせて[個人事業主の外注費の請求書で見落とす3点](/blog/kojinjigyonushi-gaichuuhi-seikyusho/)もご覧ください。
 
 あわせて[請求書の三つ折りのやり方｜向きを間違えない3ステップ](/blog/seikyusho-mitsuori-yarikata/)もご覧ください。
 
 関連する内容として[請求書照合の自動化とは？](/blog/seikyusho-shougou-jidoka/)も公開しています。
-
-近い論点を[請求書のAI自動化｜4つの工程とOCR精度の限界](/blog/seikyusho-jidoka-ai/)で扱っています。
 
 <figure><img src="/images/seikyusho-kakikata-kojin/kakunin.png" alt="個人が請求書に書く基本6項目: 発行日、請求書番号、発行者の氏名と連絡先、取引先の名称、取引内容と金額、振込先口座" loading="lazy"><figcaption>個人が請求書に書く基本6項目</figcaption></figure>
 

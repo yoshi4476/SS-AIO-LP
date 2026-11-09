@@ -70,6 +70,8 @@ faq:
 
 **個人事務所は代表1人の専門性を深く書けば足りますが、税理士法人は組織と人の両方を書き分ける必要があります。**
 
+あわせて[税理士のSEOキーワードはどう選ぶ？](/seo/zeirishi-seo-keyword/)もご覧ください。
+
 <a href="https://laws.e-gov.go.jp/law/326AC1000000237" target="_blank" rel="noopener">税理士法</a>では、税理士法人の社員は税理士に限られています。つまり法人の信頼は、所属する税理士一人ひとりの専門性の積み重ねです。AIに伝えるべき情報も、組織全体と個人の2層に分かれます。
 
 | 比較項目 | 個人の税理士事務所 | 税理士法人 |
@@ -89,8 +91,6 @@ faq:
 近い論点を[士業のSEO｜広告規制の中で専門性をどう発信するか](/seo/shigyou-seo-taisaku/)で扱っています。
 
 あわせて[不動産SEO記事のライター選び方](/seo/fudousan-seo-kiji-writer/)もご覧ください。
-
-あわせて[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)もご覧ください。
 
 <figure><img src="/images/zeirishi-houjin-aio/junbi-5.png" alt="税理士法人がAIに引用されるための5つの準備" width="1200" height="700" loading="lazy"><figcaption>税理士法人がAIに引用されるための5つの準備（当メディア作成）</figcaption></figure>
 

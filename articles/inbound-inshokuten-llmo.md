@@ -61,7 +61,7 @@ quality_attempts: 3
 
 関連する内容として[クリニックの地域名検索で上位に出ない5つの原因と直す順番](/aio/clinic-chiikimei-kensaku-joui/)も公開しています。
 
-関連する内容として[歯科医院の地域名検索で上位に出る方法](/seo/shika-chiikimei-kensaku-joui/)も公開しています。
+あわせて[歯科医院の地域名検索で上位に出る方法](/seo/shika-chiikimei-kensaku-joui/)もご覧ください。
 
 <div class="definition-box"><span class="term">LLMO（Large Language Model Optimization）とは</span>、ChatGPT・Gemini・Claude・Perplexityなどの生成AIが答えを作るとき、自社の情報が正しく出典や候補に使われるよう整えることです。</div>
 

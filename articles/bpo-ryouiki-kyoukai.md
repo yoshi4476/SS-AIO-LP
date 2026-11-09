@@ -69,6 +69,8 @@ BPOという言葉の意味は、[BPOとは？意味と業務の種類5つ](/blo
 
 **BPOの主な領域は経理・人事労務・総務・情報システム・顧客対応の5つで、どの領域にも社内か士業に残る業務があります。**
 
+関連する内容として[バックオフィスのコンサルが提案で終わる3つの原因](/blog/backoffice-consul-teian/)も公開しています。
+
 <figure><img src="/images/bpo-ryouiki-kyoukai/ryouiki.png" alt="経理・人事労務・総務・情報システム・顧客対応の5つの領域で、BPOに任せやすい業務と士業・社内に残る業務を比べた表" loading="lazy"><figcaption>BPOの領域ごとに任せる業務と士業に頼む業務</figcaption></figure>
 
 5つの領域で、任せやすい業務と残る業務を表にまとめます。
@@ -90,6 +92,8 @@ BPOという言葉の意味は、[BPOとは？意味と業務の種類5つ](/blo
 ## 税理士・社労士にしか頼めない業務はどこからか
 
 **税務代理・税務書類の作成・税務相談は税理士、社会保険の申請書等の作成と提出の代行は社労士の業務です。**
+
+あわせて[登録番号未確認の全額控除はNG](/blog/kichodaiko-hiyou-kanjoukamoku/)もご覧ください。
 
 国税庁の<a href="https://www.nta.go.jp/taxes/zeirishi/zeirishiseido/qa/06.htm" target="_blank" rel="noopener">税理士制度のQ&A（問6-1）</a>は、税理士でない者が税理士業務を行うことを税理士法第52条が禁じていると説明しています。税理士業務は、税務代理・税務書類の作成・税務相談の3つです。
 
@@ -117,6 +121,8 @@ BPOという言葉の意味は、[BPOとは？意味と業務の種類5つ](/blo
 ## 経理の領域で当社が担当した範囲と数字
 
 **経理の領域の中でも、当社が多く担当したのは受け取った請求書の処理と支払で、2023年4月〜2026年9月に25社です。**
+
+関連する内容として[インボイス制度の請求書テンプレート無料版で漏れる3場面](/blog/invoice-seikyusho-template-muryou/)も公開しています。
 
 <figure><img src="/images/bpo-ryouiki-kyoukai/tantou.png" alt="経理の領域で当社が担当した社数を、受け取り・支払処理25社からクラウド経費精算12社まで比べた棒グラフ" loading="lazy"><figcaption>経理の領域で当社が担当した社数（当社の支援実績）</figcaption></figure>
 

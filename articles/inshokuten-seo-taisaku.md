@@ -51,11 +51,13 @@ diagrams:
 
 **飲食店のSEO対策とは、自社サイトを検索結果の上位に表示させ、予約と来店に直接つなげる取り組みです。**同じ「検索対策」でも、SEO・MEO・グルメサイトでは戦う場所と費用の性質がまったく違います。
 
+関連する内容として[税理士のSEOキーワードはどう選ぶ？](/seo/zeirishi-seo-keyword/)も公開しています。
+
 あわせて[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)もご覧ください。
 
 関連する内容として[税理士の集客サイトとは？](/seo/zeirishi-shukyaku-site/)も公開しています。
 
-関連する内容として[税理士のブログ集客とは？書くべき5つの記事テーマ](/seo/zeirishi-blog-shukyaku/)も公開しています。
+近い論点を[税理士のブログ集客とは？書くべき5つの記事テーマ](/seo/zeirishi-blog-shukyaku/)で扱っています。
 
 <div class="definition-box"><span class="term">飲食店のSEO対策とは</span>、「梅田 焼き鳥」のような地域名と業態の組み合わせで検索した人に、自社サイトを見つけてもらうための施策です。Googleマップ枠の順位を狙うMEOとは対策する場所が異なり、対象は検索結果に並ぶWebページになります。</div>
 
@@ -104,8 +106,6 @@ diagrams:
 ## 飲食店のSEO対策を進める5つの手順
 
 **進め方は、キーワード設計・ページ整備・記事追加・予約導線・計測改善という5段階です。**順番を飛ばして記事だけ増やしても、受け皿のページが弱いままでは予約に届きません。
-
-あわせて[リフォームSEOとは？受注につながる5つの施策](/seo/reform-seo-taisaku/)もご覧ください。
 
 <figure><img src="/images/inshokuten-seo-taisaku/steps.png" alt="飲食店SEO対策の5手順を、キーワード設計から計測改善まで順に示した図" loading="lazy"><figcaption>飲食店SEO対策の5手順</figcaption></figure>
 

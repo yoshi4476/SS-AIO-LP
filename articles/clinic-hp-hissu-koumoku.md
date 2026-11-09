@@ -97,8 +97,6 @@ faq:
 
 関連する内容は[工務店ホームページのよくある質問は何を載せる？](/aio/koumuten-hp-yokuaru-shitsumon/)で整理しています。
 
-料金目安の書き方は、[クリニックのホームページの料金の載せ方](/aio/clinic-hp-ryokin-nosekata/)で診療の区分ごとに整理しています。
-
 <figure><img src="/images/clinic-hp-hissu-koumoku/koumoku.png" alt="クリニックのホームページに必須の6つの項目: 基本情報とアクセス、診療科目・対応疾患、医師・スタッフ紹介、初診の流れ・予約導線、自由診療の料金目安、医療広告ガイドライン準拠の表現" loading="lazy"><figcaption>クリニックのホームページに必須の6つの項目</figcaption></figure>
 
 ### 項目1: 基本情報とアクセス

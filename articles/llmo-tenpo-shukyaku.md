@@ -51,6 +51,10 @@ diagrams:
 
 **LLMO店舗集客とは、AIチャットの回答に店舗が引用され、指名検索や来店につながる状態をつくる取り組みです。**MEO対策の延長線上にありますが、狙う場所が異なります。
 
+関連する内容として[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)も公開しています。
+
+あわせて[クリニックのLLMOは公式サイトだけでは足りない](/aio/clinic-llmo-taisaku/)もご覧ください。
+
 実測の参考として、MEO運用サービス「G-ran」を含むAIO・SEO・MEOの支援で累計3,200件以上（うちMEO 2,000件以上）を運用してきました（出典: 自社実績）。
 
 <div class="definition-box"><span class="term">LLMO店舗集客とは</span>、ChatGPTやPerplexityなどのAIチャットが「近くのおすすめ」を答える場面で、自店の名前や特徴が引用され、それが来店予約という行動につながるまでの一連の取り組みを指します。</div>
@@ -102,10 +106,6 @@ FAQは、来店前の不安をそのまま質問文にすることがコツで�
 **LLMO店舗集客の最終指標は業種によって異なり、飲食店は予約数、美容室は指名予約、クリニックは指名来院で成果を測ります。**業種ごとに検討期間と比較のポイントが違うためです。
 
 関連する内容として[大阪でMEOとAIOを両方任せられる会社の選び方](/aio/osaka-meo-aio-kaisha/)も公開しています。
-
-近い論点を[クリニックのインスタ集客のやり方](/ai-marketing/clinic-instagram-yarikata/)で扱っています。
-
-あわせて[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)もご覧ください。
 
 あわせて[美容皮膚科のMEO対策とは？](/meo/biyou-hifuka-meo/)もご覧ください。
 

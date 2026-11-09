@@ -53,13 +53,13 @@ faq:
 
 経理外注の依頼先は、フリーランス・記帳代行専門会社・経理BPO会社・税理士事務所の4タイプに分かれ、費用の出し方がそれぞれ異なります。
 
+あわせて[記帳代行費用の相場は法人でいくら？](/blog/kichodaiko-houjin-hiyou-souba/)もご覧ください。
+
+近い論点を[経理の時給相場1,281円](/blog/keiri-jikyu-souba/)で扱っています。
+
 近い論点を[記帳代行料金表は税理士事務所でどう読む？](/blog/kichodaiko-ryokinhyo-zeirishi/)で扱っています。
 
 費用の目安は[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)で整理しています。
-
-選ぶときの基準は[経理外注の依頼先｜記帳代行センターと税理士の違い5つ](/blog/keiri-gaichuu-kichodaiko-center/)で整理しています。
-
-近い論点を[経理BPOと人材派遣の違い5つ｜費用・契約形態を比較](/blog/keiri-bpo-haken-chigai/)で扱っています。
 
 <div class="definition-box"><span class="term">経理外注とは</span>、記帳・請求書処理・給与計算といった経理業務の一部または全部を、社外の個人や会社に委託することです。==依頼先のタイプによって、時給制・従量制・月額制など料金の考え方自体が変わります。==</div>
 

@@ -73,7 +73,7 @@ faq:
 
 記帳代行は入力作業の切り出し、経理BPOは経理機能全体の委託という点が大きな違いです。
 
-関連する内容として[平均12万円台は落とし穴](/blog/gyoseishoshi-kichodaiko-souba/)も公開しています。
+関連する内容として[飲食店の記帳代行｜任せる範囲と選び方・失敗しない5つの確認点](/blog/inshokuten-kicho-daiko/)も公開しています。
 
 範囲の境界線をさらに詳しく知りたい場合は、[経理の外注と丸投げの違い｜任せられる範囲と残す業務4つ](https://corp.7senses.co.jp/blog/keiri-marunage-dekiru-hani/)もあわせてご確認ください。
 
