@@ -1,0 +1,123 @@
+{
+ "v": 2,
+ "slug": "nougyou-shoki-hiyou",
+ "ok": true,
+ "date": "2026-11-09",
+ "questions": [
+  "農業 AI導入補助金 対象について教えてください",
+  "農業 AI導入補助金 対象について、「農業が対象になる条件」を教えてください",
+  "農業 AI導入補助金 対象について、「農業で対象になるソフト3分野」を教えてください",
+  "農業 AI導入補助金 対象について、「対象にならないもの」を教えてください",
+  "農業 AI導入補助金 対象について、「農業機械を買いたい場合」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "農業が対象になる条件",
+   "words": [
+    "条件"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "個人農家と農業法人での違い",
+   "words": [
+    "個人農家"
+   ],
+   "hits": 3,
+   "of": 5
+  },
+  {
+   "topic": "申請前に確認する4ステップ",
+   "words": [
+    "申請前"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "農繁期を避けて申請する",
+   "words": [
+    "農繁期"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "出荷・販売のソフトで効果が出やすい場面",
+   "words": [
+    "ソフト",
+    "出荷",
+    "販売",
+    "場面"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "経営・会計ソフトは作物別の原価が見える",
+   "words": [
+    "会計ソフト",
+    "作物別",
+    "経営",
+    "原価"
+   ],
+   "hits": 5,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "ai-keiei.shift-ai.co.jp": "peer",
+  "akasakatec.com": "peer",
+  "ax-compass.me": "peer",
+  "biz.kddi.com": "peer",
+  "biz.stayway.jp": "peer",
+  "book.st-hakky.com": "peer",
+  "branche-ip.jp": "peer",
+  "hojo.mono-support.com": "peer",
+  "hojokin-dx.com": "video",
+  "inochio.co.jp": "peer",
+  "it-shien.smrj.go.jp": "public",
+  "jataff.or.jp": "peer",
+  "krk-system.com": "peer",
+  "kumiki.co.jp": "peer",
+  "lp.7senses.co.jp": "self",
+  "maff.go.jp": "public",
+  "neural-opt.com": "peer",
+  "new-beginnings.co.jp": "peer",
+  "noka-hojokin.com": "peer",
+  "note.com": "video",
+  "noukigu-honpo.com": "peer",
+  "noulog.com": "peer",
+  "physical-ai-hojokin.jp": "peer",
+  "seimitsu-nougyo.com": "peer",
+  "skylinkjapan.com": "peer",
+  "smart-agri-navi.jp": "peer",
+  "smart-hojokin.jp": "peer",
+  "smartagri-jp.com": "peer",
+  "so-labo.co.jp": "peer",
+  "sogyotecho.jp": "media",
+  "trise-c.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "zero-agri.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 1,
+  "専門家への相談": 1
+ },
+ "chars": 8511,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え5件のうち、『農繁期』に触れたものは0件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え5件のうち、『申請前』に触れたものは1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは費用の金額（◯円）は1件、進め方の手順は1件、専門家への相談は1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは33件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが1件、動画・SNS・ブログが2件でした。"
+ ]
+}

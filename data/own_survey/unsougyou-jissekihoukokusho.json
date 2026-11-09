@@ -1,0 +1,163 @@
+{
+ "v": 2,
+ "slug": "unsougyou-jissekihoukokusho",
+ "ok": true,
+ "date": "2026-11-09",
+ "questions": [
+  "運送業 実績報告書について教えてください",
+  "運送業 実績報告書について、「運送業の実績報告書とは｜IT導入補助金・ものづくり補助金で共通する提出の流れ」を教えてください",
+  "運送業 実績報告書について、「傭車・庸車（委託先ドライバー）分の費用は実績報告にどう含めるか」を教えてください",
+  "運送業 実績報告書について、「デジタコ・車載器はハードウェアとして実績報告できるか」を教えてください",
+  "運送業 実績報告書について、「軽貨物・個人事業主ドライバーが実績報告でつまずく3つの場面」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "運送業の実績報告書とは｜IT導入補助金・ものづくり補助金で共通する提出の流れ",
+   "words": [
+    "IT導入補助金",
+    "補助金"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "傭車・庸車（委託先ドライバー）分の費用は実績報告にどう含めるか",
+   "words": [
+    "委託先ドライバー",
+    "実績報告",
+    "傭車",
+    "庸車"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "デジタコ・車載器はハードウェアとして実績報告できるか",
+   "words": [
+    "ハードウェア",
+    "デジタコ",
+    "実績報告",
+    "車載器"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "軽貨物・個人事業主ドライバーが実績報告でつまずく3つの場面",
+   "words": [
+    "個人事業主ドライバー",
+    "実績報告",
+    "軽貨物",
+    "場面"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "繁忙期（3月・12月）に証憑集めを後回しにしないために",
+   "words": [
+    "繁忙期"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "IT導入補助金とものづくり補助金、実績報告で求められる証憑の違い",
+   "words": [
+    "IT導入補助金",
+    "実績報告",
+    "補助金",
+    "証憑"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "運送業の実績報告でよくある不備とNG例",
+   "words": [
+    "実績報告",
+    "NG例",
+    "不備"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "実績報告を出す前に確認したい運送業向けチェック5項目",
+   "words": [
+    "実績報告"
+   ],
+   "hits": 5,
+   "of": 5
+  }
+ ],
+ "official": [
+  {
+   "term": "AI導入補助金",
+   "org": "公的機関",
+   "of": 5,
+   "hits": 1
+  }
+ ],
+ "sources": {
+  "act-gyosei.com": "peer",
+  "blog-t.com": "peer",
+  "forval-shoukei.jp": "peer",
+  "hearty.or.jp": "peer",
+  "hojokin-agent.jp": "peer",
+  "hojokin-navi.co.jp": "peer",
+  "hound-japan.com": "peer",
+  "ht-tax.or.jp": "peer",
+  "ichidokiri.co.jp": "media",
+  "it-hojo.jp": "peer",
+  "it-shien.smrj.go.jp": "public",
+  "k-office-kamotsu.com": "peer",
+  "kaidou.jp": "peer",
+  "komateru.com": "peer",
+  "laws.e-gov.go.jp": "public",
+  "lc-gyousei.com": "peer",
+  "loginect.net": "peer",
+  "logistics360.jp": "peer",
+  "lp.7senses.co.jp": "self",
+  "mlit.go.jp": "public",
+  "nippon-smes-project.com": "media",
+  "note.com": "video",
+  "office-appare.com": "peer",
+  "office-usagi.jp": "peer",
+  "portal.monodukuri-hojo.jp": "public",
+  "saitoujimusyo.com": "peer",
+  "sme-support.co.jp": "peer",
+  "ssl.aitokyo.jp": "peer",
+  "systemgearcloud.com": "peer",
+  "tax-startup.jp": "peer",
+  "tokyo-kst.jp": "peer",
+  "totokyo.or.jp": "peer",
+  "transtron.com": "peer",
+  "tsuzuki.jp": "peer",
+  "unso-houkoku.com": "peer",
+  "unsougyo.takaisa-office.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "wakajo-shotengai.com": "peer",
+  "wwwtb.mlit.go.jp": "public",
+  "xn--jprz31c82x93etka.com": "peer",
+  "yell-tax.com": "video",
+  "ymd-unsou.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 5,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 2,
+  "専門家への相談": 1
+ },
+ "chars": 8952,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、公的機関の資料にある「AI導入補助金」に触れたものは1件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は1件、進め方の手順は2件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは42件で、公的機関・学会・業界団体が5件、ニュース・メディア・まとめが2件、動画・SNS・ブログが2件でした。"
+ ]
+}
