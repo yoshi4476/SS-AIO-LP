@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-02",
-  "asked": 3,
+  "date": "2026-11-09",
+  "asked": 4,
   "items": [
     {
       "kw": "派遣 経理 時給 相場",
@@ -12,26 +12,26 @@
         "answered": true,
         "ours": false,
         "sources": [
-          "bpo.drwallet.jp",
+          "haken.cieloazul.co.jp",
           "haken.en-japan.com",
-          "hatarako.net",
-          "r-staffing.co.jp",
+          "rstandard.co.jp",
           "staff.jusnet.co.jp",
-          "vertexaisearch.cloud.google.com",
-          "xn--pckua2a7gp15o89zb.com"
+          "tempstaff.co.jp",
+          "ten.1049.cc",
+          "vertexaisearch.cloud.google.com"
         ],
         "engines": {
           "Gemini": {
             "answered": true,
             "ours": false,
             "sources": [
-              "bpo.drwallet.jp",
+              "haken.cieloazul.co.jp",
               "haken.en-japan.com",
-              "hatarako.net",
-              "r-staffing.co.jp",
+              "rstandard.co.jp",
               "staff.jusnet.co.jp",
-              "vertexaisearch.cloud.google.com",
-              "xn--pckua2a7gp15o89zb.com"
+              "tempstaff.co.jp",
+              "ten.1049.cc",
+              "vertexaisearch.cloud.google.com"
             ]
           }
         }
@@ -40,8 +40,8 @@
     },
     {
       "kw": "コーポレート バックオフィス 違い",
-      "imp": 10,
-      "pos": 7.5,
+      "imp": 19,
+      "pos": 4.5,
       "src": "gsc",
       "written": true,
       "ai": {
@@ -56,12 +56,12 @@
           }
         }
       },
-      "score": 7.0
+      "score": 7.3
     },
     {
-      "kw": "経理補助とは",
-      "imp": 54,
-      "pos": 6.5,
+      "kw": "バックオフィス 事務 違い",
+      "imp": 52,
+      "pos": 33.5,
       "src": "gsc",
       "written": false,
       "ai": {
@@ -76,7 +76,27 @@
           }
         }
       },
-      "score": 2.7
+      "score": 6.7
+    },
+    {
+      "kw": "経理補助とは",
+      "imp": 85,
+      "pos": 6.9,
+      "src": "gsc",
+      "written": false,
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
+      "score": 2.9
     }
   ]
 }

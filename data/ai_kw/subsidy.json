@@ -1,7 +1,47 @@
 {
-  "date": "2026-11-02",
+  "date": "2026-11-09",
   "asked": 5,
   "items": [
+    {
+      "kw": "デジタル化 ai導入補助金 選び方",
+      "imp": 8,
+      "pos": 23.5,
+      "src": "gsc",
+      "written": false,
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "anshin.co.jp",
+          "carearc.co.jp",
+          "helptech.jp",
+          "hojyokin-portal.jp",
+          "ichidokiri.co.jp",
+          "it-trend.jp",
+          "j-aix.or.jp",
+          "ntt.com",
+          "sme-support.co.jp",
+          "vertexaisearch.cloud.google.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "anshin.co.jp",
+              "carearc.co.jp",
+              "helptech.jp",
+              "hojyokin-portal.jp",
+              "ichidokiri.co.jp",
+              "it-trend.jp",
+              "j-aix.or.jp",
+              "ntt.com"
+            ]
+          }
+        }
+      },
+      "score": 10.0
+    },
     {
       "kw": "it導入補助金 選び方",
       "imp": 32,
@@ -40,8 +80,8 @@
     },
     {
       "kw": "it導入支援事業者 選び方",
-      "imp": 8,
-      "pos": 16,
+      "imp": 10,
+      "pos": 13.8,
       "src": "gsc",
       "written": true,
       "ai": {
@@ -59,29 +99,9 @@
       "score": 7.0
     },
     {
-      "kw": "デジタル化 ai導入補助金 選び方",
-      "imp": 8,
-      "pos": 23.5,
-      "src": "gsc",
-      "written": false,
-      "ai": {
-        "answered": false,
-        "ours": false,
-        "sources": [],
-        "engines": {
-          "Gemini": {
-            "answered": false,
-            "ours": false,
-            "sources": []
-          }
-        }
-      },
-      "score": 7.0
-    },
-    {
       "kw": "ベンダー登録とは",
-      "imp": 60,
-      "pos": 5,
+      "imp": 68,
+      "pos": 4.7,
       "src": "gsc",
       "written": true,
       "ai": {

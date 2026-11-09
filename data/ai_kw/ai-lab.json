@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-02",
+  "date": "2026-11-09",
   "asked": 4,
   "items": [
     {
@@ -76,9 +76,45 @@
       "score": 10.5
     },
     {
+      "kw": "aio 対策 費用",
+      "imp": 12,
+      "pos": 5.8,
+      "src": "gsc",
+      "written": true,
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "allview.jp",
+          "atoz-design.jp",
+          "branding-works.jp",
+          "conmark.jp",
+          "seedinc.jp",
+          "sienca.jp",
+          "sunsee.jp"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "allview.jp",
+              "atoz-design.jp",
+              "branding-works.jp",
+              "conmark.jp",
+              "seedinc.jp",
+              "sienca.jp",
+              "sunsee.jp"
+            ]
+          }
+        }
+      },
+      "score": 10.1
+    },
+    {
       "kw": "aio対策 クリニック",
-      "imp": 53,
-      "pos": 18.6,
+      "imp": 50,
+      "pos": 18.3,
       "src": "gsc",
       "written": true,
       "ai": {
@@ -112,26 +148,6 @@
         }
       },
       "score": 8.7
-    },
-    {
-      "kw": "aio 対策 費用",
-      "imp": 12,
-      "pos": 5.8,
-      "src": "gsc",
-      "written": true,
-      "ai": {
-        "answered": false,
-        "ours": false,
-        "sources": [],
-        "engines": {
-          "Gemini": {
-            "answered": false,
-            "ours": false,
-            "sources": []
-          }
-        }
-      },
-      "score": 7.1
     }
   ]
 }
