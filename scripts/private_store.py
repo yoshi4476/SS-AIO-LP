@@ -229,9 +229,20 @@ def _token():
     return next((os.environ[k] for k in TOKEN_ENVS if os.environ.get(k)), "")
 
 
+# git が hook に渡す「置き場の場所」。引き継ぐと git -C private/ が公開側の置き場で動く
+# （2026-11-10 git worktree の作業場所で pre-commit が公開側に「お客様のファイルだけの commit」を作り、push を試みた。
+#  外れた push で済んだが、枝の上なら公開側へ出ていた）
+REPO_ENV = ("GIT_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_PREFIX", "GIT_COMMON_DIR",
+            "GIT_OBJECT_DIRECTORY", "GIT_ALTERNATE_OBJECT_DIRECTORIES")
+
+
+def _own_env():
+    return {k: v for k, v in os.environ.items() if k not in REPO_ENV}
+
+
 def _git(*args, check=False, quiet=True):
     r = subprocess.run(["git", "-C", str(base()), *args], capture_output=True, text=True, encoding="utf-8",
-                       errors="replace")
+                       errors="replace", env=_own_env())
     if check and r.returncode:
         raise RuntimeError((r.stderr or r.stdout).strip()[-300:])
     return r

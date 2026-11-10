@@ -65,6 +65,23 @@ def _own():
 
 # ── 1. 公開側の印は、社が特定できない3項目だけ ─────────────────────────────────
 
+def test_private_git_ignores_the_hook_repo_env():
+    import os
+    import subprocess
+    import private_store as PS
+    from unittest import mock
+    print("\n■ 守秘: pre-commit の中でも、非公開の置き場の git は公開側の置き場の設定（GIT_DIR など）を引き継がない")
+    with tempfile.TemporaryDirectory() as d:
+        outer, inner = Path(d) / "outer", Path(d) / "outer" / "private"
+        inner.mkdir(parents=True)
+        for p in (outer, inner):
+            subprocess.run(["git", "init", "-q", str(p)], check=True)
+        env = {"GIT_DIR": str(outer / ".git"), "GIT_INDEX_FILE": str(outer / ".git" / "index")}
+        with mock.patch.dict(os.environ, env), mock.patch.object(PS, "base", lambda: inner):
+            top = PS._git("rev-parse", "--absolute-git-dir").stdout.strip()
+    check("hook の中でも private/ 自身の .git で動く", Path(top).resolve() == (inner / ".git").resolve(), True)
+
+
 def test_public_stub_is_only_an_opaque_mark():
     print("\n■ 守秘義務: 公開側の sites/ に残るお客様の社は、社が特定できない印だけ（2026-10-10）")
     import sites as S
