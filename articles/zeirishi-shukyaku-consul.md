@@ -165,6 +165,8 @@ AIOの運用を任された会社では順位が上がり、早い会社では2�
 
 税理士事務所が初回の面談で聞くのは、結果と時期・測り方・同業での経験・サイトの変更の共有の4つです。
 
+関連する内容を先に押さえるなら、[美容室の集客コンサルに初回面談で聞く5つの質問は？](/aio/biyoushitsu-shukyaku-consul/)が参考になります。
+
 Googleは<a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo?hl=ja" target="_blank" rel="noopener">SEOの専門家についての説明</a>で、依頼の前に聞く質問を挙げています。そこから税理士事務所に要るものを選び、当社の判断で1つ足しました。
 
 1. どんな結果を、いつまでに見込むか。成果をどう測るか

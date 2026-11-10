@@ -1,0 +1,114 @@
+{
+ "v": 2,
+ "slug": "clinic-hp-ryokin-nosekata",
+ "ok": true,
+ "date": "2026-11-11",
+ "questions": [
+  "クリニック ホームページ 料金 載せ方について教えてください",
+  "クリニック ホームページ 料金 載せ方について、「クリニックの料金は、診療の区分ごとに載せ方が違う」を教えてください",
+  "クリニック ホームページ 料金 載せ方について、「保険診療の料金は「目安」と支払方法までにとどめる」を教えてください",
+  "クリニック ホームページ 料金 載せ方について、「自由診療の料金に添える4つの情報と、薬の名前の扱い」を教えてください",
+  "クリニック ホームページ 料金 載せ方について、「健康診断と予防接種の料金はどう書く？」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "クリニックの料金は、診療の区分ごとに載せ方が違う",
+   "words": [
+    "診療"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "保険診療の料金は「目安」と支払方法までにとどめる",
+   "words": [
+    "保険診療"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "自由診療の料金に添える4つの情報と、薬の名前の扱い",
+   "words": [
+    "自由診療",
+    "情報",
+    "名前"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "健康診断と予防接種の料金はどう書く？",
+   "words": [
+    "健康診断",
+    "予防接種"
+   ],
+   "hits": 3,
+   "of": 8
+  },
+  {
+   "topic": "AI検索に料金を正しく答えさせる書き方",
+   "words": [
+    "AI検索"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "医療広告等ガイドライン",
+   "org": "公的機関",
+   "of": 10,
+   "hits": 3
+  }
+ ],
+ "sources": {
+  "az-mark.jp": "peer",
+  "byoin-dock.jp": "peer",
+  "city.toyota.aichi.jp": "public",
+  "cl-mirai-lab.doctorsfile.jp": "portal",
+  "clinic-shukyaku.com": "peer",
+  "clinic.s-suteki.co.jp": "peer",
+  "clinicplus.health": "portal",
+  "dragent.jp": "peer",
+  "gvalaw.jp": "peer",
+  "jea-endo.or.jp": "public",
+  "ks-m.co.jp": "media",
+  "leadplus.co.jp": "media",
+  "lymcampus.jp": "peer",
+  "medical-grits.jp": "peer",
+  "medical-marketing-japan.com": "peer",
+  "medical.acsport.net": "peer",
+  "medicalcenterjp.com": "media",
+  "meix.jp": "peer",
+  "mhlw.go.jp": "public",
+  "more-field.co.jp": "peer",
+  "note.com": "video",
+  "nta.go.jp": "public",
+  "paddle-ship.jp": "peer",
+  "phchd.com": "peer",
+  "saito-clinic.or.jp": "peer",
+  "tokyo.med.or.jp": "public",
+  "vertexaisearch.cloud.google.com": "peer",
+  "visca-hp.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 4,
+  "注意点・失敗・リスク": 8,
+  "進め方の手順": 1,
+  "専門家への相談": 0
+ },
+ "chars": 17489,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、公的機関の資料にある「医療広告等ガイドライン」に触れたものは3件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは専門家への相談は0件、進め方の手順は1件、期間（◯か月・◯日など）は4件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは28件で、公的機関・学会・業界団体が5件、ニュース・メディア・まとめが3件、ポータル・比較サイトが2件、動画・SNS・ブログが1件でした。"
+ ]
+}

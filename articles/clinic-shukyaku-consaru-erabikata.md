@@ -148,6 +148,8 @@ SNS運用まで含めて依頼する場合は、[クリニックのインスタ�
 
 **良いコンサルと組むには、課題の洗い出し→複数社への相談→提案内容の比較という3ステップで進めます。**
 
+関連する内容は、[美容室の集客コンサルに初回面談で聞く5つの質問は？](/aio/biyoushitsu-shukyaku-consul/)で解説しています。
+
 <figure><img src="/images/clinic-shukyaku-consaru-erabikata/step.png" alt="コンサル契約までの4ステップ: 課題を洗い出す、複数社に相談する、提案内容を比較する、契約書を確認する" loading="lazy"><figcaption>コンサル契約までの4ステップ</figcaption></figure>
 
 ### ステップ1: 自院の課題を洗い出す

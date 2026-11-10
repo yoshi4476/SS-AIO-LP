@@ -195,6 +195,10 @@
 "hash": "2a723196ca56cf0312e5e6d193df0332",
 "modified": "2026-09-03"
 },
+"biyoushitsu-shukyaku-consul": {
+"hash": "5999c9ca82bfdb31a692b685adbad2a3",
+"modified": "2026-11-11"
+},
 "biyoushitsu-shukyaku-daikou": {
 "hash": "93385269fb0387e27b07d6885c6756c8",
 "modified": "2026-11-09"
@@ -272,7 +276,7 @@
 "modified": "2026-08-31"
 },
 "clinic-hp-ryokin-nosekata": {
-"hash": "3b37fbd49fee4c7bcd6e7bf84d46f0a9",
+"hash": "0d67e1d8a8f8caba24d0827514fdceb1",
 "modified": "2026-10-07"
 },
 "clinic-instagram-yarikata": {
@@ -324,7 +328,7 @@
 "modified": "2026-10-08"
 },
 "clinic-shukyaku-consaru-erabikata": {
-"hash": "9cf5d78fec59fdff6bfe7bf8cf99dcd0",
+"hash": "4d9cb438209655cf4222d1abdc1ab06f",
 "modified": "2026-08-15"
 },
 "clinic-shukyaku-jirei": {
@@ -808,7 +812,7 @@
 "modified": "2026-09-26"
 },
 "zeirishi-shukyaku-consul": {
-"hash": "90c9060b257fbde4a20b39c25ca6cffe",
+"hash": "537d455441c09614181961f14d073107",
 "modified": "2026-11-10"
 },
 "zeirishi-shukyaku-dekinai": {

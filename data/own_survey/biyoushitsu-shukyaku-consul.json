@@ -1,0 +1,122 @@
+{
+ "v": 2,
+ "slug": "biyoushitsu-shukyaku-consul",
+ "ok": true,
+ "date": "2026-11-11",
+ "questions": [
+  "美容室 集客コンサルについて教えてください",
+  "美容室 集客コンサルについて、「美容室の集客コンサルとは？予約サイトの外まで見る相談相手」を教えてください",
+  "美容室 集客コンサルについて、「初回面談の前に美容室が手元にそろえる数字」を教えてください",
+  "美容室 集客コンサルについて、「初回面談で聞く5つの質問と、見送る答え」を教えてください",
+  "美容室 集客コンサルについて、「AIが美容室を紹介する出典と、提案に入れてほしい作業」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "美容室の集客コンサルとは？予約サイトの外まで見る相談相手",
+   "words": [
+    "予約サイト",
+    "相談相手"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "初回面談の前に美容室が手元にそろえる数字",
+   "words": [
+    "初回面談",
+    "手元",
+    "数字"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "初回面談で聞く5つの質問と、見送る答え",
+   "words": [
+    "初回面談",
+    "質問"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "AIが美容室を紹介する出典と、提案に入れてほしい作業",
+   "words": [
+    "AI",
+    "出典",
+    "提案"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "美容室の集客コンサルの費用の相場と頼む範囲",
+   "words": [
+    "範囲"
+   ],
+   "hits": 4,
+   "of": 10
+  },
+  {
+   "topic": "成果が見えるまでの期間と見直す時期",
+   "words": [
+    "成果",
+    "期間"
+   ],
+   "hits": 8,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "景品表示法",
+   "org": "消費者庁",
+   "of": 10,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "atoz-design.jp": "peer",
+  "calm-tokyo.co.jp": "peer",
+  "developers.google.com": "peer",
+  "ex.salonanswer.com": "peer",
+  "funaisoken.co.jp": "peer",
+  "ifine.jp": "peer",
+  "infinity-mobius.com": "peer",
+  "jfc.go.jp": "public",
+  "kaigyo.beautygarage.jp": "peer",
+  "kaigyou.tb-net.jp": "peer",
+  "leporto.jp": "peer",
+  "media.meo-taisaku.com": "peer",
+  "meti.go.jp": "public",
+  "mhlw.go.jp": "public",
+  "salowin.jp": "peer",
+  "support.google.com": "peer",
+  "three-dots.co.jp": "peer",
+  "tol-app.jp": "peer",
+  "uni-design.tokyo": "peer",
+  "vaulta.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "web-kanji.com": "media",
+  "youtube.com": "video",
+  "yoyaku-package.com": "portal"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 6,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 4,
+  "専門家への相談": 2
+ },
+ "chars": 20526,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、消費者庁の資料にある「景品表示法」に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは費用の金額（◯円）は2件、注意点・失敗・リスクは2件、専門家への相談は2件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは24件で、公的機関・学会・業界団体が3件、ニュース・メディア・まとめが1件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
+}
