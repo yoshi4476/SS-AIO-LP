@@ -2316,6 +2316,10 @@ def test_lessons_2026_10_03():
     check("検出器: 空行の無い見出しを拾う", glued_headings("本文です。\n## 見出し"), ["## 見出し"])
     check("検出器: 空行のある見出し・コードの中は拾わない",
           glued_headings("本文です。\n\n## 見出し\n```\nx\n## コメント\n```"), [])
+    import fix_block_breaks as FB
+    box = '本文です。\n\n<div class="caution-box">注意</div>\n## 見出し\n<div>\n- 中\n</div>'
+    check("崩れの直し: 閉じたHTMLの塊の直後の見出しに空行を足し、HTMLの塊の中は触らない",
+          FB.add_blank_lines(box), ('本文です。\n\n<div class="caution-box">注意</div>\n\n## 見出し\n<div>\n- 中\n</div>', 1))
     glued = sorted(p.stem for p in (ROOT / "articles").glob("*.md") if glued_headings(p.read_text(encoding="utf-8")))
     check("原稿の見出しの前に空行がある", glued, [])
     # 2. 退避の取り込みで、自動修正の台帳（jsonl）に衝突の印が入っていた。原稿だけ見ていても防げない

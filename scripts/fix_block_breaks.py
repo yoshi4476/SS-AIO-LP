@@ -24,6 +24,10 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # 前に空行が要るもの。行頭が表・箇条書き・番号リスト・引用・見出し
 BLOCK = re.compile(r"[ 　]*(?:[0-9０-９]+[.．][ 　]|[-*+][ 　]|\||>[ 　]|#{2,6}[ 　])")
+HEADING = re.compile(r"#{2,6}[ 　]")
+# 閉じたHTMLの塊（注意の枠など）の直後の見出し。HTMLの行の後ろは塊の途中かもしれず空行を足さないが、
+# 塊が閉じた行の直後の見出しは足さないと、塊に吸われるか見出しにならない（2026-11-09 に1本。門が自動修復を呼んだ）
+CLOSED_HTML = re.compile(r"</(?:div|figure|table|details|aside|section|blockquote|p)>\s*$")
 MARKS = ("**", "==", "`")
 
 
@@ -36,7 +40,8 @@ def add_blank_lines(body):
             fence = not fence
         prev = lines[i - 1] if i else ""
         if (not fence and i and prev.strip() and cur.strip()
-                and not BLOCK.match(prev) and not prev.lstrip().startswith("<")
+                and not BLOCK.match(prev)
+                and (not prev.lstrip().startswith("<") or CLOSED_HTML.search(prev) and HEADING.match(cur))
                 and BLOCK.match(cur)):
             out.append("")
             n += 1
