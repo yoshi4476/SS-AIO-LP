@@ -321,6 +321,9 @@ def _with_material(site, got, kw0, todo):
         has = lambda k: material.hits(k, mats, pool) > 0
         if not mats or has(kw0):
             return None
+        hit = _industry_backed(site, got, kw0, todo, has)
+        if hit:
+            return hit
         # 材料のある主力の語を先に、無ければ材料のある題なら何でも（2026-10-22 運用者「シートがなくても基準点に行くように」。
         # 材料の当たらない題は一次性が80点に届かず止まり続けた。主力の語でも材料が無ければ、材料のある題の後ろに回る）
         ok = [r for r in todo if has(str(r["keyword"]))]
@@ -333,6 +336,25 @@ def _with_material(site, got, kw0, todo):
             return out
     except Exception:  # noqa: BLE001  材料が読めなくても次に書く語は返す
         return None
+    return None
+
+
+def _industry_backed(site, got, kw0, todo, has):
+    """材料の当たる題が1つも無いとき、業種に絞った題（クリニック・介護…）でその業種の材料も公的資料も無いものを後回しにする。
+    業種に絞った題は自社の数字が業種を問わない集計しか無く、一次性が73点前後で止まってしまわれた（2026-11-09）。
+    公的資料のある業種の題 → 業種に絞らない題 の順に前へ出す。どちらも無ければ None（台帳の並びのまま書く）"""
+    import public_facts as PF
+    if not PF.industry_of(kw0) or PF.for_text(kw0) or any(has(str(r["keyword"])) for r in todo):
+        return None
+    kws = [r for r in todo if str(r["keyword"]) != kw0]
+    for rule, why in ((lambda k: bool(PF.industry_of(k) and PF.for_text(k)), "公的資料のある業種の題"),
+                      (lambda k: not PF.industry_of(k), "材料の無い業種の題を後回し")):
+        for r in kws:
+            if rule(str(r["keyword"])):
+                out = dict(got)
+                out.update({"keyword": str(r["keyword"]), "aim": r.get("aim", ""),
+                            "category": r.get("category", ""), "picked_by": why})
+                return out
     return None
 
 

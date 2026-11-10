@@ -422,8 +422,12 @@ def materials(site, slug):
         # 当社調べ（own_survey）: 記事の狙う語を複数の AI に聞いて数えた結果。材料が届かない題でも、母数と時期のある
         # 自社の実測として書ける（2026-10-20 運用者「情報がなくても90以上になるように」）
         import own_survey
-        for c in own_survey.load(site, slug).get("claims") or []:
+        res = own_survey.load(site, slug)
+        for c in res.get("claims") or []:
             facts.append(f"- {c}（出典: 当社調べ）")
+            allowed.append(c)
+        for c in own_survey.topic_claims(res):
+            facts.append(f"- {c}（出典: 当社調べ・論点ごと。主題の論点の節に置き、AI の答えだけで足りるかの判断に1文でつなげる）")
             allowed.append(c)
     except Exception:  # noqa: BLE001  調べが読めなくても直しは続ける
         pass
@@ -438,6 +442,16 @@ def materials(site, slug):
     for c in cs:
         facts.append(f"- {c}（出典: 業種調査 {url}。調べ方の1文は記事に1回だけ書く。調べた会社の名前は変えない）")
         allowed += [c, url]
+    # 主題に固有の公的資料（data/public_facts.json。一次情報で確かめた法令・公的機関の数字だけ）。材料に無い数字は
+    # 直しで足すと検算で戻されるため、業種の題は自社の数字が無いと一次性が届かなかった（2026-11-09）
+    try:
+        import public_facts as PF
+        mt = meta_of(read(slug))
+        for f in PF.for_text(f"{mt.get('title') or ''} {mt.get('keyword') or ''}"):
+            facts.append(f"- {f['claim']}（出典: 公的資料 {f['org']} {f['url']}。数字を変えずに、出典の名前とURLを添えて書く）")
+            allowed += [f["claim"], f["url"]]
+    except Exception:  # noqa: BLE001  台帳が読めなくても直しは続ける
+        pass
     # お客様の声（data/voices.json。掲載が「可」で本人が確かめたものだけが入っている）。運営者情報と LP にしか
     # 使われておらず、「現場の声が無い」と減点されていた（2026-10-21）。同じ業種の声を先に、3件まで
     try:
@@ -702,7 +716,7 @@ def unused_materials(slug, site=None):
     out = []
     rows_ = [ln[2:] for ln in mats["facts"].splitlines() if ln.startswith("- ")]
     kinds = (("出典: 当社調べ", "当社調べ（複数のAIに同じ質問をして数えた結果）"), ("出典: 業種調査", "業種調査（AIの答えの出典を数えた結果）"),
-             ("お客様の声「", "お客様の声"), ("の相場は", "費用の相場"))
+             ("お客様の声「", "お客様の声"), ("の相場は", "費用の相場"), ("出典: 公的資料", "主題に固有の公的資料（法令・公的機関の数字）"))
     for mark, label in kinds:
         cand = [r for r in rows_ if mark in r and (mark != "お客様の声「" or "・同じ業種" in r)]   # 声は同じ業種の声があるときだけ求める
         if not cand:
@@ -921,7 +935,8 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         # 機械で作れる材料（当社調べ・業種調査・自社の実測）まで当てても一次性が届かない題は、材料が届くまでしまい、
         # 次の枠は材料のある題を書く（2026-10-22 運用者「シートがなくても基準点に行くように」。届かない下書きを
         # 毎回直して止まり続けていた）。題は質問シートに残り、答えが登録されたら material_sheet.apply が戻す
-        print(f"  {name}: 下書きをしまいました（{SHELF}/。{SHELF_RETRY_DAYS}日後か、質問シートの答えが登録されたら自動で戻ります）")
+        print(f"  {name}: 下書きをしまいました（{SHELF}/。翌日（{SHELF_QUICK_TRIES}回を超えたら{SHELF_RETRY_DAYS}日後）か、"
+              "質問シートの答えが登録されたら自動で戻り、別の直し方で直し直します）")
         return "shelved"
     if need:
         # 一次性が届かないだけでは知らせない（運用者「毎回一次情報で止まるのは勘弁してほしい」2026-11-02）。翌日に直し直す
@@ -940,6 +955,9 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
 SHELF = "_held"            # articles/_held/。build・本数・採点の対象（articles/*.md）に入らない
 SHELVE_AFTER = 2           # 材料が足りないで止めた回数がこれに達したらしまう（1回目は当社調べ・業種調査の測り直しを待つ）
 SHELF_RETRY_DAYS = 7       # しまってこの日数たった下書きは戻して直し直す（材料の答えを待ち続けない。2026-11-02）
+# しまって最初の数回は翌日に戻す（2026-11-10 運用者「一次性で届かない記事はなんとか85点以上に」）。直しの材料
+# （論点ごとの当社調べ・公的資料）と、前の直しが戻された理由を渡して別の直し方をさせる。届かないまま続けば7日ごとに
+SHELF_QUICK_TRIES = 4
 
 
 def shelve(slug, path=None):
@@ -969,12 +987,14 @@ def unshelve(slug):
 def retry_shelved(path=None, today=None):
     """しまって SHELF_RETRY_DAYS 日たった下書きを戻す（次の --pending が直し直す。また届かなければ2回目の止めでしまい直す）"""
     day = date.fromisoformat(today or date.today().isoformat())
-    last = {}
+    last, times = {}, {}
     for r in rows(path):
         if r.get("action") == "shelve" and str(r.get("at", ""))[:10]:
             last[r.get("slug")] = str(r["at"])[:10]
+            times[r.get("slug")] = times.get(r.get("slug"), 0) + 1
+    wait = lambda s: 1 if times[s] <= SHELF_QUICK_TRIES else SHELF_RETRY_DAYS
     back = [s for s, at in last.items()
-            if (day - date.fromisoformat(at)).days >= SHELF_RETRY_DAYS and unshelve(s)]
+            if (day - date.fromisoformat(at)).days >= wait(s) and unshelve(s)]
     for s in back:
         record({"site": site_of(s), "slug": s, "action": "unshelve", "state": "improving"})
     return back

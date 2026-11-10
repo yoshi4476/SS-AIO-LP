@@ -280,6 +280,20 @@ def claims(res):
     return out
 
 
+def topic_claims(res, limit=3):
+    """論点ごとに、ほかの論点を聞いた答えのうちその論点の語に触れた数。記事の既定の文（claims）には入れない
+    （公的資料の点がある記事では「判断に使えない」と減点された）。主題に固有の数として、一次性が届かないときの
+    直しの材料にだけ渡す（2026-11-09 クリニックの記帳代行は保険診療・診療報酬の論点の数を捨てて一次性73点で止まった）。
+    触れた答えの少ない論点（AI の答えが拾っていない所）を先に"""
+    if not res.get("ok") or res.get("v") != VERSION:
+        return []
+    # 2字の語（「資料」「帳簿」）は主題に固有の数にならない
+    rows = [r for r in res.get("topics") or [] if r.get("words") and len(r["words"][0]) >= 3 and r.get("of")]
+    rows.sort(key=lambda r: r["hits"] / r["of"])
+    return [f"同じ調べで、ほかの論点を聞いた答え{r['of']}件のうち、『{r['words'][0]}』に触れたものは{r['hits']}件でした。"
+            for r in rows[:limit]]
+
+
 FULL = MAX_ENGINES * MAX_QUESTIONS   # 答えがこれに満たない結果は、同じ月でも次の日に測り直す
 
 
