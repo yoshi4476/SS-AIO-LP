@@ -48,6 +48,24 @@ def expected_articles(sid, arts, day):
     return min(D.DAILY_TARGET, q, cap - before)
 
 
+def held_on(sid, day):
+    """その日に書いたが、公開前の採点で基準に届かず articles/_held/ へしまった下書きの数。
+    書けてはいるので「書かれていない」とは知らせない（一次性で届かない記事は要対応にしない決まり。
+    しまった下書きは quality_loop が7日で戻して直し直す。2026-11-09 にコーポレートで1本を0本と知らせた）"""
+    import re
+    import daily_audit as D
+    import sites as S
+    cats = set(S.load_all().get(sid, {}).get("categories", {}))
+    n = 0
+    for p in (D.ARTICLES / "_held").glob("*.md"):
+        fm = p.read_text(encoding="utf-8-sig")[:3000]
+        c = re.search(r"^category:\s*\"?([^\"\n]+?)\"?\s*$", fm, re.M)
+        d = re.search(r"^date:\s*\"?(\d{4}-\d{2}-\d{2})", fm, re.M)
+        if c and d and c.group(1) in cats and d.group(1) == day.isoformat():
+            n += 1
+    return n
+
+
 def check_articles(day, bad):
     import daily_audit as D
     import sites as S
@@ -60,7 +78,10 @@ def check_articles(day, bad):
         done = [a for a in arts if D.counted_day(a) == day.isoformat() and D._is_published(a, need_review=False)]
         want = expected_articles(sid, arts, day)
         print(f"  記事 {name}: {len(done)}/{want}本")
-        if len(done) < want:
+        held = held_on(sid, day) if len(done) < want else 0
+        if len(done) < want and len(done) + held >= want:
+            print(f"    {held}本は書いたが公開前の採点で基準に届かず、下書きにしまった（自動で直し直す。要対応にしない）")
+        elif len(done) < want:
             bad.append(f"要対応: {name} — {day} の記事が {len(done)}/{want} 本でした（実行は成功でも書かれていない。"
                        "pipeline-multi の「対象サイトの判定」のログで、どの理由で止まったかを確かめる）")
         elif len(done) > want:

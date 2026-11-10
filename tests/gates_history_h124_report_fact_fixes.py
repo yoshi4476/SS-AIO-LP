@@ -59,6 +59,25 @@ def _analyze(prev, cur):
 
 # ── 1. 月次レポートの向き ───────────────────────────────
 
+def test_outcome_watch_counts_held_drafts_as_written():
+    import daily_audit as D
+    import outcome_watch as O
+    import sites as S
+    from datetime import date
+    print("\n■ 結果の見張り: 書いたが採点で下書きにしまった記事は「書かれていない」と知らせない（2026-11-09 にコーポレートで誤って要対応）")
+    cat = next(iter(S.load_all()["corporate"]["categories"]))
+    with tempfile.TemporaryDirectory() as d:
+        (Path(d) / "_held").mkdir()
+        (Path(d) / "_held" / "x.md").write_text(f"---\ntitle: x\ncategory: {cat}\ndate: 2026-11-09\n---\n本文\n",
+                                               encoding="utf-8")
+        with mock.patch.object(D, "ARTICLES", Path(d)):
+            got = (O.held_on("corporate", date(2026, 11, 9)), O.held_on("corporate", date(2026, 11, 8)),
+                   O.held_on("ai-lab", date(2026, 11, 9)))
+    check("その日・その社の下書きだけを数える", got, (1, 0, 0))
+    src = (ROOT / "scripts" / "outcome_watch.py").read_text(encoding="utf-8")
+    check("足りない日は下書きを足して判定し、届けば要対応にしない", "len(done) + held >= want" in src, True)
+
+
 def test_monthly_summary_reads_rank_and_small_cv_correctly():
     print("\n■ 月次の要約: 順位は小さいほど良い・揃っての伸びは3つとも上向きのとき・CV10件未満は件数だけ")
     worse = _analyze({"clicks": 100, "impressions": 5000, "sessions": 300, "cv": 5, "pos": 10.0},
