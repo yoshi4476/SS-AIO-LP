@@ -1,0 +1,116 @@
+{
+ "v": 2,
+ "slug": "meo-settei-guide",
+ "ok": true,
+ "date": "2026-11-10",
+ "questions": [
+  "MEO設定について教えてください",
+  "MEO設定について、「MEO設定とは？MEO対策との違い」を教えてください",
+  "MEO設定について、「登録前に準備するもの5点」を教えてください",
+  "MEO設定について、「MEO設定の5ステップ」を教えてください",
+  "MEO設定について、「オーナー確認でつまずきやすい3つのケースと対処法」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "MEO設定とは？MEO対策との違い",
+   "words": [
+    "MEO対策"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "登録前に準備するもの5点",
+   "words": [
+    "登録前"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "オーナー確認でつまずきやすい3つのケースと対処法",
+   "words": [
+    "オーナー確認",
+    "ケース",
+    "対処法"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "カテゴリ・営業時間・住所を正しく設定するコツ",
+   "words": [
+    "カテゴリ",
+    "営業時間",
+    "住所",
+    "コツ"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "よくある設定ミスと直し方",
+   "words": [
+    "設定ミス"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "設定完了後にやるべきこと",
+   "words": [
+    "設定完了後"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "自社で設定するか、代行に依頼するか",
+   "words": [
+    "代行"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "0120.co.jp": "peer",
+  "buzzry.jp": "peer",
+  "coomil.co.jp": "peer",
+  "crosswish.com": "peer",
+  "earthcampus.co.jp": "peer",
+  "embedsocial.jp": "peer",
+  "enplace.co.jp": "peer",
+  "freesquare.co.jp": "peer",
+  "gyro-n.com": "peer",
+  "kobot.jp": "peer",
+  "note.com": "video",
+  "sconnect.co.jp": "peer",
+  "sogo-ad.jp": "peer",
+  "sorairu.co.jp": "peer",
+  "storepad.jp": "media",
+  "support.google.com": "peer",
+  "synqa-design.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "webma.xscore.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 2,
+  "専門家への相談": 0
+ },
+ "chars": 9254,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え4件のうち、『登録前』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え5件のうち、『設定完了後』に触れたものは1件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は0件、期間（◯か月・◯日など）は1件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは19件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件、動画・SNS・ブログが1件でした。"
+ ]
+}
