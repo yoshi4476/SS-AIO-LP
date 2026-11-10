@@ -1,0 +1,103 @@
+{
+ "v": 2,
+ "slug": "backoffice-daikou",
+ "ok": true,
+ "date": "2026-11-10",
+ "questions": [
+  "バックオフィス代行について教えてください",
+  "バックオフィス代行について、「バックオフィス代行で頼めるのはどんな業務か？」を教えてください",
+  "バックオフィス代行について、「代行に出す業務は、棚卸し表の5項目でどう決めるのか？」を教えてください",
+  "バックオフィス代行について、「見積もりを頼むとき、代行会社に何を伝えればよいのか？」を教えてください",
+  "バックオフィス代行について、「代行を頼んだ後、社内に残る作業は何か？」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "バックオフィス代行で頼めるのはどんな業務か？",
+   "words": [
+    "業務"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "代行に出す業務は、棚卸し表の5項目でどう決めるのか？",
+   "words": [
+    "代行",
+    "業務"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "見積もりを頼むとき、代行会社に何を伝えればよいのか？",
+   "words": [
+    "代行会社",
+    "見積"
+   ],
+   "hits": 6,
+   "of": 8
+  },
+  {
+   "topic": "代行を頼んだ後、社内に残る作業は何か？",
+   "words": [
+    "代行",
+    "社内",
+    "作業"
+   ],
+   "hits": 8,
+   "of": 8
+  }
+ ],
+ "official": [
+  {
+   "term": "税理士制度",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "2nd-core.com": "peer",
+  "4stella.co.jp": "peer",
+  "aibou-ps.com": "peer",
+  "aichi-keiri.jp": "peer",
+  "aimc.co.jp": "media",
+  "backofficeforce.jp": "peer",
+  "backofficelab.com": "peer",
+  "bod-grp.com": "peer",
+  "cast-er.com": "peer",
+  "co-linkweb.com": "peer",
+  "dataegg.co.jp": "peer",
+  "fujiko-san.com": "peer",
+  "grop.co.jp": "peer",
+  "ingcrowd.jp": "peer",
+  "kashika.biz": "peer",
+  "keiribu.co.jp": "peer",
+  "monepo-office.com": "peer",
+  "note.com": "video",
+  "onamae.com": "peer",
+  "persol-bd.co.jp": "peer",
+  "ppc.go.jp": "public",
+  "stablo.co.jp": "peer",
+  "stlarge.com": "peer",
+  "visit.cast-er.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 7,
+  "専門家への相談": 2
+ },
+ "chars": 15879,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、国税庁の資料にある「税理士制度」に触れたものは0件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは費用の金額（◯円）は1件、期間（◯か月・◯日など）は1件、専門家への相談は2件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは24件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが1件、動画・SNS・ブログが1件でした。"
+ ]
+}
