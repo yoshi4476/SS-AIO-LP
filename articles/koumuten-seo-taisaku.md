@@ -42,7 +42,9 @@ faq:
 
 工務店のSEO対策とは、施工事例と専門情報の発信を通じて検索から見つかり、選ばれる工務店になるための一連の施策です。
 
-検索以外の入口も併用する場合は、[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)や[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)で媒体の選び方を確認できます。注文住宅に絞った施策は[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)、地図検索は[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)が参考になります。
+検索以外の入口も併用する場合は、[工務店のSNS集客とは？5媒体の選び方と続け方](/ai-marketing/koumuten-sns-shukyaku/)や[工務店のインスタ集客とは？](/ai-marketing/koumuten-instagram-shukyaku/)で媒体の選び方を確認できます。
+
+注文住宅に絞った施策は[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)、地図検索は[工務店のMEO対策とは？](/meo/koumuten-meo-taisaku/)が参考になります。
 
 <div class="definition-box"><span class="term">工務店のSEOとは</span>、注文住宅・リフォームを手がける工務店が、検索エンジン経由で比較検討中の施主に見つけてもらい、施工実績と専門性を伝えて問い合わせにつなげる一連の施策を指します。単にホームページを持つことではなく、検索されて→比較され→選ばれる、という3段階を意識した情報設計が本来の意味です。</div>
 
