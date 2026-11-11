@@ -470,18 +470,15 @@ def materials(site, slug):
                      "声は言い換えずに「」で引用し、お客様の声だと分かるように書く）")
         allowed += [v["quote"], num]
     # 費用の相場（data/price_ranges.json）。決定支援で毎回「費用の目安が無い」と突かれていた（2026-10-21 運用者「相場は書いていい」）
-    try:
-        pr = json.loads((ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        pr = {}
-    if site in pr.get("sites", []):
+    for pr in F.price_sets(site):
         for r in pr.get("ranges", []):
             c = f"{r['label']}の相場は{r['range']}" + (f"（{r['note']}）" if r.get("note") else "")
             # 出典を「当社の見立て」と金額の近くに書くと、当社の価格を書いた形になり門（gates_history_e の own_price）が止める
             # （2026-10-21 の CI で不動産の記事が止まった）。注記は「相場の見立て」にし、当社の語を金額と同じ文に置かない
-            facts.append(f"- {c}（出典: {pr.get('as_of', '')}時点の相場の見立て。費用の目安として書き、注記も「相場の見立て」と書く。"
+            src = f"{pr['source']}。出典の名前を添えて書く" if pr.get("source") else f"{pr.get('as_of', '')}時点の相場の見立て"
+            facts.append(f"- {c}（出典: {src}。費用の目安として書き、注記も「相場の見立て」と書く。"
                          "「当社」の語を金額と同じ文に書かない）")
-            allowed.append(c)
+            allowed += [c, str(pr.get("source") or "")]
         if pr.get("positioning"):
             facts.append(f"- 書き方: {pr['positioning']}")
     try:

@@ -190,6 +190,17 @@ def load_for(site_id):
     return data, [hide_private_urls(f) for f in got]
 
 
+def price_sets(site_id, path=None):
+    """その社の記事に書いてよい費用の相場（data/price_ranges.json）。先頭の組（AIO・SEO・LLMO）と more（ほかの事業の相場）のうち、
+    sites にその社がある組だけを返す。コーポレートの記事は相場が台帳に無く、採点のたびに「費用が数字で示されない」と
+    減点されていた（2026-11-11 経理BPOの記事が3回とも同じ指摘で84点）"""
+    try:
+        pr = json.loads((path or ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    return [s for s in [pr] + list(pr.get("more") or []) if site_id in (s.get("sites") or [])]
+
+
 def scope_note(f):
     """使ってよい範囲（質問シートの「可（条件）」の条件。material_sheet が scope に残す）。書く・直す工程に数字と一緒に渡す"""
     s = str(f.get("scope") or "").strip()
@@ -239,14 +250,14 @@ def main():
         print(f"    出典: {re.sub(r'[（(][^）)]*申告[^）)]*[）)]', '', f['source']).strip()}（{f['as_of']}時点）")
     # 直しの材料（quality_loop.materials）と同じものを書く段階から渡す。相場とお客様の声は直しにしか渡っておらず、
     # 最初の採点で「費用の目安が無い」「現場の声が無い」と減点されていた（2026-10-21 運用者「最初の1回で届くことを多くして」）
-    try:
-        pr = json.loads((ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        pr = {}
-    if site_id in pr.get("sites", []):
+    for pr in price_sets(site_id):
         print(f"\n■ 費用の相場（{pr.get('as_of', '')}時点の相場の見立て。費用の目安として書く。「当社」の語を金額と同じ文に書かない）")
         for r in pr.get("ranges", []):
             print(f"  ・{r['label']}の相場は{r['range']}" + (f"（{r['note']}）" if r.get("note") else ""))
+        if pr.get("source"):
+            print(f"    出典: {pr['source']}")
+        if pr.get("source") and pr.get("positioning"):
+            print(f"    書き方: {pr['positioning']}")
     try:
         vs = json.loads((ROOT / "data" / "voices.json").read_text(encoding="utf-8"))
     except (OSError, ValueError):

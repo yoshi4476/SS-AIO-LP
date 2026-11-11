@@ -121,3 +121,16 @@ def test_every_article_has_an_entry_that_takes_contact():
           IAS.research_box.__code__.co_names.count("GENERAL_CHECKLIST") >= 1, True)
     src = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
     check("記事の末尾は、調査の箱が無ければチェックリストの箱を出す", "or IAS.checklist_box()" in src, True)
+
+
+def test_price_ranges_reach_each_business():
+    import facts as F
+    print("\n■ 費用の相場: 事業ごとの相場が、その社の記事にだけ渡る（出どころつき。当社の語を金額の行に書かない）")
+    corp, lab = F.price_sets("corporate"), F.price_sets("ai-lab")
+    check("コーポレートには経理の相場、AI集客ラボには AIO の相場、補助金には無し",
+          (bool(corp) and corp[0]["ranges"][0]["id"], lab[0]["ranges"][0]["id"], F.price_sets("subsidy")),
+          ("kicho", "article_tool", []))
+    check("足した相場には、公開の出どころ（URL と確かめた日）がある",
+          [bool(re.search(r"https://\S+", s.get("source", ""))) and "確認" in s.get("source", "") for s in corp], [True] * len(corp))
+    src = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
+    check("直しの材料も同じ入口（facts.price_sets）から読む", "F.price_sets(site)" in src, True)
