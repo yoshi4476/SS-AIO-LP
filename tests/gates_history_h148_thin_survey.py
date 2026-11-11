@@ -69,12 +69,13 @@ def test_materials_shortfall_retries_without_asking():
     try:
         with tempfile.TemporaryDirectory() as d:
             Q.ARTICLES = Path(d)
-            Q.rows = lambda path=None: [{"slug": "zz-old", "action": "shelve", "at": "2026-10-25 10:00"},
-                                        {"slug": "zz-new", "action": "shelve", "at": "2026-10-30 10:00"}]
+            # 最初の4回は翌日に戻す（2026-11-10）。7日待つのは5回目からなので、5回しまった下書きで確かめる
+            Q.rows = lambda path=None: ([{"slug": "zz-old", "action": "shelve", "at": "2026-10-25 10:00"}] * 5
+                                        + [{"slug": "zz-new", "action": "shelve", "at": "2026-10-30 10:00"}] * 5)
             Q.unshelve = lambda s: moved.append(s) or True
             Q.record = lambda row: None
             back = Q.retry_shelved(today="2026-11-01")
     finally:
         Q.ARTICLES, Q.rows, Q.unshelve, Q.record = arts, rows_, unsh, rec
-    check("7日たった下書きだけ戻す", (back, moved), (["zz-old"], ["zz-old"]))
+    check("5回しまった下書きは、7日たったものだけ戻す", (back, moved), (["zz-old"], ["zz-old"]))
     check("直している途中の記事を直す前に、しまった下書きを戻す", "back = retry_shelved()" in q, True)

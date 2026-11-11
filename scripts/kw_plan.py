@@ -1425,18 +1425,18 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
     print(f"\n■ {_S.public_id(site_id)}" if _S.is_client(site_id) else f"\n■ {site_id}（{S['cfg']['name']}）")
     month = rakko.this_month()
     if if_needed:
-        n, stock = stock_for_plan(site_id)
+        n, label = stock_for_plan(site_id)
         if n is None:
             print("   在庫を確認できないため組み直しません（管制塔の状態が取れない。課金しない）")
             return
         need = month_need(site_id)
         if n >= need:
-            print(f"   {stock}が {n} 本あるので、今回は組み直しません（1か月分 {need}本を切ったら組み直す）")
+            print(f"   {label}が {n} 本あるので、今回は組み直しません（1か月分 {need}本を切ったら組み直す）")
             return
         if runs_done(site_id) == month:
-            print(f"   {stock} {n} 本は1か月分 {need}本に足りませんが、今月（{month}）はもう組みました（1社1か月1回）")
+            print(f"   {label} {n} 本は1か月分 {need}本に足りませんが、今月（{month}）はもう組みました（1社1か月1回）")
             return
-        print(f"   {stock} {n} 本は1か月分 {need}本に足りないので組みます")
+        print(f"   {label} {n} 本は1か月分 {need}本に足りないので組みます")
     rakko.BUDGET = rakko.spent() + CREDIT_CAP      # このサイトの分だけ上限をかける
     S["sheet"], S["sheet_ng"] = sheet_terms(site_id)
     if S["sheet"] or S["sheet_ng"]:

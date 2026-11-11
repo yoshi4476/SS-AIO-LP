@@ -47,6 +47,13 @@ MONTHLY = re.compile(r"月\s*[0-9０-９]+(?:\.[0-9]+)?\s*万円")
 OWN_WORDS = re.compile(r"当社|弊社|私たち|AI集客ラボ|セブンセンス|Seven Senses|own_price", re.I)
 AMOUNT = re.compile(r"(?<![0-9.])([0-9０-９]+(?:\.[0-9]+)?)\s*万")
 FICTION = "99"          # 門の例に使う架空の額（本当の料金ではない）
+NEAR_OWN = 40           # 当社を指す語と金額がこの字数より離れていれば、別の話（1行が長いデータで離れた語どうしを結ばない）
+
+
+def _own_near(ln, rx):
+    """金額の前後 NEAR_OWN 字に当社を指す語があるか。jsonl・AI の答えの控えは1行が1,700字を超え、「当社」と相場の金額が
+    同じ行の離れた所にあるだけで拾い、門が自動修復を呼んだ（2026-11-10 の3行。どれも相場と採点者の指摘）"""
+    return any(OWN_WORDS.search(ln[max(0, m.start() - NEAR_OWN):m.end() + NEAR_OWN]) for m in rx.finditer(ln))
 
 
 def price_lines(text, wide=False):
@@ -55,7 +62,7 @@ def price_lines(text, wide=False):
     out = []
     for i, ln in enumerate(text.splitlines(), 1):
         if wide:
-            hit = (PRICE.search(ln) or MONTHLY.search(ln)) and OWN_WORDS.search(ln)
+            hit = _own_near(ln, PRICE) or _own_near(ln, MONTHLY)
         else:
             hit = PRICE.search(ln) or (MONTHLY.search(ln) and OWN_WORDS.search(ln))
         amounts = AMOUNT.findall(ln)
@@ -159,6 +166,10 @@ def test_no_prices_in_public_code():
           [bool(price_lines(s, wide=True)) for s in (own + "55万円です", "リスティング広告（月10万円で問い合わせ0件）",
                                                     "予算月1万円以内でできるAIO", own + "99万円です")],
           [True, False, False, False])
+    far = "当社" + "の受託ではコンサルのみが多い。" + "あ" * 60 + "費用は月30万円〜100万円以上です"
+    check("検出器: 同じ行でも、当社を指す語と金額が離れていれば拾わない（1行の長いデータ）",
+          (bool(price_lines(far, wide=True)), bool(price_lines("この費用は" + own + "55万円です" + "あ" * 80, wide=True))),
+          (False, True))
     targets = [p for p in (ROOT / "scripts").rglob("*.py")] + list((ROOT / "automation").glob("*.txt")) + \
         [ROOT / "PROJECT.md", ROOT / "CLAUDE.md", ROOT / "site.config.json"] + list((ROOT / "docs").rglob("*.md")) + \
         list((ROOT / ".github").rglob("*.yml"))
