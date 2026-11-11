@@ -546,7 +546,7 @@
       sessionStorage.removeItem('ss_lead');
       if (kept && Date.now() - kept.at < 600000) {
         ga('lead_capture', { lead_route: kept.route, form_type: kept.type, page_location: kept.url, page_path: kept.path });
-        ga('lead_' + kept.route, { form_type: kept.type, page_location: kept.url, page_path: kept.path });
+        ga('lead_' + slugId(kept.route), { form_type: kept.type, page_location: kept.url, page_path: kept.path });
       }
     } catch (e) {}
   }
