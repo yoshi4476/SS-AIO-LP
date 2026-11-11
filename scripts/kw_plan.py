@@ -184,6 +184,18 @@ def sheet_terms(site_id):
     return clean((kw.get("main") or []) + (kw.get("sub") or [])), clean(kw.get("exclude") or [])
 
 
+def own_targets(S):
+    """自社のサイトの「狙う語」（sites/<id>.json の kw_seeds.targets）。頼む先を探す・比べる・値段を知る語を、
+    シートの狙う語と同じく単体で起点にする。intents は業種に掛けるので、買い手の意図を足しても
+    「エステサロン 申請サポート 費用」のような誰も打たない組になり、買い手の語の候補が増えなかった（2026-11-12）"""
+    out = []
+    for t in S["cfg"].get("kw_seeds", {}).get("targets") or []:
+        t = re.sub(r"[\s　]+", " ", str(t)).strip()
+        if t and t.lower() not in [o.lower() for o in out]:
+            out.append(t)
+    return out
+
+
 def ng_phrase(low, S):
     """シートの「狙わない語」に当たるか。語句の言葉が全部入っていれば当たり（1語ずつだと
     「AI 導入補助金」の「AI」で AI の語が全部落ちる）"""
@@ -1439,6 +1451,7 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
         print(f"   {label} {n} 本は1か月分 {need}本に足りないので組みます")
     rakko.BUDGET = rakko.spent() + CREDIT_CAP      # このサイトの分だけ上限をかける
     S["sheet"], S["sheet_ng"] = sheet_terms(site_id)
+    S["sheet"] = S["sheet"] + [t for t in own_targets(S) if t.lower() not in [x.lower() for x in S["sheet"]]]
     if S["sheet"] or S["sheet_ng"]:
         print(f"   シートの狙う語 {len(S['sheet'])}件を起点に、狙わない語 {len(S['sheet_ng'])}件を除外に使います")
     if not S["industries"] and not S["sheet"]:
