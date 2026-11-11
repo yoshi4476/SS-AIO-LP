@@ -41,6 +41,20 @@ def version_text(text, page, root, memo):
     return URL.sub(sub, text)
 
 
+def ensure_main(text):
+    """ヘッダーとフッターのあいだを <main> で包む（本文の領域の目印）。既に main があるページ・ヘッダーやフッターが1つずつでないページはそのまま返す。
+    一覧・調査・業種・ツールなど 100 ページに main が無く、Google の計測でアクセシビリティが 98〜99 点だった（2026-11-12）。
+    ページを作る道具が多いので、配信の直前にここ1か所でそろえる"""
+    if "<main" in text or text.count('<header class="site-header"') != 1 or text.count('<footer class="site-footer"') != 1:
+        return text
+    h = text.find("</header>", text.find('<header class="site-header"'))
+    f = text.find('<footer class="site-footer"')
+    if h < 0 or f < h:
+        return text
+    h += len("</header>")
+    return text[:h] + "\n<main>" + text[h:f] + "</main>\n" + text[f:]
+
+
 def run(root):
     root = Path(root).resolve()
     memo, changed = {}, 0
@@ -49,6 +63,8 @@ def run(root):
             continue
         text = page.read_text(encoding="utf-8", errors="surrogateescape")
         new = version_text(text, page, root, memo)
+        if page.suffix == ".html":
+            new = ensure_main(new)
         if new != text:
             page.write_text(new, encoding="utf-8", errors="surrogateescape", newline="")
             changed += 1

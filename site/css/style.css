@@ -1105,7 +1105,7 @@ body:not(.lp-doc) .pillar:hover::before {
 }
 
 /* 色面で終わるページはフッターとの間に白帯を作らない */
-.cta-final + .site-footer { margin-top: 0; }
+.cta-final + .site-footer, main:has(> .cta-final) + .site-footer { margin-top: 0; }
 /* 数字の帯は詰めて、数字と説明を1かたまりに見せる */
 .figure-band > div { padding: clamp(1.4rem, 2.6vw, 2.1rem) 1.2rem; }
 .figure-band .num { line-height: 1.05; }

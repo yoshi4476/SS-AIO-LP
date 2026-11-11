@@ -94,3 +94,29 @@ def test_article_eyecatch_has_a_small_version_for_phones():
         if not m or not (ROOT / "site" / m.group(1).lstrip("/")).is_file() or 'fetchpriority="high"' not in tag:
             bad.append(p.parent.name)
     check("公開中の記事ページの冒頭の画像は、小さい版つきで優先して読む", (len(pages) > 100, bad[:5]), (True, []))
+
+
+def test_every_page_gets_a_main_landmark_before_deploy():
+    """2026-11-12 Google の計測で、トップとサービスのページのアクセシビリティが 98〜99 点だった。
+    一覧・調査・業種・ツールなど 100 ページに本文の領域（main）が無かった。配信の直前に1か所でそろえる"""
+    import asset_version as AV
+    print("\n■ 本文の領域（main）: 配信の直前に、無いページへ足す")
+    page = '<body><header class="site-header"><a>x</a></header>\n<section>本文</section>\n<footer class="site-footer">f</footer></body>'
+    out = AV.ensure_main(page)
+    check("ヘッダーとフッターのあいだを main で包む（中身は変えない）",
+          (out.count("<main>"), out.count("</main>"), out.replace("\n<main>", "").replace("</main>\n", "") == page,
+           out.index("</header>") < out.index("<main>") < out.index("<section>") < out.index("</main>") < out.index("<footer")),
+          (1, 1, True, True))
+    check("2回かけても増えない・既に main があるページはそのまま", (AV.ensure_main(out) == out,
+          AV.ensure_main('<header class="site-header"></header><main class="article">x</main><footer class="site-footer"></footer>').count("<main")), (True, 1))
+    check("ヘッダーやフッターが無い・2つあるページには触らない",
+          (AV.ensure_main("<p>x</p>"), AV.ensure_main(page.replace("<section>", '<footer class="site-footer"></footer><section>')).count("<main>")),
+          ("<p>x</p>", 0))
+    src = (ROOT / "scripts" / "asset_version.py").read_text(encoding="utf-8")
+    check("配信の直前の処理（版の印を付ける処理）が、HTML のページにだけかける", 'if page.suffix == ".html":\n            new = ensure_main(new)' in src, True)
+    for f in ("index.html", "lp/index.html"):
+        h = (ROOT / "site" / f).read_text(encoding="utf-8")
+        check(f"{f}: main が1つあり、最初の画面も最後の案内もその中にある",
+              (h.count("<main"), h.index("<main") < h.index('class="lx-hero') < h.index("</main>") < h.index('<footer class="site-footer"')), (1, True))
+    css = (ROOT / "site" / "css" / "style.css").read_text(encoding="utf-8")
+    check("最後の案内のすぐ下のフッターの余白の指定は、main で包んだ形にも効く", "main:has(> .cta-final) + .site-footer" in css, True)
