@@ -239,9 +239,20 @@ _TILE = re.compile(r'(<li class="[^"]*"><a href="/[^/"]+/([^/"]+)/">)<span class
 _LIST = re.compile(r'(<ul class="post-list[^"]*">)(.*?)(</ul>)', re.S)
 
 
-def _others(slug, alt_attr):
-    """同じ画像が出すぎた1枚の代わり（上から順に）: 題を描いた自動生成のアイキャッチ、内容に合う写真の棚の別の1枚"""
-    out = [f"/images/{slug}/eyecatch.png"]
+_VARIANT = re.compile(r"^/images/thumbs/aio-(.+?)(?:-\d+)?\.(webp|jpg)$")
+
+
+def _siblings(src):
+    """同じ業種の別の写真（aio-salon.webp に対する aio-salon-2.webp）。src と同じ形式で返す"""
+    m = _VARIANT.match(src.split("?")[0])
+    if not m:
+        return []
+    return [u for u in (f"/images/thumbs/{name[:-4]}.{m.group(2)}" for name in variants(m.group(1))) if u != src.split("?")[0]]
+
+
+def _others(slug, alt_attr, src=""):
+    """同じ画像が出すぎた1枚の代わり（上から順に）: 同じ業種の別の写真、題を描いた自動生成のアイキャッチ、内容に合う写真の棚の別の1枚"""
+    out = _siblings(src) + [f"/images/{slug}/eyecatch.png"]
     m = re.search(r'alt="(.*?)のアイキャッチ画像"', alt_attr)
     try:
         import photo_shelf
@@ -262,15 +273,21 @@ def _limit(block, most):
         head, slug, src, rest = m.groups()
         pick = src
         if used.get(src, 0) >= most:
-            pick = next((u for u in _others(slug, rest)
+            pick = next((u for u in _others(slug, rest, src)
                          if used.get(u, 0) < most and (ROOT / "site" / u.lstrip("/")).is_file()), src)
         used[pick] = used.get(pick, 0) + 1
         return m.group(0) if pick == src else f'{head}<span class="thumb"><img src="{pick}"{rest}>'
     return _TILE.sub(one, block)
 
 
+# この枚数までの一覧（トップの新着・関連記事）は、同じ画像を1回までにする。
+# 6枚の新着に同じ写真が2組並び、ひと目で使い回しに見えた（2026-11-12）
+SHORT_LIST = 8
+
+
 def limit_repeats(site: Path, most=2):
-    """同じ一覧で同じ画像は most 回まで。3回目からは、その記事の題を描いた自動生成のアイキャッチ（無ければ写真の棚の別の1枚）。
+    """同じ一覧で同じ画像は most 回まで（SHORT_LIST 枚までの短い一覧は1回まで）。
+    超えた分は、同じ業種の別の写真 → その記事の題を描いた自動生成のアイキャッチ → 写真の棚の別の1枚。
     業種・写真の棚の画像は種類が少なく、/aio/ では55枚中17種（同じ画像が12回）、/industry/clinic/ では25枚中9種が並んでいた（2026-10-08）。
     一覧はどこで作っても（一覧・業種・LP・関連記事）この1か所でそろえる。何度呼んでも同じ"""
     n = 0
@@ -278,7 +295,7 @@ def limit_repeats(site: Path, most=2):
         s = p.read_text(encoding="utf-8")
         if 'class="post-list' not in s:
             continue
-        new = _LIST.sub(lambda m: m.group(1) + _limit(m.group(2), most) + m.group(3), s)
+        new = _LIST.sub(lambda m: m.group(1) + _limit(m.group(2), 1 if len(_TILE.findall(m.group(2))) <= SHORT_LIST else most) + m.group(3), s)
         if new != s:
             p.write_text(new, encoding="utf-8", newline="")
             n += 1
