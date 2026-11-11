@@ -1,0 +1,1 @@
+{"at": "2026-11-11T08:24:04+00:00", "job": "記事の枠", "site": "ai-lab", "turns": 43, "sessions": 18, "input_tokens": 86, "output_tokens": 39852, "cache_creation_input_tokens": 301393, "cache_read_input_tokens": 872750, "models": {"claude-sonnet-5-5": {"input_tokens": 86, "output_tokens": 39852, "cache_creation_input_tokens": 301393, "cache_read_input_tokens": 872750}}}

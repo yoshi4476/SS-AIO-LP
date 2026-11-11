@@ -1,0 +1,142 @@
+{
+ "v": 2,
+ "slug": "aio-taisaku-hyouji-sarenai",
+ "ok": true,
+ "date": "2026-11-11",
+ "questions": [
+  "aio対策 表示されないについて教えてください",
+  "aio対策 表示されないについて、「「表示されない」とは？2つの症状を切り分ける」を教えてください",
+  "aio対策 表示されないについて、「症状1: AI Overviewが表示されない理由3つ」を教えてください",
+  "aio対策 表示されないについて、「症状2: AI Overviewは出るのに引用されない5つの原因」を教えてください",
+  "aio対策 表示されないについて、「AIクローラーの遮断は想像以上に多い」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "「表示されない」とは？2つの症状を切り分ける",
+   "words": [
+    "症状"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "症状1: AI Overviewが表示されない理由3つ",
+   "words": [
+    "Overview",
+    "AI"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "症状2: AI Overviewは出るのに引用されない5つの原因",
+   "words": [
+    "Overview",
+    "AI",
+    "原因"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "AIクローラーの遮断は想像以上に多い",
+   "words": [
+    "AIクローラー",
+    "想像以上",
+    "遮断"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "自社が「表示されない」原因を診断する4ステップ",
+   "words": [
+    "原因"
+   ],
+   "hits": 4,
+   "of": 5
+  },
+  {
+   "topic": "診断結果別・優先順位付きの対処法",
+   "words": [
+    "診断結果別",
+    "対処法"
+   ],
+   "hits": 2,
+   "of": 5
+  },
+  {
+   "topic": "改善してから反映されるまでの期間の目安",
+   "words": [
+    "期間"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "業種別によくある「表示されない」パターン",
+   "words": [
+    "パターン",
+    "業種別"
+   ],
+   "hits": 2,
+   "of": 5
+  },
+  {
+   "topic": "それでも表示されない場合の最終チェック",
+   "words": [
+    "最終チェック"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "012cloud.jp": "peer",
+  "adguard.com": "peer",
+  "ai.7senses.co.jp": "self",
+  "aio-erisuguri.com": "peer",
+  "atoz-design.jp": "peer",
+  "blog.cloudflare.com": "peer",
+  "bridge-world.jp": "peer",
+  "connecty.co.jp": "peer",
+  "extage-marketing.co.jp": "peer",
+  "help.hatenablog.com": "media",
+  "ittosha.jp": "peer",
+  "kaimonojyoz.jp": "peer",
+  "layup.info": "peer",
+  "luminage.co.jp": "peer",
+  "mrs.mirai.ad.jp": "peer",
+  "note.com": "video",
+  "orangesoftware.co.jp": "peer",
+  "plan-b.co.jp": "peer",
+  "protea-inc.co.jp": "peer",
+  "prtimes.jp": "media",
+  "rebranding.co.jp": "peer",
+  "tatap.jp": "peer",
+  "trilia.co.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "willgate.co.jp": "peer",
+  "youtube.com": "video",
+  "zenn.dev": "media"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 3,
+  "専門家への相談": 2
+ },
+ "chars": 9138,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え5件のうち、『期間』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え4件のうち、『症状』に触れたものは1件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は0件、専門家への相談は2件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは27件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが3件、動画・SNS・ブログが2件でした。"
+ ]
+}

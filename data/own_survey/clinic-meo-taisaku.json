@@ -1,0 +1,103 @@
+{
+ "v": 2,
+ "slug": "clinic-meo-taisaku",
+ "ok": true,
+ "date": "2026-11-11",
+ "questions": [
+  "クリニック meoについて教えてください",
+  "クリニック meoについて、「クリニックのMEO対策とは？」を教えてください",
+  "クリニック meoについて、「クリニックの集患でMEOを最優先すべき3つの理由」を教えてください",
+  "クリニック meoについて、「クリニックMEO対策の5つの手順」を教えてください",
+  "クリニック meoについて、「診療科別カテゴリ設定の具体例」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "クリニックの集患でMEOを最優先すべき3つの理由",
+   "words": [
+    "集患"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "診療科別カテゴリ設定の具体例",
+   "words": [
+    "診療科別カテゴリ設定",
+    "具体例"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "医療広告ガイドラインで注意すべきNG表現",
+   "words": [
+    "医療広告ガイドライン",
+    "NG表現"
+   ],
+   "hits": 3,
+   "of": 5
+  },
+  {
+   "topic": "AI検索時代のクリニックMEO対策",
+   "words": [
+    "AI検索時代"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [
+  {
+   "term": "医療広告ガイドライン",
+   "org": "厚生労働省",
+   "of": 5,
+   "hits": 3
+  },
+  {
+   "term": "改正医療法",
+   "org": "厚生労働省",
+   "of": 5,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "aidaim.co.jp": "peer",
+  "clinic-promotion.com": "peer",
+  "clius.jp": "peer",
+  "doctorsupportnet.jp": "media",
+  "for-customer.com": "peer",
+  "gyro-n.com": "peer",
+  "iryoto.jp": "peer",
+  "ks-m.co.jp": "media",
+  "maru-nagoya.jp": "peer",
+  "medical-link.co.jp": "peer",
+  "meo-freaks.com": "peer",
+  "mnes-lookrec.com": "peer",
+  "nicoms.nicho.co.jp": "peer",
+  "onamae.com": "peer",
+  "rental-jimucho.com": "peer",
+  "solasto.co.jp": "peer",
+  "toc-solutions.net": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "webridge.co.jp": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 1,
+  "専門家への相談": 0
+ },
+ "chars": 10082,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、厚生労働省の資料にある「改正医療法」に触れたものは0件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、厚生労働省の資料にある「医療広告ガイドライン」に触れたものは3件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は0件、専門家への相談は0件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは20件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが2件、動画・SNS・ブログが1件でした。"
+ ]
+}
