@@ -277,10 +277,10 @@ def body(key, metas, faq_pairs, post_tile, site_url):
 # 調査の数字と支援内容のあいだに、その業種でお客様が来てくれる場面の写真の帯を挟む（文字と表が続いて読み疲れるため。
 # 連作「AIに聞かれ、選ばれ、来てもらう」の1枚。写真が無い業種では何も出さない）
 VISIT_ALT = {
-    "clinic": "午後のクリニックの待合室で、受付を済ませる患者の後ろ姿",
+    "clinic": "午後のクリニックの待合室で、順番を待つ患者と受付の様子",
     "koumuten": "完成見学会で、工務店の担当者と一緒に新しい木の家を見て回る家族",
-    "shigyou": "書類を手に、事務所のある古いビルの階段を上る相談者の後ろ姿",
-    "fudosan": "不動産会社の店内で、担当者と物件の資料を見る夫婦の後ろ姿",
+    "shigyou": "書類を手に、事務所のある古いビルの階段を上る相談者",
+    "fudosan": "不動産会社の店内で、担当者と物件の資料を見る夫婦",
 }
 VISIT_OF = {"medical": "clinic", "reform": "koumuten"}   # 業種LPの名前 → 写真の鍵（industry_thumbs.SCENE_OF と同じ）
 SCENES = Path(__file__).resolve().parent.parent / "site" / "images" / "scenes"
