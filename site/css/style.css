@@ -2227,3 +2227,9 @@ figure.layers { margin: clamp(2.2rem, 4vw, 3.2rem) 0 0; text-align: left; }
 /* 横に動かせる表の上に出す印（site.js が、はみ出している表にだけ付ける。動かしたら消える） */
 .table-hint { margin: 1.8em 0 -1.3em; font-size: .78rem; font-weight: 700; color: var(--blue); text-align: right; }
 .table-hint + .table-wrap { margin-top: 1.8em; }
+
+/* スマホのお客様の声: 縦に積むと 3,300px あり、サービスのページが長くなりすぎていた。横に送るカードにする（次のカードが端に見えるのが合図） */
+@media (max-width: 720px) {
+  .voice-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: .9rem; padding-bottom: .7rem; -webkit-overflow-scrolling: touch; }
+  .voice-grid > .voice { flex: 0 0 86%; scroll-snap-align: start; }
+}
