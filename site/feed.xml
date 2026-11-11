@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-11T00:00:00+09:00</updated>
+  <updated>2026-11-12T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>美容クリニックの集客は何から始める？広告規制の中で選ばれる4つの経路</title>
+    <link href="https://ai.7senses.co.jp/aio/biyou-clinic-shukyaku/"/>
+    <id>https://ai.7senses.co.jp/aio/biyou-clinic-shukyaku/</id>
+    <updated>2026-11-12T00:00:00+09:00</updated>
+    <summary>美容クリニックの集客は、施術ごとの費用とリスクを書いた施術ページを土台にし、ポータル・SNS・広告と役割を分けて進めます。当社が4つのAIの出典2,362件を数えた調査では、費用などを調べる質問の回答の77.4%が公式サイトを出典にしていました。</summary>
+  </entry>
   <entry>
     <title>美容室の集客コンサルに初回面談で聞く5つの質問は？</title>
     <link href="https://ai.7senses.co.jp/aio/biyoushitsu-shukyaku-consul/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/fudousan-baikyaku-shukyaku/</id>
     <updated>2026-10-31T00:00:00+09:00</updated>
     <summary>不動産の売却集客は、売主が相場・売り方・会社選び・査定の4段階で調べる質問に、自社サイトのページで答えることから始めます。査定ページの新設で売却査定の依頼が増えた当社の不動産会社の支援をもとに、外す3つのNGと順位ごとの目安を整理します。</summary>
-  </entry>
-  <entry>
-    <title>不動産の集客ホームページで外す4つのNG｜作り直す前の点検表</title>
-    <link href="https://ai.7senses.co.jp/aio/fudousan-shukyaku-homepage/"/>
-    <id>https://ai.7senses.co.jp/aio/fudousan-shukyaku-homepage/</id>
-    <updated>2026-10-31T00:00:00+09:00</updated>
-    <summary>不動産の集客ホームページは、作り直す前に今のサイトを5項目で点検し、順位を持つページを残すことから始めます。作り直しで反響を失う4つのNGと、土台を直して3か月で問い合わせが2件から5件に増えた支援例を整理します。</summary>
   </entry>
 </feed>

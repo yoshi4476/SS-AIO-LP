@@ -76,7 +76,7 @@
 "modified": "2026-10-13"
 },
 "aio-seo-audit": {
-"hash": "b037fd151797f932d21150f887187d79",
+"hash": "a4855563551376e8e189da515d68a070",
 "modified": "2026-09-15"
 },
 "aio-seo-meo-chigai": {
@@ -187,8 +187,12 @@
 "hash": "10fc80a23ba2ac4ee357ca5a2283998e",
 "modified": "2026-09-17"
 },
+"biyou-clinic-shukyaku": {
+"hash": "9ffa3d2029bf4a3c45fc9c0f86ee990d",
+"modified": "2026-11-12"
+},
 "biyou-hifuka-meo": {
-"hash": "107f83efae25c88457be49ffeab6d07b",
+"hash": "d5103c017718f4b87d5cf04879d5fc40",
 "modified": "2026-08-24"
 },
 "biyoushitsu-meo-taisaku": {
@@ -196,7 +200,7 @@
 "modified": "2026-09-03"
 },
 "biyoushitsu-shukyaku-consul": {
-"hash": "5999c9ca82bfdb31a692b685adbad2a3",
+"hash": "421c653426446c9b25aefe0530d640e5",
 "modified": "2026-11-11"
 },
 "biyoushitsu-shukyaku-daikou": {
@@ -276,7 +280,7 @@
 "modified": "2026-08-31"
 },
 "clinic-hp-ryokin-nosekata": {
-"hash": "0d67e1d8a8f8caba24d0827514fdceb1",
+"hash": "50c80bb447ebe935f3a554e5f877f371",
 "modified": "2026-10-07"
 },
 "clinic-instagram-yarikata": {
@@ -308,7 +312,7 @@
 "modified": "2026-09-07"
 },
 "clinic-meo-taisaku": {
-"hash": "4128b9481889a9ce30419b4ab339d239",
+"hash": "0cf3a95fe1810ea95666a9e6d2b3bf18",
 "modified": "2026-08-31"
 },
 "clinic-seo-consulting-erabikata": {
