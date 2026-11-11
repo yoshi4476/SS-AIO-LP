@@ -102,10 +102,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </header>
 <main>
 
-<!-- ヒーロー（v2: URLを入れるだけの実測診断が主役。左=入力 / 右=計測盤） -->
+<!-- 1 誰の話か: ヒーロー（v2: URLを入れるだけの実測診断が主役。左=入力 / 右=計測盤） -->
 <section class="lx-hero" data-area="ヒーロー" data-area-id="hero" id="scan-start">
-  <!-- 背景の動画: お客様がAIに聞く → 答えに出た会社を選ぶ → 来院・来店・相談。紺を重ねて薄く敷く（入力と計測盤の構成はそのまま） -->
-  <img class="lx-hero-video lx-hero-still" src="/videos/lab-hero-poster.webp" srcset="/videos/lab-hero-poster-m.webp 640w, /videos/lab-hero-poster.webp 1280w" sizes="100vw" alt="AIに聞いてから会社を選ぶお客様のイメージ" aria-hidden="true" fetchpriority="high" decoding="async">
   <div class="lx-wrap lx-hero-grid">
     <div id="diagnosis">
       <ul class="lx-kicker"><li>無料</li><li>登録不要</li><li>30秒</li><li>営業電話なし</li></ul>
@@ -129,8 +127,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
         <p class="lx-err" id="lx-err" role="alert"></p>
         <p class="lx-micro"><span>入力はURLだけ</span><span>結果はその場で表示</span><span>名前やメールは不要</span></p>
       </form>
-      <p class="lx-alt">先に内容を見る: <a href="#service" data-cta="lp_hero_service">サービス</a>・<a href="#price" data-cta="lp_hero_price">料金</a> ／ 先に話を聞きたい方は <a href="#form" data-cta="lp_hero_consult">無料相談フォーム</a> ／ お電話 <a href="tel:0643057547" style="white-space:nowrap">06-4305-7547</a>（平日9:00〜20:00）</p>
-      <p class="lx-ind">業種別のご案内: <a href="/lp/medical/" data-cta="lp_hero_lp_medical">クリニック・歯科医院</a> <a href="/lp/fudosan/" data-cta="lp_hero_lp_fudosan">不動産会社</a> <a href="/lp/koumuten/" data-cta="lp_hero_lp_koumuten">工務店・リフォーム</a> <a href="/lp/shigyou/" data-cta="lp_hero_lp_shigyou">士業事務所</a></p>
+      <p class="lx-alt lx-alt--quiet">先に内容を見る: <a href="#service" data-cta="lp_hero_service">サービス</a>・<a href="#price" data-cta="lp_hero_price">料金</a> ／ 先に話を聞きたい方は <a href="#form" data-cta="lp_hero_consult">無料相談フォーム</a> ／ お電話 <a href="tel:0643057547" style="white-space:nowrap">06-4305-7547</a>（平日9:00〜20:00）</p>
     </div>
     <div class="lx-console" aria-label="この14項目を測ります">
       <div class="lx-console-head"><b>この14項目を測ります</b><small>100点満点</small></div>
@@ -138,7 +135,6 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <p class="lx-console-foot">URLを入れると、ここがその場で合否に変わります。</p>
     </div>
   </div>
-<p style="text-align:center;margin-top:1.2rem;"><a href="/faq/" data-cta="lp_faq_more">契約期間・解約・記事の品質・Googleの罰則についての質問は、ご契約前のよくある質問へ</a></p>
 </section>
 
 <!-- 実績の帯（data/first_party_facts.json の検証済みの数字だけ。期間を添える） -->
@@ -156,7 +152,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <div class="lx-wrap" id="lx-res" aria-live="polite"></div>
 </section>
 
-<!-- 課題共感 -->
+<!-- 1 の続き: 課題共感 -->
 <section class="section-full bg-deep after-stats" data-area="課題共感" data-area-id="problem">
   <div class="section" style="padding-top:0;padding-bottom:0;">
     <div class="section-head reveal">
@@ -176,7 +172,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </section>
 
 
-<!-- 市場の変化（概念図ではなく、数えた数字で見せる） -->
+<!-- 2 いま起きていること・3 なぜそうなるのか: 市場の変化（概念図ではなく、数えた数字で見せる） -->
 <section class="section" data-area="市場の変化" data-area-id="whynow">
   <div class="section-head reveal">
     <span class="eyebrow">なぜ今か</span>
@@ -213,7 +209,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </div>
 
-<!-- サービス -->
+<!-- 4 どう変えるか: サービス -->
 <section class="section-full bg-deep" id="service" data-area="サービス4本柱" data-area-id="service">
   <div class="section" style="padding-top:0;padding-bottom:0;">
     <div class="section-head reveal">
@@ -222,26 +218,22 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <p class="sub">AIO・LLMO・SEO・MEOはバラバラに外注すると設計が分断され、効果が半減します。セブンセンシズは全領域を<strong>1つのチームで一気通貫</strong>運用します。</p>
     </div>
     <div class="pillar-grid">
-      <div class="pillar pillar-has-photo cat-aio reveal">
-        <span class="pillar-photo"><img src="/images/home/svc-aio.webp" alt="検索結果の上に出るAIの答えを読む人" width="1600" height="900" loading="lazy"></span>
+      <div class="pillar cat-aio reveal">
         <span class="num">01 — AIO運用</span>
         <h3>Google AIに「引用される」</h3>
         <p>AI Overview・AIモードに引用されるためのコンテンツ構造化・構造化データ・llms.txt整備・GSC生成AIレポートでの計測までを実施します。</p>
       </div>
-      <div class="pillar pillar-has-photo cat-ai reveal reveal-d1">
-        <span class="pillar-photo"><img src="/images/home/svc-llmo.webp" alt="ノートパソコンでAIに質問する人" width="1600" height="900" loading="lazy"></span>
+      <div class="pillar cat-ai reveal reveal-d1">
         <span class="num">02 — LLMO運用</span>
         <h3>ChatGPT・Perplexityで言及される</h3>
         <p>AIチャットの回答で自社が引用・推薦されるための一次情報設計・出典明記・情報鮮度の運用と、AI経由流入のGA4計測を行います。</p>
       </div>
-      <div class="pillar pillar-has-photo cat-seo reveal reveal-d2">
-        <span class="pillar-photo"><img src="/images/home/svc-seo.webp" alt="記事の構成を見ながら原稿を書く担当者" width="1600" height="900" loading="lazy"></span>
+      <div class="pillar cat-seo reveal reveal-d2">
         <span class="num">03 — SEO運用</span>
         <h3>引用の土台になる検索上位</h3>
         <p>AI引用の前提はGoogle上位表示。KW戦略・一次情報を組み込んだ記事制作・内部対策で、検索集客の土台を固めます。</p>
       </div>
-      <div class="pillar pillar-has-photo cat-meo reveal reveal-d3">
-        <span class="pillar-photo"><img src="/images/home/svc-meo.webp" alt="地図アプリで店を探しながら商店街を歩く人" width="1600" height="900" loading="lazy"></span>
+      <div class="pillar cat-meo reveal reveal-d3">
         <span class="num">04 — MEO運用</span>
         <h3>「近くの◯◯」で選ばれる店舗に</h3>
         <p>店舗集客支援「G-ran」の実務知見で、Googleビジネスプロフィール最適化・口コミ戦略・マップ上位表示を支援します。</p>
@@ -282,75 +274,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </section>
 
-<!-- 進め方の比較（自社で運用／代行を頼む／ツールだけ使う）。中身は当サイトの記事の比較にあることだけ。料金の数字は書かない -->
-<section class="section" id="approach" data-area="進め方の比較" data-area-id="approach">
-  <div class="section-head reveal">
-    <span class="eyebrow">進め方の比較</span>
-    <h2>自社で運用する・代行を頼む・ツールだけ使う、の違い</h2>
-    <p class="sub">どれが正しいかではなく、<strong>社内に残る作業と体制</strong>で選ぶものです。費用の安い進め方ほど、社内の作業が増えます。</p>
-  </div>
-  <div class="table-wrap vz-stack ap-table reveal">
-    <table>
-      <thead><tr><th scope="col">比べる点</th><th scope="col" class="ap-self">自社で運用する</th><th scope="col" class="ap-agency">代行を頼む</th><th scope="col" class="ap-tool">ツールだけ使う</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">社内に残る作業</th><td data-label="自社で運用する">調べる・書く・測る・直すの全部</td><td data-label="代行を頼む">一次情報の提供と確認</td><td data-label="ツールだけ使う">原因の特定と修正の全部</td></tr>
-        <tr><th scope="row">費用</th><td data-label="自社で運用する">ほぼゼロ（ツール代のみ）と、担当者の人件費</td><td data-label="代行を頼む">発注費用がかかる（当社は個別にお見積り）</td><td data-label="ツールだけ使う">無料ツールなら0円。有料ツールは利用料</td></tr>
-        <tr><th scope="row">対応できる範囲</th><td data-label="自社で運用する">構造・FAQなどの基礎</td><td data-label="代行を頼む">一次情報の収集・計測と分析まで</td><td data-label="ツールだけ使う">引用・表示の数字を測るところまで（引用されなかった理由は分からない）</td></tr>
-        <tr><th scope="row">必要なスキル</th><td data-label="自社で運用する">Search Console・GA4の基本操作</td><td data-label="代行を頼む">発注側は要件の整理だけ</td><td data-label="ツールだけ使う">結果を読んで、自社で直せること</td></tr>
-        <tr><th scope="row">続けやすさ</th><td data-label="自社で運用する">担当者の異動で止まりやすい</td><td data-label="代行を頼む">継続の体制を確保しやすい</td><td data-label="ツールだけ使う">測るだけで、直すところまで進まないことがある</td></tr>
-        <tr><th scope="row">向いている会社</th><td data-label="自社で運用する">担当者に時間を割ける会社</td><td data-label="代行を頼む">担当者を置けない会社</td><td data-label="ツールだけ使う">直せる担当者がいる会社</td></tr>
-        <tr class="ap-all"><th scope="row">一次情報<small>自社の数字・現場の経験</small></th><td colspan="3" data-label="どの進め方でも">どの進め方でも、社内からしか出せません。会社の協力が前提です。</td></tr>
-        <tr class="ap-use"><th scope="row">AI集客ラボで使えるもの</th><td data-label="自社で運用する"><a href="/download/" data-cta="lp_approach_checklist">業種別のチェックリスト（PDF・無料）</a>と<a href="/blog/" data-cta="lp_approach_blog">記事</a></td><td data-label="代行を頼む"><a href="#price" data-cta="lp_approach_price">おまかせパック・SEO＋AIO運用</a>（個別お見積り）</td><td data-label="ツールだけ使う"><a href="/tools/" data-cta="lp_approach_tools">URL診断・AI診断などの無料ツール</a></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="ap-src reveal">出典: 当サイトの記事 <a href="/aio/aio-taisaku-jibunde/">AIO対策は自分でできる？</a>・<a href="/aio/aio-service-hikaku/">AIOサービス比較で外す5つの落とし穴</a>・<a href="/aio/aio-taisaku-donyu-hoho/">AIO対策の導入方法</a>・<a href="/aio/aio-taisaku-muryou-tool/">AIO対策の無料ツール6選</a>・<a href="/aio/aio-taisaku-souba/">AIO対策の相場</a>の比較から、比べる点をそろえてまとめました。</p>
-</section>
-
-<!-- 料金 -->
-<section class="section-full bg-deep" id="price" data-area="料金" data-area-id="price">
-  <section class="section" style="padding-top:0;padding-bottom:0;">
-    <div class="section-head reveal">
-      <span class="eyebrow">料金</span>
-      <h2>料金</h2>
-      <p class="sub">プランは1つです。<strong>記事の制作からサイトの保守・運用・更新まで、まとめてお任せいただけます。</strong>範囲が合わない場合は、無料の現状分析の結果をもとに個別にお見積りします。</p>
-    </div>
-    
-    <!-- おすすめプラン: 上段・横長フィーチャー -->
-    <div class="pillar cat-aio reveal" style="position:relative;border:3px solid var(--blue);box-shadow:0 24px 56px -18px rgba(37,99,235,.4);margin-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(480px,100%),1fr));gap:clamp(1.2rem,3vw,3rem);align-items:center;padding:clamp(1.8rem,3.5vw,2.8rem);">
-      <span style="position:absolute;top:-16px;left:clamp(1.5rem,4vw,2.8rem);background:linear-gradient(120deg,var(--blue),#60a5fa);color:#fff;font-weight:900;font-size:.85rem;padding:.4em 1.6em;border-radius:999px;white-space:nowrap;box-shadow:0 6px 16px -6px rgba(37,99,235,.6);">★ いちばん人気・おすすめ</span>
-      <div>
-        <span class="num">おすすめ</span>
-        <h3 style="font-size:clamp(1.5rem,3vw,2.1rem);margin:.25em 0 .2em;">おまかせパック</h3>
-        <p style="display:inline-block;font-weight:700;font-size:.85rem;letter-spacing:.08em;color:var(--blue-deep);border:1px solid var(--sky-2);background:var(--sky);border-radius:999px;padding:.35em 1.1em;margin:0 0 .8em;">AIO・SEO完全対応型</p>
-        <p style="font-size:.95rem;">記事制作からレポート・改善まで、<strong>集客の仕組みを丸ごとお任せ</strong>いただくプランです。社内の作業はほぼゼロで、資産型の集客が積み上がります。</p>
-        <p style="font-weight:700;color:var(--text);margin-top:.8em;font-size:1.05rem;">料金: <span style="font-size:1.5em;color:var(--blue-deep);">月額20万円</span></p>
-        <p style="font-size:.85rem;color:var(--muted);margin-top:.3em;">サイトの保守・運用・更新を含みます。</p>
-        <p style="margin-top:.9em;"><a class="btn btn-primary" href="#form" data-cta="lp_price_omakase" style="padding:.95em 2.4em;font-size:1rem;">おまかせパックを相談する <span class="arw">→</span></a></p>
-      </div>
-      <ul style="font-size:.95rem;color:var(--text);margin:0;padding:0;list-style:none;display:grid;gap:.8em;">
-        <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ <strong>オウンドメディア+LP</strong>の構築・運用一式</li>
-        <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ <strong>検索データ分析によるKW選定</strong><br><span style="font-size:.82rem;color:var(--muted);">AI検索で引用されやすいコンテンツタイプまで分析し、間違ったキーワード選定を行いません</span></li>
-        <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ 記事を<strong>月60本投稿</strong>（毎日2本・品質審査つき）</li>
-        <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ <strong>月次コンサルレポート</strong>（毎月1日・PDF）</li>
-        <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ レポートにもとづく<strong>サイト改善の実装まで</strong></li>
-      </ul>
-      <div style="grid-column:1/-1;border-top:1px dashed var(--line);padding-top:1.3rem;margin-top:.3rem;">
-        <div style="font-family:var(--head);font-weight:900;font-size:1.05rem;margin-bottom:.5rem;">なぜオウンドメディアでリードが獲れるのか</div>
-        <p style="font-size:.9rem;margin:0 0 1.1rem;max-width:44em;">広告は止めた瞬間に流入もゼロになりますが、記事は<strong>公開した分だけ積み上がる24時間働く営業資産</strong>です。検索とAIの回答が毎日見込み客を連れてきて、売り込みではなく「役立つ情報」で信頼をつくってから問い合わせに至るため、<strong>広告より質の高いリード</strong>が、広告費なしで増え続けます。</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:.6rem;">
-          <div style="background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.8em 1em;font-size:.84rem;"><span style="font-weight:700;color:var(--blue);">ステップ1</span><br><strong>記事が疑問に答える</strong><br><span style="color:var(--muted);">月60本が見込み客の検索・質問を受け止める</span></div>
-          <div style="background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.8em 1em;font-size:.84rem;"><span style="font-weight:700;color:var(--blue);">ステップ2</span><br><strong>検索とAIで見つかる</strong><br><span style="color:var(--muted);">上位表示+AI回答への引用（AIO/LLMO）で接点最大化</span></div>
-          <div style="background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.8em 1em;font-size:.84rem;"><span style="font-weight:700;color:var(--blue);">ステップ3</span><br><strong>診断・LPで検討が進む</strong><br><span style="color:var(--muted);">無料診断とLPが「相談したい」に育てる</span></div>
-          <div style="background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.8em 1em;font-size:.84rem;"><span style="font-weight:700;color:var(--blue);">ステップ4</span><br><strong>問い合わせが届く</strong><br><span style="color:var(--muted);">レポートで検証→改善し、獲得数を伸ばし続ける</span></div>
-        </div>
-      </div>
-    </div>
-    <p style="font-size:.85rem;color:var(--muted);margin-top:1.5rem;">※ ご契約前に費用が発生することはありません。お見積り後のお断りも遠慮なくどうぞ。</p>
-  </section>
-</section>
-
-<!-- 比較テーブル -->
+<!-- 4 の続き: 何をして、何をしないか（従来型との違い） -->
 <section class="section" data-area="他社比較" data-area-id="comparison">
   <div class="section-head reveal">
     <span class="eyebrow">他社との違い</span>
@@ -389,30 +313,30 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </div>
 
-<!-- 支援のかたち -->
+<!-- 4 の続き: 業種ごとの組み立て -->
 <section class="section" data-area="注力業種" data-area-id="industries">
   <div class="section-head reveal">
     <span class="eyebrow">注力業種</span>
-    <h2>注力業種と支援内容</h2>
+    <h2>特に力を入れているのは、3つの業種です</h2>
     <p class="sub">特に成果を出しやすい3つの業種に注力しています。<strong>実名の導入事例・成果数値は許諾を得たものから順次掲載します。</strong></p>
   </div>
   <div class="pillar-grid">
     <div class="pillar pillar-has-photo cat-aio reveal">
-      <span class="pillar-photo"><img src="/images/scenes/shigyou.webp" alt="士業の事務所で相談を受ける様子" width="1600" height="900" loading="lazy"></span>
+      <span class="pillar-photo"><img src="/images/home/lp-ind-medical.webp" alt="医院の受付で、初めて来院した方に問診票を手渡すスタッフ" width="1600" height="900" loading="lazy"></span>
       <span class="num">注力業種1</span>
       <h3>医療・クリニック / 士業・コンサル</h3>
       <p>「地域名×専門分野」で探され、信頼で選ばれる業種です。E-E-A-Tを軸にした監修記事とMEOで、<strong>専門家としての第一想起</strong>を検索とマップの両面から固めます。医療は広告規制に配慮した表現で運用します。</p>
       <p style="font-size:.82rem;color:var(--muted);margin-top:.7em;">主な施策: 監修記事SEO / MEO / FAQ構造化 / 口コミ運用</p>
     </div>
     <div class="pillar pillar-has-photo cat-meo reveal reveal-d1">
-      <span class="pillar-photo"><img src="/images/scenes/fudosan.webp" alt="住まいの相談を受ける不動産会社" width="1600" height="900" loading="lazy"></span>
+      <span class="pillar-photo"><img src="/images/home/lp-ind-home.webp" alt="モデルハウスで、見学に来た方に梁を指して説明する工務店の担当者" width="1600" height="900" loading="lazy"></span>
       <span class="num">注力業種2</span>
       <h3>不動産・工務店・リフォーム</h3>
       <p>高単価・長期検討のため、比較段階の情報収集が勝負どころです。施工事例・相場解説の記事とマップ対策で、<strong>「調べるほど御社に行き着く」導線</strong>を設計し、問い合わせの質を高めます。</p>
       <p style="font-size:.82rem;color:var(--muted);margin-top:.7em;">主な施策: 事例記事SEO / MEO / AIO / 資料請求導線設計</p>
     </div>
     <div class="pillar pillar-has-photo cat-seo reveal reveal-d2">
-      <span class="pillar-photo"><img src="/images/scenes/btob.webp" alt="BtoB・IT企業のオフィス" width="1600" height="900" loading="lazy"></span>
+      <span class="pillar-photo"><img src="/images/home/lp-ind-btob.webp" alt="オンラインの打ち合わせで、問い合わせに答えるIT企業の担当者" width="1600" height="900" loading="lazy"></span>
       <span class="num">注力業種3</span>
       <h3>BtoB・SaaS / IT企業</h3>
       <p>導入検討者は商談の前にAIと検索で比較を終えています。専門性を言語化した記事SEOとLLMO対策で、<strong>「AIに聞いたら候補に挙がる」状態</strong>をつくり、営業リストに載る前の接点を獲得します。</p>
@@ -420,7 +344,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     </div>
   </div>
   <p style="font-size:.85rem;color:var(--muted);margin-top:1.5rem;">※ 写真はイメージです。上記以外の業種（飲食・美容・小売等の店舗ビジネスなど）も、ご相談いただけます。</p>
-  
+  <p class="ind-lps">業種別のご案内: <a href="/lp/medical/" data-cta="lp_hero_lp_medical">クリニック・歯科医院</a><a href="/lp/fudosan/" data-cta="lp_hero_lp_fudosan">不動産会社</a><a href="/lp/koumuten/" data-cta="lp_hero_lp_koumuten">工務店・リフォーム</a><a href="/lp/shigyou/" data-cta="lp_hero_lp_shigyou">士業事務所</a></p>
 </section>
 
 <div class="section" style="padding-top:0;padding-bottom:0;">
@@ -433,7 +357,35 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </div>
 
-<!-- 動画と資料（課題に共感した直後に1区画へ統合。縦積み3連は読み飛ばされるため、
+<!-- voices:start -->
+<section class="section" data-area="お客様の声" data-area-id="voices">
+  <div class="section-head"><span class="eyebrow">実際の声</span><h2>お客様の声</h2>
+  <p class="section-lead">実際に運用させていただいている会社さまの言葉です。数字は各社が測った値で、集計期間を添えています。</p></div>
+  <div class="voice-grid"><figure class="voice"><p class="voice-metric"><span class="m-label">問い合わせフォームからの連絡</span><span class="m-from">月2〜3件</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">月8件前後</span></p><blockquote>以前は「業界名＋地域名」で検索しても自社が出てこない状態でした。今は主要な15キーワードのうち9つで1ページ目に入り、問い合わせフォームからの連絡が月2〜3件から月8件前後に増えています。何より、毎月のレポートで「どの記事がどう効いているか」を説明してもらえるので、社内の稟議も通しやすくなりました。</blockquote><figcaption>製造業（従業員約50名）<span class="voice-term">導入から2年</span></figcaption></figure><figure class="voice"><p class="voice-metric"><span class="m-label">月間の表示回数</span><span class="m-from">約12,000回</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">約38,000回</span></p><blockquote>最初の3ヶ月は正直、本当に変わるのか半信半疑でした。半年を過ぎたあたりから表示回数が伸び始め、今では月間の表示回数が約12,000回から38,000回、検索からの流入は約3倍です。クリック率も、タイトルと説明文を一緒に見直していただいてから1.8%→3.4%に改善しました。数字だけでなく「なぜこう直すのか」を毎回説明してくれるのが、続けられている理由です。</blockquote><figcaption>BtoBサービス業（従業員約20名）<span class="voice-term">導入から1年半</span></figcaption></figure><figure class="voice"><p class="voice-metric"><span class="m-label">月の広告費（問い合わせ件数は維持）</span><span class="m-from">約30万円</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">約10万円</span></p><blockquote>広告費を止めると問い合わせもゼロになる状態から抜け出したくて相談しました。今は検索経由が集客の土台になり、月の広告費を約30万円から10万円まで下げても、問い合わせ件数は落ちていません。担当の方が業界の商習慣まで理解して記事を書いてくれるので、こちらの手間がほとんどかからないのも助かっています。</blockquote><figcaption>小売・店舗運営<span class="voice-term">導入から2年3か月</span></figcaption></figure><figure class="voice"><p class="voice-metric"><span class="m-label">検索からのクリック数</span><span class="m-from">月38件</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">月112件</span></p><blockquote>AI検索への対策と聞いて依頼しましたが、「その前にまず検索での土台を作りましょう」と言われたのが印象的でした。AI対策とSEO対策を並行して進めていただいた結果、4ヶ月で月間表示回数が4,200回から11,600回、クリック数が月38件から112件に増えています。AI経由の成果はこれから出てくる領域だと説明を受けているので、焦らず続けるつもりです。</blockquote><figcaption>士業事務所<span class="voice-term">利用4か月</span></figcaption></figure><figure class="voice"><p class="voice-metric"><span class="m-label">検索結果でのクリック率</span><span class="m-from">2.1%</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">3.6%</span></p><blockquote>「AI対策だけをやります」という提案ではなかったのが決め手でした。記事の構造や情報の整理はSEOとAIO両方に効くとのことで、実際に表示回数とクリック率が先に動きました。開始時と比べて表示回数が約2.6倍、クリック率も2.1%から3.6%に上がり、検索からの流入は月間で約4倍です。今すぐ効く部分と、将来に効く部分を分けて説明してもらえるので納得感があります。</blockquote><figcaption>ITサービス業<span class="voice-term">利用4か月</span></figcaption></figure><figure class="voice"><p class="voice-metric"><span class="m-label">ホームページからの予約</span><span class="m-from">月9件</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">月21件</span></p><blockquote>患者さんがAIで調べる時代になる前に手を打ちたくて相談しました。まだ3ヶ月ですが、検索結果に表示される回数が月6,800回から15,400回に増え、ホームページからの予約も月9件から21件に伸びています。AI対策は長期戦だと最初に正直に言われたので、途中で不安になることがありませんでした。SEOも同時に見てもらえるぶん、短期の成果もきちんと出ています。</blockquote><figcaption>医療・クリニック<span class="voice-term">利用3か月</span></figcaption></figure><figure class="voice"><blockquote>査定サイトを作成していただき、AIO対策を行ったことで、サイトからの問い合わせが増えました。</blockquote><figcaption>不動産会社</figcaption></figure></div>
+  <p class="voice-note">掲載はご本人の許可を得たものだけです。数字は各社の集計期間を添えています。個別の成果を保証するものではありません。</p>
+</section>
+<!-- voices:end -->
+
+<!-- 5 本当か（続き）: 月次レポートの実物 -->
+<section class="section" data-area="月次レポート" data-area-id="movie" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:clamp(2rem,4vw,4.5rem);align-items:center;">
+  <div class="reveal">
+    <div class="section-head" style="margin-bottom:1.4rem;">
+      <span class="eyebrow">月次レポートの実物</span>
+      <h2>毎月のレポートは、次に何を直すかまで書いてお渡しします</h2>
+      <p class="sub">「何をして、どう変わったか」を毎月24ページでご報告します。数字を並べるだけでなく、<strong>次に何を直すか</strong>まで書いて渡すのが私たちのレポートです。</p>
+    </div>
+    <ul class="check-list" style="grid-template-columns:1fr;">
+      <li>検索・マップ・AI検索での見え方を、前月比と6ヶ月推移で報告</li>
+      <li>記事とLPのどこをどう直すか、優先度つきの改修プラン</li>
+      <li>翌月のKPI目標と実行スケジュールまで明記</li>
+    </ul>
+  </div>
+  <div class="reveal reveal-d1">
+    <img src="/images/home/report-preview.webp" alt="月次コンサルティングレポートの実物。表紙・KPIダッシュボード・改修プランのページ" width="1200" height="800" loading="lazy" style="width:100%;height:auto;display:block;border-radius:var(--radius);box-shadow:var(--shadow-md);">
+  </div>
+</section>
+
+<!-- 5 本当か（続き）: 動画と資料（課題に共感した直後に1区画へ統合。縦積み3連は読み飛ばされるため、
      動画2本を横並び → 資料 → 相談、の順に圧縮。料金スライドは資料に含まれない） -->
 <section class="section" data-area="動画と資料" data-area-id="proposal">
   <div class="section-head reveal">
@@ -484,32 +436,110 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </section>
 
-<!-- 動画 -->
-<section class="section" data-area="動画" data-area-id="movie" style="padding-top:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:clamp(2rem,4vw,4.5rem);align-items:center;">
-  <div class="reveal">
-    <div class="section-head" style="margin-bottom:1.4rem;">
-      <span class="eyebrow">月次レポート</span>
-      <h2>毎月お渡しする<br>月次レポートの実物</h2>
-      <p class="sub">「何をして、どう変わったか」を毎月24ページでご報告します。数字を並べるだけでなく、<strong>次に何を直すか</strong>まで書いて渡すのが私たちのレポートです。</p>
-    </div>
-    <ul class="check-list" style="grid-template-columns:1fr;">
-      <li>検索・マップ・AI検索での見え方を、前月比と6ヶ月推移で報告</li>
-      <li>記事とLPのどこをどう直すか、優先度つきの改修プラン</li>
-      <li>翌月のKPI目標と実行スケジュールまで明記</li>
-    </ul>
+<!-- 6 自分の場合は: 進め方の比較（自社で運用／代行を頼む／ツールだけ使う）。中身は当サイトの記事の比較にあることだけ。料金の数字は書かない -->
+<section class="section" id="approach" data-area="進め方の比較" data-area-id="approach">
+  <div class="section-head reveal">
+    <span class="eyebrow">進め方の比較</span>
+    <h2>進め方は、社内に残る作業と体制で選びます</h2>
+    <p class="sub">どれが正しいかではなく、<strong>社内に残る作業と体制</strong>で選ぶものです。費用の安い進め方ほど、社内の作業が増えます。</p>
   </div>
-  <div class="reveal reveal-d1">
-    <img src="/images/home/report-preview.webp" alt="月次コンサルティングレポートの実物。表紙・KPIダッシュボード・改修プランのページ" width="1200" height="800" loading="lazy" style="width:100%;height:auto;display:block;border-radius:var(--radius);box-shadow:var(--shadow-md);">
+  <details class="fold ap-fold" id="ap-fold" open>
+  <summary>3つの進め方を、表で比べる</summary>
+  <div class="table-wrap vz-stack ap-table reveal">
+    <table>
+      <thead><tr><th scope="col">比べる点</th><th scope="col" class="ap-self">自社で運用する</th><th scope="col" class="ap-agency">代行を頼む</th><th scope="col" class="ap-tool">ツールだけ使う</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">社内に残る作業</th><td data-label="自社で運用する">調べる・書く・測る・直すの全部</td><td data-label="代行を頼む">一次情報の提供と確認</td><td data-label="ツールだけ使う">原因の特定と修正の全部</td></tr>
+        <tr><th scope="row">費用</th><td data-label="自社で運用する">ほぼゼロ（ツール代のみ）と、担当者の人件費</td><td data-label="代行を頼む">発注費用がかかる（当社は個別にお見積り）</td><td data-label="ツールだけ使う">無料ツールなら0円。有料ツールは利用料</td></tr>
+        <tr><th scope="row">対応できる範囲</th><td data-label="自社で運用する">構造・FAQなどの基礎</td><td data-label="代行を頼む">一次情報の収集・計測と分析まで</td><td data-label="ツールだけ使う">引用・表示の数字を測るところまで（引用されなかった理由は分からない）</td></tr>
+        <tr><th scope="row">必要なスキル</th><td data-label="自社で運用する">Search Console・GA4の基本操作</td><td data-label="代行を頼む">発注側は要件の整理だけ</td><td data-label="ツールだけ使う">結果を読んで、自社で直せること</td></tr>
+        <tr><th scope="row">続けやすさ</th><td data-label="自社で運用する">担当者の異動で止まりやすい</td><td data-label="代行を頼む">継続の体制を確保しやすい</td><td data-label="ツールだけ使う">測るだけで、直すところまで進まないことがある</td></tr>
+        <tr><th scope="row">向いている会社</th><td data-label="自社で運用する">担当者に時間を割ける会社</td><td data-label="代行を頼む">担当者を置けない会社</td><td data-label="ツールだけ使う">直せる担当者がいる会社</td></tr>
+        <tr class="ap-all"><th scope="row">一次情報<small>自社の数字・現場の経験</small></th><td colspan="3" data-label="どの進め方でも">どの進め方でも、社内からしか出せません。会社の協力が前提です。</td></tr>
+        <tr class="ap-use"><th scope="row">AI集客ラボで使えるもの</th><td data-label="自社で運用する"><a href="/download/" data-cta="lp_approach_checklist">業種別のチェックリスト（PDF・無料）</a>と<a href="/blog/" data-cta="lp_approach_blog">記事</a></td><td data-label="代行を頼む"><a href="#price" data-cta="lp_approach_price">おまかせパック・SEO＋AIO運用</a>（個別お見積り）</td><td data-label="ツールだけ使う"><a href="/tools/" data-cta="lp_approach_tools">URL診断・AI診断などの無料ツール</a></td></tr>
+      </tbody>
+    </table>
   </div>
+  <p class="ap-src reveal">出典: 当サイトの記事 <a href="/aio/aio-taisaku-jibunde/">AIO対策は自分でできる？</a>・<a href="/aio/aio-service-hikaku/">AIOサービス比較で外す5つの落とし穴</a>・<a href="/aio/aio-taisaku-donyu-hoho/">AIO対策の導入方法</a>・<a href="/aio/aio-taisaku-muryou-tool/">AIO対策の無料ツール6選</a>・<a href="/aio/aio-taisaku-souba/">AIO対策の相場</a>の比較から、比べる点をそろえてまとめました。</p>
+  </details>
+  <script>if(window.matchMedia&&matchMedia("(max-width:760px)").matches)document.getElementById("ap-fold").open=false;</script>
 </section>
 
-<!-- 流れ -->
+<!-- 6 いくらで: 料金（すぐ下に短い相談の入口） -->
+<section class="section-full bg-deep" id="price" data-area="料金" data-area-id="price">
+  <section class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-head reveal">
+      <span class="eyebrow">料金</span>
+      <h2>プランは1つ。記事の制作から保守・更新まで含みます</h2>
+      <p class="sub">プランは1つです。<strong>記事の制作からサイトの保守・運用・更新まで、まとめてお任せいただけます。</strong>範囲が合わない場合は、無料の現状分析の結果をもとに個別にお見積りします。</p>
+    </div>
+    
+    <!-- おすすめプラン: 上段・横長フィーチャー -->
+    <div class="pillar cat-aio reveal" style="position:relative;border:3px solid var(--blue);box-shadow:0 24px 56px -18px rgba(37,99,235,.4);margin-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(480px,100%),1fr));gap:clamp(1.2rem,3vw,3rem);align-items:center;padding:clamp(1.8rem,3.5vw,2.8rem);">
+      <span style="position:absolute;top:-16px;left:clamp(1.5rem,4vw,2.8rem);background:linear-gradient(120deg,var(--blue),#60a5fa);color:#fff;font-weight:900;font-size:.85rem;padding:.4em 1.6em;border-radius:999px;white-space:nowrap;box-shadow:0 6px 16px -6px rgba(37,99,235,.6);">★ いちばん人気・おすすめ</span>
+      <div>
+        <span class="num">おすすめ</span>
+        <h3 style="font-size:clamp(1.5rem,3vw,2.1rem);margin:.25em 0 .2em;">おまかせパック</h3>
+        <p style="display:inline-block;font-weight:700;font-size:.85rem;letter-spacing:.08em;color:var(--blue-deep);border:1px solid var(--sky-2);background:var(--sky);border-radius:999px;padding:.35em 1.1em;margin:0 0 .8em;">AIO・SEO完全対応型</p>
+        <p style="font-size:.95rem;">記事制作からレポート・改善まで、<strong>集客の仕組みを丸ごとお任せ</strong>いただくプランです。社内の作業はほぼゼロで、資産型の集客が積み上がります。</p>
+        <p style="font-weight:700;color:var(--text);margin-top:.8em;font-size:1.05rem;">料金: <span style="font-size:1.5em;color:var(--blue-deep);">月額20万円</span></p>
+        <p style="font-size:.85rem;color:var(--muted);margin-top:.3em;">サイトの保守・運用・更新を含みます。</p>
+        <p style="margin-top:.9em;"><a class="btn btn-primary" href="#form" data-cta="lp_price_omakase" style="padding:.95em 2.4em;font-size:1rem;">おまかせパックを相談する <span class="arw">→</span></a></p>
+      </div>
+      <ul style="font-size:.95rem;color:var(--text);margin:0;padding:0;list-style:none;display:grid;gap:.8em;">
+        <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ <strong>オウンドメディア+LP</strong>の構築・運用一式</li>
+        <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ <strong>検索データ分析によるKW選定</strong><br><span style="font-size:.82rem;color:var(--muted);">AI検索で引用されやすいコンテンツタイプまで分析し、間違ったキーワード選定を行いません</span></li>
+        <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ 記事を<strong>月60本投稿</strong>（毎日2本・品質審査つき）</li>
+        <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ <strong>月次コンサルレポート</strong>（毎月1日・PDF）</li>
+        <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ レポートにもとづく<strong>サイト改善の実装まで</strong></li>
+      </ul>
+      <details class="fold why-om" style="grid-column:1/-1;border-top:1px dashed var(--line);padding-top:1.1rem;margin-top:.3rem;">
+        <summary>なぜオウンドメディアでリードが獲れるのか</summary>
+        <p style="font-size:.9rem;margin:0 0 1.1rem;max-width:44em;">広告は止めた瞬間に流入もゼロになりますが、記事は<strong>公開した分だけ積み上がる24時間働く営業資産</strong>です。検索とAIの回答が毎日見込み客を連れてきて、売り込みではなく「役立つ情報」で信頼をつくってから問い合わせに至るため、<strong>広告より質の高いリード</strong>が、広告費なしで増え続けます。</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:.6rem;">
+          <div style="background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.8em 1em;font-size:.84rem;"><span style="font-weight:700;color:var(--blue);">ステップ1</span><br><strong>記事が疑問に答える</strong><br><span style="color:var(--muted);">月60本が見込み客の検索・質問を受け止める</span></div>
+          <div style="background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.8em 1em;font-size:.84rem;"><span style="font-weight:700;color:var(--blue);">ステップ2</span><br><strong>検索とAIで見つかる</strong><br><span style="color:var(--muted);">上位表示+AI回答への引用（AIO/LLMO）で接点最大化</span></div>
+          <div style="background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.8em 1em;font-size:.84rem;"><span style="font-weight:700;color:var(--blue);">ステップ3</span><br><strong>診断・LPで検討が進む</strong><br><span style="color:var(--muted);">無料診断とLPが「相談したい」に育てる</span></div>
+          <div style="background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.8em 1em;font-size:.84rem;"><span style="font-weight:700;color:var(--blue);">ステップ4</span><br><strong>問い合わせが届く</strong><br><span style="color:var(--muted);">レポートで検証→改善し、獲得数を伸ばし続ける</span></div>
+        </div>
+      </details>
+    </div>
+    <p style="font-size:.85rem;color:var(--muted);margin-top:1.5rem;">※ ご契約前に費用が発生することはありません。お見積り後のお断りも遠慮なくどうぞ。</p>
+    <!-- 短い相談の入口（料金を見た直後に申し込める。送り先・種別・ロボットよけは下の相談フォームと同じ。項目は必須の3つと同意だけ） -->
+    <div class="quick-lead reveal" id="quick-form">
+      <div class="ql-text">
+        <p class="ql-h">料金を見て気になった方は、ここから相談できます</p>
+        <p class="ql-s">2営業日以内に担当者からご連絡します。しつこい営業は行いません。くわしく書きたい方は<a href="#form" data-cta="lp_quick_to_form">下の相談フォーム</a>へ。</p>
+      </div>
+      <form class="form-panel ql-form" action="/api/lead" method="post">
+        <input type="hidden" name="form_type" value="無料相談（LP）">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+        <label>お名前 <span class="req">必須</span>
+          <input type="text" name="name" required autocomplete="name">
+        </label>
+        <label>会社名・店舗名 <span class="req">必須</span>
+          <input type="text" name="company" required autocomplete="organization">
+        </label>
+        <label>メールアドレス <span class="req">必須</span>
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+        <label class="ql-agree">
+          <input type="checkbox" required>
+          <span><a href="/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する<span class="req">必須</span></span>
+        </label>
+        <button type="submit" class="btn btn-primary" data-cta="lp_quick_submit">無料相談を申し込む（現状分析レポート付き）</button>
+      </form>
+    </div>
+  </section>
+</section>
+
+<!-- 6 どう進むか: 流れ -->
 <!-- 流れの段階図。1〜4はご契約前で費用はかからない（料金の区画の注記と同じ）。6は毎月くり返す。手順の文は一覧のまま読める -->
 <section class="section-full bg-deep" id="flow" data-area="支援の流れ" data-area-id="flow">
   <div class="section" style="padding-top:0;padding-bottom:0;">
     <div class="section-head reveal">
-      <span class="eyebrow">ご利用の流れ</span>
-      <h2>ご相談から運用開始までの流れ</h2>
+      <span class="eyebrow">ご相談から運用開始までの流れ</span>
+      <h2>ご契約前の4つの段階に、費用はかかりません</h2>
       <p class="sub">1〜4はご契約前で、<strong>費用はかかりません</strong>。お見積りにご納得いただいてから運用を始め、6を毎月くり返します。</p>
     </div>
     <div class="stage reveal">
@@ -526,16 +556,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </section>
 
-<!-- voices:start -->
-<section class="section" data-area="お客様の声" data-area-id="voices">
-  <div class="section-head"><span class="eyebrow">実際の声</span><h2>お客様の声</h2>
-  <p class="section-lead">実際に運用させていただいている会社さまの言葉です。数字は各社が測った値で、集計期間を添えています。</p></div>
-  <div class="voice-grid"><figure class="voice"><p class="voice-metric"><span class="m-label">問い合わせフォームからの連絡</span><span class="m-from">月2〜3件</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">月8件前後</span></p><blockquote>以前は「業界名＋地域名」で検索しても自社が出てこない状態でした。今は主要な15キーワードのうち9つで1ページ目に入り、問い合わせフォームからの連絡が月2〜3件から月8件前後に増えています。何より、毎月のレポートで「どの記事がどう効いているか」を説明してもらえるので、社内の稟議も通しやすくなりました。</blockquote><figcaption>製造業（従業員約50名）<span class="voice-term">導入から2年</span></figcaption></figure><figure class="voice"><p class="voice-metric"><span class="m-label">月間の表示回数</span><span class="m-from">約12,000回</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">約38,000回</span></p><blockquote>最初の3ヶ月は正直、本当に変わるのか半信半疑でした。半年を過ぎたあたりから表示回数が伸び始め、今では月間の表示回数が約12,000回から38,000回、検索からの流入は約3倍です。クリック率も、タイトルと説明文を一緒に見直していただいてから1.8%→3.4%に改善しました。数字だけでなく「なぜこう直すのか」を毎回説明してくれるのが、続けられている理由です。</blockquote><figcaption>BtoBサービス業（従業員約20名）<span class="voice-term">導入から1年半</span></figcaption></figure><figure class="voice"><p class="voice-metric"><span class="m-label">月の広告費（問い合わせ件数は維持）</span><span class="m-from">約30万円</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">約10万円</span></p><blockquote>広告費を止めると問い合わせもゼロになる状態から抜け出したくて相談しました。今は検索経由が集客の土台になり、月の広告費を約30万円から10万円まで下げても、問い合わせ件数は落ちていません。担当の方が業界の商習慣まで理解して記事を書いてくれるので、こちらの手間がほとんどかからないのも助かっています。</blockquote><figcaption>小売・店舗運営<span class="voice-term">導入から2年3か月</span></figcaption></figure><figure class="voice"><p class="voice-metric"><span class="m-label">検索からのクリック数</span><span class="m-from">月38件</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">月112件</span></p><blockquote>AI検索への対策と聞いて依頼しましたが、「その前にまず検索での土台を作りましょう」と言われたのが印象的でした。AI対策とSEO対策を並行して進めていただいた結果、4ヶ月で月間表示回数が4,200回から11,600回、クリック数が月38件から112件に増えています。AI経由の成果はこれから出てくる領域だと説明を受けているので、焦らず続けるつもりです。</blockquote><figcaption>士業事務所<span class="voice-term">利用4か月</span></figcaption></figure><figure class="voice"><p class="voice-metric"><span class="m-label">検索結果でのクリック率</span><span class="m-from">2.1%</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">3.6%</span></p><blockquote>「AI対策だけをやります」という提案ではなかったのが決め手でした。記事の構造や情報の整理はSEOとAIO両方に効くとのことで、実際に表示回数とクリック率が先に動きました。開始時と比べて表示回数が約2.6倍、クリック率も2.1%から3.6%に上がり、検索からの流入は月間で約4倍です。今すぐ効く部分と、将来に効く部分を分けて説明してもらえるので納得感があります。</blockquote><figcaption>ITサービス業<span class="voice-term">利用4か月</span></figcaption></figure><figure class="voice"><p class="voice-metric"><span class="m-label">ホームページからの予約</span><span class="m-from">月9件</span><span class="m-arw" aria-hidden="true">→</span><span class="m-to">月21件</span></p><blockquote>患者さんがAIで調べる時代になる前に手を打ちたくて相談しました。まだ3ヶ月ですが、検索結果に表示される回数が月6,800回から15,400回に増え、ホームページからの予約も月9件から21件に伸びています。AI対策は長期戦だと最初に正直に言われたので、途中で不安になることがありませんでした。SEOも同時に見てもらえるぶん、短期の成果もきちんと出ています。</blockquote><figcaption>医療・クリニック<span class="voice-term">利用3か月</span></figcaption></figure><figure class="voice"><blockquote>査定サイトを作成していただき、AIO対策を行ったことで、サイトからの問い合わせが増えました。</blockquote><figcaption>不動産会社</figcaption></figure></div>
-  <p class="voice-note">掲載はご本人の許可を得たものだけです。数字は各社の集計期間を添えています。個別の成果を保証するものではありません。</p>
-</section>
-<!-- voices:end -->
-
-<!-- 代表メッセージ -->
+<!-- 7 不安の解消: 代表の約束 -->
 <section class="section" data-area="代表メッセージ" data-area-id="message" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(2rem,4vw,4rem);align-items:center;">
   <div class="reveal">
     <div class="section-head" style="margin-bottom:1.2rem;">
@@ -552,7 +573,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- 7 不安の解消: よくある質問 -->
 <section class="section-full bg-deep" data-area="FAQ" data-area-id="faq">
 <section class="section" style="padding-top:0;padding-bottom:0;">
   <div class="section-head reveal">
@@ -569,22 +590,23 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <details><summary>無料相談では何をしてもらえますか？</summary><p class="faq-a">現状の検索順位・AI検索での見え方を分析したレポートをお渡しし、改善の優先順位をご説明します。</p></details>
     <details><summary>無料のサイト診断では何がわかりますか？</summary><p class="faq-a">URLを入れると、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を表示します。</p></details>
   </div>
+  <p class="faq-more"><a href="/faq/" data-cta="lp_faq_more">契約期間・解約・記事の品質・Googleの罰則についての質問は、ご契約前のよくある質問へ</a></p>
 </section>
 </section>
 
-<!-- フォーム -->
+<!-- 8 次の一手: 相談フォーム -->
 <section class="section" id="form" data-area="申込フォーム" data-area-id="form">
   <div class="section-head reveal" style="text-align:center;">
     <span class="eyebrow">無料相談</span>
     <h2>無料相談・現状分析のお申し込み</h2>
     <p class="sub" style="margin-left:auto;margin-right:auto;">2営業日以内に担当者からご連絡します。しつこい営業は行いません。上の診断を受けた方は、結果が下書きされています。</p>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(2rem,4vw,4rem);align-items:start;max-width:1240px;margin:0 auto;">
-  <!-- 左: おまかせパックの提供内容 -->
-  <div class="reveal">
+  <div class="form-cols" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(2rem,4vw,4rem);align-items:start;max-width:1240px;margin:0 auto;">
+  <!-- 左: おまかせパックの提供内容（スマホでは入力欄の下） -->
+  <div class="reveal form-side">
     <h3 style="font-family:var(--head);font-weight:900;font-size:1.3rem;margin-bottom:.8rem;">いちばん人気は「おまかせパック」</h3>
     <p style="font-size:.95rem;">記事制作からレポート・改善まで、<strong>集客の仕組みを丸ごとお任せ</strong>。社内の作業はほぼゼロで、資産型の集客が積み上がります。</p>
-    <ul style="font-size:.92rem;margin:1.3rem 0 1.2rem;padding:0;list-style:none;display:grid;gap:.6em;">
+    <ul class="form-side-list" style="font-size:.92rem;margin:1.3rem 0 1.2rem;padding:0;list-style:none;display:grid;gap:.6em;">
       <li style="background:var(--sky);border-radius:10px;padding:.7em 1em;">✓ オウンドメディア+LPの構築・運用一式</li>
       <li style="background:var(--sky);border-radius:10px;padding:.7em 1em;">✓ 検索データ分析によるKW選定（AI検索で引用されやすいタイプを分析。誤ったKW選定なし）</li>
       <li style="background:var(--sky);border-radius:10px;padding:.7em 1em;">✓ 記事を月60本投稿（毎日2本・品質審査つき）</li>
@@ -599,7 +621,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <p style="margin-top:1.4rem;font-size:.88rem;color:var(--muted);">一部だけのご相談も歓迎です。現状分析のうえ、最適な組み合わせをご提案します。</p>
   </div>
   <!-- 右: 申込みフォーム -->
-  <div class="reveal reveal-d1">
+  <div class="reveal reveal-d1 form-main">
   
   <form class="form-panel" action="/api/lead" method="post" style="margin:0;max-width:none;">
     <input type="hidden" name="form_type" value="無料相談（LP）">

@@ -13,7 +13,8 @@
     // ロゴの横にボタンを並べると、スマホでロゴの文字が3行に折れた（2026-10-03）。
     // 出すのはトップと /tools/ だけ（CSS が場所を取るのと同じ条件）。全ページに出すと固定のヘッダーが 111px になり、
     // 記事では下の固定ボタンと合わせて画面の約1/4を常に覆っていた（2026-10-08）
-    var toolsPage = document.body.classList.contains('home') || document.querySelector('.tools-main');
+    // トップからも外した（2026-11-12）: 最初の画面で押せる所が5つになり、主役の「URLを入れて30秒診断」が埋もれていた
+    var toolsPage = document.querySelector('.tools-main');
     if (toolsPage && header.querySelector('.global-nav .nav-tool') && !header.querySelector('.hdr-tools')) {
       var bar = document.createElement('div');
       bar.className = 'hdr-tools';

@@ -203,11 +203,12 @@ def test_h51_phone_header_is_small_and_tools_band_only_where_needed():
     check("スマホのヘッダー: 上下の余白 .5rem・ボタン 42px（全体 約59px）",
           (_decl(nav, ".site-header .inner", "padding-top"), _decl(nav, ".nav-toggle", "height")), (".5rem", "42px"))
     reserve = [sels for sels, body in _rules(nav) if "padding-bottom" in body and any(":has(.nav-tool)" in s for s in sels)]
-    check("ツールの帯の場所を取るのはトップと /tools/ だけ",
-          reserve, [["body.home .site-header:has(.nav-tool)", "body:has(.tools-main) .site-header:has(.nav-tool)"]])
+    # 2026-11-12 トップからも外した（最初の画面で押せる所が5つになり、主役の「URLを入れて30秒診断」が埋もれていた）
+    check("ツールの帯の場所を取るのは /tools/ だけ",
+          reserve, [["body:has(.tools-main) .site-header:has(.nav-tool)"]])
     js = (ROOT / "site" / "js" / "site.js").read_text(encoding="utf-8")
     check("ツールの帯を出すのも同じ条件（CSS と JS がずれると、空きか重なりが出る）",
-          "document.body.classList.contains('home') || document.querySelector('.tools-main')" in js, True)
+          "var toolsPage = document.querySelector('.tools-main');" in js and "classList.contains('home') ||" not in js, True)
     check("目次のリンクは指で押せる高さ（文字だけの18pxだった）",
           (_decl(_base(css), ".toc a", "display"), _decl(_base(css), ".toc a", "padding")), ("block", ".4em 0"))
 
