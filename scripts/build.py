@@ -515,10 +515,11 @@ def _hub_slug(meta):
 
 
 def _research_box(meta):
-    """業種が分かる記事の末尾に、その業種の調査とチェックリストへの案内を置く（調査が無い業種は空）"""
+    """業種が分かる記事の末尾に、その業種の調査とチェックリストへの案内を置く。調査が無い記事には、
+    チェックリストの受け取りへの案内だけを置く（連絡先を残す入口の無い記事を作らない）"""
     try:
         import industry_ai_sources as IAS
-        return "\n" + IAS.research_box(_hub_slug(meta), str(meta.get("title", "")))
+        return "\n" + (IAS.research_box(_hub_slug(meta), str(meta.get("title", ""))) or IAS.checklist_box())
     except Exception:
         return ""
 

@@ -537,6 +537,11 @@ def research_for_title(title):
     return None
 
 
+# 業種のチェックリストが無い業種の記事にも、受け取りの入口を置く（近い業種の版を受け取りページで選ぶ）
+GENERAL_CHECKLIST = ('<a class="btn btn-ghost" href="/download/" data-cta="article_checklist_general">'
+                     'チェックリスト（PDF）を受け取る</a>')
+
+
 def research_box(hub_slug, title=""):
     """記事の末尾に置く「この業種の調査」の案内。題名から質問の種類が分かれば、その種類だけの内訳を出す。
     調査が無い業種は空"""
@@ -561,7 +566,7 @@ def research_box(hub_slug, title=""):
                 f'<p class="sb-sub">「{H.escape(g)}」に当たる{gb["questions"]}問を {hl["engines_text"]} に聞き、'
                 f'得られた{gb["answers"]}件の回答で、それぞれの種類のサイトを出典に含んだ回答の割合です（1つの回答が複数の種類を含むため、合計は100%になりません）。</p>'
                 f'<p><a class="btn btn-primary" href="/research/{r}-ai-sources/" data-cta="article_research_{r}">調査の結果を見る</a> '
-                + (f'<a class="btn btn-ghost" href="/download/?ind={cl}" data-cta="article_checklist_{cl}">チェックリスト（PDF）を受け取る</a>' if cl else "")
+                + (f'<a class="btn btn-ghost" href="/download/?ind={cl}" data-cta="article_checklist_{cl}">チェックリスト（PDF）を受け取る</a>' if cl else GENERAL_CHECKLIST)
                 + '</p></aside>')
     return ('<aside class="scan-box research-box" aria-label="この業種の調査">'
             f'<p class="sb-kicker">調査レポート・{hl["date"][:4]}年{int(hl["date"][5:7])}月</p>'
@@ -569,8 +574,21 @@ def research_box(hub_slug, title=""):
             f'<p class="sb-sub">{H.escape(hl["name"])}に関する{hl["questions"]}問を {hl["engines_text"]} に聞き、'
             f'AIが何を出典に答えているかを数えた調査です。</p>'
             f'<p><a class="btn btn-primary" href="/research/{r}-ai-sources/" data-cta="article_research_{r}">調査の結果を見る</a> '
-            + (f'<a class="btn btn-ghost" href="/download/?ind={cl}" data-cta="article_checklist_{cl}">チェックリスト（PDF）を受け取る</a>' if cl else "")
+            + (f'<a class="btn btn-ghost" href="/download/?ind={cl}" data-cta="article_checklist_{cl}">チェックリスト（PDF）を受け取る</a>' if cl else GENERAL_CHECKLIST)
             + '</p></aside>')
+
+
+def checklist_box():
+    """業種の調査が無い記事の末尾に置く、チェックリストの受け取りへの案内。
+    業種でない記事（205本中104本）には連絡先を残す入口が1つも無く、読者は登録不要の診断だけで帰れた（2026-11-11 の導線の点検）。
+    受け取りページ（/download/）で近い業種の版を選ぶ。数字・実績は書かない"""
+    names = "・".join(("歯科医院", "クリニック", "不動産会社", "工務店・リフォーム会社", "士業事務所"))
+    return ('<aside class="scan-box research-box" aria-label="チェックリストの受け取り">'
+            '<p class="sb-kicker">無料の資料・PDF</p>'
+            '<p class="sb-head">AI検索に自社が出る状態かを、チェックリストで確かめる</p>'
+            f'<p class="sb-sub">{names}の5つの版から、近い業種を選んで受け取れます。</p>'
+            '<p><a class="btn btn-primary" href="/download/" data-cta="article_checklist_general">チェックリスト（PDF）を受け取る</a></p>'
+            '</aside>')
 
 
 def n_engines(s):

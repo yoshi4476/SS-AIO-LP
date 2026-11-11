@@ -108,3 +108,16 @@ def test_lead_is_counted_only_after_the_endpoint_accepts():
     thanks = js.split("location.pathname.indexOf('/thanks') === 0", 1)[1][:700] if "indexOf('/thanks') === 0" in js else ""
     check("お礼のページで1回だけ数え、送ったページの場所を付け、控えを消す",
           ("ga('lead_capture'" in thanks, "page_location: kept.url" in thanks, "removeItem('ss_lead')" in thanks), (True, True, True))
+
+
+def test_every_article_has_an_entry_that_takes_contact():
+    import industry_ai_sources as IAS
+    print("\n■ 導線: 業種の調査が無い記事にも、連絡先を残す入口（チェックリストの受け取り）を置く")
+    box = IAS.checklist_box()
+    check("調査の無い記事の箱は、受け取りページへの入口を持ち、数字を書かない",
+          ('href="/download/"' in box, 'data-cta="article_checklist_general"' in box, bool(re.search(r"\d+\s*(?:%|件|社)", box))),
+          (True, True, False))
+    check("調査はあるがチェックリストの無い業種の箱にも、受け取りの入口を出す",
+          IAS.research_box.__code__.co_names.count("GENERAL_CHECKLIST") >= 1, True)
+    src = (ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
+    check("記事の末尾は、調査の箱が無ければチェックリストの箱を出す", "or IAS.checklist_box()" in src, True)
