@@ -170,6 +170,13 @@
   }
  },
  "subsidy": {
+  "ai導入補助金条件": {
+   "kw": "ai導入補助金 条件",
+   "month": "2026-11",
+   "priority": "A",
+   "proven": false,
+   "src": "gsc"
+  },
   "ai導入補助金福岡": {
    "kw": "ai導入 補助金 福岡",
    "month": "2026-10",
@@ -191,9 +198,44 @@
    "proven": false,
    "src": "gsc"
   },
+  "it導入補助金いくらもらえる": {
+   "kw": "it導入補助金 いくらもらえる",
+   "month": "2026-11",
+   "priority": "A",
+   "proven": false,
+   "src": "gsc"
+  },
+  "it導入補助金コンサル費用": {
+   "kw": "it導入補助金 コンサル費用",
+   "month": "2026-11",
+   "priority": "A",
+   "proven": false,
+   "src": "suggest"
+  },
+  "it導入補助金採択率": {
+   "kw": "it導入補助金 採択率",
+   "month": "2026-11",
+   "priority": "A",
+   "proven": false,
+   "src": "gsc"
+  },
+  "it導入補助金申請サポート": {
+   "kw": "IT導入補助金 申請サポート",
+   "month": "2026-11",
+   "priority": "A",
+   "proven": false,
+   "src": "sheet"
+  },
   "デジタル化ai導入補助金2026個人事業主": {
    "kw": "デジタル化 ai導入補助金2026 個人事業主",
    "month": "2026-10",
+   "priority": "A",
+   "proven": false,
+   "src": "suggest"
+  },
+  "個人事業主it導入補助金2025": {
+   "kw": "個人事業主 it導入補助金 2025",
+   "month": "2026-11",
    "priority": "A",
    "proven": false,
    "src": "suggest"
