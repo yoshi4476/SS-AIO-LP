@@ -471,6 +471,19 @@
   document.addEventListener('scroll', function () {
     toTop.classList.toggle('show', document.documentElement.scrollTop > 600);
   }, { passive: true });
+  // 入力欄の右端に重なるので、フォームが画面にある間は出さない
+  if ('IntersectionObserver' in window) {
+    var formsOn = [];
+    var formWatch = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = formsOn.indexOf(e.target);
+        if (e.isIntersecting && i < 0) formsOn.push(e.target);
+        if (!e.isIntersecting && i >= 0) formsOn.splice(i, 1);
+      });
+      toTop.classList.toggle('by-form', formsOn.length > 0);
+    });
+    document.querySelectorAll('form').forEach(function (f) { formWatch.observe(f); });
+  }
 
   // URLコピー（記事シェア）
   document.querySelectorAll('.copy-url').forEach(function (btn) {

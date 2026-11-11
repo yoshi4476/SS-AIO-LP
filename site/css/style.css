@@ -206,6 +206,9 @@ html.js .reveal-d3 { transition-delay: .3s; }
 .kicker::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #9be8c8; box-shadow: 0 0 10px #9be8c8; }
 .trust-row { display: flex; gap: 1.6em; flex-wrap: wrap; margin-top: 1.8rem; font-size: .8rem; color: rgba(255,255,255,.85); }
 .trust-row span { display: inline-flex; align-items: center; gap: .45em; }
+/* 太字まじりの文は i でひとまとまりにする（そのままだと太字と続きの文が別の列になり、スマホで2列に割れる） */
+.trust-row span > i { font-style: normal; min-width: 0; }
+.trust-row span::before { flex: none; }
 .trust-row span::before { content: "✓"; display: inline-grid; place-items: center; width: 1.45em; height: 1.45em; border-radius: 50%; background: rgba(255,255,255,.18); font-size: .78em; font-weight: 800; }
 .float-d1 { animation-delay: 1.2s; }
 .float-d2 { animation-delay: 2.4s; }
@@ -648,6 +651,8 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
   transition: opacity .25s, transform .25s var(--ease-out), background .2s;
 }
 .to-top.show { opacity: 1; pointer-events: auto; transform: none; }
+/* 入力欄の右端に重なるので、フォームが画面にある間は出さない */
+.to-top.by-form { opacity: 0; pointer-events: none; }
 .to-top:hover { background: var(--sky); }
 @media (max-width: 720px) { .to-top { bottom: 6.2rem; right: .9rem; } }
 
