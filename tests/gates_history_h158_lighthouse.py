@@ -64,3 +64,33 @@ def test_article_video_loads_youtube_only_after_click():
     pages = [p for p in (ROOT / "site").rglob("index.html") if '<figure class="article-video"' in p.read_text(encoding="utf-8")]
     plain = [p.parent.name for p in pages if 'srcdoc="' not in p.read_text(encoding="utf-8").split('<figure class="article-video"')[1].split("</figure>")[0]]
     check("公開中の記事ページの動画も、押すまで読み込まない形になっている", plain, [])
+
+
+def test_article_eyecatch_has_a_small_version_for_phones():
+    """2026-11-12 記事の冒頭の画像（最初の画面で優先して読む画像）が横 1600px で、スマホには 2 倍以上大きかった
+    （Google の計測で LCP 2.7 秒・性能 95 点）。横 800px の版を作り、画面の幅に合う方を読ませる"""
+    import tempfile
+    from pathlib import Path
+    from PIL import Image
+    import build as B
+    print("\n■ 記事の冒頭の画像: スマホ用の横 800px の版があり、srcset で選ばせる")
+    with tempfile.TemporaryDirectory() as td:
+        site = Path(td)
+        (site / "images" / "x").mkdir(parents=True)
+        Image.new("RGB", (1600, 900), (120, 130, 140)).save(site / "images" / "x" / "big.webp", "WEBP")
+        Image.new("RGB", (640, 360), (120, 130, 140)).save(site / "images" / "x" / "tiny.webp", "WEBP")
+        ss = B.eyecatch_srcset("/images/x/big.webp?v=abc", site)
+        check("大きい画像には小さい版を作り、srcset と sizes を出す（版の印は外して書く）",
+              ((site / "images" / "x" / "big-800.webp").is_file(), ss),
+              (True, ' srcset="/images/x/big-800.webp 800w, /images/x/big.webp 1600w" sizes="(max-width: 860px) 100vw, 980px"'))
+        check("小さい版の大きさは横 800px で、縦横の比は同じ", Image.open(site / "images" / "x" / "big-800.webp").size, (800, 450))
+        check("元が 800px 以下の画像・無い画像には何も足さない（これまでどおり1枚だけ）",
+              (B.eyecatch_srcset("/images/x/tiny.webp", site), B.eyecatch_srcset("/images/x/none.webp", site)), ("", ""))
+    pages = [p for p in (ROOT / "site").rglob("index.html") if '<figure class="article-eyecatch">' in p.read_text(encoding="utf-8")]
+    bad = []
+    for p in pages:
+        tag = re.search(r'<figure class="article-eyecatch"><img[^>]*>', p.read_text(encoding="utf-8")).group(0)
+        m = re.search(r'srcset="(/images/[^" ]+-800\.webp)(?:\?v=[0-9a-f]+)? 800w, ', tag)
+        if not m or not (ROOT / "site" / m.group(1).lstrip("/")).is_file() or 'fetchpriority="high"' not in tag:
+            bad.append(p.parent.name)
+    check("公開中の記事ページの冒頭の画像は、小さい版つきで優先して読む", (len(pages) > 100, bad[:5]), (True, []))

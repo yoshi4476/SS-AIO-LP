@@ -788,6 +788,44 @@ def prev_next_html(prev_meta, next_meta):
     return "".join(parts)
 
 
+EYECATCH_SMALL_W = 800
+
+
+def eyecatch_small(src, site=None):
+    """冒頭の画像のスマホ用の版（<名前>-800.webp）の場所。無ければ作る。元が無い・小さい・作れないときは None。
+    冒頭の画像は横 1600px（中央値 76KB・100KB 超が 56 本）で、スマホには 2 倍以上大きかった（Google の計測で LCP 2.7 秒。2026-11-12）"""
+    site = site or SITE
+    f = site / str(src).split("?")[0].lstrip("/")
+    if not f.is_file() or f.suffix.lower() not in (".webp", ".jpg", ".jpeg", ".png"):
+        return None
+    small = f.with_name(f"{f.stem}-{EYECATCH_SMALL_W}.webp")
+    if not small.is_file() or small.stat().st_mtime < f.stat().st_mtime:
+        try:
+            from PIL import Image
+            im = Image.open(f).convert("RGB")
+            if im.width <= EYECATCH_SMALL_W:
+                return None
+            im = im.resize((EYECATCH_SMALL_W, round(im.height * EYECATCH_SMALL_W / im.width)), Image.LANCZOS)
+            im.save(small, "WEBP", quality=74, method=6)
+        except Exception as e:
+            print(f"WARN: 冒頭の画像の小さい版を作れませんでした（{f.name}: {str(e)[:40]}）")
+            return None
+    return "/" + small.relative_to(site).as_posix()
+
+
+def eyecatch_srcset(src, site=None):
+    """冒頭の画像の srcset と sizes（先頭に空白つき）。小さい版が無ければ空文字（これまでどおり1枚だけ出す）"""
+    small = eyecatch_small(src, site)
+    if not small:
+        return ""
+    try:
+        from PIL import Image
+        w = Image.open((site or SITE) / str(src).split("?")[0].lstrip("/")).width
+    except Exception:
+        return ""
+    return f' srcset="{small} {EYECATCH_SMALL_W}w, {str(src).split("?")[0]} {w}w" sizes="(max-width: 860px) 100vw, 980px"'
+
+
 def _video_embed(content, meta):
     """YouTube に上がった記事動画があれば、本文の先頭に埋め込む（VideoObject つき）"""
     try:
@@ -1021,7 +1059,8 @@ def build_article(path: Path, template: str, related: str = "", unpublished_urls
     eyecatch = ""
     if meta.get("eyecatch"):
         # アイキャッチは最初に見える最大の要素（LCP）。優先して読む
-        eyecatch = (f'<figure class="article-eyecatch"><img src="{industry_thumbs.shown(meta["eyecatch"])}" '
+        _src = industry_thumbs.shown(meta["eyecatch"])
+        eyecatch = (f'<figure class="article-eyecatch"><img src="{_src}"{eyecatch_srcset(_src)} '
                     f'alt="{meta["title"]}" width="1200" height="675" fetchpriority="high" decoding="async"></figure>')
     # 本文の画像は画面に入るまで読まない（モバイルで1.5MB超を先に運んでいた）
     content = re.sub(r'<img src="(/images/[^"]+)"(?![^>]*\bloading=)', r'<img src="\1" loading="lazy" decoding="async"', content)
