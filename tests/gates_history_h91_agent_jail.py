@@ -50,6 +50,15 @@ def _in_container(run):
         and not re.search(r"(-v|--volume|--mount)[ =]\S*docker\.sock", run)
 
 
+def quiet_protect(A, root, **kw):
+    """作り物の作業場所で戻しを試す。CI の注釈（::warning）を出さない。門の再現が本物の「AI が守る場所を変えた」
+    警告として実行の画面に並び、本当に AI が触った回と見分けられなかった（2026-11-11）"""
+    from unittest import mock
+    with mock.patch.dict(os.environ):
+        os.environ.pop("GITHUB_ACTIONS", None)
+        return A.protect(root, **kw)
+
+
 def test_workflows_run_the_agent_without_keys():
     print("\n■ AI の手順: 全権限で動かさず、鍵を渡さず、前後で鍵を外して戻す")
     raw = {p.name: p.read_text(encoding="utf-8") for p in WF.glob("*.yml")}
@@ -205,7 +214,7 @@ def test_agent_guard_locks_verifies_protects_and_unlocks():
         (root / "scripts" / "evil.py").write_text("x\n")
         (root / "automation" / "logs").mkdir(parents=True)
         (root / "automation" / "logs" / "memo.txt").write_text("m\n")
-        back = A.protect(root)
+        back = quiet_protect(A, root)
         check("AI が触ってはいけない場所（コード）を戻し、作業メモと記事は残す",
               (sorted(back), (root / "scripts" / "x.py").read_text().strip(), (root / "automation" / "logs" / "memo.txt").exists(),
                (root / "articles" / "new.md").exists()),
@@ -326,7 +335,7 @@ def test_agent_guard_keeps_to_the_site_and_refuses_the_full_secret():
         (root / "articles" / "theirs.md").write_text(art("keiri-bpo", "書き換え"), encoding="utf-8")
         (root / "articles" / "theirs-new.md").write_text(art("keiri-bpo", "新しい"), encoding="utf-8")
         (root / "scripts" / "新しい.py").write_text("x\n", encoding="utf-8")
-        A.protect(root, site="ai-lab")
+        quiet_protect(A, root, site="ai-lab")
         check("その回の社の記事は残し、別の社の記事の書き換え・新しい記事は戻す。日本語名のコードも戻す",
               ((root / "articles" / "mine.md").read_text(encoding="utf-8").strip().endswith("a2"),
                (root / "articles" / "theirs.md").read_text(encoding="utf-8").strip().endswith("b"),
