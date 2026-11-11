@@ -910,3 +910,27 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
     document.querySelectorAll("form[data-ts]").forEach(function (f) { if (f._ts != null) renew(f); });
   });
 })();
+
+// 画面からはみ出している表に「横に動かせます」の印を出す（印が無く、右の列が切れたまま読まれていた。2026-11-11）
+(function () {
+  function mark() {
+    document.querySelectorAll(".table-wrap").forEach(function (w) {
+      var over = w.scrollWidth > w.clientWidth + 8;
+      var hint = w.previousElementSibling && w.previousElementSibling.classList.contains("table-hint") ? w.previousElementSibling : null;
+      if (over && !hint && !w._hinted) {
+        hint = document.createElement("p");
+        hint.className = "table-hint";
+        hint.setAttribute("aria-hidden", "true");
+        hint.textContent = "表は横に動かせます →";
+        w.parentNode.insertBefore(hint, w);
+        w._hinted = true;
+        w.addEventListener("scroll", function () { if (hint.parentNode) hint.parentNode.removeChild(hint); }, { once: true, passive: true });
+      } else if (!over && hint) {
+        hint.parentNode.removeChild(hint);
+        w._hinted = false;
+      }
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mark); else mark();
+  addEventListener("resize", mark, { passive: true });
+})();

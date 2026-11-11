@@ -2202,3 +2202,19 @@ figure.layers { margin: clamp(2.2rem, 4vw, 3.2rem) 0 0; text-align: left; }
 .hub-entry .hub-entry-btns { display: flex; flex-wrap: wrap; gap: .6rem; }
 .hub-entry .btn { padding: .7em 1.3em; font-size: .92rem; line-height: 1.6; }
 @media (max-width: 600px) { .hub-entry .btn { flex: 1 1 100%; } }
+
+/* ---------- スマホの記事の最初の画面と表（2026-11-11 の画面の点検） ---------- */
+/* 最初の画面（390px）がパンくず2段・共有ボタン・写真で埋まり、答えの文が画面の一番下に1〜2行しか出ていなかった。
+   パンくずは1行にして題を「…」で切り、棚の写真（題の字が入っていない写真）は横長に切る */
+@media (max-width: 720px) {
+  .breadcrumb ol { flex-wrap: nowrap; }
+  .breadcrumb li { flex: none; }
+  .breadcrumb li:last-child { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .article-eyecatch img[src*="/images/shelf/"] { aspect-ratio: 5 / 2; height: auto; object-fit: cover; }
+  /* 表の列が1字ずつ縦に折れていた（「記事作/成ツー/ル」）。列の幅を確保し、入りきらない表は横に動かす */
+  .table-wrap th, .table-wrap td { min-width: 7.5em; }
+  .table-wrap td:first-child, .table-wrap tbody th:first-child { min-width: 8.5em; }
+}
+/* 横に動かせる表の上に出す印（site.js が、はみ出している表にだけ付ける。動かしたら消える） */
+.table-hint { margin: 1.8em 0 -1.3em; font-size: .78rem; font-weight: 700; color: var(--blue); text-align: right; }
+.table-hint + .table-wrap { margin-top: 1.8em; }
