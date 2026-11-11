@@ -1,4 +1,27 @@
 {
+ "ai-lab": {
+  "llmo対策会社おすすめ": {
+   "kw": "llmo対策 会社 おすすめ",
+   "month": "2026-11",
+   "priority": "A",
+   "proven": false,
+   "src": "suggest"
+  },
+  "llmo対策費用": {
+   "kw": "LLMO対策 費用",
+   "month": "2026-11",
+   "priority": "A",
+   "proven": false,
+   "src": "sheet"
+  },
+  "士業llmo": {
+   "kw": "士業 llmo",
+   "month": "2026-11",
+   "priority": "A",
+   "proven": false,
+   "src": "gsc"
+  }
+ },
  "corporate": {
   "アーバン記帳代行": {
    "kw": "アーバン 記帳代行",
