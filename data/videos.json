@@ -1257,6 +1257,12 @@
       "decision": "skip",
       "suggestions": [],
       "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-11-11",
+      "sec": 42,
+      "title": "翻訳ボタンだけで外国語対応になる？",
+      "youtube": "e5sZ3g_O2HM"
     }
   },
   "fudousan-shukyaku-homepage": {
