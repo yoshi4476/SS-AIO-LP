@@ -344,9 +344,8 @@
   // ニュースレター購読フォームの計測+送信中表示
   document.querySelectorAll('form.nl-form').forEach(function (f) {
     f.addEventListener('submit', function () {
-      ga('form_submit', { form_type: 'ニュースレター購読', page_path: location.pathname });
-      ga('lead_capture', { lead_route: 'newsletter', form_type: 'ニュースレター購読' });
-      ga('lead_newsletter', {});
+      // 購読は問い合わせ（lead_capture）に数えない。送信の前に数えていたので、失敗した登録も問い合わせになり、
+      // 台帳に行が無い購読が照合のずれになっていた（2026-11-11 の導線の点検）。成功は下の newsletter_submit だけ
       var btn = f.querySelector('button[type="submit"]');
       if (btn && !btn.disabled) {
         btn.disabled = true;
@@ -389,8 +388,12 @@
       var type = typeEl ? typeEl.value : 'form';
       var route = type.indexOf('資料') >= 0 ? 'dl' : 'form';
       ga('form_submit', { form_type: type, page_path: location.pathname });
-      ga('lead_capture', { lead_route: route, form_type: type });
-      ga('lead_' + route, { form_type: type });
+      // 問い合わせ（lead_capture）は、受付が受け取ったときだけ出るお礼のページで数える（下の「お礼のページで数える」）。
+      // ここで数えると、受付が 400・403・502 を返した送信も問い合わせになる（2026-11-11 の導線の点検）
+      try {
+        sessionStorage.setItem('ss_lead', JSON.stringify({ type: type, route: route, at: Date.now(),
+          path: location.pathname, url: location.href }));
+      } catch (e) {}
       // 二重送信防止 + 送信中表示（ネイティブPOSTのため遷移までの間のみ）
       var btn = f.querySelector('button[type="submit"]');
       if (btn && !btn.disabled) {
@@ -534,6 +537,19 @@
 
   // 将来の診断ツール用フック（diagnosis_complete / site_audit_complete 等をここから送信）
   window.trackLead = function (eventName, params) { ga(eventName, params || {}); };
+
+  // お礼のページで数える: 相談フォームの送信が受付に届いたとき（/api/lead が /thanks/ へ移したとき）に1回だけ。
+  // 送ったページの場所を付ける（付けないと、ページ別の集計がすべて /thanks/ になる）。10分より前の控えは使わない
+  if (location.pathname.indexOf('/thanks') === 0) {
+    try {
+      var kept = JSON.parse(sessionStorage.getItem('ss_lead') || 'null');
+      sessionStorage.removeItem('ss_lead');
+      if (kept && Date.now() - kept.at < 600000) {
+        ga('lead_capture', { lead_route: kept.route, form_type: kept.type, page_location: kept.url, page_path: kept.path });
+        ga('lead_' + kept.route, { form_type: kept.type, page_location: kept.url, page_path: kept.path });
+      }
+    } catch (e) {}
+  }
 
   var bar = document.querySelector('.progress-bar');
   if (bar) {

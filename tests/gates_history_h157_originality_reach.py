@@ -95,3 +95,16 @@ def test_converter_change_redelivers_only_the_affected_format():
               [P.source_hash(src, c) == plain for c in ({"type": "nextjs-json", "trailing_slash": False},
                                                          {"type": "external-md"}, {"type": "self-static"}, None)], [True] * 4)
         check("照合の側も配信と同じ指紋を作る", G.source_hash(src, md_no_slash), P.source_hash(src, md_no_slash))
+
+
+def test_lead_is_counted_only_after_the_endpoint_accepts():
+    print("\n■ 計測: 問い合わせ（lead_capture）は受付が受け取ったあとにだけ数える（送信の時点・購読では数えない）")
+    js = (ROOT / "site" / "js" / "site.js").read_text(encoding="utf-8")
+    nl = js.split("document.querySelectorAll('form.nl-form').forEach", 1)[1].split("document.querySelectorAll('form.form-panel')", 1)[0]
+    panel = js.split("document.querySelectorAll('form.form-panel').forEach", 1)[1].split("document.querySelectorAll('.inline-tool')", 1)[0]
+    check("購読フォームの送信で lead_capture を出さない", "ga('lead_capture'" in nl, False)
+    check("相談フォームの送信の時点では lead_capture を出さず、控えを残す",
+          ("ga('lead_capture'" in panel, "sessionStorage.setItem('ss_lead'" in panel), (False, True))
+    thanks = js.split("location.pathname.indexOf('/thanks') === 0", 1)[1][:700] if "indexOf('/thanks') === 0" in js else ""
+    check("お礼のページで1回だけ数え、送ったページの場所を付け、控えを消す",
+          ("ga('lead_capture'" in thanks, "page_location: kept.url" in thanks, "removeItem('ss_lead')" in thanks), (True, True, True))
