@@ -168,6 +168,11 @@ def test_top_hero_video_does_not_become_late_lcp():
         h = (ROOT / "site" / f).read_text(encoding="utf-8")
         js = "".join(re.findall(r"<script>(.*?)</script>", h, re.S))
         hero = [s for s in re.findall(r"<script>(.*?)</script>", h, re.S) if "video.lx-hero-video" in s]
+        if "<video" not in h[h.find('class="lx-hero'):h.find('class="lx-console"')] and not hero:
+            # 2026-11-12 背景を静止画だけにした（動画は古い調子の作った映像だった）。動画が無ければ、後から LCP に数えられることも無い
+            check(f"{f}: ヒーローに動画を置かない（静止画だけ。置くなら最初の操作の後に読む）", True, True)
+            check(f"{f}: 計測タグの遅延読み込みはそのまま", "googletagmanager.com/gtag/js" in js, True)
+            continue
         check(f"{f}: 動画を差し込む処理は1つ", len(hero), 1)
         s = hero[0] if hero else ""
         check(f"{f}: 読み込みの後に時間で流さない（後から LCP に数えられる）",
