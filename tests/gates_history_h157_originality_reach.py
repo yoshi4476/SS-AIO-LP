@@ -129,7 +129,11 @@ def test_price_ranges_reach_each_business():
     corp, lab = F.price_sets("corporate"), F.price_sets("ai-lab")
     check("コーポレートには経理の相場、AI集客ラボには AIO の相場、補助金には無し",
           (bool(corp) and corp[0]["ranges"][0]["id"], lab[0]["ranges"][0]["id"], F.price_sets("subsidy")),
-          ("kicho", "article_tool", []))
+          ("keiri_full", "article_tool", []))
+    low = [r for s in corp for r in s["ranges"] if r["id"] != "keiri_full" and "経理BPO" in r["label"]]
+    check("経理BPO（まるごと）の相場を先頭に置き、月10万円より下を経理BPOの相場にしない（記帳だけの単品の額で安く見せない）",
+          (corp[0]["ranges"][0]["range"].startswith("月10万"), corp[0].get("bpo_min_yen"), low, "記帳だけの単品の額を経理BPOの相場として書かない" in corp[0]["positioning"]),
+          (True, 100000, [], True))
     check("足した相場には、公開の出どころ（URL と確かめた日）がある",
           [bool(re.search(r"https://\S+", s.get("source", ""))) and "確認" in s.get("source", "") for s in corp], [True] * len(corp))
     src = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
