@@ -339,7 +339,7 @@ python scripts/growth_plan.py --check    # 先月の実績を道筋と比べる�
 | 工程 | 何をするか | 守ること |
 |:--|:--|:--|
 | `rewrite_rollback.py --write`（週次） | タイトルを直した記事を28日後に対照群（触っていない記事の中央値）と比べ、表示が8割を割り順位も上がっていなければ直す前へ戻す | 戻せるのは台帳に `before_title` が残った分だけ。判定は `data/rollback_decisions.json` に残し二度は判定しない |
-| `retire_stale.py --write`（週次2本） | 公開90日で表示ゼロの記事を、題名と狙う語が最も近い記事（Dice≥0.35）へ `auto_merge` で統合 | 近い記事が無ければ統合しない（一覧に出すだけ） |
+| `retire_stale.py --write`（週次2本） | 公開60日以上で、直近28日の表示ゼロ・90日のクリックゼロの記事（公開から約1か月だけ表示されて消えた記事を含む。2026-11-12）を、題名と狙う語が最も近い記事（Dice≥0.35）へ `auto_merge` で統合 | 近い記事が無ければ統合しない（一覧に出すだけ） |
 | `auto_rewrite.py --kind fresh`（週次2本） | 公開・更新から180日の記事の時点表記を更新し `modified:` を動かす | 年月以外の数字を増やさない（検算で止まる）。確かめられない箇所は「再確認中」を添えるだけ |
 | `video_embed.py`（build / publish が呼ぶ） | YouTube に上がった記事動画を本文の先頭に埋め、VideoObject を出す | `data/videos.json` に ID がある記事だけ |
 | `industry_hub.faq_body`（build が呼ぶ） | 業種の記事の FAQ を `/industry/<業種>/faq/` に集め、FAQPage を出す | 5問未満は作らない。答えは記事の FAQ そのまま（新しい文を機械が作らない） |

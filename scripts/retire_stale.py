@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-"""公開から90日たっても検索に一度も出ない記事を、近い記事へ統合して面を薄めない。
+"""公開から60日たち、直近28日に検索に出ていない記事を、近い記事へ統合して面を薄めない。
 
 **なぜ要るか**: auto_merge は「同じ語で2本が出ている組」しか見ない。
 一度も表示されない記事は誰の競合にもならず、そのまま残る。薄い記事が増えると
 サイト全体の評価が下がる（8.2.5節と同じ理由）。
 
 やること（判断は機械だけ）:
-  1. 90日以上前に公開し、GSC のページ次元で90日間の表示が0の記事を出す
+  1. 60日以上前に公開し、GSC のページ次元で直近28日の表示が0・90日のクリックが0の記事を出す
+     （以前は「90日以上前に公開・90日の表示が0」だけだった。3サイトで直近28日の表示が0の記事107本のうち、
+     当てはまるのは2本。残りは「公開から約1か月だけ表示され、その後消えた」記事で、どの手当ても拾っていなかった。
+     うち45本には、近い内容で今も表示されている記事があった。2026-11-12）
   2. 同じサイトの公開記事から、題名と狙う語が最も近いもの（Dice ≥ 0.35）を吸収先にする
   3. auto_merge.run_one で統合する（検算・301・内部リンクの付け替えは auto_merge と同じ）
   近い記事が無いものは統合しない（無理に吸わせると主題がぼやける）。一覧に出すだけ
@@ -31,7 +34,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-AGE_DAYS = 90
+AGE_DAYS = 60        # 公開からこの日数たった記事だけ（順位が落ち着く前に統合しない。article_health の「若い」は35日未満）
+WINDOW_DAYS = 28     # この日数の表示が0なら「いま出ていない」
+CLICK_DAYS = 90      # この日数にクリックがあった記事は、読まれた実績があるので統合しない
 MIN_SIM = 0.35
 
 
@@ -52,11 +57,11 @@ def _fm(p):
             "date": g("date"), "score": int(g("score") or 0)}
 
 
-def page_stats(cfg):
-    """90日間のURLごとの (表示, クリック)。末尾スラッシュを揃える"""
+def page_stats(cfg, days=CLICK_DAYS):
+    """days 日間のURLごとの (表示, クリック)。末尾スラッシュを揃える"""
     import report_verify as RV
     end = date.today() - timedelta(days=2)
-    start = end - timedelta(days=AGE_DAYS)
+    start = end - timedelta(days=days)
     rows = RV._gsc(f"https://{cfg['domain']}/", start.isoformat(), end.isoformat(), ["page"], 25000).get("rows", [])
     out = {}
     for r in rows:
@@ -67,8 +72,19 @@ def page_stats(cfg):
 
 
 def shown_urls(cfg):
-    """90日間に一度でも表示されたURL（末尾スラッシュを揃える）"""
-    return {u for u, (i, _) in page_stats(cfg).items() if i > 0}
+    """直近 WINDOW_DAYS 日に一度でも表示されたURL（末尾スラッシュを揃える）"""
+    return {u for u, (i, _) in page_stats(cfg, WINDOW_DAYS).items() if i > 0}
+
+
+def clicked_urls(cfg):
+    """CLICK_DAYS 日にクリックがあったURL"""
+    return {u for u, (_, c) in page_stats(cfg, CLICK_DAYS).items() if c > 0}
+
+
+def faded(a, url, shown, clicked, today=None):
+    """統合の候補か: 公開から AGE_DAYS 日以上たち、いま表示が無く、クリックの実績も無い"""
+    old = ((today or date.today()) - timedelta(days=AGE_DAYS)).isoformat()
+    return bool(a.get("date")) and a["date"] <= old and url not in shown and url not in clicked
 
 
 def nearest(a, arts, shown_url):
@@ -93,23 +109,21 @@ def stale(site_id=""):
         arts = [a for a in (_fm(p) for p in (ROOT / "articles").glob("*.md")) if a
                 and a["score"] >= 85 and S.find_category_owner(a["category"]) == sid]
         try:
-            shown = shown_urls(cfg)
+            shown, clicked = shown_urls(cfg), clicked_urls(cfg)
         except Exception as e:
             print(f"   {sid}: GSC を読めません（{str(e)[:50]}）")
             continue
-        old = (date.today() - timedelta(days=AGE_DAYS)).isoformat()
         for a in arts:
-            if a["date"] > old:
-                continue
             url = S.article_url(cfg, a).rstrip("/") + "/"
-            if url in shown:
+            if not faded(a, url, shown, clicked):
                 continue
             best, sim = nearest(a, arts, lambda b: (S.article_url(cfg, b).rstrip("/") + "/") in shown)
             out.append({"site": sid, "loser": a["slug"], "title": a["title"], "date": a["date"],
                         "survivor": best["slug"] if best and sim >= MIN_SIM else "", "sim": round(sim, 2),
                         "kws": [{"kw": a["keyword"], "imp": 0, "win_pos": 0, "lose_pos": 0}],
                         "imp": 0, "loser_stat": {"pos": 0, "clicks": 0}, "survivor_stat": {"pos": 0}})
-    return out
+    # 近い記事がはっきりあるものから統合する（週の本数が限られるので、迷いの少ない組を先に）
+    return sorted(out, key=lambda r: -r["sim"])
 
 
 # ---- 書き直しても一次性が上がらない記事（--quality） -------------------------------------
@@ -263,7 +277,7 @@ def main():
         return quality_main(a)
     rows = stale(a.site)
     can = [r for r in rows if r["survivor"]]
-    print(f"■ 公開{AGE_DAYS}日以上で表示ゼロ: {len(rows)}本（吸収先あり {len(can)}本）")
+    print(f"■ 公開{AGE_DAYS}日以上で、直近{WINDOW_DAYS}日の表示ゼロ・{CLICK_DAYS}日のクリックゼロ: {len(rows)}本（吸収先あり {len(can)}本）")
     for r in rows[:20]:
         print(f"   [{r['site']:<9}] {r['loser'][:34]:<34} {r['date']} → "
               + (f"{r['survivor'][:28]}（{r['sim']}）" if r["survivor"] else "近い記事なし（残す）"))
