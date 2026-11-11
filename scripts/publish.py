@@ -43,10 +43,19 @@ ROOT = Path(__file__).resolve().parent.parent
 WORK = ROOT / ".publish-work"  # 対象リポジトリのクローン置き場（.gitignore対象）
 
 
-def source_hash(md_path: Path):
+def convert_salt(cfg):
+    """配信の変換を変えたとき、原稿が同じでも配り直させるための印（変えた方式の社にだけ付ける。ほかの社の指紋は変えない）。
+    リンクの末尾の / を外す直し（drop_link_slash）は変換だけの変更で、原稿の指紋が同じ公開済みの30本が配り直されず、
+    308 を挟むリンクが本番に残った（2026-11-09〜11）"""
+    if cfg and cfg.get("type") == "external-md" and not cfg.get("trailing_slash", True):
+        return b"|slash1"
+    return b""
+
+
+def source_hash(md_path: Path, cfg=None):
     """配信した原稿そのものの指紋。届いたかどうかの判定に使う"""
     import hashlib
-    return hashlib.sha1(md_path.read_bytes()).hexdigest()[:12]
+    return hashlib.sha1(Path(md_path).read_bytes() + convert_salt(cfg)).hexdigest()[:12]
 
 
 def manifest_path(cfg, dest: Path):
@@ -70,7 +79,7 @@ def stamp_manifest(cfg, dest: Path, meta, src: Path):
         data = json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
     except ValueError:
         data = {}
-    data[meta["slug"]] = source_hash(src)
+    data[meta["slug"]] = source_hash(src, cfg)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(data, ensure_ascii=False, indent=0, sort_keys=True),
                  encoding="utf-8")

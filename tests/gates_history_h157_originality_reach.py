@@ -79,3 +79,19 @@ def test_industry_topics_without_backing_go_later():
           (HC._industry_backed("corporate", {"keyword": "記帳代行 費用"}, "記帳代行 費用", todo, no_mat),
            HC._industry_backed("corporate", {"keyword": "クリニック 経理代行"}, "クリニック 経理代行", todo, no_mat)),
           (None, None))
+
+
+def test_converter_change_redelivers_only_the_affected_format():
+    import publish as P
+    import publish_gap as G
+    print("\n■ 配信の変換を変えた方式の社だけ、原稿が同じでも指紋が変わって配り直される（ほかの社の指紋は変えない）")
+    with tempfile.TemporaryDirectory() as d:
+        src = Path(d) / "a.md"
+        src.write_text("本文", encoding="utf-8")
+        plain = P.source_hash(src)
+        md_no_slash = {"type": "external-md", "trailing_slash": False}
+        check("末尾の / が無い形で原稿のまま配る社は指紋が変わる", P.source_hash(src, md_no_slash) != plain, True)
+        check("ほかの方式・/ が正の社・設定なしは今までと同じ指紋",
+              [P.source_hash(src, c) == plain for c in ({"type": "nextjs-json", "trailing_slash": False},
+                                                         {"type": "external-md"}, {"type": "self-static"}, None)], [True] * 4)
+        check("照合の側も配信と同じ指紋を作る", G.source_hash(src, md_no_slash), P.source_hash(src, md_no_slash))

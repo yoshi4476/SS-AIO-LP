@@ -129,9 +129,8 @@ def live_manifest_wp(cfg, rows=None):
     return {r["slug"]: r["hash"] for r in posts if r.get("slug") and r.get("hash")}
 
 
-def source_hash(md_path):
-    import hashlib
-    return hashlib.sha1(Path(md_path).read_bytes()).hexdigest()[:12]
+def source_hash(md_path, cfg=None):
+    return publish.source_hash(Path(md_path), cfg)   # 配信が残す指紋と同じ作り方で（変換の版の印も同じ）
 
 
 def recently_edited(days=2):
@@ -246,7 +245,7 @@ def main():
             # 見られない。実際、タイトルを直しても「配信済み」に見え、
             # 古いまま公開され続けていた
             mine.setdefault(site, []).append(
-                (p.stem, g("title").strip('"'), _fragments(t), source_hash(p)))
+                (p.stem, g("title").strip('"'), _fragments(t), source_hash(p, conf.get(site))))
 
     import editorial_review
     reviews = editorial_review.load()
