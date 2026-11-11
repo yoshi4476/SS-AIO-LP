@@ -275,3 +275,29 @@ def test_h59_aggregate_pages_do_not_repeat_the_title():
           (False, False, True, True))
     check("見出しが違えば何もしない", B.drop_echo_head(page.replace("<h2>AIO・LLMO運用の比較表</h2>", "<h2>違う見出し</h2>")),
           page.replace("<h2>AIO・LLMO運用の比較表</h2>", "<h2>違う見出し</h2>"))
+
+
+def test_h59_top_industry_cards_show_the_survey_number():
+    """2026-11-11 トップの業種のカードは作った写真だけで、押す理由が無かった。調査の数字を1つ出す形にし、
+    数字は調査ページと同じ入口（headline）から配信のたびに作り直す（手で書くと聞き直したときに食い違う）"""
+    import industry_ai_sources as IAS
+    print("\n■ トップの業種のカード: 写真ではなく調査の数字を出し、数字は集計から作り直す")
+    top = _read("index.html")
+    sec = re.search(r"<!-- industry:cards -->(.*?)<!-- /industry:cards -->", top, re.S)
+    body = sec.group(1) if sec else ""
+    check("トップに業種のカードの区画（印の間）があり、作った写真を使っていない",
+          (bool(sec), "/images/scenes/" in body), (True, False))
+    check("いまの集計から作ったカードと、ページのカードが同じ",
+          "<!-- industry:cards -->" + body + "<!-- /industry:cards -->" == IAS.home_cards(), True)
+    want = {hub: IAS.headline(IAS.HUB_TO_RESEARCH[hub]) for hub, _ in IAS.HOME_CARDS if IAS.HUB_TO_RESEARCH.get(hub)}
+    got = dict(re.findall(r'href="/industry/([a-z]+)/"[^>]*><span class="ind-name">[^<]*</span><span class="ind-n">([0-9.]+)%', body))
+    check("カードの数字は、その業種の調査の数字（調べる質問で公式サイトを出典に入れた回答の割合）と同じ",
+          got, {hub: str(h["oa"]) for hub, h in want.items() if h})
+    check("数字には、当社調べ・時期・問いの数を添える",
+          body.count("当社調べ・") == len(got) and body.count("問の調査") == len(got), True)
+    check("調査の業種がカードの名前と違うカード（BtoB）は、調査の業種の名前を添える",
+          bool(re.search(r'top_industry_btob">.*?<span class="ind-s">[^<]*の調査・当社調べ', body)), True)
+    with_mark = "a<!-- industry:cards -->古い<!-- /industry:cards -->b<!-- research:home -->古い<!-- /research:home -->c"
+    out = IAS.sync_home(with_mark)
+    check("作り直しは印の間だけを差し替え、印が無ければ何もしない",
+          ("古い" in out, out.startswith("a<!-- industry:cards -->"), IAS.sync_home("印なし")), (False, True, "印なし"))

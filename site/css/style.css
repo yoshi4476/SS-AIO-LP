@@ -1737,6 +1737,15 @@ main.article .article-body a.cta-button:hover { background: var(--blue-deep); tr
 .ind-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(7, 26, 56, .82) 0%, rgba(7, 26, 56, .1) 55%, transparent 100%); }
 .ind-card span { position: absolute; left: 1rem; right: 1rem; bottom: .9rem; z-index: 1; font-weight: 700; font-size: .98rem; line-height: 1.4; }
 .ind-card:hover img { transform: scale(1.06); }
+.ind-stat { aspect-ratio: auto; min-height: 168px; display: flex; flex-direction: column; gap: .3rem; padding: 1.1rem 1.1rem 1rem; background: #fff; color: var(--text); border: 1px solid var(--line); box-shadow: none; transition: border-color .2s, transform .2s; }
+.ind-stat::after { display: none; }
+.ind-stat span { position: static; }
+.ind-stat .ind-name { font-size: .98rem; font-weight: 700; color: var(--navy); }
+.ind-stat .ind-n { font-size: 2rem; font-weight: 800; line-height: 1.15; color: var(--blue-deep); font-variant-numeric: tabular-nums; margin-top: .2rem; }
+.ind-stat .ind-l { font-size: .8rem; font-weight: 500; line-height: 1.6; color: var(--text); }
+.ind-stat .ind-s { font-size: .72rem; font-weight: 400; color: var(--muted); margin-top: auto; }
+.ind-stat:hover { border-color: var(--blue); transform: translateY(-2px); }
+.ind-stat ~ .ind-card-all { aspect-ratio: auto; min-height: 120px; }
 .ind-card-all { display: flex; align-items: center; justify-content: center; background: linear-gradient(140deg, #0b2447, #1d4ed8); }
 .ind-card-all::after { display: none; }
 .ind-card-all span { position: static; text-align: center; }
