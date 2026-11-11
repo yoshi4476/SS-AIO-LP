@@ -1910,6 +1910,8 @@ html.js .rsx-tools { display: flex; flex-wrap: wrap; align-items: center; justif
 .rsx-legend-n { color: var(--muted); font-size: .74rem; flex-basis: 100%; }
 .rsx-key { display: inline-block; font-size: .7rem; font-weight: 700; color: #fff; border-radius: 4px; padding: 0 .45em; margin-right: .45em; line-height: 1.65; }
 .rsx-key.loc, .rsx-m.loc .rsx-bar i { background: var(--chart-base); }
+/* 札は白い 11px の字が載る。棒と同じ色だと濃さの比が 3.74 で基準（4.5）に届かない */
+.rsx-key.loc { background: #0f766e; }
 .rsx-key.oth, .rsx-m.oth .rsx-bar i { background: var(--chart-accent); }
 .rsx-m.split .rsx-bar i { background: #64748b; }
 .rsx-group { margin: 1.3rem 0 0; }

@@ -792,7 +792,7 @@ def _video_embed(content, meta):
     """YouTube に上がった記事動画があれば、本文の先頭に埋め込む（VideoObject つき）"""
     try:
         import video_embed
-        content = video_embed.prepend(content, meta)
+        content = video_embed.prepend(content, meta, click_to_load=True)
     except Exception as e:
         print(f"WARN: 動画の埋め込みを飛ばしました（{str(e)[:40]}）")
     return _topic_box(_glossary_links(content, meta), meta)

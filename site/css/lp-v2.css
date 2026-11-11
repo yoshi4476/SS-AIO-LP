@@ -109,11 +109,11 @@
 .lx-console-head small { font-size: .75rem; color: rgba(255, 255, 255, .75); }
 .lx-group { margin: 0 0 .7rem; }
 .lx-group:last-child { margin-bottom: 0; }
-.lx-group h3 {
+.lx-group .lx-gh {
   margin: 0 0 .35rem; font-size: .76rem; font-weight: 700; letter-spacing: .12em;
   color: #8fb7ff; display: flex; justify-content: space-between;
 }
-.lx-group h3 span { font-family: var(--lx-num); font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, .78); letter-spacing: 0; }
+.lx-group .lx-gh span { font-family: var(--lx-num); font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, .78); letter-spacing: 0; }
 .lx-group ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .28rem; }
 .lx-item {
   display: grid; grid-template-columns: 1.3rem 1fr auto; align-items: center; gap: .5rem;
@@ -285,7 +285,7 @@
 .lx-hero--top .lx-console { padding: .9rem 1.1rem; }
 .lx-hero--top .lx-console-head { margin-bottom: .45rem; }
 .lx-hero--top .lx-group { margin-bottom: .4rem; }
-.lx-hero--top .lx-group h3 { margin-bottom: .15rem; }
+.lx-hero--top .lx-group .lx-gh { margin-bottom: .15rem; }
 .lx-hero--top .lx-group ul { gap: .05rem; }
 .lx-hero--top .lx-item { font-size: .8rem; line-height: 1.35; padding: .2em .5em; }
 .lx-hero--top .lx-console-foot { margin-top: .45rem; }

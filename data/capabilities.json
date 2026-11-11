@@ -1745,7 +1745,7 @@
     "self-static": {
      "status": "ok",
      "evidence": "scripts/build.py:795",
-     "anchor": "content = video_embed.prepend(content, meta)"
+     "anchor": "content = video_embed.prepend(content, meta, click_to_load=True)"
     },
     "external-md": {
      "status": "ok",

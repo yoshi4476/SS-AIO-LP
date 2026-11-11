@@ -305,7 +305,7 @@ def top_html(d):
       </figure>
       <figure class="rs-card">
         <p class="rs-k">AIが根拠にしたページの種類（{total}件）</p>
-        <ol class="rs-bars" role="img" aria-label="{esc(said2)}">{bars}</ol>
+        <ol class="rs-bars">{bars}</ol>
         <figcaption>{esc(said2)}</figcaption>
       </figure>
     </div>

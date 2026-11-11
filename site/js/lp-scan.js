@@ -58,7 +58,7 @@
       var name = g.getAttribute("data-group");
       var got = 0, all = 0;
       checks.forEach(function (c) { if (c.group === name) { all += c.pts; if (c.ok) got += c.pts; } });
-      var s = $("h3 span", g);
+      var s = $(".lx-gh span", g);
       if (s && all) s.textContent = got + " / " + all;
     });
     var foot = $(".lx-console-foot");
