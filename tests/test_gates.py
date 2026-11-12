@@ -2337,7 +2337,10 @@ def test_lessons_2026_10_03():
     for f in ("index.html", "lp/index.html"):
         h = (ROOT / "site" / f).read_text(encoding="utf-8") if (ROOT / "site" / f).is_file() else ""
         still = re.search(r'<img[^>]*lx-hero-still[^>]*>', h)
-        check(f"{f}: ヒーローは優先の静止画から出す", bool(still and 'fetchpriority="high"' in still.group(0)), True)
+        # 2026-11-12 背景の写真そのものを外した（人物の顔に文字が重なっていた）。写真も動画も無ければ、待つものが無い
+        plain = "lx-hero-still" not in h and "lx-hero-video" not in h
+        check(f"{f}: ヒーローは優先の静止画から出す（写真も動画も無い地だけの形も可）",
+              plain or bool(still and 'fetchpriority="high"' in still.group(0)), True)
         check(f"{f}: ヒーロー動画は読み込み時に取りに行かない",
               [v for v in re.findall(r"<video[^>]*>", h) if "lx-hero-video" in v and 'preload="none"' not in v], [])
     # 5. 受付の終わった制度を狙う語にしない（ユーザーの指摘で判明: ものづくりは統合、事業再構築は終了）
