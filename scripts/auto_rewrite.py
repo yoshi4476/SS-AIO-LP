@@ -813,28 +813,34 @@ def _breakdown(text):
 
 
 def score_gate(slug, before_text, after_text, ask=None):
-    """(採用してよいか, 理由, 直した後の採点)。直す前の点は原稿に書いてある3観点を使い、無ければ直す前の原稿を採点する。
-    採用するのは: 平均が上がり、どの軸も下限（rubric）を新しく割らず、公開の基準（各軸の下限・平均）を満たすときだけ。
+    """(採用してよいか, 理由, 直した後の採点)。直す前と直した後を、同じ回に同じ採点で比べる
+    （原稿に残る点は前の回の採点で、採点の揺れと採点の指示の変更を含む。2026-11-12 の週次で、原稿の古い点と
+    その場の採点を比べ、直した後が基準に届かないとして5本を戻した）。
+    採用するのは: 平均が上がり、どの軸も下限（rubric）を新しく割らないとき。さらに
+    - 直す前が公開の基準を満たしていたなら、直した後も満たすこと（基準を割る直しは採らない）
+    - 直す前から基準に届いていなかったなら、どの軸も下がらないこと（上がった分だけ採る。点は原稿に書かない＝ ok が False）
     採点できなかったときは採用しない（点が上がったと確かめられないため）"""
     import quality_loop as QL
     import rubric as R
     ask = ask or SCORE_ASK
-    before = _breakdown(before_text)
-    if before is None:
-        sc, why = QL.score(slug, ask, text=before_text)
-        if not sc:
-            return False, f"直す前の原稿を採点できませんでした（{why[:40]}）", None
-        before = {"axes": sc["axes"], "total": sc["total"]}
+    before, why = QL.score(slug, ask, text=before_text)
+    if not before:
+        return False, f"直す前の原稿を採点できませんでした（{why[:40]}）", None
     after, why = QL.score(slug, ask, text=after_text)
     if not after:
         return False, f"直した後の原稿を採点できませんでした（{why[:40]}）", None
     newly = [k for k in QL.AXIS_KEYS if after["axes"][k] < R.floor(k) <= before["axes"][k]]
     if newly:
         return False, f"直した後に下限を割った軸があります（{'・'.join(newly)}）", after
-    if not after["ok"]:
-        return False, f"直した後の採点が公開の基準に届きません（{after['why'][:40]}）", after
     if after["total"] <= before["total"]:
         return False, f"点が上がりません（{before['total']}→{after['total']}点）", after
+    if not after["ok"] and before["ok"]:
+        return False, f"直した後の採点が公開の基準に届きません（{after['why'][:40]}）", after
+    if not after["ok"]:
+        down = [k for k in QL.AXIS_KEYS if after["axes"][k] < before["axes"][k]]
+        if down:
+            return False, f"下がった軸があります（{'・'.join(down)}。{before['total']}→{after['total']}点）", after
+        return True, f"点が上がりました（{before['total']}→{after['total']}点・公開の基準にはまだ届きません）", after
     return True, f"点が上がりました（{before['total']}→{after['total']}点）", after
 
 
@@ -2384,9 +2390,11 @@ def _apply_one(item, edited, orig):
     if kind == "early":
         LAST[slug].update({"query": item["query"], "pos_before": item["pos"], "imp_before": item["imp"]})
     if gated:
-        write_score(slug, gated)
-        rebuild_quietly()
-        LAST[slug].update({"score_after": gated["total"]})
+        # 公開の基準を満たした点だけ原稿に書く。届かない点を書くと build.py が記事を外す（公開中の記事を消さない）
+        if gated["ok"]:
+            write_score(slug, gated)
+            rebuild_quietly()
+        LAST[slug].update({"score_after": gated["total"], "score_after_ok": gated["ok"]})
         return True, f"直しました（{before[0][:24]}… → {meta(slug)[0][:24]}…・{gated['total']}点）"
     return True, f"直しました（{before[0][:24]}… → {meta(slug)[0][:24]}…）"
 
