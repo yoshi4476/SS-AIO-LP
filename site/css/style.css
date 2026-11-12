@@ -2318,10 +2318,103 @@ details.ap-fold[open] > summary { margin-bottom: 1rem; }
 /* 「必須」の印が2行に割れない */
 .form-panel label .req { white-space: nowrap; display: inline-block; }
 /* スマホのトップの新着記事は4本まで（6本を縦に積むと 2,600px あった。続きは「すべての記事を見る」） */
-@media (max-width: 720px) { .home #latest .post-list li:nth-child(n+5) { display: none; } }
+/* トップの新着は3本まで（一覧の中身は機械が作るので、見せる数だけを絞る）。6本・用語集・カテゴリ4つと、問い合わせから離れる道が続いていた */
+.home #latest .post-list > li:nth-child(n+4) { display: none; }
 /* サービスのページ: 同じ地の色の節が続く所は、上下の余白が重なって 190px 空いていた */
 body.lp-doc main > section.section + section.section { padding-top: 0; }
 body.lp-doc main > .section-full.bg-deep + .section-full.bg-deep { padding-top: 0; }
 .section .faq-more, .section-full .faq-more { max-width: none; text-align: center; }
 .quick-lead .ql-form label.ql-agree, .quick-lead .ql-form button { grid-column: 1 / -1; }
 .quick-lead .ql-form label.ql-agree { margin-top: .5em; }
+
+/* ==== 2026-11-12 第2回の直し（採点役2人の指摘） ==== */
+/* トップの最初の画面の右: 専門用語の14項目をやめ、診断で分かることを3行の平易な言葉で。左の入力欄より目立たせない（地を薄く、枠を細く） */
+.home .lx-hero .lx-console { background: rgba(255, 255, 255, .035); border-color: rgba(143, 183, 255, .2); backdrop-filter: none; padding: 1.2rem 1.4rem 1.1rem; }
+.home .lx-hero .lx-console-head { margin-bottom: .3rem; }
+.home .lx-hero .lx-console-head b { font-size: .875rem; font-weight: 700; color: rgba(255, 255, 255, .78); letter-spacing: .06em; }
+.home .lx-console .lx-group { position: relative; margin: 0; padding: .8rem 0 .8rem 2.1rem; border-top: 1px solid rgba(143, 183, 255, .16); }
+.home .lx-console .lx-group::before { content: "✓"; position: absolute; left: 0; top: .9rem; width: 1.35rem; height: 1.35rem; border-radius: 50%; background: rgba(143, 183, 255, .16); color: #8fb7ff; display: grid; place-items: center; font-size: .72rem; font-weight: 900; }
+.home .lx-console .lx-group .lx-gh { display: block; margin: 0 0 .15rem; font-size: 1rem; font-weight: 700; letter-spacing: .02em; color: #fff; }
+.home .lx-console .lx-gd { margin: 0; font-size: .86rem; line-height: 1.7; color: rgba(255, 255, 255, .72); }
+.home .lx-console .lx-console-foot { margin: 0; padding-top: .8rem; border-top: 1px solid rgba(143, 183, 255, .16); font-size: .8125rem; line-height: 1.7; }
+@media (max-width: 920px) {
+  .home .lx-hero .lx-console { padding: 1rem 1.1rem .9rem; }
+  .home .lx-console .lx-group { padding: .65rem 0 .65rem 2rem; margin: 0; }
+  .home .lx-console .lx-group::before { top: .75rem; }
+  .home .lx-console .lx-group .lx-gh { font-size: .95rem; letter-spacing: .02em; padding: 0; border-top: 0; margin: 0 0 .1rem; }
+  .home .lx-console .lx-gd { font-size: .8125rem; }
+}
+/* 最初の画面から移した14項目（無料ツールの節で開いて読む） */
+.scan-items { max-width: 1180px; margin: 1.4rem auto 0; padding: .35rem 1.3rem; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+.scan-items[open] { padding-bottom: 1.1rem; }
+.scan-items > summary { font-size: .98rem; }
+.scan-items-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1rem 1.8rem; padding-top: .5rem; }
+.scan-items .si-h { display: flex; justify-content: space-between; margin: 0 0 .35rem; font-size: .92rem; font-weight: 700; color: var(--navy); }
+.scan-items ul { list-style: none; margin: 0; padding: 0; }
+.scan-items li { display: flex; justify-content: space-between; gap: .8rem; padding: .32rem 0; border-bottom: 1px dashed var(--line); font-size: .875rem; line-height: 1.6; color: var(--text); }
+.scan-items li span, .scan-items .si-h span { flex: none; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* トップの新着の後: 記事の一覧へは文字のリンク1つ。すぐ下の最後の案内で相談へ */
+.latest-more { margin: 1.6rem 0 0; text-align: center; font-weight: 700; }
+.latest-more a { color: var(--blue-deep); }
+.cta-final .note.cta-consult { margin: 1.4rem auto 0; font-size: .95rem; color: rgba(255, 255, 255, .82); }
+.cta-final .cta-consult a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.cta-final .cta-consult span { display: block; margin-top: .35rem; font-size: .8125rem; color: rgba(255, 255, 255, .66); }
+.cta-final .cta-consult span a { font-weight: 500; }
+
+/* スマホの下の固定の帯: 主役は「30秒診断」1つ。相談は文字のリンク */
+.sticky-cta .sticky-link { flex: none; align-self: center; padding: .45em .7em; color: #fff; font-size: .875rem; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+/* 固定の帯があるページのスマホでは「↑」を出さない（帯のすぐ上で本文や部品に重なっていた） */
+@media (max-width: 760px) { body:has(> .sticky-cta) .to-top { display: none; } }
+
+/* 見出しの飾り（グラデーションの下線・小見出しの前の線）は山場の節（is-peak）だけ。全節で同じで型に見えていた */
+.home .section-head:not(.is-peak) .eyebrow::before, body.lp-doc .section-head:not(.is-peak) .eyebrow::before { content: none; }
+.home .section-head:not(.is-peak) .eyebrow, body.lp-doc .section-head:not(.is-peak) .eyebrow { color: var(--muted); letter-spacing: .08em; }
+html.js .home .section-head.reveal:not(.is-peak) h2::after, html.js body.lp-doc .section-head.reveal:not(.is-peak) h2::after { content: none; }
+
+/* サービスのページの最初の画面: 料金と進め方を見せて相談へ（トップの複製に見えないよう、右は診断の小さな欄だけ） */
+.lx-hero--svc .lx-hero-grid { align-items: center; }
+.svc-facts { margin: 0 0 1.4rem; max-width: 36em; border-top: 1px solid rgba(255, 255, 255, .16); }
+.svc-facts > div { display: grid; grid-template-columns: 6em minmax(0, 1fr); gap: .9rem; padding: .7rem 0; border-bottom: 1px solid rgba(255, 255, 255, .16); }
+.svc-facts dt { padding-top: .12rem; font-size: .8125rem; font-weight: 700; letter-spacing: .06em; color: #8fb7ff; }
+.svc-facts dd { margin: 0; font-size: .98rem; line-height: 1.6; color: #fff; }
+.svc-facts dd b { font-weight: 900; }
+.svc-facts dd small { display: block; margin-top: .1rem; font-size: .8125rem; color: rgba(255, 255, 255, .72); }
+.svc-hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.1rem; margin: 0; }
+.svc-hero-cta .btn { padding: .95em 2.1em; font-size: 1.05rem; }
+.svc-hero-cta span { font-size: .8125rem; color: rgba(255, 255, 255, .75); }
+.svc-hero-scan .lx-form { gap: .7rem; }
+.lx-form-h { margin: 0; font-size: 1.02rem; font-weight: 900; line-height: 1.5; color: var(--lx-ink); }
+.lx-form-h small { display: block; margin-top: .15rem; font-size: .8rem; font-weight: 500; color: var(--lx-mute); }
+.lx-go.lx-go--sub { background: #fff; color: var(--lx-navy); border: 2px solid var(--lx-navy); box-shadow: none; font-size: 1rem; }
+.lx-go.lx-go--sub:hover { background: var(--lx-sky); box-shadow: none; }
+.lx-console-fold { margin-top: .8rem; }
+.lx-console-fold > summary { display: flex; align-items: center; gap: .55em; padding: .4rem 0; list-style: none; cursor: pointer; font-size: .875rem; font-weight: 700; color: rgba(255, 255, 255, .86); }
+.lx-console-fold > summary::-webkit-details-marker { display: none; }
+.lx-console-fold > summary::before { content: "+"; flex: none; width: 1.45em; height: 1.45em; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .45); display: grid; place-items: center; font-size: .85rem; }
+.lx-console-fold[open] > summary::before { content: "−"; }
+.lx-console-fold > summary:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; border-radius: 6px; }
+.lx-console-fold .lx-console { margin-top: .5rem; }
+@media (max-width: 920px) {
+  .lx-hero--svc .lx-lead { margin-bottom: 1rem; }
+  .svc-hero-cta .btn { flex: 1 1 100%; justify-content: center; text-align: center; }
+  .lx-hero--svc .lx-alt--quiet { display: none; }
+}
+
+/* サービスのページの比較表: スマホでは項目ごとのカード（右の列が切れて2列しか見えなかった）。当社の欄は色で分ける */
+@media (max-width: 720px) {
+  .cmp-table td.td-hl { background: var(--sky) !important; }
+  .cmp-table td.td-hl::before { color: var(--blue-deep); }
+}
+
+/* 写真の枠（新しい写真を入れるまでは hidden で出さない。display: block の指定に負けないように） */
+.tool-card .tool-photo[hidden], .pillar-photo[hidden] { display: none; }
+.svc-facts .nw { white-space: nowrap; }
+.svc-hero-scan .lx-err:empty { display: none; }
+.lx-console-fold > summary::before { line-height: 1; }
+@media (max-width: 560px) { .svc-facts > div { grid-template-columns: 4.6em minmax(0, 1fr); gap: .7rem; } }
+.cta-final h2 .nw { white-space: nowrap; }
+/* 棒の端が枠に近い値は、棒の中に白い字で出す（スマホで枠の外にはみ出していた） */
+.lx-hbar .val.val-in { color: #fff; }
+/* 料金のボタン: 左右の余白（ページの中の指定）が広く、スマホで「る」だけ次の行に落ちていた */
+@media (max-width: 560px) { body.lp-doc #price .pillar .btn { padding-left: 1.2em !important; padding-right: 1.2em !important; } }

@@ -241,6 +241,9 @@
     ran = true;
     btn.disabled = true; btn.textContent = "計測しています…";
     startScan();
+    // 14項目は最初の画面では畳んである。測っている間の進み具合が見えるように開く
+    var fold = $(".lx-console-fold");
+    if (fold) fold.open = true;
     ev("lp_scan_start", { scan_src: ENTRY });
     fetch("/api/audit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: url, industry: ind.value, ref: window.ssRef ? window.ssRef() : "" }) })
       .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "診断できませんでした"); return j; }); })

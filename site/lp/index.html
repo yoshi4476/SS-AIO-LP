@@ -22,12 +22,12 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X6KNN36L9J');
 /* 計測タグ(172KB)は描画の後に読む。先に読むと文字が出るのが遅れる。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */
 window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);},1200);});</script>
-<link rel="stylesheet" href="/css/style.css?v=ebcacd52">
+<link rel="stylesheet" href="/css/style.css?v=d14deff9">
 <link rel="stylesheet" href="/css/lp.css?v=8cd9c540">
 <link rel="stylesheet" href="/css/lp-v2.css?v=a144959f">
 <script>document.documentElement.classList.add('js');</script>
-<script defer src="/js/site.js?v=1f58626e"></script>
-<script defer src="/js/lp-scan.js?v=5"></script>
+<script defer src="/js/site.js?v=63aac16d"></script>
+<script defer src="/js/lp-scan.js?v=6"></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -102,15 +102,26 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </header>
 <main>
 
-<!-- 1 誰の話か: ヒーロー（v2: URLを入れるだけの実測診断が主役。左=入力 / 右=計測盤） -->
-<section class="lx-hero" data-area="ヒーロー" data-area-id="hero" id="scan-start">
+<!-- 1 誰の話か: ヒーロー。このページの役目（料金と進め方を知って相談する）に合わせ、左=何を頼めて・いくらで・どう進むか＋相談、
+     右=相談の前に使える30秒の診断（トップの「30秒で無料診断する」はここへ ?check= で来て、自動で測る）。14項目は右の下に畳む -->
+<section class="lx-hero lx-hero--svc" data-area="ヒーロー" data-area-id="hero" id="scan-start">
   <div class="lx-wrap lx-hero-grid">
-    <div id="diagnosis">
-      <ul class="lx-kicker"><li>無料</li><li>登録不要</li><li>30秒</li><li>営業電話なし</li></ul>
-      <h1 class="lx-h1">そのホームページ、<br>AIと検索に<br><em>「読まれて」</em>いますか？</h1>
-      <p class="lx-lead">AIの回答にも検索結果にも、<strong>読めないページは出てきません。</strong>URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で実測し、その場で点数と直し方を表示します。</p>
+    <div class="svc-hero-main">
+      <ul class="lx-kicker"><li>SEO・AI検索対策の運用</li><li>医療・不動産・工務店に強い／その他の業種も対応</li></ul>
+      <h1 class="lx-h1">AIと検索からの集客を、<br><em>まるごと</em>お任せください。</h1>
+      <p class="lx-lead">キーワード選び・記事とLPの制作・計測・改善を、毎月の運用としてお引き受けします。料金と進め方は、このページにすべて載せています。</p>
+      <dl class="svc-facts">
+        <div><dt>料金</dt><dd>プランは1つ。<b><span class="nw">おまかせパック</span> <span class="nw">月額20万円</span></b><small>サイトの保守・運用・更新を含みます</small></dd></div>
+        <div><dt>ご契約前</dt><dd>診断・相談・現状分析レポート・お見積りは<b>無料</b><small>お見積り後のお断りも遠慮なくどうぞ</small></dd></div>
+        <div><dt>進め方</dt><dd><span class="nw">無料相談 →</span> <span class="nw">現状分析レポート →</span> <span class="nw">お見積り</span><small>ご納得いただいてから運用を始めます</small></dd></div>
+      </dl>
+      <p class="svc-hero-cta"><a class="btn btn-primary" href="#form" data-cta="lp_hero_consult">無料相談を申し込む <span class="arw">→</span></a><span>2営業日以内にご連絡します。しつこい営業は行いません。</span></p>
+      <p class="lx-alt lx-alt--quiet">くわしく見る: <a href="#service" data-cta="lp_hero_service">サービスの中身</a>・<a href="#price" data-cta="lp_hero_price">料金に含むもの</a> ／ お電話 <a href="tel:0643057547" style="white-space:nowrap">06-4305-7547</a>（平日9:00〜20:00）</p>
+    </div>
+    <div class="svc-hero-scan" id="diagnosis">
       <p class="lx-again" id="lx-again"><span></span> <button type="button">もう一度測る</button></p>
       <form class="lx-form" id="lx-scan-form" novalidate>
+        <p class="lx-form-h">相談の前に、サイトを30秒で測れます<small>無料・登録不要。名前やメールは要りません</small></p>
         <label>ホームページのURL
           <input type="url" id="lx-url" name="url" inputmode="url" placeholder="https://example.co.jp" autocomplete="url" required>
         </label>
@@ -122,17 +133,18 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
               <option>士業・コンサル</option><option>BtoB・IT</option><option>店舗・飲食・美容</option><option>その他</option>
             </select>
           </label>
-          <div style="display:grid;align-items:end;"><button type="submit" class="lx-go" id="lx-go" data-cta="lp_scan_submit">30秒で診断する</button></div>
+          <div style="display:grid;align-items:end;"><button type="submit" class="lx-go lx-go--sub" id="lx-go" data-cta="lp_scan_submit">30秒で診断する</button></div>
         </div>
         <p class="lx-err" id="lx-err" role="alert"></p>
-        <p class="lx-micro"><span>入力はURLだけ</span><span>結果はその場で表示</span><span>名前やメールは不要</span></p>
       </form>
-      <p class="lx-alt lx-alt--quiet">先に内容を見る: <a href="#service" data-cta="lp_hero_service">サービス</a>・<a href="#price" data-cta="lp_hero_price">料金</a> ／ 先に話を聞きたい方は <a href="#form" data-cta="lp_hero_consult">無料相談フォーム</a> ／ お電話 <a href="tel:0643057547" style="white-space:nowrap">06-4305-7547</a>（平日9:00〜20:00）</p>
-    </div>
+      <details class="lx-console-fold">
+      <summary>診断で測る14項目と配点</summary>
     <div class="lx-console" aria-label="この14項目を測ります">
       <div class="lx-console-head"><b>この14項目を測ります</b><small>100点満点</small></div>
       <div class="lx-group" data-group="AIが入れるか"><p class="lx-gh">AIが入れるか<span>0 / 26</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーを拒否していない（robots.txt）</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーが入口で弾かれていない（CDN・WAF）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>常時SSL（HTTPS）</span><span class="pt">6点</span></li></ul></div><div class="lx-group" data-group="検索に出るか"><p class="lx-gh">検索に出るか<span>0 / 40</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>検索に出さない設定（noindex）になっていない</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>タイトル（15〜45字）</span><span class="pt">10点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>説明文（メタディスクリプション・60〜160字）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>正規URLの指定（canonical）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>スマホ表示（viewport）</span><span class="pt">4点</span></li></ul></div><div class="lx-group" data-group="内容を読み取れるか"><p class="lx-gh">内容を読み取れるか<span>0 / 32</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>見出しH1がページに1つ</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>会社情報（電話番号・所在地）の記載</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>構造化データ（JSON-LD）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>画像の代替テキスト（alt・80%以上）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>SNS・チャット共有時の表示（OGP）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>llms.txt（参考）</span><span class="pt">2点</span></li></ul></div>
       <p class="lx-console-foot">URLを入れると、ここがその場で合否に変わります。</p>
+    </div>
+      </details>
     </div>
   </div>
 </section>
@@ -192,7 +204,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <div class="lx-data reveal reveal-d1">
       <h3>検索順位ごとのクリック率（当社の実測）</h3>
       <p class="sub">当社の3サイト・2026年6月23日〜9月20日・表示7,015回</p>
-      <div class="lx-hbar hl"><span>1〜3位</span><div class="track"><div class="fill" style="width:85%"></div><span class="val" style="left:85%">6.28%</span></div></div>
+      <div class="lx-hbar hl"><span>1〜3位</span><div class="track"><div class="fill" style="width:85%"></div><span class="val val-in" style="left:auto;right:calc(15% + .2rem)">6.28%</span></div></div>
       <div class="lx-hbar"><span>4〜10位</span><div class="track"><div class="fill" style="width:13.8%"></div><span class="val" style="left:13.8%">1.02%</span></div></div>
       <p class="so">同じ1ページ目でも、<strong>3位以内かどうかで約6倍</strong>違いました。「1ページ目に出ている」だけでは、問い合わせは増えません。</p>
       <p class="src">出典: セブンセンシズ株式会社 一次データ「検索順位ごとの実測クリック率」（Search Console の実測）</p>
@@ -215,27 +227,32 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <div class="section" style="padding-top:0;padding-bottom:0;">
     <div class="section-head reveal">
       <span class="eyebrow">サービス</span>
-      <h2>4つの施策を、1つの戦略として運用する</h2>
+      <h2>AIと検索の対策を、ばらばらにせず1つのチームで運用します</h2>
       <p class="sub">AIO・LLMO・SEO・MEOはバラバラに外注すると設計が分断され、効果が半減します。セブンセンシズは全領域を<strong>1つのチームで一気通貫</strong>運用します。</p>
     </div>
     <div class="pillar-grid">
       <div class="pillar cat-aio reveal">
-        <span class="num">01 — AIO運用</span>
+        <!-- 写真の枠（新しい写真を同じ名前で入れたら hidden を外し、親に pillar-has-photo を足す） -->
+        <span class="pillar-photo" hidden><img src="/images/home/svc-aio.webp" alt="検索結果の上に出るAIの答えを読む人" width="1600" height="900" loading="lazy"></span>
+        <span class="num">検索のAI回答（AIO）</span>
         <h3>Google AIに「引用される」</h3>
         <p>AI Overview・AIモードに引用されるためのコンテンツ構造化・構造化データ・llms.txt整備・GSC生成AIレポートでの計測までを実施します。</p>
       </div>
       <div class="pillar cat-ai reveal reveal-d1">
-        <span class="num">02 — LLMO運用</span>
+        <span class="pillar-photo" hidden><img src="/images/home/svc-llmo.webp" alt="ノートパソコンでAIに質問する人" width="1600" height="900" loading="lazy"></span>
+        <span class="num">対話型のAI（LLMO）</span>
         <h3>ChatGPT・Perplexityで言及される</h3>
         <p>AIチャットの回答で自社が引用・推薦されるための一次情報設計・出典明記・情報鮮度の運用と、AI経由流入のGA4計測を行います。</p>
       </div>
       <div class="pillar cat-seo reveal reveal-d2">
-        <span class="num">03 — SEO運用</span>
+        <span class="pillar-photo" hidden><img src="/images/home/svc-seo.webp" alt="記事の構成を見ながら原稿を書く担当者" width="1600" height="900" loading="lazy"></span>
+        <span class="num">検索結果（SEO）</span>
         <h3>引用の土台になる検索上位</h3>
         <p>AI引用の前提はGoogle上位表示。KW戦略・一次情報を組み込んだ記事制作・内部対策で、検索集客の土台を固めます。</p>
       </div>
       <div class="pillar cat-meo reveal reveal-d3">
-        <span class="num">04 — MEO運用</span>
+        <span class="pillar-photo" hidden><img src="/images/home/svc-meo.webp" alt="地図アプリで店を探しながら商店街を歩く人" width="1600" height="900" loading="lazy"></span>
+        <span class="num">地図（MEO）</span>
         <h3>「近くの◯◯」で選ばれる店舗に</h3>
         <p>店舗集客支援「G-ran」の実務知見で、Googleビジネスプロフィール最適化・口コミ戦略・マップ上位表示を支援します。</p>
       </div>
@@ -281,24 +298,24 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     <span class="eyebrow">他社との違い</span>
     <h2>従来型のSEO外注と、何が違うのか</h2>
   </div>
-  <div class="table-wrap reveal">
+  <div class="table-wrap vz-stack cmp-table reveal">
     <table>
       <thead>
         <tr>
-          <th style="width:24%;">比較項目</th>
+          <th scope="col" style="width:24%;">比較項目</th>
           <th>従来型SEO会社</th>
           <th>自社運用</th>
           <th class="th-hl">セブンセンシズ</th>
         </tr>
       </thead>
       <tbody>
-        <tr><th>AI検索（AIO）対応</th><td>対応していない会社が多い</td><td>情報収集から自力で必要</td><td class="td-hl"><strong>標準対応</strong>（引用獲得まで設計）</td></tr>
-        <tr><th>AIチャット（LLMO）対応</th><td>ほぼ未対応</td><td>計測方法が分からない</td><td class="td-hl">一次情報設計+<strong>GA4でAI経由流入を計測</strong></td></tr>
-        <tr><th>対応範囲</th><td>SEOのみが中心</td><td>手が回る範囲のみ</td><td class="td-hl"><strong>AIO・LLMO・SEO・MEOを一気通貫</strong></td></tr>
-        <tr><th>コンテンツの独自性</th><td>外注ライターの一般論になりがち</td><td>現場知見はあるが時間がない</td><td class="td-hl">一次情報を取材して<strong>引用される記事</strong>に</td></tr>
-        <tr><th>効果の計測</th><td>順位レポートのみ</td><td>GA4を見きれない</td><td class="td-hl">順位+<strong>AI引用・AI経由流入</strong>まで計測</td></tr>
-        <tr><th>店舗集客（MEO）の実務</th><td>対応外が多い</td><td>属人的になりがち</td><td class="td-hl"><strong>AIO・SEO・MEOで累計3,200件以上の運営実績</strong>（うちG-ranのMEO 2,000件以上）</td></tr>
-        <tr><th>コンプライアンス</th><td>「口コミを増やします」等の規約違反リスクのある手法を使う業者も</td><td>規約の線引きが分かりにくい</td><td class="td-hl">口コミの代理投稿・購入は<strong>一切行わない</strong>。アカウント削除リスクを避け、正攻法で上位表示</td></tr>
+        <tr><th scope="row">AI検索（AIO）対応</th><td data-label="従来型SEO会社">対応していない会社が多い</td><td data-label="自社運用">情報収集から自力で必要</td><td class="td-hl" data-label="セブンセンシズ"><strong>標準対応</strong>（引用獲得まで設計）</td></tr>
+        <tr><th scope="row">AIチャット（LLMO）対応</th><td data-label="従来型SEO会社">ほぼ未対応</td><td data-label="自社運用">計測方法が分からない</td><td class="td-hl" data-label="セブンセンシズ">一次情報設計+<strong>GA4でAI経由流入を計測</strong></td></tr>
+        <tr><th scope="row">対応範囲</th><td data-label="従来型SEO会社">SEOのみが中心</td><td data-label="自社運用">手が回る範囲のみ</td><td class="td-hl" data-label="セブンセンシズ"><strong>AIO・LLMO・SEO・MEOを一気通貫</strong></td></tr>
+        <tr><th scope="row">コンテンツの独自性</th><td data-label="従来型SEO会社">外注ライターの一般論になりがち</td><td data-label="自社運用">現場知見はあるが時間がない</td><td class="td-hl" data-label="セブンセンシズ">一次情報を取材して<strong>引用される記事</strong>に</td></tr>
+        <tr><th scope="row">効果の計測</th><td data-label="従来型SEO会社">順位レポートのみ</td><td data-label="自社運用">GA4を見きれない</td><td class="td-hl" data-label="セブンセンシズ">順位+<strong>AI引用・AI経由流入</strong>まで計測</td></tr>
+        <tr><th scope="row">店舗集客（MEO）の実務</th><td data-label="従来型SEO会社">対応外が多い</td><td data-label="自社運用">属人的になりがち</td><td class="td-hl" data-label="セブンセンシズ"><strong>AIO・SEO・MEOで累計3,200件以上の運営実績</strong>（うちG-ranのMEO 2,000件以上）</td></tr>
+        <tr><th scope="row">コンプライアンス</th><td data-label="従来型SEO会社">「口コミを増やします」等の規約違反リスクのある手法を使う業者も</td><td data-label="自社運用">規約の線引きが分かりにくい</td><td class="td-hl" data-label="セブンセンシズ">口コミの代理投稿・購入は<strong>一切行わない</strong>。アカウント削除リスクを避け、正攻法で上位表示</td></tr>
       </tbody>
     </table>
   </div>
@@ -318,27 +335,24 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <section class="section" data-area="注力業種" data-area-id="industries">
   <div class="section-head reveal">
     <span class="eyebrow">注力業種</span>
-    <h2>特に力を入れているのは、3つの業種です</h2>
-    <p class="sub">特に成果を出しやすい3つの業種に注力しています。<strong>実名の導入事例・成果数値は許諾を得たものから順次掲載します。</strong></p>
+    <h2>医療・住まい・BtoBの会社に、特に力を入れています</h2>
+    <p class="sub">特に成果を出しやすい業種に注力しています。<strong>実名の導入事例・成果数値は許諾を得たものから順次掲載します。</strong></p>
   </div>
   <div class="pillar-grid">
     <div class="pillar pillar-has-photo cat-aio reveal">
       <span class="pillar-photo"><img src="/images/home/lp-ind-medical.webp" alt="医院の受付で、初めて来院した方に問診票を手渡すスタッフ" width="1600" height="900" loading="lazy"></span>
-      <span class="num">注力業種1</span>
       <h3>医療・クリニック / 士業・コンサル</h3>
       <p>「地域名×専門分野」で探され、信頼で選ばれる業種です。E-E-A-Tを軸にした監修記事とMEOで、<strong>専門家としての第一想起</strong>を検索とマップの両面から固めます。医療は広告規制に配慮した表現で運用します。</p>
       <p style="font-size:.82rem;color:var(--muted);margin-top:.7em;">主な施策: 監修記事SEO / MEO / FAQ構造化 / 口コミ運用</p>
     </div>
     <div class="pillar pillar-has-photo cat-meo reveal reveal-d1">
       <span class="pillar-photo"><img src="/images/home/lp-ind-home.webp" alt="モデルハウスで、見学に来た方に梁を指して説明する工務店の担当者" width="1600" height="900" loading="lazy"></span>
-      <span class="num">注力業種2</span>
       <h3>不動産・工務店・リフォーム</h3>
       <p>高単価・長期検討のため、比較段階の情報収集が勝負どころです。施工事例・相場解説の記事とマップ対策で、<strong>「調べるほど御社に行き着く」導線</strong>を設計し、問い合わせの質を高めます。</p>
       <p style="font-size:.82rem;color:var(--muted);margin-top:.7em;">主な施策: 事例記事SEO / MEO / AIO / 資料請求導線設計</p>
     </div>
     <div class="pillar pillar-has-photo cat-seo reveal reveal-d2">
       <span class="pillar-photo"><img src="/images/home/lp-ind-btob.webp" alt="オンラインの打ち合わせで、問い合わせに答えるIT企業の担当者" width="1600" height="900" loading="lazy"></span>
-      <span class="num">注力業種3</span>
       <h3>BtoB・SaaS / IT企業</h3>
       <p>導入検討者は商談の前にAIと検索で比較を終えています。専門性を言語化した記事SEOとLLMO対策で、<strong>「AIに聞いたら候補に挙がる」状態</strong>をつくり、営業リストに載る前の接点を獲得します。</p>
       <p style="font-size:.82rem;color:var(--muted);margin-top:.7em;">主な施策: 記事SEO / AIO・LLMO / 導入事例コンテンツ / リード計測</p>
@@ -433,7 +447,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   </div>
   <div class="reveal" style="text-align:center;margin-top:1.8rem;">
     <a class="btn btn-primary" href="#form" data-cta="lp_proposal_form">この内容で相談してみる <span class="arw">→</span></a>
-    <p style="font-size:.8rem;color:var(--muted);margin-top:.6rem;">料金は御社の状況に合わせてお見積りします。入力の必須は、お名前・会社名・メールアドレス・ご相談の種類の4つです。</p>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:.6rem;">料金はおまかせパック月額20万円で、範囲が合わない場合は御社の状況に合わせてお見積りします。入力の必須は、お名前・会社名・メールアドレス・ご相談の種類の4つです。</p>
   </div>
 </section>
 
@@ -469,10 +483,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <!-- 6 いくらで: 料金（すぐ下に短い相談の入口） -->
 <section class="section-full bg-deep" id="price" data-area="料金" data-area-id="price">
   <section class="section" style="padding-top:0;padding-bottom:0;">
-    <div class="section-head reveal">
+    <div class="section-head reveal is-peak">
       <span class="eyebrow">料金</span>
       <h2>プランは1つ。記事の制作から保守・更新まで含みます</h2>
-      <p class="sub">プランは1つです。<strong>記事の制作からサイトの保守・運用・更新まで、まとめてお任せいただけます。</strong>範囲が合わない場合は、無料の現状分析の結果をもとに個別にお見積りします。</p>
+      <p class="sub"><strong>記事の制作からサイトの保守・運用・更新まで、まとめてお任せいただけます。</strong>範囲が合わない場合は、無料の現状分析の結果をもとに個別にお見積りします。</p>
     </div>
     
     <!-- おすすめプラン: 上段・横長フィーチャー -->
@@ -540,8 +554,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <div class="section" style="padding-top:0;padding-bottom:0;">
     <div class="section-head reveal">
       <span class="eyebrow">ご相談から運用開始までの流れ</span>
-      <h2>ご契約前の4つの段階に、費用はかかりません</h2>
-      <p class="sub">1〜4はご契約前で、<strong>費用はかかりません</strong>。お見積りにご納得いただいてから運用を始め、6を毎月くり返します。</p>
+      <h2>ご契約までは、診断も相談もお見積りも無料です</h2>
+      <p class="sub">1〜4が<strong>ご契約前</strong>です。お見積りにご納得いただいてから運用を始め、6を毎月くり返します。</p>
     </div>
     <div class="stage reveal">
       <div class="stage-phases" aria-hidden="true"><span class="is-free">ご契約前（費用はかかりません）</span><span class="is-run">ご契約後</span></div>
@@ -728,7 +742,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <div class="sticky-cta">
   <a class="btn btn-primary" href="#scan-start" data-cta="lp_sticky_scan">30秒診断</a>
-  <a class="btn btn-ghost-light" href="#form" data-cta="lp_sticky_form">無料相談</a>
+  <a class="sticky-link" href="#form" data-cta="lp_sticky_form">無料相談</a>
 </div>
 
 <!-- 離脱しかけたときの案内（PCのみ・1回だけ・まだ測っていない人だけ。lp-scan.js） -->
