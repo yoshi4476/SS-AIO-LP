@@ -3832,8 +3832,9 @@ def history_tests():
     return out
 
 
-def main():
-    for t in (test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
+def all_tests():
+    """流す順の門の一覧。同時に流すときは子も同じ一覧を作り、親から番号で受け取る"""
+    return [test_kw_conflicts, test_tag_balance, test_char_count, test_hub_gas,
               test_self_exclusion, test_published_not_rewritten_as_new,
               test_token_check_probes_write, test_selfheal_watches_real_workflows,
               test_lab_links_to_corporate, test_daily_audit_ignores_unscored_drafts,
@@ -3913,32 +3914,313 @@ def main():
               test_no_control_characters_anywhere,
               test_report_actions_close_the_loop,
               test_detectors_do_not_misread_neighbors,
-              test_lessons_2026_10_03, *history_tests()):
+              test_lessons_2026_10_03, *history_tests()]
+
+
+def _name(t):
+    return f"{t.__module__}.{t.__name__}"
+
+
+def _run(t):
+    t0 = time.perf_counter()
+    try:
+        t()
+    except Exception as e:
+        print(f"  NG  {t.__name__} が例外で止まりました: {type(e).__name__} {e}")
+        FAIL.append(t.__name__)
+    SPENT.append((time.perf_counter() - t0, _name(t)))
+
+
+def main():
+    if "--worker" in sys.argv:
+        return _worker()
+    started = time.perf_counter()
+    tests = all_tests()
+    plan = []
+    for i, t in enumerate(tests):
+        name = _name(t)
         # GATES_ONLY（正規表現）で、モジュール名か関数名が合う門だけを流す（直している途中の確認用。送る前は全部を流す）
-        if ONLY and not ONLY.search(f"{t.__module__}.{t.__name__}"):
+        if ONLY and not ONLY.search(name):
             continue
-        name = f"{t.__module__}.{t.__name__}"
         if FAST and name in SLOW and not _touched(SLOW[name]):
             print(f"\n■ 飛ばした（GATES_FAST・見ているファイルに変更なし）: {name}")
             continue
-        t0 = time.perf_counter()
-        try:
-            t()
-        except Exception as e:
-            print(f"  NG  {t.__name__} が例外で止まりました: {type(e).__name__} {e}")
-            FAIL.append(t.__name__)
-        SPENT.append((time.perf_counter() - t0, f"{t.__module__}.{t.__name__}"))
+        plan.append((i, name))
+    jobs = 1 if AUDIT else max(1, min(_jobs(), len(plan)))
+    if jobs == 1:
+        ran = []
+        for i, name in plan:
+            before = _snapshot() if AUDIT else None
+            _run(tests[i])
+            ran.append(i)
+            if AUDIT:
+                changed = _changed(before, _snapshot())
+                if changed:
+                    print(hide(f"  変更  {name}: {', '.join(changed[:8])}" + (f" ほか{len(changed) - 8}件" if len(changed) > 8 else "")))
+    else:
+        ran = _run_parallel(tests, plan, jobs)
+    # 同時に流しても数え落ち・二重が無いことを、順に流したときと同じ数で確かめる
+    missing, twice = _mismatch(plan, ran)
+    print(f"\n■ 流した門: {len(ran)}本（予定 {len(plan)}本）")
+    if missing or twice:
+        print(hide(f"  NG  流した門が予定と合いません（流れなかった {missing[:8]} / 二重 {twice[:8]}）"))
+        FAIL.append("流した門の数が予定と合わない")
     # どの門に時間を使ったか（遅いものから縮めるため。2026-10-24 運用者「確認の時間が長過ぎないか」）
     total = sum(s for s, _ in SPENT)
-    print(f"\n■ 時間のかかった門（全{len(SPENT)}本・合計{total / 60:.1f}分）")
+    print(f"\n■ 時間のかかった門（全{len(SPENT)}本・合計{total / 60:.1f}分・"
+          f"かかった時間{(time.perf_counter() - started) / 60:.1f}分・同時{jobs}）")
     for s, n in sorted(SPENT, reverse=True)[:15]:
         print(f"  {s:6.1f}秒  {n}")
-    print(f"\n{'失敗 ' + str(len(FAIL)) + '件: ' + ', '.join(FAIL) if FAIL else 'すべて通りました'}")
+    print(hide(f"\n{'失敗 ' + str(len(FAIL)) + '件: ' + ', '.join(FAIL) if FAIL else 'すべて通りました'}"))
     return 1 if FAIL else 0
+
+
+def _jobs():
+    """同時に流す子プロセスの数（GATES_JOBS。1 なら今までどおり1本ずつ）。
+    手元の既定は CPU の数（8まで。16コアの Windows で 8・12・16 を測り、8 を超えても速くならなかった。2026-11-13）。
+    CI の既定は1: お客様の門（gates_client_*）と CI だけで動く門を同時に流して確かめていない"""
+    v = os.environ.get("GATES_JOBS", "").strip()
+    if v:
+        return max(1, int(v))
+    if os.environ.get("GITHUB_ACTIONS"):
+        return 1
+    return min(8, os.cpu_count() or 1)
+
+
+def _serial(name):
+    return name in SERIAL or name.rsplit(".", 1)[0] in SERIAL
+
+
+def _snapshot(root=ROOT):
+    """管制塔の下のファイルとフォルダの状態（.git と __pycache__ は除く）。フォルダは更新時刻と中の名前も持つ。
+    作って消しただけのファイルも、フォルダの更新時刻で分かる"""
+    out = {}
+    stack = [str(root)]
+    while stack:
+        d = stack.pop()
+        try:
+            entries = list(os.scandir(d))
+        except OSError:
+            continue
+        names = []
+        for e in entries:
+            if e.name in (".git", "__pycache__"):
+                continue
+            names.append(e.name)
+            try:
+                if e.is_dir(follow_symlinks=False):
+                    stack.append(e.path)
+                else:
+                    st = e.stat(follow_symlinks=False)
+                    out[e.path] = (st.st_mtime_ns, st.st_size)
+            except OSError:
+                continue
+        try:
+            mtime = os.stat(d).st_mtime_ns
+        except OSError:
+            continue
+        out[d] = (mtime, tuple(sorted(names)), any(e.name == "__pycache__" for e in entries))
+    return out
+
+
+def _changed(before, after, root=ROOT):
+    """2つの _snapshot の違い（root からの相対パス）。__pycache__ ができただけのフォルダの時刻の変化は数えない"""
+    out = []
+    for p in sorted(before.keys() | after.keys()):
+        a, b = before.get(p), after.get(p)
+        if a == b:
+            continue
+        if a and b and len(a) == 3 and a[1] == b[1] and not a[2] and b[2]:
+            continue
+        out.append(os.path.relpath(p, root).replace(os.sep, "/"))
+    return out
+
+
+def _mismatch(plan, ran):
+    """(流れなかった門, 二重に流した門) の名前"""
+    names = dict(plan)
+    seen = {}
+    for i in ran:
+        seen[i] = seen.get(i, 0) + 1
+    return [n for i, n in plan if i not in seen], sorted({names.get(i, str(i)) for i, c in seen.items() if c > 1})
+
+
+def _show(text):
+    """子プロセスの出力を出す。門の check は伏せて出すが、門の見出しや呼んだプロセスの出力は伏せていないので、ここで伏せる"""
+    print(hide(text), flush=True)
+
+
+_READY = "@@gates-worker-ready@@"
+_DONE = "@@gates-chunk-done@@"
+
+
+def _worker():
+    """子の側。親から番号の組を1行ずつ受け取り、その門を順に流して結果を1行で返す。
+    子の標準入力は親との連絡に使うので、門が呼ぶプロセスには空の入力を渡す（命令の行を読ませない）"""
+    for s in (sys.stdout, sys.stderr):
+        s.reconfigure(encoding="utf-8", errors="replace", line_buffering=True)
+    orders = os.fdopen(os.dup(0), "r", encoding="utf-8")
+    null = os.open(os.devnull, os.O_RDONLY)
+    os.dup2(null, 0)
+    os.close(null)
+    sys.stdin = open(os.devnull, encoding="utf-8")
+    if os.name == "nt":
+        import ctypes
+        import msvcrt
+        ctypes.windll.kernel32.SetStdHandle(-10, msvcrt.get_osfhandle(0))
+    tests = all_tests()
+    print(_READY, flush=True)
+    for line in orders:
+        FAIL.clear()
+        SPENT.clear()
+        ran = []
+        for i, name in json.loads(line):
+            if i < len(tests) and _name(tests[i]) == name:
+                _run(tests[i])
+                ran.append(i)
+            else:
+                print(f"  NG  子プロセスの門の一覧が親と違います: {name}")
+        sys.stderr.flush()
+        print("\n" + _DONE + json.dumps({"fail": FAIL, "spent": SPENT, "ran": ran}, ensure_ascii=False), flush=True)
+    return 0
+
+
+def _decode(raw):
+    try:
+        return raw.decode("utf-8")
+    except UnicodeDecodeError:
+        import locale
+        return raw.decode(locale.getpreferredencoding(False), "replace")
+
+
+def _pool(chunks, jobs):
+    """chunks（[(番号, 名前), …] の組）を jobs 個の子プロセスに、空いた子から順に配って流す。
+    出力は組の順に、伏せてから出す（順に流したときと同じ並びで読める）。返り値は流した門の番号"""
+    import threading
+    results = [None] * len(chunks)
+    queue = list(range(len(chunks)))
+    broken = []
+    cond = threading.Condition()
+
+    def serve():
+        p = subprocess.Popen([sys.executable, str(Path(__file__).resolve()), "--worker"],
+                             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        try:
+            head = []
+            for raw in p.stdout:
+                if _READY in _decode(raw):
+                    break
+                head.append(_decode(raw))
+            else:
+                with cond:
+                    broken.append("".join(head))
+                return
+            while True:
+                with cond:
+                    if not queue:
+                        break
+                    k = queue.pop(0)
+                p.stdin.write((json.dumps(chunks[k], ensure_ascii=False) + "\n").encode("utf-8"))
+                p.stdin.flush()
+                lines, res = [], None
+                for raw in p.stdout:
+                    s = _decode(raw)
+                    if _DONE in s:
+                        res = json.loads(s.split(_DONE, 1)[1])
+                        break
+                    lines.append(s)
+                with cond:
+                    results[k] = ("".join(lines).rstrip("\n"), res)
+                if res is None:
+                    break
+        finally:
+            try:
+                p.stdin.close()
+            except OSError:
+                pass
+            p.wait()
+            with cond:
+                cond.notify_all()
+
+    threads = [threading.Thread(target=serve, daemon=True) for _ in range(jobs)]
+    for th in threads:
+        th.start()
+    ran = []
+    for k, chunk in enumerate(chunks):
+        mod = chunk[0][1].rsplit(".", 1)[0]
+        with cond:
+            while results[k] is None and any(th.is_alive() for th in threads):
+                cond.wait(1)
+        if results[k] is None:
+            FAIL.append(f"流れなかった門の組: {mod}")
+            continue
+        text, res = results[k]
+        if text:
+            _show(text)
+        if res is None:
+            _show(f"  NG  子プロセスが途中で止まりました（{mod} の組）")
+            FAIL.append(f"子プロセスが途中で止まった: {mod}")
+            continue
+        FAIL.extend(res["fail"])
+        SPENT.extend((s, n) for s, n in res["spent"])
+        ran.extend(res["ran"])
+    for th in threads:
+        th.join()
+    for text in broken:
+        _show(f"  NG  子プロセスが門を流す前に止まりました\n{text}")
+        FAIL.append("子プロセスが門を流す前に止まった")
+    return ran
+
+
+def _run_parallel(tests, plan, jobs):
+    """SERIAL の門を先に親で1本ずつ流し、残りをモジュールごとの組にして子プロセスで同時に流す。
+    書く門を先に流すのは、順に流したときに読む門の大半（gates_history_*）が書いた後の管制塔を見ているため。
+    組をモジュールで分けるのは、同じモジュールの門が前の門の残した状態（読み込んだモジュール・大域の値）を前提にしうるため"""
+    ran = []
+    for i, n in plan:
+        if _serial(n):
+            _run(tests[i])
+            ran.append(i)
+    chunks = []
+    for i, n in plan:
+        if _serial(n):
+            continue
+        mod = n.rsplit(".", 1)[0]
+        if chunks and chunks[-1][-1][1].rsplit(".", 1)[0] == mod:
+            chunks[-1].append([i, n])
+        else:
+            chunks.append([[i, n]])
+    before = _snapshot()
+    ran += _pool(chunks, min(jobs, len(chunks)))
+    changed = _changed(before, _snapshot())
+    if changed:
+        _show(f"\n  NG  同時に流した門が管制塔のファイルを変えました（その門を SERIAL に入れる。"
+              f"GATES_JOBS=1 GATES_AUDIT=1 で流すと、どの門かが出ます）: {', '.join(changed[:8])}")
+        FAIL.append("同時に流した門が管制塔のファイルを変えた")
+    return ran
 
 
 ONLY = re.compile(os.environ["GATES_ONLY"]) if os.environ.get("GATES_ONLY") else None
 SPENT = []
+# GATES_AUDIT=1: 1本ずつ流し、門ごとに管制塔の下で変わったファイルを出す（SERIAL に入れる門を探すため）
+AUDIT = os.environ.get("GATES_AUDIT") == "1"
+# 管制塔のファイルを書く門（モジュール名か「モジュール.門」）。同時に流すときは、ほかの門と重ねず親で1本ずつ流す。
+# GATES_AUDIT=1 の実測（2026-11-13）で、門の後に管制塔の下のファイルかフォルダが変わったもの
+SERIAL = {
+    "__main__.test_hub_gas",                                   # tests/_hub_tmp.js（固定の名前）
+    "__main__.test_kw_plan_keeps_only_buyers",                 # docs/kw-plan-*.md
+    "__main__.test_lessons_are_learned_and_pruned",            # data/lessons.jsonl
+    "__main__.test_publish_gate_actually_blocks",              # build.py: site/・articles/・data/body_hash.json・data/published.json
+    "__main__.test_numbers_come_from_two_methods",             # automation/logs/measure.jsonl
+    "__main__.test_lessons_2026_10_03",                        # data/clients/
+    "gates_history_h10.test_kw_ledger_blocks_within_group_and_reports_across_groups",  # tests/_hub_h10_tmp.js
+    "gates_history_h107_token_diet.test_eyecatch_line_and_public_run_keys",           # site/images/
+    "gates_history_h112_stock_first.test_any_rewrite_keeps_changed_description_within_100_to_160",  # articles/
+    "gates_history_h112_stock_first.test_title_candidates_with_stock_phrases_go_to_stock_first",    # articles/
+    "gates_history_h128_quality_loop.test_client_slugs_are_masked_and_rows_go_private",             # private/clients/
+    "gates_history_h32.test_client_articles_are_notified_right_after_publish",                      # data/indexnow_sent.json
+    "gates_history_h168_parallel.test_shared_writes_in_parallel_stop_the_run",                      # tests/ に試しの門を置く
+}
 # 手元の速い確認（GATES_FAST=1）で、見ているファイルが変わっていなければ飛ばす門。どれも一時のリポジトリで git を
 # 数百回呼び、手元の Windows では git の起動1回に1〜7秒かかって合計40分を超えた（2026-10-24 実測。CI の Linux では数秒）。
 # 見ているファイルを変えた回は必ず流す。CI（GATES_FAST なし）では常に流す
