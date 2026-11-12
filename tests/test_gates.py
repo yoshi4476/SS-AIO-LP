@@ -3928,13 +3928,22 @@ def _name(t):
     return f"{t.__module__}.{t.__name__}"
 
 
+def _label(name):
+    """ログに出す門・モジュールの名前。お客様の門のモジュール名（gates_client_<社の id>_…）は語の前後が _ で、
+    hide の語の境目に当たらず伏せられていなかった（CI の ::add-mask:: だけが伏せていた。2026-11-13）"""
+    hide("")
+    for w, pid in _HIDE:
+        name = name.replace(w, pid)
+    return name
+
+
 def _run(t):
     t0 = time.perf_counter()
     try:
         t()
     except Exception as e:
-        print(f"  NG  {t.__name__} が例外で止まりました: {type(e).__name__} {e}")
-        FAIL.append(t.__name__)
+        print(hide(f"  NG  {_label(t.__name__)} が例外で止まりました: {type(e).__name__} {e}"))
+        FAIL.append(_label(t.__name__))
     SPENT.append((time.perf_counter() - t0, _name(t)))
 
 
@@ -3950,7 +3959,7 @@ def main():
         if ONLY and not ONLY.search(name):
             continue
         if FAST and name in SLOW and not _touched(SLOW[name]):
-            print(f"\n■ 飛ばした（GATES_FAST・見ているファイルに変更なし）: {name}")
+            print(f"\n■ 飛ばした（GATES_FAST・見ているファイルに変更なし）: {_label(name)}")
             continue
         plan.append((i, name))
     jobs = 1 if AUDIT else max(1, min(_jobs(), len(plan)))
@@ -3963,21 +3972,22 @@ def main():
             if AUDIT:
                 changed = _changed(before, _snapshot())
                 if changed:
-                    print(hide(f"  変更  {name}: {', '.join(changed[:8])}" + (f" ほか{len(changed) - 8}件" if len(changed) > 8 else "")))
+                    print(hide(f"  変更  {_label(name)}: {', '.join(changed[:8])}" + (f" ほか{len(changed) - 8}件" if len(changed) > 8 else "")))
     else:
         ran = _run_parallel(tests, plan, jobs)
     # 同時に流しても数え落ち・二重が無いことを、順に流したときと同じ数で確かめる
     missing, twice = _mismatch(plan, ran)
     print(f"\n■ 流した門: {len(ran)}本（予定 {len(plan)}本）")
     if missing or twice:
-        print(hide(f"  NG  流した門が予定と合いません（流れなかった {missing[:8]} / 二重 {twice[:8]}）"))
+        print(hide(f"  NG  流した門が予定と合いません（流れなかった {[_label(n) for n in missing[:8]]} / "
+                   f"二重 {[_label(n) for n in twice[:8]]}）"))
         FAIL.append("流した門の数が予定と合わない")
     # どの門に時間を使ったか（遅いものから縮めるため。2026-10-24 運用者「確認の時間が長過ぎないか」）
     total = sum(s for s, _ in SPENT)
     print(f"\n■ 時間のかかった門（全{len(SPENT)}本・合計{total / 60:.1f}分・"
           f"かかった時間{(time.perf_counter() - started) / 60:.1f}分・同時{jobs}）")
     for s, n in sorted(SPENT, reverse=True)[:15]:
-        print(f"  {s:6.1f}秒  {n}")
+        print(f"  {s:6.1f}秒  {_label(n)}")
     print(hide(f"\n{'失敗 ' + str(len(FAIL)) + '件: ' + ', '.join(FAIL) if FAIL else 'すべて通りました'}"))
     return 1 if FAIL else 0
 
@@ -4086,7 +4096,7 @@ def _worker():
                 _run(tests[i])
                 ran.append(i)
             else:
-                print(f"  NG  子プロセスの門の一覧が親と違います: {name}")
+                print(f"  NG  子プロセスの門の一覧が親と違います: {_label(name)}")
         sys.stderr.flush()
         print("\n" + _DONE + json.dumps({"fail": FAIL, "spent": SPENT, "ran": ran}, ensure_ascii=False), flush=True)
     return 0
@@ -4159,14 +4169,14 @@ def _pool(chunks, jobs):
             while results[k] is None and any(th.is_alive() for th in threads):
                 cond.wait(1)
         if results[k] is None:
-            FAIL.append(f"流れなかった門の組: {mod}")
+            FAIL.append(f"流れなかった門の組: {_label(mod)}")
             continue
         text, res = results[k]
         if text:
             _show(text)
         if res is None:
-            _show(f"  NG  子プロセスが途中で止まりました（{mod} の組）")
-            FAIL.append(f"子プロセスが途中で止まった: {mod}")
+            _show(f"  NG  子プロセスが途中で止まりました（{_label(mod)} の組）")
+            FAIL.append(f"子プロセスが途中で止まった: {_label(mod)}")
             continue
         FAIL.extend(res["fail"])
         SPENT.extend((s, n) for s, n in res["spent"])
