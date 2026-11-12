@@ -2418,3 +2418,62 @@ html.js .home .section-head.reveal:not(.is-peak) h2::after, html.js body.lp-doc 
 .lx-hbar .val.val-in { color: #fff; }
 /* 料金のボタン: 左右の余白（ページの中の指定）が広く、スマホで「る」だけ次の行に落ちていた */
 @media (max-width: 560px) { body.lp-doc #price .pillar .btn { padding-left: 1.2em !important; padding-right: 1.2em !important; } }
+
+/* ===== 2026-11-12 第3回の直し（採点役2人がそろって挙げた点） ===== */
+/* 左の端を1本の線に: ヘッダー・最初の画面・実績の帯・各節の見出しと中身を、同じ幅と左右の余白（--gutter）にそろえる。
+   見出しは x=72・図の段は x=170・カードは x=131 と、節の中の塊ごとに幅の上限が違って左端がずれていた */
+.home .lx-wrap, body.lp-doc .lx-wrap,
+.home .lx-proof ul, body.lp-doc .lx-proof ul { max-width: var(--max-wide); padding-left: var(--gutter); padding-right: var(--gutter); }
+.home .whynow-grid, .home .rsh-wrap, .home .ind-cards, .home .top-tools, .home .scan-items, .home figure.svc-map, .home .st-next,
+body.lp-doc .doc-duo, body.lp-doc .form-cols { max-width: none; margin-left: 0; margin-right: 0; }
+.home .svc-map-text { max-width: 52em; margin-left: 0; }
+.form-cols .form-panel { margin: 0; max-width: none; }
+/* 図の札を写真の高さに引き伸ばさない（中身が上に寄り、下の3割が空いていた）。写真の横で上下の真ん中に置く */
+@media (min-width: 861px) { .home .whynow-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; } }
+.home .whynow-photo img { aspect-ratio: 16 / 9; height: auto; min-height: 0; }
+
+/* サービスのページの最初の画面: 主役は「無料相談を申し込む」1つ。診断は小さな文字のリンクで、押すと下に開く */
+.svc-hero-side { align-self: center; padding: clamp(1.1rem, 2.4vw, 1.6rem) clamp(1.2rem, 2.6vw, 1.8rem); border: 1px solid rgba(255, 255, 255, .16); border-radius: 20px; background: rgba(255, 255, 255, .05); }
+.svc-facts-h { margin: 0 0 .5rem; font-size: .8125rem; font-weight: 700; letter-spacing: .08em; color: rgba(255, 255, 255, .7); }
+.svc-hero-side .svc-facts { margin: 0; max-width: none; border-top: 0; }
+.svc-hero-side .svc-facts > div:last-child { border-bottom: 0; padding-bottom: 0; }
+.svc-scan { margin-top: 1rem; }
+.svc-scan > summary { display: inline-flex; align-items: center; gap: .35em; padding: .3rem 0; list-style: none; cursor: pointer; font-size: .9rem; color: rgba(255, 255, 255, .78); }
+.svc-scan > summary::-webkit-details-marker { display: none; }
+.svc-scan > summary span { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255, 255, 255, .5); }
+.svc-scan > summary::after { content: "▾"; font-size: .8em; color: rgba(255, 255, 255, .7); }
+.svc-scan[open] > summary::after { content: "▴"; }
+.svc-scan > summary:hover span { text-decoration-color: #fff; }
+.svc-scan > summary:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; border-radius: 6px; }
+.svc-scan .svc-hero-scan { margin-top: .7rem; max-width: 34rem; }
+.lx-hero--svc .lx-alt.lx-alt--quiet { margin-top: 1rem; }
+.lx-hero--svc .lx-hero-grid:has(.svc-scan[open]) .svc-hero-side { align-self: start; margin-top: 4.2rem; }
+@media (max-width: 920px) { .lx-hero--svc .lx-hero-grid:has(.svc-scan[open]) .svc-hero-side { margin-top: 0; } }
+.lx-hero--svc .lx-lead { word-break: auto-phrase; }
+
+/* 31業種の棒グラフ: 小さく薄い灰色の字（12〜13px・#5b6b84）を、読める大きさ（14px）と濃さにする。作る側は industry_ai_sources.py（字の中身は変えない） */
+.vz-l small, .vz-cap small, .vz-table th small, .vz-table td small { font-size: .875rem; color: #44546a; }
+.vz-axis { color: #44546a; }
+.vz-axis span { font-size: .875rem; }
+.vz-note, .rsx-note, .rsx-stat-s { font-size: .875rem; color: #44546a; }
+.vz-row, .vz-axis { grid-template-columns: minmax(8.5em, 12.5em) minmax(0, 1fr) 3.8em; }
+@media (max-width: 600px) {
+  .vz-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .vz-axis { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* スマホのフォーム: 札の内側の余白（42px）で入力欄が画面の7割に縮んでいた。札を画面の端近くまで広げ、内側の余白を詰める */
+@media (max-width: 560px) {
+  .form-cols .form-panel { margin: 0 calc(12px - var(--gutter)); padding: 1.5rem 1rem 1.6rem; border-radius: 18px; }
+  body.lp-doc .quick-lead { margin-left: calc(12px - var(--gutter)); margin-right: calc(12px - var(--gutter)); padding: 1.3rem .75rem .75rem; }
+  body.lp-doc .quick-lead .ql-text { padding: 0 .4rem; }
+  .quick-lead .form-panel.ql-form { padding: 1.1rem .9rem 1.2rem; }
+}
+
+/* 見出しを言葉の途中で折らない（「現状／分析」「出／てくる」）。文節で折る（対応していない端末は nw の区切りで守る） */
+.home h2, .home h3, body.lp-doc h2, body.lp-doc h3, body.lp-doc .step-title,
+.svc-facts dd, .home .cta-final p, body.lp-doc .form-panel button, .home .data-card .dc-s, .home .lx-lead { word-break: auto-phrase; }
+.lx-h1 em { white-space: nowrap; }
+/* 左右の余白を各節と同じ 20px にしたぶん、スマホで「まるごとお任せください。」が1行に入らず折れていた */
+@media (max-width: 420px) { .lx-hero--svc .lx-h1 { font-size: 1.72rem; } }
+h2 .nw, h3 .nw, .step-title .nw { white-space: nowrap; }

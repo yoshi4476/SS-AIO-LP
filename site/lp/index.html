@@ -27,7 +27,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <link rel="stylesheet" href="/css/lp-v2.css?v=a144959f">
 <script>document.documentElement.classList.add('js');</script>
 <script defer src="/js/site.js?v=63aac16d"></script>
-<script defer src="/js/lp-scan.js?v=6"></script>
+<script defer src="/js/lp-scan.js?v=7"></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -102,26 +102,23 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </header>
 <main>
 
-<!-- 1 誰の話か: ヒーロー。このページの役目（料金と進め方を知って相談する）に合わせ、左=何を頼めて・いくらで・どう進むか＋相談、
-     右=相談の前に使える30秒の診断（トップの「30秒で無料診断する」はここへ ?check= で来て、自動で測る）。14項目は右の下に畳む -->
+<!-- 1 誰の話か: ヒーロー。このページの主役は「無料相談を申し込む」1つ。左=何を頼めるか＋相談、右=料金と進め方の要点。
+     30秒の診断は相談の前に試したい人のための小さなリンクに下げ、押すと下に開く（トップの「30秒で無料診断する」から ?check= で来たときは、
+     lp-scan.js が開いて自動で測る）。強いボタンが2つ並び、どちらを押すか迷わせていた（2026-11-12 の採点） -->
 <section class="lx-hero lx-hero--svc" data-area="ヒーロー" data-area-id="hero" id="scan-start">
   <div class="lx-wrap lx-hero-grid">
     <div class="svc-hero-main">
       <ul class="lx-kicker"><li>SEO・AI検索対策の運用</li><li>医療・不動産・工務店に強い／その他の業種も対応</li></ul>
       <h1 class="lx-h1">AIと検索からの集客を、<br><em>まるごと</em>お任せください。</h1>
       <p class="lx-lead">キーワード選び・記事とLPの制作・計測・改善を、毎月の運用としてお引き受けします。料金と進め方は、このページにすべて載せています。</p>
-      <dl class="svc-facts">
-        <div><dt>料金</dt><dd>プランは1つ。<b><span class="nw">おまかせパック</span> <span class="nw">月額20万円</span></b><small>サイトの保守・運用・更新を含みます</small></dd></div>
-        <div><dt>ご契約前</dt><dd>診断・相談・現状分析レポート・お見積りは<b>無料</b><small>お見積り後のお断りも遠慮なくどうぞ</small></dd></div>
-        <div><dt>進め方</dt><dd><span class="nw">無料相談 →</span> <span class="nw">現状分析レポート →</span> <span class="nw">お見積り</span><small>ご納得いただいてから運用を始めます</small></dd></div>
-      </dl>
       <p class="svc-hero-cta"><a class="btn btn-primary" href="#form" data-cta="lp_hero_consult">無料相談を申し込む <span class="arw">→</span></a><span>2営業日以内にご連絡します。しつこい営業は行いません。</span></p>
       <p class="lx-alt lx-alt--quiet">くわしく見る: <a href="#service" data-cta="lp_hero_service">サービスの中身</a>・<a href="#price" data-cta="lp_hero_price">料金に含むもの</a> ／ お電話 <a href="tel:0643057547" style="white-space:nowrap">06-4305-7547</a>（平日9:00〜20:00）</p>
-    </div>
-    <div class="svc-hero-scan" id="diagnosis">
+      <details class="svc-scan" id="diagnosis">
+      <summary>相談の前に試す方は <span>30秒の無料診断</span></summary>
+    <div class="svc-hero-scan">
       <p class="lx-again" id="lx-again"><span></span> <button type="button">もう一度測る</button></p>
       <form class="lx-form" id="lx-scan-form" novalidate>
-        <p class="lx-form-h">相談の前に、サイトを30秒で測れます<small>無料・登録不要。名前やメールは要りません</small></p>
+        <p class="lx-form-h">URLを入れると、30秒でサイトを測ります<small>無料・登録不要。名前やメールは要りません</small></p>
         <label>ホームページのURL
           <input type="url" id="lx-url" name="url" inputmode="url" placeholder="https://example.co.jp" autocomplete="url" required>
         </label>
@@ -145,6 +142,16 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <p class="lx-console-foot">URLを入れると、ここがその場で合否に変わります。</p>
     </div>
       </details>
+    </div>
+      </details>
+    </div>
+    <div class="svc-hero-side">
+      <p class="svc-facts-h">料金と進め方</p>
+      <dl class="svc-facts">
+        <div><dt>料金</dt><dd>プランは1つ。<b><span class="nw">おまかせパック</span> <span class="nw">月額20万円</span></b><small>サイトの保守・運用・更新を含みます</small></dd></div>
+        <div><dt>ご契約前</dt><dd>診断・相談・現状分析レポート・お見積りは<b>無料</b><small>お見積り後のお断りも遠慮なくどうぞ</small></dd></div>
+        <div><dt>進め方</dt><dd><span class="nw">無料相談 →</span> <span class="nw">現状分析レポート →</span> <span class="nw">お見積り</span><small>ご納得いただいてから運用を始めます</small></dd></div>
+      </dl>
     </div>
   </div>
 </section>
@@ -215,10 +222,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <div class="section" style="padding-top:0;padding-bottom:0;">
   <div class="lead-band reveal">
     <div class="lb-text">
-      <p class="lb-main">自社のサイトは、AIに読める状態か。<strong>URLを入れるだけで30秒</strong>でわかります。</p>
-      <p class="lb-sub">登録不要｜名前もメールも要りません</p>
+      <p class="lb-main">御社のサイトがAIと検索にどう見えているかは、<strong>無料の現状分析レポート</strong>でお伝えします。</p>
+      <p class="lb-sub">相談の前に試す方は <a href="#scan-start" data-cta="lp_band_whynow_scan">30秒の無料診断</a>（登録不要）</p>
     </div>
-    <a class="btn btn-primary" href="#scan-start" data-cta="lp_band_whynow">URLだけで30秒診断する <span class="arw">→</span></a>
+    <a class="btn btn-primary" href="#form" data-cta="lp_band_whynow">無料相談を申し込む <span class="arw">→</span></a>
   </div>
 </div>
 
@@ -250,7 +257,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
         <p>AI引用の前提はGoogle上位表示。KW戦略・一次情報を組み込んだ記事制作・内部対策で、検索集客の土台を固めます。</p>
       </div>
       <div class="pillar pillar-has-photo cat-meo reveal reveal-d3">
-        <span class="pillar-photo"><img src="/images/home/svc-meo.webp" alt="週末の昼、餃子の店の入口に着いた家族" width="1600" height="900" loading="lazy"></span>
+        <span class="pillar-photo"><img src="/images/home/svc-meo.webp" alt="スマートフォンを手に器の店へ入ってきた2人連れと、器を包みながら応じる店主" width="1600" height="900" loading="lazy"></span>
         <span class="num">地図（MEO）</span>
         <h3>「近くの◯◯」で選ばれる店舗に</h3>
         <p>店舗集客支援「G-ran」の実務知見で、Googleビジネスプロフィール最適化・口コミ戦略・マップ上位表示を支援します。</p>
@@ -326,7 +333,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <p class="lb-main">比較検討中の方も歓迎です。<strong>現状分析レポートは他社比較の判断材料</strong>にもなります。</p>
       <p class="lb-sub">お見積り後のお断りも遠慮なく</p>
     </div>
-    <a class="btn btn-primary" href="#scan-start" data-cta="lp_band_compare">URLだけで30秒診断する <span class="arw">→</span></a>
+    <a class="btn btn-primary" href="#form" data-cta="lp_band_compare">無料相談を申し込む <span class="arw">→</span></a>
   </div>
 </div>
 
@@ -367,7 +374,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       <p class="lb-main"><strong>業種・商圏に合わせた優先順位</strong>を、現状分析でご提案します。</p>
       <p class="lb-sub">お電話でも: <a href="tel:0643057547">06-4305-7547</a>（9:00〜20:00 / 土日祝休）</p>
     </div>
-    <a class="btn btn-primary" href="#scan-start" data-cta="lp_band_industries">URLだけで30秒診断する <span class="arw">→</span></a>
+    <a class="btn btn-primary" href="#form" data-cta="lp_band_industries">無料相談を申し込む <span class="arw">→</span></a>
   </div>
 </div>
 
@@ -427,7 +434,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       </video>
     </div>
   </div>
-  <div class="reveal media-card slide-viewer" data-total="15" style="max-width:1160px;margin:1.8rem auto 0;">
+  <div class="reveal media-card slide-viewer" data-total="15" style="margin-top:1.8rem;">
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem;">
       <div>
         <p class="mc-label">資料</p>
@@ -445,7 +452,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     </div>
   </div>
   <div class="reveal" style="text-align:center;margin-top:1.8rem;">
-    <a class="btn btn-primary" href="#form" data-cta="lp_proposal_form">この内容で相談してみる <span class="arw">→</span></a>
+    <a class="btn btn-primary" href="#form" data-cta="lp_proposal_form">無料相談を申し込む <span class="arw">→</span></a>
     <p style="font-size:.8rem;color:var(--muted);margin-top:.6rem;">料金はおまかせパック月額20万円で、範囲が合わない場合は御社の状況に合わせてお見積りします。入力の必須は、お名前・会社名・メールアドレス・ご相談の種類の4つです。</p>
   </div>
 </section>
@@ -484,7 +491,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <section class="section" style="padding-top:0;padding-bottom:0;">
     <div class="section-head reveal is-peak">
       <span class="eyebrow">料金</span>
-      <h2>プランは1つ。記事の制作から保守・更新まで含みます</h2>
+      <h2>プランは1つ。<span class="nw">記事の制作から</span><span class="nw">保守・更新まで</span>含みます</h2>
       <p class="sub"><strong>記事の制作からサイトの保守・運用・更新まで、まとめてお任せいただけます。</strong>範囲が合わない場合は、無料の現状分析の結果をもとに個別にお見積りします。</p>
     </div>
     
@@ -498,7 +505,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
         <p style="font-size:.95rem;">記事制作からレポート・改善まで、<strong>集客の仕組みを丸ごとお任せ</strong>いただくプランです。社内の作業はほぼゼロで、資産型の集客が積み上がります。</p>
         <p style="font-weight:700;color:var(--text);margin-top:.8em;font-size:1.05rem;">料金: <span style="font-size:1.5em;color:var(--blue-deep);">月額20万円</span></p>
         <p style="font-size:.85rem;color:var(--muted);margin-top:.3em;">サイトの保守・運用・更新を含みます。</p>
-        <p style="margin-top:.9em;"><a class="btn btn-primary" href="#form" data-cta="lp_price_omakase" style="padding:.95em 2.4em;font-size:1rem;">おまかせパックを相談する <span class="arw">→</span></a></p>
+        <p style="margin-top:.9em;"><a class="btn btn-primary" href="#form" data-cta="lp_price_omakase" style="padding:.95em 2.4em;font-size:1rem;">無料相談を申し込む <span class="arw">→</span></a></p>
       </div>
       <ul style="font-size:.95rem;color:var(--text);margin:0;padding:0;list-style:none;display:grid;gap:.8em;">
         <li style="background:var(--sky);border-radius:12px;padding:.8em 1.1em;">✓ <strong>オウンドメディア+LP</strong>の構築・運用一式</li>
@@ -575,7 +582,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <div class="reveal">
     <div class="section-head" style="margin-bottom:1.2rem;">
       <span class="eyebrow">代表から</span>
-      <h2>「AIに聞いたら自社が出てくる」を、当たり前に。</h2>
+      <h2>「AIに聞いたら<span class="nw">自社が出てくる」を、</span><span class="nw">当たり前に。</span></h2>
     </div>
     
     <p>検索もマップもAIも、お客様がお店を選ぶ「入口」は変わり続けています。私たちはG-ranの支援現場で、入口の変化に追いつけたお店とそうでないお店の差を見てきました。だからこそ、流行り言葉ではなく、<strong>成果から逆算した施策だけ</strong>をご提案します。</p>
@@ -612,10 +619,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <section class="section" id="form" data-area="申込フォーム" data-area-id="form">
   <div class="section-head reveal" style="text-align:center;">
     <span class="eyebrow">無料相談</span>
-    <h2>無料相談・現状分析のお申し込み</h2>
+    <h2><span class="nw">無料相談・</span><span class="nw">現状分析の</span><span class="nw">お申し込み</span></h2>
     <p class="sub" style="margin-left:auto;margin-right:auto;">2営業日以内に担当者からご連絡します。しつこい営業は行いません。上の診断を受けた方は、結果が下書きされています。</p>
   </div>
-  <div class="form-cols" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(2rem,4vw,4rem);align-items:start;max-width:1240px;margin:0 auto;">
+  <div class="form-cols" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:clamp(2rem,4vw,4rem);align-items:start;">
   <!-- 左: おまかせパックの提供内容（スマホでは入力欄の下） -->
   <div class="reveal form-side">
     <h3 style="font-family:var(--head);font-weight:900;font-size:1.3rem;margin-bottom:.8rem;">いちばん人気は「おまかせパック」</h3>
@@ -637,7 +644,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
   <!-- 右: 申込みフォーム -->
   <div class="reveal reveal-d1 form-main">
   
-  <form class="form-panel" action="/api/lead" method="post" style="margin:0;max-width:none;">
+  <form class="form-panel" action="/api/lead" method="post">
     <input type="hidden" name="form_type" value="無料相談（LP）">
     <!-- 業種別のページ（/lp/medical/ など）から ?ind= で来た人の業種。site.js が入れ、受付（/api/lead）が本文に添える -->
     <input type="hidden" name="industry" value="">
@@ -740,8 +747,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </footer>
 
 <div class="sticky-cta">
-  <a class="btn btn-primary" href="#scan-start" data-cta="lp_sticky_scan">30秒診断</a>
-  <a class="sticky-link" href="#form" data-cta="lp_sticky_form">無料相談</a>
+  <a class="btn btn-primary" href="#form" data-cta="lp_sticky_form">無料相談を申し込む</a>
+  <a class="sticky-link" href="#scan-start" data-cta="lp_sticky_scan">30秒診断</a>
 </div>
 
 <!-- 離脱しかけたときの案内（PCのみ・1回だけ・まだ測っていない人だけ。lp-scan.js） -->

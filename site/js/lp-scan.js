@@ -16,6 +16,10 @@
   var result = $("#scan");
   var KEY = "lx_scan_last";
   var ran = false;
+  // サービスのページでは、診断の欄は「相談の前に試す方は」のリンクの下に畳んである。測るとき・診断へ案内するときは開く
+  var fold0 = form.closest ? form.closest("details") : null;
+  function openScan() { if (fold0 && !fold0.open) fold0.open = true; }
+  if (location.hash === "#diagnosis") openScan();
   // どこから診断に来たか（記事・トップ・コーポレート）。リードの記録に残し、効いている入口を分ける
   var ENTRY = "";
   try { ENTRY = (new URLSearchParams(location.search).get("src") || sessionStorage.getItem("lx_src") || "").replace(/[^\w-]/g, "").slice(0, 40); if (ENTRY) sessionStorage.setItem("lx_src", ENTRY); } catch (e) {}
@@ -239,6 +243,7 @@
     url = (url || "").trim();
     if (!url) { err.textContent = "URLを入れてください。"; input.focus(); return; }
     ran = true;
+    openScan();
     btn.disabled = true; btn.textContent = "計測しています…";
     startScan();
     // 14項目は最初の画面では畳んである。測っている間の進み具合が見えるように開く
@@ -286,6 +291,7 @@
   $$('a[href="#scan-start"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       e.preventDefault();
+      openScan();
       form.scrollIntoView({ behavior: "smooth", block: "center" });
       setTimeout(function () { input.focus({ preventScroll: true }); }, 500);
     });
@@ -310,6 +316,7 @@
     $("form", exit).addEventListener("submit", function (e) {
       e.preventDefault(); close();
       input.value = $("input", exit).value;
+      openScan();
       form.scrollIntoView({ behavior: "smooth", block: "center" });
       run(input.value);
     });
