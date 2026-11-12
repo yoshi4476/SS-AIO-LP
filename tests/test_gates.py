@@ -3238,23 +3238,30 @@ def test_numbers_come_from_two_methods():
         return
 
     import importlib
+    import tempfile
     import measure as M
     importlib.reload(M)
-    # 食い違ったときに本当に止まるか、その場で試す
-    try:
-        M.verified("ゲートの確認", lambda: 100, lambda: 51, 0.0)
-        print("  NG  食い違っても値を返しています（検算が効いていません）")
-        FAIL.append("two_method_numbers")
-        return
-    except M.Disagree:
-        pass
-    try:
-        if M.verified("ゲートの確認", lambda: 100, lambda: 100, 0.0) != 100:
-            raise AssertionError
-    except Exception:
-        print("  NG  一致しているのに値を返しません")
-        FAIL.append("two_method_numbers")
-        return
+    # 試しの照合の記録は一時の場所へ（本物の automation/logs/measure.jsonl を門のたびに積み増さない）
+    with tempfile.TemporaryDirectory() as d:
+        M.LOG = Path(d) / "measure.jsonl"
+        try:
+            # 食い違ったときに本当に止まるか、その場で試す
+            try:
+                M.verified("ゲートの確認", lambda: 100, lambda: 51, 0.0)
+                print("  NG  食い違っても値を返しています（検算が効いていません）")
+                FAIL.append("two_method_numbers")
+                return
+            except M.Disagree:
+                pass
+            try:
+                if M.verified("ゲートの確認", lambda: 100, lambda: 100, 0.0) != 100:
+                    raise AssertionError
+            except Exception:
+                print("  NG  一致しているのに値を返しません")
+                FAIL.append("two_method_numbers")
+                return
+        finally:
+            importlib.reload(M)
 
     # 合計を measure 経由で取っているか
     for name in ("growth_guard.py", "data_sanity.py"):
@@ -4211,14 +4218,11 @@ SERIAL = {
     "__main__.test_kw_plan_keeps_only_buyers",                 # docs/kw-plan-*.md
     "__main__.test_lessons_are_learned_and_pruned",            # data/lessons.jsonl
     "__main__.test_publish_gate_actually_blocks",              # build.py: site/・articles/・data/body_hash.json・data/published.json
-    "__main__.test_numbers_come_from_two_methods",             # automation/logs/measure.jsonl
     "__main__.test_lessons_2026_10_03",                        # data/clients/
     "gates_history_h10.test_kw_ledger_blocks_within_group_and_reports_across_groups",  # tests/_hub_h10_tmp.js
     "gates_history_h107_token_diet.test_eyecatch_line_and_public_run_keys",           # site/images/
     "gates_history_h112_stock_first.test_any_rewrite_keeps_changed_description_within_100_to_160",  # articles/
     "gates_history_h112_stock_first.test_title_candidates_with_stock_phrases_go_to_stock_first",    # articles/
-    "gates_history_h128_quality_loop.test_client_slugs_are_masked_and_rows_go_private",             # private/clients/
-    "gates_history_h32.test_client_articles_are_notified_right_after_publish",                      # data/indexnow_sent.json
     "gates_history_h168_parallel.test_shared_writes_in_parallel_stop_the_run",                      # tests/ に試しの門を置く
 }
 # 手元の速い確認（GATES_FAST=1）で、見ているファイルが変わっていなければ飛ばす門。どれも一時のリポジトリで git を

@@ -18,6 +18,7 @@ import re
 import sys
 import tempfile
 from datetime import date, timedelta
+from unittest import mock
 from pathlib import Path
 
 from test_gates import check, ROOT
@@ -555,10 +556,15 @@ def test_client_slugs_are_masked_and_rows_go_private():
     with tempfile.TemporaryDirectory() as d:
         e = Env(d, site="client-zz")
         e.put("zz-client-secret", _art())
-        with patched(*e.patches(QL, [_answer(60, 85, 80)]), (S, "is_client", lambda sid: sid == "client-zz")):
+        priv = Path(d) / "private"
+        # 非公開の置き場は一時の場所へ（本物の private/clients/ に試しの社を作らない）
+        with patched(*e.patches(QL, [_answer(60, 85, 80)]), (S, "is_client", lambda sid: sid == "client-zz")), \
+                mock.patch.dict(os.environ, {"SS_PRIVATE_DIR": str(priv)}):
             _, out = quiet(QL.run, ["zz-client-secret"], "new", QL.Budget(None))
         check("ログに slug が出ない", "zz-client-secret" in out, False)
         check("伏せた名前で出る", "（お客様の記事）" in out, True)
+        check("材料の依頼はお客様の社の非公開の置き場に書く",
+              (priv / "clients" / "client-zz" / "material_requests.json").is_file(), True)
     check("台帳はお客様の行を非公開の置き場へ分けて書く", "data/quality_loop.jsonl" in CP.SPLIT_JSONL, True)
 
 
