@@ -334,6 +334,16 @@ jobs:
           fi
           echo "$out" | grep -q '^要対応' && echo "::warning::固定ページに台帳と合わない数字があります（通知に載せます）" || true
 
+      # 採点（3観点と総合）が公開後の成果を当てているかの照合。順位相関と上位・下位の中央値が一致したときだけ結論を出す。
+      # 明細は非公開の置き場（reports/score_cal）、ログは件数と結論だけ。重みと基準（rubric.py）は変えず、当てていない観点を人へ知らせる
+      - name: 採点と成果の照合（月初）
+        if: steps.gate.outputs.ready == 'true' && steps.day.outputs.mid == 'false' && !inputs.resend_sites
+        run: |
+          mkdir -p automation/logs
+          out=$(python scripts/score_calibrate.py 2>&1) || true
+          echo "$out" | tail -30
+          echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
+
       # 改善の実行は道具の中から AI（auto_rewrite・auto_merge の claude）を呼び、AI は記事と検索上位の文章を読む。
       # ほかの AI の工程と同じく、作業場から鍵を外してから動かす（2026-10-20 の点検。Google の鍵・push の資格が
       # 作業場に置かれたままだった）。Google は読むだけ・1時間で切れる許可証にし、鍵を環境変数に持たない別の
