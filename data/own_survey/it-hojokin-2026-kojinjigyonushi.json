@@ -1,0 +1,124 @@
+{
+ "v": 2,
+ "slug": "it-hojokin-2026-kojinjigyonushi",
+ "ok": true,
+ "date": "2026-11-12",
+ "questions": [
+  "it導入補助金 2026 個人事業主について教えてください",
+  "it導入補助金 2026 個人事業主について、「2026年度で名称と申請枠はどう変わった？」を教えてください",
+  "it導入補助金 2026 個人事業主について、「2026年度の申請スケジュールと次の締切」を教えてください",
+  "it導入補助金 2026 個人事業主について、「個人事業主が使える申請枠と補助上限額」を教えてください",
+  "it導入補助金 2026 個人事業主について、「個人事業主に必要な書類とGビズID取得」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "2026年度で名称と申請枠はどう変わった？",
+   "words": [
+    "申請枠",
+    "名称"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "2026年度の申請スケジュールと次の締切",
+   "words": [
+    "申請スケジュール",
+    "締切"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "個人事業主が使える申請枠と補助上限額",
+   "words": [
+    "補助上限額",
+    "申請枠"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "個人事業主に必要な書類とGビズID取得",
+   "words": [
+    "GビズID取得",
+    "書類"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "交付決定までの流れと発注のタイミング",
+   "words": [
+    "タイミング",
+    "発注"
+   ],
+   "hits": 3,
+   "of": 5
+  },
+  {
+   "topic": "個人事業主が申請で注意すべき失敗例",
+   "words": [
+    "失敗例",
+    "申請"
+   ],
+   "hits": 5,
+   "of": 5
+  }
+ ],
+ "official": [
+  {
+   "term": "AI導入補助金",
+   "org": "中小企業庁",
+   "of": 5,
+   "hits": 5
+  }
+ ],
+ "sources": {
+  "ai-devlab.co.jp": "peer",
+  "anshin.co.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "bizle.jp": "peer",
+  "carearc.co.jp": "peer",
+  "d-spport.jp": "peer",
+  "freee.co.jp": "peer",
+  "furi-ten.com": "peer",
+  "gbiz-id.go.jp": "public",
+  "helptech.jp": "peer",
+  "hojokin-agent.jp": "peer",
+  "hojokin-dx.com": "video",
+  "hojokin-otaku.com": "peer",
+  "hojyokin-portal.jp": "media",
+  "it-shien.smrj.go.jp": "public",
+  "japan-finance.jp": "peer",
+  "l3.j-carnet.co.jp": "peer",
+  "leadbrain.co.jp": "peer",
+  "manulnekonote.com": "video",
+  "note.com": "video",
+  "remogu.jp": "peer",
+  "riilgate.com": "peer",
+  "shiomi-gyosei.com": "peer",
+  "squareup.com": "peer",
+  "tatsuzin.info": "peer",
+  "tokyo-kst.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 5,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 2,
+  "専門家への相談": 0
+ },
+ "chars": 8297,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、中小企業庁の資料にある「AI導入補助金」に触れたものは5件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは専門家への相談は0件、進め方の手順は2件、費用の金額（◯円）は3件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは28件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが1件、動画・SNS・ブログが4件でした。"
+ ]
+}

@@ -1,0 +1,129 @@
+{
+ "v": 2,
+ "slug": "nougyou-kikai-hojokin",
+ "ok": true,
+ "date": "2026-11-12",
+ "questions": [
+  "農業機械補助金について教えてください",
+  "農業機械補助金について、「農業機械補助金とは｜中小企業向け補助金との違い」を教えてください",
+  "農業機械補助金について、「経営発展支援事業｜新規就農者は機械導入で最大500万円」を教えてください",
+  "農業機械補助金について、「農地利用効率化等支援事業｜融資と組み合わせて機械を導入」を教えてください",
+  "農業機械補助金について、「強い農業づくり交付金｜団体向けでスマート農業機械にも対応」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 4,
+ "topics": [
+  {
+   "topic": "農業機械補助金とは｜中小企業向け補助金との違い",
+   "words": [
+    "補助金"
+   ],
+   "hits": 3,
+   "of": 3
+  },
+  {
+   "topic": "経営発展支援事業｜新規就農者は機械導入で最大500万円",
+   "words": [
+    "経営発展支援事業",
+    "新規就農者",
+    "機械導入"
+   ],
+   "hits": 2,
+   "of": 3
+  },
+  {
+   "topic": "農地利用効率化等支援事業｜融資と組み合わせて機械を導入",
+   "words": [
+    "農地利用効率化等支援事業",
+    "融資",
+    "機械",
+    "導入"
+   ],
+   "hits": 3,
+   "of": 3
+  },
+  {
+   "topic": "強い農業づくり交付金｜団体向けでスマート農業機械にも対応",
+   "words": [
+    "スマート農業機械",
+    "交付金",
+    "対応"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "なぜIT導入補助金・ものづくり補助金は農業機械を除外するのか",
+   "words": [
+    "IT導入補助金",
+    "農業機械",
+    "補助金"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "都道府県・市町村独自の農業機械補助金の探し方",
+   "words": [
+    "市町村独自",
+    "都道府県"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "申請でつまずきやすい3つの注意点",
+   "words": [
+    "申請"
+   ],
+   "hits": 4,
+   "of": 4
+  }
+ ],
+ "official": [],
+ "sources": {
+  "agrijob.jp": "peer",
+  "ai-keiei.shift-ai.co.jp": "peer",
+  "bcompany.co.jp": "peer",
+  "be-farmer.jp": "peer",
+  "city.ibusuki.lg.jp": "public",
+  "city.matsuyama.ehime.jp": "public",
+  "city.sapporo.jp": "public",
+  "hojokin-chizu.com": "peer",
+  "hojokin-kensaku.jp": "peer",
+  "hojyokin-portal.jp": "media",
+  "hojyokin.gsss.pro": "peer",
+  "ka-nosinkyo.org": "peer",
+  "maff.go.jp": "public",
+  "megaderu.net": "peer",
+  "noukaweb.com": "peer",
+  "noukigu-honpo.com": "peer",
+  "noukinavi.com": "peer",
+  "nouking.com": "peer",
+  "office-akasaki.com": "peer",
+  "pref.fukushima.lg.jp": "public",
+  "pref.tokushima.lg.jp": "public",
+  "sanchi.jp": "peer",
+  "shoei-world.com": "peer",
+  "smartagri-jp.com": "peer",
+  "so-labo.co.jp": "peer",
+  "town.kunimi.fukushima.jp": "peer",
+  "v-spirits.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 1,
+  "専門家への相談": 1
+ },
+ "chars": 7792,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え4件を数えました。ほかの論点を聞いた答え4件のうち、『スマート農業機械』に触れたものは1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え4件を数えました。4件の答えのうち、触れていたのは期間（◯か月・◯日など）は1件、進め方の手順は1件、専門家への相談は1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え4件を数えました。4件の答えの出典に挙がったページは28件で、公的機関・学会・業界団体が6件、ニュース・メディア・まとめが1件でした。"
+ ]
+}

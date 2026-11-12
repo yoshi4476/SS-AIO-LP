@@ -27,4 +27,4 @@
 {"site": "corporate", "slug": "keihi-seisan-kichodaiko-bpo-chigai", "from": "/blog/keihi-seisan-kichodaiko-bpo-chigai/", "to": "/blog/backoffice-bpo-toha/", "at": "2026-10-26", "reason": "統合: backoffice-bpo-toha に吸収", "done_at": "2026-10-27"}
 {"site": "corporate", "slug": "kaikei-keiri-chigai", "from": "/blog/kaikei-keiri-chigai/", "to": "/blog/keiri-zaimu-chigai/", "at": "2026-10-26", "reason": "統合: keiri-zaimu-chigai に吸収", "done_at": "2026-10-27"}
 {"site": "corporate", "slug": "middle-office-backoffice-chigai", "from": "/blog/middle-office-backoffice-chigai/", "to": "/blog/corporate-backoffice-chigai/", "at": "2026-11-02", "reason": "統合: corporate-backoffice-chigai に吸収", "done_at": "2026-11-03"}
-{"site": "corporate", "slug": "keihi-seisan-bpo", "from": "/blog/keihi-seisan-bpo/", "to": "/blog/backoffice-bpo-toha/", "at": "2026-11-12", "reason": "統合: backoffice-bpo-toha に吸収"}
+{"site": "corporate", "slug": "keihi-seisan-bpo", "from": "/blog/keihi-seisan-bpo/", "to": "/blog/backoffice-bpo-toha/", "at": "2026-11-12", "reason": "統合: backoffice-bpo-toha に吸収", "done_at": "2026-11-12"}

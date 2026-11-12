@@ -1,0 +1,147 @@
+{
+ "v": 2,
+ "slug": "monozukuri-hojokin-unsougyou",
+ "ok": true,
+ "date": "2026-11-12",
+ "questions": [
+  "ものづくり補助金 運送業について教えてください",
+  "ものづくり補助金 運送業について、「2026年の統合で「ものづくり・商業・サービス生産性向上促進補助金」は運送業も対象に」を教えてください",
+  "ものづくり補助金 運送業について、「「生産性向上促進補助金」という名前で探している場合」を教えてください",
+  "ものづくり補助金 運送業について、「運送業で対象になる設備投資3分野」を教えてください",
+  "ものづくり補助金 運送業について、「トラック本体・汎用車両が対象外になる理由」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "2026年の統合で「ものづくり・商業・サービス生産性向上促進補助金」は運送業も対象に",
+   "words": [
+    "サービス生産性向上促進補助金",
+    "統合",
+    "商業"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "「生産性向上促進補助金」という名前で探している場合",
+   "words": [
+    "生産性向上促進補助金",
+    "名前"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "運送業で対象になる設備投資3分野",
+   "words": [
+    "対象"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "トラック本体・汎用車両が対象外になる理由",
+   "words": [
+    "トラック本体",
+    "汎用車両",
+    "対象外"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "運送業はものづくり補助金のどの枠を選ぶか｜新事業進出枠と上限9,000万円",
+   "words": [
+    "新事業進出枠",
+    "補助金"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "資本金3億円・従業員300人｜運輸業の対象ライン",
+   "words": [
+    "対象ライン",
+    "運輸業"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "ソフト導入と設備投資、運送業はどちらから始めるか",
+   "words": [
+    "ソフト導入",
+    "設備投資"
+   ],
+   "hits": 4,
+   "of": 5
+  },
+  {
+   "topic": "汎用車両の計上で審査落ちしないために",
+   "words": [
+    "汎用車両",
+    "計上"
+   ],
+   "hits": 2,
+   "of": 5
+  }
+ ],
+ "official": [
+  {
+   "term": "商業サービス補助金",
+   "org": "中小企業庁",
+   "of": 5,
+   "hits": 2
+  }
+ ],
+ "sources": {
+  "detail.chiebukuro.yahoo.co.jp": "media",
+  "gandn.co.jp": "peer",
+  "hacobu.jp": "peer",
+  "hojokin-joseikin.com": "media",
+  "hojokin-navi.co.jp": "peer",
+  "hojokin-office.essencimo.co.jp": "peer",
+  "ichidokiri.co.jp": "media",
+  "icom-giken.com": "peer",
+  "innovales.jp": "peer",
+  "inu-llc.co.jp": "peer",
+  "it-hojokin.kyoninka.online": "peer",
+  "koyano-cpa.gr.jp": "peer",
+  "lp.7senses.co.jp": "self",
+  "mi-souken.com": "peer",
+  "mlit.go.jp": "public",
+  "mono-support.com": "peer",
+  "note.com": "video",
+  "oogata-hojokin.jp": "peer",
+  "portal.monodukuri-hojo.jp": "public",
+  "samurai-law.com": "peer",
+  "seisansei.smrj.go.jp": "public",
+  "shinjigyou-monodukuri.smrj.go.jp": "public",
+  "shinnavi.jp": "media",
+  "so-labo.co.jp": "peer",
+  "suzuyo.co.jp": "peer",
+  "tele-nishi.co.jp": "peer",
+  "tokyo-kst.jp": "peer",
+  "v-spirits.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "wwwtb.mlit.go.jp": "public",
+  "x-network.co.jp": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 0,
+  "専門家への相談": 2
+ },
+ "chars": 8574,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、中小企業庁の資料にある「商業サービス補助金」に触れたものは2件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは進め方の手順は0件、費用の金額（◯円）は1件、注意点・失敗・リスクは2件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは32件で、公的機関・学会・業界団体が5件、ニュース・メディア・まとめが4件、動画・SNS・ブログが2件でした。"
+ ]
+}

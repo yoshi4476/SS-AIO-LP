@@ -1,0 +1,179 @@
+{
+ "v": 2,
+ "slug": "it-hojokin-unsougyou",
+ "ok": true,
+ "date": "2026-11-12",
+ "questions": [
+  "it導入補助金 運送業について教えてください",
+  "it導入補助金 運送業について、「物流の2024年問題にどう効くのか」を教えてください",
+  "it導入補助金 運送業について、「運行管理システムと配車システムは何が違うのか」を教えてください",
+  "it導入補助金 運送業について、「荷主から求められる時間指定配送・CO2可視化への対応」を教えてください",
+  "it導入補助金 運送業について、「デジタコ・車載器は補助対象になるのか」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "物流の2024年問題にどう効くのか",
+   "words": [
+    "物流"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "運行管理システムと配車システムは何が違うのか",
+   "words": [
+    "運行管理システム",
+    "配車システム"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "荷主から求められる時間指定配送・CO2可視化への対応",
+   "words": [
+    "時間指定配送",
+    "荷主",
+    "対応"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "デジタコ・車載器は補助対象になるのか",
+   "words": [
+    "デジタコ",
+    "補助対象",
+    "車載器"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "補助率と上限額｜台数によって変わる考え方",
+   "words": [
+    "補助率",
+    "上限額",
+    "台数"
+   ],
+   "hits": 2,
+   "of": 5
+  },
+  {
+   "topic": "車両規模別の費用シミュレーション",
+   "words": [
+    "費用シミュレーション",
+    "車両規模別"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "軽貨物・個人事業主が対象外になりやすい条件",
+   "words": [
+    "個人事業主",
+    "軽貨物",
+    "対象外",
+    "条件"
+   ],
+   "hits": 4,
+   "of": 5
+  },
+  {
+   "topic": "傭車・庸車先の車両は誰が申請するのか",
+   "words": [
+    "庸車先",
+    "傭車",
+    "車両"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "IT導入補助金と他制度（事業再構築・ものづくり）との使い分け",
+   "words": [
+    "事業再構築",
+    "他制度"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "導入後の定着でつまずかないために",
+   "words": [
+    "導入後",
+    "定着"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "繁忙期（3月・12月）を外した導入時期の決め方",
+   "words": [
+    "導入時期",
+    "繁忙期"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [
+  {
+   "term": "AI導入補助金",
+   "org": "中小企業庁",
+   "of": 5,
+   "hits": 2
+  }
+ ],
+ "sources": {
+  "anestsystem.jp": "peer",
+  "bizle.jp": "peer",
+  "carearc.co.jp": "peer",
+  "core.co.jp": "peer",
+  "digital-ai-hojokin.jp": "peer",
+  "env.go.jp": "public",
+  "envix.co.jp": "peer",
+  "g1info.jp": "peer",
+  "genai-ai.co.jp": "peer",
+  "hacobumirai.com": "peer",
+  "hojokin-dx.com": "video",
+  "hojokin-otaku.com": "peer",
+  "hojyokin-portal.jp": "media",
+  "ichidokiri.co.jp": "media",
+  "isle-unso.com": "peer",
+  "isz.co.jp": "peer",
+  "it-seibishi.or.jp": "peer",
+  "kakeru-corp.com": "peer",
+  "kuryugroup.co.jp": "media",
+  "listing-partners.com": "peer",
+  "logi-deve.com": "peer",
+  "mlit.go.jp": "public",
+  "nipponexpress.com": "peer",
+  "note.com": "video",
+  "nttlogisco.com": "peer",
+  "onamae.com": "peer",
+  "prtimes.jp": "media",
+  "telcom-net.co.jp": "peer",
+  "tiger-inc.co.jp": "peer",
+  "transtron.com": "peer",
+  "tsuzuki.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "wskvsc.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 4,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 0,
+  "専門家への相談": 0
+ },
+ "chars": 9663,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、中小企業庁の資料にある「AI導入補助金」に触れたものは2件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは進め方の手順は0件、専門家への相談は0件、費用の金額（◯円）は2件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは33件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが4件、動画・SNS・ブログが2件でした。"
+ ]
+}
