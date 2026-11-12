@@ -8,8 +8,10 @@
 """
 import json
 import sys
+import tempfile
 import types
 from datetime import date
+from pathlib import Path
 
 from test_gates import check, ROOT
 
@@ -80,16 +82,20 @@ class _Up:
 def _run_shorts(ledger):
     import article_videos as AV
     import duo_short as DS
+    import video_make as VM
     import youtube_upload as YT
-    saved = (DS.load_script, DS.make, YT.upload)
+    saved = (DS.load_script, DS.make, YT.upload, VM.OUT)
     up = _Up()
     DS.load_script = lambda slug: {"title": "テストの問い？", "lines": []}
     DS.make = lambda sc, out: 40.0
     YT.upload = up
-    try:
-        made = AV.shorts(ledger, 1, True, True)
-    finally:
-        DS.load_script, DS.make, YT.upload = saved
+    # 動画の置き場は一時の場所へ（本物の automation/video/ を作らない。同時に流すと共有の場所の変化で落ちる）
+    with tempfile.TemporaryDirectory() as d:
+        VM.OUT = Path(d)
+        try:
+            made = AV.shorts(ledger, 1, True, True)
+        finally:
+            DS.load_script, DS.make, YT.upload, VM.OUT = saved
     return made, up
 
 
