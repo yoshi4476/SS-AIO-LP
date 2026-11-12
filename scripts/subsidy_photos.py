@@ -103,12 +103,12 @@ def decorate(repo: Path, rel: str, html: str) -> str:
                              f'<div class="hero-ph" aria-hidden="true">{img(DARK[rel], "このページの内容に関わる場面のイメージ", eager=True)}</div>')
     if rel == "index.html":
         html = _insert_after(html, r'<section class="hero" id="hero">', "hero",
-                             f'<div class="hero-ph-light" aria-hidden="true">{img("/assets/img/hero-owner.webp", "パン屋のカウンターで、タブレットのレジを操作する店主のイメージ", eager=True)}</div>')
+                             f'<div class="hero-ph-light" aria-hidden="true">{img("/assets/img/hero-owner.webp", "新しい管理システムを入れたタブレットを持つ経営者のイメージ", eager=True)}</div>')
         # 「対象になるか確認」: 中央の細い列 → 左に写真
         html = html.replace('<section id="fit" style="padding:64px 0 56px">\n  <div class="wrap rev" style="text-align:center">',
                             '<section id="fit" style="padding:64px 0 56px">\n  <div class="wrap rev ph-grid" style="text-align:center">')
         html = _insert_after(html, r'<div class="wrap rev ph-grid" style="text-align:center">', "fit",
-                             f'<figure class="ph-side">{img("/assets/img/step-check.webp", "町工場の作業台で、届いた部品の箱を端末で読み取って確かめる経営者のイメージ")}</figure>')
+                             f'<figure class="ph-side">{img("/assets/img/step-check.webp", "チェックリストで対象かを確かめる経営者のイメージ")}</figure>')
     if rel.startswith("service/") and 'id="svcform"' in html:
         html = html.replace('<section id="svcform"><div class="wrap">', '<section id="svcform"><div class="wrap ph-grid">')
         html = _insert_after(html, r'<section id="svcform"><div class="wrap ph-grid">', "form",

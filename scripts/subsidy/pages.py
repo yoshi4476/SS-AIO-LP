@@ -66,7 +66,7 @@ CHROME_CSS = """<style id="ss-common">
 .gh-tel:hover{background:rgba(42,74,138,.06)}
 .gh-tel b{font-family:var(--num);font-size:17px;font-weight:600;letter-spacing:.03em}
 .gh-tel small{font-size:12px;color:#5b6472}
-.gh-cta{flex:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 22px;border-radius:999px;background:#1d3461;color:#fff;font-size:14px;font-weight:700;line-height:1.4;text-decoration:none;white-space:nowrap;box-shadow:0 6px 18px rgba(29,52,97,.22)}
+.gh-cta{flex:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 22px;border-radius:999px;background:linear-gradient(135deg,#e8c988,#d9b36a 55%,#c39a4e);color:#171104;font-size:14px;font-weight:700;line-height:1.4;text-decoration:none;white-space:nowrap;box-shadow:0 6px 18px rgba(176,139,62,.32)}
 .gh-menu{display:none}
 @media(max-width:1479px){.gh-list .gh-ext{display:none}}
 @media(max-width:1199px){.gh-list{gap:13px}.gh-list a{font-size:13.5px}.gh-tel small{display:none}}
@@ -336,7 +336,7 @@ def card(a):
 STYLE = '''
 :root{--bg:#fdfcf9;--bg2:#f4f1e9;--panel:#ffffff;--line:#e7e2d4;--line2:rgba(176,139,62,.45);
 --text:#212b3d;--muted:#5b6472;--dim:#5c6472;--gold:#775c1c;--gold-strong:#7a5b14;--gold-ink:#171104;
---serif:"Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;--sans:"Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;--num:"Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif}
+--serif:"Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Noto Serif CJK JP", serif;--sans:"Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;--num:"Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15.5px;line-height:1.9;-webkit-font-smoothing:antialiased}
 a{color:inherit}
@@ -354,7 +354,7 @@ main{max-width:1240px;margin:0 auto;padding:56px 22px 90px;display:grid;grid-tem
 .side .sbox a:hover{border-color:var(--line2);color:var(--gold-strong)}
 .side .scta{background:linear-gradient(150deg,#132445,#1d3461 60%,#24427c);border-radius:12px;padding:22px;color:#fff;text-align:center}
 .side .scta p{font-family:var(--serif);font-weight:800;font-size:15px;line-height:1.8;margin:0 0 12px;color:#fff}
-.side .scta a{display:block;background:#fff;color:#1d3461;border-radius:999px;padding:12px;font-weight:700;font-size:14px;text-decoration:none;margin-top:8px}
+.side .scta a{display:block;background:linear-gradient(135deg,#e8c988,#d9b36a 55%,#c39a4e);color:#171104;border-radius:999px;padding:12px;font-weight:700;font-size:14px;text-decoration:none;margin-top:8px}
 .side .scta a.g{background:none;border:1.5px solid rgba(255,255,255,.5);color:#fff}
 .crumb{font-size:13px;color:var(--dim);margin-bottom:20px}
 .crumb a{color:var(--dim);text-decoration:none}
