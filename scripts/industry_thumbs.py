@@ -148,16 +148,16 @@ def variants(k):
 # 現場の写真（site/images/scenes/<鍵>.webp）。業種ページ・業種LP・調査・ツール・よくある質問の冒頭の下に、
 # その業種や話題の場面を1枚置く。文字だけの面が続くと、どの業種の話かが一目で分からない。
 SCENE_ALT = {
-    "shika": "歯科医院の入口でスリッパに履き替える初めての患者と、受付から声をかけるスタッフ",
-    "clinic": "内科の待合室で、名前を呼ばれて長椅子から立ち上がる男性と、診察室の入口に立つ看護師",
-    "seikotsuin": "整骨院で、腰の痛む場所を話す初めての患者と、しゃがんで話を聞く施術者",
-    "fudosan": "内見の部屋の扉を開け、お客様を先に通す不動産会社の担当者",
-    "koumuten": "建築中の家を、現場監督と話しながら見て回る施主の夫婦",
-    "shigyou": "古いビルの2階で、階段を上ってきた相談者を、事務所の扉を開けて迎える税理士",
-    "btob": "町工場の中を、問い合わせから見学に来たお客様に説明しながら歩く工場長",
-    "tools": "仕事の合間に、軽バンの運転席でタブレットを開く設備の業者",
-    "faq": "オンラインの相談で、画面の向こうの質問に答える担当者",
-    "research": "印刷した調査の結果に、蛍光ペンで印をつけながら読む分析の担当者",
+    "shika": "朝の歯科医院で、最初の患者の前に診療台を整える歯科医師",
+    "clinic": "明るい診察室で、医師が患者と話す様子",
+    "seikotsuin": "整骨院で、施術者が患者の肩を施術する様子",
+    "fudosan": "不動産会社の担当者が、マンションの前でお客様に説明する様子",
+    "koumuten": "完成した木の家の前に立つ工務店の担当者と施主",
+    "shigyou": "書棚のある事務所で、士業の専門家が相談に応じる様子",
+    "btob": "地方都市のIT企業の事務所で、提案書を画面で確かめる二人",
+    "tools": "ノートパソコンでサイトの分析を確かめる経営者",
+    "faq": "オンラインで相談に答える担当者",
+    "research": "複数の画面でデータを読み解く分析担当",
 }
 SCENE_OF = {"medical": "clinic", "reform": "koumuten"}   # 業種LP の名前・業種ページの slug → 写真の鍵
 
@@ -239,20 +239,9 @@ _TILE = re.compile(r'(<li class="[^"]*"><a href="/[^/"]+/([^/"]+)/">)<span class
 _LIST = re.compile(r'(<ul class="post-list[^"]*">)(.*?)(</ul>)', re.S)
 
 
-_VARIANT = re.compile(r"^/images/thumbs/aio-(.+?)(?:-\d+)?\.(webp|jpg)$")
-
-
-def _siblings(src):
-    """同じ業種の別の写真（aio-salon.webp に対する aio-salon-2.webp）。src と同じ形式で返す"""
-    m = _VARIANT.match(src.split("?")[0])
-    if not m:
-        return []
-    return [u for u in (f"/images/thumbs/{name[:-4]}.{m.group(2)}" for name in variants(m.group(1))) if u != src.split("?")[0]]
-
-
-def _others(slug, alt_attr, src=""):
-    """同じ画像が出すぎた1枚の代わり（上から順に）: 同じ業種の別の写真、題を描いた自動生成のアイキャッチ、内容に合う写真の棚の別の1枚"""
-    out = _siblings(src) + [f"/images/{slug}/eyecatch.png"]
+def _others(slug, alt_attr):
+    """同じ画像が出すぎた1枚の代わり（上から順に）: 題を描いた自動生成のアイキャッチ、内容に合う写真の棚の別の1枚"""
+    out = [f"/images/{slug}/eyecatch.png"]
     m = re.search(r'alt="(.*?)のアイキャッチ画像"', alt_attr)
     try:
         import photo_shelf
@@ -273,21 +262,15 @@ def _limit(block, most):
         head, slug, src, rest = m.groups()
         pick = src
         if used.get(src, 0) >= most:
-            pick = next((u for u in _others(slug, rest, src)
+            pick = next((u for u in _others(slug, rest)
                          if used.get(u, 0) < most and (ROOT / "site" / u.lstrip("/")).is_file()), src)
         used[pick] = used.get(pick, 0) + 1
         return m.group(0) if pick == src else f'{head}<span class="thumb"><img src="{pick}"{rest}>'
     return _TILE.sub(one, block)
 
 
-# この枚数までの一覧（トップの新着・関連記事）は、同じ画像を1回までにする。
-# 6枚の新着に同じ写真が2組並び、ひと目で使い回しに見えた（2026-11-12）
-SHORT_LIST = 8
-
-
 def limit_repeats(site: Path, most=2):
-    """同じ一覧で同じ画像は most 回まで（SHORT_LIST 枚までの短い一覧は1回まで）。
-    超えた分は、同じ業種の別の写真 → その記事の題を描いた自動生成のアイキャッチ → 写真の棚の別の1枚。
+    """同じ一覧で同じ画像は most 回まで。3回目からは、その記事の題を描いた自動生成のアイキャッチ（無ければ写真の棚の別の1枚）。
     業種・写真の棚の画像は種類が少なく、/aio/ では55枚中17種（同じ画像が12回）、/industry/clinic/ では25枚中9種が並んでいた（2026-10-08）。
     一覧はどこで作っても（一覧・業種・LP・関連記事）この1か所でそろえる。何度呼んでも同じ"""
     n = 0
@@ -295,7 +278,7 @@ def limit_repeats(site: Path, most=2):
         s = p.read_text(encoding="utf-8")
         if 'class="post-list' not in s:
             continue
-        new = _LIST.sub(lambda m: m.group(1) + _limit(m.group(2), 1 if len(_TILE.findall(m.group(2))) <= SHORT_LIST else most) + m.group(3), s)
+        new = _LIST.sub(lambda m: m.group(1) + _limit(m.group(2), most) + m.group(3), s)
         if new != s:
             p.write_text(new, encoding="utf-8", newline="")
             n += 1

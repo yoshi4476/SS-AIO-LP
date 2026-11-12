@@ -13,8 +13,7 @@
     // ロゴの横にボタンを並べると、スマホでロゴの文字が3行に折れた（2026-10-03）。
     // 出すのはトップと /tools/ だけ（CSS が場所を取るのと同じ条件）。全ページに出すと固定のヘッダーが 111px になり、
     // 記事では下の固定ボタンと合わせて画面の約1/4を常に覆っていた（2026-10-08）
-    // トップからも外した（2026-11-12）: 最初の画面で押せる所が5つになり、主役の「URLを入れて30秒診断」が埋もれていた
-    var toolsPage = document.querySelector('.tools-main');
+    var toolsPage = document.body.classList.contains('home') || document.querySelector('.tools-main');
     if (toolsPage && header.querySelector('.global-nav .nav-tool') && !header.querySelector('.hdr-tools')) {
       var bar = document.createElement('div');
       bar.className = 'hdr-tools';
@@ -472,19 +471,6 @@
   document.addEventListener('scroll', function () {
     toTop.classList.toggle('show', document.documentElement.scrollTop > 600);
   }, { passive: true });
-  // 入力欄の右端に重なるので、フォームが画面にある間は出さない
-  if ('IntersectionObserver' in window) {
-    var formsOn = [];
-    var formWatch = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        var i = formsOn.indexOf(e.target);
-        if (e.isIntersecting && i < 0) formsOn.push(e.target);
-        if (!e.isIntersecting && i >= 0) formsOn.splice(i, 1);
-      });
-      toTop.classList.toggle('by-form', formsOn.length > 0);
-    });
-    document.querySelectorAll('form').forEach(function (f) { formWatch.observe(f); });
-  }
 
   // URLコピー（記事シェア）
   document.querySelectorAll('.copy-url').forEach(function (btn) {
@@ -939,28 +925,4 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
     if (!e.persisted) return;
     document.querySelectorAll("form[data-ts]").forEach(function (f) { if (f._ts != null) renew(f); });
   });
-})();
-
-// 画面からはみ出している表に「横に動かせます」の印を出す（印が無く、右の列が切れたまま読まれていた。2026-11-11）
-(function () {
-  function mark() {
-    document.querySelectorAll(".table-wrap").forEach(function (w) {
-      var over = w.scrollWidth > w.clientWidth + 8;
-      var hint = w.previousElementSibling && w.previousElementSibling.classList.contains("table-hint") ? w.previousElementSibling : null;
-      if (over && !hint && !w._hinted) {
-        hint = document.createElement("p");
-        hint.className = "table-hint";
-        hint.setAttribute("aria-hidden", "true");
-        hint.textContent = "表は横に動かせます →";
-        w.parentNode.insertBefore(hint, w);
-        w._hinted = true;
-        w.addEventListener("scroll", function () { if (hint.parentNode) hint.parentNode.removeChild(hint); }, { once: true, passive: true });
-      } else if (!over && hint) {
-        hint.parentNode.removeChild(hint);
-        w._hinted = false;
-      }
-    });
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mark); else mark();
-  addEventListener("resize", mark, { passive: true });
 })();

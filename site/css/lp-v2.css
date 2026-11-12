@@ -109,8 +109,9 @@
 .lx-console-head small { font-size: .75rem; color: rgba(255, 255, 255, .75); }
 .lx-group { margin: 0 0 .7rem; }
 .lx-group:last-child { margin-bottom: 0; }
+/* 見出しの要素（h3）から p に替えた。行の高さは h3 と同じ 1.45 にそろえる（p の 2 のままだと採点表が約20px 伸びる） */
 .lx-group .lx-gh {
-  margin: 0 0 .35rem; font-size: .76rem; font-weight: 700; letter-spacing: .12em;
+  margin: 0 0 .35rem; font-size: .76rem; font-weight: 700; letter-spacing: .12em; line-height: 1.45;
   color: #8fb7ff; display: flex; justify-content: space-between;
 }
 .lx-group .lx-gh span { font-family: var(--lx-num); font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, .78); letter-spacing: 0; }

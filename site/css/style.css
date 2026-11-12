@@ -206,9 +206,6 @@ html.js .reveal-d3 { transition-delay: .3s; }
 .kicker::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #9be8c8; box-shadow: 0 0 10px #9be8c8; }
 .trust-row { display: flex; gap: 1.6em; flex-wrap: wrap; margin-top: 1.8rem; font-size: .8rem; color: rgba(255,255,255,.85); }
 .trust-row span { display: inline-flex; align-items: center; gap: .45em; }
-/* 太字まじりの文は i でひとまとまりにする（そのままだと太字と続きの文が別の列になり、スマホで2列に割れる） */
-.trust-row span > i { font-style: normal; min-width: 0; }
-.trust-row span::before { flex: none; }
 .trust-row span::before { content: "✓"; display: inline-grid; place-items: center; width: 1.45em; height: 1.45em; border-radius: 50%; background: rgba(255,255,255,.18); font-size: .78em; font-weight: 800; }
 .float-d1 { animation-delay: 1.2s; }
 .float-d2 { animation-delay: 2.4s; }
@@ -651,8 +648,6 @@ html.js .in .line-draw path.line, html.js .line-draw.in path.line { stroke-dasho
   transition: opacity .25s, transform .25s var(--ease-out), background .2s;
 }
 .to-top.show { opacity: 1; pointer-events: auto; transform: none; }
-/* 入力欄の右端に重なるので、フォームが画面にある間は出さない */
-.to-top.by-form { opacity: 0; pointer-events: none; }
 .to-top:hover { background: var(--sky); }
 @media (max-width: 720px) { .to-top { bottom: 6.2rem; right: .9rem; } }
 
@@ -1633,9 +1628,8 @@ main.article .article-body a.cta-button:hover { background: var(--blue-deep); tr
   .global-nav .nav-tool { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: .8em .2em; }
   /* 帯は JS が後から足す。場所を先に取っておき、ページが下へずれないようにする（CLS）。
      帯を出すのはトップと /tools/ だけ（site.js と同じ条件）。全ページで固定のヘッダーが 111px になり、
-     記事では下の固定ボタンと合わせて画面の約1/4を常に覆っていた（2026-10-08）。
-     トップからも外した（2026-11-12）: 最初の画面で押せる所が5つになり、主役の「URLを入れて30秒診断」が埋もれていた */
-  body:has(.tools-main) .site-header:has(.nav-tool) { padding-bottom: 46px; }
+     記事では下の固定ボタンと合わせて画面の約1/4を常に覆っていた（2026-10-08） */
+  body.home .site-header:has(.nav-tool), body:has(.tools-main) .site-header:has(.nav-tool) { padding-bottom: 46px; }
   .hdr-tools { display: flex; justify-content: center; align-items: center; gap: .6rem; position: absolute; left: 0; right: 0; bottom: 0; height: 46px; padding: 0 var(--gutter); background: var(--sky); border-top: 1px solid var(--line); }
   .hdr-tools a { display: inline-flex; align-items: center; min-height: 36px; font-size: .8125rem; font-weight: 700; color: var(--blue); text-decoration: none; padding: 0 .9em; border-radius: 999px; background: #fff; border: 1px solid var(--sky-2); white-space: nowrap; }
   .hdr-tools a:first-child { background: var(--blue); color: #fff; border-color: var(--blue); }
@@ -1743,15 +1737,6 @@ main.article .article-body a.cta-button:hover { background: var(--blue-deep); tr
 .ind-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(7, 26, 56, .82) 0%, rgba(7, 26, 56, .1) 55%, transparent 100%); }
 .ind-card span { position: absolute; left: 1rem; right: 1rem; bottom: .9rem; z-index: 1; font-weight: 700; font-size: .98rem; line-height: 1.4; }
 .ind-card:hover img { transform: scale(1.06); }
-.ind-stat { aspect-ratio: auto; min-height: 168px; display: flex; flex-direction: column; gap: .3rem; padding: 1.1rem 1.1rem 1rem; background: #fff; color: var(--text); border: 1px solid var(--line); box-shadow: none; transition: border-color .2s, transform .2s; }
-.ind-stat::after { display: none; }
-.ind-stat span { position: static; }
-.ind-stat .ind-name { font-size: .98rem; font-weight: 700; color: var(--navy); }
-.ind-stat .ind-n { font-size: 2rem; font-weight: 800; line-height: 1.15; color: var(--blue-deep); font-variant-numeric: tabular-nums; margin-top: .2rem; }
-.ind-stat .ind-l { font-size: .8rem; font-weight: 500; line-height: 1.6; color: var(--text); }
-.ind-stat .ind-s { font-size: .72rem; font-weight: 400; color: var(--muted); margin-top: auto; }
-.ind-stat:hover { border-color: var(--blue); transform: translateY(-2px); }
-.ind-stat ~ .ind-card-all { aspect-ratio: auto; min-height: 120px; }
 .ind-card-all { display: flex; align-items: center; justify-content: center; background: linear-gradient(140deg, #0b2447, #1d4ed8); }
 .ind-card-all::after { display: none; }
 .ind-card-all span { position: static; text-align: center; }
@@ -2219,261 +2204,3 @@ figure.layers { margin: clamp(2.2rem, 4vw, 3.2rem) 0 0; text-align: left; }
 .hub-entry .hub-entry-btns { display: flex; flex-wrap: wrap; gap: .6rem; }
 .hub-entry .btn { padding: .7em 1.3em; font-size: .92rem; line-height: 1.6; }
 @media (max-width: 600px) { .hub-entry .btn { flex: 1 1 100%; } }
-
-/* ---------- スマホの記事の最初の画面と表（2026-11-11 の画面の点検） ---------- */
-/* 最初の画面（390px）がパンくず2段・共有ボタン・写真で埋まり、答えの文が画面の一番下に1〜2行しか出ていなかった。
-   パンくずは1行にして題を「…」で切り、棚の写真（題の字が入っていない写真）は横長に切る */
-@media (max-width: 720px) {
-  .breadcrumb ol { flex-wrap: nowrap; }
-  .breadcrumb li { flex: none; }
-  .breadcrumb li:last-child { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .article-eyecatch img[src*="/images/shelf/"] { aspect-ratio: 5 / 2; height: auto; object-fit: cover; }
-  /* 表の列が1字ずつ縦に折れていた（「記事作/成ツー/ル」）。列の幅を確保し、入りきらない表は横に動かす */
-  .table-wrap th, .table-wrap td { min-width: 7.5em; }
-  .table-wrap td:first-child, .table-wrap tbody th:first-child { min-width: 8.5em; }
-}
-/* 横に動かせる表の上に出す印（site.js が、はみ出している表にだけ付ける。動かしたら消える） */
-.table-hint { margin: 1.8em 0 -1.3em; font-size: .78rem; font-weight: 700; color: var(--blue); text-align: right; }
-.table-hint + .table-wrap { margin-top: 1.8em; }
-
-/* スマホのお客様の声: 縦に積むと 3,300px あり、サービスのページが長くなりすぎていた。横に送るカードにする（次のカードが端に見えるのが合図） */
-@media (max-width: 720px) {
-  .voice-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: .9rem; padding-bottom: .7rem; -webkit-overflow-scrolling: touch; }
-  .voice-grid > .voice { flex: 0 0 86%; scroll-snap-align: start; }
-}
-
-/* ==== 2026-11-12 トップとサービスのページを1本の筋に並べ直したときの部品 ==== */
-/* 上のメニュー: 広い画面では別サイトへの2つ（補助金・コーポレート）を出さない。8項目＋ボタン2つで詰まっていた。
-   畳んだメニュー（1260px 以下）とフッターには残る */
-@media (min-width: 1261px) {
-  .site-header .global-nav a[target="_blank"] { display: none; }
-  .global-nav { gap: 1.7rem; }
-}
-/* 最初の画面: 主役は入力欄1つ。ほかの入口は小さな1行にし、スマホのトップでは出さない */
-.lx-hero .lx-alt.lx-alt--quiet { margin-top: .9rem; font-size: .8125rem; color: rgba(255, 255, 255, .62); }
-.lx-hero .lx-alt.lx-alt--quiet a, body.lp-doc .lx-hero .lx-alt.lx-alt--quiet a { color: rgba(255, 255, 255, .86); font-weight: 500; text-decoration-color: rgba(255, 255, 255, .4); }
-@media (max-width: 920px) {
-  .home .lx-hero .lx-alt--quiet { display: none; }
-  /* スマホのトップ: 計測盤は3つのまとまりと配点だけ（14行を並べると、最初の画面の下に600pxの一覧が続いた） */
-  .home .lx-console .lx-group ul { display: none; }
-  .home .lx-console .lx-group { margin-bottom: .2rem; }
-  .home .lx-console .lx-group .lx-gh { font-size: .875rem; letter-spacing: .04em; padding: .5em 0; border-top: 1px solid rgba(143, 183, 255, .2); margin: 0; }
-  .home .lx-console .lx-console-foot { margin-top: .6rem; }
-}
-/* 節の終わりの「次へ」の一言 */
-.st-next { max-width: 1100px; margin: 2.2rem auto 0; padding: 1rem 1.2rem; border-left: 3px solid var(--blue); background: var(--bg-alt); border-radius: 0 12px 12px 0; font-weight: 700; color: var(--navy); line-height: 1.8; }
-.cat-links { margin-top: 1.6rem; }
-.faq-more { text-align: center; margin: 1.6rem 0 0; font-size: .92rem; }
-/* トップの節どうしの間（色の帯の中の .section に上の余白が無く、白い節どうしは上下の余白が重なって 190px 空いていた） */
-.home .top-tools .tool-card { padding: 1.6rem 1.6rem 1.7rem; }
-/* 料金のすぐ下の短い相談の入口 */
-.quick-lead { margin-top: 1.6rem; padding: clamp(1.3rem, 3vw, 2rem); border-radius: var(--radius); background: var(--navy); color: #fff; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.6fr); gap: clamp(1.2rem, 3vw, 2.4rem); align-items: center; }
-.quick-lead .ql-h { margin: 0; font-family: var(--head); font-weight: 900; font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.6; color: #fff; }
-.quick-lead .ql-s { margin: .6rem 0 0; font-size: .875rem; line-height: 1.85; color: rgba(255, 255, 255, .8); }
-.quick-lead .ql-s a { color: #fff; }
-.quick-lead .form-panel.ql-form { max-width: none; margin: 0; padding: 1.2rem 1.3rem 1.3rem; border-radius: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .2rem .9rem; align-items: end; color: var(--text); }
-.quick-lead .ql-form label { margin: .2em 0 .4em; }
-.quick-lead .ql-form label.ql-agree { grid-column: 1 / 2; display: flex; gap: .6em; align-items: center; font-weight: 500; font-size: .84rem; cursor: pointer; margin: .7em 0 0; }
-.quick-lead .ql-form label.ql-agree input { width: auto; accent-color: var(--blue); flex: none; }
-.quick-lead .ql-form button { grid-column: 2 / -1; margin-top: .7rem; }
-@media (max-width: 980px) {
-  .quick-lead { grid-template-columns: minmax(0, 1fr); }
-  .quick-lead .form-panel.ql-form { grid-template-columns: minmax(0, 1fr); }
-  .quick-lead .ql-form label.ql-agree, .quick-lead .ql-form button { grid-column: auto; }
-}
-/* 相談フォーム: 広い画面では左の説明が入力欄に付いてくる。スマホでは見出しの直下に入力欄、説明は下 */
-@media (min-width: 761px) { .form-cols .form-side { position: sticky; top: 96px; } }
-@media (max-width: 760px) {
-  .form-cols .form-main { order: -1; }
-  .form-cols .form-side-list { display: none !important; }
-}
-/* お客様の声: 数字の無い声は1枚だけ行に余らせず、行いっぱいの引用にする */
-@media (min-width: 721px) {
-  .voice-grid > .voice:not(:has(.voice-metric)) { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; gap: 1.6rem; }
-  .voice-grid > .voice:not(:has(.voice-metric)) blockquote { font-size: 1.05rem; font-weight: 700; color: var(--navy); }
-  .voice-grid > .voice:not(:has(.voice-metric)) figcaption { margin: 0; padding: 0; border: 0; white-space: nowrap; }
-}
-/* トップ: 節の上下の余白をそろえる（節ごとに 25〜94px とばらばらで、見出しが帯の端に寄る所と大きく空く所があった） */
-.home main > .section, .home main > .flat-sec > .section, .home main > .flat-sec > .section.rsh, .home main > #latest.section { padding-top: clamp(3rem, 6vw, 5.4rem); padding-bottom: clamp(3rem, 6vw, 5.4rem); }
-.home main > .flat-sec { padding-top: 0; padding-bottom: 0; }
-/* トップの新着記事: 6本を3列×2段に（4列だと2段目の右が2つ空いた） */
-@media (min-width: 980px) { .home #latest .post-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-/* サービスのページ: 案内の帯の前後（帯の上 94px・下 140px 空いていた） */
-body.lp-doc main > .section:has(+ div.section > .lead-band), body.lp-doc main > .section-full:has(+ div.section > .lead-band) { padding-bottom: clamp(1.6rem, 3vw, 2.4rem); }
-body.lp-doc main > div.section:has(> .lead-band) + .section { padding-top: clamp(2.6rem, 5vw, 4.4rem); }
-body.lp-doc main > div.section:has(> .lead-band) + .section-full { margin-top: clamp(2.6rem, 5vw, 4.4rem); }
-body.lp-doc .lead-band { margin-top: 0; margin-bottom: 0; }
-body.lp-doc .ind-lps { justify-content: flex-start; margin-top: 1rem; }
-body.lp-doc .site-footer { margin-top: 0; }
-/* 開いて読む区画 */
-details.fold > summary { cursor: pointer; font-family: var(--head); font-weight: 900; font-size: 1.05rem; color: var(--navy); list-style: none; display: flex; align-items: center; gap: .6em; padding: .5em 0; }
-details.fold > summary::-webkit-details-marker { display: none; }
-details.fold > summary::before { content: "+"; flex: none; width: 1.6em; height: 1.6em; border-radius: 50%; background: var(--sky); color: var(--blue); display: grid; place-items: center; font-weight: 800; }
-details.fold[open] > summary::before { content: "−"; }
-details.fold > summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
-details.why-om[open] > summary { margin-bottom: .5rem; }
-details.ap-fold > summary { border: 1.5px solid var(--line); border-radius: 12px; padding: .9em 1.1em; background: #fff; }
-details.ap-fold[open] > summary { margin-bottom: 1rem; }
-@media (min-width: 761px) { details.ap-fold > summary { display: none; } }
-/* 「必須」の印が2行に割れない */
-.form-panel label .req { white-space: nowrap; display: inline-block; }
-/* スマホのトップの新着記事は4本まで（6本を縦に積むと 2,600px あった。続きは「すべての記事を見る」） */
-/* トップの新着は3本まで（一覧の中身は機械が作るので、見せる数だけを絞る）。6本・用語集・カテゴリ4つと、問い合わせから離れる道が続いていた */
-.home #latest .post-list > li:nth-child(n+4) { display: none; }
-/* サービスのページ: 同じ地の色の節が続く所は、上下の余白が重なって 190px 空いていた */
-body.lp-doc main > section.section + section.section { padding-top: 0; }
-body.lp-doc main > .section-full.bg-deep + .section-full.bg-deep { padding-top: 0; }
-.section .faq-more, .section-full .faq-more { max-width: none; text-align: center; }
-.quick-lead .ql-form label.ql-agree, .quick-lead .ql-form button { grid-column: 1 / -1; }
-.quick-lead .ql-form label.ql-agree { margin-top: .5em; }
-
-/* ==== 2026-11-12 第2回の直し（採点役2人の指摘） ==== */
-/* トップの最初の画面の右: 専門用語の14項目をやめ、診断で分かることを3行の平易な言葉で。左の入力欄より目立たせない（地を薄く、枠を細く） */
-.home .lx-hero .lx-console { background: rgba(255, 255, 255, .035); border-color: rgba(143, 183, 255, .2); backdrop-filter: none; padding: 1.2rem 1.4rem 1.1rem; }
-.home .lx-hero .lx-console-head { margin-bottom: .3rem; }
-.home .lx-hero .lx-console-head b { font-size: .875rem; font-weight: 700; color: rgba(255, 255, 255, .78); letter-spacing: .06em; }
-.home .lx-console .lx-group { position: relative; margin: 0; padding: .8rem 0 .8rem 2.1rem; border-top: 1px solid rgba(143, 183, 255, .16); }
-.home .lx-console .lx-group::before { content: "✓"; position: absolute; left: 0; top: .9rem; width: 1.35rem; height: 1.35rem; border-radius: 50%; background: rgba(143, 183, 255, .16); color: #8fb7ff; display: grid; place-items: center; font-size: .72rem; font-weight: 900; }
-.home .lx-console .lx-group .lx-gh { display: block; margin: 0 0 .15rem; font-size: 1rem; font-weight: 700; letter-spacing: .02em; color: #fff; }
-.home .lx-console .lx-gd { margin: 0; font-size: .86rem; line-height: 1.7; color: rgba(255, 255, 255, .72); }
-.home .lx-console .lx-console-foot { margin: 0; padding-top: .8rem; border-top: 1px solid rgba(143, 183, 255, .16); font-size: .8125rem; line-height: 1.7; }
-@media (max-width: 920px) {
-  .home .lx-hero .lx-console { padding: 1rem 1.1rem .9rem; }
-  .home .lx-console .lx-group { padding: .65rem 0 .65rem 2rem; margin: 0; }
-  .home .lx-console .lx-group::before { top: .75rem; }
-  .home .lx-console .lx-group .lx-gh { font-size: .95rem; letter-spacing: .02em; padding: 0; border-top: 0; margin: 0 0 .1rem; }
-  .home .lx-console .lx-gd { font-size: .8125rem; }
-}
-/* 最初の画面から移した14項目（無料ツールの節で開いて読む） */
-.scan-items { max-width: 1180px; margin: 1.4rem auto 0; padding: .35rem 1.3rem; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
-.scan-items[open] { padding-bottom: 1.1rem; }
-.scan-items > summary { font-size: .98rem; }
-.scan-items-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1rem 1.8rem; padding-top: .5rem; }
-.scan-items .si-h { display: flex; justify-content: space-between; margin: 0 0 .35rem; font-size: .92rem; font-weight: 700; color: var(--navy); }
-.scan-items ul { list-style: none; margin: 0; padding: 0; }
-.scan-items li { display: flex; justify-content: space-between; gap: .8rem; padding: .32rem 0; border-bottom: 1px dashed var(--line); font-size: .875rem; line-height: 1.6; color: var(--text); }
-.scan-items li span, .scan-items .si-h span { flex: none; color: var(--muted); font-variant-numeric: tabular-nums; }
-
-/* トップの新着の後: 記事の一覧へは文字のリンク1つ。すぐ下の最後の案内で相談へ */
-.latest-more { margin: 1.6rem 0 0; text-align: center; font-weight: 700; }
-.latest-more a { color: var(--blue-deep); }
-.cta-final .note.cta-consult { margin: 1.4rem auto 0; font-size: .95rem; color: rgba(255, 255, 255, .82); }
-.cta-final .cta-consult a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-.cta-final .cta-consult span { display: block; margin-top: .35rem; font-size: .8125rem; color: rgba(255, 255, 255, .66); }
-.cta-final .cta-consult span a { font-weight: 500; }
-
-/* スマホの下の固定の帯: 主役は「30秒診断」1つ。相談は文字のリンク */
-.sticky-cta .sticky-link { flex: none; align-self: center; padding: .45em .7em; color: #fff; font-size: .875rem; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-/* 固定の帯があるページのスマホでは「↑」を出さない（帯のすぐ上で本文や部品に重なっていた） */
-@media (max-width: 760px) { body:has(> .sticky-cta) .to-top { display: none; } }
-
-/* 見出しの飾り（グラデーションの下線・小見出しの前の線）は山場の節（is-peak）だけ。全節で同じで型に見えていた */
-.home .section-head:not(.is-peak) .eyebrow::before, body.lp-doc .section-head:not(.is-peak) .eyebrow::before { content: none; }
-.home .section-head:not(.is-peak) .eyebrow, body.lp-doc .section-head:not(.is-peak) .eyebrow { color: var(--muted); letter-spacing: .08em; }
-html.js .home .section-head.reveal:not(.is-peak) h2::after, html.js body.lp-doc .section-head.reveal:not(.is-peak) h2::after { content: none; }
-
-/* サービスのページの最初の画面: 料金と進め方を見せて相談へ（トップの複製に見えないよう、右は診断の小さな欄だけ） */
-.lx-hero--svc .lx-hero-grid { align-items: center; }
-.svc-facts { margin: 0 0 1.4rem; max-width: 36em; border-top: 1px solid rgba(255, 255, 255, .16); }
-.svc-facts > div { display: grid; grid-template-columns: 6em minmax(0, 1fr); gap: .9rem; padding: .7rem 0; border-bottom: 1px solid rgba(255, 255, 255, .16); }
-.svc-facts dt { padding-top: .12rem; font-size: .8125rem; font-weight: 700; letter-spacing: .06em; color: #8fb7ff; }
-.svc-facts dd { margin: 0; font-size: .98rem; line-height: 1.6; color: #fff; }
-.svc-facts dd b { font-weight: 900; }
-.svc-facts dd small { display: block; margin-top: .1rem; font-size: .8125rem; color: rgba(255, 255, 255, .72); }
-.svc-hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.1rem; margin: 0; }
-.svc-hero-cta .btn { padding: .95em 2.1em; font-size: 1.05rem; }
-.svc-hero-cta span { font-size: .8125rem; color: rgba(255, 255, 255, .75); }
-.svc-hero-scan .lx-form { gap: .7rem; }
-.lx-form-h { margin: 0; font-size: 1.02rem; font-weight: 900; line-height: 1.5; color: var(--lx-ink); }
-.lx-form-h small { display: block; margin-top: .15rem; font-size: .8rem; font-weight: 500; color: var(--lx-mute); }
-.lx-go.lx-go--sub { background: #fff; color: var(--lx-navy); border: 2px solid var(--lx-navy); box-shadow: none; font-size: 1rem; }
-.lx-go.lx-go--sub:hover { background: var(--lx-sky); box-shadow: none; }
-.lx-console-fold { margin-top: .8rem; }
-.lx-console-fold > summary { display: flex; align-items: center; gap: .55em; padding: .4rem 0; list-style: none; cursor: pointer; font-size: .875rem; font-weight: 700; color: rgba(255, 255, 255, .86); }
-.lx-console-fold > summary::-webkit-details-marker { display: none; }
-.lx-console-fold > summary::before { content: "+"; flex: none; width: 1.45em; height: 1.45em; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .45); display: grid; place-items: center; font-size: .85rem; }
-.lx-console-fold[open] > summary::before { content: "−"; }
-.lx-console-fold > summary:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; border-radius: 6px; }
-.lx-console-fold .lx-console { margin-top: .5rem; }
-@media (max-width: 920px) {
-  .lx-hero--svc .lx-lead { margin-bottom: 1rem; }
-  .svc-hero-cta .btn { flex: 1 1 100%; justify-content: center; text-align: center; }
-  .lx-hero--svc .lx-alt--quiet { display: none; }
-}
-
-/* サービスのページの比較表: スマホでは項目ごとのカード（右の列が切れて2列しか見えなかった）。当社の欄は色で分ける */
-@media (max-width: 720px) {
-  .cmp-table td.td-hl { background: var(--sky) !important; }
-  .cmp-table td.td-hl::before { color: var(--blue-deep); }
-}
-
-/* 写真の枠（新しい写真を入れるまでは hidden で出さない。display: block の指定に負けないように） */
-.tool-card .tool-photo[hidden], .pillar-photo[hidden] { display: none; }
-.svc-facts .nw { white-space: nowrap; }
-.svc-hero-scan .lx-err:empty { display: none; }
-.lx-console-fold > summary::before { line-height: 1; }
-@media (max-width: 560px) { .svc-facts > div { grid-template-columns: 4.6em minmax(0, 1fr); gap: .7rem; } }
-.cta-final h2 .nw { white-space: nowrap; }
-/* 棒の端が枠に近い値は、棒の中に白い字で出す（スマホで枠の外にはみ出していた） */
-.lx-hbar .val.val-in { color: #fff; }
-/* 料金のボタン: 左右の余白（ページの中の指定）が広く、スマホで「る」だけ次の行に落ちていた */
-@media (max-width: 560px) { body.lp-doc #price .pillar .btn { padding-left: 1.2em !important; padding-right: 1.2em !important; } }
-
-/* ===== 2026-11-12 第3回の直し（採点役2人がそろって挙げた点） ===== */
-/* 左の端を1本の線に: ヘッダー・最初の画面・実績の帯・各節の見出しと中身を、同じ幅と左右の余白（--gutter）にそろえる。
-   見出しは x=72・図の段は x=170・カードは x=131 と、節の中の塊ごとに幅の上限が違って左端がずれていた */
-.home .lx-wrap, body.lp-doc .lx-wrap,
-.home .lx-proof ul, body.lp-doc .lx-proof ul { max-width: var(--max-wide); padding-left: var(--gutter); padding-right: var(--gutter); }
-.home .whynow-grid, .home .rsh-wrap, .home .ind-cards, .home .top-tools, .home .scan-items, .home figure.svc-map, .home .st-next,
-body.lp-doc .doc-duo, body.lp-doc .form-cols { max-width: none; margin-left: 0; margin-right: 0; }
-.home .svc-map-text { max-width: 52em; margin-left: 0; }
-.form-cols .form-panel { margin: 0; max-width: none; }
-/* 図の札を写真の高さに引き伸ばさない（中身が上に寄り、下の3割が空いていた）。写真の横で上下の真ん中に置く */
-@media (min-width: 861px) { .home .whynow-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; } }
-.home .whynow-photo img { aspect-ratio: 16 / 9; height: auto; min-height: 0; }
-
-/* サービスのページの最初の画面: 主役は「無料相談を申し込む」1つ。診断は小さな文字のリンクで、押すと下に開く */
-.svc-hero-side { align-self: center; padding: clamp(1.1rem, 2.4vw, 1.6rem) clamp(1.2rem, 2.6vw, 1.8rem); border: 1px solid rgba(255, 255, 255, .16); border-radius: 20px; background: rgba(255, 255, 255, .05); }
-.svc-facts-h { margin: 0 0 .5rem; font-size: .8125rem; font-weight: 700; letter-spacing: .08em; color: rgba(255, 255, 255, .7); }
-.svc-hero-side .svc-facts { margin: 0; max-width: none; border-top: 0; }
-.svc-hero-side .svc-facts > div:last-child { border-bottom: 0; padding-bottom: 0; }
-.svc-scan { margin-top: 1rem; }
-.svc-scan > summary { display: inline-flex; align-items: center; gap: .35em; padding: .3rem 0; list-style: none; cursor: pointer; font-size: .9rem; color: rgba(255, 255, 255, .78); }
-.svc-scan > summary::-webkit-details-marker { display: none; }
-.svc-scan > summary span { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255, 255, 255, .5); }
-.svc-scan > summary::after { content: "▾"; font-size: .8em; color: rgba(255, 255, 255, .7); }
-.svc-scan[open] > summary::after { content: "▴"; }
-.svc-scan > summary:hover span { text-decoration-color: #fff; }
-.svc-scan > summary:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; border-radius: 6px; }
-.svc-scan .svc-hero-scan { margin-top: .7rem; max-width: 34rem; }
-.lx-hero--svc .lx-alt.lx-alt--quiet { margin-top: 1rem; }
-.lx-hero--svc .lx-hero-grid:has(.svc-scan[open]) .svc-hero-side { align-self: start; margin-top: 4.2rem; }
-@media (max-width: 920px) { .lx-hero--svc .lx-hero-grid:has(.svc-scan[open]) .svc-hero-side { margin-top: 0; } }
-.lx-hero--svc .lx-lead { word-break: auto-phrase; }
-
-/* 31業種の棒グラフ: 小さく薄い灰色の字（12〜13px・#5b6b84）を、読める大きさ（14px）と濃さにする。作る側は industry_ai_sources.py（字の中身は変えない） */
-.vz-l small, .vz-cap small, .vz-table th small, .vz-table td small { font-size: .875rem; color: #44546a; }
-.vz-axis { color: #44546a; }
-.vz-axis span { font-size: .875rem; }
-.vz-note, .rsx-note, .rsx-stat-s { font-size: .875rem; color: #44546a; }
-.vz-row, .vz-axis { grid-template-columns: minmax(8.5em, 12.5em) minmax(0, 1fr) 3.8em; }
-@media (max-width: 600px) {
-  .vz-row { grid-template-columns: minmax(0, 1fr) auto; }
-  .vz-axis { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* スマホのフォーム: 札の内側の余白（42px）で入力欄が画面の7割に縮んでいた。札を画面の端近くまで広げ、内側の余白を詰める */
-@media (max-width: 560px) {
-  .form-cols .form-panel { margin: 0 calc(12px - var(--gutter)); padding: 1.5rem 1rem 1.6rem; border-radius: 18px; }
-  body.lp-doc .quick-lead { margin-left: calc(12px - var(--gutter)); margin-right: calc(12px - var(--gutter)); padding: 1.3rem .75rem .75rem; }
-  body.lp-doc .quick-lead .ql-text { padding: 0 .4rem; }
-  .quick-lead .form-panel.ql-form { padding: 1.1rem .9rem 1.2rem; }
-}
-
-/* 見出しを言葉の途中で折らない（「現状／分析」「出／てくる」）。文節で折る（対応していない端末は nw の区切りで守る） */
-.home h2, .home h3, body.lp-doc h2, body.lp-doc h3, body.lp-doc .step-title,
-.svc-facts dd, .home .cta-final p, body.lp-doc .form-panel button, .home .data-card .dc-s, .home .lx-lead { word-break: auto-phrase; }
-.lx-h1 em { white-space: nowrap; }
-/* 左右の余白を各節と同じ 20px にしたぶん、スマホで「まるごとお任せください。」が1行に入らず折れていた */
-@media (max-width: 420px) { .lx-hero--svc .lx-h1 { font-size: 1.72rem; } }
-h2 .nw, h3 .nw, .step-title .nw { white-space: nowrap; }

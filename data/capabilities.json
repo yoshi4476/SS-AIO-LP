@@ -1077,7 +1077,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "site/js/site.js:253",
+     "evidence": "site/js/site.js:252",
      "anchor": "// cta_click + cta_〈ボタンID〉（設置場所別）/ 電話タップ"
     },
     "external-md": {

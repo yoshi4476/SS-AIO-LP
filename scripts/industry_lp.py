@@ -268,7 +268,7 @@ def body(key, metas, faq_pairs, post_tile, site_url):
         # 質問の列だけだと右が空くので、相談に答える場面の写真（イメージ）を右に置く
         out.append(f'<section class="ilp-faq"><span class="ilp-eb">質問と答え</span><h2>よくある質問</h2>'
                    f'<div class="ilp-faq-grid"><div>{faq}</div><figure class="ilp-faq-ph">'
-                   f'<img src="/images/scenes/faq.webp" alt="オンラインの相談で、画面の向こうの質問に答える担当者のイメージ" width="1600" height="900" loading="lazy">'
+                   f'<img src="/images/scenes/faq.webp" alt="オンラインで相談に答える担当者のイメージ" width="1600" height="900" loading="lazy">'
                    f'</figure></div></section>')
     out.append('</div>')
     return "\n".join(out)
@@ -277,10 +277,10 @@ def body(key, metas, faq_pairs, post_tile, site_url):
 # 調査の数字と支援内容のあいだに、その業種でお客様が来てくれる場面の写真の帯を挟む（文字と表が続いて読み疲れるため。
 # 連作「AIに聞かれ、選ばれ、来てもらう」の1枚。写真が無い業種では何も出さない）
 VISIT_ALT = {
-    "clinic": "受付時間の貼り紙を見ながらクリニックの扉を開ける親子と、気づいて振り向く受付のスタッフ",
-    "koumuten": "完成見学会で、新しい木の家の居間を見て回る家族と、少し離れて見守る工務店の担当者",
-    "shigyou": "行政書士の事務所で、手振りを交えて相談の内容を話す女性と、うなずきながら聞く行政書士",
-    "fudosan": "ベビーカーを押して来店したお客様のために、椅子をよける不動産会社の担当者",
+    "clinic": "午後のクリニックの待合室で、受付を済ませる患者の後ろ姿",
+    "koumuten": "完成見学会で、工務店の担当者と一緒に新しい木の家を見て回る家族",
+    "shigyou": "書類を手に、事務所のある古いビルの階段を上る相談者の後ろ姿",
+    "fudosan": "不動産会社の店内で、担当者と物件の資料を見る夫婦の後ろ姿",
 }
 VISIT_OF = {"medical": "clinic", "reform": "koumuten"}   # 業種LPの名前 → 写真の鍵（industry_thumbs.SCENE_OF と同じ）
 SCENES = Path(__file__).resolve().parent.parent / "site" / "images" / "scenes"

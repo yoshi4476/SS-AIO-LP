@@ -168,11 +168,6 @@ def test_top_hero_video_does_not_become_late_lcp():
         h = (ROOT / "site" / f).read_text(encoding="utf-8")
         js = "".join(re.findall(r"<script>(.*?)</script>", h, re.S))
         hero = [s for s in re.findall(r"<script>(.*?)</script>", h, re.S) if "video.lx-hero-video" in s]
-        if "<video" not in h[h.find('class="lx-hero'):h.find('class="lx-console"')] and not hero:
-            # 2026-11-12 背景を静止画だけにした（動画は古い調子の作った映像だった）。動画が無ければ、後から LCP に数えられることも無い
-            check(f"{f}: ヒーローに動画を置かない（静止画だけ。置くなら最初の操作の後に読む）", True, True)
-            check(f"{f}: 計測タグの遅延読み込みはそのまま", "googletagmanager.com/gtag/js" in js, True)
-            continue
         check(f"{f}: 動画を差し込む処理は1つ", len(hero), 1)
         s = hero[0] if hero else ""
         check(f"{f}: 読み込みの後に時間で流さない（後から LCP に数えられる）",
@@ -182,14 +177,7 @@ def test_top_hero_video_does_not_become_late_lcp():
         check(f"{f}: 動きを減らす設定では読まない", "prefers-reduced-motion" in s, True)
         check(f"{f}: 計測タグの遅延読み込みはそのまま", "googletagmanager.com/gtag/js" in js, True)
     h = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
-    # 2026-11-12 最初の画面の背景から写真を外した（人物の顔に文字と計測盤が重なっていた）。写真が無ければ、先読みも静止画も要らない。
-    # 置き直すなら: 先読みは広い画面だけ・狭い画面には敷かない・静止画は fetchpriority=high で遅延読み込みしない
-    head = h[:h.find("</head>")]
-    hero_css = "".join(re.findall(r"\.home \.lx-hero\{[^}]*\}", head))
     pre = re.search(r'<link rel="preload" as="image" href="/images/home/mv\.webp"[^>]*>', h)
-    if "mv-photo" not in hero_css and not pre and "lx-hero-still" not in h:
-        check("トップ: 最初の画面に写真を敷かない（先読み・静止画・--mv-photo のどれも無い）", True, True)
-        return
     check("トップ: 背景写真の先読みは広い画面だけ", bool(pre and 'media="(min-width: 921px)"' in pre.group(0)), True)
     mob = re.search(r"@media \(max-width:920px\)\{\.home \.lx-hero\{background:([^}]*)\}\}", h)
     check("トップ: 狭い画面の背景に大きな写真（--mv-photo）を敷かない", bool(mob) and "mv-photo" not in mob.group(1), True)

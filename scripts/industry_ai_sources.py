@@ -927,39 +927,8 @@ def home_section(inds=None):
             '  </div>\n</section>\n<!-- /research:home -->')
 
 
-CARDS_MARK = re.compile(r"<!-- industry:cards -->.*?<!-- /industry:cards -->", re.S)
-# トップの「業種から探す」に並べる業種（業種ハブの slug・表に出す名前）
-HOME_CARDS = [("shika", "歯科医院"), ("clinic", "クリニック・医療機関"), ("seikotsuin", "整骨院・接骨院"),
-              ("fudosan", "不動産"), ("koumuten", "工務店・注文住宅"), ("shigyou", "士業"),
-              ("btob", "BtoB・法人向けサービス")]
-
-
-def home_cards():
-    """トップの業種のカード（<!-- industry:cards --> の間）。写真の代わりに、その業種の調査の数字を1つ出す。
-    数は headline() からだけ取る（調査ページと同じ数字）。調査の無い業種は名前だけのカードにする"""
-    import html as H
-    out = []
-    for hub, name in HOME_CARDS:
-        r = HUB_TO_RESEARCH.get(hub)
-        hl = headline(r) if r else None
-        if hl:
-            y, m = hl["date"][:4], int(hl["date"][5:7])
-            # 調査の業種の名前がカードの名前と違うとき（BtoB のカードに IT・SaaS の調査）は、調査の名前を添える
-            scope = "" if hub != "btob" else f'{H.escape(hl["name"])}の調査・'
-            body = (f'<span class="ind-n">{_pct(hl["oa"])}</span>'
-                    f'<span class="ind-l">{H.escape(hl["T"]["other_short"])}を調べる質問で、公式サイトを出典に入れたAIの回答</span>'
-                    f'<span class="ind-s">{scope}当社調べ・{y}年{m}月・全{hl["questions"]}問の調査</span>')
-        else:
-            body = '<span class="ind-l">AIや検索で聞かれている質問と、その答え方</span>'
-        out.append(f'<a class="ind-card ind-stat" href="/industry/{hub}/" data-cta="top_industry_{hub}">'
-                   f'<span class="ind-name">{H.escape(name)}</span>{body}</a>')
-    out.append('<a class="ind-card ind-card-all" href="/industry/" data-cta="top_industry_all"><span>すべての業種 →</span></a>')
-    return "<!-- industry:cards -->" + "".join(out) + "<!-- /industry:cards -->"
-
-
 def sync_home(top_html):
     """トップの印の間を、いまの集計から作り直した区画に差し替える（印が無ければそのまま返す）"""
-    top_html = CARDS_MARK.sub(lambda m: home_cards(), top_html, count=1)
     return HOME_MARK.sub(lambda m: home_section(), top_html, count=1)
 
 

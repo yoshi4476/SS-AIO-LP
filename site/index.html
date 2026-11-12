@@ -24,10 +24,11 @@
 /* load の1.2秒後、かつ最初の描画（first-contentful-paint）の後に読む。このページは最初の描画が load より1〜2秒遅れる回があり、
    描画より先に読んだ回だけ Lighthouse の LCP が1.7秒→4.7秒に跳ねた（2026-10-12 実測）。描画の記録が取れない端末・裏のタブは5秒後に読む */
 window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeout(function(){var done=0,go=function(){if(done)return;done=1;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-X6KNN36L9J';document.head.appendChild(s);};var P=window.PerformanceObserver;if(!P||(P.supportedEntryTypes||[]).indexOf('paint')<0||performance.getEntriesByName('first-contentful-paint').length)return go();new P(function(l,o){if(l.getEntriesByName('first-contentful-paint').length){o.disconnect();go();}}).observe({type:'paint'});setTimeout(go,5000);},1200);});</script>
-<link rel="stylesheet" href="/css/lp-v2.css?v=a144959f">
-<link rel="stylesheet" href="/css/style.css?v=a59a401d">
+<link rel="stylesheet" href="/css/lp-v2.css?v=9f4aec9c">
+<link rel="preload" as="image" href="/images/home/mv.webp" type="image/webp" fetchpriority="high" media="(min-width: 921px)">
+<link rel="stylesheet" href="/css/style.css?v=66315508">
 <script>document.documentElement.classList.add('js');</script>
-<script defer src="/js/site.js?v=1f58626e"></script>
+<script defer src="/js/site.js?v=f13c308a"></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -81,8 +82,13 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
 .top-final-scan input{flex:1 1 18em;min-width:0;font:inherit;font-size:1rem;padding:.85em 1em;border:2px solid transparent;border-radius:12px}
 .top-final-scan input:focus{outline:none;border-color:#8fb7ff}
 .lx-hero form.lx-form{max-width:560px}
-/* 最初の画面は写真を敷かない（紺の地だけ）。人物の顔に文字と計測盤が重なり、主役の入力欄より背景が目立っていた（2026-11-12 の審査） */
-.home .lx-hero{padding:clamp(3rem,6vw,5rem) 0 clamp(3rem,5vw,4.4rem)}
+/* 前のトップの写真（style.css の --mv-photo）を敷き、文字の載る左側だけ濃くする */
+.home .lx-hero{background:linear-gradient(90deg,rgba(6,20,46,.9) 0%,rgba(6,20,46,.74) 48%,rgba(6,20,46,.38) 100%),linear-gradient(180deg,rgba(6,20,46,.25) 0%,rgba(6,20,46,0) 40%,rgba(6,20,46,.55) 100%),var(--mv-photo) 60% 62%/cover no-repeat,#0b2447;padding:clamp(3rem,7vw,6rem) 0 clamp(3rem,6vw,5.2rem)}
+.home .lx-hero::before{opacity:.5}
+.home .lx-console{background:rgba(6,20,46,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.home .lx-h1,.home .lx-lead{text-shadow:0 2px 18px rgba(0,0,0,.35)}
+/* 狭い画面では背景の写真（2400px・110KB）を敷かない。紺を72〜95%重ね、その上に半透明の静止画が載るのでほぼ見えず、最初の描画の前に静止画と帯域を取り合っていた */
+@media (max-width:920px){.home .lx-hero{background:linear-gradient(180deg,rgba(6,20,46,.72) 0%,rgba(6,20,46,.86) 55%,rgba(6,20,46,.95) 100%),#0b2447}}
 </style>
 <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 </head>
@@ -111,8 +117,10 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
 </header>
 <main>
 
-<!-- 1 誰の話か: 冒頭（その場で自社を測れる入口が主役。フォームはLPへ渡し、LPで自動的に診断が始まる） -->
-<section class="lx-hero lx-hero--top" id="scan-start" data-area="メインビジュアル" data-area-id="mv">
+<!-- 冒頭（その場で自社を測れる入口が先。フォームはLPへ渡し、LPで自動的に診断が始まる） -->
+<section class="lx-hero lx-hero--top" data-area="メインビジュアル" data-area-id="mv">
+  <!-- 背景の動画: お客様がAIに聞く → 答えに出た会社を選ぶ → 来院・来店・相談。紺を重ねて薄く敷く（入力と計測盤の構成はそのまま） -->
+  <img class="lx-hero-video lx-hero-still" src="/videos/lab-hero-poster.webp" srcset="/videos/lab-hero-poster-m.webp 640w, /videos/lab-hero-poster.webp 1280w" sizes="100vw" alt="AIに聞いてから会社を選ぶお客様のイメージ" aria-hidden="true" fetchpriority="high" decoding="async"><video class="lx-hero-video" muted loop playsinline preload="none" aria-hidden="true" style="opacity:0;transition:opacity .8s"></video><!-- 背景の動画は最初の操作（タップ・スクロール・キー）の後に読む。読み込みの0.7秒後に流すと、動画の最初のコマが後から最大の描画（LCP）に数えられ、モバイルの計測が1.9秒と4.4秒に割れていた（2026-10-05）。LCP は最初の操作で確定するので、操作の後なら数えられない。データ節約・2G では読まない --><script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))return;var ev=["pointerdown","keydown","touchstart","wheel","scroll"];var go=function(){ev.forEach(function(e){removeEventListener(e,go,true);});var m=matchMedia("(max-width: 900px)").matches?"-m":"";document.querySelectorAll("video.lx-hero-video").forEach(function(v){v.innerHTML='<source src="/videos/lab-hero'+m+'.webm" type="video/webm"><source src="/videos/lab-hero'+m+'.mp4" type="video/mp4">';v.addEventListener("playing",function(){v.style.opacity="";var i=v.previousElementSibling;if(i&&i.classList.contains("lx-hero-still"))i.style.opacity="0";},{once:true});v.load();var p=v.play();if(p&&p.catch)p.catch(function(){});});};ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true});});})();</script>
   <div class="lx-wrap lx-hero-grid">
     <div>
       <ul class="lx-kicker"><li>SEO・AIO・LLMO対策</li><li>医療・不動産・工務店に強い／その他の業種も対応</li></ul>
@@ -126,15 +134,13 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
         <button type="submit" class="lx-go" data-cta="top_hero_scan">30秒で無料診断する</button>
         <p class="lx-micro"><span>入力はURLだけ</span><span>登録不要</span><span>営業電話なし</span></p>
       </form>
-      <p class="lx-alt lx-alt--quiet">先に内容を見る: <a href="/lp/#service" data-cta="top_hero_service">サービスと料金</a>・<a href="#latest" data-cta="top_hero_read">新着記事</a>・<a href="/lp/#form" data-cta="top_hero_consult">無料相談</a></p>
+      <p class="lx-alt">頼める内容を先に見たい方は <a href="/lp/#service" data-cta="top_hero_service">サービスと料金</a> ／ 読んで確かめたい方は <a href="#latest" data-cta="top_hero_read">新着記事</a> ／ <a href="/lp/#form" data-cta="top_hero_consult">無料相談</a></p>
+      <p class="lx-ind">業種別のご案内: <a href="/lp/medical/" data-cta="top_hero_lp_medical">クリニック・歯科医院</a> <a href="/lp/fudosan/" data-cta="top_hero_lp_fudosan">不動産会社</a> <a href="/lp/koumuten/" data-cta="top_hero_lp_koumuten">工務店・リフォーム</a> <a href="/lp/shigyou/" data-cta="top_hero_lp_shigyou">士業事務所</a></p>
     </div>
-    <!-- 右: 診断で分かることを経営者の言葉で3行。専門用語つきの14項目は「無料ツール」の節に畳んで置く -->
-    <div class="lx-console" aria-label="30秒の診断で分かること">
-      <div class="lx-console-head"><b>30秒の診断で分かること</b></div>
-      <div class="lx-group"><p class="lx-gh">AIが、御社のサイトを読めるか</p><p class="lx-gd">入口でAIを締め出す設定になっていないかを確かめます。</p></div>
-      <div class="lx-group"><p class="lx-gh">検索結果に、正しく出るか</p><p class="lx-gd">ページの題・説明文・スマホでの表示を点検します。</p></div>
-      <div class="lx-group"><p class="lx-gh">会社の情報が、AIに伝わるか</p><p class="lx-gd">社名・所在地・電話番号が、AIの答えに使える形で書かれているかを見ます。</p></div>
-      <p class="lx-console-foot">結果はその場で表示します。点数（100点満点）と直す順番が出て、直す所があれば今日できる修正を1つお伝えします。</p>
+    <div class="lx-console" aria-label="診断で測る14項目">
+      <div class="lx-console-head"><b>この14項目を測ります</b><small>100点満点</small></div>
+      <div class="lx-group"><p class="lx-gh">AIが入れるか<span>26点</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーを拒否していない（robots.txt）</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーが入口で弾かれていない（CDN・WAF）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>常時SSL（HTTPS）</span><span class="pt">6点</span></li></ul></div><div class="lx-group"><p class="lx-gh">検索に出るか<span>40点</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>検索に出さない設定（noindex）になっていない</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>タイトル（15〜45字）</span><span class="pt">10点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>説明文（メタディスクリプション・60〜160字）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>正規URLの指定（canonical）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>スマホ表示（viewport）</span><span class="pt">4点</span></li></ul></div><div class="lx-group"><p class="lx-gh">内容を読み取れるか<span>32点</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>見出しH1がページに1つ</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>会社情報（電話番号・所在地）の記載</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>構造化データ（JSON-LD）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>画像の代替テキスト（alt・80%以上）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>SNS・チャット共有時の表示（OGP）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>llms.txt（参考）</span><span class="pt">2点</span></li></ul></div>
+      <p class="lx-console-foot">結果はその場で表示。直す順番と、今日できる修正も出ます。</p>
     </div>
   </div>
 </section>
@@ -149,8 +155,71 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
   </ul>
 </div>
 
-<!-- 2 いま起きていること（概念図ではなく、数えた数字で見せる） -->
+<!-- 無料ツール（URL診断・AI診断。ヘッダー・フッター・/tools/ と同じ2つ） -->
 <div class="cta-mini" data-exit-cta="1" style="text-align:center;margin:28px auto;max-width:720px"><p style="margin:0 0 10px;font-weight:700">ここまで読んで「自社の場合は？」と思った方へ</p><a class="cta-button" href="/lp/#diagnosis" data-cta="exit_diagnosis" style="display:inline-block;padding:12px 26px;border-radius:8px;background:#1b4fa0;color:#fff;text-decoration:none;font-weight:700">3分の無料診断で確かめる</a></div>
+<section class="section" data-area="無料ツール" data-area-id="tools">
+  <div class="section-head reveal">
+    <span class="eyebrow">無料ツール</span>
+    <h2>無料ツールで、まず確かめる</h2>
+    <p class="sub">どちらも無料です。結果はその場で表示します。</p>
+  </div>
+  <div class="top-tools">
+    <a class="tool-card" href="/tools/url-check/" data-cta="top_tools_url">
+      <span class="tool-photo"><img src="/images/home/tool-url.webp" alt="ノートパソコンでサイトの採点結果を確かめる経営者" width="1600" height="900" loading="lazy"></span>
+      <span class="tool-tag">URL診断</span>
+      <h3>URLを入れるだけで、サイトを14項目で採点</h3>
+      <p>AIと検索に読まれる状態かを100点満点で採点し、<strong>直す順番と直し方</strong>を表示します。</p>
+      <ul class="tool-spec"><li>入力はURLだけ</li><li>約30秒</li><li>登録不要</li></ul>
+      <span class="btn btn-primary">URL診断をはじめる <span class="arw">→</span></span>
+    </a>
+    <a class="tool-card" href="/tools/ai-check/" data-cta="top_tools_ai">
+      <span class="tool-photo"><img src="/images/home/tool-ai.webp" alt="スマートフォンでAIの答えと出典を確かめる手元" width="1600" height="900" loading="lazy"></span>
+      <span class="tool-tag">AI診断</span>
+      <h3>AIに、御社がどう紹介されているかを確かめる</h3>
+      <p>地域と業種でAIに3つの質問をして、<strong>答えの出典に御社のサイトが入っているか・社名が出るか</strong>を表示します。</p>
+      <ul class="tool-spec"><li>1回3問</li><li>1メールアドレス3回まで</li></ul>
+      <span class="btn btn-primary">AI診断をはじめる <span class="arw">→</span></span>
+    </a>
+  </div>
+  <p class="sub" style="text-align:center;margin-top:1rem;"><a href="/tools/" data-cta="top_tools_all">無料ツールの一覧を見る（チェックリスト・口コミ返信文ほか）</a></p>
+</section>
+<!-- season --><!-- /season -->
+
+<!-- 業種から探す（読者が自分の業種を選べば、その業種の記事と質問にまとめて届く） -->
+<section class="section" data-area="業種から探す" data-area-id="industry">
+  <div class="section-head reveal">
+    <span class="eyebrow">業種別のご案内</span>
+    <h2>業種から探す</h2>
+    <p class="sub">業種ごとに、AIや検索で聞かれている質問と、その答え方をまとめています。</p>
+  </div>
+  <div class="ind-cards reveal"><a class="ind-card" href="/industry/shika/" data-cta="top_industry_shika"><img src="/images/scenes/shika.webp" alt="歯科医院の現場のイメージ" width="1600" height="900" loading="lazy"><span>歯科医院</span></a><a class="ind-card" href="/industry/clinic/" data-cta="top_industry_clinic"><img src="/images/scenes/clinic.webp" alt="クリニック・医療機関の現場のイメージ" width="1600" height="900" loading="lazy"><span>クリニック・医療機関</span></a><a class="ind-card" href="/industry/seikotsuin/" data-cta="top_industry_seikotsuin"><img src="/images/scenes/seikotsuin.webp" alt="整骨院・接骨院の現場のイメージ" width="1600" height="900" loading="lazy"><span>整骨院・接骨院</span></a><a class="ind-card" href="/industry/fudosan/" data-cta="top_industry_fudosan"><img src="/images/scenes/fudosan.webp" alt="不動産の現場のイメージ" width="1600" height="900" loading="lazy"><span>不動産</span></a><a class="ind-card" href="/industry/koumuten/" data-cta="top_industry_koumuten"><img src="/images/scenes/koumuten.webp" alt="工務店・注文住宅の現場のイメージ" width="1600" height="900" loading="lazy"><span>工務店・注文住宅</span></a><a class="ind-card" href="/industry/shigyou/" data-cta="top_industry_shigyou"><img src="/images/scenes/shigyou.webp" alt="士業の現場のイメージ" width="1600" height="900" loading="lazy"><span>士業</span></a><a class="ind-card" href="/industry/btob/" data-cta="top_industry_btob"><img src="/images/scenes/btob.webp" alt="BtoB・法人向けサービスの現場のイメージ" width="1600" height="900" loading="lazy"><span>BtoB・法人向けサービス</span></a><a class="ind-card ind-card-all" href="/industry/" data-cta="top_industry_all"><span>すべての業種 →</span></a></div>
+  <p class="ind-lps reveal">業種別のご案内: <a href="/lp/medical/" data-cta="top_lp_medical">クリニック・歯科医院</a><a href="/lp/fudosan/" data-cta="top_lp_fudosan">不動産会社</a><a href="/lp/koumuten/" data-cta="top_lp_koumuten">工務店・リフォーム会社</a><a href="/lp/shigyou/" data-cta="top_lp_shigyou">士業事務所</a></p>
+  <p class="sub" style="text-align:center;margin-top:.8rem;">そのほかの業種にも対応しています。</p>
+</section>
+
+<!-- 新着記事 -->
+<section class="section" id="latest" data-area="新着記事" data-area-id="latest">
+  <div class="section-head reveal">
+    <span class="eyebrow">読みもの</span>
+    <h2>新着記事</h2>
+    <p class="sub">毎日更新しています。すべて、当社の運用の現場で確かめたことだけを書いています。</p>
+  </div>
+  <!-- 新着記事リスト: Phase 6（公開エージェント）が記事公開時にここへ <li> を追記する -->
+  <ul class="post-list">
+    <li class="cat-aio"><a href="/aio/biyou-clinic-shukyaku/"><span class="thumb"><img src="/images/thumbs/aio-clinic-biyou.webp" alt="美容クリニックの集客は何から始める？広告規制の中で選ばれる4つの経路のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-12">2026.11.12</time><h3>美容クリニックの集客は何から始める？広告規制の中で選ばれる4つの経路<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/biyoushitsu-shukyaku-consul/"><span class="thumb"><img src="/images/thumbs/aio-salon.webp" alt="美容室の集客コンサルに初回面談で聞く5つの質問は？のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-11">2026.11.11</time><h3>美容室の集客コンサルに初回面談で聞く5つの質問は？<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/zeirishi-shukyaku-consul/"><span class="thumb"><img src="/images/thumbs/aio-shigyou-2.webp" alt="税理士の集客コンサルは助言だけで足りる？分かれ目は3つのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-10">2026.11.10</time><h3>税理士の集客コンサルは助言だけで足りる？分かれ目は3つ<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/biyoushitsu-shukyaku-daikou/"><span class="thumb"><img src="/images/thumbs/aio-salon.webp" alt="美容室の集客代行は契約でつまずく｜確かめる4つの条項のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-09">2026.11.09</time><h3>美容室の集客代行は契約でつまずく｜確かめる4つの条項<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/biyoushitsu-shukyaku-shien/"><span class="thumb"><img src="/images/biyoushitsu-shukyaku-shien/eyecatch.png" alt="美容室の集客支援で予約サイト頼みはNG｜AI出典767件の調査のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-08">2026.11.08</time><h3>美容室の集客支援で予約サイト頼みはNG｜AI出典767件の調査<span class="tag">AIO・LLMO</span></h3></a></li>
+    <li class="cat-aio"><a href="/aio/inshokuten-shukyaku-shien/"><span class="thumb"><img src="/images/thumbs/aio-inshoku.webp" alt="飲食店の集客支援の落とし穴｜AIに聞かれる5つの質問とページのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-07">2026.11.07</time><h3>飲食店の集客支援の落とし穴｜AIに聞かれる5つの質問とページ<span class="tag">AIO・LLMO</span></h3></a></li>
+  </ul>
+  <div class="btn-row" style="justify-content:center;margin-top:2rem;">
+    <a class="btn btn-ghost" href="/blog/">すべての記事を見る <span class="arw">→</span></a>
+    <a class="btn btn-ghost" href="/glossary/">用語集を見る</a>
+  </div>
+</section>
+
+<!-- なぜ今か（概念図ではなく、数えた数字で見せる） -->
 <section class="section" data-area="なぜ今か" data-area-id="whynow">
   <div class="section-head reveal">
     <span class="eyebrow">なぜ今か</span>
@@ -158,21 +227,18 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
     <p class="sub">お客様がリンクを押す前に、検索結果の上でAIが答えを出す場面が増えました。<strong>選ばれるのは、AIが答えに使える事実が書かれていて、なおかつ上位にいる会社</strong>です。</p>
   </div>
   <div class="whynow-grid">
-    <figure class="whynow-photo reveal"><img src="/images/home/whynow.webp" alt="スマートフォンで調べてから来たお客様と、作業の手を止めて顔を上げる花屋の店主（写真はイメージです）" width="1600" height="900" loading="lazy"></figure>
+    <figure class="whynow-photo reveal"><img src="/images/home/whynow.webp" alt="リンクを押す前に、スマートフォンでAIの答えを読む人" width="1600" height="900" loading="lazy"></figure>
     <div class="lx-data reveal">
       <h3>AIの回答（AI Overview）が出た検索の割合</h3>
       <p class="sub">5万5,393件の検索を調べた学術調査（2026年3〜4月）</p>
       <div class="lx-hbar"><span>検索全体</span><div class="track"><div class="fill" style="width:13.7%"></div><span class="val" style="left:13.7%">13.7%</span></div></div>
       <div class="lx-hbar hl"><span>質問形の検索</span><div class="track"><div class="fill" style="width:64.7%"></div><span class="val" style="left:64.7%">64.7%</span></div></div>
-      <p class="so">「◯◯市で高気密の家を建てる工務店は？」のような質問形は、<strong>3件に2件近くでAIが先に答えます。</strong></p>
       <p class="src">出典: arXiv 2605.14021（2026年・55,393クエリ）</p>
     </div>
   </div>
-  <p class="st-next reveal">では、AIは答えを作るとき、どのサイトを出典にしているのか。業種ごとにAIへ聞いて数えました。</p>
 </section>
 
-<!-- 3 なぜそうなるのか: 業種別のAI調査の要点（build.py が data/research の集計から毎回作り直す。数字を手で書かない） -->
-<div class="flat-sec alt">
+<!-- 業種別のAI調査の要点（build.py が data/research の集計から毎回作り直す。数字を手で書かない） -->
 <!-- research:home -->
 <section class="section rsh" data-area="業種別のAI調査" data-area-id="research">
   <div class="section-head reveal">
@@ -188,64 +254,52 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
   </div>
 </section>
 <!-- /research:home -->
-</div>
 
-<!-- 3 の続き: 御社の業種ではどうか（読者が自分の業種を選べば、その業種の記事と質問にまとめて届く） -->
-<section class="section" data-area="業種から探す" data-area-id="industry">
-  <div class="section-head reveal">
-    <span class="eyebrow">業種から探す</span>
-    <h2>御社の業種では、どうなっているか</h2>
-    <p class="sub">業種ごとに、AIや検索で聞かれている質問と、その答え方をまとめています。</p>
-  </div>
-  <div class="ind-cards reveal"><!-- industry:cards --><a class="ind-card ind-stat" href="/industry/shika/" data-cta="top_industry_shika"><span class="ind-name">歯科医院</span><span class="ind-n">83.4%</span><span class="ind-l">費用・治療・症状などを調べる質問で、公式サイトを出典に入れたAIの回答</span><span class="ind-s">当社調べ・2026年10月・全100問の調査</span></a><a class="ind-card ind-stat" href="/industry/clinic/" data-cta="top_industry_clinic"><span class="ind-name">クリニック・医療機関</span><span class="ind-n">77.4%</span><span class="ind-l">費用・症状・受診などを調べる質問で、公式サイトを出典に入れたAIの回答</span><span class="ind-s">当社調べ・2026年10月・全100問の調査</span></a><a class="ind-card ind-stat" href="/industry/seikotsuin/" data-cta="top_industry_seikotsuin"><span class="ind-name">整骨院・接骨院</span><span class="ind-n">72.7%</span><span class="ind-l">費用・選び方・悩み別を調べる質問で、公式サイトを出典に入れたAIの回答</span><span class="ind-s">当社調べ・2026年10月・全50問の調査</span></a><a class="ind-card ind-stat" href="/industry/fudosan/" data-cta="top_industry_fudosan"><span class="ind-name">不動産</span><span class="ind-n">80.5%</span><span class="ind-l">費用・手続き・物件探しなどを調べる質問で、公式サイトを出典に入れたAIの回答</span><span class="ind-s">当社調べ・2026年10月・全100問の調査</span></a><a class="ind-card ind-stat" href="/industry/koumuten/" data-cta="top_industry_koumuten"><span class="ind-name">工務店・注文住宅</span><span class="ind-n">73.9%</span><span class="ind-l">費用・家づくり・住まいの悩みなどを調べる質問で、公式サイトを出典に入れたAIの回答</span><span class="ind-s">当社調べ・2026年10月・全100問の調査</span></a><a class="ind-card ind-stat" href="/industry/shigyou/" data-cta="top_industry_shigyou"><span class="ind-name">士業</span><span class="ind-n">72.1%</span><span class="ind-l">費用・手続き・制度などを調べる質問で、公式サイトを出典に入れたAIの回答</span><span class="ind-s">当社調べ・2026年10月・全100問の調査</span></a><a class="ind-card ind-stat" href="/industry/btob/" data-cta="top_industry_btob"><span class="ind-name">BtoB・法人向けサービス</span><span class="ind-n">25.0%</span><span class="ind-l">料金・選び方・比較・導入の悩みを調べる質問で、公式サイトを出典に入れたAIの回答</span><span class="ind-s">IT・SaaSの調査・当社調べ・2026年10月・全50問の調査</span></a><a class="ind-card ind-card-all" href="/industry/" data-cta="top_industry_all"><span>すべての業種 →</span></a><!-- /industry:cards --></div>
-  <p class="ind-lps reveal">業種別のご案内: <a href="/lp/medical/" data-cta="top_lp_medical">クリニック・歯科医院</a><a href="/lp/fudosan/" data-cta="top_lp_fudosan">不動産会社</a><a href="/lp/koumuten/" data-cta="top_lp_koumuten">工務店・リフォーム会社</a><a href="/lp/shigyou/" data-cta="top_lp_shigyou">士業事務所</a></p>
-  <p class="sub" style="text-align:center;margin-top:.8rem;">そのほかの業種にも対応しています。</p>
-</section>
-
-<!-- 次の一手（途中）: 無料ツール（URL診断・AI診断。ヘッダー・フッター・/tools/ と同じ2つ） -->
-<section class="flat-sec alt" data-area="無料ツール" data-area-id="tools">
-<div class="section">
-  <div class="section-head reveal">
-    <span class="eyebrow">無料ツール</span>
-    <h2>御社の場合は、無料で今すぐ確かめられます</h2>
-    <p class="sub">どちらも無料です。結果はその場で表示します。</p>
-  </div>
-  <div class="top-tools">
-    <a class="tool-card" href="/tools/url-check/" data-cta="top_tools_url">
-      <span class="tool-photo"><img src="/images/home/tool-url.webp" alt="畳店の作業場で、仕上げた畳の上にノートパソコンを置いて画面を確かめる若い店主" width="1600" height="900" loading="lazy"></span>
-      <span class="tool-tag">URL診断</span>
-      <h3>URLを入れるだけで、サイトを14項目で採点</h3>
-      <p>AIと検索に読まれる状態かを100点満点で採点し、<strong>直す順番と直し方</strong>を表示します。</p>
-      <ul class="tool-spec"><li>入力はURLだけ</li><li>約30秒</li><li>登録不要</li></ul>
-      <span class="btn btn-primary">URL診断をはじめる <span class="arw">→</span></span>
-    </a>
-    <a class="tool-card" href="/tools/ai-check/" data-cta="top_tools_ai">
-      <span class="tool-photo"><img src="/images/home/tool-ai.webp" alt="整備工場で、手を拭きながらスマートフォンの画面を読む整備士" width="1600" height="900" loading="lazy"></span>
-      <span class="tool-tag">AI診断</span>
-      <h3>AIに、御社がどう紹介されているかを確かめる</h3>
-      <p>地域と業種でAIに3つの質問をして、<strong>答えの出典に御社のサイトが入っているか・社名が出るか</strong>を表示します。</p>
-      <ul class="tool-spec"><li>1回3問</li><li>1メールアドレス3回まで</li></ul>
-      <span class="btn btn-primary">AI診断をはじめる <span class="arw">→</span></span>
-    </a>
-  </div>
-  <!-- 最初の画面から移した、URL診断の14項目と配点（専門用語のまま。開いて読む） -->
-  <details class="fold scan-items">
-    <summary>測る14項目と配点を見る</summary>
-    <div class="scan-items-grid">
-      <div><p class="si-h">AIが入れるか<span>26点</span></p><ul><li>AIのクローラーを拒否していない（robots.txt）<span>12点</span></li><li>AIのクローラーが入口で弾かれていない（CDN・WAF）<span>8点</span></li><li>常時SSL（HTTPS）<span>6点</span></li></ul></div>
-      <div><p class="si-h">検索に出るか<span>40点</span></p><ul><li>検索に出さない設定（noindex）になっていない<span>12点</span></li><li>タイトル（15〜45字）<span>10点</span></li><li>説明文（メタディスクリプション・60〜160字）<span>8点</span></li><li>正規URLの指定（canonical）<span>6点</span></li><li>スマホ表示（viewport）<span>4点</span></li></ul></div>
-      <div><p class="si-h">内容を読み取れるか<span>32点</span></p><ul><li>見出しH1がページに1つ<span>8点</span></li><li>会社情報（電話番号・所在地）の記載<span>8点</span></li><li>構造化データ（JSON-LD）<span>6点</span></li><li>画像の代替テキスト（alt・80%以上）<span>4点</span></li><li>SNS・チャット共有時の表示（OGP）<span>4点</span></li><li>llms.txt（参考）<span>2点</span></li></ul></div>
+<!-- 4つの施策 -->
+<section class="flat-sec alt" data-area="施策" data-area-id="category">
+  <div class="section" style="padding-top:0;">
+    <div class="section-head reveal">
+      <span class="eyebrow">扱う領域</span>
+      <h2>4つの領域を、1つの戦略として</h2>
+      <p class="sub">「AIに引用される」ためのAIO・LLMOから、土台のSEO、店舗のMEOまで。分けて外注すると噛み合わないため、一社で設計します。</p>
     </div>
-  </details>
-  <p class="sub" style="text-align:center;margin-top:1rem;"><a href="/tools/" data-cta="top_tools_all">無料ツールの一覧を見る（チェックリスト・口コミ返信文ほか）</a></p>
-</div>
+    <div class="work-grid">
+      <a class="work-card reveal" href="/aio/">
+        <span class="work-thumb"><img src="/images/home/aio.webp" alt="AI検索最適化（AIO・LLMO）の記事カテゴリ" width="1200" height="750" loading="lazy"></span>
+        <span class="no">01</span>
+        <h3>AI検索最適化</h3>
+        <p>AI Overview・ChatGPT・Perplexityに「引用される」ためのコンテンツ設計・構造化・計測。LLMO対策もここで扱います。</p>
+        <span class="more">記事を見る →</span>
+      </a>
+      <a class="work-card reveal reveal-d1" href="/seo/">
+        <span class="work-thumb"><img src="/images/home/seo.webp" alt="検索エンジン最適化（SEO）の記事カテゴリ" width="1200" height="750" loading="lazy"></span>
+        <span class="no">02</span>
+        <h3>検索エンジン最適化</h3>
+        <p>AI時代でも土台はSEO。AI引用の前提となる上位表示のためのKW戦略・記事設計・テクニカル対応。</p>
+        <span class="more">記事を見る →</span>
+      </a>
+      <a class="work-card reveal reveal-d2" href="/meo/">
+        <span class="work-thumb"><img src="/images/home/meo.webp" alt="マップ検索最適化（MEO）の記事カテゴリ" width="1200" height="750" loading="lazy"></span>
+        <span class="no">03</span>
+        <h3>マップ検索最適化</h3>
+        <p>Googleマップで「近くの◯◯」に選ばれる。店舗集客支援「G-ran」の現場ノウハウを公開します。</p>
+        <span class="more">記事を見る →</span>
+      </a>
+      <a class="work-card reveal reveal-d3" href="/ai-marketing/">
+        <span class="work-thumb"><img src="/images/home/ai.webp" alt="AI×マーケティングの記事カテゴリ" width="1200" height="750" loading="lazy"></span>
+        <span class="no">04</span>
+        <h3>AI×マーケティング</h3>
+        <p>生成AIを集客・業務に活かす実践テクニックとツール活用。中小企業のAI導入の入口に。</p>
+        <span class="more">記事を見る →</span>
+      </a>
+    </div>
+  </div>
 </section>
-<!-- season --><!-- /season -->
 
-<!-- 4 どう変えるか・6 いくらで、どう進むか: サービス（何を頼めるのかへ進める入口） -->
-<section class="flat-sec" data-area="サービス" data-area-id="service">
-  <div class="section">
-    <div class="section-head reveal is-peak">
+<!-- サービス（記事を読んだ人が、何を頼めるのかへ進める入口） -->
+<section class="flat-sec alt" data-area="サービス" data-area-id="service">
+  <div class="section" style="padding-top:0;">
+    <div class="section-head reveal">
       <span class="eyebrow">サービス</span>
       <h2>記事に書いていることを、御社のサイトで行います</h2>
       <p class="sub">AI集客ラボの記事は、当社が集客支援の現場で実際に行っている手順です。自社で進める時間が無い方は、そのまま当社にお任せいただけます。</p>
@@ -279,7 +333,7 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
     </figure>
     <p class="svc-map-text reveal">ご契約前の診断・相談・現状分析レポート・お見積りは無料です。ご契約後は、検索データからのキーワード選定、記事とLPの制作、GA4・Search Consoleでの計測、月次レポートにもとづく改善の実装を、毎月くり返します。<a href="/lp/#flow" data-cta="top_service_flow">ご相談から運用開始までの流れを見る</a></p>
     <div class="service-split">
-    <figure class="service-photo reveal"><img src="/images/home/service.webp" alt="自転車店で、問い合わせの電話を受けながらメモを取る店主（写真はイメージです）" width="1600" height="900" loading="lazy"></figure>
+    <figure class="service-photo reveal"><img src="/images/home/service.webp" alt="医院の院長と担当者が、サイトの直し方を画面で話し合う様子" width="1600" height="900" loading="lazy"></figure>
     <div class="data-cards">
       <a class="data-card reveal" href="/lp/#price" data-cta="top_service_omakase"><span class="dc-k">プランは1つ</span><span class="dc-t">おまかせパック</span><span class="dc-s">オウンドメディア＋LPの構築・記事の毎日投稿・月次レポート・改善の実装まで一式。月額20万円</span></a>
       <a class="data-card reveal" href="/lp/#price" data-cta="top_service_included"><span class="dc-k">料金に含むもの</span><span class="dc-t">サイトの保守・運用・更新</span><span class="dc-s">記事を公開するだけでなく、サイトの保守・運用・更新まで料金に含みます</span></a>
@@ -290,12 +344,12 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
   </div>
 </section>
 
-<!-- 5 本当か: 運営者（誰が書き、誰が運用しているか） -->
+<!-- 運営者・監修者 -->
 <section class="flat-sec alt" data-area="監修者" data-area-id="about">
   <div class="section">
     <div class="section-head reveal">
       <span class="eyebrow">運営者</span>
-      <h2>記事には、支援の現場で起きたことだけを書いています</h2>
+      <h2>誰が書いているのか</h2>
     </div>
     <div class="person reveal">
       <div class="person-photo">
@@ -316,35 +370,16 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
   </div>
 </section>
 
-<!-- 5 本当か（続き）: 新着記事 -->
-<section class="section" id="latest" data-area="新着記事" data-area-id="latest">
-  <div class="section-head reveal">
-    <span class="eyebrow">新着記事</span>
-    <h2>現場で確かめたことを、毎日記事にしています</h2>
-    <p class="sub">毎日更新しています。ここには新しい3本を載せています。</p>
-  </div>
-  <!-- 新着記事リスト: Phase 6（公開エージェント）が記事公開時にここへ <li> を追記する -->
-  <ul class="post-list">
-    <li class="cat-aio"><a href="/aio/biyou-clinic-shukyaku/"><span class="thumb"><img src="/images/thumbs/aio-clinic-biyou.webp" alt="美容クリニックの集客は何から始める？広告規制の中で選ばれる4つの経路のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-12">2026.11.12</time><h3>美容クリニックの集客は何から始める？広告規制の中で選ばれる4つの経路<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-aio"><a href="/aio/biyoushitsu-shukyaku-consul/"><span class="thumb"><img src="/images/thumbs/aio-salon-2.webp" alt="美容室の集客コンサルに初回面談で聞く5つの質問は？のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-11">2026.11.11</time><h3>美容室の集客コンサルに初回面談で聞く5つの質問は？<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-aio"><a href="/aio/zeirishi-shukyaku-consul/"><span class="thumb"><img src="/images/thumbs/aio-shigyou-2.webp" alt="税理士の集客コンサルは助言だけで足りる？分かれ目は3つのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-10">2026.11.10</time><h3>税理士の集客コンサルは助言だけで足りる？分かれ目は3つ<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-aio"><a href="/aio/biyoushitsu-shukyaku-daikou/"><span class="thumb"><img src="/images/thumbs/aio-salon.webp" alt="美容室の集客代行は契約でつまずく｜確かめる4つの条項のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-09">2026.11.09</time><h3>美容室の集客代行は契約でつまずく｜確かめる4つの条項<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-aio"><a href="/aio/biyoushitsu-shukyaku-shien/"><span class="thumb"><img src="/images/biyoushitsu-shukyaku-shien/eyecatch.png" alt="美容室の集客支援で予約サイト頼みはNG｜AI出典767件の調査のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-08">2026.11.08</time><h3>美容室の集客支援で予約サイト頼みはNG｜AI出典767件の調査<span class="tag">AIO・LLMO</span></h3></a></li>
-    <li class="cat-aio"><a href="/aio/inshokuten-shukyaku-shien/"><span class="thumb"><img src="/images/thumbs/aio-inshoku.webp" alt="飲食店の集客支援の落とし穴｜AIに聞かれる5つの質問とページのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-11-07">2026.11.07</time><h3>飲食店の集客支援の落とし穴｜AIに聞かれる5つの質問とページ<span class="tag">AIO・LLMO</span></h3></a></li>
-  </ul>
-  <p class="latest-more"><a href="/blog/">すべての記事を見る →</a></p>
-</section>
-
-<!-- 8 次の一手: 最後（診断と相談の2択。どちらも無料・営業電話なし） -->
-<section class="cta-final" data-area="CTA" data-area-id="cta">
-  <h2>「AIに聞いたら、<span class="nw">競合が出てきた」</span><br>——そうなる前に。</h2>
+<!-- 最後（診断と相談の2択。どちらも無料・営業電話なし） -->
+<section class="cta-final cta-photo" data-area="CTA" data-area-id="cta">
+  <h2>「AIに聞いたら、競合が出てきた」<br>——そうなる前に。</h2>
   <p>まずは御社のサイトを30秒で測ってください。話を聞きたい方は、無料相談で現状分析レポートをお渡しします。</p>
   <form class="top-final-scan" action="/lp/" method="get">
     <input type="hidden" name="src" value="top_bottom">
     <input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL">
     <button type="submit" class="btn btn-primary" data-cta="top_bottom_scan">30秒で診断する</button>
   </form>
-  <p class="note cta-consult">先に話を聞きたい方は <a href="/lp/#form" data-cta="top_bottom_consult">無料相談を申し込む →</a><span>入力30秒・2営業日以内にご連絡・営業電話なし ／ <a href="/download/">資料のダウンロード</a></span></p>
+  <p class="note"><a href="/lp/#form" data-cta="top_bottom_consult" style="color:inherit;text-decoration:underline;">無料相談を申し込む</a>（入力30秒・2営業日以内にご連絡・営業電話なし）／ <a href="/download/" style="color:inherit;text-decoration:underline;">資料をダウンロード</a></p>
 </section>
 
 </main>
@@ -390,11 +425,6 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
     <div class="footer-credit"><p><a href="https://conflux-partners.jp/works/7senses-aio" target="_blank" rel="noopener">AIO 対策・サイト制作：YW（CONFLUX PARTNERS）</a></p></div>
   </div>
 </footer>
-
-<div class="sticky-cta">
-  <a class="btn btn-primary" href="#scan-start" data-cta="top_sticky_scan">30秒診断</a>
-  <a class="sticky-link" href="/lp/#form" data-cta="top_sticky_form">無料相談</a>
-</div>
 
 <!-- build: 2026-08-12 -->
 </body>
