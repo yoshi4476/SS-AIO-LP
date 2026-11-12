@@ -2,6 +2,7 @@
   "id": "corporate",
   "name": "セブンセンシズ コーポレートサイト",
   "domain": "corp.7senses.co.jp",
+  "fixed_pages": ["/", "/company", "/services/ai-subsidy", "/services/keiri-bpo", "/services/meo", "/services/aio"],
   "repo": "yoshi4476/SS-CorporateHP",
   "branch": "main",
   "type": "nextjs-json",

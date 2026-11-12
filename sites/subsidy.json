@@ -2,6 +2,7 @@
   "id": "subsidy",
   "name": "AI導入補助金サポート",
   "domain": "lp.7senses.co.jp",
+  "fixed_pages": ["/", "/about/", "/service/hojokin/", "/youkou/"],
   "repo": "yoshi4476/seven-HPunyou",
   "branch": "master",
   "type": "external-html",

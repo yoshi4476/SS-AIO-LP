@@ -2,6 +2,7 @@
   "id": "ai-lab",
   "name": "AI集客ラボ",
   "domain": "ai.7senses.co.jp",
+  "fixed_pages": ["/", "/about/", "/faq/"],
   "repo": "yoshi4476/SS-AIO-LP",
   "branch": "master",
   "type": "self-static",
