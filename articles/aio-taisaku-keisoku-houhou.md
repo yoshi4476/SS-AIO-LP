@@ -85,6 +85,8 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 **見るべき指標は、表示回数・参照セッション・引用ページ数・11〜20位の本数・流入経路の5つです。**
 
+費用の目安を先に押さえるなら、[LLMO対策の費用で損する3つの落とし穴](/aio/llmo-taisaku-hiyou/)が参考になります。
+
 あわせて[AIOチェッカーとは？表示と引用を見分ける使い方](/aio/aio-checker/)もご覧ください。
 
 関連する内容として[AI Overviewで店舗集客はできる？](/aio/ai-overview-tenpo-shukyaku/)も公開しています。

@@ -1,0 +1,111 @@
+{
+ "v": 2,
+ "slug": "llmo-taisaku-hiyou",
+ "ok": true,
+ "date": "2026-11-13",
+ "questions": [
+  "LLMO対策 費用について教えてください",
+  "LLMO対策 費用について、「LLMO対策の費用相場は依頼の形で4つに分かれる」を教えてください",
+  "LLMO対策 費用について、「LLMO対策の費用は4つの作業に払うもの」を教えてください",
+  "LLMO対策 費用について、「順位の帯ごとのクリック率で回収を試算する」を教えてください",
+  "LLMO対策 費用について、「順位が動くまでの月数は10件中6件が1か月以内」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "LLMO対策の費用相場は依頼の形で4つに分かれる",
+   "words": [
+    "依頼"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "LLMO対策の費用は4つの作業に払うもの",
+   "words": [
+    "作業"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "順位の帯ごとのクリック率で回収を試算する",
+   "words": [
+    "クリック率",
+    "順位",
+    "回収"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "順位が動くまでの月数は10件中6件が1か月以内",
+   "words": [
+    "月以内",
+    "順位",
+    "月数"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "LLMO対策の見積もりを取る前に今日やること",
+   "words": [
+    "見積"
+   ],
+   "hits": 2,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "adcal-inc.com": "peer",
+  "admano.co.jp": "peer",
+  "ai-search.techsuite.co.jp": "peer",
+  "ai.7senses.co.jp": "self",
+  "aidma-hd.jp": "media",
+  "atglobal.co.jp": "peer",
+  "cantik.co.jp": "peer",
+  "conmark.jp": "peer",
+  "connected-one.world": "peer",
+  "cyberhorn.co.jp": "peer",
+  "dgtrends.com": "peer",
+  "fixit.co.jp": "media",
+  "geo-code.co.jp": "peer",
+  "gmotech.jp": "peer",
+  "lany.co.jp": "peer",
+  "llmocheki.com": "peer",
+  "mediareach.co.jp": "peer",
+  "mesut.co.jp": "peer",
+  "news.mynavi.jp": "media",
+  "nexer.co.jp": "media",
+  "note.com": "video",
+  "ofasim.co.jp": "peer",
+  "plan-b.co.jp": "peer",
+  "prtimes.jp": "media",
+  "queue-tech.jp": "peer",
+  "search-engine-pirates.co.jp": "peer",
+  "selfachieve.jp": "peer",
+  "shakou-inc.co.jp": "peer",
+  "simple-alpha.com": "peer",
+  "tatap.jp": "peer",
+  "umoren.ai": "peer",
+  "waccel.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 3,
+  "専門家への相談": 1
+ },
+ "chars": 10273,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え4件のうち、『作業』に触れたものは1件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは専門家への相談は1件、期間（◯か月・◯日など）は3件、進め方の手順は3件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは32件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが5件、動画・SNS・ブログが1件でした。"
+ ]
+}

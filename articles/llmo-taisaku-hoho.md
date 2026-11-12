@@ -30,6 +30,8 @@ faq:
 
 LLMO対策とは、AIチャットの回答内で自社が引用元・推奨先として選ばれるための最適化施策です。
 
+費用の目安は、[LLMO対策の費用で損する3つの落とし穴](/aio/llmo-taisaku-hiyou/)で解説しています。
+
 あわせて[クリニックのLLMOは公式サイトだけでは足りない](/aio/clinic-llmo-taisaku/)もご覧ください。
 
 前提となる考え方は[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)で整理しています。

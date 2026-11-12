@@ -148,7 +148,7 @@
 "modified": "2026-08-14"
 },
 "aio-taisaku-keisoku-houhou": {
-"hash": "53752a7f507f106db3960e1611f2a8ff",
+"hash": "498ac4ef04811f2160d31823cba38f57",
 "modified": "2026-09-02"
 },
 "aio-taisaku-keyword-sentei": {
@@ -563,8 +563,12 @@
 "hash": "de5359c39f5c8c08156ef4dc0fc172a3",
 "modified": "2026-09-04"
 },
+"llmo-taisaku-hiyou": {
+"hash": "d67d8ee048b53e83171ee5c0f2a7c937",
+"modified": "2026-11-13"
+},
 "llmo-taisaku-hoho": {
-"hash": "ae042cfd49be2574bee2a5f9e8d01896",
+"hash": "ad6ff2ef78604750ce9da349e4b43bd6",
 "modified": "2026-08-31"
 },
 "llmo-tenpo-shukyaku": {

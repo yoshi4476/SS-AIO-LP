@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-12T00:00:00+09:00</updated>
+  <updated>2026-11-13T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>LLMO対策の費用で損する3つの落とし穴｜払う前の試算</title>
+    <link href="https://ai.7senses.co.jp/aio/llmo-taisaku-hiyou/"/>
+    <id>https://ai.7senses.co.jp/aio/llmo-taisaku-hiyou/</id>
+    <updated>2026-11-13T00:00:00+09:00</updated>
+    <summary>LLMO対策の費用は、記事作成ツールで月4〜5万円前後、キーワード設計から運用まで一括の外部委託で月20万円以上が相場です。払う前に、クリック率の実測で回収を試算し、効果が出るまでの月数と3つの落とし穴を確かめる手順を解説します。</summary>
+  </entry>
   <entry>
     <title>美容クリニックの集客は何から始める？広告規制の中で選ばれる4つの経路</title>
     <link href="https://ai.7senses.co.jp/aio/biyou-clinic-shukyaku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/koumuten-chumon-jutaku-llmo/</id>
     <updated>2026-11-01T00:00:00+09:00</updated>
     <summary>工務店・注文住宅のLLMOは、AIに会社を探される場面と費用を調べられる場面で、直す場所が変わります。当社が4つのAIの出典2,662件を数えた調査では、探す質問の出典の54.5%が住宅の比較・資料請求サイトでした。状況別の直す順番と確かめ方を解説します。</summary>
-  </entry>
-  <entry>
-    <title>不動産の売却集客で外す3つのNG｜査定依頼を自社サイトで受ける順番</title>
-    <link href="https://ai.7senses.co.jp/aio/fudousan-baikyaku-shukyaku/"/>
-    <id>https://ai.7senses.co.jp/aio/fudousan-baikyaku-shukyaku/</id>
-    <updated>2026-10-31T00:00:00+09:00</updated>
-    <summary>不動産の売却集客は、売主が相場・売り方・会社選び・査定の4段階で調べる質問に、自社サイトのページで答えることから始めます。査定ページの新設で売却査定の依頼が増えた当社の不動産会社の支援をもとに、外す3つのNGと順位ごとの目安を整理します。</summary>
   </entry>
 </feed>
