@@ -224,6 +224,7 @@ LLMOチェックリストは10項目のうち、7個以上を満たせば合格�
 1. ブラウザで「自社のURL/robots.txt」を開きます。
 2. GPTBot・OAI-SearchBot・PerplexityBot・ClaudeBotの名前を探します。
 3. 「User-agent: GPTBot」の次の行が「Disallow: /」なら、拒否している状態です。
+
 4. 許可する場合は、「User-agent: GPTBot」の次の行を「Allow: /」にします。ほかの3つも同じ形で書きます。
 5. アクセスログでこれらの名前への応答が403や429なら、WAFやプラグインが弾いています。サーバーの管理画面で除外設定をします。
 
