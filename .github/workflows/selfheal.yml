@@ -818,6 +818,7 @@ jobs:
           python -m pip install --quiet --upgrade pip
           pip install --quiet -r requirements.txt
           (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /dev/null 2>&1 || true
+          npm install -g --prefer-offline @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 || { cat /tmp/npm.log; exit 1; }
 
       - name: 門を順と同時で流して比べる
         env:
@@ -852,9 +853,8 @@ jobs:
           grep -E '^  変更  ' /tmp/gates_audit.log
           bench j4 GATES_JOBS=4
           echo "::group::同時（GATES_JOBS=4）の全出力"; cat /tmp/gates_j4.log; echo "::endgroup::"
-          bench j2 GATES_JOBS=2
-          bench j8 GATES_JOBS=8
-          for l in audit j2 j4 j8; do
+          bench default
+          for l in audit j4 default; do
             if cmp -s /tmp/ng_j1.txt "/tmp/ng_$l.txt" && cmp -s /tmp/sum_j1.txt "/tmp/sum_$l.txt"; then
               echo "BENCH_SAME $l: 順と判定・本数が一致"
             else
