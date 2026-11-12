@@ -80,7 +80,7 @@ def test_count_finds_missing_and_twice():
 
 
 def test_worker_output_is_hidden():
-    print("\n■ 同時に流す: 子プロセスの出力も、社の id・名前を公開の id に置き換えてから出す")
+    print("\n■ 同時に流す: 子プロセスの出力と門の名前も、社の id・名前を公開の id に置き換えてから出す")
     import contextlib
     import io
     T = _gates()
@@ -90,9 +90,11 @@ def test_worker_output_is_hidden():
         buf = io.StringIO()
         with contextlib.redirect_stdout(buf):
             T._show("  OK  zz-secret-name の記事")
+        label = T._label("gates_client_zz-secret-name_h1.test_x")
     finally:
         T._HIDE = saved
     check("子の出力の社の名前を伏せる", buf.getvalue(), "  OK  c0000zz00 の記事\n")
+    check("門の名前に混ざった社の id も伏せる（前後が _ でも）", label, "gates_client_c0000zz00_h1.test_x")
 
 
 def _run(jobs, only):
