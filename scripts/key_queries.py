@@ -144,11 +144,14 @@ def init(site_id, cfg, limit=DEFAULT_N):
     return d[site_id]
 
 
-def cause(q, pos, rows_pq, titles):
-    """上がっていない語に、既存のどの工程を当てるかを決める"""
+def cause(q, pos, rows_pq, titles, slug=""):
+    """上がっていない語に、既存のどの工程を当てるかを決める。slug はその語に宣言した記事
+    （検索結果に出ていないだけの語を「記事が無い」とすると、同じ語の記事をもう1本書かせて食い合いを作る。2026-11-12）"""
     nq = norm(q)
     pages = [r for r in rows_pq if norm(r["k"][1]) == nq]
     if not pages:
+        if slug and slug in titles:
+            return "表示が無い（記事はある）", "その記事に、その語に答える節を書き足す（auto_rewrite の stuck）・インデックスを確かめる"
         return "記事が無い", "その語に答える記事を書く（kw_guard を通してから）"
     # 2ページ出ているだけでは食い合いではない。順位が離れていれば、
     # 片方はたまたま出ているだけ。rank_rescue と同じ基準（30位以内・差15以内）に揃える
@@ -215,24 +218,24 @@ def track(only=""):
                     up += 1
                 elif pos > base + 0.5:
                     down += 1
-                    stuck.append((item["q"], base, pos))
+                    stuck.append((item["q"], base, pos, item.get("slug") or ""))
                 else:
                     same += 1
-                    stuck.append((item["q"], base, pos))
+                    stuck.append((item["q"], base, pos, item.get("slug") or ""))
             n = len(blk["queries"])
             tot += n
             up_all += up
             lines.append(f"  {site_id}: {n}語中 上がった{up} / 変わらず{same} / 下がった{down}"
                          f"（起点 {blk['since']}）")
             import sites as _S
-            for q, base, pos in ([] if _S.is_client(site_id) else stuck[:6]):     # お客様の語と順位は CI のログに出さない
-                c, how = cause(q, pos, rows_pq, titles)
+            for q, base, pos, slug in ([] if _S.is_client(site_id) else stuck[:6]):     # お客様の語と順位は CI のログに出さない
+                c, how = cause(q, pos, rows_pq, titles, slug=slug)
                 b = "圏外" if base >= OUT else f"{base:g}位"
                 p = "圏外" if pos >= OUT else f"{pos:g}位"
                 lines.append(f"      {q}（{b}→{p}） … {c} → {how}")
                 stuck_all.append((site_id, q, c))
             if _S.is_client(site_id):
-                stuck_all += [(site_id, q, "") for q, _b, _p in stuck]
+                stuck_all += [(site_id, q, "") for q, _b, _p, _s in stuck]
     print("■ 主要クエリの推移")
     for l in lines:
         print(l)
