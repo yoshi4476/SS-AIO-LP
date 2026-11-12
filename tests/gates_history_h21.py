@@ -210,8 +210,10 @@ def test_rollback_compares_with_same_age_controls():
     import sys
     with tempfile.TemporaryDirectory() as td:
         real = (R.entries, R.published, R.DECIDED, EA.daily_by_slug, EA.interventions, sys.argv)
-        ent = [{"slug": "fixed", "at": f"{at.isoformat()} 10:00", "by": "auto_rewrite", "kind": "title",
-                "before_title": "前の題", "ok": True, "note": "直しました"}]
+        # 公開からの週数でそろえる対照は本文の直しの物差し。題はクリック率で、直す前の条件がそろった記事と比べる（h165）
+        ent = [{"slug": "fixed", "at": f"{at.isoformat()} 10:00", "by": "auto_rewrite", "kind": "serp",
+                "before_path": f"data/rewrite_before/fixed@{at.isoformat()}.md", "after_sha": "x",
+                "ok": True, "note": "直しました"}]
         try:
             R.entries, EA.interventions = (lambda: ent), (lambda: [])
             EA.daily_by_slug = lambda: (daily, None, None)

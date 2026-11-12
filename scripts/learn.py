@@ -106,7 +106,7 @@ def rollback_signal():
     # 公開から日の浅い記事の自然な落ち込みを「戻すべき」と読んでいた。数に入れない
     decided = [r for r in (d.values() if isinstance(d, dict) else [])
                if isinstance(r, dict) and "rolled_back" in r and r.get("control_n")
-               and r.get("kind", "title") == "title"]
+               and r.get("kind", "title") == "title" and not r.get("unknown")]
     if len(decided) < 6:
         return []
     back = sum(1 for r in decided if r["rolled_back"])
@@ -114,7 +114,7 @@ def rollback_signal():
         return []
     return [("learn:rollback", "failure", "quality", [],
              "題を書き換えるときは、いま表示が取れている語（GSCの上位語）を題から外さない",
-             f"直した題の{back}/{len(decided)}本が28日後に表示8割を割り、元に戻された（rewrite_rollback）")]
+             f"直した題の{back}/{len(decided)}本が28日後の判定で元に戻された（rewrite_rollback）")]
 
 
 SIGNALS = (title_signal, originality_signal, yield_signal, rollback_signal)

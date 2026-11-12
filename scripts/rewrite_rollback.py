@@ -9,6 +9,11 @@ effect_ab が出すが、悪化した記事もそのまま残る。「当てる�
 触っていない記事（対照群）の中央値**と比べる。対照の8割を下回り、順位も
 良くなっていなければ、直す前のタイトル・説明文へ戻す。
 
+**題（title）だけはクリック率で判定する**（effect_ab.title_ctr。2026-11-12 運用者の決定）。直す前の条件（順位帯・
+クリック率が目安の半分未満か）がそろった触っていない記事の上がり幅から、題が効かなかったときのクリックを見込み、
+実際のクリックがそれをはっきり割ったとき（悪化）だけ戻す。クリックの母数が足りない・直した後に表示が消えた題は
+「判定できない」として戻さず、判定済みにする（UNKNOWN=<本>。同じ28日は何度見ても同じ）。
+
 対照群は、直した記事と**公開からの週数が近い（±1週）**記事だけにする（effect_ab.cohort()。効果判定と同じ物差し）。
 記事は公開1〜3週で表示の山、4〜6週で山の約1/4に落ちる（2026-10-05 実測）。公開から日の浅い記事を直すと
 自然な落ち込みが「直した後」に入り、公開の古い記事が混ざった対照群と比べると、効いた直しまで
@@ -364,12 +369,51 @@ def main():
     # 内部リンク・CTA まで外すと同じ週数の対照が10本に届かず、判定が永久に保留になる
     acts = EA.rewrites(LOG) + entries()
     pubs = published()
-    rolled = kept = held = 0
+    rolled = kept = held = unknown = 0
+    tmemo = {}
     for d in todo:
         slug, at = d["slug"], date.fromisoformat(d["at"][:10])
         me = EA.change(daily, slug, at, DAYS)
         if me is None:
             continue                                  # 観測が足りない／表示が少ない
+        if (d.get("kind") or "title") == "title":
+            t = EA.title_ctr(daily, slug, at, DAYS, date.today(), acts, pubs, tmemo)
+            if t["status"] == "対照群が足りない":
+                held += 1
+                print(f"   保留 {shown(slug)[:38]:<38} 直す前の条件がそろった対照が{t.get('ctrl_n', 0)}本"
+                      f"（{min_controls()}本以上で判定）")
+                continue
+            if t["status"] not in ("ok", "表示が消えた"):
+                continue
+            n_a = t.get("ctr_verdict") or "判定できない"
+            worse = n_a == "悪化"
+            unk = n_a == "判定できない"
+            verdict = {"ratio": round(me[0], 2), "control": t.get("ctrl_imp"), "pos_gain": me[1],
+                       "rolled_back": False, "control_n": t.get("ctrl_n", 0), "kind": "title",
+                       "measure": "クリック率", "verdict": n_a if t["status"] == "ok" else "表示が消えた",
+                       "clk": t.get("clk"), "exp_clk": t.get("exp_clk"), "ctr": t.get("ctr"), "ctrl_ctr": t.get("ctrl_ctr")}
+            if unk:
+                verdict["unknown"] = True
+            mark = "？" if unk else "×" if worse else "○"
+            print(f"   {mark} {shown(slug)[:38]:<38} "
+                  + (f"クリック{t['clk'][1]}本（効かなければ{t['exp_clk']}本）・クリック率{t['ctr'][0]:.2f}%→{t['ctr'][1]:.2f}%"
+                     f"（対照{t['ctrl_ctr'][0]:.2f}%→{t['ctrl_ctr'][1]:.2f}%）" if t["status"] == "ok" else "直した後に表示が消えた")
+                  + ("・判定できない（戻さない）" if unk else ""))
+            restored = worse and a.write and restore(slug, d)
+            if restored:
+                verdict["rolled_back"] = True
+                rolled += 1
+                CP.append_jsonl(LOG, {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "rewrite_rollback",
+                                      "slug": slug, "kind": "rollback", "ok": True,
+                                      "note": f"クリック{t['clk'][1]}本（効かなければ{t['exp_clk']}本）のため元のタイトルへ戻した"})
+            else:
+                kept += 1
+                unknown += unk
+                if slug in SKIPPED:
+                    verdict["skipped"] = SKIPPED.pop(slug)
+            if a.write:
+                decided[f"{slug}@{d['at'][:10]}"] = verdict
+            continue
         ctrl = controls(daily, slug, at, pubs, acts)
         if ctrl is None or len(ctrl) < min_controls():
             # 判定済みにしない。翌週以降に同じ週数の記事が育てば判定できる
@@ -410,7 +454,7 @@ def main():
     if a.write:
         CP.save_dict("data/rollback_decisions.json", decided, lambda k, _v: CP.owner_of_slug(k.split("@")[0]),
                      dump=lambda o: json.dumps(o, ensure_ascii=False, indent=2), pub=DECIDED)
-    print(f"ROLLBACK_OK=yes\nROLLED_BACK={rolled}\nKEPT={kept}\nHELD={held}")
+    print(f"ROLLBACK_OK=yes\nROLLED_BACK={rolled}\nKEPT={kept}\nHELD={held}\nUNKNOWN={unknown}")
     return 0
 
 

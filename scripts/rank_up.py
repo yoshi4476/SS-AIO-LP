@@ -78,6 +78,26 @@ def expected_ctr(pos):
     return 0.1
 
 
+# 題の書き直しの候補の下限（2026-11-12 運用者の決定）: 目安のクリック率（BENCH）まで上がれば、28日でクリックが
+# この本数以上増える記事だけ。11月12日の週次で題を直した10本は、目安まで上がっても1本あたり0.2〜1.4本しか増えず、
+# 効いても効かなくてもクリックの差が測れなかった
+TITLE_MIN_GAIN = 3
+
+
+def title_gain(imp, clicks, pos):
+    """28日の表示・クリック・順位から、目安のクリック率まで上がったときに増えるクリック（本）"""
+    return imp * expected_ctr(pos) / 100 - clicks
+
+
+def title_peer(imp, clicks, pos):
+    """題の効きの対照に使う「直す前の条件」（effect_ab.title_ctr）: 順位帯（1〜10位はまとめる）と、
+    クリック率が目安の半分未満か（snippet の候補の条件）。選ぶ条件がそろうので、何もしなくても上がる分が両方に入る"""
+    if not imp or pos is None:
+        return None
+    band = "1〜10位" if pos <= TITLE_MAX_POS else band_of(pos)[0]
+    return band, clicks / imp * 100 < expected_ctr(pos) * 0.5
+
+
 def fetch(domain, days=28):
     """GSCからページごとの実績を取る。**取得はここだけで行う。**
 
@@ -247,7 +267,8 @@ def human_items(site=""):
       1. 1〜10位でクリックが取れていない（飾りの年号を含む） … 順位はある。タイトルを直せば即効く
       2. 自社ページどうしの競合          … 片方を勝たせないと両方上がらない
       3. 21位以下で狙う語が合っていない   … 直しても届くまで時間がかかる
-    11位以下の「題に狙う語が無い」「飾りの年号」は題の書き直しに回さない（TITLE_MAX_POS）
+    11位以下の「題に狙う語が無い」「飾りの年号」と、目安のクリック率まで上がっても28日で3本増えない記事は
+    題の書き直しに回さない（TITLE_MAX_POS・TITLE_MIN_GAIN）
     """
     import sites as S
     order = {"snippet": 0, "deco": 1, "title": 1, "rival": 2, "thin": 3, "intent": 4}
@@ -269,7 +290,8 @@ def human_items(site=""):
             if d["slug"] not in texts or d["imp"] < MIN_IMP:
                 continue
             for kind, msg, _ in diagnose(d["slug"], d, texts, pages):
-                if kind in ("snippet", "title", "deco") and d["pos"] > TITLE_MAX_POS:
+                if kind in ("snippet", "title", "deco") and (
+                        d["pos"] > TITLE_MAX_POS or title_gain(d["imp"], d["clicks"], d["pos"]) < TITLE_MIN_GAIN):
                     continue
                 if kind in order:
                     out.append({"kind": "title" if kind in ("snippet", "title", "deco") else "review",

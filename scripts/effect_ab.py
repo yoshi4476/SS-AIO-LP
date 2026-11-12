@@ -219,6 +219,103 @@ def measure(daily, slug, at, days, today):
                   "clk_diff": ac - bc, "imp": [bi, ai], "clk": [bc, ac]}
 
 
+# ---- 題の書き直しの効き（クリック率） --------------------------------------------
+# 題を変えて狙うのはクリック率。表示・順位で測ると、直す前のクリックがほぼ0の記事ばかりで差が出ず、
+# 同じ条件（直す前の順位帯・クリック率が目安の半分未満）の触っていない記事でも28日でクリック率が0.87%→2.76%に
+# 上がっていた（平均への戻り。2026-11-12 実測）。対照は rank_up.title_peer の条件がそろった、前後に書き直していない記事。
+# 題が効かなかったときに見込むクリック exp = 後の表示 × (直す前のクリック率 + 対照のクリック率の上がり幅)。
+# 実際のクリックとの差を √exp で割った z が ±TITLE_Z を超えたら効いた／悪化、間なら効かない（2026-11-12 運用者の決定）
+TITLE_MIN_CLICKS = 5          # 1本: 見込み・実際のクリックがどちらもこれ未満なら判定できない（戻さない）
+TITLE_MIN_CLICKS_KIND = 20    # 種類: 合計がどちらもこれ未満なら判定できない
+TITLE_Z = 2.0
+
+
+def is_title(kind):
+    return str(kind).startswith("title")
+
+
+def _z(clk, exp):
+    return (clk - exp) / max(exp, 1.0) ** 0.5
+
+
+def title_ctr(daily, slug, at, days, today, touched, pubs, memo=None):
+    """題の書き直し1件。status は 観測中／表示が少ない／表示が消えた／対照群が足りない／ok。
+    ok のとき ctr_verdict は 効いた／効かない／悪化／判定できない。memo は同じ daily で続けて呼ぶときの控え"""
+    import rank_up as RU
+    memo = {} if memo is None else memo
+
+    def pp(s):
+        k = (s, at, days)
+        if k not in memo:
+            bb = at - timedelta(days=1)
+            aa = at + timedelta(days=1)
+            memo[k] = (window(daily, s, bb - timedelta(days=days - 1), bb),
+                       window(daily, s, aa, aa + timedelta(days=days - 1)))
+        return memo[k]
+    it = {"slug": slug, "at": at.isoformat()}
+    if at + timedelta(days=days) > today - timedelta(days=LAG):
+        return dict(it, status="観測中")
+    (bi, bc, bp), (ai, ac, ap) = pp(slug)
+    if bi < MIN_IMP:
+        return dict(it, status="表示が少ない")
+    if ai < MIN_IMP:
+        return dict(it, status="表示が消えた", imp=[bi, ai], clk=[bc, ac])
+    key = RU.title_peer(bi, bc, bp)
+    lo, hi = (at - timedelta(days=days)).isoformat(), (at + timedelta(days=days)).isoformat()
+    busy = {x["slug"] for x in touched if lo <= str(x["at"])[:10] <= hi}
+    cb = [0, 0, 0, 0]
+    n = 0
+    for s in daily:
+        if s == slug or s in busy or s not in pubs:
+            continue
+        (sbi, sbc, sbp), (sai, sac, _) = pp(s)
+        # 表示の下限は直した記事と同じ（前後とも MIN_IMP）。rank_up の候補の下限（20回）をかけると、
+        # 同じ条件の記事が1本あたり1〜7本しか残らず、判定がすべて保留になった（2026-11-12 実測。合計で見るので少ない記事の重みは小さい）
+        if sbi < MIN_IMP or sai < MIN_IMP or RU.title_peer(sbi, sbc, sbp) != key:
+            continue
+        n += 1
+        cb = [cb[0] + sbi, cb[1] + sbc, cb[2] + sai, cb[3] + sac]
+    if n < MIN_CTRL:
+        return dict(it, status="対照群が足りない", ctrl_n=n)
+    c0, c1 = cb[1] / cb[0], cb[3] / cb[2]
+    exp = ai * max(0.0, bc / bi + c1 - c0)
+    if max(exp, ac) < TITLE_MIN_CLICKS:
+        v = "判定できない"
+    else:
+        z = _z(ac, exp)
+        v = "効いた" if z >= TITLE_Z else "悪化" if z <= -TITLE_Z else "効かない"
+    return dict(it, status="ok", ctr_verdict=v, imp=[bi, ai], clk=[bc, ac], exp_clk=round(exp, 2),
+                ctr=[round(bc / bi * 100, 2), round(ac / ai * 100, 2)], ctrl_ctr=[round(c0 * 100, 2), round(c1 * 100, 2)],
+                ctrl_imp=round(cb[2] / cb[0], 3), ctrl_n=n)
+
+
+def title_summary(rows, min_n):
+    """題の書き直しの種類ごとの判定。1本ずつでは母数が足りない記事も、見込みと実際のクリックを合計して見る"""
+    ok = [x for x in rows if x["status"] == "ok"]
+    gone = sum(x["status"] == "表示が消えた" for x in rows)
+    k = {"total": len(rows), "judged": len(ok), "pending": sum(x["status"] == "観測中" for x in rows),
+         "low_imp": sum(x["status"] == "表示が少ない" for x in rows),
+         "held": sum(x["status"] == "対照群が足りない" for x in rows),
+         "unknown": gone + sum(x.get("ctr_verdict") == "判定できない" for x in ok),
+         "control_n": round(st.median(x["ctrl_n"] for x in ok)) if ok else 0,
+         "measure": "クリック率"}
+    for v in ("効いた", "効かない", "悪化"):
+        k[f"n_{v}"] = sum(x.get("ctr_verdict") == v for x in ok)
+    exp = sum(x["exp_clk"] for x in ok)
+    clk = sum(x["clk"][1] for x in ok)
+    if len(ok) + gone < min_n:
+        k["verdict"] = "判定前"
+    elif max(exp, clk) < TITLE_MIN_CLICKS_KIND:
+        k["verdict"] = "判定できない"
+    else:
+        k["verdict"] = "効いた" if _z(clk, exp) >= TITLE_Z else "効かない"
+    if ok:
+        bi, ai = sum(x["imp"][0] for x in ok), sum(x["imp"][1] for x in ok)
+        k.update(exp_clk=round(exp, 1), clicks=[sum(x["clk"][0] for x in ok), clk],
+                 ctr=[round(sum(x["clk"][0] for x in ok) / bi * 100, 2), round(clk / ai * 100, 2)])
+    return k
+
+
 def rewrite_effects(acts, daily, today, days=REWRITE_DAYS, min_n=MIN_N, pubs=None, touched=None):
     """書き直し1件ずつを、同じ日で切った対照群の中央値で割り引く。
 
@@ -234,8 +331,13 @@ def rewrite_effects(acts, daily, today, days=REWRITE_DAYS, min_n=MIN_N, pubs=Non
             memo[s, at] = measure(daily, s, at, days, today)
         return memo[s, at]
     items = []
+    tmemo = {}
     for x in acts:
         at = date.fromisoformat(x["at"])
+        if is_title(x["kind"]):
+            # 題はクリック率で、直す前の条件がそろった記事と比べる（公開からの日数ではそろえない）
+            items.append(dict(title_ctr(daily, x["slug"], at, days, today, touched, pubs, tmemo), kind=x["kind"]))
+            continue
         st_, me = meas(x["slug"], at)
         it = {"slug": x["slug"], "at": x["at"], "kind": x["kind"], "status": st_}
         if me is None:
@@ -265,6 +367,9 @@ def rewrite_effects(acts, daily, today, days=REWRITE_DAYS, min_n=MIN_N, pubs=Non
     kinds = {}
     for kind in sorted({x["kind"] for x in items}):
         rows = [x for x in items if x["kind"] == kind]
+        if is_title(kind):
+            kinds[kind] = title_summary(rows, min_n)
+            continue
         judged = [x for x in rows if x["status"] == "ok" and x.get("net_imp") is not None]
         k = {"total": len(rows), "judged": len(judged),
              "pending": sum(x["status"] == "観測中" for x in rows),
@@ -308,17 +413,30 @@ def rewrite_main(days):
     res = rewrite_effects(acts, daily, date.today(), days)
     print(f"{'種類':<14}{'書き直し':>6}{'判定':>5}{'観測中':>6}{'保留':>5}{'対照':>5}"
           f"{'表示×(対照比)':>14}{'順位(対照差)':>12}{'クリック差':>10}  判定")
+    titles = []
     for kind, k in sorted(res["kinds"].items(), key=lambda kv: -kv[1]["total"]):
+        if is_title(kind):
+            titles.append((kind, k))
+            continue
         vals = (f"{k['net_imp']:>13.2f}倍{k['net_pos']:>+11.1f}位{k['net_clk']:>+10.1f}"
                 if "net_imp" in k else f"{'-':>14}{'-':>12}{'-':>10}")
         print(f"{kind[:12]:<14}{k['total']:>6}{k['judged']:>5}{k['pending']:>6}{k['held']:>5}{k['control_n']:>5}"
               f"{vals}  {k['verdict']}")
+    for kind, k in titles:
+        # 題はクリック率で判定する（直す前の条件がそろった触っていない記事と比べる）
+        clk = (f"クリック{k['clicks'][0]}→{k['clicks'][1]}本（効かなければ{k['exp_clk']}本）・"
+               f"クリック率{k['ctr'][0]:.2f}%→{k['ctr'][1]:.2f}%" if "clicks" in k else "")
+        print(f"{kind[:12]:<14}{k['total']:>6}{k['judged']:>5}{k['pending']:>6}{k['held']:>5}{k['control_n']:>5}"
+              f"  {clk}  1本ずつ 効いた{k['n_効いた']}・効かない{k['n_効かない']}・悪化{k['n_悪化']}・"
+              f"判定できない{k['unknown']}  {k['verdict']}（クリック率）")
     weak = [kd for kd, k in res["kinds"].items() if k["verdict"] == "効かない"]
     res["generated"] = date.today().isoformat()
     REWRITE_OUT.parent.mkdir(exist_ok=True)
     REWRITE_OUT.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
     print(f"\n  判定は{MIN_N}件以上がそろった種類だけ（足りない種類は判定前）。対照は公開からの日数が±{AGE_TOL}日の記事で、"
           f"{MIN_CTRL}本に満たない書き直しは保留。結果: data/rewrite_effect.json")
+    print(f"  題（title）は表示・順位ではなくクリック率で、直す前の順位帯とクリック率の条件がそろった記事と比べる。"
+          f"クリックが合計{TITLE_MIN_CLICKS_KIND}本（1本ずつは{TITLE_MIN_CLICKS}本）に満たない・表示が消えた分は判定できない")
     if weak:
         print(f"  効かない種類: {', '.join(weak)} → 続ける前に、対象の選び方と指示を見直してください")
         print(f"   ::warning::書き直しのうち対照群と差が出ていない種類が{len(weak)}件あります: {', '.join(weak)}")
@@ -412,6 +530,10 @@ def main():
     print("\n■ 判定")
     weak = []
     for kind, n, mi, ci, mp, cp in rows_out:
+        if is_title(kind):
+            # 題の効きはクリック率で測る（--rewrites）。表示・順位の倍率では「差が無い」と出ても題の判定にしない
+            print(f"  {kind}: 表示・順位では判定しない（クリック率での判定は effect_ab.py --rewrites）")
+            continue
         better = (mi > ci * 1.05) or (mp > cp + 0.5)
         note = "参考値（本数が少ない）" if n < MIN_N else ""
         mark = "効いている" if better else "対照群と差が無い"

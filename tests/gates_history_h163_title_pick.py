@@ -31,7 +31,7 @@ def test_title_rewrites_only_on_page_one():
     }
     pages = {p["url"]: p for p in (
         _page("zz-snippet", 7.0, 120, 0, "経理代行 費用"),
-        _page("zz-deco7", 6.0, 40, 0, "記帳代行 選び方"),
+        _page("zz-deco7", 6.0, 80, 0, "記帳代行 選び方"),    # 目安まで上がれば3.6本増える（h165 の下限3本を超える）
         _page("zz-kw15", 15.0, 60, 0, "経理補助 違い"),
         _page("zz-deco15", 15.0, 40, 0, "経理代行 相場"),
         _page("zz-kw30", 30.0, 80, 0, "経理 外注 比較"),
