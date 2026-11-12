@@ -286,6 +286,30 @@ python scripts/report_actions.py --selftest           # 対応表と通知文が
 自動修復の書き直しは `scripts/agent_passes.sh` が範囲（自社・お客様の社ごと）ごとに AI を回し、範囲の外を触った分を戻す。
 管制塔へは範囲ごとの通行証（`hub_token.py`。その社だけに書け、読めるのも同じ組と自社の分だけ）で入る。
 
+#### 固定ページの事実の点検（月初・`fixed_facts.py`）
+
+記事の数字は門で確かめるが、手で書いた固定ページ（トップ・よくある質問・サービス・会社概要）は対象外だった。補助金LPの
+よくある質問に、公募要領に無い「売上が法人3,300万円・個人事業主3,900万円以上」「決算2期」が残っていた（2026-11-12）。
+月初の `monthly-report.yml` が本番の固定ページ（`sites/<id>.json` の `fixed_pages`。無ければトップだけ）を取り、数字つきの主張を
+既にある台帳と照らす。台帳は新しく作らない: 制度は `.claude/skills/subsidy-advisor/references/program-status.md`（直した誤りの括弧は数えない）、
+終わった制度は `RETIRED_PROGRAMS` と自社の `ng_terms`、実績は `data/first_party_facts.json`・`public_facts.json`・`voices.json`
+（お客様の社は非公開の `facts.json` と `company.json` だけ）。
+
+```bash
+python scripts/fixed_facts.py                 # 全社（FIXED_FACTS_OK=yes/no/unknown）
+python scripts/fixed_facts.py --site subsidy  # 1社の明細を全部
+```
+
+| 出すもの | 扱い |
+|:--|:--|
+| 台帳と食い違う数字（制度名と「上限・最大・補助率・枠」の金額・率が、その制度の行に無い） | 要対応（`FIXED_FACTS_OK=no`） |
+| 台帳に無い申請の要件（売上・決算・資本金・従業員・過去の採択の数） | 要対応 |
+| 終わった制度を、終わったと書かずに載せている | 要対応 |
+| 台帳に無い数字 | 情報（誤りとは限らない。出典を台帳に足すか、文を直す） |
+
+取れなかったページがあれば終了コード1で `unknown`（問題なしにしない）。お客様の社は CI のログに件数だけを出し、非公開のデータが
+読めない回は `private_store.require` で知らせてその社だけ飛ばす。料金（月額など）の数字は扱わない。
+
 ### 8.9 AI検索で答えが出る語を、毎週さがす
 
 AI Overview の表示率は全体で13.7%、**質問形のクエリでは64.7%**（0.3節）。

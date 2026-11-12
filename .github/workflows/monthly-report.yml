@@ -318,6 +318,22 @@ jobs:
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
           echo "$out" | grep -q '^要対応' && echo "::warning::3倍計画から遅れています（通知に載せます）" || true
 
+      # 手で書いた固定ページ（トップ・よくある質問・サービス・会社概要）の数字を本番から取り、制度の台帳・会社の実績の台帳と照らす。
+      # 記事の門は固定ページを見ておらず、補助金LPのよくある質問に公募要領に無い要件が残っていた（2026-11-12）。
+      # 読むのは公開ページだけで鍵は要らない。お客様の社はログに件数だけを出す（明細は手元で --site）
+      - name: 固定ページの事実の点検（月初）
+        if: steps.day.outputs.mid == 'false' && !inputs.resend_sites
+        run: |
+          mkdir -p automation/logs
+          rc=0
+          out=$(python3 scripts/fixed_facts.py 2>&1) || rc=$?
+          echo "$out" | tail -60
+          echo "$out" | grep -E '^(要対応|情報):' >> automation/logs/findings.txt || true
+          if [ "$rc" -ne 0 ] && ! echo "$out" | grep -q '^要対応'; then
+            echo "要対応: 固定ページの事実の点検が動きませんでした（実行ログ参照）" >> automation/logs/findings.txt
+          fi
+          echo "$out" | grep -q '^要対応' && echo "::warning::固定ページに台帳と合わない数字があります（通知に載せます）" || true
+
       # 改善の実行は道具の中から AI（auto_rewrite・auto_merge の claude）を呼び、AI は記事と検索上位の文章を読む。
       # ほかの AI の工程と同じく、作業場から鍵を外してから動かす（2026-10-20 の点検。Google の鍵・push の資格が
       # 作業場に置かれたままだった）。Google は読むだけ・1時間で切れる許可証にし、鍵を環境変数に持たない別の
