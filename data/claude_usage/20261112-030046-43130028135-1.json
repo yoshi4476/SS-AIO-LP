@@ -1,0 +1,1 @@
+{"at": "2026-11-12T03:00:46+00:00", "job": "週次", "site": "", "turns": 456, "sessions": 183, "input_tokens": 912, "output_tokens": 305384, "cache_creation_input_tokens": 2429233, "cache_read_input_tokens": 9351658, "models": {"claude-sonnet-5-5": {"input_tokens": 912, "output_tokens": 305384, "cache_creation_input_tokens": 2429233, "cache_read_input_tokens": 9351658}}}

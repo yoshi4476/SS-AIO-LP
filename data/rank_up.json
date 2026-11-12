@@ -894,10 +894,9 @@
  },
  "aio-itsukara": {
   "at": "2026-11-12",
-  "pos": 3.9,
-  "imp": 125,
-  "band": "4〜10位",
-  "site": "ai-lab"
+  "pos": 3.2,
+  "site": "ai-lab",
+  "by": "auto_rewrite"
  },
  "aio-mojisuu": {
   "at": "2026-11-12",

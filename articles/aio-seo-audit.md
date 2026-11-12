@@ -18,7 +18,7 @@ diagrams:
   - name: items
     type: list
     title: 追加する視点7つ
-    items: ["AIクローラー許可", "構造化データ", "llms.txt", "冒頭の断言回答", "H2直下の1文結論", "FAQ整備", "鮮度表記"]
+    items: ["AIクローラー許可", "構造化データ", "llms.txt", "冒頭とH2直下の断言", "FAQ整備", "鮮度表記"]
   - name: ng-ok
     type: vs
     title: 監査でよくある失敗と正しい進め方

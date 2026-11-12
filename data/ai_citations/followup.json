@@ -1613,10 +1613,357 @@
     }
    },
    "cited": false
+  },
+  "tsucho-kicho-dekinai-genin": {
+   "checked": "2026-11-12",
+   "site": "corporate",
+   "kw": "通帳 記帳できない 原因",
+   "published": "2026-10-04",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "auchappy.com",
+      "csales.work",
+      "faq.hokkokubank.co.jp",
+      "jointmat.hatenablog.com",
+      "nomad-saving.com",
+      "non-bikki.com",
+      "old.vishraam.com"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "aio-log-bunseki-tool-hikaku": {
+   "checked": "2026-11-12",
+   "site": "ai-lab",
+   "kw": "aio ログ分析 ツール 比較",
+   "published": "2026-10-05",
+   "engines": {
+    "ChatGPT": {
+     "cited": true,
+     "ours": [
+      "https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/?utm_source=openai",
+      "https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/?utm_source=openai",
+      "https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/?utm_source=openai"
+     ],
+     "sources": [
+      "ai.7senses.co.jp",
+      "howtoforge.com",
+      "meev.ai",
+      "neowin.net",
+      "quantifimedia.com",
+      "rebranding.co.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "ai-kenshu.jp",
+      "c-ntn.co.jp",
+      "ctc-g.co.jp",
+      "josis365.com",
+      "ops-today.com",
+      "vertexaisearch.cloud.google.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": true,
+     "ours": [
+      "https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/"
+     ],
+     "sources": [
+      "ai-search.techsuite.co.jp",
+      "ai.7senses.co.jp",
+      "aiopulse.jp",
+      "aiseo-llmo.com",
+      "bring-flower.com",
+      "dolphinx.jp",
+      "mediareach.co.jp",
+      "rebranding.co.jp"
+     ]
+    }
+   },
+   "cited": true
+  },
+  "keiri-kanji-chigai": {
+   "checked": "2026-11-12",
+   "site": "corporate",
+   "kw": "計理 経理 違い",
+   "published": "2026-10-05",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "atmarkit.itmedia.co.jp",
+      "chigai.site",
+      "detail.chiebukuro.yahoo.co.jp",
+      "kokugoryokuup.com",
+      "note.com",
+      "vertexaisearch.cloud.google.com",
+      "zelos.co.jp"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "chigai.fromation.co.jp",
+      "chigai.site",
+      "detail.chiebukuro.yahoo.co.jp",
+      "kokugoryokuup.com",
+      "kotobank.jp",
+      "tacuslay.com"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "kojinjigyonushi-joseikin-shinsei-jouken": {
+   "checked": "2026-11-12",
+   "site": "subsidy",
+   "kw": "個人事業主 助成金 申請 条件",
+   "published": "2026-10-05",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "airregi.jp",
+      "hojoguide.jp",
+      "minnano-joseikin.com",
+      "shisei-consult.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "business.mobile.rakuten.co.jp",
+      "gmo-aozora.com",
+      "hirameki7.io",
+      "hojokin-agent.jp",
+      "minnano-joseikin.com",
+      "morishita-zeimu.com",
+      "nihon-ma.co.jp",
+      "officelinx.jp"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "airregi.jp",
+      "business.mobile.rakuten.co.jp",
+      "fvc.co.jp",
+      "sogyotecho.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "shika-hp-ryokinhyou-kakikata": {
+   "checked": "2026-11-12",
+   "site": "ai-lab",
+   "kw": "歯科医院 ホームページ 料金表 書き方",
+   "published": "2026-10-05",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "anima.tokyo",
+      "dentersection.com",
+      "go-ssa.com",
+      "grill.co.jp",
+      "saisia.co.jp",
+      "shika-pro.jp",
+      "srmk.co.jp",
+      "visca-hp.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "shika-iin-joseikin-taisho": {
+   "checked": "2026-11-12",
+   "site": "subsidy",
+   "kw": "歯科医院 助成金 対象",
+   "published": "2026-10-05",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "3tei.jp",
+      "hojoguide.jp",
+      "it-supportcenter.jp",
+      "jizokuka-hojokin-navi.jp",
+      "ortc.jp",
+      "suzuki-kenpo.or.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "3tei.jp",
+      "apotool.jp",
+      "dental-keiei.jp",
+      "mic.jp",
+      "tokyo-kst.jp",
+      "yamato-sr.jp"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "agmedical.co.jp",
+      "hojokinnavi.jp",
+      "ortc.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "getsuji-shihanki-kessan-chigai": {
+   "checked": "2026-11-12",
+   "site": "corporate",
+   "kw": "月次決算 四半期決算 違い",
+   "published": "2026-10-06",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "blackline.jp",
+      "dlri.co.jp",
+      "freee.co.jp",
+      "hupro-job.com",
+      "jicpa.or.jp",
+      "k-larc.jp",
+      "kpmg.com",
+      "sw-kaikei.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "hupro-job.com",
+      "jmsc.co.jp",
+      "k-larc.jp",
+      "s-shibu.com",
+      "somu-lier.jp",
+      "wheat-biz.com"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "it-hojokin-joken": {
+   "checked": "2026-11-12",
+   "site": "subsidy",
+   "kw": "it導入補助金 条件",
+   "published": "2026-10-06",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "carearc.co.jp",
+      "it-seibishi.or.jp",
+      "leadbrain.co.jp",
+      "note.com",
+      "so-labo.co.jp",
+      "stnet.co.jp",
+      "tatsuzin.info",
+      "vertexaisearch.cloud.google.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "carearc.co.jp",
+      "freee.co.jp",
+      "hojoguide.jp",
+      "hojokinnavi.jp",
+      "hojyokin-portal.jp",
+      "ichidokiri.co.jp",
+      "it-shien.smrj.go.jp"
+     ]
+    }
+   },
+   "cited": false
   }
  },
  "last_run": {
-  "date": "2026-11-09",
+  "date": "2026-11-12",
   "state": "ok",
   "checked": 8,
   "failed": 0,

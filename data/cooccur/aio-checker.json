@@ -9,18 +9,18 @@
   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGlACgfS8dQutE45SACAU910kdntpI2gmFKbNsXRGuCmkPZPy-0DTap8HlAyplNdx6H_j9tDF2kYkkuavctCSH_I_5Y94G-CQaIgHnsBNpUl5tDnFrLcOV9GwVP2N2I"
  ],
  "missing": [
-  "bringritera",
   "aisearchmap",
+  "bringritera",
+  "業種別ランクイン事例",
+  "マーチャントセンター",
+  "writesonic",
+  "オリジナルコンテンツ",
   "ディープクロール解析",
+  "サジェストキーワード",
   "keywordmap",
   "seomonitor",
-  "オリジナルコンテンツ",
-  "サジェストキーワード",
-  "業種別ランクイン事例",
-  "writesonic",
-  "プラットフォーム側",
-  "trackerly",
-  "言及チェックツール"
+  "計測チェックツール",
+  "プラットフォーム側"
  ],
- "covered": 0.18
+ "covered": 0.17
 }

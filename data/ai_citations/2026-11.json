@@ -961,7 +961,7 @@
             "answered": true
           },
           {
-            "kw": "ゆうちょ 記帳",
+            "kw": "請求書 三つ折り",
             "engines": {
               "ChatGPT": {
                 "cited": false,
@@ -971,33 +971,21 @@
               "Gemini": {
                 "cited": false,
                 "ours": [],
-                "sources": [
-                  "allabout.co.jp",
-                  "detail.chiebukuro.yahoo.co.jp",
-                  "faq.jp-bank.japanpost.jp",
-                  "youtube.com"
-                ]
+                "sources": []
               },
               "Perplexity": {
-                "cited": false,
-                "ours": [],
-                "sources": [
-                  "apps.apple.com",
-                  "detail.chiebukuro.yahoo.co.jp",
-                  "ja.wikipedia.org",
-                  "jbc-ltd.com",
-                  "otayoripost.net",
-                  "otoku.awaisora.com",
-                  "shiho-tax.com",
-                  "uebuginko.com"
-                ]
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
               },
               "Claude": {
                 "cited": false,
                 "ours": [],
                 "sources": [
-                  "allabout.co.jp",
-                  "news.mynavi.jp"
+                  "biz.moneyforward.com",
+                  "del-f.co.jp",
+                  "futo-tatujin.com",
+                  "geki-fu.com",
+                  "media.invoice.ne.jp",
+                  "templex.jp"
                 ]
               }
             },

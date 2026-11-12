@@ -136,7 +136,7 @@ GA4で、chatgpt.com・perplexity.aiなどから来た訪問を月1回確かめ�
 
 **自由診療の相談を増やしたい医院は運用を任せ、保険診療中心の医院は手順1と2を自院で進めるのが目安です。**分かれ目は、自由診療ページの書き直しと毎月の計測を続けられる人がいるかどうかです。
 
-近い論点を[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)で扱っています。
+あわせて[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)もご覧ください。
 
 <figure><img src="/images/shika-llmo-taisaku/wakareme.png" alt="自院で進めるか任せるかの比較: AIへの聞き取りと医院情報の統一はどちらでもできる、自由診療ページの書き直しと毎月の計測は任せるほうが続けやすい" loading="lazy"><figcaption>自院で進めるか任せるか</figcaption></figure>
 

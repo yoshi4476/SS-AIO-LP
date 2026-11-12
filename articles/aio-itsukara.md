@@ -8,7 +8,6 @@ date: 2026-10-15
 modified: 2026-10-15
 eyecatch: /images/aio-itsukara/eyecatch.png
 depth: quick
-score: 90
 diagrams:
   - name: nenpyou
     type: steps
@@ -22,6 +21,8 @@ diagrams:
 faq:
   - q: AIOはいつから始まりましたか？
     a: 日本でのAI Overviewの提供開始は2024年8月です。米国では2024年5月から先に提供されていました。
+  - q: AIによる概要はいつからですか？
+    a: 日本では2024年8月から提供されています。米国では2024年5月に先行して始まりました。
   - q: AIモードは日本でいつから使えますか？
     a: 日本語での提供は2025年9月9日から順次始まりました。検索結果の「AIモード」タブから使えます。
   - q: AIO対策はいつから始めるのが適切ですか？
@@ -32,6 +33,8 @@ faq:
     a: あります。引用の前提は検索で上位にいることなので、順位が低い記事は語の選び方から見直します。
   - q: 自社でどこまでできますか？
     a: 冒頭の答えと各見出しの1文結論の書き直しは自社でできます。語の選び方と計測は外部の手が要りやすいです。
+score: 85
+score_breakdown: {originality: 87, extractability: 90, decision: 78}
 ---
 **AI Overview（AIO）は、日本では2024年8月から提供されています。**米国では2024年5月に先行して始まり、日本語のAIモードは2025年9月9日から順次使えるようになりました。つまり「いつから」の答えは、すでに1年以上前から始まっている、です。
 
@@ -43,7 +46,7 @@ faq:
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>AI Overviewが日本で始まった時期</li><li>AIモードが日本語で使えるようになった時期</li><li>対策をいつ始めるべきかの判断基準</li><li>先送りで起きる失敗と、今日からの3つの手順</li></ul></div>
 
-## AI Overviewが日本で始まったのはいつか
+## AIによる概要（AI Overview）が日本で始まったのはいつか
 
 **AI Overviewの日本での提供は2024年8月で、米国での開始から約3か月後でした。**
 
@@ -147,6 +150,8 @@ Search Consoleで、平均順位が4〜20位の記事を抜き出します。1�
 ## よくある質問
 
 <details><summary>AIOはいつから始まりましたか？</summary><p class="faq-a">日本でのAI Overviewの提供開始は2024年8月です。米国では2024年5月から先に提供されていました。</p></details>
+
+<details><summary>AIによる概要はいつからですか？</summary><p class="faq-a">日本では2024年8月から提供されています。米国では2024年5月に先行して始まりました。</p></details>
 
 <details><summary>AIモードは日本でいつから使えますか？</summary><p class="faq-a">日本語での提供は2025年9月9日から順次始まりました。検索結果の「AIモード」タブから使えます。</p></details>
 

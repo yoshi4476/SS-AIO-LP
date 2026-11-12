@@ -154,5 +154,37 @@
     "rolled_back": false,
     "control_n": 49,
     "kind": "title"
+  },
+  "ai-hojokin-nozeishomeisho-dore@2026-10-12": {
+    "ratio": 0.94,
+    "control": 0.51,
+    "pos_gain": -0.6486928104575167,
+    "rolled_back": false,
+    "control_n": 14,
+    "kind": "stuck"
+  },
+  "seikyusho-template-muryou@2026-10-12": {
+    "ratio": 0.45,
+    "control": 0.45,
+    "pos_gain": -10.650909090909092,
+    "rolled_back": false,
+    "control_n": 19,
+    "kind": "title"
+  },
+  "jizokuka-hojokin-kensetsugyou@2026-10-12": {
+    "ratio": 1.55,
+    "control": 0.71,
+    "pos_gain": -1.334224598930481,
+    "rolled_back": false,
+    "control_n": 25,
+    "kind": "title"
+  },
+  "monozukuri-hojokin-biyoushitsu@2026-10-12": {
+    "ratio": 1.57,
+    "control": 0.71,
+    "pos_gain": -0.9610389610389607,
+    "rolled_back": false,
+    "control_n": 23,
+    "kind": "title"
   }
 }

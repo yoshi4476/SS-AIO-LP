@@ -43,6 +43,8 @@ faq:
 
 AIOサービスは、計測ツール・診断コンサル・記事制作代行・運用代行の4つの型に分かれます。
 
+実測の参考として、当サイト自体をAIO対策の実験場にしており、構造化データ・llms.txt・主要AIクローラー20種の許可を実装して計測しています（出典: 自社サイトの実装）。
+
 <div class="definition-box"><span class="term">AIOサービスとは</span>、Google AI OverviewやChatGPTなどのAI回答に自社の情報が引用されるよう、計測・診断・記事の改善を外部が担うサービスです。</div>
 
 <figure><img src="/images/aio-service-hikaku/four-types.png" alt="AIOサービスの4つの型: 計測ツール、診断・コンサル、記事制作代行、運用代行" loading="lazy"><figcaption>AIOサービスの4つの型</figcaption></figure>

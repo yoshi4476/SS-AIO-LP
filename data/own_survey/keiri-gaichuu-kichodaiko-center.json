@@ -1,0 +1,129 @@
+{
+ "v": 2,
+ "slug": "keiri-gaichuu-kichodaiko-center",
+ "ok": true,
+ "date": "2026-11-12",
+ "questions": [
+  "経理 外注 記帳 代行 センターについて教えてください",
+  "経理 外注 記帳 代行 センターについて、「経理の外注先は「記帳代行センターか税理士か」を先に切り分ける」を教えてください",
+  "経理 外注 記帳 代行 センターについて、「記帳代行センターとは？経理代行・経理BPOとの呼び名の違い」を教えてください",
+  "経理 外注 記帳 代行 センターについて、「記帳代行センターに頼める業務と頼めない業務の線引き」を教えてください",
+  "経理 外注 記帳 代行 センターについて、「税理士事務所へ外注する場合との違い5つ」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "経理の外注先は「記帳代行センターか税理士か」を先に切り分ける",
+   "words": [
+    "税理士"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "記帳代行センターに頼める業務と頼めない業務の線引き",
+   "words": [
+    "業務",
+    "業務"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "税理士事務所へ外注する場合との違い5つ",
+   "words": [
+    "税理士事務所"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "自社はどちらに頼むべきか？判断する3つの質問",
+   "words": [
+    "質問"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "依頼先選びでやってはいけない3つのNG",
+   "words": [
+    "NG"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "記帳代行センターから経理BPOへ切り替えるタイミング",
+   "words": [
+    "タイミング"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [
+  {
+   "term": "税理士法",
+   "org": "国税庁",
+   "of": 5,
+   "hits": 5
+  },
+  {
+   "term": "青色申告制度",
+   "org": "国税庁",
+   "of": 5,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "ac.jobcan.ne.jp": "peer",
+  "agent-accounting.net": "peer",
+  "all-senmonka.jp": "portal",
+  "anshin-keiri.eiwa-gr.jp": "peer",
+  "b-pos.jp": "peer",
+  "backofficeforce.jp": "peer",
+  "bizneko.jp": "media",
+  "bod-grp.com": "peer",
+  "bpio.co.jp": "peer",
+  "bricks-outsourcing.com": "peer",
+  "cyber-crew.jp": "peer",
+  "freee.co.jp": "peer",
+  "hanshin-keiri.com": "peer",
+  "heartland-tax.com": "video",
+  "kanbei.jp": "media",
+  "keihi.com": "peer",
+  "keiri-daikou.jp": "peer",
+  "keiri-method.com": "peer",
+  "keiri.cwm.co.jp": "peer",
+  "nta.go.jp": "public",
+  "ntt-finance.co.jp": "peer",
+  "persol-bd.co.jp": "peer",
+  "smc-g.co.jp": "peer",
+  "studying.jp": "peer",
+  "support-office.jp": "peer",
+  "suzuki-tax.net": "peer",
+  "tokyo-keiri.com": "peer",
+  "umegawa.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "xn--mnq381gqlg5nl.jp": "peer",
+  "yayoi-kk.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 0,
+  "専門家への相談": 5
+ },
+ "chars": 8787,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、国税庁の資料にある「青色申告制度」に触れたものは0件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、国税庁の資料にある「税理士法」に触れたものは5件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは進め方の手順は0件、費用の金額（◯円）は1件、期間（◯か月・◯日など）は1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは31件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが2件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
+}
