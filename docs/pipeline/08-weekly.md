@@ -312,9 +312,18 @@ python scripts/report_actions.py --selftest           # 対応表と通知文が
 記事の数字は門で確かめるが、手で書いた固定ページ（トップ・よくある質問・サービス・会社概要）は対象外だった。補助金LPの
 よくある質問に、公募要領に無い「売上が法人3,300万円・個人事業主3,900万円以上」「決算2期」が残っていた（2026-11-12）。
 月初の `monthly-report.yml` が本番の固定ページ（`sites/<id>.json` の `fixed_pages`。無ければトップだけ）を取り、数字つきの主張を
-既にある台帳と照らす。台帳は新しく作らない: 制度は `.claude/skills/subsidy-advisor/references/program-status.md`（直した誤りの括弧は数えない）、
+既にある台帳と照らす: 制度は `.claude/skills/subsidy-advisor/references/program-status.md`（直した誤りの括弧は数えない）、
 終わった制度は `RETIRED_PROGRAMS` と自社の `ng_terms`、実績は `data/first_party_facts.json`・`public_facts.json`・`voices.json`
-（お客様の社は非公開の `facts.json` と `company.json` だけ）。
+（お客様の社は非公開の `facts.json` と `company.json` だけ）。自社3サイトはさらに次も照らす（2026-11-13）:
+
+| 出典の種類 | 置き場 | 照らし方 |
+|:--|:--|:--|
+| 公開している一次データ | `data/datasets/*.json` の引用用の文と行（分子・分母） | 書き方（小数の桁）まで同じものだけ |
+| 当社の調査の割合 | 書き写さない。`industry_ai_sources`（業種別の表・トップの図）と `subsidy/research`（補助金LPのトップ）が集計から毎回計算した値 | 書き方まで同じものだけ。調査を作り直してページが古いままなら拾う |
+| 外部の統計 | `data/fixed_page_facts.json` の `outside`（一次情報の URL・調査の主体・時期・対象・確かめた日） | `words` がページにあるときだけ |
+| 例（モデルケース） | 同じファイルの `examples`（式 `calc` つき。実績ではないので一次情報の台帳に入れない） | 式を計算し直して文の数と合う例だけ・`words` のあるその社のページだけ |
+
+当社の手順の案内（打ち合わせの時間など）と、記録の無い実績・事例の数は台帳に入れない（台帳に無い数字のまま残し、文を直すか記録を出す）。
 
 ```bash
 python scripts/fixed_facts.py                 # 全社（FIXED_FACTS_OK=yes/no/unknown）

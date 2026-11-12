@@ -1,0 +1,60 @@
+{
+ "_readme": "固定ページだけに載せている数字の出典。読むのは scripts/fixed_facts.py だけで、記事の材料にはしない（外部の統計は自社の一次情報ではなく、例は実績ではない）。words のどれかがページにあるときだけ照らす（ほかのページの同じ数を通さない）。outside は一次情報（発表元の記事・論文）で確かめた外部の統計で、出典の URL・調査の主体・時期・対象を持つ。examples はモデルケースで、calc の式を計算し直して文（claim）の数と合わない例・文に無い数を式に使う例は台帳に入れない。制度の上限・率は program-status.md の行どおりのものだけを使う",
+ "outside": [
+  {
+   "id": "sparktoro-zero-click-2024",
+   "words": [
+    "ゼロクリック",
+    "SparkToro"
+   ],
+   "claim": "2024年に米国の Google 検索の58.5%、EU の59.7%がクリックされずに終わった",
+   "org": "SparkToro「2024 Zero-Click Search Study」（Rand Fishkin。データは Datos〈Semrush 傘下〉のパネル）",
+   "url": "https://sparktoro.com/blog/2024-zero-click-search-study-for-every-1000-us-google-searches-only-374-clicks-go-to-the-open-web-in-the-eu-its-360/",
+   "period": "2022-09〜2024-05（2024-07-02公開）",
+   "scope": "米国・EU の Google 検索（日本の数字ではない。AI Overview が広がる前の期間が中心）",
+   "checked": "2026-11-13"
+  },
+  {
+   "id": "arxiv-2605-14021-aio-rate",
+   "words": [
+    "arXiv 2605.14021",
+    "AI Overview"
+   ],
+   "claim": "Google の55,393件のクエリのうち AI Overview が出たのは13.7%で、質問形のクエリでは64.7%だった",
+   "org": "arXiv 2605.14021「Measuring Google AI Overviews: Activation, Source Quality, Claim Fidelity, and Publisher Impact」（Xu・Iqbal・Montgomery）",
+   "url": "https://arxiv.org/abs/2605.14021",
+   "period": "2026-03-13〜2026-04-21（40日間）",
+   "scope": "19分野のトレンドのクエリ55,393件",
+   "checked": "2026-11-13"
+  }
+ ],
+ "examples": [
+  {
+   "id": "ai-subsidy-invoice-550",
+   "sites": [
+    "corporate",
+    "subsidy"
+   ],
+   "words": [
+    "モデルケース"
+   ],
+   "claim": "受発注ソフト・会計ソフトを550万円で導入した場合のモデルケース（例。実績ではない）: インボイス枠の補助上限350万円が補助されると自己負担は200万円で、導入費用の64%が補助、残り36%が自己負担です",
+   "basis": "デジタル化・AI導入補助金2026 インボイス枠（program-status.md の行・2026-11-01 確認）。補助率は補助額50万円以下が3/4以内、50万円超が2/3以内で、550万円ではどちらの区切り方で計算しても350万円を超えるため、補助は上限の350万円",
+   "calc": [
+    {
+     "expr": "550-350",
+     "is": "200万円"
+    },
+    {
+     "expr": "350/550*100",
+     "is": "64%"
+    },
+    {
+     "expr": "200/550*100",
+     "is": "36%"
+    }
+   ],
+   "checked": "2026-11-13"
+  }
+ ]
+}

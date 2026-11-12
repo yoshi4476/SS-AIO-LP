@@ -4,12 +4,17 @@
 記事の数字は facts.py・add_fact・legal_claims などの門で確かめているが、固定ページは対象外だった。補助金LPのトップの
 よくある質問に、公募要領に無い「売上が法人3,300万円・個人事業主3,900万円以上」「決算2期」が残っていた（2026-11-12 に手で直した）。
 
-照らす台帳（新しく作らない。既にあるものを読む）:
+照らす台帳（既にあるものを読む。固定ページにしか無い外部の統計と例だけ fixed_page_facts.json）:
   制度   .claude/skills/subsidy-advisor/references/program-status.md の表（直した誤りを書いた括弧の中は数えない）
   終了   tests/test_gates.py の RETIRED_PROGRAMS と自社の sites/<id>.json の ng_terms
-  実績   data/first_party_facts.json・data/public_facts.json・data/voices.json（お客様の声）。
+  実績   data/first_party_facts.json・data/public_facts.json・data/voices.json（お客様の声）・
+         data/datasets/*.json（公開している一次データ）。
          お客様の社は非公開の clients/<id>/facts.json と company.json だけ
          （運用会社の実績でお客様の数字を通さない）
+  調査   当社の調査の集計から、ページを作る関数（industry_ai_sources・subsidy/research）で毎回計算した値。
+         調査は作り直すたびに数字が変わるので、台帳に書き写さない。書き方（小数の桁）まで同じものだけ通す
+  外部・例  data/fixed_page_facts.json（一次情報で確かめた外部の統計と、モデルケース。words がページにあるときだけ。
+         例は式が文の数と合うものだけ）
 
 見つけるもの:
   台帳と食い違う  制度名と「上限・最大・補助率・枠」がある文の金額・率が、その制度の行に無い
@@ -27,6 +32,7 @@ import argparse
 import ast
 import html
 import json
+import math
 import os
 import re
 import sys
@@ -42,6 +48,8 @@ STATUS = ROOT / ".claude" / "skills" / "subsidy-advisor" / "references" / "progr
 OWN_FACTS = ROOT / "data" / "first_party_facts.json"
 PUBLIC_FACTS = ROOT / "data" / "public_facts.json"
 VOICES = ROOT / "data" / "voices.json"
+DATASETS = ROOT / "data" / "datasets"
+PAGE_FACTS = ROOT / "data" / "fixed_page_facts.json"
 GATES = ROOT / "tests" / "test_gates.py"
 UA = "Mozilla/5.0 (compatible; ss-aio-pipeline/1.0)"
 WAIT = 1.0           # ページの間の待ち（本番に連続で当てない）
@@ -153,14 +161,21 @@ def keys_of(text):
 
 
 class Ledger:
-    """照らす台帳。programs は [(制度の行の名前, 行の文)]、facts は実績の文、retired は終わった制度の名前"""
+    """照らす台帳。programs は [(制度の行の名前, 行の文)]、facts は実績の文、retired は終わった制度の名前。
+    exact は書き方まで同じときだけ通す文（調査の集計。31業種の小数の割合が、ほかの文の「85%」を通していた）、
+    scoped は [(語の並び, 文)] で、語のどれかがページにあるときだけ通す（外部の統計の「約30%」が「工数削減30%」を通していた）"""
 
-    def __init__(self, programs, facts, retired):
+    def __init__(self, programs, facts, retired, exact=(), scoped=()):
         self.programs = [(n, CORRECTION.sub("", t)) for n, t in programs]
         self.retired = [r for r in retired if r]
         self.prog_keys = [(n, keys_of(t)) for n, t in self.programs]
         self.all_prog = set().union(*(k for _, k in self.prog_keys)) if self.prog_keys else set()
         self.fact_keys = set().union(*(keys_of(CORRECTION.sub("", str(f))) for f in facts)) if facts else set()
+        self.exact = {label for t in exact for *_, label in tokens(str(t))}
+        self.scoped = [([w for w in words if w], keys_of(str(t))) for words, t in scoped]
+
+    def scoped_keys(self, page_text):
+        return set().union(*(k for words, k in self.scoped if any(w in page_text for w in words)), set())
 
     def program_for(self, *texts):
         """文に出る制度の行（狭い名前を先に。文に無ければ前後の行で探す）。(名前, 鍵) か None"""
@@ -222,6 +237,83 @@ def _claims(path):
     return [str(f.get("claim") or "") + " " + str(f.get("period") or "") for f in d.get("facts") or []]
 
 
+def dataset_facts(folder=DATASETS):
+    """公開している一次データの引用用の文と行。行の分子・分母は文に無いことがある（「74件のうち64件」）"""
+    out = []
+    for p in sorted(Path(folder).glob("*.json")):
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        unit, n_unit = str(d.get("unit") or ""), re.sub(r"（.*?）", "", str(d.get("n_unit") or ""))
+        out.append(str(d.get("sentence") or ""))
+        for r in d.get("rows") or []:
+            if isinstance(r, dict):
+                out.append(f"{r.get('value')}{unit}" + (f" {r['num']}{n_unit} {r['den']}{n_unit}"
+                                                         if r.get("num") is not None and r.get("den") is not None else ""))
+    return out
+
+
+def survey_facts():
+    """当社の調査の集計から、ページを作る関数で計算した値。コーポレートの /services/aio の業種の表・ラボのトップの
+    まとまりの図は industry_ai_sources、補助金LPのトップの区画は subsidy/research が作る"""
+    import importlib.util
+    import industry_ai_sources as IAS
+    out = []
+    hls = [h for h in (IAS.headline(i) for i in IAS.live_inds()) if h]
+    for h in hls:
+        s = json.loads((IAS.OUT / f"{h['ind']}-summary.json").read_text(encoding="utf-8"))
+        out.append(f"{h['name']} {h['questions']}問 {h['lp']}% {h['lc']}% {h['oa']}% 出典{sum(s['total'].values())}件")
+    if hls:
+        out.append(" ".join(text_lines(IAS.home_section())))
+    # scripts/research.py と名前がぶつかるので、ファイルの場所で読む（build.py と同じ）
+    spec = importlib.util.spec_from_file_location("subsidy_research", ROOT / "scripts" / "subsidy" / "research.py")
+    R = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(R)
+    d = R.data("subsidy", "")
+    if d:
+        out.append(" ".join(text_lines(R.top_html(d))))
+    return out
+
+
+def _round_half_up(v, dec):
+    return math.floor(v * 10 ** dec + 0.5) / 10 ** dec
+
+
+def case_ok(case):
+    """例の式（calc）を計算し直して、結果が文の数と合うか。式に使う数も文にある数だけ（換算の100は除く）"""
+    import derived_facts as DF
+    claim = str(case.get("claim") or "").translate(_ZEN)
+    have = {float(x.replace(",", "")) for x in re.findall(NUM, claim)}
+    calc = case.get("calc") or []
+    for c in calc:
+        want = re.search(NUM, str(c.get("is") or "").translate(_ZEN))
+        try:
+            got = DF._eval(ast.parse(str(c.get("expr") or ""), mode="eval"), [])
+        except (SyntaxError, ValueError):
+            return False
+        used = {float(x.replace(",", "")) for x in re.findall(NUM, str(c.get("expr") or ""))} - {100.0}
+        if not want or not used <= have:
+            return False
+        w = want.group(0).replace(",", "")
+        if _round_half_up(got, len(w.split(".")[1]) if "." in w else 0) != float(w) or float(w) not in have:
+            return False
+    return bool(calc)
+
+
+def page_facts(sid, path=PAGE_FACTS):
+    """[(語の並び, 文)]。外部の統計（出典の URL のあるものだけ）と、その社の例（式が合うものだけ）"""
+    try:
+        d = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    out = [(f.get("words") or [], f["claim"]) for f in d.get("outside") or []
+           if str(f.get("url") or "").startswith("https://") and f.get("org") and f.get("checked")]
+    out += [(c.get("words") or [], c["claim"]) for c in d.get("examples") or []
+            if sid in (c.get("sites") or []) and case_ok(c)]
+    return out
+
+
 def ledger_for(sid):
     """その社を照らす台帳。お客様の社は、お客様の一次情報と会社情報だけを実績にする"""
     import private_store
@@ -230,14 +322,15 @@ def ledger_for(sid):
         facts = _claims(private_store.client_path(sid, "facts.json"))
         comp = private_store.read_json(sid, "company.json", {}) or {}
         facts += [str(v) for k, v in comp.items() if not str(k).startswith("_")]
-    else:
-        try:
-            voices = json.loads(VOICES.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            voices = []
-        facts = _claims(OWN_FACTS) + _claims(PUBLIC_FACTS) + \
-            [" ".join(str(v.get(k) or "") for k in ("quote", "number", "who")) for v in voices if isinstance(v, dict)]
-    return Ledger(program_rows(), facts, retired_programs())
+        return Ledger(program_rows(), facts, retired_programs())
+    try:
+        voices = json.loads(VOICES.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        voices = []
+    facts = _claims(OWN_FACTS) + _claims(PUBLIC_FACTS) + \
+        [" ".join(str(v.get(k) or "") for k in ("quote", "number", "who")) for v in voices if isinstance(v, dict)]
+    return Ledger(program_rows(), facts, retired_programs(), exact=dataset_facts() + survey_facts(),
+                  scoped=page_facts(sid))
 
 
 INLINE = r"span|b|strong|em|i|u|a|small|sup|sub|mark|abbr|time|data|code|ruby|rt|rp|wbr"
@@ -265,6 +358,7 @@ def check_html(page, ledger, url=""):
     whole = " ".join(lines).translate(_ZEN)
     page_sub = len(SUBSIDY_PAGE.findall(whole)) >= 3
     page_prog = ledger.page_program(whole) if page_sub else None
+    known = ledger.fact_keys | ledger.all_prog | ledger.scoped_keys(whole)
     out = []
     for i, raw in enumerate(lines):
         line = raw.translate(_ZEN)
@@ -300,7 +394,7 @@ def check_html(page, ledger, url=""):
                 if not keys & prog[1]:
                     out.append(dict(item, kind="mismatch", note=f"{prog[0]}の台帳の行に無い"))
                 continue
-            if keys & (ledger.fact_keys | ledger.all_prog):
+            if keys & known or label in ledger.exact:
                 continue
             out.append(dict(item, kind="unsourced", note="どの台帳にも無い"))
     return out

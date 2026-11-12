@@ -100,6 +100,53 @@ def test_real_ledger_catches_the_2026_11_12_faq():
           _bad("<dl><dt>補助上限（インボイス枠）</dt><dd><span>350</span><span>万円</span></dd></dl>", real), [])
 
 
+def test_survey_shares_come_from_the_aggregates():
+    import re
+    import fixed_facts as F
+    import industry_ai_sources as IAS
+    print("\n■ 当社の調査の割合は、台帳に書き写さず集計から計算して照らす（2026-11-13 自社3サイトで約140件が台帳に無い数字だった）")
+    survey = F.survey_facts()
+    led = F.Ledger(PROGRAMS, FACTS, [], exact=survey)
+    h = IAS.headline(IAS.live_inds()[0])
+    row = lambda lp: f"<table><tr><th>{h['name']}（{h['questions']}問）</th><td>{lp} %</td><td>{h['lc']} %</td><td>{h['oa']} %</td></tr></table>"
+    check("集計どおりの業種の割合（コーポレートの /services/aio の表）は拾わない", _kinds(row(h["lp"]), led), [])
+    off = round(h["lp"] + 0.1, 1)
+    check("集計と違う割合（ページが古い・写し違い）は台帳に無い数字として拾う", _kinds(row(off), led), [("unsourced", f"{off}%")])
+    total = int(re.search(r"種類（(\d+)件）", " ".join(survey)).group(1))
+    check("補助金LPのトップの区画（根拠にしたページの件数）も集計どおりなら拾わず、違えば拾う",
+          (_kinds(f"<p>AIが根拠にしたページの種類（{total}件）</p>", led),
+           _kinds(f"<p>AIが根拠にしたページの種類（{total + 1}件）</p>", led)), ([], [("unsourced", f"{total + 1}件")]))
+    near = F.Ledger(PROGRAMS, FACTS, [], exact=["中央値 85.0%"])
+    check("書き方まで同じものだけ通す（集計の「85.0%」で事例の「事務作業▲85%」を通さない）",
+          (_kinds("<p>中央値 85.0%</p>", near), _kinds("<p>事務作業▲85%</p>", near)), ([], [("unsourced", "85%")]))
+    datasets = F.Ledger(PROGRAMS, FACTS, [], exact=F.dataset_facts())
+    check("公開している一次データ（契約継続率）の行の分子・分母は台帳どおり、合わない継続率は拾う",
+          (_kinds("<p>SEO運用の契約継続率 86.5%（74件のうち64件）</p>", datasets),
+           _kinds("<p>運用サービスの契約継続率 94%</p>", datasets)), ([], [("unsourced", "94%")]))
+
+
+def test_outside_stats_and_examples_are_scoped():
+    import json
+    import fixed_facts as F
+    print("\n■ 外部の統計と例（data/fixed_page_facts.json）: 語のあるページだけで通し、例は式を計算し直す")
+    led = F.Ledger(PROGRAMS, FACTS, [], scoped=F.page_facts("corporate"))
+    check("出典の調査の語があるページの「58.5%」は通す（SparkToro・米国・2024年）",
+          _kinds("<p>ゼロクリック検索 58.5% の検索が、クリックされずに終わる（出典: SparkToro調査）</p>", led), [])
+    check("語の無いページの同じ数は拾う（ほかの文の数を外部の統計で通さない）",
+          _kinds("<p>問い合わせの58.5%が電話です。</p>", led), [("unsourced", "58.5%")])
+    model = "<p>受発注ソフト・会計ソフトを550万円で導入した場合のモデルケースです。</p><p>64 % が補助 残り 36 %</p>"
+    check("モデルケースの導入費用・割合（350/550・200/550）は例として通す", _kinds(model, led), [])
+    check("例はその社のページだけ（AI集客ラボには載せていない）",
+          _kinds(model, F.Ledger(PROGRAMS, FACTS, [], scoped=F.page_facts("ai-lab"))),
+          [("unsourced", "36%"), ("unsourced", "550万円"), ("unsourced", "64%")])
+    case = json.loads(F.PAGE_FACTS.read_text(encoding="utf-8"))["examples"][0]
+    check("例の式を計算し直す: 台帳の例は合い、比率の違う例・文に無い数を使う式は入れない",
+          (F.case_ok(case), F.case_ok(dict(case, calc=[{"expr": "350/550*100", "is": "70%"}])),
+           F.case_ok(dict(case, calc=[{"expr": "330/550*100", "is": "60%"}]))), (True, False, False))
+    own = (F.ROOT / "data" / "first_party_facts.json").read_text(encoding="utf-8")
+    check("例の数字は記事の一次情報の台帳に入れない（実績として使わせない）", "550万円" in own, False)
+
+
 def _run(get, targets=None):
     import fixed_facts as F
     out = io.StringIO()
@@ -153,3 +200,6 @@ def test_wired_monthly_and_documented():
         check(f"{sid} の固定ページの一覧（fixed_pages）が少数で、トップを含む",
               ("/" in cfg.get("fixed_pages", []), 1 <= len(cfg.get("fixed_pages", [])) <= 8), (True, True))
     check("docs/pipeline に点検の説明がある", "fixed_facts.py" in pipeline_doc(), True)
+    check("台帳の出典の種類（調査の集計・外部の統計と例）が文書にある",
+          ("`data/fixed_page_facts.json` の `outside`" in pipeline_doc(), "が集計から毎回計算した値" in pipeline_doc()),
+          (True, True))
