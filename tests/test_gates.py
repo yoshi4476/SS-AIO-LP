@@ -4234,6 +4234,12 @@ SERIAL = {
     "gates_history_h112_stock_first.test_any_rewrite_keeps_changed_description_within_100_to_160",  # articles/
     "gates_history_h112_stock_first.test_title_candidates_with_stock_phrases_go_to_stock_first",    # articles/
     "gates_history_h168_parallel.test_shared_writes_in_parallel_stop_the_run",                      # tests/ に試しの門を置く
+    # CI でだけ書く門（CI の GATES_AUDIT=1 の実測。2026-11-13）。claude の呼び出しを通すと、CI では agent_memory.slimmed が
+    # CLAUDE.md を AI 用の版に書き換えて戻す。同時に流すと、CLAUDE.md を読む門がその間の版を読みうる
+    "gates_history_h107_token_diet.test_one_turn_calls_run_without_claude_md",          # CLAUDE.md（CI だけ）
+    "gates_history_h137_claude_lean.test_lean_args_keep_skills_where_ai_can_use_them",  # CLAUDE.md（CI だけ）
+    "gates_history_h91_agent_jail.test_tools_calling_claude_deny_key_files",            # CLAUDE.md（CI だけ）
+    "gates_history_h38.test_readiness_is_wired",   # data/clients/<社>/readiness.json（お客様の社のデータがある回だけ）
 }
 # 手元の速い確認（GATES_FAST=1）で、見ているファイルが変わっていなければ飛ばす門。どれも一時のリポジトリで git を
 # 数百回呼び、手元の Windows では git の起動1回に1〜7秒かかって合計40分を超えた（2026-10-24 実測。CI の Linux では数秒）。
