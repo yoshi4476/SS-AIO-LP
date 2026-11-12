@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-09",
-  "asked": 4,
+  "date": "2026-11-12",
+  "asked": 3,
   "items": [
     {
       "kw": "派遣 経理 時給 相場",
@@ -39,29 +39,9 @@
       "score": 10.0
     },
     {
-      "kw": "コーポレート バックオフィス 違い",
-      "imp": 19,
-      "pos": 4.5,
-      "src": "gsc",
-      "written": true,
-      "ai": {
-        "answered": false,
-        "ours": false,
-        "sources": [],
-        "engines": {
-          "Gemini": {
-            "answered": false,
-            "ours": false,
-            "sources": []
-          }
-        }
-      },
-      "score": 7.3
-    },
-    {
       "kw": "バックオフィス 事務 違い",
-      "imp": 52,
-      "pos": 33.5,
+      "imp": 63,
+      "pos": 32.7,
       "src": "gsc",
       "written": false,
       "ai": {
@@ -76,12 +56,12 @@
           }
         }
       },
-      "score": 6.7
+      "score": 6.8
     },
     {
       "kw": "経理補助とは",
-      "imp": 85,
-      "pos": 6.9,
+      "imp": 92,
+      "pos": 6.8,
       "src": "gsc",
       "written": false,
       "ai": {
@@ -96,7 +76,7 @@
           }
         }
       },
-      "score": 2.9
+      "score": 3.0
     }
   ]
 }
