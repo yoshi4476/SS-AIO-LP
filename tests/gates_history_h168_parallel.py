@@ -65,18 +65,18 @@ def test_snapshot_sees_writes():
 
 
 def test_count_finds_missing_and_twice():
-    print("\n■ 同時に流す: 予定の門と流した門を1本ずつ突き合わせる・CI の既定は1本ずつ")
+    print("\n■ 同時に流す: 予定の門と流した門を1本ずつ突き合わせる・CI の既定は4まで")
     from unittest import mock
     T = _gates()
     plan = [(0, "m.a"), (1, "m.b"), (2, "m.c")]
     check("全部1回ずつなら合う", T._mismatch(plan, [2, 0, 1]), ([], []))
     check("流れなかった門と二重の門を名前で出す", T._mismatch(plan, [0, 0, 1]), (["m.c"], ["m.a"]))
-    with mock.patch.dict(os.environ, {"GITHUB_ACTIONS": "true"}):
+    with mock.patch.dict(os.environ, {"GITHUB_ACTIONS": "true"}), mock.patch.object(os, "cpu_count", lambda: 16):
         os.environ.pop("GATES_JOBS", None)
         ci = T._jobs()
     with mock.patch.dict(os.environ, {"GATES_JOBS": "3"}):
         named = T._jobs()
-    check("CI は GATES_JOBS が無ければ1本ずつ・GATES_JOBS を書けばその数", (ci, named), (1, 3))
+    check("CI は GATES_JOBS が無ければ CPU の数（4まで）・GATES_JOBS を書けばその数", (ci, named), (4, 3))
 
 
 def test_worker_output_is_hidden():

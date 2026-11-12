@@ -3995,12 +3995,13 @@ def main():
 def _jobs():
     """同時に流す子プロセスの数（GATES_JOBS。1 なら今までどおり1本ずつ）。
     手元の既定は CPU の数（8まで。16コアの Windows で 8・12・16 を測り、8 を超えても速くならなかった。2026-11-13）。
-    CI の既定は1: お客様の門（gates_client_*）と CI だけで動く門を同時に流して確かめていない"""
+    CI の既定は CPU の数（4まで）。お客様の門を含む962本を4コアのランナーで測り、1本ずつ316秒・同時2で205秒・
+    同時4で189秒・同時8で192秒（2026-11-13）"""
     v = os.environ.get("GATES_JOBS", "").strip()
     if v:
         return max(1, int(v))
     if os.environ.get("GITHUB_ACTIONS"):
-        return 1
+        return min(4, os.cpu_count() or 1)
     return min(8, os.cpu_count() or 1)
 
 
