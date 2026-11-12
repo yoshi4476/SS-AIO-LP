@@ -208,6 +208,18 @@ GitHub Actions では `::warning::` の注釈になり、run の画面に出る�
 例外は `nap_check` と `deploy_check`。人が手を動かすまで消えない問題のため、
 1を返して目立たせる（呼び出し側の `|| true` で全体は止まらない）。
 
+#### 門（`tests/test_gates.py`）の流し方
+
+- 送る前は `PYTHONIOENCODING=utf-8 GATES_FAST=1 python tests/test_gates.py`。途中の確認は `GATES_ONLY=<正規表現>` で関係する門だけ
+- **`GATES_JOBS`**: 同時に流す子プロセスの数。手元の既定は CPU の数（8まで）、`GATES_JOBS=1` で今までどおり1本ずつ。
+  CI（`GITHUB_ACTIONS`）の既定は1（お客様の門 `gates_client_*` を同時に流して確かめていないため）。
+  手元の Windows（16コア・GATES_FAST=1）では全部の門が約7〜10分から約3〜4分になり、判定（OK 6,334件・NG 0）と流した後の `git status` は1本ずつと同じだった（2026-11-13）
+- 管制塔のファイル（site/・data/・articles/・private/ や tests/ の固定の名前の一時ファイル）を書く門は `test_gates.SERIAL` に入れる。
+  同時に流すときは SERIAL の門を先に親で1本ずつ流し、残りをモジュールごとに子で流す。最後に「■ 流した門: N本（予定 N本）」を出し、数え落ち・二重があれば落とす
+- SERIAL に入れ忘れた門が同時の組で管制塔のファイルを変えると「同時に流した門が管制塔のファイルを変えました」で落ちる（門 `gates_history_h168_parallel.py`）。
+  どの門かは `GATES_JOBS=1 GATES_AUDIT=1` で流すと「変更 <門>: <ファイル>」で出る
+- 子プロセスの出力も `test_gates.hide` で伏せてから出す
+
 #### 毎週出るのが正常なもの
 
 `data_sanity` の「数字の信頼性」は、直しようのない事実を報告するため毎週出る
