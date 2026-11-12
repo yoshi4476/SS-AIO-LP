@@ -628,7 +628,7 @@ def cooccur_item(slug):
 
 def emerging_title_items(sites, skip=()):
     """emerging の社で、足す語も見つからない日の最後の候補: rank_up の「表示があるのにクリックが取れない」題
-    （1〜20位・表示20回以上）。題の判定期間中の記事は外す"""
+    （1〜10位・表示20回以上。rank_up.TITLE_MAX_POS）。題の判定期間中の記事は外す"""
     import rank_up
     out = []
     for sid in [s for s in re.split(r"[\s,]+", sites or "") if s and emerging_scope(s)]:

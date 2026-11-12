@@ -40,6 +40,10 @@ LOG = ROOT / "data" / "rank_up.json"
 
 MIN_IMP = 20            # これ未満は偶然と区別できない
 INBOUND_FLOOR = 12      # 被リンクの下限
+# 題の書き直し（auto_rewrite の title）に回すのは1ページ目だけ。2026-11-12 の実測（自社の記事・題を直した判定済み21件）:
+# 11位以下で題を直した記事は前後14・21・28日のどの窓でもクリック0本のまま（直す前は2・4・4本）、28日の表示は対照比0.65倍。
+# 1〜10位は対照比1.39倍で、title 全体の「効かない」（1.01倍）は2つの層を混ぜた値だった。11位以下は一覧に出すだけにする
+TITLE_MAX_POS = 10.5
 STALE_DAYS = 120        # 最終更新がこれより古ければ鮮度を疑う
 
 # 順位帯ごとに、効く手が違う。1つの帯だけ見ても全体は動かない。
@@ -240,10 +244,10 @@ def human_items(site=""):
     """文章の判断が要るものを、効く順に返す（auto_rewrite が読む）。
 
     順番は「直したときに、いちばんクリックが増える順」にする。
-      1. 4〜10位でクリックが取れていない … 順位はある。タイトルを直せば即効く
-      2. 11〜20位でタイトルに狙う語が無い … 押し上げの前提が欠けている
-      3. 自社ページどうしの競合          … 片方を勝たせないと両方上がらない
-      4. 21位以下で狙う語が合っていない   … 直しても届くまで時間がかかる
+      1. 1〜10位でクリックが取れていない（飾りの年号を含む） … 順位はある。タイトルを直せば即効く
+      2. 自社ページどうしの競合          … 片方を勝たせないと両方上がらない
+      3. 21位以下で狙う語が合っていない   … 直しても届くまで時間がかかる
+    11位以下の「題に狙う語が無い」「飾りの年号」は題の書き直しに回さない（TITLE_MAX_POS）
     """
     import sites as S
     order = {"snippet": 0, "deco": 1, "title": 1, "rival": 2, "thin": 3, "intent": 4}
@@ -265,6 +269,8 @@ def human_items(site=""):
             if d["slug"] not in texts or d["imp"] < MIN_IMP:
                 continue
             for kind, msg, _ in diagnose(d["slug"], d, texts, pages):
+                if kind in ("snippet", "title", "deco") and d["pos"] > TITLE_MAX_POS:
+                    continue
                 if kind in order:
                     out.append({"kind": "title" if kind in ("snippet", "title", "deco") else "review",
                                 "slug": d["slug"], "site": sid,
