@@ -53,7 +53,7 @@ faq:
 
 <div class="definition-box"><span class="term">Geminiの引用とは</span>、GoogleのAI「Gemini」がGoogle検索で調べた結果をもとに回答を作り、その根拠にしたWebページを回答の中や下に出典として示すことです。</div>
 
-Googleの開発者向け資料では、検索による根拠付けを次のように説明しています。モデルが検索するかを自分で決め、検索語を作り、結果をもとに答えて出典を付けます（<a href="https://ai.google.dev/gemini-api/docs/google-search" target="_blank" rel="noopener">Gemini API「Grounding with Google Search」</a>）。
+Googleの開発者向け資料では、検索による根拠付けを次のように説明しています。モデルが検索するかを自分で決め、検索語を作り、結果をもとに答えて出典を付けます（<a href="https://aistudio.google.com/docs/google-search" target="_blank" rel="noopener">Gemini API「Grounding with Google Search」</a>）。
 
 つまり*Geminiの引用*は、Google検索の索引に入っていないページには起きません。AI専用の別の入口があるわけではない点を、最初に押さえてください。
 
