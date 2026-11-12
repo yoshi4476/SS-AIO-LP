@@ -78,9 +78,9 @@ AIO対策を外部に任せる場合の相場は、部分支援で月数十万�
 
 相場は、記事本数・依頼範囲・業種・依頼先の規模の4つで大きく変わります。
 
-関連する内容として[AIOサービス比較で外す5つの落とし穴](/aio/aio-service-hikaku/)も公開しています。
+近い論点を[AIOチェッカーとは？表示と引用を見分ける使い方](/aio/aio-checker/)で扱っています。
 
-近い論点を[AIO外注の丸投げで失敗する4つの判断｜渡すもの一覧](/aio/aio-gaichuu/)で扱っています。
+関連する内容として[AIOサービス比較で外す5つの落とし穴](/aio/aio-service-hikaku/)も公開しています。
 
 <figure><img src="/images/aio-taisaku-souba/factors.png" alt="相場を決める4つの要因: 記事本数、依頼範囲(診断のみか運用までか)、業種、依頼先の規模" loading="lazy"><figcaption>相場を決める4つの要因</figcaption></figure>
 

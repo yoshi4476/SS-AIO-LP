@@ -102,11 +102,11 @@ AIの答えをそのまま信じてよいかも確かめておきます。2026�
 
 **不動産会社が着手すべきLLMO対策は、一次情報の明文化から計測まで5つの手順に整理できます。**特別な専用ツールは不要で、鍵になるのは既存ホームページの地道な情報整備。
 
+近い論点を[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)で扱っています。
+
+関連する内容として[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)も公開しています。
+
 関連する内容として[クリニックのLLMOは公式サイトだけでは足りない](/aio/clinic-llmo-taisaku/)も公開しています。
-
-あわせて[MEO会社の選び方｜LLMO対応の見極め3基準](/aio/meo-kaisha-llmo-taiou/)もご覧ください。
-
-前提となる考え方は[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)で整理しています。
 
 <figure><img src="/images/fudousan-llmo-taisaku/steps.png" alt="不動産会社が始めるLLMO対策5つのステップ: 一次情報を明文化、比較表とFAQを設置、クロール許可を確認、ポータル掲載も維持、AI参照を計測" loading="lazy"><figcaption>不動産会社が始めるLLMO対策5つのステップ</figcaption></figure>
 

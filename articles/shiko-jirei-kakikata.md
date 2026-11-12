@@ -50,6 +50,8 @@ faq:
 
 施工事例の書き方とは、竣工写真に加えて間取り・予算・工期・施主の要望を型に沿って書き込み、1件ごとに独立した記事として仕上げることです。
 
+あわせて[歯科医院ホームページで治療説明はどう書く？](/aio/shika-hp-chiryou-setsumei-kakikata/)もご覧ください。
+
 近い論点を[注文住宅SEO対策とは？](/seo/chumon-jutaku-seo-taisaku/)で扱っています。
 
 関連して、[リフォーム会社のホームページ集客](/seo/reform-hp-shukyaku/)もあわせてご確認ください。
@@ -73,8 +75,6 @@ faq:
 施工事例で反響が出ない原因は、説明不足・数値の欠如・テンプレ流用の3つに集約されます。
 
 近い論点を[工務店・注文住宅のAIO対策](/aio/koumuten-chumon-jutaku-aio/)で扱っています。
-
-あわせて[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)もご覧ください。
 
 <figure><img src="/images/shiko-jirei-kakikata/mistakes.png" alt="施工事例で反響が出ない3つのNGパターン: 写真だけで説明文が数行しかない、間取り・予算・工期の数値情報がない、他社の事例文をテンプレのまま流用している" loading="lazy"><figcaption>施工事例で反響が出ない3つのNGパターン</figcaption></figure>
 

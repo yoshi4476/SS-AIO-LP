@@ -100,6 +100,8 @@ AIO表示の最適化（AIO対策）で効くのは、Googleが明記した条�
 
 **AIOはGoogleのAI回答、LLMOはChatGPTなど他のAI、SEOは通常の検索順位が対象です。**
 
+あわせて[AIOでコンテキスト理解を促進するには？](/aio/aio-context-rikai-sokushin/)もご覧ください。
+
 3つは対立しません。AI OverviewはGoogleの通常の検索評価を土台にしているため、SEOで評価されたページが引用の候補になります。
 
 | 施策 | 対象 | 成果の見え方 |
@@ -125,8 +127,6 @@ Googleの<a href="https://developers.google.com/search/docs/fundamentals/ai-opti
 | 内容を細かく刻むとAIが理解しやすい | 細かく分ける必要は無い |
 | AI向けの特別な書き方がある | 特定の書き方は不要 |
 | GEO・AEOの専用テクニックがある | 通常のSEOと同じ。不自然な言及づくりは避ける |
-
-ページの長さについても、Googleは理想の長さは無いと説明しています。何字で書くかの決め方は[AIOの文字数に基準が無い理由](/aio/aio-mojisuu/)にまとめています。
 
 <figure><img src="/images/aio-towa/tsusetsu.png" alt="AIOの通説とGoogle公式の見解の比較: 通説ではllms.txtやAI専用の構造化データが必要とされるが、公式にはllms.txtは無視され、AI専用のスキーマは存在しない"><figcaption>AIOの通説とGoogle公式の見解（当メディア作成）</figcaption></figure>
 

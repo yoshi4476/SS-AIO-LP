@@ -73,6 +73,8 @@ AI検索の扱いは[不動産のAI検索対策の4つの実践ステップ](/ai
 
 不動産会社のWeb集客で効かなかったのは、品質の基準に届かない更新と、どこにでもある内容の記事の2つです。
 
+あわせて[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)もご覧ください。
+
 近い論点を[不動産会社ホームページのよくある質問](/aio/fudousan-hp-yokuaru-shitsumon/)で扱っています。
 
 <figure><img src="/images/fudousan-web-shukyaku/koshin.png" alt="基準に届かない記事やどこにでもある記事を足す効かない更新と、査定ページの新設やエリア情報を厚くする効いた更新の比較"></figure>
@@ -204,8 +206,6 @@ Googleの<a href="https://developers.google.com/search/docs/fundamentals/creatin
 ## 自社で進める会社・頼む会社・見送る会社
 
 不動産のWeb集客は、担当者が月に数時間を割けるなら自社で、改修と毎月の計測まで回せないなら外に頼み、紹介だけで足りているなら見送るのが目安です。
-
-近い論点を[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)で扱っています。
 
 | 会社の状況 | 向いている進め方 |
 |:--|:--|

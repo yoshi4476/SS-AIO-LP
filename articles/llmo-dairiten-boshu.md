@@ -49,6 +49,8 @@ faq:
 
 LLMO代理店とは、企業のAI検索最適化を代わりに提供し、契約1件ごとに報酬を得る販売代理の仕組みです。
 
+あわせて[AIO対策を代理店に任せる前に](/aio/aio-taisaku-dairiten/)もご覧ください。
+
 関連する内容として[AI検索対策を代理店に頼んだら何を準備する？](/aio/ai-kensaku-taisaku-dairiten-junbi/)も公開しています。
 
 「LLMO 代理店 募集」で探すときの答えは、次の表の5条件に集約できます。
@@ -140,8 +142,6 @@ LLMO代理店の始め方は、情報収集・契約・実務準備という3ス
 あわせて[クリニックのLLMOは公式サイトだけでは足りない](/aio/clinic-llmo-taisaku/)もご覧ください。
 
 関連する内容は[インバウンド飲食店のLLMO](/aio/inbound-inshokuten-llmo/)で整理しています。
-
-実際の進め方を先に押さえるなら、[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)が参考になります。
 
 <figure><img src="/images/llmo-dairiten-boshu/steps3.png" alt="LLMO代理店を始める3ステップ: 情報収集で募集要項と提供範囲を確認する、契約で報酬体系とサポート内容を確定する、実務準備で自社の対応体制を整える" loading="lazy"><figcaption>LLMO代理店を始める3ステップ</figcaption></figure>
 

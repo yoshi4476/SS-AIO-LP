@@ -137,8 +137,6 @@ faq:
 | 記帳や請求が月末に滞る | 経理代行・経理BPO | 監査を担う会計士 |
 | 経理担当が辞めて引き継げない | 経理BPO・人材の採用 | 年1回だけ関わる専門家 |
 
-人を雇うか外に出すかで迷うときは、[経理の内製と外注を6つの軸で比べた記事](/blog/keiri-naisei-gaichuu-hikaku/)も判断材料になります。
-
 <div style="text-align:center;margin:32px 0;"><a href="https://corp.7senses.co.jp/contact?s=keiri-bpo" class="cta-button" target="_blank" rel="noopener">経理BPOの無料相談</a></div>
 
 ## 頼み先を誤る3つの落とし穴

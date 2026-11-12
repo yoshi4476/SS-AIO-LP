@@ -55,7 +55,7 @@ faq:
 
 <div class="definition-box"><span class="term">AIO導入</span>とは、検索エンジンでの上位表示を土台にしたうえで、生成AIが回答の根拠として引用しやすい構造をサイトに実装することです。</div>
 
-先に費用の目安を確認したい場合は、[AIO対策の導入方法｜進め方6ステップと費用の目安](/aio/aio-taisaku-donyu-hoho/)が参考になります。自社対応か外注かで迷っている場合は、[BtoB向けAIO対策会社の選び方](/aio/btob-aio-taisaku-kaisha/)もあわせてご確認ください。
+先に費用の目安を確認したい場合は、[AIO対策の導入方法｜進め方6ステップと費用の目安](/aio/aio-taisaku-donyu-hoho/)が参考になります。自社対応か外注かで迷っている場合は、[BtoB向けAIO対策のおすすめ会社は？](/aio/btob-aio-taisaku-kaisha/)もあわせてご確認ください。
 
 ## 自社サイトでのAIO導入事例①：構造化データとllms.txtの実装
 

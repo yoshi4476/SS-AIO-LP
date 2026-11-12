@@ -106,8 +106,6 @@ AIが根拠にできるのは、サイトに文章で書かれた内容だけで
 
 税理士事務所が使える主なチャネルは、紹介・MEO・ホームページ・ブログ・セミナー・SNS/広告の6つです。
 
-関連する内容として[工務店の集客セミナー](/ai-marketing/koumuten-shukyaku-seminar/)も公開しています。
-
 <figure><img src="/images/zeirishi-shukyaku-channel/channels.png" alt="税理士事務所が使える6つの集客チャネル: 紹介、MEO（地図検索）、ホームページ、ブログ・コラム、セミナー・勉強会、SNS・広告" loading="lazy"><figcaption>税理士事務所が使える6つの集客チャネル</figcaption></figure>
 
 **チャネル1: 紹介。**既存顧問先や金融機関からの紹介です。信頼度は最も高い一方、供給量を自事務所でコントロールできません。

@@ -46,13 +46,13 @@ faq:
 
 **経理事務は数字を判断して締める仕事で、経理補助は決まった手順で数字を入れる仕事です。**作業の一部は重なりますが、責任の範囲が違います。
 
+近い論点を[自営業の経理のやり方](/blog/jieigyou-keiri-yarikata/)で扱っています。
+
 関連する内容として[小規模事業者の経理体制の作り方](/blog/shokibo-jigyousha-keiri-taisei/)も公開しています。
 
 関連する内容として[コーポレートとバックオフィスの違いは？](/blog/corporate-backoffice-chigai/)も公開しています。
 
 近い論点を[経理外注の費用相場｜依頼先4タイプの料金](/blog/keiri-gaichuu-hiyou-souba/)で扱っています。
-
-近い論点を[経理の時給相場1,281円](/blog/keiri-jikyu-souba/)で扱っています。
 
 <div class="definition-box"><span class="term">経理事務とは</span>、会計ソフトを使い、取引の入出金・社内の資金管理・給料の支払などを記帳し、月次や決算の数字にまとめる仕事です。<span class="term">経理補助とは</span>、経理事務の担当者の指示を受け、入力・書類の整理・ファイリングなど手順の決まった作業を受け持つ役割です。</div>
 

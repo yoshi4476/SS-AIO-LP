@@ -47,13 +47,13 @@ faq:
 
 記帳代行は、仕訳入力や帳簿整理などの事務処理にとどまる限り、税理士法違反にはなりません。
 
+関連する内容として[飲食店の記帳代行｜任せる範囲と選び方・失敗しない5つの確認点](/blog/inshokuten-kicho-daiko/)も公開しています。
+
+あわせて[平均12万円台は落とし穴](/blog/gyoseishoshi-kichodaiko-souba/)もご覧ください。
+
 あわせて[不動産の記帳代行はどこまで頼める？](/blog/fudousan-kichodaiko/)もご覧ください。
 
 関連する内容として[記帳代行をココナラで頼む落とし穴](/blog/kicho-daiko-coconala/)も公開しています。
-
-つまずきやすい点は[記帳代行を税理士以外に頼む落とし穴](/blog/kichodaiko-zeirishi-igai/)でも扱っています。
-
-関連する内容として[記帳代行のアウトソーシング活用](/blog/kichodaiko-outsourcing/)も公開しています。
 
 <div class="definition-box"><span class="term">記帳代行とは</span>、領収書や通帳データをもとに会計ソフトへ仕訳を入力し、試算表や帳簿を作成する業務のことです。==税理士法上の「税理士業務」には含まれず、資格がなくても行えます。==</div>
 

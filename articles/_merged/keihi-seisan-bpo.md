@@ -1,4 +1,6 @@
 ---
+merged_into: backoffice-bpo-toha
+merged_at: 2026-11-12
 title: 経費精算BPOとは？任せられる業務3つと費用相場
 description: 経費精算BPOとは、立替経費のチェックと会計ソフトへの記帳を外部委託し、最終承認だけ自社に残す仕組みです。任せられる業務とできない業務の線引き、費用相場、導入3ステップ、よくある失敗を2026年8月時点の情報で解説します。
 slug: keihi-seisan-bpo
@@ -49,11 +51,13 @@ faq:
 
 経費精算BPOとは、立替経費のチェック・記帳という実務だけを外部に任せる委託形態です。
 
+実際の例は[経費精算の不正事例6つ](/blog/keihi-seisan-fusei-jirei/)でも扱っています。
+
 近い論点を[経費精算がめんどくさい会社の落とし穴](/blog/keihi-seisan-mendokusai/)で扱っています。
 
 あわせて[記帳代行費用の相場は法人でいくら？](/blog/kichodaiko-houjin-hiyou-souba/)もご覧ください。
 
-あわせて[月次決算はいつまでに終えるか](/blog/getsuji-kessan-itsumade/)もご覧ください。
+関連する内容として[月次決算はいつまでに終えるか](/blog/getsuji-kessan-itsumade/)も公開しています。
 
 あわせてバックオフィスBPOとは？もご覧ください。
 
@@ -131,8 +135,6 @@ faq:
 <figure><img src="/images/keihi-seisan-bpo/step.png" alt="経費精算BPO導入までの3ステップ: 現状の運用を棚卸しする、任せる範囲を線引きする、委託先とテスト運用する" loading="lazy"><figcaption>経費精算BPO導入までの3ステップ</figcaption></figure>
 
 第一に、現状の申請件数・承認フロー・規程の有無を棚卸しします。規程が存在しない、または古いままの場合は、[経費精算ルールの作り方｜中小企業の5ステップと規程項目](https://corp.7senses.co.jp/blog/keihi-seisan-rule-tsukurikata/)を参考に、先に規程を整えることが前提になります。
-
-外注先に渡す資料と依頼先の選び分けは、[経費精算の外注で渡す資料5点と依頼先4種](/blog/keihi-seisan-gaichuu/)で整理しています。
 
 第二に、任せる業務と自社に残す業務を線引きします。**「経費精算を丸ごと任せる」ではなく、チェックと記帳までを任せる**という範囲を契約書に明記してください。
 

@@ -60,6 +60,8 @@ AIO対策の具体例とは、AI検索に抽出されやすい6つの構造そ�
 
 冒頭200字の具体例は、1文目で結論を断言し、対象読者と数字を先に示す書き方です。
 
+関連する内容として[歯科医院ホームページで治療説明はどう書く？](/aio/shika-hp-chiryou-setsumei-kakikata/)も公開しています。
+
 近い論点を[前置きで書き始めると失敗する？](/aio/aio-yarikata/)で扱っています。
 
 <figure><img src="/images/aio-taisaku-gutairei/opening-ng-ok.png" alt="冒頭200字のNG・OK: NG例は前置きから入る、一般論で終わる、結論が最後にある。OK例は1文目で断言する、数字を先に出す、対象読者を明記する" loading="lazy"><figcaption>冒頭200字のNG・OK</figcaption></figure>
@@ -125,7 +127,7 @@ FAQPage構造化データについては、<a href="https://developers.google.co
 
 数値ファクトの具体例は、数字・出典・計測時点の3つを1つの文にまとめて書く方法です。
 
-関連する内容として[AIO対策のFAQ｜よくある質問12問に一次データで回答](/aio/aio-taisaku-faq/)も公開しています。
+近い論点を[AIO対策のFAQ｜よくある質問12問に一次データで回答](/aio/aio-taisaku-faq/)で扱っています。
 
 **NG例:** 「AIO対策には多くの企業が取り組んでおり、成果を出している例も少なくありません。」数字が1つもなく、AIが根拠として選べる材料がありません。
 
@@ -142,8 +144,6 @@ FAQPage構造化データについては、<a href="https://developers.google.co
 ## やってはいけない具体例（NG集）
 
 AIO対策でやってはいけない具体例は、6つの構造を形だけ真似して中身を空欄のまま公開することです。
-
-あわせて[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)もご覧ください。
 
 <div class="caution-box"><span class="box-title">注意: 形だけの構造化はNG</span><br>定義ブロックや比較テーブルを設置しても、中身が一般論のままでは抽出されても引用されません。数字や自社の一次情報を伴わない構造は、器だけの状態です。</div>
 
