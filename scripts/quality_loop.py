@@ -318,9 +318,10 @@ def lower(a, b):
     return out
 
 
-def _score_once(slug, ask):
-    """1回分の採点（引用が無効なら1回だけ聞き直す）。返すのは (採点, 呼んだ回数, 理由)"""
-    article = drop_keys(read(slug), MACHINE_KEYS)
+def _score_once(slug, ask, text=None):
+    """1回分の採点（引用が無効なら1回だけ聞き直す）。返すのは (採点, 呼んだ回数, 理由)。
+    text を渡すとその原稿を採点する（書き直しの前の原稿と比べるため。auto_rewrite.score_gate）"""
+    article = drop_keys(read(slug) if text is None else text, MACHINE_KEYS)
     calls, why = 0, ""
     with tempfile.TemporaryDirectory(prefix="quality_score_", ignore_cleanup_errors=True) as tmp:
         p = Path(tmp) / f"{slug}.md"
@@ -334,15 +335,15 @@ def _score_once(slug, ask):
     return None, calls, why
 
 
-def score(slug, ask=None):
-    """別工程の採点。基準の近くなら2回採点して軸ごとに低い方を使う。採点できなければ (None, 理由)"""
+def score(slug, ask=None, text=None):
+    """別工程の採点。基準の近くなら2回採点して軸ごとに平均する。採点できなければ (None, 理由)。text は _score_once と同じ"""
     ask = ask or ASK
-    first, calls, why = _score_once(slug, ask)
+    first, calls, why = _score_once(slug, ask, text)
     if not first:
         return None, why
     res, double = first, False
     if near(first["axes"]):
-        second, c2, _ = _score_once(slug, ask)
+        second, c2, _ = _score_once(slug, ask, text)
         calls += c2
         if second:
             res, double = lower(first, second), True

@@ -788,6 +788,79 @@ def stock_items(limit=3):
     return rows[:limit]
 
 
+# 本文を書き直す直し。採用の前に、書いた AI とは別の工程で3観点を採点し直し、点が上がったときだけ残す
+# （2026-11-12 運用者「評価値は必ず上げること」）。題・説明文だけの直し（title・desc）と、
+# 採点そのものを回している公開前の直し（quality_loop）は対象にしない
+SCORE_GATED = ("stuck", "serp", "compete", "early", "question", "stock", "aiwriting", "aisplit", "fresh", "aio", "quality")
+SCORE_ASK = None   # 採点を呼ぶ関数（門では偽の採点に差し替える）。None なら quality_loop の既定（別の claude・読むだけ）
+
+
+def score_gated(kind):
+    return kind in SCORE_GATED or TAG == SPARE_TAG
+
+
+def _breakdown(text):
+    """原稿に機械が書いた3観点の点（quality_loop・score_audit の採点）。全部の軸がそろっていなければ None"""
+    import quality_loop as QL
+    sb = front_safe(text).get("score_breakdown")
+    if not isinstance(sb, dict):
+        return None
+    try:
+        axes = {k: int(sb[k]) for k in QL.AXIS_KEYS}
+    except (KeyError, TypeError, ValueError):
+        return None
+    return {"axes": axes, "total": round(sum(axes.values()) / len(axes))}
+
+
+def score_gate(slug, before_text, after_text, ask=None):
+    """(採用してよいか, 理由, 直した後の採点)。直す前の点は原稿に書いてある3観点を使い、無ければ直す前の原稿を採点する。
+    採用するのは: 平均が上がり、どの軸も下限（rubric）を新しく割らず、公開の基準（各軸の下限・平均）を満たすときだけ。
+    採点できなかったときは採用しない（点が上がったと確かめられないため）"""
+    import quality_loop as QL
+    import rubric as R
+    ask = ask or SCORE_ASK
+    before = _breakdown(before_text)
+    if before is None:
+        sc, why = QL.score(slug, ask, text=before_text)
+        if not sc:
+            return False, f"直す前の原稿を採点できませんでした（{why[:40]}）", None
+        before = {"axes": sc["axes"], "total": sc["total"]}
+    after, why = QL.score(slug, ask, text=after_text)
+    if not after:
+        return False, f"直した後の原稿を採点できませんでした（{why[:40]}）", None
+    newly = [k for k in QL.AXIS_KEYS if after["axes"][k] < R.floor(k) <= before["axes"][k]]
+    if newly:
+        return False, f"直した後に下限を割った軸があります（{'・'.join(newly)}）", after
+    if not after["ok"]:
+        return False, f"直した後の採点が公開の基準に届きません（{after['why'][:40]}）", after
+    if after["total"] <= before["total"]:
+        return False, f"点が上がりません（{before['total']}→{after['total']}点）", after
+    return True, f"点が上がりました（{before['total']}→{after['total']}点）", after
+
+
+def write_score(slug, sc):
+    """採点し直した点を原稿に書く（点は機械だけが書く。quality_loop.write_pass と同じ項目）"""
+    import quality_loop as QL
+    t = QL.read(slug)
+    vals = {"score": sc["total"], "score_breakdown": {k: sc["axes"][k] for k in QL.AXIS_KEYS}}
+    QL.write(slug, QL.set_keys(QL.drop_keys(t, ("score", "score_breakdown")), vals))
+
+
+def is_buyer(slug):
+    """買い手の語（頼む先を探す・比べる・値段を知る）を狙う記事か"""
+    import kw_intent
+    p = ROOT / "articles" / f"{slug}.md"
+    if not p.is_file():
+        return False
+    kw = str(front_safe(p.read_text(encoding="utf-8-sig", errors="replace")).get("keyword") or "").lower()
+    return bool(kw) and bool(kw_intent.BUYER.search(kw)) and not any(t in kw for t in kw_intent.NOT_BUYER)
+
+
+def buyer_first(items):
+    """買い手の語の記事を先に並べる（同じ側の中の順は変えない。2026-11-12 運用者「買い手の記事を第一優先に」）"""
+    return sorted(items, key=lambda x: 0 if is_buyer(x["slug"]) else 1)
+
+
 def stock_first(items):
     """決まり文句の残る記事は、題・説明文より先に決まり文句を直す（2026-10-19: 題の書き直しが本文の
     「半年後に…何度も見てきました」を拾い「半年で引用を競合に奪われた理由」という題にした。サイトは7月開始で、
@@ -2294,6 +2367,11 @@ def _apply_one(item, edited, orig):
         if lk:
             ng = f"{lk} に変えたタイトルの判定期間（{TITLE_LOCK_DAYS}日）中です"
     after_text = p.read_text(encoding="utf-8-sig")
+    gated = None
+    if not ng and score_gated(kind) and after_text != raw.decode("utf-8-sig", errors="replace"):
+        good, why, gated = score_gate(slug, raw.decode("utf-8-sig", errors="replace"), after_text)
+        if not good:
+            ng = why
     LAST[slug] = {"before_title": before[0], "before_description": _desc_of(before[2]),
                   "after_title": _str(front_safe(after_text).get("title")), "after_description": _desc_of(after_text)}
     if ng:
@@ -2305,6 +2383,11 @@ def _apply_one(item, edited, orig):
         LAST[slug].update(keep_before(slug, raw, p.read_bytes()))
     if kind == "early":
         LAST[slug].update({"query": item["query"], "pos_before": item["pos"], "imp_before": item["imp"]})
+    if gated:
+        write_score(slug, gated)
+        rebuild_quietly()
+        LAST[slug].update({"score_after": gated["total"]})
+        return True, f"直しました（{before[0][:24]}… → {meta(slug)[0][:24]}…・{gated['total']}点）"
     return True, f"直しました（{before[0][:24]}… → {meta(slug)[0][:24]}…）"
 
 
@@ -2430,6 +2513,8 @@ def main():
                     help="この社の記事だけを直す（空白かカンマ区切り。空=全社。集中モードが focus_report --sites を渡す）")
     ap.add_argument("--slugs", default="",
                     help="この記事だけを直す（カンマ区切り。運用者が選んだ記事に --kind の直しを当てる。候補に無ければ作る）")
+    ap.add_argument("--buyer-only", action="store_true",
+                    help="買い手の語（頼む先を探す・比べる・値段を知る）を狙う記事だけを直す")
     ap.add_argument("--main-only", action="store_true",
                     help="その社の主力の語（kw_plan.main_rule）の記事だけを直す（浮いた枠が使う）")
     a = ap.parse_args()
@@ -2489,6 +2574,9 @@ def main():
         import article_health
         items = article_health.drop_protected(items, a.kind)
     items = stock_first(items)
+    items = buyer_first(items)
+    if a.buyer_only:
+        items = [x for x in items if is_buyer(x["slug"])]
     if a.skip_recent:
         busy = recently_touched(a.skip_recent)
         # 判定期間中の題は run_one が必ず見送る。先に外さないと、本数の枠と下書きの時間をそれに使う
@@ -2498,7 +2586,7 @@ def main():
         if held:
             print(f"  直近{a.skip_recent}日に手を付けた・題の判定期間中の{len(held)}本を外しました: {', '.join(shown(s) for s in held[:6])}")
     if not items and a.kind == "spare" and a.main_only:
-        items = free_spare_items(a.sites, recently_touched(a.skip_recent) if a.skip_recent else set())
+        items = buyer_first(free_spare_items(a.sites, recently_touched(a.skip_recent) if a.skip_recent else set()))
         if items:
             print(f"  上位の見出しがある候補が尽きたので、無料の調べ（cooccur）で {len(items)}本を候補にしました")
         else:
