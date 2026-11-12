@@ -103,7 +103,8 @@ def test_client_articles_are_notified_right_after_publish():
             check("自社は常に送る", NX.gsc_owner_ok({"id": "ai-lab", "domain": "ai.7senses.co.jp"}, set()), True)
 
             sent = []
-            with _swap(NI, find_key=lambda env: "h32key0000000000",
+            # 送った記録は一時の場所へ（本物の data/indexnow_sent.json を門のたびに書き換えない）
+            with _swap(NI, STATE=Path(d) / "indexnow_sent.json", find_key=lambda env: "h32key0000000000",
                        key_ok=lambda dom, key: dom != "h32-b.example",
                        notify=lambda urls, key, site: sent.append((site, list(urls))) or 200):
                 NI.main(["--site", "h32-a"], CFGS)
