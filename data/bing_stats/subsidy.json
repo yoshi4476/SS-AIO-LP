@@ -119,6 +119,18 @@
 "2026-11-05": {
 "imp": 68,
 "clicks": 4
+},
+"2026-11-06": {
+"imp": 11,
+"clicks": 0
+},
+"2026-11-07": {
+"imp": 6,
+"clicks": 1
+},
+"2026-11-08": {
+"imp": 50,
+"clicks": 1
 }
 },
 "weeks": {
@@ -1019,10 +1031,77 @@
 "pos": 7
 }
 ],
-"pages": []
+"pages": [
+{
+"key": "https://lp.7senses.co.jp/youkou/",
+"imp": 160,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/",
+"imp": 15,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://lp.7senses.co.jp/blog/it-hojokin-joken/",
+"imp": 6,
+"clicks": 3,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-jigyouka-hokoku-kojin/",
+"imp": 6,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/blog/jigyou-saikouchiku-kojinjigyonushi-houjinnari/",
+"imp": 6,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://lp.7senses.co.jp/blog/nougyou-shoki-hiyou-hojokin/",
+"imp": 3,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/blog/chusho-shoryokuka-toshi-hojokin/",
+"imp": 3,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-kyuyo-shikyu-sogaku/",
+"imp": 3,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-miradigi-keieicheck/",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://lp.7senses.co.jp/blog/nougyou-kikai-hojokin/",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "https://lp.7senses.co.jp/blog/ai-hojokin-ikura-moraeru/",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+}
+]
 }
 },
-"updated": "2026-11-09",
+"updated": "2026-11-12",
 "site": "subsidy",
 "domain": "lp.7senses.co.jp"
 }

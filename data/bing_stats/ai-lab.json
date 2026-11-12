@@ -399,6 +399,18 @@
 "2026-11-05": {
 "imp": 9,
 "clicks": 0
+},
+"2026-11-06": {
+"imp": 12,
+"clicks": 0
+},
+"2026-11-07": {
+"imp": 6,
+"clicks": 0
+},
+"2026-11-08": {
+"imp": 18,
+"clicks": 1
 }
 },
 "weeks": {
@@ -2895,10 +2907,137 @@
 "pos": 3
 }
 ],
-"pages": []
+"pages": [
+{
+"key": "https://ai.7senses.co.jp/meo/meo-settei-guide/",
+"imp": 6,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "https://ai.7senses.co.jp/meo/shika-heiin-hiyou/",
+"imp": 4,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-seo-meo-chigai/",
+"imp": 3,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-shindan-yarikata/",
+"imp": 3,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-jibunde/",
+"imp": 3,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-towa/",
+"imp": 3,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://ai.7senses.co.jp/tools/url-check/",
+"imp": 3,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-faq/",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/fudousan-hankyou-konai/",
+"imp": 2,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/obkyaku-shoukai-shikumi/",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-seo-taisaku/",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/research/inshoku-ai-sources/",
+"imp": 2,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "https://ai.7senses.co.jp/seo/yoyaku-tsunagaru-dosen-sekkei/",
+"imp": 2,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "https://ai.7senses.co.jp/tools/",
+"imp": 2,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/",
+"imp": 1,
+"clicks": 0,
+"pos": 39
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-itsukara/",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-mojisuu/",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-guide/",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-keisoku-houhou/",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://ai.7senses.co.jp/seo/shigyou-seo-taisaku/",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+}
+]
 }
 },
-"updated": "2026-11-09",
+"updated": "2026-11-12",
 "site": "ai-lab",
 "domain": "ai.7senses.co.jp"
 }

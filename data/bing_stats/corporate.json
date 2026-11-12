@@ -119,6 +119,18 @@
 "2026-11-05": {
 "imp": 349,
 "clicks": 10
+},
+"2026-11-06": {
+"imp": 98,
+"clicks": 4
+},
+"2026-11-07": {
+"imp": 55,
+"clicks": 0
+},
+"2026-11-08": {
+"imp": 277,
+"clicks": 9
 }
 },
 "weeks": {
@@ -1559,10 +1571,131 @@
 "pos": 9
 }
 ],
-"pages": []
+"pages": [
+{
+"key": "https://corp.7senses.co.jp/blog/ginko-kicho-yarikata",
+"imp": 240,
+"clicks": 8,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-mitsuori-yarikata",
+"imp": 150,
+"clicks": 3,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata",
+"imp": 98,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tekikaku-seikyusho-youken",
+"imp": 83,
+"clicks": 1,
+"pos": 9
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-kakikata-kojin",
+"imp": 51,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-bu-keiri-ka-chigai",
+"imp": 48,
+"clicks": 3,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-ginko-furikomi-yarikata",
+"imp": 44,
+"clicks": 2,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/rakurakuseisan-keihi-seisan-yarikata",
+"imp": 37,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata",
+"imp": 36,
+"clicks": 2,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/getsuji-kessan-houkokusho-kakikata",
+"imp": 33,
+"clicks": 3,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/atm-kicho-yarikata",
+"imp": 21,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kensetsugyou-keiri-yarikata",
+"imp": 18,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/bpo-toha",
+"imp": 15,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kichodaiko-hiyou-kanjoukamoku",
+"imp": 12,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kojin-jigyonushi-choubo-tsukekata",
+"imp": 7,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-kitei-chigai",
+"imp": 4,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/eigyo-keiri-chigai",
+"imp": 3,
+"clicks": 2,
+"pos": 2
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-check-koritsuka",
+"imp": 3,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba",
+"imp": 1,
+"clicks": 2,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-daiko-kojin-jigyonushi",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+}
+]
 }
 },
-"updated": "2026-11-09",
+"updated": "2026-11-12",
 "site": "corporate",
 "domain": "corp.7senses.co.jp"
 }
