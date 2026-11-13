@@ -152,7 +152,9 @@ def collect(cfg, live=None, url_of=None, kinds=KINDS, i18n_prefix=None, arts=Non
             out.append(_page("compare", f"/compare/{cat}/", f"{name}の比較表",
                              f"{name}の記事にある比較表{len(rows)}表を1か所に集めました。表は記事のものと同じです。",
                              CP.page_html(name, rows, lambda r: url_of(by_slug[r["slug"]])),
-                             members={r["slug"] for r in rows}))
+                             # 集合で渡すと並びがプロセスごとに変わり、説明文の「記事の例」が配るたびに入れ替わって、
+                             # 中身の同じ配り直しが毎回コミットと push になっていた（2026-11-13 お客様の社へ1日34回）
+                             members=list(dict.fromkeys(r["slug"] for r in rows))))
             made.append((cat, name, len(rows)))
         if made:
             out.append(_page("compare", "/compare/", "比較表から探す",
