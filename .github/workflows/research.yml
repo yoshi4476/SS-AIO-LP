@@ -79,7 +79,8 @@ jobs:
         if: env.MODE != 'estimate'
         run: |
           python scripts/build.py
-          python tests/test_gates.py || { echo "::error::門が通らないため公開しません"; exit 1; }
+          # 門は1本ずつ（同時に流して確かめたのは自動修復の点検だけ。2026-11-13）
+          GATES_JOBS=1 python tests/test_gates.py || { echo "::error::門が通らないため公開しません"; exit 1; }
           # 月次のお知らせの下書き（プレスリリース風・SNSの短文）。書いてキューに積むだけで、配信・送信はしない
           python scripts/research_announce.py --write 2>&1 | tee automation/logs/announce.txt | tail -5 || true
           grep '^要対応' automation/logs/announce.txt >> automation/logs/findings.txt || true
