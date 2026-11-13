@@ -1,0 +1,110 @@
+{
+ "v": 2,
+ "slug": "llmo-taisaku-kaisha-osusume",
+ "ok": true,
+ "date": "2026-11-14",
+ "questions": [
+  "llmo対策 会社 おすすめについて教えてください",
+  "llmo対策 会社 おすすめについて、「LLMO対策会社とは？SEO会社と何が違うか」を教えてください",
+  "llmo対策 会社 おすすめについて、「依頼前にAIで試す4つの確認」を教えてください",
+  "llmo対策 会社 おすすめについて、「依頼先の種類ごとに向くLLMO対策の依頼」を教えてください",
+  "llmo対策 会社 おすすめについて、「支援の実績を数字で確かめる見方」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "依頼前にAIで試す4つの確認",
+   "words": [
+    "依頼前",
+    "AI"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "依頼先の種類ごとに向くLLMO対策の依頼",
+   "words": [
+    "依頼先",
+    "依頼"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "支援の実績を数字で確かめる見方",
+   "words": [
+    "支援",
+    "実績",
+    "数字",
+    "見方"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "LLMO対策会社選びの失敗例と避け方",
+   "words": [
+    "失敗例"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "LLMO対策会社に頼む会社・頼まない会社と今日の一歩",
+   "words": [
+    "一歩"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "ai-recommended.net": "peer",
+  "ai.giftx.co.jp": "peer",
+  "anema.co.jp": "peer",
+  "cinc-j.co.jp": "peer",
+  "cloudcircus.jp": "peer",
+  "codigital.co.jp": "peer",
+  "crevia-ts.com": "peer",
+  "digital-marketing.jp": "peer",
+  "erevista.co.jp": "media",
+  "geo-code.co.jp": "peer",
+  "innova-jp.com": "peer",
+  "kigyolog.com": "portal",
+  "lab.llmo-optimization.com": "peer",
+  "lifunext.com": "peer",
+  "local-mp.co.jp": "peer",
+  "media-growth.co.jp": "peer",
+  "mieru-ca.com": "media",
+  "n-works.link": "peer",
+  "pascaljp.com": "media",
+  "plan-b.co.jp": "peer",
+  "probel.jp": "peer",
+  "rakubo.co.jp": "peer",
+  "saisia.co.jp": "peer",
+  "seedinc.jp": "peer",
+  "tatap.jp": "peer",
+  "uravation.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "webanalytics.speee.jp": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 2,
+  "専門家への相談": 2
+ },
+ "chars": 13061,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え5件のうち、『失敗例』に触れたものは0件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え4件のうち、『依頼先』に触れたものは1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは期間（◯か月・◯日など）は1件、費用の金額（◯円）は2件、注意点・失敗・リスクは2件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは29件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが3件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
+}

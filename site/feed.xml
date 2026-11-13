@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-13T00:00:00+09:00</updated>
+  <updated>2026-11-14T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>LLMO対策会社のおすすめ一覧の落とし穴｜依頼前にAIで試す4つの確認</title>
+    <link href="https://ai.7senses.co.jp/aio/llmo-taisaku-kaisha-osusume/"/>
+    <id>https://ai.7senses.co.jp/aio/llmo-taisaku-kaisha-osusume/</id>
+    <updated>2026-11-14T00:00:00+09:00</updated>
+    <summary>LLMO対策会社のおすすめは、一覧の順位ではなく、自社の業種でAIの出典を測って見せられるかで決まります。上位の比較記事は10〜32社を並べますが、候補はAIに聞く4つの確認で絞れます。会社の種類ごとの向き不向きと、頼まない判断の材料も整理します。</summary>
+  </entry>
   <entry>
     <title>LLMO対策の費用で損する3つの落とし穴｜払う前の試算</title>
     <link href="https://ai.7senses.co.jp/aio/llmo-taisaku-hiyou/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/fudousan-hp-tesuryo-setsumei/</id>
     <updated>2026-11-01T00:00:00+09:00</updated>
     <summary>不動産会社のホームページの手数料説明は、法律の上限・自社が受け取る額・手数料に含まれない費用・合意の時期の4項目を分けて書きます。2024年7月の空き家等の特例への書き換え漏れなど、外しやすい3つのNGと、ページを先に作る会社・後回しにする会社の分かれ目も解説します。</summary>
-  </entry>
-  <entry>
-    <title>工務店・注文住宅のLLMO｜出典の54.5%が比較サイトという落とし穴</title>
-    <link href="https://ai.7senses.co.jp/aio/koumuten-chumon-jutaku-llmo/"/>
-    <id>https://ai.7senses.co.jp/aio/koumuten-chumon-jutaku-llmo/</id>
-    <updated>2026-11-01T00:00:00+09:00</updated>
-    <summary>工務店・注文住宅のLLMOは、AIに会社を探される場面と費用を調べられる場面で、直す場所が変わります。当社が4つのAIの出典2,662件を数えた調査では、探す質問の出典の54.5%が住宅の比較・資料請求サイトでした。状況別の直す順番と確かめ方を解説します。</summary>
   </entry>
 </feed>

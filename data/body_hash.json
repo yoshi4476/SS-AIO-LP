@@ -564,12 +564,16 @@
 "modified": "2026-09-04"
 },
 "llmo-taisaku-hiyou": {
-"hash": "028ab597b6a68d691f38f3f5d0c22b26",
+"hash": "dd2f757263b4999b3dc44aa77eb3afb0",
 "modified": "2026-11-13"
 },
 "llmo-taisaku-hoho": {
 "hash": "ad6ff2ef78604750ce9da349e4b43bd6",
 "modified": "2026-08-31"
+},
+"llmo-taisaku-kaisha-osusume": {
+"hash": "1abd37695de45cf1b156032091505d69",
+"modified": "2026-11-14"
 },
 "llmo-tenpo-shukyaku": {
 "hash": "35381402da0261893a7dd1a19a4b1c9e",
@@ -580,7 +584,7 @@
 "modified": "2026-09-08"
 },
 "meo-kaisha-llmo-taiou": {
-"hash": "7b8b8d855017fb3189a855afa16074a4",
+"hash": "153bcf2f1ed21c7acb32d6c83eb2c37a",
 "modified": "2026-09-17"
 },
 "meo-settei-guide": {
