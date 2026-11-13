@@ -125,6 +125,18 @@ python scripts/add_fact.py --add <file.json>      # 通れば登録
 `ftp`/`zip` の見た目は `data/clients/<id>/template.html` があればそれ、無ければ `templates/external_article.html`。
 配信した記事の一覧（関連記事に使う）は `data/clients/<id>/delivered.json`。
 
+**Git の社への push は1回の工程でまとめて1回**（2026-11-13: お客様の社へ1日34回 push し、配信先のビルドが失敗し続けた）。
+配信先は push のたびにビルドが走るので、記事を何本も配る道具（`publish_gap`・`publish_changed`・公開の後のリンク・`i18n`・
+`agent_guard --publish`）は子の `publish.py` に `PUBLISH_BATCH=1` を渡してコミットまでにさせ、最後に
+`publish.py --site <id> --flush` で1回だけ送る（呼び出し側が既に `PUBLISH_BATCH=1` なら送るのは呼び出し側）。新しい記事は公開を
+確かめるためその場で送り、それまでにまとめた分も同じ push で届く。中身が同じならコミットも push もしない
+（まとめのページは毎回同じ並びで作る。並びが揺れると記事が同じでも差分が出て、配り直しが毎回 push になっていた）。
+`publish_gap` は、本番では古いが**配信先のリポジトリには今の原稿の指紋で届いている記事を配り直さない**（配り直してもビルドが
+増えるだけ）。件数を `PUBLISH_UNREFLECTED` で出し、配信先の最後のコミットから30分を過ぎても本番に出ていなければ
+「配信先のビルドを確かめる」の要対応にする。`agent_guard --publish` は失敗の理由を、題・slug・社名・ドメインを含まない
+決まった語の1行（「理由: 段: 配信（書き出し・push） / 配信先へ push できない」など。`publish_flow.fail_reason`）でお客様の社でも出し、
+**配信は済んだが本番で確かめられない記事（△）は「失敗」と分けて数え、要対応の文も分ける**（配信先のビルドを確かめる）。
+
 **サイトの構成（ナビ・トップ・固定ページ・CSS・メニュー・配色）も、どの形式でも管制塔から変える**（先方は何もしない）:
 
 ```bash
