@@ -212,13 +212,22 @@ GitHub Actions では `::warning::` の注釈になり、run の画面に出る�
 
 - 送る前は `PYTHONIOENCODING=utf-8 GATES_FAST=1 python tests/test_gates.py`。途中の確認は `GATES_ONLY=<正規表現>` で関係する門だけ
 - **`GATES_JOBS`**: 同時に流す子プロセスの数。手元の既定は CPU の数（8まで）、`GATES_JOBS=1` で今までどおり1本ずつ。
-  CI（`GITHUB_ACTIONS`）の既定は1（お客様の門 `gates_client_*` を同時に流して確かめていないため）。
   手元の Windows（16コア・GATES_FAST=1）では全部の門が約7〜10分から約3〜4分になり、判定（OK 6,334件・NG 0）と流した後の `git status` は1本ずつと同じだった（2026-11-13）
+- CI（`GITHUB_ACTIONS`）の既定は CPU の数（4まで）。同時に流すのは自動修復の点検（selfheal の「いま壊れているものの確認」）だけで、
+  調査の公開（research.yml・industry-research.yml）と修復の案の検証（repair のコンテナの中。GITHUB_ACTIONS が無い）は `GATES_JOBS=1` を名指しして1本ずつ（同時を測っていない）。
+  点検と同じ条件（非公開のデータを取得・伏せ・build の後。お客様の門 `gates_client_*` も流れる）で、4コアのランナーでお客様の門を含む962本を
+  1本ずつ318秒・同時4で189秒・既定（同時4）で188秒、3つとも962本（予定962本）・OK 6,507件・NG 0 で判定が一致した（2026-11-13・run 43330616720。
+  同時8は192秒で4より速くならなかった・run 43326171101）。
+  CI でだけ書く門（claude を呼ぶ道で `agent_memory.slimmed` が CLAUDE.md を書き換える3本・お客様の社の readiness.json）は SERIAL に入れてある。
+  お客様の門は監査で何も書かなかった。CI の測り直しは作業ブランチに一回きりのジョブを置き、`gh workflow run <file> --ref <ブランチ>` で動かす（master に入れない）
 - 管制塔のファイル（site/・data/・articles/・private/ や tests/ の固定の名前の一時ファイル）を書く門は `test_gates.SERIAL` に入れる。
   同時に流すときは SERIAL の門を先に親で1本ずつ流し、残りをモジュールごとに子で流す。最後に「■ 流した門: N本（予定 N本）」を出し、数え落ち・二重があれば落とす
 - SERIAL に入れ忘れた門が同時の組で管制塔のファイルを変えると「同時に流した門が管制塔のファイルを変えました」で落ちる（門 `gates_history_h168_parallel.py`）。
-  どの門かは `GATES_JOBS=1 GATES_AUDIT=1` で流すと「変更 <門>: <ファイル>」で出る
-- 子プロセスの出力も `test_gates.hide` で伏せてから出す
+  どの門かは `GATES_JOBS=1 GATES_AUDIT=1` で流すと「変更 <門>: <ファイル>」で出る。新しい作業場所（無いフォルダを門が作る）と CI（CI でだけ書く門がある）でも確かめる
+- 書く門は、まず道具の差し替え口（`SS_PRIVATE_DIR`・`measure.LOG`・`notify_indexnow.STATE`・`video_make.OUT` など）で書き先を一時の場所へ移し、
+  GATES_AUDIT=1 で何も書かなくなったと測れたら SERIAL から外す。差し替えられないものだけ SERIAL に残す
+- 子プロセスの出力も `test_gates.hide` で伏せてから出す。門・モジュールの名前（`gates_client_<社の id>_…`）は前後が `_` で hide の語の境目に当たらないので、
+  `test_gates._label` で置き換えてから出す（時間の一覧・監査・数え落ち・例外）
 
 #### 毎週出るのが正常なもの
 
