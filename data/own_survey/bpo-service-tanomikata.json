@@ -1,0 +1,95 @@
+{
+ "v": 2,
+ "slug": "bpo-service-tanomikata",
+ "ok": true,
+ "date": "2026-11-13",
+ "questions": [
+  "bpoサービスについて教えてください",
+  "bpoサービスについて、「BPOサービスの頼み方は丸ごと型・部分型・仕組み型の3つ」を教えてください",
+  "bpoサービスについて、「3つの頼み方を費用・社内に残る作業・向く会社で比べる」を教えてください",
+  "bpoサービスについて、「枚数と時間で見る頼み方ごとの使いどころ」を教えてください",
+  "bpoサービスについて、「AIにBPOサービスを聞いて探すときの落とし穴」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "BPOサービスの頼み方は丸ごと型・部分型・仕組み型の3つ",
+   "words": [
+    "部分型"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "3つの頼み方を費用・社内に残る作業・向く会社で比べる",
+   "words": [
+    "社内",
+    "作業"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "枚数と時間で見る頼み方ごとの使いどころ",
+   "words": [
+    "枚数",
+    "時間"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "AIにBPOサービスを聞いて探すときの落とし穴",
+   "words": [
+    "AI"
+   ],
+   "hits": 3,
+   "of": 4
+  }
+ ],
+ "official": [
+  {
+   "term": "インボイス制度",
+   "org": "国税庁",
+   "of": 5,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "business.ntt-east.co.jp": "peer",
+  "cloudbuddy.biz": "peer",
+  "crex-consulting.com": "peer",
+  "freee.co.jp": "peer",
+  "hke.jp": "peer",
+  "itoutsourcing.jp": "peer",
+  "jippou.co.jp": "peer",
+  "joe-hr.com": "peer",
+  "mfloow.com": "peer",
+  "newpress.co.jp": "peer",
+  "on-sight.biz": "peer",
+  "onamae.com": "peer",
+  "pasonagroup.co.jp": "peer",
+  "persol-bd.co.jp": "peer",
+  "polyglot-link.co.jp": "peer",
+  "rakus.co.jp": "peer",
+  "sora-michi.co.jp": "peer",
+  "tasukeru.biz": "peer",
+  "wan-sign.wanbishi.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 3,
+  "専門家への相談": 0
+ },
+ "chars": 11642,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、国税庁の資料にある「インボイス制度」に触れたものは0件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は0件、期間（◯か月・◯日など）は1件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは19件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが0件でした。"
+ ]
+}
