@@ -574,9 +574,10 @@ jobs:
         if: always()
         run: |
           # 検証は AI が書き換えたコードを動かすので、これもコンテナの中（鍵は渡さない。結果は参考）
+          # コンテナには GITHUB_ACTIONS が無く門が手元の既定（同時）になるので、1本ずつを名指しする（同時はここで測っていない）
           docker run --rm --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges --pids-limit 1024 \
             -e HOME=/tmp/home -v /tmp/ws:/ws -w /ws selfheal-ai bash -c '
-              ok=1; python scripts/build.py || ok=0; python tests/test_gates.py || ok=0
+              ok=1; python scripts/build.py || ok=0; GATES_JOBS=1 python tests/test_gates.py || ok=0
               echo "SELFHEAL_VERIFY=$ok"' | tee /tmp/verify.log || true
           ok=$(grep -o 'SELFHEAL_VERIFY=[01]' /tmp/verify.log | tail -1 | cut -d= -f2)
           echo "ok=${ok:-0}" >> "$GITHUB_OUTPUT"
