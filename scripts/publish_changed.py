@@ -95,6 +95,9 @@ def main():
 
     total_ok = total_ng = 0
     failed = []         # 届かなかった記事（社/slug）。打ち切った残りも含める
+    # 子の publish.py はコミットまでにして、社ごとに最後の1回だけ push する（呼び出し側が既にまとめているなら送るのはそちら）
+    own = a.push and not P.batched()
+    env = P.batch_env() if a.push else None
     for sid in ids:
         cfg = sites_mod.load(sid)
         if cfg["type"] == "self-static":
@@ -116,6 +119,7 @@ def main():
             continue
 
         ok = ng = gated = 0
+        sent = []
         miss = 0        # 続けて落ちた数（環境の問題だけ。門で止まった記事は数えない）。1本の失敗で残り全部を諦めない
         for i, slug in enumerate(targets, 1):
             # 配信先は push のたびに自分のビルドが書き戻すことがあり、続けて push すると
@@ -126,7 +130,7 @@ def main():
                     [sys.executable, str(ROOT / "scripts" / "publish.py"),
                      "--site", sid, "--slug", slug, "--push"],
                     capture_output=True, text=True, encoding="utf-8",
-                    errors="replace", cwd=ROOT)
+                    errors="replace", cwd=ROOT, env=env)
                 if r.returncode == 0 or attempt or gate_blocked((r.stdout or "") + (r.stderr or ""), sid):
                     break
                 time.sleep(20)
@@ -135,6 +139,7 @@ def main():
             line = (why[-1][:70] if why else "原因不明").replace(slug, shown(slug))
             if r.returncode == 0:
                 ok += 1
+                sent.append(slug)
                 miss = 0
                 print(f"   [{i}/{len(targets)}] ○ {shown(slug)}", flush=True)
             elif gate_blocked(out, sid):
@@ -158,6 +163,10 @@ def main():
                     print("      python scripts/token_check.py で権限を確かめてください")
                     failed += [f"{sid}/{s}" for s in targets[i:]]
                     break
+        if own and sent and not P.flush(cfg):
+            print(f"   → まとめた {len(sent)}本を配信先へ送れませんでした（届いていません）", flush=True)
+            failed += [f"{sid}/{s}" for s in sent]
+            ng, ok = ng + len(sent), 0
         print(f"   配信 {ok}本 / 失敗 {ng}本" + (f"（うち門で止まった {gated}本）" if gated else "") + "\n")
         total_ok += ok
         total_ng += ng

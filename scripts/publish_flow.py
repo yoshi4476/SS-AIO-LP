@@ -23,21 +23,61 @@ ROOT = Path(__file__).resolve().parent.parent
 PY = sys.executable
 
 
-def run(args, check=True):
+def run(args, check=True, env=None):
     print(f"$ {' '.join(str(a) for a in args)}")
-    r = subprocess.run(args, cwd=ROOT, text=True, encoding="utf-8", errors="ignore")
+    r = subprocess.run(args, cwd=ROOT, text=True, encoding="utf-8", errors="ignore", env=env)
     if check and r.returncode != 0:
         raise SystemExit(f"失敗: {' '.join(str(a) for a in args)}")
     return r.returncode
 
 
-def run_out(args):
+def run_out(args, env=None):
     """出力も受け取る版。HELD の行で監修待ちを見分けるため（表示はそのまま流す）"""
     print(f"$ {' '.join(str(a) for a in args)}")
     r = subprocess.run(args, cwd=ROOT, text=True, encoding="utf-8", errors="ignore",
-                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env)
     print(r.stdout, end="")
     return r.returncode, r.stdout
+
+
+# どの段まで進んだかの印（PUBLISH_STAGE=）と、配信は済んだが本番で確かめられなかった印（PUBLISH_FAIL=unverified）。
+# お客様の社は呼び出し側（agent_guard・publish_gap）が出力を伏せるため、15:07 の回の失敗は「終了コード 1」としか
+# 残らず、配信の push で落ちたのか、配った後の本番の確かめで落ちたのかが分からなかった（2026-11-13）
+STAGES = {"gate": "配信の前の門", "deliver": "配信（書き出し・push）", "verify": "配信後の本番の確かめ",
+          "record": "管制塔への記録", "after": "公開の後の手順（SNS・リンク）"}
+UNVERIFIED = "PUBLISH_FAIL=unverified"
+
+
+def stage(key):
+    print(f"PUBLISH_STAGE={key}", flush=True)
+
+
+# 失敗の種類（出力の印 → 決まった語）。理由の行は記事の題・slug・社名・ドメインを含まない語だけで作る
+_KINDS = (("pushできません", "配信先へ push できない"), ("機械採点で不合格", "機械採点で不合格"),
+          ("（85点以上が必要）", "点数が公開の基準に届かない"), ("公開基準未達", "点数が公開の基準に届かない"),
+          ("categoryが不正", "カテゴリが不正"), ("担当領域を越えています", "担当領域の外"),
+          ("既存記事と重複しています", "既存の記事と重複"), ("本/月に達しています", "月の上限"),
+          ("git の衝突マーカー", "原稿に衝突の印"), ("記事が見つかりません", "原稿が無い"),
+          ("フロントマターがありません", "原稿の頭書きが無い"))
+_GIT_CMDS = ("clone", "fetch", "reset", "rebase", "commit", "push", "add", "status", "config", "rev-parse")
+
+
+def fail_reason(out):
+    """publish_flow（と publish.py）の出力から、(種類, 1行の理由) を決まった語だけで返す。
+    種類は unverified（配信は済み・本番で確かめられない）か failed。出力の文は写さない（題・slug・ドメインが混ざる）"""
+    st = re.findall(r"^PUBLISH_STAGE=(\w+)", out, re.M)
+    where = STAGES.get(st[-1], "不明") if st else "配信の前の門"
+    if re.search(rf"^{UNVERIFIED}\b", out, re.M):
+        return "unverified", f"段: {STAGES['verify']} / 配信は済みましたが、本番で記事を確かめられません"
+    what = next((w for mark, w in _KINDS if mark in out), "")
+    if not what:
+        m = re.search(r"BLOCKED\(([^)\n]{1,16})\)", out)
+        g = re.search(r"コマンド失敗: git (\w[\w-]*)", out)
+        e = re.findall(r"^(?:\w+\.)*(\w*(?:Error|Exception|Interrupt))\b", out, re.M)
+        what = (f"配信の門 BLOCKED({m.group(1)})" if m and re.fullmatch(r"[^\s/.:]+", m.group(1)) else
+                f"配信先の git {g.group(1)} が失敗" if g and g.group(1) in _GIT_CMDS else
+                f"例外 {e[-1]}" if e else "理由が出力にありません")
+    return "failed", f"段: {where} / {what}"
 
 
 def load_article(slug):
@@ -108,6 +148,7 @@ def main():
     site_id, slug = a[0], a[1]
     push = "--no-push" not in sys.argv and not check
     cfg = sites_mod.load(site_id)
+    stage("gate")
 
     src = ROOT / "articles" / f"{slug}.md"
     meta, body = load_article(slug)
@@ -255,6 +296,7 @@ def main():
     run([PY, "scripts/cta_fill.py", "--write"], check=False)
 
     # 3. 配信（サイト種別ごとの出口）
+    stage("deliver")
     if cfg["type"] == "self-static":
         # リード導線は build の前に入れる（ワークフローの同じ工程は、この後に走るため）
         run([PY, "scripts/tool_links.py", "--write"], check=False)
@@ -280,7 +322,10 @@ def main():
             args.append("--check")
         elif push:
             args.append("--push")
-        code, out = run_out(args)
+        # 新しい記事はその場で送る（この後の公開の確かめは送ってからでないとできない）。呼び出し側がまとめている
+        # 配り直しのコミットも、この push で一緒に届く
+        import publish
+        code, out = run_out(args, env=publish.unbatched_env())
         if code != 0:
             if held(out):
                 exit_held()
@@ -312,6 +357,7 @@ def finish(site_id, slug, cfg, meta, body, push, since=None):
     # ここで公開を確認しにいくと、まだ出ていないため必ず失敗する。
     # 当日中の公開確認は daily_audit の check_live が担当する。
     if push and cfg["type"] != "self-static":
+        stage("verify")
         import verify_publish
         since = since or datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
         ok, msgs = verify_publish.verify(site_id, slug, since)
@@ -320,12 +366,14 @@ def finish(site_id, slug, cfg, meta, body, push, since=None):
         if not ok:
             hub_client.error_log(site_id, "publish",
                                  f"{slug}: 配信したが公開を確認できず / " + " / ".join(msgs))
+            print(UNVERIFIED, flush=True)
             raise SystemExit(
                 "配信しましたが公開が確認できません。管制塔のエラーログに記録しました。\n"
                 "  台帳は『公開済み』にしていません（未公開のまま公開済みと記録しないため）。\n"
                 f"  確認: python scripts/verify_publish.py --site {site_id} --slug {slug}")
 
     # 5. 管制塔へ記録（公開を確認できたものだけを『公開済み』として残す）
+    stage("record")
     html, _ = md2html.convert(body)
     hub_client.publish_log(
         site=site_id, title=meta["title"], keyword=meta.get("keyword", ""),
@@ -333,6 +381,7 @@ def finish(site_id, slug, cfg, meta, body, push, since=None):
         url=url)
 
     # 6. SNSへ投稿（認証が無ければ黙ってスキップする。公開そのものは止めない）
+    stage("after")
     run([PY, "scripts/post_social.py", site_id, slug], check=False)
 
     # 7. 公開した記事へ、既存記事からリンクを送る。
@@ -349,11 +398,16 @@ def finish(site_id, slug, cfg, meta, body, push, since=None):
         if cfg["type"] == "self-static":
             run([PY, "scripts/build.py"], check=False)   # 全記事を作り直すので1回で足りる
         else:
-            for s in edited:      # 外部サイトは記事ごとに送り直す必要がある
+            # 外部サイトは記事ごとに書き出し直す。送るのは最後の1回（記事ごとに push すると配信先のビルドが本数だけ走る）。
+            # 呼び出し側（agent_guard）がまとめているなら、送るのはその最後の1回
+            import publish
+            for s in edited:
                 a = [PY, "scripts/publish.py", "--site", site_id, "--slug", s]
                 if push:
                     a.append("--push")
-                run(a, check=False)
+                run(a, check=False, env=publish.batch_env())
+            if push and not publish.batched() and not publish.flush(cfg):
+                print("内部リンク: 足したリンクを配信先へ送れませんでした（次の未配信の確認で送り直します）")
     else:
         print("内部リンク: 話題の近い記事がなく、送り元を作れませんでした")
 

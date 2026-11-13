@@ -213,6 +213,58 @@ def strip_private_links(body):
                   r"\1", body, flags=re.S)
 
 
+# 1回の工程で配る記事を、配信先へ1回の push にまとめる。配信先は push のたびにビルドが走る（Cloudflare など）。
+# 記事ごとに push していたため、お客様の社へ1日34回 push し、11:28 以降のビルドが全部失敗した（2026-11-13）。
+# 記事を何本も配る道具（publish_gap・publish_changed・公開の後のリンク・i18n・agent_guard）は、子の publish.py に
+# PUBLISH_BATCH=1 を渡してコミットまでにさせ、最後に flush で1回だけ送る。呼び出し側が既に PUBLISH_BATCH=1 なら、
+# 送るのはその呼び出し側（自分では flush しない）
+BATCH = "PUBLISH_BATCH"
+
+
+def batched():
+    return os.environ.get(BATCH) == "1"
+
+
+def batch_env(env=None):
+    return dict(os.environ if env is None else env, **{BATCH: "1"})
+
+
+def unbatched_env():
+    """その場で push させる子の環境（公開を確かめる新しい記事は、送ってからでないと確かめられない）"""
+    return {k: v for k, v in os.environ.items() if k != BATCH}
+
+
+def _pending_path(cfg):
+    return WORK / f"{cfg['id']}.pending.json"
+
+
+def pending(cfg):
+    """まとめて送る予定のコミット {"base": 重ねた配信先の先頭, "slugs": [...]}。無ければ None"""
+    try:
+        d = json.loads(_pending_path(cfg).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return d if isinstance(d, dict) and d.get("base") else None
+
+
+def _hold(cfg, base, slug):
+    d = pending(cfg) or {"base": base, "slugs": []}
+    d["slugs"] = list(dict.fromkeys([*d.get("slugs", []), slug]))
+    _pending_path(cfg).write_text(json.dumps(d, ensure_ascii=False), encoding="utf-8")
+
+
+def _restack(cfg, dest: Path, held):
+    """まとめている途中のコミットを、取り直した配信先の先頭（FETCH_HEAD）に重ねる。重ねられなければ False"""
+    new = run(["git", "rev-parse", "FETCH_HEAD"], cwd=dest)
+    if new == held["base"]:
+        return True
+    if not try_run(["git", "rebase", "--onto", "FETCH_HEAD", held["base"]], cwd=dest):
+        try_run(["git", "rebase", "--abort"], cwd=dest)
+        return False
+    _pending_path(cfg).write_text(json.dumps(dict(held, base=new), ensure_ascii=False), encoding="utf-8")
+    return True
+
+
 def ensure_clone(cfg, token):
     """対象リポジトリをクローン（既にあれば最新化）して作業パスを返す"""
     WORK.mkdir(exist_ok=True)
@@ -222,6 +274,7 @@ def ensure_clone(cfg, token):
     env = git_auth(token)
     if not (dest / ".git").exists():
         shutil.rmtree(dest, ignore_errors=True)
+        _pending_path(cfg).unlink(missing_ok=True)
         run(["git", "clone", "--depth", "1", "--branch", cfg["branch"], auth_url,
              str(dest)], env=env)
     else:
@@ -244,7 +297,13 @@ def ensure_clone(cfg, token):
                 raise SystemExit(f"配信先 {dest} にコミットしていない変更があります。先にコミットするか、"
                                  f"要らなければ git -C \"{dest}\" checkout -- . で戻してから配信してください:\n{dirty[:600]}")
         run(["git", "fetch", "--depth", "1", auth_url, cfg["branch"]], cwd=dest, env=env)
-        run(["git", "reset", "--hard", "FETCH_HEAD"], cwd=dest)
+        held = pending(cfg)
+        if held and not _restack(cfg, dest, held):
+            print("  [警告] まとめて送る予定だった変更を配信先の最新に重ねられず、捨てました（次の未配信の確認で配り直します）")
+            _pending_path(cfg).unlink(missing_ok=True)
+            held = None
+        if not held:
+            run(["git", "reset", "--hard", "FETCH_HEAD"], cwd=dest)
     # お客様の側で書かれた記事を、食い合いの検査の相手に残す（題・語は非公開の置き場へ。ログは出さない）
     try:
         import external_articles
@@ -2307,14 +2366,19 @@ def render_gaps(body):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", required=True)
-    ap.add_argument("--slug", required=True)
+    ap.add_argument("--slug")
     ap.add_argument("--push", action="store_true", help="対象リポジトリへcommit+pushする")
     # 配信の手前の門だけを通す（鍵を使わない）。記事を書く AI は鍵を持たないので、これで直してから終える
     # （配信は AI の後に鍵を持つ機械の手順が行う。agent_guard.py --publish）
     ap.add_argument("--check", action="store_true", help="配信せず、配信の前の門だけを確かめる")
+    ap.add_argument("--flush", action="store_true", help="PUBLISH_BATCH=1 でまとめたコミットを1回の push で送る")
     args = ap.parse_args()
 
     cfg = sites_mod.load(args.site)
+    if args.flush:
+        raise SystemExit(0 if flush(cfg) else 1)
+    if not args.slug:
+        ap.error("--slug が要ります（--flush のときは不要）")
     src = ROOT / "articles" / f"{args.slug}.md"
     if not src.exists():
         raise SystemExit(f"記事が見つかりません: {src}")
@@ -2490,14 +2554,38 @@ def main():
         print("\n※ --push を付けると対象リポジトリへcommit+pushします（Cloudflareが自動デプロイ）")
         return
 
+    if not commit_and_send(cfg, dest, token, f"publish: {meta['title']}（score {score} / {date.today().isoformat()}）",
+                           meta["slug"]):
+        raise SystemExit(
+            "pushできません。次の順に確かめてください。\n"
+            "  1. python scripts/token_check.py で TOKEN_OK=yes か\n"
+            "     （権限不足なら Contents: Read and write を付ける）\n"
+            "  2. 配信先に手を入れていないか（衝突していると取り込めません）\n"
+            "  記事は未配信のままです")
+
+
+def commit_and_send(cfg, dest: Path, token, message, slug):
+    """作業コピーの変更をコミットして送る。PUBLISH_BATCH=1 ならコミットまで（送るのは flush）。
+    中身が変わらなければコミットも push もしない（同じ記事の配り直しで配信先のビルドを走らせない）。送れなければ False"""
     run(["git", "config", "user.name", "AIO Pipeline Bot"], cwd=dest)
     run(["git", "config", "user.email", "noreply@7senses.co.jp"], cwd=dest)
     run(["git", "add", "-A"], cwd=dest)
-    if not run(["git", "status", "--porcelain"], cwd=dest):
+    held = pending(cfg)
+    if run(["git", "status", "--porcelain"], cwd=dest):
+        base = run(["git", "rev-parse", "HEAD"], cwd=dest)
+        run(["git", "commit", "-m", message], cwd=dest)
+        if batched():
+            _hold(cfg, base, slug)
+            print("配信先の作業コピーにコミットしました（push はこの回の最後にまとめて1回）")
+            return True
+    elif batched() or not held:
         print("変更なし — pushをスキップ")
-        return
-    run(["git", "commit", "-m",
-         f"publish: {meta['title']}（score {score} / {date.today().isoformat()}）"], cwd=dest)
+        return True
+    return push_work(cfg, dest, token)
+
+
+def push_work(cfg, dest: Path, token):
+    """作業コピーのコミット（まとめていた分も含む）を配信先へ1回で送る。送れたら True"""
     # PATを最優先で使う（CIにはこれしかない）。手元では期限切れ・失効していることがあり、
     # 実際に失効したPATで押せず記事7本が配信されないまま止まっていた。
     # その場合はgitの資格情報にフォールバックする（手元の開発者は認証済みのため）。
@@ -2512,7 +2600,8 @@ def main():
                 if i:
                     print("※ SITE_PUSH_TOKEN では認証できませんでした。PATの再発行が必要です")
                 print("push完了。対象サイトのビルドが自動で走ります。")
-                return
+                _pending_path(cfg).unlink(missing_ok=True)
+                return True
         if attempt == 0:
             # 押せない理由は権限だけではない。配信先が先に進んでいると弾かれる。
             # それを「トークンの問題」と伝えると、無関係な再発行に時間を使わせる。
@@ -2524,12 +2613,24 @@ def main():
                 # rebase が「already a rebase-merge directory」で全部落ちた（2026-09-28〜29: 1本おきに失敗）
                 try_run(["git", "rebase", "--abort"], cwd=dest)
                 break
-    raise SystemExit(
-        "pushできません。次の順に確かめてください。\n"
-        "  1. python scripts/token_check.py で TOKEN_OK=yes か\n"
-        "     （権限不足なら Contents: Read and write を付ける）\n"
-        "  2. 配信先に手を入れていないか（衝突していると取り込めません）\n"
-        "  記事は未配信のままです")
+    return False
+
+
+def flush(cfg):
+    """PUBLISH_BATCH=1 でまとめたコミットを1回の push で送る。送る物が無ければ何もせず True"""
+    held = pending(cfg)
+    if not held:
+        return True
+    dest = WORK / cfg["id"]
+    n = len(held.get("slugs") or [])
+    if not (dest / ".git").is_dir():
+        _pending_path(cfg).unlink(missing_ok=True)
+        print(f"まとめた配信: 作業コピーが無く、{n}本分を送れませんでした")
+        return False
+    ok = push_work(cfg, dest, _push_token())
+    print(f"まとめた配信: {n}本分のコミットを1回の push で送りました" if ok
+          else f"まとめた配信: {n}本分を送れませんでした（配信先の権限か、配信先との衝突）")
+    return ok
 
 
 if __name__ == "__main__":

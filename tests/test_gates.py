@@ -4254,6 +4254,9 @@ SLOW = {
     "gates_history_d.test_hist_rollback_keeps_earlier_fixes": ("scripts/auto_rewrite.py", "scripts/auto_review.py",
                                                                "scripts/report_actions.py", "tests/gates_history_d.py"),
     "gates_history_g.test_site_change_stays_in_its_own_repo": ("scripts/site_change.py", "tests/gates_history_g.py"),
+    # 手元の空のリポジトリへ実際に push して数える（手元の Windows で約9分。2026-11-13 実測）
+    "gates_history_h169_batch_deliver.test_batch_sends_one_push": ("scripts/publish.py",
+                                                                   "tests/gates_history_h169_batch_deliver.py"),
 }
 
 

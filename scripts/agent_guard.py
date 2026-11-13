@@ -727,9 +727,14 @@ def publish(root=None, only=None):
         print(f"   公開前の採点の台帳を読めませんでした（{type(e).__name__}）", flush=True)
         QL, rel = None, []
     new = new + rel
-    res = {"published": 0, "held": 0, "failed": 0, "other": 0, "quality": 0, "improving": 0}
+    res = {"published": 0, "held": 0, "failed": 0, "other": 0, "quality": 0, "improving": 0, "unverified": 0}
     py = sys.executable
     hide_all = bool(only) and S.is_client(only)
+    # 配り直し・公開の後のリンクのコミットは最後に社ごとに1回だけ送る（新しい記事は公開を確かめるためその場で送り、
+    # それまでにまとめた分も一緒に届く）。記事ごとに push して、お客様の社の配信先のビルドが1日34回走った（2026-11-13）
+    import publish_flow as PF
+    benv = dict(os.environ, PUBLISH_BATCH="1")
+    touched = set()
     for slug in new:
         site = _site_of(slug, root)
         # 社の決まらない記事・お客様の回の記事は名前を出さない（カテゴリで判定できないとお客様の記事と分からない）
@@ -776,8 +781,9 @@ def publish(root=None, only=None):
             res["improving"] += 1
             print(f"   … {name}: 公開前の採点で基準に届くまで直しています（改善中。公開しません）", flush=True)
             continue
+        touched.add(site)
         r = subprocess.run([py, "scripts/publish_flow.py", site, slug], cwd=root, capture_output=True, text=True,
-                           encoding="utf-8", errors="replace")
+                           encoding="utf-8", errors="replace", env=benv)
         out = (r.stdout or "") + (r.stderr or "")
         quiet = S.is_client(site)
         if re.search(r"^HELD\(監修待ち\)", out, re.M):
@@ -787,8 +793,15 @@ def publish(root=None, only=None):
             res["published"] += 1
             print(f"   ○ {name}: 公開しました", flush=True)
         else:
-            res["failed"] += 1
-            print(f"   × {name}: 公開できませんでした（終了コード {r.returncode}）", flush=True)
+            kind, why = PF.fail_reason(out)
+            if kind == "unverified":
+                res["unverified"] += 1
+                print(f"   △ {name}: 配信は済みましたが、本番で確かめられません（終了コード {r.returncode}）", flush=True)
+            else:
+                res["failed"] += 1
+                print(f"   × {name}: 公開できませんでした（終了コード {r.returncode}）", flush=True)
+            # 題・slug・社名・ドメインを含まない決まった語だけの1行（お客様の社でも出す）
+            print(f"     理由: {why}", flush=True)
         if not quiet:
             print("\n".join("     " + x for x in out.strip().splitlines()[-12:]), flush=True)
     ext = sorted({s for s in (_site_of(x, root) for x in changed)
@@ -798,26 +811,48 @@ def publish(root=None, only=None):
         mine = [x for x in changed if x not in new and _site_of(x, root) == site]
         if not mine:
             continue
+        touched.add(site)
         r = subprocess.run([py, "scripts/publish_changed.py", "--site", site, "--slugs", ",".join(mine), "--push"],
-                           cwd=root, capture_output=True, text=True, encoding="utf-8", errors="replace")
+                           cwd=root, capture_output=True, text=True, encoding="utf-8", errors="replace", env=benv)
         print(f"   配り直し（{S.public_id(site) if hasattr(S, 'public_id') else site}）: 終了コード {r.returncode}", flush=True)
+    lines = []
+    for site in sorted(touched):
+        if S.load(site).get("type") == "self-static":
+            continue
+        r = subprocess.run([py, "scripts/publish.py", "--site", site, "--flush"], cwd=root, capture_output=True,
+                           text=True, encoding="utf-8", errors="replace")
+        said = next((x for x in (r.stdout or "").splitlines() if x.startswith("まとめた配信")), "")
+        pid = S.public_id(site) if hasattr(S, "public_id") else site
+        if r.returncode:
+            print(f"   × まとめた配信（{pid}）: 配信先へ送れませんでした（配り直し・既存記事からのリンク）", flush=True)
+            lines.append(f"要対応: {pid} の配り直し・既存記事からのリンクを配信先へ送れませんでした"
+                         "（次の未配信の確認 publish_gap が送り直します。続くなら python scripts/token_check.py）")
+        elif said:
+            print(f"   {said}（{pid}）", flush=True)
     bad = res["failed"] + res["other"] + res["quality"]
-    print(f"AGENT_PUBLISH={'ng' if bad else 'ok'}（新しい記事 {len(new)}本: 公開 {res['published']}・"
-          f"監修待ち {res['held']}・改善中 {res['improving']}・失敗 {res['failed']}・別の社 {res['other']}・"
+    print(f"AGENT_PUBLISH={'ng' if bad or res['unverified'] else 'ok'}（新しい記事 {len(new)}本: 公開 {res['published']}・"
+          f"監修待ち {res['held']}・改善中 {res['improving']}・失敗 {res['failed']}・"
+          f"配信済みで本番未確認 {res['unverified']}・別の社 {res['other']}・"
           f"採点で隔離 {res['quality']} / "
           f"中身の変わった記事 {len(changed)}本・配り直し {len(ext)}サイト）", flush=True)
+    who = S.public_id(only) if only and hasattr(S, "public_id") else "AI の回"
+    if res["unverified"]:
+        # 配信できなかったのではない。配信先のビルドが本番に出していない（2026-11-13: Cloudflare のビルドが失敗し続けた）
+        lines.append(f"要対応: {who} で配信した記事 {res['unverified']}本が、本番で確かめられません（配信先には届いています。"
+                     "配信先のビルド（Cloudflare など）が失敗していないか、ビルドの画面で確かめる）")
     if bad:
         # AI はもういないので、止まった記事は人が見る。通知の本文（findings.txt）に要対応として載せる
-        who = S.public_id(only) if only and hasattr(S, "public_id") else "AI の回"
-        line = (f"要対応: {who} で AI が書いた記事のうち {bad}本を配信できませんでした"
-                f"（失敗 {res['failed']}・別の社 {res['other']}・機械採点で不合格のため articles/_conflicted/ へ隔離 "
-                f"{res['quality']}。実行ログの「書いた記事を配信する」を確認）")
+        lines.append(f"要対応: {who} で AI が書いた記事のうち {bad}本を配信できませんでした"
+                     f"（失敗 {res['failed']}・別の社 {res['other']}・機械採点で不合格のため articles/_conflicted/ へ隔離 "
+                     f"{res['quality']}。実行ログの「書いた記事を配信する」の「理由:」の行を確認）")
+    for line in lines:
         print(line, flush=True)
+    if lines:
         try:
             log = root / "automation" / "logs" / "findings.txt"
             log.parent.mkdir(parents=True, exist_ok=True)
             with log.open("a", encoding="utf-8") as f:
-                f.write(line + "\n")
+                f.write("".join(x + "\n" for x in lines))
         except OSError:
             pass
     return res

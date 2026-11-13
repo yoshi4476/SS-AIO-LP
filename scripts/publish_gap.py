@@ -202,6 +202,51 @@ def hidden_delivered(missing, man, hashes, is_hidden):
     return [s for s in missing if is_hidden(s) and hashes.get(s) and man.get(s) == hashes.get(s)]
 
 
+GIT_TYPES = ("nextjs-json", "external-md", "external-html")
+STUCK_MIN = 30
+
+
+def delivered_manifest(c):
+    """配信先のリポジトリ（作業コピーを取り直した先頭）にある指紋と、その先頭のコミットの時刻（UNIX 秒）。
+    Git で配る社だけ。取れなければ (None, None)（今までどおり本番だけで判断する）"""
+    if c.get("type") not in GIT_TYPES:
+        return None, None
+    try:
+        dest = publish.ensure_clone(c, publish._push_token())
+        p = publish.manifest_path(c, dest)
+        man = json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
+        r = subprocess.run(["git", "log", "-1", "--format=%ct"], cwd=dest, capture_output=True, text=True)
+        return (man if isinstance(man, dict) else {}), int(r.stdout.strip() or 0) or None
+    except (Exception, SystemExit) as e:  # noqa: BLE001  取れなければ配り直しで確かめる（今までどおり）
+        print(f"   配信先のリポジトリの指紋を読めませんでした（{type(e).__name__}）")
+        return None, None
+
+
+def unreflected(c, gap, hashes, why, repo=None):
+    """本番では古い・無いが、配信先のリポジトリには今の原稿の指紋で届いている記事。配り直しても中身は同じで、
+    push が配信先のビルドをまた走らせるだけ（2026-11-13: ビルドが失敗し続けた日に、同じ記事を1日4〜5回配り直した）。
+    変換漏れの記事は原稿の指紋が同じでも配り直す。repo: (指紋, 先頭の時刻)。None なら配信先から読む。
+    (届いている記事, 配信先の先頭の時刻) を返す"""
+    man, at = repo if repo is not None else delivered_manifest(c)
+    if man is None:
+        return [], None
+    return [s for s in gap if why.get(s) != "変換漏れ" and hashes.get(s) and man.get(s) == hashes[s]], at
+
+
+def report_unreflected(c, site, unref, at, now=None):
+    """配信先に届いているのに本番に出ていない記事の件数を出す。配信先の最後のコミットから STUCK_MIN 分を過ぎていれば、
+    配信先のビルドが止まっているとみて要対応にする（題・slug は出さない。件数だけ）"""
+    import time
+    import sites as S
+    name = (c.get("public_id") or site) if S.is_client(site) else c.get("name", site)
+    age = int(((now or time.time()) - at) // 60) if at else None
+    print(f"   {name}: 配信先には届いていて本番に出ていない {len(unref)}本（配り直しません）"
+          + (f" / 配信先の最後のコミットから約{age}分" if age is not None else ""))
+    if age is not None and age >= STUCK_MIN:
+        print(f"要対応: {name} の配信先に届いた記事 {len(unref)}本が、約{age}分たっても本番に出ていません。"
+              "配信先のビルド（Cloudflare など）が失敗していないか、ビルドの画面で確かめてください（配り直しはしません）")
+
+
 def _get(url):
     req = urllib.request.Request(
         url, headers={"User-Agent": "SevenSenses-PublishGap/1.0 (+https://7senses.co.jp)"})
@@ -250,7 +295,7 @@ def main():
     import editorial_review
     reviews = editorial_review.load()
     total_gap = 0
-    total_missing = total_failed = 0
+    total_missing = total_failed = total_unreflected = 0
     for site, slugs in sorted(mine.items()):
         c = conf[site]
         # ZIP 納品は先方が上げるまで公開されない。差を「未配信」と数えると毎日同じ ZIP を作り直す
@@ -308,6 +353,12 @@ def main():
         for s in delivered_leftovers(c, [s for s, _, _, _ in slugs if s in live and s not in stale]):
             stale.append(s)
             why[s] = "変換漏れ"
+        unref, head_at = [], None
+        if missing or stale:
+            unref, head_at = unreflected(c, missing + stale, {s: h for s, _, _, h in slugs}, why)
+            missing = [s for s in missing if s not in unref]
+            stale = [s for s in stale if s not in unref]
+            total_unreflected += len(unref)
         gap = missing + stale
         total_gap += len(gap)
         total_missing += len(missing)
@@ -318,19 +369,24 @@ def main():
             print(f"     {PS.shown(s)}（{why.get(s, '未配信')}）")
         if len(gap) > 8:
             print(f"     …ほか {len(gap) - 8}本")
+        if unref:
+            report_unreflected(c, site, unref, head_at)
 
         if a.publish and gap and c.get("type") != "self-static":
+            # 子の publish.py はコミットまでにして、この社の分を最後に1回だけ push する（記事ごとに push すると、
+            # 配信先のビルドが記事の数だけ走る。2026-11-13 お客様の社へ1日34回）
+            own = not publish.batched()
+            sent = []
             for i, s in enumerate(gap[:a.limit], 1):
                 r = subprocess.run(
                     [sys.executable, str(ROOT / "scripts" / "publish.py"),
                      "--site", site, "--slug", s, "--push"],
-                    capture_output=True, text=True, encoding="utf-8", errors="replace")
+                    capture_output=True, text=True, encoding="utf-8", errors="replace", env=publish.batch_env())
                 mark = "○" if r.returncode == 0 else "×"
                 total_failed += r.returncode != 0
                 print(f"     [{i}] {mark} {PS.shown(s)}", flush=True)
                 if r.returncode == 0:
-                    with done_file.open("a", encoding="utf-8") as fh:
-                        fh.write(f"{site} {s}\n")
+                    sent.append(s)
                 if r.returncode:
                     # 止めた理由を出す。× だけでは、配信の門（禁止語など）で止まったまま誰も気づかない
                     # （2026-10-09 お客様の社 の記事が「必ず」で止まり、承認の後も未配信だった）
@@ -338,16 +394,28 @@ def main():
                     why = next((ln for ln in reversed(out) if re.search(r"BLOCKED|HELD|Error|エラー|失敗", ln)),
                                out[-1] if out else "理由が出力されていません")
                     quiet = S.is_client(site)
-                    print(f"         理由: {why.replace(s, PS.shown(s))[:200] if quiet else why[:200]}", flush=True)
+                    if quiet:
+                        # 理由の行には題（commit の文）やドメインが混ざりうる。お客様の社は決まった語の理由だけを出す
+                        import publish_flow
+                        why = publish_flow.fail_reason((r.stdout or "") + "\n" + (r.stderr or ""))[1]
+                    print(f"         理由: {why[:200]}", flush=True)
                     if "BLOCKED" in why:
                         print(f"要対応: {c.get('public_id') or c.get('name', site) if quiet else c.get('name', site)} の "
-                              f"{PS.shown(s)} は配信の門で止まっています（{(why.replace(s, PS.shown(s)) if quiet else why)[:120]}）")
+                              f"{PS.shown(s)} は配信の門で止まっています（{why[:120]}）")
+            if own and sent and not publish.flush(c):
+                print(f"     → まとめた {len(sent)}本を配信先へ送れませんでした（届いていません）", flush=True)
+                total_failed += len(sent)
+                sent = []
+            if sent:
+                with done_file.open("a", encoding="utf-8") as fh:
+                    fh.writelines(f"{site} {s}\n" for s in sent)
 
     print(f"\nPUBLISH_GAP={total_gap}")
     # 本当に公開されていない記事・配り直しに失敗した記事の数（ワークフローはこれで警告する）。内容が古い記事の配り直し
     # （公開の後に足したリンクが次の回で届く）は毎回の作業なので、警告にしない（13回中11回出て雑音だった。2026-10-12）
     print(f"PUBLISH_MISSING={total_missing}")
     print(f"PUBLISH_FAILED={total_failed}")
+    print(f"PUBLISH_UNREFLECTED={total_unreflected}")
     if total_gap and not a.publish:
         print("  --publish を付けると、足りない分を配信します")
     return 0

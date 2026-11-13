@@ -400,13 +400,23 @@ def _republish(site_id, slugs):
     """別リポジトリの社は、訳を足した記事を配信し直す（日本語ページの hreflang と訳のページが届く）。
     AI集客ラボ（self-static）は build が置くので何もしない"""
     import subprocess
+    import publish
+    import private_store
     import sites as S
     if S.load(site_id).get("type") == "self-static":
         return
+    cfg = S.load(site_id)
+    # 書き出しは記事ごと、送るのは最後の1回（記事ごとの push は配信先のビルドを本数だけ走らせる。2026-11-13）。
+    # お客様の社は slug と出力の文を出さない（CI のログは public）
+    quiet = S.is_client(site_id)
     for s in sorted(slugs):
         r = subprocess.run([sys.executable, str(ROOT / "scripts" / "publish.py"), "--site", site_id, "--slug", s, "--push"],
-                           cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
-        print(f"   配信 {s[:40]}: {'OK' if r.returncode == 0 else 'NG ' + (r.stdout + r.stderr)[-80:].strip()}")
+                           cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace",
+                           env=publish.batch_env())
+        tail = "" if r.returncode == 0 or quiet else " " + (r.stdout + r.stderr)[-80:].strip()
+        print(f"   配信 {private_store.shown(s)[:40]}: {'OK' if r.returncode == 0 else 'NG' + tail}")
+    if not publish.batched() and not publish.flush(cfg):
+        print("   配信: 訳を足した記事を配信先へ送れませんでした（次の未配信の確認で送り直します）")
 
 
 def _credit(ja_url):
