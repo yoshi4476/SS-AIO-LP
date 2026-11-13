@@ -46,10 +46,6 @@ on:
         description: "修復の回数（2 以上は自動で取り込まない）"
         required: false
         default: "1"
-      bench:
-        description: "一回きりの実測: yes なら門を順と同時で流して比べるだけ（ほかのジョブは動かさない）"
-        required: false
-        default: ""
 
 permissions:
   # 書き込みの権限は正本へ push するジョブにだけ付ける（ジョブごとの permissions。zizmor excessive-permissions・2026-10-20）
@@ -75,7 +71,6 @@ jobs:
         with:
           persist-credentials: false   # push しないジョブは資格を残さない（2026-10-20）
       - name: 始まらなかった定時の回を起動する
-        if: github.event.inputs.bench != 'yes'
         env:
           GH_TOKEN: ${{ github.token }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -116,7 +111,7 @@ jobs:
     # 定期実行は 0 15 の回だけ（ほかの cron は取りこぼしの見張りのため。heal を1日に何度も動かさない）
     if: >-
       (github.event_name == 'schedule' && github.event.schedule == '0 15 * * *') ||
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.bench != 'yes') ||
+      github.event_name == 'workflow_dispatch' ||
       (contains(fromJSON('["Multi-Site Article Pipeline", "Article Pipeline (Rescue)", "Weekly Optimize", "Monthly Consulting Report", "Weekly Newsletter Digest", "Deploy to Cloudflare Pages"]'), github.event.workflow_run.name) &&
        (github.event.workflow_run.conclusion == 'failure' ||
         (github.event.workflow_run.conclusion == 'cancelled' &&
@@ -790,81 +785,3 @@ jobs:
           if echo "$out" | grep -q '^要対応'; then
             python3 scripts/notify_slack.py "🚨 $(echo "$out" | grep '^要対応' | head -3)" || true
           fi
-
-  # 一回きりの実測（作業ブランチだけ。取り込む版からは外す）: 点検と同じ条件（非公開のデータを取得・伏せ・build の後）で
-  # 門を順（GATES_JOBS=1）・監査（GATES_AUDIT=1）・同時（2・4・8）で流し、判定・本数・時間を比べる。
-  # 配信・コミット・通知・修復の AI は動かさず、非公開のリポジトリへも戻さない（save は動かさない）
-  gates-bench:
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.bench == 'yes'
-    runs-on: ubuntu-latest
-    timeout-minutes: 150
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
-        with:
-          persist-credentials: false
-
-      - uses: ./.github/actions/private-data
-        with:
-          token: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
-
-      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
-        with:
-          python-version: "3.12"
-
-      - name: 依存インストール
-        run: |
-          python -m pip install --quiet --upgrade pip
-          pip install --quiet -r requirements.txt
-          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /dev/null 2>&1 || true
-          npm install -g --prefer-offline @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 || { cat /tmp/npm.log; exit 1; }
-
-      - name: 門を順と同時で流して比べる
-        env:
-          SITE_PUSH_TOKEN: ${{ secrets.SITE_PUSH_TOKEN }}
-          FTP_CREDENTIALS_JSON: ${{ secrets.FTP_CREDENTIALS_JSON }}
-          WP_CREDENTIALS_JSON: ${{ secrets.WP_CREDENTIALS_JSON }}
-          HUB_URL: ${{ secrets.HUB_URL }}
-          HUB_SECRET: ${{ secrets.HUB_SECRET }}
-        run: |
-          set +e
-          echo "BENCH_CPU nproc=$(nproc) cpu_count=$(python -c 'import os; print(os.cpu_count())')"
-          echo "BENCH_CLIENT_GATE_FILES=$(ls private/tests/gates_client_*.py 2>/dev/null | wc -l)"
-          bench() {
-            label=$1; shift
-            git restore -- site data
-            python scripts/build.py > "/tmp/build_$label.log" 2>&1 || echo "BENCH_BUILD_NG $label"
-            s=$(date +%s)
-            env "$@" python tests/test_gates.py > "/tmp/gates_$label.log" 2>&1
-            rc=$?
-            e=$(date +%s)
-            ok=$(grep -c '^  OK  ' "/tmp/gates_$label.log")
-            ng=$(grep -c '^  NG  ' "/tmp/gates_$label.log")
-            echo "BENCH $label rc=$rc 秒=$((e - s)) OK=$ok NG=$ng 非公開の置き場の変更=$(git -C private status --porcelain 2>/dev/null | wc -l)"
-            grep -E '^■ 流した門|^■ 時間のかかった門|^すべて通りました|^失敗 ' "/tmp/gates_$label.log"
-            grep -E '^  NG  ' "/tmp/gates_$label.log" | sort > "/tmp/ng_$label.txt"
-            grep -E '^■ 流した門|^すべて通りました|^失敗 ' "/tmp/gates_$label.log" > "/tmp/sum_$label.txt"
-          }
-          bench j1 GATES_JOBS=1
-          echo "::group::順（GATES_JOBS=1）の全出力"; cat /tmp/gates_j1.log; echo "::endgroup::"
-          bench audit GATES_JOBS=1 GATES_AUDIT=1
-          echo "BENCH_AUDIT 変更のあった門:"
-          grep -E '^  変更  ' /tmp/gates_audit.log
-          bench j4 GATES_JOBS=4
-          echo "::group::同時（GATES_JOBS=4）の全出力"; cat /tmp/gates_j4.log; echo "::endgroup::"
-          bench default
-          for l in audit j4 default; do
-            if cmp -s /tmp/ng_j1.txt "/tmp/ng_$l.txt" && cmp -s /tmp/sum_j1.txt "/tmp/sum_$l.txt"; then
-              echo "BENCH_SAME $l: 順と判定・本数が一致"
-            else
-              echo "BENCH_DIFF $l: 順と違う"
-              diff /tmp/sum_j1.txt "/tmp/sum_$l.txt"
-              diff /tmp/ng_j1.txt "/tmp/ng_$l.txt"
-            fi
-          done
-          exit 0
-
-      - uses: ./.github/actions/private-data
-        if: always() && false
-        with: {mode: save}
