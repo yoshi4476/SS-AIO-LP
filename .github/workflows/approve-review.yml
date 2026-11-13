@@ -126,8 +126,12 @@ jobs:
           while read -r site slug; do
             [ -n "$slug" ] || continue
             # 標準入力を切る（子の工程が読むと、残りの slug の一覧を食べてしまう）
-            python scripts/publish_flow.py --finish "$site" "$slug" "--since=$since" < /dev/null \
-              || echo "::warning::$(python3 scripts/private_store.py --shown "$slug") の公開の後の手順に失敗（台帳を確かめてください）"
+            # お客様の社の記事は、finish の出力（題・slug・確認のコマンドを含む）をそのまま出さず、印の行だけを出す（2026-11-13）
+            name=$(python3 scripts/private_store.py --shown "$slug")
+            rc=0
+            fout=$(python scripts/publish_flow.py --finish "$site" "$slug" "--since=$since" < /dev/null 2>&1) || rc=$?
+            if [ "$name" = "$slug" ]; then echo "$fout"; else echo "$fout" | grep -E '^PUBLISH_(STAGE|FAIL)=' || true; fi
+            [ "$rc" -eq 0 ] || echo "::warning::${name} の公開の後の手順に失敗（台帳を確かめてください）"
           done < "$RUNNER_TEMP/finish.txt"
       - name: コミット
         run: |

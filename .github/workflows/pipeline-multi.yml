@@ -1289,10 +1289,14 @@ jobs:
           # 配信できた記事は publish_gap が automation/logs/published_now.txt（社 slug）に書く。ログの「○ slug」の行は
           # 拾わない（お客様の社の記事の slug はログに出さない。2026-10-10）
           touch automation/logs/published_now.txt
+          # お客様の社の記事は、finish の出力（題・slug・確認のコマンドを含む）をそのまま出さず、印の行だけを出す（2026-11-13）
           while read -r site slug; do
             [ -n "$slug" ] || continue
-            python scripts/publish_flow.py --finish "$site" "$slug" "--since=$since" < /dev/null \
-              || echo "::warning::$(python3 scripts/private_store.py --shown "$slug") の公開の後の手順に失敗"
+            name=$(python3 scripts/private_store.py --shown "$slug")
+            rc=0
+            fout=$(python scripts/publish_flow.py --finish "$site" "$slug" "--since=$since" < /dev/null 2>&1) || rc=$?
+            if [ "$name" = "$slug" ]; then echo "$fout"; else echo "$fout" | grep -E '^PUBLISH_(STAGE|FAIL)=' || true; fi
+            [ "$rc" -eq 0 ] || echo "::warning::${name} の公開の後の手順に失敗"
           done < automation/logs/published_now.txt
           # finish が既存記事に足したリンクを残す。コミット工程はこの前に終わっているため、
           # ここで入れないとランナーと一緒に消え、翌日の publish_gap が元の版で配信し直す
