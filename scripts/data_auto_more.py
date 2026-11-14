@@ -208,5 +208,113 @@ def fix_effects(days=90):
                "倍", out, ["aio", "seo"], "記事数", "記事", "")
 
 
+def _compete_recs():
+    """自社のサイトごとに、いちばん新しい月の「AIに聞いた答え」の記録（compete --measure の出力）"""
+    import sites as S
+    out = []
+    for sid in S.load_all():
+        files = sorted((ROOT / "data" / "compete" / sid).glob("[0-9][0-9][0-9][0-9]-[0-9][0-9].json"))
+        if files:
+            import json
+            d = json.loads(files[-1].read_text(encoding="utf-8"))
+            d.setdefault("site", sid)
+            out.append(d)
+    return out
+
+
+def _own_recs(recs, is_client):
+    if recs is None:
+        recs = _compete_recs()
+    if is_client is None:
+        from data_auto import is_client
+    # お客様の社の答えは、その社の狙う語で聞いたもの。運用会社の一次データにしない
+    return [r for r in recs if not is_client(str(r.get("site", "")))]
+
+
+def _answers(recs):
+    """(その語の検索順位, エンジンの答え) を、答えが取れたものだけ"""
+    for r in recs:
+        for it in r.get("items") or []:
+            for a in (it.get("ai") or {}).values():
+                if isinstance(a, dict) and a.get("answered"):
+                    yield it.get("pos"), a
+
+
+def _engines(recs):
+    """答えが取れたAIだけ（鍵の切れたAIの名前を「聞いた」と書かない）"""
+    names = sorted({n for r in recs for it in r.get("items") or [] for n, a in (it.get("ai") or {}).items()
+                    if isinstance(a, dict) and a.get("answered")})
+    return "・".join(names) or "AI"
+
+
+def _measured(recs):
+    ds = sorted(str(r.get("measured") or "")[:10] for r in recs if r.get("measured"))
+    return (ds[0], ds[-1]) if ds else (str(date.today()), str(date.today()))
+
+
+def ai_source_types(days=90, recs=None, is_client=None, mine=None, min_n=MIN_N):
+    """AIの回答の出典URLの種類の内訳。業種調査（research）と同じ分け方（compete.kind_of）で数える"""
+    import compete as C
+    import sites as S
+    recs = _own_recs(recs, is_client)
+    if mine is None:
+        mine = {c["domain"].lower().replace("www.", "") for c in S.load_all().values() if not S.is_client(c["id"])}
+    labels = dict(C.TYPES, self="自社（セブンセンシズのサイト）", operator="自社（セブンセンシズのサイト）")
+    count = defaultdict(int)
+    total = 0
+    for _, a in _answers(recs):
+        for u in a.get("urls") or []:
+            d = C.domain_of(u)
+            if not d:
+                continue
+            count[labels.get(C.kind_of(d, mine), labels["peer"])] += 1
+            total += 1
+    if total < min_n:
+        return None
+    start, end = _measured(recs)
+    rows = [{"label": k, "value": round(v / total * 100, 1), "num": v, "den": total,
+             "window": f"{start}〜{end}の測定", "row_start": start[:7], "row_end": end[:7]}
+            for k, v in sorted(count.items(), key=lambda x: -x[1])]
+    return _ds("ai-shutten-no-shurui", f"AIの回答で出典に選ばれたページの種類（出典{total}件）",
+               f"当社の3サイトが狙う語を{_engines(recs)}に実際に質問し、回答に出典として示された他社のURLを、"
+               "同業の会社のサイト・比較サイト・公的機関・メディア・動画やSNSなどに分けて数えました。",
+               total, "件（出典URL）", start, end,
+               "data/compete の月次の測定（検索つきのAIに狙う語をそのまま質問）で、回答の出典に示されたURL（当社のページを除き、"
+               "回答ごとに最大12件）を、業種別のAIの出典調査と同じ規則でドメインごとに分類。分類できなかった会社のサイトは"
+               "「同業・競合サイト」に含む。お客様のサイトの測定は含まない",
+               "%", rows, ["aio", "seo"], "出典URL", "件")
+
+
+def ai_cite_by_rank(days=90, recs=None, is_client=None, min_n=MIN_N):
+    """検索の順位の帯ごとに、AIの回答の出典に自社のページが入った割合（単位はAIの回答1つ）"""
+    recs = _own_recs(recs, is_client)
+    bands = [("検索10位以内", lambda p: p is not None and p <= 10.5),
+             ("検索11位以下", lambda p: p is not None and p > 10.5),
+             ("検索に出ていない語", lambda p: p is None)]
+    agg = {lab: [0, 0] for lab, _ in bands}            # [回答, 自社が出典に入った回答]
+    for pos, a in _answers(recs):
+        for lab, f in bands:
+            if f(pos):
+                agg[lab][0] += 1
+                agg[lab][1] += bool(a.get("ours"))
+                break
+    total = sum(v[0] for v in agg.values())
+    rows_n = [(lab, *agg[lab]) for lab, _ in bands if agg[lab][0] >= 10]   # 10未満の帯は割合にしない
+    if total < min_n or not rows_n:
+        return None
+    start, end = _measured(recs)
+    rows = [{"label": lab, "value": round(hit / den * 100, 1), "num": hit, "den": den,
+             "window": f"{start}〜{end}の測定", "row_start": start[:7], "row_end": end[:7]}
+            for lab, den, hit in rows_n]
+    return _ds("juni-to-ai-inyou", f"検索順位とAIの出典入り（AIの回答{total}件）",
+               "当社の3サイトが狙う語をAIに質問し、その語の検索順位の帯ごとに、回答の出典に当社のページが入った割合を出しました。"
+               "AIに引用される前提として検索の上位表示がどれだけ効くかを、自社の実測で確かめるためのデータです。",
+               total, "件（AIの回答）", start, end,
+               "data/compete の月次の測定で、答えが取れたAIの回答ごとに、出典URLに当社のドメインが含まれるかを判定。"
+               "検索順位は同じ測定の Search Console の平均掲載順位。回答が10件未満の帯は除外。お客様のサイトの測定は含まない",
+               "%", rows, ["aio", "seo"], "AIの回答", "自社が出典に入った回答", "入らなかった回答")
+
+
 BUILDERS = [("業種別のクリック率", ctr_by_industry), ("手法別のクリック率", ctr_by_method),
-            ("質問形の見出しと順位", question_h2_rank), ("自動修正の効き", fix_effects)]
+            ("質問形の見出しと順位", question_h2_rank), ("自動修正の効き", fix_effects),
+            ("AIの回答の出典の種類", ai_source_types), ("検索順位とAIの出典入り", ai_cite_by_rank)]
