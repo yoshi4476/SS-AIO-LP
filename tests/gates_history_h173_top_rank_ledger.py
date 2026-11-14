@@ -49,12 +49,13 @@ def test_key_query_cap_is_configurable():
     check("設定が無ければ今までどおり30語", KQ.limit_of({}), 30)
     check("設定があればその数", KQ.limit_of({"key_queries": {"max": 120}}), 120)
     check("壊れた設定は既定に戻す", KQ.limit_of({"key_queries": {"max": "abc"}}), 30)
-    check("AI集客ラボは約120語（100〜130）", 100 <= KQ.limit_of(S.load("ai-lab")) <= 130, True)
-    check("コーポレートは30語のまま", KQ.limit_of(S.load("corporate")), 30)
+    # 2026-11-15 運用者「AI集客ラボだけではなくすべて」（補助金は除く）。業種なしの組を足して140語、コーポレートにも台帳
+    check("AI集客ラボは約140語（120〜160）", 120 <= KQ.limit_of(S.load("ai-lab")) <= 160, True)
+    check("補助金は30語のまま（台帳の対象外）", KQ.limit_of(S.load("subsidy")), 30)
     conf = KQ.ledger_conf(S.load("ai-lab"))
-    check("AI集客ラボの組は優先業種（8）×サービス（SEO・AIO・MEO・HP制作）",
-          (len(conf["industries"]), [s for s, _t, _seed in conf["services"]]), (8, ["SEO", "AIO", "MEO", "HP制作"]))
-    check("組の設定の無い社は台帳を作らない", KQ.ledger_conf(S.load("corporate")), None)
+    check("AI集客ラボの組は優先業種（8）＋業種なし×サービス（SEO・AIO・MEO・HP制作）",
+          (len(conf["industries"]), [s for s, _t, _seed in conf["services"]]), (9, ["SEO", "AIO", "MEO", "HP制作"]))
+    check("組の設定の無い社は台帳を作らない", KQ.ledger_conf(S.load("subsidy")), None)
 
 
 def test_ledger_rows_by_industry_and_service():

@@ -175,18 +175,25 @@ def ledger_conf(cfg):
         return None
     terms = kq.get("industry_terms") or {}
     inds = [(i, [str(w).lower() for w in terms.get(i) or [i]])
-            for i in (cfg.get("kw_seeds") or {}).get("priority") or []]
+            for i in kq.get("industries") or (cfg.get("kw_seeds") or {}).get("priority") or []]
+    # 業種を含まない買い手の語（「経理代行 費用」）の組。どの業種の語にも当たらない語が入る（必ず最後に置く）
+    if kq.get("general"):
+        inds.append((kq["general"], []))
     svcs = [(s, [str(w).lower() for w in v.get("terms") or [s]], v.get("seed") or s)
             for s, v in kq["services"].items()]
     lo, hi = (list(kq.get("per_group") or [3, 5]) + [5])[:2]
     return {"industries": inds, "services": svcs, "buyer": list(kq.get("buyer_words") or []),
+            "ignore": [str(w).lower() for w in kq.get("buyer_ignore") or []],
+            "exclude": [str(w).lower() for w in kq.get("exclude") or []],
             "per_group": (int(lo), int(hi)), "max": limit_of(cfg)}
 
 
 def group_of(text, conf):
     """(業種, サービス)。どちらかが無ければ None。設定の順に見る（先に書いた方を優先）"""
     low = str(text).lower()
-    ind = next((i for i, ws in conf["industries"] if any(w in low for w in ws)), None)
+    ind = next((i for i, ws in conf["industries"] if ws and any(w in low for w in ws)), None)
+    if ind is None and conf["industries"] and not conf["industries"][-1][1]:
+        ind = conf["industries"][-1][0]               # 業種なしの組（ledger_conf の general）
     svc = next((s for s, ws, _seed in conf["services"] if any(w in low for w in ws)), None)
     return (ind, svc) if ind and svc else None
 
@@ -200,12 +207,24 @@ def build_ledger(cfg, declared, hub_kws, ranks, vols, prev=(), today="", slugs=N
         return []
     today = today or date.today().isoformat()
     lo, hi = conf["per_group"]
+
+    def is_buyer(q):
+        """依頼先を探す人の語か。制度名などに含まれる買い手の語（「AI導入補助金」の「導入」）は判定から外し、
+        その社で決めた買い手の語（buyer_words）は買い手とみなす（2026-11-15 運用者「買い手に響くキーワードで」）"""
+        full = low = str(q).lower()
+        if any(t in full for t in kw_intent.NOT_BUYER):    # 求人・転職・資格などは買い手の語があっても外す
+            return False
+        if any(t in full for t in conf["exclude"]):        # 他社の名前・別の業種・地域を絞った語（その社の設定）
+            return False
+        for w in conf["ignore"]:
+            low = low.replace(w, "")
+        return kw_intent.is_buyer(low) or any(b.lower() in full for b in conf["buyer"])
     groups = {(i, s): [] for i, _w in conf["industries"] for s, _t, _seed in conf["services"]}
     seen = set()
     for q in list(hub_kws) + [r["q"] for r in ranks.values()] + [raw for raw, _s in declared.values()]:
         g, nq = group_of(q, conf), norm(q)
         # 量が0と分かった語は狙わない（記事を寄せても集客にならない。2026-11-15 運用者の決定）
-        if g in groups and nq not in seen and vols.get(nq) != 0 and kw_intent.is_buyer(q) \
+        if g in groups and nq not in seen and vols.get(nq) != 0 and is_buyer(q) \
                 and len(nq) <= SENTENCE_LEN and not SENTENCE.search(str(q).strip()):
             seen.add(nq)
             groups[g].append(q)
@@ -213,9 +232,10 @@ def build_ledger(cfg, declared, hub_kws, ranks, vols, prev=(), today="", slugs=N
         # 量の分かる語を先に（ラッコの量 → GSC の表示）。並びを固定し、毎週の作り直しで語が入れ替わらないようにする
         qs.sort(key=lambda q: (-(vols.get(norm(q)) or 0), -(ranks.get(norm(q), {}).get("imp") or 0), norm(q)))
         seed = next(sd for s, _t, sd in conf["services"] if s == g[1])
+        general = not dict(conf["industries"]).get(g[0])
         for b in conf["buyer"]:
-            q = f"{g[0]} {seed} {b}"
-            if norm(q) not in {norm(x) for x in qs} and vols.get(norm(q)) != 0 and kw_intent.is_buyer(q):
+            q = f"{seed} {b}" if general else f"{g[0]} {seed} {b}"
+            if norm(q) not in {norm(x) for x in qs} and vols.get(norm(q)) != 0 and is_buyer(q):
                 qs.append(q)
         del qs[hi:]
     # 各組の1語目、2語目…の順に配る。上限で切っても、どの組も lo 語までは必ず残る
