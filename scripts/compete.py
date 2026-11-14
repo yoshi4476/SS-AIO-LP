@@ -122,6 +122,14 @@ def ai_cap(cfg):
         return AI_CAP
 
 
+def max_kw(cfg):
+    """測る語の数（sites/<id>.json の compete.max_kw）。差を埋める書き足しはこの語からしか選ばれない"""
+    try:
+        return int((cfg.get("compete") or {}).get("max_kw") or MAX_KW)
+    except (TypeError, ValueError):
+        return MAX_KW
+
+
 def share(n, d):
     """母数が MIN_N 未満なら割合にしない（None）。表示側は「n/d語」で出す"""
     return round(n / d, 3) if d >= MIN_N else None
@@ -386,7 +394,7 @@ def measure_site(sid, cfg, cache_only=False, dry=False, ym=None, eng=None, usage
     ym = ym or f"{date.today():%Y-%m}"
     mine, operator = site_domains(sid, cfg)
     prev = load_month(sid, prev_month(ym))
-    kws, by, window = keywords(sid, cfg, MAX_KW, [x["kw"] for x in (prev or {}).get("items", [])])
+    kws, by, window = keywords(sid, cfg, max_kw(cfg), [x["kw"] for x in (prev or {}).get("items", [])])
     if not kws:
         print(f"   {sid}: 語を選べません（Search Console の順位も台帳の語もありません）")
         return None

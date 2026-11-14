@@ -186,5 +186,10 @@
   "spare_slot": "rewrite_main",
   "spare_scope": "low_impression",
   "rescore_week_cap": 21,
-  "kw_buyer_first": true
+  "kw_buyer_first": true,
+  "compete": {
+    "max_kw": 40,
+    "ai_cap": 130,
+    "_note": "競合と比べて測る語を月20語から40語へ（2026-11-15 運用者「今までの記事もすべてAIに取り上げられるようにしたい」）。181本のうちAIに聞いて測れていたのは23語だけで、差を埋める書き足しはこの語からしか選ばれない。1語につき約3つのAIに新しく聞くので、月の上限も語の数の3倍強にする"
+  }
 }
