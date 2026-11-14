@@ -86,6 +86,8 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
    文字の載る左側だけ紺を重ねる。前は右に14項目の表を置き、写真に紺を重ねて半分の濃さにしていたので、写真がほぼ見えなかった。
    14項目の表はすぐ下の帯（.lx-scan-band）へ移した */
 .home .lx-hero{background:#0b2447;padding:clamp(3rem,6vw,5.4rem) 0}
+/* 狭い画面は背景に大きな写真を敷かない（写真は上の帯の静止画だけ。LCP を重くしない） */
+@media (max-width:920px){.home .lx-hero{background:#0b2447}}
 .home .lx-hero .lx-hero-video{opacity:1;object-position:70% 45%}
 .home .lx-hero::before{display:none}
 .home .lx-hero::after{background:linear-gradient(90deg,rgba(6,20,46,.93) 0%,rgba(6,20,46,.84) 36%,rgba(6,20,46,.3) 60%,rgba(6,20,46,0) 76%)}
