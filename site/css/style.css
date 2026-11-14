@@ -124,30 +124,38 @@ html.js .reveal-d3 { transition-delay: .3s; }
    スマホ（1260px以下）は画面の1割未満の決まりがあるので変えない。幅に応じて詰め、ロゴと社名は縮めない
    （前は1280px前後で社名が3行に折れていた。狭い幅の指定は後ろの指定に負けて効いていなかった） */
 @media (min-width: 1261px) {
-  .site-header .inner { padding-top: 1.05rem; padding-bottom: 1.05rem; gap: 1.6rem; }
+  .site-header .inner { padding-top: 1.3rem; padding-bottom: 1.3rem; gap: 1.8rem; }
   .brand { flex-shrink: 0; }
-  .brand-logo { height: 42px; }
-  .brand .mark { font-size: 1.42rem; white-space: nowrap; }
-  .brand .by { font-size: .68rem; white-space: nowrap; }
-  .global-nav { gap: 1.6rem; }
-  .global-nav a { font-size: .97rem; }
-  .site-header .global-nav .nav-cta { padding: .7em 1.6em; }
-  .site-header .global-nav .nav-tool { padding: .6em 1.2em; }
+  .brand-logo { height: 50px; }
+  .brand .mark { font-size: 1.65rem; white-space: nowrap; }
+  .brand .by { font-size: .74rem; white-space: nowrap; }
+  .global-nav { gap: 1.7rem; }
+  .global-nav a { font-size: 1.04rem; }
+  .site-header .global-nav .nav-cta { padding: .75em 1.7em; }
+  .site-header .global-nav .nav-tool { padding: .65em 1.3em; }
 }
-@media (min-width: 1261px) and (max-width: 1640px) {
+/* 1920px より狭い幅は、左右の余白を詰めて文字の大きさを保つ */
+@media (min-width: 1261px) and (max-width: 1800px) {
+  .site-header .inner { gap: 1.3rem; padding-left: clamp(1.5rem, 2.6vw, 3rem); padding-right: clamp(1.5rem, 2.6vw, 3rem); }
   .global-nav { gap: 1.15rem; }
-  .global-nav a { font-size: .9rem; }
-  .site-header .global-nav .nav-cta { padding: .65em 1.3em; }
-  .site-header .global-nav .nav-tool { padding: .55em 1em; }
+  .global-nav a { font-size: .96rem; }
+  .site-header .global-nav .nav-cta { padding: .7em 1.35em; }
+  .site-header .global-nav .nav-tool { padding: .6em 1.05em; }
 }
-@media (min-width: 1261px) and (max-width: 1420px) {
-  .site-header .inner { gap: 1.1rem; padding-left: 2rem; padding-right: 2rem; }
-  .brand-logo { height: 38px; }
-  .brand .mark { font-size: 1.3rem; }
-  .global-nav { gap: .85rem; }
-  .global-nav a { font-size: .84rem; }
-  .site-header .global-nav .nav-cta { padding: .6em 1.05em; }
-  .site-header .global-nav .nav-tool { padding: .5em .85em; }
+/* 1500px 以下は幅に比例して詰める（1440px で 15px 前後の文字を保ち、1261px でも1行に収める） */
+@media (min-width: 1261px) and (max-width: 1500px) {
+  .site-header .inner { gap: 1rem; padding-left: 1.6vw; padding-right: 1.6vw; }
+  .brand-logo { height: 44px; }
+  .brand .mark { font-size: 1.48rem; }
+  .brand .by { font-size: .68rem; }
+  .global-nav { gap: 1.12vw; }
+  .global-nav a { font-size: 1.06vw; }
+  .site-header .global-nav .nav-cta { padding: .65em 1.1em; }
+  .site-header .global-nav .nav-tool { padding: .55em .9em; }
+}
+@media (min-width: 1261px) and (max-width: 1360px) {
+  .brand-logo { height: 40px; }
+  .brand .mark { font-size: 1.34rem; }
 }
 
 /* モバイルメニュー */
