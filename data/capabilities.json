@@ -2196,37 +2196,37 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/compete.py:828",
+     "evidence": "scripts/compete.py:836",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/compete.py:828",
+     "evidence": "scripts/compete.py:836",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/compete.py:828",
+     "evidence": "scripts/compete.py:836",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/compete.py:828",
+     "evidence": "scripts/compete.py:836",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/compete.py:828",
+     "evidence": "scripts/compete.py:836",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/compete.py:828",
+     "evidence": "scripts/compete.py:836",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/compete.py:828",
+     "evidence": "scripts/compete.py:836",
      "anchor": "sids = [x for x in S.load_all() if not a.site or x == a.site]"
     }
    }
