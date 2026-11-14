@@ -274,7 +274,8 @@ UNKNOWN = re.compile(r"[A-Z_]+_OK=unknown|GROWTH_DROP=unknown")
 
 # 判定はせず「情報:」の行だけを本文に添える。要対応にしないので、これだけでは通知は送られない。
 # 期間のある取り組み（集中モード）は、期間外に何も出さない側で終わらせる
-INFO = ["focus_report.py --line"]
+# 1位を狙う語の台帳（key_queries --line）: 順位の分布・先週との比較・担う記事の無い組（お客様の社は数だけ）
+INFO = ["focus_report.py --line", "key_queries.py --line"]
 
 # 毎週出る性質で、人が動かせないもの。新しく出ても「情報」にまとめる（理由は通知に添える）
 STEADY = {

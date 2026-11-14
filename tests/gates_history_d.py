@@ -791,10 +791,11 @@ def test_hist_no_hardcoded_site_list():
 
 
 # ══ 42. ラッコの控えが CI で毎回消え、毎週課金（2026-09-27）════════════════════════
-RAKKO_USERS = re.compile(r"python3? scripts/(kw_plan|kw_discover|rakko|findings)\.py")
+RAKKO_USERS = re.compile(r"python3? scripts/(kw_plan|kw_discover|rakko|findings|key_queries)\.py")
 # kw_discover は 2026-10-08 から rakko.allow を通さず控えを読むだけ（課金も控えへの書き込みもしない）。書くのは kw_plan だけ。
 # 週次が戻した古い控え（利用の記録）を rakko- の鍵で残すと、毎日の見張りが前方一致で戻して消費を失いえた（2026-10-20 の点検）
 RAKKO_WRITERS = {"kw_plan"}
+# key_queries（1位を狙う語の台帳）は検索の量の控え（rakko_volume.json）を読むだけ（2026-11-15）
 
 
 def rakko_paths():
