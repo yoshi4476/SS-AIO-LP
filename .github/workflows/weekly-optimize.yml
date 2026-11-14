@@ -707,11 +707,14 @@ jobs:
       # 1ページ目の手前にいる記事に届かない。実測で、止まる27本のうち
       # 被リンク5本以下は3本だけだった
       - name: 11〜30位で止まっている記事へ内部リンクを寄せる
+        env:
+          # 台帳の語の検索の量を、分からない語だけ一括調査で取る（500語で15クレジット・一括検索数の枠。2026-11-15 運用者の決定）
+          RAKKO_API_KEY: ${{ secrets.RAKKO_API_KEY }}
         run: |
           # 生の出力は通知本文に入れない（要対応の行だけを拾う）
           mkdir -p automation/logs
           # 1位を狙う語の台帳（AI集客ラボ: 優先業種×SEO・AIO・MEO・HP制作の買い手の語）を作り直してから順位を記録する。
-          # ラッコは呼ばない（上の控えの検索の量だけ。無ければ GSC の表示で代える）
+          # 検索の量は上の控え。分からない語だけ一括調査で1回取り（90日は控えを使う）、量0の語は台帳から外す
           { python scripts/rank_rescue.py --refresh || true
             python scripts/key_queries.py --ledger --write || true
             python scripts/key_queries.py --track || true

@@ -21,7 +21,8 @@
 **1位を狙う語の台帳**: sites/<id>.json に key_queries（max・industry_terms・services・buyer_words）がある社だけ、
 主要クエリを「優先業種（kw_seeds.priority）×サービス」の組ごとの買い手の語に置き換える（1組3〜5語）。
 語の候補は管制塔の台帳・GSC の順位の記録（data/ranks/<id>.json）・記事の狙う語・kw_seeds の組み合わせ。
-検索の量は data/rakko_volume.json の控えだけを使う（ラッコは新しく呼ばない）。控えに無ければ GSC の表示で代える。
+検索の量は data/rakko_volume.json の控え。--write の回だけ、量の分からない語を一括調査で1回取る（500語で15クレジット・
+一括検索数の枠。90日は控えを使う）。量0の語は台帳から外す（2026-11-15 運用者の決定）。取れない語は GSC の表示で代える。
 
 終了コードは常に0（CLAUDE.md 8.7）。判定は KEYQ_OK= の印で行う。
 """
@@ -203,7 +204,8 @@ def build_ledger(cfg, declared, hub_kws, ranks, vols, prev=(), today="", slugs=N
     seen = set()
     for q in list(hub_kws) + [r["q"] for r in ranks.values()] + [raw for raw, _s in declared.values()]:
         g, nq = group_of(q, conf), norm(q)
-        if g in groups and nq not in seen and kw_intent.is_buyer(q) \
+        # 量が0と分かった語は狙わない（記事を寄せても集客にならない。2026-11-15 運用者の決定）
+        if g in groups and nq not in seen and vols.get(nq) != 0 and kw_intent.is_buyer(q) \
                 and len(nq) <= SENTENCE_LEN and not SENTENCE.search(str(q).strip()):
             seen.add(nq)
             groups[g].append(q)
@@ -213,7 +215,7 @@ def build_ledger(cfg, declared, hub_kws, ranks, vols, prev=(), today="", slugs=N
         seed = next(sd for s, _t, sd in conf["services"] if s == g[1])
         for b in conf["buyer"]:
             q = f"{g[0]} {seed} {b}"
-            if norm(q) not in {norm(x) for x in qs} and kw_intent.is_buyer(q):
+            if norm(q) not in {norm(x) for x in qs} and vols.get(norm(q)) != 0 and kw_intent.is_buyer(q):
                 qs.append(q)
         del qs[hi:]
     # 各組の1語目、2語目…の順に配る。上限で切っても、どの組も lo 語までは必ず残る
@@ -267,13 +269,29 @@ def ranks_of(site_id, days=28):
                 "url": max(a["urls"], key=a["urls"].get)} for k, a in acc.items()}
 
 
-def volumes():
-    """ラッコの検索の量の控え（kw_plan が予算の中で取ったもの）。CI のキャッシュに無ければ空"""
-    try:
-        raw = json.loads((ROOT / "data" / "rakko_volume.json").read_text(encoding="utf-8"))
-    except Exception:  # noqa: BLE001  手元・キャッシュの無い回は GSC の表示で代える
-        return {}
-    return {norm(k): v["vol"] for k, v in raw.items() if isinstance(v, dict) and v.get("vol") is not None}
+def volumes(raw=None):
+    """ラッコの検索の量の控え（kw_plan と台帳が予算の中で取ったもの）。調べて量が返らなかった語は0とみなす。
+    CI のキャッシュに無ければ空"""
+    if raw is None:
+        try:
+            raw = json.loads((ROOT / "data" / "rakko_volume.json").read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001  手元・キャッシュの無い回は GSC の表示で代える
+            return {}
+    return {norm(k): (v.get("vol") or 0) for k, v in raw.items()
+            if isinstance(v, dict) and (v.get("vol") is not None or v.get("answered"))}
+
+
+def lookup_volumes(site_id, rows, rakko=None, plan=None):
+    """量の分からない語だけを、ラッコの一括調査で1回調べる（500語で15クレジット）。kw_plan.fill_volume を使い、
+    同じ控え（90日）と同じ枠（一括検索数）で数える。枠を超える月は呼ばない（rakko.allow が止める）"""
+    if rakko is None:
+        import rakko
+    if plan is None:
+        import kw_plan as plan
+    need = {norm(r["q"]): {"kw": r["q"], "vol": None, "src": ("ledger",)} for r in rows if r.get("vol_src") == "なし"}
+    if not need or not rakko.enabled() or not rakko.allow(site_id, {"volume": 15}):
+        return 0
+    return plan.fill_volume(need)
 
 
 def hub_words(site_id):
@@ -286,10 +304,13 @@ def ledger(site_id, cfg, write=False):
     blk = load().get(site_id) or {}
     declared = keywords_of_site(site_id, cfg)
     slugs = {s for _r, s in declared.values()} | {p.stem for p in ARTICLES.glob("*.md")}
-    rows = build_ledger(cfg, declared, hub_words(site_id), ranks_of(site_id), volumes(),
-                        prev=blk.get("queries") or [], slugs=slugs)
+    hub, ranks = hub_words(site_id), ranks_of(site_id)
+    rows = build_ledger(cfg, declared, hub, ranks, volumes(), prev=blk.get("queries") or [], slugs=slugs)
     if not rows:
         return None
+    # 書く回（週次の CI）だけ課金する。量が取れたら、量0の語を外して作り直す
+    if write and lookup_volumes(site_id, rows):
+        rows = build_ledger(cfg, declared, hub, ranks, volumes(), prev=blk.get("queries") or [], slugs=slugs)
     groups = {(r["ind"], r["svc"]) for r in rows}
     empty = groups - {(r["ind"], r["svc"]) for r in rows if r["slug"]}
     src = {k: sum(1 for r in rows if r["vol_src"] == k) for k in ("rakko", "gsc", "なし")}
