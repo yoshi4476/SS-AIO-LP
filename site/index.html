@@ -96,11 +96,28 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
 /* 広い画面は少し大きく（2026-11-15 運用者「ヒーローセクションももう少しだけ広げて」）。左端は下の区画とそろえたまま、
    高さ・文字の列・見出しを広げる。スマホは変えない */
 @media (min-width:901px){
-.home .lx-hero{padding:clamp(4.2rem,8.2vw,7.8rem) 0}
+/* 実績の帯（3,200件以上ほか）まで最初の画面に収める（2026-11-15 運用者「1画面で見えるようにしたい」）。
+   ヒーローの高さ = 画面の高さ − ヘッダー − 実績の帯。高い画面ではそのぶん大きく、低い画面では見出しを縮める */
+:root{--hdr-h:93px;--proof-h:146px}
+.home .lx-hero{display:flex;align-items:center;min-height:calc(100svh - var(--hdr-h) - var(--proof-h));padding:clamp(1.4rem,3.4vh,3.4rem) 0}
+.home .lx-hero>.lx-wrap{width:100%}
+.home .lx-proof ul{padding-top:.95rem;padding-bottom:.95rem;max-width:1240px}
+.home .lx-proof .n{font-size:clamp(1.5rem,2.1vw,2rem)}
 .home .lx-hero-grid{grid-template-columns:minmax(0,720px)}
 .home .lx-h1{font-size:clamp(2.3rem,4vw,3.6rem)}
 .home .lx-lead{font-size:clamp(1.02rem,1.35vw,1.16rem);max-width:none}
 .home .lx-hero::after{background:linear-gradient(90deg,rgba(6,20,46,.93) 0%,rgba(6,20,46,.84) 40%,rgba(6,20,46,.3) 63%,rgba(6,20,46,0) 78%)}
+}
+@media (min-width:901px) and (max-width:1260px){:root{--hdr-h:105px;--proof-h:156px}}
+@media (min-width:1501px){:root{--hdr-h:95px}}
+@media (min-width:1801px){:root{--hdr-h:101px}}
+/* 低い画面（ノートパソコンの768〜880px）は、見出しと本文を画面の高さに合わせて縮める */
+@media (min-width:901px) and (max-height:880px){
+.home .lx-h1{font-size:min(3.6rem,5.7vh)}
+.home .lx-hero{padding:2.2vh 0}
+.home .lx-proof ul{padding-top:.7rem;padding-bottom:.7rem}
+.home .lx-lead{font-size:min(1.12rem,2.05vh);line-height:1.7;margin-bottom:.8rem}
+.home .lx-hero .lx-form{padding-top:.75rem;padding-bottom:.75rem}
 }
 /* 狭い画面: 写真は上に1枚の帯として見せ、その下に文字（写真の上に文字を重ねると、紺を濃く重ねるしかなく写真が見えない） */
 @media (max-width:900px){
