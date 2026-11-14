@@ -105,7 +105,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <!-- ヒーロー（v2: URLを入れるだけの実測診断が主役。左=入力 / 右=計測盤） -->
 <section class="lx-hero" data-area="ヒーロー" data-area-id="hero" id="scan-start">
   <!-- 背景の動画: お客様がAIに聞く → 答えに出た会社を選ぶ → 来院・来店・相談。紺を重ねて薄く敷く（入力と計測盤の構成はそのまま） -->
-  <img class="lx-hero-video lx-hero-still" src="/videos/lab-hero-poster.webp" srcset="/videos/lab-hero-poster-m.webp 640w, /videos/lab-hero-poster.webp 1280w" sizes="100vw" alt="AIに聞いてから会社を選ぶお客様のイメージ" aria-hidden="true" fetchpriority="high" decoding="async"><video class="lx-hero-video" muted loop playsinline preload="none" aria-hidden="true" style="opacity:0;transition:opacity .8s"></video><!-- 背景の動画は最初の操作（タップ・スクロール・キー）の後に読む。読み込みの0.7秒後に流すと、動画の最初のコマが後から最大の描画（LCP）に数えられ、モバイルの計測が1.9秒と4.4秒に割れていた（2026-10-05）。LCP は最初の操作で確定するので、操作の後なら数えられない。データ節約・2G では読まない --><script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))return;var ev=["pointerdown","keydown","touchstart","wheel","scroll"];var go=function(){ev.forEach(function(e){removeEventListener(e,go,true);});var m=matchMedia("(max-width: 900px)").matches?"-m":"";document.querySelectorAll("video.lx-hero-video").forEach(function(v){v.innerHTML='<source src="/videos/lab-hero'+m+'.webm" type="video/webm"><source src="/videos/lab-hero'+m+'.mp4" type="video/mp4">';v.addEventListener("playing",function(){v.style.opacity="";var i=v.previousElementSibling;if(i&&i.classList.contains("lx-hero-still"))i.style.opacity="0";},{once:true});v.load();var p=v.play();if(p&&p.catch)p.catch(function(){});});};ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true});});})();</script>
+  <img class="lx-hero-video lx-hero-still" src="/videos/lab-hero-poster.webp" srcset="/videos/lab-hero-poster-m.webp 960w, /videos/lab-hero-poster.webp 1280w" sizes="100vw" alt="AIの答えをスマートフォンで確かめる医院の院長のイメージ" aria-hidden="true" fetchpriority="high" decoding="async"><video class="lx-hero-video" muted loop playsinline preload="none" aria-hidden="true" style="opacity:0;transition:opacity .8s"></video><!-- 背景の動画は最初の操作（タップ・スクロール・キー）の後に読む。読み込みの0.7秒後に流すと、動画の最初のコマが後から最大の描画（LCP）に数えられ、モバイルの計測が1.9秒と4.4秒に割れていた（2026-10-05）。LCP は最初の操作で確定するので、操作の後なら数えられない。データ節約・2G では読まない --><script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))return;var ev=["pointerdown","keydown","touchstart","wheel","scroll"];var go=function(){ev.forEach(function(e){removeEventListener(e,go,true);});var m=matchMedia("(max-width: 900px)").matches?"-m":"";document.querySelectorAll("video.lx-hero-video").forEach(function(v){v.innerHTML='<source src="/videos/lab-hero'+m+'.webm" type="video/webm"><source src="/videos/lab-hero'+m+'.mp4" type="video/mp4">';v.addEventListener("playing",function(){v.style.opacity="";var i=v.previousElementSibling;if(i&&i.classList.contains("lx-hero-still"))i.style.opacity="0";},{once:true});v.load();var p=v.play();if(p&&p.catch)p.catch(function(){});});};ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true});});})();</script>
   <div class="lx-wrap lx-hero-grid">
     <div id="diagnosis">
       <ul class="lx-kicker"><li>無料</li><li>登録不要</li><li>30秒</li><li>営業電話なし</li></ul>
@@ -178,7 +178,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 
 <div class="photo-band" data-tone="light">
-  <img src="/images/home/band-morning.webp" alt="開院前の待合室で、ブラインドを上げて明かりをつける受付の担当者" width="2000" height="620" loading="lazy" decoding="async">
+  <img src="/images/home/band-morning.webp" alt="開院前の待合室で、ブラインドを上げる受付の担当者" width="2000" height="620" loading="lazy" decoding="async">
   <p>お客様は、来る前に、もうAIの答えを読んでいます。</p>
 </div>
 <!-- 市場の変化（概念図ではなく、数えた数字で見せる） -->
@@ -288,8 +288,8 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </section>
 
 <!-- 写真の帯（読み疲れを切る息継ぎ） -->
-<div class="photo-band">
-  <img src="/images/home/band-office.webp" alt="集客支援の打ち合わせを行うオフィス" width="2000" height="620" loading="lazy">
+<div class="photo-band" data-tone="light">
+  <img src="/images/home/band-office.webp" alt="集客支援の担当者が働く明るいオフィス" width="2000" height="620" loading="lazy">
   <p>AIO・LLMO・SEO・MEOを、分けずに1つの戦略として運用します。<small>施策ごとに外注先が違うと、打ち手が噛み合わないまま費用だけが積み上がります。</small></p>
 </div>
 
@@ -358,7 +358,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </div>
 
 <div class="photo-band" data-tone="light">
-  <img src="/images/home/band-search.webp" alt="昼休みの公園のベンチで、近くの医院をスマートフォンで比べる人の後ろ姿" width="2000" height="620" loading="lazy" decoding="async">
+  <img src="/images/home/band-search.webp" alt="昼休みの公園で、近くの医院をスマートフォンで比べる人" width="2000" height="620" loading="lazy" decoding="async">
   <p>自社で運用するか、任せるか。続け方で選べます。</p>
 </div>
 <!-- 料金 -->
@@ -405,7 +405,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </section>
 
 <!-- 写真の帯（読み疲れを切る息継ぎ） -->
-<div class="photo-band">
+<div class="photo-band" data-tone="light">
   <img src="/images/home/band-data.webp" alt="検索とAI検索のデータを確認する画面" width="2000" height="620" loading="lazy">
   <p>数字で報告し、次に何を直すかまで書いて渡します。<small>毎月の月次レポートで、検索・マップ・AI検索での見え方と改修プランをご報告します。</small></p>
 </div>
@@ -525,7 +525,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </section>
 
 <div class="photo-band" data-tone="light">
-  <img src="/images/home/band-visit.webp" alt="小さな事務所のガラス戸を開けて入る来客と、受付で迎える担当者" width="2000" height="620" loading="lazy" decoding="async">
+  <img src="/images/home/band-visit.webp" alt="事務所に入る来客と、受付で迎える担当者" width="2000" height="620" loading="lazy" decoding="async">
   <p>ご契約の前の現状分析とお見積りは、無料です。</p>
 </div>
 <!-- 流れ -->
@@ -578,7 +578,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </section>
 
 <!-- 写真の帯（読み疲れを切る息継ぎ） -->
-<div class="photo-band">
+<div class="photo-band" data-tone="light">
   <img src="/images/home/band-meeting.webp" alt="お客様と施策を相談する打ち合わせ" width="2000" height="620" loading="lazy">
   <p>AIO・SEO・MEOで累計3,200件以上の運用で見てきたことを、そのままお伝えします。<small>机上の一般論ではなく、実際に起きたことと打ち手をご説明します。</small></p>
 </div>

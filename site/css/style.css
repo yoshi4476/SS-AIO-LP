@@ -1753,7 +1753,7 @@ main.article .article-body a.cta-button:hover { background: var(--blue-deep); tr
 .service-split .data-cards { grid-template-columns: minmax(0, 1fr); }
 .flat-sec .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (max-width: 720px) { .flat-sec .work-grid { grid-template-columns: minmax(0, 1fr); } }
-.cta-photo { background: linear-gradient(100deg, rgba(7, 26, 56, .94) 0%, rgba(11, 36, 71, .82) 45%, rgba(11, 36, 71, .55) 100%), url("/images/home/cta.webp") center / cover no-repeat; }
+.cta-photo { background: linear-gradient(100deg, rgba(7, 26, 56, .9) 0%, rgba(11, 36, 71, .62) 45%, rgba(11, 36, 71, .18) 100%), url("/images/home/cta.webp") center / cover no-repeat; } /* 右の写真が見えるように右側の紺を薄くした（2026-11-14 運用者「暗めのものは使わない」） */
 /* Codex の点検（2026-10-03）: 余白とつり合いの調整 */
 section[data-area-id="industry"] { padding-bottom: clamp(1.6rem, 3vw, 3rem); }
 section[data-area-id="latest"] { padding-top: clamp(1.6rem, 3vw, 3rem); }

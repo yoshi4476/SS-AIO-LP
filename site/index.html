@@ -82,13 +82,39 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
 .top-final-scan input{flex:1 1 18em;min-width:0;font:inherit;font-size:1rem;padding:.85em 1em;border:2px solid transparent;border-radius:12px}
 .top-final-scan input:focus{outline:none;border-color:#8fb7ff}
 .lx-hero form.lx-form{max-width:560px}
-/* 前のトップの写真（style.css の --mv-photo）を敷き、文字の載る左側だけ濃くする */
-.home .lx-hero{background:linear-gradient(90deg,rgba(6,20,46,.9) 0%,rgba(6,20,46,.74) 48%,rgba(6,20,46,.38) 100%),linear-gradient(180deg,rgba(6,20,46,.25) 0%,rgba(6,20,46,0) 40%,rgba(6,20,46,.55) 100%),var(--mv-photo) 60% 62%/cover no-repeat,#0b2447;padding:clamp(3rem,7vw,6rem) 0 clamp(3rem,6vw,5.2rem)}
-.home .lx-hero::before{opacity:.5}
-.home .lx-console{background:rgba(6,20,46,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+/* 最初の画面（2026-11-14 運用者「写真はきれいで明るく」「バランスを意識して」）: 右に明るい写真をそのまま見せ、
+   文字の載る左側だけ紺を重ねる。前は右に14項目の表を置き、写真に紺を重ねて半分の濃さにしていたので、写真がほぼ見えなかった。
+   14項目の表はすぐ下の帯（.lx-scan-band）へ移した */
+.home .lx-hero{background:#0b2447;padding:clamp(3rem,6vw,5.4rem) 0}
+.home .lx-hero .lx-hero-video{opacity:1;object-position:70% 45%}
+.home .lx-hero::before{display:none}
+.home .lx-hero::after{background:linear-gradient(90deg,rgba(6,20,46,.93) 0%,rgba(6,20,46,.84) 36%,rgba(6,20,46,.3) 60%,rgba(6,20,46,0) 76%)}
+.home .lx-hero-grid{grid-template-columns:minmax(0,600px)}
 .home .lx-h1,.home .lx-lead{text-shadow:0 2px 18px rgba(0,0,0,.35)}
-/* 狭い画面では背景の写真（2400px・110KB）を敷かない。紺を72〜95%重ね、その上に半透明の静止画が載るのでほぼ見えず、最初の描画の前に静止画と帯域を取り合っていた */
-@media (max-width:920px){.home .lx-hero{background:linear-gradient(180deg,rgba(6,20,46,.72) 0%,rgba(6,20,46,.86) 55%,rgba(6,20,46,.95) 100%),#0b2447}}
+/* 狭い画面: 写真は上に1枚の帯として見せ、その下に文字（写真の上に文字を重ねると、紺を濃く重ねるしかなく写真が見えない） */
+@media (max-width:900px){
+.home .lx-hero{padding:0 0 2rem}
+.home .lx-hero .lx-hero-video{position:relative;display:block;height:min(62vw,340px);object-position:62% 40%}
+.home .lx-hero video.lx-hero-video{position:absolute;top:0;left:0}
+.home .lx-hero::after{background:none}
+.home .lx-hero>.lx-wrap{padding-top:1.5rem}
+}
+/* 14項目の表（最初の画面の右から移した）。明るい地に白い札で、3列に並べる。狭い画面では畳んで、押すと開く */
+.lx-scan-band{background:var(--lx-sky);padding:clamp(1.6rem,4vw,2.6rem) clamp(1rem,3vw,2rem)}
+.home .lx-scan-band .lx-console{max-width:1180px;margin:0 auto;background:#fff;border:1px solid var(--lx-rule);-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--lx-ink);box-shadow:0 18px 40px -30px rgba(11,36,71,.45)}
+.lx-scan-band summary{list-style:none;cursor:pointer}
+.lx-scan-band summary::-webkit-details-marker{display:none}
+.lx-scan-band .lx-console-head small,.lx-scan-band .lx-console-foot{color:var(--lx-mute)}
+.lx-scan-band .lx-console-body{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.2rem 1.8rem}
+.lx-scan-band .lx-group .lx-gh{color:var(--lx-blue)}
+.lx-scan-band .lx-group .lx-gh span,.lx-scan-band .lx-item .pt{color:var(--lx-mute)}
+.lx-scan-band .lx-item{color:var(--lx-ink)}
+.lx-scan-band .lx-item .mk{border-color:#b9c6d8}
+.lx-scan-band .lx-open{display:none;font-size:.8rem;color:var(--lx-blue);font-weight:700}
+@media (max-width:900px){.lx-scan-band .lx-console-body{grid-template-columns:1fr}.lx-scan-band .lx-open{display:inline}.lx-scan-band details[open] .lx-open{display:none}}
+/* 新着記事は6本。広い画面では3列×2段にそろえる（自動の列数では4本＋2本と段が欠けた） */
+@media (min-width:901px){.home #latest .post-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:600px) and (max-width:900px){.home #latest .post-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 </head>
@@ -120,7 +146,7 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
 <!-- 冒頭（その場で自社を測れる入口が先。フォームはLPへ渡し、LPで自動的に診断が始まる） -->
 <section class="lx-hero lx-hero--top" data-area="メインビジュアル" data-area-id="mv">
   <!-- 背景の動画: お客様がAIに聞く → 答えに出た会社を選ぶ → 来院・来店・相談。紺を重ねて薄く敷く（入力と計測盤の構成はそのまま） -->
-  <img class="lx-hero-video lx-hero-still" src="/videos/lab-hero-poster.webp" srcset="/videos/lab-hero-poster-m.webp 640w, /videos/lab-hero-poster.webp 1280w" sizes="100vw" alt="AIに聞いてから会社を選ぶお客様のイメージ" aria-hidden="true" fetchpriority="high" decoding="async"><video class="lx-hero-video" muted loop playsinline preload="none" aria-hidden="true" style="opacity:0;transition:opacity .8s"></video><!-- 背景の動画は最初の操作（タップ・スクロール・キー）の後に読む。読み込みの0.7秒後に流すと、動画の最初のコマが後から最大の描画（LCP）に数えられ、モバイルの計測が1.9秒と4.4秒に割れていた（2026-10-05）。LCP は最初の操作で確定するので、操作の後なら数えられない。データ節約・2G では読まない --><script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))return;var ev=["pointerdown","keydown","touchstart","wheel","scroll"];var go=function(){ev.forEach(function(e){removeEventListener(e,go,true);});var m=matchMedia("(max-width: 900px)").matches?"-m":"";document.querySelectorAll("video.lx-hero-video").forEach(function(v){v.innerHTML='<source src="/videos/lab-hero'+m+'.webm" type="video/webm"><source src="/videos/lab-hero'+m+'.mp4" type="video/mp4">';v.addEventListener("playing",function(){v.style.opacity="";var i=v.previousElementSibling;if(i&&i.classList.contains("lx-hero-still"))i.style.opacity="0";},{once:true});v.load();var p=v.play();if(p&&p.catch)p.catch(function(){});});};ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true});});})();</script>
+  <img class="lx-hero-video lx-hero-still" src="/videos/lab-hero-poster.webp" srcset="/videos/lab-hero-poster-m.webp 960w, /videos/lab-hero-poster.webp 1280w" sizes="100vw" alt="AIの答えをスマートフォンで確かめる医院の院長のイメージ" aria-hidden="true" fetchpriority="high" decoding="async"><video class="lx-hero-video" muted loop playsinline preload="none" aria-hidden="true" style="opacity:0;transition:opacity .8s"></video><!-- 背景の動画は最初の操作（タップ・スクロール・キー）の後に読む。読み込みの0.7秒後に流すと、動画の最初のコマが後から最大の描画（LCP）に数えられ、モバイルの計測が1.9秒と4.4秒に割れていた（2026-10-05）。LCP は最初の操作で確定するので、操作の後なら数えられない。データ節約・2G では読まない --><script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var c=navigator.connection;if(c&&(c.saveData||/2g/.test(c.effectiveType||"")))return;var ev=["pointerdown","keydown","touchstart","wheel","scroll"];var go=function(){ev.forEach(function(e){removeEventListener(e,go,true);});var m=matchMedia("(max-width: 900px)").matches?"-m":"";document.querySelectorAll("video.lx-hero-video").forEach(function(v){v.innerHTML='<source src="/videos/lab-hero'+m+'.webm" type="video/webm"><source src="/videos/lab-hero'+m+'.mp4" type="video/mp4">';v.addEventListener("playing",function(){v.style.opacity="";var i=v.previousElementSibling;if(i&&i.classList.contains("lx-hero-still"))i.style.opacity="0";},{once:true});v.load();var p=v.play();if(p&&p.catch)p.catch(function(){});});};ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true});});})();</script>
   <div class="lx-wrap lx-hero-grid">
     <div>
       <ul class="lx-kicker"><li>SEO・AIO・LLMO対策</li><li>医療・不動産・工務店に強い／その他の業種も対応</li></ul>
@@ -137,11 +163,6 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
       <p class="lx-alt">頼める内容を先に見たい方は <a href="/lp/#service" data-cta="top_hero_service">サービスと料金</a> ／ 読んで確かめたい方は <a href="#latest" data-cta="top_hero_read">新着記事</a> ／ <a href="/lp/#form" data-cta="top_hero_consult">無料相談</a></p>
       <p class="lx-ind">業種別のご案内: <a href="/lp/medical/" data-cta="top_hero_lp_medical">クリニック・歯科医院</a> <a href="/lp/fudosan/" data-cta="top_hero_lp_fudosan">不動産会社</a> <a href="/lp/koumuten/" data-cta="top_hero_lp_koumuten">工務店・リフォーム</a> <a href="/lp/shigyou/" data-cta="top_hero_lp_shigyou">士業事務所</a></p>
     </div>
-    <div class="lx-console" aria-label="診断で測る14項目">
-      <div class="lx-console-head"><b>この14項目を測ります</b><small>100点満点</small></div>
-      <div class="lx-group"><p class="lx-gh">AIが入れるか<span>26点</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーを拒否していない（robots.txt）</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーが入口で弾かれていない（CDN・WAF）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>常時SSL（HTTPS）</span><span class="pt">6点</span></li></ul></div><div class="lx-group"><p class="lx-gh">検索に出るか<span>40点</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>検索に出さない設定（noindex）になっていない</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>タイトル（15〜45字）</span><span class="pt">10点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>説明文（メタディスクリプション・60〜160字）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>正規URLの指定（canonical）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>スマホ表示（viewport）</span><span class="pt">4点</span></li></ul></div><div class="lx-group"><p class="lx-gh">内容を読み取れるか<span>32点</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>見出しH1がページに1つ</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>会社情報（電話番号・所在地）の記載</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>構造化データ（JSON-LD）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>画像の代替テキスト（alt・80%以上）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>SNS・チャット共有時の表示（OGP）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>llms.txt（参考）</span><span class="pt">2点</span></li></ul></div>
-      <p class="lx-console-foot">結果はその場で表示。直す順番と、今日できる修正も出ます。</p>
-    </div>
   </div>
 </section>
 
@@ -155,6 +176,18 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
   </ul>
 </div>
 
+<!-- 診断で測る14項目（2026-11-14 最初の画面の右から移した。中身は同じ） -->
+<section class="lx-scan-band" aria-label="診断で測る14項目">
+  <details class="lx-console" id="scan14" open>
+    <summary class="lx-console-head"><b>無料診断で測る14項目</b><small>100点満点 <span class="lx-open">押して開く ▼</span></small></summary>
+    <div class="lx-console-body">
+      <div class="lx-group"><p class="lx-gh">AIが入れるか<span>26点</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーを拒否していない（robots.txt）</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>AIのクローラーが入口で弾かれていない（CDN・WAF）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>常時SSL（HTTPS）</span><span class="pt">6点</span></li></ul></div><div class="lx-group"><p class="lx-gh">検索に出るか<span>40点</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>検索に出さない設定（noindex）になっていない</span><span class="pt">12点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>タイトル（15〜45字）</span><span class="pt">10点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>説明文（メタディスクリプション・60〜160字）</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>正規URLの指定（canonical）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>スマホ表示（viewport）</span><span class="pt">4点</span></li></ul></div><div class="lx-group"><p class="lx-gh">内容を読み取れるか<span>32点</span></p><ul><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>見出しH1がページに1つ</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>会社情報（電話番号・所在地）の記載</span><span class="pt">8点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>構造化データ（JSON-LD）</span><span class="pt">6点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>画像の代替テキスト（alt・80%以上）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>SNS・チャット共有時の表示（OGP）</span><span class="pt">4点</span></li><li class="lx-item"><span class="mk" aria-hidden="true"></span><span>llms.txt（参考）</span><span class="pt">2点</span></li></ul></div>
+    </div>
+  <p class="lx-console-foot">結果はその場で表示。直す順番と、今日できる修正も出ます。</p>
+  </details>
+  <script>if(matchMedia("(max-width:900px)").matches)document.getElementById("scan14").open=false;</script>
+</section>
+
 <!-- 無料ツール（URL診断・AI診断。ヘッダー・フッター・/tools/ と同じ2つ） -->
 <div class="cta-mini" data-exit-cta="1" style="text-align:center;margin:28px auto;max-width:720px"><p style="margin:0 0 10px;font-weight:700">ここまで読んで「自社の場合は？」と思った方へ</p><a class="cta-button" href="/lp/#diagnosis" data-cta="exit_diagnosis" style="display:inline-block;padding:12px 26px;border-radius:8px;background:#1b4fa0;color:#fff;text-decoration:none;font-weight:700">3分の無料診断で確かめる</a></div>
 <section class="section" data-area="無料ツール" data-area-id="tools">
@@ -165,7 +198,7 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
   </div>
   <div class="top-tools">
     <a class="tool-card" href="/tools/url-check/" data-cta="top_tools_url">
-      <span class="tool-photo"><img src="/images/home/tool-url.webp" alt="ノートパソコンでサイトの採点結果を確かめる経営者" width="1600" height="900" loading="lazy"></span>
+      <span class="tool-photo"><img src="/images/home/tool-url.webp" alt="ノートパソコンでサイトの採点結果を確かめる担当者" width="1600" height="900" loading="lazy"></span>
       <span class="tool-tag">URL診断</span>
       <h3>URLを入れるだけで、サイトを14項目で採点</h3>
       <p>AIと検索に読まれる状態かを100点満点で採点し、<strong>直す順番と直し方</strong>を表示します。</p>
@@ -173,7 +206,7 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
       <span class="btn btn-primary">URL診断をはじめる <span class="arw">→</span></span>
     </a>
     <a class="tool-card" href="/tools/ai-check/" data-cta="top_tools_ai">
-      <span class="tool-photo"><img src="/images/home/tool-ai.webp" alt="スマートフォンでAIの答えと出典を確かめる手元" width="1600" height="900" loading="lazy"></span>
+      <span class="tool-photo"><img src="/images/home/tool-ai.webp" alt="スマートフォンでAIの答えと出典を確かめる不動産会社の担当者" width="1600" height="900" loading="lazy"></span>
       <span class="tool-tag">AI診断</span>
       <h3>AIに、御社がどう紹介されているかを確かめる</h3>
       <p>地域と業種でAIに3つの質問をして、<strong>答えの出典に御社のサイトが入っているか・社名が出るか</strong>を表示します。</p>
@@ -192,7 +225,7 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
     <h2>業種から探す</h2>
     <p class="sub">業種ごとに、AIや検索で聞かれている質問と、その答え方をまとめています。</p>
   </div>
-  <div class="ind-cards reveal"><a class="ind-card" href="/industry/shika/" data-cta="top_industry_shika"><img src="/images/scenes/shika.webp" alt="歯科医院の現場のイメージ" width="1600" height="900" loading="lazy"><span>歯科医院</span></a><a class="ind-card" href="/industry/clinic/" data-cta="top_industry_clinic"><img src="/images/scenes/clinic.webp" alt="クリニック・医療機関の現場のイメージ" width="1600" height="900" loading="lazy"><span>クリニック・医療機関</span></a><a class="ind-card" href="/industry/seikotsuin/" data-cta="top_industry_seikotsuin"><img src="/images/scenes/seikotsuin.webp" alt="整骨院・接骨院の現場のイメージ" width="1600" height="900" loading="lazy"><span>整骨院・接骨院</span></a><a class="ind-card" href="/industry/fudosan/" data-cta="top_industry_fudosan"><img src="/images/scenes/fudosan.webp" alt="不動産の現場のイメージ" width="1600" height="900" loading="lazy"><span>不動産</span></a><a class="ind-card" href="/industry/koumuten/" data-cta="top_industry_koumuten"><img src="/images/scenes/koumuten.webp" alt="工務店・注文住宅の現場のイメージ" width="1600" height="900" loading="lazy"><span>工務店・注文住宅</span></a><a class="ind-card" href="/industry/shigyou/" data-cta="top_industry_shigyou"><img src="/images/scenes/shigyou.webp" alt="士業の現場のイメージ" width="1600" height="900" loading="lazy"><span>士業</span></a><a class="ind-card" href="/industry/btob/" data-cta="top_industry_btob"><img src="/images/scenes/btob.webp" alt="BtoB・法人向けサービスの現場のイメージ" width="1600" height="900" loading="lazy"><span>BtoB・法人向けサービス</span></a><a class="ind-card ind-card-all" href="/industry/" data-cta="top_industry_all"><span>すべての業種 →</span></a></div>
+  <div class="ind-cards reveal"><a class="ind-card" href="/industry/shika/" data-cta="top_industry_shika"><img src="/images/scenes/shika.webp" alt="歯科医院の現場のイメージ" width="1600" height="900" loading="lazy"><span>歯科医院</span></a><a class="ind-card" href="/industry/clinic/" data-cta="top_industry_clinic"><img src="/images/scenes/clinic.webp" alt="クリニック・医療機関の現場のイメージ" width="1600" height="900" loading="lazy"><span>クリニック・医療機関</span></a><a class="ind-card" href="/industry/seikotsuin/" data-cta="top_industry_seikotsuin"><img src="/images/scenes/seikotsuin.webp" alt="整骨院・接骨院の現場のイメージ" width="1600" height="900" loading="lazy"><span>整骨院・接骨院</span></a><a class="ind-card" href="/industry/fudosan/" data-cta="top_industry_fudosan"><img src="/images/scenes/fudosan.webp" alt="不動産の現場のイメージ" width="1600" height="900" loading="lazy"><span>不動産</span></a><a class="ind-card" href="/industry/koumuten/" data-cta="top_industry_koumuten"><img src="/images/scenes/koumuten.webp" alt="工務店・注文住宅の現場のイメージ" width="1600" height="900" loading="lazy"><span>工務店・注文住宅</span></a><a class="ind-card" href="/industry/shigyou/" data-cta="top_industry_shigyou"><img src="/images/scenes/shigyou.webp" alt="士業の現場のイメージ" width="1600" height="900" loading="lazy"><span>士業</span></a><a class="ind-card" href="/industry/btob/" data-cta="top_industry_btob"><img src="/images/scenes/btob.webp" alt="BtoB・法人向けサービスの現場のイメージ" width="1600" height="900" loading="lazy"><span>BtoB・法人向けサービス</span></a><a class="ind-card" href="/industry/" data-cta="top_industry_all"><img src="/images/scenes/ind-all.webp" alt="そのほかの業種の現場のイメージ" width="1600" height="900" loading="lazy"><span>すべての業種 →</span></a></div>
   <p class="ind-lps reveal">業種別のご案内: <a href="/lp/medical/" data-cta="top_lp_medical">クリニック・歯科医院</a><a href="/lp/fudosan/" data-cta="top_lp_fudosan">不動産会社</a><a href="/lp/koumuten/" data-cta="top_lp_koumuten">工務店・リフォーム会社</a><a href="/lp/shigyou/" data-cta="top_lp_shigyou">士業事務所</a></p>
   <p class="sub" style="text-align:center;margin-top:.8rem;">そのほかの業種にも対応しています。</p>
 </section>
@@ -227,7 +260,7 @@ window.addEventListener('load',function(){if(navigator.webdriver)return;setTimeo
     <p class="sub">お客様がリンクを押す前に、検索結果の上でAIが答えを出す場面が増えました。<strong>選ばれるのは、AIが答えに使える事実が書かれていて、なおかつ上位にいる会社</strong>です。</p>
   </div>
   <div class="whynow-grid">
-    <figure class="whynow-photo reveal"><img src="/images/home/whynow.webp" alt="リンクを押す前に、スマートフォンでAIの答えを読む人" width="1600" height="900" loading="lazy"></figure>
+    <figure class="whynow-photo reveal"><img src="/images/home/whynow.webp" alt="受診先を決める前に、スマートフォンでAIの答えを読む人" width="1600" height="900" loading="lazy"></figure>
     <div class="lx-data reveal">
       <h3>AIの回答（AI Overview）が出た検索の割合</h3>
       <p class="sub">5万5,393件の検索を調べた学術調査（2026年3〜4月）</p>
