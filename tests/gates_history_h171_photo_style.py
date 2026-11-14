@@ -30,6 +30,9 @@ def test_shelf_prompts_are_bright_and_without_elderly_people():
           bad_words("Bright and airy. no elderly people and no grey hair. no dark or moody lighting"), [])
     check("共通の指示（STYLE）に暗い撮り方・高齢の語が無い", bad_words(S.STYLE), [])
     check("共通の指示（STYLE）は明るい撮り方を言う", bool(BRIGHT.search(S.STYLE)), True)
+    # 運用者「昔ながらっぽい写真はなくして、現代風に」（2026-11-15）。紙の山・箱型PC・プリンターが古く見えた
+    check("共通の指示（STYLE）は今どきの場面を言い、紙の山・箱型PC・プリンターを禁じる",
+          all(w in S.STYLE for w in ("Contemporary", "no piles of paper", "boxy desktop PCs", "printers")), True)
     check("撮り方の変え方（VARIANT）に暗い撮り方が無い", [v for v in S.VARIANT if bad_words(v)], [])
     check("鍵ごとの場面に暗い撮り方・高齢の人物が無い", [k for k, _, scene in S.ALL if bad_words(scene)], [])
     _, _, prompt = S.missing()[0] if S.missing() else ("", "", S.STYLE)

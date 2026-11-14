@@ -86,6 +86,8 @@ STYLE = ("Bright editorial photograph of real work at a small Japanese business,
          "colours, high-key exposure without blown highlights, tidy modern interior. A natural candid moment, not posed; faces visible "
          "from the front or three-quarter view, nobody shown only from behind. Japanese people in their late 20s to mid 40s only; "
          "no elderly people and no grey hair. Natural skin texture, relaxed expressions rather than big advertising smiles. "
+         "Contemporary 2020s setting: sleek laptops, tablets and smartphones, slim monitors, clean minimal desks; "
+         "no piles of paper or binders, no boxy desktop PCs, printers, fax machines or desk phones, no dated interiors or clothing. "
          "No glow or holograms, no vignette, no colour grading filter. Absolutely no text, letters, numbers, logos or watermarks; "
          "screens and papers show only abstract shapes or are out of focus.")
 # 同じ鍵の2枚目・3枚目は撮り方を変える（同じ絵の色違いにしない）
