@@ -84,6 +84,7 @@ PROMPT = """あなたはYouTubeの解説動画の構成作家です。下の記�
 4. 構成: 導入(4〜6セリフ) → 記事の主な見出しごとに章(5〜8章。各章は Kの問い → Nの説明2〜4 → Kの反応) → 今日できる一歩 → 締め。合計36〜56セリフ。
 5. 当社の見立て・意見は「私たちの見立てでは」のように意見と分かる言い方にする。
 6. 最後のNのセリフは「詳しくは記事にまとめています。概要欄からどうぞ。」
+7. 冒頭のつかみ（最初の3セリフ・約15秒）: 最初のセリフは K の悩みか問いで、題で約束したことをそのまま確かめる。最初の3セリフのうちに、答えを知りたくなる問いを開き、最後まで見ると何が分かるかを N が1文で言う。挨拶（こんにちは・はじめまして・どうも）と前置きは入れない。名乗りは2セリフ目以降に短く。チャンネル登録・高評価のお願いはどこにも入れない（お願いは最後の記事への案内の1つだけ）。
 
 ボード（画面中央の板）: 各セリフに "board" を付けられる。付けたセリフから表示が切り替わる（付けなければ前のまま）。
 - {{"type":"cover","kicker":"業種など短く","title":"動画の題（20字以内）"}}  … 最初のセリフに必ず付ける
@@ -188,6 +189,25 @@ def _nums(s):
     return re.findall(r"\d+(?:\.\d+)?", _kanji_to_digits(s).replace(",", ""))
 
 
+# 見る人は最初の15秒で離れる。2026-11-14 の時点の台本22本のうち、最初の3セリフに挨拶が2本・N から始まるものが3本
+# （重なりを除いて4本）。「今日は〜を話します」は本題の宣言なので止めない
+# （考え方の元: Jakeschincariol/youtube-agent-skill の yt-script・MIT。冒頭は約束の確認・問い・見返りの3つだけ）
+GREETING = re.compile(r"こんにちは|こんばんは|おはようございます|はじめまして|どうも[、。！!\s]")
+ASK_FOR_SUB = re.compile(r"チャンネル登録|高評価")
+
+
+def hook_ng(lines):
+    """冒頭のつかみの検査。最初の3セリフに挨拶を入れない・K の悩みか問いで始める・登録のお願いを入れない"""
+    ng = []
+    if lines and lines[0].get("who") != "K":
+        ng.append("冒頭の最初のセリフは K の悩みか問いにする")
+    if any(GREETING.search(ln.get("text", "")) for ln in lines[:3]):
+        ng.append("冒頭の3セリフに挨拶を入れない（すぐ本題の問いと、何が分かるかを言う）")
+    if any(ASK_FOR_SUB.search(ln.get("text", "")) for ln in lines):
+        ng.append("チャンネル登録・高評価のお願いを入れない（お願いは最後の記事への案内だけ）")
+    return ng
+
+
 def validate(sc, art):
     """通してよい台本か。問題の一覧を返す（空なら合格）"""
     ng = []
@@ -218,6 +238,7 @@ def validate(sc, art):
                     ng.append(f"{i}: compare.rows の形が不正")
     if lines and (lines[0].get("board") or {}).get("type") != "cover":
         ng.append("最初のセリフに cover が無い")
+    ng += hook_ng(lines)
     if lines and (lines[-1].get("board") or {}).get("type") != "end":
         ng.append("最後のセリフに end が無い")
     if art.get("research"):
@@ -791,12 +812,23 @@ def ready():
 
 def selftest():
     art = {"text": "延床32坪で断熱等級6。10件すべてが3か月以内。"}
-    good = {"listener_role": "工務店 経営", "lines": [{"who": "K", "text": "はじめまして。", "board": {"type": "cover"}}]
+    good = {"listener_role": "工務店 経営", "lines": [{"who": "K", "text": "断熱等級はいくつあれば足りますか？", "board": {"type": "cover"}}]
             + [{"who": "N", "text": "延床32坪、断熱等級6です。"}] * 34
             + [{"who": "N", "text": "詳しくは記事にまとめています。", "board": {"type": "end"}}]}
     bad = json.loads(json.dumps(good))
     bad["lines"][3]["text"] = "導入企業の85%で成果が出ました。"
     ok = not validate(good, art) and any("85" in x for x in validate(bad, art))
+    # 冒頭のつかみ（YouTube の見る人は最初の15秒で離れる）: 挨拶・前置きで始めない、登録のお願いを入れない
+    hello = json.loads(json.dumps(good))
+    hello["lines"][1]["text"] = "こんにちは。工務店ラボのナナです。"
+    first_n = json.loads(json.dumps(good))
+    first_n["lines"][0]["who"] = "N"
+    sub = json.loads(json.dumps(good))
+    sub["lines"][20]["text"] = "役に立ったらチャンネル登録をお願いします。"
+    named = json.loads(json.dumps(good))
+    named["lines"][1]["text"] = "工務店ラボのナナです。答えは等級6です。"
+    ok = ok and all(any("冒頭" in x or "登録" in x for x in validate(s, art)) for s in (hello, first_n, sub)) \
+        and not validate(named, art)
     ok = ok and chunks("「断熱等級はいくつ必要？」みたいに、施主さんは聞きますよね。")[0].startswith("「断熱")
     # 調査が元のときも同じ強さで捨てる（調査に無い数字・一律の言い方）
     import research_promo as RP

@@ -28,6 +28,10 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 TITLE_SOFT = 70      # 検索結果で切れずに見える長さの目安。超えたら後ろの添え書きを落とす
 TITLE_MAX = 100      # YouTube の題の上限（videos の snippet.title は100字まで）
+# スマホのホームの一覧は約40字で切れる。切れると問い（何が分かるか）が消えるので、「｜」より前の問いはこの中に収める
+# （考え方の元: Jakeschincariol/youtube-agent-skill の yt-package・MIT。数字・名前は形容詞に勝つ）
+TITLE_MOBILE = 40
+VAGUE = re.compile(r"最強|完全|必見|衝撃|ヤバ|やば|絶対|究極|驚き|すごい")   # 「神」は神奈川・神戸に当たるので入れない
 MAX_QUERIES = 5      # 1記事でサジェストを引く回数の上限（狙う語＋1語ずつ落とした4組）
 
 # 問いの形。ショートで再生が多かった「〜はいくら？」「〜は何から始める？」を基準にする
@@ -145,6 +149,12 @@ def title_ng(title, term, art):
         ng.append("問いの形になっていない")
     if len(title) > TITLE_MAX:
         ng.append(f"題が{len(title)}字（上限{TITLE_MAX}）")
+    ask = title.split("｜")[0]
+    if len(ask) > TITLE_MOBILE:
+        ng.append(f"問いの部分が{len(ask)}字で、スマホの一覧（約{TITLE_MOBILE}字）で切れる")
+    vague = sorted(set(VAGUE.findall(title)) - set(VAGUE.findall(art.get("title", ""))))
+    if vague:
+        ng.append(f"中身の無い強い言葉 {vague}（数字か名前に替える）")
     extra = _nums(title) - _nums(art["text"])
     if extra:
         ng.append(f"記事に無い数字 {sorted(extra)}")
@@ -196,6 +206,11 @@ def selftest():
     def down(q):
         raise OSError("network")
     ok &= judge("x", fetch=down, art=art)["decision"] == "unknown"
+    # スマホの一覧で問いが切れる題・中身の無い強い言葉の題は通さない（良い題は通す）
+    long_term = "農業 初期費用 補助金 申請 書き方 期限 必要書類 一覧 早見表 個人事業主 法人"
+    ok &= any("スマホ" in x for x in title_ng(f"{long_term}はどう書く？", long_term, art))
+    ok &= any("言葉" in x for x in title_ng("農業 初期費用は最強の補助金でいくら？", "農業 初期費用", art))
+    ok &= not title_ng("農業 初期費用はいくら？｜費目別に使える補助金4つ", "農業 初期費用", art)
     print("YT_DEMAND_SELFTEST=" + ("ok" if ok else "ng"))
     return 0 if ok else 1
 

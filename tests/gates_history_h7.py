@@ -87,7 +87,7 @@ def test_research_promo_video():
     check("調査ページの「4つのAI」を台本の根拠にしない", "4つのAI" in art["text"] and hl["n_engines"] != 4, False)
     have = set(DV._nums(art["text"]))
     nb = next(str(k) for k in range(901, 9999) if str(k) not in have)
-    lines = ([{"who": "K", "text": "はじめまして。", "board": {"type": "cover"}},
+    lines = ([{"who": "K", "text": "AIはどこを出典にしていますか？", "board": {"type": "cover"}},
               {"who": "N", "text": f"{RP.COMPANY}の調査です。"}]
              + [{"who": "N", "text": f"質問は{hl['questions']}問です。"}] * 33
              + [{"who": "N", "text": "詳しくは調査ページにまとめています。", "board": {"type": "end"}}])
