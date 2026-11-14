@@ -791,7 +791,8 @@ def stock_items(limit=3):
 # 本文を書き直す直し。採用の前に、書いた AI とは別の工程で3観点を採点し直し、点が上がったときだけ残す
 # （2026-11-12 運用者「評価値は必ず上げること」）。題・説明文だけの直し（title・desc）と、
 # 採点そのものを回している公開前の直し（quality_loop）は対象にしない
-SCORE_GATED = ("stuck", "serp", "compete", "early", "question", "stock", "aiwriting", "aisplit", "fresh", "aio", "quality")
+SCORE_GATED = ("stuck", "serp", "compete", "early", "question", "stock", "aiwriting", "aisplit", "fresh", "aio", "quality",
+               "retarget")
 SCORE_ASK = None   # 採点を呼ぶ関数（門では偽の採点に差し替える）。None なら quality_loop の既定（別の claude・読むだけ）
 
 
@@ -1201,6 +1202,17 @@ WHAT = {
               "   同じ文で入れる。回答は本文にある内容だけで40〜60字\n"
               "4. その語が記事の主題に含まれない（別の記事で扱うべき）と判断したら、何も変えずに終了する\n"
               "5. 既存の本文・見出しは消さない。新しい数字・出典URLは足さない。keyword は変えない"),
+    # 公開から60日以上・直近28日の表示0の記事を、台帳（key_queries --ledger）でまだどの記事も担っていない語へ向け直す
+    # （retire_stale --retarget が選ぶ。2026-11-15 運用者の承認）
+    "retarget": ("この記事は公開から{age}日以上たち、直近28日は検索に一度も表示されていません。\n"
+                 "狙う語を、まだどの記事も担っていない買い手の語「{kw}」へ付け替えます。\n"
+                 "1. フロントマターの keyword を「{kw}」にする（1行だけ。同じ項目を2行に書かない）\n"
+                 "2. title（ページの H1 になる）を、「{kw}」を前半に含む15〜45字にする。本文で答えている内容だけを約束する\n"
+                 "3. description を、「{kw}」を含む100〜160字にする。タイトルで言っていないことを書く\n"
+                 "4. 冒頭の2文を、「{kw}」で検索した人（頼む先・費用・比べ方を調べている人）への答えになるよう言い換える。\n"
+                 "   本文にある内容だけで書き、新しい数字・出典URLは足さない\n"
+                 "5. slug・category・見出しの本数と順番は変えない。本文は消さない\n"
+                 "6. 本文がその語に答えられない（主題が違う）と判断したら、何も変えずに終了する"),
     "review": ("直前の自動修正で表示回数が落ちています。検索意図とずれた可能性があります。\n"
                "冒頭200字と各H2直下の1文結論を読み、狙う語で検索した人が求めている答えに\n"
                "なっているか確かめてください。ずれていれば直してください。\n"
@@ -1786,7 +1798,20 @@ def guard_message(rc):
     return f"既存記事と食い合います（kw_guard 終了コード{rc}）"
 
 
-def check(slug, before, before_warns, snap=None, allowed="", terms=(), blocked_ok=None, numbers=True):
+def kw_change_ng(kind, kw0, kw, want=""):
+    """狙う語の変更を止める理由（空なら通す）。変えてよいのは付け替え（retarget）で、決めた語へ変えたときだけ。
+    ほかの直しが語を変えると、台帳・食い合いの判定・28日の効き目の比べ方が全部ずれる"""
+    if kind == "retarget":
+        return "" if kw != kw0 and norm_kw(kw) == norm_kw(want) else f"付け替える語になっていません（{kw0} → {kw}。決めた語: {want}）"
+    return "" if kw == kw0 else f"狙う語が変わりました（{kw0} → {kw}）"
+
+
+def norm_kw(s):
+    return re.sub(r"[\s　]+", " ", str(s)).strip().lower()
+
+
+def check(slug, before, before_warns, snap=None, allowed="", terms=(), blocked_ok=None, numbers=True,
+          kind="", kw_to=""):
     """直した結果を検算する。通らない理由を返す（空なら合格）。
 
     blocked_ok は直す前からビルドが止めていた行（BLOCKED の行の集まり）。渡したときは、その行は検算に数えない
@@ -1806,8 +1831,9 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=(), blocked_o
     except FrontMatterError as e:
         return f"フロントマターが読めません（{e}）"
     _, kw0, _ = before
-    if kw != kw0:
-        return f"狙う語が変わりました（{kw0} → {kw}）"
+    ng_kw = kw_change_ng(kind, kw0, kw, kw_to)
+    if ng_kw:
+        return ng_kw
     # カテゴリが変わると URL と担当のサイトが変わる（転送の無い 404・別サイトへの配信）。指示で変えさせていない
     cat0, cat1 = _str(front_safe(before[2]).get("category")), _str(front(after).get("category"))
     if cat1 != cat0:
@@ -1857,6 +1883,9 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=(), blocked_o
             [sys.executable, "scripts/kw_guard.py", kw, "--site", site_of(slug), "--title", before[0],
              "--exclude-slug", slug], timeout=600).returncode
         if r.returncode == 3 or r.returncode > r0:
+            return guard_message(r.returncode)
+        # 付け替えは語そのものを変える。直す前の題で同じ判定でも、食い合いはこの直しが作ったもの
+        if kw != kw0 and r.returncode >= 2:
             return guard_message(r.returncode)
 
     if terms:
@@ -1992,8 +2021,9 @@ SPARE_TAG = "spare-slot"
 
 def keep_original(kind):
     """直す前の原稿を残す直しか（28日後に効かなければ rewrite_rollback が原稿ごと戻す）。
-    本文を足す直し（compete・early・serp）と、浮いた枠の直しは全部残す（浮いた枠は毎日1本で、効かない直しを積み残さない）"""
-    return kind in ("compete", "early", "serp") or TAG == SPARE_TAG
+    本文を足す直し（compete・early・serp）と、浮いた枠の直しは全部残す（浮いた枠は毎日1本で、効かない直しを積み残さない）。
+    狙う語の付け替え（retarget）も、28日で表示が出なければ原稿ごと戻す"""
+    return kind in ("compete", "early", "serp", "retarget") or TAG == SPARE_TAG
 
 
 def note(slug, kind, ok, why):
@@ -2140,6 +2170,8 @@ def build_prompt(item):
                 "入らなければ変えない。全面的に書き換えない。15〜45字")
         what = what.format(age=item.get("age", ""), query=item["query"], pos=f"{item['pos']:.1f}",
                            imp=item["imp"], title_rule=rule)
+    if kind == "retarget":
+        what = what.format(kw=item["kw"], age=item.get("age", 60))
     if kind == "fresh":
         # 年月の更新だけを許す。今日の「YYYY年」「M月」「D日」だけを「増えた数字」に数えない
         t = time.localtime()
@@ -2147,6 +2179,9 @@ def build_prompt(item):
         what = what.format(ym=ym)
         allowed = date_tokens(t.tm_year, t.tm_mon, t.tm_mday)
     prompt = PROMPT.format(slug=slug, why=item["why"], what=what)
+    if kind == "retarget":
+        prompt = prompt.replace("- フロントマターの keyword・category は変えない。",
+                                "- フロントマターの category は変えない。keyword は上の1のとおり付け替える。")
     return prompt, allowed
 
 
@@ -2274,12 +2309,13 @@ def _apply_one(item, edited, orig):
             p.write_text(t2, encoding="utf-8", newline="")
 
     nums = kind != "quality_loop"
+    kw_to = item.get("kw", "") if kind == "retarget" else ""
     ng = check(slug, before, before_warns, snap, allowed,
-               item.get("terms") or (), item.get("blocked_ok"), numbers=nums)
+               item.get("terms") or (), item.get("blocked_ok"), numbers=nums, kind=kind, kw_to=kw_to)
     if ng.startswith("警告が増えました") and fix_mechanical(slug, before_warns):
         # 長さの警告は分ける道具が決まった形で直せる。他の検算は1つも緩めず、もう1回だけ通す
         ng = check(slug, before, before_warns, snap, allowed,
-                   item.get("terms") or (), item.get("blocked_ok"), numbers=nums)
+                   item.get("terms") or (), item.get("blocked_ok"), numbers=nums, kind=kind, kw_to=kw_to)
     if ng.startswith("警告が増えました") and kind == "quality_loop":
         # FAQ の字数・分けられない長い文に外れただけで、点の上がる直し全体を捨てていた（2026-10-21 の CI で戻しの約6割）。
         # 外れた検査だけを名指しして1回だけ直させ、同じ検算をもう一度通す（検算は1つも緩めない）
@@ -2298,7 +2334,7 @@ def _apply_one(item, edited, orig):
         if edited2 != p.read_text(encoding="utf-8-sig"):
             p.write_text(edited2, encoding="utf-8", newline="")
             ng = check(slug, before, before_warns, snap, allowed,
-                       item.get("terms") or (), item.get("blocked_ok"), numbers=nums)
+                       item.get("terms") or (), item.get("blocked_ok"), numbers=nums, kind=kind, kw_to=kw_to)
     if not ng and kind == "aisplit":
         after_now = p.read_text(encoding="utf-8-sig")
         if item["claims"][0] not in after_now:
@@ -2389,6 +2425,8 @@ def _apply_one(item, edited, orig):
         LAST[slug].update(keep_before(slug, raw, p.read_bytes()))
     if kind == "early":
         LAST[slug].update({"query": item["query"], "pos_before": item["pos"], "imp_before": item["imp"]})
+    if kind == "retarget":
+        LAST[slug].update({"kw_before": before[1], "kw_after": kw_to})
     if gated:
         # 公開の基準を満たした点だけ原稿に書く。届かない点を書くと build.py が記事を外す（公開中の記事を消さない）
         if gated["ok"]:

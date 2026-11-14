@@ -427,7 +427,8 @@ python scripts/score_calibrate.py                 # 月次CIが呼ぶ（--min-n 
 | 工程 | 何をするか | 守ること |
 |:--|:--|:--|
 | `rewrite_rollback.py --write`（週次） | 本文の直しは28日後に対照群（触っていない記事の中央値）と比べ、表示が8割を割り順位も上がっていなければ直す前へ戻す。題はクリック率で判定し、悪化だけ戻す（上の段落） | 戻せるのは台帳に `before_title` が残った分だけ。判定は `data/rollback_decisions.json` に残し二度は判定しない |
-| `retire_stale.py --write`（週次2本） | 公開60日以上で、直近28日の表示ゼロ・90日のクリックゼロの記事（公開から約1か月だけ表示されて消えた記事を含む。2026-11-12）を、題名と狙う語が最も近い記事（Dice≥0.35）へ `auto_merge` で統合 | 近い記事が無ければ統合しない（一覧に出すだけ） |
+| `key_queries.py --ledger --write` → `--track`（週次） | 1位を狙う語の台帳。`sites/<id>.json` の `key_queries`（AI集客ラボは120語）がある社だけ、優先業種×サービス（SEO・AIO・MEO・HP制作）の組ごとに買い手の語を3〜5語持ち、検索の量（rakko/gsc/なし）・担う記事・順位を残す。findings の情報の欄に順位の分布・先週との比較・担う記事の無い組（`--line`）を添える（2026-11-15） | ラッコは呼ばない（控え `data/rakko_volume.json` だけ）。お客様の社は数だけ出す |
+| `retire_stale.py --retarget --write`（週次6本） | 公開60日以上で、直近28日の表示ゼロ・90日のクリックゼロの記事（公開から約1か月だけ表示されて消えた記事を含む。2026-11-12）を、台帳の同じ組で最も近い語（Dice≥0.25）と突き合わせ、担う記事が無ければ `auto_rewrite` の `retarget` で狙う語・題・説明文を付け替え、あれば担う記事へ `auto_merge` で統合。組に語が無ければ今までどおり最も近い記事（Dice≥0.35）へ統合 | 付け替えは `kw_guard` が2以上なら当てない。28日後に表示が5回に届かなければ `rewrite_rollback` が直す前へ戻す。一度試した記事は付け替えない。手元は `--dry-run` |
 | `auto_rewrite.py --kind fresh`（週次2本） | 公開・更新から180日の記事の時点表記を更新し `modified:` を動かす | 年月以外の数字を増やさない（検算で止まる）。確かめられない箇所は「再確認中」を添えるだけ |
 | `video_embed.py`（build / publish が呼ぶ） | YouTube に上がった記事動画を本文の先頭に埋め、VideoObject を出す | `data/videos.json` に ID がある記事だけ |
 | `industry_hub.faq_body`（build が呼ぶ） | 業種の記事の FAQ を `/industry/<業種>/faq/` に集め、FAQPage を出す | 5問未満は作らない。答えは記事の FAQ そのまま（新しい文を機械が作らない） |

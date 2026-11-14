@@ -27,4 +27,6 @@ def test_faded_articles_become_merge_candidates():
     check("近い記事がはっきりある組から先に統合する", 'return sorted(out, key=lambda r: -r["sim"])' in src, True)
     check("一次性の整理（--quality）は今までどおり90日の実績で見る", "stats_by[sid] = page_stats(cfg)" in src, True)
     wk = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
-    check("週の本数は増やさない（2本まで。統合は AI が書き、検算に外れたら戻す）", "retire_stale.py --write --limit 2" in wk, True)
+    # 2026-11-15 運用者の承認で、台帳の語への付け替えと統合を合わせて週6本へ（gates_history_h173_top_rank_ledger）
+    check("週の本数は付け替えと統合を合わせて6本まで（AI が書き、検算に外れたら戻す）",
+          "retire_stale.py --retarget --write --limit 6" in wk, True)

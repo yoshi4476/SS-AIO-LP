@@ -26,6 +26,8 @@ effect_ab が出すが、悪化した記事もそのまま残る。「当てる�
 台帳（auto_fix.jsonl）に残した分だけ。early（公開14〜35日の記事に細い語を入れる直し）は、
 その直しで変えた部分（題・H2の1本・FAQの問い）だけを直す前の原稿から戻す。
 判定した分は data/rollback_decisions.json に残し、二度は判定しない。
+狙う語の付け替え（retarget。直近28日の表示0の記事が対象）は直す前の表示が0で倍率を出せないので、
+直した後28日の表示が effect_ab.MIN_IMP 回に届かなければ直す前の原稿へ戻す（retarget_verdict）。
 """
 import argparse
 import json
@@ -56,6 +58,19 @@ def controls(daily, slug, at, pubs, acts):
     if cs is None:
         return None
     return [c[0] for s in cs for c in [EA.change(daily, s, at, DAYS)] if c is not None]
+
+
+def retarget_verdict(daily, slug, at, today=None):
+    """狙う語の付け替え（retarget）の28日後の判定。(直した後28日の表示, 戻すか)。観測が足りなければ None。
+    付け替えるのは直近28日の表示が0の記事なので、表示の倍率（effect_ab.change）では前が0で測れない。
+    直した後の28日に表示が effect_ab.MIN_IMP 回に届かなければ、効かなかったとみなす"""
+    import effect_ab as EA
+    a = at + timedelta(days=1)
+    b = a + timedelta(days=DAYS - 1)
+    if b > (today or date.today()) - timedelta(days=3):
+        return None
+    imp = EA.window(daily, slug, a, b)[0]
+    return imp, imp < EA.MIN_IMP
 
 
 def min_controls():
@@ -373,6 +388,29 @@ def main():
     tmemo = {}
     for d in todo:
         slug, at = d["slug"], date.fromisoformat(d["at"][:10])
+        if d.get("kind") == "retarget":
+            v = retarget_verdict(daily, slug, at)
+            if v is None:
+                continue
+            imp, worse = v
+            print(f"   {'×' if worse else '○'} {shown(slug)[:38]:<38} 付け替えた後28日の表示{imp}回")
+            verdict = {"after_imp": imp, "rolled_back": False, "kind": "retarget"}
+            restored = worse and a.write and restore(slug, d)
+            if slug in MISSING:
+                MISSING.discard(slug)
+                held += 1
+                continue
+            if restored:
+                verdict["rolled_back"] = True
+                rolled += 1
+                CP.append_jsonl(LOG, {"at": time.strftime("%Y-%m-%d %H:%M"), "by": "rewrite_rollback",
+                                      "slug": slug, "kind": "rollback", "ok": True,
+                                      "note": f"付け替えた後28日の表示{imp}回のため、直す前の原稿（狙う語）へ戻した"})
+            else:
+                kept += 1
+            if a.write:
+                decided[f"{slug}@{d['at'][:10]}"] = verdict
+            continue
         me = EA.change(daily, slug, at, DAYS)
         if me is None:
             continue                                  # 観測が足りない／表示が少ない

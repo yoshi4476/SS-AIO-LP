@@ -3639,7 +3639,7 @@ def test_report_actions_close_the_loop():
     check("industry_hub: 4問以下は作らない", IH.faq_body({"slug": "x", "name": "t"}, [], lambda m: "/"), None)
     check("video_embed: 台帳に無い記事は何もしない", VE.prepend("<p>x</p>", {"slug": "__none__"}), "<p>x</p>")
     check("週次CIが戻す・整理・鮮度を回す",
-          all(s in wk for s in ("rewrite_rollback.py --write", "retire_stale.py --write", "--kind fresh")), True)
+          all(s in wk for s in ("rewrite_rollback.py --write", "retire_stale.py --retarget --write", "--kind fresh")), True)
     check("月次CIが15日に途中経過を出す", '"0 0 15 * *"' in yml and "steps.day.outputs.through" in yml, True)
     gs = (ROOT / "automation" / "gas" / "contact.hub.gs").read_text(encoding="utf-8")
     check("自動返信の資料の案内は問い合わせだけ（無料ツールの結果メールには付けない）",

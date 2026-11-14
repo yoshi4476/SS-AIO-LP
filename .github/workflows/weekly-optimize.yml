@@ -691,6 +691,18 @@ jobs:
             python scripts/link_boost.py "$s" --write || true
           done
 
+      # 1位を狙う語の台帳（key_queries --ledger）は検索の量をこの控えから読み、findings.py はラッコの消費（rakko.py --check）も見る。毎日の在庫の見張り（kw-stock）が残した最新の控えを
+      # 戻す（前方一致で一番新しいものが戻る。週次は控えを残さない）
+      - name: ラッコの控えを戻す
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: |
+            data/rakko_cache
+            data/rakko_volume.json
+            data/rakko_spend.jsonl
+          key: rakko-${{ github.run_id }}-weekly
+          restore-keys: rakko-
+
       # 順位で止まっている記事を優先して補充する。被リンクの少ない順に配ると、
       # 1ページ目の手前にいる記事に届かない。実測で、止まる27本のうち
       # 被リンク5本以下は3本だけだった
@@ -698,7 +710,10 @@ jobs:
         run: |
           # 生の出力は通知本文に入れない（要対応の行だけを拾う）
           mkdir -p automation/logs
+          # 1位を狙う語の台帳（AI集客ラボ: 優先業種×SEO・AIO・MEO・HP制作の買い手の語）を作り直してから順位を記録する。
+          # ラッコは呼ばない（上の控えの検索の量だけ。無ければ GSC の表示で代える）
           { python scripts/rank_rescue.py --refresh || true
+            python scripts/key_queries.py --ledger --write || true
             python scripts/key_queries.py --track || true
             python scripts/brand_search.py || true
             python scripts/mentions.py --check || true; } > automation/logs/rank_rescue.txt 2>&1
@@ -1222,9 +1237,10 @@ jobs:
           out=$(python scripts/rewrite_rollback.py --write 2>&1) || true
           echo "$out" | tail -8
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
-          # AI を呼ぶのは統合（retire_stale → auto_merge）と鮮度の書き直しだけ。鍵が残っていればそこだけ飛ばす
+          # AI を呼ぶのは表示ゼロの整理（retire_stale → 付け替えは auto_rewrite の retarget・統合は auto_merge）と鮮度の書き直しだけ。
+          # 鍵が残っていればそこだけ飛ばす。表示ゼロの整理は台帳の語への付け替えと統合を合わせて週6本まで（2026-11-15 運用者の承認。前は統合2本）
           if python scripts/agent_guard.py --verify; then
-            python scripts/retire_stale.py --write --limit 2 --budget-min 15 2>&1 | tail -8 || true
+            python scripts/retire_stale.py --retarget --write --limit 6 --budget-min 30 2>&1 | tail -12 || true
             # 書き直しを2回しても一次性が80点に届かない記事を、同じ手法・業種の近い記事へ（表示・クリックが少ないものだけ）
             python scripts/retire_stale.py --quality --write --limit 1 --budget-min 15 2>&1 | tail -8 || true
             python scripts/auto_rewrite.py --write --kind fresh --limit 2 --budget-min 12 2>&1 | tail -6 || true
@@ -1408,18 +1424,6 @@ jobs:
           out=$(python scripts/gate_selftest.py 2>&1) || true
           echo "$out" | tail -10
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
-
-      # findings.py はラッコの消費（rakko.py --check）も見る。毎日の在庫の見張り（kw-stock）が残した最新の控えを
-      # 戻す（前方一致で一番新しいものが戻る。週次は控えを残さない）
-      - name: ラッコの控えを戻す
-        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
-        with:
-          path: |
-            data/rakko_cache
-            data/rakko_volume.json
-            data/rakko_spend.jsonl
-          key: rakko-${{ github.run_id }}-weekly
-          restore-keys: rakko-
 
       # 並行ジョブ（kw-refill）が見つけた要対応（ラッコのクレジット切れ）を通知本文へ足す
       - name: KW補充の要対応を受け取る

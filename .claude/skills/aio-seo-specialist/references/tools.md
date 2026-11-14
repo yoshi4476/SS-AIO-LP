@@ -15,7 +15,8 @@
 | 1ページ目手前の押し上げ | `rank_up` / `rank_rescue` / `link_boost` | 8.10 |
 | タイトル・説明文・見出しの書き直し | `auto_rewrite.py --kind title/desc/question/aio/stuck/fresh` | 8.6・8.13 |
 | 直した題を28日後に戻すか | `rewrite_rollback.py --write` | 8.11 |
-| 表示ゼロの古い記事の整理 | `retire_stale.py --write` | 8.11 |
+| 1位を狙う語の台帳（業種×サービスの組・順位の分布） | `key_queries.py --ledger --write` / `--line` | 8.11 |
+| 表示ゼロの古い記事の整理（台帳の語へ付け替え・統合） | `retire_stale.py --retarget --write`（手元は `--dry-run`） | 8.11 |
 | 内部リンクの自動追加と見直し | `auto_improve.py --write` → `auto_review.py --fix` | 8.6（言い回しの偏り・上限） |
 | AIの出典に自社が入るかの実測 | `ai_cite_check.py`（月次・1サイト20語） | 8.5 の6 |
 | 競合と比べたAIのシェア・負けている理由・差を埋める書き直し | `compete.py --measure / --gaps / --check` → `auto_rewrite.py --kind compete` | 8.17 |

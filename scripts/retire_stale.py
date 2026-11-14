@@ -15,8 +15,20 @@
   近い記事が無いものは統合しない（無理に吸わせると主題がぼやける）。一覧に出すだけ
 
   python scripts/retire_stale.py                    # 候補を見る
-  python scripts/retire_stale.py --write --limit 2  # 統合する（週次）
+  python scripts/retire_stale.py --write --limit 2  # 統合する
 出す印: STALE_OK=yes / STALE=<本> / MERGED=<本>
+
+**付け替え（--retarget。週次はこちら。2026-11-15 運用者の承認）**: 同じ候補を、1位を狙う語の台帳
+（key_queries --ledger。業種×サービスの組）と突き合わせる。記事と同じ組で題・狙う語が最も近い語（Dice）を選び、
+  - その語を担う記事がまだ無い → 狙う語・題（H1）・説明文をその語へ付け替える（auto_rewrite の retarget。kw_guard を通し、
+    食い合いなら付け替えない。28日後に表示が出なければ rewrite_rollback が直す前の原稿へ戻す）
+  - 担う記事がある → その記事へ統合する（auto_merge）
+  - 組に語が無い・一度付け替えを試した記事 → 今までどおり近い記事へ統合（近い記事が無ければ残す）
+付け替えと統合を合わせて週 WEEK_LIMIT 本まで。
+
+  python scripts/retire_stale.py --retarget --dry-run            # 対象の数と振り分けを見る（GSC を読めなければ控えで代える）
+  python scripts/retire_stale.py --retarget --write --limit 6    # 当てる（週次）
+出す印: RETARGET_OK=yes / STALE=<本> / RETARGET=<本> / MERGE=<本> / KEEP=<本> / RETARGETED=<本> / MERGED=<本>
 
 書き直しを2回しても別工程の採点（score_audit）で一次性が80点に届かない記事も、同じ統合に回す。
 自動で統合するのは90日の表示・クリックが少なく、吸収先より表示が少ないものだけ（検算は auto_merge）
@@ -38,6 +50,10 @@ AGE_DAYS = 60        # 公開からこの日数たった記事だけ（順位が
 WINDOW_DAYS = 28     # この日数の表示が0なら「いま出ていない」
 CLICK_DAYS = 90      # この日数にクリックがあった記事は、読まれた実績があるので統合しない
 MIN_SIM = 0.35
+WEEK_LIMIT = 6       # 付け替えと統合を合わせた週の本数（前は統合だけで2本。2026-11-15 運用者の承認）
+# 台帳の語は題より短く、同じ主題でも Dice が統合の下限（0.35）に届かない（実データで 0.26〜0.49）。
+# 主題の違う組（医療広告ガイドラインの記事 → ホームページ制作の外注）は 0.19 だった
+RETARGET_SIM = 0.25
 
 
 def _fm(p):
@@ -100,7 +116,19 @@ def nearest(a, arts, shown_url):
     return best, sim
 
 
-def stale(site_id=""):
+def cached_urls(sid):
+    """GSC を読めない手元の --dry-run だけで使う控え（rank_track の data/ranks/<id>.pages.json・28日×2）。
+    表示は直近28日で同じ、クリックは90日ではなく56日分になる"""
+    import json
+    import client_private as CP
+    pg = json.loads(CP.find_file(f"data/ranks/{sid}.pages.json").read_text(encoding="utf-8"))
+    n = lambda u: u.rstrip("/") + "/"
+    cur, prev = pg.get("cur") or {}, pg.get("prev") or {}
+    return ({n(u) for u, v in cur.items() if v[0] > 0},
+            {n(u) for d in (cur, prev) for u, v in d.items() if v[1] > 0})
+
+
+def stale(site_id="", cache=False):
     import sites as S
     out = []
     for sid, cfg in S.load_all().items():
@@ -111,8 +139,15 @@ def stale(site_id=""):
         try:
             shown, clicked = shown_urls(cfg), clicked_urls(cfg)
         except Exception as e:
-            print(f"   {sid}: GSC を読めません（{str(e)[:50]}）")
-            continue
+            if not cache:
+                print(f"   {sid}: GSC を読めません（{str(e)[:50]}）")
+                continue
+            try:
+                shown, clicked = cached_urls(sid)
+            except Exception:  # noqa: BLE001  控えも無い社は数えない
+                print(f"   {sid}: GSC も控えも読めません")
+                continue
+            print(f"   {sid}: GSC を読めないため控え（data/ranks/{sid}.pages.json。クリックは56日分）で数えます")
         for a in arts:
             url = S.article_url(cfg, a).rstrip("/") + "/"
             if not faded(a, url, shown, clicked):
@@ -124,6 +159,121 @@ def stale(site_id=""):
                         "imp": 0, "loser_stat": {"pos": 0, "clicks": 0}, "survivor_stat": {"pos": 0}})
     # 近い記事がはっきりあるものから統合する（週の本数が限られるので、迷いの少ない組を先に）
     return sorted(out, key=lambda r: -r["sim"])
+
+
+# ---- 台帳の語への付け替え（--retarget） -----------------------------------------------------
+def route(rows, ledger, arts, conf, tried=(), pending=()):
+    """表示ゼロの記事ごとに、付け替え（retarget）・統合（merge）・残す（none）を決める。
+    rows は stale() の行、ledger は台帳の行（key_queries の ind・svc のある行）、arts は {slug: {title, keyword}}。
+    台帳の同じ組（業種×サービス）で題と狙う語が最も近い語を選び、担う記事が無ければ付け替え、あれば統合。
+    組に語が無い・一度付け替えを試した記事（tried）・同じ語を先に別の記事へ渡した記事は、今までの統合（近い記事）へ。
+    付け替えの判定期間中の記事（pending）は、効いたかを見る前に統合しないよう外す"""
+    import key_queries as KQ
+    from cannibal_check import dice
+    losers = {r["loser"] for r in rows}
+    # すでに台帳の語を担う記事は、別の語へ向けると担っていた語を手放す（GSC の着地ページとして担う記事も）
+    carriers = {x["slug"] for x in ledger if x.get("slug")}
+    taken, out = set(), []
+    for r in rows:
+        s = r["loser"]
+        if s in pending:
+            continue
+        a = arts.get(s) or {}
+        text = f"{a.get('title', '')} {a.get('keyword', '')}"
+        g = KQ.group_of(text, conf) if conf else None
+        pool = [x for x in ledger if g and (x["ind"], x["svc"]) == g and x.get("slug") != s]
+        best = max(pool, key=lambda x: dice(text, x["q"]), default=None)
+        if best and s not in tried and s not in carriers and KQ.norm(best["q"]) not in taken \
+                and dice(text, best["q"]) >= RETARGET_SIM:
+            if not best.get("slug"):
+                taken.add(KQ.norm(best["q"]))
+                out.append({**r, "action": "retarget", "kw": best["q"], "group": g})
+                continue
+            # 担う記事も表示ゼロで統合の候補なら、そこへ寄せない（吸収先が次に消える）
+            if best["slug"] not in losers and best["slug"] in arts:
+                out.append({**r, "action": "merge", "survivor": best["slug"], "kw": best["q"], "group": g})
+                continue
+        out.append({**r, "action": "merge" if r.get("survivor") else "none"})
+    return out
+
+
+def retarget_log(log=None, today=None):
+    """(付け替えを試した記事, 付け替えの判定期間中の記事)。判定期間は rewrite_rollback と同じ28日＋GSC の遅れ3日"""
+    import json
+    import client_private as CP
+    f = Path(log) if log else ROOT / "automation" / "logs" / "auto_fix.jsonl"
+    since = ((today or date.today()) - timedelta(days=31)).isoformat()
+    tried, pending = set(), set()
+    for line in CP.read_lines(f):
+        try:
+            d = json.loads(line)
+        except ValueError:
+            continue
+        if d.get("by") != "auto_rewrite" or d.get("kind") != "retarget":
+            continue
+        tried.add(d.get("slug", ""))
+        if d.get("ok") and str(d.get("note", "")).startswith("直しました") and str(d.get("at", ""))[:10] >= since:
+            pending.add(d.get("slug", ""))
+    return tried, pending
+
+
+def retarget_main(a):
+    import key_queries as KQ
+    import private_store as PS
+    import sites as S
+    write = a.write and not a.dry_run
+    rows = stale(a.site, cache=not write)
+    tried, pending = retarget_log()
+    routed = []
+    for sid in sorted({r["site"] for r in rows}):
+        led = [x for x in (KQ.load().get(sid) or {}).get("queries") or [] if x.get("ind")]
+        arts = {b["slug"]: b for b in (_fm(p) for p in (ROOT / "articles").glob("*.md"))
+                if b and S.find_category_owner(b["category"]) == sid}
+        routed += route([r for r in rows if r["site"] == sid], led, arts,
+                        KQ.ledger_conf(S.load(sid)) if led else None, tried, pending)
+    # 台帳の語に向ける手（付け替え・担う記事への統合）を先に、次に今までの統合を近い順に
+    routed.sort(key=lambda r: (r["action"] == "none", not r.get("kw"), -r.get("sim", 0)))
+    n = {k: sum(1 for r in routed if r["action"] == k) for k in ("retarget", "merge", "none")}
+    print(f"■ 公開{AGE_DAYS}日以上で、直近{WINDOW_DAYS}日の表示ゼロ・{CLICK_DAYS}日のクリックゼロ: {len(rows)}本"
+          f"（付け替え {n['retarget']}本・統合 {n['merge']}本・残す {n['none']}本・付け替えの判定期間中で外した "
+          f"{len(rows) - len(routed)}本）")
+    for r in routed[:20]:
+        secret = S.is_client(r["site"])
+        to = (f"付け替え「{'（お客様の語）' if secret else r['kw']}」" if r["action"] == "retarget" else
+              f"統合 → {PS.shown(r['survivor'])[:28]}" + ("（台帳の語を担う記事）" if r.get("kw") else "")
+              if r["action"] == "merge" else "残す（近い記事も台帳の語も無い）")
+        print(f"   [{'お客様の社' if secret else r['site']}] {PS.shown(r['loser'])[:34]:<34} → {to}")
+    done_rt = done_mg = 0
+    if write:
+        import auto_merge as AM
+        import auto_rewrite as AR
+        t0 = time.time()
+        for r in [x for x in routed if x["action"] != "none"][:a.limit]:
+            if a.budget_min and (time.time() - t0) / 60 >= a.budget_min:
+                break
+            if r["action"] == "merge":
+                ok, why = AM.run_one(r, True)
+                AM.note(r, ok, "（表示ゼロの整理）" + why)
+                print(f"   {'○' if ok else '×'} 統合 {PS.shown(r['loser'])[:30]} → {PS.shown(r['survivor'])[:30]}: {why[:60]}")
+                done_mg += ok
+                continue
+            rc = AR.sh([sys.executable, "scripts/kw_guard.py", r["kw"], "--site", r["site"],
+                        "--exclude-slug", r["loser"]], timeout=600).returncode
+            if rc == 3:
+                print(f"   -- 付け替え {PS.shown(r['loser'])[:30]}: 食い合いを判定できないため来週に回します（kw_guard 3）")
+                continue
+            item = {"kind": "retarget", "slug": r["loser"], "site": r["site"], "kw": r["kw"], "age": AGE_DAYS,
+                    "why": f"公開{AGE_DAYS}日以上・直近{WINDOW_DAYS}日の表示0。台帳の組（{r['group'][0]}×{r['group'][1]}）の"
+                           f"語「{r['kw']}」はまだどの記事も担っていません"}
+            ok, why = (False, f"食い合いのため付け替えません（kw_guard {rc}）") if rc >= 2 else AR.run_one(item, True)
+            AR.note(item["slug"], "retarget", ok, why)
+            print(f"   {'○' if ok else '×'} 付け替え {PS.shown(r['loser'])[:30]}: {AR.said(r['loser'], why)[:60]}")
+            if ok and why.startswith("直しました"):
+                AR.hub_rewrite_log(item, why)
+                done_rt += 1
+    print(f"RETARGET_OK=yes\nSTALE={len(rows)}\nRETARGET={n['retarget']}\nMERGE={n['merge']}\nKEEP={n['none']}"
+          f"\nRETARGETED={done_rt}\nMERGED={done_mg}")
+    return 0
 
 
 # ---- 書き直しても一次性が上がらない記事（--quality） -------------------------------------
@@ -272,7 +422,12 @@ def main():
     ap.add_argument("--budget-min", type=int, default=0)
     ap.add_argument("--quality", action="store_true",
                     help=f"書き直しを{MIN_TRIES}回しても一次性が80点に届かない記事を、近い記事へ統合する")
+    ap.add_argument("--retarget", action="store_true",
+                    help="表示ゼロの記事を、台帳（key_queries --ledger）の近い語へ付け替える／担う記事へ統合する")
+    ap.add_argument("--dry-run", action="store_true", help="--retarget で、対象の数と振り分けだけを出す（書かない）")
     a = ap.parse_args()
+    if a.retarget:
+        return retarget_main(a)
     if a.quality:
         return quality_main(a)
     rows = stale(a.site)
