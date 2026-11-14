@@ -1,0 +1,101 @@
+{
+ "v": 2,
+ "slug": "kichodaiko-service-nokoru-sagyou",
+ "ok": true,
+ "date": "2026-11-14",
+ "questions": [
+  "記帳代行サービスについて教えてください",
+  "記帳代行サービスについて、「記帳代行サービスで外に出せる作業と自社に残る作業」を教えてください",
+  "記帳代行サービスについて、「記帳代行サービスを頼んでも自社に残る5つの作業」を教えてください",
+  "記帳代行サービスについて、「記帳代行サービスとの毎月の分担はどう決めるか」を教えてください",
+  "記帳代行サービスについて、「残る作業を減らすと記帳代行サービスの効果はどう変わるか」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "記帳代行サービスで外に出せる作業と自社に残る作業",
+   "words": [
+    "作業",
+    "作業"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "記帳代行サービスを頼んでも自社に残る5つの作業",
+   "words": [
+    "作業"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "記帳代行サービスとの毎月の分担はどう決めるか",
+   "words": [
+    "分担"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "残る作業を減らすと記帳代行サービスの効果はどう変わるか",
+   "words": [
+    "作業"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "記帳代行サービスが合わない3つの条件と失敗の避け方",
+   "words": [
+    "条件"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "記帳代行サービスを頼む前に今日確かめる4つのこと",
+   "words": [
+    "今日確"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "anshin-keiri.eiwa-gr.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "bookkeeping-agency.com": "peer",
+  "bricks-outsourcing.com": "peer",
+  "journal.bizocean.jp": "media",
+  "kato-comp.com": "peer",
+  "keihi.com": "peer",
+  "kurotax.jp": "peer",
+  "marunagekanri.com": "peer",
+  "note.com": "video",
+  "persol-bd.co.jp": "peer",
+  "shadan-houjin.jp": "peer",
+  "sumicpa.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "xn--1lq0e914a9zoh0o78mjfsllz.com": "peer",
+  "yayoi-kk.co.jp": "peer",
+  "ytakamoto-cpa.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 2,
+  "専門家への相談": 3
+ },
+ "chars": 9449,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え4件のうち、『分担』に触れたものは0件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは費用の金額（◯円）は1件、期間（◯か月・◯日など）は1件、進め方の手順は2件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは17件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件、動画・SNS・ブログが1件でした。"
+ ]
+}
