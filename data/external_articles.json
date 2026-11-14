@@ -1,5 +1,5 @@
 {
-  "fetched": "2026-11-07",
+  "fetched": "2026-11-15",
   "sites": {
     "corporate": [
       {
@@ -43,9 +43,49 @@
         "title": "個人事業主・小規模事業者"
       },
       {
+        "url": "https://corp.7senses.co.jp/blog/kichodaiko-service-nokoru-sagyou",
+        "slug": "kichodaiko-service-nokoru-sagyou",
+        "title": "記帳代行サービスを頼んでも残る5つの作業｜分担の決め方と見送る条件"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/bpo-service-tanomikata",
+        "slug": "bpo-service-tanomikata",
+        "title": "BPOサービスの頼み方3つ｜丸ごと・部分・仕組み型を取り違えない分かれ目"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/bpo-service-awanai-kaisha",
+        "slug": "bpo-service-awanai-kaisha",
+        "title": "BPOサービスが合わない会社の特徴3つ｜断った7件の理由と見極め方"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/clinic-kichodaiko",
+        "slug": "clinic-kichodaiko",
+        "title": "クリニック・医療機関の記帳代行、3つの収入をどう分ける？"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/backoffice-daikou",
+        "slug": "backoffice-daikou",
+        "title": "バックオフィス代行は何から頼む？棚卸し表の5項目"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/full-remote-kichodaiko",
+        "slug": "full-remote-kichodaiko",
+        "title": "フルリモートの記帳代行で失敗する3つの原因｜紙と現金が残る会社の注意点"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kichodaiko-mokaru",
+        "slug": "kichodaiko-mokaru",
+        "title": "記帳代行は儲かる？利益が残らない3つの落とし穴と受ける条件"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/bpo-ryouiki-kyoukai",
+        "slug": "bpo-ryouiki-kyoukai",
+        "title": "BPOの領域5つと士業の境目｜任せすぎで止まる3つの落とし穴"
+      },
+      {
         "url": "https://corp.7senses.co.jp/blog/gyomu-itaku-keihi-seisan",
         "slug": "gyomu-itaku-keihi-seisan",
-        "title": "経費精算は業務委託先にどう払う？源泉漏れを防ぐ3つの分かれ目"
+        "title": "業務委託の経費精算、交通費を本人に払うと源泉漏れ？"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/digital-bpo-gaichuu",
@@ -85,7 +125,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/invoice-gaichuuhi-menzei-taiou",
         "slug": "invoice-gaichuuhi-menzei-taiou",
-        "title": "インボイス制度の外注費｜免税の外注先に一方的な値下げはNG・対応3つ"
+        "title": "免税の外注先に一方的な値下げは違反？インボイス制度の外注費"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/seikyusho-shiwake",
@@ -160,12 +200,12 @@
       {
         "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-shiwake",
         "slug": "gaichuuhi-seikyuusho-shiwake",
-        "title": "外注費の請求書の仕訳で起きる誤り4つ｜源泉と登録番号の確かめ方"
+        "title": "外注費の請求書の仕訳で当社が直した誤り4つ｜源泉漏れは約10件"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/kensetsugyou-gaichuuhi-shiwake",
         "slug": "kensetsugyou-gaichuuhi-shiwake",
-        "title": "建設業の外注費の仕訳で起きやすい3つの誤り｜未成工事・一人親方・7割控除"
+        "title": "建設業の外注費の仕訳｜一人親方が給与扱いで否認される落とし穴"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/bpo-jimu-wakekata",
@@ -185,7 +225,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/keihi-seisan-ryoshusho-funshitsu",
         "slug": "keihi-seisan-ryoshusho-funshitsu",
-        "title": "経費精算の領収書を紛失したら？消費税で困る場合と対応4手順"
+        "title": "経費精算の領収書を紛失｜消費税を控除できない落とし穴と4手順"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/kaigo-kichodaiko",
@@ -195,7 +235,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/fudousan-kichodaiko",
         "slug": "fudousan-kichodaiko",
-        "title": "不動産の記帳代行はどこまで頼める？大家が外注を決める判断基準"
+        "title": "不動産の記帳代行で締めは翌月20日→8日に？経理代行9社の実測"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/biyoushitsu-kichodaiko",
@@ -260,7 +300,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/eigyo-keiri-chigai",
         "slug": "eigyo-keiri-chigai",
-        "title": "営業経理と経理の違い｜営業が請求と入金確認を抱える会社の分け方"
+        "title": "営業が請求を兼ねる3つの失敗｜営業経理と経理の違い"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/kichodaiko-osaka",
@@ -613,11 +653,6 @@
         "title": "登録番号未確認の全額控除はNG｜記帳代行費用の勘定科目"
       },
       {
-        "url": "https://corp.7senses.co.jp/blog/keihi-seisan-bpo",
-        "slug": "keihi-seisan-bpo",
-        "title": "経費精算BPOとは？任せられる業務3つと費用相場"
-      },
-      {
         "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata",
         "slug": "gaichuuhi-seikyuusho-kakikata",
         "title": "外注費の請求書の書き方｜源泉徴収漏れなどNG例と必須6項目"
@@ -675,7 +710,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-haken-jikyu-souba",
         "slug": "keiri-haken-jikyu-souba",
-        "title": "経理派遣の時給相場｜求人票の時給だけで比べると失敗する落とし穴"
+        "title": "経理派遣の時給相場｜時給1,800円が請求2,800円前後になる落とし穴"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-zangyo-herasu",
@@ -1112,7 +1147,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/nougyou-shoki-hiyou/",
         "slug": "nougyou-shoki-hiyou",
-        "title": "農業はAI導入補助金の対象か｜トラクターは対象外になる落とし穴"
+        "title": "農業はAI導入補助金の対象になるか｜条件と使えるソフト"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/shukuhakugyou-hojokin-erabikata/",
@@ -1177,7 +1212,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-osusume/",
         "slug": "it-hojokin-osusume",
-        "title": "交付決定前の発注は対象外｜IT導入補助金のおすすめの選び方"
+        "title": "IT導入補助金のおすすめの選び方｜5つの基準と4つの枠"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/",
@@ -1227,7 +1262,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/ai-hojokin-security-action-hoshi2/",
         "slug": "ai-hojokin-security-action-hoshi2",
-        "title": "AI導入補助金のセキュリティアクション二つ星｜宣言5ステップ"
+        "title": "GビズID不一致はNG｜AI導入補助金のセキュリティアクション二つ星"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/hojokin-denshishinsei-gimuka-itsukara/",
@@ -1257,7 +1292,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-gakushujuku/",
         "slug": "it-hojokin-gakushujuku",
-        "title": "IT導入補助金 学習塾の落とし穴｜生徒への課金は対象外、入退室通知は対象"
+        "title": "IT導入補助金 学習塾で生徒への課金は対象外？使える範囲は"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-nougyou-jirei/",
@@ -1437,7 +1472,7 @@
       {
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-kaikeisoft/",
         "slug": "it-hojokin-kojinjigyonushi-kaikeisoft",
-        "title": "会計ソフトの補助金｜IT導入補助金で個人事業主が使える2枠と補助率"
+        "title": "会計ソフトの補助金｜個人事業主が使える2つの枠と補助率"
       },
       {
         "url": "https://lp.7senses.co.jp/blog/it-hojokin-kojinjigyonushi-pc/",

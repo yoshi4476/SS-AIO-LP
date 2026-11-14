@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-14T00:00:00+09:00</updated>
+  <updated>2026-11-15T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>不動産の賃貸集客で失敗する3つの落とし穴｜ポータル任せと自社サイトの分担</title>
+    <link href="https://ai.7senses.co.jp/aio/fudousan-chintai-shukyaku/"/>
+    <id>https://ai.7senses.co.jp/aio/fudousan-chintai-shukyaku/</id>
+    <updated>2026-11-15T00:00:00+09:00</updated>
+    <summary>不動産の賃貸集客は、部屋を探す入居者はポータル、管理を任せたいオーナーは自社サイトとAI検索で集める分担が基本です。失敗する3つの落とし穴と避け方、自社サイトに作るページの5つの手順、成果を確かめる時期を整理します。</summary>
+  </entry>
   <entry>
     <title>LLMO対策会社のおすすめ一覧の落とし穴｜依頼前にAIで試す4つの確認</title>
     <link href="https://ai.7senses.co.jp/aio/llmo-taisaku-kaisha-osusume/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/reform-gaiheki-tosou-llmo/</id>
     <updated>2026-11-02T00:00:00+09:00</updated>
     <summary>リフォーム・外壁塗装のLLMOは、施主がAIに業者を探す・費用を調べる・業者を確かめる3つの場面に、自社の事実で答えられるよう整えることです。4つのAIの出典2,662件の調査では、探す質問の出典の54.5%が比較サイトでした。外される落とし穴と始め方を解説します。</summary>
-  </entry>
-  <entry>
-    <title>不動産会社ホームページの手数料説明で外す3つのNGと書く4項目</title>
-    <link href="https://ai.7senses.co.jp/aio/fudousan-hp-tesuryo-setsumei/"/>
-    <id>https://ai.7senses.co.jp/aio/fudousan-hp-tesuryo-setsumei/</id>
-    <updated>2026-11-01T00:00:00+09:00</updated>
-    <summary>不動産会社のホームページの手数料説明は、法律の上限・自社が受け取る額・手数料に含まれない費用・合意の時期の4項目を分けて書きます。2024年7月の空き家等の特例への書き換え漏れなど、外しやすい3つのNGと、ページを先に作る会社・後回しにする会社の分かれ目も解説します。</summary>
   </entry>
 </feed>

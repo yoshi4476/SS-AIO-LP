@@ -53,6 +53,8 @@ quality_attempts: 2
 
 不動産の集客アイデアは、AIと検索の質問が「会社を探す」ものか「費用や手続きを調べる」ものかで、効き方が変わります。
 
+つまずきやすい点を先に押さえるなら、[不動産の賃貸集客で失敗する3つの落とし穴](/aio/fudousan-chintai-shukyaku/)が参考になります。
+
 <figure><img src="/images/fudousan-shukyaku-idea/bunrui.png" alt="不動産の集客アイデア9つを、調べる質問に答える4つ、探す質問で選ばれる3つ、続けて回す2つに分けた図"></figure>
 
 <div class="definition-box"><span class="term">不動産の集客アイデアとは</span>、ポータルの掲載以外で、売りたい人・買いたい人・借りたい人からの問い合わせを増やすための打ち手です。本記事では、自社サイトとAI検索で試せるものを扱います。</div>
