@@ -32,7 +32,7 @@ INDUSTRIES = [
     ("dental", r"歯科", "A bright modern Japanese dental clinic treatment room with a dental chair and a dentist preparing instruments"),
     ("beauty-derm", r"美容皮膚科|美容外科|美容クリニック", "A calm, upscale Japanese aesthetic dermatology clinic consultation room with soft lighting"),
     ("seikotsu", r"整骨院|接骨院|整体", "A Japanese osteopathic clinic: a practitioner treating a patient's shoulder on a treatment bed"),
-    ("kaigo", r"介護", "A Japanese care facility common room with a caregiver supporting an elderly resident, warm and respectful"),
+    ("kaigo", r"介護", "A bright consultation room of a Japanese care facility: a care manager in a polo uniform explains a care plan binder to a resident's daughter in her 40s"),
     ("clinic", r"クリニック|医療|病院|医院|オンライン診療|集患", "A clean, modern Japanese clinic reception and waiting area with a receptionist"),
     ("nail", r"ネイル", "A Japanese nail salon: a nail technician working on a customer's hands at a tidy table"),
     ("esthe", r"エステ", "A serene Japanese esthetic salon treatment room with towels and soft light"),
@@ -66,7 +66,7 @@ TOPICS = [
     ("subsidy-docs", r"必要書類|書類|納税証明|実績報告|申請書|確定申告", "A neat stack of application documents, a stamp and a pen on a desk with a business owner checking them"),
     ("subsidy", r"補助金|助成金|給付金|採択|不採択", "A Japanese small business owner and a consultant reviewing a funding application on a laptop together"),
     ("automation", r"自動化|AI|OCR|マクロ|VBA|Python|エクセル|Excel|Notion|アプリ|iPhone|ツール|システム|ソフト", "A laptop showing an automated workflow dashboard in abstract shapes, a person reviewing it in a bright office"),
-    ("security", r"セキュリティ|サイバー|情報漏えい", "A secure server room or an office laptop with a lock screen, cool blue light"),
+    ("security", r"セキュリティ|サイバー|情報漏えい", "A bright IT room: an IT administrator locks an office laptop with a security key while a colleague watches"),
     ("staffing", r"人手不足|求人|退職|引き継ぎ|属人化|マニュアル|残業", "A busy Japanese back office with one staff member overloaded with papers, colleagues in background"),
     ("cost", r"費用|相場|料金|いくら|価格|報酬|時給|手数料|補助額", "A calculator, a price estimate sheet and a laptop on a desk with a manager comparing costs"),
     ("reviews", r"口コミ|レビュー|評価", "A shop owner reading customer reviews on a smartphone behind the counter"),
@@ -78,16 +78,23 @@ TOPICS = [
     ("office", r"", "A calm modern Japanese office with staff working at desks, natural light"),
 ]
 ALL = INDUSTRIES + TOPICS
-# 2026-11-02 に棚を「AI に聞かれ、選ばれ、来てもらう」連作（地方都市の小さな事業所・暖かい光・紺と生成りの色調）に
-# 作り直した。後から足す写真も同じ見た目にそろえる（ずれると一覧で浮く）。正面の顔は AI らしさが出やすいので避ける
-STYLE = ("Documentary realism, one frame of a cohesive photo series about small local businesses in a regional Japanese town "
-         "being found and visited by customers. Shot on a full-frame camera with a 35mm lens, natural light only, warm late-day "
-         "light, muted navy and ivory tones, real places with ordinary wear, candid moments, no frontal faces, "
-         "not staged stock-photo smiles, no glow or holograms. Absolutely no text, letters, numbers, logos or watermarks; "
+# 2026-11-15 運用者「サムネイルが全体的に暗い」「もっときれいな写真で専門性がありテキストにあったもの」「年老いた人や
+# 暗めのものは使わないで」で、11-02 の連作（暖かい夕方の光・くすんだ色・正面の顔を避ける）をやめ、明るい取材写真にした。
+# 後から足す写真も同じ見た目にそろえる（ずれると一覧で浮く）。後ろ姿ばかりにしない（2026-11-12 運用者）
+STYLE = ("Bright editorial photograph of real work at a small Japanese business, shot on location by a professional photographer "
+         "with a full-frame camera and a 35mm lens. Bright, clean and airy: ordinary lighting of the place plus daylight, true-to-life "
+         "colours, high-key exposure without blown highlights, tidy modern interior. A natural candid moment, not posed; faces visible "
+         "from the front or three-quarter view, nobody shown only from behind. Japanese people in their late 20s to mid 40s only; "
+         "no elderly people and no grey hair. Natural skin texture, relaxed expressions rather than big advertising smiles. "
+         "No glow or holograms, no vignette, no colour grading filter. Absolutely no text, letters, numbers, logos or watermarks; "
          "screens and papers show only abstract shapes or are out of focus.")
 # 同じ鍵の2枚目・3枚目は撮り方を変える（同じ絵の色違いにしない）
-VARIANT = ["Wide establishing shot.", "Medium shot focusing on the people and their hands.", "Different angle and time of day, close detail.",
-           "Over-the-shoulder view, shallow depth of field.", "Evening or late afternoon light, quieter mood."]
+# 2枚目以降は、人と構図と光を変える（同じ顔・同じ光の繰り返しは、生成と見抜かれる決め手だった。夕方の暗い光は使わない）
+VARIANT = ["Wide shot of the workplace with two people talking, both faces visible.",
+           "Medium shot of one person focused on the task, three-quarter view, a different person from the other photos.",
+           "Two people checking the work together while standing, bright overcast daylight.",
+           "One person explaining to a customer across a table, ordinary ceiling lights plus window light.",
+           "Medium-wide shot from a different angle, clear late-morning daylight, a different pair of people."]
 
 
 def key_for(title, keyword=""):
