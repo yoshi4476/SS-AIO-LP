@@ -114,13 +114,41 @@ html.js .reveal-d3 { transition-delay: .3s; }
 .global-nav { margin-left: auto; display: flex; gap: 1.5rem; align-items: center; }
 /* 項目が増えても折り返さない。入り切らない幅では詰め、さらに狭ければメニューボタンに畳む */
 .global-nav a { white-space: nowrap; }
-@media (max-width: 1480px) { .global-nav { gap: 1rem; } .global-nav a { font-size: .8rem; } .global-nav .nav-cta { padding: .6em 1.1em; } }
 .global-nav a { font-size: .86rem; font-weight: 600; text-decoration: none; color: var(--muted); padding: .3em 0; position: relative; transition: color .2s; }
 .global-nav a:not(.nav-cta):hover { color: var(--blue); }
 .global-nav a:not(.nav-cta)::after { content: ""; position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: var(--blue); border-radius: 2px; transform: scaleX(0); transform-origin: right; transition: transform .3s var(--ease-out); }
 .global-nav a:not(.nav-cta):hover::after { transform: scaleX(1); transform-origin: left; }
 .global-nav .nav-cta { color: #fff; background: var(--blue); padding: .65em 1.5em; border-radius: 10px; font-weight: 700; box-shadow: var(--shadow-sm); transition: background .2s, transform .2s var(--ease-out); }
 .global-nav .nav-cta:hover { background: var(--blue-deep); transform: translateY(-1px); }
+/* パソコンのヘッダーを大きく（2026-11-15 運用者「ヘッダーが少し小さい」。高さ72px・ロゴ34px・文字13.8pxだった）。
+   スマホ（1260px以下）は画面の1割未満の決まりがあるので変えない。幅に応じて詰め、ロゴと社名は縮めない
+   （前は1280px前後で社名が3行に折れていた。狭い幅の指定は後ろの指定に負けて効いていなかった） */
+@media (min-width: 1261px) {
+  .site-header .inner { padding-top: 1.05rem; padding-bottom: 1.05rem; gap: 1.6rem; }
+  .brand { flex-shrink: 0; }
+  .brand-logo { height: 42px; }
+  .brand .mark { font-size: 1.42rem; white-space: nowrap; }
+  .brand .by { font-size: .68rem; white-space: nowrap; }
+  .global-nav { gap: 1.6rem; }
+  .global-nav a { font-size: .97rem; }
+  .site-header .global-nav .nav-cta { padding: .7em 1.6em; }
+  .site-header .global-nav .nav-tool { padding: .6em 1.2em; }
+}
+@media (min-width: 1261px) and (max-width: 1640px) {
+  .global-nav { gap: 1.15rem; }
+  .global-nav a { font-size: .9rem; }
+  .site-header .global-nav .nav-cta { padding: .65em 1.3em; }
+  .site-header .global-nav .nav-tool { padding: .55em 1em; }
+}
+@media (min-width: 1261px) and (max-width: 1420px) {
+  .site-header .inner { gap: 1.1rem; padding-left: 2rem; padding-right: 2rem; }
+  .brand-logo { height: 38px; }
+  .brand .mark { font-size: 1.3rem; }
+  .global-nav { gap: .85rem; }
+  .global-nav a { font-size: .84rem; }
+  .site-header .global-nav .nav-cta { padding: .6em 1.05em; }
+  .site-header .global-nav .nav-tool { padding: .5em .85em; }
+}
 
 /* モバイルメニュー */
 .nav-toggle { display: none; margin-left: auto; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 10px; background: #fff; cursor: pointer; position: relative; }
