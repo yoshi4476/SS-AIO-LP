@@ -71,7 +71,7 @@ def gsc_rows(site_id):
             CRED,
             ["https://www.googleapis.com/auth/webmasters.readonly"]))
         end = date.today() - timedelta(days=3)
-        group = set(S.group_of(site_id)) if site_id else None
+        group = (set(S.group_of(site_id)) | set(S.same_owner_of(site_id))) if site_id else None
         all_conf = {k: v for k, v in S.load_all().items() if group is None or k in group}
     except Exception as e:
         print(f"   （GSC照合はスキップ: {type(e).__name__}）")
@@ -110,6 +110,24 @@ def owned(rows):
              "site": r.get("_site", ""), "own": r.get("_own", True)}
             for r in rows
             if r["position"] <= OWNED_POS and r["impressions"] >= OWNED_IMP]
+
+
+def _client_row(o):
+    import sites as S
+    return bool(o.get("site")) and not o.get("own", True) and S.is_client(o["site"])
+
+
+def where(o):
+    """ログに出すページの住所。運営者が同じお客様の扱いのサイト（CONFLUX）の行は、公開の id だけにする
+    （CI のログは public。記事の住所と順位を持つ語は守秘）"""
+    if _client_row(o):
+        import sites as S
+        return f"{S.public_id(o['site'])} の記事"
+    return o["page"].split("//")[-1]
+
+
+def q_of(o):
+    return "（語は伏せます）" if _client_row(o) else o["q"]
 
 
 def gsc_owner(kw, own):
@@ -246,29 +264,29 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
             continue
         level = max(level, 1)
         reasons.append((
-            "要対応", f"用語集がこの語で順位を持っている: {o['page'].split('//')[-1]}"
+            "要対応", f"用語集がこの語で順位を持っている: {where(o)}"
             + (f"（定義の出典: {src}）" if src else ""),
-            f"「{o['q']}」で{o['pos']:.1f}位・表示{o['imp']}。記事を当てるなら、用語集より記事が上に出るよう"
+            f"「{q_of(o)}」で{o['pos']:.1f}位・表示{o['imp']}。記事を当てるなら、用語集より記事が上に出るよう"
             f"出典の記事へ寄せてください（用語集の noindex・正規URLは機械では変えません）"))
     for o in gsc_owner(kw, own)[:5]:
         level = max(level, 2)
         if o.get("own", True):
             reasons.append((
-                "禁止", f"既に順位を持つページがある: {o['page'].split('//')[-1]}",
-                f"「{o['q']}」で{o['pos']:.1f}位・表示{o['imp']}。"
+                "禁止", f"既に順位を持つページがある: {where(o)}",
+                f"「{q_of(o)}」で{o['pos']:.1f}位・表示{o['imp']}。"
                 f"新記事を当てると順位が割れます。このページを書き足してください"))
         else:
+            import sites as S
             reasons.append((
-                "禁止", f"他サイト（{o['site']}）が既に取っている語: "
-                f"{o['page'].split('//')[-1]}",
-                f"「{o['q']}」で{o['pos']:.1f}位・表示{o['imp']}。"
+                "禁止", f"他サイト（{S.public_id(o['site'])}）が既に取っている語: {where(o)}",
+                f"「{q_of(o)}」で{o['pos']:.1f}位・表示{o['imp']}。"
                 f"ドメインが違っても自社どうしの食い合いになります。"
                 f"担当をどちらに寄せるか決めてから書いてください"))
     for o in gsc_related(kw, own)[:3]:
         level = max(level, 1)
         reasons.append((
-            "要差別化", f"近い語で順位を持つページがある: {o['page'].split('//')[-1]}",
-            f"「{o['q']}」で{o['pos']:.1f}位・表示{o['imp']}。"
+            "要差別化", f"近い語で順位を持つページがある: {where(o)}",
+            f"「{q_of(o)}」で{o['pos']:.1f}位・表示{o['imp']}。"
             f"同じ深さで書くと食い合います。広い側は要約にとどめ、相互にリンクしてください"))
 
     # ③ 見出し案の主題を、実績に1本ずつ当てる。
@@ -278,7 +296,7 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
             level = max(level, 1)
             reasons.append((
                 "要差別化", f"見出しの主題を既存ページが取っている: 「{head[:26]}」",
-                f"{o['page'].split('//')[-1]} が「{o['q']}」で{o['pos']:.1f}位。"
+                f"{where(o)} が「{q_of(o)}」で{o['pos']:.1f}位。"
                 f"この見出しは要約にとどめ、本文はそのページへリンクします"))
 
     # ④ タイトル案の似かた

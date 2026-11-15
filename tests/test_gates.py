@@ -2723,8 +2723,12 @@ def test_site_has_two_axes_and_no_orphans():
     items = json.loads((ROOT / "site.config.json").read_text(encoding="utf-8")).get("footer_credit") or []
     check("制作表記: AIO 対策・サイト制作の表記とリンクがある",
           (bool(items), any(it["label"].startswith("AIO 対策・サイト制作：") for it in items),
-           all(f'href="{it["url"]}" target="_blank" rel="noopener">{it["label"]}</a>' in cred for it in items)),
+           all(f'href="{it["url"]}" target="_blank" rel="noopener">{it["link"]}</a>' in cred for it in items)),
           (True, True, True))
+    # 全ページに置くリンクの文字は社名だけ（狙う語をリンクの文字にしない。文言は文字として残す。2026-11-15）
+    check("制作表記: リンクの文字は社名だけで、文言は全部見える",
+          [(it["link"] in it["label"] and "：" not in it["link"], it["label"].replace(it["link"], "") in
+            re.sub(r"<[^>]+>", "", cred).replace(it["link"], "")) for it in items], [(True, True)] * len(items))
     check("制作表記: nofollow を付けない", "nofollow" in cred, False)
     foots = {p: p.read_text(encoding="utf-8", errors="surrogateescape") for p in site.rglob("*.html")}
     foots = {p: t for p, t in foots.items() if sync_nav.FOOTER in t}
@@ -2745,7 +2749,8 @@ def test_site_has_two_axes_and_no_orphans():
     check("補助金の制作表記: LP 制作の表記とリンク",
           FC.LABEL.startswith("LP 制作：") and FC.URL.startswith("https://")
           and f'href="{FC.URL}" target="_blank" rel="noopener"' in FC.CREDIT
-          and f">{FC.LABEL}</a>" in FC.CREDIT and "nofollow" not in FC.CREDIT, True)
+          and f">{FC.LINK}</a>" in FC.CREDIT and FC.LABEL == re.sub(r"<[^>]+>", "", FC.CREDIT)
+          and "nofollow" not in FC.CREDIT, True)
     pg = (ROOT / "scripts" / "subsidy" / "pages.py").read_text(encoding="utf-8")
     check("補助金の制作表記: pages.py の雛形に入り、配信のたびに全ページへ揃える",
           "footer_credit.CREDIT" in pg and "footer_credit.apply(ROOT)" in pg, True)
@@ -2773,6 +2778,7 @@ def test_site_has_two_axes_and_no_orphans():
               # コメント（「nofollow も付けない」）は数えない。2026-10-08 にコメントを拾って NG になった
               and not any("nofollow" in ln for ln in ft.splitlines() if not ln.strip().startswith(("//", "*", "/*"))),
               True)
+        check("コーポレートの制作・顧問の表記: リンクの文字は社名・名前だけ", ('link: "CONFLUX PARTNERS"' in ft, 'link: "YW"' in ft), (True, True))
 
 
 def test_search_engines_are_told_about_all_sites():

@@ -156,3 +156,30 @@ def test_industry_variants_are_not_cannibals():
     check("同じ業種どうしは業種違いにしない", C.other_industry("歯科 AIO対策 費用", "歯科 AIO対策 会社"), False)
     src = (ROOT / "scripts" / "cannibal_check.py").read_text(encoding="utf-8")
     check("横断とこれから書く語の両方の検査で外す", src.count("and not other_industry("), 2)
+
+
+def test_same_owner_site_joins_keyword_guard():
+    """運営者が同じお客様の扱いのサイト（CONFLUX）も、狙う語の門で自社3サイトと同じ相手にする。
+    組（group_of）は分けたまま（台帳・範囲・通行証は今までどおり）。ログに相手の記事の住所と語を出さない"""
+    import kw_guard as KG
+    import sites as S
+    print("\n■ 狙う語の門: 運営者が同じサイトとも同じ語を取り合わない")
+    conf = {"ai-lab": {}, "corporate": {}, "c1": {"same_owner": True, "public_id": "pub1"}, "c2": {"public_id": "pub2"}}
+    orig = (S.load_all, S.is_client, S.own_ids)
+    S.load_all = lambda: conf
+    S.is_client = lambda sid: sid in ("c1", "c2")
+    S.own_ids = lambda: ["ai-lab", "corporate"]
+    try:
+        check("自社の門は、運営者が同じ社だけを足す", S.same_owner_of("ai-lab"), ["c1"])
+        check("運営者が同じ社の門は、自社の社を足す", S.same_owner_of("c1"), ["ai-lab", "corporate"])
+        check("ほかのお客様の社は足さない（別の会社）", S.same_owner_of("c2"), [])
+        row = {"q": "aio対策 会社", "page": "https://secret.example/journal/secret-slug/", "pos": 3.0, "imp": 50,
+               "site": "c1", "own": False}
+        check("相手の記事の住所は出さない", ("secret-slug" in KG.where(row), KG.where(row)), (False, "pub1 の記事"))
+        check("相手の順位を持つ語も出さない", KG.q_of(row), "（語は伏せます）")
+        mine = dict(row, site="ai-lab", own=True, page="https://ai.example/aio/x/")
+        check("自社の行はそのまま", (KG.where(mine), KG.q_of(mine)), ("ai.example/aio/x/", "aio対策 会社"))
+    finally:
+        S.load_all, S.is_client, S.own_ids = orig
+    src = (ROOT / "scripts" / "kw_guard.py").read_text(encoding="utf-8")
+    check("門の照合の相手に same_owner_of を足す", "S.same_owner_of(site_id)" in src, True)

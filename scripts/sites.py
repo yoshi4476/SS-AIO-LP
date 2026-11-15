@@ -124,6 +124,16 @@ def group_of(site_id):
     return own_ids()
 
 
+def same_owner_of(site_id):
+    """食い合いの門（kw_guard）だけで足す相手。お客様の扱いでも、運営者が自社と同じサイト（設定の same_owner: true。
+    CONFLUX）は、自社3サイトと同じ検索を取り合う。組（group_of）は変えない（台帳・範囲・通行証は今までどおり分ける）。
+    2026-11-15 運用者「4サイトで同じ言葉を狙う」への備え"""
+    all_ = load_all()
+    if is_client(site_id):
+        return own_ids() if (all_.get(site_id) or {}).get("same_owner") else []
+    return [s for s, c in all_.items() if is_client(s) and c.get("same_owner")]
+
+
 def group_key(site_id):
     """group_of の組の名前（管制塔へ渡す）。自社は 'own'、お客様はその社のID。同じ会社の複数のサイトは設定の group で
     1つの組にする（範囲の絞り込み・管制塔の通行証・仕事の数え方が同じ組を見る。2026-10-12 にそろえた）。

@@ -14,11 +14,14 @@ import sys
 from pathlib import Path
 
 LABEL = "LP 制作：YW（CONFLUX PARTNERS）"
+# リンクにするのは社名だけ（全ページのリンクの文字に「LP 制作」を入れない。リンクスパムのポリシーへの備え。2026-11-15）
+LINK = "CONFLUX PARTNERS"
 URL = "https://conflux-partners.jp/works/7senses-lp"
 # ページごとにフッターの CSS が違う（固定ページ・LP・404）ため、見た目は親のフッターの色と文字の大きさを継ぐ
-CREDIT = (f'<p class="footer-credit" style="margin:.4em 0 0;font-size:12px">'
+_I = LABEL.find(LINK)
+CREDIT = (f'<p class="footer-credit" style="margin:.4em 0 0;font-size:12px">{LABEL[:_I]}'
           f'<a href="{URL}" target="_blank" rel="noopener" '
-          f'style="color:inherit;text-decoration:underline;text-underline-offset:2px">{LABEL}</a></p>')
+          f'style="color:inherit;text-decoration:underline;text-underline-offset:2px">{LINK}</a>{LABEL[_I + len(LINK):]}</p>')
 
 FOOT_RX = re.compile(r"<footer[^>]*>.*?</footer>", re.S)
 CREDIT_RX = re.compile(r'(?:\r?\n)?[ \t]*<p class="footer-credit"[^>]*>.*?</p>', re.S)

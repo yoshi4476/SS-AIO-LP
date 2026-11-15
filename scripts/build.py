@@ -132,6 +132,16 @@ def _nav(key, fallback):
     return "\n".join(out)
 
 
+def credit_html(label, link, url, attrs=""):
+    """制作表記の1行。リンクにするのは link（社名）の部分だけで、前後の文言はそのまま文字で出す。
+    全ページのフッターに置くリンクの文字に狙う語を入れない（リンクスパムのポリシーへの備え。2026-11-15）"""
+    i = label.find(link)
+    if i < 0:
+        i, link = 0, label
+    return (f'{label[:i]}<a href="{url}" target="_blank" rel="noopener"{attrs}>{link}</a>'
+            f'{label[i + len(link):]}')
+
+
 def _footer_credit():
     """フッターの制作・顧問の表記（site.config.json の footer_credit）。
 
@@ -140,8 +150,7 @@ def _footer_credit():
     items = _conf().get("footer_credit") or []
     if not items:
         return ""
-    rows = "".join(f'<p><a href="{it["url"]}" target="_blank" rel="noopener">{it["label"]}</a></p>'
-                   for it in items)
+    rows = "".join(f"<p>{credit_html(it['label'], it.get('link') or it['label'], it['url'])}</p>" for it in items)
     return f'<div class="footer-credit">{rows}</div>'
 
 # ---- サイト設定 ----
