@@ -177,6 +177,21 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
     },
     {
      "@type": "Thing",
+     "name": "ChatGPT",
+     "sameAs": "https://ja.wikipedia.org/wiki/ChatGPT"
+    },
+    {
+     "@type": "Thing",
+     "name": "Perplexity",
+     "sameAs": "https://www.perplexity.ai/"
+    },
+    {
+     "@type": "Thing",
+     "name": "Gemini",
+     "sameAs": "https://gemini.google.com/"
+    },
+    {
+     "@type": "Thing",
      "name": "検索エンジン最適化（SEO）",
      "sameAs": "https://ja.wikipedia.org/wiki/%E6%A4%9C%E7%B4%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E6%9C%80%E9%81%A9%E5%8C%96"
     }
@@ -229,7 +244,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "電話予約で無断キャンセルを防ぐにはどうすればいいですか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "予約時に注意事項を伝え、前日に確認の連絡を入れる運用がもっとも効果的です。"
+      "text": "予約時に注意事項を伝え、前日に確認の連絡を入れます。繰り返す患者への対応方針も先に決めます。"
      }
     },
     {
@@ -331,14 +346,14 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       </div>
     </aside>
     <div class="article-body">
-      <p><strong>クリニックの電話予約のやり方は、初診再診の別・症状・希望日時・氏名・連絡先の5項目を毎回同じ順番で聞き取り、復唱してから確定する型を決めておくことです。</strong>型を決めておけば、担当者が変わっても対応の質が揃います。聞き漏れによる予約ミスや無断キャンセルも防ぎやすくなります。本記事では、MEO運用サービス「G-ran」を含むAIO・SEO・MEOの支援で累計3,200件以上（うちMEO 2,000件以上）を支援してきた実務の視点から、電話予約対応の型とAI電話自動応答の活用方法までまとめて解説します。</p>
+      <p><strong>クリニックの電話予約のやり方は、初診再診の別・症状・希望日時・氏名・連絡先の5項目を毎回同じ順番で聞き取り、復唱してから確定する型を決めておくことです。</strong>型を決めておけば、担当者が変わっても対応の質が揃います。聞き漏れによる予約ミスや無断キャンセルも防ぎやすくなります。</p>
 <div class="target-reader">この記事は、クリニック・医院の院長・事務長・受付スタッフなど、電話予約の対応を見直したい方向けです。</div>
 
 <p class="freshness">※ 2026年9月時点の情報です。</p>
 
 <div class="lead-summary"><p class="lst-title">この記事でわかること</p><ul><li>電話予約で聞き取るべき5項目と対応の基本4ステップ</li><li>初診・再診で変えるべき電話対応のポイント</li><li>電話予約でよくあるトラブルとNG対応の防ぎ方</li><li>AI電話自動応答を導入する際に確認すべき点</li></ul></div>
 
-<p><a href="https://yoyakulab.net/research/reservation_by_service/" target="_blank" rel="noopener">予約ラボの調査</a>（2021年3月・全国20〜60代549人を対象にしたインターネット調査）によると、<strong>医療機関の予約は電話利用が8割前後</strong>である一方、<strong>ネット予約は3〜4割にとどまる</strong>という結果が出ています（複数回答）。ネット予約が広がる業種でも、医療機関では今なお電話が主要な予約手段だとわかります。</p>
+<p><a href="https://yoyakulab.net/research/reservation_by_service/" target="_blank" rel="noopener">予約ラボの調査</a>（2021年3月・全国20〜60代549人を対象にしたインターネット調査）によると、<strong>医療機関の予約は電話利用が8割前後</strong>である一方、<strong>ネット予約は3〜4割にとどまる</strong>という結果が出ています（複数回答）。ネット予約が広がる業種でも、医療機関では電話が主要な予約手段だとわかります。ただし5年前の調査のため、自院の患者層の傾向を見る参考にとどめてください。</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -365,16 +380,23 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </tr>
 </tbody>
 </table></div>
-<p>私たちがG-ranの支援現場で相談を受けるクリニックの多くは、電話対応がスタッフの経験と勘に頼っていました。<strong>この記事は、その勘に頼った対応を型に置き換えることを目的にしています。</strong></p>
+<p><strong>この記事は、経験と勘に頼りがちな電話対応を、誰が受けても同じ質になる型に置き換えることを目的にしています。</strong></p>
 <h2 id="4">クリニックの電話予約対応、基本の流れ4ステップ</h2>
 <p><strong>電話予約対応の基本は、受電・聞き取り・空き枠提示・復唱確定の4ステップに固定することです。</strong>この順番さえ守れば、対応者による差はほとんど出ません。</p>
 <aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="url_check"><p class="it-head">御社のサイト、ChatGPTやGoogleのAIに読まれていますか？</p><p class="it-sub">URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）</p><form class="it-form" action="/tools/url-check/" method="get"><input type="hidden" name="src" value="article_inline"><input type="hidden" name="from" value="/ai-marketing/clinic-denwa-yoyaku-yarikata/"><input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_inline_url_check">確かめる</button></form></aside>
-<p>実際の例はクリニックのサイバー攻撃事例と集患を守る5つの初動対応で整理しています。</p>
-<p>実際の進め方については、<a href="/ai-marketing/clinic-kaigyou-yarikata/">クリニック開業のやり方</a>にまとめています。</p>
+<p>4ステップの中身は、次のとおりです。</p>
+<ol>
+<li>受電: 院名を名乗り、用件が予約かを確かめます。</li>
+<li>聞き取り: 5項目を決めた順に聞きます。</li>
+<li>空き枠提示: 第1希望が埋まっていれば第2希望を案内します。</li>
+<li>復唱確定: 日時・氏名・連絡先を復唱し、予約を確定します。</li>
+</ol>
+<p>型を作る順番は、初診から始めてください。当社の判断では、初診は聞く項目と案内が多く、聞き漏れの影響が大きいためです。再診は日時変更が中心なので、初診の型ができてから整えれば間に合います。</p>
+<p>開業準備の全体像は、<a href="/ai-marketing/clinic-kaigyou-yarikata/">クリニック開業のやり方</a>にまとめています。</p>
 <figure><img src="/images/clinic-denwa-yoyaku-yarikata/flow.png" alt="電話予約対応の基本4ステップ: 電話を受ける、5項目を聞き取る、空き枠を提示する、復唱して確定する" width="1200" height="400" loading="lazy"><figcaption>電話予約対応の基本4ステップ（当メディア作成）</figcaption></figure>
 
-<p>4ステップのうち、特に効果が大きいのは最後の「復唱して確定する」です。電話予約対応の要は、日時・氏名・連絡先の復唱の徹底。これだけで聞き間違いによる予約ミスの大半を防げます。</p>
-<p>受付が1人だけのクリニックでは、この型がないと電話ごとに対応の質がばらつきます。属人的な対応は、担当者が休んだ日に聞き漏れが起きる最大の原因です。マニュアルに4ステップを書き出し、新人が最初に読む資料にしておくと定着が早まります。</p>
+<p>電話予約の4ステップのうち、特に効果が大きいのは最後の「復唱して確定する」です。日時・氏名・連絡先を復唱すれば、聞き間違いによる予約ミスを防ぎやすくなります。</p>
+<p>受付が1人だけのクリニックは、型を作る優先度がもっとも高くなります。受付が複数いる医院は、人ごとの言い回しの差が出るため、5項目の順番だけを共通ルールにします。型がないと電話ごとに対応の質がばらつきます。属人的な対応は、担当者が休んだ日に聞き漏れが起きる最大の原因です。マニュアルに4ステップを書き出し、新人が最初に読む資料にしておくと定着が早まります。</p>
 <h2 id="5">電話予約で聞き取るべき5つの項目</h2>
 <p><strong>電話予約で聞くべき項目は、初診再診・症状・希望日時・氏名・連絡先の5つで、この順に固定すると聞き漏れを防げます。</strong>5項目という数を決めておくだけで、聞き取りにかかる時間も安定します。</p>
 <p>関連する内容として<a href="/meo/iryou-meo-taisaku/">医療機関のMEO対策</a>も公開しています。</p>
@@ -430,7 +452,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 （日時・氏名・生年月日・連絡先の順に確認）
 受付: では◯月◯日◯時でお取りします。お名前と電話番号を復唱いたします。
 </code></pre>
-<p>この例文をそのまま台本にする必要はありません。5項目を落とさず聞く順番だけを共通ルールにすると、担当者ごとの言い回しの違いを残したまま型を統一できます。</p>
+<p>上の会話例を、そのまま台本にする必要はありません。5項目を落とさず聞く順番だけを共通ルールにすると、担当者ごとの言い回しの違いを残したまま型を統一できます。</p>
 <aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">クリニック・医療機関のサイトは、AIと検索に読まれていますか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="ind" value="クリニック・歯科医院"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_mid_ai_check">AI診断（地域と業種を入れるだけ・無料）</a></p></aside>
 <h2 id="_1">初診と再診で変わる電話対応のポイント</h2>
 <p><strong>初診の電話対応は、問診票・持ち物・所要時間の案内を追加する分、再診より通話時間が長くなる前提で臨むことが基本です。</strong>この前提を持たないと、予約枠の見積もりがずれます。</p>
@@ -454,9 +476,9 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <td style="text-align: left;">変更後の日時のみ</td>
 </tr>
 <tr>
-<td style="text-align: left;">通話時間の目安</td>
-<td style="text-align: left;">3〜5分</td>
-<td style="text-align: left;">1〜2分</td>
+<td style="text-align: left;">通話時間の傾向</td>
+<td style="text-align: left;">長め</td>
+<td style="text-align: left;">短め</td>
 </tr>
 </tbody>
 </table></div>
@@ -467,11 +489,20 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>聞き漏れは、5項目を順番通りに聞く型がないまま会話を進めることで起きます。復唱を省略した瞬間に発生しやすいため、復唱は例外なく毎回行うルールにしてください。</p>
 <div class="caution-box"><span class="box-title">注意: 無断キャンセルを放置しない</span><br>無断キャンセルへの対応を決めずにいると、同じ患者が繰り返し予約枠を無駄にします。前日確認の連絡と、繰り返した場合の対応方針を先に決めておいてください。</div>
 
-<p>私も支援先の受付を見てきた中で、重複予約の多くは紙の予約台帳と口頭確認だけに頼っている医院で起きていました。<strong>予約システムを併用し、電話で受けた予約もその場で入力する</strong>運用に変えるだけで、重複はほぼなくなります。</p>
+<p>重複予約は、紙の予約台帳と口頭確認だけに頼る運用で起きやすくなります。当社の判断では、<strong>予約システムを併用し、電話で受けた予約もその場で入力する</strong>運用にすると、重複の原因である入力の遅れを減らせます。</p>
 <p>紙の台帳が悪いわけではありません。問題は、電話で受けた予約とネット予約が別々の場所で管理され、突き合わせるタイミングが1日の終わりだけになっていることです。受電の直後に1つの台帳へ反映するというルールだけで、突き合わせの手間そのものが要らなくなります。</p>
 <p>繁忙期に電話が集中する時間帯は、聞き取りを急ぐあまり5項目のどれかを飛ばしがちです。あらかじめ電話が混みやすい時間帯を把握しておき、その時間だけ受付を1人増やすといった対策も有効です。</p>
 <h2 id="_2">電話予約とネット予約、クリニックはどちらを軸にすべきか</h2>
 <p><strong>電話予約とネット予約は、初診や込み入った相談は電話、単純な日程変更はネットという併用が基本です。</strong>どちらか一方に絞る必要はありません。</p>
+<p>当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。同じ調べでは、ほかの論点を聞いた答え10件のうち、『ネット予約』に触れたものは1件でした。AIの答えだけでは、自院にネット予約が要るかは決まらないため、次の条件で判断してください。</p>
+<ul>
+<li>電話が営業時間外にも多く入る、または再診の日程変更が電話の大半なら ネット予約を足します。</li>
+<li>電話が受付で足りており、患者の大半が電話を好む高齢層なら ネット予約は見送って構いません。</li>
+<li>予約システムがなく台帳が紙のままなら ネット予約より先に電話予約の入力先を1つにします。</li>
+</ul>
+<p>また、当社は2026年10月に、4つのAI（ChatGPT・Gemini・Claude・Perplexity）へクリニックに関する質問を100問聞きました。答えの出典2362件を種類ごとに数えました。</p>
+<p>クリニックを探す質問では、出典の56.7%が予約・比較ポータル、35.6%が医院・クリニックの公式サイトでした（<a href="https://ai.7senses.co.jp/research/clinic-ai-sources/" target="_blank" rel="noopener">業種調査</a>）。</p>
+<p>費用・選び方・症状・受診のしかたを調べる質問では、回答の77.4%が公式サイトを1つ以上出典にしていました。公式サイトに電話番号と予約方法を載せておくことが、電話予約の入口になります。</p>
 <p>あわせて<a href="/seo/clinic-seo-consulting-erabikata/">クリニックSEOコンサル活用術｜依頼の目安と注意点</a>もご覧ください。</p>
 <div class="table-wrap"><table>
 <thead>
@@ -511,15 +542,25 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <h2 id="ai">AI電話自動応答でクリニックの電話予約を効率化する方法</h2>
 <p><strong>AI電話自動応答は、営業時間外や混雑時の一次対応を担い、受付が込み入った相談に集中できる体制をつくる手段です。</strong>すべての対応を任せる仕組みではありません。</p>
 <p>一般的なAI電話自動応答は、着信を受けて用件を聞き取り、単純な予約や問い合わせをその場で処理します。判断が難しい相談は、人間の受付へ引き継ぐ設計が主流です。AIに任せる範囲を狭く決めておくほうが、患者側の不満は出にくくなります。</p>
+<p>同じ調べでは、ほかの論点を聞いた答え10件のうち、『AI電話自動応答』に触れたものは0件でした。AIの答えは導入の可否まで踏み込まないため、自院の条件で決める必要があります。</p>
+<p>導入するかどうかは、次の条件で分けます。</p>
+<ul>
+<li>受付が1人で、昼休みや診療中に電話が取れない時間があるなら、導入を検討します。</li>
+<li>営業時間外の着信が多く、取りこぼしが出ているなら、導入を検討します。</li>
+<li>受付が複数いて電話に出られており、取りこぼしも少ないなら、導入は見送り、まず5項目の型を整えます。</li>
+</ul>
+<p>例えば1日の電話が40件で、そのうち5件が診療中に取れなかったなら、取りこぼしは1割強です。当社の判断では、取りこぼしが1割を超える日が続くなら導入を検討します。10件に1件は、患者が他院へ流れかねないためです。</p>
 <p>導入を検討する際は、聞き取り5項目をそのままAIの応答フローに落とし込めるかを確認してください。5項目が既に型になっていれば、AI導入時の設計もスムーズに進みます。</p>
 <p>事実として押さえておきたいのは、AI電話自動応答の普及が進んでいることです。前述の通り、あるサービスでは導入医院数が2,898件（2026年3月時点、同社公表）に達しています。一方で、<strong>AIがすべての電話対応を代替できるわけではない</strong>という点は、意見として付け加えておきます。</p>
+<p>費用は、記事作成ツールなど他の仕組みの相場とは性質が異なり、本記事に一次情報の額がありません。見積もりでは、月額・台帳との連携先・人への引き継ぎ方法の3つを同じ条件で比べてください。</p>
 <p>導入前に確認しておきたい点は、大きく2つです。1つ目は、AIが対応する範囲と人間に引き継ぐ範囲の線引きです。2つ目は、AIが聞き取った内容が既存の予約台帳やカルテシステムに反映される仕組みかどうかです。</p>
-<p>この2点を曖昧にしたまま導入すると、AIが受けた予約と受付が手書きで管理する予約が二重に存在し、かえって重複予約が増えるケースがあります。AI導入は、既存の型を壊さずに一次対応だけを置き換えるという考え方で検討してください。</p>
+<p>線引きと台帳連携の2点を曖昧にしたまま導入すると、AIが受けた予約と受付が手書きで管理する予約が二重に存在し、かえって重複予約が増える恐れがあります。台帳連携ができないなら、導入は見送ります。AI導入は、既存の型を壊さずに一次対応だけを置き換えるという考え方で検討してください。</p>
 <h2 id="ng">クリニックの電話予約でやってはいけないNG対応</h2>
 <p><strong>電話予約のNG対応は、曖昧な返事で保留すること、無断キャンセルの放置、初診と再診を同列に扱うことの3つです。</strong>この3つを避けるだけで、トラブルの大半は防げます。</p>
 <figure><img src="/images/clinic-denwa-yoyaku-yarikata/vs.png" alt="電話予約対応のNG・OK比較。NGは曖昧な返事での保留・無断キャンセルの放置・初診再診の同列扱い。OKは確認期限を伝える・前日確認・初診の所要時間を長めに案内する対応" loading="lazy"><figcaption>電話予約対応、NGとOKの分かれ目</figcaption></figure>
 
 <p>「一度確認して折り返します」で終わる曖昧な返事は、患者に不安を残したまま電話を切ることになります。折り返す期限をその場で伝えるだけで、印象は大きく変わります。</p>
+<p>断り方の言い回しも、先に決めておきます。例えば満席や診療科外のときは、理由を一言伝えたうえで、代わりの日時や受診先を案内します。</p>
 <p>初診の患者に再診と同じ短い案内で済ませると、来院当日に持ち物不足や時間超過が起きがちです。<strong>初診は所要時間を長めに案内する</strong>一言を、対応の型に必ず入れてください。</p>
 <p>3つのNG対応に共通するのは、対応した本人しか経緯を知らない状態が生まれることです。防ぐ手段は、簡単な備考メモの徹底。誰がいつ何を伝えたかを予約台帳の備考欄に残しておくと、次に電話を受けた別のスタッフでも同じ説明を再現できます。備考が残っていれば、患者から「前回そう言われた」と指摘されたときも慌てずに対応できます。</p>
 <div class="cta-box"><p>電話対応の型づくりから、AI検索経由の集患導線までまとめて相談できます。</p><a class="cta-button" href="/tools/url-check/" data-cta="article_body_url_check" data-ab="body_scan" data-ab-b="AIと検索に読まれているか無料で調べる">御社のサイトを30秒で無料診断する</a></div>
@@ -529,7 +570,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <div class="faq">
 <details><summary>クリニックの電話予約で最初に何を聞けばいいですか？</summary><p class="faq-a">初診再診の別・症状・希望日時・氏名・連絡先の5項目を、この順番で聞くと聞き漏れを防げます。</p></details>
 <details><summary>電話予約とネット予約、クリニックはどちらを優先すべきですか？</summary><p class="faq-a">併用が基本です。高齢層は電話、若年層はネットを好むため片方だけでは患者を取りこぼします。</p></details>
-<details><summary>電話予約で無断キャンセルを防ぐにはどうすればいいですか？</summary><p class="faq-a">予約時に注意事項を伝え、前日に確認の連絡を入れる運用がもっとも効果的です。</p></details>
+<details><summary>電話予約で無断キャンセルを防ぐにはどうすればいいですか？</summary><p class="faq-a">予約時に注意事項を伝え、前日に確認の連絡を入れます。繰り返す患者への対応方針も先に決めます。</p></details>
 <details><summary>AI電話自動応答を導入すると受付の負担はどう変わりますか？</summary><p class="faq-a">定型的な一次対応をAIが担うため、受付は込み入った相談だけに集中できます。</p></details>
 <details><summary>初診と再診で電話対応はどう変えるべきですか？</summary><p class="faq-a">初診は問診票や持ち物の案内を追加し、再診より通話時間が長くなる前提で対応します。</p></details>
 <details><summary>電話予約の対応マニュアルには何を書けばいいですか？</summary><p class="faq-a">聞き取り5項目・断り方の言い回し・キャンセル対応の3つを型にして明文化します。</p></details>
@@ -539,6 +580,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>クリニックの電話予約対応は、話術ではなく型で決まります。初診再診・症状・希望日時・氏名・連絡先の5項目を順番通りに聞き、復唱してから確定する。この基本さえ崩さなければ、担当者が変わっても対応の質は保てます。</p>
 <p>ネット予約やAI電話自動応答は、この型ができてから組み合わせるほうがうまく機能します。順番を逆にすると、型のないままシステムだけが増え、かえって運用が複雑になります。</p>
 <p>まずは自院の電話対応を録音などで振り返り、5項目が漏れなく聞けているかを確認してみてください。1週間分だけでも見返せば、抜けやすい項目の傾向が見えてきます。</p>
+<p>録音する場合は、冒頭で録音を案内し、保存先と聞ける人を限ってください。氏名や症状は個人情報のためです。録音が難しい院は、受付が1日の終わりに聞き漏れた項目をメモするだけでも足ります。見返す点は、5項目の聞き漏れ・復唱の有無・初診の案内の3つです。</p>
 <p>予約手段全体の導線設計は予約につながる導線設計、マップ経由の集患強化は<a href="/meo/clinic-meo-taisaku/">クリニックのMEO対策</a>で解説しています。</p>
 <p>ホームページ側の予約導線は<a href="/seo/clinic-hp-hissu-koumoku/">クリニックのホームページに必須の項目</a>、集患施策全体の優先順位は<a href="/ai-marketing/clinic-shukyaku-sekkeizu/">クリニック集客の設計図</a>から確認してください。</p>
 <p>電話を受ける前の段階で、検索とAI検索から選ばれる準備は<a href="/seo/clinic-seo-taisaku/">クリニックSEOの進め方</a>で解説しています。クリニック・歯科医院の検索とAI検索の対策をまとめて相談したい場合は、<a href="/lp/medical/">クリニック・歯科医院のSEO・AI検索対策のご案内</a>をご覧ください。</p>
@@ -546,7 +588,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
       <aside class="scan-box scan-bottom" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">クリニック・医療機関のサイトは、AIと検索に読まれていますか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="ind" value="クリニック・歯科医院"><input type="hidden" name="src" value="article_bottom"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_bottom_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_bottom_ai_check">AI診断（地域と業種を入れるだけ・無料）</a></p></aside>
 
-      <section class="related industry-box"><h2>クリニック・医療機関の集客をまとめて見る</h2><ul><li><a href="/aio/biyou-clinic-shukyaku/">美容クリニックの集客は何から始める？広告規制の中で選ばれる4つの経路</a><span class="tag">AIO・LLMO</span></li><li><a href="/aio/clinic-chiikimei-kensaku-joui/">クリニックの地域名検索で上位に出ない5つの原因と直す順番</a><span class="tag">AIO・LLMO</span></li><li><a href="/aio/clinic-erabareru-homepage/">クリニックの選ばれるホームページ｜比べられて負ける5つの落とし穴</a><span class="tag">AIO・LLMO</span></li></ul><p><a class="more" href="/industry/clinic/">クリニック・医療機関の記事を全部見る（25本）→</a></p></section><section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
+      <section class="related industry-box"><h2>クリニック・医療機関の集客をまとめて見る</h2><ul><li><a href="/aio/clinic-kaigyou-shukyaku/">クリニック開業の集客は開業後6か月が分かれ目｜月ごとの打ち手とNG</a><span class="tag">AIO・LLMO</span></li><li><a href="/aio/biyou-clinic-shukyaku/">美容クリニックの集客は何から始める？広告規制の中で選ばれる4つの経路</a><span class="tag">AIO・LLMO</span></li><li><a href="/aio/clinic-chiikimei-kensaku-joui/">クリニックの地域名検索で上位に出ない5つの原因と直す順番</a><span class="tag">AIO・LLMO</span></li></ul><p><a class="more" href="/industry/clinic/">クリニック・医療機関の記事を全部見る（26本）→</a></p></section><section class="related"><h2>あわせて読みたい関連記事</h2><ul class="post-list">
     <li class="cat-ai"><a href="/ai-marketing/ai-shukyaku-guide/"><span class="thumb"><img src="/images/shelf/map-2.webp" alt="AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-07-27">2026.07.27</time><h3>AI集客の完全ガイド｜AIO・LLMO・SEO・MEOの全体像<span class="tag">AI集客</span></h3></a></li>
     <li class="cat-ai"><a href="/ai-marketing/biyoushitsu-shukyaku-houhou/"><span class="thumb"><img src="/images/shelf/salon-3.webp" alt="美容室の集客方法｜新規とリピートを両立する6つの取り組みのアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-08-13">2026.08.13</time><h3>美容室の集客方法｜新規とリピートを両立する6つの取り組み<span class="tag">AI集客</span></h3></a></li>
     <li class="cat-ai"><a href="/ai-marketing/biyoushitsu-shukyaku-idea/"><span class="thumb"><img src="/images/shelf/salon-1.webp" alt="美容室の集客アイデア12選｜無料で今日から試せる施策のアイキャッチ画像" width="1200" height="675" loading="lazy"></span><time datetime="2026-09-01">2026.09.01</time><h3>美容室の集客アイデア12選｜無料で今日から試せる施策<span class="tag">AI集客</span></h3></a></li>

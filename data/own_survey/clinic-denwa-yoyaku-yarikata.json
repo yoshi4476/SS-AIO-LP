@@ -1,0 +1,118 @@
+{
+ "v": 2,
+ "slug": "clinic-denwa-yoyaku-yarikata",
+ "ok": true,
+ "date": "2026-11-16",
+ "questions": [
+  "クリニック 電話予約 やり方について教えてください",
+  "クリニック 電話予約 やり方について、「クリニックの電話予約対応、基本の流れ4ステップ」を教えてください",
+  "クリニック 電話予約 やり方について、「電話予約で聞き取るべき5つの項目」を教えてください",
+  "クリニック 電話予約 やり方について、「初診と再診で変わる電話対応のポイント」を教えてください",
+  "クリニック 電話予約 やり方について、「電話予約でよくある3つのトラブルと防ぎ方」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "クリニックの電話予約対応、基本の流れ4ステップ",
+   "words": [
+    "基本"
+   ],
+   "hits": 3,
+   "of": 8
+  },
+  {
+   "topic": "電話予約で聞き取るべき5つの項目",
+   "words": [
+    "項目"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "初診と再診で変わる電話対応のポイント",
+   "words": [
+    "電話対応",
+    "初診",
+    "再診"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "電話予約でよくある3つのトラブルと防ぎ方",
+   "words": [
+    "トラブル"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "電話予約とネット予約、クリニックはどちらを軸にすべきか",
+   "words": [
+    "ネット予約"
+   ],
+   "hits": 1,
+   "of": 10
+  },
+  {
+   "topic": "AI電話自動応答でクリニックの電話予約を効率化する方法",
+   "words": [
+    "AI電話自動応答"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "クリニックの電話予約でやってはいけないNG対応",
+   "words": [
+    "NG対応"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "3up-project.com": "peer",
+  "ai.7senses.co.jp": "self",
+  "chuwa-career.info": "peer",
+  "clinic-chikusahills.com": "peer",
+  "clius.jp": "peer",
+  "cube108.jp": "peer",
+  "itabashicentral-cl.jp": "peer",
+  "katsushika-clinic.jp": "peer",
+  "lifestyle-trivia.hatenablog.com": "media",
+  "mediaseries.medialink-ml.co.jp": "peer",
+  "medical.kameda.com": "peer",
+  "ncc.go.jp": "public",
+  "note.com": "video",
+  "notepm.jp": "peer",
+  "oshitaniclinic.com": "peer",
+  "products.medicalpass.jp": "peer",
+  "solasto.co.jp": "peer",
+  "symphonict.nesic.co.jp": "media",
+  "synergia-hub.com": "peer",
+  "tanaka-hifuka.com": "peer",
+  "tsukumo-clinic.jp": "peer",
+  "watashino.jp": "peer",
+  "www3.dental-plaza.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 6,
+  "進め方の手順": 4,
+  "専門家への相談": 0
+ },
+ "chars": 12972,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え10件のうち、『AI電話自動応答』に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。ほかの論点を聞いた答え10件のうち、『ネット予約』に触れたものは1件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は0件、期間（◯か月・◯日など）は3件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは23件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが2件、動画・SNS・ブログが1件でした。"
+ ]
+}

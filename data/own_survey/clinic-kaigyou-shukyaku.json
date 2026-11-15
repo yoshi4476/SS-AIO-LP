@@ -1,0 +1,138 @@
+{
+ "v": 2,
+ "slug": "clinic-kaigyou-shukyaku",
+ "ok": true,
+ "date": "2026-11-16",
+ "questions": [
+  "クリニック 開業 集客について教えてください",
+  "クリニック 開業 集客について、「開業後6か月の新患の入口は予約ポータル・地図・自院サイトの3つ」を教えてください",
+  "クリニック 開業 集客について、「開業直後の新患は予約ポータルと地図の情報から来る」を教えてください",
+  "クリニック 開業 集客について、「開業1〜3か月目は調べる質問に答えるページを毎月足す」を教えてください",
+  "クリニック 開業 集客について、「開業後に検索の順位が動き始めるまでの月数」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "開業後6か月の新患の入口は予約ポータル・地図・自院サイトの3つ",
+   "words": [
+    "予約ポータル",
+    "自院サイト",
+    "新患",
+    "入口"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "開業直後の新患は予約ポータルと地図の情報から来る",
+   "words": [
+    "予約ポータル",
+    "新患",
+    "地図"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "開業1〜3か月目は調べる質問に答えるページを毎月足す",
+   "words": [
+    "ページ",
+    "月目",
+    "質問"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "開業後に検索の順位が動き始めるまでの月数",
+   "words": [
+    "検索",
+    "順位",
+    "月数"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "順位ごとのクリック率で決める、待つか直すか",
+   "words": [
+    "クリック率"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "開業後半年で外しやすい3つのNG",
+   "words": [
+    "NG"
+   ],
+   "hits": 4,
+   "of": 10
+  },
+  {
+   "topic": "開業後の状況別に決める、次の打ち手と見送ること",
+   "words": [
+    "状況別"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "医療法",
+   "org": "厚生労働省",
+   "of": 10,
+   "hits": 0
+  },
+  {
+   "term": "医療広告ガイドライン",
+   "org": "厚生労働省",
+   "of": 10,
+   "hits": 3
+  }
+ ],
+ "sources": {
+  "aiakos.co.jp": "peer",
+  "apokul.jp": "peer",
+  "cl-mirai-lab.doctorsfile.jp": "portal",
+  "clius.jp": "peer",
+  "cotocellar.com": "media",
+  "developers.google.com": "peer",
+  "fdoc.jp": "portal",
+  "forusers.net": "peer",
+  "go-ssa.com": "peer",
+  "jmap.jp": "review",
+  "kanazawa-homepage.jp": "peer",
+  "medical-reserve.co.jp": "peer",
+  "medicalcenterjp.com": "media",
+  "medicalforest.co.jp": "peer",
+  "mhlw.go.jp": "public",
+  "mychoice.co.jp": "peer",
+  "nature-company.com": "peer",
+  "okayama-consulting.net": "peer",
+  "paraworks.jp": "peer",
+  "phchd.com": "peer",
+  "prtimes.jp": "media",
+  "support.google.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 8,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 2,
+  "専門家への相談": 1
+ },
+ "chars": 18073,
+ "claims": [
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、厚生労働省の資料にある「医療法」に触れたものは0件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、厚生労働省の資料にある「医療広告ガイドライン」に触れたものは3件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は1件、進め方の手順は2件でした。",
+  "当社は2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を聞き、答え10件を数えました。10件の答えの出典に挙がったページは23件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが3件、ポータル・比較サイトが2件でした。"
+ ]
+}

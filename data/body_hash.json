@@ -264,7 +264,7 @@
 "modified": "2026-09-07"
 },
 "clinic-denwa-yoyaku-yarikata": {
-"hash": "26a29fb5973e725b69aa25bd401a1d80",
+"hash": "47b603d3a253b7714363a4b06fcd4225",
 "modified": "2026-09-13"
 },
 "clinic-dx-jirei": {
@@ -286,6 +286,10 @@
 "clinic-instagram-yarikata": {
 "hash": "209dc423da74f5d5259308db5b28fe12",
 "modified": "2026-09-12"
+},
+"clinic-kaigyou-shukyaku": {
+"hash": "60685d18cb266b9ce26b5a261fe6befd",
+"modified": "2026-11-16"
 },
 "clinic-kaigyou-shukyaku-junbi": {
 "hash": "42d1f35906de6214a082be5fe6f696e2",
@@ -312,7 +316,7 @@
 "modified": "2026-09-07"
 },
 "clinic-meo-taisaku": {
-"hash": "5d155b6a8cc6f6b024d0f9acee93d26d",
+"hash": "105bcb6ab58330e55a103991cc6366c1",
 "modified": "2026-08-31"
 },
 "clinic-seo-consulting-erabikata": {
@@ -332,7 +336,7 @@
 "modified": "2026-10-08"
 },
 "clinic-shukyaku-consaru-erabikata": {
-"hash": "45656403c27bed379671f6578728aad9",
+"hash": "8fa6be2170ea3c478db55a89a7f9614a",
 "modified": "2026-08-15"
 },
 "clinic-shukyaku-jirei": {
@@ -556,7 +560,7 @@
 "modified": "2026-08-28"
 },
 "kuchikomi-fuyasu-hoho": {
-"hash": "2e15212f38fe818da1baefd347be4456",
+"hash": "b65e784a6b210445309d6d54c94b750b",
 "modified": "2026-08-31"
 },
 "llmo-dairiten-boshu": {
