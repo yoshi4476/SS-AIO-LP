@@ -174,4 +174,4 @@ AI導入補助金の不採択理由は、書類不備・対象外要件という
 
 **不採択という結果は、事業内容そのものが否定されたわけではありません。**公募要領に沿ってチェックリスト化し、機械的に潰せる項目から手をつければ、同じ内容でも結果が変わる可能性は十分にあります。焦って「実質負担ゼロ」のような営業文句に飛びつくのではなく、書類と数字を1つずつ積み上げる地道な見直しこそが、再申請での採択への近道です。
 
-採択後にAI・ITツールを使いこなす段階では、集客の伸ばし方も課題になります。ツール選定と申請の基礎は[AI導入補助金のGビズID取得方法](https://ai.7senses.co.jp/ai-marketing/ai-hojokin-gbizid-shutoku/)、対象になりやすいAI活用の具体例は[AI導入補助金のAI活用事例5選](https://ai.7senses.co.jp/ai-marketing/ai-donyu-hojokin-jirei/)、導入後の集客の全体像は[AI集客の完全ガイド](https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/)で解説しています。
+採択後にAI・ITツールを使いこなす段階では、集客の伸ばし方も課題になります。ツール選定と申請の基礎は[AI導入補助金のGビズID取得方法](https://lp.7senses.co.jp/blog/ai-hojokin-gbizid-shutoku/)、対象になりやすいAI活用の具体例は[AI導入補助金のAI活用事例5選](https://lp.7senses.co.jp/blog/ai-donyu-hojokin-jirei/)、導入後の集客の全体像は[AI集客の完全ガイド](https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/)で解説しています。

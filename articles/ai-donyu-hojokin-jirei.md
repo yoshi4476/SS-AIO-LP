@@ -183,4 +183,4 @@ AI導入補助金でのAI活用は、公式に公表されている採択事例�
 
 AI導入補助金のAI活用事例は、生成AIチャットボットのような目立つツールに限らず、会計や見積書作成にAI機能が組み込まれたツールも含まれます。まずは自社の業務のうち「誰の・どの作業時間を・どれだけ減らしたいか」を1つ書き出し、それに合うAIツールとIT導入支援事業者を探すところから始めてください。
 
-補助金でAI・ITツールを導入したあとは、集客を伸ばす番です。AI検索時代の集客の全体像は[AI集客の完全ガイド](https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/)、ChatGPTなどAIチャット経由の集客活用法は[ChatGPT集客活用法](https://ai.7senses.co.jp/ai-marketing/chatgpt-shukyaku-katsuyo/)、検索とAI回答の両方で見つけてもらう基本は[AIO対策の5つの手順](https://ai.7senses.co.jp/aio/aio-taisaku-guide/)で解説しています。
+補助金でAI・ITツールを導入したあとは、集客を伸ばす番です。ChatGPTなどAIチャットの活用や、検索とAI回答の両方で見つけてもらう基本まで含めた全体像は[AI集客の完全ガイド](https://ai.7senses.co.jp/ai-marketing/ai-shukyaku-guide/)で解説しています。
