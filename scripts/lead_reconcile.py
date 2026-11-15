@@ -19,6 +19,7 @@ GA4 の件数は「その日の lead_capture / generate_lead のうち多い方�
 """
 import argparse
 import collections
+import re
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -175,16 +176,42 @@ def ledger_rows(start=None, end=None):
     if "rows" not in _LEDGER:
         import hub_sheets as H
         sid_of = _site_resolver()
-        rows = []
+        rows, resends = [], collections.Counter()
         for r in H.rows("問い合わせ", 14):
             d = _day(r[0])
             if d:
                 rows.append({"day": d.isoformat(), "sid": sid_of(str(r[1])) or "?", "type": str(r[2]).strip(),
                              "temp": str(r[12]).strip(), "route": str(r[11]).strip()})
+                resends.update(resend_days(d, str(r[9])))
         _LEDGER["rows"] = rows
+        _LEDGER["resends"] = resends
     s = start.isoformat() if start else ""
     e = end.isoformat() if end else "9999"
     return [x for x in _LEDGER["rows"] if s <= x["day"] <= e]
+
+
+# 受付（contact.hub.gs の leadSave_）は、同じメールから24時間以内の送信を新しい行にせず、前の行の「診断・詳細」に
+# 「MM/dd HH:mm 再送信(種別)」と書き足す。どのサイトから来たかは残らない。2026-11-13 に補助金からの送信が
+# コーポレートの行に書き足され、照合は「補助金に行が無い（メールにだけ届いた可能性）」と誤って要対応にした
+RESEND = re.compile(r"(\d\d)/(\d\d) \d\d:\d\d 再送信\(")
+
+
+def resend_days(row_day, note):
+    """行の「診断・詳細」の書き足しから、再送信の日（年は行の日付から。月が戻れば翌年）"""
+    out = []
+    for m, d in RESEND.findall(note or ""):
+        y = row_day.year + (1 if int(m) < row_day.month else 0)
+        try:
+            out.append(date(y, int(m), int(d)).isoformat())
+        except ValueError:
+            continue
+    return out
+
+
+def resends_by_day(start):
+    """日ごとの再送信の書き足しの数（照合用。どのサイトの送信かは分からない。台帳を読んだ後に呼ぶ）"""
+    s = start.isoformat()
+    return collections.Counter({d: n for d, n in _LEDGER.get("resends", {}).items() if d >= s})
 
 
 def browser_probes(start):
@@ -371,6 +398,7 @@ def main():
     print(f"■ フォーム送信（GA4）と問い合わせ台帳（{start}〜{end}）\n")
     # ブラウザからの疎通確認は GA4 の送信を出すが台帳に入らない。照合の前に GA4 の数から引く（台帳を読めた回だけ）
     probes = {}
+    resend = resends_by_day(start)
     if "rows" in _LEDGER:
         try:
             probes = browser_probes(start)
@@ -402,7 +430,12 @@ def main():
         print(f"  {cfg.get('name', sid)}: GA4 の送信 {sum(ga.values())}件（{len(ga)}日） / 台帳 {sum(led[sid].values())}行"
               + (f"（{consult_text(ledger_counts(ledger_rows(start), sid=sid))}）"
                  if led[sid] and "rows" in _LEDGER else ""))
-        for d in miss:
+        covered = [d for d in miss if resend[d] > 0]
+        for d in covered:
+            resend[d] -= 1
+            print(f"  （{cfg.get('name', sid)}: {d} の送信は、同じ人の別の行に「再送信」として書き足されています。"
+                  "同じメールから24時間以内の送信は受付が1行にまとめます）")
+        for d in [d for d in miss if d not in covered]:
             src = pages_on(getattr(ga4_by_day, "rows", []), d)
             where = f"（送信したページ: {src}）" if src else ""
             unknown = led.get("?", {}).get(d, 0)

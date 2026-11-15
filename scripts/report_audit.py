@@ -18,8 +18,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-# 「リード 10件」の「0件」を拾わないよう、0 の前に数字が無いことを見る
-ZERO_LEADS = re.compile(r"(?:CV|リード)[^。]{0,8}(?<![0-9０-９,，])[0０]\s*件")
+# 「リード 10件」の「0件」を拾わないよう、0 の前に数字が無いことを見る。
+# 「CV2件（前月0件）」の前月・前年の0件は比べる相手で誤記ではない（2026-11-15 の月次で AI集客ラボを止めた）
+ZERO_LEADS = re.compile(r"(?:CV|リード)(?:(?!前月|先月|前年|前回)[^。]){0,8}(?<![0-9０-９,，])[0０]\s*件")
 
 
 def pdf_text(path):
