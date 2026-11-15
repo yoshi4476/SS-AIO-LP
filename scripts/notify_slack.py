@@ -64,15 +64,15 @@ def unsendable(text):
     return ""
 
 
-# 情報の欄にあっても毎週送るもの。1位を狙う語の台帳の数字（key_queries.py --line）は、要対応の無い週も届ける
-# （2026-11-15 運用者の決定「毎週送る」）
-EVERY_WEEK = "1位を狙う語の台帳"
+# 情報の欄にあっても毎週送るもの。1位を狙う語の台帳の数字（key_queries.py --line）と、問い合わせの件数と目標
+# （lead_reconcile.py --week-line）は、要対応の無い週も届ける（2026-11-15 運用者の決定「毎週送る」「毎日問い合わせが来るように」）
+EVERY_WEEK = ("1位を狙う語の台帳", "問い合わせの件数（")
 
 
 def worth_sending(text, routine):
     """定時の工程なら、知らせることがあるときだけ送る（情報の欄より上だけを見る。台帳の数字は毎週送る）"""
     t = text or ""
-    return (not routine) or bool(NEEDS_ATTENTION.search(t.split(INFO_MARK, 1)[0])) or EVERY_WEEK in t
+    return (not routine) or bool(NEEDS_ATTENTION.search(t.split(INFO_MARK, 1)[0])) or any(w in t for w in EVERY_WEEK)
 
 
 def main():

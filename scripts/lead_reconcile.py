@@ -378,15 +378,46 @@ def ga4_source_label(source, medium):
     return ai or (f"他サイト（{s}）" if "." in s else s)
 
 
+# 目標は毎日1件の問い合わせ（2026-11-15 運用者「毎日問い合わせが来るようなレベルにして」）。毎週の知らせで、
+# 直近7日の件数を目標と先週と並べて出す（打ち手が効いたかを、作った担当の外の物差し＝台帳で見る）
+WEEK_TARGET = 7
+
+
+def week_line(today=None, rows=None):
+    """毎週の知らせの「情報:」の1行。直近7日（昨日まで）と、その前の7日の問い合わせの件数（台帳の相談・申し込み）"""
+    import sites as S
+    end = (today or date.today()) - timedelta(days=1)
+    start, pstart = end - timedelta(days=6), end - timedelta(days=13)
+    rows = rows if rows is not None else ledger_rows()
+    cur = ledger_counts(rows, start=start, end=end)
+    prev = ledger_counts(rows, start=pstart, end=start - timedelta(days=1))
+    per = []
+    for sid in sorted({x["sid"] for x in rows if start.isoformat() <= x["day"] <= end.isoformat()}):
+        c = ledger_counts(rows, sid=sid, start=start, end=end)
+        if c["consult"]:
+            name = S.public_id(sid) if sid != "?" else "サイト名不明"
+            per.append(f"{name} 相談{c['form']}・申し込み{c['apply']}")
+    return (f"情報: 問い合わせの件数（{start:%m/%d}〜{end:%m/%d}・目標は週{WEEK_TARGET}件＝毎日1件）: "
+            f"{cur['consult']}件（相談のフォーム {cur['form']}件・無料診断などの申し込み {cur['apply']}件。先週 {prev['consult']}件）"
+            + (f"／{'、'.join(per)}" if per else ""))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--days", type=int, default=28)
     ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--week-line", action="store_true", help="毎週の知らせの1行（直近7日の問い合わせの件数と目標）")
     ap.add_argument("--fix", action="store_true",
                     help="サイト名が（不明）の行に、その日 GA4 で送信があった1社の名前を入れる（1対1で合う日だけ）")
     a = ap.parse_args()
     if a.selftest:
         return selftest()
+    if a.week_line:
+        try:
+            print(week_line())
+        except Exception as e:                       # 台帳が読めない回は知らせの本文を止めず、読めなかったと書く
+            print(f"情報: 問い合わせの件数は、台帳を読めず出せませんでした（{type(e).__name__}）")
+        return 0
     import sites as S
     end = date.today() - timedelta(days=1)
     start = end - timedelta(days=a.days - 1)
