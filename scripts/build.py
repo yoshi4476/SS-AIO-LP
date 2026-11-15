@@ -2555,10 +2555,12 @@ def main():
     import editorial_review as _ER
     _reviews = _ER.load()
     _new = [m["slug"] for m, _ in rendered if _known is not None and m["slug"] not in _known]
-    _corpus = None
+    _corpus = _cl_corpus = None
     if _new:
+        import cross_links as _CL
         import scaled_guard as _SG
         _corpus = _SG.corpus()
+        _cl_corpus = _CL.corpus()
     for meta, url in rendered:
         # 「警告ゼロが公開条件」を実際に守らせる。ただし止めるのは未公開の記事だけ。
         # 公開済みを後から取り下げると、取れている順位まで失う
@@ -2566,6 +2568,8 @@ def main():
         is_new = _known is not None and meta["slug"] not in _known
         if is_new:
             issues += _SG.check(meta["slug"], _corpus)
+            # 本文のサイト間リンク（1記事1本・各サイト2割まで。2026-11-15 運用者の承認）
+            issues += _CL.check(meta["slug"], _cl_corpus)
         if is_new and not issues and not _ER.reviewed(meta["slug"], _reviews):
             # 品質の門は通ったが、監修の記録が無い。BLOCKED と分けるのは、救済の工程が
             # BLOCKED を「書き直す対象」として拾うため（監修待ちは書き直しても解けない）

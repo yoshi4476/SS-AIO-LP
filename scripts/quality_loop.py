@@ -441,8 +441,8 @@ def materials(site, slug):
     except Exception:  # noqa: BLE001  調査が読めなくても直しは続ける
         cs, url = [], ""
     for c in cs:
-        facts.append(f"- {c}（出典: 業種調査 {url}。調べ方の1文は記事に1回だけ書く。調べた会社の名前は変えない）")
-        allowed += [c, url]
+        facts.append(f"- {c}（出典: 業種調査{' ' + url if url else ''}。調べ方の1文は記事に1回だけ書く。調べた会社の名前は変えない）")
+        allowed += [c] + ([url] if url else [])
     # 主題に固有の公的資料（data/public_facts.json。一次情報で確かめた法令・公的機関の数字だけ）。材料に無い数字は
     # 直しで足すと検算で戻されるため、業種の題は自社の数字が無いと一次性が届かなかった（2026-11-09）
     try:

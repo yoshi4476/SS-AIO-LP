@@ -78,8 +78,15 @@ def load(path):
                       if len(s) >= 20}}
 
 
-def corpus(min_score=90):
-    """公開の対象になる全記事（3サイト共通）。サイトをまたいだ同型も量産の指紋になる"""
+def corpus(min_score=None):
+    """公開の対象になる全記事（全サイト。CI ではお客様の社の記事も非公開の置き場から articles/ に重なる）。
+    サイトをまたいだ同型も量産の指紋になる。
+
+    下限は公開の下限（rubric.PASS_TOTAL）と同じにする。2026-10-21 に公開の下限を90から85へ下げた後も
+    ここだけ90のままで、85〜89点で公開した記事（自社63本・お客様の社21本。2026-11-15）が比べる相手から外れていた"""
+    if min_score is None:
+        import rubric
+        min_score = rubric.PASS_TOTAL
     out = {}
     for p in sorted(ARTICLES.glob("*.md")):
         a = load(p)
@@ -92,6 +99,12 @@ def corpus(min_score=90):
         if sc >= min_score:
             out[a["slug"]] = a
     return out
+
+
+def name(slug):
+    """ログに出す記事の名前。お客様の社の記事は slug を出さない（CI のログは public。守秘）"""
+    import cross_links
+    return cross_links.name(slug)
 
 
 def jaccard(a, b):
@@ -114,7 +127,7 @@ def check(slug, arts=None):
     near = max(((jaccard(me["grams"], a["grams"]), s) for s, a in others.items()),
                default=(0.0, ""))
     if near[0] >= BLOCK_SIM:
-        issues.append(f"量産の指紋: 本文の{near[0]:.0%}が {near[1]} と重なる"
+        issues.append(f"量産の指紋: 本文の{near[0]:.0%}が {name(near[1])} と重なる"
                       f"（上限{BLOCK_SIM:.0%}。業種を入れ替えただけの同型にしない。"
                       "その業種・地域にしか無い事情と数字で書き分ける）")
     df = Counter()
@@ -139,7 +152,7 @@ def check(slug, arts=None):
 def report():
     arts = corpus()
     keys = sorted(arts)
-    print(f"■ 量産の指紋（公開対象 {len(keys)}本・3サイト合算）\n")
+    print(f"■ 量産の指紋（公開対象 {len(keys)}本・全サイト合算）\n")
     if len(keys) < 10:
         print("  記事が10本未満のため判定しません\nSCALED_OK=yes")
         return 0
@@ -153,12 +166,12 @@ def report():
     pairs.sort(reverse=True)
     print(f"  同型の組（本文の重なり{WARN_SIM:.0%}以上）: {len(pairs)}組")
     for j, a, b in pairs[:10]:
-        print(f"    {j:.0%} {a} ～ {b}")
+        print(f"    {j:.0%} {name(a)} ～ {name(b)}")
     if pairs:
         # 重なりが auto_merge.SCALED_MIN_SIM 以上の同じサイトの組は、週次の
         # auto_merge --scaled が自動で統合する（週2組）。人が書き分ける必要は無い
         bad.append(f"参考: 業種・地名を入れ替えただけの同型記事が{len(pairs)}組"
-                   f"（最大{pairs[0][0]:.0%}: {pairs[0][1]} ～ {pairs[0][2]}）。"
+                   f"（最大{pairs[0][0]:.0%}: {name(pairs[0][1])} ～ {name(pairs[0][2])}）。"
                    "同じサイトで重なり25%以上の組は自動で統合します（週2組）")
 
     df = Counter()

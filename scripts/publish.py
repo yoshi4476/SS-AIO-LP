@@ -2403,8 +2403,10 @@ def main():
     # 既にある同型の組を書き分ける修正すら出せなくなる。date だけで判定すると、
     # 配信済みの記事が後から書かれた記事との重なりで再配信を止められ続ける。
     # 監修の判定より先に見る（品質NGの記事を HELD にすると、書き直しに回らない）
+    import cross_links
     import scaled_guard
-    bad = scaled_guard.check(args.slug)
+    # 本文のサイト間リンクも同じ扱い（配信先にまだ無い記事だけ止める。2026-11-15 運用者の承認）
+    bad = scaled_guard.check(args.slug) + cross_links.check(args.slug)
     dest = None
     if bad and args.check and cfg["type"] != "self-static":
         # 配信先にあるかは鍵が無いと見られない。新しい記事として扱う（配信済みの直しは機械の配信で通る）

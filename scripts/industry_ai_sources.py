@@ -671,7 +671,10 @@ def for_site(site, title, keyword):
             if cs:
                 out += cs
                 url = url or f"https://ai.7senses.co.jp/research/{ind}-ai-sources/"
-        return out, url
+        # 調査ページは AI集客ラボにある。他のサイトの記事に URL を渡すと、毎回同じページへのサイト間リンクになる
+        # （コーポレートの35本が同じ調査ページへリンクしていた。2026-11-15）。上限に届いている間は数字だけ渡す
+        import cross_links
+        return out, (url if cross_links.room(site) else "")
     return for_article(title, keyword) if site == "ai-lab" else ([], "")
 
 

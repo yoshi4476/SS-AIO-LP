@@ -241,7 +241,7 @@ def main():
         import industry_ai_sources as IAS
         cs, url = IAS.for_site(site_id, "", kw)
         ym = lambda c: "{}-{:02d}".format(*map(int, re.search(r"(\d{4})年(\d{1,2})月", c).groups()))
-        picked = [{"claim": c, "source": f"当社の業種調査 {url}", "as_of": ym(c), "topic": []} for c in cs] + picked
+        picked = [{"claim": c, "source": f"当社の業種調査 {url}".strip(), "as_of": ym(c), "topic": []} for c in cs] + picked
 
     print(f"■ {site_id} で使える一次情報（記事に最低1つ入れること）")
     for f in picked:

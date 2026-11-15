@@ -111,6 +111,7 @@ CHECKS = [
     ("量産の指紋（同型記事・定型文・長さの偏り）", "scaled_guard.py",
      # 明細は先頭数行しか通知に載らない。組の一覧を拾うと肝心の「要対応」が押し出される
      re.compile(r"^要対応:")),
+    ("本文のサイト間リンク（1記事1本・各サイト2割まで）", "cross_links.py", re.compile(r"^要対応:")),
     ("SNS の鍵の期限（Threads・LinkedIn は60日）", "social_connect.py --check",
      re.compile(r"^要対応:")),
     # GitHub の定時は3〜8時間遅れるため、Cloudflare Worker が時刻どおりに起動している。止まると黙って遅れに戻る
@@ -260,7 +261,7 @@ CHECKS = [
 # 最初に同時に始めておく検査。遅く（2026-10-05 の週次で pace 774秒・サイト監査 187秒・量産の指紋 43秒・
 # KW重複 38秒）、どれも読むだけでファイルを書かない（ほかの検査の読む控えを書き換えない）ものに限る。
 # 書く検査（控え・台帳を更新するもの）をここに足すと、同時に動く検査と書き合う
-PARALLEL = {"pace.py", "seo_audit.py --live --all --external", "scaled_guard.py", "hub_client.py overlaps",
+PARALLEL = {"pace.py", "seo_audit.py --live --all --external", "scaled_guard.py", "cross_links.py", "hub_client.py overlaps",
             "log_leak_check.py --max-runs 1500", "log_leak_check.py --tracked",
             # 本番を約20ページ開くので2〜3分かかる。書くのは --screens を付けたときの写真だけ（週次では付けない）
             "browser_check.py"}
