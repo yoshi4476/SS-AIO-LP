@@ -27,6 +27,21 @@ def bigrams(text):
     return {t[i:i + 2] for i in range(len(t) - 1)} or {t}
 
 
+_HUBS = []
+
+
+def other_industry(a, b):
+    """2つの語・題が、別々の業種を名指ししているか（「歯科 AIO対策 費用」と「整骨院 AIO対策 費用」）。
+    業種ごとに記事を載せていく運用（2026-11-15 運用者「いろいろな業種を載せていく」）では、業種違いは
+    別の検索で食い合わない。文字の似かたは0.7前後になり、横断の検査が「重複のおそれ」と書く AI へ渡していた。
+    同じサイトの中の判定（kw_conflicts）は語のかたまりで見て、すでに業種違いを外している"""
+    import industry_hub as IH
+    if not _HUBS:
+        _HUBS.append(IH.load()[0])
+    x, y = IH.detect(a, a, _HUBS[0]), IH.detect(b, b, _HUBS[0])
+    return bool(x and y and x != y)
+
+
 def dice(a, b):
     """2つの文字列の文字バイグラムDice係数（0〜1。1が完全一致）"""
     x, y = bigrams(a), bigrams(b)
@@ -272,7 +287,7 @@ def cross_site_check():
             if a.get("site") == b.get("site"):
                 continue  # 同一サイト内は通常のカニバリ検査が担当する
             s = dice(a.get("keyword", ""), b.get("keyword", ""))
-            if s >= WARN:
+            if s >= WARN and not other_industry(a.get("keyword", ""), b.get("keyword", "")):
                 hits.append({"score": round(s, 2), "a": a, "b": b})
     hits.sort(key=lambda h: -h["score"])
 
@@ -288,7 +303,7 @@ def cross_site_check():
             if p.get("site") != q.get("site"):
                 continue
             s = dice(p.get("keyword", ""), q.get("keyword", ""))
-            if s >= WARN:
+            if s >= WARN and not other_industry(p.get("keyword", ""), q.get("keyword", "")):
                 same.append({"score": round(s, 2), "kw": p, "art": q})
     same.sort(key=lambda h: -h["score"])
     print(f"SAME_SITE_DUP_CHECK: 未着手KW {len(pending)}件 × 公開済み {len(published)}件")

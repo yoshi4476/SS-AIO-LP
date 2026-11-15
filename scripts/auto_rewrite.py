@@ -1984,6 +1984,14 @@ def _desc_of(text):
 TITLE_LOCK_DAYS = 28   # rewrite_rollback.DAYS と同じ。この間に題を変えると効いたか判定できない
 
 
+def body_changed(before, after):
+    """前書き（--- で囲んだ設定）を除いた本文が変わったか（空白の違いは見ない）"""
+    def body(t):
+        m = re.match(r"^---\s*\n.*?\n---\s*\n(.*)$", t or "", re.S)
+        return re.sub(r"\s+", " ", m.group(1) if m else (t or "")).strip()
+    return body(before) != body(after)
+
+
 def title_changes(log=None):
     """台帳から「タイトルを実際に変えた」記録を (slug, 日付) で返す"""
     out = []
@@ -2299,8 +2307,10 @@ def _apply_one(item, edited, orig):
     if p.read_text(encoding="utf-8-sig") == before[2]:
         return True, "変更なし（直す必要なしと判断）"
 
-    if kind == "fresh":
-        # 鮮度を更新した記事は dateModified も動かす（検算の前に書き、ビルドまで通す）
+    if kind == "fresh" and body_changed(before[2], p.read_text(encoding="utf-8-sig")):
+        # 鮮度を更新した記事は dateModified も動かす（検算の前に書き、ビルドまで通す）。
+        # 本文が同じで題・説明だけ変わった回は動かさない（鮮度の偽装になる。自社3サイトは build.py が戻すが、
+        # 別リポジトリの社（CONFLUX など）は publish.py が modified をそのまま渡すため、ここで止める。2026-11-15）
         t = p.read_text(encoding="utf-8-sig")
         today = time.strftime("%Y-%m-%d")
         t2 = re.sub(r"^modified:.*$", f"modified: {today}", t, count=1, flags=re.M) if re.search(r"^modified:", t, re.M) \

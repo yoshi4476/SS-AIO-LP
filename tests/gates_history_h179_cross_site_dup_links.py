@@ -129,3 +129,30 @@ def test_gates_are_wired():
     check("build.py が新しい記事に当てる", '_CL.check(meta["slug"], _cl_corpus)' in b, True)
     check("publish.py が配信の前に当てる", "cross_links.check(args.slug)" in p, True)
     check("週次の知らせ（findings）が呼ぶ", '"cross_links.py"' in f, True)
+
+
+def test_fresh_rewrite_moves_date_only_with_body():
+    """鮮度の書き直しで題・説明だけ変わった回に更新日を進めると、本文が同じなのに日付だけ新しくなる。
+    自社3サイトは build.py が戻すが、CONFLUX など別リポジトリの社は publish.py が modified をそのまま渡していた"""
+    import auto_rewrite as AR
+    print("\n■ 鮮度の書き直し: 本文が変わったときだけ更新日を進める")
+    a = "---\ntitle: 旧\nmodified: 2026-10-01\n---\n\n本文はこれです。\n"
+    b = "---\ntitle: 新しい題\nmodified: 2026-10-01\n---\n\n本文はこれです。\n"
+    c = "---\ntitle: 旧\nmodified: 2026-10-01\n---\n\n本文を書き足しました。\n"
+    check("題だけ変わった回は本文の変更と見なさない", AR.body_changed(a, b), False)
+    check("本文が変わった回は変更と見なす", AR.body_changed(a, c), True)
+    src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
+    check("鮮度の書き直しの日付の更新は本文の変更が条件", 'kind == "fresh" and body_changed(before[2]' in src, True)
+
+
+def test_industry_variants_are_not_cannibals():
+    """業種ごとに記事を載せていく運用では、業種違いは別の検索で食い合わない（2026-11-15 運用者）。
+    横断の検査とこれから書く語の検査が文字の似かた（0.7前後）だけで「重複のおそれ」と出していた"""
+    import cannibal_check as C
+    print("\n■ 食い合いの検査: 業種違いは重複のおそれにしない。同じ業種・業種なしの似た語は今までどおり")
+    check("歯科と整骨院の同じ語は業種違い", C.other_industry("歯科 AIO対策 費用", "整骨院 AIO対策 費用"), True)
+    check("工務店と不動産の同じ語は業種違い", C.other_industry("工務店 SEO対策 会社", "不動産 SEO対策 会社"), True)
+    check("業種の無い似た語は業種違いにしない（食い合いとして見る）", C.other_industry("AIO対策 費用", "AIO対策 費用 相場"), False)
+    check("同じ業種どうしは業種違いにしない", C.other_industry("歯科 AIO対策 費用", "歯科 AIO対策 会社"), False)
+    src = (ROOT / "scripts" / "cannibal_check.py").read_text(encoding="utf-8")
+    check("横断とこれから書く語の両方の検査で外す", src.count("and not other_industry("), 2)
