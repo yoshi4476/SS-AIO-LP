@@ -2253,7 +2253,7 @@ def build_extra_pages(all_metas):
             block = ('<div class="latest-block" data-cat="new"><div class="cat-head"><h2>ほかの探し方</h2></div>'
                      f'<ul class="hub-list">{links}</ul></div>')
             if "ほかの探し方" not in t and '<footer class="site-footer">' in t:
-                t = t.replace('<footer class="site-footer">', f'<section class="wrap">{block}</section>\n<footer class="site-footer">', 1)
+                t = t.replace('<footer class="site-footer">', f'<section class="section">{block}</section>\n<footer class="site-footer">', 1)
                 idx.write_text(t, encoding="utf-8", newline="\n")
     # 診断の自動返信が読む「弱い項目 → まず読む記事」（管制塔の GAS が UrlFetch で取る）
     reco = {}
