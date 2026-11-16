@@ -452,6 +452,20 @@ def _answers_text(part):
         for a in part)
 
 
+# 記事ごとの問いの答えは「本記事」「この記事」と書かれやすい。一次情報はサイトのどの記事にも入るので、別の記事では
+# 事実と違う文になる（2026-11-16 に22件が「本記事の論点5問を Gemini に聞いた」のまま登録された）。記事の題に置き換える
+THIS_ARTICLE = re.compile(r"(?:当社の)?(?:本記事|この記事|同記事|当記事)")
+
+
+def _name_article(text, a, titles):
+    """「本記事」を記事の題に置き換えた文。記事の行でなく題が分からなければ None（保留）"""
+    if not THIS_ARTICLE.search(text):
+        return text
+    key = str(a.get("key") or "")
+    title = titles().get(key.split(":")[1]) if key.startswith("req:") else None
+    return THIS_ARTICLE.sub(f"当社の記事「{title}」", text) if title else None
+
+
 # 下書きの印（2026-11-16 に記録から作った案・推定・仮の値に付けた）。印が残る行は、仮の年月・業種・件数で組んだ事例の文が
 # 「要確認」を抜いても実際の事例に読めるので、AI に渡さず止める。運用者が実際の値に直して印を消した行だけ登録する
 DRAFT_MARK = re.compile(r"【案】|（(?:仮|推定)・要確認）")
@@ -515,6 +529,12 @@ def plan(site, answers, ask=None):
             for i, c in facts] + [("体験", t) for t in exps]
     claims = dict(olds)
     out_f, out_e = [], []
+    cache = {}
+
+    def titles():
+        if "t" not in cache:
+            cache["t"] = {k: v[0] for k, v in _articles(site).items()}
+        return cache["t"]
     items = ([("fact", it, "claim") for it in got["facts"]] + [("upd", it, "claim") for it in got["updates"]]
              + [("exp", it, "text") for it in got["experiences"]])
     for kind, it, field in items:
@@ -523,6 +543,12 @@ def plan(site, answers, ask=None):
         text = str(it.get(field) or "").strip()
         if not a or n in clash or not text:
             continue
+        named = _name_article(text, a, titles)
+        if named is None:
+            held.append((n, f"どの記事か分からない：文に「本記事」「この記事」が残るが、記事の行ではない: {text[:60]}"))
+            continue
+        if named != text:
+            text, it = named, dict(it, **{field: named})
         if _ledger(a):
             held.append((n, f"重複：1冊の台帳（{_ledger(a)}）の記録の書き写し・計算（その記録は工程がすでに使っている）: {text[:60]}"))
             continue

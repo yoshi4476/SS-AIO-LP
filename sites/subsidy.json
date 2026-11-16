@@ -229,7 +229,9 @@
     "subsidy-vendor",
     "founded",
     "dataset-keiri-*",
-    "subsidy-calc-*"
+    "subsidy-calc-*",
+    "sub-*",
+    "subsidy-m*"
   ],
   "kw_same": [
     [
