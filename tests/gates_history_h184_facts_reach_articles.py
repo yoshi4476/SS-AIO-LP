@@ -49,3 +49,16 @@ def test_sheet_names_the_article():
     reply = json.dumps({"facts": [{"no": "1", "claim": "当社が本記事の論点を5問聞き、3件で出典に挙がりました。"}]}, ensure_ascii=False)
     f, _e, held = M.plan("ai-lab", [base], ask=lambda *_: reply)
     check("plan: 記事の行でない「本記事」の文は登録せず保留", (f, [w.split("：")[0] for _, w in held]), ([], ["どの記事か分からない"]))
+
+
+def test_refill_keeps_the_original_claim():
+    import material_sheet as M
+    print("\n■ 質問シート: 一次情報の補いは元の文に足す（足す文だけで元の数字を消さない）")
+    base = {"no": "1", "key": "fact:meo-3200", "item": "一次情報の補い（記事9本で使用）", "period": "", "count": "", "ok": "可",
+            "target": "", "question": "q", "answer": "案件の一覧表で数えた"}
+    reply = json.dumps({"facts": [{"no": "1", "claim": "件数は案件の一覧表で数えました。"}]}, ensure_ascii=False)
+    f, _e, held = M.plan("ai-lab", [base], ask=lambda *_: reply)
+    claim = f[0]["claim"] if f else ""
+    check("悪い例: 足す文だけが返っても、元の数字（3,200・2,000）と足した文の両方が残る",
+          ("3,200" in claim, "2,000" in claim, claim.endswith("件数は案件の一覧表で数えました。"), f[0].get("replaces") if f else None),
+          (True, True, True, "meo-3200"))

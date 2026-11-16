@@ -580,8 +580,14 @@ def plan(site, answers, ask=None):
         elif kind == "fact" and _refill(a["key"]):
             # 補い・更新は元の一次情報を書き換える（同じ事実を2つ並べない）。更新は時点も新しくする
             it = dict(it, replaces=_refill(a["key"]), updated=a["key"].startswith("upd:"))
+            base = dict(facts).get(it["replaces"], "").rstrip()
+            if base and not it["updated"] and not _core(base) <= _core(text):
+                # 補いは元の文に足すもの。claude が足す文だけを返すと、元の数字ごと消える
+                # （2026-11-16 に「MEOの運用2,000件以上」などの5件が「件数は案件の一覧表で数えました。」だけになった）
+                text = base + ("" if base.endswith("。") else "。") + text
+                it = dict(it, **{field: text})
             against = [(it["replaces"], claims.get(it["replaces"], ""))]
-            grow = len(dict(facts).get(it["replaces"], ""))
+            grow = len(base)
         if kind == "exp" and str(it.get("key") or "") not in text:
             held.append((n, f"体験の目印の語が文に無い：登録しません: {text[:60]}"))
             continue
