@@ -49,6 +49,13 @@ def test_category_of_and_brief():
           'if cfg.get("category_rotate") and nxt.get("category") in (cfg.get("categories") or {}):' in src, True)
 
 
+def test_client_does_not_write_without_ledger_keyword():
+    print("\n■ 記事の枠: お客様の社は、台帳に書ける語が無い日は書かない（AI が自分で題を決めない）")
+    wf = (ROOT / ".github" / "workflows" / "pipeline-multi.yml").read_text(encoding="utf-8")
+    check("執筆前の食い合いの段で、お客様の社（quiet）の KW_GATE=skip は止める",
+          'if [ "${{ steps.site.outputs.quiet }}" = "yes" ] && echo "$out" | grep -q "KW_GATE=skip"; then' in wf, True)
+
+
 def test_without_rotate_is_unchanged():
     print("\n■ 次に書く語: 順に回す印の無い社は、今までどおり台帳の先頭")
     todo = [_row("りんご 1"), _row("ぶどう 1")]
