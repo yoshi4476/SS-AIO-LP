@@ -452,6 +452,17 @@ def _answers_text(part):
         for a in part)
 
 
+# 下書きの印（2026-11-16 に記録から作った案・推定・仮の値に付けた）。印が残る行は、仮の年月・業種・件数で組んだ事例の文が
+# 「要確認」を抜いても実際の事例に読めるので、AI に渡さず止める。運用者が実際の値に直して印を消した行だけ登録する
+DRAFT_MARK = re.compile(r"【案】|（(?:仮|推定)・要確認）")
+
+
+def draft_mark(a):
+    """答え・時期・件数の欄に下書きの印が残っていれば、その印（無ければ空）"""
+    m = DRAFT_MARK.search(" ".join(str(a.get(k) or "") for k in ("answer", "period", "count")))
+    return m.group(0) if m else ""
+
+
 def plan(site, answers, ask=None):
     """登録する一次情報・体験と、保留にするもの [(番号, "分類：理由")]。分類は 不可・条件が未確認・お客様の声・結びつかない行・
     分からない・食い違い・答えに無い数字・重複・文にならなかった"""
@@ -466,6 +477,10 @@ def plan(site, answers, ask=None):
         ok, scope, why = permission(a["ok"], site)
         if not ok:
             held.append((a["no"], why))
+            continue
+        mark = draft_mark(a)
+        if mark:
+            held.append((a["no"], f"下書きの印：「{mark}」が残っている（実際の値に直して印を消すと登録する）"))
             continue
         use.append(dict(a, scope=scope))
     if not use:
