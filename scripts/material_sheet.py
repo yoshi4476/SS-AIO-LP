@@ -556,6 +556,11 @@ def plan(site, answers, ask=None):
         if bad:
             held.append((n, f"答えに無い数字：答えに無い数字が入ったので登録しません（{'・'.join(bad[:3])}）: {text[:60]}"))
             continue
+        import legal_claims
+        if legal_claims.find(text):
+            # 登録してから門で落ちていた（2026-11-16「当社は…6社を支援しました」）
+            held.append((n, f"表示の決まり：当社の採択率・支援社数・作成代行と読める文は載せない: {text[:60]}"))
+            continue
         if CAVEAT.search(text):
             held.append((n, f"条件が未確認：文に確認待ちの語が残った: {text[:60]}"))
             continue

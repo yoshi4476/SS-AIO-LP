@@ -472,7 +472,8 @@
     {
       "id": "corp-keihi",
       "sites": [
-        "corporate"
+        "corporate",
+        "subsidy"
       ],
       "topic": [
         "経費精算",
@@ -509,7 +510,8 @@
     {
       "id": "corp-jidouka",
       "sites": [
-        "corporate"
+        "corporate",
+        "subsidy"
       ],
       "topic": [
         "自動化",
@@ -528,7 +530,8 @@
     {
       "id": "corp-invoice",
       "sites": [
-        "corporate"
+        "corporate",
+        "subsidy"
       ],
       "topic": [
         "インボイス制度",
@@ -823,7 +826,8 @@
     {
       "id": "corporate-calc-80aa9a5822",
       "sites": [
-        "corporate"
+        "corporate",
+        "subsidy"
       ],
       "topic": [
         "自動化",
@@ -846,7 +850,8 @@
     {
       "id": "corporate-calc-61f748b21d",
       "sites": [
-        "corporate"
+        "corporate",
+        "subsidy"
       ],
       "topic": [
         "インボイス制度",
@@ -2839,7 +2844,8 @@
     {
       "id": "corporate-m20261116-45",
       "sites": [
-        "corporate"
+        "corporate",
+        "subsidy"
       ],
       "topic": [
         "補助金",
@@ -2855,13 +2861,14 @@
     {
       "id": "corporate-m20261116-49",
       "sites": [
-        "corporate"
+        "corporate",
+        "subsidy"
       ],
       "topic": [
         "補助金",
         "権限管理"
       ],
-      "claim": "そのうち12件で、導入の前に誰が会計ソフトにどこまで触れるかが決まっていませんでした。",
+      "claim": "会計ソフト・受発注ソフトを入れる補助金の申請30件（2022年〜2026年9月）のうち12件で、導入の前に誰が会計ソフトにどこまで触れるかが決まっていませんでした。",
       "source": "自社実績（質問シート 2026-11-16）",
       "as_of": "2026-11",
       "verifiable": true,
@@ -2901,7 +2908,8 @@
     {
       "id": "corporate-m20261116-52",
       "sites": [
-        "corporate"
+        "corporate",
+        "subsidy"
       ],
       "topic": [
         "給与計算",
@@ -2947,7 +2955,8 @@
     {
       "id": "corporate-m20261116-55",
       "sites": [
-        "corporate"
+        "corporate",
+        "subsidy"
       ],
       "topic": [
         "経理内製外注",
@@ -2994,7 +3003,8 @@
     {
       "id": "corporate-m20261116-58",
       "sites": [
-        "corporate"
+        "corporate",
+        "subsidy"
       ],
       "topic": [
         "開業",
@@ -3491,22 +3501,6 @@
       "verifiable": true,
       "period": "2026-08〜2026-10",
       "denominator": 30
-    },
-    {
-      "id": "ai-lab-m20261116-18",
-      "sites": [
-        "ai-lab"
-      ],
-      "topic": [
-        "工務店",
-        "支援件数"
-      ],
-      "claim": "当社は2026年10月までに工務店・リフォーム会社6社を支援しました。",
-      "source": "自社実績（質問シート 2026-11-16）",
-      "as_of": "2026-11",
-      "verifiable": true,
-      "period": "〜2026-10",
-      "denominator": 6
     },
     {
       "id": "ai-lab-m20261116-20",

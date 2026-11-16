@@ -231,7 +231,17 @@
     "dataset-keiri-*",
     "subsidy-calc-*",
     "sub-*",
-    "subsidy-m*"
+    "subsidy-m*",
+    "corp-keihi",
+    "corp-jidouka",
+    "corp-invoice",
+    "corporate-calc-80aa9a5822",
+    "corporate-calc-61f748b21d",
+    "corporate-m20261116-45",
+    "corporate-m20261116-49",
+    "corporate-m20261116-52",
+    "corporate-m20261116-55",
+    "corporate-m20261116-58"
   ],
   "kw_same": [
     [
