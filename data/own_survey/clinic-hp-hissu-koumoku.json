@@ -1,0 +1,124 @@
+{
+ "v": 2,
+ "slug": "clinic-hp-hissu-koumoku",
+ "ok": true,
+ "date": "2026-11-16",
+ "questions": [
+  "クリニック ホームページ 必須項目について教えてください",
+  "クリニック ホームページ 必須項目について、「クリニックのホームページに必須の項目とは」を教えてください",
+  "クリニック ホームページ 必須項目について、「なぜ今、クリニックのホームページに必須項目の整備が欠かせないのか」を教えてください",
+  "クリニック ホームページ 必須項目について、「必須項目が抜けていると起こる3つの問題」を教えてください",
+  "クリニック ホームページ 必須項目について、「クリニックのホームページに必須の6つの項目」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "クリニックのホームページに必須の項目とは",
+   "words": [
+    "必須",
+    "項目"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "なぜ今、クリニックのホームページに必須項目の整備が欠かせないのか",
+   "words": [
+    "整備"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "必須項目が抜けていると起こる3つの問題",
+   "words": [
+    "問題"
+   ],
+   "hits": 1,
+   "of": 8
+  },
+  {
+   "topic": "クリニックのホームページに必須の6つの項目",
+   "words": [
+    "必須",
+    "項目"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "医療広告ガイドラインで注意すべきNG表現",
+   "words": [
+    "医療広告ガイドライン",
+    "NG表現"
+   ],
+   "hits": 6,
+   "of": 10
+  },
+  {
+   "topic": "AI検索時代のクリニックホームページで見られるポイント",
+   "words": [
+    "AI検索時代"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "医療広告ガイドライン",
+   "org": "厚生労働省",
+   "of": 10,
+   "hits": 6
+  },
+  {
+   "term": "改正医療法",
+   "org": "厚生労働省",
+   "of": 10,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "ai.7senses.co.jp": "self",
+  "aplawjapan.com": "peer",
+  "az-mark.jp": "peer",
+  "bravemedica.co.jp": "peer",
+  "clius.jp": "peer",
+  "creative-pocket.co.jp": "peer",
+  "jcsoa.gr.jp": "peer",
+  "ks-m.co.jp": "media",
+  "laws.e-gov.go.jp": "public",
+  "lichtos.co.jp": "peer",
+  "links-hd.jp": "peer",
+  "medi.nichiigakkan.co.jp": "peer",
+  "medical-design.co.jp": "peer",
+  "medical.acsport.net": "peer",
+  "medict-dx.jp": "peer",
+  "mhlw.go.jp": "public",
+  "motoki-design.co.jp": "peer",
+  "news.365medical.or.jp": "media",
+  "nishikyo-medical.com": "peer",
+  "note.com": "video",
+  "paddle-ship.jp": "peer",
+  "riplewith.jp": "peer",
+  "yamanishiya.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 4,
+  "注意点・失敗・リスク": 9,
+  "進め方の手順": 0,
+  "専門家への相談": 0
+ },
+ "chars": 15067,
+ "claims": [
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、厚生労働省の資料にある「改正医療法」に触れたものは0件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、厚生労働省の資料にある「医療広告ガイドライン」に触れたものは6件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、進め方の手順は0件、専門家への相談は0件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは23件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが2件、動画・SNS・ブログが1件でした。"
+ ]
+}

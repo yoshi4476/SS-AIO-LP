@@ -186,5 +186,37 @@
     "rolled_back": false,
     "control_n": 23,
     "kind": "title"
+  },
+  "middle-office-backoffice-chigai@2026-10-12": {
+    "ratio": 0.38,
+    "control": 0.816,
+    "pos_gain": 4.886166007905139,
+    "rolled_back": false,
+    "control_n": 18,
+    "kind": "title",
+    "measure": "クリック率",
+    "verdict": "判定できない",
+    "clk": [
+      0,
+      0
+    ],
+    "exp_clk": 0.76,
+    "ctr": [
+      0.0,
+      0.0
+    ],
+    "ctrl_ctr": [
+      0.77,
+      2.5
+    ],
+    "unknown": true
+  },
+  "ai-hojokin-chakkin-itsu@2026-10-13": {
+    "ratio": 0.43,
+    "control": 0.21,
+    "pos_gain": -0.12698412698412742,
+    "rolled_back": false,
+    "control_n": 44,
+    "kind": "stuck"
   }
 }

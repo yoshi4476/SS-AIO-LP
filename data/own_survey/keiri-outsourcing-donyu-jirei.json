@@ -1,0 +1,122 @@
+{
+ "v": 2,
+ "slug": "keiri-outsourcing-donyu-jirei",
+ "ok": true,
+ "date": "2026-11-16",
+ "questions": [
+  "経理アウトソーシング 導入事例について教えてください",
+  "経理アウトソーシング 導入事例について、「経理アウトソーシング導入事例の全体像｜よくある3つのパターン」を教えてください",
+  "経理アウトソーシング 導入事例について、「パターン1: 記帳・請求書発行のみを委託した事例」を教えてください",
+  "経理アウトソーシング 導入事例について、「パターン2: 月次決算まで範囲を広げて委託した事例」を教えてください",
+  "経理アウトソーシング 導入事例について、「パターン3: 経理担当者の退職をきっかけに全面委託した事例」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "経理アウトソーシング導入事例の全体像｜よくある3つのパターン",
+   "words": [
+    "パターン",
+    "全体像"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "パターン1: 記帳・請求書発行のみを委託した事例",
+   "words": [
+    "請求書発行",
+    "記帳"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "パターン2: 月次決算まで範囲を広げて委託した事例",
+   "words": [
+    "範囲"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "パターン3: 経理担当者の退職をきっかけに全面委託した事例",
+   "words": [
+    "経理担当者",
+    "退職"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "3つの事例に共通する導入前のつまずきポイント",
+   "words": [
+    "導入前"
+   ],
+   "hits": 4,
+   "of": 5
+  },
+  {
+   "topic": "自社に近い事例を選ぶための3つの確認軸",
+   "words": [
+    "確認軸"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "事例から学ぶ、失敗しやすい導入の進め方",
+   "words": [
+    "導入"
+   ],
+   "hits": 5,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "3s-bpo.jp": "peer",
+  "beepo.co.jp": "peer",
+  "bricks-outsourcing.com": "peer",
+  "cashmo.jp": "peer",
+  "catalog.monex.co.jp": "media",
+  "cyber-crew.jp": "peer",
+  "freee.co.jp": "peer",
+  "go.taxita.com": "portal",
+  "ideaconsulting.net": "peer",
+  "ikpi.co.jp": "peer",
+  "it-trend.jp": "portal",
+  "keiri-osaka.jp": "peer",
+  "keiri-partner.com": "peer",
+  "keiri-support.com": "peer",
+  "keiri.harbors-inc.com": "peer",
+  "keirijimu.jp": "peer",
+  "klp-bsc.jp": "peer",
+  "marunagekanri.com": "peer",
+  "mirai-keiri.co.jp": "peer",
+  "noc-net.co.jp": "peer",
+  "r25.jp": "peer",
+  "remoba.biz": "portal",
+  "rpatool-howto.com": "peer",
+  "strada-group.jp": "peer",
+  "total-keiridaikou.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yokohama-bo-support.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 5,
+  "注意点・失敗・リスク": 4,
+  "進め方の手順": 4,
+  "専門家への相談": 2
+ },
+ "chars": 10105,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え5件のうち、『確認軸』に触れたものは0件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え4件のうち、『範囲』に触れたものは2件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは費用の金額（◯円）は2件、専門家への相談は2件、注意点・失敗・リスクは4件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは27件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件、ポータル・比較サイトが3件でした。"
+ ]
+}

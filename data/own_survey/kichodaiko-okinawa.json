@@ -1,0 +1,102 @@
+{
+ "v": 2,
+ "slug": "kichodaiko-okinawa",
+ "ok": true,
+ "date": "2026-11-16",
+ "questions": [
+  "記帳代行 沖縄について教えてください",
+  "記帳代行 沖縄について、「沖縄で記帳を頼める先は3つに分かれる」を教えてください",
+  "記帳代行 沖縄について、「離島の会社は「資料の形」で依頼先が決まる」を教えてください",
+  "記帳代行 沖縄について、「沖縄県最低賃金から見る、自社で記帳する費用」を教えてください",
+  "記帳代行 沖縄について、「依頼先を絞る順番」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "沖縄で記帳を頼める先は3つに分かれる",
+   "words": [
+    "記帳"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "離島の会社は「資料の形」で依頼先が決まる",
+   "words": [
+    "依頼先",
+    "離島",
+    "資料"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "依頼先を絞る順番",
+   "words": [
+    "依頼先",
+    "順番"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "沖縄の中小企業でよくある失敗と避け方",
+   "words": [
+    "中小企業"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "頼んだ後の変化と、急がなくてよい会社",
+   "words": [
+    "変化"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "all-senmonka.jp": "portal",
+  "amagasakishi-kaikeizimusyo-support550.com": "peer",
+  "biz.moneyforward.com": "peer",
+  "freee.co.jp": "peer",
+  "horishita.com": "peer",
+  "iraminazei.com": "peer",
+  "jwarm.net": "peer",
+  "kaikei-kobayashi.com": "peer",
+  "kohagura-zei.com": "peer",
+  "marunagekanri.com": "peer",
+  "nago-plus.com": "peer",
+  "okiben.org": "peer",
+  "osakacpa.com": "peer",
+  "ows-shimamura.com": "peer",
+  "search-advisors.freee.co.jp": "portal",
+  "sjoffice.jp": "peer",
+  "syachi9.black": "peer",
+  "taxmind.blog": "peer",
+  "town.yaese.lg.jp": "public",
+  "vertexaisearch.cloud.google.com": "peer",
+  "xn--mnq381gqlg5nl.jp": "peer",
+  "yosizato.com": "peer",
+  "zeirishi.yayoi-kk.co.jp": "portal"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 2,
+  "専門家への相談": 5
+ },
+ "chars": 10019,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え5件のうち、『変化』に触れたものは0件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え5件のうち、『中小企業』に触れたものは1件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは進め方の手順は2件、費用の金額（◯円）は3件、期間（◯か月・◯日など）は3件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは23件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが0件、ポータル・比較サイトが3件でした。"
+ ]
+}

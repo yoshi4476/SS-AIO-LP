@@ -1,0 +1,118 @@
+{
+ "v": 2,
+ "slug": "shika-iin-shukyaku",
+ "ok": true,
+ "date": "2026-11-16",
+ "questions": [
+  "歯科 ai 集客について教えてください",
+  "歯科 ai 集客について、「歯科医院の集客とは？新患獲得の3つのチャネル」を教えてください",
+  "歯科 ai 集客について、「歯科医院の集客でMEO・口コミが重要な理由」を教えてください",
+  "歯科 ai 集客について、「歯科医院の集客を伸ばす5つの基本施策」を教えてください",
+  "歯科 ai 集客について、「自由診療（矯正・インプラント・審美歯科）の集客で差をつける方法」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "歯科医院の集客とは？新患獲得の3つのチャネル",
+   "words": [
+    "新患獲得",
+    "チャネル"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "歯科医院の集客でMEO・口コミが重要な理由",
+   "words": [
+    "MEO",
+    "口コミ"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "歯科医院の集客を伸ばす5つの基本施策",
+   "words": [
+    "基本施策"
+   ],
+   "hits": 0,
+   "of": 8
+  },
+  {
+   "topic": "自由診療（矯正・インプラント・審美歯科）の集客で差をつける方法",
+   "words": [
+    "インプラント",
+    "自由診療",
+    "矯正"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "歯科医院の集客で注意すべき医療広告ガイドラインのNG表現",
+   "words": [
+    "医療広告ガイドライン",
+    "NG表現"
+   ],
+   "hits": 2,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "医療広告ガイドライン",
+   "org": "厚生労働省",
+   "of": 10,
+   "hits": 2
+  }
+ ],
+ "sources": {
+  "academy.doctorbook.jp": "peer",
+  "ai.7senses.co.jp": "self",
+  "akibare-dental.jp": "peer",
+  "ante.co.jp": "peer",
+  "branding-t.co.jp": "peer",
+  "call.omnidatabank.jp": "peer",
+  "climake.jp": "peer",
+  "consuldent.jp": "peer",
+  "dental-branding.jp": "peer",
+  "dentalclinic.bizly.jp": "peer",
+  "developers.google.com": "peer",
+  "funaisoken.co.jp": "peer",
+  "gov-online.go.jp": "public",
+  "lany.co.jp": "peer",
+  "lapis-keiei.com": "peer",
+  "leadplus.co.jp": "media",
+  "mdcshigoto.com": "peer",
+  "mhlw.go.jp": "public",
+  "mic.jp": "peer",
+  "ppc.go.jp": "public",
+  "prtimes.jp": "media",
+  "seo-best.jp": "peer",
+  "service.medical-net.com": "peer",
+  "shikaweb.net": "peer",
+  "shopowner-support.net": "media",
+  "support.google.com": "peer",
+  "takara-dental.jp": "peer",
+  "umy-game.com": "peer",
+  "youtube.com": "video",
+  "zeromedical.tv": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 6,
+  "進め方の手順": 3,
+  "専門家への相談": 0
+ },
+ "chars": 17544,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、厚生労働省の資料にある「医療広告ガイドライン」に触れたものは2件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は0件、期間（◯か月・◯日など）は2件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは30件で、公的機関・学会・業界団体が3件、ニュース・メディア・まとめが3件、動画・SNS・ブログが1件でした。"
+ ]
+}

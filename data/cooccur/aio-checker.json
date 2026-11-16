@@ -11,16 +11,16 @@
  "missing": [
   "aisearchmap",
   "bringritera",
-  "業種別ランクイン事例",
-  "マーチャントセンター",
   "writesonic",
-  "オリジナルコンテンツ",
-  "ディープクロール解析",
-  "サジェストキーワード",
-  "keywordmap",
   "seomonitor",
-  "計測チェックツール",
-  "プラットフォーム側"
+  "keywordmap",
+  "サジェストキーワード",
+  "オリジナルコンテンツ",
+  "業種別ランクイン事例",
+  "ディープクロール解析",
+  "trackerly",
+  "canonical",
+  "overviews"
  ],
- "covered": 0.17
+ "covered": 0.18
 }

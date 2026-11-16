@@ -639,7 +639,7 @@
       "ai-lab": {
         "queries": 5,
         "asked": 5,
-        "cited": 4,
+        "cited": 5,
         "items": [
           {
             "kw": "aioツール",
@@ -664,7 +664,7 @@
                 ]
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
                 "cited": true,
@@ -742,47 +742,6 @@
             "answered": true
           },
           {
-            "kw": "aio 診断",
-            "engines": {
-              "ChatGPT": {
-                "cited": false,
-                "ours": [],
-                "sources": []
-              },
-              "Gemini": {
-                "cited": false,
-                "ours": [],
-                "sources": [
-                  "adv.tokyo-np.co.jp",
-                  "aioscore.jp",
-                  "atoz-design.jp",
-                  "coosy.co.jp"
-                ]
-              },
-              "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
-              },
-              "Claude": {
-                "cited": true,
-                "ours": [
-                  "https://ai.7senses.co.jp/diagnosis/aio/"
-                ],
-                "sources": [
-                  "0120.co.jp",
-                  "ai-hack.co.jp",
-                  "ai.7senses.co.jp",
-                  "aio-check.ai",
-                  "aio.solgeo.co.jp",
-                  "aiogeoscan.com",
-                  "aiosoken.com",
-                  "allweb-consulting.co.jp"
-                ]
-              }
-            },
-            "cited": true,
-            "answered": true
-          },
-          {
             "kw": "aio チェック",
             "engines": {
               "ChatGPT": {
@@ -802,7 +761,7 @@
                 ]
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
                 "cited": true,
@@ -825,46 +784,88 @@
             "answered": true
           },
           {
-            "kw": "歯科 ai 集客",
+            "kw": "aio 診断",
             "engines": {
               "ChatGPT": {
                 "cited": false,
                 "ours": [],
-                "sources": [
-                  "akabanedai-dental.com",
-                  "atpress.ne.jp",
-                  "dentalbase.ai",
-                  "dentshift.jp",
-                  "dsh-ai.marta-ai.jp",
-                  "habot.jp",
-                  "haris.ne.jp",
-                  "recetta.jp"
-                ]
+                "sources": []
               },
               "Gemini": {
                 "cited": false,
                 "ours": [],
-                "sources": []
+                "sources": [
+                  "adv.tokyo-np.co.jp",
+                  "aioscore.jp",
+                  "atoz-design.jp",
+                  "coosy.co.jp"
+                ]
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
-                "cited": false,
-                "ours": [],
+                "cited": true,
+                "ours": [
+                  "https://ai.7senses.co.jp/diagnosis/aio/"
+                ],
                 "sources": [
-                  "adcal-inc.com",
-                  "ami-h.com",
-                  "atoz-design.jp",
-                  "bridge-world.jp",
-                  "dental-branding.jp",
-                  "digital-reclame.co.jp",
-                  "elephantbrain-clinic.com",
-                  "grill.co.jp"
+                  "0120.co.jp",
+                  "ai-hack.co.jp",
+                  "ai.7senses.co.jp",
+                  "aio-check.ai",
+                  "aio.solgeo.co.jp",
+                  "aiogeoscan.com",
+                  "aiosoken.com",
+                  "allweb-consulting.co.jp"
                 ]
               }
             },
-            "cited": false,
+            "cited": true,
+            "answered": true
+          },
+          {
+            "kw": "無料aioチェック",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "adv.tokyo-np.co.jp",
+                  "ai-tool.userlocal.jp",
+                  "aio-check.ai",
+                  "aio.archcorp.jp",
+                  "m-lb.jp",
+                  "prtimes.jp",
+                  "white-link.com"
+                ]
+              },
+              "Perplexity": {
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+              },
+              "Claude": {
+                "cited": true,
+                "ours": [
+                  "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/"
+                ],
+                "sources": [
+                  "0120.co.jp",
+                  "ai-search.techsuite.co.jp",
+                  "ai.7senses.co.jp",
+                  "aio-check.ai",
+                  "aiopulse.jp",
+                  "allweb-consulting.co.jp",
+                  "btobmarketing.tmedia.co.jp",
+                  "devo.jp"
+                ]
+              }
+            },
+            "cited": true,
             "answered": true
           }
         ]
@@ -933,7 +934,7 @@
                 "sources": []
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
                 "cited": false,
@@ -963,7 +964,7 @@
                 "sources": []
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
                 "cited": false,
@@ -993,7 +994,7 @@
                 "sources": []
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
                 "cited": false,
@@ -1011,7 +1012,7 @@
             "answered": true
           },
           {
-            "kw": "請求書 三つ折り",
+            "kw": "経理代行 料金表",
             "engines": {
               "ChatGPT": {
                 "cited": false,
@@ -1021,21 +1022,27 @@
               "Gemini": {
                 "cited": false,
                 "ours": [],
-                "sources": []
+                "sources": [
+                  "anshin-keiri.eiwa-gr.jp",
+                  "cloudsolution.co.jp",
+                  "cyber-crew.jp",
+                  "go.chatwork.com",
+                  "help-you.me",
+                  "osakacpa.com",
+                  "persol-bd.co.jp",
+                  "vertexaisearch.cloud.google.com"
+                ]
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
                 "cited": false,
                 "ours": [],
                 "sources": [
-                  "biz.moneyforward.com",
-                  "del-f.co.jp",
-                  "futo-tatujin.com",
-                  "geki-fu.com",
-                  "media.invoice.ne.jp",
-                  "templex.jp"
+                  "4649.ai",
+                  "persol-bd.co.jp",
+                  "wheat-biz.com"
                 ]
               }
             },
@@ -1047,7 +1054,7 @@
       "subsidy": {
         "queries": 5,
         "asked": 5,
-        "cited": 3,
+        "cited": 1,
         "items": [
           {
             "kw": "農業補助金 返済不要",
@@ -1075,7 +1082,7 @@
                 ]
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
                 "cited": false,
@@ -1123,7 +1130,7 @@
                 ]
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
                 "cited": false,
@@ -1197,97 +1204,80 @@
             "answered": true
           },
           {
-            "kw": "ものづくり 商業 サービス生産性向上促進補助金 運送業",
+            "kw": "ベンダー登録とは",
             "engines": {
               "ChatGPT": {
                 "cited": false,
                 "ours": [],
-                "sources": [
-                  "labour-saving.smrj.go.jp",
-                  "ofsi.or.jp"
-                ]
+                "sources": []
               },
               "Gemini": {
                 "cited": false,
                 "ours": [],
-                "sources": [
-                  "connect.tohknet.co.jp",
-                  "core.co.jp",
-                  "hojokin-office.essencimo.co.jp",
-                  "ichidokiri.co.jp",
-                  "inu-llc.co.jp",
-                  "leon-strategy.com",
-                  "mono-support.com",
-                  "oogata-hojokin.jp"
-                ]
+                "sources": []
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
-                "cited": true,
-                "ours": [
-                  "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/"
-                ],
+                "cited": false,
+                "ours": [],
                 "sources": [
-                  "app-logi.co.jp",
-                  "hojokin-dx.com",
+                  "ardent.jp",
+                  "bcompany.co.jp",
                   "hojokin-office.essencimo.co.jp",
-                  "hojyokin-portal.jp",
-                  "ichidokiri.co.jp",
-                  "inu-llc.co.jp",
-                  "lp.7senses.co.jp",
-                  "portal.monodukuri-hojo.jp"
+                  "hojyokin-migiude.info",
+                  "ja.helpleft.com",
+                  "japan-finance.jp",
+                  "job-q.me",
+                  "planbase.co.jp"
                 ]
               }
             },
-            "cited": true,
+            "cited": false,
             "answered": true
           },
           {
-            "kw": "新事業進出 ものづくり補助金 運送業",
+            "kw": "電子カルテ 補助金 2024",
             "engines": {
               "ChatGPT": {
                 "cited": false,
                 "ours": [],
-                "sources": [
-                  "ichidokiri.co.jp",
-                  "leon-strategy.com",
-                  "shinnavi.jp"
-                ]
+                "sources": []
               },
               "Gemini": {
                 "cited": false,
                 "ours": [],
                 "sources": [
-                  "gekiyasuaikomon.jp",
-                  "leon-strategy.com",
-                  "mono-support.com",
-                  "sougyouyushi-support.com",
-                  "v-spirits.com"
+                  "365medical.or.jp",
+                  "hojokin-office.essencimo.co.jp",
+                  "hojyokin-portal.jp",
+                  "hokeniryo.metro.tokyo.lg.jp",
+                  "iryohokenjyoho.service-now.com",
+                  "medicaltech-news.com",
+                  "mhlw.go.jp",
+                  "mti.co.jp"
                 ]
               },
               "Perplexity": {
-                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. A"
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
-                "cited": true,
-                "ours": [
-                  "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/"
-                ],
+                "cited": false,
+                "ours": [],
                 "sources": [
-                  "gyoseishoshi.work",
+                  "biz.stayway.jp",
+                  "clinics-cloud.com",
+                  "clipla.jp",
+                  "fp-soken.or.jp",
+                  "healthcare.jbcc.co.jp",
                   "hojokin-office.essencimo.co.jp",
-                  "ichidokiri.co.jp",
-                  "inu-llc.co.jp",
-                  "kojimachi-capital.com",
-                  "lp.7senses.co.jp",
-                  "mi-souken.com",
-                  "shinjigyo-hojokin.jp"
+                  "hojokinnavi.jp",
+                  "hpdx.or.jp"
                 ]
               }
             },
-            "cited": true,
+            "cited": false,
             "answered": true
           }
         ]

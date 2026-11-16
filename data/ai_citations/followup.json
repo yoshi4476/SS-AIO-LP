@@ -1960,10 +1960,273 @@
     }
    },
    "cited": false
+  },
+  "chusho-kigyocho-hojokin": {
+   "checked": "2026-11-16",
+   "site": "subsidy",
+   "kw": "中小企業庁 補助金",
+   "published": "2026-10-07",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "chuokai-kyoto.or.jp",
+      "maido.or.jp",
+      "pref.kyoto.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "hekishin.jp",
+      "helptech.jp",
+      "hojokin-agent.jp",
+      "hojyokin-portal.jp",
+      "mirasapo-plus.go.jp",
+      "vertexaisearch.cloud.google.com",
+      "yamato-hojokin.com",
+      "youtube.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "chusho.meti.go.jp",
+      "fmclub.jp",
+      "mirasapo-plus.go.jp",
+      "seisansei.smrj.go.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "clinic-hp-ryokin-nosekata": {
+   "checked": "2026-11-16",
+   "site": "ai-lab",
+   "kw": "クリニック ホームページ 料金 載せ方",
+   "published": "2026-10-07",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "az-mark.jp",
+      "cl-mirai-lab.doctorsfile.jp",
+      "clinic.s-suteki.co.jp",
+      "creative-pocket.co.jp",
+      "meix.jp",
+      "mhlw.go.jp",
+      "more-field.co.jp",
+      "note.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "cl-mirai-lab.doctorsfile.jp",
+      "creative-pocket.co.jp",
+      "itreat.co.jp",
+      "medical.acsport.net",
+      "saisia.co.jp",
+      "x-factory.tech"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "getsuji-nenji-kessan-chigai": {
+   "checked": "2026-11-16",
+   "site": "corporate",
+   "kw": "月次決算 年次決算違い",
+   "published": "2026-10-07",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "biz.moneyforward.com",
+      "freee.co.jp",
+      "prime-partners.co.jp",
+      "yayoi-kk.co.jp",
+      "zeirishi.mynavi-agent.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "it-hojokin-denkaru-kyoyu-clinic": {
+   "checked": "2026-11-16",
+   "site": "subsidy",
+   "kw": "電子カルテ情報共有サービス 補助金 クリニック",
+   "published": "2026-10-07",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "google.com"
+     ]
+    },
+    "Gemini": {
+     "cited": true,
+     "ours": [
+      "https://lp.7senses.co.jp/blog/it-hojokin-denkaru-kyoyu-clinic/",
+      "https://lp.7senses.co.jp/blog/it-hojokin-denkaru-kyoyu-clinic/"
+     ],
+     "sources": [
+      "digikar.m3.com",
+      "hokeniryo.metro.tokyo.lg.jp",
+      "iryohokenjyoho.service-now.com",
+      "lp.7senses.co.jp",
+      "mhlw.go.jp",
+      "phchd.com",
+      "wiseman.co.jp",
+      "yamanashi-med.or.jp"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "clinics-cloud.com",
+      "clius.jp",
+      "digikar.m3.com",
+      "dm-rg.net",
+      "hojokin-office.essencimo.co.jp",
+      "hojyokin-concierge.com",
+      "hojyokin-portal.jp",
+      "ichidokiri.co.jp"
+     ]
+    }
+   },
+   "cited": true
+  },
+  "sweeep-seikyusho": {
+   "checked": "2026-11-16",
+   "site": "corporate",
+   "kw": "sweeep 請求書",
+   "published": "2026-10-07",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": true,
+     "ours": [
+      "https://corp.7senses.co.jp/blog/sweeep-seikyusho"
+     ],
+     "sources": [
+      "corp.7senses.co.jp",
+      "freee.co.jp",
+      "invox.jp",
+      "itreview.jp",
+      "kigyolog.com",
+      "ms-rpa.jp",
+      "onamae.com",
+      "vertexaisearch.cloud.google.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "818shiki.com",
+      "itreview.jp",
+      "kigyolog.com",
+      "marketers-store.com",
+      "ms-rpa.jp",
+      "note.com",
+      "prtimes.jp",
+      "rpahack.com"
+     ]
+    }
+   },
+   "cited": true
+  },
+  "aio-taisaku-hilink": {
+   "checked": "2026-11-16",
+   "site": "ai-lab",
+   "kw": "aio対策 被リンク",
+   "published": "2026-10-08",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "aisearch.similarweb.com",
+      "cantik.co.jp",
+      "erevista.co.jp",
+      "glad-cube.com",
+      "navi-tas.com",
+      "note.com",
+      "seizogyo.com",
+      "technogram.co.jp"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "auto-aio.jp",
+      "coosy.co.jp",
+      "envydesign.jp",
+      "erevista.co.jp",
+      "jarea.jp",
+      "mesut.co.jp",
+      "note.com",
+      "start-link.jp"
+     ]
+    }
+   },
+   "cited": false
   }
  },
  "last_run": {
-  "date": "2026-11-12",
+  "date": "2026-11-16",
   "state": "ok",
   "checked": 8,
   "failed": 0,

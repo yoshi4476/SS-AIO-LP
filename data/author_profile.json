@@ -1,5 +1,5 @@
 {
- "date": "2026-11-12",
+ "date": "2026-11-16",
  "same_as": [
   "https://www.linkedin.com/in/yu-haraguchi",
   "https://note.com/yu_haraguchi",
@@ -8,12 +8,6 @@
  ],
  "mentions": [],
  "works": [
-  {
-   "kind": "動画",
-   "title": "research-biyou",
-   "url": "https://www.youtube.com/watch?v=dYnX1eXwC8w",
-   "date": "2026-10-05"
-  },
   {
    "kind": "動画",
    "title": "計理と経理は何が違う？保険の計理人・旧計理士と取り違えない3つの場面",
@@ -127,6 +121,12 @@
    "title": "research-fitness",
    "url": "https://www.youtube.com/watch?v=sZQVtp7CH2w",
    "date": "2026-11-09"
+  },
+  {
+   "kind": "動画",
+   "title": "research-fudosan",
+   "url": "https://www.youtube.com/watch?v=N_-HXUnMTEE",
+   "date": "2026-11-16"
   }
  ],
  "credentials": [],
@@ -257,9 +257,9 @@
   }
  ],
  "counts": {
-  "articles": 453,
-  "datasets": 13,
-  "videos": 25,
+  "articles": 452,
+  "datasets": 14,
+  "videos": 26,
   "research": 31
  }
 }
