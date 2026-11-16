@@ -133,7 +133,7 @@ def test_gates_are_wired():
 
 def test_fresh_rewrite_moves_date_only_with_body():
     """鮮度の書き直しで題・説明だけ変わった回に更新日を進めると、本文が同じなのに日付だけ新しくなる。
-    自社3サイトは build.py が戻すが、CONFLUX など別リポジトリの社は publish.py が modified をそのまま渡していた"""
+    自社3サイトは build.py が戻すが、cc335c6c4 など別リポジトリの社は publish.py が modified をそのまま渡していた"""
     import auto_rewrite as AR
     print("\n■ 鮮度の書き直し: 本文が変わったときだけ更新日を進める")
     a = "---\ntitle: 旧\nmodified: 2026-10-01\n---\n\n本文はこれです。\n"
@@ -159,7 +159,7 @@ def test_industry_variants_are_not_cannibals():
 
 
 def test_same_owner_site_joins_keyword_guard():
-    """運営者が同じお客様の扱いのサイト（CONFLUX）も、狙う語の門で自社3サイトと同じ相手にする。
+    """運営者が同じお客様の扱いのサイト（cc335c6c4）も、狙う語の門で自社3サイトと同じ相手にする。
     組（group_of）は分けたまま（台帳・範囲・通行証は今までどおり）。ログに相手の記事の住所と語を出さない"""
     import kw_guard as KG
     import sites as S

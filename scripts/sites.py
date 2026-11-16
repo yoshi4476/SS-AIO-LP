@@ -126,7 +126,7 @@ def group_of(site_id):
 
 def same_owner_of(site_id):
     """食い合いの門（kw_guard）だけで足す相手。お客様の扱いでも、運営者が自社と同じサイト（設定の same_owner: true。
-    CONFLUX）は、自社3サイトと同じ検索を取り合う。組（group_of）は変えない（台帳・範囲・通行証は今までどおり分ける）。
+    cc335c6c4）は、自社3サイトと同じ検索を取り合う。組（group_of）は変えない（台帳・範囲・通行証は今までどおり分ける）。
     2026-11-15 運用者「4サイトで同じ言葉を狙う」への備え"""
     all_ = load_all()
     if is_client(site_id):

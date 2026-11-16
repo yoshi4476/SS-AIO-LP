@@ -2778,7 +2778,7 @@ def test_site_has_two_axes_and_no_orphans():
               # コメント（「nofollow も付けない」）は数えない。2026-10-08 にコメントを拾って NG になった
               and not any("nofollow" in ln for ln in ft.splitlines() if not ln.strip().startswith(("//", "*", "/*"))),
               True)
-        check("コーポレートの制作・顧問の表記: リンクの文字は社名・名前だけ", ('link: "CONFLUX PARTNERS"' in ft, 'link: "YW"' in ft), (True, True))
+        check("コーポレートの制作・顧問の表記: リンクの文字は社名・名前だけ", (f'link: "{who.split("（")[1].rstrip("）")}"' in ft, 'link: "YW"' in ft), (True, True))
 
 
 def test_search_engines_are_told_about_all_sites():

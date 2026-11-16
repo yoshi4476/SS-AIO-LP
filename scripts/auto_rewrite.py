@@ -2310,7 +2310,7 @@ def _apply_one(item, edited, orig):
     if kind == "fresh" and body_changed(before[2], p.read_text(encoding="utf-8-sig")):
         # 鮮度を更新した記事は dateModified も動かす（検算の前に書き、ビルドまで通す）。
         # 本文が同じで題・説明だけ変わった回は動かさない（鮮度の偽装になる。自社3サイトは build.py が戻すが、
-        # 別リポジトリの社（CONFLUX など）は publish.py が modified をそのまま渡すため、ここで止める。2026-11-15）
+        # 別リポジトリの社（cc335c6c4 など）は publish.py が modified をそのまま渡すため、ここで止める。2026-11-15）
         t = p.read_text(encoding="utf-8-sig")
         today = time.strftime("%Y-%m-%d")
         t2 = re.sub(r"^modified:.*$", f"modified: {today}", t, count=1, flags=re.M) if re.search(r"^modified:", t, re.M) \

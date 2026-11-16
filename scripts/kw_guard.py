@@ -118,7 +118,7 @@ def _client_row(o):
 
 
 def where(o):
-    """ログに出すページの住所。運営者が同じお客様の扱いのサイト（CONFLUX）の行は、公開の id だけにする
+    """ログに出すページの住所。運営者が同じお客様の扱いのサイト（cc335c6c4）の行は、公開の id だけにする
     （CI のログは public。記事の住所と順位を持つ語は守秘）"""
     if _client_row(o):
         import sites as S
