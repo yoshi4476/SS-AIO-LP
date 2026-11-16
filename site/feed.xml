@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-16T00:00:00+09:00</updated>
+  <updated>2026-11-17T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>工務店の集客の悩み5つ｜原因の見分け方とAI検索の落とし穴</title>
+    <link href="https://ai.7senses.co.jp/aio/koumuten-shukyaku-nayami/"/>
+    <id>https://ai.7senses.co.jp/aio/koumuten-shukyaku-nayami/</id>
+    <updated>2026-11-17T00:00:00+09:00</updated>
+    <summary>工務店の集客の悩みは、原因の場所で分けると5つの型になります。比較サイト頼み・インスタが反響にならない・サイトが出ない・更新が止まる・経路が分からない、の型ごとに原因の見分け方と最初の一手、見送ってよい条件を、AIの出典2,662件の調べと支援の実績から解説します。</summary>
+  </entry>
   <entry>
     <title>クリニック開業の集客は開業後6か月が分かれ目｜月ごとの打ち手とNG</title>
     <link href="https://ai.7senses.co.jp/aio/clinic-kaigyou-shukyaku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/inbound-inshokuten-ai-kensaku/</id>
     <updated>2026-11-03T00:00:00+09:00</updated>
     <summary>インバウンド飲食店のAI検索対策は、訪日客がGoogleで店を調べたときのAIの答えに、自店の英語ページを使わせることです。Googleは条件をインデックス済みでスニペット表示できることとしています。外れる4つの設定ミス、検索に出るまでの日数、国別の測り方を解説します。</summary>
-  </entry>
-  <entry>
-    <title>インバウンド飲食店のLLMO｜翻訳ボタンだけで済ませるNGと英語ページの書き方</title>
-    <link href="https://ai.7senses.co.jp/aio/inbound-inshokuten-llmo/"/>
-    <id>https://ai.7senses.co.jp/aio/inbound-inshokuten-llmo/</id>
-    <updated>2026-11-02T00:00:00+09:00</updated>
-    <summary>インバウンド飲食店のLLMOは、訪日客がChatGPTなどのAIで店を探す・調べる場面に、外国語の公式ページの事実で答えられるよう整えることです。当社の調査では、お店を探す質問の出典の33.1%がグルメ・予約サイト、29.0%が公式サイトでした。外される落とし穴と始め方を解説します。</summary>
   </entry>
 </feed>

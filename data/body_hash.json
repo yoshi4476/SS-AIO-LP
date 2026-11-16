@@ -252,7 +252,7 @@
 "modified": "2026-09-11"
 },
 "clinic-ai-kensaku-taisaku": {
-"hash": "5069747fca43512ac2f9b6a0f0360028",
+"hash": "f9620cb8fa8f45a17e10fba09f640e72",
 "modified": "2026-09-01"
 },
 "clinic-chiikimei-kensaku-joui": {
@@ -432,7 +432,7 @@
 "modified": "2026-09-12"
 },
 "fudousan-shukyaku-idea": {
-"hash": "22f73351bd8ea003a1bb234bb52d461c",
+"hash": "cfe3cf7d70bffbd06e95baf9d04d54c2",
 "modified": "2026-11-06"
 },
 "fudousan-web-shukyaku": {
@@ -547,8 +547,12 @@
 "hash": "4daef1b0f26abff50cc83fa1e7ef7c85",
 "modified": "2026-08-05"
 },
+"koumuten-shukyaku-nayami": {
+"hash": "555ae7ade5c614bac5b3d8e3ac57765b",
+"modified": "2026-11-17"
+},
 "koumuten-shukyaku-seminar": {
-"hash": "ef6e27b16935758d04039b6ebe756941",
+"hash": "90f09633195aa96b72f84436d91a2db0",
 "modified": "2026-08-28"
 },
 "koumuten-sns-shukyaku": {

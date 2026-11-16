@@ -1,0 +1,127 @@
+{
+ "v": 2,
+ "slug": "clinic-ai-kensaku-taisaku",
+ "ok": true,
+ "date": "2026-11-17",
+ "questions": [
+  "aio対策 クリニックについて教えてください",
+  "aio対策 クリニックについて、「クリニックのAIO対策（AI検索対策）とは？」を教えてください",
+  "aio対策 クリニックについて、「なぜ今、クリニックにAI検索対策が欠かせないのか」を教えてください",
+  "aio対策 クリニックについて、「AI検索でクリニックの情報はどう選ばれているか」を教えてください",
+  "aio対策 クリニックについて、「クリニックのAIO対策5つの手順」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "クリニックのAIO対策（AI検索対策）とは？",
+   "words": [
+    "AI検索対策"
+   ],
+   "hits": 2,
+   "of": 8
+  },
+  {
+   "topic": "なぜ今、クリニックにAI検索対策が欠かせないのか",
+   "words": [
+    "AI検索対策"
+   ],
+   "hits": 3,
+   "of": 8
+  },
+  {
+   "topic": "AI検索でクリニックの情報はどう選ばれているか",
+   "words": [
+    "AI検索",
+    "情報"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "AI検索対応で見落としがちな医療広告ガイドラインの注意点",
+   "words": [
+    "医療広告ガイドライン",
+    "AI検索対応",
+    "見落"
+   ],
+   "hits": 4,
+   "of": 10
+  },
+  {
+   "topic": "AI検索に「選ばれる医院」と「選ばれない医院」の違い",
+   "words": [
+    "AI検索",
+    "医院",
+    "医院"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "診療科ごとに、AI検索で聞かれることが違う",
+   "words": [
+    "AI検索"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "AI検索時代の集患を継続的に強くするポイント",
+   "words": [
+    "AI検索時代",
+    "継続的",
+    "集患"
+   ],
+   "hits": 4,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "医療広告ガイドライン",
+   "org": "厚生労働省",
+   "of": 10,
+   "hits": 4
+  }
+ ],
+ "sources": {
+  "aioagent.jp": "peer",
+  "atoz-design.jp": "peer",
+  "blog.google": "peer",
+  "clinic-shukyaku.com": "peer",
+  "clinicalweb.co.jp": "peer",
+  "developers.google.com": "peer",
+  "iryoto.jp": "peer",
+  "joshitsuku.com": "peer",
+  "lany.co.jp": "peer",
+  "m-p-h.jp": "peer",
+  "medical-dx.com": "video",
+  "method-innovation.co.jp": "peer",
+  "mhlw.go.jp": "public",
+  "paraworks.jp": "peer",
+  "pewresearch.org": "peer",
+  "prtimes.jp": "media",
+  "rebranding.co.jp": "peer",
+  "support.google.com": "peer",
+  "web-doctor.org": "peer",
+  "wemedical.zapath.jp": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 8,
+  "進め方の手順": 5,
+  "専門家への相談": 1
+ },
+ "chars": 17965,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、厚生労働省の資料にある「医療広告ガイドライン」に触れたものは4件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は1件、専門家への相談は1件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは21件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが1件、動画・SNS・ブログが2件でした。"
+ ]
+}

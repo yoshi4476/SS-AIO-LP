@@ -1,0 +1,115 @@
+{
+ "v": 2,
+ "slug": "koumuten-shukyaku-nayami",
+ "ok": true,
+ "date": "2026-11-17",
+ "questions": [
+  "工務店 集客 悩みについて教えてください",
+  "工務店 集客 悩みについて、「工務店の集客の悩みは5つの型に分かれる」を教えてください",
+  "工務店 集客 悩みについて、「悩み1：比較サイト経由の反響ばかりで価格で比べられる」を教えてください",
+  "工務店 集客 悩みについて、「悩み2：インスタを続けても問い合わせにならない」を教えてください",
+  "工務店 集客 悩みについて、「悩み3：ホームページがあるのにAI検索にも検索にも出てこない」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "悩み1：比較サイト経由の反響ばかりで価格で比べられる",
+   "words": [
+    "比較サイト経由",
+    "価格"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "悩み2：インスタを続けても問い合わせにならない",
+   "words": [
+    "インスタ"
+   ],
+   "hits": 1,
+   "of": 8
+  },
+  {
+   "topic": "悩み3：ホームページがあるのにAI検索にも検索にも出てこない",
+   "words": [
+    "ホームページ",
+    "AI検索",
+    "検索"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "悩み4：更新が続かず、記事を足しても反響が増えない",
+   "words": [
+    "更新",
+    "反響"
+   ],
+   "hits": 8,
+   "of": 10
+  },
+  {
+   "topic": "悩み5：どの経路から反響が来たか分からない",
+   "words": [
+    "経路",
+    "反響"
+   ],
+   "hits": 6,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "access-meo.jp": "peer",
+  "ad-crew.net": "peer",
+  "ameblo.jp": "video",
+  "atoz-design.jp": "peer",
+  "base-net.co.jp": "peer",
+  "biz.refo-sumu.jp": "peer",
+  "blog.nb-a.jp": "peer",
+  "branding-t.co.jp": "peer",
+  "chikalab.net": "peer",
+  "developers.google.com": "peer",
+  "dob.co.jp": "peer",
+  "genji-group.com": "peer",
+  "gotta-ride.com": "peer",
+  "hug-kumu.com": "peer",
+  "iezukuri-business.homes.jp": "portal",
+  "koumuten-hub.com": "peer",
+  "koumuten.marketing": "peer",
+  "media-growth.co.jp": "peer",
+  "megumiya.biz": "peer",
+  "mirai-style.net": "peer",
+  "miraie-c.jp": "peer",
+  "mis1.net": "peer",
+  "mlit.go.jp": "public",
+  "news.mynavi.jp": "media",
+  "note.com": "video",
+  "r-frame.jp": "peer",
+  "shintairiku.jp": "peer",
+  "shipinc.co.jp": "peer",
+  "sho-san.co.jp": "peer",
+  "support.google.com": "peer",
+  "three-count.jp": "peer",
+  "trust-lead.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "withmo.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 4,
+  "専門家への相談": 1
+ },
+ "chars": 17162,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え8件のうち、『インスタ』に触れたものは1件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は1件、期間（◯か月・◯日など）は2件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは34件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが1件、ポータル・比較サイトが1件、動画・SNS・ブログが2件でした。"
+ ]
+}

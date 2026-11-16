@@ -53,6 +53,8 @@ quality_attempts: 2
 
 不動産の集客アイデアは、AIと検索の質問が「会社を探す」ものか「費用や手続きを調べる」ものかで、効き方が変わります。
 
+関連する内容として[工務店の集客の悩み5つ](/aio/koumuten-shukyaku-nayami/)も公開しています。
+
 あわせて[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)もご覧ください。
 
 つまずきやすい点を先に押さえるなら、[不動産の賃貸集客で失敗する3つの落とし穴](/aio/fudousan-chintai-shukyaku/)が参考になります。
