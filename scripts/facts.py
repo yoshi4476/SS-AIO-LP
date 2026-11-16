@@ -190,15 +190,24 @@ def load_for(site_id):
     return data, [hide_private_urls(f) for f in got]
 
 
-def price_sets(site_id, path=None):
+def price_sets(site_id, path=None, kw=""):
     """その社の記事に書いてよい費用の相場（data/price_ranges.json）。先頭の組（AIO・SEO・LLMO）と more（ほかの事業の相場）のうち、
     sites にその社がある組だけを返す。コーポレートの記事は相場が台帳に無く、採点のたびに「費用が数字で示されない」と
     減点されていた（2026-11-11 経理BPOの記事が3回とも同じ指摘で84点）"""
     try:
         pr = json.loads((path or ROOT / "data" / "price_ranges.json").read_text(encoding="utf-8"))
     except (OSError, ValueError):
-        return []
-    return [s for s in [pr] + list(pr.get("more") or []) if site_id in (s.get("sites") or [])]
+        pr = {}
+    out = [s for s in [pr] + list(pr.get("more") or []) if site_id in (s.get("sites") or [])]
+    # お客様の社の相場は非公開の置き場の price_ranges.json（組の並び）。公開側の台帳に社の id を書かない。
+    # 新しく受けた社の狙う語の多くが「費用」の語なのに、相場が1つも渡らなかった（2026-11-17）
+    if path is None and _is_client(site_id):
+        import private_store
+        own = private_store.read_json(site_id, "price_ranges.json", []) or []
+        out += [s for s in (own if isinstance(own, list) else [own]) if isinstance(s, dict) and s.get("ranges")]
+    # 主題の言葉（topics）を持つ組は、記事の語にその言葉があるときだけ渡す（AIエージェントの記事に経理の相場を混ぜない）
+    low = str(kw or "").lower()
+    return [s for s in out if not (low and s.get("topics")) or any(str(t).lower() in low for t in s["topics"])]
 
 
 def scope_note(f):
@@ -250,7 +259,7 @@ def main():
         print(f"    出典: {re.sub(r'[（(][^）)]*申告[^）)]*[）)]', '', f['source']).strip()}（{f['as_of']}時点）")
     # 直しの材料（quality_loop.materials）と同じものを書く段階から渡す。相場とお客様の声は直しにしか渡っておらず、
     # 最初の採点で「費用の目安が無い」「現場の声が無い」と減点されていた（2026-10-21 運用者「最初の1回で届くことを多くして」）
-    for pr in price_sets(site_id):
+    for pr in price_sets(site_id, kw=kw):
         print(f"\n■ 費用の相場（{pr.get('as_of', '')}時点の相場の見立て。費用の目安として書く。「当社」の語を金額と同じ文に書かない）")
         for r in pr.get("ranges", []):
             print(f"  ・{r['label']}の相場は{r['range']}" + (f"（{r['note']}）" if r.get("note") else ""))

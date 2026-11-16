@@ -1459,6 +1459,49 @@ def _copy(cands):
     return {k: dict(c, src=set(c["src"])) for k, c in cands.items()}
 
 
+def sheet_fill(site_id):
+    """シートの狙う語（運用者が選んだ語）のうち、台帳に無い語をラッコを使わずに台帳へ足す（月1回の組みとは数えない）。
+    新しく受けた社の語の計画は、検索数10未満の買い手の細い語を落とし、50語から17語しか積めなかった。
+    1日2本の社では約9日で尽き、翌月まで記事が止まる（2026-11-17）。担当・除外語・食い合い・台帳の重複の判定は通す。
+    語はログに出さない（お客様の社の語は非公開）。件数だけ出す"""
+    import hub_client
+    import private_store
+    import sites as _S
+    rakko.revoke()
+    if not private_store.require(site_id, "シートの語の追加"):
+        return 0
+    print(f"\n■ {_S.public_id(site_id)}: シートの語を台帳へ足す（ラッコは使わない）")
+    st = stock(site_id)
+    if not st["ok"]:
+        print("   台帳を読めないため足しません")
+        return 0
+    S = KD.site_config(site_id)
+    main = {k.lower() for k in ((private_store.read_json(site_id, "brief.json", {}) or {}).get("keyword") or {}).get("main") or []}
+    corpus, arts = own_corpus(site_id) if S["cfg"].get("kw_overlap_ok") else (written_corpus(), load_articles())
+    toks = lambda k: set(k.lower().split())
+    why, items = defaultdict(int), []
+    for kw in sheet_terms(site_id)[0]:
+        if ledger_keys(kw) & st["keys"]:
+            why["台帳にある"] += 1
+        elif any(toks(kw) <= toks(x) for x in st["todo"] + [i["keyword"] for i in items]):
+            why["台帳の語と語順・語尾だけ違う"] += 1          # 「◯◯ 運用代行」と「◯◯ 運用代行 相場」は同じ検索を食い合う
+        elif kw_fit.judge_new(kw, site_id)[0]:
+            why["担当外・除外語"] += 1
+        elif is_written(kw, corpus) or kw_conflicts(kw, arts):
+            why["執筆済み・食い合い"] += 1
+        else:
+            c = {"kw": kw, "priority": "A" if kw.lower() in main else "B", "subject": kw, "src": {"sheet"}}
+            items.append(dict(ledger_item(c), category=hub_client.category_of(kw, S["cfg"])))
+    print(f"   足す {len(items)}件（足さない: " + (" / ".join(f"{k} {v}" for k, v in why.items()) or "0") + "）")
+    added = 0
+    for i in range(0, len(items), CHUNK):
+        added += (hub_client.add_kw(site_id, items[i:i + CHUNK]) or {}).get("added", 0)
+    remember_added(site_id, [i["keyword"] for i in items])
+    print(f"   台帳に {added}件を足しました")
+    print(f"KW_SHEET_FILL={_S.public_id(site_id)}:{added}")
+    return added
+
+
 def run(site_id, deep, replace, if_needed=False, main_first=0):
     """main_first=N は、主力の語だけを最大N本、優先度Aで積み足す（今の未着手は消さない・月1回の組みとは数えない）。
     補助金で、未着手106本中の主力が2本だった。一新（--replace）は主力の候補が11本しか無く、
@@ -1625,7 +1668,15 @@ def main():
                     help="ラッコを呼ばず（キャッシュは使う）、候補の構成と課金の見積もりだけ出す")
     ap.add_argument("--main-first", type=int, default=0, metavar="N",
                     help="主力の語だけを最大N本、優先度Aで積み足す（今の未着手は消さない。手で使う）")
+    ap.add_argument("--sheet-fill", action="store_true",
+                    help="シートの狙う語のうち台帳に無い語を、ラッコを使わずに足す（--site と使う。月1回の組みとは数えない）")
     a = ap.parse_args()
+    if a.sheet_fill:
+        import sites as S_
+        if not a.site:
+            raise SystemExit("--sheet-fill は --site と使います")
+        sheet_fill(S_.resolve(a.site))
+        return 0
     global DRY, DEEP
     DRY, DEEP = a.dry_run, a.deep
     if DRY and a.replace:

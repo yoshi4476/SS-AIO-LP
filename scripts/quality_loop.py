@@ -471,7 +471,12 @@ def materials(site, slug):
                      "声は言い換えずに「」で引用し、お客様の声だと分かるように書く）")
         allowed += [v["quote"], num]
     # 費用の相場（data/price_ranges.json）。決定支援で毎回「費用の目安が無い」と突かれていた（2026-10-21 運用者「相場は書いていい」）
-    for pr in F.price_sets(site):
+    try:
+        kw = re.search(r"^keyword:\s*\"?(.+?)\"?\s*$", (ROOT / "articles" / f"{slug}.md").read_text(encoding="utf-8-sig")[:3000],
+                       re.M).group(1)
+    except (OSError, AttributeError):
+        kw = ""
+    for pr in F.price_sets(site, kw=kw):
         for r in pr.get("ranges", []):
             c = f"{r['label']}の相場は{r['range']}" + (f"（{r['note']}）" if r.get("note") else "")
             # 出典を「当社の見立て」と金額の近くに書くと、当社の価格を書いた形になり門（gates_history_e の own_price）が止める

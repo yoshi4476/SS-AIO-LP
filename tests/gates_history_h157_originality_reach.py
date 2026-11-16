@@ -137,4 +137,5 @@ def test_price_ranges_reach_each_business():
     check("足した相場には、公開の出どころ（URL と確かめた日）がある",
           [bool(re.search(r"https://\S+", s.get("source", ""))) and "確認" in s.get("source", "") for s in corp], [True] * len(corp))
     src = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
-    check("直しの材料も同じ入口（facts.price_sets）から読む", "F.price_sets(site)" in src, True)
+    # 記事の語を渡して、主題の言葉の合う組だけにする（2026-11-17）
+    check("直しの材料も同じ入口（facts.price_sets）から読む", "F.price_sets(site, kw=kw)" in src, True)
