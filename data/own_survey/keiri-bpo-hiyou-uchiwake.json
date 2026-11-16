@@ -1,0 +1,158 @@
+{
+ "v": 2,
+ "slug": "keiri-bpo-hiyou-uchiwake",
+ "ok": true,
+ "date": "2026-11-16",
+ "questions": [
+  "経理 経理BPOの料金の内訳について教えてください",
+  "経理 経理BPOの料金の内訳について、「経理BPOの料金の内訳｜3つの費目で構成される」を教えてください",
+  "経理 経理BPOの料金の内訳について、「費目①基本委託料に含まれる業務範囲」を教えてください",
+  "経理 経理BPOの料金の内訳について、「費目②取引件数に応じた従量部分」を教えてください",
+  "経理 経理BPOの料金の内訳について、「費目③オプション料金の対象業務」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "経理BPOの料金の内訳｜3つの費目で構成される",
+   "words": [
+    "内訳",
+    "費目"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "費目①基本委託料に含まれる業務範囲",
+   "words": [
+    "基本委託料",
+    "業務範囲",
+    "費目"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "費目②取引件数に応じた従量部分",
+   "words": [
+    "取引件数",
+    "従量部分",
+    "費目"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "費目③オプション料金の対象業務",
+   "words": [
+    "オプション料金",
+    "対象業務",
+    "費目"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "初期費用の内訳と発生するタイミング",
+   "words": [
+    "タイミング",
+    "初期費用",
+    "内訳"
+   ],
+   "hits": 7,
+   "of": 10
+  },
+  {
+   "topic": "見積書でチェックすべき3つのポイント",
+   "words": [
+    "見積書"
+   ],
+   "hits": 0,
+   "of": 10
+  },
+  {
+   "topic": "記帳代行・税理士との料金内訳の違い",
+   "words": [
+    "記帳代行",
+    "料金内訳",
+    "税理士"
+   ],
+   "hits": 6,
+   "of": 10
+  },
+  {
+   "topic": "内訳を把握して費用を抑える3つの工夫",
+   "words": [
+    "内訳",
+    "工夫"
+   ],
+   "hits": 5,
+   "of": 10
+  },
+  {
+   "topic": "内訳確認でやってはいけないNG対応",
+   "words": [
+    "内訳確認",
+    "NG対応"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "aichi-keiri.jp": "peer",
+  "anshin-keiri.eiwa-gr.jp": "peer",
+  "atlas18.co.jp": "peer",
+  "b-pos.jp": "peer",
+  "backofficeforce.jp": "peer",
+  "bi.nttdata-with.com": "peer",
+  "biz.moneyforward.com": "peer",
+  "bookkeeping-agency.com": "peer",
+  "bpo-j.jp": "peer",
+  "bricks-outsourcing.com": "peer",
+  "catalog.monex.co.jp": "media",
+  "cone-c-slide.com": "peer",
+  "corp.7senses.co.jp": "self",
+  "crex-consulting.com": "peer",
+  "dx.bizocean.jp": "media",
+  "go.taxita.com": "portal",
+  "i-ap.net": "peer",
+  "impact-mirai.co.jp": "peer",
+  "joe-hr.com": "peer",
+  "keihi.com": "peer",
+  "keiri-marugoto.com": "peer",
+  "keiri.harbors-inc.com": "peer",
+  "keiribu.co.jp": "peer",
+  "marumaru-keiri.com": "peer",
+  "noc-net.co.jp": "peer",
+  "ntt-nexia.co.jp": "peer",
+  "persol-bd.co.jp": "peer",
+  "persol-group.co.jp": "media",
+  "proactive.jp": "peer",
+  "probel.jp": "peer",
+  "score.or.jp": "peer",
+  "services.altius-link.com": "peer",
+  "standard.or.jp": "peer",
+  "tax-bestbalance.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yayoi-kk.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 1,
+  "専門家への相談": 5
+ },
+ "chars": 11563,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え10件のうち、『見積書』に触れたものは0件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え10件のうち、『内訳』に触れたものは5件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは期間（◯か月・◯日など）は1件、進め方の手順は1件、注意点・失敗・リスクは2件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは36件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが3件、ポータル・比較サイトが1件でした。"
+ ]
+}
