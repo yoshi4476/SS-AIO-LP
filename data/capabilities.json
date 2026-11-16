@@ -29,7 +29,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2487",
+     "evidence": "scripts/publish.py:2490",
      "note": "build.py が site/ に書き、デプロイで公開",
      "anchor": "if cfg[\"type\"] == \"self-static\":",
      "anchor_prev": [
@@ -56,7 +56,7 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2245",
+     "evidence": "scripts/publish.py:2248",
      "note": "本体の REST API で投稿（--push で publish）。鍵は投稿者（author）の権限だけで、管理者・編集者の鍵なら投稿せずに止める（wp_bridge.role_problems）。本文の内部リンクは実際のパーマリンクへ直す",
      "anchor": "def write_wordpress(cfg, meta, body, src: Path, push=False):"
     },
@@ -95,33 +95,33 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2398",
+     "evidence": "scripts/publish.py:2401",
      "anchor": "if not gate_ok(meta):"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2398",
+     "evidence": "scripts/publish.py:2401",
      "anchor": "if not gate_ok(meta):"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2398",
+     "evidence": "scripts/publish.py:2401",
      "anchor": "if not gate_ok(meta):"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2398",
+     "evidence": "scripts/publish.py:2401",
      "note": "配信側の門（gate_ok・配信の前の検査）が基準未満を送らない。先方の管理画面で人が公開する記事は対象外（PHP のプラグインは 2026-10-24 に廃止。先方には何も置かない）",
      "anchor": "if not gate_ok(meta):"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2398",
+     "evidence": "scripts/publish.py:2401",
      "anchor": "if not gate_ok(meta):"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2398",
+     "evidence": "scripts/publish.py:2401",
      "note": "基準に届かない記事は ZIP を作らない",
      "anchor": "if not gate_ok(meta):"
     }
@@ -149,7 +149,7 @@
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1684",
+     "evidence": "scripts/publish.py:1687",
      "anchor": "img_dest = dest / cfg[\"images_dir\"] / meta[\"slug\"]",
      "anchor_prev": [
       "if cfg.get(\"images_dir\") and img_src.is_dir():"
@@ -167,13 +167,13 @@
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2272",
+     "evidence": "scripts/publish.py:2275",
      "note": "本文の /images/ をメディアに上げて src を置き換える（アイキャッチも同じ）",
      "anchor": "html, n_img = _wp_body_images(cfg, html, meta[\"slug\"])"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1685",
+     "evidence": "scripts/publish.py:1688",
      "anchor": "shutil.rmtree(img_dest, ignore_errors=True)",
      "anchor_prev": [
       "img_dest = dest / cfg[\"images_dir\"] / meta[\"slug\"]",
@@ -182,7 +182,7 @@
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1686",
+     "evidence": "scripts/publish.py:1689",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）",
      "anchor": "shutil.copytree(img_src, img_dest)",
      "anchor_prev": [
@@ -225,7 +225,7 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2245",
+     "evidence": "scripts/publish.py:2248",
      "note": "いまは挿さない。WordPress の投稿の消毒（KSES）は svg の要素を落とし、グラフの文字だけが本文に残るため",
      "need": "投稿者の権限では svg の要素が消毒（KSES）で落ちる。先方に何も置かない方針（PHP のプラグインは廃止）では挿せない。グラフが要る社はサブドメインの静的なページにする",
      "anchor": "def write_wordpress(cfg, meta, body, src: Path, push=False):"
@@ -270,7 +270,7 @@
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1619",
+     "evidence": "scripts/publish.py:1622",
      "note": "写真の棚から選び、一覧カードと og:image に当てる",
      "anchor": "if src_img:"
     },
@@ -287,19 +287,19 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2283",
+     "evidence": "scripts/publish.py:2286",
      "note": "写真の棚の1枚を ss-shelf- の名前でメディアに上げて featured_media にする",
      "need": "一覧・OGP に出すかは先方のテーマ・SEO プラグイン次第（WordPress 本体は og:image を出さない）",
      "anchor": "info = _wp_photo(cfg, meta)"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1619",
+     "evidence": "scripts/publish.py:1622",
      "anchor": "if src_img:"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1613",
+     "evidence": "scripts/publish.py:1615",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）",
      "anchor": "name, url = photo_shelf.pick(meta[\"title\"], str(meta.get(\"keyword\") or \"\"), meta[\"slug\"])"
     }
@@ -553,7 +553,7 @@
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1656",
+     "evidence": "scripts/publish.py:1659",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）",
      "anchor": "written = [page, md] + _update_external_index(dest, cfg, meta)"
     }
@@ -605,7 +605,7 @@
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1656",
+     "evidence": "scripts/publish.py:1659",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。既にあるファイルに足すだけで、先方に無ければ作らない（初回の接続で雛形を置く工程が要る）",
      "anchor": "written = [page, md] + _update_external_index(dest, cfg, meta)"
     }
@@ -852,7 +852,7 @@
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2262",
+     "evidence": "scripts/publish.py:2265",
      "anchor": "html = wp_bridge._split_ld(INLINE_SELF_MEASURE.sub(\"\", html))[0]",
      "note": "作らない（安全のため）: 投稿者の権限では <script> が消え、投稿メタも head に出せない（PHP のプラグインは 2026-10-24 に廃止）。構造化データが要る社はサブドメインの静的なページにする"
     },
@@ -901,7 +901,7 @@
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2262",
+     "evidence": "scripts/publish.py:2265",
      "anchor": "html = wp_bridge._split_ld(INLINE_SELF_MEASURE.sub(\"\", html))[0]",
      "note": "作らない（安全のため）: 投稿者の権限では <script> が消え、投稿メタも head に出せない（PHP のプラグインは 2026-10-24 に廃止）。構造化データが要る社はサブドメインの静的なページにする"
     },
@@ -950,7 +950,7 @@
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2262",
+     "evidence": "scripts/publish.py:2265",
      "note": "作らない（安全のため）: 投稿者の権限では <script> が消え、投稿メタも head に出せない（PHP のプラグインは 2026-10-24 に廃止）。構造化データが要る社はサブドメインの静的なページにする。監修・著者の表示は本文の先頭に入る（構造化データは出せない）",
      "anchor": "html = wp_bridge._split_ld(INLINE_SELF_MEASURE.sub(\"\", html))[0]"
     },
@@ -1000,7 +1000,7 @@
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2262",
+     "evidence": "scripts/publish.py:2265",
      "anchor": "html = wp_bridge._split_ld(INLINE_SELF_MEASURE.sub(\"\", html))[0]",
      "note": "作らない（安全のため）: 投稿者の権限では <script> が消え、投稿メタも head に出せない（PHP のプラグインは 2026-10-24 に廃止）。構造化データが要る社はサブドメインの静的なページにする"
     },
@@ -1040,7 +1040,7 @@
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1635",
+     "evidence": "scripts/publish.py:1638",
      "anchor": "# 先方の雛形が robots を持たない・index,follow だけでも、見え方の指定を1つの meta にまとめて足す"
     },
     "nextjs-json": {
@@ -1052,18 +1052,18 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2245",
+     "evidence": "scripts/publish.py:2248",
      "need": "robots の meta は WordPress 本体の既定（max-image-preview:large）のまま。画像・動画のサイトマップは作れない",
      "anchor": "def write_wordpress(cfg, meta, body, src: Path, push=False):"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1635",
+     "evidence": "scripts/publish.py:1638",
      "anchor": "# 先方の雛形が robots を持たない・index,follow だけでも、見え方の指定を1つの meta にまとめて足す"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1637",
+     "evidence": "scripts/publish.py:1640",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）",
      "anchor": "out = search_preview.robots_tag(out)"
     }
@@ -1104,14 +1104,14 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2262",
+     "evidence": "scripts/publish.py:2265",
      "anchor": "html = wp_bridge._split_ld(INLINE_SELF_MEASURE.sub(\"\", html))[0]",
      "note": "onboard_check で確かめる（記事に GA4 の測定ID（計測タグ）が出る）",
      "need": "投稿者の権限では計測のスクリプトを置けない。計測は先方のサイトに入っている GA4 だけ（入口・CTA の出来事は送られない）"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1645",
+     "evidence": "scripts/publish.py:1648",
      "note": "管制塔の雛形で描く記事のページに、どの方式とも同じ計測（automation/measure/ss-measure.js）を置く。測定IDはヒアリングシートで聞き、ftp の社も sites/<id>.json の ga4_measurement_id に保存する（client_intake）。測定IDが無い社には出さない",
      "anchor": "out = add_measure(out, cfg)"
     },
@@ -1155,7 +1155,7 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2261",
+     "evidence": "scripts/publish.py:2264",
      "note": "その場の入口と中ほどの導線を他の方式と同じ関数で入れる",
      "need": "入口の計測のスクリプトは外す（投稿者の権限では消えるため）",
      "anchor": "html = insert_mid_cta(insert_inline_entry(html, cfg), cfg)"
@@ -1189,20 +1189,20 @@
     },
     "external-md": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2004",
+     "evidence": "scripts/publish.py:2007",
      "anchor": "return write_aggregate_md(cfg, dest, live)",
      "note": "aggregate_pages.collect が業種ハブ（/industry/・/industry/<業種>/・その faq/）を build.py と同じ関数で組む（5本未満の業種・1業種で記事の8割以上を占める社は作らない。お客様の社で運用会社の名前が出るページは捨てる）。記事を配信するたびに作り直す。onboard_check で確かめる（/industry/ が開けて中身が出る）",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2000",
+     "evidence": "scripts/publish.py:2003",
      "anchor": "return write_aggregate_html(cfg, dest, live)[0]",
      "note": "aggregate_pages.collect が業種ハブ（/industry/・/industry/<業種>/・その faq/）を build.py と同じ関数で組む（5本未満の業種・1業種で記事の8割以上を占める社は作らない。お客様の社で運用会社の名前が出るページは捨てる）。その社の記事の雛形で HTML にして配信先に置き、sitemap.xml・llms.txt に載せる。先方の同じパスのページは上書きしない（補助金サイトは subsidy/pages.py が作るので sites/subsidy.json の aggregate_skip で外す）"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2002",
+     "evidence": "scripts/publish.py:2005",
      "anchor": "return write_aggregate_nextjs(cfg, dest, live)",
      "note": "aggregate_pages.collect が業種ハブ（/industry/・/industry/<業種>/・その faq/）を build.py と同じ関数で組む（5本未満の業種・1業種で記事の8割以上を占める社は作らない。お客様の社で運用会社の名前が出るページは捨てる）。中身を src/content/aggregate/pages.json に書き、描くページ（templates/nextjs_aggregate_*.tsx。下の階層は [...slug]）を置く。先方が同じ入口を持っていれば触らない"
     },
@@ -1214,7 +1214,7 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2521",
+     "evidence": "scripts/publish.py:2524",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})",
      "note": "aggregate_pages.collect が業種ハブ（/industry/・/industry/<業種>/・その faq/）を build.py と同じ関数で組む（5本未満の業種・1業種で記事の8割以上を占める社は作らない。お客様の社で運用会社の名前が出るページは捨てる）。external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す"
     },
@@ -1242,20 +1242,20 @@
     },
     "external-md": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2004",
+     "evidence": "scripts/publish.py:2007",
      "anchor": "return write_aggregate_md(cfg, dest, live)",
      "note": "aggregate_pages.collect が用語集（/glossary/。記事の定義ブロックを1ページに）を build.py と同じ関数で組む（10語未満なら作らない。お客様の社で運用会社の名前が出るページは捨てる）。記事を配信するたびに作り直す。onboard_check で確かめる（/glossary/ が開けて中身が出る）",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2000",
+     "evidence": "scripts/publish.py:2003",
      "anchor": "return write_aggregate_html(cfg, dest, live)[0]",
      "note": "aggregate_pages.collect が用語集（/glossary/。記事の定義ブロックを1ページに）を build.py と同じ関数で組む（10語未満なら作らない。お客様の社で運用会社の名前が出るページは捨てる）。その社の記事の雛形で HTML にして配信先に置き、sitemap.xml・llms.txt に載せる。先方の同じパスのページは上書きしない"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2002",
+     "evidence": "scripts/publish.py:2005",
      "anchor": "return write_aggregate_nextjs(cfg, dest, live)",
      "note": "aggregate_pages.collect が用語集（/glossary/。記事の定義ブロックを1ページに）を build.py と同じ関数で組む（10語未満なら作らない。お客様の社で運用会社の名前が出るページは捨てる）。中身を src/content/aggregate/pages.json に書き、描くページ（templates/nextjs_aggregate_*.tsx。下の階層は [...slug]）を置く。先方が同じ入口を持っていれば触らない"
     },
@@ -1267,7 +1267,7 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2521",
+     "evidence": "scripts/publish.py:2524",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})",
      "note": "aggregate_pages.collect が用語集（/glossary/。記事の定義ブロックを1ページに）を build.py と同じ関数で組む（10語未満なら作らない。お客様の社で運用会社の名前が出るページは捨てる）。external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す"
     },
@@ -1293,20 +1293,20 @@
     },
     "external-md": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2004",
+     "evidence": "scripts/publish.py:2007",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）",
      "anchor": "return write_aggregate_md(cfg, dest, live)",
      "note": "onboard_check で確かめる（/compare/ が開けて中身が出る）"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2000",
+     "evidence": "scripts/publish.py:2003",
      "note": "aggregate_pages.collect の比較表をその社の記事の雛形で HTML にして配信先に置き、sitemap.xml・llms.txt に載せる。記事を配信するたびに作り直し（aggregate_for_git）、記事の末尾から案内する。先方の同じパスのページは上書きしない",
      "anchor": "return write_aggregate_html(cfg, dest, live)[0]"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2002",
+     "evidence": "scripts/publish.py:2005",
      "note": "中身を src/content/aggregate/pages.json に書き、描くページ（templates/nextjs_aggregate_*.tsx）を入口ごとに置く（App Router・静的書き出しでビルドを確かめた）。sitemap は public/sitemap.xml か、管制塔の sitemap 雛形（corporate_sitemap.ts）が pages.json を読む",
      "anchor": "return write_aggregate_nextjs(cfg, dest, live)"
     },
@@ -1318,13 +1318,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2521",
+     "evidence": "scripts/publish.py:2524",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2521",
+     "evidence": "scripts/publish.py:2524",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1344,20 +1344,20 @@
     },
     "external-md": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2004",
+     "evidence": "scripts/publish.py:2007",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）",
      "anchor": "return write_aggregate_md(cfg, dest, live)",
      "note": "onboard_check で確かめる（/topics/ が開けて中身が出る）"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2000",
+     "evidence": "scripts/publish.py:2003",
      "note": "aggregate_pages.collect のテーマのページをその社の記事の雛形で HTML にして配信先に置き、sitemap.xml・llms.txt に載せる。記事を配信するたびに作り直し（aggregate_for_git）、記事の末尾から案内する。先方の同じパスのページは上書きしない",
      "anchor": "return write_aggregate_html(cfg, dest, live)[0]"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2002",
+     "evidence": "scripts/publish.py:2005",
      "note": "中身を src/content/aggregate/pages.json に書き、描くページ（templates/nextjs_aggregate_*.tsx）を入口ごとに置く（App Router・静的書き出しでビルドを確かめた）。sitemap は public/sitemap.xml か、管制塔の sitemap 雛形（corporate_sitemap.ts）が pages.json を読む",
      "anchor": "return write_aggregate_nextjs(cfg, dest, live)"
     },
@@ -1369,13 +1369,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2521",
+     "evidence": "scripts/publish.py:2524",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2521",
+     "evidence": "scripts/publish.py:2524",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1395,20 +1395,20 @@
     },
     "external-md": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2004",
+     "evidence": "scripts/publish.py:2007",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）",
      "anchor": "return write_aggregate_md(cfg, dest, live)",
      "note": "onboard_check で確かめる（/area/ が開けて中身が出る）"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2000",
+     "evidence": "scripts/publish.py:2003",
      "note": "aggregate_pages.collect のエリアのページをその社の記事の雛形で HTML にして配信先に置き、sitemap.xml・llms.txt に載せる。記事を配信するたびに作り直し（aggregate_for_git）、記事の末尾から案内する。先方の同じパスのページは上書きしない",
      "anchor": "return write_aggregate_html(cfg, dest, live)[0]"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2002",
+     "evidence": "scripts/publish.py:2005",
      "note": "中身を src/content/aggregate/pages.json に書き、描くページ（templates/nextjs_aggregate_*.tsx）を入口ごとに置く（App Router・静的書き出しでビルドを確かめた）。sitemap は public/sitemap.xml か、管制塔の sitemap 雛形（corporate_sitemap.ts）が pages.json を読む",
      "anchor": "return write_aggregate_nextjs(cfg, dest, live)"
     },
@@ -1420,13 +1420,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2521",
+     "evidence": "scripts/publish.py:2524",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2521",
+     "evidence": "scripts/publish.py:2524",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1447,20 +1447,20 @@
     },
     "external-md": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2004",
+     "evidence": "scripts/publish.py:2007",
      "need": "permalink つきの Markdown を pages_dir（既定は content_dir の隣の pages/）に置くところまで。先方のビルドがその置き場を permalink どおりに HTML にするかは先方の設定次第（最初の接続で pages_dir を決めて確かめる）",
      "anchor": "return write_aggregate_md(cfg, dest, live)",
      "note": "onboard_check で確かめる（季節の特集のページが開けて中身が出る）"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2000",
+     "evidence": "scripts/publish.py:2003",
      "note": "aggregate_pages.collect の今の時期の特集（その社の検索データで山が近い主題の記事）をその社の記事の雛形で HTML にして配信先に置き、sitemap.xml・llms.txt に載せる。記事を配信するたびに作り直し（aggregate_for_git）、記事の末尾から案内する。先方の同じパスのページは上書きしない。検索データ（season.py が data/season/<id>.json に山の月だけ残す）が12か月分そろうまでは作らない（判定前）",
      "anchor": "return write_aggregate_html(cfg, dest, live)[0]"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2002",
+     "evidence": "scripts/publish.py:2005",
      "note": "中身を src/content/aggregate/pages.json に書き、描くページ（templates/nextjs_aggregate_*.tsx）を入口ごとに置く（App Router・静的書き出しでビルドを確かめた）。sitemap は public/sitemap.xml か、管制塔の sitemap 雛形（corporate_sitemap.ts）が pages.json を読む。検索データ（season.py が data/season/<id>.json に山の月だけ残す）が12か月分そろうまでは作らない（判定前）",
      "anchor": "return write_aggregate_nextjs(cfg, dest, live)"
     },
@@ -1472,13 +1472,13 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2521",
+     "evidence": "scripts/publish.py:2524",
      "note": "external-html と同じ書き手で作業場所に書き、記事と一緒に上げる（1日1回まで）。作らなくなったページはサーバーから消す。検索データ（season.py が data/season/<id>.json に山の月だけ残す）が12か月分そろうまでは作らない（判定前）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:2521",
+     "evidence": "scripts/publish.py:2524",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）。作らなくなったページは先方のサーバーに残る（FTP の社は管制塔が消す）",
      "anchor": "agg, keep = aggregate_for_files(cfg, base, {meta[\"slug\"]})"
     }
@@ -1659,7 +1659,7 @@
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1630",
+     "evidence": "scripts/publish.py:1633",
      "anchor": "extra = None if noindex.on(meta) else _i18n_pages(cfg, meta, dest)"
     },
     "nextjs-json": {
@@ -1679,12 +1679,12 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1630",
+     "evidence": "scripts/publish.py:1633",
      "anchor": "extra = None if noindex.on(meta) else _i18n_pages(cfg, meta, dest)"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1630",
+     "evidence": "scripts/publish.py:1633",
      "note": "新規受付なし（ZIP は廃止）。元の判定: partial。 先方が ZIP を自分のサーバーへ上げる作業が毎回残る（ftp か Git の方式へ切り替えると無くなる）",
      "anchor": "extra = None if noindex.on(meta) else _i18n_pages(cfg, meta, dest)"
     }
@@ -1771,7 +1771,7 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2268",
+     "evidence": "scripts/publish.py:2271",
      "note": "onboard_check で確かめる（動画のある記事に埋め込みが出て、CSP が YouTube を止めていない）",
      "need": "動画の URL を1行で置く（WordPress が埋め込みにする）。VideoObject の構造化データは出せない（<script> が消える）",
      "anchor": "html = f'\\n<p>https://www.youtube.com/watch?v={rec[\"youtube\"]}</p>\\n' + html"
@@ -2005,37 +2005,37 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2461",
+     "evidence": "scripts/publish.py:2464",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2461",
+     "evidence": "scripts/publish.py:2464",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2461",
+     "evidence": "scripts/publish.py:2464",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2461",
+     "evidence": "scripts/publish.py:2464",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2461",
+     "evidence": "scripts/publish.py:2464",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/publish.py:2461",
+     "evidence": "scripts/publish.py:2464",
      "note": "全方式が配信前にこの行を通る",
      "anchor": "for name, sample, fix in render_check.problems(md2html.convert(body)[0]):"
     }
@@ -2406,7 +2406,7 @@
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1641",
+     "evidence": "scripts/publish.py:1644",
      "anchor": "out = noindex.set_robots(out)",
      "note": "head を noindex,follow に。一覧・制度別・業種別・sitemap・llms.txt（subsidy/pages.py）と関連記事（_recent_articles）は noindex の印で外す"
     },
@@ -2419,20 +2419,20 @@
     },
     "wordpress": {
      "status": "partial",
-     "evidence": "scripts/publish.py:2245",
+     "evidence": "scripts/publish.py:2248",
      "anchor": "def write_wordpress(cfg, meta, body, src: Path, push=False):",
      "note": "本文のリンクの除外と、まとめのページの材料からの除外は効く",
      "need": "head の robots と WordPress のサイトマップからの除外は無い（先方の SEO プラグインで記事ごとに「検索結果に表示しない」を設定する）"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/publish.py:1641",
+     "evidence": "scripts/publish.py:1644",
      "anchor": "out = noindex.set_robots(out)",
      "note": "external-html と同じ書き出し（head を noindex,follow・sitemap・llms.txt から外す）"
     },
     "zip": {
      "status": "n/a",
-     "evidence": "scripts/publish.py:1641",
+     "evidence": "scripts/publish.py:1644",
      "anchor": "out = noindex.set_robots(out)",
      "note": "新規受付なし（ZIP は廃止）。書き出しは external-html と同じ"
     }
