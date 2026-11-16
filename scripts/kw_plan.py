@@ -476,6 +476,14 @@ def own_hit(low, S):
     return False
 
 
+def rival_of(low, S):
+    """語に含まれる他社の名前。社の設定の rival_ok（その社が連携・取り扱いをしているサービス名）は他社名にしない。
+    連携の開発を売る社では「マネーフォワード 連携」「freee 連携」が買い手の語なのに、他社名で全部落ちた（2026-11-16）"""
+    r = kw_fit.rival(low, RIVALS)
+    ok = {kw_fit.norm(x) for x in ((S.get("cfg") or {}).get("rival_ok") or [])}
+    return r if r and kw_fit.norm(r) not in ok else None
+
+
 def cheap_reject(c, S):
     """外部に問い合わせずに落とせる理由。検索数を取る前に使う。
     補助金サイトは候補が1万件を超え、そのまま一括登録すると500エラーで
@@ -489,7 +497,7 @@ def cheap_reject(c, S):
         return "除外語"
     if any(t in low for t in NOT_BUYER):
         return "見込み客でない"
-    if kw_fit.rival(low, RIVALS):      # 英字の名前は英字の語の途中で当てない（dashboard の board）
+    if rival_of(low, S):      # 英字の名前は英字の語の途中で当てない（dashboard の board）
         return "他社名"
     if KD.is_brand_query(low):
         return "指名検索"
@@ -523,7 +531,7 @@ def relevant(c, S, corpus, arts, owned, picked_norms):
         return "除外語"
     if any(t in low for t in NOT_BUYER):
         return "見込み客でない"
-    if kw_fit.rival(low, RIVALS):      # 英字の名前は英字の語の途中で当てない（dashboard の board）
+    if rival_of(low, S):      # 英字の名前は英字の語の途中で当てない（dashboard の board）
         return "他社名"
     if KD.is_brand_query(low):
         return "指名検索"
@@ -730,6 +738,8 @@ def choose(cands, S, site_id, limit=MAX_PLAN, main=None, ledger=(), owned=None, 
     owned は GSC で順位を持つ語（用語集は除く。kw_guard も用語集を「着手禁止」にしない）。
     floor=True は問い合わせに近い根拠（lead_signal）の無い語を入れない（在庫を積み足す回）"""
     corpus, arts = written_corpus(), load_articles()
+    if (S.get("cfg") or {}).get("kw_overlap_ok"):
+        corpus, arts = own_corpus(site_id)
     if owned is None:
         owned = [o for o in gsc_owned(site_id) if not is_glossary(o["page"])]
     prio = priority_subjects(S)
@@ -1131,6 +1141,35 @@ def stock(site_id):
 
 def _page_slug(url):
     return str(url or "").split("#")[0].rstrip("/").split("/")[-1]
+
+
+def own_corpus(site_id):
+    """その社の記事だけの (written_corpus の形, load_articles の形)。公開側の articles/ と、お客様の記事の非公開の置き場。
+    運用者が「ほかのサイトと狙う語が重なってもよい」と決めた社（sites の kw_overlap_ok）だけが使う。
+    当社の全記事と照らすと、経理BPO・MEO対策・AIO対策などの買い手の語が、ほかのサイトの記事を理由に全部
+    「執筆済み」で落ちた（2026-11-16 新しく受けたお客様の社）"""
+    import private_store as P
+    import sites
+    corpus, arts = [], []
+    for base in (ROOT / "articles", P.base() / "articles"):
+        for p in sorted(base.glob("*.md")):
+            m = re.match(r"^---\s*\n(.*?)\n---\s*\n?(.*)$", p.read_text(encoding="utf-8-sig"), re.S)
+            if not m:
+                continue
+            fm, body = m.groups()
+
+            def fv(k):
+                mm = re.search(rf"^{k}:\s*(.+?)\s*$", fm, re.M)
+                return mm.group(1).strip('"') if mm else ""
+            try:
+                if sites.find_category_owner(fv("category")) != site_id:
+                    continue
+            except Exception:  # noqa: BLE001  カテゴリが読めない記事はその社の記事とみなさない
+                continue
+            corpus.append(p.stem + " " + " ".join(fv(k) for k in ("title", "description", "slug")))
+            arts.append({"slug": p.stem, "title": fv("title"), "desc": fv("description"), "cat": fv("category"),
+                         "kw": fv("keyword"), "h2": [h.strip() for h in re.findall(r"^##\s+(.+?)\s*$", body, re.M)]})
+    return corpus, arts
 
 
 def site_articles(site_id):

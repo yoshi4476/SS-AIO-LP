@@ -92,7 +92,8 @@ def _rules(site):
     needs = {flat(k): re.compile(norm(v)) for k, v in (cfg.get("kw_needs") or {}).items() if k and v}
     return {"own": own, "other": other, "needs": needs, "off": rx(cfg.get("kw_off") or []),
             "require": rx(cfg.get("kw_require") or []),
-            "drop": tuple(flat(x) for x in (cfg.get("drop_kw") or []) + (cfg.get("ng_terms") or []) if x)}
+            "drop": tuple(flat(x) for x in (cfg.get("drop_kw") or []) + (cfg.get("ng_terms") or []) if x),
+            "rival_ok": {norm(x) for x in cfg.get("rival_ok") or []}}
 
 
 # 英語の普通の語でもある製品名。製品を使いたい人の語（ログイン・料金…）と一緒のときだけ他社名とみなす
@@ -133,7 +134,7 @@ def judge(kw, site):
     if m:
         return 2, f"見込み客でない（{m.group(0)}）"
     t = rival(kw)
-    if t:
+    if t and norm(t) not in R["rival_ok"]:      # その社が連携・取り扱いをしているサービス名（sites の rival_ok）は通す
         return 2, f"他社の製品・サービス名（{flat(t)}）"
     t = next((t for t in R["drop"] if t in fl), None)
     if t:
