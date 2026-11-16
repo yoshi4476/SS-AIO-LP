@@ -1609,8 +1609,11 @@ def write_external_html(cfg, dest: Path, meta, body, src: Path):
     try:
         import pick_photo
         import photo_shelf
-        # まず3サイト共通の写真の棚から（業種・作業ごとに複数枚）。棚が空のときだけ配信先の在庫写真に戻る
-        name, url = photo_shelf.pick(meta["title"], str(meta.get("keyword") or ""), meta["slug"])
+        # まず3サイト共通の写真の棚から（業種・作業ごとに複数枚）。棚が空のときだけ配信先の在庫写真に戻る。
+        # 棚の写真は生成の人物写真。「AIで作った人物は使わない」と決めている社（sites の photo_shelf: false）は、
+        # 配信先の在庫写真（ロゴと人物写真は除く）から選ぶ（2026-11-16 新しく受けたお客様の社）
+        name, url = photo_shelf.pick(meta["title"], str(meta.get("keyword") or ""), meta["slug"]) \
+            if cfg.get("photo_shelf", True) else ("", "")
         src_img = photo_shelf.DIR / f"{Path(url).stem}.webp" if url else None
         sc = "棚"
         if not (src_img and src_img.is_file()):
