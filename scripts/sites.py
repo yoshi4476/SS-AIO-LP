@@ -18,8 +18,9 @@ SITES_DIR = ROOT / "sites"
 # 「会社名・住所…が公開されないように」）。公開の id は社名から推測できない文字列（private_store.new_public_id）。
 # 社名・ドメイン・配信先・カテゴリ・戦略の部分は全部、非公開のリポジトリの clients/<社の id>/site_private.json に置き、
 # load_all がそこから読む（public_id で公開の id と結ぶ）。公開の印は枠の割り当て（site_order）を、非公開のデータが
-# 取れない回も同じにするために残す（門 gates_history_h76・h77 が守る）
-PUBLIC_KEYS = ("id", "client", "daily_articles")
+# 取れない回も同じにするために残す（門 gates_history_h76・h77 が守る）。書く曜日（publish_weekdays）も社が特定できず、
+# 非公開のデータを読む前の日次の枠（pace.py --slot）が読むので公開の印に置く（2026-11-17）
+PUBLIC_KEYS = ("id", "client", "daily_articles", "publish_weekdays")
 
 
 def split_public(cfg):
@@ -62,8 +63,9 @@ def load_all():
                 continue
             stub = cfg
             cfg = dict(full, client=True, public_id=stub["id"])
-            if "daily_articles" in stub:
-                cfg["daily_articles"] = stub["daily_articles"]
+            for k in PUBLIC_KEYS[2:]:
+                if k in stub:
+                    cfg[k] = stub[k]
         cfg["_path"] = p.as_posix()
         out[cfg["id"]] = cfg
     return out

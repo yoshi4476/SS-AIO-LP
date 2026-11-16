@@ -1401,15 +1401,16 @@ def budget_ok(S):
 
 def month_need(site_id):
     """1か月分の本数＝1日の本数×30（月の上限まで）。量産の兆候で本数を絞った社は、絞った本数で数える
-    （1日0本の社は0＝組み直さない）"""
+    （1日0本の社は0＝組み直さない）。書く曜日を決めた社は、その曜日の割合で数える
+    （今日が書かない曜日でも0にしない。0にすると、その日の計画の組み直しが止まる）"""
     import daily_audit as DA
-    per_day = DA.DAILY_TARGET
+    need = DA.DAILY_TARGET * ENOUGH_DAYS
     try:
         import pace
-        per_day = min(per_day, pace.quota(site_id))
+        need = min(need, pace.month_quota(site_id, ENOUGH_DAYS))
     except Exception:
         pass
-    return min(per_day * ENOUGH_DAYS, DA.MONTHLY_CAP)
+    return min(need, DA.MONTHLY_CAP)
 
 
 def todo_count(site_id):

@@ -86,7 +86,9 @@ def test_public_stub_is_only_an_opaque_mark():
     print("\n■ 守秘義務: 公開側の sites/ に残るお客様の社は、社が特定できない印だけ（2026-10-10）")
     import sites as S
     import private_store as PS
-    check("公開してよい項目は id・client・daily_articles の3つ", tuple(S.PUBLIC_KEYS), ("id", "client", "daily_articles"))
+    # 書く曜日（publish_weekdays）は 2026-11-17 に足した。曜日の並びだけで社は特定できない
+    check("公開してよい項目は id・client・daily_articles・publish_weekdays の4つ", tuple(S.PUBLIC_KEYS),
+          ("id", "client", "daily_articles", "publish_weekdays"))
     extra, names = [], []
     for p in sorted((ROOT / "sites").glob("*.json")):
         d = json.loads(p.read_text(encoding="utf-8-sig"))

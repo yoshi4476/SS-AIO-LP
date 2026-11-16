@@ -141,8 +141,11 @@ def write_site(cfg, sites_dir, root=None):
     cur = site_private(cfg["id"], root=root)
     pid = cfg.get("public_id") or cur.get("public_id") or cfg["id"]
     stub = {"id": pid, "client": True}
-    if cfg.get("daily_articles") is not None:
-        stub["daily_articles"] = cfg["daily_articles"]
+    # 本数と書く曜日は、非公開の置き場を読む前の日次の枠（pace.py --slot）も読む
+    import sites as S
+    for k in S.PUBLIC_KEYS[2:]:
+        if cfg.get(k) is not None:
+            stub[k] = cfg[k]
     sp = Path(sites_dir) / f"{pid}.json"
     sp.parent.mkdir(parents=True, exist_ok=True)
     sp.write_text(json.dumps(stub, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")

@@ -15,12 +15,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 def test_monthly_plan_runs_only_below_one_month_of_stock():
     import kw_plan as KP
     import pace
-    with mock.patch.object(pace, "quota", return_value=2):
-        check("1日2本の社の1か月分は60本", KP.month_need("x"), 60)
-    with mock.patch.object(pace, "quota", return_value=1):
-        check("1日1本に絞った社は30本", KP.month_need("x"), 30)
-    with mock.patch.object(pace, "quota", return_value=0):
-        check("1日0本の社は0本（組み直さない）", KP.month_need("x"), 0)
+    # 1か月分は pace.month_quota（兆候の本数と運用者の設定の小さい方×日数。書く曜日を決めた社はその割合）で数える
+    with mock.patch.object(pace, "signal_quota", return_value=2):
+        for n, want, label in ((2, 60, "1日2本の社の1か月分は60本"), (1, 30, "1日1本に絞った社は30本"),
+                               (0, 0, "1日0本の社は0本（組み直さない）")):
+            with mock.patch.object(pace, "_site", return_value={"daily_articles": n}):
+                check(label, KP.month_need("x"), want)
 
     ran = []
     cfg = {"cfg": {"name": "x", "id": "x"}, "industries": [], "sheet": [], "sheet_ng": []}

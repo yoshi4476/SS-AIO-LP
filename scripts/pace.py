@@ -40,6 +40,9 @@
   兆候・手動の対策で止めた枠は書き直しにも回さない。設定で減らした社は一覧で「要対応」にしない
   （2026-10-09 運用者の決定: 補助金は新しい記事を1日1本にし、浮いた1枠で主力の記事を書き直す。
    2026-10-19: 補助金は新しい記事0本・2枠とも書き直し。spare_scope "emerging" で表示が出始めた記事全体を対象にする）
+  publish_weekdays（0=月〜6=日 の並び）があれば、その曜日（日本時間）だけ daily_articles の本数を書き、ほかの曜日は0本。
+  （2026-11-17 運用者の決定: 新しいドメインのお客様は最初の3か月を週3本・監修を通した記事だけにする。
+   1日0〜2本の刻みでは週2〜3本を表せなかった）
 
     python scripts/pace.py                 # 測って見るだけ
     python scripts/pace.py --write         # 判定を残す（週次）
@@ -54,7 +57,7 @@ import json
 import re
 import sys
 import urllib.request
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -103,6 +106,15 @@ def setting(sid):
     """運用者が sites/<id>.json の daily_articles に決めた1日の本数（0〜2）。無い・読めないときは既定の2本。
     daily_articles_until（その日まで）があれば、過ぎた日から既定へ戻る（2026-10-22 運用者「3日間だけ1日1本」。
     戻し忘れで本数が減ったままにならないように、期限を設定に書く）"""
+    days = weekdays(sid)
+    # CI は UTC で動くので、曜日は日本時間で決める
+    if days is not None and datetime.now(timezone(timedelta(hours=9))).weekday() not in days:
+        return 0
+    return per_day(sid)
+
+
+def per_day(sid):
+    """書く曜日の1日の本数（daily_articles。0〜2）"""
     until = _site(sid).get("daily_articles_until")
     if until and str(until) < date.today().isoformat():
         return DEFAULT
@@ -110,6 +122,21 @@ def setting(sid):
     if isinstance(v, bool) or not isinstance(v, int):
         return DEFAULT
     return max(0, min(DEFAULT, v))
+
+
+def weekdays(sid):
+    """publish_weekdays（0=月〜6=日）。無い・読めないときは None（毎日）"""
+    v = _site(sid).get("publish_weekdays")
+    if not isinstance(v, list):
+        return None
+    return {d for d in v if isinstance(d, int) and not isinstance(d, bool) and 0 <= d <= 6}
+
+
+def month_quota(sid, days=30):
+    """days 日分の本数。曜日を決めた社は書く曜日の割合で数える（語の計画の1か月分が、毎日書く前提で膨らまないように）"""
+    w = weekdays(sid)
+    per = min(signal_quota(sid), per_day(sid))
+    return per * days if w is None else round(per * days * len(w) / 7)
 
 
 def signal_quota(sid):
@@ -142,6 +169,8 @@ def slot(sid, rank):
         scope = _site(sid).get("spare_scope")
         what = {"emerging": "表示が出始めた記事", "low_impression": "表示の少ない記事"}.get(scope, "主力の記事")
         return "rewrite", f"新しい記事は1日{mine}本（運用者の設定）。浮いた枠で{what}を書き直す"
+    if mine == 0 and weekdays(sid) is not None:
+        return "skip", "今日は書く曜日ではありません（運用者の設定 publish_weekdays）"
     return "skip", f"新しい記事は1日{mine}本（運用者の設定）"
 
 
