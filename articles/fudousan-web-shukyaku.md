@@ -73,9 +73,11 @@ AI検索の扱いは[不動産のAI検索対策の4つの実践ステップ](/ai
 
 不動産会社のWeb集客で効かなかったのは、品質の基準に届かない更新と、どこにでもある内容の記事の2つです。
 
-あわせて[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)もご覧ください。
+関連する内容は、[不動産の集客アイデア9つ](/aio/fudousan-shukyaku-idea/)で解説しています。
 
-近い論点を[不動産会社ホームページのよくある質問](/aio/fudousan-hp-yokuaru-shitsumon/)で扱っています。
+近い論点を[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)で扱っています。
+
+あわせて[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)もご覧ください。
 
 <figure><img src="/images/fudousan-web-shukyaku/koshin.png" alt="基準に届かない記事やどこにでもある記事を足す効かない更新と、査定ページの新設やエリア情報を厚くする効いた更新の比較"></figure>
 
@@ -112,8 +114,6 @@ Googleの<a href="https://developers.google.com/search/docs/fundamentals/creatin
 不動産会社のAIO支援で行ったのは、**査定ページの新設と、物件のエリア情報の充実**でした（2026年10月まで）。
 
 不動産会社の支援では、売却査定の依頼と、物件を買いたい人からの問い合わせが、ともに増えました（2026年10月まで）。
-
-売主が査定の前に調べる質問への答え方は、[不動産の売却集客で外す3つのNGと査定依頼を受ける順番](/aio/fudousan-baikyaku-shukyaku/)で扱っています。
 
 当社は2026年10月に、2つのAI（ChatGPT・Claude）へ「不動産 web 集客について教えてください」と同じ質問をしました。2件の答えのうち、本記事の論点『エリアページ』の語が出たものは0件でした（出典: 当社調べ）。
 

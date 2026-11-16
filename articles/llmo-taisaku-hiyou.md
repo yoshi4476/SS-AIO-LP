@@ -77,6 +77,10 @@ AIOの相場を任せる範囲ごとに見たい場合は、[AIO対策の費用�
 
 LLMO対策の費用の中身は、土台の整備・一次情報の整備・記事の質・計測という4つの作業の人件費です。
 
+あわせて[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)もご覧ください。
+
+前提となる考え方については、[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)にまとめています。
+
 <figure><img src="/images/llmo-taisaku-hiyou/uchiwake.png" alt="LLMO対策の費用の行き先: 土台の整備、一次情報の整備、記事の質、計測の4つ" loading="lazy"><figcaption>LLMO対策の費用の行き先</figcaption></figure>
 
 Googleは、AI OverviewsやAIモードに出るための追加の要件や特別な最適化は無いと公式に説明しています（<a href="https://developers.google.com/search/docs/appearance/ai-features?hl=ja" target="_blank" rel="noopener">Google検索セントラル「AI機能とウェブサイト」</a>）。
@@ -91,8 +95,6 @@ Googleは、AI OverviewsやAIモードに出るための追加の要件や特別
 - **計測**は、検索順位とAIの回答での出典を毎月確かめる作業です。
 
 当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています（出典: 自社サイトの実装・2026年8月時点）。
-
-施策そのものの進め方は、[LLMO対策とは？ChatGPTに引用される7つの方法](/aio/llmo-taisaku-hoho/)で解説しています。
 
 ## 順位の帯ごとのクリック率で回収を試算する
 

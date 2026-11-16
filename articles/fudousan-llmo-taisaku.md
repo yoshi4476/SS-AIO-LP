@@ -61,6 +61,8 @@ AIOが対象にするのはGoogle検索のAI Overview・AIモードです。一�
 
 **生成AIの用途は「検索機能」が最多で、物件探しでもAIに直接聞く利用者が増えています。**MM総研が2025年8月時点で行った個人利用調査では、生成AI利用者の用途のうち<a href="https://www.m2ri.jp/release/detail.html?id=691" target="_blank" rel="noopener">「検索機能」が52.8%で最多</a>という結果が出ています。
 
+あわせて[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)もご覧ください。
+
 不動産に絞った動きも見え始めています。AIO/LLMO分析ツールを提供する<a href="https://akarumi.jp/knowledge/real-estate-llmo/" target="_blank" rel="noopener">AKARUMIが2026年6月に公開した調査</a>があります。中古マンション・戸建て・土地を探す想定で200件のプロンプトをAIに入力し、回答内の引用を分析したものです。
 
 | データ | 数値 | 出典 |
@@ -102,11 +104,9 @@ AIの答えをそのまま信じてよいかも確かめておきます。2026�
 
 **不動産会社が着手すべきLLMO対策は、一次情報の明文化から計測まで5つの手順に整理できます。**特別な専用ツールは不要で、鍵になるのは既存ホームページの地道な情報整備。
 
-近い論点を[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)で扱っています。
+関連する内容として[不動産の集客アイデア9つ](/aio/fudousan-shukyaku-idea/)も公開しています。
 
-関連する内容として[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)も公開しています。
-
-関連する内容として[クリニックのLLMOは公式サイトだけでは足りない](/aio/clinic-llmo-taisaku/)も公開しています。
+前提となる考え方を先に押さえるなら、[MEO会社のLLMO対応とは？](/aio/meo-kaisha-llmo-taiou/)が参考になります。
 
 <figure><img src="/images/fudousan-llmo-taisaku/steps.png" alt="不動産会社が始めるLLMO対策5つのステップ: 一次情報を明文化、比較表とFAQを設置、クロール許可を確認、ポータル掲載も維持、AI参照を計測" loading="lazy"><figcaption>不動産会社が始めるLLMO対策5つのステップ</figcaption></figure>
 

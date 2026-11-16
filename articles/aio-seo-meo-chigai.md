@@ -45,15 +45,17 @@ diagrams:
 
 **3つの違いは、狙う検索結果の場所と、評価される情報の種類の組み合わせにあります。**表で並べると、混同していた部分が見えてきます。
 
+あわせて[AIOの文字数で失敗：全記事5,000字以上の下限がNGだった理由](/aio/aio-mojisuu/)もご覧ください。
+
+あわせて[AIOでコンテキスト理解を促進するには？](/aio/aio-context-rikai-sokushin/)もご覧ください。
+
 実測の参考として、2020年から2026年10月までの集客支援は、AIO・SEO・MEOを合わせて累計3,200件以上で、そのうちMEOの運用が2,000件以上です（出典: 自社の支援実績（運用者の申告 2026-10-20））。
 
-あわせて[大阪でMEOとAIOを両方任せられる会社の選び方](/aio/osaka-meo-aio-kaisha/)もご覧ください。
+近い論点を[大阪でMEOとAIOを両方任せられる会社の選び方](/aio/osaka-meo-aio-kaisha/)で扱っています。
 
 2020年から2026年10月までにSEO対策の運用を37件、2026年2月からAIO対策の運用を22件支援しています。
 
 選ぶときの基準は、[AIOとSEOの違いとは？](/aio/aio-to-seo-no-chigai/)で解説しています。
-
-あわせて[不動産業がGoogleマップで選ばれるには？](/meo/fudousan-meo-taisaku/)もご覧ください。
 
 <figure><img src="/images/aio-seo-meo-chigai/sanshu.png" alt="AIO・SEO・MEOを一言でいうと示した図" loading="lazy"><figcaption>AIO・SEO・MEOを一言でいうと</figcaption></figure>
 
@@ -69,8 +71,6 @@ diagrams:
 ## AIOを一言でいうと
 
 **AIOとは、AIが生成する回答文の中で、自社の情報が引用元として使われるようにする対策です。**新しいマークアップを追加する対策ではありません。
-
-関連する内容は[AI Overviewで店舗集客はできる？](/aio/ai-overview-tenpo-shukyaku/)でも扱っています。
 
 <div class="definition-box"><span class="term">AIOとは</span>、AIの生成する回答の中に、自社サイトの情報が引用・参照されるよう、記事構造と一次情報を整える対策です。<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google Search Central</a>は、AI OverviewとAIモードへの表示に追加要件はなく、既存の検索SEOの評価がそのまま使われると明記しています。</div>
 

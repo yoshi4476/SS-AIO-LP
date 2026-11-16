@@ -47,13 +47,13 @@ faq:
 
 不動産の集客代行とは、反響を生むまでの集客業務を、社内で抱え込まず外部の専門会社に任せる選択肢です。
 
+関連する内容は、[不動産の集客アイデア9つ](/aio/fudousan-shukyaku-idea/)で解説しています。
+
 関連する内容として[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)も公開しています。
 
 あわせて[工務店のホームページ集客とは？反響を増やす必須6要素](/ai-marketing/koumuten-hp-shukyaku/)もご覧ください。
 
 関連する内容として[整骨院の集客セミナーは受けるべき？](/ai-marketing/seikotsuin-shukyaku-seminar/)も公開しています。
-
-近い論点を[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)で扱っています。
 
 <div class="definition-box"><span class="term">不動産の集客代行とは</span>、ポータルサイトへの物件掲載・自社サイトの運用・SNS発信・広告出稿・問い合わせ対応のうち、一部または全部を月額契約や成果報酬で外部委託する仕組みを指します。丸投げではなく、社内で担う範囲と委託する範囲を線引きする発想が土台になります。</div>
 

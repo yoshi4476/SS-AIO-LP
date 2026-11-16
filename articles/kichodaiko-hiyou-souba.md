@@ -48,11 +48,11 @@ faq:
 
 **記帳代行の費用は、税理士・記帳代行専門会社・フリーランスのどれに頼むかで大きく変わります。**
 
-近い論点を[飲食店の記帳代行｜任せる範囲と選び方・失敗しない5つの確認点](/blog/inshokuten-kicho-daiko/)で扱っています。
+費用の目安については、[記帳代行費用の相場は法人でいくら？](/blog/kichodaiko-houjin-hiyou-souba/)にまとめています。
 
-あわせて[記帳代行を札幌で頼むなら](/blog/kichodaiko-sapporo/)もご覧ください。
+あわせて[平均12万円台は落とし穴](/blog/gyoseishoshi-kichodaiko-souba/)もご覧ください。
 
-関連する内容は[記帳代行のアウトソーシング活用](/blog/kichodaiko-outsourcing/)でも扱っています。
+あわせて[記帳代行をココナラで頼む落とし穴](/blog/kicho-daiko-coconala/)もご覧ください。
 
 関連する内容として記帳のやり方に迷うゆうちょ口座｜送金と振込の見分け方も公開しています。
 

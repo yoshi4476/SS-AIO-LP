@@ -49,11 +49,11 @@ faq:
 
 **介護事業所が使える補助金は、介護テクノロジー導入支援事業（介護ICT補助金）と、一般のデジタル化・AI導入補助金の2つに分かれます。**どちらも「AI導入補助金」と呼ばれることがあり、混同している事業所が少なくありません。
 
+近い論点を[事業承継の補助金は個人事業主も対象](/blog/jigyou-shoukei-hojokin-kojinjigyonushi/)で扱っています。
+
 近い論点を[GビズID不一致はNG](/blog/ai-hojokin-security-action-hoshi2/)で扱っています。
 
 つまずきやすい点を先に押さえるなら、[AI導入補助金2026 クリニックの落とし穴](/blog/ai-hojokin-clinic-2026-schedule/)が参考になります。
-
-あわせて[電子カルテ情報共有サービスの補助金はクリニック対象外？](/blog/it-hojokin-denkaru-kyoyu-clinic/)もご覧ください。
 
 <div class="definition-box"><span class="term">介護テクノロジー導入支援事業とは</span>、見守り機器・介護記録ソフト・インカムなど介護に特化した機器の導入を、都道府県が補助する制度です。実施主体は都道府県で、財源の一部を国が負担しています。</div>
 

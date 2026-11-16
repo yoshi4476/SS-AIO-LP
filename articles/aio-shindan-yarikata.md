@@ -52,15 +52,15 @@ faq:
 
 **AIO診断とは、AI検索への引用されやすさを8つの視点で確認する作業です。ツールを使わなくても、ブラウザだけで無料でチェックできます。**
 
+関連する内容として[大阪でMEOとAIOを両方任せられる会社は？](/aio/osaka-meo-aio-kaisha/)も公開しています。
+
+近い論点を[AIO導入事例｜自社サイトで実践した4施策と数値](/aio/aio-donyu-jirei/)で扱っています。
+
+あわせて[AIOチェッカーとは？表示と引用を見分ける使い方](/aio/aio-checker/)もご覧ください。
+
 近い論点を[AIOの文字数で失敗：全記事5,000字以上の下限がNGだった理由](/aio/aio-mojisuu/)で扱っています。
 
-近い論点を[AIOでコンテキスト理解を促進するには？](/aio/aio-context-rikai-sokushin/)で扱っています。
-
 関連する内容として[AIO無料相談で聞く5つのこと](/aio/aio-muryou-soudan/)も公開しています。
-
-あわせて[AIOという言葉の意味は？](/aio/aio-kotoba/)もご覧ください。
-
-関連する内容として[前置きで書き始めると失敗する？](/aio/aio-yarikata/)も公開しています。
 
 <div class="definition-box"><span class="term">AIO診断とは</span>、検索順位・記事の書き出し・構造化データ・クローラー許可など、AI検索(AI Overview・ChatGPT等)に引用されるための条件を、項目ごとにチェックすることです。</div>
 

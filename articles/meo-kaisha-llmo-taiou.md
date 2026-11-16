@@ -77,8 +77,6 @@ AI引用に対応しているMEO会社を見極める基準は、構造化デー
 
 関連する内容として[LLMO店舗集客とは？](/aio/llmo-tenpo-shukyaku/)も公開しています。
 
-選ぶときの基準は[大阪でMEOとAIOを両方任せられる会社の選び方](/aio/osaka-meo-aio-kaisha/)でも扱っています。
-
 <figure><img src="/images/meo-kaisha-llmo-taiou/kijun3.png" alt="AI引用に対応しているMEO会社を見極める3つの基準: 構造化データの実装実績、一次情報を記事に組み込む設計力、AI検索の計測レポートの中身" loading="lazy"><figcaption>AI引用に対応しているMEO会社を見極める3つの基準</figcaption></figure>
 
 **基準1: 構造化データの実装実績。**BlogPostingやFAQPageなどのSchemaを、本文の内容と齟齬なく実装できるかを確認します。実装が形だけになっている会社も少なくありません。同じテンプレートを複数の店舗に使い回している会社は、要注意です。FAQPageの回答文が本文と一字一句違うだけでも、AIから見れば矛盾情報です。信頼できる引用元として扱われにくくなります。

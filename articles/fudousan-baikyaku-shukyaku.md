@@ -56,6 +56,8 @@ quality_attempts: 3
 
 不動産の売却集客は、家や土地を売りたい人を検索やAI検索から自社サイトへ呼び、査定の依頼を直接受ける取り組みです。
 
+関連する内容として[不動産の集客アイデア9つ](/aio/fudousan-shukyaku-idea/)も公開しています。
+
 <div class="definition-box"><span class="term">不動産の売却集客とは</span>、売却を考える人（売主）から、査定や売却の相談を受けるための集客です。物件を探す買主の集客とは、読む人も受けるページも違います。</div>
 
 買主の集客では、物件そのものが比べられます。売主の集客で比べられるのは、**査定額の根拠と、任せる会社の説明**です。
@@ -144,13 +146,9 @@ Googleの<a href="https://developers.google.com/search/docs/fundamentals/creatin
 - 担当エリアでの売れ方の傾向（担当者が見てきたこと）
 - 査定の依頼へ進む導線
 
-相場の書き方は[相場記事の作り方](/ai-marketing/souba-kiji-tsukurikata/)にまとめています。
-
 AIに選ばれる書き方は、検索の書き方と変わりません。Googleは<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">AI最適化ガイド</a>で、独自の視点と一般論に留まらない内容が効くと示しています。
 
 サイトの土台を整え、権威性の表示（運営者情報・資格・各社の実績）を足しました。表や図も内容に合わせて整理したところ、ChatGPT・Gemini・GoogleのAI回答で紹介されるようになりました。**AI検索で紹介されるようになるまでは約6か月**でした（2026年10月まで）。
-
-AI検索への対応の全体像は[不動産のAI検索対策の4つの実践ステップ](/aio/fudousan-ai-kensaku-taisaku/)で扱っています。
 
 <div class="cta-box"><p>自社の査定ページと売却の質問ページが、検索とAI検索でどう見えているかを無料で確認します。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 

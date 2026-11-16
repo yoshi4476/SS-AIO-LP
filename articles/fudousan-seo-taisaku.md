@@ -47,6 +47,8 @@ diagrams:
 
 **不動産SEOとは、自社サイトの検索順位を上げ、比較検討中の見込み客に会社ごと見つけてもらう施策です。**
 
+前提となる考え方は[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)で整理しています。
+
 近い論点を[不動産の集客代行とは？](/ai-marketing/fudousan-shukyaku-daikou/)で扱っています。
 
 <div class="definition-box"><span class="term">不動産SEOとは</span>、「エリア名+賃貸」「エリア名+不動産会社」のように検索されたとき、自社のホームページやコラム記事が上位に表示され、物件情報だけでなく会社の信頼性・専門性まで伝えて問い合わせにつなげるための一連の施策です。ポータルサイトへの物件掲載とは別物で、あくまで「自社が運用できる資産」を検索エンジン経由で育てる取り組みを指します。</div>
@@ -62,8 +64,6 @@ diagrams:
 近い論点を[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)で扱っています。
 
 関連する内容として[飲食店の集客方法とは？](/ai-marketing/inshokuten-shukyaku-hoho/)も公開しています。
-
-あわせて[不動産の集客方法とは？6つのチャネルと選び方](/ai-marketing/fudousan-shukyaku-houhou/)もご覧ください。
 
 <a href="https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo16_hh_000001_00105.html" target="_blank" rel="noopener">国土交通省</a>によると、<strong>令和6年度末時点の宅地建物取引業者数は13万2,291業者で、11年連続で増加しています</strong>。供給過多の市場では、ポータルへの物件掲載だけで反響が入ってきた時代は終わりつつあります。
 

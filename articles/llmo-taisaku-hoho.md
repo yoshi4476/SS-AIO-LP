@@ -34,8 +34,6 @@ LLMO対策とは、AIチャットの回答内で自社が引用元・推奨先�
 
 あわせて[クリニックのLLMOは公式サイトだけでは足りない](/aio/clinic-llmo-taisaku/)もご覧ください。
 
-前提となる考え方は[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)で整理しています。
-
 関連する内容については、[インバウンド飲食店のLLMO](/aio/inbound-inshokuten-llmo/)にまとめています。
 
 関連する内容については、[リフォーム・外壁塗装のLLMO](/aio/reform-gaiheki-tosou-llmo/)にまとめています。

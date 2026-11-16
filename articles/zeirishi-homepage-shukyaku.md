@@ -54,7 +54,7 @@ faq:
 
 税理士選びの起点が検索とAI回答に移ったことで、ホームページを持たない事務所は見込み客の視界に入らなくなっています。
 
-近い論点を[飲食店の集客サービスの注意点](/aio/inshokuten-shukyaku-service/)で扱っています。
+あわせて[税理士のSEOキーワードはどう選ぶ？](/seo/zeirishi-seo-keyword/)もご覧ください。
 
 あわせて[税理士の集客コンサルは助言だけで足りる？](/aio/zeirishi-shukyaku-consul/)もご覧ください。
 

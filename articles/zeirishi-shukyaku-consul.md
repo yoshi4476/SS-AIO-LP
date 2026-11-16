@@ -80,6 +80,8 @@ quality_attempts: 1
 
 当社がSEO・AIOで受けた依頼は、運用まで任される件数より、コンサルティングのみの件数のほうが多くなっています。
 
+関連する内容として[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)も公開しています。
+
 当社は2020年から2026年10月までに、SEO対策の運用を37件支援しています。2026年2月からは、AIO対策の運用を22件支援しています。コンサルティングのみは、SEOが113件、AIOが43件です（自社の支援実績・2026年10月時点）。
 
 <figure><img src="/images/zeirishi-shukyaku-consul/kensu.png" alt="SEO運用37件、SEOコンサルのみ113件、AIO運用22件、AIOコンサルのみ43件を比べた棒グラフ"></figure>
@@ -122,8 +124,6 @@ quality_attempts: 1
 ## 助言だけで足りる事務所と運用まで頼む事務所の分かれ目
 
 助言型で足りるか運用型まで頼むかは、執筆の時間・監修の担い手・数字を測る人の3つで分かれます。
-
-関連する内容として[AIOの順位が変動する理由は？](/aio/aio-junni-hendou-riyuu/)も公開しています。
 
 <figure><img src="/images/zeirishi-shukyaku-consul/tsukiji.png" alt="検索とAIで測る、直す点と順番を受け取る、事務所が書き直す、翌月に測り直すの4つを繰り返す図"></figure>
 
