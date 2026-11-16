@@ -1,6 +1,5 @@
 {
   "id": "c5fb0e662",
   "client": true,
-  "daily_articles": 1,
-  "publish_weekdays": [0, 2, 4]
+  "daily_articles": 2
 }

@@ -338,6 +338,10 @@ def main():
         print(f"  → 「{nxt['keyword']}」")
         if nxt.get("aim"):
             print(f"     狙い: {nxt['aim']}")
+        # 分野を順に回す社は、選んだ分野で書かせる（記事の category は書く AI が決めるので、指定しないと本数がそろわない）
+        if cfg.get("category_rotate") and nxt.get("category") in (cfg.get("categories") or {}):
+            print(f"     分野: {nxt['category']}（{cfg['categories'][nxt['category']]}）"
+                  "— この記事の category は必ずこの分野にする（分野を順に回して本数をそろえる社）")
         print(f"     台帳の残り: {nxt.get('remaining', '?')}件 / "
               f"補充要否: {'必要' if nxt.get('need_replenish') else '不要'}")
         print("  ※ 管制塔の台帳から取得（執筆開始時に「執筆中」へ変わります）")

@@ -233,6 +233,8 @@ def next_kw(site):
         else:
             print(f"要対応: {site} の未着手に買い手の語がありません（kw_plan で積むまで、ほかの語を書きます）")
 
+    got, kw0, todo = _rotate(site, got, kw0, todo, rows)
+
     # お客様の社は、材料（一次情報・体験・事例）のある題を先に書く。材料の無い題は一次性が40点前後で止まり、
     # 事実を作らない限り何度直しても公開できない（2026-10-20）。ある題が尽きたら無い題も書く（書かない選択はしない）
     hit = _with_material(site, got, kw0, todo)
@@ -305,6 +307,57 @@ def _buyer_first(site):
         return (S.load_all().get(site) or {}).get("kw_buyer_first") is True
     except Exception:  # noqa: BLE001  読めなければ今までの順
         return False
+
+
+def _rotate(site, got, kw0, todo, rows):
+    """分野を順に回す社（category_rotate。2026-11-17 運用者「順々に出して、すべて同じ数になるように」）は、
+    記事の数（記事の category）がいちばん少ない分野の語だけを候補にする。同数なら categories の並び順。
+    その分野の未着手が無ければ次に少ない分野へ。後の段（材料・AI回答・実証済み）はこの分野の中で効く。
+    台帳の行に分野は入らない（kw_plan は語と狙いだけを積む）ので、語の分野は category_terms の言葉で決める。
+    記事の分野は書く AI が決めるため、指示書（site_brief）が選んだ分野で書くよう指定する"""
+    import sites as S
+    try:
+        cfg = S.load_all().get(S.resolve(site)) or {}
+    except Exception:  # noqa: BLE001  読めなければ今までの順
+        return got, kw0, todo
+    cats = [c for c in cfg.get("categories") or {} if not str(c).startswith("_")]
+    if not cfg.get("category_rotate") or not cats:
+        return got, kw0, todo
+    done = _article_counts(site, cats)
+    of = lambda r: str(r.get("category", "")).strip() or category_of(str(r.get("keyword", "")), cfg)
+    for c in sorted(cats, key=lambda c: (done[c], cats.index(c))):
+        mine = [r for r in todo if of(r) == c]
+        if not mine:
+            continue
+        if str(got.get("category", "")).strip() != c:
+            got = dict(got)
+            got.update({"keyword": str(mine[0]["keyword"]), "aim": mine[0].get("aim", ""), "category": c,
+                        "picked_by": f"分野を順に回す（{c} が{done[c]}本でいちばん少ない）"})
+        return got, str(got["keyword"]), mine
+    return got, kw0, todo
+
+
+def category_of(kw, cfg):
+    """語の分野（category_terms の言葉を含む最初の分野）。どれにも当たらなければ空"""
+    low = kw.lower()
+    for c, terms in (cfg.get("category_terms") or {}).items():
+        if not str(c).startswith("_") and any(str(t).lower() in low for t in terms or []):
+            return c
+    return ""
+
+
+def _article_counts(site, cats):
+    """その社の分野ごとの記事の数（公開側の articles/ と、お客様の記事の非公開の置き場）"""
+    import re
+    import private_store as P
+    import sites as S
+    n = {c: 0 for c in cats}
+    for base in (Path(__file__).resolve().parent.parent / "articles", P.base() / "articles"):
+        for p in base.glob("*.md"):
+            m = re.search(r"^category:\s*\"?([^\"\n]+?)\"?\s*$", p.read_text(encoding="utf-8-sig")[:1500], re.M)
+            if m and m.group(1) in n and S.find_category_owner(m.group(1)) == site:
+                n[m.group(1)] += 1
+    return n
 
 
 def _with_material(site, got, kw0, todo):
