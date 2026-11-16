@@ -380,7 +380,8 @@ def ledger_lines(site_id, rows, hist, client=False):
 
 def line():
     import sites as S
-    hist = [json.loads(x) for x in (HIST.read_text(encoding="utf-8").splitlines() if HIST.is_file() else []) if x.strip()]
+    import client_private as CP     # お客様の社の行は置き場にある（読むときに合わせる）
+    hist = [json.loads(x) for x in CP.read_lines(HIST)]
     for site_id, blk in sorted(load().items()):
         rows = [r for r in blk.get("queries") or [] if r.get("ind")]
         if rows:
@@ -431,11 +432,13 @@ def track(only=""):
     today, stuck_all, up_all, tot = date.today().isoformat(), [], 0, 0
     failed = []
     lines = []
-    # 同じ日に2回走ると履歴が二重になる。当日分を落としてから書き直す
-    keep = [l for l in (HIST.read_text(encoding="utf-8").splitlines() if HIST.is_file() else [])
-            if l.strip() and json.loads(l).get("at") != today]
-    HIST.write_text(chr(10).join(keep) + (chr(10) if keep else ""), encoding="utf-8")
-    with HIST.open("a", encoding="utf-8") as fh:
+    # 同じ日に2回走ると履歴が二重になる。当日分を落としてから書き直す。お客様の社の行は非公開の置き場へ分けて書く
+    # （2026-11-16 の週次が社の id と狙う語・順位を public に書いた）。行は一度ためて、最後に save_jsonl で振り分ける
+    import io
+    import client_private as CP
+    keep = [json.loads(l) for l in CP.read_lines(HIST)]
+    keep = [r for r in keep if r.get("at") != today]
+    for fh in [io.StringIO()]:      # 1回だけ回る。下の行は fh にためる
         for site_id, blk in sorted(reg.items()):
             if only and site_id != only:
                 continue
@@ -481,6 +484,8 @@ def track(only=""):
                 stuck_all.append((site_id, q, c))
             if _S.is_client(site_id):
                 stuck_all += [(site_id, q, "") for q, _b, _p, _s in stuck]
+    keep += [json.loads(x) for x in fh.getvalue().splitlines() if x.strip()]
+    CP.save_jsonl(HIST, keep, lambda r: r.get("site"))
     print("■ 主要クエリの推移")
     for l in lines:
         print(l)

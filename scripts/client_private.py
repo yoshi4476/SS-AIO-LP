@@ -66,7 +66,8 @@ def is_private(sid):
 # 監修の記録で、社名・記事の slug が入る（公開側に置かない。2026-10-10 運用者の指示）。キャッシュは7日で消えるので、
 # 消えると困る記録はこちら
 REPO_BACKED = ("data/editorial_reviews.jsonl", "data/videos.json", "data/youtube_connected.json",
-               "data/bing_backfill.json", "data/pace_manual.json", "data/retractions.jsonl", "data/cwv.jsonl")
+               "data/bing_backfill.json", "data/pace_manual.json", "data/retractions.jsonl", "data/cwv.jsonl",
+               "data/key_query_history.jsonl")
 
 
 def private_path(sid, rel):
@@ -312,7 +313,9 @@ def save_backfill(b, pub=None):
 # 表示速度の記録（cwv.jsonl）にはお客様の社のドメインの URL が入る（2026-10-12 の週次が public に1行 push した）
 # 公開前の採点の記録（quality_loop.jsonl）には記事の slug と点数が入る（2026-10-20）
 SPLIT_JSONL = ("automation/logs/auto_fix.jsonl", "data/lessons.jsonl", "data/merges.jsonl", "data/editorial_reviews.jsonl",
-               "data/retractions.jsonl", "data/cwv.jsonl", "data/quality_loop.jsonl")
+               "data/retractions.jsonl", "data/cwv.jsonl", "data/quality_loop.jsonl",
+               # 主要クエリの順位の履歴には社の id と狙う語・順位が入る（2026-11-16 の週次が public に100行書いた）
+               "data/key_query_history.jsonl")
 
 
 def _split_rel(p):
