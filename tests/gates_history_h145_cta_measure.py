@@ -36,12 +36,18 @@ def band_problems(html, claims):
     if not m:
         return ["帯が無い"]
     out = []
-    for n in re.findall(r'<span class="n">(.*?)</span>', m.group(0), re.S):
+    # 数は単位の頭の字と組にし、見出しの語（AIO・SEO・MEO）がある項目はその語も同じ文に要る。
+    # 数だけで照らすと、測った数字が増えたとき別の意味の同じ数（口コミ74件など）に当たって見逃す（2026-11-16）
+    for li in re.findall(r"<li>(.*?)</li>", m.group(0), re.S):
+        n = (re.search(r'<span class="n">(.*?)</span>', li, re.S) or [None, ""])[1]
+        label = (re.search(r'<span class="l">(.*?)</span>', li, re.S) or [None, ""])[1]
         if re.search(r"店舗以上|社以上", n):
             out.append("単位: " + re.sub(r"<[^>]+>", "", n))
-        for num in re.findall(r"\d[\d,]*", re.sub(r"<[^>]+>", " ", n)):
-            pat = r"(?<![\d,.])" + re.escape(num) + r"(?![\d,.])"
-            if not any(re.search(pat, c) for c in claims):
+        keys = re.findall(r"[A-Z]{3}", label)
+        pairs = re.findall(r"(\d[\d,]*)\s*<small>(.)", n)
+        for num, unit in pairs:
+            pat = r"(?<![\d,.])" + re.escape(num) + r"\s*" + re.escape(unit)
+            if not any(re.search(pat, c) and (not keys or any(k in c for k in keys)) for c in claims):
                 out.append("台帳に無い数: " + num)
     return out
 
