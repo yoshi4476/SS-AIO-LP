@@ -1613,5 +1613,15 @@
     "format": "duo",
     "url": "https://ai.7senses.co.jp/research/fitness-ai-sources/",
     "youtube": "sZQVtp7CH2w"
+  },
+  "research-fudosan": {
+    "site": "ai-lab",
+    "kind": "research",
+    "date": "2026-11-16",
+    "sec": 179,
+    "mp4": "automation/video/research-fudosan.mp4",
+    "format": "duo",
+    "url": "https://ai.7senses.co.jp/research/fudosan-ai-sources/",
+    "youtube": "N_-HXUnMTEE"
   }
 }
