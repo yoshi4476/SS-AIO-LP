@@ -352,9 +352,12 @@ def article_territory(title, body, site_id):
     """
     import sites as sites_mod
     cfgs = sites_mod.load_all()
+    # 比べる相手は同じ会社の組だけ（kw_fit と同じ）。別の会社へは記事を移せない。全社と比べていたため、
+    # 担当の語の広い社を受けた日に、ほかの社と自社の記事が「その社へ移す」と知らされた（2026-11-18）
+    group = set(sites_mod.group_of(site_id)) | {site_id}
     # タイトルは記事の主題を表すため重みを3倍にする
     scores = {sid: sum(3 * title.count(t) + body.count(t) for t in cfg.get("owns", []))
-              for sid, cfg in cfgs.items()}
+              for sid, cfg in cfgs.items() if sid in group}
     own = scores.get(site_id, 0)
     best = max(scores, key=lambda k: scores[k])
     # 比率と実数の両方で明確に上回る場合だけ侵食とみなす（語数の少ない記事の誤検出を防ぐ）
@@ -393,8 +396,9 @@ def territory_check():
         # 自サイトの所有語を含むなら、他サイトの語が混ざっていても自サイトのテーマとみなす
         if any(t.lower() in low for t in owns[site]):
             continue
+        group = set(sites_mod.group_of(site))
         for other, terms in owns.items():
-            if other == site:
+            if other == site or other not in group:   # 別の会社の担当の語は、この社の台帳の侵食ではない
                 continue
             hit = next((t for t in terms if t.lower() in low), None)
             if hit:
