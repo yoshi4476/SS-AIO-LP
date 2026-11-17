@@ -1,0 +1,146 @@
+{
+ "v": 2,
+ "slug": "marunage-kichodaiko",
+ "ok": true,
+ "date": "2026-11-17",
+ "questions": [
+  "丸投げ記帳代行について教えてください",
+  "丸投げ記帳代行について、「丸投げ記帳代行とは、資料を仕分けずに渡して帳簿まで任せる形」を教えてください",
+  "丸投げ記帳代行について、「「丸投げOK」の表示で確かめる5項目」を教えてください",
+  "丸投げ記帳代行について、「丸投げ先が個人か会社かで何が変わるか」を教えてください",
+  "丸投げ記帳代行について、「丸投げ記帳代行の費用はどこで上がるか」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "丸投げ記帳代行とは、資料を仕分けずに渡して帳簿まで任せる形",
+   "words": [
+    "記帳代行",
+    "資料"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "「丸投げOK」の表示で確かめる5項目",
+   "words": [
+    "OK",
+    "表示"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "丸投げ先が個人か会社かで何が変わるか",
+   "words": [
+    "個人"
+   ],
+   "hits": 4,
+   "of": 8
+  },
+  {
+   "topic": "丸投げ記帳代行の費用はどこで上がるか",
+   "words": [
+    "記帳代行"
+   ],
+   "hits": 8,
+   "of": 8
+  },
+  {
+   "topic": "丸投げ記帳代行で起きる失敗3つと避け方",
+   "words": [
+    "記帳代行"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "丸投げ記帳代行に向く会社・見送る会社",
+   "words": [
+    "記帳代行"
+   ],
+   "hits": 10,
+   "of": 10
+  },
+  {
+   "topic": "丸投げ記帳代行を頼む前に今日確かめること",
+   "words": [
+    "記帳代行",
+    "今日確"
+   ],
+   "hits": 10,
+   "of": 10
+  }
+ ],
+ "official": [
+  {
+   "term": "税理士法",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 5
+  },
+  {
+   "term": "電子帳簿等保存制度",
+   "org": "国税庁",
+   "of": 10,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "amuse-e-yamada.com": "peer",
+  "at-tax.com": "video",
+  "biz.moneyforward.com": "peer",
+  "catalog.monex.co.jp": "media",
+  "charis-tax.jp": "peer",
+  "coconala.com": "portal",
+  "comons-backoffice.com": "peer",
+  "corp.7senses.co.jp": "self",
+  "go.chatwork.com": "peer",
+  "ht-tax.or.jp": "peer",
+  "imastax.com": "video",
+  "inspirehr-lab.com": "peer",
+  "ishikawa-ac.jp": "peer",
+  "jiei.com": "media",
+  "kaikei.management": "peer",
+  "kanbei.jp": "media",
+  "keiri.harbors-inc.com": "peer",
+  "keycrea.jp": "peer",
+  "kicho-daikou.com": "peer",
+  "media.invoice.ne.jp": "peer",
+  "meetsmore.com": "portal",
+  "mushinkoku.com": "peer",
+  "nagoya-keiri.com": "peer",
+  "nakamura-tax.net": "peer",
+  "nta.go.jp": "public",
+  "osakacpa.com": "peer",
+  "ppc.go.jp": "public",
+  "seventh-sense.co.jp": "peer",
+  "tax-ms.jp": "peer",
+  "tokyo-keiri.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "warabi-keiri.jp": "peer",
+  "wisdom-cpa.com": "peer",
+  "yamada-accounting.com": "peer",
+  "yayoi-kk.co.jp": "peer",
+  "yuki-kaikei.jp": "peer",
+  "zeeta.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 4,
+  "注意点・失敗・リスク": 7,
+  "進め方の手順": 1,
+  "専門家への相談": 8
+ },
+ "chars": 15354,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、国税庁の資料にある「電子帳簿等保存制度」に触れたものは0件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、国税庁の資料にある「税理士法」に触れたものは5件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは進め方の手順は1件、費用の金額（◯円）は3件、期間（◯か月・◯日など）は4件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは37件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが3件、ポータル・比較サイトが2件、動画・SNS・ブログが2件でした。"
+ ]
+}

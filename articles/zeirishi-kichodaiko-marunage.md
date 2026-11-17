@@ -230,6 +230,8 @@ faq:
 
 **丸投げの前に、件数・渡す日・記帳以外の作業・税理士との分担の4つを3週間で決めます。**
 
+関連する内容は[丸投げ記帳代行の「丸投げOK」で確かめる5項目](/blog/marunage-kichodaiko)でも扱っています。
+
 <figure><img src="/images/zeirishi-kichodaiko-marunage/junbi.png" alt="丸投げを始める前の4つの手順: 仕訳の件数を数える、資料を渡す日を決める、記帳以外の作業を書き出す、税理士と分担を決める" loading="lazy"><figcaption>丸投げを始める前の4つの手順</figcaption></figure>
 
 手順は次の4つです。1週目に2つ、2週目と3週目に1つずつ進めます。
