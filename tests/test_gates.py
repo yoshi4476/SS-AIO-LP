@@ -3806,7 +3806,9 @@ def test_report_actions_close_the_loop():
     check("report_digest: 照合に落ちた社は添付しない", "照合で止めました" in inspect.getsource(RD.main), True)
     check("reindex: 登録済みのURLは30日検査しない", RX.FRESH_DAYS, 30)
     check("reindex: 1回の呼び出しに時間制限", "timeout=30" in inspect.getsource(RX.svc), True)
-    check("週次CI: 60分で打ち切られない（180分）", "timeout-minutes: 180" in wk, True)
+    # 180分では 2026-11-16 に打ち切られ、要対応の通知・週次レポート・IndexNow の通知が抜けた
+    m_opt = re.search(r"\n  optimize:\n.*?\n    timeout-minutes: (\d+)", wk, re.S)
+    check("週次CI: 本体（optimize）は240分まで打ち切られない", bool(m_opt) and int(m_opt.group(1)) >= 240, True)
     check("週次CI: 同じURL検査を2回しない（index_status を外した）", "python scripts/index_status.py" not in wk, True)
     check("週次CI: 要対応を二重に書かない", wk.count("grep '^要対応' /tmp/measure.txt >> automation/logs/findings.txt") == 1, True)
     check("AI調査の答えを30日使い回す", "CACHE_DAYS = 30" in (ROOT / "scripts" / "ai_cite_check.py").read_text(encoding="utf-8"), True)
