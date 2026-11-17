@@ -1,0 +1,104 @@
+{
+ "v": 2,
+ "slug": "getsuji-kessan-checklist",
+ "ok": true,
+ "date": "2026-11-17",
+ "questions": [
+  "月次決算 早期化 チェックリストについて教えてください",
+  "月次決算 早期化 チェックリストについて、「月次決算早期化チェックリストとは？使う工程は3つ」を教えてください",
+  "月次決算 早期化 チェックリストについて、「チェックリストを使う前に整える4つの前提条件」を教えてください",
+  "月次決算 早期化 チェックリストについて、「チェックリスト①仕訳・残高照合の工程（6項目）」を教えてください",
+  "月次決算 早期化 チェックリストについて、「チェックリスト②試算表確定・報告の工程（5項目）」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "月次決算早期化チェックリストとは？使う工程は3つ",
+   "words": [
+    "工程"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "チェックリストを使う前に整える4つの前提条件",
+   "words": [
+    "前提条件"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "チェックリスト①仕訳・残高照合の工程（6項目）",
+   "words": [
+    "残高照合",
+    "仕訳",
+    "工程"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "チェックリスト②試算表確定・報告の工程（5項目）",
+   "words": [
+    "試算表確定",
+    "報告",
+    "工程"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "チェックリストを回すコツと社内でこなせない場合の判断基準",
+   "words": [
+    "判断基準",
+    "コツ",
+    "社内"
+   ],
+   "hits": 3,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "biz.moneyforward.com": "peer",
+  "catalog.monex.co.jp": "media",
+  "cfozine.jp": "peer",
+  "claudelab.jp": "peer",
+  "clouderp.scskminori.co.jp": "peer",
+  "corp.7senses.co.jp": "self",
+  "cpa-learning.com": "peer",
+  "fas-calm.co.jp": "peer",
+  "go.taxita.com": "portal",
+  "ishii-cpatax.com": "video",
+  "kaonavi.jp": "peer",
+  "keiei.freee.co.jp": "peer",
+  "keiridriven.mjs.co.jp": "peer",
+  "maro-kaikei.co.jp": "peer",
+  "media.invoice.ne.jp": "peer",
+  "note.com": "video",
+  "primejapan.co.jp": "peer",
+  "prokeiri.com": "peer",
+  "toma.co.jp": "peer",
+  "toshin-sougou.or.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yayoi-kk.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 0,
+  "進め方の手順": 4,
+  "専門家への相談": 1
+ },
+ "chars": 8672,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え4件のうち、『前提条件』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え5件のうち、『判断基準』に触れたものは3件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは注意点・失敗・リスクは0件、費用の金額（◯円）は1件、期間（◯か月・◯日など）は1件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは22件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件、ポータル・比較サイトが1件、動画・SNS・ブログが2件でした。"
+ ]
+}
