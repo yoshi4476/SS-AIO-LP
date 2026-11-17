@@ -717,6 +717,15 @@ def publish(root=None, only=None):
             SOFT_FAILS = ()
         return [c[0] for c in checks if not c[1] and not c[3] and not c[0].startswith(tuple(SOFT_FAILS))]
 
+    def _improving_file(p):
+        try:
+            import rubric
+            import yaml
+            m = re.match(r"^---\s*\n(.*?)\n---", p.read_text(encoding="utf-8-sig"), re.S)
+            return bool(m) and rubric.improving(yaml.safe_load(m.group(1)) or {})
+        except Exception:  # noqa: BLE001  読めなければ今までどおり隔離する
+            return False
+
     new, changed = changes(root)
     # 前の回から直していて、この回の公開前の採点で基準に届いた記事も、新しい記事と同じ道（publish_flow）で配る
     # （中身が変わっただけの扱いだと、管制塔の「公開済み」・SNS・検索エンジンへの通知が飛ぶ。2026-10-20 quality_loop）
@@ -753,6 +762,14 @@ def publish(root=None, only=None):
         # 確かめの失敗まで隔離してしまうので、score_check を直接呼ぶ。公開済みの記事は new に入らないので動かさない
         # （2026-10-13 に公開中の280本を誤って隔離した。門 gates_history_h126 が確かめる）
         fails = _score_fails(root, slug)
+        # 公開前の採点の直し（quality_loop）が引き受けた記事（quality_state: improving）は隔離しない。改善中の記事は build.py・
+        # 配信（rubric.gate_why）のどちらでも公開されず、次の回の直しが機械の指摘（内部リンクの送り先を含む）も直す。
+        # 隔離すると直しの対象から外れ、1本が失われていた（2026-11-17 新しい社の1本目）
+        if fails and _improving_file(root / "articles" / f"{slug}.md"):
+            res["improving"] += 1
+            print(f"   … {name}: 機械採点の不足（{'・'.join(fails[:3])}）も、公開前の直しで直します（改善中。公開しません）",
+                  flush=True)
+            continue
         if fails:
             qdir = root / "articles" / "_conflicted"
             qdir.mkdir(parents=True, exist_ok=True)

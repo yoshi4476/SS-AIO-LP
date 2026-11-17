@@ -628,6 +628,11 @@ def machine_note(slug):
         out += [f"- 前の文を読まないと分からない文（主語・対象を書き入れる）:「{x}」" for x in SC.pointing_sentences(body)]
         out += [f"- FAQ の答えの数字に、本文で付けている条件（母数・期間・含むもの）が無い。答えにも同じ条件を書く:「{x}」"
                 for x in SC.faq_scope_issues(body)]
+        # 内部リンクが3本に満たないと、配信の前の機械採点で落ちる。送り先を名指しする（2026-11-17 新しい社の1本目が0本で落ちた）
+        if len(SC.internal_links(body)) < 3:
+            tg = SC.link_targets(site_of(slug), mt.get("category") or "", skip=slug)
+            out.append(f"- 内部リンクが{len(SC.internal_links(body))}本しかない（3本以上が必要）。次の公開済みの記事から主題に関係するものを、"
+                       "本文の自然な文脈に Markdown のリンクで入れる: " + " / ".join(f"[{t}]({u})" for t, u in tg))
         if not SC.HYPO.search(re.sub(r"<[^>]+>", "", body)):
             out.append("- 仮の計算例が無い。「仮に◯◯なら△△」の形で、読者が自分の数字を当てはめられる例を1つ置く")
         # 当社調べを測ってあるのに記事に1つも無ければ、入れるよう名指しする（2026-10-21 の試しで、材料に渡しても使われなかった）
@@ -747,7 +752,13 @@ def pre_improve(slug, budget, ctx, base):
     sc = {"why": "採点の前の先回りの直し（機械の指摘と、使っていない材料）", "axes": {}, "quotes": {}, "weak": {}, "machine": note}
     good, why = IMPROVE(slug, sc, ctx["blocked"])
     record({**base, "action": "preimprove", "ok": good, "why": str(why)[:200]})
-    print(f"     採点の前の直し: {'直しました' if good else '戻しました・変更なし'}")
+    print(f"     採点の前の直し: {'直しました' if good else '戻しました・変更なし（' + reason_shown(why) + '）'}")
+
+
+def reason_shown(why):
+    """戻した理由の、ログに出せる頭の部分（括弧・コロンの後ろは記事の中身や slug を含みうるので落とす）。
+    お客様の記事は理由を伏せていたため、3回続けて戻した原因がログから分からなかった（2026-11-17）"""
+    return re.split(r"[（(:：]", str(why))[0].strip()[:40] or "理由なし"
 
 
 def waiting_materials(slug, site, path=None, today=None):
@@ -881,7 +892,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         good, why = IMPROVE(slug, sc, ctx["blocked"])
         record({**base, "action": "improve", "round": prior + done, "ok": good, "why": str(why)[:200]})
         print(f"     直し{done}回目: {'直しました' if good else '戻しました・変更なし'}（"
-              f"{why[:60] if name == slug else '中身は台帳に残しました'}）")
+              f"{why[:60] if name == slug else reason_shown(why)}）")
         if not good:
             sc["retry_note"] = str(why)
             continue

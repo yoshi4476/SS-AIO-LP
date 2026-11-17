@@ -210,6 +210,23 @@ def require_materials(site_id):
         raise SystemExit(3)
 
 
+def link_brief(cfg, category=""):
+    """内部リンクの送り先を、この記事の分野を先にして出す。送り先が3本に満たない社は要対応（機械採点で必ず落ちる）"""
+    import score_check
+    got = score_check.link_targets(cfg["id"], category)
+    print("\n■ 内部リンクの送り先（この中から主題に関係する3本以上を、本文の自然な文脈に Markdown のリンクで入れる。"
+          "会社のページ（サービス・事例・問い合わせ）へのリンクは内部リンクの本数に数えない）")
+    for title, url in got:
+        print(f"  - {title} → {url}")
+    if len(got) < 3:
+        print(f"要対応: {_shown_name(cfg)} の内部リンクの送り先が {len(got)}本しかありません（3本未満の記事は機械採点で落ちる。"
+              "仕組みの外で書いた公開済みのコラムを設定の link_pages に入れる）")
+
+
+def _shown_name(cfg):
+    return sites_mod.public_id(cfg["id"]) if sites_mod.is_client(cfg["id"]) else cfg.get("name", cfg["id"])
+
+
 def main():
     if len(sys.argv) < 2:
         raise SystemExit("使い方: python scripts/site_brief.py <site_id>\n" + sites_mod.summary())
@@ -356,6 +373,8 @@ def main():
                 print(f"     次点: {c['keyword']}")
         # 「未接続」とは限らない（台帳に書ける語が無い日も同じ形で返る）。見た事実だけを書く（2026-10-20）
         print("  ※ 管制塔の台帳から次の語が返らなかったため、このサイトのKW計画（新しく書ける語だけ）を使用")
+
+    link_brief(cfg, (nxt or {}).get("category", "") if isinstance(nxt, dict) else "")
 
     # 一次情報を毎回目に入れる。ブリーフに出ないと外部統計の引き写しだけになり、
     # どのサイトでも書ける記事＝引用先に選ばれない記事になる

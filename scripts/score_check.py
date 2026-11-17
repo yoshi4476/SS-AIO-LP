@@ -48,6 +48,25 @@ def internal_links(body):
     return {u.split("#")[0].rstrip("/") for u in _link_patterns()[0].findall(body)}
 
 
+def link_targets(site_id, category="", skip="", limit=12):
+    """内部リンクの送り先 [(題, URL)]。この社の公開済みの記事と、仕組みの外で書いた公開済みのページ（設定の link_pages）。
+    同じ分野を先に並べ、internal_links が数える形の URL だけを返す。新しく受けた社の1本目は、仕組みの記事が無く
+    手書きのコラムだけがあったのに、書く AI に送り先が渡らず、内部リンク0本で隔離された（2026-11-17）"""
+    import daily_audit as D
+    cfg = sites_mod.load_all().get(site_id) or {}
+    rows = [(a["title"], sites_mod.article_url(cfg, a), a["category"])
+            for a in D.articles_by_site().get(site_id, []) if a["slug"] != skip and D._is_published(a)]
+    rows += [(p.get("title", ""), p["url"], p.get("category", "")) for p in cfg.get("link_pages") or [] if p.get("url")]
+    rows.sort(key=lambda r: r[2] != category)
+    seen, out = set(), []
+    for title, url, _ in rows:
+        key = url.rstrip("/")
+        if title and key not in seen and internal_links(f"[x]({url})"):
+            seen.add(key)
+            out.append((title, url))
+    return out[:limit]
+
+
 DECOR_YEAR = re.compile(r"【[^】]*20\d{2}[^】]*】|20\d{2}年?最新")
 DECOR_YEAR_FROM = "2026-10-05"
 
