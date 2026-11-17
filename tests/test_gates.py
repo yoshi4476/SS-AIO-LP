@@ -2042,7 +2042,9 @@ def test_merge_is_wired():
     print(chr(10) + "■ 食い合う記事の統合")
     import auto_merge as M
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8", errors="replace")
-    check("週次が検算を先に通す", "auto_merge.py --selftest" in wf and "auto_merge.py --write" in wf, True)
+    # 自己診断は統合できる組があるときだけ、統合の前に通す（--guarded。組0の週に17分半回していた。2026-11-18）
+    check("週次が検算を先に通す", "auto_merge.py --guarded --write" in wf and "auto_merge.py --scaled --guarded --write" in wf
+          and "auto_merge.py --write" not in wf and "auto_merge.py --scaled --write" not in wf, True)
     check("配信先からも外す", "retract.py --pending --push" in wf, True)
     st = {"ai-lab": {"a": {"imp": 100, "clicks": 5, "pos": 8.0}, "b": {"imp": 40, "clicks": 1, "pos": 15.0},
                      "c": {"imp": 200, "clicks": 0, "pos": 12.0}}}

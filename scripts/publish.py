@@ -122,10 +122,31 @@ def run(args, cwd=None, check=True, env=None):
     return r.stdout.strip()
 
 
-def try_run(args, cwd=None, env=None):
-    """成否だけ知りたいとき用（run は標準出力を返すため成否の判定に使えない）"""
-    r = subprocess.run(args, cwd=cwd, capture_output=True, text=True,
-                       encoding="utf-8", errors="ignore", env=env)
+# 配信先への push・fetch の上限（秒）。2026-11-16 の週次はコーポレートへの push が20分止まり、理由も残らなかった
+PUSH_TIMEOUT = 120
+
+
+def why_failed(text, n=3):
+    """git のエラー文の末尾 n 行。公開の CI のログに出るので、URL・リポジトリ名・トークンは伏せる"""
+    lines = [ln.strip() for ln in str(text or "").splitlines() if ln.strip() and not ln.strip().startswith("To ")]
+    s = re.sub(r"https?://\S+", "（配信先）", " / ".join(lines[-n:]))
+    s = re.sub(r"[\w.-]+/[\w.-]+\.git", "（配信先）", s)
+    return mask(s)[:300] or "（エラー文なし）"
+
+
+def try_run(args, cwd=None, env=None, timeout=None, say=False):
+    """成否だけ知りたいとき用（run は標準出力を返すため成否の判定に使えない）。
+    timeout（秒）を過ぎたら止めて失敗にする。say=True なら失敗の理由を出す（黙って失敗すると原因を追えない）"""
+    what = " ".join(args[:2])
+    try:
+        r = subprocess.run(args, cwd=cwd, capture_output=True, text=True,
+                           encoding="utf-8", errors="ignore", env=env, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        if say:
+            print(f"  {what} が{timeout}秒で終わらないため止めました")
+        return False
+    if r.returncode and say:
+        print(f"  {what} の失敗の理由: {why_failed(r.stderr or r.stdout)}")
     return r.returncode == 0
 
 
@@ -2597,11 +2618,13 @@ def push_work(cfg, dest: Path, token):
     plain_url = f"https://github.com/{cfg['repo']}.git"
     urls = [f"https://x-access-token@github.com/{cfg['repo']}.git", plain_url] if token else [plain_url]
     env = git_auth(token)
+    # 素のURLは手元の資格情報に任せる。端末で聞かれて待ち続けないよう、聞かずに失敗させる
+    plain_env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
     for attempt in range(2):
         for i, u in enumerate(urls):
-            # トークン付きのURLにだけ askpass を渡す。素のURLは手元の資格情報に任せる
+            # トークン付きのURLにだけ askpass を渡す
             if try_run(["git", "push", u, f"HEAD:{cfg['branch']}"], cwd=dest,
-                       env=(env if i == 0 else None)):
+                       env=(env if i == 0 else plain_env), timeout=PUSH_TIMEOUT, say=True):
                 if i:
                     print("※ SITE_PUSH_TOKEN では認証できませんでした。PATの再発行が必要です")
                 print("push完了。対象サイトのビルドが自動で走ります。")
@@ -2612,8 +2635,8 @@ def push_work(cfg, dest: Path, token):
             # それを「トークンの問題」と伝えると、無関係な再発行に時間を使わせる。
             # 実際、配信先が1コミット進んでいるだけで4本ごとに止まっていた。
             print("  押せませんでした。配信先の変更を取り込んで、もう一度試します")
-            if not (try_run(["git", "fetch", "origin"], cwd=dest, env=env)
-                    and try_run(["git", "rebase", f"origin/{cfg['branch']}"], cwd=dest)):
+            if not (try_run(["git", "fetch", "origin"], cwd=dest, env=env, timeout=PUSH_TIMEOUT, say=True)
+                    and try_run(["git", "rebase", f"origin/{cfg['branch']}"], cwd=dest, say=True)):
                 # 取り込みに失敗したら必ず中断して元に戻す。途中のまま残すと、次の配信の
                 # rebase が「already a rebase-merge directory」で全部落ちた（2026-09-28〜29: 1本おきに失敗）
                 try_run(["git", "rebase", "--abort"], cwd=dest)

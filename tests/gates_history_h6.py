@@ -179,4 +179,4 @@ def test_merge_drafts_in_parallel_but_checks_one_by_one():
             AM.ARTICLES = saved
             AM.is_article, AM.fm, AR.meta, AR.warns, AR.snapshot, AM._claude, AM.url_of = orig
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
-    check("週次の統合は案を並列で書かせる", "auto_merge.py --write --limit $n --budget-min 30 --parallel" in wf, True)
+    check("週次の統合は案を並列で書かせる", "auto_merge.py --guarded --write --limit $n --budget-min 30 --parallel" in wf, True)

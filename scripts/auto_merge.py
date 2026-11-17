@@ -300,6 +300,9 @@ PROMPT = """articles/{survivor}.md に、articles/{loser}.md の中身を統合�
 - フロントマターの keyword・category・slug は変えない。title は変えてよいが15〜45字で狙う語（{keyword}）を含める
 - description は100〜160字（目安100〜150字）
 - ですます調。1文は50字を目安、100字を超えない
+- 統合した後に機械の検査（score_check）に外れると、統合全体が戻される: H2 は FAQ・まとめを除いて6〜12個
+  （足す見出しは H3 にしてよい）。FAQ の答えは40〜60字（30字未満・75字超は不可）。1段落は150字以内。
+  「何度も見てきました」のような出どころの無い体験談の決まり文句は書かない（{loser} にあっても移さない）
 
 終わったら、足した見出しを1行で説明して終了してください。"""
 
@@ -706,6 +709,8 @@ def main():
     ap.add_argument("--budget-min", type=int, default=0, help="この分数を超えたら次の組に着手しない（0=無制限）")
     ap.add_argument("--parallel", type=int, default=0, help="統合案を同時に書かせる組数（検算は1組ずつ）")
     ap.add_argument("--selftest", action="store_true", help="検算が効くかを本番の記事で確かめる")
+    ap.add_argument("--guarded", action="store_true",
+                    help="統合できる組があるときだけ、統合の前に自己診断を通す（効いていなければ統合せず終了コード3）")
     ap.add_argument("--scaled", action="store_true",
                     help=f"業種を入れ替えただけの同型の組（scaled_guard・重なり{SCALED_MIN_SIM:.0%}%以上）を統合する")
     ap.add_argument("--pair", nargs=2, metavar=("LOSER", "SURVIVOR"),
@@ -759,6 +764,12 @@ def main():
     if not a.write:
         print("\n  --write を付けると claude が統合し、機械が検算します（通らなければ元に戻します）")
         return 0
+    if a.guarded:
+        # 自己診断はサイトを描き直すので重い（同型の組で17分半）。統合できる組が無い週に先に回していた（2026-11-16 の週次）
+        print("\n■ 統合の検算の自己診断" + ("（同型の組）" if a.scaled else "") + "\n")
+        if selftest(a.scaled):
+            print("MERGE_SELFTEST=ng（検算が効いていないので統合しません）")
+            return 3
 
     ok = ng = 0
     started = time.time()

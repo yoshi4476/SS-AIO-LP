@@ -901,12 +901,12 @@ jobs:
             exit 0
           fi
           export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
-          if python scripts/auto_merge.py --selftest; then
-            # 記事を増やした分が伸びていないサイトがある週は4組（content_yield。本数は減らさず統合で整える）
-            n=2; python scripts/content_yield.py --any-flagged >/dev/null 2>&1 && n=4
-            # 統合案は2組同時に書かせる（1組は最長40分の応答待ち）。当てて検算するのは1組ずつ
-            python scripts/auto_merge.py --write --limit $n --budget-min 30 --parallel 2 || true
-          else
+          # 自己診断（検算が効くか）は統合できる組があるときだけ、統合の前に回す（--guarded。効いていなければ終了コード3）
+          # 記事を増やした分が伸びていないサイトがある週は4組（content_yield。本数は減らさず統合で整える）
+          n=2; python scripts/content_yield.py --any-flagged >/dev/null 2>&1 && n=4
+          # 統合案は2組同時に書かせる（1組は最長40分の応答待ち）。当てて検算するのは1組ずつ
+          rc=0; python scripts/auto_merge.py --guarded --write --limit $n --budget-min 30 --parallel 2 || rc=$?
+          if [ "$rc" = 3 ]; then
             echo "::error::統合の検算が効いていません。統合は行いません"
             python scripts/hub_client.py error_log merge \
               "auto_merge の検算が効いていません（統合は飛ばしました）" || true
@@ -927,10 +927,10 @@ jobs:
             exit 0
           fi
           export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
-          if python scripts/auto_merge.py --scaled --selftest; then
-            n=2; python scripts/content_yield.py --any-flagged >/dev/null 2>&1 && n=4
-            python scripts/auto_merge.py --scaled --write --limit $n --budget-min 25 --parallel 2 || true
-          else
+          # 自己診断はサイトを描き直すので重い（17分半）。統合できる組が無い週は回さない（--guarded。2026-11-16 は組0で回していた）
+          n=2; python scripts/content_yield.py --any-flagged >/dev/null 2>&1 && n=4
+          rc=0; python scripts/auto_merge.py --scaled --guarded --write --limit $n --budget-min 25 --parallel 2 || rc=$?
+          if [ "$rc" = 3 ]; then
             echo "::error::同型記事の統合の検算が効いていません。統合は行いません"
             python scripts/hub_client.py error_log merge \
               "auto_merge --scaled の検算が効いていません（同型記事の統合は飛ばしました）" || true

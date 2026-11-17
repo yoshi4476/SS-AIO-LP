@@ -310,10 +310,8 @@ def hits_text(hits, limit=HIT_LIMIT):
 
 # ── 機械の直し ───────────────────────────────────────────────────────
 
-def _textlint_fix(text):
-    """FIX_CONFIG のルールだけで直した全文と、当てたルール。フロントマター・FAQ の行は触らない"""
-    masked = mask(text)
-    r = run([masked], "fix", FIX_CONFIG)[0]
+def _merge_fix(text, masked, r):
+    """textlint の直しの結果1件を元の全文へ戻す。(直した全文, 当てたルール)"""
     if r.get("error") or r.get("output") is None:
         return text, []
     ml, ol, tl = masked.split("\n"), r["output"].split("\n"), text.split("\n")
@@ -325,7 +323,27 @@ def _textlint_fix(text):
     return "\n".join(tl), [a.get("ruleId", "") for a in r.get("applied") or []]
 
 
+def _textlint_fix_many(texts):
+    """FIX_CONFIG のルールだけで直した [(全文, 当てたルール)]。node の起動は1回だけ
+    （1本ずつ起動していたので、公開済みの559本で8分かかり、直した数は0だった。2026-11-16 の週次）"""
+    masked = [mask(t) for t in texts]
+    res = run(masked, "fix", FIX_CONFIG) if texts else []
+    return [_merge_fix(t, m, r) for t, m, r in zip(texts, masked, res)]
+
+
+def _textlint_fix(text):
+    """FIX_CONFIG のルールだけで直した全文と、当てたルール。フロントマター・FAQ の行は触らない"""
+    return _textlint_fix_many([text])[0]
+
+
 FIXER = _textlint_fix     # 門ではこれを差し替える
+
+
+def fix_all(texts):
+    """[(全文, 当てたルール)]。本物の textlint ならまとめて1回、門で差し替えた FIXER なら1本ずつ"""
+    if FIXER is _textlint_fix:
+        return _textlint_fix_many(texts)
+    return [FIXER(t) for t in texts]
 
 
 def _heads(text):
@@ -356,10 +374,10 @@ def note(slug, kind, ok, why, **extra):
                           "ok": ok, "note": why, **extra})
 
 
-def fix_text(before):
+def fix_text(before, fixed=None):
     """全文に機械の直しを当てて検算する。返すのは (直した後の全文, 状態, 理由, 当てたルール)。
-    状態は none / fixed / reverted（reverted のときの全文は before のまま）"""
-    after, applied = FIXER(before)
+    状態は none / fixed / reverted（reverted のときの全文は before のまま）。fixed は先にまとめて当てた結果"""
+    after, applied = fixed if fixed is not None else FIXER(before)
     rules = sorted({a.rsplit("/", 1)[-1] for a in applied if a})
     if after == before:
         return before, "none", "", rules
@@ -369,11 +387,12 @@ def fix_text(before):
     return after, "fixed", f"{len(applied)}か所（{'・'.join(rules)}）", rules
 
 
-def machine_fix(slug, write=True, path=None):
-    """1本に機械の直しを当てる（台帳 auto_fix.jsonl に残す）。返すのは (状態, 理由)。状態は none / fixed / reverted"""
+def machine_fix(slug, write=True, path=None, fixed=None, before=None):
+    """1本に機械の直しを当てる（台帳 auto_fix.jsonl に残す）。返すのは (状態, 理由)。状態は none / fixed / reverted。
+    fixed・before は、まとめて当てたときの (直した全文, 当てたルール) と、そのとき読んだ全文"""
     p = Path(path) if path else ROOT / "articles" / f"{slug}.md"
-    before = p.read_text(encoding="utf-8-sig")
-    after, st, why, rules = fix_text(before)
+    before = p.read_text(encoding="utf-8-sig") if before is None else before
+    after, st, why, rules = fix_text(before, fixed)
     if st == "reverted":
         note(slug, "textlint-fix", False, f"検算で戻しました（{why}）", rules=rules)
     elif st == "fixed" and write:
@@ -599,8 +618,15 @@ def main(argv=None):
     slugs = want or published(sites)
     if a.fix:
         res = collections.Counter()
-        for s in slugs:
-            st, why = machine_fix(s, write=a.write)
+        befores = [_read(s) for s in slugs]
+        try:
+            fixed = fix_all(befores)
+        except Unavailable as e:
+            print(f"要対応: AIっぽい言い回しの機械の直しが動きませんでした（{e}）")
+            print("AI_WRITING_FIX=unknown")
+            return 0
+        for s, b, f in zip(slugs, befores, fixed):
+            st, why = machine_fix(s, write=a.write, fixed=f, before=b)
             res[st] += 1
             if st != "none":
                 print(f"  {'○' if st == 'fixed' else '×'} {shown(s)[:40]}: {why[:60]}")

@@ -1020,6 +1020,9 @@ PROMPT = """articles/{slug}.md を直してください。この1ファイル以
 - 外部の出典リンク（href="http…"）を消さない。新しい出典のURLを足さない（記事にある出典だけを使う）
 - ですます調。1文は50字を目安、100字を超えない
 - フロントマターの keyword・category は変えない。同じ項目を2行に書かない
+- 直した後に機械の検査（score_check）に外れると、直し全体が戻される。触った箇所は次を守る:
+  FAQ の答えは40〜60字（30字未満・75字超は不可）で、フロントマターと本文の答えは同じ文。1段落は150字以内。
+  H2 は FAQ・まとめを除いて6〜12個（増やすなら H3 にする）
 - 記事の主張をずらさない。読者が求めている答えを先に書く
 - 当社の採択率・支援社数は書かない。当社が申請書類を作成する・申請を代行すると読める文を書かない
   （当社は申請に向けた相談・助言と内容の確認を行い、申請書類はお客様が作成する）
@@ -2633,14 +2636,18 @@ def main():
     items = buyer_first(items)
     if a.buyer_only:
         items = [x for x in items if is_buyer(x["slug"])]
+    # 判定期間中の題は run_one が必ず見送る。先に外さないと、本数の枠と下書きの時間をそれに使う
+    # （--skip-recent のときだけ外していたので、週次では10/15〜11/17 の題の戻し46件のうち41件がこれだった）
+    locked = [x["slug"] for x in items if x["kind"] in ("title", "desc") and title_locked(x["slug"])]
+    if locked:
+        items = [x for x in items if not (x["kind"] in ("title", "desc") and x["slug"] in locked)]
+        print(f"  題の判定期間中の{len(locked)}本は直しません: {', '.join(shown(s) for s in locked[:6])}")
     if a.skip_recent:
         busy = recently_touched(a.skip_recent)
-        # 判定期間中の題は run_one が必ず見送る。先に外さないと、本数の枠と下書きの時間をそれに使う
-        busy |= {x["slug"] for x in items if x["kind"] in ("title", "desc") and title_locked(x["slug"])}
         held = [x["slug"] for x in items if x["slug"] in busy]
         items = [x for x in items if x["slug"] not in busy]
         if held:
-            print(f"  直近{a.skip_recent}日に手を付けた・題の判定期間中の{len(held)}本を外しました: {', '.join(shown(s) for s in held[:6])}")
+            print(f"  直近{a.skip_recent}日に手を付けた{len(held)}本を外しました: {', '.join(shown(s) for s in held[:6])}")
     if not items and a.kind == "spare" and a.main_only:
         items = buyer_first(free_spare_items(a.sites, recently_touched(a.skip_recent) if a.skip_recent else set()))
         if items:
