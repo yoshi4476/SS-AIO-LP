@@ -12,7 +12,8 @@
                → ヒアリングシートで同意（bing_consent）を取った社だけ。確認ファイル BingSiteAuth.xml を
                  配信のたびに置き、本番に出たら bing_webmaster.connect が VerifySite で確かめる
   Indexing API 当社のサービスアカウントが Search Console のオーナーであること
-               → 先方にお願いするしかない（ここでは送らずに「要対応」を出す: notify_indexing.gsc_owner_ok）
+               → Google の確認ファイル（google<英数>.html）を配信のたびに置き、本番に出たら
+                 サービスアカウントが自分で確かめる（gsc_verify。2026-11-18）。WordPress だけ先方にお願いする
 
   python scripts/search_connect.py --check     # お客様の社の接続の点検（週次 findings・ヒアリングの後）
 
@@ -58,6 +59,9 @@ def files_for(cfg, current_auth=None):
     if code:
         cur = BW.live_auth(cfg["domain"]) if current_auth is None else current_auth
         out[BW.SITE_AUTH] = BW.site_auth_xml([code], cur)
+    if cfg.get("domain"):
+        import gsc_verify as GV
+        out.update(GV.files_for(cfg["domain"]))
     return out
 
 
@@ -94,7 +98,13 @@ def check(cfgs=None):
         b = c.get("bing_consent") is True
         print(f"  {sid}: Search Console のオーナー {'済' if g else '未'} / Bing の同意 {'可' if b else '無し（対象外）'}"
               f" / 方式 {c.get('type')}")
-        if not g:
+        if not g and NX.SA_PATH.is_file():
+            import gsc_verify as GV
+            r = GV.connect(c)
+            g = r["state"] == "verified"
+            if not g:
+                bad.append(GV.todo(c, r, NX.sa_email(), weekly=True))
+        elif not g:
             bad.append(NX.gsc_owner_todo(c))
         if c.get("type") == "zip":
             bad.append(f"要対応: {c.get('name', sid)} は zip（新規受付なし）です。FTP の接続情報か Git の配信先をいただき、"

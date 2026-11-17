@@ -251,6 +251,18 @@ def fb_post(text, url, page_id, token):
 
 # ---------------- Instagram / Threads ----------------
 
+def ig_from_page(page_id, token):
+    """IG_USER_ID が無いとき、Facebook ページにつながった Instagram（プロアカウント）の ID を引く。
+    ページの鍵には Instagram の投稿の権限が入っているので、先方がページに Instagram をつなげば、
+    つなぎ直し（social_connect）をしなくても次の投稿から Instagram にも出る（2026-11-18）。つながっていなければ空"""
+    q = urllib.parse.urlencode({"fields": "instagram_business_account", "access_token": token})
+    try:
+        with urllib.request.urlopen(f"{GRAPH}/{page_id}?{q}", timeout=30) as r:
+            return (json.loads(r.read().decode("utf-8")).get("instagram_business_account") or {}).get("id", "")
+    except Exception:
+        return ""
+
+
 def ig_post(caption, img, ig_id, token):
     """Instagramは2段階。コンテナを作ってから公開する"""
     d = urllib.parse.urlencode({"image_url": img, "caption": caption,
@@ -369,12 +381,16 @@ def deliver(site_id, slug, e, dry):
 
     # Instagram（画像必須）
     igi = pick(e, "IG_USER_ID", site_id)
+    if not is_set(igi) and is_set(fbt) and is_set(fbp):
+        igi = ig_from_page(fbp, fbt)
     if is_set(fbt) and is_set(igi) and img:
         try:
             ig_post(t["instagram"], img, igi, fbt)
             print("  Instagram: 投稿")
         except Exception as ex:
             print(f"  Instagram: 失敗 {str(ex)[:110]}")
+    elif is_set(fbt) and not is_set(igi):
+        print("  Instagram: スキップ（Facebook ページに Instagram のプロアカウントがつながっていません）")
     else:
         print("  Instagram: スキップ（IG_USER_ID / FB_PAGE_TOKEN / アイキャッチ）")
 

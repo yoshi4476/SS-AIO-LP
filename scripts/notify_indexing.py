@@ -15,7 +15,8 @@ AI集客ラボ72%に対しコーポレート41%と、明確に差が出ていた
 前提: indexing-service-account.json（対象サイトのGSCオーナー権限）
 ※未配置なら静かにスキップする（Actionsで未設定でも失敗させない）
 お客様の社は、サービスアカウントが Search Console のオーナーになっている社だけ送る（gsc_owner_ok）。
-なっていなければ送らず「要対応」を出す（記事CIの公開直後の通知から findings へ載る）。
+なっていなければ、配信と一緒に置いた確認ファイルでサービスアカウントが自分で確かめる（gsc_verify）。
+確かめられなければ送らず、理由を出す（人が動くものは「要対応」で記事CIの公開直後の通知から findings へ載る）。
 """
 import re
 import sys
@@ -156,10 +157,15 @@ def main(argv=None, cfgs=None):
         for sid, cfg in cfgs.items():
             if only and sid != only:
                 continue
-            # 権限の無い社に送っても 403 が並ぶだけ。送らずに、先方にお願いすることを出す
+            # 権限の無い社に送っても 403 が並ぶだけ。配信と一緒に置いた Google の確認ファイルが本番に出ていれば、
+            # サービスアカウントが自分でオーナーになる（gsc_verify）。なれなければ送らずに理由を出す
             if not gsc_owner_ok(cfg, owners):
-                print(gsc_owner_todo(cfg))
-                continue
+                import gsc_verify as GV
+                r = GV.connect(cfg)
+                if r["state"] != "verified":
+                    print(GV.todo(cfg, r, sa_email()))
+                    continue
+                print(f"  {sid}: Search Console の所有権を確かめました（以後 Indexing API で知らせます）")
             urls = sitemap_of(cfg)
             if "--all" in sys.argv:
                 jobs.append((sid, urls))

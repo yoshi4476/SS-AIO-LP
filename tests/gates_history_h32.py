@@ -141,9 +141,11 @@ def test_key_and_bing_auth_files_ride_along_with_delivery():
     import notify_indexnow as NI
     import bing_webmaster as BW
     import search_connect as SC
+    import gsc_verify as GV
     import publish
     cfg = dict(CFGS["h32-a"], type="nextjs-json", bing_consent=True)
-    with tempfile.TemporaryDirectory() as d, _swap(S, is_client=_clients), \
+    # Google の確認ファイルは gates_history_h192 で見る（鍵のある手元で本物の API を呼ばない）
+    with tempfile.TemporaryDirectory() as d, _swap(S, is_client=_clients), _swap(GV, token=lambda domain, sv=None: None), \
             _swap(NI, find_key=lambda env: "h32key0000000000"), \
             _swap(BW, auth_code=lambda c, key=None, add=True: "H32CODE" if c.get("bing_consent") else "",
                   live_auth=lambda dom: ""):

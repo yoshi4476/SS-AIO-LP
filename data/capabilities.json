@@ -730,19 +730,19 @@
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/search_connect.py:56",
+     "evidence": "scripts/search_connect.py:57",
      "note": "鍵ファイル（<鍵>.txt）を配信と一緒にドメインの直下へ置き（publish.search_files → search_connect.place。Git の社は配信先リポジトリの公開フォルダ、ftp の社はサーバーの直下）、記事の枠の公開直後に送る（.github/workflows/pipeline-multi.yml:559）",
      "anchor": "out[f\"{key}.txt\"] = key"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/search_connect.py:56",
+     "evidence": "scripts/search_connect.py:57",
      "note": "鍵ファイル（<鍵>.txt）を配信と一緒にドメインの直下へ置き（publish.search_files → search_connect.place。Git の社は配信先リポジトリの公開フォルダ、ftp の社はサーバーの直下）、記事の枠の公開直後に送る（.github/workflows/pipeline-multi.yml:559）",
      "anchor": "out[f\"{key}.txt\"] = key"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/search_connect.py:56",
+     "evidence": "scripts/search_connect.py:57",
      "note": "鍵ファイル（<鍵>.txt）を配信と一緒にドメインの直下へ置き（publish.search_files → search_connect.place。Git の社は配信先リポジトリの公開フォルダ、ftp の社はサーバーの直下）、記事の枠の公開直後に送る（.github/workflows/pipeline-multi.yml:559）",
      "anchor": "out[f\"{key}.txt\"] = key"
     },
@@ -755,7 +755,7 @@
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/search_connect.py:56",
+     "evidence": "scripts/search_connect.py:57",
      "note": "鍵ファイル（<鍵>.txt）を配信と一緒にドメインの直下へ置き（publish.search_files → search_connect.place。Git の社は配信先リポジトリの公開フォルダ、ftp の社はサーバーの直下）、記事の枠の公開直後に送る（.github/workflows/pipeline-multi.yml:559）",
      "anchor": "out[f\"{key}.txt\"] = key"
     },
