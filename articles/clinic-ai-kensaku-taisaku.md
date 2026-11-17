@@ -49,6 +49,8 @@ quality_attempts: 3
 
 **クリニックのAIO対策とは、生成AIの受診先紹介で自院が引用・言及される状態をつくる取り組みです。**AIO（AI Overview Optimization）・AI検索対策・LLMO はいずれもほぼ同じ取り組みを指し、呼び方が違うだけと考えて構いません。
 
+実際の進め方は、[クリニックの集客方法は月数で選ぶ](/aio/clinic-shukyaku-houhou/)で解説しています。
+
 当社は自社サイトをAIO対策の実験場にしています。構造化データ・llms.txt・主要AIクローラー20種の許可を実装したうえで、引用状況を日次で計測しています（出典: 自社サイトの実装・2026-08時点）。
 
 関連する内容は、[AI検索対策を代理店に頼んだら何を準備する？](/aio/ai-kensaku-taisaku-dairiten-junbi/)、[クリニックSEOコンサル活用術｜依頼の目安と注意点](/seo/clinic-seo-consulting-erabikata/)、[整骨院のホームページ集客](/ai-marketing/seikotsuin-hp-shukyaku/)、[AI検索とは？AIO対策との違いと5種類の対応ポイント](/aio/aio-taisaku-ai-kensaku/)で扱っています。

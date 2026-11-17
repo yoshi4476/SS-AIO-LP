@@ -252,7 +252,7 @@
 "modified": "2026-09-11"
 },
 "clinic-ai-kensaku-taisaku": {
-"hash": "f9620cb8fa8f45a17e10fba09f640e72",
+"hash": "0be630fd542274821aa9d377af27fdc8",
 "modified": "2026-09-01"
 },
 "clinic-chiikimei-kensaku-joui": {
@@ -300,7 +300,7 @@
 "modified": "2026-09-13"
 },
 "clinic-kanja-shukyaku": {
-"hash": "7fcabe60beda22592233dc3d40bfcf16",
+"hash": "72e835532adc5c1660f5d7e89bd11b16",
 "modified": "2026-10-15"
 },
 "clinic-kenchiku-jirei": {
@@ -316,7 +316,7 @@
 "modified": "2026-09-07"
 },
 "clinic-meo-taisaku": {
-"hash": "6487a92d3cb233145464997e034aae0a",
+"hash": "eaa3db53dce1495f0c44058e537946b6",
 "modified": "2026-08-31"
 },
 "clinic-seo-consulting-erabikata": {
@@ -339,6 +339,10 @@
 "hash": "a301a022ad10cad38276be05f1bc05c6",
 "modified": "2026-08-15"
 },
+"clinic-shukyaku-houhou": {
+"hash": "d7a2670c3f8685d0dfbaa6c802a011cc",
+"modified": "2026-11-18"
+},
 "clinic-shukyaku-jirei": {
 "hash": "e51c3c59c858a3b4f7f939ad30140943",
 "modified": "2026-08-15"
@@ -352,7 +356,7 @@
 "modified": "2026-08-16"
 },
 "donyu-jirei-kakikata": {
-"hash": "1256cdde1c6c42c57777d816e8837161",
+"hash": "145af3e78723d7605d8ff17b8dfc7638",
 "modified": "2026-08-03"
 },
 "fudousan-ai-kensaku-taisaku": {

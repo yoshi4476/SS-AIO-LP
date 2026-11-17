@@ -1,0 +1,137 @@
+{
+ "v": 2,
+ "slug": "clinic-shukyaku-houhou",
+ "ok": true,
+ "date": "2026-11-18",
+ "questions": [
+  "クリニック 集客 方法について教えてください",
+  "クリニック 集客 方法について、「クリニックの集客方法は効果が出るまでの月数と院内の手間で選ぶ」を教えてください",
+  "クリニック 集客 方法について、「集客方法5つを月数・手間・向く医院で比べる」を教えてください",
+  "クリニック 集客 方法について、「新しい集客方法を足す前に予約の取りこぼし3つをふさぐ」を教えてください",
+  "クリニック 集客 方法について、「電話で取りこぼす医院は自動応答の導入を1割で判断する」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "クリニックの集客方法は効果が出るまでの月数と院内の手間で選ぶ",
+   "words": [
+    "月数",
+    "院内"
+   ],
+   "hits": 5,
+   "of": 8
+  },
+  {
+   "topic": "集客方法5つを月数・手間・向く医院で比べる",
+   "words": [
+    "月数",
+    "手間",
+    "医院"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "新しい集客方法を足す前に予約の取りこぼし3つをふさぐ",
+   "words": [
+    "予約"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "電話で取りこぼす医院は自動応答の導入を1割で判断する",
+   "words": [
+    "自動応答",
+    "電話",
+    "医院",
+    "導入"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "地図と口コミは6か月、公式サイトとAI検索は3か月を区切りに見る",
+   "words": [
+    "公式サイト",
+    "AI検索",
+    "口コミ",
+    "地図"
+   ],
+   "hits": 9,
+   "of": 10
+  },
+  {
+   "topic": "集客方法を足しても新患が増えない医院の共通点",
+   "words": [
+    "共通点",
+    "新患",
+    "医院"
+   ],
+   "hits": 9,
+   "of": 10
+  },
+  {
+   "topic": "診療の形と院内の人手で決める集客方法と見送る方法",
+   "words": [
+    "診療",
+    "院内",
+    "人手"
+   ],
+   "hits": 10,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "ai.oki.or.jp": "peer",
+  "ajha.or.jp": "peer",
+  "aspicjapan.org": "public",
+  "cl-mirai-lab.doctorsfile.jp": "portal",
+  "clinic-shukyaku.com": "peer",
+  "clinic.cs-agent.com": "peer",
+  "clinichp.nobu-n.co.jp": "peer",
+  "cloud-tool.net": "peer",
+  "corepivot.jp": "peer",
+  "cyberhorn.co.jp": "peer",
+  "digikar.m3.com": "media",
+  "docally.jp": "peer",
+  "hm-review.com": "peer",
+  "ivry.jp": "peer",
+  "jstage.jst.go.jp": "public",
+  "markeru.co.jp": "peer",
+  "mediaseries.medialink-ml.co.jp": "peer",
+  "medicalsign.co.jp": "peer",
+  "medico-consulting.jp": "peer",
+  "mekiki-inosuke.com": "media",
+  "meti.go.jp": "public",
+  "mhlw.go.jp": "public",
+  "nomoca.net": "peer",
+  "prod-phchd-sc104-weu-rp01.azurewebsites.net": "peer",
+  "rakukarada.com": "peer",
+  "support.google.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "web.2ndlabo.com": "peer",
+  "webanalytics.speee.jp": "peer",
+  "webridge.co.jp": "peer",
+  "whitch.jp": "peer",
+  "www1.ajha.or.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 7,
+  "注意点・失敗・リスク": 5,
+  "進め方の手順": 2,
+  "専門家への相談": 0
+ },
+ "chars": 20601,
+ "claims": [
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。ほかの論点を聞いた答え8件のうち、『月数』に触れたものは5件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は0件、進め方の手順は2件でした。",
+  "2026年11月に当社が2つのAI（ChatGPT・Gemini）に本記事の論点5問を聞き、10件の答えを集めました。10件の答えの出典に挙がったページは32件で、公的機関・学会・業界団体が4件、ニュース・メディア・まとめが2件、ポータル・比較サイトが1件でした。"
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "v": 2,
+ "slug": "donyu-jirei-kakikata",
+ "ok": true,
+ "date": "2026-11-18",
+ "questions": [
+  "導入事例 書き方について教えてください",
+  "導入事例 書き方について、「導入事例とは？」を教えてください",
+  "導入事例 書き方について、「なぜ今、導入事例の書き方を見直す必要があるのか」を教えてください",
+  "導入事例 書き方について、「導入事例で成果が出ないのはなぜ？3つの落とし穴」を教えてください",
+  "導入事例 書き方について、「読まれる導入事例の3つの型と比較」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT",
+  "Gemini"
+ ],
+ "answers": 10,
+ "topics": [
+  {
+   "topic": "導入事例で成果が出ないのはなぜ？3つの落とし穴",
+   "words": [
+    "成果"
+   ],
+   "hits": 7,
+   "of": 8
+  },
+  {
+   "topic": "導入事例執筆で避けたいNG例と注意点",
+   "words": [
+    "NG例"
+   ],
+   "hits": 1,
+   "of": 10
+  },
+  {
+   "topic": "AI検索時代に見るべき導入事例の書き方のポイント",
+   "words": [
+    "AI検索時代"
+   ],
+   "hits": 0,
+   "of": 10
+  }
+ ],
+ "official": [],
+ "sources": {
+  "9230071.hs-sites.com": "peer",
+  "ad-lp.news.mynavi.jp": "media",
+  "ai.7senses.co.jp": "self",
+  "arctangent.jp": "peer",
+  "hands-plus.com": "peer",
+  "koujitsu.co.jp": "peer",
+  "learn.g2.com": "peer",
+  "magazine.balubo.jp": "peer",
+  "marketing.clabel.jp": "peer",
+  "nakami-fukuoka.com": "peer",
+  "note.com": "video",
+  "nrgmr.com": "peer",
+  "phoenix-design.co.jp": "peer",
+  "sairu.co.jp": "peer",
+  "sedesign.co.jp": "peer",
+  "seoagent.jp": "peer",
+  "webtan.impress.co.jp": "media"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 7,
+  "進め方の手順": 5,
+  "専門家への相談": 0
+ },
+ "chars": 20455,
+ "claims": [
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『AI検索時代』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。ほかの論点を聞いた答え10件のうち、『NG例』に触れたものは1件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えのうち、触れていたのは費用の金額（◯円）は0件、専門家への相談は0件、期間（◯か月・◯日など）は1件でした。",
+  "当社調べでは2026年11月に、2つのAI（ChatGPT・Gemini）へ本記事の論点5問を質問し、答え10件を得ました。10件の答えの出典に挙がったページは17件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが2件、動画・SNS・ブログが1件でした。"
+ ]
+}
