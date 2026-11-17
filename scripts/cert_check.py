@@ -14,6 +14,7 @@ import re
 import socket
 import ssl
 import sys
+import time
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -33,7 +34,12 @@ def cert_days(host):
     return (dt - datetime.now(timezone.utc)).days
 
 
-def status(url):
+# 1回の失敗では知らせない。2026-11-18 07:44 は同じ回の機械から別々の2サイト（sitemap の時間切れ・ページ2件の不達）が
+# 同時に落ち、どちらも直後に200だった（監視する側の通信の途切れ）。落ちたものだけ、間を置いてもう1回確かめる
+RETRY_WAIT = 5
+
+
+def _status_once(url):
     req = urllib.request.Request(url, headers=UA, method="HEAD")
     try:
         with urllib.request.urlopen(req, timeout=20) as r:
@@ -42,6 +48,41 @@ def status(url):
         return e.code
     except Exception:
         return 0
+
+
+def status(url, wait=None):
+    """HEAD の応答コード（届かなければ 0）。404・不達は間を置いてもう1回確かめる"""
+    code = _status_once(url)
+    if code in (404, 410, 0):
+        time.sleep(RETRY_WAIT if wait is None else wait)
+        code = _status_once(url)
+    return code
+
+
+def summary(host, pick, codes):
+    """要対応の文（無ければ空）。404 と不達（応答なし・時間切れ）は原因が違うので分けて書く"""
+    gone = [u for u, c in zip(pick, codes) if c in (404, 410)]
+    lost = [u for u, c in zip(pick, codes) if c == 0]
+    if not pick or (len(gone) + len(lost)) / len(pick) <= MAX_404_RATE:
+        return ""
+    parts = []
+    if gone:
+        parts.append(f"404 が{len(gone)}/{len(pick)}件（例: {', '.join(gone[:3])}）")
+    if lost:
+        parts.append(f"2回とも応答の無いページが{len(lost)}/{len(pick)}件（例: {', '.join(lost[:3])}）")
+    return f"{host} の sitemap の " + "・".join(parts)
+
+
+def read_sitemap(host, wait=None):
+    """sitemap.xml の loc の一覧。1回目に読めなければ、間を置いてもう1回（2回とも駄目なら例外）"""
+    for i in range(2):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(f"https://{host}/sitemap.xml", headers=UA), timeout=30) as r:
+                return re.findall(r"<loc>(.*?)</loc>", r.read().decode("utf-8"))
+        except Exception:
+            if i:
+                raise
+            time.sleep(RETRY_WAIT if wait is None else wait)
 
 
 def main():
@@ -60,20 +101,18 @@ def main():
         except Exception as e:
             bad.append(f"{host} の証明書を確認できません（{str(e)[:50]}）")
         try:
-            with urllib.request.urlopen(urllib.request.Request(f"https://{host}/sitemap.xml", headers=UA), timeout=30) as r:
-                locs = re.findall(r"<loc>(.*?)</loc>", r.read().decode("utf-8"))
+            locs = read_sitemap(host)
         except Exception as e:
-            bad.append(f"{host} の sitemap.xml を読めません（{str(e)[:50]}）")
+            bad.append(f"{host} の sitemap.xml を2回とも読めません（{str(e)[:50]}）")
             continue
         random.seed(datetime.now().strftime("%Y%m%d"))
         pick = random.sample(locs, min(a.sample, len(locs))) if locs else []
         codes = [status(u) for u in pick]
-        n404 = sum(1 for c in codes if c in (404, 410, 0))
-        rate = n404 / max(len(codes), 1)
-        print(f"   [{sid:<9}] sitemap {len(locs)}件のうち{len(pick)}件を確認 → 404/不達 {n404}件（{rate * 100:.0f}%）")
-        if pick and rate > MAX_404_RATE:
-            miss = [u for u, c in zip(pick, codes) if c in (404, 410, 0)][:3]
-            bad.append(f"{host} の sitemap に 404 が{n404}/{len(pick)}件（例: {', '.join(miss)}）")
+        print(f"   [{sid:<9}] sitemap {len(locs)}件のうち{len(pick)}件を確認 → "
+              f"404 {sum(c in (404, 410) for c in codes)}件・不達 {codes.count(0)}件")
+        why = summary(host, pick, codes)
+        if why:
+            bad.append(why)
     for b in bad:
         print(f"要対応: {b}")
     print(f"CERT_OK={'no' if bad else 'yes'}")

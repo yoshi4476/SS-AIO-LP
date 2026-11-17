@@ -131,6 +131,41 @@ def test_scaled_merge_selftest_only_when_there_is_a_pair():
           wf.count("--guarded --write") == 2 and wf.count('if [ "$rc" = 3 ]; then') >= 2, True)
 
 
+def test_alive_check_retries_once_and_names_the_cause():
+    print("\n■ 生存監視: 1回の失敗では知らせず、404 と不達を分けて書く（2026-11-18 の誤報）")
+    import cert_check as CC
+    seq = {"https://x/a": [0, 200], "https://x/b": [404, 404], "https://x/c": [0, 0]}
+    seen = []
+
+    def once(url):
+        seen.append(url)
+        return seq[url].pop(0)
+    with patched((CC, "_status_once", once)):
+        codes = [CC.status(u, wait=0) for u in ("https://x/a", "https://x/b", "https://x/c")]
+    check("1回目に届かなくても2回目に200なら200", codes, [200, 404, 0])
+    check("落ちたものだけ取り直す", seen.count("https://x/a"), 2)
+    msg = CC.summary("x", ["https://x/a", "https://x/b", "https://x/c"], codes)
+    check("404 と不達を分けて書く", ("404 が1/3件" in msg, "2回とも応答の無いページが1/3件" in msg, "https://x/a" in msg), (True, True, False))
+    check("全部200なら知らせない", CC.summary("x", ["https://x/a"], [200]), "")
+    tries = []
+
+    def flaky(req, timeout=0):
+        tries.append(1)
+        if len(tries) == 1:
+            raise TimeoutError("The read operation timed out")
+
+        class R(io.BytesIO):
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *a):
+                return False
+        return R(b"<urlset><loc>https://x/a</loc></urlset>")
+    with patched((CC.urllib.request, "urlopen", flaky)):
+        got = CC.read_sitemap("x", wait=0)
+    check("sitemap.xml は1回の時間切れで諦めない", (got, len(tries)), (["https://x/a"], 2))
+
+
 def test_rewrite_prompts_carry_the_machine_rules():
     print("\n■ 直しの指示に、機械の検査で戻される決まり（FAQ の字数・H2 の数）を書く")
     import auto_merge as AM
