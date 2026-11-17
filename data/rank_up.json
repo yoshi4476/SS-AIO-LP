@@ -822,11 +822,10 @@
   "site": "corporate"
  },
  "jigyou-saikouchiku-kojinjigyonushi-houjinnari": {
-  "at": "2026-10-26",
-  "pos": 5.7,
-  "imp": 86,
-  "band": "4〜10位",
-  "site": "subsidy"
+  "at": "2026-11-17",
+  "pos": 4.9,
+  "site": "subsidy",
+  "by": "auto_rewrite"
  },
  "kojin-jigyonushi-kuruma-kounyu-hojokin": {
   "at": "2026-11-16",
