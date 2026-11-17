@@ -260,6 +260,17 @@ GRACE_HOURS = 2      # 公開の時刻から、これだけ過ぎて無ければ
 WORKFLOW = ROOT / ".github" / "workflows" / "pipeline-multi.yml"
 
 
+def started(sid, day):
+    """その日に記事の枠がある社か。社の設定の start_date（書き始めた日）より前の日は数えない。
+    新しく受けた社が仕組みに入った翌朝、結果の見張りが「前日 0/2本」と要対応を出した（その日は社がまだ無かった。2026-11-17）"""
+    import sites as _S
+    try:
+        s = (_S.load_all().get(_S.resolve(sid)) or {}).get("start_date")
+    except Exception:  # noqa: BLE001  読めなければ今までどおり数える
+        return True
+    return not s or str(day)[:10] >= str(s)[:10]
+
+
 def daily_quota(sid):
     """その社の1日の新しい記事の本数（pace.quota＝量産の兆候と運用者の設定 daily_articles の小さい方）。読めなければ既定"""
     try:
@@ -318,6 +329,9 @@ def check_volume(todo):
                for sid, arts in articles_by_site().items()}
     ym = day[:7]
     for sid, arts in by_site.items():
+        if not started(sid, day):
+            print(f"  開始前 {site_shown(sid):10s} {day} はまだ書き始める前の日です（start_date）")
+            continue
         n = sum(1 for a in arts if counted_day(a) == day)
         month = sum(1 for a in arts if a["date"][:7] == ym)
         left = site_cap(sid) - month

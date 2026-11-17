@@ -139,6 +139,11 @@ def write_site(cfg, sites_dir, root=None):
     clients/<社の id>/site_private.json へ。書いたファイルを返す"""
     cfg = {k: v for k, v in cfg.items() if k not in ("_path", "kw_plan", "client")}
     cur = site_private(cfg["id"], root=root)
+    # 書き始めた日。この日より前は結果の見張り・前日の不足分の数に入れない（daily_audit.started）。
+    # 登録した日は設定が届く前に枠が回り終わることがあるので、翌日にする（2026-11-17）
+    if not cfg.get("start_date"):
+        from datetime import date, timedelta
+        cfg["start_date"] = cur.get("start_date") or (date.today() + timedelta(days=1)).isoformat()
     pid = cfg.get("public_id") or cur.get("public_id") or cfg["id"]
     stub = {"id": pid, "client": True}
     # 本数と書く曜日は、非公開の置き場を読む前の日次の枠（pace.py --slot）も読む

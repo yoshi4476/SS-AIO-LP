@@ -35,6 +35,8 @@ def expected_articles(sid, arts, day):
     上限は社ごと（daily_audit.site_cap）。全社60で数えると、月30本と決めた社（rules.monthly_cap）が
     上限で止まった日から月末まで「書かれていない」と毎日知らせてしまう（2026-10-07 の点検）"""
     import daily_audit as D
+    if not D.started(sid, day):
+        return 0
     before = sum(1 for a in arts if a["date"][:7] == day.isoformat()[:7] and a["date"] < day.isoformat()
                  and D._is_published(a, need_review=False))
     cap = D.site_cap(sid)
@@ -71,6 +73,8 @@ def check_articles(day, bad):
     import sites as S
     cfgs = S.load_all()
     for sid, arts in D.articles_by_site().items():
+        if not D.started(sid, day):
+            continue
         # お客様の社は公開の id で、記事の URL も出さない（CI のログ・知らせの本文に社名・ドメイン・slug を出さない。2026-10-20）
         client = S.is_client(sid)
         name = S.public_id(sid) if client else cfgs[sid].get("name", sid)

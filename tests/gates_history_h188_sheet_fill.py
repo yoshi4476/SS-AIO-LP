@@ -6,6 +6,7 @@ import io
 from contextlib import redirect_stdout
 from unittest import mock
 
+from test_gates import ROOT as ROOT_
 from test_gates import check
 
 SHEET = ["りんご 費用", "りんご 外注", "みかん 運用代行", "ぶどう 依頼", "もも 依頼"]
@@ -44,7 +45,7 @@ def test_client_price_sets_come_from_private_and_match_topic():
     import private_store
     print("\n■ 相場: お客様の社の相場は非公開の置き場から読み、主題の言葉（topics）が記事の語に合う組だけを渡す")
     own = [{"topics": ["経理"], "ranges": [{"label": "経理の委託", "range": "月10万円"}]},
-           {"topics": ["AIエージェント"], "ranges": [{"label": "AIエージェント開発", "range": "100万円"}]},
+           {"topics": ["ドローン"], "ranges": [{"label": "ドローン撮影", "range": "100万円"}]},
            {"ranges": [{"label": "主題の無い組", "range": "1万円"}]}]
     with tempfile.TemporaryDirectory() as td:
         pub = Path(td) / "price_ranges.json"
@@ -54,10 +55,29 @@ def test_client_price_sets_come_from_private_and_match_topic():
                 mock.patch.object(F, "ROOT", Path(td).parent):
             got = lambda kw: [s["ranges"][0]["label"] for s in F.price_sets("x", kw=kw)]
             check("非公開の組を読む（語なしなら全部）", len(F.price_sets("x")), 3)
-            check("「AIエージェント 開発 費用」には AIエージェントの組と主題の無い組だけ（経理の組を混ぜない）",
-                  got("AIエージェント 開発 費用"), ["AIエージェント開発", "主題の無い組"])
+            check("「ドローン 撮影 料金」には ドローンの組と主題の無い組だけ（経理の組を混ぜない）",
+                  got("ドローン 撮影 料金"), ["ドローン撮影", "主題の無い組"])
         check("良い例: 公開側の台帳の組は今までどおり sites で選ぶ（お客様の社でなければ非公開を読まない）",
               [s["ranges"][0]["label"] for s in F.price_sets("ai-lab", path=pub)], ["公開"])
+
+
+def test_watch_skips_days_before_start_date():
+    import daily_audit as D
+    import outcome_watch as OW
+    import sites
+    from datetime import date
+    print("\n■ 結果の見張り: 社の書き始めの日（start_date）より前の日は数えない（新しい社の翌朝に「前日0/2本」と出た）")
+    cfgs = {"x": {"start_date": "2026-11-17"}, "y": {}}
+    with mock.patch.object(sites, "load_all", return_value=cfgs), mock.patch.object(sites, "resolve", lambda s: s):
+        check("開始の前日は数えない・開始の日と設定の無い社は数える",
+              (D.started("x", date(2026, 11, 16)), D.started("x", "2026-11-17"), D.started("y", date(2000, 1, 1))),
+              (False, True, True))
+        with mock.patch.object(D, "articles_by_site", return_value={"x": []}):
+            bad = []
+            OW.check_articles(date(2026, 11, 16), bad)
+            check("悪い例: 開始の前日に 0本 でも要対応にしない", bad, [])
+    src = (ROOT_ / "scripts" / "private_store.py").read_text(encoding="utf-8")
+    check("新しく登録した社には書き始めの日（翌日）が入る", 'cfg["start_date"] = cur.get("start_date") or' in src, True)
 
 
 def test_sheet_fill_adds_only_new_fitting_words_without_rakko():
