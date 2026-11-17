@@ -240,6 +240,12 @@ def main():
     kw = str(meta.get("keyword") or "").strip()
     if kw:
         level, out = kw_gate.judge(kw, site_id, exclude_slug=slug)
+        if level == 3:
+            # 判定不能（GSC の鍵・通信）を「食い合い」と書くと、記事の中身を疑って直しに行く（2026-11-17）
+            print("\n".join("   " + ln for ln in out.strip().splitlines()[-4:]))
+            raise SystemExit(
+                f"BLOCKED(食い合いの検査が動かず): 「{kw}」の照合ができなかったため、この回は配信しません。\n"
+                "  記事は残し、次の回にもう一度照合します（鍵・通信を確認）")
         if level >= 2:
             print("\n".join("   " + ln for ln in out.strip().splitlines()[-4:]))
             raise SystemExit(

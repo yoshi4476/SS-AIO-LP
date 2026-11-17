@@ -55,6 +55,7 @@ def gsc_rows(site_id):
     # 取れなかったことを残す。空の結果だけ返すと「順位を持つページなし＝着手可」と読まれ、
     # GSC が落ちていた日に食い合いの語を通していた（2026-09-25 の点検で発見）
     gsc_rows.failed = ""
+    gsc_rows.denied = ""
     try:
         import gcreds
         import sites as S
@@ -88,6 +89,11 @@ def gsc_rows(site_id):
                     "startDate": str(end - timedelta(days=90)), "endDate": str(end),
                     "dimensions": ["query", "page"], "rowLimit": GSC_ROW_LIMIT}).execute().get("rows", [])
         except Exception as e:
+            # 自分のサイトに権限が無い（受けたばかりの社で、先方がオーナーを足していない）のは、待っても直らない。
+            # 判定不能にすると、追加されるまでその社の記事が全部「食い合い」で配信の前に止まった（2026-11-17）
+            if sid == site_id and no_permission(e):
+                gsc_rows.denied = dom
+                continue
             # 同じ組の他サイトも照合の相手（ドメインをまたいでも自社どうしで食い合う）。黙って飛ばすと、
             # その日は他サイトが取っている語を「着手可」で通していた（2026-10-20）。取れなければ判定不能にする
             if sid == site_id or not gsc_rows.failed:
@@ -101,6 +107,18 @@ def gsc_rows(site_id):
             x["_own"] = (sid == site_id)
         rows += r
     return rows
+
+
+def no_permission(e):
+    """Search Console の「このサイトに権限がありません」（403）。回数の上限・通信の失敗とは分ける"""
+    status = getattr(getattr(e, "resp", None), "status", None)
+    return str(status) == "403" and "permission" in str(getattr(e, "content", b"") or e).lower()
+
+
+def page_owner(kw, pages):
+    """GSC を読めない社の代わりの照合: 狙う語の語がすべて題に入っている、仕組みの外で書いたページ（link_pages）"""
+    want = terms(kw)
+    return [p for p in pages if len(want) >= 2 and want <= terms(p.get("title", ""))]
 
 
 def owned(rows):
@@ -250,6 +268,15 @@ def judge(kw, site_id, title="", h2=None, use_gsc=True, exclude_slug=""):
         reasons.append(("要確認", f"GSCの実績を照合できませんでした: {gsc_rows.failed}",
                         "照合できないことは、食い合いが無いことではありません。"
                         "GSC を確かめてから審査し直してください（オフラインなら --no-gsc を明示）"))
+    if use_gsc and site_id and getattr(gsc_rows, "denied", ""):
+        import sites as S
+        pages = (S.load_all().get(site_id) or {}).get("link_pages") or []
+        reasons.append(("要確認", f"{gsc_rows.denied} の Search Console に権限がありません（先方のオーナーの追加待ち）",
+                        "GSC の実績では照合していません。この社の記事と、仕組みの外で書いたページ（link_pages）の題で照合しました"))
+        for p in page_owner(kw, pages)[:3]:
+            level = max(level, 1)
+            reasons.append(("要差別化", f"仕組みの外で書いたページが同じ語を題にしている: {p['url']}",
+                            "同じ深さで書くと食い合います。そのページへリンクし、扱わない範囲を書き分けてください"))
     if ex:
         own = [o for o in own if not any(f"/{e}/" in o["page"] or o["page"].rstrip("/").endswith("/" + e)
                                          for e in ex)]
