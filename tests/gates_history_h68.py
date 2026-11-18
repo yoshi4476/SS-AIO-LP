@@ -251,7 +251,7 @@ def test_weekly_tools_leave_hidden_articles_alone():
     check("auto_rewrite: 外した記事は書き直さない", (ok, "noindex" in why), (False, True))
     ok, why = AM.run_one({"survivor": "kichodaiko-toha", "loser": "yucho-kicho-yarikata", "site": "corporate"}, True)
     check("auto_merge: 外した記事を含む組は統合しない", (ok, "noindex" in why), (False, True))
-    check("auto_rewrite: 直す一覧から外した記事を除く", "noindex.drop" in inspect.getsource(AW.main), True)
+    check("auto_rewrite: 直す一覧から外した記事を除く", "noindex.drop" in inspect.getsource(AW.pick_items), True)
     check("auto_merge: 外した記事を含む組を見送りにする", "noindex" in inspect.getsource(AM.main), True)
     import cta_fill
     import fact_cite

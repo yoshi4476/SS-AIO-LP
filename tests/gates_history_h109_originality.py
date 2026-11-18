@@ -79,4 +79,4 @@ def test_existing_articles_are_cleaned_weekly():
     check("書き直しの種類 stock（対象・指示・直した後の検算）がある",
           ("def stock_items" in src, '"stock": (' in src, '決まり文句が残っています' in src, '本文が減りすぎました' in src),
           (True, True, True, True))
-    check("週次が stock を回す", "--kind stock" in wk, True)
+    check("週次が stock を回す（種類の並びに入れる）", "stock:$((n + 1))" in wk, True)

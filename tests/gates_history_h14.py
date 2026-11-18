@@ -199,7 +199,8 @@ def test_compete_loop_is_wired():
     check("週次の要対応に「AIのシェアが下がった語」", any(s.startswith("compete.py --check") for _, s, _ in F.CHECKS), True)
     wk = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
     check("週次CI: compete の書き直し（週2本・予算つき）と戻しの要対応",
-          ["--kind compete --limit $n" in wk, "rewrite_rollback.py --write 2>&1) || true" in wk], [True, True])
+          ["compete:$n" in wk and '--kind "$KINDS"' in wk and "--budget-min" in wk,
+           "rewrite_rollback.py --write 2>&1) || true" in wk], [True, True])
     check("月次レポートに競合比較の節（お客様名義でも出す）",
           ["compete_pages" in inspect.getsource(MR.render), "is_client(SITE_ID)" in inspect.getsource(MR.render)], [True, True])
     gi = (ROOT / ".gitignore").read_text(encoding="utf-8")

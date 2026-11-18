@@ -813,6 +813,52 @@ def _breakdown(text):
     return {"axes": axes, "total": round(sum(axes.values()) / len(axes))}
 
 
+# 下書きと同じ並列の中で済ませた採点（prescore）。検算は1本ずつなので、そこで採点（1本あたり claude 2〜4回）を
+# 順に待っていた（2026-11-16 の週次で書き直しの2工程が22分・36分）。鍵は (記事, 原稿の中身の指紋, 採点の関数) で、
+# 中身が1文字でも違えば使わない。使うのは検算の1回だけ（取り出したら消す）
+PRESCORED = {}
+
+
+def _score_key(slug, text, ask):
+    import hashlib
+    return slug, hashlib.sha1(text.encode("utf-8")).hexdigest(), ask
+
+
+def scored(slug, text, ask=None):
+    """採点（quality_loop.score と同じ形）。済ませた採点があれば、それを1回だけ使う"""
+    import quality_loop as QL
+    return PRESCORED.pop(_score_key(slug, text, ask), None) or QL.score(slug, ask, text=text)
+
+
+def warns_of(slug, text):
+    """原稿の中身（写し）の score_check の WARN と FAIL の行（warns と同じ形）"""
+    import tempfile
+    import score_check as SC
+    with tempfile.TemporaryDirectory(prefix="prescore_", ignore_cleanup_errors=True) as tmp:
+        p = Path(tmp) / f"{slug}.md"
+        p.write_text(text, encoding="utf-8", newline="")
+        return [f"{'WARN' if warn else 'FAIL'} | {name}" + (f" | {detail}" if detail else "")
+                for name, ok, detail, warn in SC.run(slug, path=p) if not ok]
+
+
+def prescore(item, before, after):
+    """検算で使う直す前・後の採点を、下書きと同じ並列の中で先に済ませる。機械の検査で警告が増える下書きは、
+    検算で戻るか機械の直しで中身が変わる（済ませた採点を使えない）ので採点しない（AI の呼び出しを無駄にしない）。
+    うまくいかなくても何もしない（検算がその場で採点する）"""
+    import quality_loop as QL
+    if after is None or after == before or not score_gated(item["kind"]):
+        return
+    try:
+        if worse_warns(warns_of(item["slug"], before), warns_of(item["slug"], after)):
+            return
+        for t in (before, after):
+            got = QL.score(item["slug"], SCORE_ASK, text=t)
+            if got[0]:
+                PRESCORED[_score_key(item["slug"], t, SCORE_ASK)] = got
+    except Exception as e:  # noqa: BLE001  先に済ませる採点の失敗で下書きを捨てない
+        print(f"  先の採点を飛ばしました（{type(e).__name__}。検算で採点します）", file=sys.stderr)
+
+
 def score_gate(slug, before_text, after_text, ask=None):
     """(採用してよいか, 理由, 直した後の採点)。直す前と直した後を、同じ回に同じ採点で比べる
     （原稿に残る点は前の回の採点で、採点の揺れと採点の指示の変更を含む。2026-11-12 の週次で、原稿の古い点と
@@ -824,10 +870,10 @@ def score_gate(slug, before_text, after_text, ask=None):
     import quality_loop as QL
     import rubric as R
     ask = ask or SCORE_ASK
-    before, why = QL.score(slug, ask, text=before_text)
+    before, why = scored(slug, before_text, ask)
     if not before:
         return False, f"直す前の原稿を採点できませんでした（{why[:40]}）", None
-    after, why = QL.score(slug, ask, text=after_text)
+    after, why = scored(slug, after_text, ask)
     if not after:
         return False, f"直した後の原稿を採点できませんでした（{why[:40]}）", None
     newly = [k for k in QL.AXIS_KEYS if after["axes"][k] < R.floor(k) <= before["axes"][k]]
@@ -2229,15 +2275,31 @@ def draft_one(item, prompt):
     return texts[slug], r
 
 
-def draft_all(items, workers):
+# 並列の下書きを新しく始めてよいのは、予算（--budget-min）のこの割合まで。残りは書いた下書きを当てて検算する時間
+DRAFT_SHARE = 0.75
+
+
+def draft_all(items, workers, deadline=None):
     """各記事の書き直し案を、記事のコピー（一時フォルダ）で同時に書かせる。
 
     1本の書き直しのほぼ全部は AI の応答待ち。指示は「この1ファイルだけを直す」なので、コピーの上で
     書かせても中身は同じになる。当てて検算するのは呼び出し側（run_one(edited=…)）で1本ずつ行う。
+    検算で使う直す前・後の採点も、ここで同時に済ませる（prescore）。
+    deadline（時刻）を過ぎたら新しい下書きは始めない（None を返す。呼び出し側が予算を見て1本ずつ書かせるか止める）。
     指示は先に全部作る（指示を作る道具が data/ を書いても、AI の見張り（guarded）に数えない）。
     作業場所が変わっていれば全部戻して Escaped"""
     jobs = [(it, build_prompt(it)[0]) if (ROOT / "articles" / f"{it['slug']}.md").is_file() else None for it in items]
-    return guarded(lambda: map_each(lambda j: draft_one(*j)[0] if j else None, jobs, workers))
+
+    def work(j):
+        if not j or (deadline and time.time() > deadline):
+            return None
+        it, prompt = j
+        # 検算（score_gate）が採点する直す前の中身と同じ読み方（バイト列をそのまま。改行を変えない）
+        before = (ROOT / "articles" / f"{it['slug']}.md").read_bytes().decode("utf-8-sig", errors="replace")
+        text = draft_one(it, prompt)[0]
+        prescore(it, before, text)
+        return text
+    return guarded(lambda: map_each(work, jobs, workers))
 
 
 def run_one(item, write, edited=None):
@@ -2552,6 +2614,79 @@ def selftest():
     return 0 if ok == total else 1
 
 
+def parse_kinds(spec, limit):
+    """--kind の「question:2,early:2,stock:3」→ [(種類, 本数)]。本数の無い種類は limit。1つだけなら [(spec, limit)]"""
+    out = []
+    for part in [p.strip() for p in str(spec or "").split(",") if p.strip()] or [""]:
+        k, _, n = part.partition(":")
+        out.append((k.strip(), int(n) if n.strip() else limit))
+    return out
+
+
+def pick_items(a, kind, limit):
+    """1つの種類の候補（社・名指し・noindex・守る記事・判定期間中の題・直近に触った記事を外した後）。
+    動かせない種類（textlint の無い aiwriting）は None"""
+    if kind == "fresh":
+        items = fresh_items(max(limit, 4))
+    elif kind == "question":
+        items = question_items(max(limit, 4))
+    elif kind == "stock":
+        # 記事を名指しした直し（--slugs）は、多い順の上位に入らない記事も選べるよう全部から探す
+        items = stock_items(10 ** 6 if a.slugs else max(limit, 3))
+    elif kind == "desc":
+        items = desc_items(max(limit, 4))
+    elif kind == "aiwriting":
+        # 名指し（--slugs）は pick_slugs がその記事を検査する。全部を検査しない
+        import ai_writing as AW
+        if not AW.available():
+            print("要対応: AIっぽい言い回しの直しを動かせません（textlint が入っていません。npm ci --prefix automation/textlint）")
+            return None
+        items = [] if a.slugs else AW.items(AW._sites(a.sites))
+    elif kind == "aisplit":
+        items = aisplit_items(max(limit, 2))
+    elif kind == "split":
+        items = split_items(max(limit, 4))
+    elif kind == "compete":
+        items = compete_items(max(limit, 2))
+    elif kind == "early":
+        items = early_items(max(limit, 2))
+    elif kind == "spare":
+        items = spare_items()
+    elif kind == "serp":
+        items = serp_items()
+    else:
+        items = [x for x in targets() if not kind or x["kind"] == kind]
+    items = only_sites(items, a.sites)
+    if a.slugs:
+        items = pick_slugs(items, a.slugs, kind)
+    if a.main_only:
+        items = only_main(items)
+    # 検索から外した記事（noindex）は書き直さない（本数の枠と下書きの時間を使わせない）
+    import noindex
+    items = noindex.drop(items)
+    if not a.slugs:
+        # 伸びている記事には何も当てず、読まれている記事には題・構成を変える直しを当てない（運用者の名指しは除く。2026-10-22）
+        import article_health
+        items = article_health.drop_protected(items, kind)
+    items = stock_first(items)
+    items = buyer_first(items)
+    if a.buyer_only:
+        items = [x for x in items if is_buyer(x["slug"])]
+    # 判定期間中の題は run_one が必ず見送る。先に外さないと、本数の枠と下書きの時間をそれに使う
+    # （--skip-recent のときだけ外していたので、週次では10/15〜11/17 の題の戻し46件のうち41件がこれだった）
+    locked = [x["slug"] for x in items if x["kind"] in ("title", "desc") and title_locked(x["slug"])]
+    if locked:
+        items = [x for x in items if not (x["kind"] in ("title", "desc") and x["slug"] in locked)]
+        print(f"  題の判定期間中の{len(locked)}本は直しません: {', '.join(shown(s) for s in locked[:6])}")
+    if a.skip_recent:
+        busy = recently_touched(a.skip_recent)
+        held = [x["slug"] for x in items if x["slug"] in busy]
+        items = [x for x in items if x["slug"] not in busy]
+        if held:
+            print(f"  直近{a.skip_recent}日に手を付けた{len(held)}本を外しました: {', '.join(shown(s) for s in held[:6])}")
+    return items
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
@@ -2564,7 +2699,8 @@ def main():
     ap.add_argument("--selftest", action="store_true",
                     help="検算が効くかを本番の記事で確かめる（claudeは呼ばない）")
     ap.add_argument("--kind", default="",
-                    help="種別を絞る（fresh は鮮度更新だけを回す。spare は浮いた枠の順: serp → stuck → compete → 無料の調べ（cooccur）。補充は --main-only のときだけ）")
+                    help="種別を絞る（fresh は鮮度更新だけを回す。spare は浮いた枠の順: serp → stuck → compete → 無料の調べ（cooccur）。補充は --main-only のときだけ）。"
+                         "「question:2,early:2,stock:3」のように並べると、種類ごとの本数で1回に集めて同時に下書きする")
     ap.add_argument("--skip-recent", type=int, default=0,
                     help="直近この日数に auto_rewrite が手を付けた記事を外す（0=外さない。集中モード・浮いた枠が使う）")
     ap.add_argument("--tag", default="", help="台帳に残す印（集中モード・浮いた枠の直しを対照群と分けるため）")
@@ -2590,64 +2726,25 @@ def main():
         print("■ 検算の自己診断（やってはいけない書き換えを当てて、止まるか見る）\n")
         return selftest()
 
-    if a.kind == "fresh":
-        items = fresh_items(max(a.limit, 4))
-    elif a.kind == "question":
-        items = question_items(max(a.limit, 4))
-    elif a.kind == "stock":
-        # 記事を名指しした直し（--slugs）は、多い順の上位に入らない記事も選べるよう全部から探す
-        items = stock_items(10 ** 6 if a.slugs else max(a.limit, 3))
-    elif a.kind == "desc":
-        items = desc_items(max(a.limit, 4))
-    elif a.kind == "aiwriting":
-        # 名指し（--slugs）は pick_slugs がその記事を検査する。全部を検査しない
-        import ai_writing as AW
-        if not AW.available():
-            print("要対応: AIっぽい言い回しの直しを動かせません（textlint が入っていません。npm ci --prefix automation/textlint）")
-            return 0
-        items = [] if a.slugs else AW.items(AW._sites(a.sites))
-    elif a.kind == "aisplit":
-        items = aisplit_items(max(a.limit, 2))
-    elif a.kind == "split":
-        items = split_items(max(a.limit, 4))
-    elif a.kind == "compete":
-        items = compete_items(max(a.limit, 2))
-    elif a.kind == "early":
-        items = early_items(max(a.limit, 2))
-    elif a.kind == "spare":
-        items = spare_items()
-    elif a.kind == "serp":
-        items = serp_items()
+    kinds = parse_kinds(a.kind, a.limit)
+    if len(kinds) > 1:
+        # 複数の種類を1回で集め、下書きと採点を同時に済ませる（種類ごとに順に呼ぶと、並列が種類の中でしか効かない）。
+        # 同じ記事は1つの種類だけ（同じ回に2つの直しを重ねると、後の下書きが前の直しを知らずに書く）
+        bad = [k for k, _ in kinds if k in ("", "spare", "serp")]
+        if bad:
+            print(f"--kind に並べられない種類です: {', '.join(k or '（空）' for k in bad)}")
+            return 1
+        items, seen = [], set()
+        for k, n in kinds:
+            got = [x for x in (pick_items(a, k, n) or []) if x["slug"] not in seen][:n]
+            seen |= {x["slug"] for x in got}
+            items += got
+        limit = len(items)
     else:
-        items = [x for x in targets() if not a.kind or x["kind"] == a.kind]
-    items = only_sites(items, a.sites)
-    if a.slugs:
-        items = pick_slugs(items, a.slugs, a.kind)
-    if a.main_only:
-        items = only_main(items)
-    # 検索から外した記事（noindex）は書き直さない（本数の枠と下書きの時間を使わせない）
-    import noindex
-    items = noindex.drop(items)
-    if not a.slugs:
-        # 伸びている記事には何も当てず、読まれている記事には題・構成を変える直しを当てない（運用者の名指しは除く。2026-10-22）
-        import article_health
-        items = article_health.drop_protected(items, a.kind)
-    items = stock_first(items)
-    items = buyer_first(items)
-    if a.buyer_only:
-        items = [x for x in items if is_buyer(x["slug"])]
-    # 判定期間中の題は run_one が必ず見送る。先に外さないと、本数の枠と下書きの時間をそれに使う
-    # （--skip-recent のときだけ外していたので、週次では10/15〜11/17 の題の戻し46件のうち41件がこれだった）
-    locked = [x["slug"] for x in items if x["kind"] in ("title", "desc") and title_locked(x["slug"])]
-    if locked:
-        items = [x for x in items if not (x["kind"] in ("title", "desc") and x["slug"] in locked)]
-        print(f"  題の判定期間中の{len(locked)}本は直しません: {', '.join(shown(s) for s in locked[:6])}")
-    if a.skip_recent:
-        busy = recently_touched(a.skip_recent)
-        held = [x["slug"] for x in items if x["slug"] in busy]
-        items = [x for x in items if x["slug"] not in busy]
-        if held:
-            print(f"  直近{a.skip_recent}日に手を付けた{len(held)}本を外しました: {', '.join(shown(s) for s in held[:6])}")
+        items = pick_items(a, a.kind, a.limit)
+        if items is None:
+            return 0
+        limit = a.limit
     if not items and a.kind == "spare" and a.main_only:
         items = buyer_first(free_spare_items(a.sites, recently_touched(a.skip_recent) if a.skip_recent else set()))
         if items:
@@ -2657,7 +2754,7 @@ def main():
             if items:
                 print(f"  足す語も見つからないので、表示があるのにクリックの取れない {len(items)}本の題を候補にしました")
     print(f"■ 人の判断に回っていた直し: {len(items)}件"
-          + (f"（1回に{a.limit}本まで）\n" if a.write else "\n"))
+          + (f"（1回に{limit}本まで）\n" if a.write else "\n"))
     if not items:
         print("  対象がありません")
         if a.kind == "spare":
@@ -2679,12 +2776,15 @@ def main():
     ok = ng = 0
     rewrote = []
     started = time.time()
-    todo = items[:a.limit]
+    todo = items[:limit]
     drafts = [None] * len(todo)
     if a.parallel > 1:
-        k = draft_quota(len(todo), a.parallel, a.budget_min, per_min=30)
+        # 下書きと検算の採点を、予算の DRAFT_SHARE までに始めた分だけ同時に済ませる。始めなかった分は、
+        # 予算が残っていれば下の1本ずつで書かせる（前は予算から本数を決めて parallel 本しか同時に書かせず、
+        # 残りは採点まで1本ずつ待っていた）
+        deadline = started + a.budget_min * 60 * DRAFT_SHARE if a.budget_min else None
         try:
-            drafts[:k] = draft_all(todo[:k], a.parallel)
+            drafts = draft_all(todo, a.parallel, deadline)
         except Escaped as e:
             print(f"要対応: 書き直し案を書かせる間に、AI の作業場所の外が変わりました。全部戻して止めます（{e}）")
             return 1

@@ -216,7 +216,7 @@ def test_ai_split_answers_go_back_into_articles():
     src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
     check("検算: 調査の文がそのまま入ったか・URLが増えていないか", ("調査の文がそのまま入っていません" in src, "出典のURLが増えました" in src), (True, True))
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
-    check("週次で回す", "--kind aisplit" in wf, True)
+    check("週次で回す（種類の並びに入れる）", "aisplit:$n" in wf, True)
     for x in AR.aisplit_items(50):
         check(f"渡す文は「当社調べ」の固定の言い回し: {x['slug']}", x["claims"][0].endswith("（当社調べ）"), True)
 

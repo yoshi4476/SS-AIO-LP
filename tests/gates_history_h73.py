@@ -52,7 +52,8 @@ def test_spare_slot_falls_back_to_free_research():
           [(x["slug"], x["kind"], x["terms"]) for x in got], [("main-a", "stuck", ["申請の流れ", "対象経費"])])
 
     src = (ROOT / "scripts" / "auto_rewrite.py").read_text(encoding="utf-8")
-    body = src[src.index("def main("):]
+    # 候補を集める処理（直近に触った記事を外す）は pick_items、補充は main。並びは pick_items → main
+    body = src[src.index("def pick_items("):]
     check("補充は浮いた枠（spare）の候補が尽きたときだけ・主力に絞った回だけ",
           'if not items and a.kind == "spare" and a.main_only:' in body
           and body.index("free_spare_items(") > body.index("recently_touched(a.skip_recent)"), True)

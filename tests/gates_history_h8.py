@@ -32,7 +32,11 @@ def test_parallel_drafts_fit_the_budget():
             raise subprocess.TimeoutExpired("claude", 1)
         return x * 10
     check("1本が TimeoutExpired でも他の本の結果は残る", AR.map_each(fn, [1, 2, 3], 2), [10, None, 30])
-    check("auto_rewrite の main は下書きの本数を予算から決める", "draft_quota(" in inspect.getsource(AR.main), True)
+    # auto_rewrite は 2026-11-18 から、本数ではなく時刻で止める（予算の DRAFT_SHARE までに始めた下書きだけ。
+    # 検算の採点も下書きと同時に済ませるので、当てる段は短い）。予算を食い切らない狙いは同じ
+    check("auto_rewrite の main は下書きを予算の時刻までに始めた分に限る",
+          "DRAFT_SHARE" in inspect.getsource(AR.main) and "deadline" in inspect.getsource(AR.draft_all)
+          and 0 < AR.DRAFT_SHARE < 1, True)
     check("auto_merge の main も同じ", "draft_quota(" in inspect.getsource(AM.main), True)
     check("draft_all は1本ずつ例外を受け止める（両方）",
           ["map_each(" in inspect.getsource(f) for f in (AR.draft_all, AM.draft_all)], [True, True])

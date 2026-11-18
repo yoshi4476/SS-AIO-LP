@@ -41,7 +41,7 @@ def test_loops_use_the_health():
     check("採点し直しは守る記事を外し、調子の順（落ちている → 弱い → ほぼ表示なし）に並べる",
           ('if AH.protected(s, "quality", sid):' in ql, "AH.ORDER.get(health, 2)" in ql), (True, True))
     check("書き直しは名指しの無い回だけ守る記事を外す",
-          "    if not a.slugs:\n        # 伸びている記事には何も当てず" in ar and "article_health.drop_protected(items, a.kind)" in ar, True)
+          "    if not a.slugs:\n        # 伸びている記事には何も当てず" in ar and "article_health.drop_protected(items, kind)" in ar, True)
     check("毎晩の順位の記録がページ単位の28日×2期間も残す（語×ページはクリックを取りこぼす）",
           ('def fetch_pages(' in rt, '{sid}.pages.json' in rt), (True, True))
     gi = (ROOT / ".gitignore").read_text(encoding="utf-8")

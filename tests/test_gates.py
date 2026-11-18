@@ -3672,7 +3672,7 @@ def test_report_actions_close_the_loop():
     check("social_post: note 用の長文を作る", '"note"' in inspect.getsource(SP2.compose), True)
     check("週次CIが実測（速度・表記・インデックス・AI引用）を回す",
           # インデックスの検査は reindex.py が担う（index_status と二重に回していたのをやめた）
-          all(s in wk for s in ("cwv_check.py", "brand_spelling.py --fix", "reindex.py", "ai_cite_check.py --limit 5", "--kind question")), True)
+          all(s in wk for s in ("cwv_check.py", "brand_spelling.py --fix", "reindex.py", "ai_cite_check.py --limit 5", "question:$n")), True)
     sh_ = (ROOT / ".github" / "workflows" / "selfheal.yml").read_text(encoding="utf-8")
     check("日次CIが証明書・404・トークンを見る", "cert_check.py" in sh_ and "token_check.py" in sh_, True)
 
@@ -3755,7 +3755,7 @@ def test_report_actions_close_the_loop():
     check("引用の実測: 5つの検索つきAIを持つ", set(ACX.ENGINES) >= {"ChatGPT", "Gemini", "Perplexity", "Claude", "Grok"}, True)
     check("語の調査: 鍵のあるAI全部に聞く", "engines_available" in inspect.getsource(AKR.probe), True)
     check("週次CIが上位表示の実測（並び替え・型・共起語・リッチ）を回す",
-          all(s in wk for s in ("kw_reorder.py", "title_patterns.py", "cooccur.py", "rich_check.py", "--kind desc")), True)
+          all(s in wk for s in ("kw_reorder.py", "title_patterns.py", "cooccur.py", "rich_check.py", "desc:$n")), True)
 
     # 多言語（英・中・韓）: 数字を変える訳は捨てる。月名・万/億・数詞は許す
     import i18n as I18N
