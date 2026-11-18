@@ -1,0 +1,1 @@
+{"at": "2026-11-18T02:14:03+00:00", "job": "記事の枠", "site": "subsidy", "turns": 7, "sessions": 3, "input_tokens": 14, "output_tokens": 3323, "cache_creation_input_tokens": 33423, "cache_read_input_tokens": 134291, "models": {"claude-sonnet-5-5": {"input_tokens": 14, "output_tokens": 3323, "cache_creation_input_tokens": 33423, "cache_read_input_tokens": 134291}}}
