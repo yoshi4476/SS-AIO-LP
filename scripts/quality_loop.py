@@ -250,9 +250,21 @@ def scorer_args():
             "--allowedTools", "Read", "--settings", scorer_settings()]
 
 
+class ScorerModelMismatch(RuntimeError):
+    """採点のモデルが本番と違う（claude の版が古く、1つ下のモデルに落ちた）"""
+
+
 def _ask(prompt, cwd):
     """採点の claude を1回呼ぶ（門ではこれを差し替える。本物の claude は呼ばない）"""
     import auto_rewrite as A
+    want = A.MODELS[0]
+    if A.model_args() != ["--model", want[0]]:
+        # 版が古いと model_args は1つ下のモデルに黙って落ちる。採点では、同じ記事が本番（2.1.302・sonnet-5-5）の
+        # 84・88・84点に対し手元（2.1.218・sonnet-5）は91・89・93点、別の記事は75・75・76点に対し93・92・92点と、
+        # 7〜17点甘く出た（2026-11-18）。合否の物差しが変わるので、採点せずに止める
+        raise ScorerModelMismatch(
+            f"採点のモデルが本番（{want[0]}）と違います。claude の版を {'.'.join(map(str, want[1]))} 以上にしてください"
+            "（古い版は別のモデルで採点し、点が7〜17点甘く出ます）")
     r = A.sh(scorer_args(), timeout=900, stdin_text=prompt, cwd=cwd)
     return r.stdout or ""
 
