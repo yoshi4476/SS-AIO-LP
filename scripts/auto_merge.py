@@ -654,7 +654,7 @@ def selftest(scaled=False):
             print("  同型の組がありません（統合するものが無いので検算も要りません）")
             return 0
         s, l = pairs[0]
-        print(f"  試す組: {l} → {s}\n")
+        print(f"  試す組: {AR.shown(l)} → {AR.shown(s)}\n")
     else:
         arts = CC.load_articles()
         pairs = CC.find_pairs(arts)
@@ -729,7 +729,7 @@ def main():
             print("別のサイトの記事どうしは統合しません")
             return 1
         good, why = run_one(pair, a.write)
-        print(f"  {'○' if good else '×'} {l} → {s}: {why}")
+        print(f"  {'○' if good else '×'} {AR.shown(l)} → {AR.shown(s)}: {why}")
         if a.write:
             note(pair, good, why)
         return 0 if good else 1
@@ -745,19 +745,22 @@ def main():
         for p in pairs[:20]:
             ss, ls = p.get("survivor_stat") or {}, p.get("loser_stat") or {}
             print(f"  {'○' if not p['skip'] else '－'} [{p['site']}] {p['sim']:.0%} "
-                  f"{p['loser'][:34]:<34} → {p['survivor'][:34]:<34} "
+                  f"{AR.shown(p['loser'])[:34]:<34} → {AR.shown(p['survivor'])[:34]:<34} "
                   f"クリック{ls.get('clicks', 0)}/{ss.get('clicks', 0)} 表示{ls.get('imp', 0)}/{ss.get('imp', 0)}"
                   + (f"  ｜{p['skip']}" if p["skip"] else ""))
     else:
+        import sites as S
         pairs = skip_noindex(candidates(a.site))
         ready = [p for p in pairs if not p["skip"]]
         print(f"■ 同じ語で食い合っている組: {len(pairs)}（統合できる {len(ready)}）"
               + (f"（1回に{a.limit}組まで）" if a.write else "") + "\n")
         for p in pairs[:15]:
             mark = "○" if not p["skip"] else "－"
-            print(f"  {mark} [{p['site']}] {p['loser'][:30]:<30} → {p['survivor'][:30]:<30} "
+            # お客様の社の記事の名前と狙う語は、公開の CI のログに出さない（2026-11-16 の週次で名前が出ていた）
+            print(f"  {mark} [{p['site']}] {AR.shown(p['loser'])[:30]:<30} → {AR.shown(p['survivor'])[:30]:<30} "
                   f"同じ語{len(p['kws'])} 表示{p['imp']}"
-                  + (f"  ｜{p['skip']}" if p["skip"] else f"  例:「{p['kws'][0]['kw']}」"))
+                  + (f"  ｜{p['skip']}" if p["skip"] else
+                     "" if S.is_client(p["site"]) else f"  例:「{p['kws'][0]['kw']}」"))
     if not ready:
         print("\n  統合できる組はありません")
         return 0
@@ -769,7 +772,7 @@ def main():
         print("\n■ 統合の検算の自己診断" + ("（同型の組）" if a.scaled else "") + "\n")
         try:
             bad = selftest(a.scaled)
-        except Exception as e:  # noqa: BLE001  前は自己診断の例外も「検算が効いていない」として知らせていた
+        except (Exception, SystemExit) as e:  # noqa: BLE001  前は自己診断の例外も「検算が効いていない」として知らせていた
             print(f"  自己診断が途中で止まりました（{type(e).__name__}）")
             bad = True
         if bad:
@@ -801,19 +804,19 @@ def main():
             print(f"\n  {used:.0f}分使ったので、ここで止めます（残りは次回）")
             break
         if p["loser"] in gone:
-            print(f"  － {p['loser'][:28]} は既に {gone[p['loser']]} に吸収済み")
+            print(f"  － {AR.shown(p['loser'])[:28]} は既に {AR.shown(gone[p['loser']])} に吸収済み")
             continue
         if p["loser"] in gone.values():
             # 今回吸収したばかりの記事をさらに別の記事へ吸収すると、301 が2段になり、
             # 検算も1段目の中身を見ないまま通る。次回、実績を取り直してから決める
-            print(f"  － {p['loser'][:28]} は今回ほかの記事を吸収したので次回")
+            print(f"  － {AR.shown(p['loser'])[:28]} は今回ほかの記事を吸収したので次回")
             continue
         while p["survivor"] in gone:   # 生き残りが先に別の記事へ吸収されていたら、その先へ
             p["survivor"] = gone[p["survivor"]]
         good, why = run_one(p, True, draft=drafts.get(id(p)))
         if good:
             gone[p["loser"]] = p["survivor"]
-        print(f"  {'○' if good else '×'} {p['loser'][:28]} → {p['survivor'][:28]}  {why[:60]}")
+        print(f"  {'○' if good else '×'} {AR.shown(p['loser'])[:28]} → {AR.shown(p['survivor'])[:28]}  {why[:60]}")
         note(p, good, why)
         ok, ng = ok + good, ng + (not good)
     print(f"\n  統合した {ok}組 / 戻した {ng}組 / {(time.time() - started) / 60:.0f}分")

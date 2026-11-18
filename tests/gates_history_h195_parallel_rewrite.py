@@ -57,7 +57,26 @@ def test_kinds_are_collected_in_one_call():
         with patched((AR, "pick_items", picked), (AR, "shown", lambda s: s), (AR, "said", lambda s, w: w)):
             rc, out = out_of(AR.main)
         rows = [ln.split("]")[0].strip(" [") + ":" + ln.split("]")[1].split()[0] for ln in out.splitlines() if ln.strip().startswith("[")]
-        check("種類ごとの本数で、同じ記事は先の種類だけ", rows, ["question:a", "question:b", "stock:d", "stock:e"])
+        check("種類ごとの本数で、同じ記事は先の種類だけ。種類は交互に並べる（後ろの種類を毎週後回しにしない）",
+              rows, ["question:a", "stock:d", "question:b", "stock:e"])
+        def flaky(a, k, n):
+            if k == "split":
+                raise FileNotFoundError("indexing-service-account.json")
+            return picked(a, k, n)
+        sys.argv = ["auto_rewrite.py", "--kind", "question:2,split:2,stock:2"]
+        with patched((AR, "pick_items", flaky), (AR, "shown", lambda s: s), (AR, "said", lambda s, w: w)):
+            rc, out = out_of(AR.main)
+        rows = [ln.split("]")[0].strip(" [") + ":" + ln.split("]")[1].split()[0] for ln in out.splitlines() if ln.strip().startswith("[")]
+        check("1つの種類の候補集めが落ちても、ほかの種類は続ける（要対応で知らせる）",
+              (rc, rows, "split の候補を集められませんでした" in out), (0, ["question:a", "stock:d", "question:b", "stock:e"], True))
+
+        def exits(a, k, n):
+            if k == "split":
+                raise SystemExit(3)
+            return picked(a, k, n)
+        with patched((AR, "pick_items", exits), (AR, "shown", lambda s: s), (AR, "said", lambda s, w: w)):
+            rc, out = out_of(AR.main)
+        check("候補集めが SystemExit で止まっても、ほかの種類は続ける", (rc, "split の候補を集められませんでした" in out), (0, True))
         sys.argv = ["auto_rewrite.py", "--kind", "question:2,spare"]
         rc, out = out_of(AR.main)
         check("浮いた枠（spare）は並べられない", (rc, "並べられない" in out), (1, True))
@@ -122,24 +141,32 @@ def test_finished_drafts_are_applied_even_after_one_failed_past_the_budget():
     print("\n■ 予算を過ぎても、書き終えた下書きは当てる（途中の1本が書けなくても後ろを捨てない）・1種類の本数つき")
     import types
     import auto_rewrite as AR
-    clock = iter([0] + [10 ** 6] * 50)
-    applied = []
     items = [{"kind": "question", "slug": s, "why": "w"} for s in ("a", "b", "c")]
-    old = sys.argv
-    sys.argv = ["auto_rewrite.py", "--write", "--kind", "question:3", "--parallel", "3", "--budget-min", "1"]
-    try:
-        with patched((AR, "pick_items", lambda a, k, n: [dict(x) for x in items] if (k, n) == ("question", 3) else []),
-                     (AR, "draft_all", lambda todo, w, deadline=None: ["d1", None, "d3"]),
-                     (AR, "run_one", lambda x, w, edited=None: applied.append((x["slug"], edited)) or (True, "直しました: t")),
-                     (AR, "note", lambda *a, **k: None), (AR, "hub_rewrite_log", lambda *a, **k: None),
-                     (AR, "shown", lambda s: s), (AR, "said", lambda s, w: w),
-                     (AR, "time", types.SimpleNamespace(time=lambda: next(clock)))):
-            rc, out = out_of(AR.main)
-    finally:
-        sys.argv = old
+
+    def go(after_sec):
+        """予算1分。始めた後の時計を after_sec 秒に固定して main を回す。(当てた記事, 出力)"""
+        clock = iter([0] + [after_sec] * 50)
+        applied = []
+        old = sys.argv
+        sys.argv = ["auto_rewrite.py", "--write", "--kind", "question:3", "--parallel", "3", "--budget-min", "1"]
+        try:
+            with patched((AR, "pick_items", lambda a, k, n: [dict(x) for x in items] if (k, n) == ("question", 3) else []),
+                         (AR, "draft_all", lambda todo, w, deadline=None: ["d1", None, "d3"]),
+                         (AR, "run_one", lambda x, w, edited=None: applied.append((x["slug"], edited)) or (True, "直しました: t")),
+                         (AR, "note", lambda *a, **k: None), (AR, "hub_rewrite_log", lambda *a, **k: None),
+                         (AR, "shown", lambda s: s), (AR, "said", lambda s, w: w),
+                         (AR, "time", types.SimpleNamespace(time=lambda: next(clock)))):
+                rc, out = out_of(AR.main)
+        finally:
+            sys.argv = old
+        return applied, out
+    applied, out = go(72)       # 予算（60秒）は過ぎたが、OVERRUN（1.5倍=90秒）の前
     check("「question:3」1つでも種類と本数に分けて候補を集める", "人の判断に回っていた直し: 3件" in out, True)
     check("書き終えた a・c は当て、書けなかった b だけ次回", applied, [("a", "d1"), ("c", "d3")])
-    check("次回に回した本数を出す", "書いていない1本は次回に回します" in out, True)
+    check("次回に回した本数を出す", "1本は次回に回します" in out, True)
+    applied, out = go(10 ** 6)  # 予算の1.5倍を超えた
+    check("予算の1.5倍を超えたら、書き終えた下書きも当てずに次回（週次の時間の上限を守る）",
+          (applied, "3本は次回に回します" in out), ([], True))
 
 
 def test_claude_md_is_slimmed_only_for_calls_that_read_it():
@@ -185,3 +212,15 @@ def test_drafts_stop_starting_after_the_deadline_and_stay_inside_the_guard():
     check("時刻の前なら書く", (len(got), got[0] is not None, drafted), (1, True, [slug]))
     check("本物の score_check で警告を比べ、採点を済ませる（見張りが下書きを捨てない）", len(AR.PRESCORED), 2)
     AR.PRESCORED.clear()
+    real_build = AR.build_prompt
+
+    def build(it):
+        if it.get("why") == "壊れた候補":
+            raise KeyError("phrases")
+        return real_build(it)
+    drafted.clear()
+    two = [{"kind": "fresh", "slug": slug, "why": "壊れた候補"}, {"kind": "fresh", "slug": slug, "why": "w"}]
+    with patched((AR, "draft_one", fake_draft), (AR, "build_prompt", build), (AR, "prescore", lambda *a: None)):
+        got = AR.draft_all(two, 2)
+    check("1本の指示づくりが落ちても、ほかの下書きは書く（その1本は None で1本ずつに回す）",
+          (got[0], got[1] is not None, len(drafted)), (None, True, 1))

@@ -122,8 +122,9 @@ def run(args, cwd=None, check=True, env=None):
     return r.stdout.strip()
 
 
-# 配信先への push・fetch の上限（秒）。2026-11-16 の週次はコーポレートへの push が20分止まり、理由も残らなかった
-PUSH_TIMEOUT = 120
+# 配信先への push・fetch の上限（秒）。2026-11-16 の週次はコーポレートへの push が20分止まり、理由も残らなかった。
+# まとめて送る回（数十本・画像つき）でも収まる長さにする（短すぎると正しい push まで毎回落ちる）
+PUSH_TIMEOUT = 300
 
 
 def why_failed(text, n=3):

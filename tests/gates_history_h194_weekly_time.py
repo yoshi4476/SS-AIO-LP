@@ -11,7 +11,6 @@
 import contextlib
 import inspect
 import io
-import json
 import sys
 import time
 
@@ -179,6 +178,26 @@ def test_alive_check_retries_once_and_names_the_cause():
     check("sitemap.xml は1回の時間切れで諦めない", (got, len(tries)), (["https://x/a"], 2))
 
 
+def test_merge_list_hides_client_slugs_and_keywords():
+    print("\n■ 統合の一覧: お客様の社の記事の名前と狙う語を公開のログに出さない（2026-11-16 の週次で名前が出ていた）")
+    import auto_merge as AM
+    import auto_rewrite as AR
+    import sites as S
+    pair = {"site": "c1", "loser": "client-secret-loser", "survivor": "client-secret-win", "skip": "",
+            "kws": [{"kw": "お客様の狙う語"}], "imp": 30}
+    old = sys.argv
+    sys.argv = ["auto_merge.py"]
+    try:
+        with patched((AM, "candidates", lambda site="": [dict(pair)]), (AM, "skip_noindex", lambda ps: ps),
+                     (AR, "shown", lambda s: "（お客様の記事）" if s.startswith("client") else s),
+                     (S, "is_client", lambda sid: sid == "c1")):
+            rc, out = out_of(AM.main)
+    finally:
+        sys.argv = old
+    check("記事の名前を伏せる", ("client-secret" in out, "（お客様の記事）" in out), (False, True))
+    check("狙う語を出さない", "お客様の狙う語" in out, False)
+
+
 def test_rewrite_prompts_carry_the_machine_rules():
     print("\n■ 直しの指示に、機械の検査で戻される決まり（FAQ の字数・H2 の数）を書く")
     import auto_merge as AM
@@ -187,4 +206,3 @@ def test_rewrite_prompts_carry_the_machine_rules():
         check(f"{name}: FAQ の答えは30〜75字", "FAQ の答えは40〜60字（30字未満・75字超は不可）" in text, True)
         check(f"{name}: H2 は6〜12個", "6〜12個" in text, True)
     check("指示は format で崩れない", "{" not in AR.PROMPT.format(slug="s", why="w", what="x"), True)
-    json.dumps(AM.PROMPT)

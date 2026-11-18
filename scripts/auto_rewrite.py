@@ -2288,6 +2288,9 @@ def draft_one(item, prompt):
 
 # 並列の下書きを新しく始めてよいのは、予算（--budget-min）のこの割合まで。残りは書いた下書きを当てて検算する時間
 DRAFT_SHARE = 0.75
+# 書き終えた下書きを当てるのも、予算のこの倍までで止める（下書きを全部同時に書かせるので、前の「3本だけ先に書く」より
+# 当てる本数が多い。1本ごとにビルドが走り、予算を大きく超えうる。2026-11-18 の見直し）
+OVERRUN = 1.5
 
 
 def draft_all(items, workers, deadline=None):
@@ -2299,7 +2302,17 @@ def draft_all(items, workers, deadline=None):
     deadline（時刻）を過ぎたら新しい下書きは始めない（None を返す。呼び出し側が予算を見て1本ずつ書かせるか止める）。
     指示は先に全部作る（指示を作る道具が data/ を書いても、AI の見張り（guarded）に数えない）。
     作業場所が変わっていれば全部戻して Escaped"""
-    jobs = [(it, build_prompt(it)[0]) if (ROOT / "articles" / f"{it['slug']}.md").is_file() else None for it in items]
+    def job(it):
+        # 1本の指示づくりの失敗（候補の項目の欠けなど）で、ほかの下書きまで止めない。その1本は書かずに None
+        # （呼び出し側が1本ずつ書かせ、run_one が理由を残す）
+        if not (ROOT / "articles" / f"{it['slug']}.md").is_file():
+            return None
+        try:
+            return it, build_prompt(it)[0]
+        except Exception as e:  # noqa: BLE001
+            print(f"  下書きの指示を作れませんでした（{type(e).__name__}。1本ずつに回します）", file=sys.stderr)
+            return None
+    jobs = [job(it) for it in items]
 
     def work(j):
         if not j or (deadline and time.time() > deadline):
@@ -2745,11 +2758,19 @@ def main():
         if bad:
             print(f"--kind に並べられない種類です: {', '.join(k or '（空）' for k in bad)}")
             return 1
-        items, seen = [], set()
+        groups, seen = [], set()
         for k, n in kinds:
-            got = [x for x in (pick_items(a, k, n) or []) if x["slug"] not in seen][:n]
+            try:
+                picked = pick_items(a, k, n) or []
+            except (Exception, SystemExit) as e:  # noqa: BLE001  1つの種類の候補集め（GSC・非公開の置き場など）の失敗で、ほかの種類を止めない
+                # 種類ごとに別に呼んでいたときは、落ちるのはその種類だけだった
+                print(f"要対応: {k} の候補を集められませんでした（{type(e).__name__}）。ほかの種類は続けます")
+                continue
+            got = [x for x in picked if x["slug"] not in seen][:n]
             seen |= {x["slug"] for x in got}
-            items += got
+            groups.append(got)
+        # 種類を交互に並べる。種類ごとに固めると、予算が足りない週は並びの後ろの種類（付け分け・競合）が毎週回らない
+        items = [g[i] for i in range(max(map(len, groups), default=0)) for g in groups if i < len(g)]
         limit = len(items)
     else:
         # 「question:2」のように1つだけ本数つきで渡されても、種類と本数に分けて使う（そのまま渡すと候補が0件になる）
@@ -2808,6 +2829,10 @@ def main():
         if a.budget_min and used >= a.budget_min and edited is None:
             later += 1
             continue
+        if a.budget_min and used >= a.budget_min * OVERRUN:
+            # 書き終えた下書きも、当てる検算（1本ごとにビルド）が予算の OVERRUN 倍を超えたら次回へ（週次の時間の上限を守る）
+            later += 1
+            continue
         good, why = run_one(x, True, edited=edited) if edited is not None else run_one(x, True)
         print(f"  {'○' if good else '×'} [{x['kind']}] {shown(x['slug'])[:34]:<34} {said(x['slug'], why)[:56]}")
         note(x["slug"], x["kind"], good, why)
@@ -2816,7 +2841,7 @@ def main():
             rewrote.append(x["slug"])
         ok, ng = ok + good, ng + (not good)
     if later:
-        print(f"\n  上限{a.budget_min}分を過ぎたので、書いていない{later}本は次回に回します")
+        print(f"\n  上限{a.budget_min}分を過ぎたので、{later}本は次回に回します")
     print(f"\n  直した {ok}件 / 戻した {ng}件 / {(time.time() - started) / 60:.0f}分")
     print("  台帳: automation/logs/auto_fix.jsonl")
     if a.kind == "spare":

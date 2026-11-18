@@ -1211,7 +1211,9 @@ jobs:
           #   compete  競合がAIの出典に出て自社が出ない語の差（compete --gaps が月初に出す）を埋める。一次データが無いと
           #            勝てない語は書き直さず、findings（compete --check）が要対応で知らせる
           KINDS="question:$n,early:$n,stock:$((n + 1)),aisplit:$n,desc:$n,split:$n,compete:$n"
-          python scripts/auto_rewrite.py --write --kind "$KINDS" --parallel 3 --budget-min 40 2>&1 | tail -12 || true
+          python scripts/auto_rewrite.py --write --kind "$KINDS" --parallel 3 --budget-min 40 2>&1 | tee /tmp/kinds.txt | tail -12 || true
+          # 候補を集められなかった種類（GSC の失敗など）は、注釈だけでなく通知本文へ
+          grep '^要対応' /tmp/kinds.txt >> automation/logs/findings.txt || true
           # AI っぽい言い回し（textlint。2026-10-20 運用者「AIぽい言い回しは自動で直すこと」）。機械で安全に直せるもの
           # （誤用の辞書・文字の正規化）を公開済みの全記事に当て、判断の要るもの（誇張・「〜することができます」・
           # 箇条書きの「**札**:」など）は、指摘の多い記事から社ごとに週4本（sites/<id>.json の ai_writing_weekly）、
