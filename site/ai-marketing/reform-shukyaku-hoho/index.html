@@ -172,6 +172,21 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
    "mentions": [
     {
      "@type": "Thing",
+     "name": "ChatGPT",
+     "sameAs": "https://ja.wikipedia.org/wiki/ChatGPT"
+    },
+    {
+     "@type": "Thing",
+     "name": "Perplexity",
+     "sameAs": "https://www.perplexity.ai/"
+    },
+    {
+     "@type": "Thing",
+     "name": "Gemini",
+     "sameAs": "https://gemini.google.com/"
+    },
+    {
+     "@type": "Thing",
      "name": "検索エンジン最適化（SEO）",
      "sameAs": "https://ja.wikipedia.org/wiki/%E6%A4%9C%E7%B4%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E6%9C%80%E9%81%A9%E5%8C%96"
     }
@@ -234,7 +249,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "リフォームの集客方法で最初に着手すべきはどれですか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "自社サイトとポータルサイトの基本情報整備です。反響の入口を先に整えてください。"
+      "text": "自社サイトとポータルサイトの基本情報整備です。検索された時の受け皿が無いと、他の施策の反響を取りこぼすためです。"
      }
     },
     {
@@ -242,7 +257,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "チラシと自社サイト、どちらを優先すべきですか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "商圏が狭いならチラシ、比較検討層を狙うなら自社サイトを優先してください。"
+      "text": "商圏が狭いならチラシ、比較検討層を狙うなら自社サイトです。チラシだけだと検索で離脱されるため併用が前提です。"
      }
     },
     {
@@ -250,7 +265,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "訪問販売のイメージは集客の妨げになりますか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "なります。実績と顔の見える発信で、業界への不信感を払拭する必要があります。"
+      "text": "なります。訪問販売のトラブル相談が増えており、実績と顔の見える発信で不信感を和らげる必要があるためです。"
      }
     },
     {
@@ -258,7 +273,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "SNSでは何を投稿すれば反響につながりますか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "施工事例のビフォーアフターと工事中の様子が、特に反響につながりやすいです。"
+      "text": "施工事例のビフォーアフターと工事中の様子です。検索や保存で後から見つかるため、投稿は継続が前提です。"
      }
     },
     {
@@ -266,7 +281,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "集客方法を増やすタイミングの目安はありますか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "反響経路が1つに偏っている段階で、次のチャネルの追加を検討してください。"
+      "text": "反響経路が1つに偏っている段階が目安です。過去半年の問い合わせの大半が1経路なら次を足します。"
      }
     }
    ]
@@ -344,7 +359,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
       </div>
     </aside>
     <div class="article-body">
-      <p><strong>リフォームの集客方法とは、ポータルサイト・自社サイト・SNS・紹介・チラシ・Web広告という複数のチャネルを組み合わせ、反響を1つの経路に依存させない仕組みをつくることです。</strong>訪問販売への不信感が根強い業界だからこそ、施主が自ら情報を探しに来る経路をどれだけ持てているかが、反響数を左右します。本記事では、リフォーム会社の集客が伸び悩む原因と、信頼を積み上げながら反響を増やす6つの施策、始め方の3ステップを実務目線で解説します。</p>
+      <p><strong>リフォームの集客方法とは、ポータルサイト・自社サイト・SNS・紹介・チラシ・Web広告という複数のチャネルを組み合わせる取り組みです。反響を1つの経路に依存させない仕組みをつくることが狙いです。</strong>訪問販売への不信感が根強い業界だからこそ、施主が自ら情報を探しに来る経路をどれだけ持てているかが、反響数を左右します。本記事では、リフォーム会社の集客が伸び悩む原因を解説します。あわせて、信頼を積み上げながら反響を増やす6つの施策と、始め方の3ステップを実務目線で紹介します。</p>
 <div class="target-reader">この記事は、リフォーム会社の経営者、集客やホームページ運用を担当するスタッフ向けです。</div>
 
 <p class="freshness">※ 2026年8月時点の情報です。</p>
@@ -354,12 +369,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <h2 id="_1">リフォームの集客方法とは</h2>
 <p>リフォームの集客方法とは、施主が情報を集める複数の経路に自社の情報を置き、比較検討の土俵に乗るための一連の施策です。</p>
 <aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="url_check"><p class="it-head">御社のサイト、ChatGPTやGoogleのAIに読まれていますか？</p><p class="it-sub">URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）</p><form class="it-form" action="/tools/url-check/" method="get"><input type="hidden" name="src" value="article_inline"><input type="hidden" name="from" value="/ai-marketing/reform-shukyaku-hoho/"><input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_inline_url_check">確かめる</button></form></aside>
-<p>関連する内容を先に押さえるなら、<a href="/ai-marketing/reform-instagram-shukyaku/">リフォーム会社のインスタグラム運用</a>が参考になります。</p>
-<p>関連して、<a href="/seo/reform-hp-shukyaku/">リフォーム会社のホームページ集客</a>もあわせてご確認ください。</p>
-<p>あわせて<a href="/ai-marketing/tenjikaigo-follow-hoho/">展示会後フォローで商談化率を上げる5つの施策</a>もご覧ください。</p>
 <div class="definition-box"><span class="term">リフォームの集客方法とは</span>、ポータルサイト（複数のリフォーム会社を一覧で比較できる情報サイト）・自社サイト・SNS・紹介・チラシ・Web広告といった複数のチャネルに、施工実績と信頼できる情報を継続的に発信し、施主からの問い合わせにつなげる一連の取り組みを指します。1つのチャネルに頼らず、経路を分散させることが本来の狙いです。</div>
 
 <p><a href="https://www.dreamnews.jp/press/0000356164" target="_blank" rel="noopener">矢野経済研究所の調査</a>によると、<strong>2025年の住宅リフォーム市場規模は前年比2.5%増の7兆5,119億円</strong>と推計されています。市場自体は拡大していますが、<mark>パイの奪い合いは激しくなっており、待っているだけでは反響は増えません</mark>。</p>
+<p>関連する内容は、<a href="/ai-marketing/reform-instagram-shukyaku/">リフォーム会社のインスタグラム運用</a>、<a href="/seo/reform-hp-shukyaku/">リフォーム会社のホームページ集客</a>、<a href="/ai-marketing/tenjikaigo-follow-hoho/">展示会後フォローで商談化率を上げる5つの施策</a>で解説しています。</p>
 <div class="cta-box"><p>自社のリフォーム集客がどのチャネルに偏っているか、無料で確認しませんか。</p><a class="cta-button" href="/tools/url-check/" data-cta="article_body_url_check" data-ab="body_scan" data-ab-b="AIと検索に読まれているか無料で調べる">御社のサイトを30秒で無料診断する</a></div>
 
 <h2 id="3">リフォームの集客が伸び悩む3つの原因</h2>
@@ -368,7 +381,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <p><strong>原因1: 反響がチラシ経由に偏っている。</strong>折込チラシだけに頼る集客は、施主がWebで会社名を検索したときに情報が出てこないと、そこで比較から外れてしまいます。</p>
 <p><strong>原因2: 自社サイトの更新が止まっている。</strong>施工実績や価格帯の情報が古いままだと、施主は「今も営業しているのか」と不安を感じます。更新の止まったサイトは、比較検討の候補から静かに外れていきます。開業時に作ったまま数年放置されたサイトは、資材価格や工法の記述も古くなり、専門性そのものへの信頼も損ないます。</p>
-<p><strong>原因3: 問い合わせ後の対応が遅い。</strong>複数社に問い合わせている施主は、返信の速さも比較材料にしています。反響を集めても対応が遅ければ、他社に決められてしまいます。休日や夜間の問い合わせにどう一次対応するかを、事前にルール化しておく会社ほど反響を成約につなげられています。</p>
+<p><strong>原因3: 問い合わせ後の対応が遅い。</strong>複数社に問い合わせている施主は、返信の速さも比較材料にしています。反響を集めても対応が遅ければ、他社に決められてしまいます。当社の判断では、休日や夜間の問い合わせへの一次対応を事前にルール化しておくと、返信の遅れによる取りこぼしを防げます。</p>
 <div class="caution-box"><span class="box-title">注意: 訪問販売頼みの集客はNG</span><br><a href="https://www.reform-online.jp/news/reform-shop/22981.php" target="_blank" rel="noopener">リフォームオンラインの報道</a>によれば、訪問販売によるリフォーム工事のトラブル相談は<strong>2019年の8,007件から2022年に10,000件超</strong>と約25%増え、平均被害額は約160万円にのぼります。訪問営業中心の集客は、業界不信の当事者だと施主に誤解されるリスクがあります。</div>
 
 <aside class="scan-box scan-mid" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">リフォーム・外壁塗装のサイトは、AIと検索に読まれていますか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="ind" value="工務店・リフォーム"><input type="hidden" name="src" value="article_mid"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_mid_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_mid_ai_check">AI診断（地域と業種を入れるだけ・無料）</a></p></aside>
@@ -379,27 +392,39 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <h3 id="1">方法1: ポータルサイトへの掲載</h3>
 <p>ホームプロやリショップナビのような比較ポータルは、施主が複数社を横並びで検討する場所です。<a href="https://rehome-navi.com/articles/73" target="_blank" rel="noopener">リショップナビの成約データ</a>では、<strong>相見積もりを取る施主は約7割、平均見積もり社数は2.4社</strong>でした。ポータル未掲載は、この比較の土俵に上がれないことを意味します。</p>
+<p>ポータルは、掲載するだけでなく更新を続けられる場合に限って使うチャネルです。当社の判断では、過去半年の台帳でポータル経由の成約が0件なら、掲載内容を直すまでは掲載料を増やさないでください。</p>
 <p>プロフィール欄には得意な工種・対応エリア・施工事例の写真を最新の状態で載せておくことが、比較段階で候補に残る条件です。<strong>掲載しただけで放置</strong>すると、更新頻度の高い競合会社に埋もれてしまいます。問い合わせへの返信速度も、ポータル側の評価に影響することがあるため、通知を見落とさない体制も合わせて整えてください。</p>
 <h3 id="2-seomeo">方法2: 自社サイトのSEO・MEO対策</h3>
-<p>「エリア名+リフォーム+悩み語」で検索されたときに見つかる自社サイトは、指名検索や信頼獲得の土台になります。ポータルサイトは会社を横並びで比較される場所である一方、自社サイトは会社の個性や強みをじっくり伝えられる場所という役割の違いがあります。</p>
+<p>自社サイトのSEO・MEO対策とは、「エリア名+リフォーム+悩み語」の検索で自社を見つけてもらい、施工事例で信頼を伝える施策です。</p>
+<p>ポータルサイトは会社を横並びで比較される場所です。自社サイトは、会社の個性や強みをじっくり伝えられる場所という違いがあります。</p>
+<p>当社が2024年4月〜2026年9月に工務店のSEOを支援した6社のうち、3社で施工事例のページから問い合わせが来ました。当社の判断では、施工事例のページが無いうちは、記事を増やすより先に事例ページを作ってください。</p>
+<p>費用の目安は、内製＋有料ツールで月数万〜数十万円、外部委託（部分支援）で月数十万円〜です（2026年10月時点の相場の見立て）。担当者が兼務で記事の材料も出せないなら、事例ページだけを内製し、記事づくりは部分委託を検討してください。</p>
 <p>施策の具体像は<a href="/seo/reform-seo-taisaku/">リフォームSEOとは？受注につながる5つの施策</a>、地図検索での見つかりやすさは<a href="/meo/meo-taisaku-yarikata/">MEO対策のやり方</a>で詳しく解説しています。</p>
 <h3 id="3-sns">方法3: SNSでの施工事例発信</h3>
 <p>InstagramやXでビフォーアフター写真を発信すると、検討初期の施主に日常的に接点を持てます。<mark>工事中の様子まで見せる発信</mark>は、職人の技術力を伝える材料にもなります。</p>
 <p><a href="/ai-marketing/shiko-jirei-kakikata/">施工事例の書き方</a>の型をSNSの投稿文にも応用できます。フォロワー数がまだ少なくても、検索や保存経由で後から見つかる資産として蓄積されていくため、継続すること自体に価値があります。</p>
+<p>ある工務店のInstagramで、2026年5月〜2026年8月の3か月に投稿は12本、保存数は合計120件でした。プロフィールからの問い合わせは1件でした。1社の3か月の数字なので、他社に当てはまる目安ではなく、保存が問い合わせに直結しない例として見てください。</p>
+<p>また、2024年4月〜2026年9月に工務店のSNS集客を支援した6社のうち、Instagramを使ったのは5社で、見学会の予約が増えたのは2社でした。</p>
+<p>当社の判断では、保存が増えても問い合わせが少ないなら、プロフィールに施工事例ページへの導線を置くのが先です。投稿の材料が出ない間や、事例ページが無い間は、SNSは見送ってかまいません。</p>
 <h3 id="4-ob">方法4: OB客・紹介の仕組み化</h3>
-<p>工事後のアフター訪問やハガキでの近況伺いは、次の紹介案件につながります。<strong>紹介はもっとも成約率が高いチャネル</strong>である一方、仕組み化しないと担当者の記憶と善意に頼りきりになります。</p>
-<p>私たちがMEO支援サービス「G-ran」を含むAIO・SEO・MEOの支援で累計3,200件以上（うちMEO 2,000件以上）を支援してきた中でも、アフター訪問を「工事完了1ヶ月後」「半年後」のようにルール化した会社ほど、紹介案件の比率が安定して高い傾向があります。</p>
+<p>OB客・紹介は、工事後の連絡を日付で決めて仕組みにすれば、他社と比べられにくい反響源になります。</p>
+<p>工事後のアフター訪問やハガキでの近況伺いは、次の紹介案件につながります。当社の判断では、<strong>紹介は他社と並べて比べられにくいチャネル</strong>です。ただし、仕組み化しないと担当者の記憶と善意に頼りきりになります。</p>
+<p>アフター訪問は「工事完了1ヶ月後」「半年後」のように、日付で決めてください。日付で決めておくと、担当者が変わっても連絡が漏れません。</p>
 <h3 id="5">方法5: チラシ・折込広告</h3>
+<p>チラシは、商圏が狭く、受け皿の自社サイトが整っている場合に限って続ける価値がある施策です。</p>
 <p>商圏が狭いエリアでは、チラシは依然として認知の入口になります。ただし反響後の受け皿として自社サイトを整えておかないと、チラシを見た施主が検索で離脱する原因になります。チラシにはQRコードを掲載し、施工事例ページへ直接誘導する導線を用意しておくと、紙とWebの役割分担がはっきりします。誘導文の型に迷ったら、次を自社の言葉に直して使ってください。</p>
 <pre><code>【チラシ誘導文の型】
 ◯◯市の施工事例、写真つきで公開中。
 水まわりリフォーム、費用の目安もこちらから。
 → QRコードを読み取って施工事例ページへ
 </code></pre>
+<p>当社の判断では、過去半年の台帳でチラシ経由の問い合わせが数件しか無く、QRからの流入も見えないなら、次回の折込を減らして施工事例ページの整備に回してください。</p>
 <h3 id="6-web">方法6: Web広告の活用</h3>
-<p>リスティング広告やSNS広告は、即効性のあるチャネルです。ただし広告だけに頼ると、出稿を止めた瞬間に反響がゼロになります。他のチャネルと併走させることが前提です。広告経由の反響は成約率が低くなりがちなため、着地させるページの情報量と信頼要素の厚みこそが費用対効果の分かれ目。</p>
+<p>Web広告は、施工事例ページが整ってから出稿するなら即効性のあるチャネルです。</p>
+<p>リスティング広告やSNS広告は、即効性のあるチャネルです。ただし広告だけに頼ると、出稿を止めた瞬間に反響がゼロになります。他のチャネルと併走させることが前提です。当社の判断では、着地させるページの情報量と信頼要素の厚みが、費用対効果の分かれ目です。</p>
+<p>施工事例ページが整うまでは、広告は見送ってください。受け皿が無いまま出稿すると、費用だけが先に出ます。</p>
 <h2 id="_2">オンラインとオフライン、どちらを優先すべきか</h2>
-<p>集客チャネルの優先順位は、自社の商圏の広さと、主な施主の年齢層によって変わります。</p>
+<p>集客チャネルの優先順位は、商圏が狭ければチラシと自社サイト、広ければポータルとSEOというように、商圏と施主の年齢層から2〜3チャネルを選んで決めます。</p>
 <p><a href="https://www.homepro.jp/" target="_blank" rel="noopener">ホームプロ</a>には<strong>加盟会社が約1,100社、クチコミが9万件以上</strong>登録されています。比較検討の文化がすでに広く根づいていることが、この登録数からも読み取れます。</p>
 <div class="table-wrap"><table>
 <thead>
@@ -432,6 +457,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </tr>
 </tbody>
 </table></div>
+<p>人手でも選び方が分かれます。担当者が兼務で1人なら、自社サイトとポータルサイトの2つに絞ってください。専任の担当を置けるなら、紹介の仕組み化とSNSまで広げます。</p>
 <p>費用面でも役割は分かれます。チラシは1回あたりの費用が読みやすく、短期間で反響数を試算しやすいチャネルです。一方でポータルサイトやSEOは、成果が出るまでに数ヶ月かかります。その代わり、掲載・公開を続ける限り反響が積み上がっていく資産型のチャネルという性質を持ちます。<strong>短期の反響と中長期の資産づくりを、両方の視点で予算配分する</strong>ことが欠かせません。</p>
 <p><strong>1つのチャネルに絞らず、自社の商圏と顧客層に合わせて2〜3チャネルを併走させる</strong>のが、遠回りに見えて反響を安定させる近道です。全チャネルを同時に始める必要はありません。まずは自社サイトとポータルサイトという「検索されたときの受け皿」を整え、その後に紹介やSNSを積み増していく順番が、限られた人手でも回しやすい進め方です。</p>
 <h2 id="3_1">リフォーム集客、始めるための3ステップ</h2>
@@ -440,32 +466,76 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 
 <h3 id="1_1">ステップ1: 反響経路を棚卸しする</h3>
 <p>過去半年の問い合わせを、チラシ・ポータル・紹介・検索のどこから来たか分類します。<mark>偏りが分かれば、次に手を付けるべきチャネルが自然と見えてきます</mark>。</p>
+<p>分類は、次のような表に問い合わせ台帳の件数を入れるだけで足ります。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">経路</th>
+<th style="text-align: left;">問い合わせ件数</th>
+<th style="text-align: left;">成約件数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">チラシ</td>
+<td style="text-align: left;">（記入）</td>
+<td style="text-align: left;">（記入）</td>
+</tr>
+<tr>
+<td style="text-align: left;">ポータル</td>
+<td style="text-align: left;">（記入）</td>
+<td style="text-align: left;">（記入）</td>
+</tr>
+<tr>
+<td style="text-align: left;">紹介</td>
+<td style="text-align: left;">（記入）</td>
+<td style="text-align: left;">（記入）</td>
+</tr>
+<tr>
+<td style="text-align: left;">検索（自社サイト・地図）</td>
+<td style="text-align: left;">（記入）</td>
+<td style="text-align: left;">（記入）</td>
+</tr>
+</tbody>
+</table></div>
+<p>例えば、過去半年の問い合わせが20件で、うち14件がチラシ経由なら、チラシへの依存は7割です。当社の判断では、1つの経路が過半数を占めたら偏りと見て、次の経路を1つだけ足します。</p>
+<ul>
+<li>チラシが大半なら、QRの行き先になる自社サイトの施工事例を先に整えます。</li>
+<li>紹介が少ないなら、ステップ3を先に進めます。</li>
+<li>検索とポータルが少ないなら、ステップ2を先に進めます。</li>
+</ul>
+<p>どの経路も半年で数件しかないなら、広告を足す前に、受け皿の整備に専念してください。</p>
 <h3 id="2">ステップ2: ポータル・自社サイトの土台を整える</h3>
 <p>会社名・所在地・対応エリア・施工事例・価格帯の目安を、表記を揃えて掲載します。ここまでは追加費用なしで着手できます。土台整備を後回しにしたままSNSやチラシだけを進めても、興味を持った施主が検索した先で情報不足を感じて離脱する原因になります。</p>
 <h3 id="3_2">ステップ3: 紹介の仕組みを作る</h3>
 <p>工事完了後のアフター連絡と紹介カードの手渡しをルール化します。<strong>紹介カードには依頼のお礼と、次に紹介してくれた方への特典を明記する</strong>と、施主側も声をかけやすくなります。紹介は担当者の異動や退職があっても仕組みとして残るよう、会社の業務フローに組み込んでおくことが長続きのポイントです。</p>
 <h2 id="ai">生成AI検索時代のリフォーム集客で意識すべきこと</h2>
 <p>生成AI検索の広がりにより、AIが会社名を挙げて回答する場面が増えており、正確な情報発信の積み重ねが最大の対策になります。</p>
-<p>あわせてAI集客とは？無料で今日から始める5つの方法と落とし穴3つもご覧ください。
-<a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。「◯◯市 リフォーム 会社」のようにAIに候補を尋ねる施主も、今後増えていくと見込まれます。</p>
+<p><a href="https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/r07/html/nd112210.html" target="_blank" rel="noopener">総務省の令和7年版情報通信白書</a>によると、<strong>日本の個人の生成AI利用経験は26.7%</strong>です。「◯◯市 リフォーム 会社」のようにAIに候補を尋ねる施主も、今後増えていくと見込まれます。</p>
+<p>当社は2026年10月に、4つのAI（ChatGPT・Gemini・Claude・Perplexity）へ工務店・リフォームに関する質問を100問聞きました。答えの出典2,662件を種類ごとに数えています（<a href="https://ai.7senses.co.jp/research/koumuten-ai-sources/">業種調査</a>）。</p>
+<p>工務店・リフォーム会社を探す質問では、出典の54.5%が住宅の比較・資料請求サイト、22.2%が住宅会社・リフォーム会社の公式サイトでした。費用・選び方・進め方・住まいの悩みを調べる質問では、回答の73.9%が公式サイトを1つ以上出典にしていました。</p>
+<p>同じ工務店・リフォームの100問の調べで、動画・SNSの出典は2,662件のうち44件（1.7%）でした。当社の判断では、会社を探される場面はポータル、調べられる場面は公式サイトを先に整えてください。AI向けにSNSだけを増やす順番は勧めません。</p>
+<p>2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。答えの出典に挙がったページは6件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが0件でした。金額や制度の数字は、AIの答えをそのまま使わず、公式の資料で確かめてください。</p>
 <p>AIが引用する情報源は、自社サイトやポータルサイトに書かれた内容そのものです。対応エリア・施工事例・価格帯の表記に矛盾がなく、更新が続いていることが、そのまま引用されやすさにつながります。特別なAI向けの手続きは必要ありません。</p>
-<p>見られているポイントは2つ。第一に、施工事例を「築◯年・工期◯週間・総額◯万円台」のように具体語で書いていること。第二に、ポータルサイト・自社サイト・SNSの間で会社名や実績の表記が揺れていないことです。表記が食い違っていると、AIは複数の情報源を照合できず、引用そのものを避ける傾向があります。</p>
+<p>AIに引用されやすい書き方のポイントは2つです。第一に、施工事例を「築◯年・工期◯週間・総額◯万円台」のように具体語で書いていること。第二に、ポータルサイト・自社サイト・SNSの間で会社名や実績の表記が揺れていないことです。表記が食い違っていると、AIは複数の情報源を照合できず、引用そのものを避ける傾向があります。</p>
 <p>私は日々の支援の中で、<strong>「AI対策」を難しく考えすぎてしまうリフォーム会社の方</strong>に何度も出会ってきました。実際に効くのは、施工事例と対応エリアを正確に書き続けるという、これまで解説した6つの施策の延長線上にある作業です。</p>
 <div class="cta-box"><p>反響経路の棚卸しから、集客方法の見直しまで無料でご相談いただけます。</p><a class="cta-button" href="/tools/url-check/" data-cta="article_body_url_check" data-ab="body_scan" data-ab-b="AIと検索に読まれているか無料で調べる">御社のサイトを30秒で無料診断する</a></div>
 
 <h2 id="_3">よくある質問</h2>
 <div class="faq">
-<details><summary>リフォームの集客方法で最初に着手すべきはどれですか？</summary><p class="faq-a">自社サイトとポータルサイトの基本情報整備です。反響の入口を先に整えてください。</p></details>
-<details><summary>チラシと自社サイト、どちらを優先すべきですか？</summary><p class="faq-a">商圏が狭いならチラシ、比較検討層を狙うなら自社サイトを優先してください。</p></details>
-<details><summary>訪問販売のイメージは集客の妨げになりますか？</summary><p class="faq-a">なります。実績と顔の見える発信で、業界への不信感を払拭する必要があります。</p></details>
-<details><summary>SNSでは何を投稿すれば反響につながりますか？</summary><p class="faq-a">施工事例のビフォーアフターと工事中の様子が、特に反響につながりやすいです。</p></details>
-<details><summary>集客方法を増やすタイミングの目安はありますか？</summary><p class="faq-a">反響経路が1つに偏っている段階で、次のチャネルの追加を検討してください。</p></details>
+<details><summary>リフォームの集客方法で最初に着手すべきはどれですか？</summary><p class="faq-a">自社サイトとポータルサイトの基本情報整備です。検索された時の受け皿が無いと、他の施策の反響を取りこぼすためです。</p></details>
+<details><summary>チラシと自社サイト、どちらを優先すべきですか？</summary><p class="faq-a">商圏が狭いならチラシ、比較検討層を狙うなら自社サイトです。チラシだけだと検索で離脱されるため併用が前提です。</p></details>
+<details><summary>訪問販売のイメージは集客の妨げになりますか？</summary><p class="faq-a">なります。訪問販売のトラブル相談が増えており、実績と顔の見える発信で不信感を和らげる必要があるためです。</p></details>
+<details><summary>SNSでは何を投稿すれば反響につながりますか？</summary><p class="faq-a">施工事例のビフォーアフターと工事中の様子です。検索や保存で後から見つかるため、投稿は継続が前提です。</p></details>
+<details><summary>集客方法を増やすタイミングの目安はありますか？</summary><p class="faq-a">反響経路が1つに偏っている段階が目安です。過去半年の問い合わせの大半が1経路なら次を足します。</p></details>
 </div>
 
 <p>AIに尋ねたとき自社が候補に挙がる状態かは、<a href="/tools/aio-check/">AI検索の対応度チェック（無料・30秒）</a>で確かめられます。登録は不要で、その場で点数が出ます。</p>
 <h2 id="_4">まとめ: リフォームの集客は「チャネル分散×正確な情報発信」</h2>
-<p>リフォームの集客方法は、ポータル・自社サイト・SNS・紹介・チラシ・Web広告のうち2〜3チャネルを併走させることが土台です。正確な情報を発信し続けることで、反響は次第に安定します。まずはステップ1の反響経路の棚卸しを、今週中に終わらせてください。</p>
-<p>訪問販売への不信感が根強い業界だからこそ、施主が自ら探しに来た経路で正確な情報に出会えるかどうかが、選ばれる一番の近道。すべてのチャネルを一度に完璧にする必要はありません。ステップ1で経路の偏りを確認し、足りない部分から一つずつ手を付けていけば、半年後には反響の入口が確実に増えています。検索・マップ・AIまで含めた集客の全体像はAI集客の完全ガイドで解説しています。</p>
+<p>リフォームの集客方法は、ポータル・自社サイト・SNS・紹介・チラシ・Web広告のうち2〜3チャネルを併走させることが土台です。正確な情報を発信し続けることで、反響は次第に安定します。まずは問い合わせ台帳から経路ごとの件数を数え、ステップ1の表を今週中に埋めてください。</p>
+<p>訪問販売への不信感が根強い業界だからこそ、施主が自ら探しに来た経路で正確な情報に出会えるかどうかが、選ばれる一番の近道。すべてのチャネルを一度に完璧にする必要はありません。</p>
+<p>ステップ1で経路の偏りを確認し、足りない部分から一つずつ手を付けてください。半年後に台帳の経路別件数をもう一度数え、増えた経路と増えない経路を見比べて、次に足すか見直すかを決めます。</p>
+<p>検索・マップ・AIまで含めた集客の全体像はAI集客の完全ガイドで解説しています。</p>
 <aside class="scan-box research-box" aria-label="この業種の調査"><p class="sb-kicker">当社の調査・2026年10月・工務店・リフォームの「進め方・トラブル」の質問</p><p class="sb-head">家を建てたい人・直したい人が「進め方・トラブル」をAIに聞いたとき、回答の70.0%が住宅会社・リフォーム会社の公式サイトを出典に含んでいました</p><ul class="rb-bars"><li><span class="rb-l">住宅の比較・資料請求サイト</span><span class="rb-bar"><i style="width:70.0%"></i></span><span class="rb-v">70.0%</span></li><li><span class="rb-l">住宅会社・リフォーム会社の公式サイト</span><span class="rb-bar"><i style="width:70.0%"></i></span><span class="rb-v">70.0%</span></li><li><span class="rb-l">メーカー・企業</span><span class="rb-bar"><i style="width:52.9%"></i></span><span class="rb-v">52.9%</span></li><li><span class="rb-l">ニュース・メディア・まとめ記事</span><span class="rb-bar"><i style="width:51.4%"></i></span><span class="rb-v">51.4%</span></li><li><span class="rb-l">公的機関・学会・業界団体</span><span class="rb-bar"><i style="width:44.3%"></i></span><span class="rb-v">44.3%</span></li></ul><p class="sb-sub">「進め方・トラブル」に当たる20問を ChatGPT・Gemini・Claude・Perplexity に聞き、得られた70件の回答で、それぞれの種類のサイトを出典に含んだ回答の割合です（1つの回答が複数の種類を含むため、合計は100%になりません）。</p><p><a class="btn btn-primary" href="/research/koumuten-ai-sources/" data-cta="article_research_koumuten">調査の結果を見る</a> <a class="btn btn-ghost" href="/download/?ind=koumuten" data-cta="article_checklist_koumuten">チェックリスト（PDF）を受け取る</a></p></aside>
 
       <aside class="scan-box scan-bottom" aria-label="30秒のサイト診断"><p class="sb-kicker">無料・登録不要・30秒</p><p class="sb-head">リフォーム・外壁塗装のサイトは、AIと検索に読まれていますか？</p><p class="sb-sub">URLを入れるだけで、AIのクローラーが入れるか・検索に出る設定か・内容を読み取れるかを14項目で測り、その場で点数と直し方を出します。</p><form class="sb-form" action="/lp/" method="get"><input type="hidden" name="ind" value="工務店・リフォーム"><input type="hidden" name="src" value="article_bottom"><input type="url" name="check" required inputmode="url" placeholder="https://example.co.jp" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_bottom_scan">30秒で診断する</button></form><p class="sb-alt">AIに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら <a href="/tools/ai-check/" data-cta="article_bottom_ai_check">AI診断（地域と業種を入れるだけ・無料）</a></p></aside>
