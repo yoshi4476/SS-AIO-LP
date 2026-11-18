@@ -55,6 +55,8 @@ quality_attempts: 1
 
 **クリニックの集客方法は、見つけてもらう・選んでもらう・答えに出る・予約してもらうの4つの役割に分かれます。**
 
+つまずきやすい点については、[歯医者の集客はポータル任せで失敗？](/aio/haisha-shukyaku-iriguchi/)にまとめています。
+
 <div class="definition-box"><span class="term">クリニックの集客方法とは</span>、患者が医院を見つけ、診療内容を比べ、予約するまでの各段階に打つ手のことです。広告だけを指す言葉ではありません。</div>
 
 <figure><img src="/images/clinic-shukyaku-houhou/houhou-bunrui.png" alt="クリニックの集客方法を見つけてもらう・選んでもらう・答えに出る・予約してもらうの4つに分けた図"></figure>

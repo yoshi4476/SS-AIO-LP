@@ -71,6 +71,8 @@ quality_attempts: 3
 
 賃貸の入居者の集客は、物件探しをポータルに任せ、自社サイトは来店前に会社を確かめるページに絞る分担が向いています。
 
+つまずきやすい点を先に押さえるなら、[歯医者の集客はポータル任せで失敗？](/aio/haisha-shukyaku-iriguchi/)が参考になります。
+
 <figure><img src="/images/fudousan-chintai-shukyaku/buntan.png" alt="ポータルと自社サイトの主な読者・載せる中身・情報が残る期間・選ばれる単位の比較表"></figure>
 
 | 見る点 | ポータル | 自社サイト |
