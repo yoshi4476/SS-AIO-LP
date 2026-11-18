@@ -59,7 +59,8 @@ def test_quality_loop_fix_skips_number_check_only_there():
     # 3つ目は機械の指摘だけを直す2回目の後の検算（2026-10-21・h134）。どの検算も同じ nums を渡す
     check("品質ループの種類だけ numbers=False", ('nums = kind != "quality_loop"' in src, src.count("numbers=nums")), (True, 3))
     check("ほかの種類は今までどおり無かった数字を止める", bool(A.new_fact_numbers("本文。", "本文。相場は1,500円です。")), True)
-    check("直す回数は1回の実行で2回まで（運用者「最大でも二回で90に」）", (Q.ROUNDS, Q.MAX_ROUNDS), (2, 2))
+    # 2回直して80〜84点で、まだ上がっているときだけ3回目（2026-11-18 運用者の承認。h196）
+    check("直す回数は1回の実行で2回（80〜84点で上がっているときだけ3回まで）", (Q.ROUNDS, Q.MAX_ROUNDS), (2, 3))
     w = Q.lower({"axes": {"originality": 80, "extractability": 90, "decision": 90},
                  "quotes": {"originality": "a", "extractability": "a", "decision": "a"},
                  "weak": {"originality": ["x"], "extractability": ["y"], "decision": ["z"]}},

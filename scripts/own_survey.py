@@ -325,7 +325,10 @@ def run(slug, force=False):
     res["claims"] = claims(res)
     p = _path(site, slug)
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(res, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
+    # 一度に置き換える（上限で止められたとき、書きかけの JSON を残さない）
+    tmp = p.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(res, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
+    tmp.replace(p)
     return res
 
 
@@ -345,8 +348,25 @@ def targets(sites=()):
     return out
 
 
+def budget_of(argv):
+    """(--budget-min の分, それを除いた引数)。分が読めなければ None（無制限）"""
+    if "--budget-min" not in argv:
+        return None, list(argv)
+    i = argv.index("--budget-min")
+    try:
+        mins = float(argv[i + 1])
+    except (IndexError, ValueError):
+        mins = None
+    return mins, argv[:i] + argv[i + 2:]
+
+
 def main():
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    import time
+    # 手順の時間切れの後も裏で data/ を書き続け、次の手順の直しを全部戻させた（2026-11-09・12・16 の週次）。
+    # 上限を過ぎたら次の記事を聞き始めない
+    mins, rest = budget_of(sys.argv[1:])
+    deadline = None if mins is None else time.time() + mins * 60
+    args = [a for a in rest if not a.startswith("--")]
     if "--engines" in sys.argv:
         print("OWN_SURVEY_ENGINES=" + ",".join(engines("")))
         return 0
@@ -376,7 +396,10 @@ def main():
         return 1
     import client_private as CP
     import quality_loop as Q
-    for slug in args:
+    for i, slug in enumerate(args):
+        if deadline is not None and time.time() >= deadline:
+            print(f"OWN_SURVEY_STOPPED={len(args) - i}（時間の上限のため、残りの記事は聞かずに終えます）")
+            break
         site = Q.site_of(slug)
         res = load(site, slug) if "--show" in sys.argv else run(slug, force="--force" in sys.argv)
         name = Q.shown(slug)

@@ -1266,6 +1266,7 @@ jobs:
         uses: ./.github/actions/own-survey
         with:
           args: --rescore 4
+          minutes: 11
           claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
           gemini_key: ${{ secrets.GEMINI_API_KEY }}
@@ -1286,6 +1287,9 @@ jobs:
             exit 0
           fi
           export HUB_AGENT_TOKEN="$(cat "$RUNNER_TEMP/hub_tokens/tools" 2>/dev/null || true)"
+          # 前の手順の当社調べが残っていれば止める（時間切れの後も裏で data/ を書き、直しの見張りが直しを全部戻した。
+          # 2026-11-09・12・16 の週次で直し18回）。部品の timeout で残らないはずだが、残っていたときの備え
+          pkill -f scripts/own_survey.py 2>/dev/null || true
           out=$(python scripts/quality_loop.py --rescore 4 --budget-min 30 2>&1) || true
           echo "$out" | tail -30
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true

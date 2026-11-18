@@ -827,6 +827,7 @@ jobs:
         with:
           script: cross_score
           args: ""
+          minutes: 21
           sites: "${{ steps.site.outputs.id }}"
           claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           codex_auth: ${{ secrets.CODEX_AUTH_JSON }}
@@ -841,6 +842,7 @@ jobs:
         uses: ./.github/actions/own-survey
         with:
           args: --rescore-auto 1
+          minutes: 6
           sites: "${{ steps.site.outputs.id }}"
           claude_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           codex_auth: ${{ secrets.CODEX_AUTH_JSON }}

@@ -62,7 +62,7 @@ def test_materials_shortfall_retries_without_asking():
     import quality_loop as Q
     print("\n■ 一次性が届かないだけでは知らせず、しまった下書きも7日で戻して直し直す（運用者「毎回一次情報で止まるのは勘弁」2026-11-02）")
     q = (ROOT / "scripts" / "quality_loop.py").read_text(encoding="utf-8")
-    hold_part = q.split("    if need:\n", 1)[1].split("\n    elif published:", 1)[0] if "    if need:\n" in q else "要対応"
+    hold_part = q.split("    if need:\n", 1)[1].split("\n    elif published", 1)[0] if "    if need:\n" in q else "要対応"
     check("材料が足りないときの行に「要対応」が無い", "要対応" in hold_part, False)
     arts, rows_, unsh, rec = Q.ARTICLES, Q.rows, Q.unshelve, Q.record
     moved = []

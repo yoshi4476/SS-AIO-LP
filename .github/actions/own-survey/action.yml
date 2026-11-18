@@ -18,6 +18,13 @@ inputs:
   sites:
     description: 対象の社（社の id。空なら全社の直している記事と新しい記事）
     default: ""
+  minutes:
+    description: >-
+      調べの上限の分（呼ぶ手順の timeout-minutes より4分短く。前後の Codex の準備とログイン情報の書き戻しの分を残す。
+      書き戻す前に手順が時間切れになると、更新された Codex のログイン情報が Secrets に戻らない）。手順が時間切れになると、
+      調べの処理は止まらずに裏で data/ を書き続け、次の手順の直しの見張りが「作業場所の外が変わった」で直しを全部戻した
+      （2026-11-09・12・16 の週次）。own_survey は2分前に新しい記事を聞き始めるのをやめ、上限で timeout が処理ごと止める
+    default: "11"
   claude_token:
     description: CLAUDE_CODE_OAUTH_TOKEN
     required: true
@@ -61,6 +68,7 @@ runs:
         SITES: ${{ inputs.sites }}
         ARGS: ${{ inputs.args }}
         SCRIPT: ${{ inputs.script }}
+        MINUTES: ${{ inputs.minutes }}
       run: |
         if [ -f "$RUNNER_TEMP/gemini_usage.json" ]; then
           export GEMINI_USAGE_FILE="$RUNNER_TEMP/gemini_usage.json" GEMINI_LOG_FILE="$RUNNER_TEMP/gemini_log.txt"
@@ -93,8 +101,13 @@ runs:
         case "$SCRIPT" in own_survey|cross_score) ;; *) echo "::error::動かせないスクリプトです"; exit 1 ;; esac
         # shellcheck disable=SC2086
         [ "$SCRIPT" = own_survey ] && { python scripts/own_survey.py --engines || true; }
+        # 0 は timeout の上限なしになるので既定に戻す
+        case "$MINUTES" in ''|*[!0-9]*|0|00) MINUTES=11 ;; esac
+        extra=""
+        [ "$SCRIPT" = own_survey ] && [ "$MINUTES" -gt 3 ] && extra="--budget-min $((MINUTES - 2))"
+        # -u: 止められたときも、それまでの OWN_SURVEY・CROSS_SCORE の行を失わない
         # shellcheck disable=SC2086
-        python "scripts/$SCRIPT.py" $ARGS $SITES 2>&1 | grep -E '^(OWN_SURVEY|CROSS_SCORE)' || true
+        timeout -k 15 "$((MINUTES * 60))" python -u "scripts/$SCRIPT.py" $ARGS $extra $SITES 2>&1 | grep -E '^(OWN_SURVEY|CROSS_SCORE)' || true
 
     # 当社調べで Gemini が行った検索の回数を、AI を動かさない手順で台帳へ送る（AI 診断と合わせて月の上限を数える）
     - shell: bash

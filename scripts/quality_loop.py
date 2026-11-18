@@ -46,9 +46,25 @@ import rubric as R  # noqa: E402
 ARTICLES = ROOT / "articles"
 LOG = ROOT / "data" / "quality_loop.jsonl"
 ROUNDS = 2                  # 1回の実行で直す回数（運用者「1度や2度で完璧に」）
-MAX_ROUNDS = 2              # 直す回数は増やさない（運用者「最大でも二回で90に」2026-10-21）
+# 2回直して80〜84点で、2回目でも点が上がっていれば3回目を直す（2026-11-18 運用者の承認。台帳の10-20〜11-18 で、
+# 2回とも直せたのに80〜84点で止まった保留が35件あった。以前は「最大でも二回で90に」2026-10-21 で2回まで）
+MAX_ROUNDS = 3
+NEAR_MISS = (80, 84)
+# 検算で戻された直し（記事は変わっていない）は2回の枠に数えず、戻された理由を渡してあと何回まで直させるか。
+# 直し346回のうち92回が戻され、戻された直しも枠を使ったので、2回とも戻されて終わる記事が18件あった（2026-11-18）
+RETRY_EXTRA = 2
 SCORE_MIN = 4               # 1回の採点の見込み（分）。予算の残りがこれより少なければ採点を始めない
-IMPROVE_MIN = 14            # 1回の直し（AI＋検算＋ビルド）と採点し直しの見込み（分）
+# 1回の直し（AI＋検算＋ビルド）と採点し直しの見込み（分）。14分としていたが、台帳の実測は直しが9割2分以内・最大6分、
+# 採点し直しが2回採点で約2分。見込みが大きすぎて、週次では後の社の記事が「時間が足りない」で採点だけになり、直さずに
+# 保留になった（27件。2026-11-18）。最大の直し＋採点し直し（約8分）を見込み、予算の内で終わらせる（手順の時間切れの
+# 余裕＝予算30分・手順35分の5分を食わない。時間切れで止まると検算の前の記事が残る）
+IMPROVE_MIN = 8
+# 検算で戻された理由のうち、直し方を変えれば通りうるもの（このときだけ枠に数えずに直し直す）。記事が無い・時間切れ・
+# ほかの記事が原因のビルドの止まりなどは、やり直しても同じなので今までどおり1回と数える
+RETRYABLE = ("警告が増えました", "本文に無かった数字", "出典リンクが消えました", "別の記事まで変わっています",
+             "直す記事は変わらず")
+# やり直しても同じ・続けて呼ぶと時間を食うだけの理由（この回の直しをやめる）
+HALT = ("claude が", "途中で止まりました")
 SURVEY_MIN = 12             # 当社調べ（2つの AI に記事の論点5問まで）の見込み（分）。同じ月に測った記事は聞き直さない
 NEAR_TOTAL = (R.PASS_TOTAL - 2, R.PASS_TOTAL + 3)   # 平均がこの間なら、採点のぶれで合否が変わりうる → 2回採点して低い方を使う
 NEAR_AXIS = (R.PASS_EACH - 2, R.floor("originality") + 4)        # 1軸がこの間でも同じ
@@ -857,8 +873,11 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         print(f"  … {name}: 材料（一次情報・体験・事例）の追加を待っています（改善中のまま。材料が増えた回に直します）")
         record({**base, "action": "skip", "state": "improving" if not published else "unscored", "why": "材料待ち"})
         return "skipped"
-    if not budget.ok(SCORE_MIN):
-        print(f"  … {name}: 時間の残りが足りないため採点しません（改善中のまま。次の回が続けます）")
+    # 公開済みの記事は、直す時間（採点＋直し1回）が無ければ採点も始めない。採点だけして直せずに要対応を出していた
+    # （2026-11-09・12・16 の週次で、後の社の記事が採点だけで保留になった）。公開前の記事は採点だけでも合格して公開できるので今までどおり
+    if not budget.ok(SCORE_MIN + (IMPROVE_MIN if published else 0)):
+        print(f"  … {name}: 時間の残りが足りないため採点しません（"
+              + ("公開のまま。次の回に採点して直します）" if published else "改善中のまま。次の回が続けます）"))
         record({**base, "action": "skip", "state": "improving" if not published else "unscored"})
         return "skipped"
     if not published:
@@ -873,7 +892,8 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
               + ("公開のまま来週採点し直します" if published else "改善中のまま次の回が採点し直します"))
         record({**base, "action": "score", "state": "error", "why": why[:200]})
         return "error"
-    done = 0
+    done = tries = 0            # done は当たった直しと AI が直す所なしと判断した回、tries は呼んだ回数（検算で戻された回を含む）
+    halted = False
     prior = tries_before(slug)
     record({**base, "action": "score", "round": prior, "axes": sc["axes"], "total": sc["total"], "ok": sc["ok"],
             "double": sc["double"], "state": "passed" if sc["ok"] else "scoring", "weak": sc.get("weak", {})})
@@ -881,47 +901,57 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         f"{AXIS_NAME[k]}{sc['axes'][k]}" for k in AXIS_KEYS) + f"）{'・2回採点' if sc['double'] else ''}")
     # 点が下がった直しは捨て、最高点の版を残す（2026-10-21 の試しで 80→87→80 と下がった版が残った）
     best_text, best = read(slug), sc
+    first_total = sc["total"]
     # 公開できる点（85）に届いても、目標（90）未満なら回数の残りで直し続ける。点が下がった版は捨てる（PDCA。2026-10-21）
-    while (not sc["ok"] or sc["total"] < R.TARGET) and done < rounds and budget.ok(IMPROVE_MIN):
-        done += 1
+    while (not sc["ok"] or sc["total"] < R.TARGET) and done < rounds and tries < rounds + RETRY_EXTRA \
+            and budget.ok(IMPROVE_MIN):
+        tries += 1
         if "blocked" not in ctx:
             ctx["blocked"] = blocked_lines()
         sc["ai_writing"] = aiwriting_note(slug)
         sc["machine"] = machine_note(slug)
         sc["repeated"] = repeated_failures(slug)
         good, why = IMPROVE(slug, sc, ctx["blocked"])
-        record({**base, "action": "improve", "round": prior + done, "ok": good, "why": str(why)[:200]})
-        print(f"     直し{done}回目: {'直しました' if good else '戻しました・変更なし'}（"
+        record({**base, "action": "improve", "round": prior + tries, "ok": good, "why": str(why)[:200]})
+        print(f"     直し{tries}回目: {'直しました' if good else '戻しました・変更なし'}（"
               f"{why[:60] if name == slug else reason_shown(why)}）")
         if not good:
             sc["retry_note"] = str(why)
-            continue
+            if str(why).startswith(HALT):
+                halted = True
+                break           # 上限・時間切れは、続けて呼んでも同じ
+            if not str(why).startswith(RETRYABLE):
+                done += 1       # 直す所なし・記事が無い・ほかの記事のビルドの止まりなどは1回と数える
+            continue            # 検算で戻された回は数えず、戻された理由を渡して直し直す
+        done += 1
         sc2, why2 = score(slug)
         if not sc2:
             print(f"要対応: {name} の採点し直しができませんでした（{why2}）")
             record({**base, "action": "score", "state": "error", "why": why2[:200]})
             break
-        if sc2["total"] > sc["total"] and done >= rounds and rounds < MAX_ROUNDS:
-            # 点が上がっているあいだは、1回の実行で直す回数を増やす（2回では80点前後で止まった。2026-10-21 の試し）
+        if sc2["total"] > sc["total"] and done >= rounds and rounds < MAX_ROUNDS and not sc2["ok"] \
+                and NEAR_MISS[0] <= sc2["total"] <= NEAR_MISS[1]:
+            # 2回直して80〜84点で、まだ上がっているなら3回目を直す（2026-11-18 運用者の承認）
             rounds += 1
         if sc2["total"] < best["total"]:
             write(slug, best_text)
-            record({**base, "action": "revert", "round": prior + done, "total": sc2["total"], "kept": best["total"]})
+            record({**base, "action": "revert", "round": prior + tries, "total": sc2["total"], "kept": best["total"]})
             print(f"     採点し直し: 総合{sc2['total']}（前の{best['total']}点より下がったので、前の版に戻しました）")
             sc = dict(best, weak=sc2.get("weak", best.get("weak")), quotes=sc2.get("quotes", best.get("quotes")))
+            sc.pop("retry_note", None)      # 前の版の時の「検算で戻された理由」を、戻した後の直しに渡さない
             continue
         best_text, best = read(slug), sc2
         sc = sc2
-        record({**base, "action": "score", "round": prior + done, "axes": sc["axes"], "total": sc["total"],
+        record({**base, "action": "score", "round": prior + tries, "axes": sc["axes"], "total": sc["total"],
                 "ok": sc["ok"], "double": sc["double"], "state": "passed" if sc["ok"] else "scoring",
                 "weak": sc.get("weak", {})})
         print(f"     採点し直し: 総合{sc['total']}（" + "・".join(f"{AXIS_NAME[k]}{sc['axes'][k]}" for k in AXIS_KEYS) + "）")
     if sc["ok"]:
         old_day = str(meta_of(read(slug)).get("date") or "")[:10]
-        write_pass(slug, sc, attempts=prior + done + 1,
+        write_pass(slug, sc, attempts=prior + tries + 1,
                    refresh_date=(mode == "pending" and old_day and old_day < date.today().isoformat()))
         record({**base, "action": "pass", "state": "passed", "total": sc["total"], "axes": sc["axes"],
-                "rounds": prior + done, "since": since})
+                "rounds": prior + tries, "since": since})
         try:
             import material
             # 依頼は台帳と同じフォルダに置く（門が台帳を一時フォルダへ差し替えたとき、本物の依頼に架空の記事を書かない）
@@ -942,7 +972,7 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
             need, asked = "materials", material.fingerprint(site)
         except Exception as e:  # noqa: BLE001
             print(f"  （材料の依頼を残せませんでした: {type(e).__name__}）")
-    record({**base, "action": "hold", "state": state, "total": sc["total"], "rounds": prior + done, "since": since,
+    record({**base, "action": "hold", "state": state, "total": sc["total"], "rounds": prior + tries, "since": since,
             "axes": sc["axes"], "need": need, "materials": asked, "survey": survey_of(slug, site)[0],
             "body": body_of(slug)})
     if need and not published and shelve(slug):
@@ -956,8 +986,16 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         # 一次性が届かないだけでは知らせない（運用者「毎回一次情報で止まるのは勘弁してほしい」2026-11-02）。翌日に直し直す
         print(f"  {name}: 一次性が{sc['axes']['originality']}点で{R.floor('originality')}点に届きませんでした。"
               "翌日に直して採点し直します（材料の依頼は material_requests.json。答えがあれば使います）")
+    elif published and halted:
+        print(f"要対応: 公開済みの {name} を直せませんでした（{reason_shown(sc.get('retry_note', ''))}）。公開は続け、次の回も直します")
+    elif published and sc["total"] > first_total:
+        # この回に点が上がった記事は、次の回に続けて直せば届く見込みがあり、人の手は要らない（2026-11-18 運用者
+        # 「こういうの何とかして」。61→84点の記事が要対応で届いていた）。上がらなかった記事だけを知らせる
+        print(f"  公開済みの {name}: {first_total}→{sc['total']}点に上がりました（{sc['why']}）。公開のまま、次の回に続けて直します")
+    elif published and tries == 0:
+        print(f"  公開済みの {name}: 総合{sc['total']}点。直す時間が残っていなかったため、次の回に直します")
     elif published:
-        print(f"要対応: 公開済みの {name} が基準に届きません（総合{sc['total']}・{sc['why']}）。公開は続け、来週も直します")
+        print(f"要対応: 公開済みの {name} が直しても上がりません（総合{sc['total']}・{sc['why']}）。公開は続け、次の回も直します")
     else:
         print(f"要対応: {name} は直しても基準に届きません（総合{sc['total']}・{sc['why']}）。改善中のまま公開せず、"
               "次の回が新しい記事より先に直し続けます")
@@ -1165,14 +1203,18 @@ def rescore_targets(per_site=None, sites=(), path=None):
         # 同じ分類の中では、買い手の語の記事から直す（問い合わせに近い）
         seller = 0 if not low_sites[sid] or KI.is_buyer(m.get("keyword") or "") else 1
         by_site.setdefault(sid, []).append((first, seller, busy, AH.ORDER.get(health, 2), score, str(m.get("date") or ""), s))
-    out = []
+    groups = []
     for sid, items in sorted(by_site.items()):
         n = RESCORE_PER_SITE if per_site is None else per_site
         try:
             n = int((S.load(sid) or {}).get("quality_rescore", n))     # 社ごとの設定が先
         except Exception:
             pass
-        out += [x[-1] for x in sorted(items)[:max(0, n)]]
+        groups.append([x[-1] for x in sorted(items)[:max(0, n)]])
+    # 社を交互に並べる。社ごとに固めていたので、週次は1つ目の社が時間を使い、後の社の記事は直さずに終わった（2026-11-18）
+    out = []
+    for i in range(max((len(g) for g in groups), default=0)):
+        out += [g[i] for g in groups if i < len(g)]
     return out
 
 
