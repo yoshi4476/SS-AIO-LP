@@ -4236,6 +4236,8 @@ AUDIT = os.environ.get("GATES_AUDIT") == "1"
 # GATES_AUDIT=1 の実測（2026-11-13）で、門の後に管制塔の下のファイルかフォルダが変わったもの
 SERIAL = {
     "__main__.test_hub_gas",                                   # tests/_hub_tmp.js（固定の名前）
+    # 本物の作業場所で見張り（guarded）を動かす。同時に流すと、ほかの門が書いたファイルを見張りが戻して消す
+    "gates_history_h195_parallel_rewrite.test_drafts_stop_starting_after_the_deadline_and_stay_inside_the_guard",
     "__main__.test_kw_plan_keeps_only_buyers",                 # docs/kw-plan-*.md
     "__main__.test_lessons_are_learned_and_pruned",            # data/lessons.jsonl
     "__main__.test_publish_gate_actually_blocks",              # build.py: site/・articles/・data/body_hash.json・data/published.json

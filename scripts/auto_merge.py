@@ -767,7 +767,12 @@ def main():
     if a.guarded:
         # 自己診断はサイトを描き直すので重い（同型の組で17分半）。統合できる組が無い週に先に回していた（2026-11-16 の週次）
         print("\n■ 統合の検算の自己診断" + ("（同型の組）" if a.scaled else "") + "\n")
-        if selftest(a.scaled):
+        try:
+            bad = selftest(a.scaled)
+        except Exception as e:  # noqa: BLE001  前は自己診断の例外も「検算が効いていない」として知らせていた
+            print(f"  自己診断が途中で止まりました（{type(e).__name__}）")
+            bad = True
+        if bad:
             print("MERGE_SELFTEST=ng（検算が効いていないので統合しません）")
             return 3
 

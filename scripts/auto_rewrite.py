@@ -71,11 +71,20 @@ def sh(args, timeout=1800, stdin_text=None, cwd=None):
         if cwd is None and "--max-turns" in args and args[args.index("--max-turns") + 1] == "1":
             import tempfile
             cwd = tempfile.mkdtemp(prefix="claude_bare_")
-        else:
+        elif reads_root_memory(cwd or ROOT):
             import agent_memory
             with agent_memory.slimmed("writer"):
                 return _run(args, cwd=cwd or ROOT, timeout=timeout, input=stdin_text, env=env)
     return _run(args, cwd=cwd or ROOT, timeout=timeout, input=stdin_text, env=env)
+
+
+def reads_root_memory(cwd):
+    """その場所で起こした claude が作業の場所の CLAUDE.md を読むか（作業の場所か、その下）。
+    一時フォルダの写しで起こす下書き・採点は読まない。そこで CLAUDE.md を絞って戻すと、同時に起こした回どうしで
+    書きかけの CLAUDE.md を読み合い、壊れた版を戻しうる（2026-11-16 の週次で、統合の下書きを2本同時に書かせた後に
+    「AI が触ってはいけない場所 CLAUDE.md を戻した」が出た）。絞るのは読む呼び出しのときだけ"""
+    p, root = Path(cwd).resolve(), ROOT.resolve()
+    return p == root or root in p.parents
 
 
 WINDOWS = os.name == "nt"
@@ -855,7 +864,9 @@ def prescore(item, before, after):
             got = QL.score(item["slug"], SCORE_ASK, text=t)
             if got[0]:
                 PRESCORED[_score_key(item["slug"], t, SCORE_ASK)] = got
-    except Exception as e:  # noqa: BLE001  先に済ませる採点の失敗で下書きを捨てない
+    except (Exception, SystemExit) as e:  # noqa: BLE001  先に済ませる採点の失敗で下書きを捨てない
+        # score_check は崩れた原稿（フロントマターが無い）で SystemExit を出す。受け止めないと並列の外まで上がり、
+        # ほかの下書きまで全部捨てて止まる。理由には記事の名前を出さない（公開の CI のログに載る）
         print(f"  先の採点を飛ばしました（{type(e).__name__}。検算で採点します）", file=sys.stderr)
 
 
@@ -2741,10 +2752,11 @@ def main():
             items += got
         limit = len(items)
     else:
-        items = pick_items(a, a.kind, a.limit)
+        # 「question:2」のように1つだけ本数つきで渡されても、種類と本数に分けて使う（そのまま渡すと候補が0件になる）
+        kind, limit = kinds[0]
+        items = pick_items(a, kind, limit)
         if items is None:
             return 0
-        limit = a.limit
     if not items and a.kind == "spare" and a.main_only:
         items = buyer_first(free_spare_items(a.sites, recently_touched(a.skip_recent) if a.skip_recent else set()))
         if items:
@@ -2788,13 +2800,14 @@ def main():
         except Escaped as e:
             print(f"要対応: 書き直し案を書かせる間に、AI の作業場所の外が変わりました。全部戻して止めます（{e}）")
             return 1
+    later = 0
     for x, edited in zip(todo, drafts):
         used = (time.time() - started) / 60
-        # 書き終えた下書きは AI を待たずに当てられるので、予算を過ぎても捨てない
+        # 書き終えた下書きは AI を待たずに当てられるので、予算を過ぎても捨てない。書いていない分だけ次回へ回す
+        # （止めていたので、途中の1本が時間切れで書けないと、その後ろの書き終えた下書きまで捨てていた）
         if a.budget_min and used >= a.budget_min and edited is None:
-            print(f"\n  {used:.0f}分使ったので、ここで止めます"
-                  f"（残りは次回。上限{a.budget_min}分）")
-            break
+            later += 1
+            continue
         good, why = run_one(x, True, edited=edited) if edited is not None else run_one(x, True)
         print(f"  {'○' if good else '×'} [{x['kind']}] {shown(x['slug'])[:34]:<34} {said(x['slug'], why)[:56]}")
         note(x["slug"], x["kind"], good, why)
@@ -2802,6 +2815,8 @@ def main():
             hub_rewrite_log(x, why)
             rewrote.append(x["slug"])
         ok, ng = ok + good, ng + (not good)
+    if later:
+        print(f"\n  上限{a.budget_min}分を過ぎたので、書いていない{later}本は次回に回します")
     print(f"\n  直した {ok}件 / 戻した {ng}件 / {(time.time() - started) / 60:.0f}分")
     print("  台帳: automation/logs/auto_fix.jsonl")
     if a.kind == "spare":

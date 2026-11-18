@@ -43,21 +43,27 @@ def test_push_has_a_time_limit_and_says_why():
     print("\n■ 配信先への push: 上限をつけ、失敗の理由を伏せ字つきで出す")
     import publish as P
     msg = ("To https://github.com/owner/client-site.git\n ! [rejected] HEAD -> main (fetch first)\n"
-           "remote: Permission to owner/client-site.git denied to bot. ghp_abcdef123456")
+           "remote: Permission to owner/client-site.git denied to bot.\n"
+           "error: could not apply 1a2b3c4... publish: お客様の記事の題（score 90）\n"
+           "Could not apply 1a2b3c4... publish: お客様の記事の題（score 90）\n"
+           "fatal: unable to access 'https://github.com/owner/client-site.git/': error: 403 ghp_abcdef123456")
     why = P.why_failed(msg)
-    check("理由に git のエラー文が残る", "rejected" in why and "Permission" in why, True)
+    check("理由に git の決まった形の行が残る", "rejected" in why and "403" in why, True)
     check("URL・リポジトリ名・トークンは出さない", any(s in why for s in ("github.com", "owner/client-site", "abcdef123456")), False)
+    check("remote: の行と、コミットの題の載る行は出さない（お客様の記事の題）", any(s in why for s in ("Permission", "お客様の記事の題")), False)
     t0 = time.time()
     rc, out = out_of(P.try_run, [sys.executable, "-c", "import time; time.sleep(30)"], timeout=1, say=True)
     check("上限を過ぎたら止めて失敗にする（待ち続けない）", (rc, time.time() - t0 < 15), (False, True))
     check("止めたことを出す", "秒で終わらないため止めました" in out, True)
-    rc, out = out_of(P.try_run, [sys.executable, "-c", "import sys; sys.stderr.write('boom-reason'); sys.exit(1)"], say=True)
+    rc, out = out_of(P.try_run, [sys.executable, "-c", "import sys; sys.stderr.write('fatal: boom-reason'); sys.exit(1)"], say=True)
     check("失敗の理由を出す", (rc, "boom-reason" in out), (False, True))
     rc, out = out_of(P.try_run, [sys.executable, "-c", "import sys; sys.exit(1)"])
     check("say の無い呼び出しは黙ったまま（rebase --abort などの後始末）", (rc, out), (False, ""))
     src = inspect.getsource(P.push_work)
     check("push と fetch に上限を渡す", src.count("timeout=PUSH_TIMEOUT") >= 2 and "say=True" in src, True)
-    check("素のURLは端末で聞かない（GIT_TERMINAL_PROMPT=0）", 'GIT_TERMINAL_PROMPT="0"' in src, True)
+    check("素のURLは端末で聞かない（GIT_TERMINAL_PROMPT=0）。鍵の無い回も", 'GIT_TERMINAL_PROMPT="0"' in src
+          and "env if (token and i == 0) else plain_env" in src and "env=env or plain_env" in src, True)
+    check("rebase の理由は出さない（ぶつかったコミットの題が載る）", 'try_run(["git", "rebase", f"origin/{cfg[\'branch\']}"], cwd=dest)' in src, True)
     check("上限は数分以内", 30 <= P.PUSH_TIMEOUT <= 300, True)
 
 
@@ -124,6 +130,13 @@ def test_scaled_merge_selftest_only_when_there_is_a_pair():
                      (AM, "run_one", lambda *a, **k: merged.append(a) or (True, "統合しました"))):
             rc, out = out_of(AM.main)
         check("組があれば先に自己診断し、効いていなければ統合せず3で終わる", (rc, ran, merged), (3, [True], []))
+
+        def boom(scaled=False):
+            raise RuntimeError("x")
+        with patched((AM, "scaled_candidates", lambda site="": [dict(pair)]), (AM, "skip_noindex", lambda ps: ps),
+                     (AM, "selftest", boom), (AM, "run_one", lambda *a, **k: merged.append(a) or (True, "統合しました"))):
+            rc, out = out_of(AM.main)
+        check("自己診断が例外で止まっても、統合せず3で知らせる", (rc, merged), (3, []))
     finally:
         sys.argv = old_argv
     wf = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")

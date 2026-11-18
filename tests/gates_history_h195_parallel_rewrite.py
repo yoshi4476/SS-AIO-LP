@@ -106,6 +106,64 @@ def test_scores_are_done_beside_the_drafts_and_used_once():
         AR.prescore(item, "直す前", "直した後")
     check("先の採点が落ちても下書きは捨てない（何も残さない）", AR.PRESCORED, {})
 
+    def broken(slug, text):
+        raise SystemExit(f"articles/{slug}.md にフロントマターがありません")
+    try:
+        with patched((QL, "score", fake_score), (AR, "warns_of", broken)):
+            AR.prescore(item, "直す前", "直した後")
+        survived = True
+    except SystemExit:
+        survived = False
+    check("崩れた原稿で score_check が SystemExit を出しても、並列の外へ上げない（ほかの下書きを捨てない）",
+          (survived, AR.PRESCORED), (True, {}))
+
+
+def test_finished_drafts_are_applied_even_after_one_failed_past_the_budget():
+    print("\n■ 予算を過ぎても、書き終えた下書きは当てる（途中の1本が書けなくても後ろを捨てない）・1種類の本数つき")
+    import types
+    import auto_rewrite as AR
+    clock = iter([0] + [10 ** 6] * 50)
+    applied = []
+    items = [{"kind": "question", "slug": s, "why": "w"} for s in ("a", "b", "c")]
+    old = sys.argv
+    sys.argv = ["auto_rewrite.py", "--write", "--kind", "question:3", "--parallel", "3", "--budget-min", "1"]
+    try:
+        with patched((AR, "pick_items", lambda a, k, n: [dict(x) for x in items] if (k, n) == ("question", 3) else []),
+                     (AR, "draft_all", lambda todo, w, deadline=None: ["d1", None, "d3"]),
+                     (AR, "run_one", lambda x, w, edited=None: applied.append((x["slug"], edited)) or (True, "直しました: t")),
+                     (AR, "note", lambda *a, **k: None), (AR, "hub_rewrite_log", lambda *a, **k: None),
+                     (AR, "shown", lambda s: s), (AR, "said", lambda s, w: w),
+                     (AR, "time", types.SimpleNamespace(time=lambda: next(clock)))):
+            rc, out = out_of(AR.main)
+    finally:
+        sys.argv = old
+    check("「question:3」1つでも種類と本数に分けて候補を集める", "人の判断に回っていた直し: 3件" in out, True)
+    check("書き終えた a・c は当て、書けなかった b だけ次回", applied, [("a", "d1"), ("c", "d3")])
+    check("次回に回した本数を出す", "書いていない1本は次回に回します" in out, True)
+
+
+def test_claude_md_is_slimmed_only_for_calls_that_read_it():
+    print("\n■ CLAUDE.md を絞って戻すのは、作業の場所で起こす claude だけ（一時フォルダの同時の呼び出しで競合させない）")
+    import tempfile
+    import subprocess
+    import agent_memory
+    import auto_rewrite as AR
+    check("作業の場所とその下は読む", (AR.reads_root_memory(ROOT), AR.reads_root_memory(ROOT / "scripts")), (True, True))
+    with tempfile.TemporaryDirectory() as d:
+        check("一時フォルダは読まない", AR.reads_root_memory(d), False)
+        entered = []
+
+        @contextlib.contextmanager
+        def fake_slim(profile="writer"):
+            entered.append(profile)
+            yield
+        with patched((agent_memory, "slimmed", fake_slim),
+                     (AR, "_run", lambda args, cwd=None, **k: subprocess.CompletedProcess(args, 0, "", ""))):
+            AR.sh(["claude", "-p", "--max-turns", "40"], stdin_text="x", cwd=d)
+            check("一時フォルダの呼び出し（下書き・採点）は絞らない", entered, [])
+            AR.sh(["claude", "-p", "--max-turns", "40"], stdin_text="x")
+            check("作業の場所の呼び出しは今までどおり絞る", entered, ["writer"])
+
 
 def test_drafts_stop_starting_after_the_deadline_and_stay_inside_the_guard():
     print("\n■ 予算の時刻を過ぎたら新しい下書きを始めない／本物の機械の検査を見張りの中で動かしても下書きは捨てない")
