@@ -1,0 +1,120 @@
+{
+ "v": 2,
+ "slug": "aio-shindan-yarikata",
+ "ok": true,
+ "date": "2026-11-19",
+ "questions": [
+  "aio診断について教えてください",
+  "aio診断について、「AIO診断とは？何を確認するものか」を教えてください",
+  "aio診断について、「なぜ順位が良くてもAIO診断が必要なのか」を教えてください",
+  "aio診断について、「AIO診断でチェックする8つの視点」を教えてください",
+  "aio診断について、「自分でできるAIO診断の3ステップ」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "なぜ順位が良くてもAIO診断が必要なのか",
+   "words": [
+    "順位"
+   ],
+   "hits": 3,
+   "of": 4
+  },
+  {
+   "topic": "AIO診断でチェックする8つの視点",
+   "words": [
+    "視点"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "自分でできるAIO診断の3ステップ",
+   "words": [
+    "自分"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "診断結果の点数別・優先すべき対策",
+   "words": [
+    "診断結果",
+    "点数別"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "AIO診断ツールの選び方｜無料の5つでどこまで分かるか",
+   "words": [
+    "無料"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "専門家によるAIO診断が必要なケース",
+   "words": [
+    "専門家",
+    "ケース"
+   ],
+   "hits": 2,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "acedirection.co.jp": "peer",
+  "adv.tokyo-np.co.jp": "peer",
+  "ai-and-marketing.jp": "peer",
+  "ai-hack.co.jp": "peer",
+  "ai-search.techsuite.co.jp": "peer",
+  "ai.7senses.co.jp": "self",
+  "aio-check.ai": "peer",
+  "aio.uls-conect.com": "peer",
+  "aioj.jp": "peer",
+  "aiomarketing.jp": "peer",
+  "atoz-design.jp": "peer",
+  "auncon.co.jp": "peer",
+  "brevia.jp": "peer",
+  "bridge-world.jp": "peer",
+  "btobmarketing.tmedia.co.jp": "peer",
+  "camp.webmarks.co.jp": "peer",
+  "coosy.co.jp": "peer",
+  "jinrai.co.jp": "peer",
+  "koukoku.jp": "peer",
+  "lab.llmo-optimization.com": "peer",
+  "linksurge.jp": "peer",
+  "llmo-aio.com": "peer",
+  "mesut.co.jp": "peer",
+  "note.com": "video",
+  "one-produce.co.jp": "peer",
+  "pref.co.jp": "peer",
+  "prtimes.jp": "media",
+  "saito-online.com": "peer",
+  "sitest.jp": "peer",
+  "sora-michi.co.jp": "peer",
+  "switchitmaker2.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "web-planners.net": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 2,
+  "専門家への相談": 0
+ },
+ "chars": 9019,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え4件のうち、『自分』に触れたものは0件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。ほかの論点を聞いた答え5件のうち、『診断結果』に触れたものは1件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは費用の金額（◯円）は0件、期間（◯か月・◯日など）は0件、専門家への相談は0件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは34件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件、動画・SNS・ブログが2件でした。"
+ ]
+}

@@ -1,0 +1,93 @@
+{
+ "v": 2,
+ "slug": "kengakukai-shukyaku-hoho",
+ "ok": true,
+ "date": "2026-11-19",
+ "questions": [
+  "見学会 集客について教えてください",
+  "見学会 集客について、「見学会集客とは？」を教えてください",
+  "見学会 集客について、「見学会の集客が伸び悩む3つの原因」を教えてください",
+  "見学会 集客について、「見学会集客を伸ばす6つの施策」を教えてください",
+  "見学会 集客について、「集客チャネル別の使い分け方」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "見学会の集客が伸び悩む3つの原因",
+   "words": [
+    "原因"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "見学会集客を伸ばす6つの施策",
+   "words": [
+    "施策"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "申込から来場につなげる導線設計3ステップ",
+   "words": [
+    "申込",
+    "来場"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "当日運営とアフターフォローのポイント",
+   "words": [
+    "アフターフォロー",
+    "当日運営"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "AI検索時代の見学会集客で意識すべきこと",
+   "words": [
+    "AI検索時代"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "biz.refo-sumu.jp": "peer",
+  "delight-solutions.co.jp": "peer",
+  "designlab.asapri.co.jp": "peer",
+  "genji-group.com": "peer",
+  "housing-labo.com": "peer",
+  "i-pro-spuj.co.jp": "peer",
+  "iezukuri-business.homes.jp": "portal",
+  "kensetsu.gemba-tech.jp": "peer",
+  "laikamarketing.com": "peer",
+  "miraie-c.jp": "peer",
+  "note.com": "video",
+  "shopowner-support.net": "media",
+  "sumapo.net": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "wakudori.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 0,
+  "進め方の手順": 3,
+  "専門家への相談": 1
+ },
+ "chars": 10282,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え4件のうち、『原因』に触れたものは0件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え5件のうち、『アフターフォロー』に触れたものは1件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは注意点・失敗・リスクは0件、費用の金額（◯円）は1件、専門家への相談は1件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは15件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
+}
