@@ -1,0 +1,127 @@
+{
+ "v": 2,
+ "slug": "keiri-jidoka-ai",
+ "ok": true,
+ "date": "2026-11-19",
+ "questions": [
+  "経理 自動化 AIについて教えてください",
+  "経理 自動化 AIについて、「経理AI自動化とは？何がどこまでできるのか」を教えてください",
+  "経理 自動化 AIについて、「経理AI自動化で負担を軽減できること5つ」を教えてください",
+  "経理 自動化 AIについて、「経理AI自動化を始める4つの手順」を教えてください",
+  "経理 自動化 AIについて、「経理AI自動化の設定でつまずきやすいところ」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "経理AI自動化で負担を軽減できること5つ",
+   "words": [
+    "負担",
+    "軽減"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "経理AI自動化の設定でつまずきやすいところ",
+   "words": [
+    "設定"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "経理AI自動化とRPA・クラウド会計の自動仕訳との違い",
+   "words": [
+    "クラウド会計",
+    "自動仕訳",
+    "RPA"
+   ],
+   "hits": 4,
+   "of": 5
+  },
+  {
+   "topic": "経理AI自動化で失敗しやすい原因とNG運用",
+   "words": [
+    "NG運用",
+    "原因"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "自動化しても人の判断が必要な業務",
+   "words": [
+    "業務"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "費用相場とツール選定の比較軸",
+   "words": [
+    "ツール選定",
+    "費用相場",
+    "比較軸"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "AI自動化で対応しきれない場合は経理BPOも選択肢に",
+   "words": [
+    "選択肢"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [
+  {
+   "term": "電子帳簿保存法",
+   "org": "国税庁",
+   "of": 5,
+   "hits": 1
+  }
+ ],
+ "sources": {
+  "ai-keiei.shift-ai.co.jp": "peer",
+  "all-senmonka.jp": "portal",
+  "asset.smbcc-businessclub.jp": "peer",
+  "biz.moneyforward.com": "peer",
+  "career.jusnet.co.jp": "peer",
+  "catalog.monex.co.jp": "media",
+  "concur.co.jp": "peer",
+  "deloitte.com": "peer",
+  "freee.co.jp": "peer",
+  "keihi.com": "peer",
+  "leapal.jp": "peer",
+  "majorflow.jpn.panasonic.com": "peer",
+  "make-a-hit.co.jp": "peer",
+  "noc-net.co.jp": "peer",
+  "note.com": "video",
+  "obc.co.jp": "peer",
+  "persol-wsc.co.jp": "peer",
+  "plex-agent.com": "peer",
+  "proactive.jp": "peer",
+  "reiwa-inc.com": "peer",
+  "talent-partner.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 2,
+  "専門家への相談": 2
+ },
+ "chars": 10105,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、国税庁の資料にある「電子帳簿保存法」に触れたものは1件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは費用の金額（◯円）は1件、期間（◯か月・◯日など）は1件、進め方の手順は2件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは23件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件、ポータル・比較サイトが1件、動画・SNS・ブログが2件でした。"
+ ]
+}
