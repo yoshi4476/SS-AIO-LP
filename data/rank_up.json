@@ -7,11 +7,10 @@
   "site": "ai-lab"
  },
  "aio-taisaku-muryou-tool": {
-  "at": "2026-11-16",
-  "pos": 15.4,
-  "imp": 1478,
-  "band": "11〜20位",
-  "site": "ai-lab"
+  "at": "2026-11-19",
+  "pos": 17.3,
+  "site": "ai-lab",
+  "by": "auto_rewrite"
  },
  "ai-kantan-shukyaku": {
   "at": "2026-10-05",
