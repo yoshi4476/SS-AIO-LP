@@ -167,7 +167,7 @@ def test_stale_articles_retarget_or_merge():
                    [{"q": "クリニック ホームページ制作 外注", "ind": "クリニック", "svc": "HP制作", "slug": ""}],
                    {"g1": {"title": "医療広告ガイドラインとは？クリニックHPの禁止6表現", "keyword": "医療広告ガイドライン Web"}},
                    conf)[0]["action"], "none")
-    check("週の上限は付け替えと統合を合わせて6本", RS.WEEK_LIMIT, 6)
+    check("週の上限は付け替えと統合を合わせて10本（2026-11-19 運用者の決定）", RS.WEEK_LIMIT, 10)
 
 
 def test_retarget_kind_allows_only_the_designated_keyword():
@@ -207,5 +207,5 @@ def test_weekly_wiring():
     check("台帳を作る工程がある", i_led > 0, True)
     check("台帳を作ってから順位を記録する（広げた語にも順位が付く）", 0 < i_led < i_track, True)
     check("台帳はラッコの控え（検索の量）を戻してから作る", 0 < wk.find("name: ラッコの控えを戻す") < i_led, True)
-    check("表示ゼロの記事は付け替えと統合を合わせて週6本", "retire_stale.py --retarget --write --limit 6" in wk, True)
+    check("表示ゼロの記事は付け替えと統合を合わせて週10本", "retire_stale.py --retarget --write --limit 10" in wk, True)
     check("前の2本だけの統合は残さない", "retire_stale.py --write --limit 2" in wk, False)

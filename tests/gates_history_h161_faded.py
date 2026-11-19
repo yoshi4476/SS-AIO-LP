@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 def test_faded_articles_become_merge_candidates():
     import retire_stale as RS
-    print("\n■ 消えた記事の整理: 公開60日以上・直近28日の表示0・90日のクリック0 を統合の候補にする")
+    print("\n■ 消えた記事の整理: 公開30日以上・直近28日の表示0・90日のクリック0 を統合の候補にする")
     today = date(2026, 11, 12)
     u = "https://x.example/blog/a/"
     old, young = {"date": "2026-08-20"}, {"date": "2026-10-20"}
@@ -22,11 +22,11 @@ def test_faded_articles_become_merge_candidates():
     check("公開60日未満は候補にしない（順位が落ち着く前に統合しない）", RS.faded(young, u, set(), set(), today), False)
     check("公開日の無い記事は候補にしない", RS.faded({"date": ""}, u, set(), set(), today), False)
     check("日数の決まり（公開60日・表示28日・クリック90日）と、近さの下限",
-          (RS.AGE_DAYS, RS.WINDOW_DAYS, RS.CLICK_DAYS, RS.MIN_SIM >= 0.3), (60, 28, 90, True))
+          (RS.AGE_DAYS, RS.WINDOW_DAYS, RS.CLICK_DAYS, RS.MIN_SIM >= 0.3), (30, 28, 90, True))
     src = (ROOT / "scripts" / "retire_stale.py").read_text(encoding="utf-8")
     check("近い記事がはっきりある組から先に統合する", 'return sorted(out, key=lambda r: -r["sim"])' in src, True)
     check("一次性の整理（--quality）は今までどおり90日の実績で見る", "stats_by[sid] = page_stats(cfg)" in src, True)
     wk = (ROOT / ".github" / "workflows" / "weekly-optimize.yml").read_text(encoding="utf-8")
     # 2026-11-15 運用者の承認で、台帳の語への付け替えと統合を合わせて週6本へ（gates_history_h173_top_rank_ledger）
     check("週の本数は付け替えと統合を合わせて6本まで（AI が書き、検算に外れたら戻す）",
-          "retire_stale.py --retarget --write --limit 6" in wk, True)
+          "retire_stale.py --retarget --write --limit 10" in wk, True)

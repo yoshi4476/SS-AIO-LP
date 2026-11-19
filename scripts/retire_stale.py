@@ -27,7 +27,7 @@
 付け替えと統合を合わせて週 WEEK_LIMIT 本まで。
 
   python scripts/retire_stale.py --retarget --dry-run            # 対象の数と振り分けを見る（GSC を読めなければ控えで代える）
-  python scripts/retire_stale.py --retarget --write --limit 6    # 当てる（週次）
+  python scripts/retire_stale.py --retarget --write --limit 10   # 当てる（週次）
 出す印: RETARGET_OK=yes / STALE=<本> / RETARGET=<本> / MERGE=<本> / KEEP=<本> / RETARGETED=<本> / MERGED=<本>
 
 書き直しを2回しても別工程の採点（score_audit）で一次性が80点に届かない記事も、同じ統合に回す。
@@ -46,11 +46,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-AGE_DAYS = 60        # 公開からこの日数たった記事だけ（順位が落ち着く前に統合しない。article_health の「若い」は35日未満）
+AGE_DAYS = 30        # 公開からこの日数たった記事だけ（2026-11-19 運用者「一ヶ月以内のものは直さなくていい」。前は60日）
 WINDOW_DAYS = 28     # この日数の表示が0なら「いま出ていない」
 CLICK_DAYS = 90      # この日数にクリックがあった記事は、読まれた実績があるので統合しない
 MIN_SIM = 0.35
-WEEK_LIMIT = 6       # 付け替えと統合を合わせた週の本数（前は統合だけで2本。2026-11-15 運用者の承認）
+WEEK_LIMIT = 10      # 付け替えと統合を合わせた週の本数（2026-11-19 運用者の決定。登録済みで表示ゼロが103本。前は6本）
 # 台帳の語は題より短く、同じ主題でも Dice が統合の下限（0.35）に届かない（実データで 0.26〜0.49）。
 # 主題の違う組（医療広告ガイドラインの記事 → ホームページ制作の外注）は 0.19 だった
 RETARGET_SIM = 0.25

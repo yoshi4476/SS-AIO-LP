@@ -1242,9 +1242,10 @@ jobs:
           echo "$out" | tail -8
           echo "$out" | grep '^要対応' >> automation/logs/findings.txt || true
           # AI を呼ぶのは表示ゼロの整理（retire_stale → 付け替えは auto_rewrite の retarget・統合は auto_merge）と鮮度の書き直しだけ。
-          # 鍵が残っていればそこだけ飛ばす。表示ゼロの整理は台帳の語への付け替えと統合を合わせて週6本まで（2026-11-15 運用者の承認。前は統合2本）
+          # 鍵が残っていればそこだけ飛ばす。表示ゼロの整理は台帳の語への付け替えと統合を合わせて週10本まで（2026-11-19 運用者の決定。前は6本）。
+          # 4本増えた分、持ち時間を30分から50分にする（週次の上限は240分）
           if python scripts/agent_guard.py --verify; then
-            python scripts/retire_stale.py --retarget --write --limit 6 --budget-min 30 2>&1 | tail -12 || true
+            python scripts/retire_stale.py --retarget --write --limit 10 --budget-min 50 2>&1 | tail -12 || true
             # 書き直しを2回しても一次性が80点に届かない記事を、同じ手法・業種の近い記事へ（表示・クリックが少ないものだけ）
             python scripts/retire_stale.py --quality --write --limit 1 --budget-min 15 2>&1 | tail -8 || true
             python scripts/auto_rewrite.py --write --kind fresh --limit 2 --budget-min 12 2>&1 | tail -6 || true
