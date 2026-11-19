@@ -147,7 +147,7 @@ jobs:
           # 3つは互いに関係ないので同時に入れる。止めるのは claude が入らなかったときだけ（前と同じ）
           pip install --quiet -r requirements.txt > /tmp/pip.log 2>&1 & p1=$!
           # 図解の検査（image_check）が日本語フォントを使う。無いと門が途中で止まる（2026-10-05 に自動修復が提案）
-          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /dev/null 2>&1 & p2=$!
+          CI_APT_TRIES=1 bash scripts/ci_apt.sh fonts-noto-cjk > /dev/null 2>&1 & p2=$!
           npm install -g --prefer-offline @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 & p3=$!
           wait $p1 || cat /tmp/pip.log
           wait $p2 || true

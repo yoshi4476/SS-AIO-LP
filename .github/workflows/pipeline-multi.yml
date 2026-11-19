@@ -358,7 +358,7 @@ jobs:
         run: |
           # 3つは互いに関係ないので同時に入れる（順に入れて約35秒・遅い日は5分）。1つでも失敗したら止める
           pip install -q -r requirements.txt yt-dlp==2026.10.21 > /tmp/pip.log 2>&1 & p1=$!
-          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1 & p2=$!
+          bash scripts/ci_apt.sh fonts-noto-cjk > /tmp/apt.log 2>&1 & p2=$!
           npm install -g --prefer-offline @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 & p3=$!
           # AI っぽい言い回しの検出（textlint。版は automation/textlint/package-lock.json で固定）。公開前の品質ループが使う。
           # 入らなくても記事は止めない（品質ループは言い回しの直しを飛ばして採点を続ける）

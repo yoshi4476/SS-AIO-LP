@@ -59,10 +59,10 @@ jobs:
             # 写せなければ apt で入れる（控えが壊れていても図は外れない）
             ( ( { sudo mkdir -p /usr/share/fonts/opentype && sudo cp -r ~/.fonts-ci/noto /usr/share/fonts/opentype/ \
                   && [ -f /usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc ]; } \
-                || { sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk; } ) > /tmp/apt.log 2>&1
+                || bash scripts/ci_apt.sh fonts-noto-cjk ) > /tmp/apt.log 2>&1
               echo $? > /tmp/apt.rc ) < /dev/null > /dev/null 2>&1 &
           else
-            ( (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1; rc=$?
+            ( bash scripts/ci_apt.sh fonts-noto-cjk > /tmp/apt.log 2>&1; rc=$?
               if [ "$rc" = 0 ] && [ -d /usr/share/fonts/opentype/noto ]; then
                 rm -rf ~/.fonts-ci && mkdir -p ~/.fonts-ci && cp -r /usr/share/fonts/opentype/noto ~/.fonts-ci/ && touch ~/.fonts-ci/done
               fi

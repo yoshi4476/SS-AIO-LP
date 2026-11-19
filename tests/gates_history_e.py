@@ -43,6 +43,7 @@ OUT_AFTER = re.compile(r"外注|代行|委託|コンサル|専門会社|制作�
 # 1記事・1文字・1回あたりの単価は月額の相場と別の単位
 PER = re.compile(r"文字単価|字の|1記事|1本|記事単価|あたり|1回|単発|スポット")
 INH = re.compile(r"内製|自社対応|自社で|自分で|社内|ツール|無料")
+INH_SUBJ = re.compile(r"(?:内製|自社対応)[^、，。外注代行委託]{0,10}の相場")
 SVC = re.compile(r"AIO|SEO|LLMO|GEO|AI検索|AI Overview|AIモード|記事制作|コンテンツ", re.I)
 # 別の商材・別の単位の金額（MEO・反響対応・HP制作・セミナー・広告費・ツールのドル建て・初期費用・記事単価）
 # 記事作成ツールは data/price_ranges.json の article_tool（月4〜5万円前後）。外部委託の額ではない
@@ -115,8 +116,12 @@ def low_claims(text):
                 after = re.split(r"[、，。]", u[m.end():])[0]
                 if not is_row and INH.search(after) and not OUT_AFTER.search(after):
                     continue
-                lo = max([x.end() for x in OUT.finditer(pre)] or [-1])
                 li = max([x.end() for x in INH.finditer(pre)] or [-1])
+                # 「相場」は主語ではない。節が内製の語で始まる「内製＋有料ツールの相場は月数万〜」は内製の相場（2026-11-19）。
+                # 「外注と内製の相場」「社内に担当がいない場合の相場」「…、相場は」は外注の相場として拾う
+                seg = re.split(r"[、，。]", pre)[-1].strip().lstrip("|").strip()
+                inh_subj = bool(INH_SUBJ.match(seg)) and "ない" not in seg
+                lo = max([x.end() for x in OUT.finditer(pre) if not (x.group() == "相場" and inh_subj)] or [-1])
                 if lo < 0 and li < 0 and not is_row and OUT_AFTER.search(re.split(r"[、，。]", u[m.end():])[0]):
                     lo = 0
                 if lo < 0 and li < 0:
@@ -163,8 +168,16 @@ def test_hist_price_ranges_consistent():
            "SEOコンサルは月額十数万円が中心です。",
            "SEOは自社対応中心で月1〜5万円、外注では月10〜30万円が目安です。",
            "| フルサポート型 | 月15万〜30万円 | MEO・SEO・AI検索を一括で任せたい医院 |",
-           "  - q: SEOコンサルの費用相場はいくらですか？\n    a: 月額5万〜20万円が目安です。"]
+           "  - q: SEOコンサルの費用相場はいくらですか？\n    a: 月額5万〜20万円が目安です。",
+           "AIO対策の相場は月5万円です。",
+           "ツールより外注の相場は月5万円です。",
+           "外注と内製の相場は月5万円です。",
+           "社内に担当がいない場合の相場は月5万円です。",
+           "無料の診断もありますが、相場は月5万円です。",
+           "ツールを使わない場合、相場は月5万円です。",
+           "| 外注・内製の相場 | 月5万円 |"]
     good = ["内製＋有料ツールは月数万〜数十万円です。",
+            "内製＋有料ツールの相場は月数万〜数十万円です（2026年10月時点の相場の見立て）。",
             "AIO対策は、内製＋有料ツールなら月数万〜数十万円、外部委託・部分支援は月数十万円〜です。",
             "| 内製＋有料ツール併用 | 数万〜数十万円＋担当者の人件費 |",
             "DolphinX は月額99ドルのツールで、AI引用を自動で記録します。",

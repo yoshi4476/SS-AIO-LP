@@ -109,7 +109,7 @@ def test_deploy_skips_only_identical_output():
           ("steps.fonts.outputs.cache-hit != 'true'" in save["if"], "steps.build.outputs.fonts == 'ready'" in save["if"],
            save.get("continue-on-error")), (True, True, True))
     check("控えを写せない・中身が欠けていれば apt で入れる（図を外さない）",
-          ("NotoSansCJK-Bold.ttc" in pre, pre.count("sudo apt-get install -y -qq fonts-noto-cjk")), (True, 2))
+          ("NotoSansCJK-Bold.ttc" in pre, pre.count("bash scripts/ci_apt.sh fonts-noto-cjk")), (True, 2))
     check("控えの保存は作り直しの後（フォントを入れ終えた後）",
           names.index("日本語フォントを控える") > names.index("原稿から作り直す"), True)
     check("日本語フォントを入れ終えてから作り直す",

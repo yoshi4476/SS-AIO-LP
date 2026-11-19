@@ -376,7 +376,7 @@ jobs:
           HUB_SECRET: ""
         run: |
           # 検算の門は図を描く（日本語フォントが要る）。無いと門が途中で止まり、改善の回が毎月捨てられていた（2026-11-01）
-          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1 & apt=$!
+          CI_APT_TRIES=1 bash scripts/ci_apt.sh fonts-noto-cjk > /tmp/apt.log 2>&1 & apt=$!
           npm install -g @anthropic-ai/claude-code@2.1.302 || true
           wait $apt || echo "::warning::日本語フォントを入れられませんでした（改善の検算が止まります）"
           if ! python scripts/agent_guard.py --verify; then

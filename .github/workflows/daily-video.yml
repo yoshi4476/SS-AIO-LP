@@ -84,7 +84,7 @@ jobs:
       - name: 準備
         run: |
           # apt・npm・pip は互いに関係ないので同時に入れる（順に入れて約70秒・遅い日は6分）
-          (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk) > /dev/null 2>&1 & apt=$!
+          CI_APT_TRIES=1 bash scripts/ci_apt.sh ffmpeg fonts-noto-cjk > /dev/null 2>&1 & apt=$!
           # 掛け合いの台本を書かせる（動かなければスライド形式に落ちる）
           npm install -g --prefer-offline @anthropic-ai/claude-code@2.1.302 > /dev/null 2>&1 & npm=$!
           pip install --quiet -r requirements.txt edge-tts

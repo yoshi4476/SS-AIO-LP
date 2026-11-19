@@ -564,7 +564,7 @@ jobs:
         run: |
           # 3つは互いに関係ないので同時に入れる（記事の枠と同じ形）。1つでも失敗したら止める
           pip install -r requirements.txt > /tmp/pip.log 2>&1 & p1=$!
-          (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk) > /tmp/apt.log 2>&1 & p2=$!
+          bash scripts/ci_apt.sh fonts-noto-cjk > /tmp/apt.log 2>&1 & p2=$!
           npm install -g --prefer-offline @anthropic-ai/claude-code@2.1.302 > /tmp/npm.log 2>&1 & p3=$!
           ok=1
           wait $p1 || { cat /tmp/pip.log; ok=0; }
