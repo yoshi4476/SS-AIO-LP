@@ -1455,6 +1455,23 @@ def _drop_rejects(cands, S, sheet_fate):
     return pre
 
 
+def stock_have(todo, buyer_only):
+    """積む本数を決めるときに「今ある」と数える未着手。買い手の語が足りなくて組む回は、買い手の語だけを数える。
+    全体（59本）で数えると、買い手の語が3本でも「目標36本に届いている」として0本しか積まず、
+    その月の1回を使い切っていた（2026-11-12 の AI集客ラボ。月末まで買い手でない語を書いた）"""
+    return [k for k in todo if kw_intent.is_buyer(k)] if buyer_only else list(todo)
+
+
+def _keep_buyers(cands, sheet_fate):
+    """買い手の語でない候補を外す（買い手の語が足りなくて組む回）。外した件数"""
+    out = [k for k, c in cands.items() if not kw_intent.is_buyer(c["kw"])]
+    for k in out:
+        if "sheet" in cands[k]["src"]:
+            sheet_fate[k] = "買い手の語でない"
+        del cands[k]
+    return len(out)
+
+
 def _copy(cands):
     return {k: dict(c, src=set(c["src"])) for k, c in cands.items()}
 
@@ -1544,7 +1561,11 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
     st = stock(site_id)
     need_m = month_need(site_id)
     target = math.ceil(need_m * STOCK_FACTOR)
-    limit = MAX_PLAN if replace else (max(0, target - len(st["todo"])) if st["ok"] else target)
+    import hub_client
+    # 買い手の語を先に書く社は、買い手の語の在庫で組むかを決める（stock_for_plan）。積む本数と候補もそれに合わせる
+    buyer_only = if_needed and not replace and not main_first and hub_client._buyer_first(site_id)
+    have = stock_have(st["todo"], buyer_only)
+    limit = MAX_PLAN if replace else (max(0, target - len(have)) if st["ok"] else target)
     rule, share, main_name = main_rule(site_id)
     have_main = sum(1 for k in st["todo"] if rule and rule(k))
     need_main = 0 if replace or not rule else min(limit, max(0, math.ceil(share / 100 * (len(st["todo"]) + limit)) - have_main))
@@ -1553,7 +1574,8 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
             print("   主力の決まり（scheme_mix / category_mix）が無いため、主力だけを積むことはできません")
             return
         limit = need_main = main_first
-    stock_line = (f"在庫: 未着手 {len(st['todo'])}本 ／ 1か月分 {need_m}本 ／ 積む目標 {target}本（1か月分×{STOCK_FACTOR}）"
+    stock_line = (f"在庫: 未着手 {len(st['todo'])}本" + (f"（うち買い手の語 {len(have)}本。買い手の語だけを積む）" if buyer_only else "")
+                  + f" ／ 1か月分 {need_m}本 ／ 積む目標 {target}本（1か月分×{STOCK_FACTOR}）"
                   f" → 今回 {limit}本まで積む" if st["ok"] else f"在庫: 台帳を読めないため {limit}本まで組む（積む前に管制塔が重複を弾く）")
     print("   " + stock_line)
     if limit <= 0:
@@ -1569,6 +1591,8 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
     arts = site_articles(site_id)
     to_rw, blocked = route_proven(site_id, cands, owned, arts)
     rewrites = rewrite_targets(site_id, arts, to_rw)
+    if buyer_only:
+        print(f"   買い手の語でない候補 {_keep_buyers(cands, sheet_fate)}件を外し、残り {len(cands)}件から選びます")
     # 足りるかを、検索数を取る前に見積もる（検索数を取る語は通る前提で数える。多めに見て2倍に届かなければ予備を使う）
     trial = _copy(cands)
     pending = set(lookup_list(trial))
@@ -1601,6 +1625,8 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
             if k not in cands:
                 cands[k] = c
         _drop_rejects(cands, S, sheet_fate)
+        if buyer_only:
+            _keep_buyers(cands, sheet_fate)
         fill_volume(cands)
         picked, dropped = choose(cands, S, site_id, limit=limit, main=(rule, need_main), ledger=st["keys"],
                                  owned=owned, floor=not replace)
@@ -1641,6 +1667,10 @@ def run(site_id, deep, replace, if_needed=False, main_first=0):
         print("     %s %-30s 月間%-5s KD%-3s 意図%+d 出どころ:%s%s" % (
             c["priority"], c["kw"][:30], c.get("vol", "—"), c.get("kd", "—"), c["intent"], primary_src(c),
             "（4〜30位）" if c.get("proven") else ""))
+    # 候補そのものが尽きた回は、翌日組み直しても同じ結果でラッコを使うだけなので、月の1回は済んだことにして知らせる
+    if buyer_only and not picked:
+        print(f"要対応: 買い手の語を積めませんでした（{_S.public_id(site_id)}。候補が尽きています。"
+              "sites/<id>.json の kw_seeds.targets に頼む先を探す語を足してください）")
     if DRY:
         return
     if replace:
