@@ -224,7 +224,7 @@
 "modified": "2026-09-15"
 },
 "btob-cvr-kaizen": {
-"hash": "84491e364fd981025104013cf05b9ea9",
+"hash": "1015c90c182c033434a1dc180f976aec",
 "modified": "2026-08-05"
 },
 "btob-lead-kakutoku-hoho": {
@@ -252,7 +252,7 @@
 "modified": "2026-09-11"
 },
 "clinic-ai-kensaku-taisaku": {
-"hash": "0be630fd542274821aa9d377af27fdc8",
+"hash": "e88fc672e614264b188dd04620c01e20",
 "modified": "2026-09-01"
 },
 "clinic-chiikimei-kensaku-joui": {
@@ -292,7 +292,7 @@
 "modified": "2026-11-16"
 },
 "clinic-kaigyou-shukyaku-junbi": {
-"hash": "42d1f35906de6214a082be5fe6f696e2",
+"hash": "b518ef704e4c08bfeb5ab063a4c239a7",
 "modified": "2026-11-04"
 },
 "clinic-kaigyou-yarikata": {
@@ -460,7 +460,7 @@
 "modified": "2026-09-26"
 },
 "haisha-shukyaku-iriguchi": {
-"hash": "05a6976a0bf7763271fde511681cf363",
+"hash": "6b8fa1d9ce95f618305cca729d30ba31",
 "modified": "2026-11-19"
 },
 "inbound-inshokuten-ai-kensaku": {
@@ -772,8 +772,12 @@
 "modified": "2026-08-31"
 },
 "shika-kaigyou-hiyou": {
-"hash": "ce36e44c67e0a473d85acdc490e90225",
+"hash": "0bd7f08b2401f0cc011713662bc54090",
 "modified": "2026-09-09"
+},
+"shika-kaigyou-shukyaku-junbi": {
+"hash": "2cd5d6c59dd0df063302d0b023f322c3",
+"modified": "2026-11-20"
 },
 "shika-llmo-taisaku": {
 "hash": "0d611b222df875ebc4f0e0307e191811",
@@ -796,7 +800,7 @@
 "modified": "2026-10-06"
 },
 "shiko-jirei-kakikata": {
-"hash": "2402374c5ecba38e0278011a2454c8fa",
+"hash": "3399f627187c119bf372a542bd27a0cd",
 "modified": "2026-08-06"
 },
 "shiryoseikyu-fuyasu-hoho": {

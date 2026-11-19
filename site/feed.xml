@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-19T00:00:00+09:00</updated>
+  <updated>2026-11-20T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>歯科開業の集客準備で外す3つのNG｜口コミ0件の開業日に備える</title>
+    <link href="https://ai.7senses.co.jp/aio/shika-kaigyou-shukyaku-junbi/"/>
+    <id>https://ai.7senses.co.jp/aio/shika-kaigyou-shukyaku-junbi/</id>
+    <updated>2026-11-20T00:00:00+09:00</updated>
+    <summary>歯科開業の集客準備は、開業の3か月前に自費の料金を決め、料金と治療説明のページを6週間前までに公開する作業です。集客の準備の相談を受けた歯科医院では、開業後3か月の新患は月40人で、うちWebから来た人は15人でした。順番とNG、頼むかの基準を解説します。</summary>
+  </entry>
   <entry>
     <title>歯医者の集客はポータル任せで失敗？AIが出典に選ぶ2つの入口</title>
     <link href="https://ai.7senses.co.jp/aio/haisha-shukyaku-iriguchi/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/clinic-erabareru-homepage/</id>
     <updated>2026-11-04T00:00:00+09:00</updated>
     <summary>クリニックの選ばれるホームページとは、ポータルやAIで候補を絞った患者が受診を決められる公式サイトです。当社が4つのAIの出典2,362件を数えた調査では、費用や症状を調べる質問の回答の77.4%が公式サイトを出典にしていました。負ける5つの落とし穴と直す順番を解説します。</summary>
-  </entry>
-  <entry>
-    <title>クリニック開業の集客準備で外す3つのNG｜Webは開業6週間前に公開</title>
-    <link href="https://ai.7senses.co.jp/aio/clinic-kaigyou-shukyaku-junbi/"/>
-    <id>https://ai.7senses.co.jp/aio/clinic-kaigyou-shukyaku-junbi/</id>
-    <updated>2026-11-04T00:00:00+09:00</updated>
-    <summary>クリニック開業の集客準備は、開業日から逆算してホームページを6週間前までに公開し、検索とAIに先に見つけてもらう作業です。当社の自社3サイト372本の集計では、公開28〜41日の記事の96.2%が検索に出ていました。準備の順番と外しやすいNGを解説します。</summary>
   </entry>
 </feed>

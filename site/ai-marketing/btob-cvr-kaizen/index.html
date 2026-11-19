@@ -172,6 +172,16 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
    "mentions": [
     {
      "@type": "Thing",
+     "name": "ChatGPT",
+     "sameAs": "https://ja.wikipedia.org/wiki/ChatGPT"
+    },
+    {
+     "@type": "Thing",
+     "name": "Gemini",
+     "sameAs": "https://gemini.google.com/"
+    },
+    {
+     "@type": "Thing",
      "name": "検索エンジン最適化（SEO）",
      "sameAs": "https://ja.wikipedia.org/wiki/%E6%A4%9C%E7%B4%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E6%9C%80%E9%81%A9%E5%8C%96"
     }
@@ -216,7 +226,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "@type": "HowToStep",
      "position": 2,
      "name": "離脱率が最も高い箇所を1つ選んで直す",
-     "text": "全部を一度に変えず、最も離脱率が高い1箇所（多くはフォーム項目）から着手します。訪問数が少ないサイトはAB比較に時間がかかるため、比較期間を長めに確保する意識も必要です。"
+     "text": "全部を一度に変えず、最も離脱率が高い1箇所（多くはフォーム項目）から着手します。訪問数が少ないサイトはAB比較に時間がかかるため、比較期間を長めに確保してください。"
     },
     {
      "@type": "HowToStep",
@@ -242,7 +252,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "BtoBのCVR平均値はどのくらいですか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "海外調査ではLPの種類や業種で幅があり、1〜3.5%程度に収まるケースが多いです。"
+      "text": "海外のFirst Page Sage社の調査（83社）では、ページ種別ごとに1.1〜3.5%の幅があります。"
      }
     },
     {
@@ -250,7 +260,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "CVRを改善すればリード数は必ず増えますか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "訪問数が一定であれば増えます。ただし流入経路の見直しも並行が必要です。"
+      "text": "訪問数が一定なら増える可能性が高いですが、必ずではありません。流入経路の見直しも並行してください。"
      }
     },
     {
@@ -266,7 +276,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
      "name": "CVR改善とSEO・LLMO対策はどちらを優先すべきですか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "集客と受け皿は両輪です。流入があるページから優先的にCVR改善してください。"
+      "text": "すでに流入があるページはCVR改善を先に、流入がほぼ無いページは集客を先に進めてください。"
      }
     },
     {
@@ -362,14 +372,12 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <h2 id="btob-cvr">BtoB CVR改善とは</h2>
 <p>BtoB CVR改善とは、Webサイトやフォームの構成を見直し、訪問者が離脱せず問い合わせまで到達できるようにする活動です。</p>
 <aside class="inline-tool" aria-label="AIでの見え方の確認" data-tool="url_check"><p class="it-head">御社のサイト、ChatGPTやGoogleのAIに読まれていますか？</p><p class="it-sub">URLを入れると、AIのクローラーが入れるか・内容を読めるかを無料で確かめられます（登録不要）</p><form class="it-form" action="/tools/url-check/" method="get"><input type="hidden" name="src" value="article_inline"><input type="hidden" name="from" value="/ai-marketing/btob-cvr-kaizen/"><input type="url" name="url" required inputmode="url" placeholder="https://" aria-label="ホームページのURL"><button type="submit" class="btn btn-primary" data-cta="article_inline_url_check">確かめる</button></form></aside>
-<p>実測の参考として、当社は3つの自社メディアを運営し、記事からの問い合わせ導線を実際に運用しています（出典: 自社の運用）。</p>
 <div class="definition-box"><span class="term">CVR（コンバージョン率）とは</span>、LPやサイトへの訪問数のうち、資料請求・問い合わせ・トライアル申込などの成果に至った割合を指します。計算式は「CV数÷セッション数×100」で、集客施策とは独立して評価すべき指標です。</div>
 
 <p><mark>集客とCVR改善は別の課題として扱う必要があります</mark>。広告やSEOで訪問数を増やす努力をしても、LPやフォームに離脱要因が残っていれば、増えた訪問数の大半がそのまま流出します。私たちが相談を受けるBtoB企業でも、「広告費を増やしたのに商談数が変わらない」というケースの多くは、集客側ではなく受け皿側に手つかずの改善余地が残っていました。</p>
-<p>私も支援先のヒアリングで実際のフォームを一緒に開いてみると、部署名や電話番号まで必須項目にしたまま数年間放置されているケースを何度も見てきました。担当者自身が「これが離脱の原因になっている」と気づいていないことも多く、外部の目で棚卸しするだけで改善点が見つかることは珍しくありません。</p>
+<p>当社の判断では、改修の前に実際のフォームを開き、必須項目を1つずつ棚卸しするのが確実です。部署名や電話番号まで必須のまま放置されていると、担当者自身が離脱の原因だと気づきにくいためです。</p>
 <h2 id="btob-cvr_1">なぜ今、BtoB CVR改善に取り組む必要があるのか</h2>
 <p>BtoB CVR改善が重要なのは、商談前の比較検討がオンライン上でほぼ完結し、営業が介在する余地が減っているためです。</p>
-<p>当社は3つの自社メディアを運営し、記事から問い合わせまでの導線を実際に運用しています。<strong>改善の最初の一手は、記事の下に置くCTAの行き先を1つに絞ること</strong>でした。</p>
 <p><a href="https://www.gartner.com/en/sales/insights/b2b-buying-journey" target="_blank" rel="noopener">Gartnerの調査</a>によると、<strong>B2B購買担当者が営業担当者と対面する時間は、購買プロセス全体のわずか17%</strong>にとどまります。複数ベンダーを比較している場合、1社あたりに割ける時間はさらに5〜6%まで縮小し、残りの多くの時間は独自リサーチ（27%）に充てられています。</p>
 <p>つまり、営業が接触する前の段階で、LPやサイトの情報だけで比較候補に残れるかどうかが決まってしまう構造です。この段階で離脱されると、営業が優秀でも挽回する機会自体が生まれません。</p>
 <p><a href="https://firstpagesage.com/seo-blog/b2b-landing-page-conversion-rates/" target="_blank" rel="noopener">First Page Sage社の2026年レポート</a>（海外83社・27業種のBtoB企業を分析）では、<strong>ページ種別ごとの平均CVRに大きな差</strong>が見られます。国内企業とは母集団が異なるため、絶対値ではなく傾向として参考にしてください。</p>
@@ -419,7 +427,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <div class="caution-box"><span class="box-title">注意: 訪問数だけを追う改善はNG</span><br>訪問数や表示回数だけを見て満足していると、離脱要因を放置したまま広告費だけが積み上がります。CVRという受け皿側の指標を必ず併せて確認してください。</div>
 
 <h2 id="btob-cvr5">BtoB CVR改善の5つの施策</h2>
-<p>CVR改善の主な施策は、フォーム最適化・LP構成の見直し・証拠情報の追加など5つに整理できます。</p>
+<p>CVR改善の主な施策は、フォーム最適化・LP構成の見直し・事例と数値の追加・CTA導線の改善・チャット対応の5つです。</p>
 <p>資料請求という着地点そのものを増やす施策は、<a href="/ai-marketing/shiryoseikyu-fuyasu-hoho/">資料請求を増やす方法とは？6つの施策と見直す順序</a>にまとめています。</p>
 <p><a href="https://www.formstack.com/blog/form-conversion-tips" target="_blank" rel="noopener">Formstack社が紹介する調査</a>では、<strong>フォームから項目を1つ減らすだけでコンバージョンが50%増加した</strong>事例が報告されています。項目数を絞るほど入力の心理的な負担が下がるためです。</p>
 <div class="table-wrap"><table>
@@ -467,9 +475,9 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 2. 任意項目にしても質を保てないか（保てるなら任意化）
 3. 入力の手間に対して得られる情報の価値が見合っているか
 </code></pre>
-<p>小さな見直しの積み重ねが、離脱率という数字にそのまま跳ね返ってくる仕組み。</p>
+<p>小さな見直しの積み重ねは、離脱率という数字にそのまま表れます。</p>
 <h2 id="btob-cvrkpi">BtoB CVR改善の効果を測るKPIの見方</h2>
-<p>CVR改善の効果は、CVR単体ではなくファネル全体の数値で評価する必要があります。</p>
+<p>CVR改善の効果は、CVR単体ではなくファネル全体の数値で評価してください。</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -502,6 +510,7 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 </tbody>
 </table></div>
 <p><strong>CVRだけが上がっても、フォーム完了率や商談化率が伸びなければ質の低いリードが増えただけ</strong>の可能性があります。数を追う指標と質を追う指標を必ずセットで確認してください。</p>
+<p>2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え5件のうち、『KPI』に触れたものは0件でした。AIの答えだけではKPI設計が抜けやすいため、上の表で自社の指標を確かめてから使ってください。</p>
 <p>計測には、アクセス解析ツールに加えてヒートマップ・録画型のツールを併用すると、どの段階で離脱しているかを画面上で直接確認できます。数値だけでは分からない「入力欄で手が止まっている」といった挙動が見えると、次の改修の優先順位が立てやすくなります。</p>
 <p>改善後の反響をリード獲得の他施策と組み合わせる方法は<a href="/ai-marketing/btob-lead-kakutoku-hoho/">BtoBリード獲得の方法とは？</a>でも解説しています。</p>
 <h2 id="aibtob-cvr">AI検索時代のBtoB CVR改善で見られるポイント</h2>
@@ -509,7 +518,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <p>近い論点を<a href="/aio/saas-hikaku-kiji-taisaku/">SaaS比較記事で不利にならない5つの打ち手</a>で扱っています。</p>
 <p>AI回答経由でLPに来る訪問者は、<mark>一般的な会社説明ではなく「自社の状況に当てはまる根拠」を求めて訪問しています</mark>。この訪問者に一般論のLPを見せると、比較検討がすでに進んでいる分、離脱の判断も速くなります。</p>
 <p>AI検索対策の基礎は<a href="/aio/btob-llmo-taisaku/">BtoB AI検索対策（LLMO）とは？</a>、指名検索からの流入強化は<a href="/aio/saas-shimei-kensaku-fuyashikata/">SaaS指名検索の増やし方｜AI時代に効く5つの施策</a>で詳しく解説しています。</p>
-<p>これはCVR改善の考え方自体を変えるものではありません。フォーム最適化や証拠情報の追加といった従来の施策に加え、<mark>AI経由の訪問者が最初に見る情報に数値ファクトと事例を厚く配置する</mark>ことが、これまで以上に重要になっています。</p>
+<p>AI経由の訪問者が増えても、CVR改善の考え方自体は変わりません。フォーム最適化や証拠情報の追加といった従来の施策に加え、<mark>AI経由の訪問者が最初に見る情報に数値ファクトと事例を厚く配置する</mark>ことが、これまで以上に重要になっています。</p>
+<p>当社は2026年10月に、3つのAI（ChatGPT・Gemini・Claude）へIT・SaaSに関する質問を50問聞き、答えの出典959件を種類ごとに数えました（<a href="https://ai.7senses.co.jp/research/saas-ai-sources/">業種調査</a>）。IT企業を探す質問では、出典の19.3%が比較・口コミサイト、36.6%がIT企業の公式サイトでした。</p>
+<p>同じ調べで、IT企業を探す質問で、IT企業の公式サイトを出典にした回答は90.0%、比較・口コミサイトを出典にした回答は60.0%でした。AI経由の訪問者はまず公式サイトに着地しやすいため、公式サイトの事例ページを先に整えるのが当社の判断です。</p>
+<p>同じ調べでは、ほかの論点を聞いた答え5件のうち、『AI検索時代』に触れたものは0件でした。AIの答えだけでAI経由の訪問者向けの設計を決めず、自社の流入経路を計測して確かめてください。</p>
 <p>流入経路別にファーストビューを出し分けられるサイトなら、AI経由の訪問者には事例ページへ誘導できます。検索広告経由の訪問者には料金・機能ページへ誘導する調整も、CVRを底上げする現実的な打ち手です。</p>
 <h2 id="btob-cvr3_1">BtoB CVR改善を始める3ステップ</h2>
 <p>始め方は、現状計測・1箇所改修・比較検証という3ステップで進めると迷いません。</p>
@@ -518,7 +530,15 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <h3 id="1-lpcvr">ステップ1: LPとフォームのCVR・離脱率を計測する</h3>
 <p>ページ単位・フォーム項目単位で離脱率を計測し、感覚ではなく数字でボトルネックの場所を特定します。</p>
 <h3 id="2-1">ステップ2: 離脱率が最も高い箇所を1つ選んで直す</h3>
-<p>全部を一度に変えず、最も離脱率が高い1箇所（多くはフォーム項目）から着手します。訪問数が少ないサイトはAB比較に時間がかかるため、比較期間を長めに確保する意識も必要です。</p>
+<p>全部を一度に変えず、最も離脱率が高い1箇所（多くはフォーム項目）から着手します。訪問数が少ないサイトはAB比較に時間がかかるため、比較期間を長めに確保してください。</p>
+<p>仮に月のフォーム到達が100件でフォーム完了が10件なら、完了率は10%です。この規模では1件の増減で完了率が10%動くため、AB比較は見送り、2〜4週間ほど前後比較で傾向を見てください。到達が十分に多いなら、AB比較に進めます。</p>
+<p>施策は条件で選び分けます。次のとおりです。</p>
+<ul>
+<li>フォームの必須項目が5つを超えているなら、EFOを先に行う</li>
+<li>事例がまだ1本も無いなら、チャットより事例の追加を先に行う</li>
+<li>更新の権限や担当者が確保できないなら、チャットは見送る</li>
+<li>流入がほぼ無いページは、CVR改善より集客を先に進める</li>
+</ul>
 <h3 id="3">ステップ3: 改修前後を比較し効果の出た施策を広げる</h3>
 <p><strong>改修前後のCVRを比較し、効果が出た施策を他のLPにも横展開する</strong>ことで、改善のスピードが加速していきます。</p>
 <div class="cta-box"><p>自社のLPやフォームにどれだけ改善余地があるか、無料で確認しませんか。</p><a class="cta-button" href="/tools/url-check/" data-cta="article_body_url_check" data-ab="body_scan" data-ab-b="AIと検索に読まれているか無料で調べる">御社のサイトを30秒で無料診断する</a></div>
@@ -526,10 +546,10 @@ window.addEventListener('load',function(){setTimeout(function(){var s=document.c
 <h2 id="_1">よくある質問</h2>
 <div class="faq">
 <details><summary>BtoB CVR改善で最初に着手すべき施策は何ですか？</summary><p class="faq-a">フォーム項目を減らすEFOが低コストかつ即効性が高く、最初の一手に向いています。</p></details>
-<details><summary>BtoBのCVR平均値はどのくらいですか？</summary><p class="faq-a">海外調査ではLPの種類や業種で幅があり、1〜3.5%程度に収まるケースが多いです。</p></details>
-<details><summary>CVRを改善すればリード数は必ず増えますか？</summary><p class="faq-a">訪問数が一定であれば増えます。ただし流入経路の見直しも並行が必要です。</p></details>
+<details><summary>BtoBのCVR平均値はどのくらいですか？</summary><p class="faq-a">海外のFirst Page Sage社の調査（83社）では、ページ種別ごとに1.1〜3.5%の幅があります。</p></details>
+<details><summary>CVRを改善すればリード数は必ず増えますか？</summary><p class="faq-a">訪問数が一定なら増える可能性が高いですが、必ずではありません。流入経路の見直しも並行してください。</p></details>
 <details><summary>フォームの入力項目はいくつまで減らすべきですか？</summary><p class="faq-a">名前・会社名・メールアドレスなど3〜5項目程度が目安とされています。</p></details>
-<details><summary>CVR改善とSEO・LLMO対策はどちらを優先すべきですか？</summary><p class="faq-a">集客と受け皿は両輪です。流入があるページから優先的にCVR改善してください。</p></details>
+<details><summary>CVR改善とSEO・LLMO対策はどちらを優先すべきですか？</summary><p class="faq-a">すでに流入があるページはCVR改善を先に、流入がほぼ無いページは集客を先に進めてください。</p></details>
 <details><summary>改善の効果はどのくらいの期間で確認できますか？</summary><p class="faq-a">訪問数にもよりますが、2〜4週間ほどでAB比較の傾向が見え始めます。</p></details>
 </div>
 

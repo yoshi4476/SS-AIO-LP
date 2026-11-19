@@ -102,6 +102,8 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 **医院を探す入口ではポータルと医院情報を、調べる入口では自院のサイトの費用と症状のページを整えます。**2つの入口は、整える場所が違います。
 
+あわせて[歯科開業の集客準備で外す3つのNG](/aio/shika-kaigyou-shukyaku-junbi/)もご覧ください。
+
 <figure><img src="/images/haisha-shukyaku-iriguchi/hikaku.png" alt="入口ごとに整えるもの: 医院を探す入口は予約・比較ポータルが主な出典でポータルと地図を整える。費用や症状を調べる入口は医院の公式サイトが主な出典で自院のサイトを整える" loading="lazy"><figcaption>入口ごとに整えるもの</figcaption></figure>
 
 図の中身を表にもまとめます。出典の割合は、上の2つの見出しで紹介した当社の調べの数字です。
