@@ -1,0 +1,1 @@
+{"at": "2026-11-20T00:28:36+00:00", "job": "記事の枠", "site": "corporate", "turns": 57, "sessions": 23, "input_tokens": 114, "output_tokens": 60773, "cache_creation_input_tokens": 437426, "cache_read_input_tokens": 1436169, "models": {"claude-sonnet-5-5": {"input_tokens": 114, "output_tokens": 60773, "cache_creation_input_tokens": 437426, "cache_read_input_tokens": 1436169}}}
