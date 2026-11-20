@@ -1,0 +1,152 @@
+{
+ "v": 2,
+ "slug": "clinic-shukyaku-sekkeizu",
+ "ok": true,
+ "date": "2026-11-21",
+ "questions": [
+  "クリニック集客の設計図について教えてください",
+  "クリニック集客の設計図について、「クリニック集客の設計図とは？」を教えてください",
+  "クリニック集客の設計図について、「なぜMEOかSEOか、どちらか一本では頭打ちになるのか」を教えてください",
+  "クリニック集客の設計図について、「クリニック集客の設計図｜施策の優先順位3ステップ」を教えてください",
+  "クリニック集客の設計図について、「体制と予算で変わる進め方｜内製・部分外部化・フルサポートの選び方」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "クリニック集客の設計図とは？",
+   "words": [
+    "クリニック集客",
+    "設計図"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "なぜMEOかSEOか、どちらか一本では頭打ちになるのか",
+   "words": [
+    "MEO",
+    "SEO",
+    "一本"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "クリニック集客の設計図｜施策の優先順位3ステップ",
+   "words": [
+    "クリニック集客",
+    "設計図",
+    "施策"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "体制と予算で変わる進め方｜内製・部分外部化・フルサポートの選び方",
+   "words": [
+    "フルサポート",
+    "部分外部化",
+    "体制",
+    "予算"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "自由診療・保険診療で変わる設計図の重みづけ",
+   "words": [
+    "自由診療",
+    "保険診療",
+    "設計図"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "クリニック集客を90日で動かすロードマップ",
+   "words": [
+    "クリニック集客",
+    "ロードマップ"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "医療広告ガイドラインで踏み外しやすい注意点",
+   "words": [
+    "医療広告ガイドライン"
+   ],
+   "hits": 4,
+   "of": 5
+  },
+  {
+   "topic": "設計図を実行に移す際によくある失敗3つ",
+   "words": [
+    "設計図",
+    "実行"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "設計図を回し続けるための月次チェック",
+   "words": [
+    "月次チェック",
+    "設計図"
+   ],
+   "hits": 5,
+   "of": 5
+  }
+ ],
+ "official": [
+  {
+   "term": "医療広告ガイドライン",
+   "org": "厚生労働省",
+   "of": 5,
+   "hits": 4
+  }
+ ],
+ "sources": {
+  "athmed.jp": "peer",
+  "cl-mirai-lab.doctorsfile.jp": "portal",
+  "clinic-keiei-lab.com": "peer",
+  "clinic-navi.com": "peer",
+  "clinic.s-suteki.co.jp": "peer",
+  "clinichp.nobu-n.co.jp": "peer",
+  "cotocellar.com": "media",
+  "cyberhorn.co.jp": "peer",
+  "digikar.m3.com": "media",
+  "lany.co.jp": "peer",
+  "leosophia.co.jp": "peer",
+  "local-mp.co.jp": "peer",
+  "m-p-h.jp": "peer",
+  "medicalwebstage.jp": "peer",
+  "n-works.link": "peer",
+  "note.com": "video",
+  "phchd.com": "peer",
+  "prtimes.jp": "media",
+  "rental-jimucho.com": "peer",
+  "sugoyoku.com": "peer",
+  "sungrove.co.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "webridge.co.jp": "peer",
+  "x-umbrella.co.jp": "peer",
+  "yuchuburu.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 0,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 4,
+  "専門家への相談": 0
+ },
+ "chars": 13144,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、厚生労働省の資料にある「医療広告ガイドライン」に触れたものは4件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは期間（◯か月・◯日など）は0件、専門家への相談は0件、費用の金額（◯円）は1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは25件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが3件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
+}
