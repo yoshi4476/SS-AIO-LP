@@ -1968,6 +1968,14 @@ def check(slug, before, before_warns, snap=None, allowed="", terms=(), blocked_o
         if len(after) < len(b) * 0.98:
             return f"本文が減りました（{len(b)}→{len(after)}字）。足す直しのはずです"
 
+    # 表示の決まり（当社の採択率・支援社数・作成代行）は build.py も見るが、build.py はコーポレート・補助金の記事を
+    # 「他サイト」として検査の前に飛ばす。コーポレートの記事の書き直しが「当社は…22社を支援しました」を入れて
+    # 取り込まれた（2026-11-20）。直す前から当たっていた文は数えない（直しが作ったものではない）
+    import legal_claims
+    new_legal = [h for h in legal_claims.find(after) if h not in legal_claims.find(b)]
+    if new_legal:
+        return f"表示の決まりに当たる文が増えました（{new_legal[0][0]}: {new_legal[0][1][:40]}）"
+
     r = sh([sys.executable, "scripts/build.py"], timeout=1800)
     stopped = [ln for ln in (r.stdout or "").splitlines() if "BLOCKED" in ln and ln not in (blocked_ok or ())]
     if r.returncode or stopped:
