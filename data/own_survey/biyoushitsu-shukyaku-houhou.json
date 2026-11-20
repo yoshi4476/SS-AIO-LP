@@ -1,0 +1,101 @@
+{
+ "v": 2,
+ "slug": "biyoushitsu-shukyaku-houhou",
+ "ok": true,
+ "date": "2026-11-20",
+ "questions": [
+  "美容室 集客方法について教えてください",
+  "美容室 集客方法について、「美容院・美容室の集客方法、新規接点とリピート化を両輪で考える」を教えてください",
+  "美容室 集客方法について、「集客導線を整える6つの取り組み」を教えてください",
+  "美容室 集客方法について、「割引訴求と景品表示法の付き合い方」を教えてください",
+  "美容室 集客方法について、「現場でよく見かける3つのつまずき」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "美容院・美容室の集客方法、新規接点とリピート化を両輪で考える",
+   "words": [
+    "リピート化",
+    "新規接点",
+    "美容院"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "集客導線を整える6つの取り組み",
+   "words": [
+    "集客導線"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "割引訴求と景品表示法の付き合い方",
+   "words": [
+    "景品表示法",
+    "割引訴求"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "現場でよく見かける3つのつまずき",
+   "words": [
+    "現場"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "AIに店名を挙げてもらうために今できること",
+   "words": [
+    "AI",
+    "店名"
+   ],
+   "hits": 1,
+   "of": 5
+  }
+ ],
+ "official": [
+  {
+   "term": "景品表示法",
+   "org": "消費者庁",
+   "of": 4,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "delight-solutions.co.jp": "peer",
+  "ikumou-syuukyaku.com": "peer",
+  "jcb.co.jp": "peer",
+  "kaigyo.beautygarage.jp": "peer",
+  "koshikiad.com": "peer",
+  "media.aupay.wallet.auone.jp": "peer",
+  "morinaga.co.jp": "peer",
+  "prtimes.com": "media",
+  "relax-job.com": "portal",
+  "rich-beauty-academy.tokyo": "peer",
+  "salon.tb-id.com": "peer",
+  "salonbrain.co.jp": "peer",
+  "salowin.jp": "peer",
+  "tenpo-shukyaku.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 4,
+  "専門家への相談": 0
+ },
+ "chars": 11766,
+ "claims": [
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。4件の答えのうち、消費者庁の資料にある「景品表示法」に触れたものは0件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えのうち、触れていたのは専門家への相談は0件、費用の金額（◯円）は1件、期間（◯か月・◯日など）は3件でした。",
+  "当社調べでは2026年11月に、1つのAI（Gemini）へ本記事の論点5問を質問し、答え5件を得ました。5件の答えの出典に挙がったページは15件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが1件、ポータル・比較サイトが1件でした。"
+ ]
+}
