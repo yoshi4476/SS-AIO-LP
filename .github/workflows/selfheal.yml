@@ -93,7 +93,40 @@ jobs:
             python3 scripts/notify_slack.py "🚨 $(echo "$out" | grep '^要対応' | head -3)" || true
           fi
 
+  # 取り消しで終わった回が「古い待ち」かを見る。作られてから26時間を過ぎた回は、その日の記事を後の回と救済が
+  # もう書いている。2026-11-20 に、11/11 に作られて工程が1つも始まらないまま9日待った記事の回が取り消され、
+  # heal が直すもの無しで動き「修復の案に直した中身がありません（生成物だけ）」と知らせた（run 44681623442）
+  stale-cancel:
+    # 起動の条件は heal の workflow_run の条件と同じにする（古いかを見るのは、下の手順で取り消しの回だけ）
+    if: >-
+      github.event_name == 'workflow_run' &&
+      contains(fromJSON('["Multi-Site Article Pipeline", "Article Pipeline (Rescue)", "Weekly Optimize", "Monthly Consulting Report", "Weekly Newsletter Digest", "Deploy to Cloudflare Pages"]'), github.event.workflow_run.name) &&
+      (github.event.workflow_run.conclusion == 'failure' ||
+       (github.event.workflow_run.conclusion == 'cancelled' &&
+        github.event.workflow_run.name != 'Deploy to Cloudflare Pages'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions: {}
+    outputs:
+      skip: ${{ steps.age.outputs.skip }}
+    steps:
+      - name: 作られてからの時間
+        id: age
+        env:
+          CREATED: ${{ github.event.workflow_run.created_at }}
+          WR_NAME: ${{ github.event.workflow_run.name }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        run: |
+          age=$(( $(date -u +%s) - $(date -u -d "$CREATED" +%s) ))
+          if [ "$CONCLUSION" = cancelled ] && [ "$age" -gt 93600 ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::${WR_NAME} の取り消しは作られてから $((age / 3600)) 時間たった古い待ちのため、修復しません（その日の分は後の回と救済が書いています）"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
   heal:
+    needs: stale-cancel
     permissions:
       contents: write
       actions: read
@@ -109,13 +142,15 @@ jobs:
     # これを拾うと push が続くたびに修復・書き直し・「cancelled で終わりました」の通知が走る
     # 記事動画・調査などは書き直しの手順（retry_prompt）が合わないので、ここでは扱わない（rerun が受け持つ）
     # 定期実行は 0 15 の回だけ（ほかの cron は取りこぼしの見張りのため。heal を1日に何度も動かさない）
+    # stale-cancel は workflow_run の回だけ動き、定期・手動の回では飛ばされる。飛ばされても heal が動くよう !cancelled() で見る
     if: >-
+      !cancelled() && needs.stale-cancel.outputs.skip != 'true' && (
       (github.event_name == 'schedule' && github.event.schedule == '0 15 * * *') ||
       github.event_name == 'workflow_dispatch' ||
       (contains(fromJSON('["Multi-Site Article Pipeline", "Article Pipeline (Rescue)", "Weekly Optimize", "Monthly Consulting Report", "Weekly Newsletter Digest", "Deploy to Cloudflare Pages"]'), github.event.workflow_run.name) &&
        (github.event.workflow_run.conclusion == 'failure' ||
         (github.event.workflow_run.conclusion == 'cancelled' &&
-         github.event.workflow_run.name != 'Deploy to Cloudflare Pages')))
+         github.event.workflow_run.name != 'Deploy to Cloudflare Pages'))))
     runs-on: ubuntu-latest
     timeout-minutes: 45
     outputs:
@@ -525,7 +560,8 @@ jobs:
   # 非公開のデータも取らない。直した内容は本体（master）へ入れず、差分をキャッシュで次のジョブへ渡す
   repair:
     needs: heal
-    if: needs.heal.outputs.broken == '1'
+    # 既定の success() は祖先（stale-cancel）まで見る。定期・手動の回は stale-cancel が飛ばされるので、heal の成否だけで見る
+    if: "!cancelled() && needs.heal.result == 'success' && needs.heal.outputs.broken == '1'"
     runs-on: ubuntu-latest
     timeout-minutes: 50
     permissions:
