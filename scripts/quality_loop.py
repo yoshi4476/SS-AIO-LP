@@ -938,8 +938,13 @@ def process(slug, mode, budget, rounds=ROUNDS, ctx=None):
         done += 1
         sc2, why2 = score(slug)
         if not sc2:
-            print(f"要対応: {name} の採点し直しができませんでした（{why2}）")
+            # 採点できなかった直しは残さず、最後に採点した版へ戻す。残すと、85点以上の版から90点を目指した直しが
+            # 採点されないまま合格として公開される（2026-11-20 に採点役の引用が本文に無く、直しが採点されずに残った）
+            write(slug, best_text)
+            sc = best
+            print(f"要対応: {name} の採点し直しができませんでした（{why2}）。直しを戻し、最後に採点した版（{best['total']}点）にしました")
             record({**base, "action": "score", "state": "error", "why": why2[:200]})
+            record({**base, "action": "revert", "round": prior + tries, "kept": best["total"]})
             break
         if sc2["total"] > sc["total"] and done >= rounds and rounds < MAX_ROUNDS and not sc2["ok"] \
                 and NEAR_MISS[0] <= sc2["total"] <= NEAR_MISS[1]:
