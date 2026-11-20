@@ -1373,7 +1373,14 @@ def check_contract(cfg, dest: Path, meta):
     # 「定着している表記」だけを許可する（全体の1割以上、かつ2本以上）。
     total = sum(used.values())
     established = {k: v for k, v in used.items() if v >= max(2, total * 0.1)}
-    if established and cat_label not in established:
+    # 配信先の記事の一覧のページに、その表示名が要素の文字そのもの（<h3>経営と設計</h3> など）としてあれば、
+    # 相手のサイトが持っているカテゴリ。送った記事が少ない社では、正しいカテゴリでも2本に届かず全部止まっていた
+    # （2026-11-20 リズコムの最初の「経営と設計（代表コラム）」の記事が、配信も拾い直しも理由なしで止まった）。
+    # 1文字違う表記は一覧に無いので、今まで通り止まる
+    index = blog / "index.html"
+    on_list = index.is_file() and re.search(rf">\s*{re.escape(cat_label)}\s*<",
+                                            index.read_text(encoding="utf-8", errors="ignore")) is not None
+    if established and cat_label not in established and not on_list:
         top = sorted(used.items(), key=lambda x: -x[1])
         raise SystemExit(
             f"配信を中止します。カテゴリ表示名『{cat_label}』は配信先で使われていません。\n"
