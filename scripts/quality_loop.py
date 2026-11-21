@@ -680,6 +680,14 @@ def machine_note(slug):
             tg = SC.link_targets(site_of(slug), mt.get("category") or "", skip=slug)
             out.append(f"- 内部リンクが{len(SC.internal_links(body))}本しかない（3本以上が必要）。次の公開済みの記事から主題に関係するものを、"
                        "本文の自然な文脈に Markdown のリンクで入れる: " + " / ".join(f"[{t}]({u})" for t, u in tg))
+        # 相場の決まりに外れた文は、配信の前の機械採点で落ちる。文と正しい相場を名指しする（2026-11-21 費用の記事）
+        import price_claims as PC
+        if PC.applies(mt.get("category")):
+            text = read(slug)
+            out += [f"- 外部委託の月額を数十万円より下に書いている（相場は data/price_ranges.json だけが正: {PC.ranges_note()}）。"
+                    f"区分ごとの額に書き直す:「{s}」" for _, s in PC.low_claims(text)[:3]]
+            if PC.own_price(text):
+                out.append("- 当社の価格（月額）を書いている。当社の額は書かず、相場の区分で書く")
         if not SC.HYPO.search(re.sub(r"<[^>]+>", "", body)):
             out.append("- 仮の計算例が無い。「仮に◯◯なら△△」の形で、読者が自分の数字を当てはめられる例を1つ置く")
         # 当社調べを測ってあるのに記事に1つも無ければ、入れるよう名指しする（2026-10-21 の試しで、材料に渡しても使われなかった）

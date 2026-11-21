@@ -510,6 +510,17 @@ def run(slug, path=None):
     hit = [w for w in ng if w and w in hay]
     add("お客様の使えない表現（rules.ng_words）が無い", not hit, "、".join(hit) or "なし")
 
+    # AI集客ラボの相場・価格の決まり（data/price_ranges.json）。全部の門（gates_history_e）だけが見ていて、公開前の機械採点に
+    # 無かったため、外部委託を「月数万円から」の幅にまとめた要約の文が公開された（2026-11-21 費用の記事）。
+    # 当社の価格は本当の額が CI の公開の記録に出ないよう、行番号だけを出す
+    import price_claims as PC
+    if PC.applies(meta.get("category")):
+        low = PC.low_claims(text)
+        add("相場: 外部委託の月額を数十万円より下に書かない（data/price_ranges.json）", not low,
+            "、".join(f"{i}行目「{s[:40]}」" for i, s in low[:3]) or "なし")
+        own = PC.own_price(text)
+        add("相場: 当社の価格を書かない", not own, "、".join(f"{i}行目" for i, _ in own[:5]) or "なし")
+
     # 入れてはいけない HTML（ld+json 以外の script・on 属性・iframe・外部への form・javascript: の URL・自動の転送）。
     # 外の文章（字幕・上位の見出し）の指示に従った AI が入れうる。build.py・publish.py と同じ判定（html_safety）を書く段で当てる
     import html_safety
