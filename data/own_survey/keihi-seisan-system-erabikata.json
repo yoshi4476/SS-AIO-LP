@@ -1,0 +1,76 @@
+{
+ "v": 2,
+ "slug": "keihi-seisan-system-erabikata",
+ "ok": true,
+ "date": "2026-11-21",
+ "questions": [
+  "経費精算システムについて教えてください",
+  "経費精算システムについて、「経費精算システムとは？」を教えてください",
+  "経費精算システムについて、「経費精算システムを導入するとどう変わるか」を教えてください",
+  "経費精算システムについて、「経費精算システムの選定基準｜見るべき4つのポイント」を教えてください",
+  "経費精算システムについて、「経費精算システムの料金はいくらかかるか」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "経費精算システムの選定基準｜見るべき4つのポイント",
+   "words": [
+    "選定基準"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "経費精算システムと経費精算BPO・社内ルール整備の使い分け",
+   "words": [
+    "経費精算BPO",
+    "社内ルール整備"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [
+  {
+   "term": "仕入税額控除",
+   "org": "国税庁",
+   "of": 5,
+   "hits": 0
+  }
+ ],
+ "sources": {
+  "alsi.co.jp": "peer",
+  "aspicjapan.org": "public",
+  "biz.moneyforward.com": "peer",
+  "bizee.jp": "media",
+  "bts.jtbbwt.com": "peer",
+  "catalog.monex.co.jp": "media",
+  "dstmp.shachihata.co.jp": "peer",
+  "emeao.jp": "portal",
+  "invox.jp": "peer",
+  "journal.bizocean.jp": "media",
+  "kb2.sbi-bs.co.jp": "peer",
+  "keihi.com": "peer",
+  "keiriplus.jp": "peer",
+  "majorflow.jpn.panasonic.com": "peer",
+  "manage.coel-inc.jp": "media",
+  "meetsmore.com": "portal",
+  "romsearch.officestation.jp": "portal"
+ },
+ "dims": {
+  "費用の金額（◯円）": 1,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 0,
+  "専門家への相談": 0
+ },
+ "chars": 9820,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、国税庁の資料にある「仕入税額控除」に触れたものは0件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは進め方の手順は0件、専門家への相談は0件、費用の金額（◯円）は1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは17件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが4件、ポータル・比較サイトが3件でした。"
+ ]
+}
