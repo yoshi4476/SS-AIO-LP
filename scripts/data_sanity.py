@@ -230,7 +230,7 @@ def check_leads(sid, cfg, prop, days, ledger, out):
     # 台帳も GA4 と同じ end（前日）で切る。今日の相談まで数えると、GA4 にまだ無い今日の分が
     # 毎回「GA4 に送信の記録がありません」と出ていた（2026-10-20）
     led = {d: n for d, n in ledger.get(sid, {}).items() if start.isoformat() <= d <= end.isoformat()}
-    for d in lead_mismatch(gad, led, L.ACKED.get(sid, {})):
+    for d in lead_mismatch(gad, led, L.acked(sid)):
         out.append(("注意", f"{d} の問い合わせは台帳に{led[d]}行あるのに、GA4 に送信の記録がありません"
                             "（送信の計測が飛んでいないか。手で足した行なら問題なし）"))
     # 問い合わせとして数えるのは台帳の相談だけ（売り込み・社内の試し送信を除く）。GA4 と比べるのは台帳の全行

@@ -41,6 +41,20 @@ except Exception:
     ACKED = {}
 
 
+def acked(sid):
+    """決着した日。お客様の社は日付と理由が社名と結びつくので、公開の ACK_FILE ではなく非公開の置き場の
+    clients/<id>/lead_reconcile_ack.json に置く（2026-11-22 リズコムの台帳連携前の営業17件）"""
+    out = dict(ACKED.get(sid, {}))
+    try:
+        import sites as S
+        if S.is_client(sid):
+            import private_store
+            out.update(private_store.read_json(sid, "lead_reconcile_ack.json", {}) or {})
+    except Exception:
+        pass
+    return out
+
+
 def ga4_by_day(prop, start, end):
     import gcreds
     from google.analytics.data_v1beta import BetaAnalyticsDataClient
@@ -402,6 +416,16 @@ def week_line(today=None, rows=None):
             + (f"／{'、'.join(per)}" if per else ""))
 
 
+def inbox_hint(sid):
+    """台帳に行が無い送信を探す先。お客様のフォームのメールはその社の受信箱にだけ届き、info.ai には来ない
+    （2026-11-22 リズコムの17件で「info.ai の受信箱を確認」と知らせ、探す先を誤らせた）"""
+    import sites as S
+    if S.is_client(sid):
+        return ("（その社の受信箱（フォームのメールの送り先）にだけ届いた可能性。その社に確かめ、相談なら台帳に書き足す。"
+                "営業なら非公開の置き場の clients/<id>/lead_reconcile_ack.json に決着を残す）")
+    return "（メールにだけ届いた可能性。info.ai の受信箱を確認し、台帳に書き足す）"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--days", type=int, default=28)
@@ -455,7 +479,7 @@ def main():
         if pr:
             print(f"  （{cfg.get('name', sid)}: ブラウザからの疎通確認 {sum(pr.values())}件を GA4 の送信から引きました）")
         # 調べて記録が見つからなかった日（ACK）は毎週くり返し知らせない
-        ack = set(ACKED.get(sid, {}))
+        ack = set(acked(sid))
         miss = [d for d, n in sorted(ga.items()) if n > 0 and led[sid].get(d, 0) == 0 and d not in ack]
         # 照合は台帳の全行と比べる（GA4 の送信には売り込み・テストも入る）。件数として出すのは相談だけ
         print(f"  {cfg.get('name', sid)}: GA4 の送信 {sum(ga.values())}件（{len(ga)}日） / 台帳 {sum(led[sid].values())}行"
@@ -479,7 +503,7 @@ def main():
                            "（その行のサイト名を直す。フォームがサイトIDを送っているかも確かめる）")
             else:
                 bad.append(f"要対応: {cfg.get('name', sid)} — {d} に GA4 では送信{ga[d]}件あるのに台帳に行がありません"
-                           + where + "（メールにだけ届いた可能性。info.ai の受信箱を確認し、台帳に書き足す）")
+                           + where + inbox_hint(sid))
             print("  " + bad[-1])
     if a.fix:
         # 根拠が1対1のときだけ直す: その日の（不明）の行がちょうど1行で、行の無い送信がある社もちょうど1社
