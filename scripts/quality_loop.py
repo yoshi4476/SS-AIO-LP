@@ -280,12 +280,31 @@ def _plain(s):
     return s
 
 
+def _near(p, body):
+    """書式を外した引用 p が、本文の1か所と1割以内の字の違い（落とした・足した・替えた字の合計）で一致するか。数字は同じに限る。
+    採点役は長い文を写すときに数文字を落とす（2026-11-21 お客様の記事2本で採点が2回とも無効になり止まった。手元で同じ
+    記事を本番と同じ版で5回採点すると、引用15個のうち1個が、53字の文の途中の3字を落とした写しだった）。作った文は1割に収まらない"""
+    import difflib
+    tol = len(p) // 10
+    if not tol:
+        return False
+    i, j, k = difflib.SequenceMatcher(None, body, p, autojunk=False).find_longest_match(0, len(body), 0, len(p))
+    if k < 8:
+        return False
+    lo = max(0, i - j - tol)
+    win = body[lo:min(len(body), i + len(p) - j + tol)]
+    blocks = [b for b in difflib.SequenceMatcher(None, win, p, autojunk=False).get_matching_blocks() if b.size]
+    matched = sum(b.size for b in blocks)
+    span = win[blocks[0].a:blocks[-1].a + blocks[-1].size]
+    return (len(p) - matched) + (len(span) - matched) <= tol and re.findall(r"\d+", span) == re.findall(r"\d+", p)
+
+
 def quote_ok(quote, article):
-    """引用が本文にそのまま有るか。「…」で省いた引用は、切れた各部分（6字以上）が本文に有ればよい"""
+    """引用が本文に有るか。「…」で省いた引用は、切れた各部分（6字以上）が本文に有ればよい。写し違いの数文字は _near で許す"""
     body = _plain(article)
     parts = [_plain(p) for p in re.split(r"…+|\.\.\.+|⋯", str(quote or ""))]
     parts = [p for p in parts if len(p) >= 6]
-    return bool(parts) and max(len(p) for p in parts) >= 8 and all(p in body for p in parts)
+    return bool(parts) and max(len(p) for p in parts) >= 8 and all(p in body or _near(p, body) for p in parts)
 
 
 def _json_of(text):
