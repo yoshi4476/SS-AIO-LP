@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-22T00:00:00+09:00</updated>
+  <updated>2026-11-23T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>YouTube SEO対策の費用はいつ払う？工務店のAI出典は動画1.7%</title>
+    <link href="https://ai.7senses.co.jp/aio/youtube-seo-taisaku-hiyou/"/>
+    <id>https://ai.7senses.co.jp/aio/youtube-seo-taisaku-hiyou/</id>
+    <updated>2026-11-23T00:00:00+09:00</updated>
+    <summary>YouTube SEO対策の費用は、題・説明欄・サムネイル・字幕・分析に払うお金で、動画を作る費用は別です。当社が工務店・リフォームの質問100問を4つのAIに聞いた調べでは、出典2,662件のうち動画・SNSは44件（1.7%）でした。払う判断と失敗例を解説します。</summary>
+  </entry>
   <entry>
     <title>SEO対策代行の費用は成果報酬で損する？料金体系3つと契約の条件</title>
     <link href="https://ai.7senses.co.jp/seo/seo-taisaku-daikou-hiyou/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/kaitoriten-shukyaku/</id>
     <updated>2026-11-06T00:00:00+09:00</updated>
     <summary>買取店の集客は、売りたい人が「品目と地域」で検索やAIに聞いたとき、自店のページが答えに入るかで決まります。品目ページの不足・許可番号の非表示・出張買取の勧誘の3つの失敗と、店頭・出張・宅配ごとの打ち手を解説します。</summary>
-  </entry>
-  <entry>
-    <title>クリニックの地域名検索で上位に出ない5つの原因と直す順番</title>
-    <link href="https://ai.7senses.co.jp/aio/clinic-chiikimei-kensaku-joui/"/>
-    <id>https://ai.7senses.co.jp/aio/clinic-chiikimei-kensaku-joui/</id>
-    <updated>2026-11-05T00:00:00+09:00</updated>
-    <summary>クリニックが地域名検索で上位に出ない主な原因は、トップページ1枚で全診療科を狙うことと、題名に地域名と診療科名が無いことです。当社が4つのAIの出典2,362件を数えた調査では、クリニックを探す質問の回答の75.0%がポータルを出典にしていました。5つの原因と直す順番を解説します。</summary>
   </entry>
 </feed>

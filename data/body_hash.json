@@ -464,7 +464,7 @@
 "modified": "2026-11-19"
 },
 "homepage-seo-taisaku-hiyou": {
-"hash": "46c1ccc7a25c0f69ed1a8a116faa831e",
+"hash": "7658b587ab594601518d25f2db91c24b",
 "modified": "2026-11-21"
 },
 "inbound-inshokuten-ai-kensaku": {
@@ -716,7 +716,7 @@
 "modified": "2026-08-19"
 },
 "seo-taisaku-daikou-hiyou": {
-"hash": "d34520378cb4dc6a0e563ebb725c8dc6",
+"hash": "d57503d7842e3157a676cf2788cec936",
 "modified": "2026-11-22"
 },
 "shigyou-chiikimei-kensaku-joui": {
@@ -830,6 +830,10 @@
 "whitepaper-tsukurikata": {
 "hash": "30710a8a77bd5cb13bfd7c4b3e0b85b8",
 "modified": "2026-08-02"
+},
+"youtube-seo-taisaku-hiyou": {
+"hash": "b4521334f3526449c6900be1777f9264",
+"modified": "2026-11-23"
 },
 "yoyaku-tsunagaru-dosen-sekkei": {
 "hash": "aa988db785e8b53d7476e187919b1369",

@@ -1,5 +1,5 @@
 {
-  "fetched": "2026-11-15",
+  "fetched": "2026-11-23",
   "sites": {
     "corporate": [
       {
@@ -41,6 +41,46 @@
         "url": "https://corp.7senses.co.jp/blog/theme/kojin",
         "slug": "kojin",
         "title": "個人事業主・小規模事業者"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyusho-template-muryou",
+        "slug": "gaichuuhi-seikyusho-template-muryou",
+        "title": "外注費の請求書テンプレート無料版の落とし穴4つ｜外注先に渡す前に足す欄"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/backoffice-gaichu",
+        "slug": "backoffice-gaichu",
+        "title": "バックオフィス外注で増える社内の手間3つ｜減らす分け方と向かない会社"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/backoffice-gyomu-itaku",
+        "slug": "backoffice-gyomu-itaku",
+        "title": "バックオフィス業務委託で個人に頼む落とし穴3つ｜会社との分け方"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kaikei-kichodaiko",
+        "slug": "kaikei-kichodaiko",
+        "title": "会計記帳代行は試算表まで頼む？記帳だけで止まる落とし穴3つ"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/keiri-kichodaiko-kouka-jiki",
+        "slug": "keiri-kichodaiko-kouka-jiki",
+        "title": "経理記帳代行の効果は何か月で出る？最初の3か月で止まる落とし穴"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/marunage-kichodaiko",
+        "slug": "marunage-kichodaiko",
+        "title": "丸投げ記帳代行の「丸投げOK」で確かめる5項目｜対象外と追加料金"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kichodaiko-gyomu-hani",
+        "slug": "kichodaiko-gyomu-hani",
+        "title": "記帳代行業務の範囲｜含まれる5つの作業と頼めない業務の境目"
+      },
+      {
+        "url": "https://corp.7senses.co.jp/blog/kichodaiko-ai",
+        "slug": "kichodaiko-ai",
+        "title": "記帳代行AIの落とし穴4つ｜任せきりで残る仕訳ミスと確かめ方"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/kichodaiko-service-nokoru-sagyou",
@@ -345,7 +385,7 @@
       {
         "url": "https://corp.7senses.co.jp/blog/seikyusho-template-muryou",
         "slug": "seikyusho-template-muryou",
-        "title": "請求書テンプレ無料で起きやすい失敗｜登録番号なしの旧版と確認6点"
+        "title": "請求書テンプレ無料の入手先4種と確認6点｜登録番号なしの旧版に注意"
       },
       {
         "url": "https://corp.7senses.co.jp/blog/keiri-gyomu-itaku",

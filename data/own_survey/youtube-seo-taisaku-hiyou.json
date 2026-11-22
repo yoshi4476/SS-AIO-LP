@@ -1,0 +1,94 @@
+{
+ "v": 2,
+ "slug": "youtube-seo-taisaku-hiyou",
+ "ok": true,
+ "date": "2026-11-23",
+ "questions": [
+  "youtube seo対策 費用について教えてください",
+  "youtube seo対策 費用について、「YouTube SEO対策の費用は何に払うお金か？」を教えてください",
+  "youtube seo対策 費用について、「AI検索の答えで動画はどのくらい出典に選ばれるか？」を教えてください",
+  "youtube seo対策 費用について、「YouTube SEO対策の費用が無駄になる3つの失敗」を教えてください",
+  "youtube seo対策 費用について、「YouTube SEOに費用をかけてよい会社・見送る会社」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "AI検索の答えで動画はどのくらい出典に選ばれるか？",
+   "words": [
+    "AI検索",
+    "動画",
+    "出典"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "YouTube SEO対策の費用が無駄になる3つの失敗",
+   "words": [
+    "無駄"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "YouTube SEOに費用をかけてよい会社・見送る会社",
+   "words": [
+    "SEO"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "動画にかける予算を施工事例のページへ回すべき場合",
+   "words": [
+    "施工事例",
+    "ページ",
+    "動画",
+    "予算"
+   ],
+   "hits": 5,
+   "of": 5
+  },
+  {
+   "topic": "YouTube SEOの費用を払う前に今日確かめること",
+   "words": [
+    "SEO",
+    "今日確"
+   ],
+   "hits": 5,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "behealthy.co.jp": "peer",
+  "birdy-official.co.jp": "peer",
+  "glad-cube.com": "peer",
+  "hakoniwa.link": "peer",
+  "holytech.jp": "peer",
+  "joh-abroad.jp": "peer",
+  "optyino.ai": "peer",
+  "qask.tech": "peer",
+  "rankzero.io": "peer",
+  "seo-lab.jp": "peer",
+  "subscribepr.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 3,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 1,
+  "専門家への相談": 0
+ },
+ "chars": 10381,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え4件のうち、『無駄』に触れたものは1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは専門家への相談は0件、進め方の手順は1件、注意点・失敗・リスクは2件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは13件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが0件、動画・SNS・ブログが1件でした。"
+ ]
+}
