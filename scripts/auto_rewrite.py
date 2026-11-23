@@ -2672,6 +2672,11 @@ def parse_kinds(spec, limit):
 def pick_items(a, kind, limit):
     """1つの種類の候補（社・名指し・noindex・守る記事・判定期間中の題・直近に触った記事を外した後）。
     動かせない種類（textlint の無い aiwriting）は None"""
+    import strategy_pause as SP
+    if SP.paused(kind) and not getattr(a, "slugs", ""):
+        # 対照群と比べて効きが出ない種類は4週休む（運用者が記事を名指ししたときは当てる。2026-11-23 運用者の決定）
+        print(f"  {kind}: 効きが出ないため休止中です（{(SP.load().get(kind) or {}).get('until', '')} まで）")
+        return []
     if kind == "fresh":
         items = fresh_items(max(limit, 4))
     elif kind == "question":

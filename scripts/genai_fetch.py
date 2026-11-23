@@ -145,7 +145,8 @@ def main():
     print(f"■ 生成AIレポートの取得 {start}〜{end}")
     # タスクは毎日動く。先月ぶんがそろっているサイトは開かない（そろうまで毎日やり直す形）
     have = G.load().get(f"{start:%Y-%m}", {})
-    todo = {sid: cfg for sid, cfg in S.load_all().items() if sid not in have}
+    keep = set(G.site_ids(f"{start:%Y-%m}"))          # その月より後に始めた社は取りに行かない
+    todo = {sid: cfg for sid, cfg in S.load_all().items() if sid not in have and sid in keep}
     if not todo:
         print("  先月ぶんは全サイト取り込み済みです")
         print("GENAI_FETCH=ok")
@@ -167,7 +168,7 @@ def main():
             if not f:
                 if "not-verified" in page.url:
                     why = "このアカウントに閲覧権限がありません（Search Console の設定 → ユーザーと権限で追加）"
-                print(f"  × {sid}: {why[:160]}")
+                print(f"  × {S.public_id(sid)}: {why[:160]}")
                 got.append(False)
                 continue
             ok, msg = G.ingest(f)
@@ -182,6 +183,9 @@ def main():
         run("git", "pull", "--rebase", "--autostash")
         r = run("git", "push")
         print("  反映しました" if r.returncode == 0 else f"  反映できませんでした: {r.stderr[:120]}")
+        if any(S.is_client(sid) for sid in todo):
+            import private_store          # お客様の社の分は非公開の置き場（genai_import._save）
+            private_store.push(f"生成AIレポートを取り込む（{start:%Y-%m}・お客様の社）")
     status = 'ok' if got and all(got) else 'partial' if any(got) else 'none'
     if status != "ok":
         print("要対応: 生成AIレポートを取れないサイトがあります（上の × を参照）")

@@ -234,6 +234,15 @@ def is_title(kind):
     return str(kind).startswith("title")
 
 
+def _pause(weak, why):
+    """効きが出ない種類を4週休ませる（strategy_pause。2026-11-23 運用者の決定）。休ませた種類を知らせに出す"""
+    import strategy_pause as SP
+    added = SP.note(["title" if is_title(k) else k for k in weak], why=why)
+    if added:
+        print(f"  休止にしました（{SP.PAUSE_DAYS}日。終われば自動で戻り、戻ってから測り直す）: {', '.join(added)}")
+    return added
+
+
 def _z(clk, exp):
     return (clk - exp) / max(exp, 1.0) ** 0.5
 
@@ -439,6 +448,7 @@ def rewrite_main(days):
           f"クリックが合計{TITLE_MIN_CLICKS_KIND}本（1本ずつは{TITLE_MIN_CLICKS}本）に満たない・表示が消えた分は判定できない")
     if weak:
         print(f"  効かない種類: {', '.join(weak)} → 続ける前に、対象の選び方と指示を見直してください")
+        _pause(weak, "書き直しの種類別の判定（28日・対照群比）で効かない")
         print(f"   ::warning::書き直しのうち対照群と差が出ていない種類が{len(weak)}件あります: {', '.join(weak)}")
     print("REWRITE_EFFECT_OK=" + ("no" if weak else "unknown" if FAILED else "yes"))
     return 0
@@ -542,6 +552,7 @@ def main():
             weak.append(kind)
     if weak:
         print(f"\n  差が無い施策: {', '.join(weak)}")
+        _pause(weak, "対照群と比べて表示・順位に差が無い")
         print("  → 続ける前に、基準や当て方を見直してください。"
               "効かない手を毎週続けると、効く手に使う時間が減ります")
     print("EFFECT_AB_OK=" + ("no" if weak else "unknown" if partial else "yes"))

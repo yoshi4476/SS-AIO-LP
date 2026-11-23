@@ -687,6 +687,14 @@ def main():
         except Exception as e:
             print(f"   公開後の山から落ちた記事は、日別の表示を取れないため見送ります（{str(e)[:60]}）")
             dt = []
+        # 対照群と比べて効きが出ない種類は4週休む（2026-11-23 運用者の決定。strategy_pause）
+        import strategy_pause as SP
+        if SP.paused("link_rescue"):
+            print(f"   11〜30位への送り（link_rescue）は効きが出ないため休止中です（{SP.load()['link_rescue']['until']} まで）")
+            poor = []
+        if SP.paused("link_decay"):
+            print(f"   山から落ちた記事への送り（link_decay）は効きが出ないため休止中です（{SP.load()['link_decay']['until']} まで）")
+            dt = []
         decayed = {s for s, _, _, _ in dt}
         poor += [s for s, _, _, _ in dt]
         print(f"■ {site}: 公開後の山の週から直近の週が1/4以下に落ち、被リンクが{RESCUE_FLOOR}本未満 {len(dt)}記事")

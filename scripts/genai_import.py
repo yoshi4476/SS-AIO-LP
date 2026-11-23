@@ -51,13 +51,51 @@ HOW = """  取り込み方（月1回・3サイトぶん。所要5分）
   指標も表示回数のみで、クリック数はGoogleが出していません。"""
 
 
-def site_ids():
+def site_ids(month=""):
+    """month（YYYY-MM）を渡すと、その月の終わりより後に始めた社（start_date）を外す。始める前の月は数字が無いのが正しく、
+    11/17 に始めた社の10月分を毎週「未取込」と出していた（2026-11-23）"""
     import sites as S                    # お客様の社は非公開の置き場の社の id
-    return [s for s in S.load_all() if s != "sample"]
+    out = []
+    for s, cfg in S.load_all().items():
+        if s == "sample":
+            continue
+        if month and str(cfg.get("start_date") or "")[:7] > month:
+            continue
+        out.append(s)
+    return out
+
+
+CLIENT_FILE = "genai_impressions.json"   # お客様の社の分は非公開の置き場の clients/<id>/ に {月: 記録}
 
 
 def load():
-    return json.loads(STORE.read_text(encoding="utf-8")) if STORE.is_file() else {}
+    """{月: {社の id: 記録}}。お客様の社の分は非公開の置き場から重ねる（公開の data/ には社の id もページの URL も書かない。
+    2026-11-23 まで、お客様の社の分も公開の data/genai_impressions.json に社の id とページの URL で書く作りだった）"""
+    store = json.loads(STORE.read_text(encoding="utf-8")) if STORE.is_file() else {}
+    import sites as S
+    for sid in S.load_all():
+        if S.is_client(sid):
+            import private_store as P
+            for ym, rec in (P.read_json(sid, CLIENT_FILE, {}) or {}).items():
+                store.setdefault(ym, {})[sid] = rec
+    return store
+
+
+def _save(store):
+    """load() の形を、自社の分は公開の data/ へ、お客様の社の分は非公開の置き場へ分けて書く"""
+    import sites as S
+    pub, priv = {}, {}
+    for ym, rows in store.items():
+        for sid, rec in rows.items():
+            if S.is_client(sid):
+                priv.setdefault(sid, {})[ym] = rec
+            else:
+                pub.setdefault(ym, {})[sid] = rec
+    STORE.write_text(json.dumps(pub, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
+    if priv:
+        import private_store as P
+        for sid, rows in priv.items():
+            P.write_json(sid, CLIENT_FILE, rows)
 
 
 def pick(header, names):
@@ -194,17 +232,19 @@ def ingest(path, write=True, site="", month=""):
                            f"（含まれる月: {', '.join(seen)}）")
         # ページ別の表は期間全体の合計なので、期間が1か月のときだけその月に付ける
         page_month = seen[0] if len(seen) == 1 else ""
+    import sites as S
+    who = S.public_id(sid)               # CI のログは public。お客様の社は公開の id で出す
     if not write:
-        return True, f"{sid}: {', '.join(f'{m} {v:,}表示' for m, v in sorted(monthly.items()))}（--apply で記録）"
+        return True, f"{who}: {', '.join(f'{m} {v:,}表示' for m, v in sorted(monthly.items()))}（--apply で記録）"
     store = load()
     for ym, v in monthly.items():
         cur = store.setdefault(ym, {}).get(sid) or {}
         store[ym][sid] = {"total": v,
                           "pages": pages if (ym == page_month and pages) else cur.get("pages", {}),
                           "imported": date.today().isoformat(), "source": Path(path).name}
-    STORE.write_text(json.dumps(store, ensure_ascii=False, indent=2), encoding="utf-8")
+    _save(store)
     note = "" if page_month else "（ページ別は期間が複数月のため記録せず）"
-    return True, f"{sid}: {', '.join(f'{m} {v:,}表示' for m, v in sorted(monthly.items()))} を記録{note}"
+    return True, f"{who}: {', '.join(f'{m} {v:,}表示' for m, v in sorted(monthly.items()))} を記録{note}"
 
 
 def main():
@@ -225,7 +265,7 @@ def main():
         # 前月ぶんが揃っているかを見る。APIから取れない以上、
         # 人が落とすのを忘れれば数字は永久に空く。忘れたことに気づける形にする
         have = set((store.get(last) or {}))
-        missing = [s for s in site_ids() if s not in have]
+        missing = [s for s in site_ids(last) if s not in have]
 
         if store:
             print("■ 取り込み済みの生成AI表示回数")
@@ -238,7 +278,9 @@ def main():
             print("  まだ何も取り込んでいません")
 
         if missing:
-            print(f"  {last} ぶんが未取込です: {', '.join(missing)}")
+            # CI のログは public。お客様の社は公開の id で出す（社の id は社名から作る）
+            import sites as S
+            print(f"  {last} ぶんが未取込です: {', '.join(S.public_id(s) for s in missing)}")
             print(HOW)
             print("GENAI_OK=no")
         else:
@@ -309,6 +351,8 @@ def scan(push=False):
         run("git", "pull", "--rebase", "--autostash")
         r = run("git", "push")
         print("  反映しました" if r.returncode == 0 else f"  反映できませんでした: {r.stderr[:120]}")
+        import private_store              # お客様の社の分は非公開の置き場（_save）。変わっていなければ何もしない
+        private_store.push("生成AIレポートを取り込む（お客様の社）")
     return 0
 
 
