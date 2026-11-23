@@ -20,5 +20,32 @@
    "hits": 216,
    "failed": 0
   }
+ },
+ "2026-W48": {
+  "cc335c6c4": {
+   "articles": 62,
+   "hits": 0,
+   "failed": 0
+  },
+  "c5fb0e662": {
+   "articles": 8,
+   "hits": 0,
+   "failed": 0
+  },
+  "subsidy": {
+   "articles": 133,
+   "hits": 59,
+   "failed": 0
+  },
+  "ai-lab": {
+   "articles": 209,
+   "hits": 117,
+   "failed": 0
+  },
+  "corporate": {
+   "articles": 182,
+   "hits": 171,
+   "failed": 0
+  }
  }
 }

@@ -131,6 +131,58 @@
 "2026-11-08": {
 "imp": 277,
 "clicks": 9
+},
+"2026-11-09": {
+"imp": 325,
+"clicks": 12
+},
+"2026-11-10": {
+"imp": 275,
+"clicks": 9
+},
+"2026-11-11": {
+"imp": 267,
+"clicks": 8
+},
+"2026-11-12": {
+"imp": 316,
+"clicks": 8
+},
+"2026-11-13": {
+"imp": 53,
+"clicks": 1
+},
+"2026-11-14": {
+"imp": 55,
+"clicks": 3
+},
+"2026-11-15": {
+"imp": 261,
+"clicks": 9
+},
+"2026-11-16": {
+"imp": 328,
+"clicks": 7
+},
+"2026-11-17": {
+"imp": 295,
+"clicks": 13
+},
+"2026-11-18": {
+"imp": 292,
+"clicks": 7
+},
+"2026-11-19": {
+"imp": 307,
+"clicks": 13
+},
+"2026-11-20": {
+"imp": 83,
+"clicks": 4
+},
+"2026-11-21": {
+"imp": 47,
+"clicks": 1
 }
 },
 "weeks": {
@@ -1693,9 +1745,765 @@
 "pos": 3
 }
 ]
+},
+"2026-11-13": {
+"queries": [
+{
+"key": "適格請求書 要件",
+"imp": 11,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "セブンセンシズ",
+"imp": 4,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "請求書の作り方",
+"imp": 4,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "月次報告書 書き方",
+"imp": 3,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "経理 流れ フロー図",
+"imp": 3,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "センシズ 会社概要",
+"imp": 3,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "atm入金　代表者勘定　勘定科目",
+"imp": 2,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "atm引きだし 記帳され方",
+"imp": 2,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "個人の請求書",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "商取引の支払い振込手順",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "経理課",
+"imp": 2,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "計上業務でよくつかう便利な関数をショートカット",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "銀行記帳",
+"imp": 2,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "楽楽精算　領収書　明細が２つある場合",
+"imp": 1,
+"clicks": 2,
+"pos": 4
+},
+{
+"key": "atmでおろした現金で支払　経理仕訳",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "会計勘定科目　ａｔｍは",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "外注費 適格請求書",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "月次決算書を翌月１日になんて出せるかボケ",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "検針・請求書代行業務料金の横浜市の相場",
+"imp": 1,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "楽々精算　経理部門の承認は必要か",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "現金をatmからおろすこと 仕訳",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "経理 引継ぎ用資料",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "経理　フローチャート 図形 一覧",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "請求書　銀行引き落とし　記帳方法",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "2026.10月co月次决算对应",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "2026年度年末決算に伴う銀行口座入金伝票(bank manual journal entry)の決算処理について",
+"imp": 1,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "atm 記帳　名目",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "不徳の精算",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "会社の実在の確かめ方 事例",
+"imp": 1,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "会計ソフト でできない 業務 エクセル 突合 自動化 経理 されている",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "決算報告書 書き方",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "経理課に呼ばれる理由",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "経費不正",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "経費精算 入力ミス 故意 不正請求 訂正",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "請求書　作り方　式　意味",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "請求書のテンプレートの作成はexcel, wordどちらがいい？",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "銀行出金仕訳",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "銀行出金仕訳　貸銀行",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "銀行口座からお金を引く 仕訳",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+}
+],
+"pages": [
+{
+"key": "https://corp.7senses.co.jp/blog/ginko-kicho-yarikata",
+"imp": 250,
+"clicks": 10,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-mitsuori-yarikata",
+"imp": 92,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/atm-kicho-yarikata",
+"imp": 80,
+"clicks": 6,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/rakurakuseisan-keihi-seisan-yarikata",
+"imp": 74,
+"clicks": 4,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-bu-keiri-ka-chigai",
+"imp": 60,
+"clicks": 2,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-kakikata-kojin",
+"imp": 58,
+"clicks": 2,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-ginko-furikomi-yarikata",
+"imp": 54,
+"clicks": 2,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata",
+"imp": 53,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/getsuji-kessan-houkokusho-kakikata",
+"imp": 42,
+"clicks": 1,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-kakikata",
+"imp": 31,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tekikaku-seikyusho-youken",
+"imp": 28,
+"clicks": 0,
+"pos": 10
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template",
+"imp": 14,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keihi-seisan-fusei-jirei",
+"imp": 13,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kensetsugyou-keiri-yarikata",
+"imp": 12,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kojin-jigyonushi-choubo-tsukekata",
+"imp": 12,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-tsukurikata",
+"imp": 10,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keihi-seisan-ryoshusho-funshitsu",
+"imp": 9,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/company",
+"imp": 7,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-excel-jidoka",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+}
+]
+},
+"2026-11-20": {
+"queries": [
+{
+"key": "個人で請求書を出す場合",
+"imp": 4,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "請求書の照合・入力ミスチェック",
+"imp": 3,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "会社経理　退職者　すること",
+"imp": 2,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "請求代行 手数料",
+"imp": 2,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "請求書 個人",
+"imp": 2,
+"clicks": 1,
+"pos": 6
+},
+{
+"key": "_月次報告書",
+"imp": 2,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "個人事業主で毎月ある会社に請求書を出してお金をもらっています　これは給与ですか",
+"imp": 2,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "月次決算 フローチャート",
+"imp": 2,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "現金外注",
+"imp": 2,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "経理 有料セミナー",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "行政書士 依頼料　記帳代行",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "請求書送り方 個人 登録番号なし",
+"imp": 2,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "通帳の金額の動きを把握するやり方",
+"imp": 2,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "経理部と経理課の違い",
+"imp": 1,
+"clicks": 2,
+"pos": 2
+},
+{
+"key": "電気代　紙で支払書が届いた　銀行振込どのようにする",
+"imp": 1,
+"clicks": 2,
+"pos": 6
+},
+{
+"key": "atm手数料 科目",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "人材派遣を雇う。経理事務職員週に１回程度３時間ならいくら",
+"imp": 1,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "外注費　原稿料の請求書",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "社員立替経費 領収書紛失 消費税処理",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "経理 月次レぽ 書き方",
+"imp": 1,
+"clicks": 1,
+"pos": 3
+},
+{
+"key": "経理マン python",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "経理業務　各業務フロー図　参考例",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "経理部　課",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "銀行 記帳 括弧書く振替",
+"imp": 1,
+"clicks": 1,
+"pos": 1
+},
+{
+"key": "銀行　取引明細後日記帳とは",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "銀行窓口から振込　請求書必要？",
+"imp": 1,
+"clicks": 1,
+"pos": 2
+},
+{
+"key": "飲食店 経理 基本",
+"imp": 1,
+"clicks": 1,
+"pos": 4
+},
+{
+"key": "aio対策 運用代行",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "しまなみ銀行 支払い忘れ 記帳",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "京都銀行 通帳記入のアルファベット記号の見方",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "付の請求書はインボイス６要件のうち「取引年月日」が明確になっていないようで",
+"imp": 1,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "出張業務は？bpo",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "支払フロー図",
+"imp": 1,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "月次決算 四半期決算",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "月次決算報告",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "楽楽精算 1枚 領収書 複数部門 按分 機能",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "経理部掌握",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "請求書の支払い方法",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "通帳記帳　サイフリって何",
+"imp": 1,
+"clicks": 0,
+"pos": 2
+},
+{
+"key": "通帳記帳　電話代サイフリって何",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+},
+{
+"key": "銀行口座処理。",
+"imp": 1,
+"clicks": 0,
+"pos": 1
+},
+{
+"key": "青色申告特別控除 65万円控除 複式簿記 仕訳帳 総勘定元帳 条件 記帳 電子申告 国税庁",
+"imp": 1,
+"clicks": 0,
+"pos": 8
+}
+],
+"pages": [
+{
+"key": "https://corp.7senses.co.jp/blog/ginko-kicho-yarikata",
+"imp": 197,
+"clicks": 6,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-kakikata-kojin",
+"imp": 119,
+"clicks": 6,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-mitsuori-yarikata",
+"imp": 111,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/rakurakuseisan-keihi-seisan-yarikata",
+"imp": 95,
+"clicks": 1,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/atm-kicho-yarikata",
+"imp": 78,
+"clicks": 2,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-ginko-furikomi-yarikata",
+"imp": 68,
+"clicks": 4,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-bu-keiri-ka-chigai",
+"imp": 65,
+"clicks": 4,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/getsuji-kessan-houkokusho-kakikata",
+"imp": 62,
+"clicks": 2,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tsucho-kicho-yarikata",
+"imp": 48,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keihi-seisan-ryoshusho-funshitsu",
+"imp": 36,
+"clicks": 5,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-gyomu-flow-template",
+"imp": 22,
+"clicks": 2,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/tekikaku-seikyusho-youken",
+"imp": 20,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kensetsugyou-keiri-yarikata",
+"imp": 11,
+"clicks": 1,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-hakko-tesuryo-souba",
+"imp": 9,
+"clicks": 2,
+"pos": 2
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-shiharai-yarikata",
+"imp": 6,
+"clicks": 0,
+"pos": 7
+},
+{
+"key": "https://corp.7senses.co.jp/blog/gaichuuhi-seikyuusho-nashi",
+"imp": 4,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/gyoseishoshi-kichodaiko-souba",
+"imp": 3,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/blog/keiri-koritsuka-seminar",
+"imp": 3,
+"clicks": 0,
+"pos": 14
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kojinjigyonushi-gaichuuhi-seikyusho",
+"imp": 3,
+"clicks": 0,
+"pos": 4
+},
+{
+"key": "https://corp.7senses.co.jp/blog/seikyusho-check-koritsuka",
+"imp": 3,
+"clicks": 0,
+"pos": 9
+},
+{
+"key": "https://corp.7senses.co.jp/blog/kojin-jigyonushi-choubo-tsukekata",
+"imp": 2,
+"clicks": 0,
+"pos": 8
+},
+{
+"key": "https://corp.7senses.co.jp/blog/bpo-toha",
+"imp": 1,
+"clicks": 0,
+"pos": 5
+},
+{
+"key": "https://corp.7senses.co.jp/blog/getsuji-shihanki-kessan-chigai",
+"imp": 1,
+"clicks": 0,
+"pos": 6
+},
+{
+"key": "https://corp.7senses.co.jp/services/aio",
+"imp": 1,
+"clicks": 0,
+"pos": 3
+}
+]
 }
 },
-"updated": "2026-11-12",
+"updated": "2026-11-23",
 "site": "corporate",
 "domain": "corp.7senses.co.jp"
 }
