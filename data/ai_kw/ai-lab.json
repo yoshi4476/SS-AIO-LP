@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-16",
-  "asked": 4,
+  "date": "2026-11-23",
+  "asked": 3,
   "items": [
     {
       "kw": "aio 導入 メリット 費用",
@@ -37,6 +37,47 @@
       "score": 11.6
     },
     {
+      "kw": "aio 外注 依頼 注意点",
+      "imp": 49,
+      "pos": 21.4,
+      "src": "gsc",
+      "written": true,
+      "ai": {
+        "answered": true,
+        "ours": false,
+        "sources": [
+          "awoo.ai",
+          "crosswish.com",
+          "curumi.co.jp",
+          "ecmarketing.co.jp",
+          "hakuhodody-one.co.jp",
+          "magalglobal.com",
+          "malinovsky.io",
+          "note.com",
+          "piftee.co.jp",
+          "seedinc.jp",
+          "vertexaisearch.cloud.google.com"
+        ],
+        "engines": {
+          "Gemini": {
+            "answered": true,
+            "ours": false,
+            "sources": [
+              "awoo.ai",
+              "crosswish.com",
+              "curumi.co.jp",
+              "ecmarketing.co.jp",
+              "hakuhodody-one.co.jp",
+              "magalglobal.com",
+              "malinovsky.io",
+              "note.com"
+            ]
+          }
+        }
+      },
+      "score": 10.7
+    },
+    {
       "kw": "aio 対策 費用",
       "imp": 12,
       "pos": 5.8,
@@ -71,83 +112,6 @@
         }
       },
       "score": 10.1
-    },
-    {
-      "kw": "aio 外注 依頼 注意点",
-      "imp": 43,
-      "pos": 20.8,
-      "src": "gsc",
-      "written": true,
-      "ai": {
-        "answered": true,
-        "ours": false,
-        "sources": [
-          "andmedia.co.jp",
-          "aspicjapan.org",
-          "atoz-design.jp",
-          "beginners-investment.net",
-          "conmark.jp",
-          "kiyono-co.jp",
-          "note.com",
-          "seedinc.jp",
-          "youtube.com"
-        ],
-        "engines": {
-          "Gemini": {
-            "answered": true,
-            "ours": false,
-            "sources": [
-              "andmedia.co.jp",
-              "aspicjapan.org",
-              "atoz-design.jp",
-              "beginners-investment.net",
-              "conmark.jp",
-              "kiyono-co.jp",
-              "note.com",
-              "seedinc.jp"
-            ]
-          }
-        }
-      },
-      "score": 9.6
-    },
-    {
-      "kw": "aio対策 クリニック",
-      "imp": 46,
-      "pos": 20.0,
-      "src": "gsc",
-      "written": true,
-      "ai": {
-        "answered": true,
-        "ours": false,
-        "sources": [
-          "atoz-design.jp",
-          "jinrai.co.jp",
-          "joshitsuku.com",
-          "learningedge.jp",
-          "medical-dx.com",
-          "paraworks.jp",
-          "protea-inc.co.jp",
-          "shopowner-support.net"
-        ],
-        "engines": {
-          "Gemini": {
-            "answered": true,
-            "ours": false,
-            "sources": [
-              "atoz-design.jp",
-              "jinrai.co.jp",
-              "joshitsuku.com",
-              "learningedge.jp",
-              "medical-dx.com",
-              "paraworks.jp",
-              "protea-inc.co.jp",
-              "shopowner-support.net"
-            ]
-          }
-        }
-      },
-      "score": 8.7
     }
   ]
 }

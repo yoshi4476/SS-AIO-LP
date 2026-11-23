@@ -1,11 +1,11 @@
 {
-  "date": "2026-11-16",
-  "asked": 5,
+  "date": "2026-11-23",
+  "asked": 7,
   "items": [
     {
       "kw": "派遣 経理 時給 相場",
-      "imp": 10,
-      "pos": 8.5,
+      "imp": 9,
+      "pos": 8.8,
       "src": "gsc",
       "written": true,
       "ai": {
@@ -39,29 +39,9 @@
       "score": 10.0
     },
     {
-      "kw": "コーポレート バックオフィス 違い",
-      "imp": 23,
-      "pos": 4.0,
-      "src": "gsc",
-      "written": true,
-      "ai": {
-        "answered": false,
-        "ours": false,
-        "sources": [],
-        "engines": {
-          "Gemini": {
-            "answered": false,
-            "ours": false,
-            "sources": []
-          }
-        }
-      },
-      "score": 7.4
-    },
-    {
       "kw": "バックオフィス 事務 違い",
-      "imp": 83,
-      "pos": 32.0,
+      "imp": 133,
+      "pos": 29.2,
       "src": "gsc",
       "written": false,
       "ai": {
@@ -76,12 +56,52 @@
           }
         }
       },
-      "score": 6.9
+      "score": 8.1
+    },
+    {
+      "kw": "財務と経理の違い",
+      "imp": 5,
+      "pos": 14.8,
+      "src": "gsc",
+      "written": false,
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
+      "score": 6.8
+    },
+    {
+      "kw": "コーポレート バックオフィス 違い",
+      "imp": 27,
+      "pos": 3.6,
+      "src": "gsc",
+      "written": true,
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
+      "score": 6.4
     },
     {
       "kw": "経理部 経理課 違い",
-      "imp": 7,
-      "pos": 1.1,
+      "imp": 9,
+      "pos": 1.2,
       "src": "gsc",
       "written": true,
       "ai": {
@@ -96,12 +116,32 @@
           }
         }
       },
-      "score": 5.9
+      "score": 6.0
+    },
+    {
+      "kw": "請求書 銀行振込 やり方",
+      "imp": 18,
+      "pos": 4.9,
+      "src": "gsc",
+      "written": true,
+      "ai": {
+        "answered": false,
+        "ours": false,
+        "sources": [],
+        "engines": {
+          "Gemini": {
+            "answered": false,
+            "ours": false,
+            "sources": []
+          }
+        }
+      },
+      "score": 5.3
     },
     {
       "kw": "経理補助とは",
-      "imp": 101,
-      "pos": 6.6,
+      "imp": 119,
+      "pos": 6.5,
       "src": "gsc",
       "written": false,
       "ai": {
@@ -116,7 +156,7 @@
           }
         }
       },
-      "score": 3.0
+      "score": 3.1
     }
   ]
 }
