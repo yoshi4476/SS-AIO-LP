@@ -553,9 +553,18 @@ def overlaps_report():
         print("KW_OVERLAP_OK=unknown")
         return 0
     todo = [r for r in got if str(r.get("status") or "").strip() in ("", "未確認")]
-    print(f"■ KW重複の確認（組の違う社が同じ語を持っている）: 未確認 {len(todo)}件 / 全{len(got)}件")
-    # お客様の社を含む組は語を出さない（CI のログ・通知は public の実行記録に残る。語は管制塔の表で見る）
+    # 運用者が「ほかのサイトと狙う語が重なってもよい」と決めた社（kw_overlap_ok）を含む組は、確認が済んでいるので要対応にしない。
+    # 決定（2026-11-16 リズコム）は語の計画だけが見ていて、この知らせは毎週「未確認3件」を出していた（2026-11-23）
     import sites as _S
+    ok = set()
+    for sid, cfg in _S.load_all().items():
+        if cfg.get("kw_overlap_ok"):
+            ok |= {sid, str(cfg.get("public_id") or sid)}
+    allowed = [r for r in todo if str(r.get("site_a")) in ok or str(r.get("site_b")) in ok]
+    todo = [r for r in todo if r not in allowed]
+    print(f"■ KW重複の確認（組の違う社が同じ語を持っている）: 未確認 {len(todo)}件 / 全{len(got)}件"
+          + (f"（ほかに、重なってよいと決めた社を含む組 {len(allowed)}件）" if allowed else ""))
+    # お客様の社を含む組は語を出さない（CI のログ・通知は public の実行記録に残る。語は管制塔の表で見る）
     mine = [r for r in todo if _S.is_client(r.get("site_a")) or _S.is_client(r.get("site_b"))]
     for r in [r for r in todo if r not in mine][:30]:
         print(f"  - 「{r.get('keyword')}」 {r.get('site_a')}（{r.get('region_a') or '地域不明'}・先に登録）"

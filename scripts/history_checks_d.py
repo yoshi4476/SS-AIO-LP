@@ -70,8 +70,13 @@ def check_secrets(found):
     r = subprocess.run(["gh", "secret", "list", "--json", "name"], cwd=ROOT, capture_output=True,
                        text=True, encoding="utf-8", errors="replace", timeout=60, env=_gh_env("HISTD_GH_TOKEN"))
     if r.returncode != 0:
-        print(f"  GitHub Secrets: 一覧を取れません（{(r.stderr or '').strip()[:80]}）")
-        GH_SKIPPED.append(f"鍵の登録: {(r.stderr or '').strip()[:60]}")
+        err = (r.stderr or "").strip()
+        print(f"  GitHub Secrets: 一覧を取れません（{err[:80]}）")
+        if "401" in err or "Bad credentials" in err:
+            # 鍵が失効している。「動かせず」とだけ出し、7週続いても何をすればよいかが届かなかった（2026-10-12〜11-23）
+            print("要対応: Secrets を読み書きする鍵 GH_SECRET_TOKEN が失効しています（401）。GitHub で Secrets を読み書きできる"
+                  "個人用トークンを作り直し、gh secret set GH_SECRET_TOKEN で登録し直してください（Codex・SNS の鍵の書き戻しも同じ鍵）")
+        GH_SKIPPED.append(f"鍵の登録: {err[:60]}")
         return
     have = {d["name"] for d in json.loads(r.stdout or "[]")}
     miss = sorted(workflow_secrets() - have)

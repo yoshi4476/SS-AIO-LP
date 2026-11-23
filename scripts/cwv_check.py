@@ -436,6 +436,12 @@ def crux_fix(err):
     elif "API_KEY_SERVICE_BLOCKED" in err:
         what = ("鍵の「APIの制限」で Chrome UX Report API が許可されていません（API_KEY_SERVICE_BLOCKED）。"
                 "鍵の制限に Chrome UX Report API を足すか、別の鍵を Secret CRUX_API_KEY に登録してください")
+    elif "ACCESS_DENIED" in err or "PERMISSION_DENIED" in err:
+        # API が有効でも、鍵の「APIの制限」に入っていないとこの形で返る（2026-11-23: 予備の YOUTUBE_API_KEY が
+        # YouTube だけに制限されていた。CRUX_API_KEY も PAGESPEED_API_KEY も無いと、その鍵で呼ぶ）
+        what = ("鍵の「APIの制限」に Chrome UX Report API が入っていません（ACCESS_DENIED）。CRUX_API_KEY が無いと "
+                "PAGESPEED_API_KEY・YOUTUBE_API_KEY の順に使います。CrUX 用の鍵を Secret CRUX_API_KEY に登録するか、"
+                "使っている鍵の制限に Chrome UX Report API を足してください")
     else:
         what = f"鍵か API の設定を確かめてください（{err[:60]}）"
     return f"実利用者の表示速度（CrUX）を測れません: {what}"
