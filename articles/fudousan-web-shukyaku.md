@@ -53,6 +53,8 @@ quality_attempts: 7
 
 不動産のWeb集客は、検索やAI検索から自社サイトへ人を呼び、査定や来店の問い合わせを自社で受ける仕組みです。
 
+関連する内容は[不動産の反響が来ない5つの原因とポータル依存の脱却法](/ai-marketing/fudousan-hankyou-konai/)で整理しています。
+
 <div class="definition-box"><span class="term">不動産のWeb集客とは</span>、ポータルサイト・自社サイト・SNS・Web広告を使い、物件を探す人や売りたい人から問い合わせを受ける取り組みです。本記事では、自社サイトで受ける反響を中心に扱います。</div>
 
 ポータルは物件を比べる場所です。掲載をやめると、ポータル経由の反響は止まります。
@@ -76,8 +78,6 @@ AI検索の扱いは[不動産のAI検索対策の4つの実践ステップ](/ai
 関連する内容は、[不動産の集客アイデア9つ](/aio/fudousan-shukyaku-idea/)で解説しています。
 
 近い論点を[不動産SEOコンサルティングとは？](/seo/fudousan-seo-consulting/)で扱っています。
-
-あわせて[不動産のLLMO対策とは？AIに選ばれる5つの条件](/aio/fudousan-llmo-taisaku/)もご覧ください。
 
 <figure><img src="/images/fudousan-web-shukyaku/koshin.png" alt="基準に届かない記事やどこにでもある記事を足す効かない更新と、査定ページの新設やエリア情報を厚くする効いた更新の比較"></figure>
 

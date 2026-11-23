@@ -71,9 +71,9 @@ faq:
 
 記帳代行は入力作業のみ、経理代行は請求書発行まで、経理BPOは給与計算まで範囲が広がります。
 
-あわせて[記帳代行料金表は税理士事務所でどう読む？](/blog/kichodaiko-ryokinhyo-zeirishi/)もご覧ください。
+あわせて[請求書発行手数料の相場｜代行サービス4タイプの料金差](/blog/seikyusho-hakko-tesuryo-souba/)もご覧ください。
 
-関連する内容として[経理代行サービスとは？できること6つと料金相場](/blog/keiri-daiko-service/)も公開しています。
+あわせて[記帳代行料金表は税理士事務所でどう読む？](/blog/kichodaiko-ryokinhyo-zeirishi/)もご覧ください。
 
 | 項目 | 記帳代行 | 経理代行 | 経理BPO |
 |:--|:--|:--|:--|

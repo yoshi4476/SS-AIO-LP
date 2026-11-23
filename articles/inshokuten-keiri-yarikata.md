@@ -110,7 +110,7 @@ faq:
 
 **飲食店は、店内飲食が10%、持ち帰り・宅配が軽減税率の8%という税率区分を、会計処理に正しく反映する必要があります。**
 
-関連する内容として[請求書照合の自動化と導入4ステップ](/blog/seikyusho-shougou-jidoka/)も公開しています。
+あわせて[飲食店の記帳代行｜任せる範囲と選び方・失敗しない5つの確認点](/blog/inshokuten-kicho-daiko/)もご覧ください。
 
 <figure><img src="/images/inshokuten-keiri-yarikata/zeiritsu.png" alt="飲食店の消費税区分: 店内飲食は10%、持ち帰り・宅配は軽減税率の8%" loading="lazy"><figcaption>飲食店の消費税区分（店内飲食10%・持ち帰り8%）</figcaption></figure>
 

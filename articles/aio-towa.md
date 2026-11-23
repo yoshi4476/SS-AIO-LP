@@ -100,7 +100,7 @@ AIO表示の最適化（AIO対策）で効くのは、Googleが明記した条�
 
 **AIOはGoogleのAI回答、LLMOはChatGPTなど他のAI、SEOは通常の検索順位が対象です。**
 
-近い論点を[AIOの文字数で失敗：全記事5,000字以上の下限がNGだった理由](/aio/aio-mojisuu/)で扱っています。
+近い論点を[AIOでコンテキスト理解を促進するには？](/aio/aio-context-rikai-sokushin/)で扱っています。
 
 3つは対立しません。AI OverviewはGoogleの通常の検索評価を土台にしているため、SEOで評価されたページが引用の候補になります。
 

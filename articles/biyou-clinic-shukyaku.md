@@ -78,7 +78,7 @@ quality_attempts: 3
 
 **美容クリニックの集客の経路は、予約・比較ポータル、院の施術ページ、SNS、Web広告の4つで、それぞれ患者の段階が違います。**4つを同じ目的で使うと、費用をかけても予約が増えません。
 
-関連する内容として[クリニック開業の集客準備で外す3つのNG](/aio/clinic-kaigyou-shukyaku-junbi/)も公開しています。
+関連する内容として[クリニック開業の集客準備で外す3つのNG](/aio/clinic-kaigyou-shukyaku/)も公開しています。
 
 <figure><img src="/images/biyou-clinic-shukyaku/keiro.png" alt="美容クリニックの4つの経路の役割: 予約・比較ポータルは院を探す段階、施術ページは施術を比べる段階、SNSは興味を持つ段階、Web広告は予約する段階" loading="lazy"><figcaption>美容クリニックの4つの経路の役割</figcaption></figure>
 

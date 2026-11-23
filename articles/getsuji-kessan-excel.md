@@ -109,7 +109,7 @@ Excelに手で打っていた銀行・カードの明細を、会計ソフトの
 
 **エクセルの月次決算で起きやすいのは、年払いの一括計上、備品の消耗品処理、会計ソフトとの二重入力の3つです。**
 
-あわせて[経費精算がめんどくさい会社の落とし穴](/blog/keihi-seisan-mendokusai/)もご覧ください。
+あわせて[月次決算と四半期決算の違いは？](/blog/getsuji-shihanki-kessan-chigai/)もご覧ください。
 
 <figure><img src="/images/getsuji-kessan-excel/otoshiana.png" alt="年払いの一括計上・備品の消耗品処理・二重入力という3つの落とし穴と、それぞれの直し方を左右に並べた図"></figure>
 

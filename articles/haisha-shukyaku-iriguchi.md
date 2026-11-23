@@ -53,6 +53,10 @@ quality_attempts: 1
 
 **歯医者の集客とは、検索やAIで歯医者を探す患者に自院を見つけてもらい、予約につなげる取り組みです。**患者の入口は、医院を探す質問と、費用や症状を調べる質問の2つに分かれます。
 
+関連する内容として[歯科医院の地域名検索で上位に出る方法](/seo/shika-chiikimei-kensaku-joui/)も公開しています。
+
+あわせて[LLMO対策会社のおすすめ一覧の落とし穴](/aio/llmo-taisaku-kaisha-osusume/)もご覧ください。
+
 <figure><img src="/images/haisha-shukyaku-iriguchi/iriguchi.png" alt="患者が歯医者にたどり着く2つの入口: 地域名＋歯医者で医院を探す入口と、治療名＋費用・症状で調べる入口" loading="lazy"><figcaption>患者が歯医者にたどり着く2つの入口</figcaption></figure>
 
 <div class="definition-box"><span class="term">集客の入口とは</span>、患者が最初に医院の情報に触れる検索の種類です。入口ごとに、検索結果やAIの答えに並ぶサイトの種類が変わります。</div>
@@ -102,6 +106,8 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 **医院を探す入口ではポータルと医院情報を、調べる入口では自院のサイトの費用と症状のページを整えます。**2つの入口は、整える場所が違います。
 
+近い論点を[クリニック開業の集客は開業後6か月が分かれ目](/aio/clinic-kaigyou-shukyaku/)で扱っています。
+
 あわせて[歯科開業の集客準備で外す3つのNG](/aio/shika-kaigyou-shukyaku-junbi/)もご覧ください。
 
 <figure><img src="/images/haisha-shukyaku-iriguchi/hikaku.png" alt="入口ごとに整えるもの: 医院を探す入口は予約・比較ポータルが主な出典でポータルと地図を整える。費用や症状を調べる入口は医院の公式サイトが主な出典で自院のサイトを整える" loading="lazy"><figcaption>入口ごとに整えるもの</figcaption></figure>
@@ -145,8 +151,6 @@ Googleは<a href="https://developers.google.com/search/docs/appearance/ai-featur
 
 AIに集客の相談をしても、表現のきまりまで教えてくれるとは限りません。当社が2026年11月12日に聞いた「歯科医院 AI検索に出ない原因」の答えのうち、医療広告ガイドラインを問いに含まない8件で、ガイドラインに触れたものは0件でした（出典: 当社調べ）。
 
-AI検索に出ない原因の切り分けは[歯科医院がAI検索に出ない5つの原因](/aio/shika-ai-kensaku-denai-genin/)にまとめました。
-
 ## 歯医者の集客でよくある3つの失敗と避け方
 
 **歯医者の集客でよくある失敗は、ポータル任せ・中身の薄いQ&Aの量産・AIクローラーの遮断の3つです。**どれも、起きること・原因・避け方がはっきりしています。
@@ -162,7 +166,6 @@ AI検索での紹介・表示にも効果はありませんでした。原因は
 同じ20社のうち7社は、よくある質問の本文と構造化データが合っていませんでした。避け方は、robots.txtでAIクローラーを止めていないかを、制作会社に確かめてもらうことです。
 
 <span class="txt-red">体験談や「地域一番」の表現を、集客のために増やすのはNGです。</span>当社の見直しでは、どちらも直した数の多い表現でした。
-
 
 AI検索への対応で抜けている箇所は、[AI検索の対応度チェック（無料・30秒）](/tools/aio-check/)で確かめられます。登録は不要で、その場で点数が出ます。
 

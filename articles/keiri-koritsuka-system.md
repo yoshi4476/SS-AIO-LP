@@ -50,6 +50,8 @@ quality_attempts: 3
 
 経理効率化システムとは、記帳・仕訳・経費精算・請求書処理をITで自動化し、手作業を減らす仕組みの総称です。
 
+関連する内容として[経理アウトソーシング導入事例｜3パターンで見る選び方](/blog/keiri-outsourcing-donyu-jirei/)も公開しています。
+
 <div class="definition-box"><span class="term">経理効率化システムとは</span>、クラウド会計ソフトやRPA、AI-OCRなど、経理の定型業務をIT化して省力化するツール全般を指す言葉です。==1つのツールで全業務が完結するわけではなく、複数を組み合わせて使うのが一般的です==。</div>
 
 クラウド化・自動化・BPO活用まで含めた事例は[経理効率化の事例4選｜方法別のポイントと進め方【2026年】](https://corp.7senses.co.jp/blog/keiri-koritsuka-jirei/)で紹介していますが、本記事はシステム選定そのものに絞って解説します。
@@ -64,7 +66,11 @@ MM総研が2026年3月末時点で公表した調査によると、<a href="http
 
 経理効率化システムは、クラウド会計・経費精算・RPA/AI-OCR・受発注連携の4種類に大別できます。
 
-あわせて[バックオフィス外注で増える社内の手間3つ](/blog/backoffice-gaichu/)もご覧ください。
+あわせて[BPO事務で失敗しない分け方](/blog/bpo-jimu-wakekata/)もご覧ください。
+
+あわせて[バックオフィスのコンサルが提案で終わる3つの原因](/blog/backoffice-consul-teian/)もご覧ください。
+
+関連する内容として[経費精算の外注で失敗する引き継ぎ](/blog/keihi-seisan-gaichuu/)も公開しています。
 
 <figure><img src="/images/keiri-koritsuka-system/shurui.png" alt="経理効率化システムの主な種類4つ: クラウド会計ソフト、経費精算システム、RPA・AI-OCR、受発注連携システム" loading="lazy"><figcaption>経理効率化システムの主な種類4つ</figcaption></figure>
 

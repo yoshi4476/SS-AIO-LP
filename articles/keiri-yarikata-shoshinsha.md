@@ -73,6 +73,8 @@ faq:
 
 経理のやり方は、証憑整理・記帳・月次確認・保存・申告準備という5ステップで進めます。
 
+あわせて[月次決算とは？初心者向けの基本と進め方5ステップ](/blog/getsuji-kessan-nyumon/)もご覧ください。
+
 あわせて[フリーランスの経理のやり方](/blog/freelance-keiri-yarikata/)もご覧ください。
 
 <figure><img src="/images/keiri-yarikata-shoshinsha/gosuteppu.png" alt="経理のやり方5ステップ: 証憑を集める、帳簿に記帳する、月次で確認する、書類を保存する、申告に備える" loading="lazy"><figcaption>経理のやり方5ステップ</figcaption></figure>
@@ -131,7 +133,6 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 
 個人事業主は白色申告でも、2014年1月から記帳と帳簿の保存が義務化されています。
 
-
 近い論点を[個人事業主の帳簿の付け方](/blog/kojin-jigyonushi-choubo-tsukekata/)で扱っています。
 
 国税庁の<a href="https://www.nta.go.jp/taxes/shiraberu/shinkoku/kojin_jigyo/index.htm" target="_blank" rel="noopener">個人で事業を行っている方の記帳・帳簿等の保存について</a>があります。**この情報では、事業所得のある人は白色申告でも記帳と帳簿・書類の保存義務があり、帳簿は原則7年、請求書や領収書などの書類は5年の保存が必要とされています。**
@@ -173,9 +174,6 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 ## 経理を自分でやる場合と外注する場合の違い
 
 月の仕訳が100件に満たず、内容を自分で見られるなら自分で、それ以外なら外注を検討します。
-
-
-費用の目安は[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)で整理しています。
 
 | 項目 | 自分でやる場合 | 外注する場合 |
 |:--|:--|:--|
@@ -232,7 +230,6 @@ MM総研が2026年3月に実施した<a href="https://www.m2ri.jp/release/detail
 <details><summary>帳簿や領収書はどのくらいの期間保存すればいいですか？</summary><p class="faq-a">帳簿は原則7年、請求書や領収書などの書類は原則5年の保存が必要とされています。</p></details>
 <details><summary>経理を自分でやるか外注するかはどう判断すればいいですか？</summary><p class="faq-a">月の仕訳が100件に満たず内容を自分で見られるなら自分で、それ以外は外注を検討します。</p></details>
 </div>
-
 
 経理の手間が集中している作業の洗い出しは、[経理の現状分析（無料）](https://corp.7senses.co.jp/contact?s=keiri-bpo)でご相談を受け付けています。契約を前提にしたご案内ではありません。
 

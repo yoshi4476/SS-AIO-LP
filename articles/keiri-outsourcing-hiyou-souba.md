@@ -48,11 +48,11 @@ eyecatch: /images/keiri-outsourcing-hiyou-souba/eyecatch.png
 
 経理アウトソーシングの費用は、記帳のみの委託と、給与計算まで含む全般委託とで数倍から数十倍の差が出ます。
 
+選ぶときの基準については、[経理アウトソーシング導入事例｜3パターンで見る選び方](/blog/keiri-outsourcing-donyu-jirei/)にまとめています。
+
 関連する内容は、[バックオフィスアウトソーシングの5つのメリット](/blog/backoffice-outsourcing-merit/)で解説しています。
 
 費用の目安については、[経理外注の費用相場｜依頼先4タイプの料金](/blog/keiri-gaichuu-hiyou-souba/)にまとめています。
-
-費用の目安は[フリーランスの経理費用相場](/blog/freelance-keiri-hiyou-souba/)で整理しています。
 
 関連する内容として[経理事務と経理補助の違い](/blog/keiri-jimu-hojo-chigai)も公開しています。
 

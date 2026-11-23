@@ -122,6 +122,8 @@ AI経由の集客で自社がどこまで準備できているかは、[AI検索
 
 導入事例は、ヒアリング設計から公開までを6つのステップに分けて進めると迷いません。
 
+関連する内容は[歯科医院ホームページで治療説明はどう書く？](/aio/shika-hp-chiryou-setsumei-kakikata/)で整理しています。
+
 <figure><img src="/images/donyu-jirei-kakikata/write-steps-zenhan.png" alt="導入事例の書き方 前半3ステップ（取材まで）: ヒアリング設計、取材依頼、インタビュー実施" loading="lazy"><figcaption>導入事例の書き方 前半3ステップ（取材まで）</figcaption></figure>
 
 ### ステップ1: ヒアリング設計で質問リストを事前に準備する

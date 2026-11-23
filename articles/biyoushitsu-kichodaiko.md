@@ -49,6 +49,8 @@ quality_attempts: 4
 
 **美容室の記帳代行で任せられるのは、売上・仕入・人への支払・固定費を帳簿に記録し、月ごとにまとめる作業です。**
 
+近い論点を[記帳代行AIの落とし穴4つ](/blog/kichodaiko-ai/)で扱っています。
+
 あわせて[外注費の請求書テンプレート無料版の落とし穴4つ](/blog/gaichuuhi-seikyusho-template-muryou/)もご覧ください。
 
 つまずきやすい点を先に押さえるなら、[記帳代行AIの落とし穴4つ](/blog/kichodaiko-ai)が参考になります。

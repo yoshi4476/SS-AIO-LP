@@ -54,6 +54,10 @@ quality_attempts: 3
 
 LLMO対策会社は、ChatGPTやGeminiなどのAIの回答で、依頼主の情報が根拠に選ばれる状態を作る会社です。
 
+前提となる考え方は、[MEO会社のLLMO対応とは？](/aio/meo-kaisha-llmo-taiou/)で解説しています。
+
+あわせて[LLMO代理店募集の見分け方｜確認すべき5つの条件](/aio/llmo-dairiten-boshu/)もご覧ください。
+
 あわせて[歯科のLLMOとは？ChatGPTに医院を正しく紹介させる4つの手順](/aio/shika-llmo-taisaku/)もご覧ください。
 
 前提となる考え方は[BtoBのLLMO対策とは？](/aio/btob-llmo-taisaku/)で整理しています。
@@ -65,8 +69,6 @@ LLMO対策会社は、ChatGPTやGeminiなどのAIの回答で、依頼主の情�
 同じ説明で、llms.txtのようなAI向けのファイルは「Google検索は無視する」としています（<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">Google 検索セントラル「生成AI機能に向けたウェブサイトの最適化」</a>）。
 
 **違いが出るのは、成果の測り方です。**SEO会社は順位とクリックを報告します。LLMO対策会社は、それに加えて、どのAIのどの回答で出典に挙がったかを報告します。
-
-施策そのものの中身は、[LLMO対策とは？ChatGPTに引用される7つの方法](/aio/llmo-taisaku-hoho/)で解説しています。
 
 ## おすすめ一覧の「◯選」だけで選ぶと外れる理由
 
@@ -201,8 +203,6 @@ LLMO対策会社に頼むべきかは、成約1件の利益、自社の数字や
 **自社の数字や事例を1つも出せない会社には、LLMO対策会社への依頼は向きません。**材料が無いと、頼んでもどこにでもある記事が増えるだけだからです。
 
 **まず、自社の業種と地域の語を3つ決め、ChatGPTとGeminiに聞いて、出典に自社が出るかを確かめてください。**出なかった語が、相談のときに会社へ渡す最初の課題になります。
-
-費用の相場と回収の試算は、[LLMO対策の費用で損する3つの落とし穴](/aio/llmo-taisaku-hiyou/)で確かめられます。
 
 <div class="cta-box"><p>決めた3つの語で、AIの出典に挙がるかを一緒に確かめませんか。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談はこちら</a></div>
 

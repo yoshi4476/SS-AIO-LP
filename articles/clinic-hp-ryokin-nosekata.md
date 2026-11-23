@@ -45,7 +45,7 @@ faq:
 
 関連する内容として[歯科医院ホームページで治療説明はどう書く？](/aio/shika-hp-chiryou-setsumei-kakikata/)も公開しています。
 
-あわせて[クリニック開業の集客準備で外す3つのNG](/aio/clinic-kaigyou-shukyaku-junbi/)もご覧ください。
+あわせて[クリニック開業の集客準備で外す3つのNG](/aio/clinic-kaigyou-shukyaku/)もご覧ください。
 
 実際の進め方については、[クリニックの電話予約のやり方](/ai-marketing/clinic-denwa-yoyaku-yarikata/)にまとめています。
 

@@ -50,7 +50,7 @@ faq:
 
 関連する内容として[AIシステム開発の費用は補助対象経費になる？](/blog/ai-system-kaihatsu-hojo-taisho-keihi/)も公開しています。
 
-関連する内容として[電子カルテ情報共有サービスの補助金はクリニック対象外？](/blog/it-hojokin-denkaru-kyoyu-clinic/)も公開しています。
+あわせて[電子カルテ情報共有サービスの補助金はクリニック対象外？](/blog/it-hojokin-denkaru-kyoyu-clinic/)もご覧ください。
 
 <div class="definition-box"><span class="term">中小企業庁の補助金とは</span>、経済産業省の外局である中小企業庁が所管し、中小企業基盤整備機構などの事務局が公募・審査する補助制度です。申請すれば必ず受け取れる助成金と違い、事業計画の審査で採択が決まります。</div>
 

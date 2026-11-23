@@ -48,6 +48,10 @@ quality_attempts: 3
 
 **クリニックの集客事例は、MEO・SEO・AI検索・口コミ・予約導線の5パターンに大別できます。**
 
+関連する内容は、[クリニック開業の集客は開業後6か月が分かれ目](/aio/clinic-kaigyou-shukyaku/)で解説しています。
+
+実際の進め方は、[クリニックの集客方法は月数で選ぶ](/aio/clinic-shukyaku-houhou/)で解説しています。
+
 <div class="definition-box"><span class="term">クリニックの集客事例とは</span>、来院につながった施策のうち、他院でも再現しやすい「型」として整理したものです。特定の医院だけの一回限りの成功ではなく、繰り返し効果が出やすい打ち手を指します。</div>
 
 関連記事は次のとおりです。口コミの返信文は[病院・クリニックの口コミ返信](/meo/byoin-kuchikomi-henshin-reibun/)にまとめています。費用の目安は[クリニック集客コンサルの選び方5つの基準｜費用相場](/ai-marketing/clinic-shukyaku-consaru-erabikata/)で扱っています。
@@ -133,8 +137,6 @@ AI検索対応の落とし穴は、順位もマップ表示も悪くないのに
 ## 事例4: 口コミ返信の徹底で指名検索が増えたパターン
 
 **口コミへの全件返信を続けた医院は、院名そのものを検索する“指名検索”が増える傾向があります。**
-
-関連する内容として[口コミ返信テンプレート集｜星評価別の例文とAI活用術](/meo/googlemap-kuchikomi-henshin/)も公開しています。
 
 <a href="https://www.brightlocal.com/research/local-consumer-review-survey-2025/" target="_blank" rel="noopener">BrightLocalのLocal Consumer Review Survey 2025</a>では、<strong>消費者の71%が地域の店や施設を探す際に口コミを日常的に読み</strong>、<strong>83%が確認先としてGoogleを利用</strong>すると回答しています。体への不安を伴う医院選びでは、この傾向はさらに強まります。
 

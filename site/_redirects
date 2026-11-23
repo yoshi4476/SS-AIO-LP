@@ -35,6 +35,9 @@
 # 統合（2026-10-05）: aio-taisaku-merit-hiyou → aio-taisaku-donyu-hoho
 /aio/aio-taisaku-merit-hiyou/  /aio/aio-taisaku-donyu-hoho/  301
 
+# 統合（2026-11-23）: clinic-kaigyou-shukyaku-junbi → clinic-kaigyou-shukyaku
+/aio/clinic-kaigyou-shukyaku-junbi/  /aio/clinic-kaigyou-shukyaku/  301
+
 # 用語集（1語1ページ → 1ページ）。旧URLはまとめたページの該当箇所へ
 /glossary/f7ad398a6b/  /glossary/#f7ad398a6b  301
 /glossary/b1622b608b/  /glossary/#b1622b608b  301
@@ -121,7 +124,6 @@
 /glossary/a8119e9763/  /aio/clinic-shukyaku-houhou/  301
 /glossary/68973c088d/  /seo/clinic-hp-hissu-koumoku/  301
 /glossary/59ded05012/  /ai-marketing/clinic-kaigyou-yarikata/  301
-/glossary/7c719feebe/  /aio/clinic-kaigyou-shukyaku-junbi/  301
 /glossary/f1f6626a0c/  /aio/clinic-kaigyou-shukyaku/  301
 /glossary/df69351885/  /ai-marketing/clinic-shukyaku-sekkeizu/  301
 /glossary/fc934197d6/  /glossary/#fc934197d6  301

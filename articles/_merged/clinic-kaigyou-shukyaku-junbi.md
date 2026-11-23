@@ -1,4 +1,6 @@
 ---
+merged_into: clinic-kaigyou-shukyaku
+merged_at: 2026-11-23
 title: クリニック開業の集客準備で外す3つのNG｜Webは開業6週間前に公開
 description: クリニック開業の集客準備は、開業日から逆算してホームページを6週間前までに公開し、検索とAIに先に見つけてもらう作業です。当社の自社3サイト372本の集計では、公開28〜41日の記事の96.2%が検索に出ていました。準備の順番と外しやすいNGを解説します。
 slug: clinic-kaigyou-shukyaku-junbi
