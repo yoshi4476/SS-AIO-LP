@@ -10,6 +10,15 @@
    "templates/nextjs_alternates.ts": "f4c7fe26f560"
   }
  },
+ "reiscom": {
+  "at": "2026-11-23",
+  "fp": "5ee67c068039",
+  "parts": {
+   "clients/company.json": "ceb9bf308101",
+   "dest/template": "b95287a0a162",
+   "sites": "224eb06f128a"
+  }
+ },
  "subsidy": {
   "at": "2026-11-16",
   "fp": "bc5ac90e642a",
