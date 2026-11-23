@@ -1,0 +1,115 @@
+{
+ "v": 2,
+ "slug": "aio-taisaku-souba",
+ "ok": true,
+ "date": "2026-11-24",
+ "questions": [
+  "aio対策 相場について教えてください",
+  "aio対策 相場について、「AIO対策の相場は月数十万〜数百万円が目安」を教えてください",
+  "aio対策 相場について、「相場を決める4つの要因」を教えてください",
+  "aio対策 相場について、「任せる範囲別にできることの違い」を教えてください",
+  "aio対策 相場について、「依頼先タイプ別の違い」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "AIO対策の相場は月数十万〜数百万円が目安",
+   "words": [
+    "月数十万",
+    "数百万円"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "相場を決める4つの要因",
+   "words": [
+    "要因"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "任せる範囲別にできることの違い",
+   "words": [
+    "範囲別"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "依頼先タイプ別の違い",
+   "words": [
+    "依頼先タイプ別"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "AIO対策を安く抑えるには任せる範囲を絞る",
+   "words": [
+    "範囲"
+   ],
+   "hits": 4,
+   "of": 5
+  },
+  {
+   "topic": "相場より安い・高い見積もりに潜む落とし穴",
+   "words": [
+    "見積"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "見積もりを比較する3つのチェックポイント",
+   "words": [
+    "チェックポイント",
+    "見積"
+   ],
+   "hits": 1,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "adcal-inc.com": "peer",
+  "allview.jp": "peer",
+  "bridge-world.jp": "peer",
+  "btobmarketing.tmedia.co.jp": "peer",
+  "conmark.jp": "peer",
+  "curumi.co.jp": "peer",
+  "cyberhorn.co.jp": "peer",
+  "dgtrends.com": "peer",
+  "fyve.co.jp": "peer",
+  "geo-code.co.jp": "peer",
+  "gmotech.jp": "peer",
+  "kigyolog.com": "portal",
+  "note.com": "video",
+  "pascaljp.com": "media",
+  "phoenix-design.co.jp": "peer",
+  "protea-inc.co.jp": "peer",
+  "prtimes.jp": "media",
+  "rpst.jp": "peer",
+  "seedinc.jp": "peer",
+  "simple-alpha.com": "peer",
+  "vertexaisearch.cloud.google.com": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 5,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 2,
+  "進め方の手順": 1,
+  "専門家への相談": 3
+ },
+ "chars": 11356,
+ "claims": [
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え4件のうち、『月数十万』に触れたものは0件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え5件のうち、『見積』に触れたものは1件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは期間（◯か月・◯日など）は1件、進め方の手順は1件、注意点・失敗・リスクは2件でした。",
+  "2026年11月に当社が1つのAI（Gemini）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは21件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが2件、ポータル・比較サイトが1件、動画・SNS・ブログが1件でした。"
+ ]
+}

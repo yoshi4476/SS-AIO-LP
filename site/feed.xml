@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-23T00:00:00+09:00</updated>
+  <updated>2026-11-24T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>SEO対策会社の選び方｜伸びなかった7件で分かった契約前の確認5つ</title>
+    <link href="https://ai.7senses.co.jp/seo/seo-taisaku-kaisha-erabikata/"/>
+    <id>https://ai.7senses.co.jp/seo/seo-taisaku-kaisha-erabikata/</id>
+    <updated>2026-11-24T00:00:00+09:00</updated>
+    <summary>SEO対策会社の選び方は、実績の数より、更新の権限と記事の材料を誰が用意するかを契約前に決められる会社かで判断します。当社のSEO運用37件・AIO運用22件のうち伸びずに終わった7件の原因と、契約前に聞く5つの確認点をまとめました。</summary>
+  </entry>
   <entry>
     <title>YouTube SEO対策の費用はいつ払う？工務店のAI出典は動画1.7%</title>
     <link href="https://ai.7senses.co.jp/aio/youtube-seo-taisaku-hiyou/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/fudousan-shukyaku-idea/</id>
     <updated>2026-11-06T00:00:00+09:00</updated>
     <summary>不動産の集客アイデアは、売り手や買い手がAIと検索で「調べる」質問に自社サイトで答えるものから試します。4つのAIの出典2,465件の調査では、調べる質問の回答の80.5%が不動産会社の公式サイトを出典にしていました。9つのアイデアと始める順番を整理します。</summary>
-  </entry>
-  <entry>
-    <title>買取店の集客で失敗する3つの原因｜AI検索に選ばれる店の条件</title>
-    <link href="https://ai.7senses.co.jp/aio/kaitoriten-shukyaku/"/>
-    <id>https://ai.7senses.co.jp/aio/kaitoriten-shukyaku/</id>
-    <updated>2026-11-06T00:00:00+09:00</updated>
-    <summary>買取店の集客は、売りたい人が「品目と地域」で検索やAIに聞いたとき、自店のページが答えに入るかで決まります。品目ページの不足・許可番号の非表示・出張買取の勧誘の3つの失敗と、店頭・出張・宅配ごとの打ち手を解説します。</summary>
   </entry>
 </feed>
