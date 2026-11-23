@@ -9,18 +9,18 @@
   "https://anema.co.jp/blog/geo-check-tools/"
  ],
  "missing": [
-  "株式会社メディアグロース",
   "インベストメント株式会社",
+  "株式会社メディアグロース",
   "aisearchmap",
-  "主要モニタリングツール",
   "bringritera",
-  "writesonic",
-  "seomonitor",
-  "業種別ランクイン事例",
+  "主要モニタリングツール",
   "ディープクロール解析",
-  "trackerly",
-  "対策マスターガイド",
-  "overviews"
+  "業種別ランクイン事例",
+  "seomonitor",
+  "writesonic",
+  "rankscale",
+  "プラットフォーム側",
+  "実践チェックリスト"
  ],
  "covered": 0.31
 }

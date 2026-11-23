@@ -57,7 +57,7 @@ faq:
 
 あわせて[電子カルテ情報共有サービスの補助金はクリニック対象外？](/blog/it-hojokin-denkaru-kyoyu-clinic/)もご覧ください。
 
-関連する内容として[GビズID不一致はNG](/blog/ai-hojokin-security-action-hoshi2/)も公開しています。
+あわせて[GビズID不一致はNG](/blog/ai-hojokin-security-action-hoshi2/)もご覧ください。
 
 <a href="https://it-shien.smrj.go.jp/applicant/subsidy/normal/" target="_blank" rel="noopener">デジタル化・AI導入補助金2026の通常枠ページ</a>によると、この制度はソフトウェア・クラウドサービスの導入費用を補助します。宿泊業ならPMSや予約システムが対象になりやすい分野です。
 

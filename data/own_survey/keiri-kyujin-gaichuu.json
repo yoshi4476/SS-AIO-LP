@@ -1,0 +1,104 @@
+{
+ "v": 2,
+ "slug": "keiri-kyujin-gaichuu",
+ "ok": true,
+ "date": "2026-11-23",
+ "questions": [
+  "経理 外注 求人について教えてください",
+  "経理 外注 求人について、「経理の求人になぜ応募が来ないのか？3つの構造的原因」を教えてください",
+  "経理 外注 求人について、「経理の求人にかかる採用コストの内訳と相場」を教えてください",
+  "経理 外注 求人について、「求人を出してから採用が決まるまでの期間の目安」を教えてください",
+  "経理 外注 求人について、「経理担当者が採用できないまま放置するリスク」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "経理の求人になぜ応募が来ないのか？3つの構造的原因",
+   "words": [
+    "構造的原因",
+    "応募"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "経理の求人にかかる採用コストの内訳と相場",
+   "words": [
+    "採用コスト",
+    "内訳"
+   ],
+   "hits": 1,
+   "of": 4
+  },
+  {
+   "topic": "求人を出してから採用が決まるまでの期間の目安",
+   "words": [
+    "採用",
+    "期間"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "経理担当者が採用できないまま放置するリスク",
+   "words": [
+    "リスク",
+    "採用"
+   ],
+   "hits": 4,
+   "of": 4
+  },
+  {
+   "topic": "経理の求人と外注（BPO）を費用・期間で比較する",
+   "words": [
+    "BPO"
+   ],
+   "hits": 3,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "assist.purple-onions.com": "peer",
+  "b-stylejob.jp": "peer",
+  "bricks-outsourcing.com": "peer",
+  "business.sokudan.work": "peer",
+  "crosslink.jp.net": "peer",
+  "crowdworks.jp": "portal",
+  "employment.en-japan.com": "portal",
+  "go.taxita.com": "portal",
+  "hr-media.offers.jp": "peer",
+  "hr.jobseeker-navi.com": "peer",
+  "jmsc.co.jp": "peer",
+  "keiri.harbors-inc.com": "peer",
+  "local-saiyo.jp": "peer",
+  "lxcareer.com": "peer",
+  "marugotoinc.jp": "peer",
+  "megubiz.com": "peer",
+  "neo-career.co.jp": "peer",
+  "roberthalf.com": "peer",
+  "saiyo-doda.jp": "peer",
+  "staff.merrybiz.co.jp": "peer",
+  "tempstaff.co.jp": "peer",
+  "vertexaisearch.cloud.google.com": "peer",
+  "xn--pckua2a7gp15o89zb.com": "peer",
+  "zaitaku.sal.ne.jp": "peer",
+  "zeeta.co.jp": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 3,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 1,
+  "専門家への相談": 1
+ },
+ "chars": 9766,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え4件のうち、『採用コスト』に触れたものは1件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは進め方の手順は1件、専門家への相談は1件、費用の金額（◯円）は2件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは25件で、公的機関・学会・業界団体が0件、ニュース・メディア・まとめが0件、ポータル・比較サイトが3件でした。"
+ ]
+}

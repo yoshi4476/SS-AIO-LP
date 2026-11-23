@@ -38,3 +38,11 @@
 {"date": "2026-11-16", "site": "corporate", "url": "https://corp.7senses.co.jp/blog/shiwake-jidoka-houhou", "strategy": "mobile", "source": "lab", "LCP": 2401.011432028947, "CLS": 0.001167637883510082, "INP": null, "score": 98}
 {"date": "2026-11-16", "site": "subsidy", "url": "https://lp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 1150.5029293299901, "CLS": 0, "INP": null, "score": 99}
 {"date": "2026-11-16", "site": "subsidy", "url": "https://lp.7senses.co.jp/blog/ai-donyu-hojokin-jirei/", "strategy": "mobile", "source": "lab", "LCP": 1082.012672963935, "CLS": 0, "INP": null, "score": 97}
+{"date": "2026-11-23", "site": "ai-lab", "url": "https://ai.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 1385.0458877925955, "CLS": 0, "INP": null, "score": 98}
+{"date": "2026-11-23", "site": "ai-lab", "url": "https://ai.7senses.co.jp/seo/zeirishi-shukyaku-site/", "strategy": "mobile", "source": "lab", "LCP": 4308.304501522426, "CLS": 0, "INP": null, "score": 75}
+{"date": "2026-11-23", "site": "corporate", "url": "https://corp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 1166.0040905712456, "CLS": 0.0016899618858409388, "INP": null, "score": 96}
+{"date": "2026-11-23", "site": "corporate", "url": "https://corp.7senses.co.jp/blog/shiwake-jidoka-houhou", "strategy": "mobile", "source": "lab", "LCP": 2101.0116810363797, "CLS": 0.001167637883510082, "INP": null, "score": 98}
+{"date": "2026-11-23", "site": "subsidy", "url": "https://lp.7senses.co.jp/", "strategy": "mobile", "source": "lab", "LCP": 1126.5020650994352, "CLS": 0, "INP": null, "score": 99}
+{"date": "2026-11-23", "site": "subsidy", "url": "https://lp.7senses.co.jp/blog/ai-donyu-hojokin-jirei/", "strategy": "mobile", "source": "lab", "LCP": 1051.0131727719395, "CLS": 0, "INP": null, "score": 100}
+{"date": "2026-11-23", "site": "ai-lab", "url": "https://ai.7senses.co.jp/seo/zeirishi-shukyaku-site/", "strategy": "mobile", "source": "lab", "LCP": 1407.5353102843346, "CLS": 0, "INP": null, "score": 100}
+{"date": "2026-11-23", "site": "ai-lab", "url": "https://ai.7senses.co.jp/seo/zeirishi-shukyaku-site/", "strategy": "mobile", "source": "lab", "LCP": 1361.0635643019573, "CLS": 0, "INP": null, "score": 100}

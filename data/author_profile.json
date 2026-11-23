@@ -1,5 +1,5 @@
 {
- "date": "2026-11-16",
+ "date": "2026-11-23",
  "same_as": [
   "https://www.linkedin.com/in/yu-haraguchi",
   "https://note.com/yu_haraguchi",
@@ -8,12 +8,6 @@
  ],
  "mentions": [],
  "works": [
-  {
-   "kind": "動画",
-   "title": "計理と経理は何が違う？保険の計理人・旧計理士と取り違えない3つの場面",
-   "url": "https://www.youtube.com/watch?v=-fUhQeHt8ss",
-   "date": "2026-10-06"
-  },
   {
    "kind": "動画",
    "title": "工務店のAI検索集客｜来場予約までの導線を4ステップで確かめる",
@@ -127,6 +121,12 @@
    "title": "research-fudosan",
    "url": "https://www.youtube.com/watch?v=N_-HXUnMTEE",
    "date": "2026-11-16"
+  },
+  {
+   "kind": "動画",
+   "title": "research-fuyouhin",
+   "url": "https://www.youtube.com/watch?v=IyFeqsE5kR4",
+   "date": "2026-11-23"
   }
  ],
  "credentials": [],
@@ -257,9 +257,9 @@
   }
  ],
  "counts": {
-  "articles": 452,
+  "articles": 436,
   "datasets": 14,
-  "videos": 26,
+  "videos": 27,
   "research": 31
  }
 }

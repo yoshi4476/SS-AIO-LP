@@ -639,7 +639,7 @@
       "ai-lab": {
         "queries": 5,
         "asked": 5,
-        "cited": 5,
+        "cited": 4,
         "items": [
           {
             "kw": "aioツール",
@@ -687,7 +687,7 @@
             "answered": true
           },
           {
-            "kw": "aioチェッカー",
+            "kw": "aio 診断",
             "engines": {
               "ChatGPT": {
                 "cited": false,
@@ -698,43 +698,29 @@
                 "cited": false,
                 "ours": [],
                 "sources": [
-                  "aio-check.ai",
-                  "bring-flower.com",
-                  "devo.jp",
-                  "gyro-n.com",
-                  "note.com",
-                  "ui.userlocal.jp",
-                  "white-link.com",
-                  "willgate.co.jp"
+                  "adv.tokyo-np.co.jp",
+                  "aioscore.jp",
+                  "atoz-design.jp",
+                  "coosy.co.jp"
                 ]
               },
               "Perplexity": {
-                "cited": true,
-                "ours": [
-                  "https://ai.7senses.co.jp/aio/aio-checker/"
-                ],
-                "sources": [
-                  "ai-search.techsuite.co.jp",
-                  "ai.7senses.co.jp",
-                  "aiopulse.jp",
-                  "boring-tool.com",
-                  "devo.jp",
-                  "jiji.com",
-                  "news.livedoor.com",
-                  "seedinc.jp"
-                ]
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
-                "cited": false,
-                "ours": [],
+                "cited": true,
+                "ours": [
+                  "https://ai.7senses.co.jp/diagnosis/aio/"
+                ],
                 "sources": [
-                  "aipicks.jp",
-                  "commercepick.com",
-                  "huntscreens.com",
-                  "jinrai.co.jp",
-                  "uravation.com",
-                  "voix.jp",
-                  "webtan.impress.co.jp"
+                  "0120.co.jp",
+                  "ai-hack.co.jp",
+                  "ai.7senses.co.jp",
+                  "aio-check.ai",
+                  "aio.solgeo.co.jp",
+                  "aiogeoscan.com",
+                  "aiosoken.com",
+                  "allweb-consulting.co.jp"
                 ]
               }
             },
@@ -784,7 +770,7 @@
             "answered": true
           },
           {
-            "kw": "aio 診断",
+            "kw": "aioチェッカー",
             "engines": {
               "ChatGPT": {
                 "cited": false,
@@ -795,10 +781,14 @@
                 "cited": false,
                 "ours": [],
                 "sources": [
-                  "adv.tokyo-np.co.jp",
-                  "aioscore.jp",
-                  "atoz-design.jp",
-                  "coosy.co.jp"
+                  "aio-check.ai",
+                  "bring-flower.com",
+                  "devo.jp",
+                  "gptzero.me",
+                  "grammarly.com",
+                  "ui.userlocal.jp",
+                  "vertexaisearch.cloud.google.com",
+                  "zerogpt.com"
                 ]
               },
               "Perplexity": {
@@ -807,17 +797,17 @@
               "Claude": {
                 "cited": true,
                 "ours": [
-                  "https://ai.7senses.co.jp/diagnosis/aio/"
+                  "https://ai.7senses.co.jp/aio/aio-checker/"
                 ],
                 "sources": [
-                  "0120.co.jp",
-                  "ai-hack.co.jp",
+                  "ai-search.techsuite.co.jp",
                   "ai.7senses.co.jp",
-                  "aio-check.ai",
-                  "aio.solgeo.co.jp",
-                  "aiogeoscan.com",
-                  "aiosoken.com",
-                  "allweb-consulting.co.jp"
+                  "btobmarketing.tmedia.co.jp",
+                  "devo.jp",
+                  "note.com",
+                  "prov.co.jp",
+                  "sungrove.co.jp",
+                  "unomas.jp"
                 ]
               }
             },
@@ -825,7 +815,7 @@
             "answered": true
           },
           {
-            "kw": "無料aioチェック",
+            "kw": "クリニック 集客",
             "engines": {
               "ChatGPT": {
                 "cited": false,
@@ -835,37 +825,27 @@
               "Gemini": {
                 "cited": false,
                 "ours": [],
-                "sources": [
-                  "adv.tokyo-np.co.jp",
-                  "ai-tool.userlocal.jp",
-                  "aio-check.ai",
-                  "aio.archcorp.jp",
-                  "m-lb.jp",
-                  "prtimes.jp",
-                  "white-link.com"
-                ]
+                "sources": []
               },
               "Perplexity": {
                 "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
               },
               "Claude": {
-                "cited": true,
-                "ours": [
-                  "https://ai.7senses.co.jp/aio/aio-taisaku-muryou-tool/"
-                ],
+                "cited": false,
+                "ours": [],
                 "sources": [
-                  "0120.co.jp",
-                  "ai-search.techsuite.co.jp",
-                  "ai.7senses.co.jp",
-                  "aio-check.ai",
-                  "aiopulse.jp",
-                  "allweb-consulting.co.jp",
-                  "btobmarketing.tmedia.co.jp",
-                  "devo.jp"
+                  "adrim.co.jp",
+                  "assist-centering.co.jp",
+                  "biz.service.ntt-east.co.jp",
+                  "clasic.jp",
+                  "coomil.co.jp",
+                  "digikar.m3.com",
+                  "e-pace.co.jp",
+                  "gmotech.jp"
                 ]
               }
             },
-            "cited": true,
+            "cited": false,
             "answered": true
           }
         ]
@@ -875,51 +855,6 @@
         "asked": 5,
         "cited": 0,
         "items": [
-          {
-            "kw": "コーポレートとは",
-            "engines": {
-              "ChatGPT": {
-                "cited": false,
-                "ours": [],
-                "sources": []
-              },
-              "Gemini": {
-                "cited": false,
-                "ours": [],
-                "sources": []
-              },
-              "Perplexity": {
-                "cited": false,
-                "ours": [],
-                "sources": [
-                  "dictionary.cambridge.org",
-                  "ei-navi.jp",
-                  "ejje.weblio.jp",
-                  "ferret-plus.com",
-                  "ja.wikipedia.org",
-                  "jp.indeed.com",
-                  "kotobank.jp",
-                  "ldoceonline.com"
-                ]
-              },
-              "Claude": {
-                "cited": false,
-                "ours": [],
-                "sources": [
-                  "directscout.recruit.co.jp",
-                  "ejje.weblio.jp",
-                  "freee.co.jp",
-                  "kotobank.jp",
-                  "kpmg.com",
-                  "limo.media",
-                  "unistyleinc.com",
-                  "weblio.jp"
-                ]
-              }
-            },
-            "cited": false,
-            "answered": true
-          },
           {
             "kw": "経理課",
             "engines": {
@@ -1012,7 +947,7 @@
             "answered": true
           },
           {
-            "kw": "経理代行 料金表",
+            "kw": "コーポレートとは",
             "engines": {
               "ChatGPT": {
                 "cited": false,
@@ -1022,16 +957,7 @@
               "Gemini": {
                 "cited": false,
                 "ours": [],
-                "sources": [
-                  "anshin-keiri.eiwa-gr.jp",
-                  "cloudsolution.co.jp",
-                  "cyber-crew.jp",
-                  "go.chatwork.com",
-                  "help-you.me",
-                  "osakacpa.com",
-                  "persol-bd.co.jp",
-                  "vertexaisearch.cloud.google.com"
-                ]
+                "sources": []
               },
               "Perplexity": {
                 "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
@@ -1040,9 +966,46 @@
                 "cited": false,
                 "ours": [],
                 "sources": [
-                  "4649.ai",
-                  "persol-bd.co.jp",
-                  "wheat-biz.com"
+                  "biz.trans-suite.jp",
+                  "boutex.jp",
+                  "branding-works.jp",
+                  "gimon-sukkiri.jp",
+                  "jp.indeed.com",
+                  "meaning.jp",
+                  "note.com",
+                  "topicks.jp"
+                ]
+              }
+            },
+            "cited": false,
+            "answered": true
+          },
+          {
+            "kw": "請求書 三つ折り",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": []
+              },
+              "Perplexity": {
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "biz.moneyforward.com",
+                  "del-f.co.jp",
+                  "futo-tatujin.com",
+                  "geki-fu.com",
+                  "media.invoice.ne.jp",
+                  "templex.jp"
                 ]
               }
             },
@@ -1151,59 +1114,6 @@
             "answered": true
           },
           {
-            "kw": "美容室 レジ 補助金",
-            "engines": {
-              "ChatGPT": {
-                "cited": false,
-                "ours": [],
-                "sources": [
-                  "jobvr.co.jp",
-                  "salog.jp"
-                ]
-              },
-              "Gemini": {
-                "cited": false,
-                "ours": [],
-                "sources": [
-                  "airregi.jp",
-                  "busicom.co.jp",
-                  "carearc.co.jp",
-                  "catalog.monex.co.jp",
-                  "hojyokin-portal.jp",
-                  "jyoseikin-support.net",
-                  "mono-support.com",
-                  "note.com"
-                ]
-              },
-              "Perplexity": {
-                "cited": false,
-                "ours": [],
-                "sources": [
-                  "11consul.com",
-                  "activemedia.co.jp",
-                  "bireki.jp",
-                  "carearc.co.jp",
-                  "catalog.monex.co.jp",
-                  "gxo.co.jp",
-                  "hojonavi.org",
-                  "kaigyou.tb-net.jp"
-                ]
-              },
-              "Claude": {
-                "cited": false,
-                "ours": [],
-                "sources": [
-                  "aspicjapan.org",
-                  "atsoho.com",
-                  "hojyokin-portal.jp",
-                  "office-tree.jp"
-                ]
-              }
-            },
-            "cited": false,
-            "answered": true
-          },
-          {
             "kw": "ベンダー登録とは",
             "engines": {
               "ChatGPT": {
@@ -1231,6 +1141,52 @@
                   "japan-finance.jp",
                   "job-q.me",
                   "planbase.co.jp"
+                ]
+              }
+            },
+            "cited": false,
+            "answered": true
+          },
+          {
+            "kw": "美容室 レジ 補助金",
+            "engines": {
+              "ChatGPT": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "beauty-pos.jp",
+                  "salog.jp"
+                ]
+              },
+              "Gemini": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "beauty-pos.jp",
+                  "bireki.jp",
+                  "carearc.co.jp",
+                  "catalog.monex.co.jp",
+                  "ex.salonanswer.com",
+                  "hojyokin-portal.jp",
+                  "note.com",
+                  "postas.co.jp"
+                ]
+              },
+              "Perplexity": {
+                "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+              },
+              "Claude": {
+                "cited": false,
+                "ours": [],
+                "sources": [
+                  "11consul.com",
+                  "carearc.co.jp",
+                  "ex.salonanswer.com",
+                  "local-mp.co.jp",
+                  "physical-ai-hojokin.jp",
+                  "rsvia.co.jp",
+                  "salon-grant.com",
+                  "shop-reform.com"
                 ]
               }
             },

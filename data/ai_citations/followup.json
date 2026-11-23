@@ -2223,10 +2223,300 @@
     }
    },
    "cited": false
+  },
+  "ai-system-kaihatsu-hojo-taisho-keihi": {
+   "checked": "2026-11-23",
+   "site": "subsidy",
+   "kw": "ai システム開発 補助金 申請 補助対象経費",
+   "published": "2026-10-15",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "hojokin-dx.com",
+      "hojokin.tagiru.co.jp",
+      "it-shien.smrj.go.jp",
+      "syusodo.co.jp"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "gandn.co.jp",
+      "hnavi.co.jp",
+      "hojokin-joseikin.com",
+      "inu-llc.co.jp",
+      "it-shien.smrj.go.jp",
+      "it-trend.jp",
+      "next1create.com",
+      "sun-asterisk.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "0120.co.jp",
+      "ai-keiei.shift-ai.co.jp",
+      "bigdata-analytics.jp",
+      "biz.moneyforward.com",
+      "chusho.meti.go.jp",
+      "fyve.co.jp",
+      "genee.jp",
+      "hojokin-dx.com"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "aio-itsukara": {
+   "checked": "2026-11-23",
+   "site": "ai-lab",
+   "kw": "aio いつから",
+   "published": "2026-10-15",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "corsair.com",
+      "darkflash.com",
+      "forgepc.co.uk"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "ai-search.techsuite.co.jp",
+      "anima.tokyo",
+      "jp.linkshare.com",
+      "network.mobile.rakuten.co.jp",
+      "phonogram.co.jp",
+      "studionika.co.jp",
+      "tatap.jp",
+      "vicme.jp"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "ai-search.techsuite.co.jp",
+      "current.ndl.go.jp",
+      "hottolink.co.jp",
+      "internet.watch.impress.co.jp",
+      "jetstream.blog",
+      "tatap.jp",
+      "vicme.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "clinic-kanja-shukyaku": {
+   "checked": "2026-11-23",
+   "site": "ai-lab",
+   "kw": "クリニック 患者 集客",
+   "published": "2026-10-15",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "coomil.co.jp",
+      "dcp-sol.com",
+      "digikar.m3.com",
+      "gmotech.jp",
+      "lany.co.jp",
+      "medicalcenterjp.com",
+      "n-works.link",
+      "stock-sun.com"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "getsuji-kessan-itsumade": {
+   "checked": "2026-11-23",
+   "site": "corporate",
+   "kw": "月次決算 いつまで",
+   "published": "2026-10-15",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "accounting.cast-er.com",
+      "catalog.monex.co.jp",
+      "freee.co.jp",
+      "obc.co.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "kicho-daiko-coconala": {
+   "checked": "2026-11-23",
+   "site": "corporate",
+   "kw": "記帳代行 ココナラ",
+   "published": "2026-10-15",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "coconala.com",
+      "crowdworks.jp",
+      "note.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "coconala.com"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "nogyo-hojokin-50sai-ijo": {
+   "checked": "2026-11-23",
+   "site": "subsidy",
+   "kw": "農業 補助金 50歳以上",
+   "published": "2026-10-15",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": []
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "freesup.crowdworks.jp",
+      "hojyokin-portal.jp",
+      "maff.go.jp",
+      "mirasapo.jp",
+      "noka-hojokin.com",
+      "note.com",
+      "noukaweb.com",
+      "smart-hojokin.jp"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "agrinews.co.jp",
+      "city.akita.lg.jp",
+      "city.nagasaki.lg.jp",
+      "city.oshu.iwate.jp",
+      "farm-connect.org",
+      "hojyokin-portal.jp",
+      "ksdtu.com",
+      "kuma-farm.jp"
+     ]
+    }
+   },
+   "cited": false
+  },
+  "kichodaiko-sapporo": {
+   "checked": "2026-11-23",
+   "site": "corporate",
+   "kw": "記帳代行 札幌",
+   "published": "2026-10-16",
+   "engines": {
+    "ChatGPT": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "google.com"
+     ]
+    },
+    "Gemini": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "chuo-keiri.jp",
+      "keiri-adachi.com",
+      "muraki-cpa.gr.jp",
+      "sanke-inc.co.jp",
+      "sasaki-eiko.jp",
+      "suginot.com",
+      "vp-keiri.com"
+     ]
+    },
+    "Perplexity": {
+     "error": "HTTP 403: 鍵に権限がありません｜{\"error\":{\"message\":\"The Agent API requires paid credits. S"
+    },
+    "Claude": {
+     "cited": false,
+     "ours": [],
+     "sources": [
+      "buildway.jimdofree.com",
+      "go.taxita.com",
+      "help-you.me",
+      "kaikei.management",
+      "keiri-adachi.com",
+      "leapal.jp",
+      "marunagekanri.com",
+      "sanke-inc.co.jp"
+     ]
+    }
+   },
+   "cited": false
   }
  },
  "last_run": {
-  "date": "2026-11-16",
+  "date": "2026-11-23",
   "state": "ok",
   "checked": 8,
   "failed": 0,
