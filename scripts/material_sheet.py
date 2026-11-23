@@ -149,7 +149,8 @@ def make(site, out_dir, today=None):
     name = display_name(site)
     rows = rows_for(site, requests_of(site))
     wb = Workbook()
-    question_tab(wb, site, name, today, rows)
+    import material_prefill as MP
+    question_tab(wb, site, name, today, rows, filled=MP.load_record(site))
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     safe = re.sub(r'[\\/:*?"<>|\s]+', "_", name)
@@ -158,8 +159,11 @@ def make(site, out_dir, today=None):
     return p, len(rows)
 
 
-def question_tab(wb, site, name, today, rows, extra_head=()):
-    """質問のタブと隠しタブ。rows は (key, 項目, 質問, 目安, *読むだけの欄)。--apply は A〜H 列と隠しタブだけを読む"""
+def question_tab(wb, site, name, today, rows, extra_head=(), filled=None):
+    """質問のタブと隠しタブ。rows は (key, 項目, 質問, 目安, *読むだけの欄)。--apply は A〜H 列と隠しタブだけを読む。
+    filled は公開ページから自動で埋めた答え（material_prefill の記録 {key: {answer, url}}）。答えの欄に入れ、目安の欄に出典を書く。
+    その行は登録済みなので、そのまま戻ってきても重複として捨てる"""
+    filled = filled or {}
     from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
     ws = wb.active
     ws.title = TAB
@@ -182,8 +186,12 @@ def question_tab(wb, site, name, today, rows, extra_head=()):
         c.font = Font(name="Arial", bold=True, color="FFFFFF")
         c.fill = PatternFill("solid", start_color="1F3A5F")
         c.alignment = Alignment(vertical="center", wrap_text=True)
-    for i, (_, lab, q, hint, *more) in enumerate(rows, 1):
-        ws.append([i, lab, q, hint, "", "", "", ""] + list(more)[:len(extra_head)])
+    for i, (key, lab, q, hint, *more) in enumerate(rows, 1):
+        got = filled.get(key) if isinstance(filled.get(key), dict) else None
+        if got:
+            hint = f"自動記入済み（御社の公開ページ {got.get('url', '')} から。{got.get('at', '')}）。違っていれば直してください"
+        ws.append([i, lab, q, hint, (got or {}).get("answer", ""), "", "", "可" if got else ""]
+                  + list(more)[:len(extra_head)])
     for row in ws.iter_rows(min_row=5, max_row=4 + len(rows)):
         for c in row:
             c.font = Font(name="Arial", size=10)
@@ -619,12 +627,12 @@ def plan(site, answers, ask=None):
     return out_f, out_e, held
 
 
-def write(site, facts, exps, today=None):
-    """一次情報・体験を書き足す。お客様の社は非公開の置き場、自社は data/"""
+def write(site, facts, exps, today=None, source=""):
+    """一次情報・体験を書き足す。お客様の社は非公開の置き場、自社は data/。source は出どころ（公開ページからの自動記入など）"""
     import private_store as P
     today = today or date.today().isoformat()
     tag = today.replace("-", "")
-    src = f"自社実績（質問シート {today}）"
+    src = source or f"自社実績（質問シート {today}）"
     if P.is_client(site):
         fd = P.read_json(site, "facts.json", {"facts": []}) or {"facts": []}
         ed = P.read_json(site, "experiences.json", {"experiences": []}) or {"experiences": []}

@@ -389,14 +389,6 @@ jobs:
           # 書き直しから31日たった自社の記事の前と後（表示・平均順位）を一次情報にする（週3本。運用者 2026-10-21）
           python scripts/material_sheet.py --auto-measure 3 || true
 
-      # 採点で材料が足りないと出た記事の質問シートを、依頼が新しく出た・変わった週だけメールで送る（運用者 2026-10-21）
-      - name: 材料の質問シートを送る
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
-          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
-        run: python scripts/material_sheet.py --mail || true
-
       # どの業種×手法が空いているかを盤面で出す。空きマスは、そのまま
       # 次に書くべき記事になる。1本ずつ選んでいると面の欠けに気づけない
       - name: 盤面の空きを出す（業種 × 手法）
@@ -936,6 +928,17 @@ jobs:
               "auto_merge --scaled の検算が効いていません（同型記事の統合は飛ばしました）" || true
           fi
 
+      # 材料の質問シートを、社の公開ページから自動で埋める（運用者 2026-11-23「シートなどは自動で埋めるように」）。
+      # 外のページの文を AI に読ませるので、鍵を外したこの間に動かす。答えは引用で機械が確かめ、登録の重複・食い違いは
+      # material_sheet.plan が止める。非公開の置き場へ送るのは鍵を戻した後（下の「材料の質問シートを送る」）
+      - name: 材料の質問シートを公開ページから自動で埋める
+        if: steps.guard.outputs.ok == 'yes'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HUB_SECRET: ""
+        run: timeout 20m python scripts/material_prefill.py --write --no-push || true
+
       # AI が触ってはいけない場所（コード・ワークフロー・門・指示書）の変更を戻してから鍵を戻す。この後の git add -A に入れない
       - name: 書き直し・統合の後に触ってはいけない場所を戻す
         if: always() && steps.lock_rewrite.outcome != 'skipped'
@@ -951,6 +954,18 @@ jobs:
         run: |
           rm -f "$RUNNER_TEMP/hub_tokens/tools"
           python scripts/agent_guard.py --unlock
+
+      # 採点で材料が足りないと出た記事の質問シートを、依頼が新しく出た・変わった週だけメールで送る（運用者 2026-10-21）。
+      # 公開ページから自動で埋めた答え（上の工程）を非公開の置き場へ送ってから、埋めた答えの入ったシートを作る
+      - name: 材料の質問シートを送る
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          LEAD_FROM_EMAIL: ${{ secrets.LEAD_FROM_EMAIL }}
+          NOTIFY_TO_EMAIL: info.ai@7senses.co.jp
+          PRIVATE_DATA_TOKEN: ${{ secrets.PRIVATE_DATA_TOKEN || secrets.SITE_PUSH_TOKEN }}
+        run: |
+          python -c "import sys; sys.path.insert(0, 'scripts'); import private_store as P; P.push('質問シートを社の公開ページから自動記入')" || true
+          python scripts/material_sheet.py --mail || true
 
       # 当てた修正の積み上がりを見る。link_boost・tool_links・auto_improve は
       # どれも1本ずつしか見ないため、ここでしか全体の偏りに気づけない。

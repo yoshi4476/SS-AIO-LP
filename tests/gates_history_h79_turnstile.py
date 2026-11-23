@@ -369,7 +369,14 @@ def _browser_case(page, path, mode, api="ok", enforce=False, form_sel="form.form
         except Exception:
             return default
     got["msg"] = look("(document.querySelector('.ts-msg') || {}).textContent || ''", "") if not got["posts"] else ""
-    got["reset"] = look("window.__tsReset || 0", 0) if sub else 0
+    # 作り直し（renew）は送った後の setTimeout(0) で動く。送信を見た瞬間に読むと、まだ動いておらず 0 と出る回があった
+    # （2026-11-23 に3回に1回落ちた）。1秒まで待ってから読む
+    got["reset"] = 0
+    for _ in range(10 if sub else 0):
+        got["reset"] = look("window.__tsReset || 0", 0)
+        if got["reset"]:
+            break
+        page.wait_for_timeout(100)
     return got
 
 
