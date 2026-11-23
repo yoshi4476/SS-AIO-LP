@@ -96,6 +96,8 @@ quality_attempts: 3
 
 **外注先の請求書に登録番号が無いと困るのは、本則課税で消費税を計算する個人事業主だけです。**
 
+つまずきやすい点は[適格請求書発行事業者登録番号の照合で見落とす3つの落とし穴](/blog/tekikaku-touroku-bangou)でも扱っています。
+
 関連する内容として[請求書の書き方｜個人が押さえる基本6項目と源泉徴収](/blog/seikyusho-kakikata-kojin/)も公開しています。
 
 <figure><img src="/images/kojinjigyonushi-gaichuuhi-seikyusho/keisan.png" alt="免税事業者、簡易課税、2割特例・3割特例、本則課税ごとに、登録番号の無い請求書の影響と請求書の保存を比べた表"></figure>

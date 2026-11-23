@@ -118,7 +118,7 @@ faq:
 
 <figure><img src="/images/tekikaku-seikyusho-youken/jyuryo.png" alt="受け取った請求書の確認3ステップ: 登録番号を公表サイトで照合する、6項目の欠けを確認する、欠けがあれば再交付を依頼する" loading="lazy"><figcaption>受け取った請求書の確認3ステップ</figcaption></figure>
 
-登録番号は<a href="https://www.invoice-kohyo.nta.go.jp/" target="_blank" rel="noopener">国税庁の適格請求書発行事業者公表サイト</a>で照合できます。登録は取消や失効もあるため、取引開始時だけでなく定期的な照合が必要です。
+登録番号は<a href="https://www.invoice-kohyo.nta.go.jp/" target="_blank" rel="noopener">国税庁の適格請求書発行事業者公表サイト</a>で照合できます。登録は取消や失効もあるため、取引開始時だけでなく定期的な照合が必要です。照合で見落としやすい点は、[適格請求書発行事業者登録番号の照合で見落とす3つの落とし穴](https://corp.7senses.co.jp/blog/tekikaku-touroku-bangou/)にまとめました。
 
 欠けの内容によって、対応は3つに分かれます。
 
