@@ -1,18 +1,28 @@
 {
-  "date": "2026-11-22",
+  "date": "2026-11-23",
   "method": "GSCのCTR歪みからの推定",
   "sites": {
     "ai-lab": {
       "judged": 32,
-      "suspect_taken": 29,
-      "healthy": 3,
-      "too_thin": 220,
+      "suspect_taken": 30,
+      "healthy": 2,
+      "too_thin": 219,
       "items": [
+        {
+          "kw": "原口優",
+          "url": "https://ai.7senses.co.jp/author/haraguchi/",
+          "pos": 1.1,
+          "imp": 17,
+          "clicks": 1,
+          "ctr": 5.88,
+          "expected_ctr": 28.0,
+          "ratio": 0.21
+        },
         {
           "kw": "ai overview 店舗集客",
           "url": "https://ai.7senses.co.jp/aio/ai-overview-tenpo-shukyaku/",
-          "pos": 2.8,
-          "imp": 19,
+          "pos": 2.9,
+          "imp": 18,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 11.0,
@@ -21,18 +31,18 @@
         {
           "kw": "aio gemini 引用 載る方法",
           "url": "https://ai.7senses.co.jp/aio/gemini-inyou-noru-houhou/",
-          "pos": 4.8,
-          "imp": 12,
+          "pos": 4.5,
+          "imp": 13,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 7.0,
+          "expected_ctr": 8.0,
           "ratio": 0.0
         },
         {
           "kw": "aio コンテキスト 理解 促進",
           "url": "https://ai.7senses.co.jp/aio/aio-context-rikai-sokushin/",
-          "pos": 2.7,
-          "imp": 14,
+          "pos": 2.6,
+          "imp": 16,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 11.0,
@@ -41,8 +51,8 @@
         {
           "kw": "aio コンテキスト 理解 促進",
           "url": "https://ai.7senses.co.jp/aio/aio-towa/",
-          "pos": 6.5,
-          "imp": 13,
+          "pos": 5.6,
+          "imp": 12,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -52,7 +62,7 @@
           "kw": "aio チェッカー",
           "url": "https://ai.7senses.co.jp/aio/aio-checker/",
           "pos": 7.4,
-          "imp": 28,
+          "imp": 30,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -71,8 +81,8 @@
         {
           "kw": "aio ツール 評判 口コミ",
           "url": "https://ai.7senses.co.jp/aio/aio-tool-hyouban-kuchikomi/",
-          "pos": 3.8,
-          "imp": 16,
+          "pos": 3.6,
+          "imp": 17,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -81,8 +91,8 @@
         {
           "kw": "aio ログ分析 ツール 比較",
           "url": "https://ai.7senses.co.jp/aio/aio-log-bunseki-tool-hikaku/",
-          "pos": 4,
-          "imp": 12,
+          "pos": 4.2,
+          "imp": 11,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 8.0,
@@ -91,18 +101,28 @@
         {
           "kw": "aio 代理店 選び方 ポイント",
           "url": "https://ai.7senses.co.jp/aio/aio-dairiten-erabikata/",
-          "pos": 6.8,
-          "imp": 12,
+          "pos": 7.1,
+          "imp": 13,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
           "ratio": 0.0
         },
         {
+          "kw": "aio 効果測定 レポート 雛形",
+          "url": "https://ai.7senses.co.jp/aio/aio-koka-sokutei-report-hinagata/",
+          "pos": 5.1,
+          "imp": 11,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 7.0,
+          "ratio": 0.0
+        },
+        {
           "kw": "aio 反映時間",
           "url": "https://ai.7senses.co.jp/aio/aio-towa/",
           "pos": 5.8,
-          "imp": 14,
+          "imp": 13,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -142,7 +162,7 @@
           "kw": "aio 相談",
           "url": "https://ai.7senses.co.jp/aio/aio-muryou-soudan/",
           "pos": 5.9,
-          "imp": 19,
+          "imp": 18,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -171,11 +191,11 @@
         {
           "kw": "aio類義語",
           "url": "https://ai.7senses.co.jp/aio/aio-kotoba/",
-          "pos": 8.3,
-          "imp": 20,
+          "pos": 8.7,
+          "imp": 19,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 3.5,
+          "expected_ctr": 3.0,
           "ratio": 0.0
         },
         {
@@ -187,52 +207,32 @@
           "ctr": 0,
           "expected_ctr": 4.0,
           "ratio": 0.0
-        },
-        {
-          "kw": "ハウスメーカーにおすすめのllmo会社を教えて",
-          "url": "https://ai.7senses.co.jp/lp/koumuten/",
-          "pos": 5.1,
-          "imp": 46,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 7.0,
-          "ratio": 0.0
-        },
-        {
-          "kw": "マットレスメーカーにおすすめのllmo会社を教えて",
-          "url": "https://ai.7senses.co.jp/",
-          "pos": 5.1,
-          "imp": 16,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 7.0,
-          "ratio": 0.0
         }
       ]
     },
     "corporate": {
-      "judged": 44,
-      "suspect_taken": 38,
+      "judged": 43,
+      "suspect_taken": 37,
       "healthy": 6,
-      "too_thin": 243,
+      "too_thin": 249,
       "items": [
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/",
           "pos": 6.7,
-          "imp": 946,
+          "imp": 935,
           "clicks": 4,
-          "ctr": 0.42,
+          "ctr": 0.43,
           "expected_ctr": 4.0,
-          "ratio": 0.1
+          "ratio": 0.11
         },
         {
           "kw": "セブンセンシズ",
           "url": "https://corp.7senses.co.jp/company",
           "pos": 3.3,
-          "imp": 262,
+          "imp": 263,
           "clicks": 4,
-          "ctr": 1.53,
+          "ctr": 1.52,
           "expected_ctr": 11.0,
           "ratio": 0.14
         },
@@ -249,20 +249,20 @@
         {
           "kw": "コーポレート バックオフィス 違い",
           "url": "https://corp.7senses.co.jp/blog/corporate-backoffice-chigai",
-          "pos": 1.3,
-          "imp": 19,
+          "pos": 1.4,
+          "imp": 17,
           "clicks": 1,
-          "ctr": 5.26,
+          "ctr": 5.88,
           "expected_ctr": 28.0,
-          "ratio": 0.19
+          "ratio": 0.21
         },
         {
           "kw": "経理補助とは",
           "url": "https://corp.7senses.co.jp/blog/keiri-jimu-hojo-chigai",
           "pos": 6.6,
-          "imp": 90,
+          "imp": 88,
           "clicks": 1,
-          "ctr": 1.11,
+          "ctr": 1.14,
           "expected_ctr": 4.0,
           "ratio": 0.28
         },
@@ -280,7 +280,7 @@
           "kw": "seo 代理店",
           "url": "https://corp.7senses.co.jp/",
           "pos": 7.8,
-          "imp": 10,
+          "imp": 12,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -300,7 +300,7 @@
           "kw": "コーポレートとは",
           "url": "https://corp.7senses.co.jp/blog/corporate-backoffice-chigai",
           "pos": 9.4,
-          "imp": 73,
+          "imp": 63,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.0,
@@ -319,18 +319,18 @@
         {
           "kw": "コーポレート部門とは",
           "url": "https://corp.7senses.co.jp/blog/corporate-backoffice-chigai",
-          "pos": 3.6,
-          "imp": 22,
+          "pos": 4.6,
+          "imp": 23,
           "clicks": 0,
           "ctr": 0,
-          "expected_ctr": 8.0,
+          "expected_ctr": 7.0,
           "ratio": 0.0
         },
         {
           "kw": "セブンセンシズ株式会社",
           "url": "https://corp.7senses.co.jp/services",
           "pos": 1,
-          "imp": 29,
+          "imp": 30,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 28.0,
@@ -369,8 +369,8 @@
         {
           "kw": "月次決算 いつまで",
           "url": "https://corp.7senses.co.jp/blog/getsuji-kessan-itsumade",
-          "pos": 6.3,
-          "imp": 11,
+          "pos": 6.4,
+          "imp": 10,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -419,8 +419,8 @@
       ]
     },
     "subsidy": {
-      "judged": 26,
-      "suspect_taken": 24,
+      "judged": 27,
+      "suspect_taken": 25,
       "healthy": 2,
       "too_thin": 51,
       "items": [
@@ -437,31 +437,41 @@
         {
           "kw": "ベンダー登録とは",
           "url": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/",
-          "pos": 2.0,
-          "imp": 76,
+          "pos": 1.9,
+          "imp": 79,
           "clicks": 2,
-          "ctr": 2.63,
+          "ctr": 2.53,
           "expected_ctr": 15.0,
-          "ratio": 0.18
+          "ratio": 0.17
         },
         {
           "kw": "農業補助金 返済不要",
           "url": "https://lp.7senses.co.jp/blog/nogyo-hojokin-hensai-fuyou/",
-          "pos": 6.4,
-          "imp": 212,
+          "pos": 6.3,
+          "imp": 206,
           "clicks": 1,
-          "ctr": 0.47,
+          "ctr": 0.49,
           "expected_ctr": 5.0,
-          "ratio": 0.09
+          "ratio": 0.1
         },
         {
           "kw": "ものづくり 商業 サービス生産性向上促進補助金 運送業",
           "url": "https://lp.7senses.co.jp/blog/monozukuri-hojokin-unsougyou/",
-          "pos": 7.9,
-          "imp": 28,
+          "pos": 7.8,
+          "imp": 26,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
+          "ratio": 0.0
+        },
+        {
+          "kw": "エクセル 開発 補助金",
+          "url": "https://lp.7senses.co.jp/service/dev/",
+          "pos": 10,
+          "imp": 10,
+          "clicks": 0,
+          "ctr": 0,
+          "expected_ctr": 2.5,
           "ratio": 0.0
         },
         {
@@ -487,8 +497,8 @@
         {
           "kw": "ベンダー登録とは",
           "url": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/#sec1",
-          "pos": 3,
-          "imp": 76,
+          "pos": 3.0,
+          "imp": 79,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 11.0,
@@ -498,7 +508,7 @@
           "kw": "ベンダー登録とは",
           "url": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/#sec2",
           "pos": 2.6,
-          "imp": 40,
+          "imp": 42,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 11.0,
@@ -508,7 +518,7 @@
           "kw": "ベンダー登録とは",
           "url": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/#sec3",
           "pos": 2.6,
-          "imp": 40,
+          "imp": 42,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 11.0,
@@ -518,7 +528,7 @@
           "kw": "ベンダー登録とは",
           "url": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/#sec4",
           "pos": 2.6,
-          "imp": 40,
+          "imp": 42,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 11.0,
@@ -527,8 +537,8 @@
         {
           "kw": "ベンダー登録とは",
           "url": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/#sec5",
-          "pos": 3,
-          "imp": 76,
+          "pos": 3.0,
+          "imp": 79,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 11.0,
@@ -538,7 +548,7 @@
           "kw": "ベンダー登録とは",
           "url": "https://lp.7senses.co.jp/blog/vendor-touroku-toha/#sec6",
           "pos": 2.6,
-          "imp": 40,
+          "imp": 42,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 11.0,
@@ -547,8 +557,8 @@
         {
           "kw": "個人事業主 車両購入 補助金",
           "url": "https://lp.7senses.co.jp/blog/kojin-jigyonushi-kuruma-kounyu-hojokin/",
-          "pos": 7,
-          "imp": 12,
+          "pos": 7.4,
+          "imp": 14,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -557,8 +567,8 @@
         {
           "kw": "個人事業主 車代 補助金",
           "url": "https://lp.7senses.co.jp/blog/kojin-jigyonushi-kuruma-kounyu-hojokin/",
-          "pos": 6.0,
-          "imp": 22,
+          "pos": 6.1,
+          "imp": 21,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 5.0,
@@ -568,7 +578,7 @@
           "kw": "個人事業主 車購入補助金",
           "url": "https://lp.7senses.co.jp/blog/kojin-jigyonushi-kuruma-kounyu-hojokin/",
           "pos": 7.8,
-          "imp": 86,
+          "imp": 81,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -578,7 +588,7 @@
           "kw": "大阪市中央区 meo対策 代理店",
           "url": "https://lp.7senses.co.jp/service/meo/",
           "pos": 6.9,
-          "imp": 16,
+          "imp": 15,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 4.0,
@@ -587,8 +597,8 @@
         {
           "kw": "大阪市中央区 meo対策 代理店 サービス",
           "url": "https://lp.7senses.co.jp/service/meo/",
-          "pos": 8.1,
-          "imp": 10,
+          "pos": 8.3,
+          "imp": 11,
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 3.5,
@@ -612,16 +622,6 @@
           "clicks": 0,
           "ctr": 0,
           "expected_ctr": 2.5,
-          "ratio": 0.0
-        },
-        {
-          "kw": "農業補助金 おかしい",
-          "url": "https://lp.7senses.co.jp/blog/nogyo-hojokin-hensai-fuyou/",
-          "pos": 1,
-          "imp": 19,
-          "clicks": 0,
-          "ctr": 0,
-          "expected_ctr": 28.0,
           "ratio": 0.0
         }
       ]
