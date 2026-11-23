@@ -112,8 +112,16 @@ def main():
     ap.add_argument("--force", action="store_true", help="指紋に関係なく描き直す（--site と使う）")
     a = ap.parse_args()
     st = load_state()
-    targets = {sid: c for sid, c in S.load_all().items()
-               if c.get("type") in TYPES and sid != "sample" and (not a.site or sid == a.site)}
+    every = S.load_all()
+    # 記録（公開リポジトリに commit する）とログには公開の id を使う。社の id（社名から作る）で書き、
+    # 2026-11-23 の週次で data/rerender_state.json にお客様の社名が出た。前の書き方の行は公開の id へ移す
+    pub = {sid: c.get("public_id") or sid for sid, c in every.items()}
+    for sid, pid in pub.items():
+        if pid != sid and sid in st:
+            st.setdefault(pid, st[sid])
+            del st[sid]
+    targets = {sid: c for sid, c in every.items()
+               if c.get("type") in TYPES and sid != "sample" and (not a.site or a.site in (sid, pub[sid]))}
     if not targets:
         print("RERENDER_OK=unset（描き直しの対象の方式の社がありません）")
         return 0
@@ -131,17 +139,18 @@ def main():
             p = ROOT / ".publish-work" / sid
             dest = p if p.is_dir() else None
         parts = inputs(cfg, dest)
-        go, why = judge(st.get(sid), parts)
+        pid = pub[sid]
+        go, why = judge(st.get(pid), parts)
         if a.force:
             go, why = True, "--force"
-        print(f"■ {sid}（{cfg['type']}）: {'描き直す' if go else '描き直さない'} … {why}")
+        print(f"■ {pid}（{cfg['type']}）: {'描き直す' if go else '描き直さない'} … {why}")
         if not a.push:
             continue
         if go and not rerender(sid):
             bad.append(f"要対応: {cfg.get('name', sid)} の描き直しに失敗しました（次の週次でやり直します）")
             continue
-        st[sid] = {"fp": fingerprint(parts), "parts": parts,
-                   "at": date.today().isoformat() if go or sid not in st else st[sid].get("at", "")}
+        st[pid] = {"fp": fingerprint(parts), "parts": parts,
+                   "at": date.today().isoformat() if go or pid not in st else st[pid].get("at", "")}
     if a.push:
         save_state(st)
     for b in bad:
