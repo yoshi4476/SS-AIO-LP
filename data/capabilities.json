@@ -1950,43 +1950,43 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:350",
+     "evidence": "scripts/seo_audit.py:352",
      "note": "公開前の門",
      "anchor": "ap.add_argument(\"--gate\", action=\"store_true\","
     },
     "external-md": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:379",
+     "evidence": "scripts/seo_audit.py:381",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "external-html": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:379",
+     "evidence": "scripts/seo_audit.py:381",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "nextjs-json": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:379",
+     "evidence": "scripts/seo_audit.py:381",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "wordpress": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:283",
+     "evidence": "scripts/seo_audit.py:285",
      "note": "WordPress 本体の REST の公開URLの一覧で本番を巡回して知らせる（findings の週次）",
      "anchor": "if cfg and cfg.get(\"type\") == \"wordpress\":"
     },
     "ftp": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:379",
+     "evidence": "scripts/seo_audit.py:381",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     },
     "zip": {
      "status": "ok",
-     "evidence": "scripts/seo_audit.py:379",
+     "evidence": "scripts/seo_audit.py:381",
      "note": "本番を巡回して知らせる（findings の週次）",
      "anchor": "cfgs = S.load_all()"
     }
@@ -2292,37 +2292,37 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "automation/gas/contact.hub.gs:1051",
+     "evidence": "automation/gas/contact.hub.gs:1057",
      "note": "フォームを管制塔が直接受ける",
      "anchor": "function followUp() {"
     },
     "external-md": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:1070",
+     "evidence": "automation/gas/contact.hub.gs:1076",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "external-html": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:1070",
+     "evidence": "automation/gas/contact.hub.gs:1076",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "nextjs-json": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:1070",
+     "evidence": "automation/gas/contact.hub.gs:1076",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "wordpress": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:1070",
+     "evidence": "automation/gas/contact.hub.gs:1076",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },
     "ftp": {
      "status": "n/a",
-     "evidence": "automation/gas/contact.hub.gs:1070",
+     "evidence": "automation/gas/contact.hub.gs:1076",
      "note": "自動回答・追いかけは運用会社の無料ツール（ai.7senses.co.jp/tools/）と自社の資料の案内で、文面も運用会社の名前。お客様のサイトに管制塔の無料ツールは無く（配信物にツールを含めない）、お客様の問い合わせへの返信は先方のフォームが行う。転送（forward-to-hub.gs）は silent で記録だけ。お客様の読者へ運用会社の名前で送らないため、この方式の社では意味が無い。元の判定: partial — 先方のフォームが Apps Script のときだけ転送のコードを配れる",
      "anchor": "if (!aiLab[String(r[1] || '').trim()]) continue;"
     },

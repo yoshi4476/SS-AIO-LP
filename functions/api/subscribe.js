@@ -18,7 +18,7 @@
  *
  * ロボットよけ（Turnstile）は functions/_turnstile.js。結果は管制塔の「ロボットよけ」タブに残る。
  */
-import { FIELD, REFUSAL, verify, refuse, log } from "../_turnstile.js";
+import { FIELD, STATE, REFUSAL, verify, refuse, log } from "../_turnstile.js";
 import { sign, read, digest, ipKey, rateHit } from "../_sign.js";
 
 const PURPOSE = "ss-subscribe";
@@ -43,7 +43,7 @@ export async function onRequestPost(context) {
   if (!EMAIL_RX.test(email) || email.length > 120) return text("メールアドレスの形式が正しくありません。", 400);
 
   const ip = request.headers.get("CF-Connecting-IP") || "";
-  const ts = await verify(env, fd.get(FIELD), ip);
+  const ts = await verify(env, fd.get(FIELD), ip, fd.get(STATE));
   const refused = refuse("subscribe", ts, email);
   const done = log(env, "ai-lab", "newsletter", ts, email, refused);
   if (context.waitUntil) context.waitUntil(done);

@@ -94,7 +94,9 @@ def page_facts(h):
         "article": bool(re.search(r'"@type"\s*:\s*"(?:BlogPosting|Article|NewsArticle|TechArticle)"', h)),
         "og_missing": [k for k in OG_NEED if f'property="{k}"' not in h],
         "h1": len(re.findall(r"<h1[\s>]", body)),
-        "img_noalt": len([m for m in re.findall(r"<img\b[^>]*>", body) if not re.search(r'\balt="[^"]+"', m)]),
+        # alt="" は飾りの画像の正しい書き方（WCAG 2.2 の H67）。数えるのは alt の属性そのものが無い画像だけ。
+        # 空の alt も数えていて、リズコムのトップの飾りの帯（aria-hidden の中の17枚）を毎週「要対応」と出していた（2026-11-23）
+        "img_noalt": len([m for m in re.findall(r"<img\b[^>]*>", body) if not re.search(r"\balt\s*=", m)]),
         "links": set(re.findall(r'href="(/[^"#?]*)"', body)),
     }
 

@@ -21,16 +21,25 @@ export const REFUSAL = "ロボットでないことの確認ができません�
 
 export const FIELD = "cf-turnstile-response";
 
+// 答えが無いまま送ったときの、ページの部品の状態（site.js が「状態:待った秒」で添える。例 wait:6・err:2・off:0）。
+// 本物の相談が none になった2件（2026-11-06・11-10）は、部品が読めなかったのか・待ち切れなかったのかが記録から分からなかった。
+// 記録の codes に page-<状態> として残す。台帳へは送らない
+export const STATE = "ts_state";
+export function pageState(v) {
+  const s = String(v || "").replace(/[^a-z0-9:]/gi, "").slice(0, 16);
+  return "page-" + (s || "unknown");
+}
+
 /** 週次の疎通確認（lead_probe.py）のアドレス。断らない（ページを通らないので答えを持たない） */
 export function isProbe(email) {
   return /@pipeline-check\.invalid$/i.test(String(email || ""));
 }
 
 /** result: ok / none（答えが無い）/ invalid / error（確かめられない）/ unset（鍵が無い） */
-export async function verify(env, token, ip) {
+export async function verify(env, token, ip, state) {
   if (!env.TURNSTILE_SECRET || !env.TURNSTILE_SITEKEY) return { result: "unset" };
   const t = String(token || "").trim();
-  if (!t) return { result: "none" };
+  if (!t) return { result: "none", codes: pageState(state) };
   if (t.length > 2048) return { result: "invalid", codes: "format" };
   const form = new FormData();
   form.append("secret", env.TURNSTILE_SECRET);

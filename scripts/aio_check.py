@@ -40,10 +40,15 @@ def get(url):
 def article_urls(locs, paths):
     """sitemap の URL から記事テンプレートのページだけを残す（カテゴリ・テーマ・タグ・ページ送りの一覧は除く）"""
     out = []
+    # 下にページを持つ URL は一覧（お客様の社の /column/<分野>/ など）。区切りの名前は社ごとに違うので、名前ではなく
+    # 「その URL の下に別のページが sitemap にあるか」で見分ける。分野の一覧を記事と取り違え、FAQ も記事型も無いのが
+    # 正しい一覧のページを「不足」と出していた（2026-11-23 の週次）
+    parents = {u.rstrip("/") + "/" for u in locs
+               if any(v != u and v.startswith(u.rstrip("/") + "/") for v in locs)}
     for u in locs:
         segs = [s for s in urllib.parse.urlsplit(u).path.split("/") if s]
         if (any(f"/{p_}/" in u for p_ in paths) and segs and segs[-1] not in paths
-                and not set(segs) & LISTING_SEGMENTS):
+                and not set(segs) & LISTING_SEGMENTS and u.rstrip("/") + "/" not in parents):
             out.append(u)
     return out
 

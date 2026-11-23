@@ -45,7 +45,7 @@ function btnOf(sc){return sc.querySelector('button[type="submit"],#d-show');}
 function mount(sc){
  var st=sc._ts;
  if(st&&(!st.box||st.box.isConnected))return;
- st=sc._ts={state:"wait",box:null,id:null};
+ st=sc._ts={state:"wait",box:null,id:null,at:Date.now()};
  load().then(function(ts){
   var b=btnOf(sc);
   if(!ts||!sc.isConnected||!b){st.state="off";return;}
@@ -85,7 +85,7 @@ return {send:function(url,payload){
  var st=last&&last._ts;
  return token().catch(function(){return "";}).then(function(t){
   var f={};try{f=window.ssFirst?ssFirst():{};}catch(e){f={};}
-  var b=Object.assign({},f,t?{"cf-turnstile-response":t}:{},payload);
+  var b=Object.assign({},f,t?{"cf-turnstile-response":t}:{ts_state:(st?st.state:"none")+":"+(st?Math.round((Date.now()-st.at)/1000):0)},payload);
   var p=fetch(url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(b)});
   p.then(function(){renew(st);},function(){renew(st);});
   return p;

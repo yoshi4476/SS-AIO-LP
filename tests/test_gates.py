@@ -2287,6 +2287,8 @@ def test_site_audit_has_no_critical_or_warning():
     check("検出器: sitemap の開けないページを拾う", "sitemap のページが開けない" in kinds, True)
     check("検出器: 題の短さ・説明文の欠け・OGP・H1・alt を拾う",
           {"題が短すぎる", "説明文が無い", "OGPが不完全", "H1が1つでない", "alt の無い画像"} <= kinds, True)
+    deco = SA.page_facts('<html><body><div aria-hidden="true"><img src="/a.png" alt=""></div><img src="/b.png" alt="図"></body></html>')
+    check("検出器: 飾りの画像の alt=\"\" は alt の無い画像に数えない（WCAG の書き方）", deco["img_noalt"], 0)
     rows, _ = SA.local()
     serious = sorted({f"{s} {k}" for s, k, _, _ in rows if s != "お知らせ"})
     check("手元の site/ に致命的・警告が無い", serious, [])

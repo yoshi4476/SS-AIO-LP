@@ -18,6 +18,7 @@ import io
 import json
 import re
 import sys
+import zlib
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -235,9 +236,15 @@ def rewrite(slug, paras, head):
             continue
         title, url = m.group(1), m.group(2)
         fit = cc.dice(ln.topic(x["h2"]), ln.topic(title)) if x["h2"] else 0.0
-        new = ln.sentence(title, url, hash(slug) % 5 + i, fit)
-        if new.strip() != x["line"].strip():
-            edits.append((x["start"], x["end"], new))
+        # 種は実行ごとに変わらない値にし、同じ型・上限に達した型を引いたら次の型を試す。Python の hash は実行ごとに
+        # 変わり、同じ型を引いた回は振り直さずに終わっていた（2026-11-23 歯科の記事の「関連する内容として」3本が残った）
+        base = zlib.crc32(slug.encode("utf-8")) + i
+        for k in range(8):
+            new = ln.sentence(title, url, base + k, fit)
+            if form_of(new) != x["form"] and seen[form_of(new)] < MAX_SAME_FORM:
+                seen[form_of(new)] += 1
+                edits.append((x["start"], x["end"], new))
+                break
     return edits
 
 

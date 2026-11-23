@@ -380,6 +380,11 @@ function botCheck_(body, d, site, type, probe) {
   const token = d['cf-turnstile-response'] || body['cf-turnstile-response'] || '';
   delete d['cf-turnstile-response'];
   delete body['cf-turnstile-response'];
+  // 答えが無いまま送ったときの、ページの部品の状態（「状態:待った秒」）。記録の codes に page-<状態> と残し、台帳には残さない。
+  // 本物の相談が none になった2件（2026-11-06・11-10）は、読めなかったのか待ち切れなかったのかが分からなかった
+  const state = String(d.ts_state || body.ts_state || '').replace(/[^a-z0-9:]/gi, '').slice(0, 16);
+  delete d.ts_state;
+  delete body.ts_state;
   const trusted = (!!SHARED_SECRET && body.secret === SHARED_SECRET) || formTrusted_(body);
   // フォーム専用の合言葉は、台帳の「その他項目」や通知に残さない（d と body が同じものの送り元がある）
   delete d.form_secret;
@@ -392,6 +397,7 @@ function botCheck_(body, d, site, type, probe) {
   } else {
     v = turnstileVerify_(token);
     if (v.result === 'unset') return { refuse: false };
+    if (v.result === 'none') v.codes = 'page-' + (state || 'unknown');
   }
   const refuse = turnstileEnforce_() && !trusted && !probe && (v.result === 'none' || v.result === 'invalid');
   botLog_(site, trusted ? 'サーバーで確認' : 'ページから直接', type, v, probe, refuse);

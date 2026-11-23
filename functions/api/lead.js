@@ -13,7 +13,7 @@
  *
  * ロボットよけ（Turnstile）は functions/_turnstile.js。答えを確かめ、結果を管制塔への転送に添える（台帳には残さない）。
  */
-import { ENFORCE, FIELD, REFUSAL, verify, refuse, log } from "../_turnstile.js";
+import { ENFORCE, FIELD, STATE, REFUSAL, verify, refuse, log } from "../_turnstile.js";
 import { readAudit } from "../_audit_checks.js";
 
 // 管制塔の受付が別の意味に読む項目は、フォームから受け取らない（自動返信の本文・通知の止め方を外から決めさせない）
@@ -35,7 +35,7 @@ export async function onRequestPost(context) {
     return new Response("フォーム形式で送信してください。", { status: 400 });
   }
   // ロボットよけの答え（最長2048字）は切らずに別に持ち、台帳へは送らない
-  for (const [k, v] of fd) if (k !== FIELD && !RESERVED.includes(k)) data[k] = String(v).slice(0, 2000);
+  for (const [k, v] of fd) if (k !== FIELD && k !== STATE && !RESERVED.includes(k)) data[k] = String(v).slice(0, 2000);
   const token = String(fd.get(FIELD) || "");
 
   // ハニーポット（botはこの不可視フィールドを埋める）
@@ -60,7 +60,7 @@ export async function onRequestPost(context) {
     return new Response("このフォームからは送れない種別です。", { status: 400 });
   }
 
-  const ts = await verify(env, token, request.headers.get("CF-Connecting-IP") || "");
+  const ts = await verify(env, token, request.headers.get("CF-Connecting-IP") || "", fd.get(STATE));
   if (refuse("lead", ts, data.email)) {
     const done = log(env, "ai-lab", String(data.form_type || "").slice(0, 40), ts, data.email, true);
     if (context.waitUntil) context.waitUntil(done);

@@ -853,8 +853,17 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
     }).catch(function () { return null; });
     return ready;
   }
+  // 答えが無いまま送るときに、部品の状態と待った秒を添える（受付が記録の codes に page-<状態> と残す。台帳には入らない）。
+  // 本物の相談が none になった2件（2026-11-06・11-10）は、読めなかったのか待ち切れなかったのかが分からなかった
+  function note(f) {
+    if (token(f)) return;
+    var i = f.querySelector('input[name="ts_state"]');
+    if (!i) { i = document.createElement("input"); i.type = "hidden"; i.name = "ts_state"; f.appendChild(i); }
+    i.value = (f.getAttribute("data-ts") || "none") + ":" + Math.round((Date.now() - (f._tsAt || Date.now())) / 1000);
+  }
   function mount(f) {
     if (f.getAttribute("data-ts")) return;
+    f._tsAt = Date.now();
     f.setAttribute("data-ts", "wait");
     load().then(function (ts) {
       if (!ts || !document.documentElement.contains(f)) { f.setAttribute("data-ts", "off"); return; }
@@ -899,7 +908,7 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
     if (f.noValidate && !f.checkValidity()) return;   // 未入力の案内はフォームの側がすぐ出す
     mount(f);
     var st = f.getAttribute("data-ts");
-    if (token(f) || (st !== "wait" && st !== "run" && st !== "ask")) { renew(f); return; }
+    if (token(f) || (st !== "wait" && st !== "run" && st !== "ask")) { note(f); renew(f); return; }
     e.preventDefault();
     e.stopImmediatePropagation();
     var btn = f.querySelector('button[type="submit"]'), t0 = Date.now();
@@ -915,6 +924,7 @@ document.querySelectorAll(".slide-viewer").forEach(function (v) {
         m.textContent = "確認の欄にチェックを入れてから、もう一度送信してください。うまくいかない場合は 06-4305-7547 までお電話ください。";
         return;
       }
+      note(f);
       f._tsGo = true;
       if (f.requestSubmit) f.requestSubmit();
       else if (f.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }))) f.submit();
