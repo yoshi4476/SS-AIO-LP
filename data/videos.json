@@ -1363,6 +1363,12 @@
         "代理店営業"
       ],
       "reason": "YouTube のサジェストに、狙う語と業種に近い検索語が出ませんでした（ショートだけにする）"
+    },
+    "short": {
+      "date": "2026-11-23",
+      "sec": 52,
+      "title": "LLMO代理店の募集、何を見て選ぶ？",
+      "youtube": "WXZo4oE1myg"
     }
   },
   "clinic-erabareru-homepage": {
@@ -1647,5 +1653,15 @@
     "format": "duo",
     "url": "https://ai.7senses.co.jp/research/fudosan-ai-sources/",
     "youtube": "N_-HXUnMTEE"
+  },
+  "research-fuyouhin": {
+    "site": "ai-lab",
+    "kind": "research",
+    "date": "2026-11-23",
+    "sec": 185,
+    "mp4": "automation/video/research-fuyouhin.mp4",
+    "format": "duo",
+    "url": "https://ai.7senses.co.jp/research/fuyouhin-ai-sources/",
+    "youtube": "IyFeqsE5kR4"
   }
 }
