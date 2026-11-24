@@ -18,6 +18,7 @@ increase し続ける。手作業で整えても数日で元に戻る。公開�
 import io
 import re
 import sys
+import zlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -107,6 +108,16 @@ def send_links(site_id, targets=None, want=WANT, dry=False, quiet=False):
         targets = [s for s, v in inb.items() if v < want]
     targets = [t for t in targets if t in arts]
 
+    # 送り元がリンクだけの段落を週次の見直しの上限（auto_review.MAX_LINK_PARA）まで持っていれば足さない。
+    # 足すと週次で削られ、次の公開でまた足され、同じ記事の出し直しが続いた（2026-11-24 お客様の社の記事が1週間に3〜5回）
+    import auto_review as ar
+    paras = {}
+
+    def para_n(s):
+        if s not in paras:
+            paras[s] = len(ar.scan(ROOT / "articles" / f"{s}.md")[2])
+        return paras[s]
+
     edits = {}
     for tgt in targets:
         y = arts[tgt]
@@ -116,6 +127,8 @@ def send_links(site_id, targets=None, want=WANT, dry=False, quiet=False):
         cands = []
         for s, x in arts.items():
             if s == tgt or tgt in x["out"] or out_n[s] + len(edits.get(s, [])) >= MAX_OUT:
+                continue
+            if para_n(s) + len(edits.get(s, [])) >= ar.MAX_LINK_PARA:
                 continue
             sc = similarity(x, y)
             if sc >= MIN_TOPIC_FIT:
@@ -154,7 +167,7 @@ def send_links(site_id, targets=None, want=WANT, dry=False, quiet=False):
             i = c.index(f'## {pk["h2"]}')
             j = c.index("\n\n", c.index("\n", i) + 1)
             c = c[:j] + "\n\n" + sentence(pk["title"], pk["url"],
-                                          hash(s) % 5 + k, pk["fit"]) + c[j:]
+                                          zlib.crc32(s.encode("utf-8")) % 5 + k, pk["fit"]) + c[j:]
         io.open(p, "w", encoding="utf-8", newline="").write(c)
     return list(edits)
 

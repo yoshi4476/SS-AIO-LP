@@ -118,6 +118,9 @@ def send_links(tgt, words, want, texts):
     for _, s in cands:
         if done >= want:
             break
+        # 週次の見直し（auto_review）の上限に達した記事へ足すと、削られて足すの出し直しが続く
+        if len(ar.scan(ROOT / "articles" / f"{s}.md")[2]) >= ar.MAX_LINK_PARA:
+            continue
         fm2, body = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", texts[s], re.S).groups()
         best, pos = 0, None
         for m in re.finditer(r"^## (.+)$", body, re.M):

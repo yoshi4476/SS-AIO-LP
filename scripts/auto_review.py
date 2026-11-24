@@ -153,7 +153,7 @@ def spread(paths, write=False):
                 continue
             title, url = m.group(1), m.group(2)
             fit = cc.dice(ln.topic(x["h2"]), ln.topic(title)) if x["h2"] else 0.0
-            new = ln.sentence(title, url, hash(p.stem) % 5 + i, fit)
+            new = ln.sentence(title, url, zlib.crc32(p.stem.encode("utf-8")) % 5 + i, fit)
             if form_of(new) == x["form"] or over.get(form_of(new), 0) > 0:
                 continue                       # 偏っている型へ戻さない
             edits.append((x["start"], x["end"], new))

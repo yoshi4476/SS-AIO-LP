@@ -82,6 +82,9 @@ def add_links(slug, texts, want=3, write=False):
         m = list(re.finditer(r"^## .+$", t, re.M))
         if len(m) < 3:
             continue
+        # 週次の見直し（auto_review）の上限に達した記事へ足すと、削られて足すの出し直しが続く
+        if len(ar.scan(ROOT / "articles" / f"{s}.md")[2]) >= ar.MAX_LINK_PARA:
+            continue
         pos = m[len(m) // 2].start()          # 中ほどの見出しの前に置く
         # 言い回しは link_new の型から選ぶ。自前の一文をここで書くと、
         # 同じ文がサイト中に並ぶ。実測で1つの型が全体の41.5%を占めた
