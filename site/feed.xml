@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-24T00:00:00+09:00</updated>
+  <updated>2026-11-25T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>SEO対策の費用はGoogleに払う？0円の範囲と見積もりの落とし穴3つ</title>
+    <link href="https://ai.7senses.co.jp/seo/seo-taisaku-hiyou-google/"/>
+    <id>https://ai.7senses.co.jp/seo/seo-taisaku-hiyou-google/</id>
+    <updated>2026-11-25T00:00:00+09:00</updated>
+    <summary>SEO対策でGoogleに払う費用は0円です。Googleは検索結果への掲載や順位の引き上げにお金を受け取らないと公式に説明しています。費用が出るのは記事やサイトを直す作業と、別の仕組みのGoogle広告です。支払い先の分け方と、見積もりの落とし穴3つを解説します。</summary>
+  </entry>
   <entry>
     <title>SEO対策会社の選び方｜伸びなかった7件で分かった契約前の確認5つ</title>
     <link href="https://ai.7senses.co.jp/seo/seo-taisaku-kaisha-erabikata/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/inshokuten-shukyaku-shien/</id>
     <updated>2026-11-07T00:00:00+09:00</updated>
     <summary>飲食店の集客支援は、お客様がAIや検索で店を探す・調べる質問に、店の事実で答えるページを整える取り組みです。当社が3つのAIに50問聞いた調査では、ランチや予約などを調べる質問の回答の60.0%が公式サイトを出典にしていました。作るページと頼む判断を解説します。</summary>
-  </entry>
-  <entry>
-    <title>不動産の集客アイデア9つ｜AIに外される3つの落とし穴と始める順番</title>
-    <link href="https://ai.7senses.co.jp/aio/fudousan-shukyaku-idea/"/>
-    <id>https://ai.7senses.co.jp/aio/fudousan-shukyaku-idea/</id>
-    <updated>2026-11-06T00:00:00+09:00</updated>
-    <summary>不動産の集客アイデアは、売り手や買い手がAIと検索で「調べる」質問に自社サイトで答えるものから試します。4つのAIの出典2,465件の調査では、調べる質問の回答の80.5%が不動産会社の公式サイトを出典にしていました。9つのアイデアと始める順番を整理します。</summary>
   </entry>
 </feed>

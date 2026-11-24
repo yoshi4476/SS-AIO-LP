@@ -184,6 +184,8 @@ quality_attempts: 4
 
 プロフィールの基本整備、施術メニュー登録、口コミ運用の順で着手すると迷わず進められます。
 
+費用の目安については、[SEO対策の費用はGoogleに払う？](/seo/seo-taisaku-hiyou-google/)にまとめています。
+
 <figure><img src="/images/biyou-hifuka-meo/steps.png" alt="美容皮膚科MEO対策 着手の3ステップ: 基本整備でプロフィールとNAP統一、メニュー登録で施術名を網羅登録、口コミ運用で依頼と返信を継続" loading="lazy"><figcaption>美容皮膚科MEO対策 着手の3ステップ</figcaption></figure>
 
 ### ステップ1: 基本情報とNAPを統一する

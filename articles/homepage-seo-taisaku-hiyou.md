@@ -213,6 +213,8 @@ AIの回答で紹介されるまでを含めて頼むかどうかは、[AIO外�
 
 4つ目は、断る理由になります。Googleは<a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo?hl=ja" target="_blank" rel="noopener">SEO業者の選び方の案内</a>で、Googleで1位を保証できる人はいないと説明しています。**順位の保証をうたう依頼先は、その時点で候補から外してください。**
 
+Googleへの支払いが0円であることと、見積もりに紛れやすい不要な作業は、[SEO対策の費用でGoogleに払うものと払わないもの](/seo/seo-taisaku-hiyou-google/)で整理しています。
+
 成果報酬型の見積もりなら、成果にする順位と対象の語も確かめてください。[SEO対策の代行費用を料金体系ごとに比べる](/seo/seo-taisaku-daikou-hiyou/)で、契約書の書き方まで扱っています。
 
 同じ案内は、依頼の前に過去の事例や業界での経験を聞くよう勧めています。依頼先には、次の3つをそのまま聞いてください。

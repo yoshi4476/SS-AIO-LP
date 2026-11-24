@@ -213,6 +213,8 @@ FC加盟の良し悪しは、増える受注の粗利が契約期間の支払総
 
 施工事例の書き方は[施工事例の書き方｜反響が増える7つの要素とNG例](/ai-marketing/shiko-jirei-kakikata/)、工務店のSEO対策は[工務店のSEO対策｜施工事例で選ばれる5つの施策と始め方](/seo/koumuten-seo-taisaku/)で詳しく解説しています。
 
+<div class="cta-box"><p>SEO・AIO・LLMOの現状分析を無料で行います。</p><a class="cta-button" href="/lp/">AI検索対策の無料相談</a></div>
+
 ## よくある質問
 
 <div class="faq">
