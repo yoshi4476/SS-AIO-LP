@@ -124,7 +124,13 @@ def check_page(url, html, status, final, indexed=None):
     out = []
     if status != 200:
         return [f"HTTP {status}"]
-    if final.rstrip("/") != url.rstrip("/"):
+    # 転送を問題にするのはトップ・sitemap に載せたページ・sitemap が取れない回・別のドメインへ飛ぶときだけ。
+    # 決め打ちで見に行く /about/ などを、作り直したサイトが同じサイトの新しいページへ移しているのは意図した転送
+    # （2026-11-24 お客様の社で前のサイトのURLを301で移したら「要対応」と知らせていた）
+    host = lambda u: re.sub(r"^https?://(www\.)?", "", u).split("/")[0]  # noqa: E731
+    top = re.sub(r"^https?://[^/]+", "", _norm(url)) == ""
+    if final.rstrip("/") != url.rstrip("/") and (
+            indexed is None or top or _norm(url) in indexed or host(final) != host(url)):
         out.append(f"別のURLへ転送 → {final}")
 
     # 社内向けコメントがソースに残っていないか
@@ -142,7 +148,6 @@ def check_page(url, html, status, final, indexed=None):
     # sitemap から外して noindex にしたページは意図した外し（例: 別事業のサイトで、AI集客ラボと同じ診断を
     # 検索で食わないよう外したページ。2026-10-11 に「要対応」と誤って知らせていた）
     rob = re.search(r'<meta[^>]+name="robots"[^>]+content="([^"]*)"', html, re.I)
-    top = re.sub(r"^https?://[^/]+", "", _norm(url)) == ""
     if rob and "noindex" in rob.group(1).lower() and (indexed is None or top or _norm(url) in indexed):
         out.append("noindex が付いている" + ("（sitemap に載せている）" if indexed is not None and not top else ""))
 
@@ -207,8 +212,10 @@ def main():
     a = ap.parse_args()
 
     ng = 0
+    # 公開の印（お客様の社）で呼ばれても社の id に直す。直さないとどのサイトにも当たらず、何も見ずに「問題 0件」と出ていた
+    want = sites_mod.resolve(a.site) if a.site else ""
     for sid, cfg in sites_mod.load_all().items():
-        if a.site and sid != a.site:
+        if want and sid != want:
             continue
         urls = targets(sid, a.all)
         st_sm, body_sm, _ = fetch("https://" + cfg["domain"] + "/sitemap.xml")
