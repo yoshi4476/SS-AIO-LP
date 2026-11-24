@@ -1,0 +1,82 @@
+{
+ "v": 2,
+ "slug": "kicho-jidoka-app",
+ "ok": true,
+ "date": "2026-11-24",
+ "questions": [
+  "自動化 記帳 appについて教えてください",
+  "自動化 記帳 appについて、「記帳自動化アプリとは？できることと仕組み」を教えてください",
+  "自動化 記帳 appについて、「記帳自動化アプリでできることと、人の確認が必要なこと」を教えてください",
+  "自動化 記帳 appについて、「主要な記帳自動化アプリ3社の比較｜対象規模とプラン」を教えてください",
+  "自動化 記帳 appについて、「記帳自動化アプリを選ぶときの3つの基準」を教えてください"
+ ],
+ "engines": [
+  "Gemini"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "主要な記帳自動化アプリ3社の比較｜対象規模とプラン",
+   "words": [
+    "対象規模",
+    "プラン"
+   ],
+   "hits": 2,
+   "of": 4
+  },
+  {
+   "topic": "記帳自動化アプリの導入でよくある失敗とNG運用",
+   "words": [
+    "NG運用",
+    "導入"
+   ],
+   "hits": 2,
+   "of": 5
+  },
+  {
+   "topic": "アプリだけでは解決しない業務と経理BPOという選択肢",
+   "words": [
+    "経理BPO",
+    "選択肢",
+    "業務"
+   ],
+   "hits": 2,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "aspicjapan.org": "public",
+  "biz-owner.net": "media",
+  "biz.moneyforward.com": "peer",
+  "catalog.monex.co.jp": "media",
+  "clouderp.jp": "media",
+  "freedash.jp": "peer",
+  "freee.co.jp": "peer",
+  "invox.jp": "peer",
+  "it-trend.jp": "portal",
+  "keihi.com": "peer",
+  "kigyolog.com": "portal",
+  "meetsmore.com": "portal",
+  "pr.mono.ipros.com": "peer",
+  "saito-zei.com": "peer",
+  "shinjuku-partners.co.jp": "media",
+  "support.kodama-system.com": "media",
+  "vertexaisearch.cloud.google.com": "peer",
+  "yayoi-kk.co.jp": "peer",
+  "youtube.com": "video"
+ },
+ "dims": {
+  "費用の金額（◯円）": 2,
+  "期間（◯か月・◯日など）": 1,
+  "注意点・失敗・リスク": 3,
+  "進め方の手順": 0,
+  "専門家への相談": 3
+ },
+ "chars": 10253,
+ "claims": [
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。ほかの論点を聞いた答え5件のうち、『NG運用』に触れたものは2件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えのうち、触れていたのは進め方の手順は0件、期間（◯か月・◯日など）は1件、費用の金額（◯円）は2件でした。",
+  "当社は2026年11月に、1つのAI（Gemini）へ本記事の論点5問を聞き、答え5件を数えました。5件の答えの出典に挙がったページは19件で、公的機関・学会・業界団体が1件、ニュース・メディア・まとめが5件、ポータル・比較サイトが3件、動画・SNS・ブログが1件でした。"
+ ]
+}

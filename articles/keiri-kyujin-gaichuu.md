@@ -165,7 +165,9 @@ doda<a href="https://doda.jp/guide/market/007_1.html" target="_blank" rel="noope
 2. 秘密保持・再委託の制限・データの返却と消去・漏えい時の損害賠償・委託元による監査の5条項があるか
 3. 担当者が休んだときに誰が代わるか
 
-外注と丸投げの違いは[経理の外注と丸投げの違い](/blog/keiri-marunage-dekiru-hani/)もご覧ください。内製と外注の比較軸は[経理の内製と外注を比較｜6つの軸で見る違いと選び方](/blog/keiri-naisei-gaichuu-hikaku/)、外注すべきかの判断基準は[経理外注の判断基準5つ](/blog/keiri-gaichuu-handan-kijun/)でも詳しく解説しています。
+外注と丸投げの違いは[経理の外注と丸投げの違い](/blog/keiri-marunage-dekiru-hani/)もご覧ください。
+
+内製と外注の比較軸は[経理の内製と外注を比較｜6つの軸で見る違いと選び方](/blog/keiri-naisei-gaichuu-hikaku/)、外注すべきかの判断基準は[経理外注の判断基準5つ](/blog/keiri-gaichuu-handan-kijun/)でも詳しく解説しています。
 
 ## 経理の求人と外注（BPO）を費用・期間で比較する
 
