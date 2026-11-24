@@ -1375,7 +1375,7 @@ def check_contract(cfg, dest: Path, meta):
     established = {k: v for k, v in used.items() if v >= max(2, total * 0.1)}
     # 配信先の記事の一覧のページに、その表示名が要素の文字そのもの（<h3>経営と設計</h3> など）としてあれば、
     # 相手のサイトが持っているカテゴリ。送った記事が少ない社では、正しいカテゴリでも2本に届かず全部止まっていた
-    # （2026-11-20 リズコムの最初の「経営と設計（代表コラム）」の記事が、配信も拾い直しも理由なしで止まった）。
+    # （2026-11-20 c5fb0e662 の最初の「経営と設計（代表コラム）」の記事が、配信も拾い直しも理由なしで止まった）。
     # 1文字違う表記は一覧に無いので、今まで通り止まる
     index = blog / "index.html"
     on_list = index.is_file() and re.search(rf">\s*{re.escape(cat_label)}\s*<",

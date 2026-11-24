@@ -62,7 +62,10 @@ def todays_urls(cfg, days=1):
     if cfg.get("type") == "wordpress":
         import wp_bridge
         links = wp_bridge.url_map(cfg)
-    for p in (ROOT / "articles").glob("*.md"):
+    # お客様の社の原稿は非公開の置き場にある。公開側だけを読んでいた間、お客様の新しい記事は
+    # Google・IndexNow へ一度も知らせていなかった（2026-11-24 お客様の社の新しい記事が Google に未登録で見つかった）
+    import private_store as P
+    for p in [*(ROOT / "articles").glob("*.md"), *(P.base() / "articles").glob("*.md")]:
         t = p.read_text(encoding="utf-8-sig")
         m = re.match(r"^---\s*\n(.*?)\n---", t, re.S)
         if not m:

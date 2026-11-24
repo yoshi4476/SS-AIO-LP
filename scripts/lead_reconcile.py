@@ -43,7 +43,7 @@ except Exception:
 
 def acked(sid):
     """決着した日。お客様の社は日付と理由が社名と結びつくので、公開の ACK_FILE ではなく非公開の置き場の
-    clients/<id>/lead_reconcile_ack.json に置く（2026-11-22 リズコムの台帳連携前の営業17件）"""
+    clients/<id>/lead_reconcile_ack.json に置く（2026-11-22 c5fb0e662 の台帳連携前の営業17件）"""
     out = dict(ACKED.get(sid, {}))
     try:
         import sites as S
@@ -418,7 +418,7 @@ def week_line(today=None, rows=None):
 
 def inbox_hint(sid):
     """台帳に行が無い送信を探す先。お客様のフォームのメールはその社の受信箱にだけ届き、info.ai には来ない
-    （2026-11-22 リズコムの17件で「info.ai の受信箱を確認」と知らせ、探す先を誤らせた）"""
+    （2026-11-22 c5fb0e662 の17件で「info.ai の受信箱を確認」と知らせ、探す先を誤らせた）"""
     import sites as S
     if S.is_client(sid):
         return ("（その社の受信箱（フォームのメールの送り先）にだけ届いた可能性。その社に確かめ、相談なら台帳に書き足す。"

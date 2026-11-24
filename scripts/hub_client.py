@@ -554,7 +554,7 @@ def overlaps_report():
         return 0
     todo = [r for r in got if str(r.get("status") or "").strip() in ("", "未確認")]
     # 運用者が「ほかのサイトと狙う語が重なってもよい」と決めた社（kw_overlap_ok）を含む組は、確認が済んでいるので要対応にしない。
-    # 決定（2026-11-16 リズコム）は語の計画だけが見ていて、この知らせは毎週「未確認3件」を出していた（2026-11-23）
+    # 決定（2026-11-16 c5fb0e662）は語の計画だけが見ていて、この知らせは毎週「未確認3件」を出していた（2026-11-23）
     import sites as _S
     ok = set()
     for sid, cfg in _S.load_all().items():
