@@ -177,6 +177,9 @@ def check_page(url, html, status, final, indexed=None):
     base = re.match(r"(https?://[^/]+)", url).group(1)
     for src in sorted(set(re.findall(r'<img[^>]+src="(/[^"]+)"', html)))[:6]:
         st_i, _b, _f = fetch(base + src)
+        if st_i == 0:
+            # 通信の一瞬の失敗（HTTP 0）は1回だけ取り直す。2026-11-25 に本番で200を返す画像を「表示できない」と知らせていた
+            st_i, _b, _f = fetch(base + src)
         if st_i != 200:
             out.append(f"画像が表示できない: {src}（HTTP {st_i}）")
     return out

@@ -2051,7 +2051,7 @@
    "cells": {
     "self-static": {
      "status": "ok",
-     "evidence": "scripts/live_check.py:185",
+     "evidence": "scripts/live_check.py:188",
      "anchor": "def targets(site_id, all_urls):"
     },
     "external-md": {
