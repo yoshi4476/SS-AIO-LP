@@ -159,7 +159,7 @@ quality_attempts: 1
 
 **SEO対策代行の料金体系は、狙う語が決まっているか、材料と更新の体制があるか、何を成果と見るかの3点で選びます。**
 
-選ぶときの基準は[SEO対策会社の選び方](/seo/seo-taisaku-kaisha-erabikata/)で整理しています。
+選ぶときの基準は[SEO対策会社の選び方](/seo/seo-taisaku-kaisha-erabikata/)で整理しています。複数社の見積もりを同じ条件で並べる手順は、[SEO対策の費用比較の6項目](/seo/seo-taisaku-hiyou-hikaku/)にまとめました。
 
 自社の状況を次の表に当てはめてください。
 
