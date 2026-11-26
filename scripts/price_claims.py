@@ -144,6 +144,12 @@ def own_price(text):
     for i, raw in enumerate(text.splitlines(), 1):
         line = plain(raw)
         for m in OWN_AMT.finditer(line):
+            # 金額の文が別のもの（記事作成ツールなど）の値段で、その文に当社の語が無ければ当社の価格ではない。
+            # 前後40字が文の切れ目をまたぎ、「ツールで月◯万円前後。当社が支援して…」を隔離していた（2026-11-26）
+            a = max(line.rfind(c, 0, m.start()) for c in "。！？") + 1
+            b = min([x for x in (line.find(c, m.end()) for c in "。！？") if x >= 0] or [len(line)])
+            if OTHER.search(line[a:b]) and not OWN.search(line[a:b]):
+                continue
             if OWN.search(line[max(0, m.start() - 40):m.end() + 40]):
                 out.append((i, line[max(0, m.start() - 30):m.end() + 20]))
     return out
