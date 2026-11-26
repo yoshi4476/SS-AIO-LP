@@ -4,8 +4,15 @@
   <link href="https://ai.7senses.co.jp/"/>
   <link rel="self" href="https://ai.7senses.co.jp/feed.xml"/>
   <id>https://ai.7senses.co.jp/</id>
-  <updated>2026-11-26T00:00:00+09:00</updated>
+  <updated>2026-11-27T00:00:00+09:00</updated>
   <author><name>セブンセンシズ株式会社</name></author>
+  <entry>
+    <title>SEOコンサルティング費用が無駄になる3条件｜助言型と運用型の分け方</title>
+    <link href="https://ai.7senses.co.jp/seo/seo-consulting-hiyou/"/>
+    <id>https://ai.7senses.co.jp/seo/seo-consulting-hiyou/</id>
+    <updated>2026-11-27T00:00:00+09:00</updated>
+    <summary>SEOコンサルティング費用は、直す点と順番の助言に払う料金で、記事を書いて直す社内の時間は別にかかります。当社がSEO・AIOの運用で伸びずに終わった7件の理由は、更新の権限が無い3件、記事の材料が出ない3件、予算1件でした。</summary>
+  </entry>
   <entry>
     <title>SEO対策の費用比較で見落とす落とし穴3つ｜見積もりは6項目で並べる</title>
     <link href="https://ai.7senses.co.jp/seo/seo-taisaku-hiyou-hikaku/"/>
@@ -138,12 +145,5 @@
     <id>https://ai.7senses.co.jp/aio/biyoushitsu-shukyaku-shien/</id>
     <updated>2026-11-08T00:00:00+09:00</updated>
     <summary>美容室の集客支援は、予約サイトの運用だけでなく、公式サイトの料金や悩みの解説まで頼めるかで選びます。3つのAIの出典767件の調査では、料金や悩みを調べる質問の回答の87.5%が美容室の公式サイトを出典にしていました。頼むべき店と見送る店も整理します。</summary>
-  </entry>
-  <entry>
-    <title>飲食店の集客代行で丸投げはNG｜店が手放さない3つの作業</title>
-    <link href="https://ai.7senses.co.jp/aio/inshokuten-shukyaku-daikou/"/>
-    <id>https://ai.7senses.co.jp/aio/inshokuten-shukyaku-daikou/</id>
-    <updated>2026-11-07T00:00:00+09:00</updated>
-    <summary>飲食店の集客代行は、記事やサイトの更新は任せ、店の事実の確定・原稿の承認・予約の経路の記録の3つは店に残すのが基本です。当社が3つのAIに50問聞いた調査では、店を探す質問の出典の33.1%がグルメ・予約サイト、29.0%が公式サイトでした。</summary>
   </entry>
 </feed>

@@ -110,6 +110,8 @@ AIの回答に出るために費用をかける先は、Googleでも専用ファ
 
 **SEO対策とGoogle広告の費用の違いは、Googleに払うかどうかと、止めた後に集客が残るかどうかの2点です。**
 
+費用の目安は[SEOコンサルティング費用が無駄になる3条件](/seo/seo-consulting-hiyou/)で整理しています。
+
 <figure><img src="/images/seo-taisaku-hiyou-google/seo-koukoku-matrix.png" alt="SEO対策とGoogle広告の比較。Googleへの支払い、止めたとき、検索結果に出るまで、向く場面の違い" loading="lazy"><figcaption>SEO対策とGoogle広告の違い（当メディア作成）</figcaption></figure>
 
 | 観点 | SEO対策 | Google広告 |
