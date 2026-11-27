@@ -1,0 +1,84 @@
+{
+ "v": 2,
+ "slug": "reform-seo-taisaku",
+ "ok": true,
+ "date": "2026-11-28",
+ "questions": [
+  "リフォーム SEOについて教えてください",
+  "リフォーム SEOについて、「リフォームSEOとは」を教えてください",
+  "リフォーム SEOについて、「なぜリフォーム会社にSEO対策が重要なのか」を教えてください",
+  "リフォーム SEOについて、「リフォームSEOとポータルサイト集客の違い」を教えてください",
+  "リフォーム SEOについて、「リフォームSEOで陥りやすい3つの失敗」を教えてください"
+ ],
+ "engines": [
+  "ChatGPT"
+ ],
+ "answers": 5,
+ "topics": [
+  {
+   "topic": "リフォームSEOとポータルサイト集客の違い",
+   "words": [
+    "ポータルサイト集客"
+   ],
+   "hits": 0,
+   "of": 4
+  },
+  {
+   "topic": "リフォームSEOを成功させる5つの施策",
+   "words": [
+    "施策"
+   ],
+   "hits": 0,
+   "of": 5
+  },
+  {
+   "topic": "リフォームSEOの費用相場と外注・内製の判断",
+   "words": [
+    "費用相場",
+    "外注",
+    "内製"
+   ],
+   "hits": 1,
+   "of": 5
+  },
+  {
+   "topic": "AI検索時代のリフォームSEOで見られるポイント",
+   "words": [
+    "AI検索時代"
+   ],
+   "hits": 0,
+   "of": 5
+  }
+ ],
+ "official": [],
+ "sources": {
+  "ai.7senses.co.jp": "self",
+  "cypress-all.co.jp": "peer",
+  "delight-solutions.co.jp": "peer",
+  "developers.google.com": "peer",
+  "homepro.jp": "portal",
+  "jbn-support.jp": "public",
+  "koujitsu.co.jp": "peer",
+  "mlit.go.jp": "public",
+  "ntttp-dlead.com": "peer",
+  "refonavi.or.jp": "portal",
+  "shukyaku.more-andf.jp": "peer",
+  "support.google.com": "peer",
+  "uchoice.co.jp": "peer",
+  "webseisaku.site": "peer"
+ },
+ "dims": {
+  "費用の金額（◯円）": 0,
+  "期間（◯か月・◯日など）": 2,
+  "注意点・失敗・リスク": 1,
+  "進め方の手順": 0,
+  "専門家への相談": 0
+ },
+ "chars": 7553,
+ "claims": [
+  "2026年11月に当社が1つのAI（ChatGPT）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え4件のうち、『ポータルサイト集客』に触れたものは0件でした。",
+  "2026年11月に当社が1つのAI（ChatGPT）に本記事の論点5問を聞き、5件の答えを集めました。ほかの論点を聞いた答え5件のうち、『費用相場』に触れたものは1件でした。",
+  "2026年11月に当社が1つのAI（ChatGPT）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えのうち、触れていたのは費用の金額（◯円）は0件、進め方の手順は0件、専門家への相談は0件でした。",
+  "2026年11月に当社が1つのAI（ChatGPT）に本記事の論点5問を聞き、5件の答えを集めました。5件の答えの出典に挙がったページは14件で、公的機関・学会・業界団体が2件、ニュース・メディア・まとめが0件、ポータル・比較サイトが2件でした。"
+ ]
+}

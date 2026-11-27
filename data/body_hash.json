@@ -648,7 +648,7 @@
 "modified": "2026-10-11"
 },
 "reform-seo-taisaku": {
-"hash": "72023f98270c99f37e0cac27f8a2b80a",
+"hash": "dfd41a19125216b2e261b5492379e149",
 "modified": "2026-08-29"
 },
 "reform-shukyaku-daikou": {
@@ -730,6 +730,10 @@
 "seo-taisaku-hiyou-hikaku": {
 "hash": "7ecde17287262ce7d0317568e440f833",
 "modified": "2026-11-26"
+},
+"seo-taisaku-hiyou-kanjoukamoku": {
+"hash": "59856d82234821ce2e9d6b77777d40b6",
+"modified": "2026-11-28"
 },
 "seo-taisaku-kaisha-erabikata": {
 "hash": "67984085b02899391959489c9de84026",
